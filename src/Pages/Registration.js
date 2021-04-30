@@ -120,7 +120,7 @@ const Registration = () => {
                 }
             }, (error) => {
                 // setOpenLoader(false);
-                console.log(error);
+                // console.log(error);
             });
 
     }
