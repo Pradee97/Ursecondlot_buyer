@@ -52,11 +52,13 @@ const Header = () => {
 
 
           <nav class="nav-menu d-none d-lg-block">
-            <ul>
+          <ul>
               <li class="active"><a href="/">Home</a></li>
               <li><a href="#">About</a></li>
               <li><a href="/fees">Fees</a></li>
-              <li><a href="#">Contactus</a></li></ul>
+              <li><a href="/floorplans">Floor</a></li>
+              <li><a href="#">Contactus</a></li>
+              </ul>
           </nav>
 
           <a href="login" class="get-started-btn dealerLogin">Dealer Login</a>

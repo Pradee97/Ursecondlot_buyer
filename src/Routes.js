@@ -9,9 +9,9 @@ import EmailError from "./Pages/EmailError";
 import Email from "./Pages/Email";
 import Fees from "./Pages/Fees";
 import Emailsuccess from "./Pages/Emailsuccess";
-
-
-
+import FloorPlans from "./Pages/FloorPlans";
+import FloorAdd from "./Pages/FloorAdd";
+import FloorEdit from "./Pages/FloorEdit";
 
 
 
@@ -34,13 +34,14 @@ function AppRouter() {
           <Route  path="/email/:id" component={Email}/>
           <Route  path="/fees" component={Fees}/>
           <Route  path="/emailsuccess" component={Emailsuccess}/>
-
-          
-
-
-
+          <Route  path="/floorplans" component={FloorPlans}/>
+          <Route  path="/flooradd" component={FloorAdd}/>
+          <Route  path="/flooredit/:id" component={FloorEdit}/>
 
 
+
+
+        
         </Switch>
       </Router>
     </div>

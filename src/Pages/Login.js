@@ -2,6 +2,8 @@ import React from 'react';
 import API from "../Services/BaseService";
 import { useHistory } from "react-router-dom";
 
+import ls from 'local-storage';
+
 // import '../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -29,6 +31,7 @@ import '../assets/css/style.css';
 
 const Login = () => {
   const history = useHistory();
+  
 
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
@@ -46,7 +49,8 @@ const Login = () => {
       .then((response) => {
         console.log("res", response)
         if (response.data.success == true) {
-          history.push("/");
+          ls.set('userDetails', response.data.data);
+          history.push("/fees");
         } else {
           history.push("error");
         }
@@ -58,6 +62,7 @@ const Login = () => {
   }
   return (
     <div>
+      
       <main id="main" class="inner-page">
         <div className="col-lg-4 card loginBlock">
           <div class="dealar-login">
