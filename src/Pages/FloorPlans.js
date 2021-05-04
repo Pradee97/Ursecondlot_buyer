@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import {
     Form,
+    // Icon,
     Input,
     Select,
     AutoComplete,
@@ -13,7 +14,7 @@ import {
     notification,
     Spin,
 } from 'antd';
-
+import Icon from '@ant-design/icons';
 
 import '../assets/vendor/bootstrap/css/bootstrap.min.css';
 import '../assets/vendor/icofont/icofont.min.css';
@@ -67,7 +68,7 @@ const FloorPlans = () => {
        <div class="row content">
            <div class="col-lg-12 floorplanstableblock">
                <div class="add-floor">
-                   <a class="add-floor-btns" href="/flooradd"><img src="assets/img/addbtn.jpg"/>Add Floor</a>
+                   <a class="add-floor-btns" href="/flooradd"><img src="addbtn.jpg"/>Add Floor</a>
                </div>
                
 
@@ -79,7 +80,10 @@ const FloorPlans = () => {
                      <thead>
                        <tr>
                            <th colspan="2" scope="colgroup">Floor plan {index+1}
-                           <Button onClick={() => onHandleEdit(item.floor_plan_id)}>Edit</Button></th>
+                           <div class="editbutton">
+                           <Button onClick={() => onHandleEdit(item.floor_plan_id)}  >Edit</Button></div></th>
+                           {/* <a class="editicon" onClick={() => onHandleEdit(item.floor_plan_id)}><Icon type="edit" theme = "filled"/></a></div></th> */}
+
                        </tr>
                      </thead>
                      <tr>

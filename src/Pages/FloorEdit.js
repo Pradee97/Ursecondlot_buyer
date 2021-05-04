@@ -1,7 +1,6 @@
 import React from 'react';
 import API from "../Services/BaseService";
 import { useHistory,useParams } from "react-router-dom";
-
 // import '../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -43,16 +42,7 @@ const FloorEdit = () => {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [dateOpened, setDateOpened] = useState("");
     const [accountOpened, setAccountOpened] = useState("");
-    // const [stateId, setStateId] = useState("");
-    // const [cityName, setCityName] = useState("");
-    // const [cityId, setCityId] = useState("");
-    // const [zipCodeId, setZipcodeId] = useState("");
-    // const [numberOfYears, setNumberofYears] = useState("");
     
-    // useEffect(() => {
-    //     fetchCountry();
-    //     fetchState();
-    // }, []);
 
     async function fetchFloorDetails() {
         

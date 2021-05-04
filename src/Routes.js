@@ -12,12 +12,17 @@ import Emailsuccess from "./Pages/Emailsuccess";
 import FloorPlans from "./Pages/FloorPlans";
 import FloorAdd from "./Pages/FloorAdd";
 import FloorEdit from "./Pages/FloorEdit";
+import About from "./Pages/About";
+
+
+
 
 
 
 
 
 import './App.css';
+import Contactus from './Pages/Contactus';
 
 
 function AppRouter() {
@@ -37,6 +42,10 @@ function AppRouter() {
           <Route  path="/floorplans" component={FloorPlans}/>
           <Route  path="/flooradd" component={FloorAdd}/>
           <Route  path="/flooredit/:id" component={FloorEdit}/>
+          <Route  path="/contactus" component={Contactus}/>
+          <Route  path="/about" component={About}/>
+
+
 
 
 
