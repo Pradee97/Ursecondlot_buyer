@@ -1,5 +1,7 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
+import checkImg from '../../src/assets/img/check.svg';
+
 
 
 
@@ -14,7 +16,7 @@ const Emailsuccess = () => {
                             <div class="row content">
                                 <div class="modalcontent">
                                     <div class="Successfull-icon">
-                                        <img alt="" src="check.svg" />
+                                    <img alt="" src={checkImg} />
                                     </div>
                                     <div class="modalbody">
                                         <h2> Account Successfully Activated </h2>

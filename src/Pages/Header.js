@@ -5,6 +5,8 @@ import { useHistory } from "react-router-dom";
 import { useState } from 'react';
 import { useEffect } from 'react';
 
+import LogoImg from '../../src/assets/img/Logo_final.png';
+
 import '../assets/vendor/bootstrap/css/bootstrap.min.css';
 import '../assets/vendor/icofont/icofont.min.css';
 import '../assets/vendor/boxicons/css/boxicons.min.css';
@@ -48,7 +50,7 @@ const Header = () => {
       <header id="header" class="">
         <div class="container-fluid d-flex align-items-center">
 
-          <h1 class="logo mr-auto"><img src="Logo_final.png" ></img></h1>
+          <h1 class="logo mr-auto"><img src={LogoImg} ></img></h1>
 
 
           <nav class="nav-menu d-none d-lg-block">

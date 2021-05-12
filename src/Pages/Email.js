@@ -13,7 +13,7 @@ import {
     notification,
     Spin,
 } from 'antd';
-
+import checkImg from '../../src/assets/img/check.svg';
 
 import '../assets/vendor/bootstrap/css/bootstrap.min.css';
 import '../assets/vendor/icofont/icofont.min.css';
@@ -66,7 +66,7 @@ const Email = () => {
                             <div class="row content">
                                 <div class="modalcontent" style={{marginLeft:"28%"}}>
                                     <div class="Successfull-icon">
-                                        <img alt="" src="check.svg" />
+                                        <img alt="" src={checkImg} />
                                     </div>
                                     <div class="modalbody">
                                         <h2>Account Activation </h2>
