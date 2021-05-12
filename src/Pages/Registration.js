@@ -14,7 +14,7 @@ import {
     notification,
     Spin,
 } from 'antd';
-
+import googleApiKey from './config.js'
 
 import '../assets/vendor/bootstrap/css/bootstrap.min.css';
 import '../assets/vendor/icofont/icofont.min.css';
@@ -42,9 +42,9 @@ const Registration = () => {
     const [time, setTime] = useState("");
     const [country, setCountry] = useState("");
     const [stateName, setStateName] = useState("");
-    const [stateId, setStateId] = useState("");
+    // const [stateId, setStateId] = useState("");
     const [cityName, setCityName] = useState("");
-    const [cityId, setCityId] = useState("");
+    // const [cityId, setCityId] = useState("");
     const [zipCodeId, setZipcodeId] = useState("");
     const [numberOfYears, setNumberofYears] = useState("");
     async function fetchCountry() {
@@ -78,15 +78,16 @@ const Registration = () => {
     }
     useEffect(() => {
         fetchCountry();
-        fetchState();
+        // fetchState();
     }, []);
-    const handleState = (e) => {
-        setStateId(e.target.value)
-        fetchCity(e.target.value)
-    }
-    const handleCity = (e) => {
-        setCityId(e.target.value)
-    }
+
+    // const handleState = (e) => {
+    //     setStateId(e.target.value)
+    //     fetchCity(e.target.value)
+    // }
+    // const handleCity = (e) => {
+    //     setCityId(e.target.value)
+    // }
 
 
     const registrationhandleSubmit = (event) => {
@@ -103,8 +104,8 @@ const Registration = () => {
             meeting_time: time,
             active: "0",
             country_id: "1",
-            state_id: stateId,
-            city_id: cityId,
+            state_name: stateName,
+            city_name: cityName,
             zipcode_id: zipCodeId,
             no_years: numberOfYears
         };
@@ -120,9 +121,43 @@ const Registration = () => {
                 }
             }, (error) => {
                 // setOpenLoader(false);
-                // console.log(error);
+                console.log(error);
             });
 
+    }
+    const setZipcode = (data) => {
+        if(data.length !=5 ){
+            setCityName('')
+            setStateName('') 
+        }
+        if(data.length==5 ){
+            fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${data}&components=country:US&key=${googleApiKey}`)
+        .then(response => {
+               
+            if (response.ok){
+                return response.json()
+            }else{
+                console.log("something went wrong in address api..., try again")
+            }
+            
+        })
+        .then(data => {
+            console.log("google place data =>",data)
+            if(data.results.length>0){
+                console.log("CITY  ",data.results[0].address_components[1].long_name)
+                console.log("STATE  ",data.results[0].address_components[2].long_name )
+                setCityName( data.results[0].address_components[1].long_name)
+                setStateName(data.results[0].address_components[2].long_name)                
+            }else{
+                setCityName('')
+                setStateName('') 
+                console.log("please enter valid zipcode") ;
+            }
+           
+        })
+
+        }
+        
     }
     return (
         <div>
@@ -131,57 +166,85 @@ const Registration = () => {
                     <form class="registrationform" onSubmit={registrationhandleSubmit} >
                         <h2 class="title"> Dealer Registration</h2>
                         <div class="row">
+                        <div class="col-sm-12 form-group"> 
+                        <div className="tbox">
+                            <input className="textbox " type="text" placeholder="" id="dealer_name" required onChange={(e) => setDealerName(e.target.value)} />
+				            <label  for="dealer_name" className={dealerName !="" ? "input-has-value" : ""}>Dealer name</label>
+			            </div>
+                        </div>
+                        <div class="col-sm-12 form-group"> 
+                        <div className="tbox">
+                            <input className="textbox " type="text" placeholder="" id="first_name" required onChange={(e) => setFirstName(e.target.value)} />
+				            <label  for="first_name" className={firstName !="" ? "input-has-value" : ""}>First Name</label>
+			            </div>
+                        </div>
+                        <div class="col-sm-12 form-group"> 
+                        <div className="tbox">
+                            <input className="textbox " type="text" placeholder="" id="last_name" required onChange={(e) => setLastName(e.target.value)} />
+				            <label  for="last_name" className={lastName !="" ? "input-has-value" : ""}>Last Name</label>
+			            </div>
+                        </div>
+                        <div class="col-sm-12 form-group">
+                        <div className="tbox">
+                            <input className="textbox " type="text" placeholder="" id="phone_no" required onChange={(e) => setPhoneNumber(e.target.value)} />
+				            <label  for="phone_no" className={phoneNumber !="" ? "input-has-value" : ""}>Phone</label>
+			            </div>
+                        </div>
+                        <div class="col-sm-12 form-group">
+                        <div className="tbox">
+                            <input className="textbox " type="text" placeholder="" id="email" required onChange={(e) => setEmail(e.target.value)} />
+				            <label  for="email" className={email !="" ? "input-has-value" : ""}>Email</label>
+			            </div>
+                        </div>
+                        <div class="col-sm-12 form-group">
+                        <div className="tbox">
+                            <input className="textbox " type="text" placeholder="" id="address" required onChange={(e) => setAddress(e.target.value)} />
+				            <label  for="address" className={address !="" ? "input-has-value" : ""}>Address</label>
+			            </div>
+                        </div>
 
-                            <div class="col-sm-12 form-group">
-                                <input type="text" class="form-control" placeholder="Dealer name" required onChange={(e) => setDealerName(e.target.value)} />
-                            </div>
-                            <div class="col-sm-12 form-group">
-                                <input type="text" class="form-control" placeholder="First name" required onChange={(e) => setFirstName(e.target.value)} />
-                            </div>
 
-                            <div class="col-sm-12 form-group">
-                                <input type="text" class="form-control" placeholder="Last name" required onChange={(e) => setLastName(e.target.value)} />
-                            </div>
-
-                            <div class="col-sm-12 form-group">
-                                <input type="number" class="form-control" placeholder="Phone" required onChange={(e) => setPhoneNumber(e.target.value)} />
-                            </div>
-                            <div class="col-sm-12 form-group">
-                                <input type="email" class="form-control" placeholder="Enter your email." required onChange={(e) => setEmail(e.target.value)} />
-                            </div>
-                            <div class="col-sm-12 form-group">
-                                <input type="address" class="form-control" placeholder="Address" required onChange={(e) => setAddress(e.target.value)} />
-                            </div>
+                            
+                           
                             <div class="col-sm-4 form-group">
-                                <select class="form-control custom-select browser-default" required defaultValue={stateId} onChange={handleState}>
+                                {/* <select class="form-control custom-select browser-default" required defaultValue={stateId} onChange={handleState}>
                                     <option>State</option>
                                     {stateName &&
                                         <>
                                             {stateName.map((state, index) => <option key={state.state_id} value={state.state_id}>{state.state_name}</option>)}
                                         </>
                                     }
-                                </select>
+                                </select> */}
+                                 <input type="text" class="form-control" placeholder="state" value ={stateName} required disabled  />
                             </div>
                             <div class="col-sm-4 form-group">
-                                <select id="City" class="form-control custom-select browser-default" required defaultValue={cityId} onChange={handleCity}>
+                                {/* <select id="City" class="form-control custom-select browser-default" required defaultValue={cityId} onChange={handleCity}>
                                     <option>City</option>
                                     {cityName &&
                                         <>
                                             {cityName.map((city, index) => <option key={city.city_id} value={city.city_id}>{city.city_name}</option>)}
                                         </>
                                     }
-                                </select>
+                                </select> */}
+                                <input type="text" class="form-control" placeholder="city" value ={cityName} required disabled  />
                             </div>
                             <div class="col-sm-4 form-group">
-                                <input type="number" class="form-control" placeholder="Zipcode" required onChange={(e) => setZipcodeId(e.target.value)} />
+                                <input type="text" class="form-control" placeholder="Zipcode" required onChange={(e) => setZipcode(e.target.value)} />
                             </div>
-                            <div class="col-sm-12 form-group">
-                                <input type="number" class="form-control" placeholder="How many years in car business" required onChange={(e) => setNumberofYears(e.target.value)} />
+                            
+                        <div class="col-sm-12 form-group">
+                            <div className="tbox">
+                            <input className="textbox " type="text" placeholder="" id="no_years" required onChange={(e) => setNumberofYears(e.target.value)} />
+				            <label  for="no_years" className={numberOfYears !="" ? "input-has-value" : ""}>How many years in car business</label>
+			                </div>  
                             </div>
+                            
                             <div class="col-sm-12 form-group scheduleMeeting">
                                 <h2 class="text-center">Schedule Meeting with our Agent</h2>
                                 <p>Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry</p>
                             </div>
+
+
                             <div class="col-sm-6 form-group">
                                 <input type="Date" class="form-control" placeholder="Select date" required onChange={(e) => setDate(e.target.value)} />
                             </div>

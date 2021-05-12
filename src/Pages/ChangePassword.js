@@ -67,8 +67,7 @@ const ChangePassword = () => {
 
           .then((response) => {
             console.log("res", response)
-            if (response.data.success == true) {
-            
+            if (response.data.success == true) {            
               history.push("/login");
             } else {
               history.push("error");

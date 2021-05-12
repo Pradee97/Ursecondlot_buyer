@@ -28,15 +28,12 @@ import '../assets/vendor/owl.carousel/assets/owl.carousel.min.css';
 import '../assets/vendor/aos/aos.css';
 import '../assets/css/style.css';
 
-
 const Login = () => {
   const history = useHistory();
   
 
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
-  // const [openLoader, setOpenLoader] = useState(false);
-
 
   const loginhandleSubmit = (event) => {
     // setOpenLoader(true);
@@ -47,15 +44,15 @@ const Login = () => {
     };
     API.post("http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/buyer/login", request)
       .then((response) => {
-        console.log("res", response)
+        console.log("resresponse.data.data", response.data.data)
         if (response.data.success == true) {
           ls.set('userDetails', response.data.data);
-          if(ls.get('status')==='no'){
-            history.push("/changepassword");
+          if(response.data.data.local_flag===null){
+            history.push("/ChangePassword");
           }else{
             history.push("/carList");
           }
-          history.push("/fees");
+          
         } else {
           history.push("error");
         }
@@ -65,27 +62,47 @@ const Login = () => {
         });
 
   }
+  
+   
+   
+  
+     
+
+  
   return (
+
     <div>
       
-      <main id="main" class="inner-page">
+      <main id="main" className="inner-page">
         <div className="col-lg-4 card loginBlock">
-          <div class="dealar-login">
+          <div className="dealar-login">
             <img alt="Google" src="Logo_final.png" />
           </div>
           <form onSubmit={loginhandleSubmit}>
             <h2 className="title"> Dealer login</h2>
+           
+
             <div className="email-login">
-              <input type="text" placeholder="Email/Username" required onChange={(e) => setEmailId(e.target.value)} />
-              <input type="password" placeholder="Enter Password" required onChange={(e) => setPassword(e.target.value)} />
-            </div>
+		   <div className="tbox">
+       <input className="textbox " type="text" placeholder="" id="uname" required onChange={(e) => setEmailId(e.target.value)} />
+				 <label  for="uname" className={emailId !="" ? "input-has-value" : ""}>User Name</label>
+			</div>
+			 
+			 <div className="tbox">
+       <input className="textbox" type="password" placeholder="" id="psw" required onChange={(e) => setPassword(e.target.value)} />
+				 <label for="psw" className={password != "" ? "input-has-value" : "" }>Password</label>
+			 </div>
+		  </div>
+		  
+
+
+
             <div className="row">
               <div className="col-lg-6">
-                <input type="checkbox" id="remember" name="rememberme" /><label>Remember me</label>
+              <a className="forget-name" href="#">Forgot Username</a>
               </div>
 
               <div className="col-lg-6 forget">
-                <a className="forget-name" href="#">Forgot Username</a>
                 <a className="forget-pass" href="#">Forgot password</a>
               </div>
               <div className="col-lg-12 loginBtn">
@@ -95,10 +112,10 @@ const Login = () => {
             </div>
           </form>
         </div>
-        <section id="playstoreBlock" class="playstoreBlock">
-          <div class="container">
-            <div class="row content">
-              <div class="col-lg-12">
+        <section id="playstoreBlock" className="playstoreBlock">
+          <div className="container">
+            <div className="row content">
+              <div className="col-lg-12">
                 <img src="appstore.png" />
                 <img src="googleplay.png" />
               </div>
@@ -107,7 +124,7 @@ const Login = () => {
         </section>
       </main>
 
-      <a href="#" class="back-to-top"><i class="ri-arrow-up-line"></i></a>
+      <a href="#" className="back-to-top"><i className="ri-arrow-up-line"></i></a>
 
       <script src="assets/vendor/jquery/jquery.min.js"></script>
       <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
