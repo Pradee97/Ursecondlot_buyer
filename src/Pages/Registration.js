@@ -104,10 +104,11 @@ const Registration = () => {
             meeting_time: time,
             active: "0",
             country_id: "1",
-            state_name: stateName,
-            city_name: cityName,
+            state_id: stateName,
+            city_id: cityName,
             zipcode_id: zipCodeId,
-            no_years: numberOfYears
+            no_years: numberOfYears,
+            local_flag: 0,
         };
         API
             .post("http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/registration/add", request)
@@ -131,6 +132,7 @@ const Registration = () => {
             setStateName('') 
         }
         if(data.length==5 ){
+            setZipcodeId(data)
             fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${data}&components=country:US&key=${googleApiKey}`)
         .then(response => {
                

@@ -47,7 +47,7 @@ const Login = () => {
         console.log("resresponse.data.data", response.data.data)
         if (response.data.success == true) {
           ls.set('userDetails', response.data.data);
-          if(response.data.data.local_flag===null){
+          if(response.data.data.local_flag===0){
             history.push("/ChangePassword");
           }else{
             history.push("/carList");
