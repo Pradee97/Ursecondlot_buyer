@@ -50,6 +50,11 @@ const Login = () => {
         console.log("res", response)
         if (response.data.success == true) {
           ls.set('userDetails', response.data.data);
+          if(ls.get('status')==='no'){
+            history.push("/changepassword");
+          }else{
+            history.push("/carList");
+          }
           history.push("/fees");
         } else {
           history.push("error");

@@ -13,6 +13,9 @@ import FloorPlans from "./Pages/FloorPlans";
 import FloorAdd from "./Pages/FloorAdd";
 import FloorEdit from "./Pages/FloorEdit";
 import About from "./Pages/About";
+import ChangePassword from './Pages/ChangePassword';
+import CarList from './Pages/CarList';
+
 
 
 
@@ -36,7 +39,7 @@ function AppRouter() {
           <Route  path="/success" component={Success}/>
           <Route  path="/error" component={Error}/>
           <Route  path="/emailerror" component={EmailError}/>
-          <Route  path="/email/:id" component={Email}/>
+          <Route  path="/email" component={Email}/>
           <Route  path="/fees" component={Fees}/>
           <Route  path="/emailsuccess" component={Emailsuccess}/>
           <Route  path="/floorplans" component={FloorPlans}/>
@@ -44,6 +47,9 @@ function AppRouter() {
           <Route  path="/flooredit/:id" component={FloorEdit}/>
           <Route  path="/contactus" component={Contactus}/>
           <Route  path="/about" component={About}/>
+          <Route  path="/changepassword" component={ChangePassword}/>
+          <Route  path="/carList" component={CarList}/>
+
 
 
 

@@ -20,7 +20,7 @@ const Success = () => {
                                     </div>
                                     <div class="modalbody">
                                         <h2>successfully submitted</h2>
-                                        <p>Please Activate your account with the link shared to the given email id</p>
+                                        <p>Please Activate your account with the link shared to the given email Id</p>
                                     </div>
                                     <div class="modalfooter ">
                                         <a class="cta-btns" href="/">OK</a>
