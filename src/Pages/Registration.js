@@ -243,7 +243,7 @@ const Registration = () => {
                             
                             <div class="col-sm-12 form-group scheduleMeeting">
                                 <h2 class="text-center">Schedule Meeting with our Agent</h2>
-                                <p>Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry</p>
+                                <p>Thank you for interesting in our platform, Make you money and success.</p>
                             </div>
 
 
