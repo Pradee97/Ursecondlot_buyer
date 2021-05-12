@@ -4,6 +4,7 @@ import { useHistory,useParams } from "react-router-dom";
 // import '../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import ls from 'local-storage';
 import {
     Form,
     Input,
@@ -26,17 +27,18 @@ import '../assets/vendor/aos/aos.css';
 
 
 import '../assets/css/style.css';
-import { Modal, Button } from 'antd';
+import '../assets/css/responsive.css';
 
 
 
 const Email = () => {
     const history = useHistory();
     const { id } = useParams();
-    let value=id.split("=");
-    const handleclick = () => {
+    let value=window.location.href.split("id=");
+    const [status, setValue] = useState("");
+    async function handleclick() {
         
-            console.log("check",id)
+            console.log("check",value[1])
             let request = {
                 user_id: value[1]
               };
@@ -45,7 +47,9 @@ const Email = () => {
            .then((response) => {
              console.log("res", response.data.success)
             if (response.data.success ) {
-                history.push("/emailsuccess");
+              setValue(response.data.success);
+              ls.set('status', 'no');
+                //history.push("/emailsuccess");
                //history.push("/login");
              } else {
                history.push("/error");
@@ -56,6 +60,9 @@ const Email = () => {
              });
     
        }
+       useEffect(() => {
+        handleclick();
+    }, []);
   
     return (
       <div>
@@ -64,13 +71,15 @@ const Email = () => {
                     <div class="container">
                         <div class="Successfullformblock col-lg-6">
                             <div class="row content">
-                                <div class="modalcontent" style={{marginLeft:"28%"}}>
+                                <div class="modalcontent" style={{marginLeft:"21%"}}>
                                     <div class="Successfull-icon">
                                         <img alt="" src="check.svg" />
                                     </div>
-                                    <div class="modalbody">
-                                        <h2>Account Activation </h2>
-                                <button class="cta-btn" onClick={handleclick}>Active</button>
+                                    <div class="modalbody">                                       
+                                        <p>Email successfull activated</p>
+                                        <p>Username and Password sent to email</p>
+                                
+                                        <a href="/login" class="get-started-btn dealerLogin">Dealer Login</a>
                                     
                                     </div>
                                     {/* <div class="modalfooter ">
@@ -85,6 +94,16 @@ const Email = () => {
                     </div>
                 </div>
             </main>
+            <script src="assets/vendor/jquery/jquery.min.js"></script>
+            <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+            <script src="assets/vendor/php-email-form/validate.js"></script>
+            <script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+            <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+            <script src="assets/vendor/venobox/venobox.min.js"></script>
+            <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+            <script src="assets/vendor/aos/aos.js"></script>
+            <script src="assets/js/main.js"></script>
       </div>
     );
   };

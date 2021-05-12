@@ -2494,9 +2494,8 @@ input[type="text"], input[type="password"]{
 .loginBtn{
 	text-align:center;
 	font-size:14px;
-	padding-bottom
-}
 
+}
 
 
 .loginBtn .cta-btn{
@@ -3248,7 +3247,7 @@ SuccessfullModalCenter
 }
 .Successfullform .modalbody p {
     color: rgb(112, 112, 112);
-    font-size: 16px;
+    font-size: 14px;
 	margin-bottom:20px;
 }
 
@@ -5505,4 +5504,8 @@ Add Users
 	color: #4E4E4E;
 	font-size:22px;
 	font-weight:500;
+}
+.error-message{
+  color: red;
+	font-size:13px;
 }
