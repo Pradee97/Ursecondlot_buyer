@@ -466,9 +466,10 @@ h1, h2, h3, h4, h5, h6 {
 # Hero Section
 --------------------------------------------------------------*/
 #hero {
-  background:url("../img/banner.jpg") no-repeat center top;
+  background:url("../img/banner.jpg") no-repeat;
   width: 100%;
-  height: 580px; 
+  height: 580px;
+  
 }
 
 #hero .container {
@@ -882,7 +883,7 @@ table td span{
 /*----------------------------------------------------------------
 Cars list
 ------------------------------------------------------------------*/
-.suggested-cars .col-md-3 , .inventory-cars .col-md-3, .recently-cars .col-md-3, .favorite-cars .col-md-3{ 
+.suggested-cars .col-md-3{ 
 -ms-flex: 20%;
     flex:  20%;
     max-width:  20%;
@@ -893,13 +894,13 @@ Cars list
 	opacity: 1;
 	padding:30px 90px;
 }
- .car-item {
+.suggested-cars .car-item {
     border-radius: 5px;
     border: 1px solid #eef0ef;
 	box-shadow: 0px 3px 6px #00000029;
 	position:relative;
 }
-.suggested-cars .section-title h2 ,.inventory-cars .section-title h2 , .recently-cars .section-title h2  {   
+.suggested-cars .section-title h2 {   
     margin-bottom: 10px; 
 	padding-bottom: 5px;
 }
@@ -911,7 +912,7 @@ Cars list
 .car-item:hover {
   transform: scale(1.2);
 }
-.cars-lock{	
+.suggested-cars .cars-lock{	
 	position: absolute;
     background: #fff;
     border-radius: 50px;
@@ -921,20 +922,20 @@ Cars list
 	
 }
 
-.car-item img{
+.suggested-cars .car-item img{
 	width:100%;
 }
- .cars-lock img{
+.suggested-cars .cars-lock img{
 	width:15px;	
 }
-.cars-content {
+.suggested-cars .cars-content {
     padding: 15px;
 }
- .cars-tag {
+.suggested-cars .cars-tag {
 	position: absolute;
 	margin-top:-27px;
 }
- .cars-tag h4 {
+.suggested-cars .cars-tag h4 {
     font-size: 12px;
     background: #bd062c;
     padding: 7px 14px;
@@ -942,31 +943,31 @@ Cars list
 	display:inline;
 	font-weight:normal;
 }
- .cars-content .details {
+.suggested-cars .cars-content .details {
     margin: 0;
     font-weight: 300;
     font-size: 16px;
     color: #9f9f9f;
 }
- .cars-content .details img {
+.suggested-cars .cars-content .details img {
    width:20px;
    margin-right:10px;
 }
-.cars-content h3 {
+.suggested-cars .cars-content h3 {
     font-weight: 700;
     font-size: 20px;
 }
- .cars-content h3 a {
+.suggested-cars .cars-content h3 a {
     color: #37423b;
     transition: 0.3s;
 	font-size:18px;
 	font-weight:500;
 }
- .cars-content p {
+.suggested-cars .cars-content p {
     font-size: 14px;
     color: #777777;
 }
- .cars-prices{
+.suggested-cars .cars-prices{
 	display: -ms-flexbox;    
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
@@ -979,7 +980,7 @@ Cars list
     border-top: none;
     padding-top: 2px;
 }
- .cars-prices .cta-btns {
+.suggested-cars .cars-prices .cta-btns {
     background-color: #fff;
     color: #343434;
     padding: 10px 20px;   
@@ -988,7 +989,7 @@ Cars list
     border: 1px solid #707070;
 	font-size:18px;
 }
- .cars-prices .cta-btns-primary {
+.suggested-cars .cars-prices .cta-btns-primary {
 	font-size:18px;
     background-color: #b8b8b8;
     color: white;
@@ -996,7 +997,126 @@ Cars list
     border-radius: 3px;
     border: none;
 }
-.more-btn {
+.suggested-cars .more-btn {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 6px 30px 8px 30px;
+    color: #bd062c;
+    border-radius: 50px;
+    transition: all ease-in-out 0.4s;
+	font-size:18px;
+	padding-top:25px;
+	margin-top:25px;
+}
+
+.inventory-cars .col-md-3{ 
+-ms-flex: 20%;
+    flex:  20%;
+    max-width:  20%;
+
+}
+
+.inventory-cars {
+	background: #fff 0% 0% no-repeat padding-box;
+	opacity: 1;
+	padding:30px 90px;
+}
+.inventory-cars .car-item {
+    border-radius: 5px;
+    border: 1px solid #eef0ef;
+	box-shadow: 0px 3px 6px #00000029;
+	position:relative;
+}
+.inventory-cars .section-title h2 {   
+    margin-bottom: 10px; 
+	padding-bottom: 5px;
+}
+
+.inventory-cars .cars-lock{	
+	position: absolute;
+    background: #fff;
+    border-radius: 50px;
+    padding: 8px 12px;
+    right: 10px;
+    top: 10px;
+	
+}
+.inventory-cars .cars-lock img{
+	width:15px;	
+}
+.inventory-cars .cars-content {
+    padding: 15px;
+}
+.inventory-cars .cars-tag {
+	position: absolute;
+	margin-top:-27px;
+}
+.inventory-cars .cars-tag h4 {
+    font-size: 12px;
+    background: #bd062c;
+    padding: 7px 14px;
+    color: #fff;
+	display:inline;
+	font-weight:normal;
+}
+.inventory-cars .cars-content .details {
+    margin: 0;
+    font-weight: 300;
+    font-size: 16px;
+    color: #9f9f9f;
+}
+.inventory-cars .car-item img{
+	width:100%;
+}
+.inventory-cars .cars-content .details img {
+   width:20px;
+   margin-right:10px;
+}
+.inventory-cars .cars-content h3 {
+    font-weight: 700;
+    font-size: 20px;
+}
+.inventory-cars .cars-content h3 a {
+    color: #37423b;
+    transition: 0.3s;
+	font-size:18px;
+	font-weight:500;
+}
+.inventory-cars .cars-content p {
+    font-size: 14px;
+    color: #777777;
+}
+.inventory-cars .cars-prices{
+	display: -ms-flexbox;    
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    padding:20px 0;
+    margin-top:20px;;
+    border-top: none;
+    padding-top: 2px;
+}
+.inventory-cars .cars-prices .cta-btns {
+    background-color: #fff;
+    color: #343434;
+    padding: 10px 20px;   
+	margin-right:20px;
+    border-radius: 3px;
+    border: 1px solid #707070;
+	font-size:18px;
+}
+.inventory-cars .cars-prices .cta-btns-primary {
+	font-size:18px;
+    background-color: #b8b8b8;
+    color: white;
+    padding: 10px 20px;   
+    border-radius: 3px;
+    border: none;
+}
+.inventory-cars .more-btn {
     display: inline-block;
     background: rgba(255, 255, 255, 0.2);
     padding: 6px 30px 8px 30px;
@@ -1009,11 +1129,135 @@ Cars list
 }
 
 
-.inventory-cars , .recently-cars{
+
+
+.recently-cars .col-md-3{ 
+-ms-flex: 20%;
+    flex:  20%;
+    max-width:  20%;
+
+}
+
+.recently-cars {
 	background: #fff 0% 0% no-repeat padding-box;
 	opacity: 1;
 	padding:30px 90px;
 }
+.recently-cars .car-item {
+    border-radius: 5px;
+    border: 1px solid #eef0ef;
+	box-shadow: 0px 3px 6px #00000029;
+	position:relative;
+}
+.recently-cars .section-title h2 {   
+    margin-bottom: 10px; 
+	padding-bottom: 5px;
+}
+
+.recently-cars .cars-lock{	
+	position: absolute;
+    background: #fff;
+    border-radius: 50px;
+    padding: 8px 12px;
+    right: 10px;
+    top: 10px;
+	
+}
+.recently-cars .cars-lock img{
+	width:15px;	
+}
+.recently-cars .cars-content {
+    padding: 15px;
+}
+.recently-cars .cars-tag {
+	position: absolute;
+	margin-top:-27px;
+}
+.recently-cars .cars-tag h4 {
+    font-size: 12px;
+    background: #bd062c;
+    padding: 7px 14px;
+    color: #fff;
+	display:inline;
+	font-weight:normal;
+}
+.recently-cars .cars-content .details {
+    margin: 0;
+    font-weight: 300;
+    font-size: 16px;
+    color: #9f9f9f;
+}
+.recently-cars .car-item img{
+	width:100%;
+}
+.recently-cars .cars-content .details img {
+   width:20px;
+   margin-right:10px;
+}
+.recently-cars .cars-content h3 {
+    font-weight: 700;
+    font-size: 20px;
+}
+.recently-cars .cars-content h3 a {
+    color: #37423b;
+    transition: 0.3s;
+	font-size:18px;
+	font-weight:500;
+}
+.recently-cars .cars-content p {
+    font-size: 14px;
+    color: #777777;
+}
+.recently-cars .cars-prices{
+	display: -ms-flexbox;    
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    padding:20px 0;
+    margin-top:20px;;
+    border-top: none;
+    padding-top: 2px;
+}
+.recently-cars .cars-prices .cta-btns {
+    background-color: #fff;
+    color: #343434;
+    padding: 10px 20px;   
+	margin-right:20px;
+    border-radius: 3px;
+    border: 1px solid #707070;
+	font-size:18px;
+}
+.recently-cars .cars-prices .cta-btns-primary {
+	font-size:18px;
+    background-color: #b8b8b8;
+    color: white;
+    padding: 10px 20px;   
+    border-radius: 3px;
+    border: none;
+}
+.recently-cars .more-btn {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 6px 30px 8px 30px;
+    color: #bd062c;
+    border-radius: 50px;
+    transition: all ease-in-out 0.4s;
+	font-size:18px;
+	padding-top:25px;
+	margin-top:25px;
+}
+
+.favorite-cars .col-md-3{ 
+-ms-flex: 20%;
+    flex:  20%;
+    max-width:  20%;
+
+}
+
+
 .favorite-cars {
 	background: #fff 0% 0% no-repeat padding-box;
 	opacity: 1;
@@ -1127,12 +1371,6 @@ Cars list
 	padding-top:25px;
 	margin-top:25px;
 }
-
-
-
-
-
-
 
 
 /*--------------------------------------------------------------
@@ -2391,7 +2629,6 @@ border-left:40px solid transparent;
 }
 .dealar-login{
 	background:#bd062c;
-	padding:20px 0;
 	
 }
 .cards {
@@ -2433,11 +2670,10 @@ border-left:40px solid transparent;
 input[type="text"],
 input[type="password"] {
   padding: 15px 20px;
-  margin:0px 0;
+  margin:5px 0;
   border: 1px solid #ccc;
   border-radius: 8px;
   box-sizing: border-box;
-  
 }
 
 .cta-btn {
@@ -2478,30 +2714,16 @@ input[type="text"], input[type="password"]{
 }
 .forget{
 	text-align:right;
-	color: #BD062C;
-	font-size:14px;
-}
-.forget a{
-	padding-bottom:10px;
 }
 #remember{
 	margin-right:10px;
 }
-.remembermes label{
-	color: #BD062C;
-	font-size:14px;
-}
 .loginBtn{
 	text-align:center;
-	font-size:14px;
-	padding-bottom
 }
-
-
 
 .loginBtn .cta-btn{
 	width:auto;
-	font-size:18px;
 }
 
 .dealerLogin{
@@ -2524,129 +2746,10 @@ input[type="text"], input[type="password"]{
 	font-size:18px;
 }
 .scheduleMeeting h2{
-	font-size:18px;
-	color: #4E4E4E;
+	font-size:20px;
 }
 .scheduleMeeting p{
-	font-size:10px;
-	color: #9F9F9F;
-}
-
-
-  .box {
-    -webkit-appearance: none;
-	-moz-appearance: window;
-	padding: 2px 50px 2px 2px;
-	background-image: url("../img/arrowmarks.png");
-	background-repeat: no-repeat;
-	background-position: right center;
-	display: inline-block;
-	width: 100%;
-	height: 50px;
-	box-sizing: border-box;
-	outline: none;
-	border: 1px solid lightgray;
-	border-radius: 3px;
-	padding: 10px;
-	padding-right:15px;
-	transition: all 0.1s ease-out;
-	color: #9F9F9F;
-      }
-
-
-.registerpageBlock .form-group {
-    margin-bottom: 5px;
-}
-
-  .calender {
-    -webkit-appearance: none;
-	-moz-appearance: window;
-	padding: 2px 50px 2px 2px;
-	background-image: url("../img/calender.png");
-	background-repeat: no-repeat;
-	background-position: right center;
-	display: inline-block;
-	width: 100%;
-	height: 50px;
-	box-sizing: border-box;
-	outline: none;
-	border: 1px solid lightgray;
-	border-radius: 3px;
-	padding: 10px;
-	padding-right:15px;
-	transition: all 0.1s ease-out;
-	color: #707070;
-      }
-
-
-.time-picker {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  transition: all 0.4s ease;
-  height: 0;
-  overflow: hidden;
-  color: #9F9F9F;
-}
-.time-picker .set-time {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 15px;
-}
-.time-picker .label {
-  width: 60px;
-  margin: 0 5px;
-  text-align: center;
-  line-height: 34px;
-  display: inline-style;
-}
-.time-picker .label a {
-  display: block;
-  border: 1px solid #DDDDDD;
-  cursor: pointer;
-  font-size: 18px;
-  font-weight: bold;
-  border-radius: 3px;
-}
-.time-picker .label a:hover, .time-picker .label a:active {
-  background-color: #4E4E4E;
-
-  color: #FFFFFF;
-}
-.time-picker .label .set {
-  text-align: center;
-  box-sizing: border-box;
-  width: 100%;
-  height: 40px;
-  font-size: 14px;
-  border: transparent;
-  color: #9F9F9F;
-}
-.time-picker #submitTime {
-  text-align: center;
-  line-height: 34px;
-  border: 1px solid #DDDDDD;
-  width: 128px;
-  margin: auto;
-  border-radius: 3px;
-  cursor: pointer;
-  
-  
-}
-.time-picker.open {
-  border: 1px solid #DDDDDD;
-  padding: 15px;
-  transition: all 0.5s ease;
-  height: auto;
-  background-color: #fff;
-}
-.timer  input[type="text"] {
-color: #9F9F9F;
-background:#fff;
-}
-.agreetab label{
-	color: #1E1E1E;
-	font-size:12px;
+	font-size:14px;
 }
 
 /*------------------------------------------------------
@@ -2674,11 +2777,6 @@ popup Dialogbox
     display: flex;
     justify-content: center;
     gap: 5px;
-}
-.modal-body p{
-	font-size:22px;
-	color: #707070;
-	
 }
 .modal-body{
 	text-align: center;
@@ -4739,13 +4837,13 @@ Form text overlop
 }
 .tbox input[type=text] + label {
   position: absolute;
-    top: 12px;
+    top: 18px;
     left: 10px;
     bottom: 0;
     border-radius: 3px 0 0 3px;
     padding: 0 5px;
     background: #fff;
-    color: #9F9F9F;
+    color: #707070;
     transform: translateZ(0) translateX(0);
     transition: all 0.3s ease-in;
     transition-delay: 0.2s;

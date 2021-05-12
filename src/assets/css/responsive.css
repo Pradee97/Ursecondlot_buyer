@@ -1,0 +1,243 @@
+@media (max-width: 1700px) {
+	
+	
+	
+	
+	
+	
+}
+
+@media (max-width: 1600px) {
+	
+#topbar .col-lg-8 {
+    -ms-flex: 0 0 60%;
+    flex: 0 0 60%;
+    max-width: 60%;
+}
+#topbar .col-lg-4 {
+    -ms-flex: 0 0 40%;
+    flex: 0 0 40%;
+    max-width: 40%;
+}
+	
+#hero {   
+    background-size: cover;
+	height: 495px;
+}
+	
+	
+	
+}
+
+@media (max-width: 1500px) {
+	
+	
+	
+	
+	
+}
+
+@media (max-width: 1400px) {
+
+#hero {
+    height: 485px;
+}
+	
+	
+	
+}
+
+@media (max-width: 1335px) {
+#topbar .col-lg-8 {
+    -ms-flex: 0 0 55%;
+    flex: 0 0 55%;
+    max-width: 55%;
+}
+#topbar .col-lg-4 {
+    -ms-flex: 0 0 45%;
+    flex: 0 0 45%;
+    max-width: 45%;
+}
+#hero .container {
+    padding-top: 10px;
+}
+#hero {  
+    height: 450px;
+}
+	
+	
+	
+	
+}
+@media (max-width: 1300px) {
+	
+
+	
+	
+	
+}
+
+@media (max-width: 1200px) {
+#topbar .col-lg-8 {
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+#topbar .col-lg-4 {
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+#hero {
+    height: 435px;
+}
+.section-title h2 {
+    font-size: 30px;
+	margin-bottom:5px;	
+}
+.about p {   
+    font-size: 14px;  
+}
+.loginblockpage .col-lg-4{
+	-ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+.registerpageBlock .col-lg-4{
+	-ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+	
+	
+}
+
+
+@media (max-width: 1100px) {
+#topbar .col-lg-8 {
+     -ms-flex: 0 0 45%;
+    flex: 0 0 45%;
+    max-width: 45%;
+}
+#topbar .col-lg-4 {
+   -ms-flex: 0 0 55%;
+    flex: 0 0 55%;
+    max-width: 55%;
+}
+#hero h1 {  
+    font-size: 35px;
+}
+#hero h2 {    
+    font-size: 22px;   
+}
+#hero {
+    height: 395px;
+}
+.fees .section-title p {  
+    font-size: 14px;    
+}
+.feestable h2 {  
+    font-size: 22px;   
+}
+.contact .info .contacttag {   
+    font-size: 14px;   
+}
+	
+	
+	
+}
+
+@media (max-width: 991px) {
+
+.mobile-nav-toggle i {
+    color: #333;
+}
+.mobile-nav-toggle {  
+    top: 73px;
+    right: 175px;
+}
+#hero h1 {
+    font-size: 30px;
+}
+#hero h2 {
+    font-size: 20px;
+}
+#hero .btn-get-started {  
+    font-size: 17px;  
+}  
+.section-title h2 {
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+.contact .info p {  
+    font-size: 16px;   
+}
+
+.loginblockpage .col-lg-4 {
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 70%;
+}
+.registerpageBlock .col-lg-4 {
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 70%;
+}
+	
+	
+	
+}
+
+
+@media (max-width: 767px) {
+	
+	
+	
+	
+	
+}
+
+@media (max-width: 640px) {
+	
+	
+	
+	
+	
+}
+
+@media (max-width: 575px) {
+	
+	
+	
+	
+	
+}
+
+@media (max-width: 500px) {
+	
+	
+	
+	
+	
+}
+@media (max-width: 480px) {
+	
+	
+	
+	
+	
+}
+@media (max-width: 375px) {
+	
+	
+	
+	
+	
+}
+@media (max-width: 320px) {
+	
+	
+	
+	
+	
+}
