@@ -149,7 +149,7 @@ const Registration = () => {
                 console.log("CITY  ",data.results[0].address_components[1].long_name)
                 console.log("STATE  ",data.results[0].address_components[2].long_name )
                 setCityName( data.results[0].address_components[1].long_name)
-                setStateName(data.results[0].address_components[2].long_name)                
+                setStateName(data.results[0].address_components[3].long_name)                
             }else{
                 setCityName('')
                 setStateName('') 
