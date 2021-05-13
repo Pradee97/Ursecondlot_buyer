@@ -26,7 +26,9 @@ import '../assets/vendor/remixicon/remixicon.css';
 import '../assets/vendor/venobox/venobox.css';
 import '../assets/vendor/owl.carousel/assets/owl.carousel.min.css';
 import '../assets/vendor/aos/aos.css';
+
 import '../assets/css/style.css';
+
 
 const Login = () => {
   const history = useHistory();

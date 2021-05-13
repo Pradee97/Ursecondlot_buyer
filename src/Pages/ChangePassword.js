@@ -51,7 +51,7 @@ const ChangePassword = () => {
     const changehandleSubmit = (event) => {
         event.preventDefault();
         if(newPassword != confirmPassword){
-                setErrorMessage("Newpassword and Confirmpassword didn't match")
+                setErrorMessage("Newpassword and Confirmpassword didn't Match")
              }
         
         else{
@@ -87,8 +87,10 @@ const ChangePassword = () => {
                 <div className="col-lg-4 card loginBlock">
                     <form class="registrationform" onSubmit={changehandleSubmit} >
                         <h2 class="title">Change Password</h2>
+                        <p className="error-message">{errorMessage}</p>
                         <div class="row">
 
+                    
                             <div class="col-sm-12 form-group">
                                 <input type="password" class="form-control" placeholder="Old Password" required onChange={(e) => setOldPassword(e.target.value)} />
                             </div>
@@ -97,8 +99,8 @@ const ChangePassword = () => {
                             </div>
 
                             <div class="col-sm-12 form-group">
-                                <input type="password" class="form-control" placeholder="Confirm Password" required onChange={(e) => setConfirmPassword(e.target.value)} />
-                                 <p className="error-message">{errorMessage}</p>
+                                <input type="password" class="form-control" placeholder="Confirm Password" required onChange={(e) => setConfirmPassword(e.target.value)} /><br></br>
+                        
 
                             </div>
                             {/* <div class="col-sm-12 form-group">

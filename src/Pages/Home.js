@@ -16,7 +16,6 @@ import '../assets/vendor/venobox/venobox.css';
 import '../assets/vendor/owl.carousel/assets/owl.carousel.min.css';
 import '../assets/vendor/aos/aos.css';
 
-
 import '../assets/css/style.css';
 
 
@@ -40,7 +39,7 @@ const Home = () => {
 		  </div>
 
           <div className="d-lg-flex">
-          <button className={`btn-get-started scrollto ${!isOpen ? 'dis-btn' : 'hide-btn' }`} type="button" onClick={togglePopup}>Become a Dealer</button>
+          <button className="btn-get-started scrollto" type="button" onClick={togglePopup}>Become a Dealer</button>
    
           {isOpen && <Popup
       content={<>
@@ -49,9 +48,9 @@ const Home = () => {
 		  <div class="modals-dialog modals-dialog-centered popupmodel">
 			<div class="modals-content">
 			  <div class="modals-header">
-         <button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick={togglePopup}>
+         {/* <button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick={togglePopup}> */}
 				  <span aria-hidden="true">&times;</span>
-				</button>
+				{/* </button> */}
 			  </div>
 			  <div class="location-login">        
 					 <img alt="" src="Logo_final.png"  />
@@ -68,7 +67,7 @@ const Home = () => {
 		</div>
 
       </>}
-      // handleClose={togglePopup}
+      handleClose={togglePopup}
     />}
             {/* <button onClick={() => setBecomedealer(true)}>Becomedealer</button>
             <Popup trigger={buttonBecomedealer}>hi</Popup> */}

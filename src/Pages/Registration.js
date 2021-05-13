@@ -1,7 +1,10 @@
 import React from 'react';
 import API from "../Services/BaseService";
 import { useHistory } from "react-router-dom";
-
+import DatePicker from 'react-datetime';
+import moment from 'moment';
+import 'react-datetime/css/react-datetime.css';
+import Datetime from 'react-datetime';
 // import '../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -26,12 +29,21 @@ import '../assets/vendor/owl.carousel/assets/owl.carousel.min.css';
 import '../assets/vendor/aos/aos.css';
 
 
-import '../assets/css/style.css';
-
+import '../assets/css/style.css'; 
 
 const Registration = () => {
     const history = useHistory();
 
+    // const [startDate, setStartDate] = useState(new Date());
+
+    const yesterday = moment().subtract(1, 'day');
+const disablePastDt = current => {
+  return current.isAfter(yesterday);
+};
+
+const inputProps = {
+    placeholder: 'Select Date',
+};
     const [dealerName, setDealerName] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -248,7 +260,14 @@ const Registration = () => {
 
 
                             <div class="col-sm-6 form-group">
-                                <input type="Date" class="form-control" placeholder="Select date" required onChange={(e) => setDate(e.target.value)} />
+                                {/* <input type="Date" class="form-control datepicker" placeholder="Select date" startDate={new Date()} required onChange={(e) => setDate(e.target.value)} /> */}
+                                <Datetime inputProps={ inputProps } timeFormat={false}
+        isValidDate={disablePastDt}/>
+                                {/* <DatePicker placeholder="Select Date"
+        timeFormat={false}
+        isValidDate={disablePastDt}/> */}
+     
+                                {/* <DatePicker selected={startDate} onChange={date => setStartDate(date)} /> */}
                             </div>
                             <div class="col-sm-6 form-group">
                                 <input type="time" class="form-control" placeholder="Select Time" required onChange={(e) => setTime(e.target.value)} />
@@ -286,6 +305,12 @@ const Registration = () => {
             <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
             <script src="assets/vendor/aos/aos.js"></script>
             <script src="assets/js/main.js"></script>
+           
+
+            {/* $('.datepicker').datepicker({ 
+                startDate= new Date()
+            }); */}
+           
         </div>
 
 
