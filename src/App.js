@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom'
 import AppRouter from './Routes';
-import Header from './Pages/Header';
-import Footer from './Pages/Footer';
+import Header from './Component/Header';
+import Footer from './Component/Footer';
 
 
 

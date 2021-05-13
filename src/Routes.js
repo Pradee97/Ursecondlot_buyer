@@ -1,31 +1,24 @@
 import React, {lazy, Suspense} from 'react';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import Home from "./Pages/Home";
-import Login from "./Pages/Login";
-import Registration from "./Pages/Registration";
-import Success from "./Pages/Success";
-import Error from "./Pages/Error";
-import EmailError from "./Pages/EmailError";
-import Email from "./Pages/Email";
-import Fees from "./Pages/Fees";
-import Emailsuccess from "./Pages/Emailsuccess";
-import FloorPlans from "./Pages/FloorPlans";
-import FloorAdd from "./Pages/FloorAdd";
-import FloorEdit from "./Pages/FloorEdit";
-import About from "./Pages/About";
-import ChangePassword from './Pages/ChangePassword';
-import CarList from './Pages/CarList';
-
-
-
-
-
-
-
+import Home from "./Pages/Home/Home";
+import Login from "./Pages/Login/Login";
+import Registration from "./Pages/Registration/Registration";
+import Success from "./Component/Success";
+import Error from "./Component/Error";
+import EmailError from "./Component/EmailError";
+import Email from "./Component/Email";
+import Fees from "./Pages/Fees/Fees";
+import Emailsuccess from "./Component/Emailsuccess";
+import FloorPlans from "./Pages/Floor/FloorPlans";
+import FloorAdd from "./Pages/Floor/FloorAdd";
+import FloorEdit from "./Pages/Floor/FloorEdit";
+import About from "./Pages/About/About";
+import ChangePassword from './Pages/ChangePassword/ChangePassword';
+import CarList from './Pages/CarList/CarList';
 
 
 import './App.css';
-import Contactus from './Pages/Contactus';
+import Contactus from './Pages/Contactus/Contactus';
 
 
 function AppRouter() {
@@ -49,14 +42,6 @@ function AppRouter() {
           <Route  path="/about" component={About}/>
           <Route  path="/changepassword" component={ChangePassword}/>
           <Route  path="/carList" component={CarList}/>
-
-
-
-
-
-
-
-        
         </Switch>
       </Router>
     </div>

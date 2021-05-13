@@ -1,7 +1,7 @@
 import React from 'react';
-import API from "../Services/BaseService";
+import API from "../../Services/BaseService";
 import { useHistory,useParams } from "react-router-dom";
-// import '../assets/css/styles.css';
+// import '../../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import {
@@ -16,17 +16,17 @@ import {
 } from 'antd';
 import Icon from '@ant-design/icons';
 
-import '../assets/vendor/bootstrap/css/bootstrap.min.css';
-import '../assets/vendor/icofont/icofont.min.css';
-import '../assets/vendor/boxicons/css/boxicons.min.css';
-import '../assets/vendor/font-awesome/css/font-awesome.min.css';
-import '../assets/vendor/remixicon/remixicon.css';
-import '../assets/vendor/venobox/venobox.css';
-import '../assets/vendor/owl.carousel/assets/owl.carousel.min.css';
-import '../assets/vendor/aos/aos.css';
+import '../../assets/vendor/bootstrap/css/bootstrap.min.css';
+import '../../assets/vendor/icofont/icofont.min.css';
+import '../../assets/vendor/boxicons/css/boxicons.min.css';
+import '../../assets/vendor/font-awesome/css/font-awesome.min.css';
+import '../../assets/vendor/remixicon/remixicon.css';
+import '../../assets/vendor/venobox/venobox.css';
+import '../../assets/vendor/owl.carousel/assets/owl.carousel.min.css';
+import '../../assets/vendor/aos/aos.css';
 
 
-import '../assets/css/style.css';
+import '../../assets/css/style.css';
 import { Modal, Button } from 'antd';
 
 

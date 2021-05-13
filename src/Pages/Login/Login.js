@@ -1,10 +1,10 @@
 import React from 'react';
-import API from "../Services/BaseService";
+import API from "../../Services/BaseService";
 import { useHistory } from "react-router-dom";
 
 import ls from 'local-storage';
 
-// import '../assets/css/styles.css';
+// import '../../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { store } from 'react-notifications-component';
@@ -18,15 +18,15 @@ import {
   Spin,
 } from 'antd';
 
-import '../assets/vendor/bootstrap/css/bootstrap.min.css';
-import '../assets/vendor/icofont/icofont.min.css';
-import '../assets/vendor/boxicons/css/boxicons.min.css';
-import '../assets/vendor/font-awesome/css/font-awesome.min.css';
-import '../assets/vendor/remixicon/remixicon.css';
-import '../assets/vendor/venobox/venobox.css';
-import '../assets/vendor/owl.carousel/assets/owl.carousel.min.css';
-import '../assets/vendor/aos/aos.css';
-import '../assets/css/style.css';
+import '../../assets/vendor/bootstrap/css/bootstrap.min.css';
+import '../../assets/vendor/icofont/icofont.min.css';
+import '../../assets/vendor/boxicons/css/boxicons.min.css';
+import '../../assets/vendor/font-awesome/css/font-awesome.min.css';
+import '../../assets/vendor/remixicon/remixicon.css';
+import '../../assets/vendor/venobox/venobox.css';
+import '../../assets/vendor/owl.carousel/assets/owl.carousel.min.css';
+import '../../assets/vendor/aos/aos.css';
+import '../../assets/css/style.css';
 
 const Login = () => {
   const history = useHistory();
