@@ -2650,6 +2650,55 @@ background:#fff;
 	color: #1E1E1E;
 	font-size:12px;
 }
+.registrationform .form-group.agreetab label {
+  position: relative;
+  cursor: pointer;
+}
+.registrationform .form-group.agreetab label::before {
+  content: '';
+-webkit-appearance: none;
+background-color: transparent;
+border: 1px solid #707070;
+padding: 10px;
+display: inline-block;
+position: relative;
+vertical-align: middle;
+cursor: pointer;
+margin-right: 5px;
+background: #fff;
+border: 1px solid #707070;
+}
+.registrationform .form-group.agreetab input:checked + label::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 2px;
+  left: 9px;
+  width: 6px;
+  height: 14px;
+  border: solid #bd062c;
+      border-top-width: medium;
+      border-right-width: medium;
+      border-bottom-width: medium;
+      border-left-width: medium;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.registrationform .form-group.agreetab label{
+  cursor: pointer;
+}
+.registrationform .form-group.agreetab input {
+  padding: 0;
+  height: initial;
+  width: initial;
+  margin-bottom: 0;
+  display: none!important;
+  cursor: pointer;
+}
+.registrationform .form-group.agreetab {
+	float:left;
+	text-align:left;
+}
 
 /*------------------------------------------------------
 popup Dialogbox
@@ -5515,3 +5564,188 @@ label.input-has-value {
 	  transition: all 0.1s ease-out !important;
 	  font-size:14px;
 }
+
+/*------------------------------------------------
+Popup Modal 
+-------------------------------------------------*/
+.modals {   
+	z-index: 1050;
+	display: block;
+	width: 100%;
+	height: 100%;   
+	outline: 0;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+.modals-dialog{
+  max-width: 500px;
+  margin: 1.75rem auto;
+}
+.modals-dialog-centered{
+  min-height: calc(100% - 3.5rem);
+	display:flex;
+	align-items: center;
+}
+.modals-dialog {
+  position: relative;
+  width: auto;
+  margin: .5rem;
+  pointer-events: none;
+	display: block;
+	margin: auto;
+}
+.modals-dialog-centered::before {
+  display: block;
+  height: calc(100vh - 1rem);
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
+  content: "";
+}	
+.modals-content {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0,0,0,.2);
+  border-radius: .3rem;
+  outline: 0;
+}
+.popupmodel .modals-header {
+  background: transparent linear-gradient(180deg, #BD062C 0%, #5F0316 100%) 0% 0% no-repeat padding-box;
+  padding: 30px 0;
+}
+.modals-header {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 1rem 1rem;
+  border-bottom: 1px solid #dee2e6;
+  border-top-left-radius: calc(.3rem - 1px);
+  border-top-right-radius: calc(.3rem - 1px);
+}
+.modals-content {
+  pointer-events: auto;
+}
+.popupmodel .modals-header .close {
+  padding-left: 30px;
+  color: #fff;
+}
+.modals-header .close {
+  padding: 5px;
+      padding-left: 5px;
+  margin: -1rem 1rem 1rem auto;
+}
+.location-login {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+.modals-body {
+  position: relative;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 1rem;
+}
+.modals-body {
+  text-align: center;
+  margin-top: 20px;
+}
+.modals-body p {
+  font-size: 22px;
+  color: #707070;
+}
+.modals-footer {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  padding: .75rem;
+      padding-top: 0.75rem;
+  border-top: 1px solid #dee2e6;
+  border-bottom-right-radius: calc(.3rem - 1px);
+  border-bottom-left-radius: calc(.3rem - 1px);
+}
+.modals-footer {
+  text-align: center;
+  margin: 0 auto;
+  border-top: none;
+  padding-top: 2px;
+}
+.modals-footer > * {
+  margin: .25rem;
+      margin-top: 0.25rem;
+      margin-bottom: 0.25rem;
+}
+
+.popup-box {
+  position: fixed;
+  background: #00000050;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+ 
+
+
+
+.models-box {
+  position: relative;
+  width: 70%;
+  margin: 0 auto;
+  height: auto;
+  max-height: 70vh;
+  margin-top: calc(100vh - 85vh - 20px);
+  background: transparent;
+  border-radius: 4px;
+  overflow: auto;
+  top: 150px;
+}
+.userlinks{
+	text-align:left;
+}
+label.input-has-value {
+	transform: translateY(-110%) translateX(0%) !important;
+	  border-radius: 3px !important;
+	  transition: all 0.1s ease-out !important;
+	  font-size:14px;
+}
+.error-message{
+	color: red;
+	font-size:20px;
+	font-weight:500;
+	padding:15px 0;
+}
+
+.close-icon {
+  content: '';
+  cursor: pointer;
+  position: fixed;
+  right: calc(40% - 30px);
+  top: calc(112vh - 85vh - 33px);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  line-height: 32px;
+  background-color: white;
+  text-align: center;
+  font-size: 25px;
+  z-index: 999;
+  color: #000;
+  font-weight: 600;
+  
+  }

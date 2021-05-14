@@ -1,6 +1,10 @@
 import React from 'react';
 import API from "../../Services/BaseService";
 import { useHistory } from "react-router-dom";
+import DatePicker from 'react-datetime';
+import Datetime from 'react-datetime';
+import moment from 'moment';
+import 'react-datetime/css/react-datetime.css';
 
 // import '../../assets/css/styles.css';
 import { useState } from 'react';
@@ -31,6 +35,15 @@ import '../../assets/css/style.css';
 
 const Registration = () => {
     const history = useHistory();
+
+    const yesterday = moment().subtract(1, 'day');
+    const disablePastDt = current => {
+      return current.isAfter(yesterday);
+    };
+
+    const inputProps = {
+        placeholder: 'Select Date',
+    };
 
     const [dealerName, setDealerName] = useState("");
     const [firstName, setFirstName] = useState("");
@@ -248,14 +261,16 @@ const Registration = () => {
 
 
                             <div class="col-sm-6 form-group">
-                                <input type="Date" class="form-control" placeholder="Select date" required onChange={(e) => setDate(e.target.value)} />
+                                {/* <input type="Date" class="form-control" placeholder="Select date" required onChange={(e) => setDate(e.target.value)} /> */}
+                                <Datetime inputProps={ inputProps } timeFormat={false} dateFormat="DD/MM/YYYY"
+        isValidDate={disablePastDt}/>
                             </div>
                             <div class="col-sm-6 form-group">
                                 <input type="time" class="form-control" placeholder="Select Time" required onChange={(e) => setTime(e.target.value)} />
                             </div>
-                            <div class="col-sm-12">
+                            <div class="col-sm-12 form-group agreetab">
                                 <input type="checkbox" class="form-check d-inline" id="chb" required />
-                                <label for="chb" class="form-check-label"> I agree for the <a href="#">Terms And Conditions</a>.
+                                <label for="chb" class="form-check-label"> I Agree for the <a href="#">Terms And Conditions</a>.
                                 </label>
                             </div>
                             <div class="col-lg-12 loginBtn">
