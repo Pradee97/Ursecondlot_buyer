@@ -15,8 +15,7 @@ import '../../assets/vendor/remixicon/remixicon.css';
 import '../../assets/vendor/venobox/venobox.css';
 import '../../assets/vendor/owl.carousel/assets/owl.carousel.min.css';
 import '../../assets/vendor/aos/aos.css';
-
-
+import '../../Component/Popup/popup.css';
 import '../../assets/css/style.css';
 import './home.css';
 

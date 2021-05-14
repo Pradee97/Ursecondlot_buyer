@@ -261,7 +261,7 @@ const Registration = () => {
 
 
                             <div class="col-sm-6 form-group">
-                                {/* <input type="Date" class="form-control" placeholder="Select date" required onChange={(e) => setDate(e.target.value)} /> */}
+                               
                                 <Datetime inputProps={ inputProps } timeFormat={false} dateFormat="DD/MM/YYYY"
         isValidDate={disablePastDt}/>
                             </div>

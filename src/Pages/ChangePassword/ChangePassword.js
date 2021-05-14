@@ -26,7 +26,7 @@ import '../../assets/vendor/venobox/venobox.css';
 import '../../assets/vendor/owl.carousel/assets/owl.carousel.min.css';
 import '../../assets/vendor/aos/aos.css';
 
-
+import './ChangePassword.css';
 import '../../assets/css/style.css';
 import { Modal, Button } from 'antd';
 import '../../assets/css/responsive.css';
