@@ -2650,6 +2650,55 @@ background:#fff;
 	color: #1E1E1E;
 	font-size:12px;
 }
+.registrationform .form-group.agreetab label {
+  position: relative;
+  cursor: pointer;
+}
+.registrationform .form-group.agreetab label::before {
+  content: '';
+-webkit-appearance: none;
+background-color: transparent;
+border: 1px solid #707070;
+padding: 10px;
+display: inline-block;
+position: relative;
+vertical-align: middle;
+cursor: pointer;
+margin-right: 5px;
+background: #fff;
+border: 1px solid #707070;
+}
+.registrationform .form-group.agreetab input:checked + label::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 2px;
+  left: 9px;
+  width: 6px;
+  height: 14px;
+  border: solid #bd062c;
+      border-top-width: medium;
+      border-right-width: medium;
+      border-bottom-width: medium;
+      border-left-width: medium;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.registrationform .form-group.agreetab label{
+  cursor: pointer;
+}
+.registrationform .form-group.agreetab input {
+  padding: 0;
+  height: initial;
+  width: initial;
+  margin-bottom: 0;
+  display: none!important;
+  cursor: pointer;
+}
+.registrationform .form-group.agreetab {
+	float:left;
+	text-align:left;
+}
 
 /*------------------------------------------------------
 popup Dialogbox
@@ -5515,3 +5564,5 @@ label.input-has-value {
 	  transition: all 0.1s ease-out !important;
 	  font-size:14px;
 }
+
+

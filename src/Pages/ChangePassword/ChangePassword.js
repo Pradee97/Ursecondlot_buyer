@@ -17,8 +17,8 @@ import {
 } from 'antd';
 
 
-
 import { Modal, Button } from 'antd';
+import './ChangePassword.css';
 import '../../assets/css/responsive.css';
 
 
@@ -77,6 +77,7 @@ const ChangePassword = () => {
                 <div className="col-lg-4 card loginBlock">
                     <form class="registrationform" onSubmit={changehandleSubmit} >
                         <h2 class="title">Change Password</h2>
+                        <p className="error-message">{errorMessage}</p>
                         <div class="row">
 
                             <div class="col-sm-12 form-group">
@@ -88,7 +89,7 @@ const ChangePassword = () => {
 
                             <div class="col-sm-12 form-group">
                                 <input type="password" class="form-control" placeholder="Confirm Password" required onChange={(e) => setConfirmPassword(e.target.value)} />
-                                 <p className="error-message">{errorMessage}</p>
+                                 
 
                             </div>
                             {/* <div class="col-sm-12 form-group">
