@@ -17,18 +17,8 @@ import {
 } from 'antd';
 
 
-import '../../assets/vendor/bootstrap/css/bootstrap.min.css';
-import '../../assets/vendor/icofont/icofont.min.css';
-import '../../assets/vendor/boxicons/css/boxicons.min.css';
-import '../../assets/vendor/font-awesome/css/font-awesome.min.css';
-import '../../assets/vendor/remixicon/remixicon.css';
-import '../../assets/vendor/venobox/venobox.css';
-import '../../assets/vendor/owl.carousel/assets/owl.carousel.min.css';
-import '../../assets/vendor/aos/aos.css';
-
-import './ChangePassword.css';
-import '../../assets/css/style.css';
 import { Modal, Button } from 'antd';
+import './ChangePassword.css';
 import '../../assets/css/responsive.css';
 
 
@@ -124,16 +114,7 @@ const ChangePassword = () => {
                     </div>
                 </section>
             </main>
-            <script src="assets/vendor/jquery/jquery.min.js"></script>
-            <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-            <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
-            <script src="assets/vendor/php-email-form/validate.js"></script>
-            <script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
-            <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-            <script src="assets/vendor/venobox/venobox.min.js"></script>
-            <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
-            <script src="assets/vendor/aos/aos.js"></script>
-            <script src="assets/js/main.js"></script>
+
         </div>
 
     );
