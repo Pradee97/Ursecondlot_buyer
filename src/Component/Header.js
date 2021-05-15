@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 // import '../assets/css/styles.css';
 import { useState } from 'react';
@@ -22,6 +22,9 @@ import '../assets/css/style.css';
 
 const Header = () => {
   const history = useHistory();
+  // const location = useLocation();
+  console.log("history=====",history)
+  // console.log("location=====",location)
   return (
     <div>
 

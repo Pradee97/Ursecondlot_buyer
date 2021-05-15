@@ -28,17 +28,17 @@ const CarList = () => {
                                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div class="car-item">
                                         <div class="cars-lock">
-                                            <img src="lock.svg"  />
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"}  />
                                         </div>
-                                        <img src="cars01.png" />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}/>
                                         <div class="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
                                         <div class="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
                                             <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src="speedometer.svg" alt="" /><span>31,1241 m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <p class="details"><img src="gasoline-pump.svg" alt="" /><span>Diesel</span></p>
+                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
                                             <div class="cars-prices">
@@ -51,17 +51,17 @@ const CarList = () => {
                                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div class="car-item">
                                         <div class="cars-lock">
-                                            <img src="lock.svg" class="img-fluid" alt="..." />
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
                                         </div>
-                                        <img src="cars01.png" class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"} class="img-fluid" alt="..." />
                                         <div class="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
                                         <div class="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
                                             <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src="speedometer.svg" alt="" /><span>31,1241 m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                    <p class="details"><img src="gasoline-pump.svg" alt="" /><span>Diesel</span></p>
+                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
                                             <div class="cars-prices">
@@ -74,17 +74,17 @@ const CarList = () => {
                                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div class="car-item">
                                         <div class="cars-lock">
-                                            <img src="lock.svg" class="img-fluid" alt="..." />
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
                                         </div>
-                                        <img src="cars01.png" class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
                                         <div class="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
                                         <div class="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
                                             <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src="speedometer.svg" alt="" /><span>31,1241 m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                    <p class="details"><img src="gasoline-pump.svg" alt="" /><span>Diesel</span></p>
+                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
                                             <div class="cars-prices">
@@ -97,17 +97,17 @@ const CarList = () => {
                                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div class="car-item">
                                         <div class="cars-lock">
-                                            <img src="lock.svg" class="img-fluid" alt="..." />
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
                                         </div>
-                                        <img src="cars01.png" class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
                                         <div class="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
                                         <div class="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
                                             <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src="speedometer.svg" alt="" /><span>31,1241 m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                    <p class="details"><img src="gasoline-pump.svg" alt="" /><span>Diesel</span></p>
+                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
                                             <div class="cars-prices">
@@ -120,18 +120,18 @@ const CarList = () => {
                                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div class="car-item">
                                         <div class="cars-lock">
-                                            <img src="lock.svg" class="img-fluid" alt="..." />
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
                                         </div>
-                                        <img src="cars01.png" class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"} class="img-fluid" alt="..." />
                                         <div class="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
                                         <div class="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
                                             <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src="speedometer.svg" alt="" /><span>31,1241 m</span></p>
+                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src="gasoline-pump.svg" alt="" /><span>Diesel</span></p>
+              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
                                             <div class="cars-prices">
@@ -162,18 +162,18 @@ const CarList = () => {
                                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div class="car-item">
                                         <div class="cars-lock">
-                                            <img src="lock.svg" class="img-fluid" alt="..." />
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
                                         </div>
-                                        <img src="cars01.png" class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"} class="img-fluid" alt="..." />
                                         <div class="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
                                         <div class="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
                                             <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src="speedometer.svg" alt="" /><span>31,1241 m</span></p>
+                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src="gasoline-pump.svg" alt="" /><span>Diesel</span></p>
+              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
                                             <div class="cars-prices">
@@ -186,18 +186,18 @@ const CarList = () => {
                                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div class="car-item">
                                         <div class="cars-lock">
-                                            <img src="lock.svg" class="img-fluid" alt="..." />
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
                                         </div>
-                                        <img src="cars01.png" class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"} class="img-fluid" alt="..." />
                                         <div class="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
                                         <div class="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
                                             <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src="speedometer.svg" alt="" /><span>31,1241 m</span></p>
+                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src="gasoline-pump.svg" alt="" /><span>Diesel</span></p>
+              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
                                             <div class="cars-prices">
@@ -210,18 +210,18 @@ const CarList = () => {
                                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div class="car-item">
                                         <div class="cars-lock">
-                                            <img src="lock.svg" class="img-fluid" alt="..." />
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
                                         </div>
-                                        <img src="cars01.png" class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"} class="img-fluid" alt="..." />
                                         <div class="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
                                         <div class="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
                                             <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src="speedometer.svg" alt="" /><span>31,1241 m</span></p>
+                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src="gasoline-pump.svg" alt="" /><span>Diesel</span></p>
+              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
                                             <div class="cars-prices">
@@ -234,18 +234,18 @@ const CarList = () => {
                                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div class="car-item">
                                         <div class="cars-lock">
-                                            <img src="lock.svg" class="img-fluid" alt="..." />
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
                                         </div>
-                                        <img src="cars01.png" class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"} class="img-fluid" alt="..." />
                                         <div class="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
                                         <div class="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
                                             <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src="speedometer.svg" alt="" /><span>31,1241 m</span></p>
+                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src="gasoline-pump.svg" alt="" /><span>Diesel</span></p>
+              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
                                             <div class="cars-prices">
@@ -258,18 +258,18 @@ const CarList = () => {
                                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div class="car-item">
                                         <div class="cars-lock">
-                                            <img src="lock.svg" class="img-fluid" alt="..." />
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
                                         </div>
-                                        <img src="cars01.png" class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
                                         <div class="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
                                         <div class="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
                                             <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src="speedometer.svg" alt="" /><span>31,1241 m</span></p>
+                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src="gasoline-pump.svg" alt="" /><span>Diesel</span></p>
+              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
                                             <div class="cars-prices">
@@ -286,18 +286,18 @@ const CarList = () => {
                                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div class="car-item">
                                         <div class="cars-lock">
-                                            <img src="lock.svg" class="img-fluid" alt="..." />
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
                                         </div>
-                                        <img src="cars01.png" class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
                                         <div class="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
                                         <div class="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
                                             <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src="speedometer.svg" alt="" /><span>31,1241 m</span></p>
+                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src="gasoline-pump.svg" alt="" /><span>Diesel</span></p>
+              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
                                             <div class="cars-prices">
@@ -310,18 +310,18 @@ const CarList = () => {
                                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div class="car-item">
                                         <div class="cars-lock">
-                                            <img src="lock.svg" class="img-fluid" alt="..." />
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
                                         </div>
-                                        <img src="cars01.png" class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
                                         <div class="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
                                         <div class="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
                                             <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src="speedometer.svg" alt="" /><span>31,1241 m</span></p>
+                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src="gasoline-pump.svg" alt="" /><span>Diesel</span></p>
+              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
                                             <div class="cars-prices">
@@ -334,18 +334,18 @@ const CarList = () => {
                                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div class="car-item">
                                         <div class="cars-lock">
-                                            <img src="lock.svg" class="img-fluid" alt="..." />
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
                                         </div>
-                                        <img src="cars01.png" class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
                                         <div class="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
                                         <div class="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
                                             <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src="speedometer.svg" alt="" /><span>31,1241 m</span></p>
+                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src="gasoline-pump.svg" alt="" /><span>Diesel</span></p>
+              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
                                             <div class="cars-prices">
@@ -358,18 +358,18 @@ const CarList = () => {
                                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div class="car-item">
                                         <div class="cars-lock">
-                                            <img src="lock.svg" class="img-fluid" alt="..." />
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
                                         </div>
-                                        <img src="cars01.png" class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
                                         <div class="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
                                         <div class="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
                                             <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src="speedometer.svg" alt="" /><span>31,1241 m</span></p>
+                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src="gasoline-pump.svg" alt="" /><span>Diesel</span></p>
+              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
                                             <div class="cars-prices">
@@ -382,18 +382,18 @@ const CarList = () => {
                                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div class="car-item">
                                         <div class="cars-lock">
-                                            <img src="lock.svg" class="img-fluid" alt="..." />
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
                                         </div>
-                                        <img src="cars01.png" class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
                                         <div class="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
                                         <div class="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
                                             <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src="speedometer.svg" alt="" /><span>31,1241 m</span></p>
+                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src="gasoline-pump.svg" alt="" /><span>Diesel</span></p>
+              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
                                             <div class="cars-prices">
@@ -425,18 +425,18 @@ const CarList = () => {
                                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div class="car-item">
                                         <div class="cars-lock">
-                                            <img src="lock.svg" class="img-fluid" alt="..." />
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
                                         </div>
-                                        <img src="cars01.png" class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
                                         <div class="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
                                         <div class="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
                                             <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src="speedometer.svg" alt="" /><span>31,1241 m</span></p>
+                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src="gasoline-pump.svg" alt="" /><span>Diesel</span></p>
+              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
                                             <div class="cars-prices">
@@ -449,18 +449,18 @@ const CarList = () => {
                                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div class="car-item">
                                         <div class="cars-lock">
-                                            <img src="lock.svg" class="img-fluid" alt="..." />
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
                                         </div>
-                                        <img src="cars01.png" class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
                                         <div class="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
                                         <div class="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
                                             <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src="speedometer.svg" alt="" /><span>31,1241 m</span></p>
+                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src="gasoline-pump.svg" alt="" /><span>Diesel</span></p>
+              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
                                             <div class="cars-prices">
@@ -473,18 +473,18 @@ const CarList = () => {
                                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div class="car-item">
                                         <div class="cars-lock">
-                                            <img src="lock.svg" class="img-fluid" alt="..." />
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
                                         </div>
-                                        <img src="cars01.png" class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
                                         <div class="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
                                         <div class="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
                                             <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src="speedometer.svg" alt="" /><span>31,1241 m</span></p>
+                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src="gasoline-pump.svg" alt="" /><span>Diesel</span></p>
+              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
                                             <div class="cars-prices">
@@ -497,18 +497,18 @@ const CarList = () => {
                                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div class="car-item">
                                         <div class="cars-lock">
-                                            <img src="lock.svg" class="img-fluid" alt="..." />
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
                                         </div>
-                                        <img src="cars01.png" class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
                                         <div class="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
                                         <div class="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
                                             <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src="speedometer.svg" alt="" /><span>31,1241 m</span></p>
+                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src="gasoline-pump.svg" alt="" /><span>Diesel</span></p>
+              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
                                             <div class="cars-prices">
@@ -521,18 +521,18 @@ const CarList = () => {
                                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div class="car-item">
                                         <div class="cars-lock">
-                                            <img src="lock.svg" class="img-fluid" alt="..." />
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
                                         </div>
-                                        <img src="cars01.png" class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
                                         <div class="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
                                         <div class="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
                                             <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src="speedometer.svg" alt="" /><span>31,1241 m</span></p>
+                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src="gasoline-pump.svg" alt="" /><span>Diesel</span></p>
+              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
                                             <div class="cars-prices">
@@ -549,18 +549,18 @@ const CarList = () => {
                                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div class="car-item">
                                         <div class="cars-lock">
-                                            <img src="lock.svg" class="img-fluid" alt="..." />
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
                                         </div>
-                                        <img src="cars01.png" class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
                                         <div class="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
                                         <div class="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
                                             <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src="speedometer.svg" alt="" /><span>31,1241 m</span></p>
+                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src="gasoline-pump.svg" alt="" /><span>Diesel</span></p>
+              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
                                             <div class="cars-prices">
@@ -573,18 +573,18 @@ const CarList = () => {
                                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div class="car-item">
                                         <div class="cars-lock">
-                                            <img src="lock.svg" class="img-fluid" alt="..." />
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
                                         </div>
-                                        <img src="cars01.png" class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
                                         <div class="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
                                         <div class="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
                                             <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src="speedometer.svg" alt="" /><span>31,1241 m</span></p>
+                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src="gasoline-pump.svg" alt="" /><span>Diesel</span></p>
+              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
                                             <div class="cars-prices">
@@ -597,18 +597,18 @@ const CarList = () => {
                                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div class="car-item">
                                         <div class="cars-lock">
-                                            <img src="lock.svg" class="img-fluid" alt="..." />
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
                                         </div>
-                                        <img src="cars01.png" class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
                                         <div class="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
                                         <div class="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
                                             <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src="speedometer.svg" alt="" /><span>31,1241 m</span></p>
+                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src="gasoline-pump.svg" alt="" /><span>Diesel</span></p>
+              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
                                             <div class="cars-prices">
@@ -621,18 +621,18 @@ const CarList = () => {
                                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div class="car-item">
                                         <div class="cars-lock">
-                                            <img src="lock.svg" class="img-fluid" alt="..." />
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
                                         </div>
-                                        <img src="cars01.png" class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
                                         <div class="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
                                         <div class="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
                                             <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src="speedometer.svg" alt="" /><span>31,1241 m</span></p>
+                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src="gasoline-pump.svg" alt="" /><span>Diesel</span></p>
+              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
                                             <div class="cars-prices">
@@ -645,18 +645,18 @@ const CarList = () => {
                                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div class="car-item">
                                         <div class="cars-lock">
-                                            <img src="lock.svg" class="img-fluid" alt="..." />
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
                                         </div>
-                                        <img src="cars01.png" class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
                                         <div class="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
                                         <div class="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
                                             <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src="speedometer.svg" alt="" /><span>31,1241 m</span></p>
+                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src="gasoline-pump.svg" alt="" /><span>Diesel</span></p>
+              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
                                             <div class="cars-prices">
@@ -687,9 +687,9 @@ const CarList = () => {
                                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div class="car-item">
                                         <div class="cars-lock">
-                                            <img src="lock.svg" class="img-fluid" alt="..." />
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
                                         </div>
-                                        <img src="cars01.png" class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
 
                                         <div class="cars-content">
                                             <h3><a href="#">View Details</a></h3>
@@ -699,9 +699,9 @@ const CarList = () => {
                                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div class="car-item">
                                         <div class="cars-lock">
-                                            <img src="lock.svg" class="img-fluid" alt="..." />
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
                                         </div>
-                                        <img src="cars01.png" class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
 
                                         <div class="cars-content">
                                             <h3><a href="#">View Details</a></h3>
@@ -711,9 +711,9 @@ const CarList = () => {
                                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div class="car-item">
                                         <div class="cars-lock">
-                                            <img src="lock.svg" class="img-fluid" alt="..." />
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
                                         </div>
-                                        <img src="cars01.png" class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
 
                                         <div class="cars-content">
                                             <h3><a href="#">View Details</a></h3>
@@ -723,9 +723,9 @@ const CarList = () => {
                                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div class="car-item">
                                         <div class="cars-lock">
-                                            <img src="lock.svg" class="img-fluid" alt="..." />
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
                                         </div>
-                                        <img src="cars01.png" class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
 
                                         <div class="cars-content">
                                             <h3><a href="#">View Details</a></h3>
@@ -735,9 +735,9 @@ const CarList = () => {
                                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div class="car-item">
                                         <div class="cars-lock">
-                                            <img src="lock.svg" class="img-fluid" alt="..." />
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
                                         </div>
-                                        <img src="cars01.png" class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
 
                                         <div class="cars-content">
                                             <h3><a href="#">View Details</a></h3>

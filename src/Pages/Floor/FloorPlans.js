@@ -57,7 +57,7 @@ const FloorPlans = () => {
        <div class="row content">
            <div class="col-lg-12 floorplanstableblock">
                <div class="add-floor">
-                   <a class="add-floor-btns" href="/flooradd"><img src="addbtn.jpg"/>Add Floor</a>
+                   <a class="add-floor-btns" href="/flooradd"><img src={process.env.PUBLIC_URL +"/images/addbtn.jpg"}/>Add Floor</a>
                </div>
                
 
@@ -119,8 +119,8 @@ const FloorPlans = () => {
 
        <div class="row content">
          <div class="col-lg-12">
-           <img src="appstore.png" />
-           <img src="googleplay.png" />
+           <img src={process.env.PUBLIC_URL +"/images/appstore.png" }/>
+           <img src={process.env.PUBLIC_URL +"/images/googleplay.png"} />
           
          </div>
         
