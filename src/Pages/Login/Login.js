@@ -42,11 +42,13 @@ const Login = () => {
           if(response.data.data.local_flag == '0'){
             history.push("/ChangePassword");
           }else{
+            localStorage.setItem("islogedIn", true)
             history.push("/carList");
           }
           
         } else {
           history.push("error");
+          localStorage.setItem("islogedIn", false)
         }
       },
         (error) => {
@@ -108,8 +110,8 @@ const Login = () => {
           <div className="container">
             <div className="row content">
               <div className="col-lg-12">
-                <img src="appstore.png" />
-                <img src="googleplay.png" />
+                <img src={process.env.PUBLIC_URL +"/images/appstore.png"} />
+                <img src={process.env.PUBLIC_URL +"/images/googleplay.png"} />
               </div>
             </div>
           </div>

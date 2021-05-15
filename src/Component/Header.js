@@ -7,83 +7,74 @@ import { useEffect } from 'react';
 
 import LogoImg from '../../src/assets/img/Logo_final.png';
 
-import '../assets/vendor/bootstrap/css/bootstrap.min.css';
-import '../assets/vendor/icofont/icofont.min.css';
-import '../assets/vendor/boxicons/css/boxicons.min.css';
-import '../assets/vendor/font-awesome/css/font-awesome.min.css';
-import '../assets/vendor/remixicon/remixicon.css';
-import '../assets/vendor/venobox/venobox.css';
-import '../assets/vendor/owl.carousel/assets/owl.carousel.min.css';
-import '../assets/vendor/aos/aos.css';
-
-
 import '../assets/css/style.css';
 
 
 const Header = () => {
   const history = useHistory();
-  // const location = useLocation();
+  const location = useLocation();
   console.log("history=====",history)
-  // console.log("location=====",location)
+  console.log("location=====",location)
   return (
     <div>
 
-      <div id="topbar" class="">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-lg-8 topLeft">
-              <div class="socialIcons">
-                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                <a href="#" class="snapchat"><i class="bx bxl-snapchat"></i></a>
-                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+      <div id="topbar" className="">
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-lg-8 topLeft">
+              <div className="socialIcons">
+                <a href="#" className="twitter"><i className="bx bxl-twitter"></i></a>
+                <a href="#" className="snapchat"><i className="bx bxl-snapchat"></i></a>
+                <a href="#" className="instagram"><i className="bx bxl-instagram"></i></a>
               </div>
             </div>
 
-            <div class="col-lg-4 topRight">
-              <div class="rightMenu">
-                <a href="#"><i class="icofont-globe"></i> English <i class="icofont-thin-down"></i></a>
-                <i class="bx bxl-envelope"></i> CALL US: 123 456 789
-			<i class="bx bxl-phone"></i> <a href="#">GET FREE DEMO <i class="icofont-long-arrow-right"></i></a>
+            <div className="col-lg-4 topRight">
+              <div className="rightMenu">
+                <a href="#"><i className="icofont-globe"></i> English <i className="icofont-thin-down"></i></a>
+                <i className="bx bxl-envelope"></i> CALL US: 123 456 789
+			<i className="bx bxl-phone"></i> <a href="#">GET FREE DEMO <i className="icofont-long-arrow-right"></i></a>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <header id="header" class="">
-        <div class="container-fluid d-flex align-items-center">
+      <header id="header" className="">
+        <div className="container-fluid d-flex align-items-center">
 
-          <h1 class="logo mr-auto"><img src={LogoImg} ></img></h1>
+          <h1 className="logo mr-auto"><img src={LogoImg} ></img></h1>
+          <nav className="nav-menu d-none d-lg-block">
+          {!localStorage.getItem("islogedIn") ?
+            <ul>
+                <li className={location.pathname ==="/"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/')} >Home</a></li>
+                <li className={location.pathname ==="/about"? "active" : ""} ><a href="JavaScript:void(0)"  onClick={()=>history.push('/about')} >About</a></li>
+                <li className={location.pathname ==="/fees"? "active" : ""}  ><a href="JavaScript:void(0)" onClick={()=>history.push('/fees')} >Fees</a></li>
+                <li className={location.pathname ==="/contactus"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/contactus')}>Contactus</a></li>
+                <li className={location.pathname ==="/transport"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/transport')} >Transport</a></li>
 
-
-          <nav class="nav-menu d-none d-lg-block">
-          <ul>
-              <li class="active"><a href="/">Home</a></li>
-              <li><a href="/about">About</a></li>
-              <li><a href="/fees">Fees</a></li>
-              {/* <li><a href="/floorplans">Floor</a></li> */}
-              <li><a href="/contactus">Contactus</a></li>
-              </ul>
+            </ul>
+            :
+            <ul>
+                <li className={location.pathname ==="/carList"? "active" : ""} ><a href="/carList" onClick={()=>history.push('/')} >Home</a></li>
+                <li className={location.pathname ==="/search"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/search')} >Search</a></li>
+                <li className={location.pathname ==="/mybids"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/mybids')} >My Bids</a></li>
+                <li className={location.pathname ==="/fees"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/fees')} >Fees</a></li>
+                <li className={location.pathname ==="/floor"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/floor')} >Floor</a></li>
+                <li className={location.pathname ==="/transport"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/transport')} >Transport</a></li>
+                <li className={location.pathname ==="/"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>{history.push('/');localStorage.clear()}}>logout</a></li>
+             </ul>
+             }
+         
           </nav>
 
-          <a href="login" class="get-started-btn dealerLogin">Dealer Login</a>
+          <a href="login" className="get-started-btn dealerLogin">Dealer Login</a>
 
         </div>
       </header>
      
 
-      <a href="#" class="back-to-top"><i class="ri-arrow-up-line"></i></a>
-
-      <script src="assets/vendor/jquery/jquery.min.js"></script>
-      <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-      <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
-      <script src="assets/vendor/php-email-form/validate.js"></script>
-      <script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
-      <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-      <script src="assets/vendor/venobox/venobox.min.js"></script>
-      <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
-      <script src="assets/vendor/aos/aos.js"></script>
-      <script src="assets/js/main.js"></script>
+      <a href="#" className="back-to-top"><i className="ri-arrow-up-line"></i></a>
     </div>
 
 

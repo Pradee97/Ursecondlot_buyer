@@ -19,12 +19,15 @@ const About = lazy(() => import('./Pages/About/About'));
 const ChangePassword = lazy(() => import('./Pages/ChangePassword/ChangePassword'));
 const CarList = lazy(() => import('./Pages/CarList/CarList'));
 const Contactus = lazy(() => import('./Pages/Contactus/Contactus'));
+const Header = lazy(() =>  import('./Component/Header'));
+const Inprogress = lazy(() => import('./Component/Inprogress/Inprogress'));
 
 function AppRouter() {
   return (
     <div className="App">
       <Router>
         <Suspense fallback={<div>Loading...</div>}>
+          <Header /> 
           <Switch>
             <Route exact path="/" component={Home}/>
             <Route  path="/login" component={Login}/>
@@ -42,6 +45,10 @@ function AppRouter() {
             <Route  path="/about" component={About}/>
             <Route  path="/changepassword" component={ChangePassword}/>
             <Route  path="/carList" component={CarList}/>
+            <Route  path="/search" component={Inprogress}/>
+            <Route  path="/floor" component={Inprogress}/>
+            <Route  path="/mybids" component={Inprogress}/>
+            <Route  path="/transport" component={Inprogress}/>
           </Switch>
         </Suspense>
       </Router>
