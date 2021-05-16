@@ -19,7 +19,7 @@ const About = lazy(() => import('./Pages/About/About'));
 const ChangePassword = lazy(() => import('./Pages/ChangePassword/ChangePassword'));
 const CarList = lazy(() => import('./Pages/CarList/CarList'));
 const Contactus = lazy(() => import('./Pages/Contactus/Contactus'));
-const Header = lazy(() =>  import('./Component/Header'));
+const Header = lazy(() =>  import('./Component/Header/Header'));
 const Inprogress = lazy(() => import('./Component/Inprogress/Inprogress'));
 
 function AppRouter() {

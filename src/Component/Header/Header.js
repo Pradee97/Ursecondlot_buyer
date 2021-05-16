@@ -5,19 +5,43 @@ import { useHistory, useLocation } from "react-router-dom";
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-import LogoImg from '../../src/assets/img/Logo_final.png';
+import LogoImg from '../../../src/assets/img/Logo_final.png';
 
-import '../assets/css/style.css';
-
+// import '../../assets/css/style.css';
+import './header.css';
 
 const Header = () => {
   const history = useHistory();
   const location = useLocation();
-  console.log("history=====",history)
-  console.log("location=====",location)
+
+const Submenu = () => {
+    return (
+      <ul className="nav__submenu">
+        <li className="nav__submenu-item ">
+          <a>History</a>
+        </li>
+        <li className="nav__submenu-item ">
+          <a>Favorite List</a>
+        </li>
+        <li className="nav__submenu-item ">
+          <a>Manage Account</a>
+        </li>
+        <li className="nav__submenu-item ">
+          <a>Contact Us</a>
+        </li>
+        <li className="nav__submenu-item ">
+          <a>About Us</a>
+        </li>
+        <li className="nav__submenu-item ">
+        <a href="JavaScript:void(0)" onClick={()=>{history.push('/');localStorage.clear()}}>logout</a>
+        </li>
+
+      </ul>
+    )
+  }
+
   return (
     <div>
-
       <div id="topbar" className="">
         <div className="container-fluid">
           <div className="row">
@@ -33,7 +57,7 @@ const Header = () => {
               <div className="rightMenu">
                 <a href="#"><i className="icofont-globe"></i> English <i className="icofont-thin-down"></i></a>
                 <i className="bx bxl-envelope"></i> CALL US: 123 456 789
-			<i className="bx bxl-phone"></i> <a href="#">GET FREE DEMO <i className="icofont-long-arrow-right"></i></a>
+			          <i className="bx bxl-phone"></i> <a href="#">GET FREE DEMO <i className="icofont-long-arrow-right"></i></a>
               </div>
             </div>
           </div>
@@ -63,6 +87,11 @@ const Header = () => {
                 <li className={location.pathname ==="/floor"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/floor')} >Floor</a></li>
                 <li className={location.pathname ==="/transport"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/transport')} >Transport</a></li>
                 <li className={location.pathname ==="/"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>{history.push('/');localStorage.clear()}}>logout</a></li>
+                {/* <li className={location.pathname ==="/"? "active" : ""} >
+                <img alt="Menu" src={process.env.PUBLIC_URL +"/images/hamburger-menu.svg"} />
+                <Submenu />
+                </li> */}
+                
              </ul>
              }
          
