@@ -103,7 +103,7 @@ const Submenu = () => {
          
           </nav>
 
-          <a href="login" className="get-started-btn dealerLogin">Dealer Login</a>
+          {!localStorage.getItem("islogedIn") && <a href="login" className="get-started-btn dealerLogin">Dealer Login</a> }
 
         </div>
       </header>

@@ -1,12 +1,7 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import API from "../../Services/BaseService";
 import { useHistory,useLocation } from "react-router-dom";
-
 import ls from 'local-storage';
-
-// import '../../assets/css/styles.css';
-import { useState } from 'react';
-import { useEffect } from 'react';
 import { store } from 'react-notifications-component';
 import {
   Form,
@@ -22,14 +17,18 @@ import {
 const Login = () => {
   const history = useHistory();
   const location = useLocation();
-  console.log("location=====",location)
-
+ 
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
+
+  // useEffect(()=>{
+  //   localStorage.clear()
+  // })
 
   const loginhandleSubmit = (event) => {
     // setOpenLoader(true);
     event.preventDefault();
+    localStorage.setItem("islogedIn", false)
     let request = {
       email: emailId,
       password: password
@@ -87,10 +86,6 @@ const Login = () => {
 				 <label for="psw" className={password != "" ? "input-has-value" : "" }>Password</label>
 			 </div>
 		  </div>
-		  
-
-
-
             <div className="row">
               <div className="col-lg-6">
               <a className="forget-name" href="#">Forgot Username</a>
@@ -120,8 +115,6 @@ const Login = () => {
 
       <a href="#" className="back-to-top"><i className="ri-arrow-up-line"></i></a>
     </div>
-
-
   )
 }
 
