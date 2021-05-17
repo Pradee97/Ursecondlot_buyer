@@ -25,6 +25,8 @@ const ManageAccount = lazy(() => import("./Pages/ManageAccount/ManageAccount"));
 const LotFee = lazy(() => import ('./Pages/ManageAccount/LotFee'));
 const Notification = lazy(() => import ('./Pages/ManageAccount/Notification'));
 const Payment = lazy(() => import ('./Pages/ManageAccount/Payment'));
+const PaymentInfo = lazy(() => import('./Pages/ManageAccount/PaymentInfo'));
+const EditPayment = lazy(() => import('./Pages/ManageAccount/EditPayment'));
 
 function AppRouter() {
   return (
@@ -57,6 +59,8 @@ function AppRouter() {
             <Route  path="/lotfee" component={LotFee}/>
             <Route  path="/notification" component={Notification}/>
             <Route  path="/payment" component={Payment}/>
+            <Route  path="/paymentinfo" component={PaymentInfo}/>
+            <Route  path="/editpayment" component={EditPayment}/>
           </Switch>
         </Suspense>
       </Router>
