@@ -37,7 +37,7 @@ const About = () => {
        <div class="row content">
          <div class="col-lg-6">
            <div class="aboutusimg">
-            <img src="aboutusimg.png" />
+            <img src={process.env.PUBLIC_URL +"/images/aboutusimg.png"} />
            </div>
            
          </div>
@@ -65,8 +65,8 @@ const About = () => {
 
        <div class="row content">
          <div class="col-lg-12">
-           <img src="appstore.png" />
-           <img src="googleplay.png" />
+           <img src={process.env.PUBLIC_URL +"/images/appstore.png"} />
+           <img src={process.env.PUBLIC_URL +"/images/googleplay.png"} />
           
          </div>
         
