@@ -47,6 +47,8 @@ const Registration = () => {
     // const [cityId, setCityId] = useState("");
     const [zipCodeId, setZipcodeId] = useState("");
     const [numberOfYears, setNumberofYears] = useState("");
+    const [option, setOption] = useState("");
+
     async function fetchCountry() {
         const country = API.get('http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/country');
         country.then(res => {
@@ -107,7 +109,7 @@ const Registration = () => {
             state_id: stateName,
             city_id: cityName,
             zipcode_id: zipCodeId,
-            no_years: numberOfYears,
+            no_years: option,
             local_flag: 0,
         };
         API
@@ -163,42 +165,42 @@ const Registration = () => {
     }
     return (
         <div>
-            <main id="main" class="inner-page">
+            <main id="main" className="inner-page">
                 <div className="col-lg-4 card loginBlock">
-                    <form class="registrationform" onSubmit={registrationhandleSubmit} >
-                        <h2 class="title"> Dealer Registration</h2>
-                        <div class="row">
-                        <div class="col-sm-12 form-group"> 
+                    <form className="registrationform" onSubmit={registrationhandleSubmit} >
+                        <h2 className="title"> Dealer Registration</h2>
+                        <div className="row">
+                        <div className="col-sm-12 form-group"> 
                         <div className="tbox">
                             <input className="textbox " type="text" placeholder="" id="dealer_name" required onChange={(e) => setDealerName(e.target.value)} />
 				            <label  for="dealer_name" className={dealerName !="" ? "input-has-value" : ""}>Dealer name</label>
 			            </div>
                         </div>
-                        <div class="col-sm-12 form-group"> 
+                        <div className="col-sm-12 form-group"> 
                         <div className="tbox">
                             <input className="textbox " type="text" placeholder="" id="first_name" required onChange={(e) => setFirstName(e.target.value)} />
 				            <label  for="first_name" className={firstName !="" ? "input-has-value" : ""}>First Name</label>
 			            </div>
                         </div>
-                        <div class="col-sm-12 form-group"> 
+                        <div className="col-sm-12 form-group"> 
                         <div className="tbox">
                             <input className="textbox " type="text" placeholder="" id="last_name" required onChange={(e) => setLastName(e.target.value)} />
 				            <label  for="last_name" className={lastName !="" ? "input-has-value" : ""}>Last Name</label>
 			            </div>
                         </div>
-                        <div class="col-sm-12 form-group">
+                        <div className="col-sm-12 form-group">
                         <div className="tbox">
                             <input className="textbox " type="text" placeholder="" id="phone_no" required onChange={(e) => setPhoneNumber(e.target.value)} />
 				            <label  for="phone_no" className={phoneNumber !="" ? "input-has-value" : ""}>Phone</label>
 			            </div>
                         </div>
-                        <div class="col-sm-12 form-group">
+                        <div className="col-sm-12 form-group">
                         <div className="tbox">
                             <input className="textbox " type="text" placeholder="" id="email" required onChange={(e) => setEmail(e.target.value)} />
 				            <label  for="email" className={email !="" ? "input-has-value" : ""}>Email</label>
 			            </div>
                         </div>
-                        <div class="col-sm-12 form-group">
+                        <div className="col-sm-12 form-group">
                         <div className="tbox">
                             <input className="textbox " type="text" placeholder="" id="address" required onChange={(e) => setAddress(e.target.value)} />
 				            <label  for="address" className={address !="" ? "input-has-value" : ""}>Address</label>
@@ -208,8 +210,8 @@ const Registration = () => {
 
                             
                            
-                            <div class="col-sm-4 form-group">
-                                {/* <select class="form-control custom-select browser-default" required defaultValue={stateId} onChange={handleState}>
+                            <div className="col-sm-4 form-group">
+                                {/* <select className="form-control custom-select browser-default" required defaultValue={stateId} onChange={handleState}>
                                     <option>State</option>
                                     {stateName &&
                                         <>
@@ -217,10 +219,10 @@ const Registration = () => {
                                         </>
                                     }
                                 </select> */}
-                                 <input type="text" class="form-control" placeholder="state" value ={stateName} required disabled  />
+                                 <input type="text" className="form-control" placeholder="state" value ={stateName} required disabled  />
                             </div>
-                            <div class="col-sm-4 form-group">
-                                {/* <select id="City" class="form-control custom-select browser-default" required defaultValue={cityId} onChange={handleCity}>
+                            <div className="col-sm-4 form-group">
+                                {/* <select id="City" className="form-control custom-select browser-default" required defaultValue={cityId} onChange={handleCity}>
                                     <option>City</option>
                                     {cityName &&
                                         <>
@@ -228,49 +230,59 @@ const Registration = () => {
                                         </>
                                     }
                                 </select> */}
-                                <input type="text" class="form-control" placeholder="city" value ={cityName} required disabled  />
+                                <input type="text" className="form-control" placeholder="city" value ={cityName} required disabled  />
                             </div>
-                            <div class="col-sm-4 form-group">
-                                <input type="text" class="form-control" placeholder="Zipcode" required onChange={(e) => setZipcode(e.target.value)} />
-                            </div>
-                            
-                        <div class="col-sm-12 form-group">
-                            <div className="tbox">
-                            <input className="textbox " type="text" placeholder="" id="no_years" required onChange={(e) => setNumberofYears(e.target.value)} />
-				            <label  for="no_years" className={numberOfYears !="" ? "input-has-value" : ""}>How many years in car business</label>
-			                </div>  
+                            <div className="col-sm-4 form-group">
+                                <input type="text" className="form-control" placeholder="Zipcode" required onChange={(e) => setZipcode(e.target.value)} />
                             </div>
                             
-                            <div class="col-sm-12 form-group scheduleMeeting">
-                                <h2 class="text-center">Schedule Meeting with our Agent</h2>
+
+                            <div className="col-sm-8 form-group">
+                                <div className="tbox">
+                                {/* {/ <lable for="drop" className={option !="" ? "input-has-value" : ""}>How many years in car business</lable> /} */}
+                                <select id="drop" placeholder="" required className="form-control custom-select browser-default textbox" onChange={(e) => setOption(e.target.value)}>
+                                <option value="Default">How many years in car business</option>
+                                <option value="1-3">1-3</option>
+                                <option value="3-5">3-5</option>
+                                <option value="5-10">5-10</option>
+                                <option value="10-15">10-15</option>
+                                <option value="15-20">15-20</option>
+                                <option value="More then 20">More then 20</option>
+                                </select>
+                                </div>
+                            </div>
+
+                            
+                            <div className="col-sm-12 form-group scheduleMeeting">
+                                <h2 className="text-center">Schedule Meeting with our Agent</h2>
                                 <p>Thank you for interesting in our platform, Make you money and success.</p>
                             </div>
 
 
-                            <div class="col-sm-6 form-group">
+                            <div className="col-sm-6 form-group">
                                
                                 <Datetime inputProps={ inputProps } timeFormat={false} dateFormat="DD/MM/YYYY"
         isValidDate={disablePastDt}/>
                             </div>
-                            <div class="col-sm-6 form-group">
-                                <input type="time" class="form-control" placeholder="Select Time" required onChange={(e) => setTime(e.target.value)} />
+                            <div className="col-sm-6 form-group">
+                                <input type="time" className="form-control" placeholder="Select Time" required onChange={(e) => setTime(e.target.value)} />
                             </div>
-                            <div class="col-sm-12 form-group agreetab">
-                                <input type="checkbox" class="form-check d-inline" id="chb" required />
-                                <label for="chb" class="form-check-label"> I Agree for the <a href="#">Terms And Conditions</a>.
+                            <div className="col-sm-12 form-group agreetab">
+                                <input type="checkbox" className="form-check d-inline" id="chb" required />
+                                <label for="chb" className="form-check-label"> I Agree for the <a href="#">Terms And Conditions</a>.
                                 </label>
                             </div>
-                            <div class="col-lg-12 loginBtn">
-                                <button class="cta-btn">Submit</button>
+                            <div className="col-lg-12 loginBtn">
+                                <button className="cta-btn">Submit</button>
                             </div>
                         </div>
                     </form>
 
                 </div>
-                <section id="playstoreBlock" class="playstoreBlock">
-                    <div class="container">
-                        <div class="row content">
-                            <div class="col-lg-12">
+                <section id="playstoreBlock" className="playstoreBlock">
+                    <div className="container">
+                        <div className="row content">
+                            <div className="col-lg-12">
                                 <img src={process.env.PUBLIC_URL +"/images/appstore.png"} />
                                 <img src={process.env.PUBLIC_URL +"/images/googleplay.png"} />
                             </div>
