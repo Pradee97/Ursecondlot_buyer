@@ -1,9 +1,8 @@
 import React from 'react';
 import { useHistory, useLocation } from "react-router-dom";
-
-// import '../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import ls from 'local-storage';
 
 import LogoImg from '../../../src/assets/img/Logo_final.png';
 
@@ -18,19 +17,19 @@ const Submenu = () => {
     return (
       <ul className="nav__submenu">
         <li className="nav__submenu-item ">
-          <a>History</a>
+          <a href="JavaScript:void(0)" onClick={()=>history.push('/history')}>History</a>
         </li>
         <li className="nav__submenu-item ">
-          <a>Favorite List</a>
+          <a href="JavaScript:void(0)" onClick={()=>history.push('/favorite')}>Favorite List</a>
         </li>
         <li className="nav__submenu-item ">
-          <a>Manage Account</a>
+          <a href="JavaScript:void(0)" onClick={()=>history.push('/manageaccount')}>Manage Account</a>
         </li>
         <li className="nav__submenu-item ">
-          <a>Contact Us</a>
+          <a href="JavaScript:void(0)" onClick={()=>history.push('/contactus')}>Contact Us</a>
         </li>
         <li className="nav__submenu-item ">
-          <a>About Us</a>
+          <a href="JavaScript:void(0)" onClick={()=>history.push('/about')}>About Us</a>
         </li>
         <li className="nav__submenu-item ">
         <a href="JavaScript:void(0)" onClick={()=>{history.push('/');localStorage.clear()}}>logout</a>
@@ -68,7 +67,7 @@ const Submenu = () => {
         <div className="container-fluid d-flex align-items-center">
 
           <h1 className="logo mr-auto"><img src={LogoImg} ></img></h1>
-          <nav className="nav-menu d-none d-lg-block">
+          <nav className="nav-menu d-none d-lg-block nav">
           {!localStorage.getItem("islogedIn") ?
             <ul>
                 <li className={location.pathname ==="/"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/')} >Home</a></li>
@@ -79,18 +78,25 @@ const Submenu = () => {
 
             </ul>
             :
-            <ul>
+            <ul className="nav__menu">
                 <li className={location.pathname ==="/carList"? "active" : ""} ><a href="/carList" onClick={()=>history.push('/')} >Home</a></li>
                 <li className={location.pathname ==="/search"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/search')} >Search</a></li>
                 <li className={location.pathname ==="/mybids"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/mybids')} >My Bids</a></li>
                 <li className={location.pathname ==="/fees"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/fees')} >Fees</a></li>
                 <li className={location.pathname ==="/floor"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/floor')} >Floor</a></li>
                 <li className={location.pathname ==="/transport"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/transport')} >Transport</a></li>
-                <li className={location.pathname ==="/"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>{history.push('/');localStorage.clear()}}>logout</a></li>
-                {/* <li className={location.pathname ==="/"? "active" : ""} >
-                <img alt="Menu" src={process.env.PUBLIC_URL +"/images/hamburger-menu.svg"} />
-                <Submenu />
-                </li> */}
+                <li className={location.pathname ==="/"? "active nav__menu-item" : "nav__menu-item"} >
+                  <img alt="Menu" src={process.env.PUBLIC_URL +"/images/cart.svg"} onClick={()=>history.push('/cart')}/>
+                </li>
+                <li className={location.pathname ==="/"? "active nav__menu-item" : "nav__menu-item"} >
+                  <img alt="Menu" src={process.env.PUBLIC_URL +"/images/hamburger-menu.svg"} />
+                  <Submenu />
+                </li>
+                <li className={location.pathname ==="/"? "active nav__menu-item" : "nav__menu-item"} >
+                  <b className="user_name">Welcome {JSON.parse(localStorage.getItem("userDetails")).first_name}</b>
+                  {/* annamalai plz add avatar image below */}
+                  {/* <img alt="Menu" src={process.env.PUBLIC_URL +"/images/hamburger-menu.svg"} />  */}
+                </li>
                 
              </ul>
              }

@@ -18,387 +18,387 @@ const CarList = () => {
     return (
        
             <div>
-                <main id="main" class="inner-page">
-                    <div id="suggested-cars" class="suggested-cars">
-                        <div class="container-fluid aos-init aos-animate" data-aos="fade-up">
-                            <div class="section-title">
+                <main id="main" className="inner-page">
+                    <div id="suggested-cars" className="suggested-cars">
+                        <div className="container-fluid aos-init aos-animate" data-aos="fade-up">
+                            <div className="section-title">
                                 <h2>Suggested cars</h2>
                             </div>
-                            <div class="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
-                                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                    <div class="car-item">
-                                        <div class="cars-lock">
+                            <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
+                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                    <div className="car-item">
+                                        <div className="cars-lock">
                                             <img src={process.env.PUBLIC_URL +"/images/lock.svg"}  />
                                         </div>
                                         <img src={process.env.PUBLIC_URL +"/images/cars01.png"}/>
-                                        <div class="cars-tag">
+                                        <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
-                                        <div class="cars-content">
+                                        <div className="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                                            <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
-                                            <div class="cars-prices">
-                                                <a class="cta-btns" href="#">$1900</a>
-                                                <a class="cta-btns-primary" href="#">Make Bid</a>
+                                            <div className="cars-prices">
+                                                <a className="cta-btns" href="#">$1900</a>
+                                                <a className="cta-btns-primary" href="#">Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                    <div class="car-item">
-                                        <div class="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
+                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                    <div className="car-item">
+                                        <div className="cars-lock">
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
                                         </div>
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"} class="img-fluid" alt="..." />
-                                        <div class="cars-tag">
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"} className="img-fluid" alt="..." />
+                                        <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
-                                        <div class="cars-content">
+                                        <div className="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                                            <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                    <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
-                                            <div class="cars-prices">
-                                                <a class="cta-btns" href="#">$1900</a>
-                                                <a class="cta-btns-primary" href="#">Make Bid</a>
+                                            <div className="cars-prices">
+                                                <a className="cta-btns" href="#">$1900</a>
+                                                <a className="cta-btns-primary" href="#">Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                    <div class="car-item">
-                                        <div class="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
+                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                    <div className="car-item">
+                                        <div className="cars-lock">
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
                                         </div>
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
-                                        <div class="cars-tag">
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}className="img-fluid" alt="..." />
+                                        <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
-                                        <div class="cars-content">
+                                        <div className="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                                            <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                    <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
-                                            <div class="cars-prices">
-                                                <a class="cta-btns" href="#">$1900</a>
-                                                <a class="cta-btns-primary" href="#">Make Bid</a>
+                                            <div className="cars-prices">
+                                                <a className="cta-btns" href="#">$1900</a>
+                                                <a className="cta-btns-primary" href="#">Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                    <div class="car-item">
-                                        <div class="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
+                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                    <div className="car-item">
+                                        <div className="cars-lock">
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
                                         </div>
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
-                                        <div class="cars-tag">
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}className="img-fluid" alt="..." />
+                                        <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
-                                        <div class="cars-content">
+                                        <div className="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                                            <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                    <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
-                                            <div class="cars-prices">
-                                                <a class="cta-btns" href="#">$1900</a>
-                                                <a class="cta-btns-primary" href="#">Make Bid</a>
+                                            <div className="cars-prices">
+                                                <a className="cta-btns" href="#">$1900</a>
+                                                <a className="cta-btns-primary" href="#">Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                    <div class="car-item">
-                                        <div class="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
+                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                    <div className="car-item">
+                                        <div className="cars-lock">
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
                                         </div>
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"} class="img-fluid" alt="..." />
-                                        <div class="cars-tag">
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"} className="img-fluid" alt="..." />
+                                        <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
-                                        <div class="cars-content">
+                                        <div className="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                                            <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
+              <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
-                                            <div class="cars-prices">
-                                                <a class="cta-btns" href="#">$1900</a>
-                                                <a class="cta-btns-primary" href="#">Make Bid</a>
+                                            <div className="cars-prices">
+                                                <a className="cta-btns" href="#">$1900</a>
+                                                <a className="cta-btns-primary" href="#">Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="text-center">
-                                <a href="#" class="more-btn">View More <i class="bx bx-chevron-right"></i></a>
+                            <div className="text-center">
+                                <a href="#" className="more-btn">View More <i className="bx bx-chevron-right"></i></a>
                             </div>
                         </div>
                     </div>
 
 
 
-                    <div id="inventory-cars" class="inventory-cars">
-                        <div class="container-fluid aos-init aos-animate" data-aos="fade-up">
+                    <div id="inventory-cars" className="inventory-cars">
+                        <div className="container-fluid aos-init aos-animate" data-aos="fade-up">
 
-                            <div class="section-title">
+                            <div className="section-title">
                                 <h2>inventory</h2>
                             </div>
 
-                            <div class="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
+                            <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
 
-                                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                    <div class="car-item">
-                                        <div class="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
+                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                    <div className="car-item">
+                                        <div className="cars-lock">
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
                                         </div>
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"} class="img-fluid" alt="..." />
-                                        <div class="cars-tag">
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"} className="img-fluid" alt="..." />
+                                        <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
-                                        <div class="cars-content">
+                                        <div className="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                                            <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
+              <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
-                                            <div class="cars-prices">
-                                                <a class="cta-btns" href="#">$1900</a>
-                                                <a class="cta-btns-primary" href="#">Make Bid</a>
+                                            <div className="cars-prices">
+                                                <a className="cta-btns" href="#">$1900</a>
+                                                <a className="cta-btns-primary" href="#">Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                    <div class="car-item">
-                                        <div class="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
+                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                    <div className="car-item">
+                                        <div className="cars-lock">
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
                                         </div>
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"} class="img-fluid" alt="..." />
-                                        <div class="cars-tag">
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"} className="img-fluid" alt="..." />
+                                        <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
-                                        <div class="cars-content">
+                                        <div className="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                                            <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
+              <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
-                                            <div class="cars-prices">
-                                                <a class="cta-btns" href="#">$1900</a>
-                                                <a class="cta-btns-primary" href="#">Make Bid</a>
+                                            <div className="cars-prices">
+                                                <a className="cta-btns" href="#">$1900</a>
+                                                <a className="cta-btns-primary" href="#">Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                    <div class="car-item">
-                                        <div class="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
+                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                    <div className="car-item">
+                                        <div className="cars-lock">
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
                                         </div>
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"} class="img-fluid" alt="..." />
-                                        <div class="cars-tag">
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"} className="img-fluid" alt="..." />
+                                        <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
-                                        <div class="cars-content">
+                                        <div className="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                                            <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
+              <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
-                                            <div class="cars-prices">
-                                                <a class="cta-btns" href="#">$1900</a>
-                                                <a class="cta-btns-primary" href="#">Make Bid</a>
+                                            <div className="cars-prices">
+                                                <a className="cta-btns" href="#">$1900</a>
+                                                <a className="cta-btns-primary" href="#">Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                    <div class="car-item">
-                                        <div class="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
+                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                    <div className="car-item">
+                                        <div className="cars-lock">
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
                                         </div>
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"} class="img-fluid" alt="..." />
-                                        <div class="cars-tag">
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"} className="img-fluid" alt="..." />
+                                        <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
-                                        <div class="cars-content">
+                                        <div className="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                                            <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
+              <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
-                                            <div class="cars-prices">
-                                                <a class="cta-btns" href="#">$1900</a>
-                                                <a class="cta-btns-primary" href="#">Make Bid</a>
+                                            <div className="cars-prices">
+                                                <a className="cta-btns" href="#">$1900</a>
+                                                <a className="cta-btns-primary" href="#">Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                    <div class="car-item">
-                                        <div class="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
+                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                    <div className="car-item">
+                                        <div className="cars-lock">
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
                                         </div>
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
-                                        <div class="cars-tag">
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}className="img-fluid" alt="..." />
+                                        <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
-                                        <div class="cars-content">
+                                        <div className="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                                            <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
+              <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
-                                            <div class="cars-prices">
-                                                <a class="cta-btns" href="#">$1900</a>
-                                                <a class="cta-btns-primary" href="#">Make Bid</a>
+                                            <div className="cars-prices">
+                                                <a className="cta-btns" href="#">$1900</a>
+                                                <a className="cta-btns-primary" href="#">Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="row aos-init aos-animate mt-3 pt-4" data-aos="zoom-in" data-aos-delay="100">
+                            <div className="row aos-init aos-animate mt-3 pt-4" data-aos="zoom-in" data-aos-delay="100">
 
-                                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                    <div class="car-item">
-                                        <div class="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
+                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                    <div className="car-item">
+                                        <div className="cars-lock">
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
                                         </div>
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
-                                        <div class="cars-tag">
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}className="img-fluid" alt="..." />
+                                        <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
-                                        <div class="cars-content">
+                                        <div className="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                                            <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
+              <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
-                                            <div class="cars-prices">
-                                                <a class="cta-btns" href="#">$1900</a>
-                                                <a class="cta-btns-primary" href="#">Make Bid</a>
+                                            <div className="cars-prices">
+                                                <a className="cta-btns" href="#">$1900</a>
+                                                <a className="cta-btns-primary" href="#">Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                    <div class="car-item">
-                                        <div class="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
+                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                    <div className="car-item">
+                                        <div className="cars-lock">
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
                                         </div>
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
-                                        <div class="cars-tag">
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}className="img-fluid" alt="..." />
+                                        <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
-                                        <div class="cars-content">
+                                        <div className="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                                            <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
+              <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
-                                            <div class="cars-prices">
-                                                <a class="cta-btns" href="#">$1900</a>
-                                                <a class="cta-btns-primary" href="#">Make Bid</a>
+                                            <div className="cars-prices">
+                                                <a className="cta-btns" href="#">$1900</a>
+                                                <a className="cta-btns-primary" href="#">Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                    <div class="car-item">
-                                        <div class="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
+                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                    <div className="car-item">
+                                        <div className="cars-lock">
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
                                         </div>
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
-                                        <div class="cars-tag">
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}className="img-fluid" alt="..." />
+                                        <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
-                                        <div class="cars-content">
+                                        <div className="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                                            <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
+              <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
-                                            <div class="cars-prices">
-                                                <a class="cta-btns" href="#">$1900</a>
-                                                <a class="cta-btns-primary" href="#">Make Bid</a>
+                                            <div className="cars-prices">
+                                                <a className="cta-btns" href="#">$1900</a>
+                                                <a className="cta-btns-primary" href="#">Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                    <div class="car-item">
-                                        <div class="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
+                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                    <div className="car-item">
+                                        <div className="cars-lock">
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
                                         </div>
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
-                                        <div class="cars-tag">
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}className="img-fluid" alt="..." />
+                                        <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
-                                        <div class="cars-content">
+                                        <div className="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                                            <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
+              <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
-                                            <div class="cars-prices">
-                                                <a class="cta-btns" href="#">$1900</a>
-                                                <a class="cta-btns-primary" href="#">Make Bid</a>
+                                            <div className="cars-prices">
+                                                <a className="cta-btns" href="#">$1900</a>
+                                                <a className="cta-btns-primary" href="#">Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                    <div class="car-item">
-                                        <div class="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
+                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                    <div className="car-item">
+                                        <div className="cars-lock">
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
                                         </div>
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
-                                        <div class="cars-tag">
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}className="img-fluid" alt="..." />
+                                        <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
-                                        <div class="cars-content">
+                                        <div className="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                                            <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
+              <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
-                                            <div class="cars-prices">
-                                                <a class="cta-btns" href="#">$1900</a>
-                                                <a class="cta-btns-primary" href="#">Make Bid</a>
+                                            <div className="cars-prices">
+                                                <a className="cta-btns" href="#">$1900</a>
+                                                <a className="cta-btns-primary" href="#">Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
@@ -407,339 +407,339 @@ const CarList = () => {
                             </div>
 
 
-                            <div class="text-center">
-                                <a href="#" class="more-btn">See More Make Search <i class="bx bx-chevron-right"></i></a>
+                            <div className="text-center">
+                                <a href="#" className="more-btn">See More Make Search <i className="bx bx-chevron-right"></i></a>
                             </div>
                         </div>
                     </div>
 
-                    <div id="recently-cars" class="recently-cars">
-                        <div class="container-fluid aos-init aos-animate" data-aos="fade-up">
+                    <div id="recently-cars" className="recently-cars">
+                        <div className="container-fluid aos-init aos-animate" data-aos="fade-up">
 
-                            <div class="section-title">
+                            <div className="section-title">
                                 <h2>Recently Added Cars</h2>
                             </div>
 
-                            <div class="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
+                            <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
 
-                                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                    <div class="car-item">
-                                        <div class="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
+                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                    <div className="car-item">
+                                        <div className="cars-lock">
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
                                         </div>
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
-                                        <div class="cars-tag">
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}className="img-fluid" alt="..." />
+                                        <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
-                                        <div class="cars-content">
+                                        <div className="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                                            <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
+              <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
-                                            <div class="cars-prices">
-                                                <a class="cta-btns" href="#">$1900</a>
-                                                <a class="cta-btns-primary" href="#">Make Bid</a>
+                                            <div className="cars-prices">
+                                                <a className="cta-btns" href="#">$1900</a>
+                                                <a className="cta-btns-primary" href="#">Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                    <div class="car-item">
-                                        <div class="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
+                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                    <div className="car-item">
+                                        <div className="cars-lock">
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
                                         </div>
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
-                                        <div class="cars-tag">
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}className="img-fluid" alt="..." />
+                                        <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
-                                        <div class="cars-content">
+                                        <div className="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                                            <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
+              <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
-                                            <div class="cars-prices">
-                                                <a class="cta-btns" href="#">$1900</a>
-                                                <a class="cta-btns-primary" href="#">Make Bid</a>
+                                            <div className="cars-prices">
+                                                <a className="cta-btns" href="#">$1900</a>
+                                                <a className="cta-btns-primary" href="#">Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                    <div class="car-item">
-                                        <div class="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
+                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                    <div className="car-item">
+                                        <div className="cars-lock">
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
                                         </div>
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
-                                        <div class="cars-tag">
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}className="img-fluid" alt="..." />
+                                        <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
-                                        <div class="cars-content">
+                                        <div className="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                                            <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
+              <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
-                                            <div class="cars-prices">
-                                                <a class="cta-btns" href="#">$1900</a>
-                                                <a class="cta-btns-primary" href="#">Make Bid</a>
+                                            <div className="cars-prices">
+                                                <a className="cta-btns" href="#">$1900</a>
+                                                <a className="cta-btns-primary" href="#">Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                    <div class="car-item">
-                                        <div class="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
+                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                    <div className="car-item">
+                                        <div className="cars-lock">
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
                                         </div>
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
-                                        <div class="cars-tag">
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}className="img-fluid" alt="..." />
+                                        <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
-                                        <div class="cars-content">
+                                        <div className="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                                            <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
+              <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
-                                            <div class="cars-prices">
-                                                <a class="cta-btns" href="#">$1900</a>
-                                                <a class="cta-btns-primary" href="#">Make Bid</a>
+                                            <div className="cars-prices">
+                                                <a className="cta-btns" href="#">$1900</a>
+                                                <a className="cta-btns-primary" href="#">Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                    <div class="car-item">
-                                        <div class="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
+                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                    <div className="car-item">
+                                        <div className="cars-lock">
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
                                         </div>
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
-                                        <div class="cars-tag">
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}className="img-fluid" alt="..." />
+                                        <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
-                                        <div class="cars-content">
+                                        <div className="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                                            <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
+              <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
-                                            <div class="cars-prices">
-                                                <a class="cta-btns" href="#">$1900</a>
-                                                <a class="cta-btns-primary" href="#">Make Bid</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row aos-init aos-animate mt-3 pt-4" data-aos="zoom-in" data-aos-delay="100">
-
-                                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                    <div class="car-item">
-                                        <div class="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
-                                        </div>
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
-                                        <div class="cars-tag">
-                                            <h4>Best deal</h4>
-                                        </div>
-                                        <div class="cars-content">
-                                            <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                                            <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
-                                            </div>
-
-                                            <div class="cars-prices">
-                                                <a class="cta-btns" href="#">$1900</a>
-                                                <a class="cta-btns-primary" href="#">Make Bid</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                    <div class="car-item">
-                                        <div class="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
-                                        </div>
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
-                                        <div class="cars-tag">
-                                            <h4>Best deal</h4>
-                                        </div>
-                                        <div class="cars-content">
-                                            <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                                            <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
-                                            </div>
-
-                                            <div class="cars-prices">
-                                                <a class="cta-btns" href="#">$1900</a>
-                                                <a class="cta-btns-primary" href="#">Make Bid</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                    <div class="car-item">
-                                        <div class="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
-                                        </div>
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
-                                        <div class="cars-tag">
-                                            <h4>Best deal</h4>
-                                        </div>
-                                        <div class="cars-content">
-                                            <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                                            <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
-                                            </div>
-
-                                            <div class="cars-prices">
-                                                <a class="cta-btns" href="#">$1900</a>
-                                                <a class="cta-btns-primary" href="#">Make Bid</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                    <div class="car-item">
-                                        <div class="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
-                                        </div>
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
-                                        <div class="cars-tag">
-                                            <h4>Best deal</h4>
-                                        </div>
-                                        <div class="cars-content">
-                                            <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                                            <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
-                                            </div>
-
-                                            <div class="cars-prices">
-                                                <a class="cta-btns" href="#">$1900</a>
-                                                <a class="cta-btns-primary" href="#">Make Bid</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                    <div class="car-item">
-                                        <div class="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
-                                        </div>
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
-                                        <div class="cars-tag">
-                                            <h4>Best deal</h4>
-                                        </div>
-                                        <div class="cars-content">
-                                            <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                                            <div class="d-flex align-items-center mb-3">
-                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <p class="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
-                                            </div>
-
-                                            <div class="cars-prices">
-                                                <a class="cta-btns" href="#">$1900</a>
-                                                <a class="cta-btns-primary" href="#">Make Bid</a>
+                                            <div className="cars-prices">
+                                                <a className="cta-btns" href="#">$1900</a>
+                                                <a className="cta-btns-primary" href="#">Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
+                            <div className="row aos-init aos-animate mt-3 pt-4" data-aos="zoom-in" data-aos-delay="100">
 
-                            <div class="text-center">
-                                <a href="#" class="more-btn">See More Make Search <i class="bx bx-chevron-right"></i></a>
+                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                    <div className="car-item">
+                                        <div className="cars-lock">
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
+                                        </div>
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}className="img-fluid" alt="..." />
+                                        <div className="cars-tag">
+                                            <h4>Best deal</h4>
+                                        </div>
+                                        <div className="cars-content">
+                                            <h3><a href="#">Honda amaze (2014 model)</a></h3>
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
+                                            </div>
+
+                                            <div className="cars-prices">
+                                                <a className="cta-btns" href="#">$1900</a>
+                                                <a className="cta-btns-primary" href="#">Make Bid</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                    <div className="car-item">
+                                        <div className="cars-lock">
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
+                                        </div>
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}className="img-fluid" alt="..." />
+                                        <div className="cars-tag">
+                                            <h4>Best deal</h4>
+                                        </div>
+                                        <div className="cars-content">
+                                            <h3><a href="#">Honda amaze (2014 model)</a></h3>
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
+                                            </div>
+
+                                            <div className="cars-prices">
+                                                <a className="cta-btns" href="#">$1900</a>
+                                                <a className="cta-btns-primary" href="#">Make Bid</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                    <div className="car-item">
+                                        <div className="cars-lock">
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
+                                        </div>
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}className="img-fluid" alt="..." />
+                                        <div className="cars-tag">
+                                            <h4>Best deal</h4>
+                                        </div>
+                                        <div className="cars-content">
+                                            <h3><a href="#">Honda amaze (2014 model)</a></h3>
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
+                                            </div>
+
+                                            <div className="cars-prices">
+                                                <a className="cta-btns" href="#">$1900</a>
+                                                <a className="cta-btns-primary" href="#">Make Bid</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                    <div className="car-item">
+                                        <div className="cars-lock">
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
+                                        </div>
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}className="img-fluid" alt="..." />
+                                        <div className="cars-tag">
+                                            <h4>Best deal</h4>
+                                        </div>
+                                        <div className="cars-content">
+                                            <h3><a href="#">Honda amaze (2014 model)</a></h3>
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
+                                            </div>
+
+                                            <div className="cars-prices">
+                                                <a className="cta-btns" href="#">$1900</a>
+                                                <a className="cta-btns-primary" href="#">Make Bid</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                    <div className="car-item">
+                                        <div className="cars-lock">
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
+                                        </div>
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}className="img-fluid" alt="..." />
+                                        <div className="cars-tag">
+                                            <h4>Best deal</h4>
+                                        </div>
+                                        <div className="cars-content">
+                                            <h3><a href="#">Honda amaze (2014 model)</a></h3>
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
+                                            </div>
+
+                                            <div className="cars-prices">
+                                                <a className="cta-btns" href="#">$1900</a>
+                                                <a className="cta-btns-primary" href="#">Make Bid</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div className="text-center">
+                                <a href="#" className="more-btn">See More Make Search <i className="bx bx-chevron-right"></i></a>
                             </div>
                         </div>
                     </div>
 
-                    <div id="favorite-cars" class="favorite-cars">
-                        <div class="container-fluid aos-init aos-animate" data-aos="fade-up">
+                    <div id="favorite-cars" className="favorite-cars">
+                        <div className="container-fluid aos-init aos-animate" data-aos="fade-up">
 
-                            <div class="section-title">
+                            <div className="section-title">
                                 <h2>favorite list</h2>
                             </div>
 
-                            <div class="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
+                            <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
 
-                                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                    <div class="car-item">
-                                        <div class="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
+                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                    <div className="car-item">
+                                        <div className="cars-lock">
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
                                         </div>
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}className="img-fluid" alt="..." />
 
-                                        <div class="cars-content">
+                                        <div className="cars-content">
                                             <h3><a href="#">View Details</a></h3>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                    <div class="car-item">
-                                        <div class="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
+                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                    <div className="car-item">
+                                        <div className="cars-lock">
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
                                         </div>
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}className="img-fluid" alt="..." />
 
-                                        <div class="cars-content">
+                                        <div className="cars-content">
                                             <h3><a href="#">View Details</a></h3>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                    <div class="car-item">
-                                        <div class="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
+                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                    <div className="car-item">
+                                        <div className="cars-lock">
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
                                         </div>
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}className="img-fluid" alt="..." />
 
-                                        <div class="cars-content">
+                                        <div className="cars-content">
                                             <h3><a href="#">View Details</a></h3>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                    <div class="car-item">
-                                        <div class="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
+                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                    <div className="car-item">
+                                        <div className="cars-lock">
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
                                         </div>
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}className="img-fluid" alt="..." />
 
-                                        <div class="cars-content">
+                                        <div className="cars-content">
                                             <h3><a href="#">View Details</a></h3>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                    <div class="car-item">
-                                        <div class="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} class="img-fluid" alt="..." />
+                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                    <div className="car-item">
+                                        <div className="cars-lock">
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
                                         </div>
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}class="img-fluid" alt="..." />
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}className="img-fluid" alt="..." />
 
-                                        <div class="cars-content">
+                                        <div className="cars-content">
                                             <h3><a href="#">View Details</a></h3>
                                         </div>
                                     </div>
@@ -748,8 +748,8 @@ const CarList = () => {
                         </div>
 
 
-                        <div class="text-center">
-                            <a href="#" class="more-btn">View Favorite List <i class="bx bx-chevron-right"></i></a>
+                        <div className="text-center">
+                            <a href="#" className="more-btn">View Favorite List <i className="bx bx-chevron-right"></i></a>
                         </div>
                     </div>
                 

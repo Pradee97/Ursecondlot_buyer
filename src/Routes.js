@@ -61,6 +61,9 @@ function AppRouter() {
             <Route  path="/payment" component={Payment}/>
             <Route  path="/paymentinfo" component={PaymentInfo}/>
             <Route  path="/editpayment" component={EditPayment}/>
+            <Route  path="/favorite" component={Inprogress}/>
+            <Route  path="/history" component={Inprogress}/>
+            <Route  path="/cart" component={Inprogress}/>
           </Switch>
         </Suspense>
       </Router>

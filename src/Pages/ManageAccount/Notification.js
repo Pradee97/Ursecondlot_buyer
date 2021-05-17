@@ -71,68 +71,68 @@ const Notification = () => {
     return (
         <div>
 
-<main id="main" class="inner-page">
+<main id="main" className="inner-page">
    
    
-    <div id="notificationaccount" class="notificationaccount">
-		<div class="container" >
-			<div class="notificationaccountblock col-lg-12">
-				<div class="section-title">
+    <div id="notificationaccount" className="notificationaccount">
+		<div className="container" >
+			<div className="notificationaccountblock col-lg-12">
+				<div className="section-title">
 				  <h2>Notification</h2>
 				</div>
-				<div class="row content">
-					<div class="col-lg-3 col-md-4 col-sm-12 accountleftblock">
-						<div class="mgaccountuser">
-							<div class="mgaccountuserleft">
-								<img src={process.env.PUBLIC_URL +"/images/userimg.jpg"} class="img-fluid" alt="..."/>
+				<div className="row content">
+					<div className="col-lg-3 col-md-4 col-sm-12 accountleftblock">
+						<div className="mgaccountuser">
+							<div className="mgaccountuserleft">
+								<img src={process.env.PUBLIC_URL +"/images/userimg.jpg"} className="img-fluid" alt="..."/>
 							</div>
-							<div class="mgaccountuserright">
+							<div className="mgaccountuserright">
 								<h3>Fernand</h3>
-								<div class="d-flex align-items-center">
-									<p class="details"><img src={process.env.PUBLIC_URL +"/images/Path.svg"} class="img-fluid" alt="..."/><span>California, Cl</span></p>
+								<div className="d-flex align-items-center">
+									<p className="details"><img src={process.env.PUBLIC_URL +"/images/Path.svg"} className="img-fluid" alt="..."/><span>California, Cl</span></p>
 								</div>
 									
 							</div>
 						</div>
 						
-						<div class="mgaccountuserlinks">
-							<div class="userlinks">
-								<li><img src={process.env.PUBLIC_URL +"/images/Icon awesome-user.svg"} class="img-fluid" alt=""/><a href="/manageaccount">Account</a></li>
-								<li class="active"><img src={process.env.PUBLIC_URL +"/images/Icon awesome-bell.svg"} class="img-fluid" alt=""/><a href="/notification">Notification</a></li>
-								<li><img src={process.env.PUBLIC_URL +"/images/dollar-symbol.svg"} class="img-fluid" alt=""/><a href="/payment">Payment</a></li>
-								<li><img src={process.env.PUBLIC_URL +"/images/fees.svg"} class="img-fluid" alt=""/><a href="/lotfee">Lot Fee</a></li>
-								<li><img src={process.env.PUBLIC_URL +"/images/google-docs.svg"} class="img-fluid" alt=""/><a href="documents.html">Document</a></li>
-								<li><img src={process.env.PUBLIC_URL +"/images/profile.svg"} class="img-fluid" alt=""/><a href="adduser.html">Add User</a></li>
+						<div className="mgaccountuserlinks">
+							<div className="userlinks">
+								<li><img src={process.env.PUBLIC_URL +"/images/Icon awesome-user.svg"} className="img-fluid" alt=""/><a href="/manageaccount">Account</a></li>
+								<li className="active"><img src={process.env.PUBLIC_URL +"/images/Icon awesome-bell.svg"} className="img-fluid" alt=""/><a href="/notification">Notification</a></li>
+								<li><img src={process.env.PUBLIC_URL +"/images/dollar-symbol.svg"} className="img-fluid" alt=""/><a href="/payment">Payment</a></li>
+								<li><img src={process.env.PUBLIC_URL +"/images/fees.svg"} className="img-fluid" alt=""/><a href="/lotfee">Lot Fee</a></li>
+								<li><img src={process.env.PUBLIC_URL +"/images/google-docs.svg"} className="img-fluid" alt=""/><a href="documents.html">Document</a></li>
+								<li><img src={process.env.PUBLIC_URL +"/images/profile.svg"} className="img-fluid" alt=""/><a href="adduser.html">Add User</a></li>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 notificationaccountrightblock">
-						<div class="notificationrighttableblock"> 
+					<div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 notificationaccountrightblock">
+						<div className="notificationrighttableblock"> 
 							<h2>Bids</h2>
-							<div class="notificationtabblock col-lg-12">
+							<div className="notificationtabblock col-lg-12">
 							<h3>Email</h3>
-								<div class="row">
-								<form class="bidsemailblock">
-									<div class="col-lg-4 col-md-4">
-										<div class="radio input-group">
+								<div className="row">
+								<form className="bidsemailblock">
+									<div className="col-lg-4 col-md-4">
+										<div className="radio input-group">
 											<input id="radio-dailyupdate" name="radio" type="radio" />
-											<label  for="radio-dailyupdate" class="radio-label">Daily Update</label>
+											<label  for="radio-dailyupdate" className="radio-label">Daily Update</label>
 											<p>You will receive an email daily of new bid activity</p>
 										</div>
 									</div>
 									
-									<div class="col-lg-4 col-md-4">
-										<div class="radio input-group">
+									<div className="col-lg-4 col-md-4">
+										<div className="radio input-group">
 											<input id="radio-instanceemnail" name="radio" type="radio"/>
-											<label  for="radio-instanceemnail" class="radio-label">Instant Email</label>
+											<label  for="radio-instanceemnail" className="radio-label">Instant Email</label>
 											<p>Don't miss any deal! we will send you emails immediately with any new bid activity</p>
 										</div>
 									</div>
 									
-									<div class="col-lg-4 col-md-4">
-										<div class="radio input-group">
+									<div className="col-lg-4 col-md-4">
+										<div className="radio input-group">
 											<input id="radio-instemnail" name="radio" type="radio"/>
-											<label  for="radio-instemnail" class="radio-label">Never</label>
+											<label  for="radio-instemnail" className="radio-label">Never</label>
 											<p>you wont receive any emails for bid activity.</p>
 										</div>
 									</div>
@@ -140,30 +140,30 @@ const Notification = () => {
 								</div>
 							</div>
 							
-							<div class="notificationtabblock mt-3 pt-4 col-lg-12">
+							<div className="notificationtabblock mt-3 pt-4 col-lg-12">
 							<h3>SMS (Text Message)</h3>
-								<div class="row">
-								<form class="bidssmsblock">
-									<div class="col-lg-4 col-md-4">
-										<div class="radio input-group">
+								<div className="row">
+								<form className="bidssmsblock">
+									<div className="col-lg-4 col-md-4">
+										<div className="radio input-group">
 											<input id="radio-dailysms" name="radio" type="radio"/>
-											<label  for="radio-dailysms" class="radio-label">Daily Update</label>
+											<label  for="radio-dailysms" className="radio-label">Daily Update</label>
 											<p>You will receive an SMS daily of new bid activity</p>
 										</div>
 									</div>
 									
-									<div class="col-lg-4 col-md-4">
-										<div class="radio input-group">
+									<div className="col-lg-4 col-md-4">
+										<div className="radio input-group">
 											<input id="radio-dailyinssms" name="radio" type="radio"/>
-											<label  for="radio-dailyinssms" class="radio-label">Instant SMS</label>
+											<label  for="radio-dailyinssms" className="radio-label">Instant SMS</label>
 											<p>Don't miss any deal! we will send you SMS immediately with any new bid activity</p>
 										</div>
 									</div>
 									
-									<div class="col-lg-4 col-md-4">
-										<div class="radio input-group">
+									<div className="col-lg-4 col-md-4">
+										<div className="radio input-group">
 											<input id="radio-dailysmsnover" name="radio" type="radio"/>
-											<label  for="radio-dailysmsnover" class="radio-label">Never</label>
+											<label  for="radio-dailysmsnover" className="radio-label">Never</label>
 											<p>you wont receive any SMS for bid activity.</p>
 										</div>
 									</div>
@@ -171,22 +171,22 @@ const Notification = () => {
 								</div>
 							</div>
 							
-							<div class="notificationtabblock mt-3 pt-4 col-lg-12">
+							<div className="notificationtabblock mt-3 pt-4 col-lg-12">
 							<h3>Push notification(for Mobile Apllication)</h3>
-								<div class="row">
-								<form class="bidsnotiblock">
-									<div class="col-lg-4 col-md-4">
-										<div class="radio input-group">
+								<div className="row">
+								<form className="bidsnotiblock">
+									<div className="col-lg-4 col-md-4">
+										<div className="radio input-group">
 											<input id="radio-dailynotificat" name="radio" type="radio"/>
-											<label  for="radio-dailynotificat" class="radio-label">Yes</label>
+											<label  for="radio-dailynotificat" className="radio-label">Yes</label>
 											<p>You will receive push notifications when any new bid activity directly to your mobile phone.</p>
 										</div>
 									</div>
 									
-									<div class="col-lg-4 col-md-4">
-										<div class="radio input-group">
+									<div className="col-lg-4 col-md-4">
+										<div className="radio input-group">
 											<input id="radio-dailyno" name="radio" type="radio"/>
-											<label  for="radio-dailyno" class="radio-label">No</label>
+											<label  for="radio-dailyno" className="radio-label">No</label>
 											<p>you wont receive any push notification.</p>
 										</div>
 									</div>
@@ -196,24 +196,24 @@ const Notification = () => {
 						</div>
 						
 						
-						<div class="notificationrighttableblock favoritetableblock  mt-3 pt-4"> 
+						<div className="notificationrighttableblock favoritetableblock  mt-3 pt-4"> 
 							<h2>Favorite Cars</h2>
-							<div class="notificationtabblock mt-3 pt-4 col-lg-12">
+							<div className="notificationtabblock mt-3 pt-4 col-lg-12">
 								<h3>Email</h3>
-								<div class="row">
-								<form class="favoriteemailblock">
-									<div class="col-lg-4 col-md-4">
-										<div class="radio input-group">
+								<div className="row">
+								<form className="favoriteemailblock">
+									<div className="col-lg-4 col-md-4">
+										<div className="radio input-group">
 											<input id="radio-dailycarsno" name="radio" type="radio"/>
-											<label  for="radio-dailycarsno" class="radio-label">Daily Update</label>
+											<label  for="radio-dailycarsno" className="radio-label">Daily Update</label>
 											<p>You will receive a daily Email when new vehicle posted matching your Favorite cars</p>
 										</div>
 									</div>
 									
-									<div class="col-lg-4 col-md-4">
-										<div class="radio input-group">
+									<div className="col-lg-4 col-md-4">
+										<div className="radio input-group">
 											<input id="radio-dailycarsnover" name="radio" type="radio"/>
-											<label  for="radio-dailycarsnover" class="radio-label">Never</label>
+											<label  for="radio-dailycarsnover" className="radio-label">Never</label>
 											<p>you wont receive any emails With fresh inventory.</p>
 										</div>
 									</div>
@@ -221,22 +221,22 @@ const Notification = () => {
 								</div>
 							</div>
 							
-							<div class="notificationtabblock mt-3 pt-4 col-lg-12">
+							<div className="notificationtabblock mt-3 pt-4 col-lg-12">
 								<h3>SMS (Text Message)</h3>
-								<div class="row">
-								<form class="favoritesmsblock">
-									<div class="col-lg-4 col-md-4">
-										<div class="radio input-group">
+								<div className="row">
+								<form className="favoritesmsblock">
+									<div className="col-lg-4 col-md-4">
+										<div className="radio input-group">
 											<input id="radio-dailysmct" name="radio" type="radio"/>
-											<label  for="radio-dailysmct" class="radio-label">Daily Update</label>
+											<label  for="radio-dailysmct" className="radio-label">Daily Update</label>
 											<p>You will receive a daily SMS when new vehicle posted matching your Favorite cars</p>
 										</div>
 									</div>
 									
-									<div class="col-lg-4 col-md-4">
-										<div class="radio input-group">
+									<div className="col-lg-4 col-md-4">
+										<div className="radio input-group">
 											<input id="radio-dailysmtnover" name="radio" type="radio"/>
-											<label  for="radio-dailysmtnover" class="radio-label">Never</label>
+											<label  for="radio-dailysmtnover" className="radio-label">Never</label>
 											<p>you wont receive any SMS With fresh inventory.</p>
 										</div>
 									</div>
@@ -244,9 +244,9 @@ const Notification = () => {
 								</div>
 							</div>
 						</div>
-						<div class="text-center">
-							{/* <a href="#" class="save-more-btn">Save</a> */}
-							<Button class="save-more-btn" onClick={savehandleclick}>Save</Button>
+						<div className="text-center">
+							{/* <a href="#" className="save-more-btn">Save</a> */}
+							<Button className="save-more-btn" onClick={savehandleclick}>Save</Button>
 						</div>
 					</div>
 				</div>
@@ -257,12 +257,12 @@ const Notification = () => {
    
 
     
-    <section id="playstoreBlock" class="playstoreBlock">
-      <div class="container">
+    <section id="playstoreBlock" className="playstoreBlock">
+      <div className="container">
 
 
-        <div class="row content">
-          <div class="col-lg-12">
+        <div className="row content">
+          <div className="col-lg-12">
 		  <img src={process.env.PUBLIC_URL +"/images/appstore.png"} />
            <img src={process.env.PUBLIC_URL +"/images/googleplay.png"} />
 		   

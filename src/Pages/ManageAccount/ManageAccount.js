@@ -50,48 +50,48 @@ const ManageAccount = () => {
   }, []);
      return (
       <div>
-<main id="main" class="inner-page">
+<main id="main" className="inner-page">
    
   
-   <div id="mgaccount" class="mgaccount">
-       <div class="container" >
-           <div class="mgaccountblock col-lg-12">
-               <div class="section-title">
+   <div id="mgaccount" className="mgaccount">
+       <div className="container" >
+           <div className="mgaccountblock col-lg-12">
+               <div className="section-title">
                  <h2>Manage Account</h2>
                </div>
-               <div class="row content">
-                   <div class="col-lg-3 col-md-4 col-sm-12 mgaccountleftblock">
-                       <div class="mgaccountuser">
-                           <div class="mgaccountuserleft">
-                               <img src={process.env.PUBLIC_URL +"/images/userimg.jpg"} class="img-fluid" alt="..."/>
+               <div className="row content">
+                   <div className="col-lg-3 col-md-4 col-sm-12 mgaccountleftblock">
+                       <div className="mgaccountuser">
+                           <div className="mgaccountuserleft">
+                               <img src={process.env.PUBLIC_URL +"/images/userimg.jpg"} className="img-fluid" alt="..."/>
                            </div>
-                           <div class="mgaccountuserright">
+                           <div className="mgaccountuserright">
                                <h3>Fernand</h3>
-                               <div class="d-flex align-items-center">
-                                   <p class="details"><img src={process.env.PUBLIC_URL +"/images/Path.svg"} class="img-fluid" alt="..."/><span>California, Cl</span></p>
+                               <div className="d-flex align-items-center">
+                                   <p className="details"><img src={process.env.PUBLIC_URL +"/images/Path.svg"} className="img-fluid" alt="..."/><span>California, Cl</span></p>
                                </div>
                                    
                            </div>
                        </div>
                        
-                       <div class="mgaccountuserlinks">
-                               <div class="userlinks">
+                       <div className="mgaccountuserlinks">
+                               <div className="userlinks">
                                  <ul>
-                                   <li><img src={process.env.PUBLIC_URL +"/images/Icon awesome-user.svg"} class="img-fluid" alt=""/><a href="/manageaccount">Account</a></li>
-                                   <li><img src={process.env.PUBLIC_URL +"/images/Icon awesome-bell.svg"} class="img-fluid" alt=""/><a href="/notification">Notification</a></li>
-                                   <li><img src={process.env.PUBLIC_URL +"/images/dollar-symbol.svg"} class="img-fluid" alt=""/><a href="/payment">Payment</a></li>
-                                   <li><img src={process.env.PUBLIC_URL +"/images/fees.svg"} class="img-fluid" alt=""/><a href="/lotfee">Lot Fee</a></li>
-                                   <li><img src={process.env.PUBLIC_URL +"/images/google-docs.svg"} class="img-fluid" alt=""/><a href="#">Document</a></li>
-                                   <li><img src={process.env.PUBLIC_URL +"/images/profile.svg"} class="img-fluid" alt=""/><a href="#">Add User</a></li>
+                                   <li><img src={process.env.PUBLIC_URL +"/images/Icon awesome-user.svg"} className="img-fluid" alt=""/><a href="/manageaccount">Account</a></li>
+                                   <li><img src={process.env.PUBLIC_URL +"/images/Icon awesome-bell.svg"} className="img-fluid" alt=""/><a href="/notification">Notification</a></li>
+                                   <li><img src={process.env.PUBLIC_URL +"/images/dollar-symbol.svg"} className="img-fluid" alt=""/><a href="/payment">Payment</a></li>
+                                   <li><img src={process.env.PUBLIC_URL +"/images/fees.svg"} className="img-fluid" alt=""/><a href="/lotfee">Lot Fee</a></li>
+                                   <li><img src={process.env.PUBLIC_URL +"/images/google-docs.svg"} className="img-fluid" alt=""/><a href="#">Document</a></li>
+                                   <li><img src={process.env.PUBLIC_URL +"/images/profile.svg"} className="img-fluid" alt=""/><a href="#">Add User</a></li>
                                    </ul>
                                </div>
                            </div>
                    </div>
-                   <div class="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 mgaccountrightblock">
-                       <div class="mgaccountrighttableblock"> 
+                   <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 mgaccountrightblock">
+                       <div className="mgaccountrighttableblock"> 
                            <h3>Dealer Information <span><a href="#">Edit</a></span></h3>
                            <p>Titles Will be sent to this address title will not be shipped in to physical address</p>
-                           <div class="mgaccountrighttable">
+                           <div className="mgaccountrighttable">
                            <h4>Dealer Name</h4>	
                                <h5>Jack</h5>	
                                <table>
@@ -109,9 +109,9 @@ const ManageAccount = () => {
                            </div>
                        </div>
                        
-                       <div class="mgaccountrighttableblock mt-3 pt-4"> 
+                       <div className="mgaccountrighttableblock mt-3 pt-4"> 
                            <h3>Contact information<span><a href="#">Edit</a></span></h3>							
-                           <div class="mgaccountrighttable">
+                           <div className="mgaccountrighttable">
                                <table>
                                  <thead></thead>								 
                                  <tr>
@@ -127,10 +127,10 @@ const ManageAccount = () => {
                            </div>
                        </div>
                        
-                       <div class="mgaccountrighttableblock mt-3 pt-4"> 
+                       <div className="mgaccountrighttableblock mt-3 pt-4"> 
                            <h3>Address<span><a href="#">Edit</a></span></h3>	
                            <p>Location where transport carriers will drop of a vehicle that you have purchased</p>							
-                           <div class="mgaccountrighttable">
+                           <div className="mgaccountrighttable">
                                <table>
                                  <thead></thead>
                                    <tr>
@@ -158,12 +158,12 @@ const ManageAccount = () => {
                            </div>
                        </div>
                        
-                       <div class="mgaccountrighttableblock mt-3 pt-4"> 
+                       <div className="mgaccountrighttableblock mt-3 pt-4"> 
                            <h3>Legal manage account<span><a href="/legalmanageaccountedit">Edit</a></span></h3>	
                            <p>Legal document sent to your address</p>	
 
                {accountDetails.length>0?accountDetails.map((item,index) =>
-                           <div class="mgaccountrighttable">
+                           <div className="mgaccountrighttable">
                                <table>
                                  <thead></thead>
                                    <tr>
@@ -193,7 +193,7 @@ const ManageAccount = () => {
 
                        </div>
                        
-                       <div class="mgaccountrighttableblock mt-3 pt-4"> 
+                       <div className="mgaccountrighttableblock mt-3 pt-4"> 
                            <h3>Manage Account Password<span><a href="#">Edit</a></span></h3>
                        </div>
                        
@@ -205,12 +205,12 @@ const ManageAccount = () => {
    </div>
    
    
-   <section id="playstoreBlock" class="playstoreBlock">
-     <div class="container">
+   <section id="playstoreBlock" className="playstoreBlock">
+     <div className="container">
 
 
-       <div class="row content">
-         <div class="col-lg-12">
+       <div className="row content">
+         <div className="col-lg-12">
          <img src={process.env.PUBLIC_URL +"/images/appstore.png"} />
            <img src={process.env.PUBLIC_URL +"/images/googleplay.png"} />
           

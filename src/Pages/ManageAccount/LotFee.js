@@ -86,52 +86,52 @@ const LotFee = () => {
     return (
         <div>
 
-<main id="main" class="inner-page">
+<main id="main" className="inner-page">
    
    
-   <div id="lotfee" class="lotfee">
-       <div class="container">
-           <div class="lotfeeblock col-lg-12">
-               <div class="section-title">
+   <div id="lotfee" className="lotfee">
+       <div className="container">
+           <div className="lotfeeblock col-lg-12">
+               <div className="section-title">
                  <h2>Lot Fee</h2>
                </div>
-               <div class="row content">
-                   <div class="col-lg-3 col-md-4 col-sm-12 accountleftblock">
-                       <div class="mgaccountuser">
-                           <div class="mgaccountuserleft">
-                               <img src={process.env.PUBLIC_URL +"/images/userimg.jpg"} class="img-fluid" alt="..."/>
+               <div className="row content">
+                   <div className="col-lg-3 col-md-4 col-sm-12 accountleftblock">
+                       <div className="mgaccountuser">
+                           <div className="mgaccountuserleft">
+                               <img src={process.env.PUBLIC_URL +"/images/userimg.jpg"} className="img-fluid" alt="..."/>
                            </div>
-                           <div class="mgaccountuserright">
+                           <div className="mgaccountuserright">
                                <h3>Fernand</h3>
-                               <div class="d-flex align-items-center">
-                                   <p class="details"><img src={process.env.PUBLIC_URL +"/images/Path.svg"} class="img-fluid" alt="..."/><span>California, Cl</span></p>
+                               <div className="d-flex align-items-center">
+                                   <p className="details"><img src={process.env.PUBLIC_URL +"/images/Path.svg"} className="img-fluid" alt="..."/><span>California, Cl</span></p>
                                </div>
                                    
                            </div>
                        </div>
                        
-                       <div class="mgaccountuserlinks">
-                           <div class="userlinks">
-                               <li><img src={process.env.PUBLIC_URL +"/images/Icon awesome-user.svg"} class="img-fluid" alt=""/><a href="/manageaccount">Account</a></li>
-                               <li><img src={process.env.PUBLIC_URL +"/images/Icon awesome-bell.svg"} class="img-fluid" alt=""/><a href="/notification">Notification</a></li>
-                               <li><img src={process.env.PUBLIC_URL +"/images/dollar-symbol.svg"} class="img-fluid" alt=""/><a href="/payment">Payment</a></li>
-                               <li class="active"><img src={process.env.PUBLIC_URL +"/images/fees.svg"} class="img-fluid" alt=""/><a href="/lotfee">Lot Fee</a></li>
-                               <li><img src={process.env.PUBLIC_URL +"/images/google-docs.svg"} class="img-fluid" alt=""/><a href="documents.html">Document</a></li>
-                               <li><img src={process.env.PUBLIC_URL +"/images/profile.svg"} class="img-fluid" alt=""/><a href="adduser.html">Add User</a></li>
+                       <div className="mgaccountuserlinks">
+                           <div className="userlinks">
+                               <li><img src={process.env.PUBLIC_URL +"/images/Icon awesome-user.svg"} className="img-fluid" alt=""/><a href="/manageaccount">Account</a></li>
+                               <li><img src={process.env.PUBLIC_URL +"/images/Icon awesome-bell.svg"} className="img-fluid" alt=""/><a href="/notification">Notification</a></li>
+                               <li><img src={process.env.PUBLIC_URL +"/images/dollar-symbol.svg"} className="img-fluid" alt=""/><a href="/payment">Payment</a></li>
+                               <li className="active"><img src={process.env.PUBLIC_URL +"/images/fees.svg"} className="img-fluid" alt=""/><a href="/lotfee">Lot Fee</a></li>
+                               <li><img src={process.env.PUBLIC_URL +"/images/google-docs.svg"} className="img-fluid" alt=""/><a href="documents.html">Document</a></li>
+                               <li><img src={process.env.PUBLIC_URL +"/images/profile.svg"} className="img-fluid" alt=""/><a href="adduser.html">Add User</a></li>
                            </div>
                        </div>
                    </div>
-                   <div class="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 lotfeerightblock">
-                       <div class="lotfee-inner">
+                   <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 lotfeerightblock">
+                       <div className="lotfee-inner">
                        <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard </p>
-                           <div class="form-group col-lg-6 col-md-6 lotfee-form">
-                               <div class="input-icon">
-                                 <input type="text" class="form-control" defaultValue={lotValue.length>0?"":lotValue.lot_fee}  onChange={(e) => setLotfee(e.target.value)}/> 
+                           <div className="form-group col-lg-6 col-md-6 lotfee-form">
+                               <div className="input-icon">
+                                 <input type="text" className="form-control" defaultValue={lotValue.length>0?"":lotValue.lot_fee}  onChange={(e) => setLotfee(e.target.value)}/> 
                                    <i>$</i>
                                </div>
                            </div>
-                           <div class="col-lg-12 loginBtn">
-                               <button class="cta-btn" onClick={handlesubimt}>Submit</button>
+                           <div className="col-lg-12 loginBtn">
+                               <button className="cta-btn" onClick={handlesubimt}>Submit</button>
                                {/* conclick={handlesubimt} */}
                            </div>
                        </div>
@@ -144,12 +144,12 @@ const LotFee = () => {
   
 
    
-   <section id="playstoreBlock" class="playstoreBlock">
-     <div class="container">
+   <section id="playstoreBlock" className="playstoreBlock">
+     <div className="container">
 
 
-       <div class="row content">
-         <div class="col-lg-12">
+       <div className="row content">
+         <div className="col-lg-12">
          <img src={process.env.PUBLIC_URL +"/images/appstore.png"} />
            <img src={process.env.PUBLIC_URL +"/images/googleplay.png"} />
          </div>

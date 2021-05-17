@@ -80,58 +80,58 @@ const FloorEdit = () => {
     }, []);
     return (
         <div>
-            <main id="main" class="inner-page">
+            <main id="main" className="inner-page">
                 <div className="col-lg-4 card loginBlock">
-                    <form class="registrationform" onSubmit={updateFloorPlan} >
-                        <h2 class="title"> Floor Plans Edit</h2>
-                        <div class="row">
+                    <form className="registrationform" onSubmit={updateFloorPlan} >
+                        <h2 className="title"> Floor Plans Edit</h2>
+                        <div className="row">
 
-                            <div class="col-sm-12 form-group">
-                                <input type="text"  defaultValue={floorObjc.contact_name} class="form-control" placeholder="Contact Name" required onChange={(e) => setContactName(e.target.value)} />
+                            <div className="col-sm-12 form-group">
+                                <input type="text"  defaultValue={floorObjc.contact_name} className="form-control" placeholder="Contact Name" required onChange={(e) => setContactName(e.target.value)} />
                             </div>
-                            <div class="col-sm-12 form-group">
-                                <input type="text" defaultValue={floorObjc.company_name} class="form-control" placeholder="Company Name" required onChange={(e) => setCompanyName(e.target.value)} />
-                            </div>
-
-                            <div class="col-sm-12 form-group">
-                                <input type="text" defaultValue={floorObjc.branch_name} class="form-control" placeholder="Branch Name" required onChange={(e) => setBranchName(e.target.value)} />
+                            <div className="col-sm-12 form-group">
+                                <input type="text" defaultValue={floorObjc.company_name} className="form-control" placeholder="Company Name" required onChange={(e) => setCompanyName(e.target.value)} />
                             </div>
 
-                            <div class="col-sm-12 form-group">
-                                <input type="number" defaultValue={floorObjc.account_no} class="form-control" placeholder="Account Number" required onChange={(e) => setAccountNumber(e.target.value)} />
+                            <div className="col-sm-12 form-group">
+                                <input type="text" defaultValue={floorObjc.branch_name} className="form-control" placeholder="Branch Name" required onChange={(e) => setBranchName(e.target.value)} />
                             </div>
-                            <div class="col-sm-12 form-group">
-                                <input type="number" defaultValue={floorObjc.credit_limit} class="form-control" placeholder="Credit Limit" required onChange={(e) => setCreditLimit(e.target.value)} />
+
+                            <div className="col-sm-12 form-group">
+                                <input type="number" defaultValue={floorObjc.account_no} className="form-control" placeholder="Account Number" required onChange={(e) => setAccountNumber(e.target.value)} />
                             </div>
-                            <div class="col-sm-12 form-group">
-                                <input type="email" defaultValue={floorObjc.email_id} class="form-control" placeholder="Email Id" required onChange={(e) => setEmailId(e.target.value)} />
+                            <div className="col-sm-12 form-group">
+                                <input type="number" defaultValue={floorObjc.credit_limit} className="form-control" placeholder="Credit Limit" required onChange={(e) => setCreditLimit(e.target.value)} />
                             </div>
-                            <div class="col-sm-12 form-group">
-                                <input type="text" defaultValue={floorObjc.address} class="form-control" placeholder="Address" required onChange={(e) => setAddress(e.target.value)} />
+                            <div className="col-sm-12 form-group">
+                                <input type="email" defaultValue={floorObjc.email_id} className="form-control" placeholder="Email Id" required onChange={(e) => setEmailId(e.target.value)} />
                             </div>
-                            <div class="col-sm-12 form-group">
-                                <input type="number" defaultValue={floorObjc.phone_no} class="form-control" placeholder="Phone Number" required onChange={(e) => setPhoneNumber(e.target.value)} />
+                            <div className="col-sm-12 form-group">
+                                <input type="text" defaultValue={floorObjc.address} className="form-control" placeholder="Address" required onChange={(e) => setAddress(e.target.value)} />
                             </div>
-                            <div class="col-sm-12 form-group">
-                                <input type="Date" value={floorObjc.date_opened} class="form-control" placeholder="Date Opened" required onChange={(e) => setDateOpened(e.target.value)} />
+                            <div className="col-sm-12 form-group">
+                                <input type="number" defaultValue={floorObjc.phone_no} className="form-control" placeholder="Phone Number" required onChange={(e) => setPhoneNumber(e.target.value)} />
+                            </div>
+                            <div className="col-sm-12 form-group">
+                                <input type="Date" value={floorObjc.date_opened} className="form-control" placeholder="Date Opened" required onChange={(e) => setDateOpened(e.target.value)} />
                             </div>
                     
-                            <div class="col-sm-12 form-group">
-                                <input type="text" defaultValue={floorObjc.account_opened} class="form-control" placeholder="Account Opened" required onChange={(e) => setAccountOpened(e.target.value)} />
+                            <div className="col-sm-12 form-group">
+                                <input type="text" defaultValue={floorObjc.account_opened} className="form-control" placeholder="Account Opened" required onChange={(e) => setAccountOpened(e.target.value)} />
                             </div>
                            
                     
-                            <div class="col-lg-12 loginBtn">
-                                <button class="cta-btn">Update</button>
+                            <div className="col-lg-12 loginBtn">
+                                <button className="cta-btn">Update</button>
                             </div>
                         </div>
                     </form>
 
                 </div>
-                <section id="playstoreBlock" class="playstoreBlock">
-                    <div class="container">
-                        <div class="row content">
-                            <div class="col-lg-12">
+                <section id="playstoreBlock" className="playstoreBlock">
+                    <div className="container">
+                        <div className="row content">
+                            <div className="col-lg-12">
                                 <img src={process.env.PUBLIC_URL +"/images/appstore.png" }/>
                                 <img src={process.env.PUBLIC_URL +"/images/googleplay.png"} />
                             </div>

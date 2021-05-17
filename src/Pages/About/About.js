@@ -23,25 +23,25 @@ const About = () => {
     
     return (
         <div>
-              <main id="main" class="inner-page">
+              <main id="main" className="inner-page">
    
    
-   <div id="about" class="about">
-     <div class="container" >
-     <div class="aboutblock col-lg-12">
+   <div id="about" className="about">
+     <div className="container" >
+     <div className="aboutblock col-lg-12">
 
-       <div class="section-title">
+       <div className="section-title">
          <h2>About Us</h2>
        </div>
 
-       <div class="row content">
-         <div class="col-lg-6">
-           <div class="aboutusimg">
+       <div className="row content">
+         <div className="col-lg-6">
+           <div className="aboutusimg">
             <img src={process.env.PUBLIC_URL +"/images/aboutusimg.png"} />
            </div>
            
          </div>
-         <div class="col-lg-6 pt-4 pt-lg-0">
+         <div className="col-lg-6 pt-4 pt-lg-0">
            <p>
              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
            </p>
@@ -59,12 +59,12 @@ const About = () => {
   
 
    
-   <section id="playstoreBlock" class="playstoreBlock">
-     <div class="container">
+   <section id="playstoreBlock" className="playstoreBlock">
+     <div className="container">
 
 
-       <div class="row content">
-         <div class="col-lg-12">
+       <div className="row content">
+         <div className="col-lg-12">
            <img src={process.env.PUBLIC_URL +"/images/appstore.png"} />
            <img src={process.env.PUBLIC_URL +"/images/googleplay.png"} />
           

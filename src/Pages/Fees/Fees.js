@@ -44,19 +44,19 @@ const Fees = () => {
 
     return (
         <div>
-            <main id="main" class="inner-page">
+            <main id="main" className="inner-page">
 
 
-                <div id="fees" class="fees">
-                    <div class="container">
-                        <div class="feesblock col-lg-12">
-                            <div class="section-title">
+                <div id="fees" className="fees">
+                    <div className="container">
+                        <div className="feesblock col-lg-12">
+                            <div className="section-title">
                                 <h2>FEES</h2>
                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
                             </div>
-                            <div class="row content">
-                                <div class="col-lg-6 pt-4 pt-lg-0 feestableBlock">
-                                    <div class="feestable">
+                            <div className="row content">
+                                <div className="col-lg-6 pt-4 pt-lg-0 feestableBlock">
+                                    <div className="feestable">
                                         <h2>Buyer Fee</h2>
                                         <Table columns={columns} dataSource={feeDetails}></Table>
                                     </div>
@@ -65,12 +65,12 @@ const Fees = () => {
                         </div>
                     </div>
                 </div>
-                <section id="playstoreBlock" class="playstoreBlock">
-                    <div class="container">
+                <section id="playstoreBlock" className="playstoreBlock">
+                    <div className="container">
 
 
-                        <div class="row content">
-                            <div class="col-lg-12">
+                        <div className="row content">
+                            <div className="col-lg-12">
                                 <img src={process.env.PUBLIC_URL +"/images/appstore.png"} />
                                 <img src={process.env.PUBLIC_URL +"/images/googleplay.png"} />
                             </div>

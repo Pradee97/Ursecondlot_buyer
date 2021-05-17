@@ -73,40 +73,40 @@ const ChangePassword = () => {
 
     return (
         <div>
-            <main id="main" class="inner-page">
+            <main id="main" className="inner-page">
                 <div className="col-lg-4 card loginBlock">
-                    <form class="registrationform" onSubmit={changehandleSubmit} >
-                        <h2 class="title">Change Password</h2>
+                    <form className="registrationform" onSubmit={changehandleSubmit} >
+                        <h2 className="title">Change Password</h2>
                         <p className="error-message">{errorMessage}</p>
-                        <div class="row">
+                        <div className="row">
 
-                            <div class="col-sm-12 form-group">
-                                <input type="password" class="form-control" placeholder="Old Password" required onChange={(e) => setOldPassword(e.target.value)} />
+                            <div className="col-sm-12 form-group">
+                                <input type="password" className="form-control" placeholder="Old Password" required onChange={(e) => setOldPassword(e.target.value)} />
                             </div>
-                            <div class="col-sm-12 form-group">
-                                <input type="password" class="form-control" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="eg:(It should be Uppercase, Lowercase, Specialcharacter, Numbers and Minimum 8 character)" placeholder="New Password" required onChange={(e) => setNewPassword(e.target.value)} />
+                            <div className="col-sm-12 form-group">
+                                <input type="password" className="form-control" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="eg:(It should be Uppercase, Lowercase, Specialcharacter, Numbers and Minimum 8 character)" placeholder="New Password" required onChange={(e) => setNewPassword(e.target.value)} />
                             </div>
 
-                            <div class="col-sm-12 form-group">
-                                <input type="password" class="form-control" placeholder="Confirm Password" required onChange={(e) => setConfirmPassword(e.target.value)} />
+                            <div className="col-sm-12 form-group">
+                                <input type="password" className="form-control" placeholder="Confirm Password" required onChange={(e) => setConfirmPassword(e.target.value)} />
                                  
 
                             </div>
-                            {/* <div class="col-sm-12 form-group">
-                                <input type="text" class="form-control" placeholder="User Id" required onChange={(e) => setUserId(e.target.value)} />
+                            {/* <div className="col-sm-12 form-group">
+                                <input type="text" className="form-control" placeholder="User Id" required onChange={(e) => setUserId(e.target.value)} />
                             </div> */}
                             
-                            <div class="col-lg-12 loginBtn">
-                                <button class="cta-btn">Submit</button>
+                            <div className="col-lg-12 loginBtn">
+                                <button className="cta-btn">Submit</button>
                             </div>
                         </div>
                     </form>
 
                 </div>
-                <section id="playstoreBlock" class="playstoreBlock">
-                    <div class="container">
-                        <div class="row content">
-                            <div class="col-lg-12">
+                <section id="playstoreBlock" className="playstoreBlock">
+                    <div className="container">
+                        <div className="row content">
+                            <div className="col-lg-12">
                                 <img src={process.env.PUBLIC_URL +"/images/appstore.png"} />
                                 <img src={process.env.PUBLIC_URL +"/images/googleplay.png"} />
                             </div>

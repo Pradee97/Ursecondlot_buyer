@@ -43,35 +43,35 @@ const FloorPlans = () => {
 
     return (
         <div>
-             <main id="main" class="inner-page">
+             <main id="main" className="inner-page">
    
    
-   <div id="floorplans" class="floorplans">
-     <div class="container">
-     <div class="floorplansblock col-lg-12">
+   <div id="floorplans" className="floorplans">
+     <div className="container">
+     <div className="floorplansblock col-lg-12">
 
-       <div class="section-title">
+       <div className="section-title">
          <h2>Floor Plans</h2>
        </div>
 
-       <div class="row content">
-           <div class="col-lg-12 floorplanstableblock">
-               <div class="add-floor">
-                   <a class="add-floor-btns" href="/flooradd"><img src={process.env.PUBLIC_URL +"/images/addbtn.jpg"}/>Add Floor</a>
+       <div className="row content">
+           <div className="col-lg-12 floorplanstableblock">
+               <div className="add-floor">
+                   <a className="add-floor-btns" href="/flooradd"><img src={process.env.PUBLIC_URL +"/images/addbtn.jpg"}/>Add Floor</a>
                </div>
                
 
                {floorDetails.length>0?floorDetails.map((item,index) =>
-               <div class="col-lg-12 mt-3 pt-4 floorplanstableblock">
-               <div class="floorplanstable">
+               <div className="col-lg-12 mt-3 pt-4 floorplanstableblock">
+               <div className="floorplanstable">
                
                    <table>
                      <thead>
                        <tr>
                            <th colspan="2" scope="colgroup">Floor plan {index+1}
-                           <div class="editbutton">
+                           <div className="editbutton">
                            <Button onClick={() => onHandleEdit(item.floor_plan_id)}  >Edit</Button></div></th>
-                           {/* <a class="editicon" onClick={() => onHandleEdit(item.floor_plan_id)}><Icon type="edit" theme = "filled"/></a></div></th> */}
+                           {/* <a className="editicon" onClick={() => onHandleEdit(item.floor_plan_id)}><Icon type="edit" theme = "filled"/></a></div></th> */}
 
                        </tr>
                      </thead>
@@ -113,12 +113,12 @@ const FloorPlans = () => {
   
 
    
-   <section id="playstoreBlock" class="playstoreBlock">
-     <div class="container">
+   <section id="playstoreBlock" className="playstoreBlock">
+     <div className="container">
 
 
-       <div class="row content">
-         <div class="col-lg-12">
+       <div className="row content">
+         <div className="col-lg-12">
            <img src={process.env.PUBLIC_URL +"/images/appstore.png" }/>
            <img src={process.env.PUBLIC_URL +"/images/googleplay.png"} />
           
