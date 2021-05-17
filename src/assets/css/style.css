@@ -4656,6 +4656,23 @@ __________________________________________________________*/
 .userlinks a:hover, .userlinks .active > a, .userlinks li:hover > a {
     color: #BD062C;
 }
+
+.userlinks {
+  text-align: left;
+}
+
+.notificationtabblock h3 {
+  color: #343434;
+  font-size: 25px;
+  font-weight: 500;
+  display: block;
+  text-align: left;
+}
+
+.bidsemailblock, .bidssmsblock, .bidsnotiblock, .favoriteemailblock, .favoritesmsblock {
+  display: flex;
+}
+
 .mgaccountleftblock{
 	margin: 0 auto;
 	word-wrap: break-word;
