@@ -19,31 +19,21 @@ const About = lazy(() => import('./Pages/About/About'));
 const ChangePassword = lazy(() => import('./Pages/ChangePassword/ChangePassword'));
 const CarList = lazy(() => import('./Pages/CarList/CarList'));
 const Contactus = lazy(() => import('./Pages/Contactus/Contactus'));
-<<<<<<< HEAD
-const LotFee = lazy(() => import('./Pages/ManageAccount/LotFee'));
-const ManageAccount = lazy(() => import('./Pages/ManageAccount/ManageAccount'));
-const Notification = lazy(() => import('./Pages/ManageAccount/Notification'));
-const Payment = lazy(() => import('./Pages/ManageAccount/Payment'));
-const PaymentInfo = lazy(() => import('./Pages/ManageAccount/PaymentInfo'));
-const EditPayment = lazy(() => import('./Pages/ManageAccount/EditPayment'));
-=======
 const Header = lazy(() =>  import('./Component/Header/Header'));
 const Inprogress = lazy(() => import('./Component/Inprogress/Inprogress'));
 const ManageAccount = lazy(() => import("./Pages/ManageAccount/ManageAccount"));
 const LotFee = lazy(() => import ('./Pages/ManageAccount/LotFee'));
 const Notification = lazy(() => import ('./Pages/ManageAccount/Notification'));
 const Payment = lazy(() => import ('./Pages/ManageAccount/Payment'));
->>>>>>> c33a92504ef70c2a6e2c7048a307247c4aa289ab
+const PaymentInfo = lazy(() => import('./Pages/ManageAccount/PaymentInfo'));
+const EditPayment = lazy(() => import('./Pages/ManageAccount/EditPayment'));
 
 function AppRouter() {
   return (
     <div className="App">
       <Router>
         <Suspense fallback={<div>Loading...</div>}>
-<<<<<<< HEAD
-=======
           <Header /> 
->>>>>>> c33a92504ef70c2a6e2c7048a307247c4aa289ab
           <Switch>
             <Route exact path="/" component={Home}/>
             <Route  path="/login" component={Login}/>
@@ -61,23 +51,16 @@ function AppRouter() {
             <Route  path="/about" component={About}/>
             <Route  path="/changepassword" component={ChangePassword}/>
             <Route  path="/carList" component={CarList}/>
-<<<<<<< HEAD
-=======
             <Route  path="/search" component={Inprogress}/>
             <Route  path="/floor" component={Inprogress}/>
             <Route  path="/mybids" component={Inprogress}/>
             <Route  path="/transport" component={Inprogress}/>
->>>>>>> c33a92504ef70c2a6e2c7048a307247c4aa289ab
             <Route  path="/manageaccount" component={ManageAccount}/>
             <Route  path="/lotfee" component={LotFee}/>
             <Route  path="/notification" component={Notification}/>
             <Route  path="/payment" component={Payment}/>
-<<<<<<< HEAD
             <Route  path="/paymentinfo" component={PaymentInfo}/>
             <Route  path="/editpayment" component={EditPayment}/>
-
-=======
->>>>>>> c33a92504ef70c2a6e2c7048a307247c4aa289ab
           </Switch>
         </Suspense>
       </Router>

@@ -16,18 +16,6 @@ import {
 } from 'antd';
 import googleApiKey from '../../Constant/config.js'
 
-import '../../assets/vendor/bootstrap/css/bootstrap.min.css';
-import '../../assets/vendor/icofont/icofont.min.css';
-import '../../assets/vendor/boxicons/css/boxicons.min.css';
-import '../../assets/vendor/font-awesome/css/font-awesome.min.css';
-import '../../assets/vendor/remixicon/remixicon.css';
-import '../../assets/vendor/venobox/venobox.css';
-import '../../assets/vendor/owl.carousel/assets/owl.carousel.min.css';
-import '../../assets/vendor/aos/aos.css';
-
-
-import '../../assets/css/style.css';
-
 
 const PaymentInfo = () => {
     const history = useHistory();
@@ -52,56 +40,56 @@ const PaymentInfo = () => {
     return (
         <div>
 
-            <main id="main" class="inner-page">
+            <main id="main" className="inner-page">
 
 
-                <div id="paymentaccount" class="paymentaccount">
-                    <div class="container" >
-                        <div class="paymentaccountblock col-lg-12">
-                            <div class="section-title">
+                <div id="paymentaccount" className="paymentaccount">
+                    <div className="container" >
+                        <div className="paymentaccountblock col-lg-12">
+                            <div className="section-title">
                                 <h2>Payment Summary</h2>
                             </div>
-                            <div class="row content">
-                                <div class="col-lg-3 col-md-4 col-sm-12 accountleftblock">
-                                    <div class="mgaccountuser">
-                                        <div class="mgaccountuserleft">
-                                            <img src="userimg.jpg" class="img-fluid" alt="..." />
+                            <div className="row content">
+                                <div className="col-lg-3 col-md-4 col-sm-12 accountleftblock">
+                                    <div className="mgaccountuser">
+                                        <div className="mgaccountuserleft">
+                                            <img src={process.env.PUBLIC_URL +"/images/userimg.jpg"} className="img-fluid" alt="..." />
                                         </div>
-                                        <div class="mgaccountuserright">
+                                        <div className="mgaccountuserright">
                                             <h3>Fernand</h3>
-                                            <div class="d-flex align-items-center">
-                                                <p class="details"><img src="Path.svg" class="img-fluid" alt="..." /><span>California, Cl</span></p>
+                                            <div className="d-flex align-items-center">
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/Path.svg"} className="img-fluid" alt="..." /><span>California, Cl</span></p>
                                             </div>
 
                                         </div>
                                     </div>
 
-                                    <div class="mgaccountuserlinks">
-                                        <div class="userlinks">
-                                            <li><img src="Icon awesome-user.svg" class="img-fluid" alt="" /><a href="/manageaccount">Account</a></li>
-                                            <li><img src="Icon awesome-bell.svg" class="img-fluid" alt="" /><a href="/notification">Notification</a></li>
-                                            <li class="active"><img src="dollar-symbol.svg" class="img-fluid" alt="" /><a href="/payment">Payment</a></li>
-                                            <li><img src="fees.svg" class="img-fluid" alt="" /><a href="/lotfee">Lot Fee</a></li>
-                                            <li><img src="google-docs.svg" class="img-fluid" alt="" /><a href="documents.html">Document</a></li>
-                                            <li><img src="profile.svg" class="img-fluid" alt="" /><a href="adduser.html">Add User</a></li>
+                                    <div className="mgaccountuserlinks">
+                                        <div className="userlinks">
+                                            <li><img src={process.env.PUBLIC_URL +"/images/Icon awesome-user.svg"} className="img-fluid" alt="" /><a href="/manageaccount">Account</a></li>
+                                            <li><img src={process.env.PUBLIC_URL +"/images/Icon awesome-bell.svg"} className="img-fluid" alt="" /><a href="/notification">Notification</a></li>
+                                            <li className="active"><img src={process.env.PUBLIC_URL +"/images/dollar-symbol.svg"} className="img-fluid" alt="" /><a href="/payment">Payment</a></li>
+                                            <li><img src={process.env.PUBLIC_URL +"/images/fees.svg"} className="img-fluid" alt="" /><a href="/lotfee">Lot Fee</a></li>
+                                            <li><img src={process.env.PUBLIC_URL +"/images/google-docs.svg"} className="img-fluid" alt="" /><a href="documents.html">Document</a></li>
+                                            <li><img src={process.env.PUBLIC_URL +"/images/profile.svg"} className="img-fluid" alt="" /><a href="adduser.html">Add User</a></li>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 paymentrightblock">
-                                    <div class="paymentdetailblock">
+                                <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 paymentrightblock">
+                                    <div className="paymentdetailblock">
                                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</p>
-                                        <div class="add-floors">
-                                            <div class="row">
-                                                <div class="add-accounts">
-                                                    <a class="add-account-btns" href="/payment"><img src="addbtn.jpg" />Add Bank Account</a>
+                                        <div className="add-floors">
+                                            <div className="row">
+                                                <div className="add-accounts">
+                                                    <a className="add-account-btns" href="/payment"><img src={process.env.PUBLIC_URL +"/images/addbtn.jpg"} />Add Bank Account</a>
                                                 </div>
                                             </div>
                                         </div>
                                         {paymentinfo.length>0?paymentinfo.map((item,index) =>
-                                        <div class="col-lg-12 col-md-12 col-sm-12 mt-2 pt-4 bankinfo ">
-                                            <div class="bankinfos">
+                                        <div className="col-lg-12 col-md-12 col-sm-12 mt-2 pt-4 bankinfo ">
+                                            <div className="bankinfos">
                                                 <h4>Bank Account Information</h4>
-                                                <div class="bankinfotable">
+                                                <div className="bankinfotable">
                                                     <a href="editpayment">Edit</a>
                                                     <table>
                                                         <tr>
@@ -130,16 +118,16 @@ const PaymentInfo = () => {
                                                         </tr>
                                                     </table>
 
-                                                    <div class="releaseinfo">
-                                                        <div class="row">
-                                                            <div class="col-sm-6 form-group">
+                                                    <div className="releaseinfo">
+                                                        <div className="row">
+                                                            <div className="col-sm-6 form-group">
                                                                 <p>Signed bank Authorization letter for bank to release information. </p>
                                                             </div>
 
-                                                            <div class="col-sm-6 form-group uploadbutton">
-                                                                <div class="tbox">
+                                                            <div className="col-sm-6 form-group uploadbutton">
+                                                                <div className="tbox">
                                                                     <input type="file" id="downupload" hidden />
-                                                                    <label for="downupload"><img src="download.png" />Document</label>
+                                                                    <label for="downupload"><img src={process.env.PUBLIC_URL +"/images/download.png"} />Document</label>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -161,14 +149,14 @@ const PaymentInfo = () => {
 
 
 
-                    <section id="playstoreBlock" class="playstoreBlock">
-                        <div class="container">
+                    <section id="playstoreBlock" className="playstoreBlock">
+                        <div className="container">
 
 
-                            <div class="row content">
-                                <div class="col-lg-12">
-                                    <img src="appstore.png" />
-                                    <img src="googleplay.png" />
+                            <div className="row content">
+                                <div className="col-lg-12">
+                                    <img src={process.env.PUBLIC_URL +"/images/appstore.png"} />
+                                    <img src={process.env.PUBLIC_URL +"/images/googleplay.png"} />
 
                                 </div>
 
@@ -183,16 +171,6 @@ const PaymentInfo = () => {
 
             </main>
 
-                <script src="assets/vendor/jquery/jquery.min.js"></script>
-                <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-                <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
-                <script src="assets/vendor/php-email-form/validate.js"></script>
-                <script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
-                <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-                <script src="assets/vendor/venobox/venobox.min.js"></script>
-                <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
-                <script src="assets/vendor/aos/aos.js"></script>
-                <script src="assets/js/main.js"></script>
         </div>
 
 

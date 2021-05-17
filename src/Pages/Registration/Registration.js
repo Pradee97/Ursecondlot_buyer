@@ -47,8 +47,6 @@ const Registration = () => {
     // const [cityId, setCityId] = useState("");
     const [zipCodeId, setZipcodeId] = useState("");
     const [numberOfYears, setNumberofYears] = useState("");
-
-    
     async function fetchCountry() {
         const country = API.get('http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/country');
         country.then(res => {
@@ -173,7 +171,7 @@ const Registration = () => {
                         <div class="col-sm-12 form-group"> 
                         <div className="tbox">
                             <input className="textbox " type="text" placeholder="" id="dealer_name" required onChange={(e) => setDealerName(e.target.value)} />
-				            <label  for="dealer_name" className={dealerName !="" ? "input-has-value" : ""} >Dealer name</label>
+				            <label  for="dealer_name" className={dealerName !="" ? "input-has-value" : ""}>Dealer name</label>
 			            </div>
                         </div>
                         <div class="col-sm-12 form-group"> 

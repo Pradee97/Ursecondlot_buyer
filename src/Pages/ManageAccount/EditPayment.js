@@ -16,18 +16,6 @@ import {
 } from 'antd';
 import googleApiKey from '../../Constant/config.js'
 
-import '../../assets/vendor/bootstrap/css/bootstrap.min.css';
-import '../../assets/vendor/icofont/icofont.min.css';
-import '../../assets/vendor/boxicons/css/boxicons.min.css';
-import '../../assets/vendor/font-awesome/css/font-awesome.min.css';
-import '../../assets/vendor/remixicon/remixicon.css';
-import '../../assets/vendor/venobox/venobox.css';
-import '../../assets/vendor/owl.carousel/assets/owl.carousel.min.css';
-import '../../assets/vendor/aos/aos.css';
-
-
-import '../../assets/css/style.css';
-
 
 const EditPayment = () => {
     const history = useHistory();
@@ -109,147 +97,147 @@ const EditPayment = () => {
     return (
         <div>
 
-            <main id="main" class="inner-page">
+            <main id="main" className="inner-page">
 
 
-                <div id="paymentaccount" class="paymentaccount">
-                    <div class="container" >
-                        <div class="paymentaccountblock col-lg-12">
-                            <div class="section-title">
+                <div id="paymentaccount" className="paymentaccount">
+                    <div className="container" >
+                        <div className="paymentaccountblock col-lg-12">
+                            <div className="section-title">
                                 <h2>Payment Summary</h2>
                             </div>
-                            <div class="row content">
-                                <div class="col-lg-3 col-md-4 col-sm-12 accountleftblock">
-                                    <div class="mgaccountuser">
-                                        <div class="mgaccountuserleft">
-                                            <img src="userimg.jpg" class="img-fluid" alt="..." />
+                            <div className="row content">
+                                <div className="col-lg-3 col-md-4 col-sm-12 accountleftblock">
+                                    <div className="mgaccountuser">
+                                        <div className="mgaccountuserleft">
+                                            <img src={process.env.PUBLIC_URL +"/images/userimg.jpg"} className="img-fluid" alt="..." />
                                         </div>
-                                        <div class="mgaccountuserright">
+                                        <div className="mgaccountuserright">
                                             <h3>Fernand</h3>
-                                            <div class="d-flex align-items-center">
-                                                <p class="details"><img src="Path.svg" class="img-fluid" alt="..." /><span>California, Cl</span></p>
+                                            <div className="d-flex align-items-center">
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/Path.svg"} className="img-fluid" alt="..." /><span>California, Cl</span></p>
                                             </div>
 
                                         </div>
                                     </div>
 
-                                    <div class="mgaccountuserlinks">
-                                        <div class="userlinks">
-                                            <li><img src="Icon awesome-user.svg" class="img-fluid" alt="" /><a href="/manageaccount">Account</a></li>
-                                            <li><img src="Icon awesome-bell.svg" class="img-fluid" alt="" /><a href="/notification">Notification</a></li>
-                                            <li class="active"><img src="dollar-symbol.svg" class="img-fluid" alt="" /><a href="/payment">Payment</a></li>
-                                            <li><img src="fees.svg" class="img-fluid" alt="" /><a href="/lotfee">Lot Fee</a></li>
-                                            <li><img src="google-docs.svg" class="img-fluid" alt="" /><a href="documents.html">Document</a></li>
-                                            <li><img src="profile.svg" class="img-fluid" alt="" /><a href="adduser.html">Add User</a></li>
+                                    <div className="mgaccountuserlinks">
+                                        <div className="userlinks">
+                                            <li><img src={process.env.PUBLIC_URL +"/images/Icon awesome-user.svg"} className="img-fluid" alt="" /><a href="/manageaccount">Account</a></li>
+                                            <li><img src={process.env.PUBLIC_URL +"/images/Icon awesome-bell.svg"} className="img-fluid" alt="" /><a href="/notification">Notification</a></li>
+                                            <li className="active"><img src={process.env.PUBLIC_URL +"/images/dollar-symbol.svg"} className="img-fluid" alt="" /><a href="/payment">Payment</a></li>
+                                            <li><img src={process.env.PUBLIC_URL +"/images/fees.svg"} className="img-fluid" alt="" /><a href="/lotfee">Lot Fee</a></li>
+                                            <li><img src={process.env.PUBLIC_URL +"/images/google-docs.svg"} className="img-fluid" alt="" /><a href="documents.html">Document</a></li>
+                                            <li><img src={process.env.PUBLIC_URL +"/images/profile.svg"} className="img-fluid" alt="" /><a href="adduser.html">Add User</a></li>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 paymentrightblock">
-                                    <div class="paymentdetailblock">
+                                <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 paymentrightblock">
+                                    <div className="paymentdetailblock">
                                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</p>
                                     
 
-                                        <div class="paymentform col-lg-12">
-                                            <form class="backaccountform" onSubmit={updatepaymentinfo} >
-                                                <h2 class="title"> Bank account information Edit</h2>
-                                                <div class="row">
+                                        <div className="paymentform col-lg-12">
+                                            <form className="backaccountform" onSubmit={updatepaymentinfo} >
+                                                <h2 className="title"> Bank account information Edit</h2>
+                                                <div className="row">
 
-                                                    <div class="col-sm-12 form-group">
-                                                    <input type="text"  defaultValue={paymentObjc.dealership_name} class="form-control" placeholder="Dealership name" required onChange={(e) => setDealershipName(e.target.value)} />
+                                                    <div className="col-sm-12 form-group">
+                                                    <input type="text"  defaultValue={paymentObjc.dealership_name} className="form-control" placeholder="Dealership name" required onChange={(e) => setDealershipName(e.target.value)} />
                                                     </div>
-                                                    <div class="col-sm-12 form-group">
-                                                    <input type="text"  defaultValue={paymentObjc.acc_name} class="form-control" placeholder="Account holder name" required onChange={(e) => setAccountHolderName(e.target.value)} />
-                                                    </div>
-
-                                                    <div class="col-sm-12 form-group">
-                                                    <input type="text"  defaultValue={paymentObjc.bank_name} class="form-control" placeholder="Bank name" required onChange={(e) => setBankName(e.target.value)} />
+                                                    <div className="col-sm-12 form-group">
+                                                    <input type="text"  defaultValue={paymentObjc.acc_name} className="form-control" placeholder="Account holder name" required onChange={(e) => setAccountHolderName(e.target.value)} />
                                                     </div>
 
-                                                    <div class="col-sm-12 form-group">
-                                                    <input type="text"  defaultValue={paymentObjc.acc_no} class="form-control" placeholder="Account number" required onChange={(e) => setAccountNumber(e.target.value)} />
+                                                    <div className="col-sm-12 form-group">
+                                                    <input type="text"  defaultValue={paymentObjc.bank_name} className="form-control" placeholder="Bank name" required onChange={(e) => setBankName(e.target.value)} />
                                                     </div>
 
-                                                    <div class="col-sm-12 form-group">
-                                                    <input type="text"  defaultValue={paymentObjc.ach_no} class="form-control" placeholder="ACH number" required onChange={(e) => setACHNumber(e.target.value)} />
+                                                    <div className="col-sm-12 form-group">
+                                                    <input type="text"  defaultValue={paymentObjc.acc_no} className="form-control" placeholder="Account number" required onChange={(e) => setAccountNumber(e.target.value)} />
                                                     </div>
 
-                                                    <div class="col-sm-12 form-group">
-                                                    <input type="text"  defaultValue={paymentObjc.routing_no} class="form-control" placeholder="Routing number" required onChange={(e) => setRoutingNumber(e.target.value)} />
+                                                    <div className="col-sm-12 form-group">
+                                                    <input type="text"  defaultValue={paymentObjc.ach_no} className="form-control" placeholder="ACH number" required onChange={(e) => setACHNumber(e.target.value)} />
                                                     </div>
 
-                                                    <div class="col-sm-12 form-group">
-                                                    <input type="text"  defaultValue={paymentObjc.bank_address} class="form-control" placeholder="Bank address" required onChange={(e) => setBankAddress(e.target.value)} />
+                                                    <div className="col-sm-12 form-group">
+                                                    <input type="text"  defaultValue={paymentObjc.routing_no} className="form-control" placeholder="Routing number" required onChange={(e) => setRoutingNumber(e.target.value)} />
                                                     </div>
-                                                    {/* <div class="col-sm-4 form-group">
-                                                        <div class="tbox">
-                                                            <select id="state" class="form-control custom-select browser-default">
+
+                                                    <div className="col-sm-12 form-group">
+                                                    <input type="text"  defaultValue={paymentObjc.bank_address} className="form-control" placeholder="Bank address" required onChange={(e) => setBankAddress(e.target.value)} />
+                                                    </div>
+                                                    {/* <div className="col-sm-4 form-group">
+                                                        <div className="tbox">
+                                                            <select id="state" className="form-control custom-select browser-default">
                                                                 <option value="US">State</option>
                                                             </select>
-                                                            <input type="text"  defaultValue={paymentObjc.state_id} class="form-control" placeholder="State" required onChange={(e) => setStateName(e.target.value)} />
+                                                            <input type="text"  defaultValue={paymentObjc.state_id} className="form-control" placeholder="State" required onChange={(e) => setStateName(e.target.value)} />
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-4 form-group">
-                                                        <div class="tbox">
-                                                            <select id="city" class="form-control custom-select browser-default">
+                                                    <div className="col-sm-4 form-group">
+                                                        <div className="tbox">
+                                                            <select id="city" className="form-control custom-select browser-default">
                                                                 <option value="USA">City</option>
                                                             </select>
-                                                            <input type="text"  defaultValue={paymentObjc.city_id} class="form-control" placeholder="City" required onChange={(e) => setCityName(e.target.value)} />
+                                                            <input type="text"  defaultValue={paymentObjc.city_id} className="form-control" placeholder="City" required onChange={(e) => setCityName(e.target.value)} />
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-sm-4 form-group">
-                                                        <div class="tbox">
-                                                            <select id="zipcode" class="form-control custom-select browser-default">
+                                                    <div className="col-sm-4 form-group">
+                                                        <div className="tbox">
+                                                            <select id="zipcode" className="form-control custom-select browser-default">
                                                                 <option value="USA">Zipcode</option>
                                                             </select>
-                                                            <input type="text"  defaultValue={paymentObjc.zipcode} class="form-control" placeholder="Zipcode" required onChange={(e) => setZipcodeId(e.target.value)} />
+                                                            <input type="text"  defaultValue={paymentObjc.zipcode} className="form-control" placeholder="Zipcode" required onChange={(e) => setZipcodeId(e.target.value)} />
                                                         </div>
                                                     </div> */}
 
-                                                    <div class="col-sm-12 form-group">
-                                                    <input type="text"  defaultValue={paymentObjc.acc_address} class="form-control" placeholder="Account Holder Address" required onChange={(e) => setAccountHolderAddress(e.target.value)} />
+                                                    <div className="col-sm-12 form-group">
+                                                    <input type="text"  defaultValue={paymentObjc.acc_address} className="form-control" placeholder="Account Holder Address" required onChange={(e) => setAccountHolderAddress(e.target.value)} />
                                                     </div>
 
-                                                    {/* <div class="col-sm-4 form-group">
-                                                        <div class="tbox">
-                                                            <select id="state" class="form-control custom-select browser-default">
+                                                    {/* <div className="col-sm-4 form-group">
+                                                        <div className="tbox">
+                                                            <select id="state" className="form-control custom-select browser-default">
                                                                 <option value="US">State</option>
                                                             </select>
-                                                            <input type="text"  defaultValue={paymentObjc.acc_state_id} class="form-control" placeholder="State" required onChange={(e) => setAccountStateName(e.target.value)} />
+                                                            <input type="text"  defaultValue={paymentObjc.acc_state_id} className="form-control" placeholder="State" required onChange={(e) => setAccountStateName(e.target.value)} />
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-4 form-group">
-                                                        <div class="tbox">
-                                                            <select id="city" class="form-control custom-select browser-default">
+                                                    <div className="col-sm-4 form-group">
+                                                        <div className="tbox">
+                                                            <select id="city" className="form-control custom-select browser-default">
                                                                 <option value="USA">City</option>
                                                             </select>
-                                                            <input type="text"  defaultValue={paymentObjc.acc_city_id} class="form-control" placeholder="City" required onChange={(e) => setAccountCityName(e.target.value)} />
+                                                            <input type="text"  defaultValue={paymentObjc.acc_city_id} className="form-control" placeholder="City" required onChange={(e) => setAccountCityName(e.target.value)} />
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-sm-4 form-group">
-                                                        <div class="tbox">
-                                                            <select id="zipcode" class="form-control custom-select browser-default">
+                                                    <div className="col-sm-4 form-group">
+                                                        <div className="tbox">
+                                                            <select id="zipcode" className="form-control custom-select browser-default">
                                                                 <option value="USA">Zipcode</option>
                                                             </select>
-                                                            <input type="text"  defaultValue={paymentObjc.acc_zipcode} class="form-control" placeholder="Zipcode" required onChange={(e) => setAccountZipcodeId(e.target.value)} />
+                                                            <input type="text"  defaultValue={paymentObjc.acc_zipcode} className="form-control" placeholder="Zipcode" required onChange={(e) => setAccountZipcodeId(e.target.value)} />
                                                         </div>
                                                     </div> */}
 
-                                                    <div class="col-sm-6 form-group">
+                                                    <div className="col-sm-6 form-group">
                                                         <p>Signed bank Authorization letter for bank to release information. </p>
                                                     </div>
 
 
 
-                                                    <div class="col-sm-6 form-group uploadbutton">
-                                                        <div class="tbox">
+                                                    <div className="col-sm-6 form-group uploadbutton">
+                                                        <div className="tbox">
                                                             <input type="file" id="upload" hidden />
-                                                            <label for="upload"><img src="upload.png" />Upload Document</label>
+                                                            <label for="upload"><img src={process.env.PUBLIC_URL +"/images/upload.png"} />Upload Document</label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-12 loginBtn">
-                                                        <button class="cta-btn">Update</button>
+                                                    <div className="col-lg-12 loginBtn">
+                                                        <button className="cta-btn">Update</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -270,14 +258,14 @@ const EditPayment = () => {
 
 
 
-                    <section id="playstoreBlock" class="playstoreBlock">
-                        <div class="container">
+                    <section id="playstoreBlock" className="playstoreBlock">
+                        <div className="container">
 
 
-                            <div class="row content">
-                                <div class="col-lg-12">
-                                    <img src="appstore.png" />
-                                    <img src="googleplay.png" />
+                            <div className="row content">
+                                <div className="col-lg-12">
+                                    <img src={process.env.PUBLIC_URL +"/images/appstore.png"} />
+                                    <img src={process.env.PUBLIC_URL +"/images/googleplay.png"} />
 
                                 </div>
 
@@ -292,16 +280,6 @@ const EditPayment = () => {
 
             </main>
 
-                <script src="assets/vendor/jquery/jquery.min.js"></script>
-                <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-                <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
-                <script src="assets/vendor/php-email-form/validate.js"></script>
-                <script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
-                <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-                <script src="assets/vendor/venobox/venobox.min.js"></script>
-                <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
-                <script src="assets/vendor/aos/aos.js"></script>
-                <script src="assets/js/main.js"></script>
         </div>
 
 

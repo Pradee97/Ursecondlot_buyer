@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React from 'react';
 import API from "../../Services/BaseService";
 import { useHistory } from "react-router-dom";
@@ -154,164 +153,164 @@ const Payment = () => {
     return (
         <div>
 
-            <main id="main" class="inner-page">
+            <main id="main" className="inner-page">
 
 
-                <div id="paymentaccount" class="paymentaccount">
-                    <div class="container" >
-                        <div class="paymentaccountblock col-lg-12">
-                            <div class="section-title">
+                <div id="paymentaccount" className="paymentaccount">
+                    <div className="container" >
+                        <div className="paymentaccountblock col-lg-12">
+                            <div className="section-title">
                                 <h2>Payment Summary</h2>
                             </div>
-                            <div class="row content">
-                                <div class="col-lg-3 col-md-4 col-sm-12 accountleftblock">
-                                    <div class="mgaccountuser">
-                                        <div class="mgaccountuserleft">
-                                            <img src="userimg.jpg" class="img-fluid" alt="..." />
+                            <div className="row content">
+                                <div className="col-lg-3 col-md-4 col-sm-12 accountleftblock">
+                                    <div className="mgaccountuser">
+                                        <div className="mgaccountuserleft">
+                                            <img src={process.env.PUBLIC_URL +"/images/userimg.jpg"} className="img-fluid" alt="..." />
                                         </div>
-                                        <div class="mgaccountuserright">
+                                        <div className="mgaccountuserright">
                                             <h3>Fernand</h3>
-                                            <div class="d-flex align-items-center">
-                                                <p class="details"><img src="Path.svg" class="img-fluid" alt="..." /><span>California, Cl</span></p>
+                                            <div className="d-flex align-items-center">
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/Path.svg"} className="img-fluid" alt="..." /><span>California, Cl</span></p>
                                             </div>
 
                                         </div>
                                     </div>
 
-                                    <div class="mgaccountuserlinks">
-                                        <div class="userlinks">
-                                            <li><img src="Icon awesome-user.svg" class="img-fluid" alt="" /><a href="/manageaccount">Account</a></li>
-                                            <li><img src="Icon awesome-bell.svg" class="img-fluid" alt="" /><a href="/notification">Notification</a></li>
-                                            <li class="active"><img src="dollar-symbol.svg" class="img-fluid" alt="" /><a href="/payment">Payment</a></li>
-                                            <li><img src="fees.svg" class="img-fluid" alt="" /><a href="/lotfee">Lot Fee</a></li>
-                                            <li><img src="google-docs.svg" class="img-fluid" alt="" /><a href="documents.html">Document</a></li>
-                                            <li><img src="profile.svg" class="img-fluid" alt="" /><a href="adduser.html">Add User</a></li>
+                                    <div className="mgaccountuserlinks">
+                                        <div className="userlinks">
+                                            <li><img src={process.env.PUBLIC_URL +"/images/Icon awesome-user.svg"} className="img-fluid" alt="" /><a href="/manageaccount">Account</a></li>
+                                            <li><img src={process.env.PUBLIC_URL +"/images/Icon awesome-bell.svg"} className="img-fluid" alt="" /><a href="/notification">Notification</a></li>
+                                            <li className="active"><img src={process.env.PUBLIC_URL +"/images/dollar-symbol.svg"} className="img-fluid" alt="" /><a href="/payment">Payment</a></li>
+                                            <li><img src={process.env.PUBLIC_URL +"/images/fees.svg"} className="img-fluid" alt="" /><a href="/lotfee">Lot Fee</a></li>
+                                            <li><img src={process.env.PUBLIC_URL +"/images/google-docs.svg"} className="img-fluid" alt="" /><a href="documents.html">Document</a></li>
+                                            <li><img src={process.env.PUBLIC_URL +"/images/profile.svg"} className="img-fluid" alt="" /><a href="adduser.html">Add User</a></li>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 paymentrightblock">
-                                    <div class="paymentdetailblock">
+                                <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 paymentrightblock">
+                                    <div className="paymentdetailblock">
                                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</p>
 
 
-                                        <div class="paymentform col-lg-12">
-                                            <form class="backaccountform" onSubmit={paymenthandleSubmit}>
-                                                <h2 class="title"> Bank account information</h2>
-                                                <div class="row">
+                                        <div className="paymentform col-lg-12">
+                                            <form className="backaccountform" onSubmit={paymenthandleSubmit}>
+                                                <h2 className="title"> Bank account information</h2>
+                                                <div className="row">
 
 
-                                                    <div class="col-sm-12 form-group">
-                                                        <div class="tbox">
+                                                    <div className="col-sm-12 form-group">
+                                                        <div className="tbox">
                                                             <input type="text" className="textbox" name="dname" id="name-d" placeholder="" required  onChange={(e) => setDealershipName(e.target.value)} />
                                                             <label for="name-d" className={dealershipName !="" ? "input-has-value" : ""}>Dealership name</label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-12 form-group">
-                                                        <div class="tbox">
-                                                            <input type="text" class="textbox" name="fname" id="name-f" placeholder="" required  onChange={(e) => setAccountHolderName(e.target.value)} />
+                                                    <div className="col-sm-12 form-group">
+                                                        <div className="tbox">
+                                                            <input type="text" className="textbox" name="fname" id="name-f" placeholder="" required  onChange={(e) => setAccountHolderName(e.target.value)} />
                                                             <label for="name-f" className={accountHolderName !="" ? "input-has-value" : ""}>Account holder name</label>
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-sm-12 form-group">
-                                                        <div class="tbox">
-                                                            <input type="text" class="textbox" name="lname" id="name-l" placeholder="" required  onChange={(e) => setBankName(e.target.value)} />
+                                                    <div className="col-sm-12 form-group">
+                                                        <div className="tbox">
+                                                            <input type="text" className="textbox" name="lname" id="name-l" placeholder="" required  onChange={(e) => setBankName(e.target.value)} />
                                                             <label for="name-b" className={bankName !="" ? "input-has-value" : ""}>Bank name</label>
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-sm-12 form-group">
-                                                        <div class="tbox">
-                                                            <input type="text" class="textbox" name="anumber" id="anumber" placeholder="" required  onChange={(e) => setAccountNumber(e.target.value)} />
+                                                    <div className="col-sm-12 form-group">
+                                                        <div className="tbox">
+                                                            <input type="text" className="textbox" name="anumber" id="anumber" placeholder="" required  onChange={(e) => setAccountNumber(e.target.value)} />
                                                             <label for="anumber" className={accountNumber !="" ? "input-has-value" : ""}>Account number</label>
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-sm-12 form-group">
-                                                        <div class="tbox">
-                                                            <input type="text" class="textbox" name="achnumber" id="achnumber" placeholder="" required  onChange={(e) => setACHNumber(e.target.value)} />
+                                                    <div className="col-sm-12 form-group">
+                                                        <div className="tbox">
+                                                            <input type="text" className="textbox" name="achnumber" id="achnumber" placeholder="" required  onChange={(e) => setACHNumber(e.target.value)} />
                                                             <label for="achnumber" className={ACHnumber !="" ? "input-has-value" : ""}>ACH number</label>
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-sm-12 form-group">
-                                                        <div class="tbox">
-                                                            <input type="text" class="textbox" name="rtnumber" id="rtnumber" placeholder="" required  onChange={(e) => setRoutingNumber(e.target.value)} />
+                                                    <div className="col-sm-12 form-group">
+                                                        <div className="tbox">
+                                                            <input type="text" className="textbox" name="rtnumber" id="rtnumber" placeholder="" required  onChange={(e) => setRoutingNumber(e.target.value)} />
                                                             <label for="rtnumber" className={routingNumber !="" ? "input-has-value" : ""}>Routing number</label>
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-sm-12 form-group">
-                                                        <div class="tbox">
-                                                            <input type="text" class="textbox" name="baddress" id="baddress" placeholder="" required  onChange={(e) => setBankAddress(e.target.value)} />
+                                                    <div className="col-sm-12 form-group">
+                                                        <div className="tbox">
+                                                            <input type="text" className="textbox" name="baddress" id="baddress" placeholder="" required  onChange={(e) => setBankAddress(e.target.value)} />
                                                             <label for="baddress" className={bankAddress !="" ? "input-has-value" : ""}>Bank address</label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-4 form-group">
-                                                        <div class="tbox">
-                                                            {/* <select id="state" class="form-control custom-select browser-default">
+                                                    <div className="col-sm-4 form-group">
+                                                        <div className="tbox">
+                                                            {/* <select id="state" className="form-control custom-select browser-default">
                                                                 <option value={stateName}>State</option>
                                                             </select> */}
-                                                            <input type="text" class="form-control" placeholder="state" value ={stateName} required  />
+                                                            <input type="text" className="form-control" placeholder="state" value ={stateName} required  />
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-4 form-group">
-                                                        <div class="tbox">
-                                                            {/* <select id="city" class="form-control custom-select browser-default">
+                                                    <div className="col-sm-4 form-group">
+                                                        <div className="tbox">
+                                                            {/* <select id="city" className="form-control custom-select browser-default">
                                                                 <option value= {cityName} >City</option>
                                                             </select> */}
-                                                            <input type="text" class="form-control" placeholder="city" value ={cityName} required  /> 
+                                                            <input type="text" className="form-control" placeholder="city" value ={cityName} required  /> 
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-sm-4 form-group">
-                                                        <div class="tbox">
-                                                        {/* <select id="zipcode" class="form-control custom-select browser-default">
+                                                    <div className="col-sm-4 form-group">
+                                                        <div className="tbox">
+                                                        {/* <select id="zipcode" className="form-control custom-select browser-default">
                                                                 <option value="USA">Zipcode</option>
                                                             </select> */}
-                                                            <input id="zipcode" class="form-control custom-select browser-default" placeholder="Zipcode" required onChange={(e) => setZipcode(e.target.value,1)} />
+                                                            <input id="zipcode" className="form-control custom-select browser-default" placeholder="Zipcode" required onChange={(e) => setZipcode(e.target.value,1)} />
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-sm-12 form-group">
-                                                        <div class="tbox">
-                                                            <input type="text" class="textbox" name="ahaddress" id="ahaddress" placeholder="" required  onChange={(e) => setAccountHolderAddress(e.target.value)} />
+                                                    <div className="col-sm-12 form-group">
+                                                        <div className="tbox">
+                                                            <input type="text" className="textbox" name="ahaddress" id="ahaddress" placeholder="" required  onChange={(e) => setAccountHolderAddress(e.target.value)} />
                                                             <label for="ahaddress" className={accountHolderAddress !="" ? "input-has-value" : ""}>Account Holder Address</label>
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-sm-4 form-group">
-                                                        <div class="tbox">
-                                                            {/* <select id="state" class="form-control custom-select browser-default">
+                                                    <div className="col-sm-4 form-group">
+                                                        <div className="tbox">
+                                                            {/* <select id="state" className="form-control custom-select browser-default">
                                                                 <option value="US">State</option>
                                                             </select> */}
-                                                             <input type="text" class="form-control" placeholder="state" value ={accountStateName} required  />
+                                                             <input type="text" className="form-control" placeholder="state" value ={accountStateName} required  />
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-4 form-group">
-                                                        <div class="tbox">
-                                                            {/* <select id="city" class="form-control custom-select browser-default">
+                                                    <div className="col-sm-4 form-group">
+                                                        <div className="tbox">
+                                                            {/* <select id="city" className="form-control custom-select browser-default">
                                                                 <option value="USA">City</option>
                                                             </select> */}
-                                                            <input type="text" class="form-control" placeholder="city" value ={accountCityName} required  /> 
+                                                            <input type="text" className="form-control" placeholder="city" value ={accountCityName} required  /> 
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-sm-4 form-group">
-                                                        <div class="tbox">
-                                                            {/* <select id="zipcode" class="form-control custom-select browser-default">
+                                                    <div className="col-sm-4 form-group">
+                                                        <div className="tbox">
+                                                            {/* <select id="zipcode" className="form-control custom-select browser-default">
                                                                 <option value="USA">Zipcode</option>
                                                             </select> */}
-                                                            <input id="zipcode" class="form-control custom-select browser-default" placeholder="Zipcode" required onChange={(e) => setZipcode(e.target.value,2)} />
+                                                            <input id="zipcode" className="form-control custom-select browser-default" placeholder="Zipcode" required onChange={(e) => setZipcode(e.target.value,2)} />
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-sm-6 form-group">
+                                                    <div className="col-sm-6 form-group">
                                                         <p>Signed bank Authorization letter for bank to release information. </p>
                                                     </div>
 
-                                                    <div class="col-lg-12 loginBtn">
-                                                        <button class="cta-btn">Submit</button>
+                                                    <div className="col-lg-12 loginBtn">
+                                                        <button className="cta-btn">Submit</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -332,14 +331,14 @@ const Payment = () => {
 
 
 
-                    <section id="playstoreBlock" class="playstoreBlock">
-                        <div class="container">
+                    <section id="playstoreBlock" className="playstoreBlock">
+                        <div className="container">
 
 
-                            <div class="row content">
-                                <div class="col-lg-12">
-                                    <img src="appstore.png" />
-                                    <img src="googleplay.png" />
+                            <div className="row content">
+                                <div className="col-lg-12">
+                                    <img src={process.env.PUBLIC_URL +"/images/appstore.png" }/>
+                                    <img src={process.env.PUBLIC_URL +"/images/googleplay.png"} />
 
                                 </div>
 
@@ -354,329 +353,11 @@ const Payment = () => {
 
             </main>
 
-                <script src="assets/vendor/jquery/jquery.min.js"></script>
-                <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-                <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
-                <script src="assets/vendor/php-email-form/validate.js"></script>
-                <script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
-                <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-                <script src="assets/vendor/venobox/venobox.min.js"></script>
-                <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
-                <script src="assets/vendor/aos/aos.js"></script>
-                <script src="assets/js/main.js"></script>
+
         </div>
 
 
     );
 };
 
-=======
-import React from 'react';
-import API from "../../Services/BaseService";
-import { useHistory } from "react-router-dom";
-
-// import '../../assets/css/styles.css';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import {
-    Form,
-    Input,
-    Select,
-    AutoComplete,
-    Radio,
-    notification,
-    Spin,
-} from 'antd';
-import googleApiKey from '../../Constant/config.js'
-
-import '../../assets/vendor/bootstrap/css/bootstrap.min.css';
-import '../../assets/vendor/icofont/icofont.min.css';
-import '../../assets/vendor/boxicons/css/boxicons.min.css';
-import '../../assets/vendor/font-awesome/css/font-awesome.min.css';
-import '../../assets/vendor/remixicon/remixicon.css';
-import '../../assets/vendor/venobox/venobox.css';
-import '../../assets/vendor/owl.carousel/assets/owl.carousel.min.css';
-import '../../assets/vendor/aos/aos.css';
-
-
-import '../../assets/css/style.css';
-
-
-const Payment = () => {
-    const history = useHistory();
-
-    return (
-        <div>
-
-            <main id="main" class="inner-page">
-
-
-                <div id="paymentaccount" class="paymentaccount">
-                    <div class="container" >
-                        <div class="paymentaccountblock col-lg-12">
-                            <div class="section-title">
-                                <h2>Payment Summary</h2>
-                            </div>
-                            <div class="row content">
-                                <div class="col-lg-3 col-md-4 col-sm-12 accountleftblock">
-                                    <div class="mgaccountuser">
-                                        <div class="mgaccountuserleft">
-                                            <img src={process.env.PUBLIC_URL +"/images/userimg.jpg"} class="img-fluid" alt="..." />
-                                        </div>
-                                        <div class="mgaccountuserright">
-                                            <h3>Fernand</h3>
-                                            <div class="d-flex align-items-center">
-                                                <p class="details"><img src={process.env.PUBLIC_URL +"/images/Path.svg"} class="img-fluid" alt="..." /><span>California, Cl</span></p>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="mgaccountuserlinks">
-                                        <div class="userlinks">
-                                            <li><img src={process.env.PUBLIC_URL +"/images/Icon awesome-user.svg"} class="img-fluid" alt="" /><a href="/manageaccount">Account</a></li>
-                                            <li><img src={process.env.PUBLIC_URL +"/images/Icon awesome-bell.svg"} class="img-fluid" alt="" /><a href="/notification">Notification</a></li>
-                                            <li class="active"><img src={process.env.PUBLIC_URL +"/images/dollar-symbol.svg"} class="img-fluid" alt="" /><a href="/payment">Payment</a></li>
-                                            <li><img src={process.env.PUBLIC_URL +"/images/fees.svg"} class="img-fluid" alt="" /><a href="/lotfee">Lot Fee</a></li>
-                                            <li><img src={process.env.PUBLIC_URL +"/images/google-docs.svg"} class="img-fluid" alt="" /><a href="documents.html">Document</a></li>
-                                            <li><img src={process.env.PUBLIC_URL +"/images/profile.svg"} class="img-fluid" alt="" /><a href="adduser.html">Add User</a></li>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 paymentrightblock">
-                                    <div class="paymentdetailblock">
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</p>
-                                        <div class="add-floors">
-                                            <div class="row">
-                                                <div class="add-accounts">
-                                                    <a class="add-account-btns" href="#"><img src={process.env.PUBLIC_URL +"/images/addbtn.jpg"} />Add Bank Account</a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="paymentform col-lg-12">
-                                            <form class="backaccountform">
-                                                <h2 class="title"> Bank account information</h2>
-                                                <div class="row">
-
-                                                    <div class="col-sm-12 form-group">
-                                                        <div class="tbox">
-                                                            <input type="text" class="form-control" name="dname" id="name-d" placeholder="" required />
-                                                            <label for="name-d">Dealership name</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-12 form-group">
-                                                        <div class="tbox">
-                                                            <input type="text" class="form-control" name="fname" id="name-f" placeholder="" required />
-                                                            <label for="name-f">Account holder name</label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-12 form-group">
-                                                        <div class="tbox">
-                                                            <input type="text" class="form-control" name="lname" id="name-l" placeholder="" required />
-                                                            <label for="name-b">Bank name</label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-12 form-group">
-                                                        <div class="tbox">
-                                                            <input type="text" class="form-control" name="anumber" id="anumber" placeholder="" required />
-                                                            <label for="anumber">Account number</label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-12 form-group">
-                                                        <div class="tbox">
-                                                            <input type="text" class="form-control" name="achnumber" id="achnumber" placeholder="" required />
-                                                            <label for="achnumber">ACH number</label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-12 form-group">
-                                                        <div class="tbox">
-                                                            <input type="text" class="form-control" name="rtnumber" id="rtnumber" placeholder="" required />
-                                                            <label for="rtnumber">Routing number</label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-12 form-group">
-                                                        <div class="tbox">
-                                                            <input type="text" class="form-control" name="baddress" id="baddress" placeholder="" required />
-                                                            <label for="baddress">Bank address</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-4 form-group">
-                                                        <div class="tbox">
-                                                            <select id="state" class="form-control custom-select browser-default">
-                                                                <option value="US">State</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-4 form-group">
-                                                        <div class="tbox">
-                                                            <select id="city" class="form-control custom-select browser-default">
-                                                                <option value="USA">City</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-4 form-group">
-                                                        <div class="tbox">
-                                                            <select id="zipcode" class="form-control custom-select browser-default">
-                                                                <option value="USA">Zipcode</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-12 form-group">
-                                                        <div class="tbox">
-                                                            <input type="text" class="form-control" name="ahaddress" id="ahaddress" placeholder="" required />
-                                                            <label for="ahaddress">Account Holder Address</label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-4 form-group">
-                                                        <div class="tbox">
-                                                            <select id="state" class="form-control custom-select browser-default">
-                                                                <option value="US">State</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-4 form-group">
-                                                        <div class="tbox">
-                                                            <select id="city" class="form-control custom-select browser-default">
-                                                                <option value="USA">City</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-4 form-group">
-                                                        <div class="tbox">
-                                                            <select id="zipcode" class="form-control custom-select browser-default">
-                                                                <option value="USA">Zipcode</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-6 form-group">
-                                                        <p>Signed bank Authorization letter for bank to release information. </p>
-                                                    </div>
-
-
-
-                                                    <div class="col-sm-6 form-group uploadbutton">
-                                                        <div class="tbox">
-                                                            <input type="file" id="upload" hidden />
-                                                            <label for="upload"><img src={process.env.PUBLIC_URL +"/images/upload.png"} />Upload Document</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-12 loginBtn">
-                                                        <button class="cta-btn">Submit</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-12 mt-2 pt-4 bankinfo ">
-                                            <div class="bankinfos">
-                                                <h4>Bank Account Information</h4>
-                                                <div class="bankinfotable">
-                                                    <a href="#">Edit</a>
-                                                    <table>
-                                                        <tr>
-                                                            <td><span>Dealership Name</span></td>
-                                                            <td>Fernando</td>
-                                                            <td><span>ACH Number</span></td>
-                                                            <td>#544531313</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><span>Account holder name</span></td>
-                                                            <td>Botero</td>
-                                                            <td><span>Routing Number</span></td>
-                                                            <td>#544531313</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><span>Bank Name</span></td>
-                                                            <td>Bank of Amarica</td>
-                                                            <td><span>Bank Address</span></td>
-                                                            <td>Horizon Ave, California, Cl</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><span>Account Number</span></td>
-                                                            <td>********7895</td>
-                                                            <td><span>ACCount Holder Address</span></td>
-                                                            <td>Horizon Ave, California, Cl</td>
-                                                        </tr>
-                                                    </table>
-
-                                                    <div class="releaseinfo">
-                                                        <div class="row">
-                                                            <div class="col-sm-6 form-group">
-                                                                <p>Signed bank Authorization letter for bank to release information. </p>
-                                                            </div>
-
-                                                            <div class="col-sm-6 form-group uploadbutton">
-                                                                <div class="tbox">
-                                                                    <input type="file" id="downupload" hidden />
-                                                                    <label for="downupload"><img src={process.env.PUBLIC_URL +"/images/download.png"} />Document</label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-
-
-
-
-
-                    <section id="playstoreBlock" class="playstoreBlock">
-                        <div class="container">
-
-
-                            <div class="row content">
-                                <div class="col-lg-12">
-                                  <img src={process.env.PUBLIC_URL +"/images/appstore.png"} />
-                                  <img src={process.env.PUBLIC_URL +"/images/googleplay.png"} />
-
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </section>
-
-                </div>
-
-
-
-            </main>
-
-                <script src="assets/vendor/jquery/jquery.min.js"></script>
-                <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-                <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
-                <script src="assets/vendor/php-email-form/validate.js"></script>
-                <script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
-                <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-                <script src="assets/vendor/venobox/venobox.min.js"></script>
-                <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
-                <script src="assets/vendor/aos/aos.js"></script>
-                <script src="assets/js/main.js"></script>
-        </div>
-
-
-    );
-};
-
->>>>>>> c33a92504ef70c2a6e2c7048a307247c4aa289ab
 export default Payment;
