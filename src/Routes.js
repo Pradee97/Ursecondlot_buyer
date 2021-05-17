@@ -21,6 +21,10 @@ const CarList = lazy(() => import('./Pages/CarList/CarList'));
 const Contactus = lazy(() => import('./Pages/Contactus/Contactus'));
 const Header = lazy(() =>  import('./Component/Header/Header'));
 const Inprogress = lazy(() => import('./Component/Inprogress/Inprogress'));
+const ManageAccount = lazy(() => import("./Pages/ManageAccount/ManageAccount"));
+const LotFee = lazy(() => import ('./Pages/ManageAccount/LotFee'));
+const Notification = lazy(() => import ('./Pages/ManageAccount/Notification'));
+const Payment = lazy(() => import ('./Pages/ManageAccount/Payment'));
 
 function AppRouter() {
   return (
@@ -49,6 +53,10 @@ function AppRouter() {
             <Route  path="/floor" component={Inprogress}/>
             <Route  path="/mybids" component={Inprogress}/>
             <Route  path="/transport" component={Inprogress}/>
+            <Route  path="/manageaccount" component={ManageAccount}/>
+            <Route  path="/lotfee" component={LotFee}/>
+            <Route  path="/notification" component={Notification}/>
+            <Route  path="/payment" component={Payment}/>
           </Switch>
         </Suspense>
       </Router>

@@ -47,7 +47,7 @@ const Submenu = () => {
           <div className="row">
             <div className="col-lg-8 topLeft">
               <div className="socialIcons">
-                <a href="#" className="twitter"><i className="bx bxl-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
                 <a href="#" className="snapchat"><i className="bx bxl-snapchat"></i></a>
                 <a href="#" className="instagram"><i className="bx bxl-instagram"></i></a>
               </div>
