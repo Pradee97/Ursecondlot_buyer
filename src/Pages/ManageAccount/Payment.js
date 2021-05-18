@@ -14,20 +14,6 @@ import {
     notification,
     Spin,
 } from 'antd';
-import googleApiKey from '../../Constant/config.js'
-
-import '../../assets/vendor/bootstrap/css/bootstrap.min.css';
-import '../../assets/vendor/icofont/icofont.min.css';
-import '../../assets/vendor/boxicons/css/boxicons.min.css';
-import '../../assets/vendor/font-awesome/css/font-awesome.min.css';
-import '../../assets/vendor/remixicon/remixicon.css';
-import '../../assets/vendor/venobox/venobox.css';
-import '../../assets/vendor/owl.carousel/assets/owl.carousel.min.css';
-import '../../assets/vendor/aos/aos.css';
-
-
-import '../../assets/css/style.css';
-
 
 const Payment = () => {
     const history = useHistory();
@@ -71,42 +57,38 @@ const Payment = () => {
             else{
             setAccountZipcodeId(data)
             }
-
-            fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${data}&components=country:US&key=${googleApiKey}`)
+            const request={zipcode_id: data}
+        API.post("http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/location/condition", request)
         .then(response => {
                
-            if (response.ok){
-                return response.json()
+            if (response.statusText== "OK"){
+                console.log("google place data =>",data)
+                const {results} = response.data.data
+                if(results.length>0){
+
+                    console.log("CITY  ",results[0].address_components[1].long_name)
+                    console.log("STATE  ",results[0].address_components[2].long_name )
+                    if(con===1){
+                    setCityName( results[0].address_components[1].long_name)
+                    setStateName(results[0].address_components[3].long_name)
+                }
+                else{
+                    setAccountCityName(results[0].address_components[1].long_name)
+                    setAccountStateName(results[0].address_components[3].long_name)
+                }              
+                }
+                else{
+                    setCityName('')
+                    setStateName('') 
+                    setAccountCityName('')
+                    setAccountStateName('')
+                    console.log("please enter valid zipcode") ;
+                }
             }else{
                 console.log("something went wrong in address api..., try again")
             }
             
         })
-        .then(data => {
-            console.log("google place data =>",data)
-            if(data.results.length>0){
-                console.log("CITY  ",data.results[0].address_components[1].long_name)
-                console.log("STATE  ",data.results[0].address_components[2].long_name )
-                if(con===1){
-                setCityName( data.results[0].address_components[1].long_name)
-                setStateName(data.results[0].address_components[3].long_name)
-            }
-            else{
-                setAccountCityName(data.results[0].address_components[1].long_name)
-                setAccountStateName(data.results[0].address_components[3].long_name)
-            }              
-            }
-        
-                else{
-                setCityName('')
-                setStateName('') 
-                setAccountCityName('')
-                setAccountStateName('')
-                console.log("please enter valid zipcode") ;
-            }
-           
-        })
-
         }
         
     }

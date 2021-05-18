@@ -14,8 +14,6 @@ import {
     notification,
     Spin,
 } from 'antd';
-import googleApiKey from '../../Constant/config.js'
-
 
 const EditPayment = () => {
     const history = useHistory();

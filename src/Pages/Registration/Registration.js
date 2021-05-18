@@ -18,7 +18,6 @@ import {
     notification,
     Spin,
 } from 'antd';
-import googleApiKey from '../../Constant/config.js'
 
 const Registration = () => {
     const history = useHistory();
@@ -30,6 +29,7 @@ const Registration = () => {
 
     const inputProps = {
         placeholder: 'Select Date',
+        required:true
     };
 
     const [dealerName, setDealerName] = useState("");
@@ -42,13 +42,15 @@ const Registration = () => {
     const [time, setTime] = useState("");
     const [country, setCountry] = useState("");
     const [stateName, setStateName] = useState("");
+    const [stateNameList, setStateNameList] = useState([]);
     // const [stateId, setStateId] = useState("");
     const [cityName, setCityName] = useState("");
+    const [cityNameList, setCityNameList] = useState([]);
     // const [cityId, setCityId] = useState("");
     const [zipCodeId, setZipcodeId] = useState("");
     const [numberOfYears, setNumberofYears] = useState("");
     const [option, setOption] = useState("");
-
+   
     async function fetchCountry() {
         const country = API.get('http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/country');
         country.then(res => {
@@ -63,7 +65,7 @@ const Registration = () => {
         const state = API.post('http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/state/condition', request);
         state.then(res => {
             console.log("res", res.data.data)
-            setStateName(res.data.data);
+            setStateNameList(res.data.data);
         })
             .catch(err => { console.log(err); });
     }
@@ -74,22 +76,24 @@ const Registration = () => {
         const state = API.post('http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/city/condition', request);
         state.then(res => {
             console.log("city", res.data.data)
-            setCityName(res.data.data);
+            setCityNameList(res.data.data);
         })
             .catch(err => { console.log(err); });
     }
     useEffect(() => {
         fetchCountry();
-        // fetchState();
+        fetchState();
     }, []);
 
-    // const handleState = (e) => {
-    //     setStateId(e.target.value)
-    //     fetchCity(e.target.value)
-    // }
-    // const handleCity = (e) => {
-    //     setCityId(e.target.value)
-    // }
+    const handleState = (e) => {   
+        setStateName( stateNameList.filter(data=>data.state_id == e.target.value)[0].state_name)
+        fetchCity(e.target.value)
+        setZipcodeId("")
+    }
+    const handleCity = (e) => {
+        setCityName(e.target.value)
+        setZipcodeId("")
+    }
 
 
     const registrationhandleSubmit = (event) => {
@@ -128,40 +132,54 @@ const Registration = () => {
             });
 
     }
-    const setZipcode = (data) => {
+
+    const setZipcodeNormal = (data) => {
+        if(data.length ===0 ){
+            setZipcodeId("")
+            setCityName('')
+            setStateName('') 
+        }
+        if(data.length==5 ){
+            setZipcodeId(data)
+        }
+    }
+    const setZipcodeGoogle = (data) => {
+        if(data.length ===0 ){
+            setZipcodeId("")
+            setCityName('')
+            setStateName('') 
+        }
         if(data.length !=5 ){
             setCityName('')
             setStateName('') 
         }
         if(data.length==5 ){
             setZipcodeId(data)
-            fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${data}&components=country:US&key=${googleApiKey}`)
+            const request={zipcode_id: data}
+            API.post("http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/location/condition", request)
         .then(response => {
+            console.log("google place data response =>",response)
+            if (response.statusText== "OK"
+            ){
+                const {results} = response.data.data
+                if(results.length>0){
+                    console.log("google place data =>",response.data)
+                    console.log("CITY  ",results[0].address_components[1].long_name)
+                    console.log("STATE  ",results[0].address_components[1].long_name)
+                    setCityName( results[0].address_components[1].long_name)
+                    setStateName(results[0].address_components[3].long_name)                
+                }else{
+                    setCityName('')
+                    setStateName('') 
+                    console.log("please enter valid zipcode");
+                }
                
-            if (response.ok){
-                return response.json()
             }else{
                 console.log("something went wrong in address api..., try again")
             }
             
         })
-        .then(data => {
-            console.log("google place data =>",data)
-            if(data.results.length>0){
-                console.log("CITY  ",data.results[0].address_components[1].long_name)
-                console.log("STATE  ",data.results[0].address_components[2].long_name )
-                setCityName( data.results[0].address_components[1].long_name)
-                setStateName(data.results[0].address_components[3].long_name)                
-            }else{
-                setCityName('')
-                setStateName('') 
-                console.log("please enter valid zipcode") ;
-            }
-           
-        })
-
         }
-        
     }
     return (
         <div>
@@ -172,19 +190,19 @@ const Registration = () => {
                         <div className="row">
                         <div className="col-sm-12 form-group"> 
                         <div className="tbox">
-                            <input className="textbox " type="text" placeholder="" id="dealer_name" required onChange={(e) => setDealerName(e.target.value)} />
+                            <input className="textbox " type="text" placeholder="" id="dealer_name" required maxLength="50" onChange={(e) => setDealerName(e.target.value)} />
 				            <label  for="dealer_name" className={dealerName !="" ? "input-has-value" : ""}>Dealer name</label>
 			            </div>
                         </div>
                         <div className="col-sm-12 form-group"> 
                         <div className="tbox">
-                            <input className="textbox " type="text" placeholder="" id="first_name" required onChange={(e) => setFirstName(e.target.value)} />
+                            <input className="textbox " type="text" placeholder="" id="first_name" required maxLength="30" onChange={(e) => setFirstName(e.target.value)} />
 				            <label  for="first_name" className={firstName !="" ? "input-has-value" : ""}>First Name</label>
 			            </div>
                         </div>
                         <div className="col-sm-12 form-group"> 
                         <div className="tbox">
-                            <input className="textbox " type="text" placeholder="" id="last_name" required onChange={(e) => setLastName(e.target.value)} />
+                            <input className="textbox " type="text" placeholder="" id="last_name" required maxLength="30" onChange={(e) => setLastName(e.target.value)} />
 				            <label  for="last_name" className={lastName !="" ? "input-has-value" : ""}>Last Name</label>
 			            </div>
                         </div>
@@ -196,13 +214,13 @@ const Registration = () => {
                         </div>
                         <div className="col-sm-12 form-group">
                         <div className="tbox">
-                            <input className="textbox " type="text" placeholder="" id="email" required onChange={(e) => setEmail(e.target.value)} />
+                            <input className="textbox" type="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Invalid email address"  placeholder="" id="email" required onChange={(e) => setEmail(e.target.value)} />
 				            <label  for="email" className={email !="" ? "input-has-value" : ""}>Email</label>
 			            </div>
                         </div>
                         <div className="col-sm-12 form-group">
                         <div className="tbox">
-                            <input className="textbox " type="text" placeholder="" id="address" required onChange={(e) => setAddress(e.target.value)} />
+                            <input className="textbox " type="text" placeholder="" id="address" maxLength="300" required onChange={(e) => setAddress(e.target.value)} />
 				            <label  for="address" className={address !="" ? "input-has-value" : ""}>Address</label>
 			            </div>
                         </div>
@@ -211,36 +229,43 @@ const Registration = () => {
                             
                            
                             <div className="col-sm-4 form-group">
-                                {/* <select className="form-control custom-select browser-default" required defaultValue={stateId} onChange={handleState}>
+                            {zipCodeId == "" ?
+                                 (<select className="form-control custom-select browser-default" required defaultValue={stateName} onChange={handleState}>
                                     <option>State</option>
-                                    {stateName &&
+                                    {stateNameList.length>0 &&
                                         <>
-                                            {stateName.map((state, index) => <option key={state.state_id} value={state.state_id}>{state.state_name}</option>)}
+                                            {stateNameList.map((state, index) => <option key={state.state_id} value={state.state_id}>{state.state_name}</option>)}
                                         </>
                                     }
-                                </select> */}
-                                 <input type="text" className="form-control" placeholder="state" value ={stateName} required disabled  />
+                                </select> )
+                                :
+                                 (<input type="text" className="form-control" placeholder="state" value ={stateName} required />)}
                             </div>
                             <div className="col-sm-4 form-group">
-                                {/* <select id="City" className="form-control custom-select browser-default" required defaultValue={cityId} onChange={handleCity}>
+                            {zipCodeId == "" ?
+                                (<select id="City" className="form-control custom-select browser-default" required defaultValue={cityName} onChange={handleCity}>
                                     <option>City</option>
-                                    {cityName &&
+                                    {cityNameList.length>0 &&
                                         <>
-                                            {cityName.map((city, index) => <option key={city.city_id} value={city.city_id}>{city.city_name}</option>)}
+                                            {cityNameList.map((city, index) => <option key={city.city_id} value={city.city_name}>{city.city_name}</option>)}
                                         </>
                                     }
-                                </select> */}
-                                <input type="text" className="form-control" placeholder="city" value ={cityName} required disabled  />
+                                </select>)
+                                :
+                                (<input type="text" className="form-control" placeholder="city" value ={cityName} required />)}
                             </div>
                             <div className="col-sm-4 form-group">
-                                <input type="text" className="form-control" placeholder="Zipcode" required onChange={(e) => setZipcode(e.target.value)} />
+                            {stateName!=="" && cityName !=="" ?
+                                (<input type="text" className="form-control" placeholder="Zipcode" required maxLength="5" onChange={(e) => setZipcodeNormal(e.target.value)} />)
+
+                                :(<input type="text" className="form-control" placeholder="Zipcode" required maxLength="5" onChange={(e) => setZipcodeGoogle(e.target.value)} />)}
                             </div>
                             
 
                             <div className="col-sm-8 form-group">
                                 <div className="tbox">
                                 {/* {/ <lable for="drop" className={option !="" ? "input-has-value" : ""}>How many years in car business</lable> /} */}
-                                <select id="drop" placeholder="" required className="form-control custom-select browser-default textbox" onChange={(e) => setOption(e.target.value)}>
+                                <select id="drop" placeholder="" required className="form-control custom-select browser-default textbox" required onChange={(e) => setOption(e.target.value)}>
                                 <option value="Default">How many years in car business</option>
                                 <option value="1-3">1-3</option>
                                 <option value="3-5">3-5</option>

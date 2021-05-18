@@ -14,22 +14,6 @@ import {
     notification,
     Spin,
 } from 'antd';
-import googleApiKey from '../../Constant/config.js'
-
-import '../../assets/vendor/bootstrap/css/bootstrap.min.css';
-import '../../assets/vendor/icofont/icofont.min.css';
-import '../../assets/vendor/boxicons/css/boxicons.min.css';
-import '../../assets/vendor/font-awesome/css/font-awesome.min.css';
-import '../../assets/vendor/remixicon/remixicon.css';
-import '../../assets/vendor/venobox/venobox.css';
-import '../../assets/vendor/owl.carousel/assets/owl.carousel.min.css';
-import '../../assets/vendor/aos/aos.css';
-
-
-import '../../assets/css/style.css';
-
-
-
 
 const ManageAccount = () => {
     const history = useHistory();
