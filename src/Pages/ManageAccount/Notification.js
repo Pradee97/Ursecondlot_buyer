@@ -8,26 +8,10 @@ import { useEffect } from 'react';
 import {
   Button
 } from 'antd';
-import googleApiKey from '../../Constant/config.js'
-
-import '../../assets/vendor/bootstrap/css/bootstrap.min.css';
-import '../../assets/vendor/icofont/icofont.min.css';
-import '../../assets/vendor/boxicons/css/boxicons.min.css';
-import '../../assets/vendor/font-awesome/css/font-awesome.min.css';
-import '../../assets/vendor/remixicon/remixicon.css';
-import '../../assets/vendor/venobox/venobox.css';
-import '../../assets/vendor/owl.carousel/assets/owl.carousel.min.css';
-import '../../assets/vendor/aos/aos.css';
-
-
-import '../../assets/css/style.css';
-
-
-
 const Notification = () => {
     const history = useHistory();
     const [notification, setNotification] = useState("");
-
+   
     async function getNotification() {
         let request = {
             buyer_id: 1
@@ -115,7 +99,7 @@ const Notification = () => {
 								<form className="bidsemailblock">
 									<div className="col-lg-4 col-md-4">
 										<div className="radio input-group">
-											<input id="radio-dailyupdate" name="radio" type="radio" />
+											<input id="radio-dailyupdate" checked = {notification.email == "daily" ?  true: false} name="radio" type="radio" />
 											<label  for="radio-dailyupdate" className="radio-label">Daily Update</label>
 											<p>You will receive an email daily of new bid activity</p>
 										</div>
@@ -123,7 +107,7 @@ const Notification = () => {
 									
 									<div className="col-lg-4 col-md-4">
 										<div className="radio input-group">
-											<input id="radio-instanceemnail" name="radio" type="radio"/>
+											<input id="radio-instanceemnail" checked = {notification.email == "instant" ?  true: false} name="radio" type="radio"/>
 											<label  for="radio-instanceemnail" className="radio-label">Instant Email</label>
 											<p>Don't miss any deal! we will send you emails immediately with any new bid activity</p>
 										</div>
@@ -131,7 +115,7 @@ const Notification = () => {
 									
 									<div className="col-lg-4 col-md-4">
 										<div className="radio input-group">
-											<input id="radio-instemnail" name="radio" type="radio"/>
+											<input id="radio-instemnail" checked = {notification.email == "no" ?  true: false} name="radio" type="radio"/>
 											<label  for="radio-instemnail" className="radio-label">Never</label>
 											<p>you wont receive any emails for bid activity.</p>
 										</div>
@@ -146,7 +130,7 @@ const Notification = () => {
 								<form className="bidssmsblock">
 									<div className="col-lg-4 col-md-4">
 										<div className="radio input-group">
-											<input id="radio-dailysms" name="radio" type="radio"/>
+											<input id="radio-dailysms" checked = {notification.sms == "daily" ?  true: false} name="radio" type="radio"/>
 											<label  for="radio-dailysms" className="radio-label">Daily Update</label>
 											<p>You will receive an SMS daily of new bid activity</p>
 										</div>
@@ -154,7 +138,7 @@ const Notification = () => {
 									
 									<div className="col-lg-4 col-md-4">
 										<div className="radio input-group">
-											<input id="radio-dailyinssms" name="radio" type="radio"/>
+											<input id="radio-dailyinssms" checked = {notification.sms == "instant" ?  true: false} name="radio" type="radio"/>
 											<label  for="radio-dailyinssms" className="radio-label">Instant SMS</label>
 											<p>Don't miss any deal! we will send you SMS immediately with any new bid activity</p>
 										</div>
@@ -162,7 +146,7 @@ const Notification = () => {
 									
 									<div className="col-lg-4 col-md-4">
 										<div className="radio input-group">
-											<input id="radio-dailysmsnover" name="radio" type="radio"/>
+											<input id="radio-dailysmsnover" checked = {notification.sms == "no" ?  true: false} name="radio" type="radio"/>
 											<label  for="radio-dailysmsnover" className="radio-label">Never</label>
 											<p>you wont receive any SMS for bid activity.</p>
 										</div>
@@ -177,7 +161,7 @@ const Notification = () => {
 								<form className="bidsnotiblock">
 									<div className="col-lg-4 col-md-4">
 										<div className="radio input-group">
-											<input id="radio-dailynotificat" name="radio" type="radio"/>
+											<input id="radio-dailynotificat" checked = {notification.push_notification == "yes" ?  true: false} name="radio" type="radio"/>
 											<label  for="radio-dailynotificat" className="radio-label">Yes</label>
 											<p>You will receive push notifications when any new bid activity directly to your mobile phone.</p>
 										</div>
@@ -185,7 +169,7 @@ const Notification = () => {
 									
 									<div className="col-lg-4 col-md-4">
 										<div className="radio input-group">
-											<input id="radio-dailyno" name="radio" type="radio"/>
+											<input id="radio-dailyno" checked = {notification.push_notification == "no" ?  true: false} name="radio" type="radio"/>
 											<label  for="radio-dailyno" className="radio-label">No</label>
 											<p>you wont receive any push notification.</p>
 										</div>
@@ -204,7 +188,7 @@ const Notification = () => {
 								<form className="favoriteemailblock">
 									<div className="col-lg-4 col-md-4">
 										<div className="radio input-group">
-											<input id="radio-dailycarsno" name="radio" type="radio"/>
+											<input id="radio-dailycarsno" checked = {notification.favorite_email == "daily" ?  true: false} name="radio" type="radio"/>
 											<label  for="radio-dailycarsno" className="radio-label">Daily Update</label>
 											<p>You will receive a daily Email when new vehicle posted matching your Favorite cars</p>
 										</div>
@@ -212,7 +196,7 @@ const Notification = () => {
 									
 									<div className="col-lg-4 col-md-4">
 										<div className="radio input-group">
-											<input id="radio-dailycarsnover" name="radio" type="radio"/>
+											<input id="radio-dailycarsnover" checked = {notification.favorite_email == "no" ?  true: false} name="radio" type="radio"/>
 											<label  for="radio-dailycarsnover" className="radio-label">Never</label>
 											<p>you wont receive any emails With fresh inventory.</p>
 										</div>
@@ -227,7 +211,7 @@ const Notification = () => {
 								<form className="favoritesmsblock">
 									<div className="col-lg-4 col-md-4">
 										<div className="radio input-group">
-											<input id="radio-dailysmct" name="radio" type="radio"/>
+											<input id="radio-dailysmct" checked = {notification.favorite_sms == "daily" ?  true: false} name="radio" type="radio"/>
 											<label  for="radio-dailysmct" className="radio-label">Daily Update</label>
 											<p>You will receive a daily SMS when new vehicle posted matching your Favorite cars</p>
 										</div>
@@ -235,7 +219,7 @@ const Notification = () => {
 									
 									<div className="col-lg-4 col-md-4">
 										<div className="radio input-group">
-											<input id="radio-dailysmtnover" name="radio" type="radio"/>
+											<input id="radio-dailysmtnover" checked = {notification.favorite_sms == "no" ?  true: false} name="radio" type="radio"/>
 											<label  for="radio-dailysmtnover" className="radio-label">Never</label>
 											<p>you wont receive any SMS With fresh inventory.</p>
 										</div>
@@ -278,16 +262,6 @@ const Notification = () => {
  
 
   </main>
-       <script src="assets/vendor/jquery/jquery.min.js"></script>
-            <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-            <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
-            <script src="assets/vendor/php-email-form/validate.js"></script>
-            <script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
-            <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-            <script src="assets/vendor/venobox/venobox.min.js"></script>
-            <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
-            <script src="assets/vendor/aos/aos.js"></script>
-            <script src="assets/js/main.js"></script>
  </div>
 
 
