@@ -165,6 +165,7 @@ const Registration = () => {
     }
     return (
         <div>
+             
             <main id="main" className="inner-page">
                 <div className="col-lg-4 card loginBlock">
                     <form className="registrationform" onSubmit={registrationhandleSubmit} >
@@ -290,7 +291,7 @@ const Registration = () => {
                     </div>
                 </section>
             </main>
-           
+          
         </div>
     )
 }
