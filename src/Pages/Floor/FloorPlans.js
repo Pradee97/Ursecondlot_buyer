@@ -1,7 +1,7 @@
 import React from 'react';
 import API from "../../Services/BaseService";
 import { useHistory,useParams } from "react-router-dom";
-// import '../../assets/css/styles.css';
+import './floorplans.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import {
