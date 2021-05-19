@@ -5,6 +5,9 @@ import DatePicker from 'react-datetime';
 import Datetime from 'react-datetime';
 import moment from 'moment';
 import 'react-datetime/css/react-datetime.css';
+import Popup from '../../Component/Popup/Popup';
+
+import '../../Component/Popup/popup.css';
 
 // import '../../assets/css/styles.css';
 import { useState } from 'react';
@@ -21,6 +24,12 @@ import {
 
 const Registration = () => {
     const history = useHistory();
+    const [isOpen, setIsOpen] = useState(false);
+ 
+    const togglePopup = () => {
+      setIsOpen(!isOpen);
+    }
+
 
     const yesterday = moment().subtract(1, 'day');
     const disablePastDt = current => {
@@ -193,6 +202,7 @@ const Registration = () => {
                         <div className="tbox">
                             <input className="textbox " type="text" placeholder="" id="dealer_name" required maxLength="50" onChange={(e) => setDealerName(e.target.value)} />
 				            <label  for="dealer_name" className={dealerName !="" ? "input-has-value" : ""}>Dealer name</label>
+                            
 			            </div>
                         </div>
                         <div className="col-sm-12 form-group"> 
@@ -217,6 +227,7 @@ const Registration = () => {
                         <div className="tbox">
                             <input className="textbox" type="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Invalid email address"  placeholder="" id="email" required onChange={(e) => setEmail(e.target.value)} />
 				            <label  for="email" className={email !="" ? "input-has-value" : ""}>Email</label>
+                           
 			            </div>
                         </div>
                         <div className="col-sm-12 form-group">
@@ -287,16 +298,55 @@ const Registration = () => {
 
                             <div className="col-sm-6 form-group">
                                
-                                <Datetime inputProps={ inputProps } timeFormat={false} dateFormat="DD/MM/YYYY"
-        isValidDate={disablePastDt}/>
+                                <Datetime inputProps={ inputProps } timeFormat={false} dateFormat="DD/MM/YYYY" isValidDate={disablePastDt}/>
                             </div>
                             <div className="col-sm-6 form-group">
                                 <input type="time" className="form-control" placeholder="Select Time" required onChange={(e) => setTime(e.target.value)} />
                             </div>
                             <div className="col-sm-12 form-group agreetab">
                                 <input type="checkbox" className="form-check d-inline" id="chb" required />
-                                <label for="chb" className="form-check-label"> I Agree for the <a href="#">Terms And Conditions</a>.
+                                <label for="chb" className="form-check-label"> I Agree for the <a href="JavaScript:void(0)" onClick={togglePopup}>Terms And Conditions</a>
                                 </label>
+                                {isOpen && <Popup
+      content={<>
+    
+    <div id="termspage" class="termspage">
+      <div class="container">
+		  <div class="termspageblock col-lg-6">
+			   <div class="row content">
+					<div class="modalcontent">
+				
+						<div class="modalbody">
+							<h2>Terms And Conditions </h2>
+							<p>
+							Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the 
+							industry's standard dummy text ever since the 1500s,
+							</p>
+							<p>
+							Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the 
+							industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and 
+							scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap 
+							into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the 
+							release of Letraset sheets containing Lorem Ipsum passages Lorem Ipsum has been the industry's standard 
+							dummy text ever since the 1500s,
+							</p>
+							<p>
+							Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
+							standard dummy text ever since the 1500s,
+							</p>
+						</div>
+						<div class="modalfooter ">
+							<a class="cta-btns" href="#">I AGREE</a>
+						</div>
+					</div>
+				</div>
+		  </div>
+	   </div>
+    </div>
+
+      </>}
+      handleClose={togglePopup}
+    />}
                             </div>
                             <div className="col-lg-12 loginBtn">
                                 <button className="cta-btn">Submit</button>
