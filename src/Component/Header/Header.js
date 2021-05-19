@@ -68,46 +68,48 @@ const Submenu = () => {
 
           <h1 className="logo mr-auto"><img src={LogoImg} ></img></h1>
           <nav className="nav-menu d-none d-lg-block nav">
-          {!localStorage.getItem("islogedIn") ?
-            <ul>
-                <li className={location.pathname ==="/"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/')} >Home</a></li>
-                <li className={location.pathname ==="/about"? "active" : ""} ><a href="JavaScript:void(0)"  onClick={()=>history.push('/about')} >About</a></li>
-                <li className={location.pathname ==="/fees"? "active" : ""}  ><a href="JavaScript:void(0)" onClick={()=>history.push('/fees')} >Fees</a></li>
-                <li className={location.pathname ==="/contactus"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/contactus')}>Contactus</a></li>
-                <li className={location.pathname ==="/transport"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/transport')} >Transport</a></li>
+          {localStorage.getItem("islogedIn") === "true" ?
+
+              <ul className="nav__menu">
+              <li className={location.pathname ==="/carList"? "active" : ""} ><a href="/carList" onClick={()=>history.push('/')} >Home</a></li>
+              <li className={location.pathname ==="/search"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/search')} >Search</a></li>
+              <li className={location.pathname ==="/mybids"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/mybids')} >My Bids</a></li>
+              <li className={location.pathname ==="/fees"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/fees')} >Fees</a></li>
+              <li className={location.pathname ==="/floor"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/floor')} >Floor</a></li>
+              <li className={location.pathname ==="/transport"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/transport')} >Transport</a></li>
+              <li className={location.pathname ==="/chat"? "active nav__menu-item" : "nav__menu-item"} >
+                <img alt="Menu" src={process.env.PUBLIC_URL +"/images/chat.svg"} onClick={()=>history.push('/chat')}/>
+              </li>
+              <li className={location.pathname ==="/cart"? "active nav__menu-item" : "nav__menu-item"} >
+                <img alt="Menu" src={process.env.PUBLIC_URL +"/images/cart.svg"} onClick={()=>history.push('/cart')}/>
+              </li>
+              <li>
+                <b className="user_name">Welcome {JSON.parse(localStorage.getItem("userDetails")).first_name}</b>
+                
+                <img alt="Menu" src={process.env.PUBLIC_URL +"/images/user.svg"} /> 
+              </li>
+              <li className="nav__menu-item" >
+                <img alt="Menu" src={process.env.PUBLIC_URL +"/images/hamburger-menu.svg"} />
+                <Submenu />
+              </li>
+
 
             </ul>
+             
             :
-            <ul className="nav__menu">
-                <li className={location.pathname ==="/carList"? "active" : ""} ><a href="/carList" onClick={()=>history.push('/')} >Home</a></li>
-                <li className={location.pathname ==="/search"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/search')} >Search</a></li>
-                <li className={location.pathname ==="/mybids"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/mybids')} >My Bids</a></li>
-                <li className={location.pathname ==="/fees"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/fees')} >Fees</a></li>
-                <li className={location.pathname ==="/floor"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/floor')} >Floor</a></li>
-                <li className={location.pathname ==="/transport"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/transport')} >Transport</a></li>
-                <li className={location.pathname ==="/"? "active nav__menu-item" : "nav__menu-item"} >
-                  <img alt="Menu" src={process.env.PUBLIC_URL +"/images/chat.svg"} onClick={()=>history.push('/cart')}/>
-                </li>
-                <li className={location.pathname ==="/"? "active nav__menu-item" : "nav__menu-item"} >
-                  <img alt="Menu" src={process.env.PUBLIC_URL +"/images/cart.svg"} onClick={()=>history.push('/cart')}/>
-                </li>
-                <li className={location.pathname ==="/"? "active nav__menu-item" : "nav__menu-item"} >
-                  <b className="user_name">Welcome {JSON.parse(localStorage.getItem("userDetails")).first_name}</b>
-                  
-                  <img alt="Menu" src={process.env.PUBLIC_URL +"/images/user.svg"} /> 
-                </li>
-                <li className={location.pathname ==="/"? "active nav__menu-item" : "nav__menu-item"} >
-                  <img alt="Menu" src={process.env.PUBLIC_URL +"/images/hamburger-menu.svg"} />
-                  <Submenu />
-                </li>
-               
-                
-             </ul>
+            <ul>
+              <li className={location.pathname ==="/"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/')} >Home</a></li>
+              <li className={location.pathname ==="/about"? "active" : ""} ><a href="JavaScript:void(0)"  onClick={()=>history.push('/about')} >About</a></li>
+              <li className={location.pathname ==="/fees"? "active" : ""}  ><a href="JavaScript:void(0)" onClick={()=>history.push('/fees')} >Fees</a></li>
+              <li className={location.pathname ==="/contactus"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/contactus')}>Contactus</a></li>
+              <li className={location.pathname ==="/transport"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/transport')} >Transport</a></li>
+
+            </ul>
              }
          
           </nav>
 
-          {!localStorage.getItem("islogedIn") && <a href="login" className="get-started-btn dealerLogin">Dealer Login</a> }
+          {(localStorage.getItem("islogedIn") ==="false" || localStorage.getItem("islogedIn") ===null) && <a href="login" className="get-started-btn dealerLogin">Dealer Login</a> }
 
         </div>
       </header>

@@ -21,9 +21,10 @@ const Login = () => {
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
 
-  // useEffect(()=>{
-  //   localStorage.clear()
-  // })
+  useEffect(()=>{
+    // localStorage.clear()
+    localStorage.setItem("islogedIn", false)
+  })
 
   const loginhandleSubmit = (event) => {
     // setOpenLoader(true);
