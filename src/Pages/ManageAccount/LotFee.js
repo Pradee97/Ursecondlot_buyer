@@ -58,6 +58,7 @@ const LotFee = () => {
                .then((response) => {
                  console.log("res", response.data.success)
                 if (response.data.success ) {
+                    alert("Lot Fee Succesfully Created");
                     history.push("/lotfee");
                    //history.push("/login");
                  } else {
