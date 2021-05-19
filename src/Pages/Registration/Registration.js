@@ -6,7 +6,6 @@ import Datetime from 'react-datetime';
 import moment from 'moment';
 import 'react-datetime/css/react-datetime.css';
 import Popup from '../../Component/Popup/Popup';
-
 import '../../Component/Popup/popup.css';
 
 // import '../../assets/css/styles.css';
