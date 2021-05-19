@@ -86,17 +86,21 @@ const Submenu = () => {
                 <li className={location.pathname ==="/floor"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/floor')} >Floor</a></li>
                 <li className={location.pathname ==="/transport"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/transport')} >Transport</a></li>
                 <li className={location.pathname ==="/"? "active nav__menu-item" : "nav__menu-item"} >
+                  <img alt="Menu" src={process.env.PUBLIC_URL +"/images/chat.svg"} onClick={()=>history.push('/cart')}/>
+                </li>
+                <li className={location.pathname ==="/"? "active nav__menu-item" : "nav__menu-item"} >
                   <img alt="Menu" src={process.env.PUBLIC_URL +"/images/cart.svg"} onClick={()=>history.push('/cart')}/>
+                </li>
+                <li className={location.pathname ==="/"? "active nav__menu-item" : "nav__menu-item"} >
+                  <b className="user_name">Welcome {JSON.parse(localStorage.getItem("userDetails")).first_name}</b>
+                  
+                  <img alt="Menu" src={process.env.PUBLIC_URL +"/images/user.svg"} /> 
                 </li>
                 <li className={location.pathname ==="/"? "active nav__menu-item" : "nav__menu-item"} >
                   <img alt="Menu" src={process.env.PUBLIC_URL +"/images/hamburger-menu.svg"} />
                   <Submenu />
                 </li>
-                <li className={location.pathname ==="/"? "active nav__menu-item" : "nav__menu-item"} >
-                  <b className="user_name">Welcome {JSON.parse(localStorage.getItem("userDetails")).first_name}</b>
-                  {/* annamalai plz add avatar image below */}
-                  {/* <img alt="Menu" src={process.env.PUBLIC_URL +"/images/hamburger-menu.svg"} />  */}
-                </li>
+               
                 
              </ul>
              }
