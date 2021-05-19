@@ -20,7 +20,7 @@ const ManageAccount = () => {
     const [accountDetails, setaccountDetails] = useState("");
     async function fetchAccountDetails() {
       let request = {
-          buyer_id: 1,
+          buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
       };
       const state = API.post('http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/user_profile/condition', request);
       state.then(res => {
@@ -63,7 +63,7 @@ const ManageAccount = () => {
                                  <ul>
                                    <li><img src={process.env.PUBLIC_URL +"/images/Icon awesome-user.svg"} className="img-fluid" alt=""/><a href="/manageaccount">Account</a></li>
                                    <li><img src={process.env.PUBLIC_URL +"/images/Icon awesome-bell.svg"} className="img-fluid" alt=""/><a href="/notification">Notification</a></li>
-                                   <li><img src={process.env.PUBLIC_URL +"/images/dollar-symbol.svg"} className="img-fluid" alt=""/><a href="/payment">Payment</a></li>
+                                   <li><img src={process.env.PUBLIC_URL +"/images/dollar-symbol.svg"} className="img-fluid" alt=""/><a href="/paymentinfo">Payment</a></li>
                                    <li><img src={process.env.PUBLIC_URL +"/images/fees.svg"} className="img-fluid" alt=""/><a href="/lotfee">Lot Fee</a></li>
                                    <li><img src={process.env.PUBLIC_URL +"/images/google-docs.svg"} className="img-fluid" alt=""/><a href="#">Document</a></li>
                                    <li><img src={process.env.PUBLIC_URL +"/images/profile.svg"} className="img-fluid" alt=""/><a href="#">Add User</a></li>
@@ -143,7 +143,7 @@ const ManageAccount = () => {
                        </div>
                        
                        <div className="mgaccountrighttableblock mt-3 pt-4"> 
-                           <h3>Legal manage account<span><a href="/legalmanageaccountedit">Edit</a></span></h3>	
+                           <h3>Legal manage account<span><a href="/legalaccountedit">Edit</a></span></h3>	
                            <p>Legal document sent to your address</p>	
 
                {accountDetails.length>0?accountDetails.map((item,index) =>
@@ -178,7 +178,7 @@ const ManageAccount = () => {
                        </div>
                        
                        <div className="mgaccountrighttableblock mt-3 pt-4"> 
-                           <h3>Manage Account Password<span><a href="#">Edit</a></span></h3>
+                           <h3>Manage Account Password<span><a href="/changepassword">Edit</a></span></h3>
                        </div>
                        
                                   

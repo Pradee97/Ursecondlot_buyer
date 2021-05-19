@@ -1,7 +1,7 @@
 import React from 'react';
 import API from "../../Services/BaseService";
 import { useHistory,useParams } from "react-router-dom";
-// import '../../assets/css/styles.css';
+import './floorplans.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import {
@@ -23,9 +23,10 @@ import { Modal, Button } from 'antd';
 const FloorPlans = () => {
     const history = useHistory();
     const [floorDetails, setFloorDetails] = useState("");
+    console.log(JSON.parse(localStorage.getItem("userDetails")).user_id)
     async function fetchBuyerFloorPlans() {
         let request = {
-            buyer_id: 1,
+            buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
         };
         const state = API.post('http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/floor_plan/condition', request);
         state.then(res => {

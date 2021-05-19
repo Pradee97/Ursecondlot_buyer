@@ -11,10 +11,16 @@ import {
 const Notification = () => {
     const history = useHistory();
     const [notification, setNotification] = useState("");
+    const [email, setEmail] = useState("");
+    const [sms, setSms] = useState("");
+    const [push_notification, setPush_notification] = useState("");
+	const [femail, setFavEmail] = useState("");
+    const [fsms, setFavSms] = useState("");
+
    
     async function getNotification() {
         let request = {
-            buyer_id: 1
+            buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
         };
         const state = API.post('http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/notification/condition', request);
         state.then(res => {
@@ -32,15 +38,22 @@ const Notification = () => {
             
 		// console.log("check",buyer_id)
 		let request = {
-			buyer_id:1
+			buyer_id:JSON.parse(localStorage.getItem("userDetails"))===""?"":JSON.parse(localStorage.getItem("userDetails")).user_id,
+			email:email,
+			sms:sms,
+			push_notification:push_notification,
+			favorite_email:femail,
+			favorite_sms:fsms,
+			active:1
+
 			
 		  };
 
-	API.post("http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/user_active/update",request)
+	API.post("http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/notification/add",request)
 	   .then((response) => {
 		 console.log("res", response.data.success)
 		if (response.data.success ) {
-			history.push("#");
+			history.push("/notification");
 		   //history.push("/login");
 		 } else {
 		   history.push("/error");
@@ -83,7 +96,7 @@ const Notification = () => {
 							<div className="userlinks">
 								<li><img src={process.env.PUBLIC_URL +"/images/Icon awesome-user.svg"} className="img-fluid" alt=""/><a href="/manageaccount">Account</a></li>
 								<li className="active"><img src={process.env.PUBLIC_URL +"/images/Icon awesome-bell.svg"} className="img-fluid" alt=""/><a href="/notification">Notification</a></li>
-								<li><img src={process.env.PUBLIC_URL +"/images/dollar-symbol.svg"} className="img-fluid" alt=""/><a href="/payment">Payment</a></li>
+								<li><img src={process.env.PUBLIC_URL +"/images/dollar-symbol.svg"} className="img-fluid" alt=""/><a href="/paymentinfo">Payment</a></li>
 								<li><img src={process.env.PUBLIC_URL +"/images/fees.svg"} className="img-fluid" alt=""/><a href="/lotfee">Lot Fee</a></li>
 								<li><img src={process.env.PUBLIC_URL +"/images/google-docs.svg"} className="img-fluid" alt=""/><a href="documents.html">Document</a></li>
 								<li><img src={process.env.PUBLIC_URL +"/images/profile.svg"} className="img-fluid" alt=""/><a href="adduser.html">Add User</a></li>
@@ -99,7 +112,7 @@ const Notification = () => {
 								<form className="bidsemailblock">
 									<div className="col-lg-4 col-md-4">
 										<div className="radio input-group">
-											<input id="radio-dailyupdate" checked = {notification.email == "daily" ?  true: false} name="radio" type="radio" />
+											<input id="radio-dailyupdate" checked = {notification.email == "daily" ?  true: false} value="daily" name="radio" type="radio" onChange={(e) => setEmail(e.target.value)} />
 											<label  for="radio-dailyupdate" className="radio-label">Daily Update</label>
 											<p>You will receive an email daily of new bid activity</p>
 										</div>
@@ -107,7 +120,7 @@ const Notification = () => {
 									
 									<div className="col-lg-4 col-md-4">
 										<div className="radio input-group">
-											<input id="radio-instanceemnail" checked = {notification.email == "instant" ?  true: false} name="radio" type="radio"/>
+											<input id="radio-instanceemnail" checked = {notification.email == "instant" ?  true: false} value="instant" name="radio" type="radio" onChange={(e) => setEmail(e.target.value)}/>
 											<label  for="radio-instanceemnail" className="radio-label">Instant Email</label>
 											<p>Don't miss any deal! we will send you emails immediately with any new bid activity</p>
 										</div>
@@ -115,7 +128,7 @@ const Notification = () => {
 									
 									<div className="col-lg-4 col-md-4">
 										<div className="radio input-group">
-											<input id="radio-instemnail" checked = {notification.email == "no" ?  true: false} name="radio" type="radio"/>
+											<input id="radio-instemnail" checked = {notification.email == "no" ?  true: false} value="no" name="radio" type="radio" onChange={(e) => setEmail(e.target.value)}/>
 											<label  for="radio-instemnail" className="radio-label">Never</label>
 											<p>you wont receive any emails for bid activity.</p>
 										</div>

@@ -26,7 +26,7 @@ const LotFee = () => {
 
     async function getLotfee() {
         let request = {
-            buyer_id: 1
+            buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
         };
         console.log("=======>",)
         const state = API.post('http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/lot_fee/condition', request);
@@ -47,7 +47,7 @@ const LotFee = () => {
             
                 //console.log("check",buyer_id)
                 let request = {
-                    buyer_id: 1,
+                    buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
                     lot_fee:lotfee,
                     active:1
 
@@ -58,7 +58,7 @@ const LotFee = () => {
                .then((response) => {
                  console.log("res", response.data.success)
                 if (response.data.success ) {
-                    history.push("#");
+                    history.push("/lotfee");
                    //history.push("/login");
                  } else {
                    history.push("/error");
@@ -101,7 +101,7 @@ const LotFee = () => {
                            <div className="userlinks">
                                <li><img src={process.env.PUBLIC_URL +"/images/Icon awesome-user.svg"} className="img-fluid" alt=""/><a href="/manageaccount">Account</a></li>
                                <li><img src={process.env.PUBLIC_URL +"/images/Icon awesome-bell.svg"} className="img-fluid" alt=""/><a href="/notification">Notification</a></li>
-                               <li><img src={process.env.PUBLIC_URL +"/images/dollar-symbol.svg"} className="img-fluid" alt=""/><a href="/payment">Payment</a></li>
+                               <li><img src={process.env.PUBLIC_URL +"/images/dollar-symbol.svg"} className="img-fluid" alt=""/><a href="/paymentinfo">Payment</a></li>
                                <li className="active"><img src={process.env.PUBLIC_URL +"/images/fees.svg"} className="img-fluid" alt=""/><a href="/lotfee">Lot Fee</a></li>
                                <li><img src={process.env.PUBLIC_URL +"/images/google-docs.svg"} className="img-fluid" alt=""/><a href="documents.html">Document</a></li>
                                <li><img src={process.env.PUBLIC_URL +"/images/profile.svg"} className="img-fluid" alt=""/><a href="adduser.html">Add User</a></li>
