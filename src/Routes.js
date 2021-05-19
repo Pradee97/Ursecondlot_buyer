@@ -2,7 +2,6 @@ import React, {lazy, Suspense} from 'react';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import './App.css';
 
-
 const Home = lazy(() => import('./Pages/Home/Home'));
 const Login = lazy(() => import('./Pages/Login/Login'));
 const Registration = lazy(() => import('./Pages/Registration/Registration'));
@@ -44,7 +43,7 @@ function AppRouter() {
             <Route  path="/email" component={Email}/>
             <Route  path="/fees" component={Fees}/>
             <Route  path="/emailsuccess" component={Emailsuccess}/>
-            <Route  path="/floorplans" component={FloorPlans}/>
+            <Route  path="/floor" component={FloorPlans}/>
             <Route  path="/flooradd" component={FloorAdd}/>
             <Route  path="/flooredit/:id" component={FloorEdit}/>
             <Route  path="/contactus" component={Contactus}/>

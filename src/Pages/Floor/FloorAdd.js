@@ -123,8 +123,8 @@ const FloorAdd = () => {
                     <div className="container">
                         <div className="row content">
                             <div className="col-lg-12">
-                                <img src="appstore.png" />
-                                <img src="googleplay.png" />
+                            <img src={process.env.PUBLIC_URL +"/images/appstore.png" }/>
+                                <img src={process.env.PUBLIC_URL +"/images/googleplay.png"} />
                             </div>
                         </div>
                     </div>

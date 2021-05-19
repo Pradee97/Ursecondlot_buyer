@@ -295,7 +295,7 @@ const Registration = () => {
                             </div>
                             <div className="col-sm-12 form-group agreetab">
                                 <input type="checkbox" className="form-check d-inline" id="chb" required />
-                                <label for="chb" className="form-check-label"> I Agree for the <a href="#">Terms And Conditions</a>.
+                                <label for="chb" className="form-check-label"> I Agree for the <a href="">Terms And Conditions</a>.
                                 </label>
                             </div>
                             <div className="col-lg-12 loginBtn">
