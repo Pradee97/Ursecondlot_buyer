@@ -177,3 +177,36 @@ label.input-has-value {
   font-weight: 600;
   
   }
+
+
+  /*----------------------------------------------------
+Terms And Conditions
+------------------------------------------------------*/
+.termspage {
+  padding-bottom: 50px;
+}
+.termspageblock {
+  margin: 0 auto;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: .25rem;
+  padding: 30px 40px;
+  text-align:center;
+}
+.termspageblock .modalbody h2 {
+  color: #000000;
+  font-size: 20px;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-align:center;
+  margin-bottom:20px;
+}
+.termspageblock .modalbody p {
+  color: #8F8F8F;
+  font-size: 16px;
+  margin-bottom: 20px;
+  font-weight:normal;
+  text-align:left;
+}
