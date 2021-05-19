@@ -5,6 +5,7 @@
 body {
   font-family: 'Poppins', sans-serif;
   color: #444444;
+  font-size: 14px;
 }
 
 a {
@@ -15,6 +16,11 @@ a:hover {
   color: #002768;
   text-decoration: none;
   text-decoration:underline;
+}
+
+a:focus {
+  border: none;
+  outline: none;
 }
 
 
@@ -209,7 +215,7 @@ h1, h2, h3, h4, h5, h6 {
 .nav-menu > ul > li {
   position: relative;
   white-space: nowrap;
-  padding: 10px 0 10px 50px;
+  padding: 10px 0 10px 30px;
 }
 
 .nav-menu .hamburgermenu{    
@@ -502,7 +508,20 @@ h1, h2, h3, h4, h5, h6 {
   margin: 10px 0 0 0;
   color: #fff;
   background: #bd062c;
+  border:none;
 }
+
+#hero .btn-get-started:hover{
+  background: #ea0535;
+ }
+
+#hero .btn-get-started:focus{
+  border: none;
+  outline: none;
+}
+
+
+
 
 .bannertext-bg{
 	background: rgba(0, 0, 0, 0.5);
@@ -513,7 +532,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #hero .btn-get-started:hover {
-  background: #bd062c;
+  background: #002768;
 }
 
 #hero .btn-watch-video {
@@ -2458,9 +2477,15 @@ input[type="password"] {
   display: block;
 }
 
+.forget-username{
+  text-align: left;
+}
+
 .loginBlock{
 	margin:auto;
 	padding:0;
+  width: 100%;
+  max-width: 640px;
 }
 
 .inner-page .title{
@@ -2481,7 +2506,7 @@ input[type="text"], input[type="password"]{
 .forget{
 	text-align:right;
 	color: #BD062C;
-	font-size:16px;
+	font-size:14px;
 }
 .forget a{
 	padding-bottom:10px;
@@ -2530,7 +2555,7 @@ input[type="text"], input[type="password"]{
 	color: #4E4E4E;
 }
 .scheduleMeeting p{
-	font-size:10px;
+	font-size:14px;
 	color: #9F9F9F;
 }
 
@@ -2667,6 +2692,7 @@ cursor: pointer;
 margin-right: 5px;
 background: #fff;
 border: 1px solid #707070;
+margin-top: -3px;
 }
 .registrationform .form-group.agreetab input:checked + label::after {
   content: '';
@@ -2751,6 +2777,12 @@ popup Dialogbox
     border-radius: 3px;
     border: none;
 }
+
+.cta-btns:hover{
+  color: white;
+}
+
+
 .cta-btns-primary{
 	background-color: #002768;
     color: white;
@@ -2760,6 +2792,11 @@ popup Dialogbox
     border-radius: 3px;
     border: none;
 }
+
+.cta-btns-primary:hover{
+	text-decoration: underline;
+}
+
 
 .modal-footer a:hover {
     color: #fff;
@@ -5589,5 +5626,37 @@ label.input-has-value {
   text-align: center;
   background: rgba(0, 0, 0, 0.05);
   border-radius: 4px;
+}
+
+.dropdown-menu.show{
+  left: inherit;
+  right: 0;
+}
+.contactblock  .form-group label{
+  text-align: left;
+  float: left;
+}
+
+button{
+  border: none;
+  background: #bd062c;
+  color: #fff;
+}
+
+button:hover{
+  background: #002768;
+}
+
+button:focus{
+  border: none;
+  outline: none;
+}
+
+.datePickerBlock .bx-calendar{
+  position: absolute;
+  z-index: 9;
+  right: 25px;
+  font-size: 25px;
+  top: 12px;
 }
 

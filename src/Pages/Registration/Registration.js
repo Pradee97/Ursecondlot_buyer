@@ -285,8 +285,8 @@ const Registration = () => {
                             </div>
 
 
-                            <div className="col-sm-6 form-group">
-                               
+                            <div className="col-sm-6 form-group datePickerBlock">
+                            <i class='bx bx-calendar'></i>
                                 <Datetime inputProps={ inputProps } timeFormat={false} dateFormat="DD/MM/YYYY"
         isValidDate={disablePastDt}/>
                             </div>
