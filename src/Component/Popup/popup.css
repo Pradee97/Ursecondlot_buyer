@@ -11,7 +11,6 @@ Popup Modal
 	overflow-y: auto;
 }
 .modals-dialog{
-  max-width: 500px;
   margin: 1.75rem auto;
 }
 .modals-dialog-centered{
@@ -138,15 +137,16 @@ Popup Modal
 
 .models-box {
   position: relative;
-  width: 70%;
+  width: 100%;
   margin: 0 auto;
   height: auto;
   max-height: 70vh;
-  margin-top: calc(100vh - 85vh - 20px);
-  background: transparent;
+  margin-top: 0;
+  background: #fff;
   border-radius: 4px;
   overflow: auto;
-  top: 150px;
+  top: 100px;
+  max-width: 500px;
 }
 .userlinks{
 	text-align:left;
@@ -162,18 +162,49 @@ label.input-has-value {
 .close-icon {
   content: '';
   cursor: pointer;
-  position: fixed;
-  right: calc(40% - 30px);
-  top: calc(112vh - 85vh - 33px);
+  position: absolute;
+  right:10px;
+  top:10px;
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  line-height: 32px;
-  background-color: white;
+  line-height: 38px;
   text-align: center;
   font-size: 25px;
   z-index: 999;
-  color: #000;
-  font-weight: 600;
+  color: #002768;
+  font-weight: 400;
   
   }
+
+
+  /*----------------------------------------------------
+Terms And Conditions
+------------------------------------------------------*/
+.termspage {
+  padding-bottom: 20px;
+}
+.termspageblock {
+  margin: 0 auto;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border-radius: .25rem;
+  padding: 30px 40px;
+  text-align:center;
+}
+.termspageblock .modalbody h2 {
+  color: #002768;
+  font-size: 20px;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-align:center;
+  margin-bottom:20px;
+}
+.termspageblock .modalbody p {
+  color: #444;
+  font-size: 14px;
+  margin-bottom: 20px;
+  font-weight:normal;
+  text-align:justify;
+}
