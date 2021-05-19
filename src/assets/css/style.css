@@ -789,7 +789,6 @@ section {
 }
 
 .fees .content ul li {
-  padding-left: 28px;
   position: relative;
 }
 
@@ -4857,6 +4856,7 @@ Form text overlop
     display: inline-block;
     height: 22px;
     margin: 0;
+    font-size: 16px;
 
 }
 .tbox input.textbox:focus + label {
@@ -5653,3 +5653,19 @@ button:focus{
   top: 12px;
 }
 
+ul.ant-pagination{
+  margin-top: 20px;
+}
+
+ul.ant-pagination li{
+  display: inline;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.ant-pagination-item-link{
+  width: 25px;
+  height: 25px;
+  line-height: 12px;
+  cursor: pointer;
+}

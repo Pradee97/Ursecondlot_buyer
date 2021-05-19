@@ -310,8 +310,8 @@ const Registration = () => {
       content={<>
     
     <div id="termspage" class="termspage">
-      <div class="container">
-		  <div class="termspageblock col-lg-6">
+      
+		  <div class="termspageblock">
 			   <div class="row content">
 					<div class="modalcontent">
 				
@@ -340,7 +340,7 @@ const Registration = () => {
 					</div>
 				</div>
 		  </div>
-	   </div>
+	  
     </div>
 
       </>}
