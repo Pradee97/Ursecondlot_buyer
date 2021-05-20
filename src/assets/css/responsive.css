@@ -1,7 +1,15 @@
 @media (max-width: 1700px) {
 	
-	
-	
+	.cars-prices .cta-btns {
+        margin-right: 2px;
+    }
+    .cars-content {
+        padding: 5px;
+    }
+    .suggested-cars , .inventory-cars, .recently-cars , .favorite-cars {
+       margin: 0 2%;
+        padding:0;
+    }
 	
 	
 	
@@ -25,13 +33,16 @@
 	height: 495px;
 }
 	
-	
+
 	
 }
 
 @media (max-width: 1500px) {
 	
-	
+	.container {
+        max-width: 94%;
+        margin: 0 2%;
+    }
 	
 	
 	
@@ -41,6 +52,10 @@
 
 #hero {
     height: 485px;
+}
+.suggested-cars .col-md-3, .inventory-cars .col-md-3, .recently-cars .col-md-3, .favorite-cars .col-md-3 {
+    flex: 25% 1;
+    max-width: 25%;
 }
 	
 	
@@ -142,7 +157,10 @@
 .contact .info .contacttag {   
     font-size: 14px;   
 }
-	
+.suggested-cars .col-md-3, .inventory-cars .col-md-3, .recently-cars .col-md-3, .favorite-cars .col-md-3 {
+    flex: 33.33% 1;
+    max-width: 33.33%;
+}
 	
 	
 }
@@ -183,6 +201,10 @@
     flex: 0 0 50%;
     max-width: 70%;
 }
+.suggested-cars .col-md-3, .inventory-cars .col-md-3, .recently-cars .col-md-3, .favorite-cars .col-md-3 {
+    flex: 50% 1;
+    max-width: 50%;
+}
 	
 	
 	
@@ -207,7 +229,10 @@
 
 @media (max-width: 575px) {
 	
-	
+	.suggested-cars .col-md-3, .inventory-cars .col-md-3, .recently-cars .col-md-3, .favorite-cars .col-md-3 {
+        flex: 100% 1;
+        max-width: 100%;
+    }
 	
 	
 	
