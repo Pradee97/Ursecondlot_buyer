@@ -15,10 +15,19 @@ import {
     notification,
     Spin,
 } from 'antd';
+import Popup from '../../Component/Popup/Popup';
+
+import '../../Component/Popup/popup.css';
 
 
 const FloorAdd = () => {
-    const history = useHistory();    
+    const history = useHistory();   
+    const [isOpen, setIsOpen] = useState(false);
+ 
+    const togglePopup = () => {
+      setIsOpen(!isOpen);
+    }
+    const [popupcontent,setPopupcontent] = useState ("");
     const userDetails=ls.get('userDetails');
     const [contactName, setContactName] = useState("");
     const [companyName, setCompanyName] = useState("");
@@ -58,10 +67,11 @@ const FloorAdd = () => {
             .then((response) => {
                 if (response.data.success) {
                     const { data } = response;
-                    console.log("response", response)
-                    history.push("/success");
+                    togglePopup()
+			        setPopupcontent ("Floor Successfully Created")
                 } else {
-                    history.push("emailerror");
+                    togglePopup()
+			        setPopupcontent ("Floor is not Created, Please try Again")
                 }
             }, (error) => {
                 // setOpenLoader(false);
@@ -129,6 +139,43 @@ const FloorAdd = () => {
                         </div>
                     </div>
                 </section>
+                {isOpen && <Popup
+      content={<>
+    
+    <div>
+            <main id="main" class="inner-page">
+                <div id="Successfullform" class="Successfullform">
+                    <div class="container">
+                        <div class="Successfullformblock col-lg-12">
+                            <div class="row content">
+                                <div class="modalcontent">
+                                    <div class="Successfull-icon">
+                                        {/* <img alt="" src={checkImg} /> */}
+                                    </div>
+                                    <div class="modalbody">
+	 									<h2>{popupcontent}</h2>
+                                        
+                                    </div>
+                                   
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+
+
+
+        </div>
+
+
+      </>}
+      handleClose={togglePopup}
+    />}
             </main>
         </div>
 
