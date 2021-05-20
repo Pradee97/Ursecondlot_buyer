@@ -5486,6 +5486,23 @@ paymentform
     display: inline-block;
 }
 
+.editpaymentform .tbox label{
+  position: relative;
+    top: 12px;
+    left: 10px;
+    bottom: 0;    
+    padding: 0 5px;
+    background: #fff;
+    color: #9F9F9F;    
+    display: inline-block;
+    height: 22px;
+    margin: 0;
+    font-size: 16px;
+    float: left;
+}
+.editpaymentform .tbox {
+  margin-bottom: 5px;
+}
 /*----------------------------------------------
 
 ------------------------------------------------*/
