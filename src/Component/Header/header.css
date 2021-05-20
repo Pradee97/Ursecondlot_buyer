@@ -1,0 +1,68 @@
+.user_name{
+    color: #BD062C;
+    font-weight: 400;
+    text-transform: capitalize;
+    margin-right: 10px;
+}
+
+
+/* This is the extracted copied part responsible for showing & hiding the submenu. */
+.nav__submenu {
+    display: none;
+}
+.nav__menu-item:hover .nav__submenu {
+    display: block;
+}
+
+.menu-container {
+    text-align: center;
+}
+nav ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.nav__menu {
+    line-height: 45px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.nav__menu-item {
+    display: inline-block;
+    position: relative;
+}
+
+.nav__menu-item:hover .nav__submenu {
+    display: block;
+}
+.nav__submenu {
+    font-weight: 300;
+    text-transform: none;
+    display: none;
+    position: absolute;
+    width: 200px;
+    background-color: #fff;
+    z-index: 1 !important;
+    right: 0;
+}
+.nav__submenu-item:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+ul.nav__submenu{
+    border: #ddd solid 1px;
+}
+
+
+ul.nav__submenu li.nav__submenu-item{
+    padding: 0;
+    padding-left: 20px;
+}
+
+ul.nav__submenu li.nav__submenu-item a{
+    text-transform: none;
+    font-weight: 400;
+    font-size: 14px;
+}
