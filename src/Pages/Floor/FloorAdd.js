@@ -86,7 +86,7 @@ const FloorAdd = () => {
             <main id="main" className="inner-page">
                 <div className="col-lg-4 card loginBlock flooraddform">
                     <form className="registrationform" onSubmit={registrationhandleSubmit} >
-                        <h2 className="title"> Floor Plan Add</h2>
+                        <h2 className="title">Add Floor Plan </h2>
                         <div className="row">
 
                             <div className="col-sm-12 form-group">
