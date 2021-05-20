@@ -58,8 +58,10 @@ const FloorAdd = () => {
             email_id: emailId,
             address: address,
             phone_no: phoneNumber,
-            date_opened: dateOpened,
+            opened_date: dateOpened,
             account_opened: accountOpened,
+            buyer_id:userDetails.user_id,
+            active:1
             
         }];
         API
@@ -99,7 +101,15 @@ const FloorAdd = () => {
                             </div>
 
                             <div className="col-sm-12 form-group">
-                                <input type="number" className="form-control" placeholder="Account Number" required onChange={(e) => setAccountNumber(e.target.value)} />
+                            <select className="form-control">
+                            <option disabled>Currency</option>
+                            <option value="$">$</option>
+                            </select>
+                                {/* <input type="text" className="form-control" placeholder="Currency" required /> */}
+                            </div>
+
+                            <div className="col-sm-12 form-group">
+                                <input type="text" className="form-control" placeholder="Account Number" required onChange={(e) => setAccountNumber(e.target.value)} />
                             </div>
                             <div className="col-sm-12 form-group">
                                 <input type="number" className="form-control" placeholder="Credit Limit" required onChange={(e) => setCreditLimit(e.target.value)} />
@@ -118,7 +128,12 @@ const FloorAdd = () => {
                             </div>
                     
                             <div className="col-sm-12 form-group">
-                                <input type="text" className="form-control" placeholder="Account Opened" required onChange={(e) => setAccountOpened(e.target.value)} />
+                            <select className="form-control" required onChange={(e) => setAccountOpened(e.target.value)}>
+                            <option disabled>Account Opened</option>
+                            <option value="Yes">Yes</option>
+                            <option selected>No</option>
+                            </select>
+                                {/* <input type="text" className="form-control" placeholder="Account Opened" required onChange={(e) => setAccountOpened(e.target.value)} /> */}
                             </div>
                            
                     

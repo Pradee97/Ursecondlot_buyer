@@ -1,7 +1,7 @@
 import React from 'react';
 import API from "../../Services/BaseService";
 import { useHistory , useParams} from "react-router-dom";
-
+import ls from 'local-storage';
 // import '../../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -17,7 +17,7 @@ import {
 
 const EditPayment = () => {
     const history = useHistory();
-
+    const { id } = useParams();
     const { payment_info_id } = useParams();
     const [paymentObjc, setPaymentObj] = useState("");
     const [dealershipName, setDealershipName] = useState("");
@@ -34,13 +34,13 @@ const EditPayment = () => {
     // const [accountCityName, setAccountCityName] = useState("");
     // const [accountStateName, setAccountStateName] = useState("");
     // const [accountZipcodeId, setAccountZipcodeId] = useState("");
-    
+    let userDetails = ls.get('userDetails');
 
     async function fetchpaymentDetails() {
-        // let request = {
-        //     buyer_id: 1
-        // };
-        const state = API.get(`http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/payment_info/1`);
+         let request = {
+             payment_info_id:id
+         };
+        const state = API.post(`http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/payment/condition`,request);
         state.then(res => {
             console.log("res", res.data.data)
             setPaymentObj(res.data.data);
@@ -136,35 +136,56 @@ const EditPayment = () => {
                                     
 
                                         <div className="paymentform col-lg-12">
-                                            <form className="backaccountform" onSubmit={updatepaymentinfo} >
+                                            <form className="backaccountform editpaymentform" onSubmit={updatepaymentinfo} >
                                                 <h2 className="title"> Bank account information Edit</h2>
                                                 <div className="row">
 
                                                     <div className="col-sm-12 form-group">
-                                                    <input type="text"  defaultValue={paymentObjc.dealership_name} className="form-control" placeholder="Dealership name" required onChange={(e) => setDealershipName(e.target.value)} />
-                                                    </div>
+                                                        <div className="tbox">
+                                                        <label>Dealership name</label>
+                                                            <input type="text"  defaultValue={paymentObjc.dealership_name} className="form-control " placeholder="" required onChange={(e) => setDealershipName(e.target.value)} />
+                                                        </div>
+                                                     </div>
                                                     <div className="col-sm-12 form-group">
-                                                    <input type="text"  defaultValue={paymentObjc.acc_name} className="form-control" placeholder="Account holder name" required onChange={(e) => setAccountHolderName(e.target.value)} />
+                                                        <div className="tbox">
+                                                        <label>Account Holder Name</label>
+                                                    <input type="text"  defaultValue={paymentObjc.acc_name} className="form-control" placeholder="" required onChange={(e) => setAccountHolderName(e.target.value)} />
                                                     </div>
-
-                                                    <div className="col-sm-12 form-group">
-                                                    <input type="text"  defaultValue={paymentObjc.bank_name} className="form-control" placeholder="Bank name" required onChange={(e) => setBankName(e.target.value)} />
-                                                    </div>
-
-                                                    <div className="col-sm-12 form-group">
-                                                    <input type="text"  defaultValue={paymentObjc.acc_no} className="form-control" placeholder="Account number" required onChange={(e) => setAccountNumber(e.target.value)} />
                                                     </div>
 
                                                     <div className="col-sm-12 form-group">
-                                                    <input type="text"  defaultValue={paymentObjc.ach_no} className="form-control" placeholder="ACH number" required onChange={(e) => setACHNumber(e.target.value)} />
+                                                    <div className="tbox">
+                                                        <label>Bank name</label>
+                                                    <input type="text"  defaultValue={paymentObjc.bank_name} className="form-control" placeholder="" required onChange={(e) => setBankName(e.target.value)} />
+                                                    </div>
                                                     </div>
 
                                                     <div className="col-sm-12 form-group">
-                                                    <input type="text"  defaultValue={paymentObjc.routing_no} className="form-control" placeholder="Routing number" required onChange={(e) => setRoutingNumber(e.target.value)} />
+                                                    <div className="tbox">
+                                                        <label>Account number</label>
+                                                    <input type="text"  defaultValue={paymentObjc.acc_no} className="form-control" placeholder="" required onChange={(e) => setAccountNumber(e.target.value)} />
+                                                    </div>
                                                     </div>
 
                                                     <div className="col-sm-12 form-group">
-                                                    <input type="text"  defaultValue={paymentObjc.bank_address} className="form-control" placeholder="Bank address" required onChange={(e) => setBankAddress(e.target.value)} />
+                                                    <div className="tbox">
+                                                        <label>ACH number</label>
+                                                    <input type="text"  defaultValue={paymentObjc.ach_no} className="form-control" placeholder="" required onChange={(e) => setACHNumber(e.target.value)} />
+                                                    </div>
+                                                    </div>
+
+                                                    <div className="col-sm-12 form-group">
+                                                    <div className="tbox">
+                                                        <label>Routing Number</label>
+                                                    <input type="text"  defaultValue={paymentObjc.routing_no} className="form-control" placeholder="" required onChange={(e) => setRoutingNumber(e.target.value)} />
+                                                    </div>
+                                                    </div>
+
+                                                    <div className="col-sm-12 form-group">
+                                                    <div className="tbox">
+                                                        <label>Bank Address</label>
+                                                    <input type="text"  defaultValue={paymentObjc.bank_address} className="form-control" placeholder="" required onChange={(e) => setBankAddress(e.target.value)} />
+                                                    </div>
                                                     </div>
                                                     {/* <div className="col-sm-4 form-group">
                                                         <div className="tbox">
@@ -193,7 +214,10 @@ const EditPayment = () => {
                                                     </div> */}
 
                                                     <div className="col-sm-12 form-group">
-                                                    <input type="text"  defaultValue={paymentObjc.acc_address} className="form-control" placeholder="Account Holder Address" required onChange={(e) => setAccountHolderAddress(e.target.value)} />
+                                                    <div className="tbox">
+                                                        <label>Account Holder Address</label>
+                                                    <input type="text"  defaultValue={paymentObjc.acc_address} className="form-control" placeholder="" required onChange={(e) => setAccountHolderAddress(e.target.value)} />
+                                                    </div>
                                                     </div>
 
                                                     {/* <div className="col-sm-4 form-group">
@@ -229,10 +253,8 @@ const EditPayment = () => {
 
 
                                                     <div className="col-sm-6 form-group uploadbutton">
-                                                        <div className="tbox">
                                                             <input type="file" id="upload" hidden />
                                                             <label for="upload"><img src={process.env.PUBLIC_URL +"/images/upload.png"} />Upload Document</label>
-                                                        </div>
                                                     </div>
                                                     <div className="col-lg-12 loginBtn">
                                                         <button className="cta-btn">Update</button>
