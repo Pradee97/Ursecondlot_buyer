@@ -68,10 +68,10 @@ const LotFee = () => {
                  console.log("res", response.data.success)
                 if (response.data.success ) {
                     togglePopup()
-                    setPopupcontent ("Buyer Notification Successfully Created")
+                    setPopupcontent ("Lotfee Successfully Created")
                  } else {
                     togglePopup()
-                    setPopupcontent ("Buyer Notification is not Created, Please try Again")
+                    setPopupcontent ("Lotfee is not Created, Please try Again")
                  }
                },
                  (error) => {
