@@ -8,6 +8,7 @@ import LogoImg from '../../../src/assets/img/Logo_final.png';
 
 // import '../../assets/css/style.css';
 import './header.css';
+import { Alert } from 'antd';
 
 const Header = () => {
   const history = useHistory();
@@ -39,6 +40,16 @@ const Submenu = () => {
     )
   }
 
+  const logoNavigation = () => {
+    if (localStorage.getItem("islogedIn") ==="false" || localStorage.getItem("islogedIn") ===null) {
+      history.push("/")
+    }
+    else {
+      history.push("/carList")
+    }
+    
+  }
+
   return (
     <div>
       <div id="topbar" className="">
@@ -46,17 +57,17 @@ const Submenu = () => {
           <div className="row">
             <div className="col-lg-8 topLeft">
               <div className="socialIcons">
-                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                <a href="#" className="snapchat"><i className="bx bxl-snapchat"></i></a>
-                <a href="#" className="instagram"><i className="bx bxl-instagram"></i></a>
+                <a href="JavaScript:void(0)" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="JavaScript:void(0)" className="snapchat"><i className="bx bxl-snapchat"></i></a>
+                <a href="JavaScript:void(0)" className="instagram"><i className="bx bxl-instagram"></i></a>
               </div>
             </div>
 
             <div className="col-lg-4 topRight">
               <div className="rightMenu">
-                <a href="#"><i className="icofont-globe"></i> English <i className="icofont-thin-down"></i></a>
+                <a href="JavaScript:void(0)"><i className="icofont-globe"></i> English <i className="icofont-thin-down"></i></a>
                 <i className="bx bxl-envelope"></i> CALL US: 123 456 789
-			          <i className="bx bxl-phone"></i> <a href="#">GET FREE DEMO <i className="icofont-long-arrow-right"></i></a>
+			          <i className="bx bxl-phone"></i> <a href="JavaScript:void(0)">GET FREE DEMO <i className="icofont-long-arrow-right"></i></a>
               </div>
             </div>
           </div>
@@ -66,7 +77,7 @@ const Submenu = () => {
       <header id="header" className="">
         <div className="container-fluid d-flex align-items-center">
 
-          <h1 className="logo mr-auto"><img src={LogoImg} ></img></h1>
+          <h1 className="logo mr-auto" ><img src={LogoImg} onClick={logoNavigation}></img></h1>
           <nav className="nav-menu d-none d-lg-block nav">
           {localStorage.getItem("islogedIn") === "true" ?
 
