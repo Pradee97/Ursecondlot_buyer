@@ -59,8 +59,6 @@ const FloorAdd = () => {
             .post("http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/floor_plan/add", request)
             .then((response) => {
                 if (response.data.success) {
-                    const { data } = response;
-                    console.log("response", response)
                     history.push("/success");
                 } else {
                     history.push("emailerror");
@@ -76,7 +74,7 @@ const FloorAdd = () => {
             <main id="main" className="inner-page">
                 <div className="col-lg-4 card loginBlock">
                     <form className="registrationform" onSubmit={registrationhandleSubmit} >
-                        <h2 className="title"> Floor Plan Add</h2>
+                        <h2 className="title">Add Floor Plan </h2>
                         <div className="row">
 
                             <div className="col-sm-12 form-group">

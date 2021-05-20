@@ -37,6 +37,16 @@ const FloorEdit = () => {
         const state = API.get('http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/floor_plan/'+id);
         state.then(res => {
             console.log("res", res.data.data)
+            setContactName(res.data.data.contact_name);
+            setCompanyName(res.data.data.company_name);
+            setBranchName(res.data.data.branch_name);
+            setAccountNumber(res.data.data.account_no);
+            setCreditLimit(res.data.data.credit_limit);
+            setEmailId(res.data.data.email_id);
+            setAddress(res.data.data.address);
+            setPhoneNumber(res.data.data.phone_no);
+            setDateOpened(res.data.data.date_opened);
+            setAccountOpened(res.data.data.account_no);
             setFloorObj(res.data.data);
         })
             .catch(err => { console.log(err); });
@@ -116,7 +126,7 @@ const FloorEdit = () => {
                                 <input type="number" defaultValue={floorObjc.phone_no} className="form-control" placeholder="Phone Number" required onChange={(e) => setPhoneNumber(e.target.value)} />
                             </div>
                             <div className="col-sm-12 form-group">
-                                <input type="Date" value={floorObjc.date_opened} className="form-control" placeholder="Date Opened" required onChange={(e) => setDateOpened(e.target.value)} />
+                                <input type="Date" value={floorObjc.opened_date} className="form-control" placeholder="Date Opened" required onChange={(e) => setDateOpened(e.target.value)} />
                             </div>
                     
                             <div className="col-sm-12 form-group">
