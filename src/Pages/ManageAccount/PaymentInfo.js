@@ -5,6 +5,7 @@ import ls from 'local-storage';
 // import '../../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import '../../assets/css/responsive.css';
 import {
     Button
 } from 'antd';
@@ -72,7 +73,7 @@ const PaymentInfo = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 paymentrightblock">
+                                <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 paymentrightblock ">
                                     <div className="paymentdetailblock">
                                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</p>
                                         <div className="add-floors">
@@ -83,7 +84,7 @@ const PaymentInfo = () => {
                                             </div>
                                         </div>
                                         {paymentinfo.length>0?paymentinfo.map((item,index) =>
-                                        <div className="col-lg-12 col-md-12 col-sm-12 mt-2 pt-4 bankinfo ">
+                                        <div className="col-lg-12 col-md-12 col-sm-12 mt-2 pt-4 bankinfo paymentinfoblocks">
                                             <div className="bankinfos">
                                                 <h4>Bank Account Information</h4>
                                                 <div className="bankinfotable">
@@ -117,15 +118,12 @@ const PaymentInfo = () => {
 
                                                     <div className="releaseinfo">
                                                         <div className="row">
-                                                            <div className="col-sm-6 form-group">
+                                                            <div className="col-sm-12">
                                                                 <p>Signed bank Authorization letter for bank to release information. </p>
-                                                            </div>
-
-                                                            <div className="col-sm-6 form-group uploadbutton">
-                                                                <div className="tbox">
+                                                            <div className="uploadbutton">                                                              
                                                                     <input type="file" id="downupload" hidden />
                                                                     <label for="downupload"><img src={process.env.PUBLIC_URL +"/images/download.png"} />Document</label>
-                                                                </div>
+                                                            </div>
                                                             </div>
                                                         </div>
                                                     </div>

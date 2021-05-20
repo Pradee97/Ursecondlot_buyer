@@ -6,6 +6,7 @@ import ls from 'local-storage';
 // import '../../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import '../../assets/css/responsive.css';
 import {
     Table
 } from 'antd';
@@ -174,8 +175,8 @@ const CarList = () => {
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
                                             <div className="d-flex align-items-center mb-3">
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
                                             <div className="cars-prices">
@@ -197,9 +198,9 @@ const CarList = () => {
                                         <div className="cars-content">
                                             <h3><a href="#">Honda amaze (2014 model)</a></h3>
                                             <div className="d-flex align-items-center mb-3">
-                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
+                                        <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>31,1241 m</span></p>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                             </div>
 
                                             <div className="cars-prices">
@@ -281,9 +282,7 @@ const CarList = () => {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div className="row aos-init aos-animate mt-3 pt-4" data-aos="zoom-in" data-aos-delay="100">
+                       
 
                                 <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div className="car-item">
@@ -544,9 +543,7 @@ const CarList = () => {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div className="row aos-init aos-animate mt-3 pt-4" data-aos="zoom-in" data-aos-delay="100">
+                         
 
                                 <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div className="car-item">

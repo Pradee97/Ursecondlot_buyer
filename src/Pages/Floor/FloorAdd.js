@@ -84,7 +84,7 @@ const FloorAdd = () => {
     return (
         <div>
             <main id="main" className="inner-page">
-                <div className="col-lg-4 card loginBlock">
+                <div className="col-lg-4 card loginBlock flooraddform">
                     <form className="registrationform" onSubmit={registrationhandleSubmit} >
                         <h2 className="title"> Floor Plan Add</h2>
                         <div className="row">
@@ -101,18 +101,18 @@ const FloorAdd = () => {
                             </div>
 
                             <div className="col-sm-12 form-group">
+                                <input type="text" className="form-control" placeholder="Account Number" required onChange={(e) => setAccountNumber(e.target.value)} />
+                            </div>
+
+                            <div className="col-sm-3 form-group">
                             <select className="form-control">
                             <option disabled>Currency</option>
                             <option value="$">$</option>
                             </select>
                                 {/* <input type="text" className="form-control" placeholder="Currency" required /> */}
                             </div>
-
-                            <div className="col-sm-12 form-group">
-                                <input type="text" className="form-control" placeholder="Account Number" required onChange={(e) => setAccountNumber(e.target.value)} />
-                            </div>
-                            <div className="col-sm-12 form-group">
-                                <input type="number" className="form-control" placeholder="Credit Limit" required onChange={(e) => setCreditLimit(e.target.value)} />
+                            <div className="col-sm-9 form-group">
+                                <input type="text" className="form-control" placeholder="Credit Limit" required onChange={(e) => setCreditLimit(e.target.value)} />
                             </div>
                             <div className="col-sm-12 form-group">
                                 <input type="email" className="form-control" placeholder="Email Id" required onChange={(e) => setEmailId(e.target.value)} />
@@ -128,14 +128,17 @@ const FloorAdd = () => {
                             </div>
                     
                             <div className="col-sm-12 form-group">
-                            <select className="form-control" required onChange={(e) => setAccountOpened(e.target.value)}>
+                            <div className="tbox">
+                            <select className="form-control textbox" required onChange={(e) => setAccountOpened(e.target.value)}>
                             <option disabled>Account Opened</option>
                             <option value="Yes">Yes</option>
                             <option selected>No</option>
                             </select>
+
+                            <label  for="account_Opened" className={accountOpened!="" ? "input-has-value" : ""}>Account Opened</label>
                                 {/* <input type="text" className="form-control" placeholder="Account Opened" required onChange={(e) => setAccountOpened(e.target.value)} /> */}
                             </div>
-                           
+                            </div>
                     
                             <div className="col-lg-12 loginBtn">
                                 <button className="cta-btn">Submit</button>
