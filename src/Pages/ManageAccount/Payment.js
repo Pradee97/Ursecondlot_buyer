@@ -1,7 +1,7 @@
 import React from 'react';
 import API from "../../Services/BaseService";
 import { useHistory } from "react-router-dom";
-
+import ls from 'local-storage';
 // import '../../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -34,7 +34,7 @@ const Payment = () => {
     const [accountCityName, setAccountCityName] = useState("");
     const [accountStateName, setAccountStateName] = useState("");
     const [accountZipcodeId, setAccountZipcodeId] = useState("");
-    
+    let userDetails = ls.get('userDetails');
 
     const setZipcode = (data, con) => {
         console.log("con=>",con)
@@ -98,7 +98,7 @@ const Payment = () => {
         event.preventDefault();        
     
         let request = {
-            buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+            buyer_id: userDetails.user_id,
             dealership_name: dealershipName,
             acc_name: accountHolderName,      
             bank_name: bankName,
@@ -113,7 +113,7 @@ const Payment = () => {
             acc_state_id: accountStateName,
             acc_city_id: accountCityName,
             acc_zipcode: accountZipcodeId,
-                active:1
+            active:1
         }
         
         API

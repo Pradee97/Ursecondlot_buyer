@@ -13,10 +13,12 @@ import {
     notification,
     Spin,
 } from 'antd';
+import ls from 'local-storage';
 
 const FloorEdit = () => {
     const history = useHistory();
     const { id } = useParams();
+    const userDetails=ls.get('userDetails');
     const [floorObjc, setFloorObj] = useState("");
     const [contactName, setContactName] = useState("");
     const [companyName, setCompanyName] = useState("");
@@ -53,9 +55,10 @@ const FloorEdit = () => {
             email_id: emailId,
             address: address,
             phone_no: phoneNumber,
-            date_opened: dateOpened,
+            opened_date: dateOpened,
             account_opened: accountOpened,
-            active:1
+            active:1,
+            buyer_id: userDetails.user_id
            
         };
         API

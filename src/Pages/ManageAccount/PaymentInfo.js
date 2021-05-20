@@ -1,27 +1,22 @@
 import React from 'react';
 import API from "../../Services/BaseService";
 import { useHistory } from "react-router-dom";
-
+import ls from 'local-storage';
 // import '../../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import {
-    Form,
-    Input,
-    Select,
-    AutoComplete,
-    Radio,
-    notification,
-    Spin,
+    Button
 } from 'antd';
 
 
 const PaymentInfo = () => {
     const history = useHistory();
     const [paymentinfo, setPaymentInfo] = useState("");
+    let userDetails = ls.get('userDetails');
     async function getPaymentInfo() {
         let request = {
-            buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id
+            buyer_id: userDetails.user_id
         };
         const state = API.post('http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/payment_info/condition', request);
         state.then(res => {
@@ -30,6 +25,9 @@ const PaymentInfo = () => {
         })
             .catch(err => { console.log(err); });
     }
+    function onHandleEdit(e){
+        history.push("/flooredit/"+e);
+      }
 	useEffect(() => {
         getPaymentInfo()
         
@@ -89,7 +87,7 @@ const PaymentInfo = () => {
                                             <div className="bankinfos">
                                                 <h4>Bank Account Information</h4>
                                                 <div className="bankinfotable">
-                                                    <a href="editpayment">Edit</a>
+                                                <Button onClick={() => onHandleEdit(item.payment_info_id)}>Edit</Button>
                                                     <table>
                                                         <tr>
                                                             <td><span>Dealership Name</span></td>

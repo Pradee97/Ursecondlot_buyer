@@ -22,11 +22,12 @@ const LotFee = () => {
     const history = useHistory();
     const [lotfee, setLotfee] = useState("");
     const [lotValue,setLotValue] = useState("");
+    let userDetails = ls.get('userDetails');
     console.log("======12345====>",ls.get('userDetails'))
 
     async function getLotfee() {
         let request = {
-            buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+            buyer_id: userDetails.user_id,
         };
         console.log("=======>",)
         const state = API.post('http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/lot_fee/condition', request);
@@ -47,7 +48,7 @@ const LotFee = () => {
             
                 //console.log("check",buyer_id)
                 let request = {
-                    buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+                    buyer_id: userDetails.user_id,
                     lot_fee:lotfee,
                     active:1
 

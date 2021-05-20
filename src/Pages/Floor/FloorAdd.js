@@ -49,8 +49,10 @@ const FloorAdd = () => {
             email_id: emailId,
             address: address,
             phone_no: phoneNumber,
-            date_opened: dateOpened,
+            opened_date: dateOpened,
             account_opened: accountOpened,
+            buyer_id:userDetails.user_id,
+            active:1
             
         }];
         API
