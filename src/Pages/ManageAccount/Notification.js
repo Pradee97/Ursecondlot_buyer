@@ -1,7 +1,7 @@
 import React from 'react';
 import API from "../../Services/BaseService";
 import { useHistory } from "react-router-dom";
-
+import ls from 'local-storage';
 // import '../../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -16,11 +16,11 @@ const Notification = () => {
     const [push_notification, setPush_notification] = useState("no");
 	const [femail, setFavEmail] = useState("no");
     const [fsms, setFavSms] = useState("no");
-
+	let userDetails = ls.get('userDetails');
    
     async function getNotification() {
         let request = {            
-         buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+         buyer_id: userDetails.user_id,
 
         }; 
         const state = API.post('http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/notification/condition', request);
@@ -45,7 +45,7 @@ const Notification = () => {
             
 		// console.log("check",buyer_id)
 		let request = {
-			buyer_id:JSON.parse(localStorage.getItem("userDetails"))===""?"":JSON.parse(localStorage.getItem("userDetails")).user_id,
+			buyer_id:userDetails.user_id,
 			email:email,
 			sms:sms,
 			push_notification:push_notification,

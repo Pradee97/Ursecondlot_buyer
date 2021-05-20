@@ -1,7 +1,7 @@
 import React from 'react';
 import API from "../../Services/BaseService";
 import { useHistory , useParams} from "react-router-dom";
-
+import ls from 'local-storage';
 // import '../../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -17,7 +17,7 @@ import {
 
 const EditPayment = () => {
     const history = useHistory();
-
+    const { id } = useParams();
     const { payment_info_id } = useParams();
     const [paymentObjc, setPaymentObj] = useState("");
     const [dealershipName, setDealershipName] = useState("");
@@ -34,13 +34,13 @@ const EditPayment = () => {
     // const [accountCityName, setAccountCityName] = useState("");
     // const [accountStateName, setAccountStateName] = useState("");
     // const [accountZipcodeId, setAccountZipcodeId] = useState("");
-    
+    let userDetails = ls.get('userDetails');
 
     async function fetchpaymentDetails() {
-        // let request = {
-        //     buyer_id: 1
-        // };
-        const state = API.get(`http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/payment_info/1`);
+         let request = {
+             payment_info_id:id
+         };
+        const state = API.post(`http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/payment/condition`,request);
         state.then(res => {
             console.log("res", res.data.data)
             setPaymentObj(res.data.data);

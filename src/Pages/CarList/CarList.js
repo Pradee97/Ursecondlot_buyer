@@ -1,6 +1,7 @@
 import React from 'react';
 import API from "../../Services/BaseService";
 import { useHistory } from "react-router-dom";
+import ls from 'local-storage';
 
 // import '../../assets/css/styles.css';
 import { useState } from 'react';
@@ -13,7 +14,8 @@ import { Modal, Button } from 'antd';
 
 
 const CarList = () => {
-
+    let userDetails = ls.get('userDetails');
+    console.log("=======>",userDetails.user_id)
 
     return (
        
