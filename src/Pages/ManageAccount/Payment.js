@@ -290,7 +290,10 @@ const Payment = () => {
                                                     <div className="col-sm-6 form-group">
                                                         <p>Signed bank Authorization letter for bank to release information. </p>
                                                     </div>
-
+                                                    <div className="col-sm-6 form-group uploadbutton">
+                                                            <input type="file" id="upload" hidden />
+                                                            <label for="upload"><img src={process.env.PUBLIC_URL +"/images/upload.png"} />Upload Document</label>
+                                                    </div>
                                                     <div className="col-lg-12 loginBtn">
                                                         <button className="cta-btn">Submit</button>
                                                     </div>

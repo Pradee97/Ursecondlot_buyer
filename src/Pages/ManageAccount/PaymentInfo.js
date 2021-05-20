@@ -26,7 +26,7 @@ const PaymentInfo = () => {
             .catch(err => { console.log(err); });
     }
     function onHandleEdit(e){
-        history.push("/flooredit/"+e);
+        history.push("/editpayment/"+e);
       }
 	useEffect(() => {
         getPaymentInfo()
