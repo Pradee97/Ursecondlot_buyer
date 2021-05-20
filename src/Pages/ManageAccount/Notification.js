@@ -8,14 +8,26 @@ import { useEffect } from 'react';
 import {
   Button
 } from 'antd';
+import Popup from '../../Component/Popup/Popup';
+
+import '../../Component/Popup/popup.css';
+
+
 const Notification = () => {
-    const history = useHistory();
+	const history = useHistory();
+	const [isOpen, setIsOpen] = useState(false);
+ 
+    const togglePopup = () => {
+      setIsOpen(!isOpen);
+    }
+
     const [notification, setNotification] = useState("no");
     const [email, setEmail] = useState("no");
     const [sms, setSms] = useState("no");
     const [push_notification, setPush_notification] = useState("no");
 	const [femail, setFavEmail] = useState("no");
     const [fsms, setFavSms] = useState("no");
+	const [popupcontent,setPopupcontent] = useState ("");
 	let userDetails = ls.get('userDetails');
    
     async function getNotification() {
@@ -61,11 +73,13 @@ const Notification = () => {
 	   .then((response) => {
 		 console.log("res", response.data.success)
 		if (response.data.success ) {
-			alert("Buyer Notification Successfully Created")
-			history.push("/notification");
-		   //history.push("/login");
+			togglePopup()
+			setPopupcontent ("Buyer Notification Successfully Created")
+			
 		 } else {
-		   history.push("/error");
+			togglePopup()
+			setPopupcontent ("Buyer Notification is not Created, Please try Again")
+		
 		 }
 	   },
 		 (error) => {
@@ -269,9 +283,37 @@ const Notification = () => {
         </div>
       </div>
     </section>
+	{isOpen && <Popup
+      content={<>
+    
+    <div>
+            <main id="main" class="inner-page">
+                <div id="Successfullform" class="Successfullform">
+                    <div class="container">
+                        <div class="Successfullformblock col-lg-12">
+                            <div class="row content">
+                                <div class="modalcontent">
+                                    <div class="Successfull-icon">
+                                        {/* <img alt="" src={checkImg} /> */}
+                                    </div>
+                                    <div class="modalbody">
+	 									<h2>{popupcontent}</h2>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+      </>}
+      handleClose={togglePopup}
+    />}
   </main>
  </div>
 );
 };
+
 
 export default Notification;
