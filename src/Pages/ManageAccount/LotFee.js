@@ -15,13 +15,22 @@ import {
     notification,
     Spin,
 } from 'antd';
+import Popup from '../../Component/Popup/Popup';
+
+import '../../Component/Popup/popup.css';
 
 
 
 const LotFee = () => {
     const history = useHistory();
+    const [isOpen, setIsOpen] = useState(false);
+ 
+    const togglePopup = () => {
+      setIsOpen(!isOpen);
+    }
     const [lotfee, setLotfee] = useState("");
     const [lotValue,setLotValue] = useState("");
+    const [popupcontent,setPopupcontent] = useState ("");
     let userDetails = ls.get('userDetails');
     console.log("======12345====>",ls.get('userDetails'))
 
@@ -58,11 +67,11 @@ const LotFee = () => {
                .then((response) => {
                  console.log("res", response.data.success)
                 if (response.data.success ) {
-                    alert("Lot Fee Succesfully Created");
-                    history.push("/lotfee");
-                   //history.push("/login");
+                    togglePopup()
+                    setPopupcontent ("Buyer Notification Successfully Created")
                  } else {
-                   history.push("/error");
+                    togglePopup()
+                    setPopupcontent ("Buyer Notification is not Created, Please try Again")
                  }
                },
                  (error) => {
@@ -146,12 +155,34 @@ const LotFee = () => {
 
      </div>
    </section>
-
-  
-
-
-
- </main>
+   {isOpen && <Popup
+      content={<>
+    
+    <div>
+            <main id="main" class="inner-page">
+                <div id="Successfullform" class="Successfullform">
+                    <div class="container">
+                        <div class="Successfullformblock col-lg-12">
+                            <div class="row content">
+                                <div class="modalcontent">
+                                    <div class="Successfull-icon">
+                                        {/* <img alt="" src={checkImg} /> */}
+                                    </div>
+                                    <div class="modalbody">
+	 									<h2>{popupcontent}</h2>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+      </>}
+      handleClose={togglePopup}
+    />}
+   </main>
         </div>
 
 
