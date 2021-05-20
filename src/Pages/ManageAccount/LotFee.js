@@ -22,11 +22,12 @@ const LotFee = () => {
     const history = useHistory();
     const [lotfee, setLotfee] = useState("");
     const [lotValue,setLotValue] = useState("");
+    let userDetails = ls.get('userDetails');
     console.log("======12345====>",ls.get('userDetails'))
 
     async function getLotfee() {
         let request = {
-            buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+            buyer_id: userDetails.user_id,
         };
         console.log("=======>",)
         const state = API.post('http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/lot_fee/condition', request);
@@ -41,13 +42,12 @@ const LotFee = () => {
         // fetchState();
     }, []);
 
-        // const { id } = useParams();
-        // let value=id.split("=");
+        
         const handlesubimt = () => {
             
                 //console.log("check",buyer_id)
                 let request = {
-                    buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+                    buyer_id: userDetails.user_id,
                     lot_fee:lotfee,
                     active:1
 
@@ -114,7 +114,7 @@ const LotFee = () => {
                        <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard </p>
                            <div className="form-group col-lg-6 col-md-6 lotfee-form">
                                <div className="input-icon">
-                                 <input type="text" className="form-control" defaultValue={lotValue.length>0?"":lotValue.lot_fee}  onChange={(e) => setLotfee(e.target.value)}/> 
+                                 <input type="text" className="form-control" defaultValue={lotValue===undefined?"":lotValue.lot_fee}  onChange={(e) => setLotfee(e.target.value)}/> 
                                    <i>$</i>
                                </div>
                            </div>

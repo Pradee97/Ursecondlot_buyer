@@ -13,10 +13,12 @@ import {
     notification,
     Spin,
 } from 'antd';
+import ls from 'local-storage';
 
 const FloorEdit = () => {
     const history = useHistory();
     const { id } = useParams();
+    const userDetails=ls.get('userDetails');
     const [floorObjc, setFloorObj] = useState("");
     const [contactName, setContactName] = useState("");
     const [companyName, setCompanyName] = useState("");
@@ -53,9 +55,10 @@ const FloorEdit = () => {
             email_id: emailId,
             address: address,
             phone_no: phoneNumber,
-            date_opened: dateOpened,
+            opened_date: dateOpened,
             account_opened: accountOpened,
-            active:1
+            active:1,
+            buyer_id: userDetails.user_id
            
         };
         API
@@ -98,7 +101,15 @@ const FloorEdit = () => {
                             </div>
 
                             <div className="col-sm-12 form-group">
-                                <input type="number" defaultValue={floorObjc.account_no} className="form-control" placeholder="Account Number" required onChange={(e) => setAccountNumber(e.target.value)} />
+                            <select className="form-control">
+                            <option disabled>Currency</option>
+                            <option value="$">$</option>
+                            </select>
+                                {/* <input type="text" className="form-control" placeholder="Currency" required /> */}
+                            </div>
+
+                            <div className="col-sm-12 form-group">
+                                <input type="text" defaultValue={floorObjc.account_no} className="form-control" placeholder="Account Number" required onChange={(e) => setAccountNumber(e.target.value)} />
                             </div>
                             <div className="col-sm-12 form-group">
                                 <input type="number" defaultValue={floorObjc.credit_limit} className="form-control" placeholder="Credit Limit" required onChange={(e) => setCreditLimit(e.target.value)} />
@@ -117,7 +128,12 @@ const FloorEdit = () => {
                             </div>
                     
                             <div className="col-sm-12 form-group">
-                                <input type="text" defaultValue={floorObjc.account_opened} className="form-control" placeholder="Account Opened" required onChange={(e) => setAccountOpened(e.target.value)} />
+                            <select className="form-control" onChange={(e) => setAccountOpened(e.target.value)}>
+                            <option disabled>Account Opened</option>
+                            <option value="Yes">Yes</option>
+                            <option selected>No</option>
+                            </select>
+                                {/* <input type="text" defaultValue={floorObjc.account_opened} className="form-control" placeholder="Account Opened" required onChange={(e) => setAccountOpened(e.target.value)} /> */}
                             </div>
                            
                     
