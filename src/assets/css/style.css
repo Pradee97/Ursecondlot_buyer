@@ -3360,10 +3360,23 @@ SuccessfullModalCenter
 	
 .Successfullform .Successfullformblock .Successfull-icon img{
 	background:#27ae60;
-	width:15%;
+	width:20%;
 	padding: 15px 9px;
 	border-radius:50%;
 	margin-bottom:20px;
+}
+
+.Successfullform .Successfullformblock .get-started-btn {
+  margin-left: 4px;
+  color: #fff;
+  border-radius: 5px;
+  padding: 6px 25px 7px 25px;
+  white-space: nowrap;
+  transition: 0.3s;
+  font-size: 20px;
+  display: inline-block;
+  font-weight: 300;
+  background: #bd062c;
 }
 .Successfullform .modalbody h2{
 	color: rgb(0, 39, 104);
