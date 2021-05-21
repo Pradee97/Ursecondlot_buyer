@@ -86,7 +86,7 @@ const FloorAdd = () => {
             <main id="main" className="inner-page">
                 <div className="col-lg-4 card loginBlock flooraddform">
                     <form className="registrationform" onSubmit={registrationhandleSubmit} >
-                    <button onClick={() => history.push("/floor")}>Back</button>
+                    <button className="back-btn-paymentform" onClick={() => history.push("/floor")}>Back</button>
                         <h2 className="title">Add Floor Plan </h2>
                         <div className="row">
                         <div className="col-sm-12 form-group"> 
@@ -114,16 +114,19 @@ const FloorAdd = () => {
                             </div>
                             </div>
                             <div className="col-sm-3 form-group">
-                            <select className="textbox">
+                            <div className="tbox">
+                            <select className="form-control textbox" >
                             <option disabled>Currency</option>
                             <option value="$">$</option>
                             </select>
                                 {/* <input type="text" className="form-control" placeholder="Currency" required /> */}
+                               </div>
                             </div>
-                            
+                            <div className="col-sm-9 form-group">
                             <div className="tbox">
                                 <input type="text" id="creditLimit" className="textbox" placeholder="" required onChange={(e) => setCreditLimit(e.target.value)} />
                                 <label for="creditLimit" className={creditLimit !="" ? "input-has-value" : ""}>Credit Limit</label>
+                            </div>
                             </div>
                             
                             <div className="col-sm-12 form-group">
@@ -153,7 +156,7 @@ const FloorAdd = () => {
                     
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                            <select className="textbox" required onChange={(e) => setAccountOpened(e.target.value)}>
+                            <select className="form-control textbox" required onChange={(e) => setAccountOpened(e.target.value)}>
                             <option disabled>Account Opened</option>
                             <option value="Yes">Yes</option>
                             <option selected>No</option>
@@ -163,6 +166,8 @@ const FloorAdd = () => {
                                 {/* <input type="text" className="form-control" placeholder="Account Opened" required onChange={(e) => setAccountOpened(e.target.value)} /> */}
                             </div>
                             </div>
+
+                          
                     
                             <div className="col-lg-12 loginBtn">
                                 <button className="cta-btn">Submit</button>

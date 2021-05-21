@@ -5499,7 +5499,21 @@ paymentform
   left: 19px;
   padding: 0 10px;
 }
-
+.flooraddform .back-btn-paymentform, .flooreditform  .back-btn-paymentform{
+    float: left; 
+    display: inline-block;
+    padding: 6px 20px;
+    font-size: 16px;
+}
+.flooraddform .registrationform  h2, .flooreditform .registrationform  h2{
+    margin: 20px;
+    color: #002768;
+    font-size: 22px;
+    font-weight: 500;
+    text-transform: uppercase;
+    display: block;
+    padding-top: 20px;
+}
 
 .backaccountform.editpaymentform .topforms , .backaccountform.addpaymentform .topforms {
   margin-top: 30px;
