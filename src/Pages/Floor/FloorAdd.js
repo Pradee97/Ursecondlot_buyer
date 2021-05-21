@@ -89,48 +89,71 @@ const FloorAdd = () => {
                     <button onClick={() => history.push("/floor")}>Back</button>
                         <h2 className="title">Add Floor Plan </h2>
                         <div className="row">
-
-                            <div className="col-sm-12 form-group">
-                                <input type="text" className="form-control" placeholder="Contact Name" required onChange={(e) => setContactName(e.target.value)} />
+                        <div className="col-sm-12 form-group"> 
+                            <div className="tbox">
+                                <input type="text"  id="contactName" className="textbox" placeholder="" required onChange={(e) => setContactName(e.target.value)} />
+                                <label for="contactName" className={contactName !="" ? "input-has-value" : ""}>Contact Name</label>
+                            </div>
                             </div>
                             <div className="col-sm-12 form-group">
-                                <input type="text" className="form-control" placeholder="Company Name" required onChange={(e) => setCompanyName(e.target.value)} />
+                            <div className="tbox">
+                                <input type="text"  id="companyName" className="textbox" placeholder="" required onChange={(e) => setCompanyName(e.target.value)} />
+                                <label for="companyName" className={companyName !="" ? "input-has-value" : ""}>Company Name</label>
                             </div>
-
+                            </div>
                             <div className="col-sm-12 form-group">
-                                <input type="text" className="form-control" placeholder="Branch Name" required onChange={(e) => setBranchName(e.target.value)} />
+                            <div className="tbox">
+                                <input type="text" id="branchName" className="textbox" placeholder="" required onChange={(e) => setBranchName(e.target.value)} />
+                                <label for="branchName" className={branchName !="" ? "input-has-value" : ""}>Branch Name</label>
                             </div>
-
+                            </div>
                             <div className="col-sm-12 form-group">
-                                <input type="text" className="form-control" placeholder="Account Number" required onChange={(e) => setAccountNumber(e.target.value)} />
+                            <div className="tbox">
+                                <input type="text" id="accountNumber" className="textbox" placeholder="" required onChange={(e) => setAccountNumber(e.target.value)} />
+                                <label for="accountNumber" className={accountNumber !="" ? "input-has-value" : ""}>accountNumber</label>
                             </div>
-
+                            </div>
                             <div className="col-sm-3 form-group">
-                            <select className="form-control">
+                            <select className="textbox">
                             <option disabled>Currency</option>
                             <option value="$">$</option>
                             </select>
                                 {/* <input type="text" className="form-control" placeholder="Currency" required /> */}
                             </div>
-                            <div className="col-sm-9 form-group">
-                                <input type="text" className="form-control" placeholder="Credit Limit" required onChange={(e) => setCreditLimit(e.target.value)} />
+                            
+                            <div className="tbox">
+                                <input type="text" id="creditLimit" className="textbox" placeholder="" required onChange={(e) => setCreditLimit(e.target.value)} />
+                                <label for="creditLimit" className={creditLimit !="" ? "input-has-value" : ""}>Credit Limit</label>
+                            </div>
+                            
+                            <div className="col-sm-12 form-group">
+                            <div className="tbox">
+                                <input type="email" id="emailId" className="textbox" placeholder="" required onChange={(e) => setEmailId(e.target.value)} />
+                                <label for="emailId" className={emailId !="" ? "input-has-value" : ""}>Email Id</label>
+                            </div>
                             </div>
                             <div className="col-sm-12 form-group">
-                                <input type="email" className="form-control" placeholder="Email Id" required onChange={(e) => setEmailId(e.target.value)} />
+                            <div className="tbox">
+                                <input type="text" id="address" className="textbox" placeholder="" required onChange={(e) => setAddress(e.target.value)} />
+                                <label for="address" className={address !="" ? "input-has-value" : ""}>Address</label>
+                            </div>
                             </div>
                             <div className="col-sm-12 form-group">
-                                <input type="text" className="form-control" placeholder="Address" required onChange={(e) => setAddress(e.target.value)} />
+                            <div className="tbox">
+                                <input type="number" id="phoneNumber" className="textbox" placeholder="" required onChange={(e) => setPhoneNumber(e.target.value)} />
+                                <label for="phoneNumber" className={phoneNumber !="" ? "input-has-value" : ""}>Phone Number</label>
+                            </div>
                             </div>
                             <div className="col-sm-12 form-group">
-                                <input type="number" className="form-control" placeholder="Phone Number" required onChange={(e) => setPhoneNumber(e.target.value)} />
-                            </div>
-                            <div className="col-sm-12 form-group">
-                                <input type="Date" className="form-control" placeholder="Date Opened" required onChange={(e) => setDateOpened(e.target.value)} />
+                            <div className="tbox">
+                                <input type="Date" id="dateOpened" className="textbox" placeholder="" required onChange={(e) => setDateOpened(e.target.value)} />
+                                <label for="dateOpened" className={dateOpened !="" ? "input-has-value" : ""}>Date Opened</label>
+                            </div> 
                             </div>
                     
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                            <select className="form-control textbox" required onChange={(e) => setAccountOpened(e.target.value)}>
+                            <select className="textbox" required onChange={(e) => setAccountOpened(e.target.value)}>
                             <option disabled>Account Opened</option>
                             <option value="Yes">Yes</option>
                             <option selected>No</option>
