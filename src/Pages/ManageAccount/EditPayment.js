@@ -148,7 +148,7 @@ const EditPayment = () => {
                                                 <h2 className="title"> Bank account information Edit</h2>
                                                 <div className="row">
 
-                                                    <div className="col-sm-12 form-group">
+                                                    <div className="col-sm-12 form-group topforms">
                                                         <div className="tbox">
                                                         <label>Dealership name</label>
                                                             <input type="text"  defaultValue={paymentObjc.dealership_name} className="form-control " placeholder="" required onChange={(e) => setDealershipName(e.target.value)} />

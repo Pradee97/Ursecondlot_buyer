@@ -176,12 +176,12 @@ const Payment = () => {
 
 
                                         <div className="paymentform col-lg-12">
-                                            <form className="backaccountform" onSubmit={paymenthandleSubmit}>
+                                            <form className="backaccountform addpaymentform" onSubmit={paymenthandleSubmit}>
                                                 <h2 className="title"> Bank account information</h2>
                                                 <div className="row">
 
 
-                                                    <div className="col-sm-12 form-group">
+                                                    <div className="col-sm-12 form-group topforms">
                                                         <div className="tbox">
                                                             <input type="text" className="textbox" name="dname" id="name-d" placeholder="" required  onChange={(e) => setDealershipName(e.target.value)} />
                                                             <label for="name-d" className={dealershipName !="" ? "input-has-value" : ""}>Dealership name</label>

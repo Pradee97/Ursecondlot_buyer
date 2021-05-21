@@ -155,7 +155,7 @@ const FloorEdit = () => {
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                            <select className="form-control" onChange={(e) => setAccountOpened(e.target.value)}>
+                            <select className="form-control textbox" onChange={(e) => setAccountOpened(e.target.value)}>
                             <option disabled>Account Opened</option>
                             <option value="Yes">Yes</option>
                             <option selected>No</option>
