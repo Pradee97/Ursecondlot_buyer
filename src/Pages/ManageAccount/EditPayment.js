@@ -43,6 +43,14 @@ const EditPayment = () => {
         const state = API.post(`payment/condition`,request);
         state.then(res => {
             console.log("res", res.data.data)
+            setDealershipName(res.data.data.dealership_name);
+            setAccountHolderName(res.data.data.acc_name);
+            setBankName(res.data.data.bank_name);
+            setAccountNumber(res.data.data.acc_no);
+            setACHNumber(res.data.data.ach_no);
+            setRoutingNumber(res.data.data.routing_no);
+            setBankAddress(res.data.data.bank_address);
+            setAccountHolderAddress(res.data.data.acc_address);
             setPaymentObj(res.data.data);
         })
             .catch(err => { console.log(err); });
@@ -139,7 +147,7 @@ const EditPayment = () => {
                                                 <h2 className="title"> Bank account information Edit</h2>
                                                 <div className="row">
 
-                                                    <div className="col-sm-12 form-group">
+                                                    <div className="col-sm-12 form-group topforms">
                                                         <div className="tbox">
                                                         <label>Dealership name</label>
                                                             <input type="text"  defaultValue={paymentObjc.dealership_name} className="form-control " placeholder="" required onChange={(e) => setDealershipName(e.target.value)} />

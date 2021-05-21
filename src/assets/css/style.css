@@ -974,6 +974,7 @@ Cars list
 .cars-content h3 {
     font-weight: 700;
     font-size: 20px;
+    text-align: left;
 }
  .cars-content h3 a {
     color: #37423b;
@@ -1783,10 +1784,10 @@ Cars list
 /*--------------------------------------------------------------
 # Contact
 --------------------------------------------------------------*/
-.contact .info {
- 
+.contact .info { 
   padding: 30px;  
   width: 100%;
+  text-align: left;
 
 }
 .contactfoms h3{
@@ -1837,6 +1838,7 @@ Cars list
   font-size: 16px;
   color: #707070;
   font-weight:300;
+  text-align: center;
 }
 
 .contact .info p {
@@ -2725,6 +2727,42 @@ margin-top: -3px;
 	text-align:left;
 }
 
+
+.registrationform .tbox .textbox + label{
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  bottom: 0;
+  border-radius: 3px 0 0 3px;
+  padding: 0 5px;
+  background: #fff;
+  color: #9F9F9F;
+  transform: translateZ(0) translateX(0);
+  transition: all 0.3s ease-in;
+  transition-delay: 0.2s;
+  display: inline-block;
+  height: 22px;
+  margin: 0;
+  font-size: 16px;
+}
+
+ .datePickerBlock .tbox .textbox  label{
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  bottom: 0;
+  border-radius: 3px 0 0 3px;
+  padding: 0 5px;
+  background: #fff;
+  color: #9F9F9F;
+  transform: translateZ(0) translateX(0);
+  transition: all 0.3s ease-in;
+  transition-delay: 0.2s;
+  display: inline-block;
+  height: 22px;
+  margin: 0;
+  font-size: 16px;
+}
 /*------------------------------------------------------
 popup Dialogbox
 -------------------------------------------------------*/
@@ -4083,6 +4121,8 @@ Search Box"
 }
 
 
+
+
 /*------------------------------------------------
 Transport
 --------------------------------------------------*/
@@ -4759,6 +4799,7 @@ border-collapse: collapse;
 margin: 0;
 padding: 0;
 width: 100%;
+margin-top: 20px;
 
 	
 }
@@ -4767,7 +4808,7 @@ width: 100%;
     padding: .35em;
 }
 .mgaccountrighttable table td {
-    width: 40%;
+    width: 50%;
     color: #343434;
     text-align: left;
     padding-left: 20px;
@@ -4781,7 +4822,7 @@ width: 100%;
     color: #707070;
     font-size: 16px;
     font-weight: 500;
-    width: 60%;
+    width: 61%;
     float: right;
 }
 .mgaccountrighttableblock h3{
@@ -4789,16 +4830,20 @@ width: 100%;
 	display:block;
 	font-size:20px;
 	color: #343434;
+  font-weight: 500;
+  margin-bottom: 15px;
 }
 .mgaccountrighttableblock h3 span{
 	float:inline-end;
 	color: #BD062C;	
+  float: right;
 }
 .mgaccountrighttableblock p{
 	text-align:center;
 	display:block;
 	color: #343434;	
 	font-size:16px;
+  margin-bottom: 20px;
 }
 .mgaccountrighttableblock{
 	margin: 0 auto;
@@ -4811,15 +4856,27 @@ width: 100%;
 }
 .mgaccountrighttableblock h4{
 	color: #343434;
-	font-size:16px;
-	margin-top:10px;
+	font-size:18px;
+	margin-top:20px;
 	padding-left: 20px;
+  text-align: left;
+  font-weight: normal;
 }
 .mgaccountrighttableblock h5{
+	color: #343434;
+	font-size:20px;
+	margin-top:10px;
+	padding-left: 20px;
+  text-align: left;
+  font-weight: 500;
+}
+.mgaccountrighttableblock h6{
 	color: #707070;
 	font-size:16px;
 	margin-top:10px;
 	padding-left: 20px;
+  text-align: left;
+ 
 }
 /*---------------------------------------------------
 Form text overlop
@@ -4900,6 +4957,7 @@ userfavorite-cars
 
 .car-item {
   transition: 0.2s;
+  margin-top: 3%;
 }
 
 .car-item:hover {
@@ -5313,6 +5371,20 @@ height: 100%;
         padding-top: 30px;
 }
 
+.notificationrighttableblock label{
+  color: #343434;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+}
+
+.notificationrighttableblock  .radio input[type="radio"] + .radio-label:before { 
+  margin-right: 10px; 
+  top: 0px;
+  width: 27px;
+  height: 27px;
+}
+
 .notificationrighttableblock h2{
 	color: #343434;
 	font-size:30px;
@@ -5331,6 +5403,9 @@ height: 100%;
 	color: #343434;
 	font-size:14px;
 	font-weight:normal;
+  text-align: left;
+  margin-top: 5px;
+    padding-left: 37px;
 }
 .notificationaccountrightblock .save-more-btn {
     display: inline-block;
@@ -5401,6 +5476,7 @@ paymentform
 .uploadbutton {
 	text-align:center;
 	margin:0 auto;
+  float: left;
 }
 
 .backaccountform {
@@ -5410,19 +5486,29 @@ paymentform
 	margin-top:30px;
 }
 
-.backaccountform .title{
+.backaccountform.editpaymentform .title, .backaccountform.addpaymentform .title{
 	color: #4E4E4E;
 	font-size: 20px;
 	font-weight: 500;
 	text-transform: capitalize;
 	text-align: left;
-	position: relative;
-	top: -33px;
+	position: absolute  ;
+	top: -4px;
 	background: #fff;
 	display: inline-block;
+  left: 19px;
+  padding: 0 10px;
 }
+
+
+.backaccountform.editpaymentform .topforms , .backaccountform.addpaymentform .topforms {
+  margin-top: 30px;
+}
+
+
 .bankinfo{
     float: left;
+    
     
 }
 
@@ -5436,6 +5522,8 @@ paymentform
 .bankinfo table {
     float: left;
     padding: 10px 20px;
+    padding-top: -5px;
+    width: 100%;
 }
 
 .bankinfo table tr{
@@ -5447,7 +5535,7 @@ paymentform
     font-size: 14px;
     text-align: left;
     border: none;
-    padding: 20px 10px;
+    padding: 3px 10px;
 	float:left;
 }
 .bankinfo table td {
@@ -5455,7 +5543,7 @@ paymentform
     font-size: 14px;
     text-align: left;
     border: none;
-    padding: 20px 10px;
+    padding: 5px 10px;
 }
 .bankinfos{
 	border: 1px solid #ddd;
@@ -5474,6 +5562,16 @@ paymentform
     margin: 20px 30px;
 	display:inline-block;
 }
+
+.paymentdetailblock p{
+  text-align: left;
+  color: #4E4E4E;
+  font-size: 14px;
+  margin: 20px 15px;
+  display: inline-block;
+  float: left;
+  margin-top: 25px;
+}
 .bankinfo .bankinfos h4{
     color: #4E4E4E;
     font-size: 20px;
@@ -5484,6 +5582,22 @@ paymentform
     top: -33px;
     background: #fff;
     display: inline-block;
+    float: left;
+    padding: 0 10px;
+    left: 10px;
+}
+.bankinfotable{
+  float: left;
+  display: contents;
+}
+.paymentinfoblocks button {
+  border: none;
+  background: none;
+  color: #BD062C;
+  font-size:18px;
+  font-weight: 500;
+  float: right;
+  display: inline-block;
 }
 
 .editpaymentform .tbox label{
@@ -5502,6 +5616,24 @@ paymentform
 }
 .editpaymentform .tbox {
   margin-bottom: 5px;
+}
+
+.flooraddform .tbox .textbox + label , .flooreditform .tbox .textbox + label {
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  bottom: 0;
+  border-radius: 3px 0 0 3px;
+  padding: 0 5px;
+  background: #fff;
+  color: #9F9F9F;
+  transform: translateZ(0) translateX(0);
+  transition: all 0.3s ease-in;
+  transition-delay: 0.2s;
+  display: inline-block;
+  height: 22px;
+  margin: 0;
+  font-size: 16px;
 }
 /*----------------------------------------------
 

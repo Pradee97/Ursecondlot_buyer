@@ -7,6 +7,7 @@ import moment from 'moment';
 import 'react-datetime/css/react-datetime.css';
 import Popup from '../../Component/Popup/Popup';
 import '../../Component/Popup/popup.css';
+import Terms from '../../Component/TermsAndCondition/TermsAndCondition';
 
 // import '../../assets/css/styles.css';
 import { useState } from 'react';
@@ -36,7 +37,7 @@ const Registration = () => {
     };
 
     const inputProps = {
-        placeholder: 'Select Date',
+        placeholder: 'DD/MM/YYYY',
         required:true
     };
 
@@ -233,42 +234,48 @@ const Registration = () => {
                             <input className="textbox " type="text" placeholder="" id="address" maxLength="300" required onChange={(e) => setAddress(e.target.value)} />
 				            <label  for="address" className={address !="" ? "input-has-value" : ""}>Address</label>
 			            </div>
-                        </div>
-
-
-                            
+                        </div>                           
                            
                             <div className="col-sm-4 form-group">
-                            {zipCodeId == "" ?
-                                 (<select className="form-control custom-select browser-default" required defaultValue={stateName} onChange={handleState}>
-                                    <option>State</option>
-                                    {stateNameList.length>0 &&
-                                        <>
-                                            {stateNameList.map((state, index) => <option key={state.state_id} value={state.state_id}>{state.state_name}</option>)}
-                                        </>
-                                    }
-                                </select> )
-                                :
-                                 (<input type="text" className="form-control" placeholder="state" value ={stateName} required />)}
+                                <div className="tbox">
+                                {zipCodeId == "" ?
+                                    (<select className="form-control custom-select browser-default textbox " required defaultValue={stateName} onChange={handleState}>
+                                        <option disabled>State</option>
+                                        {stateNameList.length>0 &&
+                                            <>
+                                                {stateNameList.map((state, index) => <option key={state.state_id} value={state.state_id}>{state.state_name}</option>)}
+                                            </>
+                                        }
+                                    </select> )
+                                    :
+                                    (<input type="text" className="form-control" placeholder="" value ={stateName} required />)}
+                                    <label  for="state_id" className={stateName!="" ? "input-has-value" : ""}>State Name</label>
+                                </div>
                             </div>
                             <div className="col-sm-4 form-group">
-                            {zipCodeId == "" ?
-                                (<select id="City" className="form-control custom-select browser-default" required defaultValue={cityName} onChange={handleCity}>
-                                    <option>City</option>
-                                    {cityNameList.length>0 &&
-                                        <>
-                                            {cityNameList.map((city, index) => <option key={city.city_id} value={city.city_name}>{city.city_name}</option>)}
-                                        </>
-                                    }
-                                </select>)
-                                :
-                                (<input type="text" className="form-control" placeholder="city" value ={cityName} required />)}
+                                <div className="tbox">
+                                {zipCodeId == "" ?
+                                    (<select id="City" className="form-control custom-select browser-default textbox" required defaultValue={cityName} onChange={handleCity}>
+                                        <option disabled>City</option>
+                                        {cityNameList.length>0 &&
+                                            <>
+                                                {cityNameList.map((city, index) => <option key={city.city_id} value={city.city_name}>{city.city_name}</option>)}
+                                            </>
+                                        }
+                                    </select>)
+                                    :
+                                    (<input type="text" className="form-control" placeholder="city" value ={cityName} required />)}
+                                    <label  for="city_id" className={cityName!="" ? "input-has-value" : ""}>City Name</label>
+                                </div>
                             </div>
                             <div className="col-sm-4 form-group">
-                            {stateName!=="" && cityName !=="" ?
-                                (<input type="text" className="form-control" placeholder="Zipcode" required maxLength="5" onChange={(e) => setZipcodeNormal(e.target.value)} />)
+                                <div className="tbox">
+                                {stateName!=="" && cityName !=="" ?
+                                    (<input type="text" className="form-control textbox" placeholder="" required maxLength="5" onChange={(e) => setZipcodeNormal(e.target.value)} />)
 
-                                :(<input type="text" className="form-control" placeholder="Zipcode" required maxLength="5" onChange={(e) => setZipcodeGoogle(e.target.value)} />)}
+                                    :(<input type="text" className="form-control textbox" placeholder="" required maxLength="5" onChange={(e) => setZipcodeGoogle(e.target.value)} />)}
+                                    <label  for="zipcode_id" className={zipCodeId!="" ? "input-has-value" : ""}>Zipcode</label>
+                                </div>
                             </div>
                             
 
@@ -276,7 +283,7 @@ const Registration = () => {
                                 <div className="tbox">
                                 {/* {/ <lable for="drop" className={option !="" ? "input-has-value" : ""}>How many years in car business</lable> /} */}
                                 <select id="drop" placeholder="" required className="form-control custom-select browser-default textbox" required onChange={(e) => setOption(e.target.value)}>
-                                <option >How many years in car business</option>
+                                <option disabled >How many years in car business</option>
                                 <option value="Less then 1">Less then 1</option>
                                 <option value="1-3">1-3</option>
                                 <option value="3-5">3-5</option>
@@ -285,6 +292,8 @@ const Registration = () => {
                                 <option value="15-20">15-20</option>
                                 <option value="More then 20">More then 20</option>
                                 </select>
+
+                                <label  for="no_years" className={option!="" ? "input-has-value" : ""}>How many years in car business</label>
                                 </div>
                             </div>
 
@@ -295,53 +304,29 @@ const Registration = () => {
                             </div>
 
 
-                            <div className="col-sm-6 form-group datePickerBlock">
-                            <i class='bx bx-calendar'></i>
-                                <Datetime inputProps={ inputProps } timeFormat={false} dateFormat="DD/MM/YYYY" isValidDate={disablePastDt}/>
+                            <div className="col-sm-6 form-group datePickerBlock ">
+                                <div className="tbox">
+                                <div className="textbox">
+                                <i class='bx bx-calendar'></i>
+                                    <Datetime inputProps={ inputProps } timeFormat={false} dateFormat="DD/MM/YYYY" isValidDate={disablePastDt}/>
+                                    <label  for="meeting_date" className={date!="" ? "input-has-value" : ""}>Select Date</label>
+                                </div>
+                                </div>
                             </div>
                             <div className="col-sm-6 form-group">
-                                <input type="time" className="form-control" placeholder="Select Time" required onChange={(e) => setTime(e.target.value)} />
+                            <div className="tbox">
+                                <input type="time" className="form-control textbox" placeholder="Select Time" required onChange={(e) => setTime(e.target.value)} />
+                                <label  for="meeting_time" className={time!="" ? "input-has-value" : ""}>Select Time</label>
+                                </div>
                             </div>
                             <div className="col-sm-12 form-group agreetab">
-                                <input type="checkbox" className="form-check d-inline" id="chb" required />
+                                <input type="checkbox" className="form-check d-inline " id="chb" required />
                                 <label for="chb" className="form-check-label"> I Agree for the <a href="JavaScript:void(0)" onClick={togglePopup}>Terms And Conditions</a>
                                 </label>
                                 {isOpen && <Popup
       content={<>
     
-    <div id="termspage" class="termspage">
-      
-		  <div class="termspageblock">
-			   <div class="row content">
-					<div class="modalcontent">
-				
-						<div class="modalbody">
-							<h2>Terms And Conditions </h2>
-							<p>
-							Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the 
-							industry's standard dummy text ever since the 1500s,
-							</p>
-							<p>
-							Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the 
-							industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and 
-							scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap 
-							into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the 
-							release of Letraset sheets containing Lorem Ipsum passages Lorem Ipsum has been the industry's standard 
-							dummy text ever since the 1500s,
-							</p>
-							<p>
-							Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
-							standard dummy text ever since the 1500s,
-							</p>
-						</div>
-						<div class="modalfooter ">
-							<a class="cta-btns" href="JavaScript:void(0)" onClick={togglePopup}>I AGREE</a>
-						</div>
-					</div>
-				</div>
-		  </div>
-	  
-    </div>
+            <Terms toggle={togglePopup} />
 
       </>}
       handleClose={togglePopup}
