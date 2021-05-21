@@ -43,6 +43,14 @@ const EditPayment = () => {
         const state = API.post(`http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/payment/condition`,request);
         state.then(res => {
             console.log("res", res.data.data)
+            setDealershipName(res.data.data.dealership_name);
+            setAccountHolderName(res.data.data.acc_name);
+            setBankName(res.data.data.bank_name);
+            setAccountNumber(res.data.data.acc_no);
+            setACHNumber(res.data.data.ach_no);
+            setRoutingNumber(res.data.data.routing_no);
+            setBankAddress(res.data.data.bank_address);
+            setAccountHolderAddress(res.data.data.acc_address);
             setPaymentObj(res.data.data);
         })
             .catch(err => { console.log(err); });

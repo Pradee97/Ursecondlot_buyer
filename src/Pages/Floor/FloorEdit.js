@@ -96,7 +96,8 @@ const FloorEdit = () => {
             <main id="main" className="inner-page">
                 <div className="col-lg-4 card loginBlock flooreditform">
                     <form className="registrationform" onSubmit={updateFloorPlan} >
-                        <h2 className="title"> Floor Plans Edit</h2>
+                    <button onClick={() => history.push("/floor")}>Back</button>
+                        <h2 className="title"> Edit Floor Plans </h2>
                         <div className="row">
 
                             <div className="col-sm-12 form-group">
