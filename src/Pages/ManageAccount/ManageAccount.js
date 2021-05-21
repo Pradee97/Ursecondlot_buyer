@@ -135,10 +135,10 @@ const ManageAccount = () => {
                                  </tr>	
                                </table> 
                                <h4>Location name</h4>	
-                               <h5>Horizon fairway - Computer number 693</h5>
+                               <h6>Horizon fairway - Computer number 693</h6>
 
                                <h4>Instructions</h4>	
-                               <h5>Computer number 693</h5>									
+                               <h6>Computer number 693</h6>									
                            </div>
                        </div>
                        
@@ -168,10 +168,10 @@ const ManageAccount = () => {
                                  </tr>	
                                </table> 
                                <h4>Location name</h4>	
-                               <h5>Horizon fairway - Computer number 693</h5>
+                               <h6>Horizon fairway - Computer number 693</h6>
 
                                <h4>Instructions</h4>	
-                               <h5>Computer number 693</h5>									
+                               <h6>Computer number 693</h6>									
                            </div>
                 )  :""}
 
