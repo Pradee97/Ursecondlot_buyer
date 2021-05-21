@@ -68,7 +68,7 @@ const Email = () => {
                                         <p>Email successfull activated</p>
                                         <p>Username and Password sent to email</p>
                                 
-                                        <a href="/login" class="get-started-btn dealerLogin">Dealer Login</a>
+                                        <a href="/login" class="get-started-btn">Dealer Login</a>
                                     
                                     </div>
                                     {/* <div class="modalfooter ">
