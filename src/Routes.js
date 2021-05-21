@@ -51,7 +51,6 @@ function AppRouter() {
             <Route  path="/changepassword" component={ChangePassword}/>
             <Route  path="/carList" component={CarList}/>
             <Route  path="/search" component={Inprogress}/>
-            <Route  path="/floor" component={Inprogress}/>
             <Route  path="/mybids" component={Inprogress}/>
             <Route  path="/transport" component={Inprogress}/>
             <Route  path="/manageaccount" component={ManageAccount}/>
