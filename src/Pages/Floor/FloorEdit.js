@@ -99,22 +99,28 @@ const FloorEdit = () => {
                     <button onClick={() => history.push("/floor")}>Back</button>
                         <h2 className="title"> Edit Floor Plans </h2>
                         <div className="row">
-
+                        
                             <div className="col-sm-12 form-group">
-                                <input type="text"  defaultValue={floorObjc.contact_name} className="form-control" placeholder="Contact Name" required onChange={(e) => setContactName(e.target.value)} />
+                            <div className="tbox">
+                            <label>Contact Name</label>
+                                <input type="text"  defaultValue={floorObjc.contact_name} className="form-control" placeholder="" required onChange={(e) => setContactName(e.target.value)} />
+                            </div>
                             </div>
                             <div className="col-sm-12 form-group">
+                            <div className="tbox">
                                 <input type="text" defaultValue={floorObjc.company_name} className="form-control" placeholder="Company Name" required onChange={(e) => setCompanyName(e.target.value)} />
                             </div>
-
+                            </div>
                             <div className="col-sm-12 form-group">
+                            <div className="tbox">
                                 <input type="text" defaultValue={floorObjc.branch_name} className="form-control" placeholder="Branch Name" required onChange={(e) => setBranchName(e.target.value)} />
                             </div>
-
+                            </div>
                             <div className="col-sm-12 form-group">
+                            <div className="tbox">
                                 <input type="text" defaultValue={floorObjc.account_no} className="form-control" placeholder="Account Number" required onChange={(e) => setAccountNumber(e.target.value)} />
                             </div>
-
+                            </div>
                             <div className="col-sm-3 form-group">
                             <select className="form-control">
                             <option disabled>Currency</option>
@@ -123,21 +129,30 @@ const FloorEdit = () => {
                                 {/* <input type="text" className="form-control" placeholder="Currency" required /> */}
                             </div>
                             <div className="col-sm-9 form-group">
+                            <div className="tbox">
                                 <input type="text" defaultValue={floorObjc.credit_limit} className="form-control" placeholder="Credit Limit" required onChange={(e) => setCreditLimit(e.target.value)} />
                             </div>
+                            </div>
                             <div className="col-sm-12 form-group">
+                            <div className="tbox">
                                 <input type="email" defaultValue={floorObjc.email_id} className="form-control" placeholder="Email Id" required onChange={(e) => setEmailId(e.target.value)} />
                             </div>
+                            </div>
                             <div className="col-sm-12 form-group">
+                            <div className="tbox">
                                 <input type="text" defaultValue={floorObjc.address} className="form-control" placeholder="Address" required onChange={(e) => setAddress(e.target.value)} />
                             </div>
+                            </div>
                             <div className="col-sm-12 form-group">
+                            <div className="tbox">
                                 <input type="number" defaultValue={floorObjc.phone_no} className="form-control" placeholder="Phone Number" required onChange={(e) => setPhoneNumber(e.target.value)} />
                             </div>
+                            </div>
                             <div className="col-sm-12 form-group">
+                            <div className="tbox">
                                 <input type="Date" value={floorObjc.opened_date} className="form-control" placeholder="Date Opened" required onChange={(e) => setDateOpened(e.target.value)} />
                             </div>
-                    
+                            </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                             <select className="form-control" onChange={(e) => setAccountOpened(e.target.value)}>
