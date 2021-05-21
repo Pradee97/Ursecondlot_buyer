@@ -18,7 +18,7 @@ const PaymentInfo = () => {
         let request = {
             buyer_id: userDetails.user_id
         };
-        const state = API.post('http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/payment_info/condition', request);
+        const state = API.post('payment_info/condition', request);
         state.then(res => {
             console.log("res", res.data.data)
             setPaymentInfo(res.data.data);

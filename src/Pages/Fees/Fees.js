@@ -31,7 +31,7 @@ const Fees = () => {
         let request = {
             type: "Buyer"
         };
-        const state = API.post('http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/fees/condition', request);
+        const state = API.post('fees/condition', request);
         state.then(res => {
             console.log("res", res)
             setFeeDetails(res.data.data);

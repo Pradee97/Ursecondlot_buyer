@@ -53,7 +53,7 @@ const ChangePassword = () => {
 
         };
         // if(newPassword === confirmPassword)
-        API.post("http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/changepassword/update", request)
+        API.post("changepassword/update", request)
 
           .then((response) => {
             console.log("res", response)

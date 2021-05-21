@@ -58,7 +58,7 @@ const Payment = () => {
             setAccountZipcodeId(data)
             }
             const request={zipcode_id: data}
-        API.post("http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/location/condition", request)
+        API.post("location/condition", request)
         .then(response => {
                
             if (response.statusText== "OK"){
@@ -117,7 +117,7 @@ const Payment = () => {
         }
         
         API
-            .post("http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/payment_info/add", request)
+            .post("payment_info/add", request)
             .then((response) => {
                 if (response.data.success) {
                     const { data } = response;

@@ -22,7 +22,7 @@ const ManageAccount = () => {
       let request = {
           buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
       };
-      const state = API.post('http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/user_profile/condition', request);
+      const state = API.post('user_profile/condition', request);
       state.then(res => {
           console.log("res", res)
           setaccountDetails(res.data.data);

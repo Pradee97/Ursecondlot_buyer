@@ -40,7 +40,7 @@ const EditPayment = () => {
          let request = {
              payment_info_id:id
          };
-        const state = API.post(`http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/payment/condition`,request);
+        const state = API.post(`payment/condition`,request);
         state.then(res => {
             console.log("res", res.data.data)
             setPaymentObj(res.data.data);
@@ -70,8 +70,7 @@ const EditPayment = () => {
             // acc_zipcode: accountZipcodeId
             active:1
         };
-        API
-        .put("http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/payment_info/edit"+payment_info_id, request)
+        API.put("payment_info/edit"+payment_info_id, request)
         .then((response) => {
             if (response.data.success) {
                 const { data } = response;

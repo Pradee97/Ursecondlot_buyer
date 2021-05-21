@@ -29,7 +29,7 @@ const FloorPlans = () => {
         let request = {
             buyer_id:userDetails.user_id,
         };
-        const state = API.post('http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/floor_plan/condition', request);
+        const state = API.post('floor_plan/condition', request);
         state.then(res => {
             console.log("res", res)
             setFloorDetails(res.data.data);

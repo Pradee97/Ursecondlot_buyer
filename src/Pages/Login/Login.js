@@ -34,7 +34,7 @@ const Login = () => {
       email: emailId,
       password: password
     };
-    API.post("http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/buyer/login", request)
+    API.post("buyer/login", request)
       .then((response) => {
         console.log("resresponse.data.data", response.data.data)
         if (response.data.success == true) {

@@ -60,7 +60,7 @@ const Registration = () => {
     const [option, setOption] = useState("");
    
     async function fetchCountry() {
-        const country = API.get('http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/country');
+        const country = API.get('country');
         country.then(res => {
             setCountry(res.data.data[0].country_id);
         })
@@ -70,7 +70,7 @@ const Registration = () => {
         let request = {
             country_id: 1
         };
-        const state = API.post('http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/state/condition', request);
+        const state = API.post('state/condition', request);
         state.then(res => {
             console.log("res", res.data.data)
             setStateNameList(res.data.data);
@@ -81,7 +81,7 @@ const Registration = () => {
         let request = {
             state_id: e
         };
-        const state = API.post('http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/city/condition', request);
+        const state = API.post('city/condition', request);
         state.then(res => {
             console.log("city", res.data.data)
             setCityNameList(res.data.data);
@@ -124,8 +124,7 @@ const Registration = () => {
             no_years: option,
             local_flag: 0,
         };
-        API
-            .post("http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/registration/add", request)
+        API.post("registration/add", request)
             .then((response) => {
                 if (response.data.success) {
                     const { data } = response;
@@ -164,7 +163,7 @@ const Registration = () => {
         if(data.length==5 ){
             setZipcodeId(data)
             const request={zipcode_id: data}
-            API.post("http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/location/condition", request)
+            API.post("location/condition", request)
         .then(response => {
             console.log("google place data response =>",response)
             if (response.statusText== "OK"

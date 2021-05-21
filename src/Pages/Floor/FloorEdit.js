@@ -34,7 +34,7 @@ const FloorEdit = () => {
 
     async function fetchFloorDetails() {
         
-        const state = API.get('http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/floor_plan/'+id);
+        const state = API.get('floor_plan/'+id);
         state.then(res => {
             console.log("res", res.data.data)
             setFloorObj(res.data.data);
@@ -62,7 +62,7 @@ const FloorEdit = () => {
            
         };
         API
-            .put("http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/floor_plan/"+id, request)
+            .put("floor_plan/"+id, request)
             .then((response) => {
                 if (response.data.success) {
                     const { data } = response;

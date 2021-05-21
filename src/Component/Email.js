@@ -32,7 +32,7 @@ const Email = () => {
                 user_id: value[1]
               };
 
-        API.post("http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/user_active/update",request)
+        API.post("user_active/update",request)
            .then((response) => {
              console.log("res", response.data.success)
             if (response.data.success ) {
