@@ -352,7 +352,7 @@ const Registration = () => {
 							</p>
 						</div>
 						<div class="modalfooter ">
-							<a class="cta-btns" href="JavaScript:void(0)" onClick={togglePopup}>I AGREE</a>
+							<a class="cta-btns" href="JavaScript:void(0)" onClick={togglePopup}>Close</a>
 						</div>
 					</div>
 				</div>
