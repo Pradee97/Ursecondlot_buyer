@@ -58,7 +58,7 @@ const Fees = () => {
                                 <div className="col-lg-6 pt-4 pt-lg-0 feestableBlock">
                                     <div className="feestable">
                                         <h2>Buyer Fee</h2>
-                                        <Table columns={columns} dataSource={feeDetails}></Table>
+                                        <Table columns={columns} dataSource={feeDetails} pagination={false} ></Table>
                                     </div>
                                 </div>
                             </div>
