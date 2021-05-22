@@ -11,6 +11,7 @@ import {
 import Popup from '../../Component/Popup/Popup';
 
 import '../../Component/Popup/popup.css';
+import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 
 
 const Notification = () => {
@@ -20,7 +21,13 @@ const Notification = () => {
     const togglePopup = () => {
       setIsOpen(!isOpen);
     }
-
+	const [popupTitle, setPopupTitle] = useState ("");
+    const [popupMsg, setPopupMsg] = useState ("");
+    const [popupType, setPopupType] = useState ("");
+    const [popupActionType, setPopupActionType] = useState ("");
+    const [popupActionValue, setPopupActionValue] = useState ("");
+	const [popupActionPath, setPopupActionPath] = useState ("")
+	
     const [notification, setNotification] = useState("no");
     const [email, setEmail] = useState("no");
     const [sms, setSms] = useState("no");
@@ -74,16 +81,30 @@ const Notification = () => {
 		 console.log("res", response.data.success)
 		if (response.data.success ) {
 			togglePopup()
-			setPopupcontent ("Buyer Notification Successfully Created")
+                setPopupTitle("Create Notification");
+                setPopupMsg("Notification Successfully Created");
+                setPopupType("success");
+                setPopupActionType("redirect");
+                setPopupActionValue("ok");
+                setPopupActionPath("/notification")
 			
 		 } else {
 			togglePopup()
-			setPopupcontent ("Buyer Notification is not Created, Please try Again")
+                setPopupTitle("Create Notification");
+                setPopupMsg("Notification is not Created, Please try Again");
+                setPopupType("error");
+                setPopupActionType("close");
+                setPopupActionValue("close");
 		
 		 }
 	   },
 		 (error) => {
-
+			togglePopup()
+			setPopupTitle("Error");
+			setPopupMsg(error," Please try Again");
+			setPopupType("error");
+			setPopupActionType("close");
+			setPopupActionValue("close");
 		 });
 
    }
@@ -283,36 +304,19 @@ const Notification = () => {
         </div>
       </div>
     </section>
-	{isOpen && <Popup
-      content={<>
-    
-    <div>
-            <main id="main" class="inner-page">
-                <div id="Successfullform" class="Successfullform">
-                    <div class="container">
-                        <div class="Successfullformblock col-lg-12">
-                            <div class="row content">
-                                <div class="modalcontent">
-                                    <div class="Successfull-icon">
-                                        {/* <img alt="" src={checkImg} /> */}
-                                    </div>
-                                    <div class="modalbody">
-	 									<h2>{popupcontent}</h2>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+	{isOpen && 
+                <CommonPopup 
+                    handleClose= {togglePopup}
+                    popupTitle= {popupTitle}
+                    popupMsg= {popupMsg}
+                    popupType= {popupType}
+                    popupActionType= {popupActionType}
+                    popupActionValue= {popupActionValue}
+                    popupActionPath={popupActionPath}
+                />}
             </main>
         </div>
-      </>}
-      handleClose={togglePopup}
-    />}
-  </main>
- </div>
-);
+    );
 };
 
 

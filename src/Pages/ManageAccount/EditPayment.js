@@ -14,9 +14,25 @@ import {
     notification,
     Spin,
 } from 'antd';
+import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 
 const EditPayment = () => {
+
     const history = useHistory();
+    const [isOpen, setIsOpen] = useState(false);
+    const [isOpens, setIsOpens] = useState(false);
+ 
+    const togglePopup = () => {
+      setIsOpen(!isOpen);
+    }
+
+    const [popupTitle, setPopupTitle] = useState ("");
+    const [popupMsg, setPopupMsg] = useState ("");
+    const [popupType, setPopupType] = useState ("");
+    const [popupActionType, setPopupActionType] = useState ("");
+    const [popupActionValue, setPopupActionValue] = useState ("");
+    const [popupActionPath, setPopupActionPath] = useState ("")
+    const [payment, setPayment] = useState("");
     const { id } = useParams();
     const { payment_info_id } = useParams();
     const [paymentObjc, setPaymentObj] = useState("");
@@ -83,13 +99,29 @@ const EditPayment = () => {
             if (response.data.success) {
                 const { data } = response;
                 console.log("response", response)
-                history.push("/success");
+                togglePopup()
+                setPopupTitle("Edit Payment");
+                setPopupMsg("Payment is Updated Successfully");
+                setPopupType("success");
+                setPopupActionType("redirect");
+                setPopupActionValue("ok");
+                setPopupActionPath("/paymentinfo")
             } else {
-                history.push("emailerror");
+                togglePopup()
+                setPopupTitle("Edit Payment");
+                setPopupMsg("Payment is not Updated, Please try Again");
+                setPopupType("error");
+                setPopupActionType("close");
+                setPopupActionValue("close");
             }
         }, (error) => {
             // setOpenLoader(false);
-            // console.log(error);
+                togglePopup()
+                setPopupTitle("Error");
+                setPopupMsg(error," Please try Again");
+                setPopupType("error");
+                setPopupActionType("close");
+                setPopupActionValue("close");
         });
 
     }
@@ -301,7 +333,16 @@ const EditPayment = () => {
                         </div>
                     </section>
 
-               
+                    {isOpen && 
+                <CommonPopup 
+                    handleClose= {togglePopup}
+                    popupTitle= {popupTitle}
+                    popupMsg= {popupMsg}
+                    popupType= {popupType}
+                    popupActionType= {popupActionType}
+                    popupActionValue= {popupActionValue}
+                    popupActionPath={popupActionPath}
+                />}
 
 
 
