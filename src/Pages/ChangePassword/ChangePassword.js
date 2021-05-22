@@ -6,6 +6,9 @@ import ls from 'local-storage';
 // import '../../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
+
+import CommonPopup from '../../Component/CommonPopup/CommonPopup';
+
 import {
     Form,
     Input,
@@ -29,8 +32,19 @@ const ChangePassword = () => {
     const [oldPassword, setOldPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState('')
+    const [errorMessage, setErrorMessage] = useState('')
+    const [isOpen, setIsOpen] = useState(false);
 
+    const togglePopup = () => {
+        setIsOpen(!isOpen);
+    }
+
+    const [popupTitle, setPopupTitle] = useState ("");
+    const [popupMsg, setPopupMsg] = useState ("");
+    const [popupType, setPopupType] = useState ("");
+    const [popupActionType, setPopupActionType] = useState ("");
+    const [popupActionValue, setPopupActionValue] = useState ("");
+    const [popupActionPath, setPopupActionPath] = useState ("")
 
     // const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -57,14 +71,33 @@ const ChangePassword = () => {
 
           .then((response) => {
             console.log("res", response)
-            if (response.data.success == true) {            
-              history.push("/login");
+            if (response.data.success == true) {  
+            //   history.push("/login");
+            togglePopup()
+            setPopupTitle("Change Password");
+            setPopupMsg("Change Password Successfully Updated");
+            setPopupType("success");
+            setPopupActionType("redirect");
+            setPopupActionValue("ok");
+            setPopupActionPath("/login")
+
             } else {
-              history.push("error");
+            //   history.push("error");
+            togglePopup()
+            setPopupTitle("Change Password");
+            setPopupMsg("Change Password is not Updated, Please try Again");
+            setPopupType("error");
+            setPopupActionType("close");
+            setPopupActionValue("close");
             }
           },
             (error) => {
-    
+                togglePopup()
+                setPopupTitle("Error");
+                setPopupMsg(error," Please try Again");
+                setPopupType("error");
+                setPopupActionType("close");
+                setPopupActionValue("close");
             });
         }
       
@@ -113,6 +146,16 @@ const ChangePassword = () => {
                         </div>
                     </div>
                 </section>
+                {isOpen && 
+                <CommonPopup 
+                    handleClose= {togglePopup}
+                    popupTitle= {popupTitle}
+                    popupMsg= {popupMsg}
+                    popupType= {popupType}
+                    popupActionType= {popupActionType}
+                    popupActionValue= {popupActionValue}
+                    popupActionPath={popupActionPath}
+                />}
             </main>
 
         </div>
