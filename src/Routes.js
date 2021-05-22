@@ -1,6 +1,7 @@
 import React, {lazy, Suspense} from 'react';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import './App.css';
+import Loading from './Component/Loading/Loading';
 
 const Home = lazy(() => import('./Pages/Home/Home'));
 const Login = lazy(() => import('./Pages/Login/Login'));
@@ -32,7 +33,7 @@ function AppRouter() {
   return (
     <div className="App">
       <Router>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loading />}>
           <Header /> 
           <Switch>
             <Route exact path="/" component={Home}/>

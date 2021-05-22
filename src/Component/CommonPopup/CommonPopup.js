@@ -10,10 +10,10 @@ const CommonPopup = props => {
     // Example values for reference
 
     // const { handleClose, 
-    //     popupTitle = "ERROR", 
+    //     popupTitle = "ERROR",
     //     popupMsg = "something went wrong please try again", 
-    //     popupType = 'error', 
-    //     popupActionType = 'close', 
+    //     popupType = 'error',            //("success or error")
+    //     popupActionType = 'close',      //("redirect  or close")
     //     popupActionValue = 'close', 
     //     popupActionPath } = props;
 
