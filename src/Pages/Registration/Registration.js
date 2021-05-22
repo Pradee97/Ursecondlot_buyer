@@ -236,11 +236,11 @@ const Registration = () => {
 			            </div>
                         </div>                           
                            
-                            <div className="col-sm-4 form-group">
+                            <div className="col-sm-4 form-group selectTbox">
                                 <div className="tbox">
                                 {zipCodeId == "" ?
                                     (<select className="form-control custom-select browser-default textbox " required defaultValue={stateName} onChange={handleState}>
-                                        <option disabled>State</option>
+                                        <option disabled>Select State</option>
                                         {stateNameList.length>0 &&
                                             <>
                                                 {stateNameList.map((state, index) => <option key={state.state_id} value={state.state_id}>{state.state_name}</option>)}
@@ -249,14 +249,14 @@ const Registration = () => {
                                     </select> )
                                     :
                                     (<input type="text" className="form-control" placeholder="" value ={stateName} required />)}
-                                    <label  for="state_id" className={stateName!="" ? "input-has-value" : ""}>State Name</label>
+                                    <label  for="state_id" className={"input-has-value"}>State Name</label>
                                 </div>
                             </div>
-                            <div className="col-sm-4 form-group">
+                            <div className="col-sm-4 form-group selectTbox">
                                 <div className="tbox">
                                 {zipCodeId == "" ?
                                     (<select id="City" className="form-control custom-select browser-default textbox" required defaultValue={cityName} onChange={handleCity}>
-                                        <option disabled>City</option>
+                                        <option disabled>Select City</option>
                                         {cityNameList.length>0 &&
                                             <>
                                                 {cityNameList.map((city, index) => <option key={city.city_id} value={city.city_name}>{city.city_name}</option>)}
@@ -265,7 +265,7 @@ const Registration = () => {
                                     </select>)
                                     :
                                     (<input type="text" className="form-control" placeholder="city" value ={cityName} required />)}
-                                    <label  for="city_id" className={cityName!="" ? "input-has-value" : ""}>City Name</label>
+                                    <label  for="city_id" className={"input-has-value"}>City Name</label>
                                 </div>
                             </div>
                             <div className="col-sm-4 form-group">
@@ -274,7 +274,7 @@ const Registration = () => {
                                     (<input type="text" className="form-control textbox" placeholder="" required maxLength="5" onChange={(e) => setZipcodeNormal(e.target.value)} />)
 
                                     :(<input type="text" className="form-control textbox" placeholder="" required maxLength="5" onChange={(e) => setZipcodeGoogle(e.target.value)} />)}
-                                    <label  for="zipcode_id" className={zipCodeId!="" ? "input-has-value" : ""}>Zipcode</label>
+                                    <label  for="zipcode_id" className={"input-has-value"}>Zipcode</label>
                                 </div>
                             </div>
                             
@@ -293,7 +293,7 @@ const Registration = () => {
                                 <option value="More then 20">More then 20</option>
                                 </select>
 
-                                <label  for="no_years" className={option!="" ? "input-has-value" : ""}>How many years in car business</label>
+                                <label  for="no_years" className={"input-has-value"}>How many years in car business</label>
                                 </div>
                             </div>
 
@@ -313,7 +313,7 @@ const Registration = () => {
                                 </div>
                                 </div>
                             </div>
-                            <div className="col-sm-6 form-group">
+                            <div className="col-sm-6 form-group timepicker">
                             <div className="tbox">
                                 <input type="time" className="form-control textbox" placeholder="Select Time" required onChange={(e) => setTime(e.target.value)} />
                                 <label  for="meeting_time" className={time!="" ? "input-has-value" : ""}>Select Time</label>

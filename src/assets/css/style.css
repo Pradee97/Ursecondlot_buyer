@@ -2545,6 +2545,7 @@ input[type="text"], input[type="password"]{
 .registrationform .form-control{
 	margin-bottom:0;
 	margin-top:0;
+  padding-right: 10px;
 }
 
 .scheduleMeeting{
@@ -2743,7 +2744,7 @@ margin-top: -3px;
   display: inline-block;
   height: 22px;
   margin: 0;
-  font-size: 16px;
+  font-size: 14px;
 }
 
  .datePickerBlock .tbox .textbox  label{
@@ -2761,7 +2762,7 @@ margin-top: -3px;
   display: inline-block;
   height: 22px;
   margin: 0;
-  font-size: 16px;
+  font-size: 14px;
 }
 /*------------------------------------------------------
 popup Dialogbox
@@ -5844,4 +5845,24 @@ ul.ant-pagination li{
   height: 25px;
   line-height: 12px;
   cursor: pointer;
+}
+.selectTbox label {
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  bottom: 0;
+  border-radius: 3px 0 0 3px;
+  padding: 0 5px;
+  background: #fff;
+  color: #9F9F9F;
+  transform: translateZ(0) translateX(0);
+  transition: all 0.3s ease-in;
+  transition-delay: 0.2s;
+  display: inline-block;
+  height: 22px;
+  margin: 0;
+  font-size: 14px;
+}
+.timepicker .tbox .textbox + label{
+  font-size: 16px;
 }
