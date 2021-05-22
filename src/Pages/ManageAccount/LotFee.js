@@ -18,7 +18,7 @@ import {
 import Popup from '../../Component/Popup/Popup';
 
 import '../../Component/Popup/popup.css';
-
+import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 
 
 const LotFee = () => {
@@ -28,6 +28,14 @@ const LotFee = () => {
     const togglePopup = () => {
       setIsOpen(!isOpen);
     }
+
+    const [popupTitle, setPopupTitle] = useState ("");
+    const [popupMsg, setPopupMsg] = useState ("");
+    const [popupType, setPopupType] = useState ("");
+    const [popupActionType, setPopupActionType] = useState ("");
+    const [popupActionValue, setPopupActionValue] = useState ("");
+    const [popupActionPath, setPopupActionPath] = useState ("")
+
     const [lotfee, setLotfee] = useState("");
     const [lotValue,setLotValue] = useState("");
     const [popupcontent,setPopupcontent] = useState ("");
@@ -68,14 +76,28 @@ const LotFee = () => {
                  console.log("res", response.data.success)
                 if (response.data.success ) {
                     togglePopup()
-                    setPopupcontent ("Lotfee Successfully Created")
+                    setPopupTitle("Create LotFee");
+                    setPopupMsg("LotFee Successfully Created");
+                    setPopupType("success");
+                    setPopupActionType("redirect");
+                    setPopupActionValue("ok");
+                    setPopupActionPath("/lotfee")
                  } else {
                     togglePopup()
-                    setPopupcontent ("Lotfee is not Created, Please try Again")
+                    setPopupTitle("Create LotFee");
+                    setPopupMsg("LotFee is not Created, Please try Again");
+                    setPopupType("error");
+                    setPopupActionType("close");
+                    setPopupActionValue("close");
                  }
                },
                  (error) => {
-        
+                    togglePopup()
+                    setPopupTitle("Error");
+                    setPopupMsg(error," Please try Again");
+                    setPopupType("error");
+                    setPopupActionType("close");
+                    setPopupActionValue("close");
                  });
         
            }
@@ -155,33 +177,16 @@ const LotFee = () => {
 
      </div>
    </section>
-   {isOpen && <Popup
-      content={<>
-    
-    <div>
-            <main id="main" class="inner-page">
-                <div id="Successfullform" class="Successfullform">
-                    <div class="container">
-                        <div class="Successfullformblock col-lg-12">
-                            <div class="row content">
-                                <div class="modalcontent">
-                                    <div class="Successfull-icon">
-                                        {/* <img alt="" src={checkImg} /> */}
-                                    </div>
-                                    <div class="modalbody">
-	 									<h2>{popupcontent}</h2>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </main>
-        </div>
-      </>}
-      handleClose={togglePopup}
-    />}
+   {isOpen && 
+                <CommonPopup 
+                    handleClose= {togglePopup}
+                    popupTitle= {popupTitle}
+                    popupMsg= {popupMsg}
+                    popupType= {popupType}
+                    popupActionType= {popupActionType}
+                    popupActionValue= {popupActionValue}
+                    popupActionPath={popupActionPath}
+                />}
    </main>
         </div>
 
