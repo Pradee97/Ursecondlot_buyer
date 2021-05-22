@@ -4,6 +4,9 @@ import { useHistory,useParams } from "react-router-dom";
 // import '../../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
+
+import CommonPopup from '../../Component/CommonPopup/CommonPopup';
+
 import {
     Form,
     Input,
@@ -30,7 +33,18 @@ const FloorEdit = () => {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [dateOpened, setDateOpened] = useState("");
     const [accountOpened, setAccountOpened] = useState("");
+    const [isOpen, setIsOpen] = useState(false);
     
+    const togglePopup = () => {
+        setIsOpen(!isOpen);
+      }
+
+    const [popupTitle, setPopupTitle] = useState ("");
+    const [popupMsg, setPopupMsg] = useState ("");
+    const [popupType, setPopupType] = useState ("");
+    const [popupActionType, setPopupActionType] = useState ("");
+    const [popupActionValue, setPopupActionValue] = useState ("");
+    const [popupActionPath, setPopupActionPath] = useState ("")
 
     async function fetchFloorDetails() {
         
@@ -77,13 +91,32 @@ const FloorEdit = () => {
                 if (response.data.success) {
                     const { data } = response;
                     console.log("response", response)
-                    history.push("/success");
+                    // history.push("/success");
+                    togglePopup()
+                    setPopupTitle("Edit Floor");
+                    setPopupMsg("Floor Successfully Edited");
+                    setPopupType("success");
+                    setPopupActionType("redirect");
+                    setPopupActionValue("ok");
+                    setPopupActionPath("/floor")
                 } else {
-                    history.push("emailerror");
+                    // history.push("emailerror");
+                    togglePopup()
+                    setPopupTitle("Edit Floor");
+                    setPopupMsg("Floor is not Edited, Please try Again");
+                    setPopupType("error");
+                    setPopupActionType("close");
+                    setPopupActionValue("close");
                 }
             }, (error) => {
                 // setOpenLoader(false);
                 // console.log(error);
+                togglePopup()
+                setPopupTitle("Error");
+                setPopupMsg(error," Please try Again");
+                setPopupType("error");
+                setPopupActionType("close");
+                setPopupActionValue("close");
             });
 
     }
@@ -192,6 +225,16 @@ const FloorEdit = () => {
                         </div>
                     </div>
                 </section>
+                {isOpen && 
+                <CommonPopup 
+                    handleClose= {togglePopup}
+                    popupTitle= {popupTitle}
+                    popupMsg= {popupMsg}
+                    popupType= {popupType}
+                    popupActionType= {popupActionType}
+                    popupActionValue= {popupActionValue}
+                    popupActionPath={popupActionPath}
+                />}
             </main>
         </div>
 

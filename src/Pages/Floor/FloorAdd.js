@@ -12,7 +12,6 @@ import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 const FloorAdd = () => {
     const history = useHistory();   
     const [isOpen, setIsOpen] = useState(false);
-    const [isOpens, setIsOpens] = useState(false);
  
     const togglePopup = () => {
       setIsOpen(!isOpen);
@@ -98,9 +97,7 @@ const FloorAdd = () => {
             <main id="main" className="inner-page">
                 <div className="col-lg-4 card loginBlock flooraddform">
                     <form className="registrationform" onSubmit={registrationhandleSubmit} >
-                    <button className="back-btn-paymentform" onClick={() => history.push("/floor")}>Back</button>
-                    <button type="button" className="back-btn-paymentform" onClick={()=>setIsOpen(true)}>testr</button>
-                    
+                        <button className="back-btn-paymentform" onClick={() => history.push("/floor")}>Back</button>              
                         <h2 className="title">Add Floor Plan </h2>
                         <div className="row">
                         <div className="col-sm-12 form-group"> 

@@ -6,41 +6,19 @@ import Datetime from 'react-datetime';
 import moment from 'moment';
 import 'react-datetime/css/react-datetime.css';
 import Popup from '../../Component/Popup/Popup';
+import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import '../../Component/Popup/popup.css';
 import Terms from '../../Component/TermsAndCondition/TermsAndCondition';
+import StateAndCity from '../../Component/StateAndCity/StateAndCity'
 
 // import '../../assets/css/styles.css';
 import { useState } from 'react';
-import { useEffect } from 'react';
-import {
-    Form,
-    Input,
-    Select,
-    AutoComplete,
-    Radio,
-    notification,
-    Spin,
-} from 'antd';
 
 const Registration = () => {
     const history = useHistory();
-    const [isOpen, setIsOpen] = useState(false);
  
-    const togglePopup = () => {
-      setIsOpen(!isOpen);
-    }
-
-
-    const yesterday = moment().subtract(1, 'day');
-    const disablePastDt = current => {
-      return current.isAfter(yesterday);
-    };
-
-    const inputProps = {
-        placeholder: 'DD/MM/YYYY',
-        required:true
-    };
-
+    const [isOpen, setIsOpen] = useState(false);
+    const [isCommonPopupOpen, setIsCommonPopupOpen] = useState(false);
     const [dealerName, setDealerName] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -49,62 +27,36 @@ const Registration = () => {
     const [address, setAddress] = useState("");
     const [date, setDate] = useState("");
     const [time, setTime] = useState("");
-    const [country, setCountry] = useState("");
     const [stateName, setStateName] = useState("");
-    const [stateNameList, setStateNameList] = useState([]);
-    // const [stateId, setStateId] = useState("");
     const [cityName, setCityName] = useState("");
-    const [cityNameList, setCityNameList] = useState([]);
-    // const [cityId, setCityId] = useState("");
     const [zipCodeId, setZipcodeId] = useState("");
     const [numberOfYears, setNumberofYears] = useState("");
     const [option, setOption] = useState("");
+    const [popupTitle, setPopupTitle] = useState ("");
+    const [popupMsg, setPopupMsg] = useState ("");
+    const [popupType, setPopupType] = useState ("");
+    const [popupActionType, setPopupActionType] = useState ("");
+    const [popupActionValue, setPopupActionValue] = useState ("");
+    const [popupActionPath, setPopupActionPath] = useState ("");
+
+    const togglePopup = () => {
+        setIsOpen(!isOpen);
+      }
+  
+      const toggleCommonPopup = () => {
+          setIsCommonPopupOpen(!isCommonPopupOpen);
+      }
+  
+      const yesterday = moment().subtract(1, 'day');
+      const disablePastDt = current => {
+        return current.isAfter(yesterday);
+      };
+  
+      const inputProps = {
+          placeholder: 'DD/MM/YYYY',
+          required:true
+      };
    
-    async function fetchCountry() {
-        const country = API.get('country');
-        country.then(res => {
-            setCountry(res.data.data[0].country_id);
-        })
-            .catch(err => { console.log(err); });
-    }
-    async function fetchState() {
-        let request = {
-            country_id: 1
-        };
-        const state = API.post('state/condition', request);
-        state.then(res => {
-            console.log("res", res.data.data)
-            setStateNameList(res.data.data);
-        })
-            .catch(err => { console.log(err); });
-    }
-    function fetchCity(e) {
-        let request = {
-            state_id: e
-        };
-        const state = API.post('city/condition', request);
-        state.then(res => {
-            console.log("city", res.data.data)
-            setCityNameList(res.data.data);
-        })
-            .catch(err => { console.log(err); });
-    }
-    useEffect(() => {
-        fetchCountry();
-        fetchState();
-    }, []);
-
-    const handleState = (e) => {   
-        setStateName( stateNameList.filter(data=>data.state_id == e.target.value)[0].state_name)
-        fetchCity(e.target.value)
-        setZipcodeId("")
-    }
-    const handleCity = (e) => {
-        setCityName(e.target.value)
-        setZipcodeId("")
-    }
-
-
     const registrationhandleSubmit = (event) => {
         // setOpenLoader(true);
         event.preventDefault();
@@ -125,73 +77,51 @@ const Registration = () => {
             no_years: option,
             local_flag: 0,
         };
+        console.log("reg value=====",request)
+        return
         API.post("registration/add", request)
             .then((response) => {
                 if (response.data.success) {
                     const { data } = response;
                     console.log("response", response)
-                    history.push("success");
+                    toggleCommonPopup()
+                    setPopupTitle("Dealer Registered successfully");
+                    setPopupMsg("Please Activate your account with the link shared to the given email Id");
+                    setPopupType("success");
+                    setPopupActionType("redirect");
+                    setPopupActionValue("ok");
+                    setPopupActionPath("/login")
                 } else {
-                    history.push("emailerror");
+                    toggleCommonPopup()
+                    setPopupTitle("Error");
+                    setPopupMsg ("registration failed, Please try Again");
+                    setPopupType("error");
+                    setPopupActionType("close");
+                    setPopupActionValue("close");
                 }
             }, (error) => {
-                // setOpenLoader(false);
-                console.log(error);
+                toggleCommonPopup()
+                setPopupTitle("Error");
+                setPopupMsg(error," Please try Again");
+                setPopupType("error");
+                setPopupActionType("close");
+                setPopupActionValue("close");
             });
-
+    }
+    const getStateName=(stateData)=>{
+        setStateName(stateData)
     }
 
-    const setZipcodeNormal = (data) => {
-        if(data.length ===0 ){
-            setZipcodeId("")
-            setCityName('')
-            setStateName('') 
-        }
-        if(data.length==5 ){
-            setZipcodeId(data)
-        }
+    const getCityName=(cityData)=>{
+        setCityName(cityData)
     }
-    const setZipcodeGoogle = (data) => {
-        if(data.length ===0 ){
-            setZipcodeId("")
-            setCityName('')
-            setStateName('') 
-        }
-        if(data.length !=5 ){
-            setCityName('')
-            setStateName('') 
-        }
-        if(data.length==5 ){
-            setZipcodeId(data)
-            const request={zipcode_id: data}
-            API.post("location/condition", request)
-        .then(response => {
-            console.log("google place data response =>",response)
-            if (response.statusText== "OK"
-            ){
-                const {results} = response.data.data
-                if(results.length>0){
-                    console.log("google place data =>",response.data)
-                    console.log("CITY  ",results[0].address_components[1].long_name)
-                    console.log("STATE  ",results[0].address_components[1].long_name)
-                    setCityName( results[0].address_components[1].long_name)
-                    setStateName(results[0].address_components[3].long_name)                
-                }else{
-                    setCityName('')
-                    setStateName('') 
-                    console.log("please enter valid zipcode");
-                }
-               
-            }else{
-                console.log("something went wrong in address api..., try again")
-            }
-            
-        })
-        }
+
+    const getZipCodeId=(zipData)=>{
+        setZipcodeId(zipData)
     }
+
     return (
         <div>
-             
             <main id="main" className="inner-page">
                 <div className="col-lg-4 card loginBlock">
                     <form className="registrationform" onSubmit={registrationhandleSubmit} >
@@ -201,7 +131,6 @@ const Registration = () => {
                         <div className="tbox">
                             <input className="textbox " type="text" placeholder="" id="dealer_name" required maxLength="50" onChange={(e) => setDealerName(e.target.value)} />
 				            <label  for="dealer_name" className={dealerName !="" ? "input-has-value" : ""}>Dealer name</label>
-                            
 			            </div>
                         </div>
                         <div className="col-sm-12 form-group"> 
@@ -234,51 +163,14 @@ const Registration = () => {
                             <input className="textbox " type="text" placeholder="" id="address" maxLength="300" required onChange={(e) => setAddress(e.target.value)} />
 				            <label  for="address" className={address !="" ? "input-has-value" : ""}>Address</label>
 			            </div>
-                        </div>                           
-                           
-                            <div className="col-sm-4 form-group selectTbox">
-                                <div className="tbox">
-                                {zipCodeId == "" ?
-                                    (<select className="form-control custom-select browser-default textbox " required defaultValue={stateName} onChange={handleState}>
-                                        <option disabled>Select State</option>
-                                        {stateNameList.length>0 &&
-                                            <>
-                                                {stateNameList.map((state, index) => <option key={state.state_id} value={state.state_id}>{state.state_name}</option>)}
-                                            </>
-                                        }
-                                    </select> )
-                                    :
-                                    (<input type="text" className="form-control" placeholder="" value ={stateName} required />)}
-                                    <label  for="state_id" className={"input-has-value"}>State Name</label>
-                                </div>
-                            </div>
-                            <div className="col-sm-4 form-group selectTbox">
-                                <div className="tbox">
-                                {zipCodeId == "" ?
-                                    (<select id="City" className="form-control custom-select browser-default textbox" required defaultValue={cityName} onChange={handleCity}>
-                                        <option disabled>Select City</option>
-                                        {cityNameList.length>0 &&
-                                            <>
-                                                {cityNameList.map((city, index) => <option key={city.city_id} value={city.city_name}>{city.city_name}</option>)}
-                                            </>
-                                        }
-                                    </select>)
-                                    :
-                                    (<input type="text" className="form-control" placeholder="city" value ={cityName} required />)}
-                                    <label  for="city_id" className={"input-has-value"}>City Name</label>
-                                </div>
-                            </div>
-                            <div className="col-sm-4 form-group">
-                                <div className="tbox">
-                                {stateName!=="" && cityName !=="" ?
-                                    (<input type="text" className="form-control textbox" placeholder="" required maxLength="5" onChange={(e) => setZipcodeNormal(e.target.value)} />)
-
-                                    :(<input type="text" className="form-control textbox" placeholder="" required maxLength="5" onChange={(e) => setZipcodeGoogle(e.target.value)} />)}
-                                    <label  for="zipcode_id" className={"input-has-value"}>Zipcode</label>
-                                </div>
-                            </div>
-                            
-
+                        </div>        
+                        
+                        <StateAndCity 
+                            setStateValue = { getStateName } 
+                            setCityValue ={ getCityName }
+                            setZipcodeValue ={ getZipCodeId }
+                        />
+                         
                             <div className="col-sm-8 form-group">
                                 <div className="tbox">
                                 {/* {/ <lable for="drop" className={option !="" ? "input-has-value" : ""}>How many years in car business</lable> /} */}
@@ -324,13 +216,20 @@ const Registration = () => {
                                 <label for="chb" className="form-check-label"> I Agree for the <a href="JavaScript:void(0)" onClick={togglePopup}>Terms And Conditions</a>
                                 </label>
                                 {isOpen && <Popup
-      content={<>
-    
-            <Terms toggle={togglePopup} />
-
-      </>}
-      handleClose={togglePopup}
-    />}
+                                    content={<>
+                                        <Terms toggle={togglePopup} />
+                                    </>}
+                                    handleClose={togglePopup}
+                                />}
+                                {isCommonPopupOpen && <CommonPopup 
+                                    handleClose= {togglePopup}
+                                    popupTitle= {popupTitle}
+                                    popupMsg= {popupMsg}
+                                    popupType= {popupType}
+                                    popupActionType= {popupActionType}
+                                    popupActionValue= {popupActionValue}
+                                    popupActionPath={popupActionPath}
+                                />}
                             </div>
                             <div className="col-lg-12 loginBtn">
                                 <button className="cta-btn">Submit</button>
