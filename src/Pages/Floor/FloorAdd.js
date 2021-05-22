@@ -6,28 +6,25 @@ import ls from 'local-storage';
 // import '../../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import {
-    Form,
-    Input,
-    Select,
-    AutoComplete,
-    Radio,
-    notification,
-    Spin,
-} from 'antd';
-import Popup from '../../Component/Popup/Popup';
 
-import '../../Component/Popup/popup.css';
-
+import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 
 const FloorAdd = () => {
     const history = useHistory();   
     const [isOpen, setIsOpen] = useState(false);
+    const [isOpens, setIsOpens] = useState(false);
  
     const togglePopup = () => {
       setIsOpen(!isOpen);
     }
-    const [popupcontent,setPopupcontent] = useState ("");
+
+    const [popupTitle, setPopupTitle] = useState ("");
+    const [popupMsg, setPopupMsg] = useState ("");
+    const [popupType, setPopupType] = useState ("");
+    const [popupActionType, setPopupActionType] = useState ("");
+    const [popupActionValue, setPopupActionValue] = useState ("");
+    const [popupActionPath, setPopupActionPath] = useState ("")
+
     const userDetails=ls.get('userDetails');
     const [contactName, setContactName] = useState("");
     const [companyName, setCompanyName] = useState("");
@@ -69,14 +66,30 @@ const FloorAdd = () => {
                 if (response.data.success) {
                     const { data } = response;
                     togglePopup()
-			        setPopupcontent ("Floor Successfully Created")
+                    setPopupTitle("Create Floor");
+                    setPopupMsg("Floor Successfully Created");
+                    setPopupType("success");
+                    setPopupActionType("redirect");
+                    setPopupActionValue("ok");
+                    setPopupActionPath("/floor")
+
                 } else {
                     togglePopup()
-			        setPopupcontent ("Floor is not Created, Please try Again")
+                    setPopupTitle("Create Floor");
+                    setPopupMsg("Floor is not Created, Please try Again");
+                    setPopupType("error");
+                    setPopupActionType("close");
+                    setPopupActionValue("close");
                 }
             }, (error) => {
                 // setOpenLoader(false);
                 // console.log(error);
+                    togglePopup()
+                    setPopupTitle("Error");
+                    setPopupMsg(error," Please try Again");
+                    setPopupType("error");
+                    setPopupActionType("close");
+                    setPopupActionValue("close");
             });
 
     }
@@ -86,6 +99,8 @@ const FloorAdd = () => {
                 <div className="col-lg-4 card loginBlock flooraddform">
                     <form className="registrationform" onSubmit={registrationhandleSubmit} >
                     <button className="back-btn-paymentform" onClick={() => history.push("/floor")}>Back</button>
+                    <button type="button" className="back-btn-paymentform" onClick={()=>setIsOpen(true)}>testr</button>
+                    
                         <h2 className="title">Add Floor Plan </h2>
                         <div className="row">
                         <div className="col-sm-12 form-group"> 
@@ -185,43 +200,16 @@ const FloorAdd = () => {
                         </div>
                     </div>
                 </section>
-                {isOpen && <Popup
-      content={<>
-    
-    <div>
-            <main id="main" class="inner-page">
-                <div id="Successfullform" class="Successfullform">
-                    <div class="container">
-                        <div class="Successfullformblock col-lg-12">
-                            <div class="row content">
-                                <div class="modalcontent">
-                                    <div class="Successfull-icon">
-                                        {/* <img alt="" src={checkImg} /> */}
-                                    </div>
-                                    <div class="modalbody">
-	 									<h2>{popupcontent}</h2>
-                                        
-                                    </div>
-                                   
-
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </main>
-
-
-
-
-        </div>
-
-
-      </>}
-      handleClose={togglePopup}
-    />}
+                {isOpen && 
+                <CommonPopup 
+                    handleClose= {togglePopup}
+                    popupTitle= {popupTitle}
+                    popupMsg= {popupMsg}
+                    popupType= {popupType}
+                    popupActionType= {popupActionType}
+                    popupActionValue= {popupActionValue}
+                    popupActionPath={popupActionPath}
+                />}
             </main>
         </div>
 

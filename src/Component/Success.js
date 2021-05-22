@@ -2,9 +2,6 @@ import React from 'react';
 import { useHistory } from "react-router-dom";
 import checkImg from '../../src/assets/img/check.svg';
 
-
-
-
 const Success = () => {
     const history = useHistory();
     return (

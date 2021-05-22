@@ -26,6 +26,7 @@ const Notification = lazy(() => import ('./Pages/ManageAccount/Notification'));
 const Payment = lazy(() => import ('./Pages/ManageAccount/Payment'));
 const PaymentInfo = lazy(() => import('./Pages/ManageAccount/PaymentInfo'));
 const EditPayment = lazy(() => import('./Pages/ManageAccount/EditPayment'));
+const Footer = lazy(() => import('./Component/Footer'));
 
 function AppRouter() {
   return (
@@ -64,6 +65,7 @@ function AppRouter() {
             <Route  path="/cart" component={Inprogress}/>
             <Route  path="/chat" component={Inprogress}/>
           </Switch>
+          <Footer />
         </Suspense>
       </Router>
     </div>
