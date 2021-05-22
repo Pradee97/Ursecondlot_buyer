@@ -19,7 +19,6 @@ import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 const Payment = () => {
     const history = useHistory();
     const [isOpen, setIsOpen] = useState(false);
-    const [isOpens, setIsOpens] = useState(false);
  
     const togglePopup = () => {
       setIsOpen(!isOpen);
