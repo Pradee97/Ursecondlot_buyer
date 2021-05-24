@@ -78,7 +78,7 @@ const Registration = () => {
             local_flag: 0,
         };
         console.log("reg value=====",request)
-        return
+
         API.post("registration/add", request)
             .then((response) => {
                 if (response.data.success) {

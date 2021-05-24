@@ -25,6 +25,7 @@ const FloorAdd = () => {
     const [popupActionPath, setPopupActionPath] = useState ("")
 
     const userDetails=ls.get('userDetails');
+    const [option, setOption] = useState("");
     const [contactName, setContactName] = useState("");
     const [companyName, setCompanyName] = useState("");
     const [branchName, setBranchName] = useState("");
@@ -126,10 +127,12 @@ const FloorAdd = () => {
                             </div>
                             <div className="col-sm-3 form-group">
                             <div className="tbox">
-                            <select className="form-control textbox" >
-                            <option disabled>Currency</option>
+  
+                            <select className="form-control custom-select browser-default textbox" id="drop" placeholder="" required onChange={(e) => setOption(e.target.value)} >
                             <option value="$">$</option>
+                            {/* <option disabled>Currency</option> */}
                             </select>
+                            <label  for="no_years" className={"input-has-value"}>Currency</label>
                                 {/* <input type="text" className="form-control" placeholder="Currency" required /> */}
                                </div>
                             </div>
@@ -153,18 +156,18 @@ const FloorAdd = () => {
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
-                            <div className="tbox">
+                            <div className="tbox">                            
                                 <input type="number" id="phoneNumber" className="textbox" placeholder="" required onChange={(e) => setPhoneNumber(e.target.value)} />
                                 <label for="phoneNumber" className={phoneNumber !="" ? "input-has-value" : ""}>Phone Number</label>
                             </div>
-                            </div>
+                            </div>                           
                             <div className="col-sm-12 form-group">
-                            <div className="tbox">
+                            <div className="tbox">                                                       
                                 <input type="Date" id="dateOpened" className="textbox" placeholder="" required onChange={(e) => setDateOpened(e.target.value)} />
                                 <label for="dateOpened" className={dateOpened !="" ? "input-has-value" : ""}>Date Opened</label>
                             </div> 
                             </div>
-                    
+                                                     
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                             <select className="form-control textbox" required onChange={(e) => setAccountOpened(e.target.value)}>
