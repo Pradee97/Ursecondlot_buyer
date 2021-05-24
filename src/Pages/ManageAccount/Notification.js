@@ -1,15 +1,12 @@
 import React from 'react';
-import API from "../../Services/BaseService";
 import { useHistory } from "react-router-dom";
 import ls from 'local-storage';
-// import '../../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import {
-  Button
-} from 'antd';
+import {  Button } from 'antd';
+import API from "../../Services/BaseService";
+import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
 import Popup from '../../Component/Popup/Popup';
-
 import '../../Component/Popup/popup.css';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 
@@ -135,17 +132,7 @@ const Notification = () => {
 									
 							</div>
 						</div>
-						
-						<div className="mgaccountuserlinks">
-							<div className="userlinks">
-								<li><img src={process.env.PUBLIC_URL +"/images/Icon awesome-user.svg"} className="img-fluid" alt=""/><a href="/manageaccount">Account</a></li>
-								<li className="active"><img src={process.env.PUBLIC_URL +"/images/Icon awesome-bell.svg"} className="img-fluid" alt=""/><a href="/notification">Notification</a></li>
-								<li><img src={process.env.PUBLIC_URL +"/images/dollar-symbol.svg"} className="img-fluid" alt=""/><a href="/paymentinfo">Payment</a></li>
-								<li><img src={process.env.PUBLIC_URL +"/images/fees.svg"} className="img-fluid" alt=""/><a href="/lotfee">Lot Fee</a></li>
-								<li><img src={process.env.PUBLIC_URL +"/images/google-docs.svg"} className="img-fluid" alt=""/><a href="/document">Document</a></li>
-								<li><img src={process.env.PUBLIC_URL +"/images/profile.svg"} className="img-fluid" alt=""/><a href="adduser.html">Add User</a></li>
-							</div>
-						</div>
+						<ManageAccountLinks />
 					</div>
 					<div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 notificationaccountrightblock">
 						<div className="notificationrighttableblock"> 
