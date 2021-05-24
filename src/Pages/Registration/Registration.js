@@ -77,7 +77,7 @@ const Registration = () => {
             no_years: option,
             local_flag: 0,
         };
-       
+        console.log("reg value=====",request)
         
         API.post("registration/add", request)
             .then((response) => {

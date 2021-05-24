@@ -72,7 +72,7 @@ const FloorPlans = () => {
                        <tr>
                            <th colspan="2" scope="colgroup">Floor plan {index+1}
                            <div className="editbutton">
-                           {/* <Button onClick={() => onHandleEdit(item.floor_plan_id)}  >Edit</Button> */}
+                           {/* <Button onClick={() => onHandleEdit(item.floor_plan_id)}  >Edit</Button></div></th> */}
                            </div></th>
                            {/* <a className="editicon" onClick={() => onHandleEdit(item.floor_plan_id)}><Icon type="edit" theme = "filled"/></a></div></th> */}
 
@@ -88,6 +88,7 @@ const FloorPlans = () => {
                      </tr>
                     <tr>
                        <td>Branch Name <span>{item.branch_name}</span></td>
+                       {/* <td>Floor Plan Credit Limit <span>$3000</span></td> */}
                        <td>Floor Plan Credit Limit <span>{item.credit_limit}</span></td>
                      </tr>
                      <tr>
