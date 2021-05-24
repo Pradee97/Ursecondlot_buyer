@@ -122,7 +122,7 @@ const StateAndCity = props => {
 
 return (
     <>
-        <div className="col-sm-4 form-group">
+        <div className="col-sm-4 form-group selectTbox">
             <div className="tbox">
                 {zipCodeId == "" ?
                     (<div className="selcetclass"> 
@@ -134,19 +134,19 @@ return (
                             </>
                         }
                     </select>
-                    <label  for="state_id" className={stateName!="" ? "input-has-value" : ""}>State Name</label>
+                    <label  for="state_id" className={"input-has-value"}>State</label>
                     </div>
                      )
                     :
                     (<>
                         <input type="text" className="form-control textbox" placeholder="" value ={stateName} required />
-                        <label  for="state_id" className={stateName!="" ? "input-has-value" : ""}>State Name</label>
+                        <label  for="state_id" className={"input-has-value"}>State</label>
                     </>)
                 }
                
             </div>
         </div>
-        <div className="col-sm-4 form-group">
+        <div className="col-sm-4 form-group selectTbox">
             <div className="tbox">
                 {zipCodeId == "" ?
                 (<div className="selcetclass"> 
@@ -158,13 +158,13 @@ return (
                             </>
                         }
                     </select>
-                    <label  for="city_id" className={cityName!="" ? "input-has-value" : ""}>City Name</label>
+                    <label  for="city_id" className={"input-has-value"}>City</label>
                 </div>
                 )
                 :
                 (<>
                     <input type="text" className="form-control textbox" placeholder="" value ={cityName} required />
-                    <label  for="city_id" className={cityName!="" ? "input-has-value" : ""}>City Name</label>
+                    <label  for="city_id" className={"input-has-value"}>City</label>
                 </>
                     )}
                 
@@ -176,7 +176,7 @@ return (
                 (<input type="text" className="form-control textbox" placeholder="" required maxLength="5" onChange={(e) => setZipcodeNormal(e.target.value)} />)
 
                 :(<input type="text" className="form-control textbox" placeholder="" required maxLength="5" onChange={(e) => setZipcodeGoogle(e.target.value)} />)}
-                <label  for="zipcode_id" className={zipCodeId!="" ? "input-has-value" : ""}>Zipcode</label>
+                <label  for="zipcode_id" className={"input-has-value"}>Zipcode</label>
             </div>
         </div>
     </>

@@ -76,9 +76,7 @@ const Registration = () => {
             zipcode_id: zipCodeId,
             no_years: option,
             local_flag: 0,
-        };
-        console.log("reg value=====",request)
-        
+        };        
         API.post("registration/add", request)
             .then((response) => {
                 if (response.data.success) {
@@ -185,7 +183,7 @@ const Registration = () => {
                                 <option value="More then 20">More then 20</option>
                                 </select>
 
-                                <label  for="no_years" className={option!="" ? "input-has-value" : ""}>How many years in car business</label>
+                                <label  for="no_years" className={"input-has-value"}>How many years in car business</label>
                                 </div>
                             </div>
 
@@ -205,7 +203,7 @@ const Registration = () => {
                                 </div>
                                 </div>
                             </div>
-                            <div className="col-sm-6 form-group">
+                            <div className="col-sm-6 form-group timepicker">
                             <div className="tbox">
                                 <input type="time" className="form-control textbox" placeholder="Select Time" required onChange={(e) => setTime(e.target.value)} />
                                 <label  for="meeting_time" className={time!="" ? "input-has-value" : ""}>Select Time</label>
