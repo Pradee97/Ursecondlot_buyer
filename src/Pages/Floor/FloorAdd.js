@@ -2,11 +2,9 @@ import React from 'react';
 import API from "../../Services/BaseService";
 import { useHistory } from "react-router-dom";
 import ls from 'local-storage';
-
-// import '../../assets/css/styles.css';
+import Datetime from 'react-datetime';
 import { useState } from 'react';
 import { useEffect } from 'react';
-
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 
 const FloorAdd = () => {
@@ -42,7 +40,18 @@ const FloorAdd = () => {
     // const [zipCodeId, setZipcodeId] = useState("");
     // const [numberOfYears, setNumberofYears] = useState("");
    
-  
+    const inputProps = {
+        placeholder: 'DD/MM/YYYY',
+        required:true
+    };
+
+    const floorDate = (event) => {
+        setDateOpened(event.format("YYY-MM-DD"))
+    }
+
+    // const openDatepicker = (event)=>{
+    //     event._calendar.setOpen(true)
+    // }
     const registrationhandleSubmit = (event) => {
         // setOpenLoader(true);
         event.preventDefault();
@@ -61,6 +70,8 @@ const FloorAdd = () => {
             active:1
             
         }];
+        console.log("===",request)
+        return
         API.post("floor_plan/add", request)
             .then((response) => {
                 if (response.data.success) {
@@ -161,11 +172,16 @@ const FloorAdd = () => {
                                 <label for="phoneNumber" className={phoneNumber !="" ? "input-has-value" : ""}>Phone Number</label>
                             </div>
                             </div>                           
-                            <div className="col-sm-12 form-group">
-                            <div className="tbox">                                                       
-                                <input type="Date" id="dateOpened" className="textbox" placeholder="" required onChange={(e) => setDateOpened(e.target.value)} />
-                                <label for="dateOpened" className={dateOpened !="" ? "input-has-value" : ""}>Date Opened</label>
-                            </div> 
+                            <div className="col-sm-12 form-group datePickerBlock">
+                                <div className="tbox">
+                                    <div className="textbox">
+                                        <i class='bx bx-calendar' ></i>                                                     
+                                        {/* <input type="Date" id="dateOpened" className="textbox" placeholder="" required onChange={(e) => setDateOpened(e.target.value)} />
+                                        <label for="dateOpened" className={dateOpened !="" ? "input-has-value" : ""}>Date Opened</label>  */}
+                                         <Datetime inputProps={ inputProps } timeFormat={false} dateFormat="DD/MM/YYYY" onChange={floorDate}/> 
+                                        <label  for="meeting_date" className={dateOpened!="" ? "input-has-value" : ""}>Date Opened</label> 
+                                    </div>
+                                </div> 
                             </div>
                                                      
                             <div className="col-sm-12 form-group">
