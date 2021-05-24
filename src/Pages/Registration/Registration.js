@@ -216,6 +216,7 @@ const Registration = () => {
                                 <label for="chb" className="form-check-label"> I Agree for the <a href="JavaScript:void(0)" onClick={togglePopup}>Terms And Conditions</a>
                                 </label>
                                 {isOpen && <Popup
+                                    isClose={false}
                                     content={<>
                                         <Terms toggle={togglePopup} />
                                     </>}

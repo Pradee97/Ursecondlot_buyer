@@ -31,7 +31,8 @@ const Home = () => {
           <button className="btn-get-started scrollto" type="button" onClick={togglePopup}>Become a Dealer</button>
    
           {isOpen && <Popup
-      content={<>
+            isClose={true}
+            content={<>
     
     <div className="modals">
 		  <div className="modals-dialog modals-dialog-centered popupmodel">
