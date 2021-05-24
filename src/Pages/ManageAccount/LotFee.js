@@ -37,7 +37,7 @@ const LotFee = () => {
     const [popupActionPath, setPopupActionPath] = useState ("")
 
     const [lotfee, setLotfee] = useState("");
-    const [lotValue,setLotValue] = useState("");
+    const [lotValue,setLotValue] = useState({lot_fee:0});
     const [popupcontent,setPopupcontent] = useState ("");
     let userDetails = ls.get('userDetails');
     console.log("======12345====>",ls.get('userDetails'))
@@ -145,7 +145,7 @@ const LotFee = () => {
                        <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard </p>
                            <div className="form-group col-lg-6 col-md-6 lotfee-form">
                                <div className="input-icon">
-                                 <input type="text" className="form-control" defaultValue={lotValue===undefined?"":lotValue.lot_fee}  onChange={(e) => setLotfee(e.target.value)}/> 
+                                 <input type="text" className="form-control" defaultValue={lotValue===undefined?0:lotValue.lot_fee}  onChange={(e) => setLotfee(e.target.value)}/> 
                                    <i>$</i>
                                </div>
                            </div>

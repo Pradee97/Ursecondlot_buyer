@@ -134,13 +134,13 @@ return (
                             </>
                         }
                     </select>
-                    <label  for="state_id" className={"input-has-value"}>State Name</label>
+                    <label  for="state_id" className={"input-has-value"}>State</label>
                     </div>
                      )
                     :
                     (<>
                         <input type="text" className="form-control textbox" placeholder="" value ={stateName} required />
-                        <label  for="state_id" className={"input-has-value"}>State Name</label>
+                        <label  for="state_id" className={"input-has-value"}>State</label>
                     </>)
                 }
                
@@ -158,13 +158,13 @@ return (
                             </>
                         }
                     </select>
-                    <label  for="city_id" className={"input-has-value"}>City Name</label>
+                    <label  for="city_id" className={"input-has-value"}>City</label>
                 </div>
                 )
                 :
                 (<>
                     <input type="text" className="form-control textbox" placeholder="" value ={cityName} required />
-                    <label  for="city_id" className={"input-has-value"}>City Name</label>
+                    <label  for="city_id" className={"input-has-value"}>City</label>
                 </>
                     )}
                 
