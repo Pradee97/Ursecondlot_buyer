@@ -77,7 +77,7 @@ const Submenu = () => {
       <header id="header" className="">
         <div className="container-fluid d-flex align-items-center">
 
-          <h1 className="logo mr-auto" ><img src={LogoImg} onClick={logoNavigation}></img></h1>
+          <a href="#" className="logo mr-auto" ><img src={LogoImg} onClick={logoNavigation}></img></a>
           <nav className="nav-menu d-none d-lg-block nav">
           {localStorage.getItem("islogedIn") === "true" ?
 
