@@ -45,7 +45,7 @@ const PaymentInfo = () => {
                     <div className="container" >
                         <div className="paymentaccountblock col-lg-12">
                             <div className="section-title">
-                                <h2>Payment Summary</h2>
+                                <h2>Financials</h2>
                             </div>
                             <div className="row content">
                                 <div className="col-lg-3 col-md-4 col-sm-12 accountleftblock">
@@ -68,7 +68,7 @@ const PaymentInfo = () => {
                                             <li><img src={process.env.PUBLIC_URL +"/images/Icon awesome-bell.svg"} className="img-fluid" alt="" /><a href="/notification">Notification</a></li>
                                             <li className="active"><img src={process.env.PUBLIC_URL +"/images/dollar-symbol.svg"} className="img-fluid" alt="" /><a href="/paymentinfo">Payment</a></li>
                                             <li><img src={process.env.PUBLIC_URL +"/images/fees.svg"} className="img-fluid" alt="" /><a href="/lotfee">Lot Fee</a></li>
-                                            <li><img src={process.env.PUBLIC_URL +"/images/google-docs.svg"} className="img-fluid" alt="" /><a href="documents.html">Document</a></li>
+                                            <li><img src={process.env.PUBLIC_URL +"/images/google-docs.svg"} className="img-fluid" alt="" /><a href="/document">Document</a></li>
                                             <li><img src={process.env.PUBLIC_URL +"/images/profile.svg"} className="img-fluid" alt="" /><a href="adduser.html">Add User</a></li>
                                         </div>
                                     </div>
@@ -88,7 +88,7 @@ const PaymentInfo = () => {
                                             <div className="bankinfos">
                                                 <h4>Bank Account Information</h4>
                                                 <div className="bankinfotable">
-                                                <Button onClick={() => onHandleEdit(item.payment_info_id)}>Edit</Button>
+                                                {/* <Button onClick={() => onHandleEdit(item.payment_info_id)}>Edit</Button> */}
                                                     <table>
                                                         <tr>
                                                             <td><span>Dealership Name</span></td>
@@ -121,8 +121,8 @@ const PaymentInfo = () => {
                                                             <div className="col-sm-12">
                                                                 <p>Signed bank Authorization letter for bank to release information. </p>
                                                             <div className="uploadbutton">                                                              
-                                                                    <input type="file" id="downupload" hidden />
-                                                                    <label for="downupload"><img src={process.env.PUBLIC_URL +"/images/download.png"} />Document</label>
+                                                            <a href={item.doc_name}>
+                                                                    <label for="downupload"><img src={process.env.PUBLIC_URL +"/images/download.png"} />Document</label></a>
                                                             </div>
                                                             </div>
                                                         </div>

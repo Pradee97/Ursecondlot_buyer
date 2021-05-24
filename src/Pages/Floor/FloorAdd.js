@@ -157,7 +157,7 @@ const FloorAdd = () => {
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">                            
-                                <input type="number" id="phoneNumber" className="textbox" placeholder="" required onChange={(e) => setPhoneNumber(e.target.value)} />
+                                <input type="text" id="phoneNumber" className="textbox" placeholder="" required onChange={(e) => setPhoneNumber(e.target.value)} />
                                 <label for="phoneNumber" className={phoneNumber !="" ? "input-has-value" : ""}>Phone Number</label>
                             </div>
                             </div>                           

@@ -27,6 +27,7 @@ const Notification = lazy(() => import ('./Pages/ManageAccount/Notification'));
 const Payment = lazy(() => import ('./Pages/ManageAccount/Payment'));
 const PaymentInfo = lazy(() => import('./Pages/ManageAccount/PaymentInfo'));
 const EditPayment = lazy(() => import('./Pages/ManageAccount/EditPayment'));
+// const Document = lazy(() => import('./Pages/ManageAccount/Document'));
 const Footer = lazy(() => import('./Component/Footer'));
 
 function AppRouter() {
@@ -61,6 +62,7 @@ function AppRouter() {
             <Route  path="/payment" component={Payment}/>
             <Route  path="/paymentinfo" component={PaymentInfo}/>
             <Route  path="/editpayment/:id" component={EditPayment}/>
+            {/* <Route  path="/document" component={Document}/> */}
             <Route  path="/favorite" component={Inprogress}/>
             <Route  path="/history" component={Inprogress}/>
             <Route  path="/cart" component={Inprogress}/>

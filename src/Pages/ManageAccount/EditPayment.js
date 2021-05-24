@@ -42,14 +42,15 @@ const EditPayment = () => {
     const [ACHnumber, setACHNumber] = useState("");
     const [routingNumber, setRoutingNumber] = useState("");
     const [bankAddress, setBankAddress] = useState("");
-    // const [cityName, setCityName] = useState("");
-    // const [stateName, setStateName] = useState("");
-    // const [zipCodeId, setZipcodeId] = useState("");
+    const [cityName, setCityName] = useState("");
+    const [stateName, setStateName] = useState("");
+    const [zipCodeId, setZipcodeId] = useState("");
     const [accountHolderAddress, setAccountHolderAddress] = useState("");
-    // const [accountCityName, setAccountCityName] = useState("");
-    // const [accountStateName, setAccountStateName] = useState("");
-    // const [accountZipcodeId, setAccountZipcodeId] = useState("");
+    const [accountCityName, setAccountCityName] = useState("");
+    const [accountStateName, setAccountStateName] = useState("");
+    const [accountZipcodeId, setAccountZipcodeId] = useState("");
     let userDetails = ls.get('userDetails');
+    const [doc,setDoc]=useState("");
 
     async function fetchpaymentDetails() {
          let request = {
@@ -67,9 +68,14 @@ const EditPayment = () => {
             setBankAddress(res.data.data.bank_address);
             setAccountHolderAddress(res.data.data.acc_address);
             setPaymentObj(res.data.data);
+           
         })
             .catch(err => { console.log(err); });
     }
+
+    const onFileChange = (event) => {
+        setDoc(event.target.files[0])      
+      };
 
     const updatepaymentinfo = (event) => {
         // setOpenLoader(true);
@@ -84,13 +90,13 @@ const EditPayment = () => {
             ach_no: ACHnumber,
             routing_no: routingNumber,
             bank_address: bankAddress,
-            // state_id: stateName,
-            // city_id: cityName,
-            // zipcode: zipCodeId,
+            state_id: stateName,
+            city_id: cityName,
+            zipcode: zipCodeId,
             acc_address: accountHolderAddress,
-            // acc_state_id: accountStateName,
-            // acc_city_id: accountCityName,
-            // acc_zipcode: accountZipcodeId
+            acc_state_id: accountStateName,
+            acc_city_id: accountCityName,
+            acc_zipcode: accountZipcodeId,
             active:1
         };
         API.put("payment_info/edit"+payment_info_id, request)
@@ -225,12 +231,12 @@ const EditPayment = () => {
                                                     <input type="text"  defaultValue={paymentObjc.bank_address} className="form-control" placeholder="" required onChange={(e) => setBankAddress(e.target.value)} />
                                                     </div>
                                                     </div>
-                                                    {/* <div className="col-sm-4 form-group">
+                                                    <div className="col-sm-4 form-group">
                                                         <div className="tbox">
                                                             <select id="state" className="form-control custom-select browser-default">
                                                                 <option value="US">State</option>
                                                             </select>
-                                                            <input type="text"  defaultValue={paymentObjc.state_id} className="form-control" placeholder="State" required onChange={(e) => setStateName(e.target.value)} />
+                                                            {/* <input type="text"  defaultValue={paymentObjc.state_id} className="form-control" placeholder="State" required onChange={(e) => setStateName(e.target.value)} /> */}
                                                         </div>
                                                     </div>
                                                     <div className="col-sm-4 form-group">
@@ -238,7 +244,7 @@ const EditPayment = () => {
                                                             <select id="city" className="form-control custom-select browser-default">
                                                                 <option value="USA">City</option>
                                                             </select>
-                                                            <input type="text"  defaultValue={paymentObjc.city_id} className="form-control" placeholder="City" required onChange={(e) => setCityName(e.target.value)} />
+                                                            {/* <input type="text"  defaultValue={paymentObjc.city_id} className="form-control" placeholder="City" required onChange={(e) => setCityName(e.target.value)} /> */}
                                                         </div>
                                                     </div>
 
@@ -247,9 +253,9 @@ const EditPayment = () => {
                                                             <select id="zipcode" className="form-control custom-select browser-default">
                                                                 <option value="USA">Zipcode</option>
                                                             </select>
-                                                            <input type="text"  defaultValue={paymentObjc.zipcode} className="form-control" placeholder="Zipcode" required onChange={(e) => setZipcodeId(e.target.value)} />
+                                                            {/* <input type="text"  defaultValue={paymentObjc.zipcode} className="form-control" placeholder="Zipcode" required onChange={(e) => setZipcodeId(e.target.value)} /> */}
                                                         </div>
-                                                    </div> */}
+                                                    </div>
 
                                                     <div className="col-sm-12 form-group">
                                                     <div className="tbox">
@@ -258,12 +264,12 @@ const EditPayment = () => {
                                                     </div>
                                                     </div>
 
-                                                    {/* <div className="col-sm-4 form-group">
+                                                    <div className="col-sm-4 form-group">
                                                         <div className="tbox">
                                                             <select id="state" className="form-control custom-select browser-default">
                                                                 <option value="US">State</option>
                                                             </select>
-                                                            <input type="text"  defaultValue={paymentObjc.acc_state_id} className="form-control" placeholder="State" required onChange={(e) => setAccountStateName(e.target.value)} />
+                                                            {/* <input type="text"  defaultValue={paymentObjc.acc_state_id} className="form-control" placeholder="State" required onChange={(e) => setAccountStateName(e.target.value)} /> */}
                                                         </div>
                                                     </div>
                                                     <div className="col-sm-4 form-group">
@@ -271,7 +277,7 @@ const EditPayment = () => {
                                                             <select id="city" className="form-control custom-select browser-default">
                                                                 <option value="USA">City</option>
                                                             </select>
-                                                            <input type="text"  defaultValue={paymentObjc.acc_city_id} className="form-control" placeholder="City" required onChange={(e) => setAccountCityName(e.target.value)} />
+                                                            {/* <input type="text"  defaultValue={paymentObjc.acc_city_id} className="form-control" placeholder="City" required onChange={(e) => setAccountCityName(e.target.value)} /> */}
                                                         </div>
                                                     </div>
 
@@ -282,7 +288,7 @@ const EditPayment = () => {
                                                             </select>
                                                             <input type="text"  defaultValue={paymentObjc.acc_zipcode} className="form-control" placeholder="Zipcode" required onChange={(e) => setAccountZipcodeId(e.target.value)} />
                                                         </div>
-                                                    </div> */}
+                                                    </div>
 
                                                     <div className="col-sm-6 form-group">
                                                         <p>Signed bank Authorization letter for bank to release information. </p>
@@ -291,7 +297,7 @@ const EditPayment = () => {
 
 
                                                     <div className="col-sm-6 form-group uploadbutton">
-                                                            <input type="file" id="upload" hidden />
+                                                    <input type="file" id="upload" hidden onChange={onFileChange} />
                                                             <label for="upload"><img src={process.env.PUBLIC_URL +"/images/upload.png"} />Upload Document</label>
                                                     </div>
                                                     <div className="col-lg-12 loginBtn">
