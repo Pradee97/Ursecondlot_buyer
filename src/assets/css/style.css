@@ -40,6 +40,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Poppins', sans-serif;
 }
 
+
 /*--------------------------------------------------------------
 # Preloader
 --------------------------------------------------------------*/
@@ -5767,7 +5768,7 @@ Add Users
     position: relative;
     cursor: pointer;
 	color: #707070;
-	font-size:20px;
+	font-size:18px;
 }
 .adduserpageforminner .form-group input {
     padding: 0;
@@ -5790,6 +5791,26 @@ Add Users
     margin-right: 5px;
     background: #fff;
     border: 1px solid #707070;
+}
+.adduserpageforminner .form-group input:checked + label::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 8px;
+  left: 9px;
+  width: 6px;
+  height: 14px;
+  border: solid #bd062c;
+      border-top-width: medium;
+      border-right-width: medium;
+      border-bottom-width: medium;
+      border-left-width: medium;
+  border-top-width: medium;
+  border-right-width: medium;
+  border-bottom-width: medium;
+  border-left-width: medium;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
 }
 
 .adduserpage-inner {  
@@ -5886,4 +5907,152 @@ ul.ant-pagination li{
 }
 .timepicker .tbox .textbox + label{
   font-size: 16px;
+}
+
+/*--------------------------------------------------------
+Manage Account
+__________________________________________________________*/
+
+.userlinks a:hover, .userlinks .active > a, .userlinks li:hover > a {
+  color: #BD062C;
+}
+.myprofilerighttable table{
+border: none;
+border-collapse: collapse;
+margin: 0;
+padding: 0;
+width: 100%;
+
+
+}
+.myprofilerighttable table tr {
+  border:none;
+  padding: .35em;
+}
+.myprofilerighttable table td {
+  width: 40%;
+  color: #343434;
+  text-align: left;
+  padding-left: 20px;
+  font-weight: 500;
+  font-size: 16px;
+border-left: none;
+border-right: none;
+font-weight: 500;
+}
+.myprofilerighttable table td span {
+  color: #707070;
+  font-size: 16px;
+  font-weight: 500;
+  width: 60%;
+  float: right;
+}
+.myprofilerighttableblock h3{
+text-align:center;
+display:block;
+font-size:20px;
+color: #343434;
+}
+.myprofilerighttableblock h3 span{
+float:right;
+color: #BD062C;	
+}
+.myprofilerighttableblock p{
+text-align:center;
+display:block;
+color: #343434;	
+font-size:16px;
+}
+.myprofilerighttableblock{
+margin: 0 auto;
+word-wrap: break-word;
+background-color: #fff;
+background-clip: border-box;
+box-shadow: 0px 3px 6px #00000029;
+border-radius: .25rem;
+padding: 30px;
+}
+.myprofilerighttableblock h4{
+color: #343434;
+font-size:16px;
+margin-top:10px;
+padding-left: 20px;
+}
+.myprofilerighttableblock h5{
+color: #707070;
+font-size:16px;
+margin-top:10px;
+padding-left: 20px;
+}
+/*----------------------------------------------------
+Users
+------------------------------------------------------*/
+
+.filtersblock {
+  margin: 0 auto;
+  padding: 0 auto;
+  text-align: center;
+  display: block;
+  color: #B8B8B8;
+}
+.filtersblock .searchbox {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+.userlisttableblock {
+  text-align: center;
+  margin: auto;
+  padding: 0;
+}
+.add-user {
+  float: right;
+  display: block;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.add-user .add-user-btns {
+  color: B6062A;
+  padding: 10px 20px;
+  margin-right: 0px;
+  border-radius: 5px;
+  border: 2px solid #B6062A;
+  font-size: 16px;
+}
+.userlisttable table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  box-shadow: 0px 3px 6px #00000029;
+}
+
+.userlisttable table th {
+  background:#2C5BAA;
+  color: #fff;
+  font-size: 17px;
+  padding: 20px 10px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+.userlisttable table {
+  border-collapse: collapse;
+}
+.userlisttable table tr {
+  border-bottom: 1px solid #ddd;
+  background: #fff;
+}
+
+.userlisttable table td {
+  color: #919191;
+  padding-left: 20px;
+  font-size: 14px;
+  text-align: center;
+  padding: 30px 20px;
+  border-right: 1px solid #ddd;
+}
+.userlisttable table td .cartitlename {
+  color: #002768;
+  font-size: 14px;
+  font-weight: 500;
 }
