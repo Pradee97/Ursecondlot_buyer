@@ -71,14 +71,14 @@ const FloorAdd = () => {
             
         }];
         console.log("===",request)
-        return
+        // return
         API.post("floor_plan/add", request)
             .then((response) => {
                 if (response.data.success) {
                     const { data } = response;
                     togglePopup()
                     setPopupTitle("Create Floor");
-                    setPopupMsg("Floor Successfully Created");
+                    setPopupMsg("Floor is successfully created.Thanks you So much for your business");
                     setPopupType("success");
                     setPopupActionType("redirect");
                     setPopupActionValue("ok");

@@ -225,7 +225,7 @@ const Payment = () => {
                                 </div>
                                 <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 paymentrightblock">
                                     <div className="paymentdetailblock">
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</p>
+                                        <p>Thank you for providing us the information of your bank system. We going to use this for make charegs to your account when you purchase a car.To assure easy transaction for your business</p>
 
 
                                         <div className="paymentform col-lg-12">
@@ -243,7 +243,7 @@ const Payment = () => {
                                                     <div className="col-sm-12 form-group">
                                                         <div className="tbox">
                                                             <input type="text" className="textbox" name="fname" id="name-f" placeholder="" required  onChange={(e) => setAccountHolderName(e.target.value)} />
-                                                            <label for="name-f" className={accountHolderName !="" ? "input-has-value" : ""}>Account holder name</label>
+                                                            <label for="name-f" className={accountHolderName !="" ? "input-has-value" : ""}>Signer on account"</label>
                                                         </div>
                                                     </div>
 
