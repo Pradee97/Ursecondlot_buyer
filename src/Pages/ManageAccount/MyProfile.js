@@ -3,7 +3,6 @@ import { useHistory , useParams} from "react-router-dom";
 import { useState } from 'react';
 import { useEffect } from 'react';
 import API from "../../Services/BaseService";
-import API from "../../Services/BaseService";
 import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
 
 const MyProfile = () => {

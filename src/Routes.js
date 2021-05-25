@@ -29,6 +29,9 @@ import PaymentInfo from './Pages/ManageAccount/PaymentInfo';
 import EditPayment from './Pages/ManageAccount/EditPayment';
 import Footer from './Component/Footer';
 // import Document from './Pages/ManageAccount/Document';
+import Buyers from './Pages/ManageAccount/Buyers';
+import AddUser from './Pages/ManageAccount/AddUser';
+import MyProfile  from './Pages/ManageAccount/MyProfile';
 
 
 function AppRouter() {
@@ -68,6 +71,9 @@ function AppRouter() {
             <Route  path="/history" component={Inprogress}/>
             <Route  path="/cart" component={Inprogress}/>
             <Route  path="/chat" component={Inprogress}/>
+            <Route  path="/buyers" component={Buyers}/>
+            <Route  path="/adduser" component={AddUser}/>
+            <Route  path="/myprofile" component={MyProfile}/>
           </Switch>
           <Footer />
         {/* </Suspense> */}
