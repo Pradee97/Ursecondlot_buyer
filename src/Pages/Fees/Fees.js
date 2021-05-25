@@ -52,7 +52,7 @@ const Fees = () => {
                         <div className="feesblock col-lg-12">
                             <div className="section-title">
                                 <h2>FEES</h2>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+                                <p>Thank you for interesting in our platform, We wish you make money and come back to buy more cars</p>
                             </div>
                             <div className="row content">
                                 <div className="col-lg-6 pt-4 pt-lg-0 feestableBlock">
