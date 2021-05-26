@@ -4765,10 +4765,6 @@ vehicles Summary
 Manage Account
 __________________________________________________________*/
 
-.userlinks a:hover, .userlinks .active > a, .userlinks li:hover > a {
-    color: #BD062C;
-}
-
 .userlinks {
   text-align: left;
 }
