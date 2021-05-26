@@ -1,0 +1,232 @@
+import React from 'react';
+import API from "../../Services/BaseService";
+import { useHistory,useParams } from "react-router-dom";
+// import '../../assets/css/styles.css';
+import { useState } from 'react';
+import { useEffect } from 'react';
+
+import CommonPopup from '../../Component/CommonPopup/CommonPopup';
+
+import {
+    Form,
+    Input,
+    Select,
+    AutoComplete,
+    Radio,
+    notification,
+    Spin,
+} from 'antd';
+import ls from 'local-storage';
+
+const EditMyProfile = () => {
+    const history = useHistory();
+    const { id } = useParams();
+    const userDetails=ls.get('userDetails');
+    const [myProfileObjc, setMyProfileObj] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [primaryPhone, setPrimaryPhone] = useState("");
+    const [mobilePhone, setMobilephone] = useState("");
+    const [emailId, setEmailId] = useState("");
+    const [address, setAddress] = useState("");
+    const [city, setCity] = useState("");
+    const [state, setState] = useState("");
+    const [zipcde, setZipcode] = useState("");
+    const [locationName, setLocationName] = useState("");
+    const [isOpen, setIsOpen] = useState(false);
+    
+    const togglePopup = () => {
+        setIsOpen(!isOpen);
+      }
+
+    const [popupTitle, setPopupTitle] = useState ("");
+    const [popupMsg, setPopupMsg] = useState ("");
+    const [popupType, setPopupType] = useState ("");
+    const [popupActionType, setPopupActionType] = useState ("");
+    const [popupActionValue, setPopupActionValue] = useState ("");
+    const [popupActionPath, setPopupActionPath] = useState ("")
+
+    async function fetchMyProfileDetails() {
+        
+        const state = API.get('floor_plan/'+id);
+        state.then(res => {
+            console.log("res", res.data.data)
+            setFirstName(res.data.data.first_name);
+            setLastName(res.data.data.last_name);
+            setPrimaryPhone(res.data.data.phone_no);
+            setMobilephone(res.data.data.phone_no);           
+            setEmailId(res.data.data.email);
+            setAddress(res.data.data.address);
+            setCity(res.data.data.city_id);
+            setState(res.data.data.state_id);
+            setZipcode(res.data.data.zipcode_id); 
+            setLocationName(res.data.data.address);
+            setMyProfileObj(res.data.data);
+        })
+            .catch(err => { console.log(err); });
+    }
+  
+    const updateMyProfile = (event) => {
+        // setOpenLoader(true);
+        event.preventDefault();        
+    
+        let request = {
+            first_name: firstName,
+            last_name: lastName,
+            phone_no: primaryPhone,
+            phone_no: mobilePhone,           
+            email: emailId,
+            address: address,
+            city_id: city,
+            state_id: state,
+            zipcode_id: zipcde,
+            address: locationName,
+            active:1,
+            buyer_id: userDetails.user_id
+           
+        };
+        API
+            .put("floor_plan/"+id, request)
+            .then((response) => {
+                if (response.data.success) {
+                    const { data } = response;
+                    console.log("response", response)
+                    // history.push("/success");
+                    togglePopup()
+                    setPopupTitle("Edit My Profile");
+                    setPopupMsg("Profile Successfully Edited");
+                    setPopupType("success");
+                    setPopupActionType("redirect");
+                    setPopupActionValue("ok");
+                    setPopupActionPath("/myprofile")
+                } else {
+                    // history.push("emailerror");
+                    togglePopup()
+                    setPopupTitle("Edit Profile");
+                    setPopupMsg("Profile is not Edited, Please try Again");
+                    setPopupType("error");
+                    setPopupActionType("close");
+                    setPopupActionValue("close");
+                }
+            }, (error) => {
+                // setOpenLoader(false);
+                // console.log(error);
+                togglePopup()
+                setPopupTitle("Error");
+                setPopupMsg(error," Please try Again");
+                setPopupType("error");
+                setPopupActionType("close");
+                setPopupActionValue("close");
+            });
+
+    }
+
+    useEffect(() => {
+        fetchMyProfileDetails();
+    }, []);
+    return (
+        <div>
+            <main id="main" className="inner-page">
+                <div className="col-lg-4 card loginBlock myprofileeditform">
+                    <form className="registrationform" onSubmit={updateMyProfile} >
+                    <button className="back-btn-paymentform" onClick={() => history.push("/myprofile")}>Back</button>
+                        <h2 className="title"> Edit My Profile </h2>
+                        <div className="row">
+                        
+                            <div className="col-sm-12 form-group">
+                            <div className="tbox">                           
+                                <input type="text"  defaultValue={myProfileObjc.first_name} className="form-control textbox" placeholder="" required onChange={(e) => setFirstName(e.target.value)} />
+                                <label for="first_name" className={firstName !="" ? "input-has-value" : ""}>First Name</label>
+                            </div>
+                            </div>
+                            <div className="col-sm-12 form-group">
+                            <div className="tbox">
+                                <input type="text" defaultValue={myProfileObjc.last_name} className="form-control textbox" placeholder="" required onChange={(e) => setLastName(e.target.value)} />
+                                <label for="last_name" className={lastName !="" ? "input-has-value" : ""}>Last Name</label>
+                            </div>
+                            </div>
+                            <div className="col-sm-12 form-group">
+                            <div className="tbox">
+                                <input type="number" defaultValue={myProfileObjc.phone_no} className="form-control textbox" placeholder="" required onChange={(e) => setPrimaryPhone(e.target.value)} />
+                                <label for="phone_no" className={primaryPhone !="" ? "input-has-value" : ""}>Primary Phone</label>
+                            </div>
+                            </div>
+                            <div className="col-sm-12 form-group">
+                            <div className="tbox">
+                                <input type="number" defaultValue={myProfileObjc.phone_no} className="form-control textbox" placeholder="" required onChange={(e) => setMobilephone(e.target.value)} />
+                                <label for="phone_no" className={mobilePhone !="" ? "input-has-value" : ""}>Mobile Phone</label>
+                            </div>
+                            </div>                      
+                            <div className="col-sm-12 form-group">
+                            <div className="tbox">
+                                <input type="email" defaultValue={myProfileObjc.email} className="form-control textbox" placeholder="" required onChange={(e) => setEmailId(e.target.value)} />
+                                <label for="email" className={emailId !="" ? "input-has-value" : ""}>Email Id</label>
+                            </div>
+                            </div>
+                            <div className="col-sm-12 form-group">
+                            <div className="tbox">
+                                <input type="text" defaultValue={myProfileObjc.address} className="form-control textbox" placeholder="" required onChange={(e) => setAddress(e.target.value)} />
+                                <label for="address" className={address !="" ? "input-has-value" : ""}>Address</label>
+                            </div>
+                            </div>
+                            <div className="col-sm-12 form-group">
+                            <div className="tbox">
+                                <input type="text" defaultValue={myProfileObjc.city_id} className="form-control textbox" placeholder="" required onChange={(e) => setCity(e.target.value)} />
+                                <label for="city_id" className={city !="" ? "input-has-value" : ""}>City</label>
+                            </div>
+                            </div>
+                            <div className="col-sm-12 form-group">
+                            <div className="tbox">
+                                <input type="text" defaultValue={myProfileObjc.state_id} className="form-control textbox" placeholder="" required onChange={(e) => setState(e.target.value)} />
+                                <label for="state_id" className={state !="" ? "input-has-value" : ""}>State</label>
+                            </div>
+                            </div>
+                            <div className="col-sm-12 form-group">
+                            <div className="tbox">
+                                <input type="text" defaultValue={myProfileObjc.zipcode_id} className="form-control textbox" placeholder="" required onChange={(e) => setZipcode(e.target.value)} />
+                                <label for="zipcode_id" className={zipcde !="" ? "input-has-value" : ""}>Zipcode</label>
+                            </div>
+                            </div>
+                            <div className="col-sm-12 form-group">
+                            <div className="tbox">
+                                <input type="text" defaultValue={myProfileObjc.address} className="form-control textbox" placeholder="" required onChange={(e) => setLocationName(e.target.value)} />
+                                <label for="address" className={locationName !="" ? "input-has-value" : ""}>Location Name</label>
+                            </div>
+                            </div>
+                                                     
+                    
+                            <div className="col-lg-12 loginBtn">
+                                <button className="cta-btn">Update</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <section id="playstoreBlock" className="playstoreBlock">
+                    <div className="container">
+                        <div className="row content">
+                            <div className="col-lg-12">
+                                <img src={process.env.PUBLIC_URL +"/images/appstore.png" }/>
+                                <img src={process.env.PUBLIC_URL +"/images/googleplay.png"} />
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                {isOpen && 
+                <CommonPopup 
+                    handleClose= {togglePopup}
+                    popupTitle= {popupTitle}
+                    popupMsg= {popupMsg}
+                    popupType= {popupType}
+                    popupActionType= {popupActionType}
+                    popupActionValue= {popupActionValue}
+                    popupActionPath={popupActionPath}
+                />}
+            </main>
+        </div>
+
+
+    )
+}
+
+export default EditMyProfile;
