@@ -16,10 +16,11 @@ import {
 
 const Login = () => {
   const history = useHistory();
-  const location = useLocation();
+  const {state} = useLocation();
  
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
+  const [redirectToRefferrer, setRedirectToRefferrer] = useState(false);
 
   useEffect(()=>{
     // localStorage.clear()
@@ -29,6 +30,7 @@ const Login = () => {
   const loginhandleSubmit = (event) => {
     // setOpenLoader(true);
     event.preventDefault();
+    setRedirectToRefferrer(true)
     localStorage.setItem("islogedIn", false)
     let request = {
       email: emailId,
@@ -43,7 +45,7 @@ const Login = () => {
             history.push("/ChangePassword");
           }else{
             localStorage.setItem("islogedIn", true)
-            history.push("/carList");
+            state?.from?.pathname !=="" && state?.from?.pathname !== undefined?  history.push(state.from.pathname) :  history.push("/carList");            
           }
           
         } else {
@@ -54,14 +56,7 @@ const Login = () => {
         (error) => {
 
         });
-
   }
-  
-   
-   
-  
-     
-
   
   return (
 
