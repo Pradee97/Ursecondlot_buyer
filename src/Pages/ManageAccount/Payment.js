@@ -228,7 +228,7 @@ const Payment = () => {
                                         <p>Thank you for providing us the information of your bank system. We going to use this for make charegs to your account when you purchase a car.To assure easy transaction for your business</p>
 
 
-                                        <div className="paymentform col-lg-12">
+                                        <div className="paymentform card col-lg-12">
                                             <form className="backaccountform addpaymentform" onSubmit={paymenthandleSubmit}>
                                                 <h2 className="title"> Bank account information</h2>
                                                 <div className="row">
@@ -306,7 +306,7 @@ const Payment = () => {
                                                         <p>Signed bank Authorization letter for bank to release information. </p>
                                                     </div>
                                                     <div className="col-sm-6 form-group uploadbutton">
-                                                    {/* <input type="file" id="upload" hidden onChange={onFileChange} /> */}
+                                                    {/* <input type="file" id="upload" className="uploadbox" hidden onChange={onFileChange} /> */}
                                                     <FileBase64 multiple={ true } onDone={ getFiles } type="hidden"/>
                                                             <label for="upload"><img src={process.env.PUBLIC_URL +"/images/upload.png"} />Upload Document</label>
                                                             <p><b>{doc.name}</b></p>

@@ -127,20 +127,20 @@ return (
                 {zipCodeId == "" ?
                     (<div className="selcetclass"> 
                     <select className="form-control custom-select browser-default textbox " required defaultValue={stateName} onChange={handleState}>
-                        <option disabled>State</option>
+                        <option disabled value="0">State</option>
                         {stateNameList.length>0 &&
                             <>
                                 {stateNameList.map((state, index) => <option key={state.state_id} value={state.state_id}>{state.state_name}</option>)}
                             </>
                         }
                     </select>
-                    <label  for="state_id" className={"input-has-value"}>State</label>
+                    <label  for="state_id" className={stateName!="" ? "input-has-value" : ""}>State Name</label>
                     </div>
                      )
                     :
                     (<>
                         <input type="text" className="form-control textbox" placeholder="" value ={stateName} required />
-                        <label  for="state_id" className={"input-has-value"}>State</label>
+                        <label  for="state_id" className={"input-has-value"}>State Name</label>
                     </>)
                 }
                
@@ -151,20 +151,20 @@ return (
                 {zipCodeId == "" ?
                 (<div className="selcetclass"> 
                     <select id="City" className="form-control custom-select browser-default textbox" required defaultValue={cityName} onChange={handleCity}>
-                        <option disabled>City</option>
+                        <option disabled value="0">City</option>
                         {cityNameList.length>0 &&
                             <>
                                 {cityNameList.map((city, index) => <option key={city.city_id} value={city.city_name}>{city.city_name}</option>)}
                             </>
                         }
                     </select>
-                    <label  for="city_id" className={"input-has-value"}>City</label>
+                    <label  for="city_id" className={cityName!="" ? "input-has-value" : ""}>City Name</label>
                 </div>
                 )
                 :
                 (<>
                     <input type="text" className="form-control textbox" placeholder="" value ={cityName} required />
-                    <label  for="city_id" className={"input-has-value"}>City</label>
+                    <label  for="city_id" className={"input-has-value"}>City Name</label>
                 </>
                     )}
                 
