@@ -32,7 +32,7 @@ import Footer from './Component/Footer';
 import Buyers from './Pages/ManageAccount/Buyers';
 import AddUser from './Pages/ManageAccount/AddUser';
 import MyProfile  from './Pages/ManageAccount/MyProfile';
-
+import EditMyProfile  from './Pages/ManageAccount/EditMyProfile';
 
 function AppRouter() {
   return (
@@ -73,7 +73,8 @@ function AppRouter() {
             <Route  path="/chat" component={Inprogress}/>
             <Route  path="/buyers" component={Buyers}/>
             <Route  path="/adduser" component={AddUser}/>
-            <Route  path="/myprofile" component={MyProfile}/>
+            <Route  path="/myprofile" component={MyProfile}/>  
+            <Route  path="/editmyprofile" component={EditMyProfile}/>         
           </Switch>
           <Footer />
         {/* </Suspense> */}
