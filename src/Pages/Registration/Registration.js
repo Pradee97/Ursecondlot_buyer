@@ -221,7 +221,7 @@ const Registration = () => {
                                     handleClose={togglePopup}
                                 />}
                                 {isCommonPopupOpen && <CommonPopup 
-                                    handleClose= {togglePopup}
+                                    handleClose= {isCommonPopupOpen}
                                     popupTitle= {popupTitle}
                                     popupMsg= {popupMsg}
                                     popupType= {popupType}
