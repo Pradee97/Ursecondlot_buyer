@@ -5510,6 +5510,9 @@ paymentform
 	margin:0 auto;
   float: left;
 }
+.uploadbutton input{
+  display: none;
+}
 
 .backaccountform {
 	float:left;	
