@@ -1,22 +1,11 @@
 import React from 'react';
-import API from "../../Services/BaseService";
 import { useHistory } from "react-router-dom";
-
-// import '../../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import ls from 'local-storage';
-import {
-    Form,
-    Input,
-    Select,
-    AutoComplete,
-    Radio,
-    notification,
-    Spin,
-} from 'antd';
+import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
+import API from "../../Services/BaseService";
 import Popup from '../../Component/Popup/Popup';
-
 import '../../Component/Popup/popup.css';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 
@@ -128,21 +117,11 @@ const LotFee = () => {
                                    
                            </div>
                        </div>
-                       
-                       <div className="mgaccountuserlinks">
-                           <div className="userlinks">
-                               <li><img src={process.env.PUBLIC_URL +"/images/Icon awesome-user.svg"} className="img-fluid" alt=""/><a href="/manageaccount">Account</a></li>
-                               <li><img src={process.env.PUBLIC_URL +"/images/Icon awesome-bell.svg"} className="img-fluid" alt=""/><a href="/notification">Notification</a></li>
-                               <li><img src={process.env.PUBLIC_URL +"/images/dollar-symbol.svg"} className="img-fluid" alt=""/><a href="/paymentinfo">Payment</a></li>
-                               <li className="active"><img src={process.env.PUBLIC_URL +"/images/fees.svg"} className="img-fluid" alt=""/><a href="/lotfee">Lot Fee</a></li>
-                               <li><img src={process.env.PUBLIC_URL +"/images/google-docs.svg"} className="img-fluid" alt=""/><a href="documents.html">Document</a></li>
-                               <li><img src={process.env.PUBLIC_URL +"/images/profile.svg"} className="img-fluid" alt=""/><a href="adduser.html">Add User</a></li>
-                           </div>
-                       </div>
+                       <ManageAccountLinks />
                    </div>
                    <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 lotfeerightblock">
                        <div className="lotfee-inner">
-                       <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard </p>
+                       <p>Your expense or your profit added to the vehicle every time you purchase </p>
                            <div className="form-group col-lg-6 col-md-6 lotfee-form">
                                <div className="input-icon">
                                  <input type="text" className="form-control" defaultValue={lotValue===undefined?0:lotValue.lot_fee}  onChange={(e) => setLotfee(e.target.value)}/> 

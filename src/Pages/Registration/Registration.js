@@ -76,9 +76,7 @@ const Registration = () => {
             zipcode_id: zipCodeId,
             no_years: option,
             local_flag: 0,
-        };
-        console.log("reg value=====",request)
-
+        };        
         API.post("registration/add", request)
             .then((response) => {
                 if (response.data.success) {
@@ -216,6 +214,7 @@ const Registration = () => {
                                 <label for="chb" className="form-check-label"> I Agree for the <a href="JavaScript:void(0)" onClick={togglePopup}>Terms And Conditions</a>
                                 </label>
                                 {isOpen && <Popup
+                                    isClose={false}
                                     content={<>
                                         <Terms toggle={togglePopup} />
                                     </>}

@@ -1,15 +1,12 @@
 import React from 'react';
-import API from "../../Services/BaseService";
 import { useHistory } from "react-router-dom";
 import ls from 'local-storage';
-// import '../../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import {
-  Button
-} from 'antd';
+import {  Button } from 'antd';
+import API from "../../Services/BaseService";
+import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
 import Popup from '../../Component/Popup/Popup';
-
 import '../../Component/Popup/popup.css';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 
@@ -135,17 +132,7 @@ const Notification = () => {
 									
 							</div>
 						</div>
-						
-						<div className="mgaccountuserlinks">
-							<div className="userlinks">
-								<li><img src={process.env.PUBLIC_URL +"/images/Icon awesome-user.svg"} className="img-fluid" alt=""/><a href="/manageaccount">Account</a></li>
-								<li className="active"><img src={process.env.PUBLIC_URL +"/images/Icon awesome-bell.svg"} className="img-fluid" alt=""/><a href="/notification">Notification</a></li>
-								<li><img src={process.env.PUBLIC_URL +"/images/dollar-symbol.svg"} className="img-fluid" alt=""/><a href="/paymentinfo">Payment</a></li>
-								<li><img src={process.env.PUBLIC_URL +"/images/fees.svg"} className="img-fluid" alt=""/><a href="/lotfee">Lot Fee</a></li>
-								<li><img src={process.env.PUBLIC_URL +"/images/google-docs.svg"} className="img-fluid" alt=""/><a href="documents.html">Document</a></li>
-								<li><img src={process.env.PUBLIC_URL +"/images/profile.svg"} className="img-fluid" alt=""/><a href="adduser.html">Add User</a></li>
-							</div>
-						</div>
+						<ManageAccountLinks />
 					</div>
 					<div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 notificationaccountrightblock">
 						<div className="notificationrighttableblock"> 
@@ -154,15 +141,23 @@ const Notification = () => {
 							<h3>Email</h3>
 								<div className="row">
 								<form className="bidsemailblock">
-									<div className="col-lg-4 col-md-4">
+									<div className="col-lg-3 col-md-3">
 										<div className="radio input-group">
 											<input id="radio-dailyupdate" checked = {email == "daily" ?  true: false} value="daily" name="radio" type="radio" onChange={(e) => setEmail(e.target.value)} />
 											<label  for="radio-dailyupdate" className="radio-label">Daily Update</label>
 											<p>You will receive an email daily of new bid activity</p>
 										</div>
 									</div>
+
+									<div className="col-lg-3 col-md-3">
+										<div className="radio input-group">
+											<input id="radio-weeklyupdate"  value="daily" name="radio" type="radio" />
+											<label  for="radio-weeklyupdate" className="radio-label">Weekly Update</label>
+											<p>You will receive an email weekly of new bid activity</p>
+										</div>
+									</div>
 									
-									<div className="col-lg-4 col-md-4">
+									<div className="col-lg-3 col-md-3">
 										<div className="radio input-group">
 											<input id="radio-instanceemnail" checked = {email == "instant" ?  true: false} value="instant" name="radio" type="radio" onChange={(e) => setEmail(e.target.value)}/>
 											<label  for="radio-instanceemnail" className="radio-label">Instant Email</label>
@@ -170,7 +165,7 @@ const Notification = () => {
 										</div>
 									</div>
 									
-									<div className="col-lg-4 col-md-4">
+									<div className="col-lg-3 col-md-3">
 										<div className="radio input-group">
 											<input id="radio-instemnail" checked = {email == "no" ?  true: false} value="no" name="radio" type="radio" onChange={(e) => setEmail(e.target.value)}/>
 											<label  for="radio-instemnail" className="radio-label">Never</label>
@@ -185,15 +180,23 @@ const Notification = () => {
 							<h3>SMS (Text Message)</h3>
 								<div className="row">
 								<form className="bidssmsblock">
-									<div className="col-lg-4 col-md-4">
+									<div className="col-lg-3 col-md-3">
 										<div className="radio input-group">
 											<input id="radio-dailysms" checked = {sms == "daily" ?  true: false} value="daily" name="radio" type="radio" onChange={(e) => setSms(e.target.value)}/>
 											<label  for="radio-dailysms" className="radio-label">Daily Update</label>
 											<p>You will receive an SMS daily of new bid activity</p>
 										</div>
 									</div>
+
+									<div className="col-lg-3 col-md-3">
+										<div className="radio input-group">
+											<input id="radio-weeklysms"  value="weekly" name="radio" type="radio"/>
+											<label  for="radio-weeklysms" className="radio-label"> Weekly Update</label>
+											<p>You will receive an SMS weekly of new bid activity</p>
+										</div>
+									</div>
 									
-									<div className="col-lg-4 col-md-4">
+									<div className="col-lg-3 col-md-3">
 										<div className="radio input-group">
 											<input id="radio-dailyinssms" checked = {sms == "instant" ?  true: false} value="instant" name="radio" type="radio" onChange={(e) => setSms(e.target.value)}/>
 											<label  for="radio-dailyinssms" className="radio-label">Instant SMS</label>
@@ -201,7 +204,7 @@ const Notification = () => {
 										</div>
 									</div>
 									
-									<div className="col-lg-4 col-md-4">
+									<div className="col-lg-3 col-md-3">
 										<div className="radio input-group">
 											<input id="radio-dailysmsnover" checked = {sms == "no" ?  true: false} value="no" name="radio" type="radio" onChange={(e) => setSms(e.target.value)}/>
 											<label  for="radio-dailysmsnover" className="radio-label">Never</label>
@@ -250,6 +253,13 @@ const Notification = () => {
 											<p>You will receive a daily Email when new vehicle posted matching your Favorite cars</p>
 										</div>
 									</div>
+									<div className="col-lg-4 col-md-4">
+										<div className="radio input-group">
+											<input id="radio-weeklycarsno"  value="weekly" name="radio" type="radio" />
+											<label  for="radio-weeklycarsno" className="radio-label">Weekly Update</label>
+											<p>You will receive a weekly Email when new vehicle posted matching your Favorite cars</p>
+										</div>
+									</div>
 									
 									<div className="col-lg-4 col-md-4">
 										<div className="radio input-group">
@@ -273,6 +283,15 @@ const Notification = () => {
 											<p>You will receive a daily SMS when new vehicle posted matching your Favorite cars</p>
 										</div>
 									</div>
+
+									<div className="col-lg-4 col-md-4">
+										<div className="radio input-group">
+											<input id="radio-weeklysmct"  value="weekly" name="radio" type="radio" />
+											<label  for="radio-weeklysmct" className="radio-label">Weekly Update</label>
+											<p>You will receive a weekly SMS when new vehicle posted matching your Favorite cars</p>
+										</div>
+									</div>
+									
 									
 									<div className="col-lg-4 col-md-4">
 										<div className="radio input-group">

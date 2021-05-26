@@ -77,12 +77,12 @@ const Submenu = () => {
       <header id="header" className="">
         <div className="container-fluid d-flex align-items-center">
 
-          <h1 className="logo mr-auto" ><img src={LogoImg} onClick={logoNavigation}></img></h1>
+          <a href="#" className="logo mr-auto" ><img src={LogoImg} onClick={logoNavigation}></img></a>
           <nav className="nav-menu d-none d-lg-block nav">
           {localStorage.getItem("islogedIn") === "true" ?
 
               <ul className="nav__menu">
-              <li className={location.pathname ==="/carList"? "active" : ""} ><a href="/carList" onClick={()=>history.push('/')} >Home</a></li>
+              <li className={location.pathname ==="/carList"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/carList')} >Home</a></li>
               <li className={location.pathname ==="/search"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/search')} >Search</a></li>
               <li className={location.pathname ==="/mybids"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/mybids')} >My Bids</a></li>
               <li className={location.pathname ==="/fees"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/fees')} >Fees</a></li>
@@ -123,9 +123,7 @@ const Submenu = () => {
 
         </div>
       </header>
-     
-
-      <a href="#" className="back-to-top"><i className="ri-arrow-up-line"></i></a>
+      <a href="JavaScript:void(0)" className="back-to-top"><i className="ri-arrow-up-line"></i></a>
     </div>
 
 
