@@ -5511,9 +5511,43 @@ paymentform
 	margin:0 auto;
   float: left;
 }
-.uploadbutton input{
-  display: none;
+.uploadbtn {
+  margin-top: 20px;
 }
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.uploadbtn .btn {
+  border: 2px solid #9F9F9F;
+  background: #9F9F9F;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+
+
+
+
+
+
+
+
+
 
 .backaccountform {
 	float:left;	
