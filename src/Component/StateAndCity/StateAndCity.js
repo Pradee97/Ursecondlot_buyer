@@ -127,14 +127,14 @@ return (
                 {zipCodeId == "" ?
                     (<div className="selcetclass"> 
                     <select className="form-control custom-select browser-default textbox " required defaultValue={stateName} onChange={handleState}>
-                        <option disabled value="0">State</option>
+                        <option disabled value="0">Select State</option>
                         {stateNameList.length>0 &&
                             <>
                                 {stateNameList.map((state, index) => <option key={state.state_id} value={state.state_id}>{state.state_name}</option>)}
                             </>
                         }
                     </select>
-                    <label  for="state_id" className={stateName!="" ? "input-has-value" : ""}>State Name</label>
+                    <label  for="state_id" className={"input-has-value"}>State Name</label>
                     </div>
                      )
                     :
@@ -151,14 +151,14 @@ return (
                 {zipCodeId == "" ?
                 (<div className="selcetclass"> 
                     <select id="City" className="form-control custom-select browser-default textbox" required defaultValue={cityName} onChange={handleCity}>
-                        <option disabled value="0">City</option>
+                        <option disabled value="0">Select City</option>
                         {cityNameList.length>0 &&
                             <>
                                 {cityNameList.map((city, index) => <option key={city.city_id} value={city.city_name}>{city.city_name}</option>)}
                             </>
                         }
                     </select>
-                    <label  for="city_id" className={cityName!="" ? "input-has-value" : ""}>City Name</label>
+                    <label  for="city_id" className={"input-has-value"}>City Name</label>
                 </div>
                 )
                 :
@@ -176,7 +176,7 @@ return (
                 (<input type="text" className="form-control textbox" placeholder="" required maxLength="5" onChange={(e) => setZipcodeNormal(e.target.value)} />)
 
                 :(<input type="text" className="form-control textbox" placeholder="" required maxLength="5" onChange={(e) => setZipcodeGoogle(e.target.value)} />)}
-                <label  for="zipcode_id" className={zipCodeId!="" ? "input-has-value" : ""}>Zipcode</label>
+                <label  for="zipcode_id" className={"input-has-value"}>Zipcode</label>
             </div>
         </div>
     </>

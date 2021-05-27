@@ -170,7 +170,11 @@ h1, h2, h3, h4, h5, h6 {
   padding-right: 80px;
 }
 
-
+.container{
+  max-width: 100%;
+  padding-left: 80px;
+  padding-right: 80px;
+}
 
 
 #header.header-scrolled, #header.header-inner-pages {
@@ -663,8 +667,6 @@ section {
   font-size: 32px;
   font-weight: 500;
   text-transform: uppercase;
-  margin-bottom: 20px;
-  padding-bottom: 20px;
   position: relative;
   color: #002768;
 }
@@ -775,6 +777,18 @@ section {
 .about .section-title h2 {
 	padding-bottom: 10px;
 }
+
+.aboutblock .content{
+  max-width: 1199px;
+  margin: auto;
+}
+
+.contactblock  .content{
+  max-width: 1199px;
+  margin: auto;
+}
+
+
 .about p {
 	color:#8F8F8F;
 	font-size:16px;
@@ -784,6 +798,8 @@ section {
 .aboutusimg{
 	text-align:center;
 }
+
+
 
 
 /*--------------------------------------------------------------
@@ -921,7 +937,6 @@ Cars list
 .suggested-cars{
 	background: #F5F5F5 0% 0% no-repeat padding-box;
 	opacity: 1;
-	padding:30px 90px;
 }
  .car-item {
     border-radius: 5px;
@@ -930,8 +945,8 @@ Cars list
 	position:relative;
 }
 .suggested-cars .section-title h2 ,.inventory-cars .section-title h2 , .recently-cars .section-title h2  {   
-    margin-bottom: 10px; 
-	padding-bottom: 5px;
+    margin-bottom: 0px; 
+	padding-bottom: 0px;
 }
 
 .car-item {
@@ -1043,12 +1058,12 @@ Cars list
 .inventory-cars , .recently-cars{
 	background: #fff 0% 0% no-repeat padding-box;
 	opacity: 1;
-	padding:30px 90px;
+	padding:30px 0;
 }
 .favorite-cars {
 	background: #fff 0% 0% no-repeat padding-box;
 	opacity: 1;
-	padding:30px 90px;
+	padding:30px 0;
 }
 .favorite-cars .car-item {
     border-radius: 5px;
@@ -2416,8 +2431,12 @@ border-left:40px solid transparent;
 }
 .inner-page{
 	background:#F5F5F5;
-	padding-top:50px;
+	padding-top:40px;
   min-height: 760px;
+}
+
+.inner-page .container-fluid{
+  padding: 0 80px;
 }
 
 .dealar-login img {
@@ -2500,7 +2519,7 @@ input[type="password"] {
 	margin:auto;
 	padding:0;
   width: 100%;
-  max-width: 560px;
+  max-width: 640px;
 }
 
 .inner-page .title{
@@ -4807,14 +4826,21 @@ __________________________________________________________*/
 	display:flex;
 }
 .mgaccountuserleft{
-	margin-right:5px;
+	margin-right:10px;
 }
 
+.mgaccountuserleft img{
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+}
 
 .mgaccountuserright h3 {
     font-size: 18px;
     font-weight: 500;
     color: #343434;	
+    text-align: left;
+    padding-top: 10px;
 }
 .mgaccountuserright .details span {
     font-size: 14px;
@@ -4827,8 +4853,9 @@ __________________________________________________________*/
 }
 .userlinks li{
 	list-style:none;
-	margin:15px 0;
+	margin:10px 0;
 	color: #4E4E4E;
+  padding-left: 0;
 }
 .userlinks li a{
 	font-size:18px;
@@ -4876,11 +4903,32 @@ margin-top: 20px;
   margin-bottom: 15px;
 }
 .mgaccountrighttableblock h3 span{
-	float:inline-end;
 	color: #BD062C;	
   float: right;
   background-color: #fff;
+  font-size: 16px;
 }
+
+.mgaccountrighttableblock h3 button{
+  border:#ddd solid 1px;
+}
+
+.mgaccountrighttableblock h3 button:hover, .mgaccountrighttableblock h3 button:focus{
+  border:#BD062C solid 1px;
+}
+
+.mgaccountrighttableblock h3 a{
+  border:#ddd solid 1px;
+  font-weight: 400;
+  padding: 4px 15px;
+}
+.mgaccountrighttableblock h3 a:hover, .mgaccountrighttableblock h3 a:focus{
+  border:#BD062C solid 1px;
+  color: #BD062C;
+  text-decoration: none;
+}
+
+
 .mgaccountrighttableblock p{
 	text-align:center;
 	display:block;
@@ -4893,7 +4941,7 @@ margin-top: 20px;
 	word-wrap: break-word;
 	background-color: #fff;
 	background-clip: border-box;
-	box-shadow: 0px 3px 6px #00000029;
+	box-shadow: 0px 3px 5px #ddd;
 	border-radius: .25rem;
 	padding: 30px;
 }
@@ -4906,7 +4954,7 @@ margin-top: 20px;
   font-weight: normal;
 }
 .mgaccountrighttableblock h5{
-	color: #343434;
+	color: #002768;
 	font-size:20px;
 	margin-top:10px;
 	padding-left: 20px;
@@ -5998,9 +6046,22 @@ font-size:20px;
 color: #343434;
 }
 .myprofilerighttableblock h3 span{
-float:right;
-color: #BD062C;	
+  color: #BD062C;	
+  float: right;
+  background-color: #fff;
+  font-size: 16px;
 }
+
+.myprofilerighttableblock h3 button{
+  border:#ddd solid 1px;
+  background: #fff;
+    color: #bd062c;
+    padding: 5px 15px;
+}
+.myprofilerighttableblock h3 button:hover, .myprofilerighttableblock h3 button:focus{
+  border:#BD062C solid 1px;
+}
+
 .myprofilerighttableblock p{
 text-align:center;
 display:block;

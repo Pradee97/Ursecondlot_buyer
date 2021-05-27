@@ -177,7 +177,7 @@ const Registration = () => {
                                 <div className="tbox">
                                     {/* {/ <lable for="drop" className={option !="" ? "input-has-value" : ""}>How many years in car business</lable> /} */}
                                     <select id="drop" placeholder="" required className="form-control custom-select browser-default textbox" required onChange={(e) => setOption(e.target.value)}>
-                                        <option disabled >How many years in car business</option>
+                                        <option disabled >Select year</option>
                                         <option value="Less then 1">Less then 1</option>
                                         <option value="1-3">1-3</option>
                                         <option value="3-5">3-5</option>

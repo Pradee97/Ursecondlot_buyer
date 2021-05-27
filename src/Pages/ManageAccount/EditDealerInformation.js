@@ -93,7 +93,7 @@ const EditDealerInformation = () => {
             <main id="main" class="inner-page">
                 <div className="col-lg-4 card loginBlock">
                     <form class="registrationform" onSubmit={updateDealerInfo} >
-                        <h2 class="title"> DealerInformation Edit</h2>
+                        <h2 class="title"> Edit Dealer Information</h2>
                         <div class="row">
 
                             <div class="col-sm-12 form-group">
