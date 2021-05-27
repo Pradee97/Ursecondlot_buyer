@@ -24,7 +24,7 @@ const Footer = () => {
     return (
         <div>
             <footer id="footer">
-                <div class="container footer-bottom clearfix">
+                <div class="container-fluid footer-bottom clearfix">
                     <div class="copyright">
                         &copy; Copyright 2021 Ur2nd Lot<sup>TM</sup>. All Rights Reserved
 </div>
