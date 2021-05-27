@@ -33,6 +33,19 @@ const ManageAccount = () => {
           console.log("res", res)
           setaccountDetails(res.data.data);
           setDealerInfo(res.data.data);
+          // setaddressDetails(res.data.data);
+      })
+          .catch(err => { console.log(err); });
+    }
+    async function fetchAddressDetails() {
+      let request = {
+          buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+      };
+      const state = API.post('buyer_address/condition', request);
+      state.then(res => {
+          console.log("res", res)
+          // setaccountDetails(res.data.data);
+          // setDealerInfo(res.data.data);
           setaddressDetails(res.data.data);
       })
           .catch(err => { console.log(err); });
@@ -68,6 +81,7 @@ const ManageAccount = () => {
   useEffect(() => {
     fetchAccountDetails();
     fetchLegalDetails();
+    fetchAddressDetails();
   }, []);
      return (
       <div>
@@ -143,11 +157,11 @@ const ManageAccount = () => {
                            )  :""}
 
                {addressDetails.length>0?addressDetails.map((item,index) =>
-                                              <div className="mgaccountrighttableblock mt-3 pt-4"> 
+                           <div className="mgaccountrighttableblock mt-3 pt-4"> 
                            {/* <h3>Address<span><a href="#">Edit</a></span></h3>	 */}
                            <h3>Address<span>
                            <Button onClick={() => history.push("/addressadd")}>Add</Button>
-                             <Button onClick={() => onHandleAddressEdit(item.id)}>Edit</Button></span>
+                             <Button onClick={() => onHandleAddressEdit(item.user_address_id)}>Edit</Button></span>
                              </h3>
                            <p>Location where transport carriers will drop of a vehicle that you have purchased</p>	
                            <div className="mgaccountrighttable">
@@ -197,11 +211,11 @@ const ManageAccount = () => {
                                  </tr>								  
                                  <tr>
                                    <td>Last name<span>{item.last_name}</span></td>
-                                   <td>City<span>{item.city_id}</span></td>
+                                   <td>City<span>{item.city_name}</span></td>
                                  </tr>
                                 <tr>
                                    <td>Legal business name<span>{item.legal_manage_id}</span></td>
-                                   <td>State<span>{item.state_id}</span></td>
+                                   <td>State<span>{item.state_name}</span></td>
                                  </tr>	
                                    <tr>
                                    <td>EIN number<span>{item.ein_no}</span></td>

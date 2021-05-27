@@ -32,20 +32,20 @@ const EditDealerInformation = () => {
         console.log(id)
         
         let request = {
-            buyer_id: id,
+            buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
         };
         const state = API.post('user_profile/condition', request);
         state.then(res => {
             console.log("res", res.data.data)
-            setFirstname(res.data.data.first_name);
-            setLastname(res.data.data.last_name);
-            setPrimaryphone(res.data.data.phone_no);
-            setMobilephone(res.data.data.mobile_phone);
-            setAddress(res.data.data.address);
-            setCity(res.data.data.city_name);
-            setState(res.data.data.state_name);
-            setZipcode(res.data.data.zipcode_id);
-            setAccountObj(res.data.data)
+            setFirstname(res.data.data[0].first_name);
+            setLastname(res.data.data[0].last_name);
+            setPrimaryphone(res.data.data[0].phone_no);
+            setMobilephone(res.data.data[0].mobile_phone);
+            setAddress(res.data.data[0].address);
+            setCity(res.data.data[0].city_name);
+            setState(res.data.data[0].state_name);
+            setZipcode(res.data.data[0].zipcode_id);
+            setAccountObj(res.data.data[0])
         })
             .catch(err => { console.log(err); });
     }
@@ -55,6 +55,7 @@ const EditDealerInformation = () => {
         event.preventDefault();        
     
         let request = {
+            // user_id:id,
             first_name: firstName,
             last_name: lastName,
             phone_no: primaryPhone,
@@ -68,7 +69,7 @@ const EditDealerInformation = () => {
            
         };
         API
-            .post('http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/dealer_information/'+id, request)
+            .post('http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/#/'+id, request)
             .then((response) => {
                 if (response.data.success) {
                     const { data } = response;
