@@ -1,5 +1,5 @@
 import React, {lazy, Suspense} from 'react';
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch, Redirect, useHistory} from "react-router-dom";
 import './App.css';
 import Loading from './Component/Loading/Loading';
 
@@ -33,8 +33,23 @@ import Buyers from './Pages/ManageAccount/Buyers';
 import AddUser from './Pages/ManageAccount/AddUser';
 import MyProfile  from './Pages/ManageAccount/MyProfile';
 import EditMyProfile  from './Pages/ManageAccount/EditMyProfile';
+import EditDealerInformation from './Pages/ManageAccount/EditDealerInformation';
+import EditAddress  from './Pages/ManageAccount/EditAddress';
+import AddLegalAccount  from './Pages/ManageAccount/AddLegalAccount';
+import AddAddress  from './Pages/ManageAccount/AddAddress';
 
 function AppRouter() {
+
+  const history = useHistory()
+  const PrivateRoute = ({children, ...rest})=>{
+      return (<Route {...rest} render={({location})=>{
+        return localStorage.getItem("islogedIn") === "true" ? children   : <Redirect to={{pathname:"/login", state:{from:location}}} />
+      }}>
+        
+      </Route>)
+  }
+
+
   return (
     <div className="App">
       <Router>
@@ -44,37 +59,43 @@ function AppRouter() {
             <Route exact path="/" component={Home}/>
             <Route  path="/login" component={Login}/>
             <Route  path="/registration" component={Registration}/>
+            <Route  path="/contactus" component={Contactus}/>
+            <Route  path="/about" component={About}/>
             <Route  path="/success" component={Success}/>
             <Route  path="/error" component={Error}/>
             <Route  path="/emailerror" component={EmailError}/>
             <Route  path="/email" component={Email}/>
             <Route  path="/fees" component={Fees}/>
             <Route  path="/emailsuccess" component={Emailsuccess}/>
-            <Route  path="/floor" component={FloorPlans}/>
-            <Route  path="/flooradd" component={FloorAdd}/>
-            <Route  path="/flooredit/:id" component={FloorEdit}/>
-            <Route  path="/contactus" component={Contactus}/>
-            <Route  path="/about" component={About}/>
-            <Route  path="/changepassword" component={ChangePassword}/>
-            <Route  path="/carList" component={CarList}/>
-            <Route  path="/search" component={Inprogress}/>
-            <Route  path="/mybids" component={Inprogress}/>
-            <Route  path="/transport" component={Inprogress}/>
-            <Route  path="/manageaccount" component={ManageAccount}/>
-            <Route  path="/lotfee" component={LotFee}/>
-            <Route  path="/notification" component={Notification}/>
-            <Route  path="/payment" component={Payment}/>
-            <Route  path="/paymentinfo" component={PaymentInfo}/>
-            <Route  path="/editpayment/:id" component={EditPayment}/>
-            <Route  path="/document" component={Document}/> 
-            <Route  path="/favorite" component={Inprogress}/>
-            <Route  path="/history" component={Inprogress}/>
-            <Route  path="/cart" component={Inprogress}/>
-            <Route  path="/chat" component={Inprogress}/>
-            <Route  path="/buyers" component={Buyers}/>
-            <Route  path="/adduser" component={AddUser}/>
-            <Route  path="/myprofile" component={MyProfile}/>  
-            <Route  path="/editmyprofile" component={EditMyProfile}/>         
+            <PrivateRoute>
+              <Route  path="/floor" component={FloorPlans}/>
+              <Route  path="/flooradd" component={FloorAdd}/>
+              <Route  path="/flooredit/:id" component={FloorEdit}/>
+              <Route  path="/changepassword" component={ChangePassword}/>
+              <Route  path="/carList" component={CarList}/>
+              <Route  path="/search" component={Inprogress}/>
+              <Route  path="/mybids" component={Inprogress}/>
+              <Route  path="/transport" component={Inprogress}/>
+              <Route  path="/manageaccount" component={ManageAccount}/>
+              <Route  path="/lotfee" component={LotFee}/>
+              <Route  path="/notification" component={Notification}/>
+              <Route  path="/payment" component={Payment}/>
+              <Route  path="/paymentinfo" component={PaymentInfo}/>
+              <Route  path="/editpayment/:id" component={EditPayment}/>
+              <Route  path="/document" component={Document}/> 
+              <Route  path="/favorite" component={Inprogress}/>
+              <Route  path="/history" component={Inprogress}/>
+              <Route  path="/cart" component={Inprogress}/>
+              <Route  path="/chat" component={Inprogress}/>
+              <Route  path="/buyers" component={Buyers}/>
+              <Route  path="/adduser" component={AddUser}/>
+              <Route  path="/myprofile" component={MyProfile}/>  
+              <Route  path="/editmyprofile/:id" component={EditMyProfile}/>
+              <Route  path="/dealerinfoedit/:id" component={EditDealerInformation}/>
+              <Route  path="/addressedit/:id" component={EditAddress}/>
+              <Route  path="/legaladd" component={AddLegalAccount}/>
+              <Route  path="/addressadd" component={AddAddress}/>
+            </PrivateRoute>       
           </Switch>
           <Footer />
         {/* </Suspense> */}

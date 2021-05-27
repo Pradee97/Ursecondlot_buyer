@@ -176,7 +176,7 @@ return (
                 (<input type="text" className="form-control textbox" placeholder="" required maxLength="5" onChange={(e) => setZipcodeNormal(e.target.value)} />)
 
                 :(<input type="text" className="form-control textbox" placeholder="" required maxLength="5" onChange={(e) => setZipcodeGoogle(e.target.value)} />)}
-                <label  for="zipcode_id" className={"input-has-value"}>Zipcode</label>
+                <label  for="zipcode_id" className={zipCodeId!="" ? "input-has-value" : ""}>Zipcode</label>
             </div>
         </div>
     </>

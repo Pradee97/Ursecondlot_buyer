@@ -305,12 +305,16 @@ const Payment = () => {
                                                     <div className="col-sm-6 form-group">
                                                         <p>Signed bank Authorization letter for bank to release information. </p>
                                                     </div>
-                                                    <div className="col-sm-6 form-group uploadbutton">
-                                                    {/* <input type="file" id="upload" className="uploadbox" hidden onChange={onFileChange} /> */}
-                                                    <FileBase64 multiple={ true } onDone={ getFiles } type="hidden"/>
-                                                            <label for="upload"><img src={process.env.PUBLIC_URL +"/images/upload.png"} />Upload Document</label>
-                                                            <p><b>{doc.name}</b></p>
-					                                        
+                                                    {/* <div className="col-sm-6 form-group uploadbutton">
+                                                    <input type="file" id="upload" className="uploadbox" hidden onChange={onFileChange} /> 
+                                                            <FileBase64 multiple={ true } onDone={ getFiles } hidden type="hidden"/>
+                                                            <label for="upload upl"><img src={process.env.PUBLIC_URL +"/images/upload.png"} />Upload Document</label>                                                            <p><b>{doc.name}</b></p>
+                                                    </div>*/}
+                                                    <div className="col-sm-6 form-group uploadbtn">
+                                                    <div class="upload-btn-wrapper">
+                                                        <button class="btn"><img src={process.env.PUBLIC_URL +"/images/upload.png"} />Upload Document</button>
+                                                        <FileBase64 multiple={ true } onDone={ getFiles } hidden type="hidden"/>
+                                                    </div>
                                                     </div>
                                                    
                                                     <div className="col-lg-12 loginBtn">
