@@ -79,6 +79,7 @@ const ChangePassword = () => {
             setPopupType("success");
             setPopupActionType("redirect");
             setPopupActionValue("ok");
+            localStorage.clear();
             setPopupActionPath("/login")
 
             } else {

@@ -56,6 +56,10 @@ const Registration = () => {
           placeholder: 'DD/MM/YYYY',
           required:true
       };
+      
+      const registrationDate = (event) => {
+        setDate(event.format("DD/MM/YYYY"))
+    }
    
     const registrationhandleSubmit = (event) => {
         // setOpenLoader(true);
@@ -198,7 +202,7 @@ const Registration = () => {
                                 <div className="tbox">
                                 <div className="textbox">
                                 <i class='bx bx-calendar'></i>
-                                    <Datetime inputProps={ inputProps } timeFormat={false} dateFormat="DD/MM/YYYY" isValidDate={disablePastDt}/>
+                                    <Datetime inputProps={ inputProps } timeFormat={false} dateFormat="DD/MM/YYYY" isValidDate={disablePastDt} onChange={registrationDate}/>
                                     <label  for="meeting_date" className={date!="" ? "input-has-value" : ""}>Select Date</label>
                                 </div>
                                 </div>
@@ -221,7 +225,7 @@ const Registration = () => {
                                     handleClose={togglePopup}
                                 />}
                                 {isCommonPopupOpen && <CommonPopup 
-                                    handleClose= {togglePopup}
+                                    handleClose= {isCommonPopupOpen}
                                     popupTitle= {popupTitle}
                                     popupMsg= {popupMsg}
                                     popupType= {popupType}

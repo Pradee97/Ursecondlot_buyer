@@ -124,7 +124,7 @@ const LotFee = () => {
                        <p>Your expense or your profit added to the vehicle every time you purchase </p>
                            <div className="form-group col-lg-6 col-md-6 lotfee-form">
                                <div className="input-icon">
-                                 <input type="text" className="form-control" defaultValue={lotValue===undefined?0:lotValue.lot_fee}  onChange={(e) => setLotfee(e.target.value)}/> 
+                                 <input type="text" className="form-control" value={lotValue===undefined?0:lotValue.lot_fee}  onChange={(e) => setLotfee(e.target.value)}/> 
                                    <i>$</i>
                                </div>
                            </div>

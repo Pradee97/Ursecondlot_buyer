@@ -7,6 +7,24 @@ import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccount
 
 const MyProfile = () => {
     const history = useHistory();
+    const [accountDetails, setaccountDetails] = useState("");
+    async function fetchAccountDetails() {
+      let request = {
+          buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+      };
+      const state = API.post('user_profile/condition', request);
+      state.then(res => {
+          console.log("res", res)
+          setaccountDetails(res.data.data);
+      })
+          .catch(err => { console.log(err); });
+    }
+    function onHandleEdit(e){
+      history.push("/editmyprofile/"+e);
+    }
+  useEffect(() => {
+    fetchAccountDetails();
+  }, []);
 
     return (
         <div>
@@ -36,34 +54,39 @@ const MyProfile = () => {
                    </div>
                    <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 myprofilerightblock">
                        <div className="myprofilerighttableblock"> 
-                           <h3>My Details<span><a href="#">Edit</a></span></h3>	
-                           <p>Location where transport carriers will drop of a vehicle that you have purchased</p>							
+                       {accountDetails.length>0?accountDetails.map((item,index) =>	
+                       
+                           
                            <div className="myprofilerighttable">
+                             <h3>My Details<span><button onClick={() => onHandleEdit(item.user_id)}>Edit</button></span></h3>	
+                           <p>Location where transport carriers will drop of a vehicle that you have purchased</p>
+                           					
                                <table>
                                  <thead></thead>
                                    <tr>
-                                   <td>First name<span>williams</span></td>
-                                   <td>Address<span>Horizon Ave, California, Cl</span></td>
+                                   <td>First name<span>{item.first_name}</span></td>
+                                   <td>Address<span>{item.address}</span></td>
                                  </tr>								  
                                  <tr>
-                                   <td>Last name<span>botero</span></td>
-                                   <td>City<span>Fresno</span></td>
+                                   <td>Last name<span>{item.last_name}</span></td>
+                                   <td>City<span>{item.city_name}</span></td>
                                  </tr>
                                 <tr>
-                                   <td>Primary phone<span>746-561-6784</span></td>
-                                   <td>State<span>California</span></td>
+                                   <td>Primary phone<span>{item.phone_no}</span></td>
+                                   <td>State<span>{item.state_name}</span></td>
                                  </tr>	
                                    <tr>
-                                   <td>Mobile phone<span>746-561-6784</span></td>
-                                   <td>Zip code<span>90011</span></td>
+                                   <td>Mobile phone<span>{item.mobile_no}</span></td>
+                                   <td>Zip code<span>{item.zipcode_id}</span></td>
                                  </tr>
 
                                   <tr>
-                                   <td>Email Id<span>williams@williams.com</span></td>
-                                   <td>Location name<span>Horizon fairway - Computer number 693</span></td>
+                                   <td>Email Id<span>{item.email}</span></td>
+                                   <td>Location name<span>{item.address}</span></td>
                                  </tr>	
                                </table>                             								
                            </div>
+                           )  :""}
                        </div>
                        <div className="mgaccountrighttableblock mt-3 pt-4"> 
                            <h3>Manage Account Password<span><a href="/changepassword">Edit</a></span></h3>

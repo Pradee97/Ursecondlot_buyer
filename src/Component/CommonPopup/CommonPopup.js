@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { useHistory } from "react-router-dom";
 import checkImg from '../../../src/assets/img/check.svg';
-import errorImg from '../../../src/assets/img/error.svg';
+import errorImg from '../../../src/assets/img/erroricon.png';
 import "./commonPopup.css"
 
 const CommonPopup = props => {
