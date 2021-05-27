@@ -5,6 +5,7 @@ import ls from 'local-storage';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
+import StateAndCity from '../../Component/StateAndCity/StateAndCity';
 
 const AddAddress = () => {
     const history = useHistory();   
@@ -27,9 +28,9 @@ const AddAddress = () => {
     const [address, setAddress] = useState("");
     const [primaryPhone, setPrimaryphone] = useState("");
     const [mobilePhone, setMobilephone] = useState("");
-    const [city, setCity] = useState("");
-    const [state, setState] = useState("");
-    const [zipCode, setZipcode] = useState("");
+    const [city, setCityName] = useState("");
+    const [state, setStateName] = useState("");
+    const [zipCode, setZipcodeId] = useState("");
 
     const onhandleSubmit = (event) => {
         // setOpenLoader(true);
@@ -40,12 +41,11 @@ const AddAddress = () => {
             last_name: lastName,
             address: address,
             phone_no: primaryPhone,
-            mobile_phone: mobilePhone,
+            mobile_no: mobilePhone,
             city_id: city,
             state_id: state,
             zipcode_id: zipCode,
-            buyer_id:userDetails.id,
-
+            buyer_id:userDetails.user_id,
             active:1
            
         }];
@@ -83,6 +83,16 @@ const AddAddress = () => {
             });
 
     }
+    const getStateName = (stateData) => {
+		setStateName(stateData)
+	}
+	const getCityName = (cityData) => {
+		setCityName(cityData)
+	}
+
+	const getZipCodeId = (zipData) => {
+		setZipcodeId(zipData)
+	}
 
 
     return (
@@ -125,7 +135,12 @@ const AddAddress = () => {
                                 <label for="contactName" className={address !="" ? "input-has-value" : ""}>Address</label>
                             </div>
                             </div>
-                            <div className="col-sm-12 form-group">
+                            <StateAndCity
+														setStateValue={getStateName}
+														setCityValue={getCityName}
+														setZipcodeValue={getZipCodeId}
+													/>
+                            {/* <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" id="accountNumber" className="textbox" placeholder="" required onChange={(e) => setCity(e.target.value)} />
                                 <label for="accountNumber" className={city !="" ? "input-has-value" : ""}>City</label>
@@ -144,7 +159,7 @@ const AddAddress = () => {
                                 <input type="text" id="emailId" className="textbox" placeholder="" required onChange={(e) => setZipcode(e.target.value)} />
                                 <label for="emailId" className={zipCode !="" ? "input-has-value" : ""}>Zip code</label>
                             </div>
-                            </div>
+                            </div> */}
                           
                             <div className="col-lg-12 loginBtn">
                                 <button className="cta-btn">Submit</button>

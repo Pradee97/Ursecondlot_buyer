@@ -5,6 +5,7 @@ import ls from 'local-storage';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
+import StateAndCity from '../../Component/StateAndCity/StateAndCity';
 
 const AddLegalAccount = () => {
     const history = useHistory();   
@@ -28,18 +29,18 @@ const AddLegalAccount = () => {
     const [dealershiplicense, setDealershiplicense] = useState(""); 
     const [taxid, setTaxid] = useState("");
     const [address, setAddress] = useState("");
-    const [city, setCity] = useState("");
-    const [state, setState] = useState("");
-    const [zipcode, setZipcode] = useState("");
     const [dealershipLicenseexp, setDealershiplicenseexp] = useState("");
     const [taxidexp, setTaxidexp] = useState("");
     const [legalBusinessname, setLegalBusinessname] = useState("");
+    const [state, setStateName] = useState("");
+	const [city, setCityName] = useState("");
+	const [zipcode, setZipcodeId] = useState("");
 
     const onhandleSubmit = (event) => {
         // setOpenLoader(true);
         event.preventDefault();        
     
-        let request = [{
+        let request = {
             buyer_id: 68,
             first_name: firstname,
             last_name: lastname,                                           
@@ -54,7 +55,7 @@ const AddLegalAccount = () => {
             address: address,
             bussiness_name: legalBusinessname,
             active: 1          
-        }];
+        };
         console.log("===",request)
         // return
         API.post("legal_manage/add", request)
@@ -89,6 +90,16 @@ const AddLegalAccount = () => {
             });
 
     }
+    const getStateName = (stateData) => {
+		setStateName(stateData)
+	}
+	const getCityName = (cityData) => {
+		setCityName(cityData)
+	}
+
+	const getZipCodeId = (zipData) => {
+		setZipcodeId(zipData)
+	}
 
     return (
         <div>
@@ -142,7 +153,12 @@ const AddLegalAccount = () => {
                                 <label for="address" className={address !="" ? "input-has-value" : ""}>Address</label>
                             </div>
                             </div>
-                            <div className="col-sm-12 form-group">
+                            <StateAndCity
+														setStateValue={getStateName}
+														setCityValue={getCityName}
+														setZipcodeValue={getZipCodeId}
+													/>
+                            {/* <div className="col-sm-12 form-group">
                             <div className="tbox">                            
                                 <input type="text" id="phoneNumber" className="textbox" placeholder="" required onChange={(e) => setCity(e.target.value)} />
                                 <label for="phoneNumber" className={city !="" ? "input-has-value" : ""}>City</label>
@@ -158,8 +174,8 @@ const AddLegalAccount = () => {
                              <div className="tbox">                            
                                 <input type="number" id="phoneNumber" className="textbox" placeholder="" required onChange={(e) => setZipcode(e.target.value)} />
                                 <label for="phoneNumber" className={zipcode !="" ? "input-has-value" : ""}>Zip code</label>
-                            </div>
-                            </div>  
+                            </div> 
+                            </div>  */}
                             <div className="col-sm-12 form-group">
                              <div className="tbox">                            
                                 <input type="date" id="phoneNumber" className="textbox" placeholder="" required onChange={(e) => setDealershiplicenseexp(e.target.value)} />
