@@ -1,14 +1,14 @@
 @media (max-width: 1700px) {
 	
 	.cars-prices .cta-btns {
-        margin-right: 2px;
+        margin-right: 2px!important;
     }
     .cars-content {
-        padding: 5px;
+        padding: 10px!important;
     }
     .suggested-cars , .inventory-cars, .recently-cars , .favorite-cars {
        margin: 0 2%;
-        padding:0;
+        padding:0!important;
     }
 	
 	
@@ -43,7 +43,9 @@
         max-width: 94%;
         margin: 0 2%;
     }
-	
+	.car-item {        
+        background: #fff;
+    }
 	
 	
 }
@@ -54,8 +56,8 @@
     height: 485px;
 }
 .suggested-cars .col-md-3, .inventory-cars .col-md-3, .recently-cars .col-md-3, .favorite-cars .col-md-3 {
-    flex: 25% 1;
-    max-width: 25%;
+    flex: 25% 1 !important;
+    max-width: 25% !important;
 }
 	
 	
@@ -123,7 +125,17 @@
     flex: 0 0 50%;
     max-width: 50%;
 }
+.suggested-cars .col-md-3, .inventory-cars .col-md-3, .recently-cars .col-md-3, .favorite-cars .col-md-3 {
+    flex: 33.33% 1 !important;
+    max-width: 33.33% !important;
+}
 	
+.cars-prices .cta-btns-primary {  
+    padding: 10px 35px!important; 
+}
+.cars-prices .cta-btns {  
+    padding: 10px 35px !important;  
+}
 	
 }
 
@@ -158,8 +170,8 @@
     font-size: 14px;   
 }
 .suggested-cars .col-md-3, .inventory-cars .col-md-3, .recently-cars .col-md-3, .favorite-cars .col-md-3 {
-    flex: 33.33% 1;
-    max-width: 33.33%;
+    flex: 50% 1 !important;
+    max-width: 50% !important;
 }
 	
 	
