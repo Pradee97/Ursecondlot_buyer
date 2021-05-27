@@ -14,7 +14,7 @@ const ManageAccountLinks = () => {
                     <li><img src={process.env.PUBLIC_URL +"/images/dollar-symbol.svg"} className="img-fluid" alt=""/><a href="JavaScript:void(0)"  onClick={()=>history.push('/paymentinfo')} >Payment</a></li>
                     <li><img src={process.env.PUBLIC_URL +"/images/fees.svg"} className="img-fluid" alt=""/><a href="JavaScript:void(0)"  onClick={()=>history.push('/lotfee')} >Lot Fee</a></li>
                     <li><img src={process.env.PUBLIC_URL +"/images/google-docs.svg"} className="img-fluid" alt=""/><a href="JavaScript:void(0)"  onClick={()=>history.push('/document')}>Document</a></li>
-                    <li><img src={process.env.PUBLIC_URL +"/images/profile.svg"} className="img-fluid" alt=""/><a href="/JavaScript:void(0)"  onClick={()=>history.push('/buyers')} >Buyers</a></li>  
+                    <li><img src={process.env.PUBLIC_URL +"/images/profile.svg"} className="img-fluid" alt=""/><a   onClick={()=>history.push('/buyers')} >Buyers</a></li>  
                 </ul>
             </div>
         </div>

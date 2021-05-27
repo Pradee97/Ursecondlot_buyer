@@ -2,12 +2,45 @@ import React from 'react';
 import { useHistory , useParams} from "react-router-dom";
 import { useState } from 'react';
 import { useEffect } from 'react';
+import ls from 'local-storage';
 import API from "../../Services/BaseService";
 import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
 
 const Buyers = () => {
     const history = useHistory();
-
+    let userDetails = ls.get('userDetails');
+    const [userList,setUserList] = useState("");
+    const [data,setData]=useState("");
+    async function getuserDetails() {
+        let request = {
+            dealer_id: userDetails.dealer_id
+        };
+        const state = API.post('user_list/condition', request);
+        state.then(res => {
+            console.log("res", res.data.data)
+            setUserList(res.data.data);
+        })
+            .catch(err => { console.log(err); });
+    }
+    function searchUser(){
+        let request={
+            data: data,
+            dealer_id:userDetails.dealer_id
+        }
+        API.post("userSearch/condition",request)
+        .then((response)=>{
+            console.log("rep search req",request);
+            console.log("inside rep search", response.data.data);
+            setUserList(response.data.data);
+        },
+        (error) => {
+            console.log(error);
+          }
+        );
+    }
+    useEffect(() => {
+        getuserDetails();
+    }, []);
     return (
         <div>
             <main id="main" class="inner-page">
@@ -37,16 +70,16 @@ const Buyers = () => {
                    <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 adduserpagerightblock">
                        <div className="adduserpage-inner"> 
                             <div className="col-lg-12"> 
-                                <div className="filtersblock col-lg-9">
-                                    <div className="input-group searchbox">
-                                        <input className="form-control border" type="textsearch" value="Search" id="search-input"/>
-                                        <span className="input-group-append">
-                                            <button className="btn ms-n5" type="button">
-                                                <i className="fa fa-search"></i>
-                                            </button>
-                                        </span>
-                                    </div>
+
+                            <div class="filtersblock col-lg-9" >
+                                <div class="input-group searchbox">
+                                <input type="text"  class="form-control border" placeholder="Search" onChange={(e) => setData(e.target.value)}></input>
+                                <span class="input-group-append" >
+                                <button class="btn ms-n5" type="button" id="btntest" name="btntest" onClick={searchUser} ><i class='bx bx-search'></i></button>
+                                </span>
+                                
                                 </div>
+                            </div>                                
 
                                 <div class="col-lg-12 userlisttableblock">
                                     <div class="add-user">
@@ -61,31 +94,21 @@ const Buyers = () => {
                                                 <th>Phone</th>
                                                 <th>Email</th>
                                                 <th>Privileges</th>
+                                                <th>Status</th>
                                             </tr>
                                         </thead>
+                                        {userList.length>0?userList.map((item,index) =>
                                         <tr>
-                                            <td>01</td>															
-                                            <td><span class="cartitlename">Fernando Botero Pablo</span></td>
-                                            <td>746-561-6784</td>
-                                            <td>someoneone@example.com</td>
+                                            <td>{item.user_id}</td>															
+                                            <td><span class="cartitlename">{item.first_name} {item.last_name} </span></td>
+                                            <td>{item.phone_no}</td>
+                                            <td>{item.email}</td>
                                             <td>amorsolo, Cancel the bid after 4 hours, Bid, Proxy Bid, Counter Bid, Lot Fee</td>
+                                            <td>{item.active==="1"?"Active":"InActive"}</td>
                                         </tr>
+                                        ):""}
                                         
-                                        <tr>
-                                            <td>01</td>															
-                                            <td><span class="cartitlename">Fernando Botero Pablo</span></td>
-                                            <td>746-561-6784</td>
-                                            <td>someoneone@example.com</td>
-                                            <td>amorsolo, Cancel the bid after 4 hours, Bid, Proxy Bid, Counter Bid, Lot Fee</td>
-                                        </tr>
                                         
-                                        <tr>
-                                            <td>01</td>															
-                                            <td><span class="cartitlename">Fernando Botero Pablo</span></td>
-                                            <td>746-561-6784</td>
-                                            <td>someoneone@example.com</td>
-                                            <td>amorsolo, Cancel the bid after 4 hours, Bid, Proxy Bid, Counter Bid, Lot Fee</td>
-                                        </tr>
                                         </table>            
                                     </div>
 					            </div>

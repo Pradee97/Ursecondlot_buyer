@@ -16,7 +16,7 @@ import { useState } from 'react';
 
 const Registration = () => {
     const history = useHistory();
- 
+
     const [isOpen, setIsOpen] = useState(false);
     const [isCommonPopupOpen, setIsCommonPopupOpen] = useState(false);
     const [dealerName, setDealerName] = useState("");
@@ -32,31 +32,31 @@ const Registration = () => {
     const [zipCodeId, setZipcodeId] = useState("");
     const [numberOfYears, setNumberofYears] = useState("");
     const [option, setOption] = useState("");
-    const [popupTitle, setPopupTitle] = useState ("");
-    const [popupMsg, setPopupMsg] = useState ("");
-    const [popupType, setPopupType] = useState ("");
-    const [popupActionType, setPopupActionType] = useState ("");
-    const [popupActionValue, setPopupActionValue] = useState ("");
-    const [popupActionPath, setPopupActionPath] = useState ("");
+    const [popupTitle, setPopupTitle] = useState("");
+    const [popupMsg, setPopupMsg] = useState("");
+    const [popupType, setPopupType] = useState("");
+    const [popupActionType, setPopupActionType] = useState("");
+    const [popupActionValue, setPopupActionValue] = useState("");
+    const [popupActionPath, setPopupActionPath] = useState("");
 
     const togglePopup = () => {
         setIsOpen(!isOpen);
-      }
-  
-      const toggleCommonPopup = () => {
-          setIsCommonPopupOpen(!isCommonPopupOpen);
-      }
-  
-      const yesterday = moment().subtract(1, 'day');
-      const disablePastDt = current => {
+    }
+
+    const toggleCommonPopup = () => {
+        setIsCommonPopupOpen(!isCommonPopupOpen);
+    }
+
+    const yesterday = moment().subtract(1, 'day');
+    const disablePastDt = current => {
         return current.isAfter(yesterday);
-      };
-  
-      const inputProps = {
-          placeholder: 'DD/MM/YYYY',
-          required:true
-      };
-   
+    };
+
+    const inputProps = {
+        placeholder: 'DD/MM/YYYY',
+        required: true
+    };
+
     const registrationhandleSubmit = (event) => {
         // setOpenLoader(true);
         event.preventDefault();
@@ -76,7 +76,7 @@ const Registration = () => {
             zipcode_id: zipCodeId,
             no_years: option,
             local_flag: 0,
-        };        
+        };
         API.post("registration/add", request)
             .then((response) => {
                 if (response.data.success) {
@@ -92,7 +92,7 @@ const Registration = () => {
                 } else {
                     toggleCommonPopup()
                     setPopupTitle("Error");
-                    setPopupMsg ("registration failed, Please try Again");
+                    setPopupMsg("registration failed, Please try Again");
                     setPopupType("error");
                     setPopupActionType("close");
                     setPopupActionValue("close");
@@ -100,21 +100,21 @@ const Registration = () => {
             }, (error) => {
                 toggleCommonPopup()
                 setPopupTitle("Error");
-                setPopupMsg(error," Please try Again");
+                setPopupMsg(error, " Please try Again");
                 setPopupType("error");
                 setPopupActionType("close");
                 setPopupActionValue("close");
             });
     }
-    const getStateName=(stateData)=>{
+    const getStateName = (stateData) => {
         setStateName(stateData)
     }
 
-    const getCityName=(cityData)=>{
+    const getCityName = (cityData) => {
         setCityName(cityData)
     }
 
-    const getZipCodeId=(zipData)=>{
+    const getZipCodeId = (zipData) => {
         setZipcodeId(zipData)
     }
 
@@ -125,69 +125,69 @@ const Registration = () => {
                     <form className="registrationform" onSubmit={registrationhandleSubmit} >
                         <h2 className="title"> Dealer Registration</h2>
                         <div className="row">
-                        <div className="col-sm-12 form-group"> 
-                        <div className="tbox">
-                            <input className="textbox " type="text" placeholder="" id="dealer_name" required maxLength="50" onChange={(e) => setDealerName(e.target.value)} />
-				            <label  for="dealer_name" className={dealerName !="" ? "input-has-value" : ""}>Dealer name</label>
-			            </div>
-                        </div>
-                        <div className="col-sm-12 form-group"> 
-                        <div className="tbox">
-                            <input className="textbox " type="text" placeholder="" id="first_name" required maxLength="30" onChange={(e) => setFirstName(e.target.value)} />
-				            <label  for="first_name" className={firstName !="" ? "input-has-value" : ""}>First Name</label>
-			            </div>
-                        </div>
-                        <div className="col-sm-12 form-group"> 
-                        <div className="tbox">
-                            <input className="textbox " type="text" placeholder="" id="last_name" required maxLength="30" onChange={(e) => setLastName(e.target.value)} />
-				            <label  for="last_name" className={lastName !="" ? "input-has-value" : ""}>Last Name</label>
-			            </div>
-                        </div>
-                        <div className="col-sm-12 form-group">
-                        <div className="tbox">
-                            <input className="textbox " type="text" placeholder="" id="phone_no" required onChange={(e) => setPhoneNumber(e.target.value)} />
-				            <label  for="phone_no" className={phoneNumber !="" ? "input-has-value" : ""}>Phone</label>
-			            </div>
-                        </div>
-                        <div className="col-sm-12 form-group">
-                        <div className="tbox">
-                            <input className="textbox" type="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Invalid email address"  placeholder="" id="email" required onChange={(e) => setEmail(e.target.value)} />
-				            <label  for="email" className={email !="" ? "input-has-value" : ""}>Email</label>
-                           
-			            </div>
-                        </div>
-                        <div className="col-sm-12 form-group">
-                        <div className="tbox">
-                            <input className="textbox " type="text" placeholder="" id="address" maxLength="300" required onChange={(e) => setAddress(e.target.value)} />
-				            <label  for="address" className={address !="" ? "input-has-value" : ""}>Address</label>
-			            </div>
-                        </div>        
-                        
-                        <StateAndCity 
-                            setStateValue = { getStateName } 
-                            setCityValue ={ getCityName }
-                            setZipcodeValue ={ getZipCodeId }
-                        />
-                         
-                            <div className="col-sm-8 form-group">
+                            <div className="col-sm-12 form-group">
                                 <div className="tbox">
-                                {/* {/ <lable for="drop" className={option !="" ? "input-has-value" : ""}>How many years in car business</lable> /} */}
-                                <select id="drop" placeholder="" required className="form-control custom-select browser-default textbox" required onChange={(e) => setOption(e.target.value)}>
-                                <option disabled >How many years in car business</option>
-                                <option value="Less then 1">Less then 1</option>
-                                <option value="1-3">1-3</option>
-                                <option value="3-5">3-5</option>
-                                <option value="5-10">5-10</option>
-                                <option value="10-15">10-15</option>
-                                <option value="15-20">15-20</option>
-                                <option value="More then 20">More then 20</option>
-                                </select>
+                                    <input className="textbox " type="text" placeholder="" id="dealer_name" required maxLength="50" onChange={(e) => setDealerName(e.target.value)} />
+                                    <label for="dealer_name" className={dealerName != "" ? "input-has-value" : ""}>Dealer name</label>
+                                </div>
+                            </div>
+                            <div className="col-sm-12 form-group">
+                                <div className="tbox">
+                                    <input className="textbox " type="text" placeholder="" id="first_name" required maxLength="30" onChange={(e) => setFirstName(e.target.value)} />
+                                    <label for="first_name" className={firstName != "" ? "input-has-value" : ""}>First Name</label>
+                                </div>
+                            </div>
+                            <div className="col-sm-12 form-group">
+                                <div className="tbox">
+                                    <input className="textbox " type="text" placeholder="" id="last_name" required maxLength="30" onChange={(e) => setLastName(e.target.value)} />
+                                    <label for="last_name" className={lastName != "" ? "input-has-value" : ""}>Last Name</label>
+                                </div>
+                            </div>
+                            <div className="col-sm-12 form-group">
+                                <div className="tbox">
+                                    <input className="textbox " type="text" placeholder="" id="phone_no" required onChange={(e) => setPhoneNumber(e.target.value)} />
+                                    <label for="phone_no" className={phoneNumber != "" ? "input-has-value" : ""}>Phone</label>
+                                </div>
+                            </div>
+                            <div className="col-sm-12 form-group">
+                                <div className="tbox">
+                                    <input className="textbox" type="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Invalid email address" placeholder="" id="email" required onChange={(e) => setEmail(e.target.value)} />
+                                    <label for="email" className={email != "" ? "input-has-value" : ""}>Email</label>
 
-                                <label  for="no_years" className={"input-has-value"}>How many years in car business</label>
+                                </div>
+                            </div>
+                            <div className="col-sm-12 form-group">
+                                <div className="tbox">
+                                    <input className="textbox " type="text" placeholder="" id="address" maxLength="300" required onChange={(e) => setAddress(e.target.value)} />
+                                    <label for="address" className={address != "" ? "input-has-value" : ""}>Address</label>
                                 </div>
                             </div>
 
-                            
+                            <StateAndCity
+                                setStateValue={getStateName}
+                                setCityValue={getCityName}
+                                setZipcodeValue={getZipCodeId}
+                            />
+
+                            <div className="col-sm-8 form-group">
+                                <div className="tbox">
+                                    {/* {/ <lable for="drop" className={option !="" ? "input-has-value" : ""}>How many years in car business</lable> /} */}
+                                    <select id="drop" placeholder="" required className="form-control custom-select browser-default textbox" required onChange={(e) => setOption(e.target.value)}>
+                                        <option disabled >How many years in car business</option>
+                                        <option value="Less then 1">Less then 1</option>
+                                        <option value="1-3">1-3</option>
+                                        <option value="3-5">3-5</option>
+                                        <option value="5-10">5-10</option>
+                                        <option value="10-15">10-15</option>
+                                        <option value="15-20">15-20</option>
+                                        <option value="More then 20">More then 20</option>
+                                    </select>
+
+                                    <label for="no_years" className={"input-has-value"}>How many years in car business</label>
+                                </div>
+                            </div>
+
+
                             <div className="col-sm-12 form-group scheduleMeeting">
                                 <h2 className="text-center">Schedule Meeting with our Agent</h2>
                                 <p>Thank you for interesting in our platform, Make you money and success.</p>
@@ -196,17 +196,17 @@ const Registration = () => {
 
                             <div className="col-sm-6 form-group datePickerBlock ">
                                 <div className="tbox">
-                                <div className="textbox">
-                                <i class='bx bx-calendar'></i>
-                                    <Datetime inputProps={ inputProps } timeFormat={false} dateFormat="DD/MM/YYYY" isValidDate={disablePastDt}/>
-                                    <label  for="meeting_date" className={date!="" ? "input-has-value" : ""}>Select Date</label>
-                                </div>
+                                    <div className="textbox">
+                                        <i class='bx bx-calendar'></i>
+                                        <Datetime inputProps={inputProps} timeFormat={false} dateFormat="DD/MM/YYYY" isValidDate={disablePastDt} />
+                                        <label for="meeting_date" className={date != "" ? "input-has-value" : ""}>Select Date</label>
+                                    </div>
                                 </div>
                             </div>
                             <div className="col-sm-6 form-group timepicker">
-                            <div className="tbox">
-                                <input type="time" className="form-control textbox" placeholder="Select Time" required onChange={(e) => setTime(e.target.value)} />
-                                <label  for="meeting_time" className={time!="" ? "input-has-value" : ""}>Select Time</label>
+                                <div className="tbox">
+                                    <input type="time" className="form-control textbox" placeholder="Select Time" required onChange={(e) => setTime(e.target.value)} />
+                                    <label for="meeting_time" className={time != "" ? "input-has-value" : ""}>Select Time</label>
                                 </div>
                             </div>
                             <div className="col-sm-12 form-group agreetab">
@@ -220,13 +220,13 @@ const Registration = () => {
                                     </>}
                                     handleClose={togglePopup}
                                 />}
-                                {isCommonPopupOpen && <CommonPopup 
-                                    handleClose= {isCommonPopupOpen}
-                                    popupTitle= {popupTitle}
-                                    popupMsg= {popupMsg}
-                                    popupType= {popupType}
-                                    popupActionType= {popupActionType}
-                                    popupActionValue= {popupActionValue}
+                                {isCommonPopupOpen && <CommonPopup
+                                    handleClose={isCommonPopupOpen}
+                                    popupTitle={popupTitle}
+                                    popupMsg={popupMsg}
+                                    popupType={popupType}
+                                    popupActionType={popupActionType}
+                                    popupActionValue={popupActionValue}
                                     popupActionPath={popupActionPath}
                                 />}
                             </div>
@@ -241,14 +241,14 @@ const Registration = () => {
                     <div className="container">
                         <div className="row content">
                             <div className="col-lg-12">
-                                <img src={process.env.PUBLIC_URL +"/images/appstore.png"} />
-                                <img src={process.env.PUBLIC_URL +"/images/googleplay.png"} />
+                                <img src={process.env.PUBLIC_URL + "/images/appstore.png"} />
+                                <img src={process.env.PUBLIC_URL + "/images/googleplay.png"} />
                             </div>
                         </div>
                     </div>
                 </section>
             </main>
-          
+
         </div>
     )
 }
