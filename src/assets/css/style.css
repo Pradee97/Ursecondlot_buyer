@@ -6,6 +6,7 @@ body {
   font-family: 'Poppins', sans-serif;
   color: #444444;
   font-size: 14px;
+  background: #F5F5F5;
 }
 
 a {
@@ -2138,9 +2139,7 @@ Cars list
 #footer {
   font-size: 14px;
   background: #00163b;
-  position: relative;
   bottom: 0;
-  width: 100%;
 }
 
 #footer .footer-newsletter {
@@ -2408,6 +2407,7 @@ border-left:40px solid transparent;
 .inner-page{
 	background:#F5F5F5;
 	padding-top:50px;
+  min-height: 760px;
 }
 
 .dealar-login img {
