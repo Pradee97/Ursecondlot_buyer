@@ -34,28 +34,28 @@ const EditLegalAccount = () => {
 
     async function fetchAccountDetails() {
         console.log(id)
-        
+        let request = {
+            buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+        };
       
-            let request = {
-                buyer_id: id,
-            };
+           
             const state = API.post('legal_manage/condition', request);
             state.then(res => {
             console.log("res", res.data.data)
-            setFirstname(res.data.data.first_name);
-            setLastname(res.data.data.last_name);
-            setLegalBusinessname(res.data.data.legal_manage_id);
-            setEINnumber(res.data.data.ein_no);
-            setDealershiplicense(res.data.data.dealer_license);
-            setTaxid(res.data.data.tax_id);
-            setAddress(res.data.data.address);
-            setCity(res.data.data.city_id);
-            setState(res.data.data.state_id);
-            setZipcode(res.data.data.zipcode_id);
-            setDealershipLicenseexp(res.data.data.dealer_license_exp);
-            setTaxidexp(res.data.data.tax_id_exp);
+            setFirstname(res.data.data[0].first_name);
+            setLastname(res.data.data[0].last_name);
+            setLegalBusinessname(res.data.data[0].legal_manage_id);
+            setEINnumber(res.data.data[0].ein_no);
+            setDealershiplicense(res.data.data[0].dealer_license);
+            setTaxid(res.data.data[0].tax_id);
+            setAddress(res.data.data[0].address);
+            setCity(res.data.data[0].city_name);
+            setState(res.data.data[0].state_name);
+            setZipcode(res.data.data[0].zipcode_id);
+            setDealershipLicenseexp(res.data.data[0].dealer_license_exp);
+            setTaxidexp(res.data.data[0].tax_id_exp);
 
-            setAccountObj(res.data.data)
+            setAccountObj(res.data.data[0])
         })
             .catch(err => { console.log(err); });
     }
@@ -82,7 +82,7 @@ const EditLegalAccount = () => {
            
         };
         API
-            .put('http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/legal_manage/'+id, request)
+            .post('legal_manage/update', request)
             .then((response) => {
                 if (response.data.success) {
                     const { data } = response;
@@ -110,44 +110,77 @@ const EditLegalAccount = () => {
                         <div class="row">
 
                             <div class="col-sm-12 form-group">
-                                <input type="text"  defaultValue={accountObjc.first_name} class="form-control" placeholder="First name" required onChange={(e) => setFirstname(e.target.value)} />
+                            <div className="tbox">
+                                <input type="text"  defaultValue={accountObjc.first_name} class="form-control textbox" placeholder="" required onChange={(e) => setFirstname(e.target.value)} />
+                                <label for="first_name" className={firstname !="" ? "input-has-value" : ""}>First Name</label>
+                            </div>
                             </div>
                             <div class="col-sm-12 form-group">
-                                <input type="text" defaultValue={accountObjc.last_name} class="form-control" placeholder="Last name" required onChange={(e) => setLastname(e.target.value)} />
+                            <div className="tbox">
+                                <input type="text" defaultValue={accountObjc.last_name} class="form-control textbox" placeholder="" required onChange={(e) => setLastname(e.target.value)} />
+                                <label for="first_name" className={lastname !="" ? "input-has-value" : ""}>Last Name</label>
                             </div>
-
-                            <div class="col-sm-12 form-group">
-                                <input type="text" defaultValue={accountObjc.legal_manage_id} class="form-control" placeholder="Legal business name" required onChange={(e) => setLegalBusinessname(e.target.value)} />
-                            </div>
-
-                            <div class="col-sm-12 form-group">
-                                <input type="text" defaultValue={accountObjc.ein_no} class="form-control" placeholder="EIN number" required onChange={(e) => setEINnumber(e.target.value)} />
                             </div>
                             <div class="col-sm-12 form-group">
-                                <input type="text" defaultValue={accountObjc.dealer_license} class="form-control" placeholder="Dealership license" required onChange={(e) => setDealershiplicense(e.target.value)} />
+                            <div className="tbox">
+                                <input type="text" defaultValue={accountObjc.legal_manage_id} class="form-control textbox" placeholder="" required onChange={(e) => setLegalBusinessname(e.target.value)} />
+                                <label for="first_name" className={legalBusinessname !="" ? "input-has-value" : ""}>Legal Business Name</label>
+                            </div>
                             </div>
                             <div class="col-sm-12 form-group">
-                                <input type="text" defaultValue={accountObjc.tax_id} class="form-control" placeholder="Tax id" required onChange={(e) => setTaxid(e.target.value)} />
+                            <div className="tbox">
+                                <input type="text" defaultValue={accountObjc.ein_no} class="form-control textbox" placeholder="" required onChange={(e) => setEINnumber(e.target.value)} />
+                                <label for="first_name" className={EINnumber !="" ? "input-has-value" : ""}>EIN Number</label>
+                            </div>
                             </div>
                             <div class="col-sm-12 form-group">
-                                <input type="text" defaultValue={accountObjc.address} class="form-control" placeholder="Address" required onChange={(e) => setAddress(e.target.value)} />
+                            <div className="tbox">
+                                <input type="text" defaultValue={accountObjc.dealer_license} class="form-control textbox" placeholder="" required onChange={(e) => setDealershiplicense(e.target.value)} />
+                                <label for="first_name" className={dealershiplicense !="" ? "input-has-value" : ""}>Dealership License</label>
+                            </div>
                             </div>
                             <div class="col-sm-12 form-group">
-                                <input type="text" defaultValue={accountObjc.city_id} class="form-control" placeholder="City" required onChange={(e) => setCity(e.target.value)} />
+                            <div className="tbox">
+                                <input type="text" defaultValue={accountObjc.tax_id} class="form-control textbox" placeholder="" required onChange={(e) => setTaxid(e.target.value)} />
+                                <label for="first_name" className={taxid !="" ? "input-has-value" : ""}>Tax Id</label>
+                            </div>
                             </div>
                             <div class="col-sm-12 form-group">
-                                <input type="text" defaultValue={accountObjc.state_id} class="form-control" placeholder="State" required onChange={(e) => setState(e.target.value)} />
+                            <div className="tbox">
+                                <input type="text" defaultValue={accountObjc.address} class="form-control textbox" placeholder="" required onChange={(e) => setAddress(e.target.value)} />
+                                <label for="first_name" className={address !="" ? "input-has-value" : ""}>Address</label>
+                            </div>
+                            </div>
+                            <div class="col-sm-12 form-group">
+                            <div className="tbox">
+                                <input type="text" defaultValue={accountObjc.city_name} class="form-control textbox" placeholder="" required onChange={(e) => setCity(e.target.value)} />
+                                <label for="first_name" className={city !="" ? "input-has-value" : ""}>City</label>
+                            </div>
+                            </div>
+                            <div class="col-sm-12 form-group">
+                            <div className="tbox">
+                                <input type="text" defaultValue={accountObjc.state_name} class="form-control textbox" placeholder="" required onChange={(e) => setState(e.target.value)} />
+                                <label for="first_name" className={state !="" ? "input-has-value" : ""}>State</label>
+                            </div>
                             </div>
                              <div class="col-sm-12 form-group">
-                                <input type="number" defaultValue={accountObjc.zipcode_id} class="form-control" placeholder="Zip code" required onChange={(e) => setZipcode(e.target.value)} />
+                             <div className="tbox">
+                                <input type="number" defaultValue={accountObjc.zipcode_id} class="form-control textbox" placeholder="" required onChange={(e) => setZipcode(e.target.value)} />
+                                <label for="first_name" className={zipcode !="" ? "input-has-value" : ""}>Zip code</label>
                             </div> 
-                            <div class="col-sm-12 form-group">
-                                <input type="text" defaultValue={accountObjc.dealer_license_exp} class="form-control" placeholder="Dealership license exp" required onChange={(e) => setDealershipLicenseexp(e.target.value)} />
-                            </div> 
-                            <div class="col-sm-12 form-group">
-                                <input type="text" defaultValue={accountObjc.tax_id_exp} class="form-control" placeholder="Tax id exp" required onChange={(e) => setTaxidexp(e.target.value)} />
                             </div>
-                    
+                            <div class="col-sm-12 form-group">
+                            <div className="tbox">
+                                <input type="text" defaultValue={accountObjc.dealer_license_exp} class="form-control textbox" placeholder="" required onChange={(e) => setDealershipLicenseexp(e.target.value)} />
+                                <label for="first_name" className={dealershipLicenseexp !="" ? "input-has-value" : ""}>Dealership license exp</label>
+                            </div> 
+                            </div>
+                            <div class="col-sm-12 form-group">
+                            <div className="tbox">
+                                <input type="text" defaultValue={accountObjc.tax_id_exp} class="form-control textbox" placeholder="" required onChange={(e) => setTaxidexp(e.target.value)} />
+                                <label for="first_name" className={taxidexp!="" ? "input-has-value" : ""}>Tax id exp</label>
+                            </div>
+                            </div>
                             <div class="col-lg-12 loginBtn">
                                 <button class="cta-btn">Update</button>
                             </div>

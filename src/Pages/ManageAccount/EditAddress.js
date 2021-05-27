@@ -54,10 +54,11 @@ const EditAddress = () => {
             address: address,
             phone_no: primaryPhone,
             mobile_phone: mobilePhone,
-            city_name: city,
-            state_name: state,
+            city_id: city,
+            state_id: state,
             zipcode_id: zipCode,
-
+            // location: location,
+            // buyer_address_id:buyeraddress,
             active:1
            
         };
