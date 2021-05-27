@@ -19,6 +19,9 @@ const MyProfile = () => {
       })
           .catch(err => { console.log(err); });
     }
+    function onHandleEdit(e){
+      history.push("/editmyprofile/"+e);
+    }
   useEffect(() => {
     fetchAccountDetails();
   }, []);
@@ -51,10 +54,13 @@ const MyProfile = () => {
                    </div>
                    <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 myprofilerightblock">
                        <div className="myprofilerighttableblock"> 
-                           <h3>My Details<span><a href="/editmyprofile">Edit</a></span></h3>	
-                           <p>Location where transport carriers will drop of a vehicle that you have purchased</p>
-                           {accountDetails.length>0?accountDetails.map((item,index) =>						
+                       {accountDetails.length>0?accountDetails.map((item,index) =>	
+                       
+                           
                            <div className="myprofilerighttable">
+                             <h3>My Details<span><button onClick={() => onHandleEdit(item.user_id)}>Edit</button></span></h3>	
+                           <p>Location where transport carriers will drop of a vehicle that you have purchased</p>
+                           					
                                <table>
                                  <thead></thead>
                                    <tr>
@@ -63,14 +69,14 @@ const MyProfile = () => {
                                  </tr>								  
                                  <tr>
                                    <td>Last name<span>{item.last_name}</span></td>
-                                   <td>City<span>{item.city_id}</span></td>
+                                   <td>City<span>{item.city_name}</span></td>
                                  </tr>
                                 <tr>
                                    <td>Primary phone<span>{item.phone_no}</span></td>
-                                   <td>State<span>{item.state_id}</span></td>
+                                   <td>State<span>{item.state_name}</span></td>
                                  </tr>	
                                    <tr>
-                                   <td>Mobile phone<span>{item.phone_no}</span></td>
+                                   <td>Mobile phone<span>{item.mobile_no}</span></td>
                                    <td>Zip code<span>{item.zipcode_id}</span></td>
                                  </tr>
 
