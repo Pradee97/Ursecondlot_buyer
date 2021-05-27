@@ -50,13 +50,17 @@ const Registration = () => {
     const yesterday = moment().subtract(1, 'day');
     const disablePastDt = current => {
         return current.isAfter(yesterday);
-    };
-
-    const inputProps = {
-        placeholder: 'DD/MM/YYYY',
-        required: true
-    };
-
+      };
+  
+      const inputProps = {
+          placeholder: 'DD/MM/YYYY',
+          required:true
+      };
+      
+      const registrationDate = (event) => {
+        setDate(event.format("DD/MM/YYYY"))
+    }
+   
     const registrationhandleSubmit = (event) => {
         // setOpenLoader(true);
         event.preventDefault();
@@ -196,11 +200,11 @@ const Registration = () => {
 
                             <div className="col-sm-6 form-group datePickerBlock ">
                                 <div className="tbox">
-                                    <div className="textbox">
-                                        <i class='bx bx-calendar'></i>
-                                        <Datetime inputProps={inputProps} timeFormat={false} dateFormat="DD/MM/YYYY" isValidDate={disablePastDt} />
-                                        <label for="meeting_date" className={date != "" ? "input-has-value" : ""}>Select Date</label>
-                                    </div>
+                                <div className="textbox">
+                                <i class='bx bx-calendar'></i>
+                                    <Datetime inputProps={ inputProps } timeFormat={false} dateFormat="DD/MM/YYYY" isValidDate={disablePastDt} onChange={registrationDate}/>
+                                    <label  for="meeting_date" className={date!="" ? "input-has-value" : ""}>Select Date</label>
+                                </div>
                                 </div>
                             </div>
                             <div className="col-sm-6 form-group timepicker">

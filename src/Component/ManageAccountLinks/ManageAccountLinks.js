@@ -1,9 +1,10 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 
 const ManageAccountLinks = () => {
     const history = useHistory();
+    const location = useLocation();
     return(
         <div className="mgaccountuserlinks">
             <div className="userlinks">

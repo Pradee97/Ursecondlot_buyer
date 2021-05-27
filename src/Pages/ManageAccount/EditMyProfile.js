@@ -21,6 +21,8 @@ import ls from 'local-storage';
 const EditMyProfile = () => {
     const history = useHistory();
     const { id } = useParams();
+    const { user_id } = useParams();
+    const { buyer_id } = useParams();
     const userDetails=ls.get('userDetails');
     const [myProfileObjc, setMyProfileObj] = useState("");
     const [firstName, setFirstName] = useState("");
@@ -31,7 +33,7 @@ const EditMyProfile = () => {
     const [address, setAddress] = useState("");
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
-    const [zipcde, setZipcode] = useState("");
+    const [zipcode, setZipcode] = useState("");
     const [locationName, setLocationName] = useState("");
     const [isOpen, setIsOpen] = useState(false);
     
@@ -47,46 +49,51 @@ const EditMyProfile = () => {
     const [popupActionPath, setPopupActionPath] = useState ("")
 
     async function fetchMyProfileDetails() {
+        let request = {
+            buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+        };
         
-        const state = API.get('floor_plan/'+id);
+        const state = API.post('user_profile/condition',request);
         state.then(res => {
             console.log("res", res.data.data)
-            setFirstName(res.data.data.first_name);
-            setLastName(res.data.data.last_name);
-            setPrimaryPhone(res.data.data.phone_no);
-            setMobilephone(res.data.data.phone_no);           
-            setEmailId(res.data.data.email);
-            setAddress(res.data.data.address);
-            setCity(res.data.data.city_id);
-            setState(res.data.data.state_id);
-            setZipcode(res.data.data.zipcode_id); 
-            setLocationName(res.data.data.address);
-            setMyProfileObj(res.data.data);
+            setFirstName(res.data.data[0].first_name);
+            setLastName(res.data.data[0].last_name);
+            setPrimaryPhone(res.data.data[0].phone_no);
+            setMobilephone(res.data.data[0].mobile_no);           
+            setEmailId(res.data.data[0].email);
+            setAddress(res.data.data[0].address);
+            setCity(res.data.data[0].city_name);
+            setState(res.data.data[0].state_name);
+            setZipcode(res.data.data[0].zipcode_id); 
+            setLocationName(res.data.data[0].address);
+            setMyProfileObj(res.data.data[0]);
         })
             .catch(err => { console.log(err); });
     }
+   
   
     const updateMyProfile = (event) => {
         // setOpenLoader(true);
         event.preventDefault();        
     
         let request = {
+            user_id:id,
             first_name: firstName,
             last_name: lastName,
             phone_no: primaryPhone,
-            phone_no: mobilePhone,           
+            mobile_no: mobilePhone,           
             email: emailId,
             address: address,
             city_id: city,
             state_id: state,
-            zipcode_id: zipcde,
+            zipcode_id: zipcode,
             address: locationName,
             active:1,
-            buyer_id: userDetails.user_id
+            // buyer_id: userDetails.user_id
            
         };
         API
-            .put("floor_plan/"+id, request)
+            .post("myProfile/update" ,request)
             .then((response) => {
                 if (response.data.success) {
                     const { data } = response;
@@ -113,7 +120,7 @@ const EditMyProfile = () => {
                 // console.log(error);
                 togglePopup()
                 setPopupTitle("Error");
-                setPopupMsg(error," Please try Again");
+                setPopupMsg("something went wrong, Please try Again");
                 setPopupType("error");
                 setPopupActionType("close");
                 setPopupActionValue("close");
@@ -153,7 +160,7 @@ const EditMyProfile = () => {
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="number" defaultValue={myProfileObjc.phone_no} className="form-control textbox" placeholder="" required onChange={(e) => setMobilephone(e.target.value)} />
+                                <input type="number" defaultValue={myProfileObjc.mobile_no} className="form-control textbox" placeholder="" required onChange={(e) => setMobilephone(e.target.value)} />
                                 <label for="phone_no" className={mobilePhone !="" ? "input-has-value" : ""}>Mobile Phone</label>
                             </div>
                             </div>                      
@@ -171,20 +178,20 @@ const EditMyProfile = () => {
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={myProfileObjc.city_id} className="form-control textbox" placeholder="" required onChange={(e) => setCity(e.target.value)} />
+                                <input type="text" defaultValue={myProfileObjc.city_name} className="form-control textbox" placeholder="" required onChange={(e) => setCity(e.target.value)} />
                                 <label for="city_id" className={city !="" ? "input-has-value" : ""}>City</label>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={myProfileObjc.state_id} className="form-control textbox" placeholder="" required onChange={(e) => setState(e.target.value)} />
+                                <input type="text" defaultValue={myProfileObjc.state_name} className="form-control textbox" placeholder="" required onChange={(e) => setState(e.target.value)} />
                                 <label for="state_id" className={state !="" ? "input-has-value" : ""}>State</label>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={myProfileObjc.zipcode_id} className="form-control textbox" placeholder="" required onChange={(e) => setZipcode(e.target.value)} />
-                                <label for="zipcode_id" className={zipcde !="" ? "input-has-value" : ""}>Zipcode</label>
+                                <label for="zipcode_id" className={zipcode !="" ? "input-has-value" : ""}>Zipcode</label>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
