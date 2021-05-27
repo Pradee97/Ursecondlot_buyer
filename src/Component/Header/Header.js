@@ -5,7 +5,10 @@ import { useEffect } from 'react';
 import ls from 'local-storage';
 
 import LogoImg from '../../../src/assets/img/Logo_final.png';
-
+import cartImg from '../../../src/assets/img/cart.svg';
+import chatImg from '../../../src/assets/img/chat.svg';
+import userImg from '../../../src/assets/img/user.svg';
+import hamburgermenuImg from '../../../src/assets/img/hamburger-menu.svg';
 // import '../../assets/css/style.css';
 import './header.css';
 import { Alert } from 'antd';
@@ -89,18 +92,18 @@ const Submenu = () => {
               <li className={location.pathname ==="/floor"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/floor')} >Floor</a></li>
               <li className={location.pathname ==="/transport"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/transport')} >Transport</a></li>
               <li className={location.pathname ==="/chat"? "active nav__menu-item" : "nav__menu-item"} >
-                <img alt="Menu" src={process.env.PUBLIC_URL +"/images/chat.svg"} onClick={()=>history.push('/chat')}/>
+                <img alt="Menu" src={chatImg} onClick={()=>history.push('/chat')}/>
               </li>
               <li className={location.pathname ==="/cart"? "active nav__menu-item" : "nav__menu-item"} >
-                <img alt="Menu" src={process.env.PUBLIC_URL +"/images/cart.svg"} onClick={()=>history.push('/cart')}/>
+                <img alt="Menu" src={cartImg} onClick={()=>history.push('/cart')}/>
               </li>
               <li>
                 <b className="user_name">Welcome {JSON.parse(localStorage.getItem("userDetails")).first_name}</b>
                 
-                <img alt="Menu" src={process.env.PUBLIC_URL +"/images/user.svg"} /> 
+                <img alt="Menu" src={userImg} /> 
               </li>
               <li className="nav__menu-item" >
-                <img alt="Menu" src={process.env.PUBLIC_URL +"/images/hamburger-menu.svg"} />
+                <img alt="Menu" src={hamburgermenuImg} />
                 <Submenu />
               </li>
 
