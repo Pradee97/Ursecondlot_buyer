@@ -53,22 +53,7 @@ const AddLegalAccount = () => {
             zipcode_id: zipcode,
             address: address,
             bussiness_name: legalBusinessname,
-            active: 1
-            // first_name: firstname,
-            // last_name: lastname,
-            // legal_manage_id: legalBusinessname,
-            // ein_no: EINnumber,
-            // dealer_license: dealershiplicense,
-            // tax_id: taxid,
-            // address: address,
-            // city_name: city,
-            // state_name: state,
-            // zipcode_id: zipcode,
-            // dealer_license_exp: dealershipLicenseexp,
-            // tax_id_exp: taxidexp,
-            // buyer_id:userDetails.id,
-
-            // active:1
+            active: 1          
         }];
         console.log("===",request)
         // return
