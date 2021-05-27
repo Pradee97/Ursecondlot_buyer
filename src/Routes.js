@@ -86,7 +86,7 @@ function AppRouter() {
               <Route  path="/buyers" component={Buyers}/>
               <Route  path="/adduser" component={AddUser}/>
               <Route  path="/myprofile" component={MyProfile}/>  
-              <Route  path="/editmyprofile" component={EditMyProfile}/>
+              <Route  path="/editmyprofile/:id" component={EditMyProfile}/>
             </PrivateRoute>       
           </Switch>
           <Footer />
