@@ -490,7 +490,7 @@ h1, h2, h3, h4, h5, h6 {
 #hero {
   background:url("../img/banner.jpg") no-repeat center top;
   width: 100%;
-  height: 580px; 
+  height: 590px; 
 }
 
 #hero .container {
@@ -4987,6 +4987,7 @@ Form text overlop
   border-radius: 3px;
   padding: 10px;
   transition: all 0.1s ease-out;
+  background: #fff;
   
 }
 .tbox input.textbox + label {
@@ -5998,7 +5999,7 @@ ul.ant-pagination li{
   font-size: 14px;
 }
 .timepicker .tbox .textbox + label{
-  font-size: 16px;
+  font-size: 14px;
 }
 
 /*--------------------------------------------------------
@@ -6160,6 +6161,13 @@ Users
   color: #002768;
   font-size: 14px;
   font-weight: 500;
+}
+
+.custom-select{
+  background:#fff url("../img/arrowmarks.png") no-repeat right center;  
+}
+.datePickerBlock input{
+  background:#fff url("../img/calender.png") no-repeat right center;  
 }
 
 

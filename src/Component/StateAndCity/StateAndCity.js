@@ -182,7 +182,7 @@ return (
                             </>
                         }
                     </select>
-                    <label  for="state_id" className={stateName!="" ? "input-has-value" : ""}>State</label>
+                    <label  for="state_id" className={"input-has-value"}>State</label>
                     </div>
                      )
                     :
@@ -206,7 +206,7 @@ return (
                             </>
                         }
                     </select>
-                    <label  for="city_id" className={cityName!="" ? "input-has-value" : ""}>City</label>
+                    <label  for="city_id" className={"input-has-value"}>City</label>
                 </div>
                 )
                 :
@@ -224,13 +224,13 @@ return (
                     {!isEdit && stateName!=="" && cityName !==""  ?
                     (<>
                         <input type="text" className="form-control textbox"  placeholder=""  required maxLength="5" onChange={(e) => setZipcodeNormal(e.target.value)} />
-                        <label  for="zipcode_id" className={zipCodeId!="" ? "input-has-value" : ""}>Zipcode</label>
+                        <label  for="zipcode_id" className={"input-has-value"}>Zipcode</label>
                     </>
                     )
 
                     :(<>
                         <input type="text" className="form-control textbox" defaultValue={isEdit ? defaultZipcodeValue : zipCodeId} placeholder="" required maxLength="5" onChange={(e) => setZipcodeGoogle(e.target.value)} />
-                        {/* <label  for="zipcode_id" className={zipCodeId!="" ? "input-has-value" : ""}>Zipcode</label> */}
+                        {<label  for="zipcode_id" className={"input-has-value"}>Zipcode</label>}
                     </>
                         )}
                 </div>
