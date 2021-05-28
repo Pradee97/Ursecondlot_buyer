@@ -57,9 +57,9 @@ const EditAddress = () => {
         console.log(id)
         
         let request = {
-            buyer_id:JSON.parse(localStorage.getItem("userDetails")).user_id,
+            buyer_address_id:id,
         };
-        const state = API.post('user_profile/condition', request);
+        const state = API.post('buyer_address/condition', request);
         state.then(res => {
             console.log("res", res.data.data)
             setFirstName(res.data.data[0].first_name);
@@ -90,7 +90,7 @@ const EditAddress = () => {
             city_id: city,
             state_id: state,
             zipcode_id: zipCode,
-            // location: location,
+            location: address,
             // buyer_address_id:buyeraddress,
             active:1
            
@@ -155,7 +155,7 @@ const EditAddress = () => {
                                 <input type="text" defaultValue={accountObjc.mobile_no} class="form-control" placeholder="Mobile phone" required onChange={(e) => setMobilePhone(e.target.value)} />
                             </div>
                             <div class="col-sm-12 form-group">
-                                <input type="text" defaultValue={accountObjc.address} class="form-control" placeholder="Address" required onChange={(e) => setAddress(e.target.value)} />
+                                <input type="text" defaultValue={accountObjc.location} class="form-control" placeholder="Address" required onChange={(e) => setAddress(e.target.value)} />
                             </div>
                             <StateAndCity 
                                 setStateValue = { getStateName } 
