@@ -36,11 +36,11 @@ const EditDealerInformation = () => {
         };
         const state = API.post('user_profile/condition', request);
         state.then(res => {
-            console.log("res", res.data.data)
+            console.log("res=======>", res.data.data)
             setFirstname(res.data.data[0].first_name);
             setLastname(res.data.data[0].last_name);
             setPrimaryphone(res.data.data[0].phone_no);
-            setMobilephone(res.data.data[0].mobile_phone);
+            setMobilephone(res.data.data[0].mobile_no);
             setAddress(res.data.data[0].address);
             setCity(res.data.data[0].city_name);
             setState(res.data.data[0].state_name);
@@ -59,7 +59,7 @@ const EditDealerInformation = () => {
             first_name: firstName,
             last_name: lastName,
             phone_no: primaryPhone,
-            mobile_phone: mobilePhone,
+            mobile_no: mobilePhone,
             address: address,
             city_id: city,
             state_id: state,
