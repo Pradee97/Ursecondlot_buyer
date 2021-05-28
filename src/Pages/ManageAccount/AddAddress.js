@@ -102,7 +102,7 @@ const AddAddress = () => {
                 <div className="col-lg-4 card loginBlock flooraddform">
                     <form className="registrationform" onSubmit={onhandleSubmit} >
                         <button className="back-btn-paymentform" onClick={() => history.push("/manageaccount")}>Back</button>              
-                        <h2 className="title">Add Legal Manage Account </h2>
+                        <h2 className="title">Add Address </h2>
                         <div className="row">
                         <div className="col-sm-12 form-group"> 
                         <div className="tbox">
@@ -136,10 +136,10 @@ const AddAddress = () => {
                             </div>
                             </div>
                             <StateAndCity
-														setStateValue={getStateName}
-														setCityValue={getCityName}
-														setZipcodeValue={getZipCodeId}
-													/>
+                                setStateValue={getStateName}
+                                setCityValue={getCityName}
+                                setZipcodeValue={getZipCodeId}
+                            />
                             {/* <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" id="accountNumber" className="textbox" placeholder="" required onChange={(e) => setCity(e.target.value)} />
