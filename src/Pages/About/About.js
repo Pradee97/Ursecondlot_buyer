@@ -1,21 +1,8 @@
 import React from 'react';
-import API from "../../Services/BaseService";
-import { useHistory,useParams } from "react-router-dom";
-// import '../../assets/css/styles.css';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import {
-    Form,
-    Input,
-    Select,
-    AutoComplete,
-    Radio,
-    notification,
-    Spin,
-} from 'antd';
-
-import { Modal, Button } from 'antd';
-
+import { useHistory } from "react-router-dom";
+import AboutusImg from '../../../src/assets/img/aboutusimg.png';
+import AppStoreImg from '../../../src/assets/img/appstore.png';
+import GooglePlayImg from '../../../src/assets/img/googleplay.png';
 
 
 const About = () => {
@@ -24,8 +11,7 @@ const About = () => {
     return (
         <div>
               <main id="main" className="inner-page">
-   
-   
+      
    <div id="about" className="about">
      <div className="container" >
      <div className="aboutblock col-lg-12">
@@ -37,7 +23,7 @@ const About = () => {
        <div className="row content">
          <div className="col-lg-6">
            <div className="aboutusimg">
-            <img src={process.env.PUBLIC_URL +"/images/aboutusimg.png"} />
+            <img src={AboutusImg} />
            </div>
            
          </div>
@@ -65,8 +51,8 @@ const About = () => {
 
        <div className="row content">
          <div className="col-lg-12">
-           <img src={process.env.PUBLIC_URL +"/images/appstore.png"} />
-           <img src={process.env.PUBLIC_URL +"/images/googleplay.png"} />
+           <img src={AppStoreImg} />
+           <img src={GooglePlayImg} />
           
          </div>
         

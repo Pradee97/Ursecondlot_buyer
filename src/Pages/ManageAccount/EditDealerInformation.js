@@ -4,6 +4,8 @@ import { useHistory,useParams } from "react-router-dom";
 // import '../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import CommonPopup from '../../Component/CommonPopup/CommonPopup';
+
 import {
     Form,
     Input,
@@ -13,6 +15,7 @@ import {
     notification,
     Spin,
 } from 'antd';
+import StateAndCity from '../../Component/StateAndCity/StateAndCity'
 
 const EditDealerInformation = () => {
     const history = useHistory();
@@ -26,7 +29,31 @@ const EditDealerInformation = () => {
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
     const [zipCode, setZipcode] = useState("");
+
+    const [isOpen, setIsOpen] = useState(false);
+ 
+    const togglePopup = () => {
+      setIsOpen(!isOpen);
+    }
+
+    const [popupTitle, setPopupTitle] = useState ("");
+    const [popupMsg, setPopupMsg] = useState ("");
+    const [popupType, setPopupType] = useState ("");
+    const [popupActionType, setPopupActionType] = useState ("");
+    const [popupActionValue, setPopupActionValue] = useState ("");
+    const [popupActionPath, setPopupActionPath] = useState ("")
   
+    const getStateName=(stateData)=>{
+        setState(stateData)
+    }
+
+    const getCityName=(cityData)=>{
+        setCity(cityData)
+    }
+
+    const getZipCodeId=(zipData)=>{
+        setZipcode(zipData)
+    }
 
     async function fetchAccountDetails() {
         console.log(id)
@@ -36,11 +63,11 @@ const EditDealerInformation = () => {
         };
         const state = API.post('user_profile/condition', request);
         state.then(res => {
-            console.log("res", res.data.data)
+            console.log("res=======>", res.data.data)
             setFirstname(res.data.data[0].first_name);
             setLastname(res.data.data[0].last_name);
             setPrimaryphone(res.data.data[0].phone_no);
-            setMobilephone(res.data.data[0].mobile_phone);
+            setMobilephone(res.data.data[0].mobile_no);
             setAddress(res.data.data[0].address);
             setCity(res.data.data[0].city_name);
             setState(res.data.data[0].state_name);
@@ -59,7 +86,7 @@ const EditDealerInformation = () => {
             first_name: firstName,
             last_name: lastName,
             phone_no: primaryPhone,
-            mobile_phone: mobilePhone,
+            mobile_no: mobilePhone,
             address: address,
             city_id: city,
             state_id: state,
@@ -73,17 +100,34 @@ const EditDealerInformation = () => {
                 if (response.data.success) {
                     const { data } = response;
                     console.log("response", response)
-                    history.push("/success");
+                    // history.push("/success");
+                    togglePopup()
+                    setPopupTitle("Edit Dealer Information");
+                    setPopupMsg(" Edit Dealer Information is successfully Updated");
+                    setPopupType("success");
+                    setPopupActionType("redirect");
+                    setPopupActionValue("ok");
+                    setPopupActionPath("/manageaccount")
+
                 } else {
-                    history.push("emailerror");
+                    togglePopup()
+                    setPopupTitle("Edit Dealer Information");
+                    setPopupMsg("Edit Dealer Information is not update, Please try Again");
+                    setPopupType("error");
+                    setPopupActionType("close");
+                    setPopupActionValue("close");
                 }
             }, (error) => {
                 // setOpenLoader(false);
                 // console.log(error);
+                    togglePopup()
+                    setPopupTitle("Error");
+                    setPopupMsg( "Something went wrong, Please try Again");
+                    setPopupType("error");
+                    setPopupActionType("close");
+                    setPopupActionValue("close");
             });
-
-    }
-
+        }
     useEffect(() => {
       fetchAccountDetails();
     }, []);
@@ -92,6 +136,7 @@ const EditDealerInformation = () => {
             <main id="main" class="inner-page">
                 <div className="col-lg-4 card loginBlock">
                     <form class="registrationform" onSubmit={updateDealerInfo} >
+                    <button className="back-btn-paymentform" onClick={() => history.push("/manageaccount")}>Back</button>                
                         <h2 class="title"> Edit Dealer Information</h2>
                         <div class="row">
 
@@ -109,6 +154,7 @@ const EditDealerInformation = () => {
                             </div>
 
                             <div class="col-sm-12 form-group">
+<<<<<<< HEAD
                             <div className="tbox">
                                 <input type="number" defaultValue={accountObjc.phone_no} class="textbox" placeholder="Primary phone" required onChange={(e) => setPrimaryphone(e.target.value)} />
                                 <label for="primary_phone" className={primaryPhone != "" ? "input-has-value" : ""}>Primary Phone</label>
@@ -120,6 +166,13 @@ const EditDealerInformation = () => {
                                 <input type="number" defaultValue={accountObjc.mobile_phone} class="textbox" placeholder="Mobile phone" required onChange={(e) => setMobilephone(e.target.value)} />
                                 <label for="mobile_phone" className={mobilePhone != "" ? "input-has-value" : ""}>Mobile Phone</label>
                             </div>
+=======
+                                <input type="text" defaultValue={accountObjc.phone_no} class="form-control" placeholder="Primary phone" required onChange={(e) => setPrimaryphone(e.target.value)} />
+                            </div>
+
+                            <div class="col-sm-12 form-group">
+                                <input type="text" defaultValue={accountObjc.mobile_phone} class="form-control" placeholder="Mobile phone" required onChange={(e) => setMobilephone(e.target.value)} />
+>>>>>>> e744955eed2da424b32212b4761db27d45288374
                             </div>
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
@@ -127,11 +180,25 @@ const EditDealerInformation = () => {
                                 <label for="address" className={address != "" ? "input-has-value" : ""}>Address</label>
                             </div>
                             </div>
+<<<<<<< HEAD
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={accountObjc.city_name} class="textbox" placeholder="City" required onChange={(e) => setCity(e.target.value)} />
                                 <label for="city" className={city != "" ? "input-has-value" : ""}>City</label>
                             </div>
+=======
+                            <StateAndCity 
+                                setStateValue = { getStateName } 
+                                setCityValue ={ getCityName }
+                                setZipcodeValue ={ getZipCodeId }
+                                isEdit = {true}
+                                defaultStateValue = {state}
+                                defaultCityValue = {city}
+                                defaultZipcodeValue = {zipCode}
+                            />
+                            {/* <div class="col-sm-12 form-group">
+                                <input type="text" defaultValue={accountObjc.city_name} class="form-control" placeholder="City" required onChange={(e) => setCity(e.target.value)} />
+>>>>>>> e744955eed2da424b32212b4761db27d45288374
                             </div>
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
@@ -140,11 +207,16 @@ const EditDealerInformation = () => {
                             </div>
                             </div>
                             <div class="col-sm-12 form-group">
+<<<<<<< HEAD
                             <div className="tbox">
                                 <input type="number" defaultValue={accountObjc.zipcode_id} class="textbox" placeholder="Zip code" required onChange={(e) => setZipcode(e.target.value)} />
                                 <label for="first_name" className={zipCode != "" ? "input-has-value" : ""}>Zipcode</label>
                             </div>
                             </div>
+=======
+                                <input type="number" defaultValue={accountObjc.zipcode_id} class="form-control" placeholder="Zip code" required onChange={(e) => setZipcode(e.target.value)} />
+                            </div> */}
+>>>>>>> e744955eed2da424b32212b4761db27d45288374
                           
                     
                             <div class="col-lg-12 loginBtn">
@@ -164,6 +236,16 @@ const EditDealerInformation = () => {
                         </div>
                     </div>
                 </section>
+                {isOpen && 
+                <CommonPopup 
+                    handleClose= {togglePopup}
+                    popupTitle= {popupTitle}
+                    popupMsg= {popupMsg}
+                    popupType= {popupType}
+                    popupActionType= {popupActionType}
+                    popupActionValue= {popupActionValue}
+                    popupActionPath={popupActionPath}
+                />}
             </main>
           
         </div>

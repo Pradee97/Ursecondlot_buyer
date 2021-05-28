@@ -36,7 +36,7 @@ const AddAddress = () => {
         // setOpenLoader(true);
         event.preventDefault();        
     
-        let request = [{
+        let request = {
             first_name: firstName,
             last_name: lastName,
             address: address,
@@ -46,9 +46,9 @@ const AddAddress = () => {
             state_id: state,
             zipcode_id: zipCode,
             buyer_id:userDetails.user_id,
-            active:1
-           
-        }];
+            location:address,
+            active:1           
+        };
         console.log("===",request)
         // return
         API.post("buyer_address/add", request)
@@ -76,7 +76,7 @@ const AddAddress = () => {
                 // console.log(error);
                     togglePopup()
                     setPopupTitle("Error");
-                    setPopupMsg(error," Please try Again");
+                    setPopupMsg( "Something went wrong, Please try Again");
                     setPopupType("error");
                     setPopupActionType("close");
                     setPopupActionValue("close");
@@ -101,7 +101,7 @@ const AddAddress = () => {
 <main id="main" className="inner-page">
                 <div className="col-lg-4 card loginBlock flooraddform">
                     <form className="registrationform" onSubmit={onhandleSubmit} >
-                        {/* <button className="back-btn-paymentform" onClick={() => history.push("/#")}>Back</button>               */}
+                        <button className="back-btn-paymentform" onClick={() => history.push("/manageaccount")}>Back</button>              
                         <h2 className="title">Add Legal Manage Account </h2>
                         <div className="row">
                         <div className="col-sm-12 form-group"> 
