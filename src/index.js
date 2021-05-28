@@ -19,7 +19,7 @@ const clearStorage = () => {
 ReactDOM.render(
   <React.StrictMode>
   <App/>
-  {window.addEventListener('load', clearStorage)}
+  {/* {window.addEventListener('load', clearStorage)} */}
 </React.StrictMode>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

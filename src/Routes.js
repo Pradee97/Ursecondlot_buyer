@@ -68,11 +68,12 @@ function AppRouter() {
             <Route  path="/email" component={Email}/>
             <Route  path="/fees" component={Fees}/>
             <Route  path="/emailsuccess" component={Emailsuccess}/>
+            <Route  path="/changepassword" component={ChangePassword}/>
+
             <PrivateRoute>
               <Route  path="/floor" component={FloorPlans}/>
               <Route  path="/flooradd" component={FloorAdd}/>
               <Route  path="/flooredit/:id" component={FloorEdit}/>
-              <Route  path="/changepassword" component={ChangePassword}/>
               <Route  path="/carList" component={CarList}/>
               <Route  path="/search" component={Inprogress}/>
               <Route  path="/mybids" component={Inprogress}/>
