@@ -216,7 +216,7 @@ const Notification = () => {
 													<div className="col-lg-3 col-md-3">
 													<Popover content={content} >
 														<div className="radio input-group">
-															<input id="radio-dailysmsnover" checked={sms == "no" ? true : false} value="no" name="radio" type="radio" onChange={(e) => setSms(e.target.value)} />
+															<input id="radio-dailysmsnover" checked={sms == "no" ? true : false} value="no" name="radio" type="radio" readOnly disabled={true} onChange={(e) => setSms(e.target.value)} />
 															<label for="radio-dailysmsnover" className="radio-label">Never</label>
 															<p>you wont receive any SMS for bid activity.</p>
 														</div>
@@ -277,7 +277,7 @@ const Notification = () => {
 													<div className="col-lg-4 col-md-4">
 													<Popover content={content} >
 														<div className="radio input-group">
-															<input id="radio-dailycarsnover" checked={femail == "no" ? true : false} value="no" name="radio" type="radio" onChange={(e) => setFavEmail(e.target.value)} />
+															<input id="radio-dailycarsnover" checked={femail == "no" ? true : false} value="no" name="radio" type="radio" readOnly disabled={true} onChange={(e) => setFavEmail(e.target.value)} />
 															<label for="radio-dailycarsnover" className="radio-label">Never</label>
 															<p>you wont receive any emails With fresh inventory.</p>
 														</div>
@@ -311,7 +311,7 @@ const Notification = () => {
 													<div className="col-lg-4 col-md-4">
 													<Popover content={content} >
 														<div className="radio input-group">
-															<input id="radio-dailysmtnover" checked={fsms == "no" ? true : false} value="no" name="radio" type="radio" onChange={(e) => setFavSms(e.target.value)} />
+															<input id="radio-dailysmtnover" checked={fsms == "no" ? true : false} value="no" name="radio" type="radio" readOnly disabled={true} onChange={(e) => setFavSms(e.target.value)} />
 															<label for="radio-dailysmtnover" className="radio-label">Never</label>
 															<p>you wont receive any SMS With fresh inventory.</p>
 														</div>
