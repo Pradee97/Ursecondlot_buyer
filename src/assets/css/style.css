@@ -161,7 +161,7 @@ h1, h2, h3, h4, h5, h6 {
     z-index: 997;
     padding: 5px 0;
     top: 40px;
-	box-shadow: 0px 3px 6px #00000029;
+	box-shadow: 0px 3px 6px #ddd;
   text-align: left;
 }
 
@@ -942,7 +942,7 @@ Cars list
  .car-item {
     border-radius: 5px;
     border: 1px solid #eef0ef;
-	box-shadow: 0px 3px 6px #00000029;
+	box-shadow: 0px 3px 6px #ddd;
 	position:relative;
 }
 .suggested-cars .section-title h2 ,.inventory-cars .section-title h2 , .recently-cars .section-title h2  {   
@@ -1069,7 +1069,7 @@ Cars list
 .favorite-cars .car-item {
     border-radius: 5px;
     border: 1px solid #eef0ef;
-	box-shadow: 0px 3px 6px #00000029;
+	box-shadow: 0px 3px 6px #ddd;
 	position:relative;
 }
 .favorite-cars .section-title h2 {   
@@ -3150,7 +3150,7 @@ Car Detail Page
     border: 1px solid rgba(0,0,0,.125);
     border-radius: .25rem;
     padding: 30px 40px;
-	box-shadow: 0px 3px 6px #00000029;
+	box-shadow: 0px 3px 6px #ddd;
 }
 .carspecifation p{
 	color:#343434;
@@ -3173,7 +3173,7 @@ Car Detail Page
 .dealer-cars   .car-item {
     border-radius: 5px;
     border: 1px solid #eef0ef;
-	box-shadow: 0px 3px 6px #00000029;
+	box-shadow: 0px 3px 6px #ddd;
 	position:relative;
 }
 .dealer-cars   .section-title h2 {   
@@ -3290,7 +3290,7 @@ Car Detail Page
 .other-dealer-cars    .car-item {
     border-radius: 5px;
     border: 1px solid #eef0ef;
-	box-shadow: 0px 3px 6px #00000029;
+	box-shadow: 0px 3px 6px #ddd;
 	position:relative;
 }
 .other-dealer-cars    .section-title h2 {   
@@ -3951,7 +3951,7 @@ Search Box"
 .search-cars .car-item {
     border-radius: 5px;
     border: 1px solid #eef0ef;
-	box-shadow: 0px 3px 6px #00000029;
+	box-shadow: 0px 3px 6px #ddd;
 	position:relative;
 }
 .search-cars .cars-lock{	
@@ -4140,7 +4140,7 @@ Search Box"
     margin: 0;
     padding: 0;
     width: 100%;
-    box-shadow: 0px 3px 6px #00000029;
+    box-shadow: 0px 3px 6px #ddd;
 }
  .floorplanstable h2{
 	color:#002768;
@@ -4619,7 +4619,7 @@ vehicles Summary
 	word-wrap: break-word;
 	background-color: #fff;
 	background-clip: border-box;
-	box-shadow: 0px 3px 6px #00000029;
+	box-shadow: 0px 3px 6px #ddd;
 	border-radius: .25rem;
 	padding: 20px;
 }
@@ -4647,7 +4647,7 @@ vehicles Summary
 	word-wrap: break-word;
 	background-color: #fff;
 	background-clip: border-box;
-	box-shadow: 0px 3px 6px #00000029;
+	box-shadow: 0px 3px 6px #ddd;
 	border-radius: .25rem;
 	padding: 20px;
 }
@@ -4749,7 +4749,7 @@ vehicles Summary
 	word-wrap: break-word;
 	background-color: #fff;
 	background-clip: border-box;
-	box-shadow: 0px 3px 6px #00000029;
+	box-shadow: 0px 3px 6px #ddd;
 	border-radius: .25rem;
 	padding: 20px;
 }
@@ -4915,6 +4915,7 @@ margin-top: 20px;
   float: right;
   background-color: #fff;
   font-size: 16px;
+  line-height: 22px;
 }
 
 .mgaccountrighttableblock h3 button{
@@ -5047,7 +5048,7 @@ userfavorite-cars
 .userfavorite-cars .car-item {
     border-radius: 5px;
     border: 1px solid #eef0ef;
-	box-shadow: 0px 3px 6px #00000029;
+	box-shadow: 0px 3px 6px #ddd;
 	position:relative;
 }
 .userfavorite-cars .section-title h2 {   
@@ -5465,7 +5466,7 @@ height: 100%;
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
-    box-shadow: 0px 3px 6px #00000029;
+    box-shadow: 0px 3px 6px #ddd;
     border-radius: .25rem;
     padding: 30px;
         padding-top: 30px;
@@ -5533,6 +5534,9 @@ height: 100%;
 /*-----------------------------------------
 paymentform 
 -------------------------------------------*/
+
+
+
 .paymentdetailblock{
 	float:left;
 	margin: 0 auto;
@@ -5541,7 +5545,7 @@ paymentform
 	word-wrap: break-word;
 	background-color: #fff;
 	background-clip: border-box;
-	box-shadow: 0px 3px 6px #00000029;
+  box-shadow: 0px 3px 6px #ddd;
 	border-radius: .25rem;
 	padding: 30px;
     padding-top: 30px;
@@ -5554,8 +5558,9 @@ paymentform
 	margin:20px 30px;
 }
 .paymentform {
-	float:left;	
-	
+	margin: auto;
+  max-width: 800px;	
+	border:none
 }
 
 .add-floors{
@@ -5565,25 +5570,40 @@ paymentform
 
 .add-accounts {
     margin:20px 0;
+    margin-right: 15px;
 }
 .add-account-btns{
-	color: B6062A;
+	color: #B6062A;
 	padding: 10px 20px;
 	margin-right: 0px;
 	border-radius: 5px;
 	border: 2px solid #B6062A;
 	font-size: 16px;
 }
+.add-account-btns:hover, .add-account-btns:focus{
+	color: #fff;
+  background: #002768;
+  border: 2px solid #002768;
+  text-decoration: none;
+}
+
+
 .uploadbutton label{
 	 display: inline-block;
   background: #9F9F9F ;
   color: white;
-  padding: 10px 20px;
+  padding: 8px 10px;
   font-family: sans-serif;
-  border-radius: 0.3rem;
+  border-radius: 3px;
   cursor: pointer;
-  margin-top: 1rem;
+  margin-top: 15px;
+  font-size: 16px;
 }
+
+.uploadbutton label:hover{
+  background: #002768 ;
+}
+
 .uploadbutton {
 	text-align:center;
 	margin:0 auto;
@@ -5603,34 +5623,28 @@ paymentform
   border: 2px solid #9F9F9F;
   background: #9F9F9F;
   color: #fff;
-  padding: 10px 20px;
-  border-radius: 8px;
+  padding: 8px 20px;
+  border-radius: 3px;
   font-size: 16px;
   font-weight: normal;
 }
 
+
+
 .upload-btn-wrapper input[type=file] {
-  font-size: 100px;
+  font-size: 10px;
   position: absolute;
   left: 0;
   top: 0;
   opacity: 0;
+  line-height: 45px;
 }
-
-
-
-
-
-
-
-
-
 
 
 .backaccountform {
 	float:left;	
 	border: 1px solid #ddd;
-	padding: 0 20px;
+	padding:15px 40px;
 	margin-top:30px;
 }
 
@@ -5675,7 +5689,7 @@ paymentform
 }
 
 .bankinfo a {
-    float: inline-end;
+    float: right;
     margin-right: 20px;   
     color: #BD062C;
     font-size: 18px;
@@ -5725,8 +5739,9 @@ paymentform
 	display:inline-block;
 }
 
+
 .paymentdetailblock p{
-  text-align: left;
+  text-align: center;
   color: #4E4E4E;
   font-size: 14px;
   margin: 20px 15px;
@@ -5813,7 +5828,7 @@ paymentform
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
-    box-shadow: 0px 3px 6px #00000029;
+    box-shadow: 0px 3px 6px #ddd;
     border-radius: .25rem;
     padding: 30px;
     padding-top: 30px;  
@@ -5843,7 +5858,7 @@ Documents page
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
-    box-shadow: 0px 3px 6px #00000029;
+    box-shadow: 0px 3px 6px #ddd;
     border-radius: .25rem;
     padding: 30px;
         padding-top: 30px;
@@ -5859,15 +5874,16 @@ Documents page
 	
 .docdetails h5{
 	color: #343434;
-	font-size:14px;
-	font-weight:normal;
+	font-size:16px;
+	font-weight:500;
 	margin-bottom:20px;
 }
 .docdetails p{
 	color: #343434;
-	font-size:12px;
-	font-weight:normal;
-	margin:20px 0;
+	font-size:14px;
+	font-weight:400;
+	margin-top:20px;
+  margin-bottom: 0;
 }
 
 /*------------------------------------
@@ -5936,7 +5952,7 @@ Add Users
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
-    box-shadow: 0px 3px 6px #00000029;
+    box-shadow: 0px 3px 6px #ddd;
     border-radius: .25rem;
     padding: 30px;
 }
@@ -6101,7 +6117,7 @@ margin: 0 auto;
 word-wrap: break-word;
 background-color: #fff;
 background-clip: border-box;
-box-shadow: 0px 3px 6px #00000029;
+box-shadow: 0px 3px 6px #ddd;
 border-radius: .25rem;
 padding: 30px;
 }
@@ -6157,7 +6173,7 @@ Users
   margin: 0;
   padding: 0;
   width: 100%;
-  box-shadow: 0px 3px 6px #00000029;
+  box-shadow: 0px 3px 6px #ddd;
 }
 
 .userlisttable table th {
@@ -6219,6 +6235,24 @@ Users
   font-size: 12px;
 }
 
+.docdetails a.btn{
+  padding: 0;
+  margin-left: 5px;
+  font-size: 14px;
+  color: #BD062C;
+}
 
+.docdetails .upload-btn-wrapper{
+  display: inline;
+}
 
+.docdetails .upload-btn-wrapper input[type=file]{
+  font-size: 5px;
+  line-height: 20px;
+  padding-left: 5px;
+  color: #BD062C;
+}
 
+.documentspageblock{
+  margin-top: 40px;
+}

@@ -95,24 +95,42 @@ const Document = () => {
                                                     <div class="docdetails">
                                                         <h5>Copy of Dealer license</h5>
                                                         <img src={process.env.PUBLIC_URL+"/images/uploadblack.png"} class="img-fluid" alt="" />
-                                                        <FileBase64  onDone={(e)=>getFiles(e,"Dealer license") } />
-                                                        <p> Drag and drop her or<a href="#"> upload file</a></p>
+                                                        <p> Drag and drop her or 
+                                                            <div class="upload-btn-wrapper">
+                                                                <a class="btn"> Upload File</a>
+                                                                <FileBase64  onDone={(e)=>getFiles(e,"Dealer license") } />
+                                                            </div>
+                                                        </p>
+
+
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4">
                                                     <div class="docdetails">
                                                         <h5>Certificate of liability insurance.</h5>
                                                         <img src={process.env.PUBLIC_URL+"/images/uploadblack.png"} class="img-fluid" alt="" />
-                                                        <FileBase64  onDone={(e)=>getFiles(e,"liability insurance") }/>
-                                                        <p> Drag and drop her or<a href="#"> upload file</a></p>
+                                                       
+                                                        <p> Drag and drop her or
+
+                                                        <div class="upload-btn-wrapper">
+                                                                <a class="btn"> Upload File</a>
+                                                                <FileBase64  onDone={(e)=>getFiles(e,"liability insurance") }/>
+                                                            </div>
+                                                        </p>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4">
                                                     <div class="docdetails">
                                                         <h5>Copy of Company check.</h5>
                                                         <img src={process.env.PUBLIC_URL+"/images/uploadblack.png"} class="img-fluid" alt="" />
-                                                        <FileBase64  onDone={(e)=>getFiles(e,"company check") }/>
-                                                        <p> Drag and drop her or<a href="#"> upload file</a></p>
+                                                        
+                                                        <p> Drag and drop her or
+                                                        <div class="upload-btn-wrapper">
+                                                                <a class="btn"> Upload File</a>
+                                                                <FileBase64  onDone={(e)=>getFiles(e,"company check") }/>
+                                                            </div>
+
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -124,24 +142,41 @@ const Document = () => {
                                                     <div class="docdetails">
                                                         <h5>Copy of state sales tax certificate.</h5>
                                                         <img src={process.env.PUBLIC_URL+"/images/uploadblack.png"} class="img-fluid" alt="" />
-                                                        <FileBase64  onDone={(e)=>getFiles(e,"state sales tax") }/>
-                                                        <p> Drag and drop her or<a href="#"> upload file</a></p>
+                                                       
+                                                        <p> Drag and drop her or
+                                                        <div class="upload-btn-wrapper">
+                                                                <a class="btn"> Upload File</a>
+                                                                <FileBase64  onDone={(e)=>getFiles(e,"state sales tax") }/>
+                                                            </div>
+
+                                                        </p>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4">
                                                     <div class="docdetails">
                                                         <h5>Copy of surety bond (if required by you state).</h5>
                                                         <img src={process.env.PUBLIC_URL+"/images/uploadblack.png"} class="img-fluid" alt="" />
-                                                        <FileBase64  onDone={(e)=>getFiles(e,"surety bond") }/>
-                                                        <p> Drag and drop her or<a href="#"> upload file</a></p>
+                                                       
+                                                        <p> Drag and drop her or
+                                                        <div class="upload-btn-wrapper">
+                                                                <a class="btn"> Upload File</a>
+                                                                <FileBase64  onDone={(e)=>getFiles(e,"surety bond") }/>
+                                                            </div>
+
+                                                        </p>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4">
                                                     <div class="docdetails">
                                                         <h5>Copy of DMV vehicle dealer bond (in required states).</h5>
                                                         <img src={process.env.PUBLIC_URL+"/images/uploadblack.png"} class="img-fluid" alt="" />
-                                                        <FileBase64  onDone={(e)=>getFiles(e,"DMV vehicle") }/>
-                                                        <p> Drag and drop her or<a href="#"> upload file</a></p>
+                                                       
+                                                        <p> Drag and drop her or
+                                                        <div class="upload-btn-wrapper">
+                                                                <a class="btn"> Upload File</a>
+                                                                <FileBase64  onDone={(e)=>getFiles(e,"DMV vehicle") }/>
+                                                            </div>
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -153,24 +188,39 @@ const Document = () => {
                                                     <div class="docdetails">
                                                         <h5>Signed individual guaranty for each owner.</h5>
                                                         <img src={process.env.PUBLIC_URL+"/images/uploadblack.png"} class="img-fluid" alt="" />
-                                                        <FileBase64  onDone={(e)=>getFiles(e,"individual guaranty") }/>
-                                                        <p> Drag and drop her or<a href="#"> upload file</a></p>
+                                                       
+                                                        <p> Drag and drop her or
+                                                        <div class="upload-btn-wrapper">
+                                                                <a class="btn"> Upload File</a>
+                                                                <FileBase64  onDone={(e)=>getFiles(e,"individual guaranty") }/>
+                                                            </div>
+                                                        </p>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4">
                                                     <div class="docdetails">
                                                         <h5>Legible copy of driver’s license for owners and representatives</h5>
                                                         <img src={process.env.PUBLIC_URL+"/images/uploadblack.png"} class="img-fluid" alt="" />
-                                                        <FileBase64  onDone={(e)=>getFiles(e,"owners and representatives") }/>
-                                                        <p> Drag and drop her or<a href="#"> upload file</a></p>
+                                                        
+                                                        <p> Drag and drop her or
+                                                        <div class="upload-btn-wrapper">
+                                                                <a class="btn"> Upload File</a>
+                                                                <FileBase64  onDone={(e)=>getFiles(e,"owners and representatives") }/>
+                                                            </div>
+                                                        </p>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4">
                                                     <div class="docdetails">
                                                         <h5>Signed bank Authorization letter for bank to release information.</h5>
                                                         <img src={process.env.PUBLIC_URL+"/images/uploadblack.png"} class="img-fluid" alt="" />
-                                                        <FileBase64  onDone={(e)=>getFiles(e,"bank Authorization") }/>
-                                                        <p> Drag and drop her or<a href="#"> upload file</a></p>
+                                                       
+                                                        <p> Drag and drop her or
+                                                        <div class="upload-btn-wrapper">
+                                                                <a class="btn"> Upload File</a>
+                                                                <FileBase64  onDone={(e)=>getFiles(e,"bank Authorization") }/>
+                                                            </div>
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -182,16 +232,26 @@ const Document = () => {
                                                     <div class="docdetails">
                                                         <h5>Legible copy of driver’s license for owners and representatives</h5>
                                                         <img src={process.env.PUBLIC_URL+"/images/uploadblack.png"} class="img-fluid" alt="" />
-                                                        <FileBase64  onDone={(e)=>getFiles(e,"owners and representatives") }/>
-                                                        <p> Drag and drop her or<a href="#"> upload file</a></p>
+                                                        
+                                                        <p> Drag and drop her or
+                                                        <div class="upload-btn-wrapper">
+                                                                <a class="btn"> Upload File</a>
+                                                                <FileBase64  onDone={(e)=>getFiles(e,"owners and representatives") }/>
+                                                            </div>
+                                                        </p>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4">
                                                     <div class="docdetails">
                                                         <h5>Articles of incorporation.</h5>
                                                         <img src={process.env.PUBLIC_URL+"/images/uploadblack.png"} class="img-fluid" alt="" />
-                                                        <FileBase64  onDone={(e)=>getFiles(e,"Articles of incorporation") }/>
-                                                        <p> Drag and drop her or<a href="#"> upload file</a></p>
+                                                       
+                                                        <p> Drag and drop her or
+                                                        <div class="upload-btn-wrapper">
+                                                                <a class="btn"> Upload File</a>
+                                                                <FileBase64  onDone={(e)=>getFiles(e,"Articles of incorporation") }/>
+                                                            </div>
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>

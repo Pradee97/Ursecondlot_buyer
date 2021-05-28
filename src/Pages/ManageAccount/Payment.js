@@ -312,7 +312,7 @@ const Payment = () => {
                                                     </div>*/}
                                                     <div className="col-sm-6 form-group uploadbtn">
                                                     <div class="upload-btn-wrapper">
-                                                        <button class="btn"><img src={process.env.PUBLIC_URL +"/images/upload.png"} />Upload Document</button>
+                                                        <button class="btn"><i class="icofont-upload-alt"></i> Upload Document</button>
                                                         <FileBase64 multiple={ true } onDone={ getFiles } hidden type="hidden"/>
                                                     </div>
                                                     </div>

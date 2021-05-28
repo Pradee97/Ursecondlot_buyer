@@ -64,11 +64,11 @@ const PaymentInfo = () => {
                                     <div className="paymentdetailblock">
                                     <p>Thank you for providing us the information of your bank system. We going to use this for make charegs to your account when you purchase a car.To assure easy transaction for your business</p>
                                         <div className="add-floors">
-                                            <div className="row">
+                                           
                                                 <div className="add-accounts">
-                                                    <a className="add-account-btns" href="/payment"><img src={process.env.PUBLIC_URL +"/images/addbtn.jpg"} />Add Bank Account</a>
+                                                    <a className="add-account-btns" href="/payment"><i class="icofont-plus"></i> Add Bank Account</a>
                                                 </div>
-                                            </div>
+                                            
                                         </div>
                                         {paymentinfo.length>0?paymentinfo.map((item,index) =>
                                         <div className="col-lg-12 col-md-12 col-sm-12 mt-2 pt-4 bankinfo paymentinfoblocks">
@@ -109,7 +109,7 @@ const PaymentInfo = () => {
                                                                 <p>Signed bank Authorization letter for bank to release information. </p>
                                                             <div className="uploadbutton">                                                              
                                                             <a href={item.doc_name}>
-                                                                    <label for="downupload"><img src={process.env.PUBLIC_URL +"/images/download.png"} />Document</label></a>
+                                                                    <label for="downupload"><img src={process.env.PUBLIC_URL +"/images/download.png"} />Documents</label></a>
                                                             </div>
                                                             </div>
                                                         </div>
