@@ -36,7 +36,7 @@ const AddAddress = () => {
         // setOpenLoader(true);
         event.preventDefault();        
     
-        let request = [{
+        let request = {
             first_name: firstName,
             last_name: lastName,
             address: address,
@@ -46,9 +46,9 @@ const AddAddress = () => {
             state_id: state,
             zipcode_id: zipCode,
             buyer_id:userDetails.user_id,
-            active:1
-           
-        }];
+            location:address,
+            active:1           
+        };
         console.log("===",request)
         // return
         API.post("buyer_address/add", request)
