@@ -41,7 +41,7 @@ const EditAddress = () => {
             setLastname(res.data.data[0].last_name);
             setAddress(res.data.data[0].address);
             setPrimaryphone(res.data.data[0].phone_no);
-            setMobilephone(res.data.data[0].mobile_phone);
+            setMobilephone(res.data.data[0].mobile_no);
             setCity(res.data.data[0].city_name);
             setState(res.data.data[0].state_name);
             setZipcode(res.data.data[0].zipcode_id);
@@ -61,7 +61,7 @@ const EditAddress = () => {
             last_name: lastName,
             address: address,
             phone_no: primaryPhone,
-            mobile_phone: mobilePhone,
+            mobile_no: mobilePhone,
             city_id: city,
             state_id: state,
             zipcode_id: zipCode,
@@ -109,7 +109,7 @@ const EditAddress = () => {
                                 <input type="number" defaultValue={accountObjc.phone_no} class="form-control" placeholder="Primary phone" required onChange={(e) => setPrimaryphone(e.target.value)} />
                             </div>
                             <div class="col-sm-12 form-group">
-                                <input type="number" defaultValue={accountObjc.mobile_phone} class="form-control" placeholder="Mobile phone" required onChange={(e) => setMobilephone(e.target.value)} />
+                                <input type="number" defaultValue={accountObjc.mobile_no} class="form-control" placeholder="Mobile phone" required onChange={(e) => setMobilephone(e.target.value)} />
                             </div>
                             <div class="col-sm-12 form-group">
                                 <input type="text" defaultValue={accountObjc.address} class="form-control" placeholder="Address" required onChange={(e) => setAddress(e.target.value)} />

@@ -55,21 +55,20 @@ const EditDealerInformation = () => {
         event.preventDefault();        
     
         let request = {
-            // user_id:id,
+            user_id:id,
             first_name: firstName,
             last_name: lastName,
             phone_no: primaryPhone,
             mobile_phone: mobilePhone,
             address: address,
-            city_name: city,
-            state_name: state,
+            city_id: city,
+            state_id: state,
             zipcode_id: zipCode,
-
             active:1
            
         };
         API
-            .post('http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/#/'+id, request)
+            .post('http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/user_profile/update', request)
             .then((response) => {
                 if (response.data.success) {
                     const { data } = response;
