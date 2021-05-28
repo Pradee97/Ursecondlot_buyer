@@ -1,10 +1,9 @@
 import React from 'react';
 import API from "../../Services/BaseService";
 import { useHistory,useParams } from "react-router-dom";
-// import '../../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
-
+import StateAndCity from '../../Component/StateAndCity/StateAndCity'
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 
 import {
@@ -37,16 +36,29 @@ const EditMyProfile = () => {
     const [locationName, setLocationName] = useState("");
     const [isOpen, setIsOpen] = useState(false);
     
-    const togglePopup = () => {
-        setIsOpen(!isOpen);
-      }
-
     const [popupTitle, setPopupTitle] = useState ("");
     const [popupMsg, setPopupMsg] = useState ("");
     const [popupType, setPopupType] = useState ("");
     const [popupActionType, setPopupActionType] = useState ("");
     const [popupActionValue, setPopupActionValue] = useState ("");
     const [popupActionPath, setPopupActionPath] = useState ("")
+    
+    const togglePopup = () => {
+        setIsOpen(!isOpen);
+      }
+
+      const getStateName=(stateData)=>{
+        setState(stateData)
+    }
+
+    const getCityName=(cityData)=>{
+        setCity(cityData)
+    }
+
+    const getZipCodeId=(zipData)=>{
+        setZipcode(zipData)
+    }
+
 
     async function fetchMyProfileDetails() {
         let request = {
@@ -176,24 +188,35 @@ const EditMyProfile = () => {
                                 <label for="address" className={address !="" ? "input-has-value" : ""}>Address</label>
                             </div>
                             </div>
-                            <div className="col-sm-12 form-group">
+                            <StateAndCity 
+                                setStateValue = { getStateName } 
+                                setCityValue ={ getCityName }
+                                setZipcodeValue ={ getZipCodeId }
+                                isEdit = {true}
+                                defaultStateValue = {state}
+                                defaultCityValue = {city}
+                                defaultZipcodeValue = {zipcode}
+                            />
+                            
+                            {/* <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={myProfileObjc.city_name} className="form-control textbox" placeholder="" required onChange={(e) => setCity(e.target.value)} />
+                                <input type="text" defaultValue={city} className="form-control textbox" placeholder="" required onChange={(e) => setCity(e.target.value)} />
                                 <label for="city_id" className={city !="" ? "input-has-value" : ""}>City</label>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={myProfileObjc.state_name} className="form-control textbox" placeholder="" required onChange={(e) => setState(e.target.value)} />
+                                <input type="text" defaultValue={state} className="form-control textbox" placeholder="" required onChange={(e) => setState(e.target.value)} />
                                 <label for="state_id" className={state !="" ? "input-has-value" : ""}>State</label>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={myProfileObjc.zipcode_id} className="form-control textbox" placeholder="" required onChange={(e) => setZipcode(e.target.value)} />
+                                <input type="text" defaultValue={zipcode} className="form-control textbox" placeholder="" required onChange={(e) => setZipcode(e.target.value)} />
                                 <label for="zipcode_id" className={zipcode !="" ? "input-has-value" : ""}>Zipcode</label>
                             </div>
-                            </div>
+                            </div> */}
+
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={myProfileObjc.address} className="form-control textbox" placeholder="" required onChange={(e) => setLocationName(e.target.value)} />
