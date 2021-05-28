@@ -104,7 +104,7 @@ const EditDealerInformation = () => {
             <main id="main" class="inner-page">
                 <div className="col-lg-4 card loginBlock">
                     <form class="registrationform" onSubmit={updateDealerInfo} >
-                
+                    <button className="back-btn-paymentform" onClick={() => history.push("/manageaccount")}>Back</button>                
                         <h2 class="title"> Edit Dealer Information</h2>
                         <div class="row">
 

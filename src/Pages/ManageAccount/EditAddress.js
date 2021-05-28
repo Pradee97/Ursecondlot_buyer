@@ -130,7 +130,7 @@ const EditAddress = () => {
                             <StateAndCity 
                                 setStateValue = { getStateName } 
                                 setCityValue ={ getCityName }
-                                setZIpCodeValue ={ getZipCodeId }
+                                setZipcodeValue ={ getZipCodeId }
                                 isEdit = {true}
                                 defaultStateValue = {state}
                                 defaultCityValue = {city}
