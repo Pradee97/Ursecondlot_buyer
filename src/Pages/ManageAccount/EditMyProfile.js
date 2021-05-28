@@ -177,7 +177,7 @@ const EditMyProfile = () => {
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={myProfileObjc.mobile_no} className="form-control textbox" placeholder="" required onChange={(e) => setMobilephone(e.target.value)} />
-                                <label for="phone_no" className={mobilePhone !="" ? "input-has-value" : ""}>Mobile Phone</label>
+                                <label for="mobile_no" className={mobilePhone !="" ? "input-has-value" : ""}>Mobile Phone</label>
                             </div>
                             </div>                      
                             <div className="col-sm-12 form-group">
