@@ -25,8 +25,8 @@ const LotFee = () => {
     const [popupActionValue, setPopupActionValue] = useState ("");
     const [popupActionPath, setPopupActionPath] = useState ("")
 
-    const [lotFee, setLotFee]= useState({})
-    const [lotValue, setLotValue] = useState(0);
+    const [lotFee, setLotFee]= useState("")
+    const [lotValue, setLotValue] = useState("");
     const [popupcontent,setPopupcontent] = useState ("");
     let userDetails = ls.get('userDetails');
 
@@ -37,8 +37,8 @@ const LotFee = () => {
         const state = API.post('lot_fee/condition', request);
         state.then(res => {
             console.log("res", res.data.data)
-            setLotValue(res.data?.data?.lot_fee || 0);
-            setLotFee(res.data.data)
+            setLotValue(res.data.data.lot_fee) ;
+            setLotFee( res.data.data )
         })
             .catch(err => { console.log(err); });
     }
@@ -50,7 +50,6 @@ const LotFee = () => {
         console.log("---------------",data)
         setLotValue(data)
     }
-
         
         const handlesubimt = () => {
                 //console.log("check",buyer_id)
