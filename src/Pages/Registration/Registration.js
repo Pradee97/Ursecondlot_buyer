@@ -201,7 +201,7 @@ const Registration = () => {
                             <div className="col-sm-6 form-group datePickerBlock ">
                                 <div className="tbox">
                                 <div className="textbox">
-                                <i class='bx bx-calendar'></i>
+                                
                                     <Datetime inputProps={ inputProps } timeFormat={false} dateFormat="DD/MM/YYYY" isValidDate={disablePastDt} onChange={registrationDate}/>
                                     <label  for="meeting_date" className={date!="" ? "input-has-value" : ""}>Select Date</label>
                                 </div>
@@ -210,7 +210,7 @@ const Registration = () => {
                             <div className="col-sm-6 form-group timepicker">
                                 <div className="tbox">
                                     <input type="time" className="form-control textbox" placeholder="Select Time" required onChange={(e) => setTime(e.target.value)} />
-                                    <label for="meeting_time" className={time != "" ? "input-has-value" : ""}>Select Time</label>
+                                    <label for="meeting_time" className={"input-has-value"}>Select Time</label>
                                 </div>
                             </div>
                             <div className="col-sm-12 form-group agreetab">

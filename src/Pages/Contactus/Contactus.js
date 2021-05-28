@@ -33,7 +33,7 @@ const Contactus = () => {
          <h2>Contact US</h2>
        </div>
 
-       <div className="row">
+       <div className="row content">
 
          <div className="col-lg-6 d-flex align-items-stretch">
            <div className="info">

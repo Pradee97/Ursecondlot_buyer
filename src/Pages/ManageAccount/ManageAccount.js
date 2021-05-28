@@ -114,7 +114,7 @@ const ManageAccount = () => {
                             <td>State<span>{item.state_name}</span></td>
                           </tr>
                           <tr>
-                            <td>Mobile<span>{item.mobile_phone}</span></td>
+                            <td>Mobile<span>{item.mobile_no}</span></td>
                             <td>Zip code<span>{item.zipcode_id}</span></td>
                           </tr>
                         </table>
@@ -132,7 +132,7 @@ const ManageAccount = () => {
                           <thead></thead>
                           <tr>
                             <td>First name<span>{item.first_name}</span></td>
-                            <td>Address<span>{item.address}</span></td>
+                            <td>Address<span>{item.location}</span></td>
                           </tr>
                           <tr>
                             <td>Last name<span>{item.last_name}</span></td>

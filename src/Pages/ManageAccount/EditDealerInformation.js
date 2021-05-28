@@ -15,6 +15,7 @@ import {
     notification,
     Spin,
 } from 'antd';
+import StateAndCity from '../../Component/StateAndCity/StateAndCity'
 
 const EditDealerInformation = () => {
     const history = useHistory();
@@ -41,6 +42,18 @@ const EditDealerInformation = () => {
     const [popupActionType, setPopupActionType] = useState ("");
     const [popupActionValue, setPopupActionValue] = useState ("");
     const [popupActionPath, setPopupActionPath] = useState ("")
+  
+    const getStateName=(stateData)=>{
+        setState(stateData)
+    }
+
+    const getCityName=(cityData)=>{
+        setCity(cityData)
+    }
+
+    const getZipCodeId=(zipData)=>{
+        setZipcode(zipData)
+    }
 
     async function fetchAccountDetails() {
         console.log(id)
@@ -50,11 +63,11 @@ const EditDealerInformation = () => {
         };
         const state = API.post('user_profile/condition', request);
         state.then(res => {
-            console.log("res", res.data.data)
+            console.log("res=======>", res.data.data)
             setFirstname(res.data.data[0].first_name);
             setLastname(res.data.data[0].last_name);
             setPrimaryphone(res.data.data[0].phone_no);
-            setMobilephone(res.data.data[0].mobile_phone);
+            setMobilephone(res.data.data[0].mobile_no);
             setAddress(res.data.data[0].address);
             setCity(res.data.data[0].city_name);
             setState(res.data.data[0].state_name);
@@ -73,7 +86,7 @@ const EditDealerInformation = () => {
             first_name: firstName,
             last_name: lastName,
             phone_no: primaryPhone,
-            mobile_phone: mobilePhone,
+            mobile_no: mobilePhone,
             address: address,
             city_id: city,
             state_id: state,
@@ -123,7 +136,8 @@ const EditDealerInformation = () => {
             <main id="main" class="inner-page">
                 <div className="col-lg-4 card loginBlock">
                     <form class="registrationform" onSubmit={updateDealerInfo} >
-                        <h2 class="title"> DealerInformation Edit</h2>
+                    <button className="back-btn-paymentform" onClick={() => history.push("/manageaccount")}>Back</button>                
+                        <h2 class="title"> Edit Dealer Information</h2>
                         <div class="row">
 
                             <div class="col-sm-12 form-group">
@@ -143,7 +157,16 @@ const EditDealerInformation = () => {
                             <div class="col-sm-12 form-group">
                                 <input type="text" defaultValue={accountObjc.address} class="form-control" placeholder="Address" required onChange={(e) => setAddress(e.target.value)} />
                             </div>
-                            <div class="col-sm-12 form-group">
+                            <StateAndCity 
+                                setStateValue = { getStateName } 
+                                setCityValue ={ getCityName }
+                                setZipcodeValue ={ getZipCodeId }
+                                isEdit = {true}
+                                defaultStateValue = {state}
+                                defaultCityValue = {city}
+                                defaultZipcodeValue = {zipCode}
+                            />
+                            {/* <div class="col-sm-12 form-group">
                                 <input type="text" defaultValue={accountObjc.city_name} class="form-control" placeholder="City" required onChange={(e) => setCity(e.target.value)} />
                             </div>
                             <div class="col-sm-12 form-group">
@@ -151,7 +174,7 @@ const EditDealerInformation = () => {
                             </div>
                             <div class="col-sm-12 form-group">
                                 <input type="number" defaultValue={accountObjc.zipcode_id} class="form-control" placeholder="Zip code" required onChange={(e) => setZipcode(e.target.value)} />
-                            </div>
+                            </div> */}
                           
                     
                             <div class="col-lg-12 loginBtn">
