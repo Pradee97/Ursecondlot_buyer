@@ -25,40 +25,40 @@ const LotFee = () => {
     const [popupActionValue, setPopupActionValue] = useState ("");
     const [popupActionPath, setPopupActionPath] = useState ("")
 
-    const [lotfee, setLotfee] = useState("");
-    const [lotValue,setLotValue] = useState({lot_fee:0});
+    const [lotFee, setLotFee]= useState({})
+    const [lotValue, setLotValue] = useState(0);
     const [popupcontent,setPopupcontent] = useState ("");
     let userDetails = ls.get('userDetails');
-    console.log("======12345====>",ls.get('userDetails'))
 
     async function getLotfee() {
         let request = {
             buyer_id: userDetails.user_id,
         };
-        console.log("=======>",)
         const state = API.post('lot_fee/condition', request);
         state.then(res => {
             console.log("res", res.data.data)
-            setLotValue(res.data.data);
+            setLotValue(res.data?.data?.lot_fee || 0);
+            setLotFee(res.data.data)
         })
             .catch(err => { console.log(err); });
     }
 	useEffect(() => {
         getLotfee();
-        // fetchState();
-    }, []);
+    },[]);
+    // useEffect(() => {},[lotValue]);
+    const updateLotValue = (data)=>{
+        console.log("---------------",data)
+        setLotValue(data)
+    }
 
         
         const handlesubimt = () => {
-            
                 //console.log("check",buyer_id)
-                let request = {
-                    buyer_id: userDetails.user_id,
-                    lot_fee:lotfee,
-                    active:1
-
-                    
-                  };
+            let request = {
+                buyer_id: userDetails.user_id,
+                lot_fee: lotValue,
+                active:1
+            };
     
             API.post("lot_fee/add",request)
                .then((response) => {
@@ -90,7 +90,7 @@ const LotFee = () => {
                  });
         
            }
-
+          
     return (
         <div>
 
@@ -124,7 +124,7 @@ const LotFee = () => {
                        <p>Your expense or your profit added to the vehicle every time you purchase </p>
                            <div className="form-group col-lg-6 col-md-6 lotfee-form">
                                <div className="input-icon">
-                                 <input type="text" className="form-control" value={lotValue===undefined?0:lotValue.lot_fee}  onChange={(e) => setLotfee(e.target.value)}/> 
+                                 <input type="text" className="form-control" defaultValue={lotFee.lot_fee} onChange={(e) => updateLotValue(e.target.value)}/> 
                                    <i>$</i>
                                </div>
                            </div>

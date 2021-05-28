@@ -34,7 +34,7 @@ const Document = () => {
         let request = {
             buyer_id: userDetails.user_id,
             buyer_doc_type:value,
-            doc_name:file,
+            doc_name:file.length>0?file:[file],
         };
         console.log("======12345====>",request)
         const upload=API.post('buyer_document/add', request);
