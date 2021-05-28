@@ -154,7 +154,6 @@ const EditDealerInformation = () => {
                             </div>
 
                             <div class="col-sm-12 form-group">
-<<<<<<< HEAD
                             <div className="tbox">
                                 <input type="number" defaultValue={accountObjc.phone_no} class="textbox" placeholder="Primary phone" required onChange={(e) => setPrimaryphone(e.target.value)} />
                                 <label for="primary_phone" className={primaryPhone != "" ? "input-has-value" : ""}>Primary Phone</label>
@@ -163,16 +162,9 @@ const EditDealerInformation = () => {
 
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="number" defaultValue={accountObjc.mobile_phone} class="textbox" placeholder="Mobile phone" required onChange={(e) => setMobilephone(e.target.value)} />
+                                <input type="number" defaultValue={accountObjc.mobile_no} class="textbox" placeholder="Mobile phone" required onChange={(e) => setMobilephone(e.target.value)} />
                                 <label for="mobile_phone" className={mobilePhone != "" ? "input-has-value" : ""}>Mobile Phone</label>
                             </div>
-=======
-                                <input type="text" defaultValue={accountObjc.phone_no} class="form-control" placeholder="Primary phone" required onChange={(e) => setPrimaryphone(e.target.value)} />
-                            </div>
-
-                            <div class="col-sm-12 form-group">
-                                <input type="text" defaultValue={accountObjc.mobile_phone} class="form-control" placeholder="Mobile phone" required onChange={(e) => setMobilephone(e.target.value)} />
->>>>>>> e744955eed2da424b32212b4761db27d45288374
                             </div>
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
@@ -180,13 +172,6 @@ const EditDealerInformation = () => {
                                 <label for="address" className={address != "" ? "input-has-value" : ""}>Address</label>
                             </div>
                             </div>
-<<<<<<< HEAD
-                            <div class="col-sm-12 form-group">
-                            <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.city_name} class="textbox" placeholder="City" required onChange={(e) => setCity(e.target.value)} />
-                                <label for="city" className={city != "" ? "input-has-value" : ""}>City</label>
-                            </div>
-=======
                             <StateAndCity 
                                 setStateValue = { getStateName } 
                                 setCityValue ={ getCityName }
@@ -198,7 +183,6 @@ const EditDealerInformation = () => {
                             />
                             {/* <div class="col-sm-12 form-group">
                                 <input type="text" defaultValue={accountObjc.city_name} class="form-control" placeholder="City" required onChange={(e) => setCity(e.target.value)} />
->>>>>>> e744955eed2da424b32212b4761db27d45288374
                             </div>
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
@@ -207,16 +191,8 @@ const EditDealerInformation = () => {
                             </div>
                             </div>
                             <div class="col-sm-12 form-group">
-<<<<<<< HEAD
-                            <div className="tbox">
-                                <input type="number" defaultValue={accountObjc.zipcode_id} class="textbox" placeholder="Zip code" required onChange={(e) => setZipcode(e.target.value)} />
-                                <label for="first_name" className={zipCode != "" ? "input-has-value" : ""}>Zipcode</label>
-                            </div>
-                            </div>
-=======
                                 <input type="number" defaultValue={accountObjc.zipcode_id} class="form-control" placeholder="Zip code" required onChange={(e) => setZipcode(e.target.value)} />
                             </div> */}
->>>>>>> e744955eed2da424b32212b4761db27d45288374
                           
                     
                             <div class="col-lg-12 loginBtn">
