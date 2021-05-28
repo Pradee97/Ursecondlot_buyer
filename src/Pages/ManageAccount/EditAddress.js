@@ -4,6 +4,7 @@ import { useHistory,useParams } from "react-router-dom";
 // import '../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import StateAndCity from '../../Component/StateAndCity/StateAndCity';
 import {
     Form,
     Input,
@@ -18,15 +19,26 @@ const EditAddress = () => {
     const history = useHistory();
     const { id } = useParams();
     const [accountObjc, setAccountObj] = useState("");
-    const [firstName, setFirstname] = useState("");
-    const [lastName, setLastname] = useState("");
+    const [FirstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
     const [address, setAddress] = useState("");
-    const [primaryPhone, setPrimaryphone] = useState("");
-    const [mobilePhone, setMobilephone] = useState("");
+    const [primaryPhone, setPrimaryPhone] = useState("");
+    const [mobilePhone, setMobilePhone] = useState("");
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
-    const [zipCode, setZipcode] = useState("");
+    const [zipCode, setZIpCode] = useState("");
   
+    const getStateName=(stateData)=>{
+        setState(stateData)
+    }
+
+    const getCityName=(cityData)=>{
+        setCity(cityData)
+    }
+
+    const getZipCodeId=(zipData)=>{
+        setZIpCode(zipData)
+    }
 
     async function fetchAccountDetails() {
         console.log(id)
@@ -37,14 +49,14 @@ const EditAddress = () => {
         const state = API.post('user_profile/condition', request);
         state.then(res => {
             console.log("res", res.data.data)
-            setFirstname(res.data.data[0].first_name);
-            setLastname(res.data.data[0].last_name);
+            setFirstName(res.data.data[0].first_name);
+            setLastName(res.data.data[0].last_name);
             setAddress(res.data.data[0].address);
-            setPrimaryphone(res.data.data[0].phone_no);
-            setMobilephone(res.data.data[0].mobile_no);
+            setPrimaryPhone(res.data.data[0].phone_no);
+            setMobilePhone(res.data.data[0].mobile_no);
             setCity(res.data.data[0].city_name);
             setState(res.data.data[0].state_name);
-            setZipcode(res.data.data[0].zipcode_id);
+            setZIpCode(res.data.data[0].zipcode_id);
             setAccountObj(res.data.data[0])
         })
             .catch(err => { console.log(err); });
@@ -57,7 +69,7 @@ const EditAddress = () => {
         let request = {
             buyer_address_id:id,
             buyer_id:JSON.parse(localStorage.getItem("userDetails")).user_id,
-            first_name: firstName,
+            first_name: FirstName,
             last_name: lastName,
             address: address,
             phone_no: primaryPhone,
@@ -95,34 +107,44 @@ const EditAddress = () => {
             <main id="main" class="inner-page">
                 <div className="col-lg-4 card loginBlock">
                     <form class="registrationform" onSubmit={updateAddress} >
+                    <button className="back-btn-paymentform" onClick={() => history.push("/manageaccount")}>Back</button> 
                         <h2 class="title"> DealerInformation Edit</h2>
                         <div class="row">
 
                         <div class="col-sm-12 form-group">
-                                <input type="text"  defaultValue={accountObjc.first_name} class="form-control" placeholder="First name" required onChange={(e) => setFirstname(e.target.value)} />
+                                <input type="text"  defaultValue={accountObjc.first_name} class="form-control" placeholder="First name" required onChange={(e) => setFirstName(e.target.value)} />
                             </div>
                             <div class="col-sm-12 form-group">
-                                <input type="text" defaultValue={accountObjc.last_name} class="form-control" placeholder="Last name" required onChange={(e) => setLastname(e.target.value)} />
+                                <input type="text" defaultValue={accountObjc.last_name} class="form-control" placeholder="Last name" required onChange={(e) => setLastName(e.target.value)} />
                             </div>
                         
                             <div class="col-sm-12 form-group">
-                                <input type="number" defaultValue={accountObjc.phone_no} class="form-control" placeholder="Primary phone" required onChange={(e) => setPrimaryphone(e.target.value)} />
+                                <input type="number" defaultValue={accountObjc.phone_no} class="form-control" placeholder="Primary phone" required onChange={(e) => setPrimaryPhone(e.target.value)} />
                             </div>
                             <div class="col-sm-12 form-group">
-                                <input type="number" defaultValue={accountObjc.mobile_no} class="form-control" placeholder="Mobile phone" required onChange={(e) => setMobilephone(e.target.value)} />
+                                <input type="number" defaultValue={accountObjc.mobile_no} class="form-control" placeholder="Mobile phone" required onChange={(e) => setMobilePhone(e.target.value)} />
                             </div>
                             <div class="col-sm-12 form-group">
                                 <input type="text" defaultValue={accountObjc.address} class="form-control" placeholder="Address" required onChange={(e) => setAddress(e.target.value)} />
                             </div>
-                            <div class="col-sm-12 form-group">
+                            <StateAndCity 
+                                setStateValue = { getStateName } 
+                                setCityValue ={ getCityName }
+                                setZIpCodeValue ={ getZipCodeId }
+                                isEdit = {true}
+                                defaultStateValue = {state}
+                                defaultCityValue = {city}
+                                defaultZipcodeValue = {zipCode}
+                            />
+                            {/* <div class="col-sm-12 form-group">
                                 <input type="text" defaultValue={accountObjc.city_name} class="form-control" placeholder="City" required onChange={(e) => setCity(e.target.value)} />
                             </div>
                             <div class="col-sm-12 form-group">
                                 <input type="text" defaultValue={accountObjc.state_name} class="form-control" placeholder="State" required onChange={(e) => setState(e.target.value)} />
                             </div>
                             <div class="col-sm-12 form-group">
-                                <input type="number" defaultValue={accountObjc.zipcode_id} class="form-control" placeholder="Zip code" required onChange={(e) => setZipcode(e.target.value)} />
-                            </div>
+                                <input type="number" defaultValue={accountObjc.zipcode_id} class="form-control" placeholder="Zip code" required onChange={(e) => setZIpCode(e.target.value)} />
+                            </div> */}
                           
                     
                             <div class="col-lg-12 loginBtn">
