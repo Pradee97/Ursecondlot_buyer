@@ -136,27 +136,39 @@ const EditAddress = () => {
         <div>
             <main id="main" class="inner-page">
                 <div className="col-lg-4 card loginBlock">
+                    
                     <form class="registrationform" onSubmit={updateAddress} >
-                        <h2 class="title"> Address Edit</h2>
                     <button className="back-btn-paymentform" onClick={() => history.push("/manageaccount")}>Back</button>
+                        <h2 class="title"> Address Edit</h2>
+                    
                         <div class="row">
 
                         <div class="col-sm-12 form-group">
-                                <input type="text"  defaultValue={accountObjc.first_name} class="form-control" placeholder="First name" required onChange={(e) => setFirstName(e.target.value)} />
-                            </div>
+                        <div className="tbox">
+                                <input type="text"  defaultValue={accountObjc.first_name} class="textbox" placeholder="First name" required onChange={(e) => setFirstName(e.target.value)} />
+                                <label for="first_name" className={"input-has-value"}>First Name</label>
+                            </div> </div>
                             <div class="col-sm-12 form-group">
-                                <input type="text" defaultValue={accountObjc.last_name} class="form-control" placeholder="Last name" required onChange={(e) => setLastName(e.target.value)} />
-                            </div>
+                            <div className="tbox">
+                                <input type="text" defaultValue={accountObjc.last_name} class="textbox" placeholder="Last name" required onChange={(e) => setLastName(e.target.value)} />
+                                <label for="last_name"  className={"input-has-value"}>Last name</label>
+                            </div> </div>
                         
                             <div class="col-sm-12 form-group">
-                                <input type="text" defaultValue={accountObjc.phone_no} class="form-control" placeholder="Primary phone" required onChange={(e) => setPrimaryPhone(e.target.value)} />
-                            </div>
+                            <div className="tbox">
+                                <input type="text" defaultValue={accountObjc.phone_no} class="textbox" placeholder="Primary phone" required onChange={(e) => setPrimaryPhone(e.target.value)} />
+                                <label for="primary_phone"  className={"input-has-value"}>Primary Phone</label>
+                            </div> </div>
                             <div class="col-sm-12 form-group">
-                                <input type="text" defaultValue={accountObjc.mobile_no} class="form-control" placeholder="Mobile phone" required onChange={(e) => setMobilePhone(e.target.value)} />
-                            </div>
+                            <div className="tbox">
+                                <input type="text" defaultValue={accountObjc.mobile_no} class="textbox" placeholder="Mobile phone" required onChange={(e) => setMobilePhone(e.target.value)} />
+                                <label for="mobile_phone"  className={"input-has-value"}>Mobile Phone</label>
+                            </div> </div>
                             <div class="col-sm-12 form-group">
-                                <input type="text" defaultValue={accountObjc.location} class="form-control" placeholder="Address" required onChange={(e) => setAddress(e.target.value)} />
-                            </div>
+                            <div className="tbox">
+                                <input type="text" defaultValue={accountObjc.location} class="textbox" placeholder="Address" required onChange={(e) => setAddress(e.target.value)} />
+                                <label for="address"  className={"input-has-value"}>Address</label>
+                            </div> </div>
                             <StateAndCity 
                                 setStateValue = { getStateName } 
                                 setCityValue ={ getCityName }
