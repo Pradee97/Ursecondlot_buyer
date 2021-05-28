@@ -315,6 +315,7 @@ const Payment = () => {
                                                         <button class="btn"><i class="icofont-upload-alt"></i> Upload Document</button>
                                                         <FileBase64 multiple={ true } onDone={ getFiles } hidden type="hidden"/>
                                                     </div>
+                                                    <p>{doc.length>0?doc[0].name:doc.name}</p>
                                                     </div>
                                                    
                                                     <div className="col-lg-12 loginBtn">
