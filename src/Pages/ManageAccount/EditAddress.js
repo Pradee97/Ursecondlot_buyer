@@ -102,7 +102,7 @@ const EditAddress = () => {
                     const { data } = response;
                     togglePopup()
                     setPopupTitle("Edit Address");
-                    setPopupMsg(" EditAddress is successfully Updated");
+                    setPopupMsg(" Edit Address is successfully Updated");
                     setPopupType("success");
                     setPopupActionType("redirect");
                     setPopupActionValue("ok");

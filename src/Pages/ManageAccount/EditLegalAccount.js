@@ -113,8 +113,8 @@ const EditLegalAccount = () => {
                 if (response.data.success) {
                     const { data } = response;
                     togglePopup()
-                    setPopupTitle("Edit LegalManageAccount");
-                    setPopupMsg(" EditLegalManageAccount is successfully Updated");
+                    setPopupTitle("Edit Legal ManageAccount");
+                    setPopupMsg(" Edit Legal ManageAccount is successfully Updated");
                     setPopupType("success");
                     setPopupActionType("redirect");
                     setPopupActionValue("ok");
@@ -122,8 +122,8 @@ const EditLegalAccount = () => {
 
                 } else {
                     togglePopup()
-                    setPopupTitle("Edit LegalManageAccount");
-                    setPopupMsg("Edit LegalManageAccount is not update, Please try Again");
+                    setPopupTitle("Edit Legal ManageAccount");
+                    setPopupMsg("Edit Legal ManageAccount is not update, Please try Again");
                     setPopupType("error");
                     setPopupActionType("close");
                     setPopupActionValue("close");
