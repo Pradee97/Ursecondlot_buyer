@@ -41,7 +41,7 @@ const AddLegalAccount = () => {
         event.preventDefault();        
     
         let request = {
-            buyer_id: 68,
+            buyer_id: userDetails.user_id,
             first_name: firstname,
             last_name: lastname,                                           
             ein_no: EINnumber,
