@@ -30,12 +30,21 @@ const EditLegalAccount = () => {
     const [zipcode, setZipcode] = useState("");
     const [dealershipLicenseexp, setDealershipLicenseexp] = useState("");
     const [taxidexp, setTaxidexp] = useState("");
+
+    const [isCommonPopupOpen, setIsCommonPopupOpen] = useState(false);
+	const [option, setOption] = useState("");
+	const [popupTitle, setPopupTitle] = useState("");
+	const [popupMsg, setPopupMsg] = useState("");
+	const [popupType, setPopupType] = useState("");
+	const [popupActionType, setPopupActionType] = useState("");
+	const [popupActionValue, setPopupActionValue] = useState("");
+	const [popupActionPath, setPopupActionPath] = useState("");
   
 
     async function fetchAccountDetails() {
         console.log(id)
         let request = {
-            buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+            legal_manage_id: id,
         };
       
            
@@ -67,7 +76,7 @@ const EditLegalAccount = () => {
         let request = {
             first_name: firstname,
             last_name: lastname,
-            legal_manage_id: legalBusinessname,
+            legal_manage_id: id,
             ein_no: EINnumber,
             dealer_license: dealershiplicense,
             tax_id: taxid,
@@ -77,7 +86,7 @@ const EditLegalAccount = () => {
             zipcode_id: zipcode,
             dealer_license_exp: dealershipLicenseexp,
             tax_id_exp: taxidexp,
-
+            bussiness_name:legalBusinessname,
             active:1
            
         };
@@ -86,16 +95,34 @@ const EditLegalAccount = () => {
             .then((response) => {
                 if (response.data.success) {
                     const { data } = response;
-                    console.log("response", response)
-                    history.push("/success");
+                    console.log("response", response.data)
+                    toggleCommonPopup()
+                    setPopupTitle("Legal Account successfully Updated");
+                    setPopupMsg("");
+                    setPopupType("success");
+                    setPopupActionType("redirect");
+                    setPopupActionValue("ok");
+                    setPopupActionPath("/manageaccount")
                 } else {
-                    history.push("emailerror");
+                    toggleCommonPopup()
+                    setPopupTitle("Error");
+                    setPopupMsg("Legal Account failed to Update, Please try Again");
+                    setPopupType("error");
+                    setPopupActionType("close");
+                    setPopupActionValue("close");
                 }
             }, (error) => {
-                // setOpenLoader(false);
-                // console.log(error);
+                toggleCommonPopup()
+                setPopupTitle("Error");
+                setPopupMsg(error, " Please try Again");
+                setPopupType("error");
+                setPopupActionType("close");
+                setPopupActionValue("close");
             });
 
+    }
+    const toggleCommonPopup = () => {
+        setIsCommonPopupOpen(!isCommonPopupOpen);
     }
 
     useEffect(() => {
@@ -123,7 +150,7 @@ const EditLegalAccount = () => {
                             </div>
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.legal_manage_id} class="form-control textbox" placeholder="" required onChange={(e) => setLegalBusinessname(e.target.value)} />
+                                <input type="text" defaultValue={accountObjc.bussiness_name} class="form-control textbox" placeholder="" required onChange={(e) => setLegalBusinessname(e.target.value)} />
                                 <label for="first_name" className={legalBusinessname !="" ? "input-has-value" : ""}>Legal Business Name</label>
                             </div>
                             </div>

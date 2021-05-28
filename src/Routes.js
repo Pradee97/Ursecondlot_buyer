@@ -33,11 +33,11 @@ import Buyers from './Pages/ManageAccount/Buyers';
 import AddUser from './Pages/ManageAccount/AddUser';
 import MyProfile  from './Pages/ManageAccount/MyProfile';
 import EditMyProfile  from './Pages/ManageAccount/EditMyProfile';
-import EditLegalAccount  from './Pages/ManageAccount/EditLegalAccount';
 import EditDealerInformation from './Pages/ManageAccount/EditDealerInformation';
 import EditAddress  from './Pages/ManageAccount/EditAddress';
 import AddLegalAccount  from './Pages/ManageAccount/AddLegalAccount';
 import AddAddress  from './Pages/ManageAccount/AddAddress';
+import EditLegalAccount from './Pages/ManageAccount/EditLegalAccount';
 
 function AppRouter() {
 
@@ -92,9 +92,9 @@ function AppRouter() {
               <Route  path="/adduser" component={AddUser}/>
               <Route  path="/myprofile" component={MyProfile}/>  
               <Route  path="/editmyprofile/:id" component={EditMyProfile}/>
-              <Route  path="/legaledit/:id" component={EditLegalAccount}/>
               <Route  path="/dealerinfoedit/:id" component={EditDealerInformation}/>
               <Route  path="/addressedit/:id" component={EditAddress}/>
+              <Route  path="/legaledit/:id" component={EditLegalAccount}/>
               <Route  path="/legaladd" component={AddLegalAccount}/>
               <Route  path="/addressadd" component={AddAddress}/>
             </PrivateRoute>       

@@ -2,14 +2,23 @@ import React, {useState, useEffect} from "react"
 import API from "../../Services/BaseService";
 
 const StateAndCity = props => {
-    // const { setStateValue, setCityValue, setZipcodeValue } = {props}
 
+    console.log("pppppp",props)
+    // const [defaultZipcodeValue, setDefaultZipcodeValue] = useState(props.defaultZipcodeValue !== undefined ? props.defaultZipcodeValue : "");
+    const [defaultZipcodeValue, setDefaultZipcodeValue] = useState(props.defaultZipcodeValue);
+    const [zipCodeId, setZipcodeId] = useState("");
+    const [isEdit, setIsEdit] = useState(props?.isEdit || false);
     const [country, setCountry] = useState("");
+    // const [defaultStateValue, setDefaultStateValue] = useState(props.defaultStateValue !== undefined ? props.defaultStateValue  :  "");
+    const [defaultStateValue, setDefaultStateValue] = useState(props.defaultStateValue);
     const [stateName, setStateName] = useState("");
     const [stateNameList, setStateNameList] = useState([]);
+    // const [defaultCityValue, setDefaultCityValue] = useState(props.defaultCityValue !== undefined ?  props.defaultCityValue : "");
+    const [defaultCityValue, setDefaultCityValue] = useState(props.defaultCityValue);
     const [cityName, setCityName] = useState("");
     const [cityNameList, setCityNameList] = useState([]);
-    const [zipCodeId, setZipcodeId] = useState("");
+    
+    
 
     async function fetchCountry() {
         const country = API.get('country');
@@ -43,34 +52,70 @@ const StateAndCity = props => {
             .catch(err => { console.log(err); });
     }
 
+    // useEffect(() => {
+    //     if (props.isEdit !==undefined || !props.isEdit) {
+    //         console.log("triggering-----------")
+    //         setStateName(props?.defaultStateValue || "");
+    //         setCityName(props?.defaultCityValue || "");
+    //         setZipcodeId(props?.defaultZipcodeValue || "");
+    //     }
+        
+    // }, []);
+
     useEffect(() => {
+       
         props.setStateValue(stateName);
         props.setCityValue(cityName);
         props.setZipcodeValue(zipCodeId);
-    }, [stateName, cityName, zipCodeId]);
+       
+    }, [stateName,cityName,zipCodeId]);
+
+    useEffect (()=>{
+        if(isEdit){
+            // setDefaultZipCodeId(props.defaultStateValue)
+            setDefaultStateValue(props.defaultStateValue);
+            setDefaultCityValue(props.defaultCityValue);
+            setDefaultZipcodeValue(props.defaultZipcodeValue);
+        }
+    })
+    // useEffect (()=>{
+    //     if (props.isEdit !==undefined || !props.isEdit) {
+    //             console.log("triggering-----------")
+    //             setStateName(props.defaultStateValue );
+    //             setCityName(props.defaultCityValue );
+    //             setZipcodeId(props.defaultZipcodeValue );
+    //         }
+    // },[stateName, cityName, zipCodeId])
 
     useEffect(() => {
         fetchCountry();
-        fetchState();
-    }, []);
+        !isEdit && fetchState();
+    }, [isEdit]);
+
+    useEffect(() => { setZipcodeId( zipCodeId) }, [zipCodeId])
+
 
     const getAlert = () => {
         alert('clicked');
       }
     
 
-    const handleState = (e) => {   
+    const handleState = (e) => {  
+        console.log("--------handleState") 
         setStateName( stateNameList.filter(data=>data.state_id == e.target.value)[0].state_name)
         fetchCity(e.target.value)
         setZipcodeId("")
     }
 
     const handleCity = (e) => {
+        console.log("--------handleCity")
         setCityName(e.target.value)
         setZipcodeId("")
     }
 
     const setZipcodeNormal = (data) => {
+        console.log("--------setZipcodeNormal")
+        setIsEdit(false)
         if(data.length ===0 ){
             setZipcodeId("")
             setCityName('')
@@ -86,12 +131,15 @@ const StateAndCity = props => {
             setZipcodeId("")
             setCityName('')
             setStateName('') 
+            setIsEdit(false)
         }
         if(data.length !=5 ){
             setCityName('')
-            setStateName('') 
+            setStateName('')
+            setIsEdit(false)
         }
         if(data.length==5 ){
+            setIsEdit(false)
             setZipcodeId(data)
             const request={zipcode_id: data}
             API.post("location/condition", request)
@@ -124,23 +172,23 @@ return (
     <>
         <div className="col-sm-4 form-group selectTbox">
             <div className="tbox">
-                {zipCodeId == "" ?
+                {!isEdit && zipCodeId == ""?
                     (<div className="selcetclass"> 
-                    <select className="form-control custom-select browser-default textbox " required defaultValue={stateName} onChange={handleState}>
-                        <option disabled value="0">State</option>
+                    <select className="form-control custom-select browser-default textbox" required defaultValue={stateName}  onChange={handleState}>
+                        <option style={{"display":"none"}}></option>
                         {stateNameList.length>0 &&
                             <>
                                 {stateNameList.map((state, index) => <option key={state.state_id} value={state.state_id}>{state.state_name}</option>)}
                             </>
                         }
                     </select>
-                    <label  for="state_id" className={stateName!="" ? "input-has-value" : ""}>State Name</label>
+                    <label  for="state_id" className={stateName!="" ? "input-has-value" : ""}>State</label>
                     </div>
                      )
                     :
                     (<>
-                        <input type="text" className="form-control textbox" placeholder="" value ={stateName} required />
-                        <label  for="state_id" className={"input-has-value"}>State Name</label>
+                        <input type="text" className="form-control textbox" placeholder="" readOnly = {true} value ={ stateName || defaultStateValue} required />
+                        <label  for="state_id" className={"input-has-value"}>State</label>
                     </>)
                 }
                
@@ -148,23 +196,23 @@ return (
         </div>
         <div className="col-sm-4 form-group selectTbox">
             <div className="tbox">
-                {zipCodeId == "" ?
+                { !isEdit && zipCodeId == "" ?
                 (<div className="selcetclass"> 
                     <select id="City" className="form-control custom-select browser-default textbox" required defaultValue={cityName} onChange={handleCity}>
-                        <option disabled value="0">City</option>
+                    <option style={{"display":"none"}}></option>
                         {cityNameList.length>0 &&
                             <>
                                 {cityNameList.map((city, index) => <option key={city.city_id} value={city.city_name}>{city.city_name}</option>)}
                             </>
                         }
                     </select>
-                    <label  for="city_id" className={cityName!="" ? "input-has-value" : ""}>City Name</label>
+                    <label  for="city_id" className={cityName!="" ? "input-has-value" : ""}>City</label>
                 </div>
                 )
                 :
                 (<>
-                    <input type="text" className="form-control textbox" placeholder="" value ={cityName} required />
-                    <label  for="city_id" className={"input-has-value"}>City Name</label>
+                    <input type="text" className="form-control textbox" placeholder="" readOnly = {true} value ={ cityName || defaultCityValue} required />
+                    <label  for="city_id" className={"input-has-value"}>City</label>
                 </>
                     )}
                 
@@ -172,11 +220,20 @@ return (
         </div>
         <div className="col-sm-4 form-group">
             <div className="tbox">
-                {stateName!=="" && cityName !=="" ?
-                (<input type="text" className="form-control textbox" placeholder="" required maxLength="5" onChange={(e) => setZipcodeNormal(e.target.value)} />)
+                <div className="selcetclass"> 
+                    {!isEdit && stateName!=="" && cityName !==""  ?
+                    (<>
+                        <input type="text" className="form-control textbox"  placeholder=""  required maxLength="5" onChange={(e) => setZipcodeNormal(e.target.value)} />
+                        <label  for="zipcode_id" className={zipCodeId!="" ? "input-has-value" : ""}>Zipcode</label>
+                    </>
+                    )
 
-                :(<input type="text" className="form-control textbox" placeholder="" required maxLength="5" onChange={(e) => setZipcodeGoogle(e.target.value)} />)}
-                <label  for="zipcode_id" className={"input-has-value"}>Zipcode</label>
+                    :(<>
+                        <input type="text" className="form-control textbox" defaultValue={isEdit ? defaultZipcodeValue : zipCodeId} placeholder="" required maxLength="5" onChange={(e) => setZipcodeGoogle(e.target.value)} />
+                        {/* <label  for="zipcode_id" className={zipCodeId!="" ? "input-has-value" : ""}>Zipcode</label> */}
+                    </>
+                        )}
+                </div>
             </div>
         </div>
     </>
