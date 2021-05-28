@@ -37,7 +37,7 @@ const Notification = () => {
 	const content = (
 		<div>
 			<Popover>
-				<p>Plasee Check contact us</p>
+				<p>please reach out ursecondlot Admin</p>
 			</Popover>
 		</div>
 	);
