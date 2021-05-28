@@ -176,7 +176,7 @@ const Notification = () => {
 													<div className="col-lg-3 col-md-3"  >
 														<Popover content={content} >
 															<div className="radio input-group">
-																<input id="radio-instemnail" checked={email == "no" ? true : false} value="no" name="radio" type="radio" readOnly  onChange={(e) => setEmail(e.target.value)} />
+																<input id="radio-instemnail" checked={email == "no" ? true : false} value="no" name="radio" type="radio" readOnly disabled={true} onChange={(e) => setEmail(e.target.value)} />
 																<label for="radio-instemnail" className="radio-label">Never</label>
 																<p>you wont receive any emails for bid activity.</p>
 															</div>
