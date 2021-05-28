@@ -95,7 +95,7 @@ const EditDealerInformation = () => {
            
         };
         API
-            .post('http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/user_profile/update', request)
+            .post('user_profile/update', request)
             .then((response) => {
                 if (response.data.success) {
                     const { data } = response;
