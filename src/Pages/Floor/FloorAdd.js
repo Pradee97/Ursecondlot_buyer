@@ -46,7 +46,7 @@ const FloorAdd = () => {
     };
 
     const floorDate = (event) => {
-        setDateOpened(event.format("YYY-MM-DD"))
+        setDateOpened(event.format("YYYY-MM-DD"))
     }
 
     // const openDatepicker = (event)=>{
