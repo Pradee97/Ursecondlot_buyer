@@ -155,15 +155,15 @@ const EditDealerInformation = () => {
 
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="number" defaultValue={accountObjc.phone_no} class="textbox" placeholder="Primary phone" required onChange={(e) => setPrimaryphone(e.target.value)} />
-                                <label for="primary_phone" className={primaryPhone != "" ? "input-has-value" : ""}>Primary Phone</label>
+                                <input type="text" defaultValue={accountObjc.phone_no} class="textbox" placeholder="Primary phone" required onChange={(e) => setPrimaryphone(e.target.value)} />
+                                <label for="phone_no" className={primaryPhone != "" ? "input-has-value" : ""}>Primary Phone</label>
                             </div>
                             </div>
 
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="number" defaultValue={accountObjc.mobile_no} class="textbox" placeholder="Mobile phone" required onChange={(e) => setMobilephone(e.target.value)} />
-                                <label for="mobile_phone" className={mobilePhone != "" ? "input-has-value" : ""}>Mobile Phone</label>
+                                <input type="text" defaultValue={accountObjc.mobile_no} class="textbox" placeholder="Mobile phone" required onChange={(e) => setMobilephone(e.target.value)} />
+                                <label for="mobile_no" className={mobilePhone != "" ? "input-has-value" : ""}>Mobile Phone</label>
                             </div>
                             </div>
                             <div class="col-sm-12 form-group">

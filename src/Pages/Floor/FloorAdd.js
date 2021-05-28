@@ -175,7 +175,7 @@ const FloorAdd = () => {
                             <div className="col-sm-12 form-group datePickerBlock">
                                 <div className="tbox">
                                     <div className="textbox">
-                                        <i class='bx bx-calendar' ></i>                                                     
+                                        {/* <i class='bx bx-calendar' ></i>                                                      */}
                                         {/* <input type="Date" id="dateOpened" className="textbox" placeholder="" required onChange={(e) => setDateOpened(e.target.value)} />
                                         <label for="dateOpened" className={dateOpened !="" ? "input-has-value" : ""}>Date Opened</label>  */}
                                          <Datetime inputProps={ inputProps } timeFormat={false} dateFormat="DD/MM/YYYY" onChange={floorDate}/> 
