@@ -187,11 +187,11 @@ const ManageAccount = () => {
                           </tr>
                           <tr>
                             <td>Dealership license<span>{item.dealer_license}</span></td>
-                            <td>Dealership license exp<span>{item.dealer_license_exp}</span></td>
+                            <td>Dealership license exp<span>{item.dealer_license_exp.substring(0,10)}</span></td>
                           </tr>
                           <tr>
                             <td>Tax id<span>{item.tax_id}</span></td>
-                            <td>Tax id exp<span>{item.tax_id_exp}</span></td>
+                            <td>Tax id exp<span>{item.tax_id_exp.substring(0,10)}</span></td>
                           </tr>
                         </table>
                         <h4>Location name</h4>
