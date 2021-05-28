@@ -101,7 +101,7 @@ const AddAddress = () => {
 <main id="main" className="inner-page">
                 <div className="col-lg-4 card loginBlock flooraddform">
                     <form className="registrationform" onSubmit={onhandleSubmit} >
-                        {/* <button className="back-btn-paymentform" onClick={() => history.push("/#")}>Back</button>               */}
+                        <button className="back-btn-paymentform" onClick={() => history.push("/manageaccount")}>Back</button>              
                         <h2 className="title">Add Legal Manage Account </h2>
                         <div className="row">
                         <div className="col-sm-12 form-group"> 

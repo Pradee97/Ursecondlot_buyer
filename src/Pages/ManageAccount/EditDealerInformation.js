@@ -13,6 +13,7 @@ import {
     notification,
     Spin,
 } from 'antd';
+import StateAndCity from '../../Component/StateAndCity/StateAndCity'
 
 const EditDealerInformation = () => {
     const history = useHistory();
@@ -27,6 +28,17 @@ const EditDealerInformation = () => {
     const [state, setState] = useState("");
     const [zipCode, setZipcode] = useState("");
   
+    const getStateName=(stateData)=>{
+        setState(stateData)
+    }
+
+    const getCityName=(cityData)=>{
+        setCity(cityData)
+    }
+
+    const getZipCodeId=(zipData)=>{
+        setZipcode(zipData)
+    }
 
     async function fetchAccountDetails() {
         console.log(id)
@@ -92,6 +104,7 @@ const EditDealerInformation = () => {
             <main id="main" class="inner-page">
                 <div className="col-lg-4 card loginBlock">
                     <form class="registrationform" onSubmit={updateDealerInfo} >
+                    <button className="back-btn-paymentform" onClick={() => history.push("/manageaccount")}>Back</button>                
                         <h2 class="title"> Edit Dealer Information</h2>
                         <div class="row">
 
@@ -112,7 +125,16 @@ const EditDealerInformation = () => {
                             <div class="col-sm-12 form-group">
                                 <input type="text" defaultValue={accountObjc.address} class="form-control" placeholder="Address" required onChange={(e) => setAddress(e.target.value)} />
                             </div>
-                            <div class="col-sm-12 form-group">
+                            <StateAndCity 
+                                setStateValue = { getStateName } 
+                                setCityValue ={ getCityName }
+                                setZipcodeValue ={ getZipCodeId }
+                                isEdit = {true}
+                                defaultStateValue = {state}
+                                defaultCityValue = {city}
+                                defaultZipcodeValue = {zipCode}
+                            />
+                            {/* <div class="col-sm-12 form-group">
                                 <input type="text" defaultValue={accountObjc.city_name} class="form-control" placeholder="City" required onChange={(e) => setCity(e.target.value)} />
                             </div>
                             <div class="col-sm-12 form-group">
@@ -120,7 +142,7 @@ const EditDealerInformation = () => {
                             </div>
                             <div class="col-sm-12 form-group">
                                 <input type="number" defaultValue={accountObjc.zipcode_id} class="form-control" placeholder="Zip code" required onChange={(e) => setZipcode(e.target.value)} />
-                            </div>
+                            </div> */}
                           
                     
                             <div class="col-lg-12 loginBtn">
