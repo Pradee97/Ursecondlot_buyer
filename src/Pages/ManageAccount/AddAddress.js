@@ -46,8 +46,8 @@ const AddAddress = () => {
             state_id: state,
             zipcode_id: zipCode,
             buyer_id:userDetails.user_id,
-            active:1
-           
+            location:address,
+            active:1           
         };
         console.log("===",request)
         // return
