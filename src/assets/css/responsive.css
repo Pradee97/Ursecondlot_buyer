@@ -1,18 +1,15 @@
 @media (max-width: 1700px) {
 	
-	.cars-prices .cta-btns {
-        margin-right: 2px!important;
+    #topbar .col-lg-8 {
+        -ms-flex: 0 0 60%;
+        flex: 0 0 60%;
+        max-width: 60%;
     }
-    .cars-content {
-        padding: 10px!important;
+    #topbar .col-lg-4 {
+        -ms-flex: 0 0 40%;
+        flex: 0 0 40%;
+        max-width: 40%;
     }
-    .suggested-cars , .inventory-cars, .recently-cars , .favorite-cars {
-       margin: 0 2%;
-        padding:0!important;
-    }
-	
-	
-	
 }
 
 @media (max-width: 1600px) {
@@ -32,22 +29,28 @@
     background-size: cover;
 	height: 495px;
 }
-	
+.topLeft{
+    padding-left: 20px;
+}	
+.rightMenu{
+    margin-right: 0;
+}
+#header .container-fluid, #footer .container-fluid{
+    padding-left: 20px;
+padding-right: 20px;
+}
+
+.inner-page .container-fluid {
+    padding: 0 20px;
+}
 
 	
 }
 
 @media (max-width: 1500px) {
-	
-	.container {
-        max-width: 94%;
-        margin: 0 2%;
-    }
 	.car-item {        
         background: #fff;
     }
-	
-	
 }
 
 @media (max-width: 1400px) {

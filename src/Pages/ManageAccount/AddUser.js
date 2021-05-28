@@ -161,7 +161,12 @@ const AddUser = () => {
 									<div className="adduserpage-inner">
 										<div className="col-lg-12">
 											<form class="adduserpageform" onSubmit={registrationhandleSubmit}>
-												<div className="row">													
+												<div className="row">
+
+												<div className="section-title">
+													<h2>User Details</h2>
+												</div>
+
 													<div className="col-sm-12 form-group">
 														<div className="tbox">
 															<input className="textbox " type="text" placeholder="" id="first_name" required maxLength="30" onChange={(e) => setFirstName(e.target.value)} />
@@ -200,7 +205,7 @@ const AddUser = () => {
 														setZipcodeValue={getZipCodeId}
 													/>
 
-													<div className="col-sm-8 form-group">
+													<div className="col-sm-8 form-group selectTbox">
 														<div className="tbox">
 															{/* {/ <lable for="drop" className={option !="" ? "input-has-value" : ""}>How many years in car business</lable> /} */}
 															<select id="drop" placeholder="" required className="form-control custom-select browser-default textbox" required onChange={(e) => setOption(e.target.value)}>
@@ -228,7 +233,7 @@ const AddUser = () => {
 													<div className="col-sm-6 form-group datePickerBlock ">
 														<div className="tbox">
 															<div className="textbox">
-																<i class='bx bx-calendar'></i>
+																
 																<Datetime inputProps={inputProps} timeFormat={false} dateFormat="DD/MM/YYYY" isValidDate={disablePastDt} />
 																<label for="meeting_date" className={date != "" ? "input-has-value" : ""}>Select Date</label>
 															</div>

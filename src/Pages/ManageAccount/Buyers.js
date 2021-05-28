@@ -83,7 +83,7 @@ const Buyers = () => {
 
                                 <div class="col-lg-12 userlisttableblock">
                                     <div class="add-user">
-                                        <a class="add-user-btns" href="/adduser"><img src={process.env.PUBLIC_URL +"/images/addbtn.jpg"}  alt="adduser"/>Add User</a>
+                                        <a class="add-user-btns" href="/adduser"><i class="icofont-plus"></i> Add User</a>
                                     </div>					
                                     <div class="userlisttable">
                                         <table>

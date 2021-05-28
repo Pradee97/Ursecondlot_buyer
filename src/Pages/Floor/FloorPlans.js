@@ -59,7 +59,7 @@ const FloorPlans = () => {
        <div className="row content">
            <div className="col-lg-12 floorplanstableblock">
                <div className="add-floor">
-                   <a className="add-floor-btns" href="/flooradd"><img src={process.env.PUBLIC_URL +"/images/addbtn.jpg"}/>Add Floor</a>
+                   <a className="add-floor-btns" href="/flooradd"><i class="icofont-plus"></i>  Add Floor</a>
                </div>
                
 
