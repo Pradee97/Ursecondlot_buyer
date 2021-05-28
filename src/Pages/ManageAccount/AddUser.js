@@ -6,6 +6,7 @@ import API from "../../Services/BaseService";
 import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
 import ls from 'local-storage';
 import StateAndCity from '../../Component/StateAndCity/StateAndCity';
+import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import Datetime from 'react-datetime';
 import moment from 'moment';
 const AddUser = () => {
@@ -28,16 +29,21 @@ const AddUser = () => {
 	const [proxy_bid,setProxy_bid]=useState("");
 	const [counter_bid,setCounter_bid]=useState("");
 	const [lot_fee,setLot_fee]=useState("");
-	
-
-    const [isCommonPopupOpen, setIsCommonPopupOpen] = useState(false);
 	const [option, setOption] = useState("");
-	const [popupTitle, setPopupTitle] = useState("");
-	const [popupMsg, setPopupMsg] = useState("");
-	const [popupType, setPopupType] = useState("");
-	const [popupActionType, setPopupActionType] = useState("");
-	const [popupActionValue, setPopupActionValue] = useState("");
-	const [popupActionPath, setPopupActionPath] = useState("");
+	
+	const [isOpen, setIsOpen] = useState(false);
+ 
+    const togglePopup = () => {
+      setIsOpen(!isOpen);
+    }
+
+    const [popupTitle, setPopupTitle] = useState ("");
+    const [popupMsg, setPopupMsg] = useState ("");
+    const [popupType, setPopupType] = useState ("");
+    const [popupActionType, setPopupActionType] = useState ("");
+    const [popupActionValue, setPopupActionValue] = useState ("");
+    const [popupActionPath, setPopupActionPath] = useState ("")
+   
 	console.log("=====userDetails====>",userDetails)
 	console.log("======>",userDetails.dealer_id)
 	const getStateName = (stateData) => {
@@ -54,9 +60,7 @@ const AddUser = () => {
 		placeholder: 'DD/MM/YYYY',
 		required: true
 	};
-	const toggleCommonPopup = () => {
-        setIsCommonPopupOpen(!isCommonPopupOpen);
-    }
+	
 	const yesterday = moment().subtract(1, 'day');
 	const disablePastDt = current => {
 		return current.isAfter(yesterday);
@@ -100,29 +104,33 @@ const AddUser = () => {
                 if (response.data.success) {
                     const { data } = response;
                     console.log("response", response)
-                    toggleCommonPopup()
-                    setPopupTitle("Dealer Registered successfully");
-                    setPopupMsg("Please Activate your account with the link shared to the given email Id");
+					togglePopup()
+                    setPopupTitle("Create AddUser");
+                    setPopupMsg("AddUser Successfully Created");
                     setPopupType("success");
                     setPopupActionType("redirect");
                     setPopupActionValue("ok");
                     setPopupActionPath("/buyers")
+
                 } else {
-                    toggleCommonPopup()
+                    togglePopup()
                     setPopupTitle("Error");
-                    setPopupMsg("registration failed, Please try Again");
+                    setPopupMsg("AddUser failed, Please try Again");
                     setPopupType("error");
                     setPopupActionType("close");
                     setPopupActionValue("close");
                 }
             }, (error) => {
-                toggleCommonPopup()
-                setPopupTitle("Error");
-                setPopupMsg(error, " Please try Again");
-                setPopupType("error");
-                setPopupActionType("close");
-                setPopupActionValue("close");
+                // setOpenLoader(false);
+                // console.log(error);
+                    togglePopup()
+                    setPopupTitle("Error");
+                    setPopupMsg( "Something went wrong, Please try Again");
+                    setPopupType("error");
+                    setPopupActionType("close");
+                    setPopupActionValue("close");
             });
+
     }
 	return (
 		<div>
@@ -296,6 +304,16 @@ const AddUser = () => {
 						</div>
 					</div>
 				</section>
+				{isOpen && 
+                <CommonPopup 
+                    handleClose= {togglePopup}
+                    popupTitle= {popupTitle}
+                    popupMsg= {popupMsg}
+                    popupType= {popupType}
+                    popupActionType= {popupActionType}
+                    popupActionValue= {popupActionValue}
+                    popupActionPath={popupActionPath}
+                />}
 			</main>
 		</div>
 	);
