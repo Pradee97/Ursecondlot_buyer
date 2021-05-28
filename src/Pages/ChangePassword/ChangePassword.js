@@ -95,7 +95,7 @@ const ChangePassword = () => {
             (error) => {
                 togglePopup()
                 setPopupTitle("Error");
-                setPopupMsg(error," Please try Again");
+                setPopupMsg( "Something went wrong, Please try Again");
                 setPopupType("error");
                 setPopupActionType("close");
                 setPopupActionValue("close");

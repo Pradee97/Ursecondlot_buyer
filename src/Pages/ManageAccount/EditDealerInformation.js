@@ -4,6 +4,8 @@ import { useHistory,useParams } from "react-router-dom";
 // import '../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import CommonPopup from '../../Component/CommonPopup/CommonPopup';
+
 import {
     Form,
     Input,
@@ -27,6 +29,19 @@ const EditDealerInformation = () => {
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
     const [zipCode, setZipcode] = useState("");
+
+    const [isOpen, setIsOpen] = useState(false);
+ 
+    const togglePopup = () => {
+      setIsOpen(!isOpen);
+    }
+
+    const [popupTitle, setPopupTitle] = useState ("");
+    const [popupMsg, setPopupMsg] = useState ("");
+    const [popupType, setPopupType] = useState ("");
+    const [popupActionType, setPopupActionType] = useState ("");
+    const [popupActionValue, setPopupActionValue] = useState ("");
+    const [popupActionPath, setPopupActionPath] = useState ("")
   
     const getStateName=(stateData)=>{
         setState(stateData)
@@ -85,17 +100,34 @@ const EditDealerInformation = () => {
                 if (response.data.success) {
                     const { data } = response;
                     console.log("response", response)
-                    history.push("/success");
+                    // history.push("/success");
+                    togglePopup()
+                    setPopupTitle("Edit Dealer Information");
+                    setPopupMsg(" Edit Dealer Information is successfully Updated");
+                    setPopupType("success");
+                    setPopupActionType("redirect");
+                    setPopupActionValue("ok");
+                    setPopupActionPath("/manageaccount")
+
                 } else {
-                    history.push("emailerror");
+                    togglePopup()
+                    setPopupTitle("Edit Dealer Information");
+                    setPopupMsg("Edit Dealer Information is not update, Please try Again");
+                    setPopupType("error");
+                    setPopupActionType("close");
+                    setPopupActionValue("close");
                 }
             }, (error) => {
                 // setOpenLoader(false);
                 // console.log(error);
+                    togglePopup()
+                    setPopupTitle("Error");
+                    setPopupMsg( "Something went wrong, Please try Again");
+                    setPopupType("error");
+                    setPopupActionType("close");
+                    setPopupActionValue("close");
             });
-
-    }
-
+        }
     useEffect(() => {
       fetchAccountDetails();
     }, []);
@@ -162,6 +194,16 @@ const EditDealerInformation = () => {
                         </div>
                     </div>
                 </section>
+                {isOpen && 
+                <CommonPopup 
+                    handleClose= {togglePopup}
+                    popupTitle= {popupTitle}
+                    popupMsg= {popupMsg}
+                    popupType= {popupType}
+                    popupActionType= {popupActionType}
+                    popupActionValue= {popupActionValue}
+                    popupActionPath={popupActionPath}
+                />}
             </main>
           
         </div>

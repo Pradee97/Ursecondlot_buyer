@@ -4,6 +4,7 @@ import { useHistory,useParams } from "react-router-dom";
 // import '../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import StateAndCity from '../../Component/StateAndCity/StateAndCity'
 import {
     Form,
@@ -32,14 +33,18 @@ const EditLegalAccount = () => {
     const [dealershipLicenseexp, setDealershipLicenseexp] = useState("");
     const [taxidexp, setTaxidexp] = useState("");
 
-    const [isCommonPopupOpen, setIsCommonPopupOpen] = useState(false);
-	const [option, setOption] = useState("");
-	const [popupTitle, setPopupTitle] = useState("");
-	const [popupMsg, setPopupMsg] = useState("");
-	const [popupType, setPopupType] = useState("");
-	const [popupActionType, setPopupActionType] = useState("");
-	const [popupActionValue, setPopupActionValue] = useState("");
-	const [popupActionPath, setPopupActionPath] = useState("");
+    const [isOpen, setIsOpen] = useState(false);
+ 
+    const togglePopup = () => {
+      setIsOpen(!isOpen);
+    }
+
+    const [popupTitle, setPopupTitle] = useState ("");
+    const [popupMsg, setPopupMsg] = useState ("");
+    const [popupType, setPopupType] = useState ("");
+    const [popupActionType, setPopupActionType] = useState ("");
+    const [popupActionValue, setPopupActionValue] = useState ("");
+    const [popupActionPath, setPopupActionPath] = useState ("")
   
     const getStateName=(stateData)=>{
         setState(stateData)
@@ -107,34 +112,32 @@ const EditLegalAccount = () => {
             .then((response) => {
                 if (response.data.success) {
                     const { data } = response;
-                    console.log("response", response.data)
-                    toggleCommonPopup()
-                    setPopupTitle("Legal Account successfully Updated");
-                    setPopupMsg("");
+                    togglePopup()
+                    setPopupTitle("Edit LegalManageAccount");
+                    setPopupMsg(" EditLegalManageAccount is successfully Updated");
                     setPopupType("success");
                     setPopupActionType("redirect");
                     setPopupActionValue("ok");
                     setPopupActionPath("/manageaccount")
+
                 } else {
-                    toggleCommonPopup()
-                    setPopupTitle("Error");
-                    setPopupMsg("Legal Account failed to Update, Please try Again");
+                    togglePopup()
+                    setPopupTitle("Edit LegalManageAccount");
+                    setPopupMsg("Edit LegalManageAccount is not update, Please try Again");
                     setPopupType("error");
                     setPopupActionType("close");
                     setPopupActionValue("close");
                 }
             }, (error) => {
-                toggleCommonPopup()
-                setPopupTitle("Error");
-                setPopupMsg(error, " Please try Again");
-                setPopupType("error");
-                setPopupActionType("close");
-                setPopupActionValue("close");
+                // setOpenLoader(false);
+                // console.log(error);
+                    togglePopup()
+                    setPopupTitle("Error");
+                    setPopupMsg( "Something went wrong, Please try Again");
+                    setPopupType("error");
+                    setPopupActionType("close");
+                    setPopupActionValue("close");
             });
-
-    }
-    const toggleCommonPopup = () => {
-        setIsCommonPopupOpen(!isCommonPopupOpen);
     }
 
     useEffect(() => {
@@ -247,6 +250,16 @@ const EditLegalAccount = () => {
                         </div>
                     </div>
                 </section>
+                {isOpen && 
+                <CommonPopup 
+                    handleClose= {togglePopup}
+                    popupTitle= {popupTitle}
+                    popupMsg= {popupMsg}
+                    popupType= {popupType}
+                    popupActionType= {popupActionType}
+                    popupActionValue= {popupActionValue}
+                    popupActionPath={popupActionPath}
+                />}
             </main>
           
         </div>

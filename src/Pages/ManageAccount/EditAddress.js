@@ -4,6 +4,7 @@ import { useHistory,useParams } from "react-router-dom";
 // import '../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import StateAndCity from '../../Component/StateAndCity/StateAndCity';
 import {
     Form,
@@ -28,6 +29,18 @@ const EditAddress = () => {
     const [state, setState] = useState("");
     const [zipCode, setZIpCode] = useState("");
   
+    const [isOpen, setIsOpen] = useState(false);
+ 
+    const togglePopup = () => {
+      setIsOpen(!isOpen);
+    }
+
+    const [popupTitle, setPopupTitle] = useState ("");
+    const [popupMsg, setPopupMsg] = useState ("");
+    const [popupType, setPopupType] = useState ("");
+    const [popupActionType, setPopupActionType] = useState ("");
+    const [popupActionValue, setPopupActionValue] = useState ("");
+    const [popupActionPath, setPopupActionPath] = useState ("")
     const getStateName=(stateData)=>{
         setState(stateData)
     }
@@ -85,16 +98,33 @@ const EditAddress = () => {
         API
             .post("buyer_address/update", request)
             .then((response) => {
-                if (response.data.success) {
+                    if (response.data.success) {
                     const { data } = response;
-                    console.log("response", response)
-                    history.push("/manageaccount");
+                    togglePopup()
+                    setPopupTitle("Edit Address");
+                    setPopupMsg(" EditAddress is successfully Updated");
+                    setPopupType("success");
+                    setPopupActionType("redirect");
+                    setPopupActionValue("ok");
+                    setPopupActionPath("/manageaccount")
+
                 } else {
-                    history.push("emailerror");
+                    togglePopup()
+                    setPopupTitle("Edit Address");
+                    setPopupMsg("Edit Address is not update, Please try Again");
+                    setPopupType("error");
+                    setPopupActionType("close");
+                    setPopupActionValue("close");
                 }
             }, (error) => {
                 // setOpenLoader(false);
                 // console.log(error);
+                    togglePopup()
+                    setPopupTitle("Error");
+                    setPopupMsg( "Something went wrong, Please try Again");
+                    setPopupType("error");
+                    setPopupActionType("close");
+                    setPopupActionValue("close");
             });
 
     }
@@ -107,8 +137,8 @@ const EditAddress = () => {
             <main id="main" class="inner-page">
                 <div className="col-lg-4 card loginBlock">
                     <form class="registrationform" onSubmit={updateAddress} >
-                    <button className="back-btn-paymentform" onClick={() => history.push("/manageaccount")}>Back</button> 
-                        <h2 class="title"> DealerInformation Edit</h2>
+                        <h2 class="title"> Address Edit</h2>
+                    <button className="back-btn-paymentform" onClick={() => history.push("/manageaccount")}>Back</button>
                         <div class="row">
 
                         <div class="col-sm-12 form-group">
@@ -164,6 +194,16 @@ const EditAddress = () => {
                         </div>
                     </div>
                 </section>
+                {isOpen && 
+                <CommonPopup 
+                    handleClose= {togglePopup}
+                    popupTitle= {popupTitle}
+                    popupMsg= {popupMsg}
+                    popupType= {popupType}
+                    popupActionType= {popupActionType}
+                    popupActionValue= {popupActionValue}
+                    popupActionPath={popupActionPath}
+                />}
             </main>
           
         </div>
