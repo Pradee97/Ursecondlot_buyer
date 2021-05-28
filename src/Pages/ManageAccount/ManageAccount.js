@@ -132,7 +132,7 @@ const ManageAccount = () => {
                           <thead></thead>
                           <tr>
                             <td>First name<span>{item.first_name}</span></td>
-                            <td>Address<span>{item.address}</span></td>
+                            <td>Address<span>{item.location}</span></td>
                           </tr>
                           <tr>
                             <td>Last name<span>{item.last_name}</span></td>
