@@ -664,7 +664,7 @@ section {
 }
 
 .section-title h2 {
-  font-size: 32px;
+  font-size: 30px;
   font-weight: 500;
   text-transform: uppercase;
   position: relative;
@@ -937,6 +937,7 @@ Cars list
 .suggested-cars{
 	background: #F5F5F5 0% 0% no-repeat padding-box;
 	opacity: 1;
+  padding-bottom: 30px;
 }
  .car-item {
     border-radius: 5px;
@@ -1911,7 +1912,7 @@ Cars list
   width: 100%;
   padding: 30px;
   background: #ECECEC;
-  border-radius:10px;
+  border-radius:5px;
   
 }
 
@@ -2869,6 +2870,8 @@ popup Dialogbox
 
 .cta-btns:hover{
   color: white;
+  background-color: #002768;
+  text-decoration: none;
 }
 
 
@@ -3404,6 +3407,7 @@ SuccessfullModalCenter
     border-radius: .25rem;
     padding: 30px 40px;
 	text-align:center;
+  max-width: 600px;
 }
 .Successfullform{
 	background: #F5F5F5;
@@ -3412,10 +3416,11 @@ SuccessfullModalCenter
 	
 .Successfullform .Successfullformblock .Successfull-icon img{
 	background:#27ae60;
-	width:10%;
 	padding: 15px 11px;
 	border-radius:50%;
 	margin-bottom:20px;
+  width: 50px;
+  height: 50px;
 }
 
 .Successfullform .Successfullformblock .get-started-btn {
@@ -3872,7 +3877,7 @@ Search Box"
   transform: rotate(45deg);
 }
 .radio {
-  margin: 0.5rem;
+  margin: 0;
 }
 .radio input[type="radio"] {
   position: absolute;
@@ -3882,7 +3887,7 @@ Search Box"
   content: '';
   background: #fff;
   border-radius: 100%;
-  border: 1px solid #b4b4b4;
+  border: 2px solid #b4b4b4;
   display: inline-block;
   width: 1.4em;
   height: 1.4em;
@@ -3896,14 +3901,14 @@ Search Box"
 }
 .radio input[type="radio"]:checked + .radio-label:before {
   background-color: #bd062c;
-   box-shadow: inset 0 0 0 4px #f4f4f4;
+   box-shadow: inset 0 0 0 3px #f4f4f4;
 }
 .radio input[type="radio"]:focus + .radio-label:before {
   outline: none;
-  border-color: #3197EE;
+  border-color: #b4b4b4;
 }
 .radio input[type="radio"]:disabled + .radio-label:before {
-  box-shadow: inset 0 0 0 4px #f4f4f4;
+  box-shadow: inset 0 0 0 3px #f4f4f4;
   border-color: #bd062c;
   background: #bd062c; 	
 }
@@ -4800,10 +4805,11 @@ __________________________________________________________*/
 
 .notificationtabblock h3 {
   color: #343434;
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 500;
   display: block;
   text-align: left;
+  margin-bottom: 10px;
 }
 
 .bidsemailblock, .bidssmsblock, .bidsnotiblock, .favoriteemailblock, .favoritesmsblock {
@@ -4853,7 +4859,7 @@ __________________________________________________________*/
 }
 .userlinks li{
 	list-style:none;
-	margin:10px 0;
+	margin:0;
 	color: #4E4E4E;
   padding-left: 0;
 }
@@ -4891,7 +4897,7 @@ margin-top: 20px;
     color: #707070;
     font-size: 16px;
     font-weight: 500;
-    width: 61%;
+    width: 65%;
     float: right;
 }
 .mgaccountrighttableblock h3{
@@ -4901,6 +4907,8 @@ margin-top: 20px;
 	color: #343434;
   font-weight: 500;
   margin-bottom: 15px;
+  border-bottom: #eee solid 1px;
+  padding-bottom: 15px;
 }
 .mgaccountrighttableblock h3 span{
 	color: #BD062C;	
@@ -5483,11 +5491,14 @@ height: 100%;
 	text-align:center;
 	display:block;
 	font-weight:500;
+  margin-bottom: 20px;
+  border-bottom: #eee solid 1px;
+  padding-bottom: 10px;
 }
 
 .notificationtabblock  h3{
 	color: #343434;
-	font-size:25px;
+	font-size:20px;
 	font-weight:500;
 	display:block;
 }
@@ -5502,14 +5513,22 @@ height: 100%;
 .notificationaccountrightblock .save-more-btn {
     display: inline-block;
     background: #BD062C;
-    padding: 6px 30px 8px 30px;
+    padding:10px 20px;
     color: #fff;
     border-radius: 5px;
     transition: all ease-in-out 0.4s;
     font-size: 18px;
     margin-top: 25px;
-    border: 2px solid #bd062c;
+    height: 44px;
 }
+.notificationaccountrightblock .save-more-btn span{
+  color: #fff;
+}
+
+.notificationaccountrightblock .save-more-btn:hover {
+  background: #002768;
+}
+
 
 /*-----------------------------------------
 paymentform 
@@ -5637,11 +5656,11 @@ paymentform
 .flooraddform .registrationform  h2, .flooreditform .registrationform  h2{
     margin: 20px;
     color: #002768;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 500;
     text-transform: uppercase;
     display: block;
-    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .backaccountform.editpaymentform .topforms , .backaccountform.addpaymentform .topforms {
@@ -5781,6 +5800,10 @@ paymentform
 /*----------------------------------------------
 
 ------------------------------------------------*/
+.lotfeerightblock{
+  padding-right: 0;
+}
+
 .lotfee-inner {
     float: left;
     margin: 0 auto;
@@ -5793,7 +5816,8 @@ paymentform
     box-shadow: 0px 3px 6px #00000029;
     border-radius: .25rem;
     padding: 30px;
-    padding-top: 30px;   
+    padding-top: 30px;  
+    width: 100%; 
 }
 
 .lotfee-inner  p {
@@ -5805,6 +5829,7 @@ paymentform
 .lotfee-form{
 	margin:20px auto;
 	display:block;
+  max-width: 400px;
 }
 
 
@@ -5928,7 +5953,7 @@ label.input-has-value {
 	transform: translateY(-110%) translateX(0%) !important;
 	  border-radius: 3px !important;
 	  transition: all 0.1s ease-out !important;
-	  font-size:14px;
+	  font-size:14px !important;
 }
 
 
@@ -6045,6 +6070,8 @@ text-align:center;
 display:block;
 font-size:20px;
 color: #343434;
+border-bottom: #eee solid 1px;
+padding-bottom: 15px;
 }
 .myprofilerighttableblock h3 span{
   color: #BD062C;	
@@ -6169,5 +6196,29 @@ Users
 .datePickerBlock input{
   background:#fff url("../img/calender.png") no-repeat right center;  
 }
+
+.backBtn{
+  width: 100px;
+  float: left;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.ant-btn{
+  color: #BD062C;
+}
+
+.ant-btn:hover{
+  color: #BD062C;
+}
+
+.ant-btn i{
+  margin-right: 5px;
+  color: #BD062C;
+  font-size: 12px;
+}
+
+
 
 

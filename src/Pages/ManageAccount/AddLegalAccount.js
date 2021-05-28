@@ -179,13 +179,13 @@ const AddLegalAccount = () => {
                             <div className="col-sm-12 form-group">
                              <div className="tbox">                            
                                 <input type="date" id="phoneNumber" className="textbox" placeholder="" required onChange={(e) => setDealershiplicenseexp(e.target.value)} />
-                                <label for="phoneNumber" className={dealershipLicenseexp !="" ? "input-has-value" : ""}>Dealership license exp</label>
+                                <label for="phoneNumber" className={"input-has-value"}>Dealership license exp</label>
                             </div>
                             </div>  
                             <div className="col-sm-12 form-group">
                              <div className="tbox">                            
                                 <input type="date" id="phoneNumber" className="textbox" placeholder="" required onChange={(e) => setTaxidexp(e.target.value)} />
-                                <label for="phoneNumber" className={taxidexp !="" ? "input-has-value" : ""}>Tax id exp</label>
+                                <label for="phoneNumber" className={"input-has-value"}>Tax id exp</label>
                             </div>
                             </div>  
                             <div className="col-lg-12 loginBtn">

@@ -146,9 +146,13 @@ const EditMyProfile = () => {
     return (
         <div>
             <main id="main" className="inner-page">
-                <div className="col-lg-4 card loginBlock myprofileeditform">
+                <div className="col-lg-4  loginBlock">
+                    <button className="back-btn-paymentform backBtn" onClick={() => history.push("/myprofile")}><i class="icofont-arrow-left"></i> Back</button>
+                
+                
+                <div className="col-lg-12 card loginBlock myprofileeditform">
                     <form className="registrationform" onSubmit={updateMyProfile} >
-                    <button className="back-btn-paymentform" onClick={() => history.push("/myprofile")}>Back</button>
+                    
                         <h2 className="title"> Edit My Profile </h2>
                         <div className="row">
                         
@@ -231,7 +235,7 @@ const EditMyProfile = () => {
                         </div>
                     </form>
 
-                </div>
+                </div></div>
                 <section id="playstoreBlock" className="playstoreBlock">
                     <div className="container">
                         <div className="row content">

@@ -33,7 +33,7 @@ const Submenu = () => {
           <a href="JavaScript:void(0)" onClick={()=>history.push('/about')}>About Us</a>
         </li>
         <li className="nav__submenu-item ">
-        <a href="JavaScript:void(0)" onClick={()=>{history.push('/');localStorage.clear()}}>logout</a>
+        <a href="JavaScript:void(0)" onClick={()=>{history.push('/');localStorage.clear()}}>Logout</a>
         </li>
 
       </ul>

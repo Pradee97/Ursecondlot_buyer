@@ -321,9 +321,9 @@ const Notification = () => {
 											</div>
 										</div>
 									</div>
-									<div className="text-center">
+									<div className="text-center col-lg-12 loginBtn">
 										{/* <a href="#" className="save-more-btn">Save</a> */}
-										<Button className="save-more-btn" onClick={savehandleclick}>Save</Button>
+										<Button className="save-more-btn cta-btn" onClick={savehandleclick}>Save</Button>
 									</div>
 								</div>
 							</div>

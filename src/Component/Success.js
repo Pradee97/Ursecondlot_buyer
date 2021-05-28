@@ -10,7 +10,7 @@ const Success = () => {
                 <div id="Successfullform" class="Successfullform">
                     <div class="container">
                         <div class="Successfullformblock col-lg-6">
-                            <div class="row content">
+                            <div class="content">
                                 <div class="modalcontent">
                                     <div class="Successfull-icon">
                                         <img alt="" src={checkImg} />
