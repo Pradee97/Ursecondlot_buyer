@@ -122,7 +122,7 @@ const Submenu = () => {
          
           </nav>
 
-          {(localStorage.getItem("islogedIn") ==="false" || localStorage.getItem("islogedIn") ===null) && <a href="login" className="get-started-btn dealerLogin">Dealer Login</a> }
+          {(localStorage.getItem("islogedIn") ==="false" || localStorage.getItem("islogedIn") ===null) && <a href="JavaScript:void(0)" onClick={()=>history.push('/login')} className="get-started-btn dealerLogin">Dealer Login</a> }
 
         </div>
       </header>
