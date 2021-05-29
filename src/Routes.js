@@ -38,6 +38,7 @@ import EditAddress  from './Pages/ManageAccount/EditAddress';
 import AddLegalAccount  from './Pages/ManageAccount/AddLegalAccount';
 import AddAddress  from './Pages/ManageAccount/AddAddress';
 import EditLegalAccount from './Pages/ManageAccount/EditLegalAccount';
+import EditBuyer from './Pages/ManageAccount/EditBuyer'
 
 function AppRouter() {
 
@@ -98,6 +99,7 @@ function AppRouter() {
               <Route  path="/legaledit/:id" component={EditLegalAccount}/>
               <Route  path="/legaladd" component={AddLegalAccount}/>
               <Route  path="/addressadd" component={AddAddress}/>
+              <Route  path="/buyeredit/:id" component={EditBuyer}/>
             </PrivateRoute>       
           </Switch>
           <Footer />

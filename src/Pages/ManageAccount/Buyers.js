@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import ls from 'local-storage';
 import API from "../../Services/BaseService";
 import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
+import { Button } from 'antd';
 
 const Buyers = () => {
     const history = useHistory();
@@ -23,12 +24,15 @@ const Buyers = () => {
             .catch(err => { console.log(err); });
     }
     function searchUser(){
+        console.log("=====data=======>",data)
         let request={
             data: data,
             dealer_id:userDetails.dealer_id
         }
+        if(data!==""){
         API.post("userSearch/condition",request)
         .then((response)=>{
+            console.log("=====response=======>",response)
             console.log("rep search req",request);
             console.log("inside rep search", response.data.data);
             setUserList(response.data.data);
@@ -37,7 +41,13 @@ const Buyers = () => {
             console.log(error);
           }
         );
+        } else {
+            setUserList([]);
+        }
     }
+    function onHandleEdit(e) {
+        history.push("/buyeredit/"+e);
+      }
     useEffect(() => {
         getuserDetails();
     }, []);
@@ -75,7 +85,7 @@ const Buyers = () => {
                                 <div class="input-group searchbox">
                                 <input type="text"  class="form-control border" placeholder="Search" onChange={(e) => setData(e.target.value)}></input>
                                 <span class="input-group-append" >
-                                <button class="btn ms-n5" type="button" id="btntest" name="btntest" onClick={searchUser} ><i class='bx bx-search'></i></button>
+                                <button class="btn ms-n5" type="button"  id="btntest" name="btntest" disable onClick={searchUser} ><i class='bx bx-search'></i></button>
                                 </span>
                                 
                                 </div>
@@ -95,6 +105,7 @@ const Buyers = () => {
                                                 <th>Email</th>
                                                 <th>Privileges</th>
                                                 <th>Status</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         {userList.length>0?userList.map((item,index) =>
@@ -104,9 +115,14 @@ const Buyers = () => {
                                             <td>{item.phone_no}</td>
                                             <td>{item.email}</td>
                                             <td>amorsolo, Cancel the bid after 4 hours, Bid, Proxy Bid, Counter Bid, Lot Fee</td>
-                                            <td>{item.active==="1"?"Active":"InActive"}</td>
+                                            <td>{item.active===1?"Active":"InActive"}</td>
+                                            <td><Button class="ant-btn" onClick={() => onHandleEdit(item.user_id)}><i class="icofont-ui-edit"></i> Edit</Button></td>
                                         </tr>
-                                        ):""}
+                                        ):
+                                        <tr><td colspan="6" ng-show="0">
+                                        <b>There's No Data</b>
+                                            </td>
+                                        </tr>}
                                         
                                         
                                         </table>            
