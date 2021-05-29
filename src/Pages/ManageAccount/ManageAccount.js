@@ -98,7 +98,7 @@ const ManageAccount = () => {
                       <p>Titles Will be sent to this address title will not be shipped in to physical address</p>
                       <div className="mgaccountrighttable">
                         <h4>Dealer Name</h4>
-                        <h5>Jack</h5>
+                        <h5>{item.dealer_name}</h5>
                         <table>
                           <thead></thead>
                           <tr>

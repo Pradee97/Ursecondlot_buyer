@@ -114,8 +114,9 @@ const Buyers = () => {
                                             <td><span class="cartitlename">{item.first_name} {item.last_name} </span></td>
                                             <td>{item.phone_no}</td>
                                             <td>{item.email}</td>
-                                            <td>amorsolo, Cancel the bid after 4 hours, Bid, Proxy Bid, Counter Bid, Lot Fee</td>
-                                            <td>{item.active===1?"Active":"InActive"}</td>
+                                            <td>{item.buy_now===1?"Buy Now,":""}{item.cancel_bid===1?"Cancel the bid after 4 hours,":""}{item.bid===1?"Bid,":""}
+                                            {item.proxy_bid===1?"Proxy Bid,":""}{item.counter_bid===1?"Counter Bid,":""}{item.lot_fee===1?"Lot Fee.":""}</td>
+                                            <td>{item.status===1?"Active":"InActive"}</td>
                                             <td><Button class="ant-btn" onClick={() => onHandleEdit(item.user_id)}><i class="icofont-ui-edit"></i> Edit</Button></td>
                                         </tr>
                                         ):

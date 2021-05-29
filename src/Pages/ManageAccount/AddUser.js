@@ -22,35 +22,42 @@ const AddUser = () => {
 	const [stateName, setStateName] = useState("");
 	const [cityName, setCityName] = useState("");
 	const [zipCodeId, setZipcodeId] = useState("");
-	const [user_privileges,setUserPrivileges]=useState("");
-	const [buy_now,setBuyNow]=useState("");
-	const [cancel_bid,setCancelBid]=useState("");
-	const [bid,setBid]=useState("");
-	const [proxy_bid,setProxy_bid]=useState("");
-	const [counter_bid,setCounter_bid]=useState("");
-	const [lot_fee,setLot_fee]=useState("");
+	const [buy_now, setBuyNow] = useState("");
+	const [cancel_bid, setCancelBid] = useState("");
+	const [bid, setBid] = useState("");
+	const [proxy_bid, setProxy_bid] = useState("");
+	const [counter_bid, setCounter_bid] = useState("");
+	const [lot_fee, setLot_fee] = useState("");
 	const [option, setOption] = useState("");
-	
-	const [isOpen, setIsOpen] = useState(false);
- 
-    const togglePopup = () => {
-      setIsOpen(!isOpen);
-    }
 
-    const [popupTitle, setPopupTitle] = useState ("");
-    const [popupMsg, setPopupMsg] = useState ("");
-    const [popupType, setPopupType] = useState ("");
-    const [popupActionType, setPopupActionType] = useState ("");
-    const [popupActionValue, setPopupActionValue] = useState ("");
-    const [popupActionPath, setPopupActionPath] = useState ("")
-   
-	console.log("=====userDetails====>",userDetails)
-	console.log("======>",userDetails.dealer_id)
+	const [isOpen, setIsOpen] = useState(false);
+
+	const togglePopup = () => {
+		setIsOpen(!isOpen);
+	}
+
+	const [popupTitle, setPopupTitle] = useState("");
+	const [popupMsg, setPopupMsg] = useState("");
+	const [popupType, setPopupType] = useState("");
+	const [popupActionType, setPopupActionType] = useState("");
+	const [popupActionValue, setPopupActionValue] = useState("");
+	const [popupActionPath, setPopupActionPath] = useState("")
+
+	console.log("=====userDetails====>", userDetails)
+	console.log("======>", userDetails.dealer_id)
 	const getStateName = (stateData) => {
 		setStateName(stateData)
 	}
 	const getCityName = (cityData) => {
 		setCityName(cityData)
+	}
+	const setUserPrivileges = (e)=>{
+			setBuyNow("");
+			setCancelBid("");
+			setBid("");
+			setProxy_bid("");
+			setCounter_bid("");
+			setLot_fee("");
 	}
 
 	const getZipCodeId = (zipData) => {
@@ -60,78 +67,71 @@ const AddUser = () => {
 		placeholder: 'DD/MM/YYYY',
 		required: true
 	};
-	
+
 	const yesterday = moment().subtract(1, 'day');
 	const disablePastDt = current => {
 		return current.isAfter(yesterday);
 	};
 	const registrationhandleSubmit = (event) => {
-        
-        event.preventDefault();		
-		if(user_privileges==="1"){
-			setBuyNow(1);
-			setCancelBid(1);
-			setBid(1);
-			setProxy_bid(1);
-			setCounter_bid(1);
-			setLot_fee(1);
-		}
-        let request = {
-			dealer_id:userDetails.dealer_id,
-            first_name: firstName,
-            last_name: lastName,
-            email: email,
-            phone_no: phoneNumber,
-            address: address,
-            active: "0",
-            country_id: "1",
-            state_id: stateName,
-            city_id: cityName,
-            zipcode_id: zipCodeId,
-            no_years: option,
-            local_flag: 0,
-			buy_now:buy_now==="1"?1:0,
-			cancel_bid:cancel_bid==="1"?1:0,
-			bid:bid==="1"?1:0,
-			proxy_bid:proxy_bid==="1"?1:0,
-			counter_bid:counter_bid==="1"?1:0,
-			lot_fee:lot_fee==="1"?1:0,
+
+		event.preventDefault();
+		
+		let request = {
+			dealer_id: userDetails.dealer_id,
+			first_name: firstName,
+			last_name: lastName,
+			email: email,
+			phone_no: phoneNumber,
+			address: address,
+			active: "0",
+			country_id: "1",
+			state_id: stateName,
+			city_id: cityName,
+			zipcode_id: zipCodeId,
+			no_years: option,
 			local_flag: 0,
-        };
-		console.log("----request---->",request)
-        API.post("buyer/add", request)
-            .then((response) => {
-                if (response.data.success) {
-                    const { data } = response;
-                    console.log("response", response)
+			buy_now: buy_now === "1" ? 1 : 0,
+			cancel_bid: cancel_bid === "1" ? 1 : 0,
+			bid: bid === "1" ? 1 : 0,
+			proxy_bid: proxy_bid === "1" ? 1 : 0,
+			counter_bid: counter_bid === "1" ? 1 : 0,
+			lot_fee: lot_fee === "1" ? 1 : 0,
+			local_flag: 0,
+		};
+		console.log("----request---->", request)
+		API.post("buyer/add", request)
+			.then((response) => {
+				if (response.data.success) {
+					const { data } = response;
+					console.log("response", response)
 					togglePopup()
-                    setPopupTitle("Create AddUser");
-                    setPopupMsg("AddUser Successfully Created");
-                    setPopupType("success");
-                    setPopupActionType("redirect");
-                    setPopupActionValue("ok");
-                    setPopupActionPath("/buyers")
+					setPopupTitle("Create AddUser");
+					setPopupMsg("AddUser Successfully Created");
+					setPopupType("success");
+					setPopupActionType("redirect");
+					setPopupActionValue("ok");
+					setPopupActionPath("/buyers")
 
-                } else {
-                    togglePopup()
-                    setPopupTitle("Error");
-                    setPopupMsg("AddUser failed, Please try Again");
-                    setPopupType("error");
-                    setPopupActionType("close");
-                    setPopupActionValue("close");
-                }
-            }, (error) => {
-                // setOpenLoader(false);
-                // console.log(error);
-                    togglePopup()
-                    setPopupTitle("Error");
-                    setPopupMsg( "Something went wrong, Please try Again");
-                    setPopupType("error");
-                    setPopupActionType("close");
-                    setPopupActionValue("close");
-            });
+				} else {
+					togglePopup()
+					setPopupTitle("Error");
+					setPopupMsg("AddUser failed, Please try Again");
+					setPopupType("error");
+					setPopupActionType("close");
+					setPopupActionValue("close");
+				}
+			}, (error) => {
+				// setOpenLoader(false);
+				// console.log(error);
+				togglePopup()
+				setPopupTitle("Error");
+				setPopupMsg("Something went wrong, Please try Again");
+				setPopupType("error");
+				setPopupActionType("close");
+				setPopupActionValue("close");
+			});
 
-    }
+	}
 	return (
 		<div>
 			<main id="main" class="inner-page">
@@ -139,10 +139,11 @@ const AddUser = () => {
 					<div className="container" >
 						<div className="adduserpageblock col-lg-12">
 							<div className="section-title">
-								<h2>Add User</h2>
+								<h2>Add Buyer</h2>
 							</div>
 							<div className="row content">
 								<div className="col-lg-3 col-md-4 col-sm-12 accountleftblock">
+								
 									<div className="mgaccountuser">
 										<div className="mgaccountuserleft">
 											<img src={process.env.PUBLIC_URL + "/images/userimg.jpg"} className="img-fluid" alt="..." />
@@ -160,12 +161,14 @@ const AddUser = () => {
 								<div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 adduserpagerightblock">
 									<div className="adduserpage-inner">
 										<div className="col-lg-12">
+										
 											<form class="adduserpageform" onSubmit={registrationhandleSubmit}>
 												<div className="row">
-
-												<div className="section-title">
-													<h2>User Details</h2>
-												</div>
+												
+													<div className="section-title">
+													<button className="back-btn-paymentform backBtn" onClick={() => history.push("/buyers")}><i class="icofont-arrow-left"></i> Back</button>
+														<h2>Buyer Details</h2>
+													</div>
 
 													<div className="col-sm-12 form-group">
 														<div className="tbox">
@@ -223,68 +226,46 @@ const AddUser = () => {
 														</div>
 													</div>
 
-
-													<div className="col-sm-12 form-group scheduleMeeting">
-														<h2 className="text-center">Schedule Meeting with our Agent</h2>
-														<p>Thank you for interesting in our platform, Make you money and success.</p>
-													</div>
-
-
-													<div className="col-sm-6 form-group datePickerBlock ">
-														<div className="tbox">
-															<div className="textbox">
-																
-																<Datetime inputProps={inputProps} timeFormat={false} dateFormat="DD/MM/YYYY" isValidDate={disablePastDt} />
-																<label for="meeting_date" className={date != "" ? "input-has-value" : ""}>Select Date</label>
-															</div>
-														</div>
-													</div>
-													<div className="col-sm-6 form-group timepicker">
-														<div className="tbox">
-															<input type="time" className="form-control textbox" placeholder="Select Time" required onChange={(e) => setTime(e.target.value)} />
-															<label for="meeting_time" className={time != "" ? "input-has-value" : ""}>Select Time</label>
-														</div>
-													</div>
 												</div>
 												<div className="section-title">
-													<h2>User Privileges</h2>
+													<h2>Buyer Privileges</h2>
 												</div>
 												<div class="col-sm-12">
 													<div class="radio input-group privileges">
-														<input id="radio-privileges" name="radio" type="radio" value="1" onChange={(e) =>setUserPrivileges(e.target.value)}/>
-														<label for="radio-privileges" class="radio-label">Select User Privileges</label>
+														<input id="radio-privileges" name="radio" type="radio" value="1" onChange={(e) => setUserPrivileges(e.target.value)} />
+														<label for="radio-privileges" class="radio-label">Select Buyer Privileges</label>
 													</div>
 
 													<div class=" row adduserpageforminner">
 														<div class="col-sm-6 form-group input-group">
-															<input type="checkbox" id="buynow" value={buy_now==="1"?0:1} onChange={(e) =>setBuyNow(e.target.value)}/>
+															<input type="checkbox" id="buynow" value={buy_now === "1" ? 0 : 1} onChange={(e) => setBuyNow(e.target.value)} />
 															<label for="buynow">Buy now</label>
 														</div>
 														<div class="col-sm-6 form-group input-group ">
-															<input type="checkbox" id="cancelbid" value={cancel_bid==="1"?0:1} onChange={(e) =>setCancelBid(e.target.value)}/>
+															<input type="checkbox" id="cancelbid" value={cancel_bid === "1" ? 0 : 1} onChange={(e) => setCancelBid(e.target.value)} />
 															<label for="cancelbid">Cancel the bid after 4 hours</label>
 														</div>
 														<div class="col-sm-6 form-group input-group ">
-															<input type="checkbox" id="bid" value={bid==="1"?0:1} onChange={(e) =>setBid(e.target.value)}/>
+															<input type="checkbox" id="bid" value={bid === "1" ? 0 : 1} onChange={(e) => setBid(e.target.value)} />
 															<label for="bid">Bid</label>
 														</div>
 														<div class="col-sm-6 form-group input-group ">
-															<input type="checkbox" id="proxybid" value={proxy_bid==="1"?0:1} onChange={(e) =>setProxy_bid(e.target.value)}/>
+															<input type="checkbox" id="proxybid" value={proxy_bid === "1" ? 0 : 1} onChange={(e) => setProxy_bid(e.target.value)} />
 															<label for="proxybid">Proxy Bid</label>
 														</div>
 														<div class="col-sm-6 form-group input-group ">
-															<input type="checkbox" id="counterbid" value={counter_bid==="1"?0:1} onChange={(e) =>setCounter_bid(e.target.value)}/>
+															<input type="checkbox" id="counterbid" value={counter_bid === "1" ? 0 : 1} onChange={(e) => setCounter_bid(e.target.value)} />
 															<label for="counterbid">Counter Bid</label>
 														</div>
 														<div class="col-sm-6 form-group input-group ">
-															<input type="checkbox" id="lotfee"  value={lot_fee==="1"?0:1} onChange={(e) =>setLot_fee(e.target.value)}/>
+															<input type="checkbox" id="lotfee" value={lot_fee === "1" ? 0 : 1} onChange={(e) => setLot_fee(e.target.value)} />
 															<label for="lotfee">Lot Fee</label>
 														</div>
 													</div>
 												</div>
 												<div class="col-sm-12">
 													<div class="radio input-group noprivileges">
-														<input id="radio-noprivileges" name="radio" type="radio" value="0" onChange={(e) =>setUserPrivileges(e.target.value)}/>
+														<input id="radio-noprivileges" name="radio" type="radio" value="0" onChange={(e) => setUserPrivileges(e.target.value)} />
 														<label for="radio-noprivileges" class="radio-label">No privileges (Only View)</label>
 													</div>
 												</div>
@@ -309,16 +290,16 @@ const AddUser = () => {
 						</div>
 					</div>
 				</section>
-				{isOpen && 
-                <CommonPopup 
-                    handleClose= {togglePopup}
-                    popupTitle= {popupTitle}
-                    popupMsg= {popupMsg}
-                    popupType= {popupType}
-                    popupActionType= {popupActionType}
-                    popupActionValue= {popupActionValue}
-                    popupActionPath={popupActionPath}
-                />}
+				{isOpen &&
+					<CommonPopup
+						handleClose={togglePopup}
+						popupTitle={popupTitle}
+						popupMsg={popupMsg}
+						popupType={popupType}
+						popupActionType={popupActionType}
+						popupActionValue={popupActionValue}
+						popupActionPath={popupActionPath}
+					/>}
 			</main>
 		</div>
 	);

@@ -133,7 +133,7 @@ const Payment = () => {
             acc_state_id: accountStateName,
             acc_city_id: accountCityName,
             acc_zipcode: accountZipcodeId,
-            doc_name:doc,
+            doc_name:doc.length>0?doc:[doc],
             active:1
         }
         
