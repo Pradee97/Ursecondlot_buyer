@@ -303,7 +303,7 @@ const Payment = () => {
                                                    
 
                                                     <div className="col-sm-6 form-group">
-                                                        <p>Signed bank Authorization letter for bank to release information. </p>
+                                                        Signed bank Authorization letter for bank to release information.
                                                     </div>
                                                     {/* <div className="col-sm-6 form-group uploadbutton">
                                                     <input type="file" id="upload" className="uploadbox" hidden onChange={onFileChange} /> 
@@ -315,7 +315,7 @@ const Payment = () => {
                                                         <button class="btn"><i class="icofont-upload-alt"></i> Upload Document</button>
                                                         <FileBase64 multiple={ true } onDone={ getFiles } hidden type="hidden"/>
                                                     </div>
-                                                    <p>{doc.length>0?doc[0].name:doc.name}</p>
+                                                    <span class="uploadedFile">{doc.length>0?doc[0].name:doc.name}</span>
                                                     </div>
                                                    
                                                     <div className="col-lg-12 loginBtn">

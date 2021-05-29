@@ -135,11 +135,13 @@ const EditAddress = () => {
     return (
         <div>
             <main id="main" class="inner-page">
-                <div className="col-lg-4 card loginBlock">
-                    
+                <div className="col-lg-4 loginBlock">
+
+                <button className="back-btn-paymentform backBtn" onClick={() => history.push("/manageaccount")}><i class="icofont-arrow-left"></i> Back</button>
+                <div className="col-lg-12 card">
                     <form class="registrationform" onSubmit={updateAddress} >
-                    <button className="back-btn-paymentform" onClick={() => history.push("/manageaccount")}>Back</button>
-                        <h2 class="title"> Address Edit</h2>
+                   
+                        <h2 class="title"> Edit Address</h2>
                     
                         <div class="row">
 
@@ -195,7 +197,7 @@ const EditAddress = () => {
                         </div>
                     </form>
 
-                </div>
+                </div></div>
                 <section id="playstoreBlock" class="playstoreBlock">
                     <div class="container">
                         <div class="row content">

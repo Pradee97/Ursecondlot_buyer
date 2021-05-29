@@ -107,9 +107,14 @@ const FloorAdd = () => {
     return (
         <div>
             <main id="main" className="inner-page">
-                <div className="col-lg-4 card loginBlock flooraddform">
+                <div className="col-lg-4 loginBlock flooraddform">
+
+               
+                <button className="back-btn-paymentform backBtn" onClick={() => history.push("/floor")}><i class="icofont-arrow-left"></i> Back</button> 
+                <div className="col-lg-12 card">
                     <form className="registrationform" onSubmit={registrationhandleSubmit} >
-                        <button className="back-btn-paymentform" onClick={() => history.push("/floor")}>Back</button>              
+                        
+
                         <h2 className="title">Add Floor Plan </h2>
                         <div className="row">
                         <div className="col-sm-12 form-group"> 
@@ -205,7 +210,7 @@ const FloorAdd = () => {
                         </div>
                     </form>
 
-                </div>
+                </div> </div>
                 <section id="playstoreBlock" className="playstoreBlock">
                     <div className="container">
                         <div className="row content">

@@ -104,9 +104,13 @@ const AddLegalAccount = () => {
     return (
         <div>
 <main id="main" className="inner-page">
-                <div className="col-lg-4 card loginBlock flooraddform">
+                <div className="col-lg-4  loginBlock flooraddform">
+
+                <button className="back-btn-paymentform backBtn" onClick={() => history.push("/manageaccount")}><i class="icofont-arrow-left"></i> Back</button>              
+
+                <div className="col-lg-12 card">
                     <form className="registrationform" onSubmit={onhandleSubmit} >
-                        <button className="back-btn-paymentform" onClick={() => history.push("/manageaccount")}>Back</button>              
+                        
                         <h2 className="title">Add Legal Manage Account </h2>
                         <div className="row">
                         <div className="col-sm-12 form-group"> 
@@ -194,7 +198,7 @@ const AddLegalAccount = () => {
                         </div>
                     </form>
 
-                </div>
+                </div>  </div>
                 <section id="playstoreBlock" className="playstoreBlock">
                     <div className="container">
                         <div className="row content">

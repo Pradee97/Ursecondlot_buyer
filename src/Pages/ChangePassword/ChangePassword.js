@@ -108,23 +108,35 @@ const ChangePassword = () => {
     return (
         <div>
             <main id="main" className="inner-page">
-                <div className="col-lg-4 card loginBlock">
+                <div className="col-lg-4  loginBlock">
+
+                <button className="back-btn-paymentform backBtn" onClick={() => history.push("/myprofile")}><i class="icofont-arrow-left"></i> Back</button>
+                <div className="col-lg-12 card">
+
                     <form className="registrationform" onSubmit={changehandleSubmit} >
                         <h2 className="title">Change Password</h2>
                         <p className="error-message">{errorMessage}</p>
-                        <div className="row">
+                        <div className="row changePassblock">
 
                             <div className="col-sm-12 form-group">
-                                <input type="password" className="form-control" placeholder="Old Password" required onChange={(e) => setOldPassword(e.target.value)} />
+                            <div className="tbox">
+                                <input type="password" id="old_password" className="textbox" placeholder="" required onChange={(e) => setOldPassword(e.target.value)} />
+                                <label for="old_password"  className={oldPassword != "" ? "input-has-value" : ""}>Old Password</label>
+                            </div>
                             </div>
                             <div className="col-sm-12 form-group">
-                                <input type="password" className="form-control" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="eg:(It should be Uppercase, Lowercase, Specialcharacter, Numbers and Minimum 8 character)" placeholder="New Password" required onChange={(e) => setNewPassword(e.target.value)} />
+                            <div className="tbox">
+                                <input type="password" id="new_password" className="textbox" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="eg:(It should be Uppercase, Lowercase, Specialcharacter, Numbers and Minimum 8 character)" placeholder="" required onChange={(e) => setNewPassword(e.target.value)} />
+                                <label for="new_password" c className={newPassword != "" ? "input-has-value" : ""}>New Password</label>
+                                
+                            </div>
                             </div>
 
                             <div className="col-sm-12 form-group">
-                                <input type="password" className="form-control" placeholder="Confirm Password" required onChange={(e) => setConfirmPassword(e.target.value)} />
-                                 
-
+                            <div className="tbox">
+                                <input type="password" id="confirm_password" className="textbox" placeholder="" required onChange={(e) => setConfirmPassword(e.target.value)} />
+                                <label for="confirm_password"  className={confirmPassword != "" ? "input-has-value" : ""}>Confirm Password</label>
+                            </div> 
                             </div>
                             {/* <div className="col-sm-12 form-group">
                                 <input type="text" className="form-control" placeholder="User Id" required onChange={(e) => setUserId(e.target.value)} />
@@ -136,7 +148,7 @@ const ChangePassword = () => {
                         </div>
                     </form>
 
-                </div>
+                </div> </div>
                 <section id="playstoreBlock" className="playstoreBlock">
                     <div className="container">
                         <div className="row content">

@@ -92,19 +92,35 @@ const Document = () => {
                                         <div class="col-lg-12">
                                             <div class="row">
                                                 <div class="col-lg-4 col-md-4">
-                                                    <div class="docdetails">
+                                                    {/*<div class="docdetails">
                                                         <h5>Copy of Dealer license</h5>
                                                         <img src={process.env.PUBLIC_URL+"/images/uploadblack.png"} class="img-fluid" alt="" />
                                                         <p> Drag and drop her or 
                                                             <div class="upload-btn-wrapper">
                                                                 <a class="btn"> Upload File</a>
-                                                                <FileBase64  onDone={(e)=>getFiles(e,"Dealer license") } />
+                                                                <FileBase64  onDone={(e)=>getFiles(e,"Dealer license") } />                                                                
                                                             </div>
                                                         </p>
+                                                 </div> */}
+                                                    
+                                                    <div class="docdetails">
+                                                        <h5>Copy of Dealer license</h5>
+                                                        <img src={process.env.PUBLIC_URL+"/images/fileDocIcon.png"} class="img-fluid" alt="" />
+                                                        <p>
+                                                            <div class="upload-btn-wrapper updateFile">
+                                                                <a class="btn"> Update File</a>
+                                                                <FileBase64  onDone={(e)=>getFiles(e,"Dealer license") } />                                                                
+                                                            </div>
 
-
+                                                            <a class="btn deleteFile"> Delete File</a>
+                                                        </p>
                                                     </div>
+
+
+
                                                 </div>
+
+                                                
                                                 <div class="col-lg-4 col-md-4">
                                                     <div class="docdetails">
                                                         <h5>Certificate of liability insurance.</h5>

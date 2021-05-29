@@ -883,6 +883,7 @@ section {
 	text-align:center;
 	margin: auto;
     padding: 0;
+    max-width: 500px;
 }
 .feestable table{
     border: 1px solid #ccc;
@@ -891,6 +892,8 @@ section {
     padding: 0;
     width: 100%;
     text-align:center;
+    font-size: 16px;
+    font-weight: 500;
 }
  .feestable h2{
 	color:#002768;
@@ -924,6 +927,17 @@ table td span{
 	font-weight:500;
 	
 }
+
+
+.ant-table-thead > tr > th{
+  background:#2c5baa;
+	color:#fff;
+}
+.feestable .ant-table-tbody > tr > td:last-child{
+  color: #bd062c;
+}
+
+
 
 /*----------------------------------------------------------------
 Cars list
@@ -2781,6 +2795,7 @@ margin-top: -3px;
   font-size: 14px;
 }
 
+
 .registrationform .tbox .selcetclass .textbox  label{
   position: absolute;
   top: -12px;
@@ -3724,7 +3739,7 @@ Make your Bid
 }
 
 .input-icon > input {
-  padding-left: 52px;
+  padding-left: 50px;
 	padding-right: 0;
 }
 
@@ -4126,7 +4141,7 @@ Search Box"
 }
 
 .floorplans .section-title h2 {
-	padding-bottom:10px;
+	padding-bottom:0px;
 }
 
 .floorplanstableblock{
@@ -4152,8 +4167,8 @@ Search Box"
  .floorplanstable th{
 	background:#2c5baa;
 	color:#fff;
-	font-size:25px;
-	padding:20px 0;
+	font-size:20px;
+	padding:10px 0;
 	font-weight:500;
 	width:100%;
 	text-transform: capitalize;
@@ -5618,9 +5633,7 @@ paymentform
 	margin:0 auto;
   float: left;
 }
-.uploadbtn {
-  margin-top: 20px;
-}
+
 
 .upload-btn-wrapper {
   position: relative;
@@ -5673,7 +5686,7 @@ paymentform
 .flooraddform .back-btn-paymentform, .flooreditform  .back-btn-paymentform{
     float: left; 
     display: inline-block;
-    padding: 6px 20px;
+    padding: 0px;
     font-size: 16px;
 }
 .flooraddform .registrationform  h2, .flooreditform .registrationform  h2{
@@ -5853,7 +5866,7 @@ paymentform
 .lotfee-form{
 	margin:20px auto;
 	display:block;
-  max-width: 400px;
+  max-width: 300px;
 }
 
 
@@ -6233,12 +6246,20 @@ Users
 }
 
 .backBtn{
-  width: 100px;
   float: left;
-  padding: 10px;
+  padding:0px;
   margin-bottom: 10px;
-  border-radius: 5px;
+  border-radius: 3px;
+  color: #BD062C;
+  background: transparent;
+  font-size: 16px;
 }
+
+.backBtn:hover{
+  color: #002768;
+  background: transparent;
+}
+
 
 .ant-btn{
   color: #BD062C;
@@ -6259,6 +6280,7 @@ Users
   margin-left: 5px;
   font-size: 14px;
   color: #BD062C;
+  text-decoration: underline;
 }
 
 .docdetails .upload-btn-wrapper{
@@ -6294,3 +6316,39 @@ Users
   margin-right: 0px;
 }
 
+.changePassblock .tbox .textbox + label {
+  font-size: 16px;
+}
+
+.uploadbtn{
+  text-align: center;
+}
+
+.uploadedFile{
+  float: left;
+  width: 100%;
+}
+
+.lotfee-form input{
+  font-size: 20px;
+}
+
+.updateFile{
+  float: left;
+}
+.deleteFile{
+  float: right;
+}
+
+table td .ant-btn{
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+table td .ant-btn span{
+	font-weight:400;	
+}
+table td .ant-btn:hover span, table td .ant-btn:hover i{
+  color: #002768;
+}
