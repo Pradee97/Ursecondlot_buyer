@@ -44,7 +44,7 @@ import EditBuyer from './Pages/ManageAccount/EditBuyer'
 
 function AppRouter() {
 
-  const timeout = 10000;
+  const timeout = 900000;
   const [isSession, setIsSession] = useState (false);// for session popup
 
   const handleOnIdle = () =>{
@@ -53,7 +53,7 @@ function AppRouter() {
     }
   } 
 
-  useIdleTimer({ timeout,   onIdle: handleOnIdle  })
+  // useIdleTimer({ timeout,   onIdle: handleOnIdle  })
 
   const PrivateRoute = ({children, ...rest})=>{
       return (<Route {...rest} render={({location})=>{
