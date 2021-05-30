@@ -39,7 +39,8 @@ import AddLegalAccount  from './Pages/ManageAccount/AddLegalAccount';
 import AddAddress  from './Pages/ManageAccount/AddAddress';
 import EditLegalAccount from './Pages/ManageAccount/EditLegalAccount';
 import EditBuyer from './Pages/ManageAccount/EditBuyer'
-
+import ForgotPasswordEmail from './Pages/ForgotPassword/ForgotPasswordEmail';
+import ForgotPassword from './Pages/ForgotPassword/ForgotPassword'
 function AppRouter() {
 
   const history = useHistory()
@@ -70,6 +71,8 @@ function AppRouter() {
             <Route  path="/fees" component={Fees}/>
             <Route  path="/emailsuccess" component={Emailsuccess}/>
             <Route  path="/changepassword" component={ChangePassword}/>
+            <Route path="/forgotpasswordemail" component={ForgotPasswordEmail}/>
+            <Route path="/forgotpassword" component={ForgotPassword}/>
 
             <PrivateRoute>
               <Route  path="/floor" component={FloorPlans}/>
