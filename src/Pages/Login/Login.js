@@ -88,7 +88,7 @@ const Login = () => {
               </div>
 
               <div className="col-lg-6 forget">
-                <a className="forget-pass" href="#">Forgot password</a>
+                <a className="forget-pass" href="/forgotpasswordemail">Forgot password</a>
               </div>
               <div className="col-lg-12 loginBtn">
                 <button className="cta-btn">Log In</button>
