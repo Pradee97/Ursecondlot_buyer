@@ -54,6 +54,10 @@
 	
 }
 
+.CommonModalfooter.session button{
+margin: 10px;
+}
+
 .popup-box {
     position: fixed;
     background: #00000050;

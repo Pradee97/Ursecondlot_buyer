@@ -1,8 +1,10 @@
-import React, {lazy, Suspense} from 'react';
+import React, {lazy, Suspense, useState, useEffect} from 'react';
 import {BrowserRouter as Router, Route, Switch, Redirect, useHistory} from "react-router-dom";
+import { useIdleTimer } from 'react-idle-timer'
 import './App.css';
-import Loading from './Component/Loading/Loading';
+import SessionConfirmationPopup from "./Component/CommonPopup/SessionConfirmationPopup"
 
+import Loading from './Component/Loading/Loading';
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
 import Registration from './Pages/Registration/Registration';
@@ -42,19 +44,28 @@ import EditBuyer from './Pages/ManageAccount/EditBuyer'
 
 function AppRouter() {
 
-  const history = useHistory()
+  const timeout = 10000;
+  const [isSession, setIsSession] = useState (false);// for session popup
+
+  const handleOnIdle = () =>{
+    if (localStorage.getItem("islogedIn") === "true") {
+      setIsSession(true)
+    }
+  } 
+
+  useIdleTimer({ timeout,   onIdle: handleOnIdle  })
+
   const PrivateRoute = ({children, ...rest})=>{
       return (<Route {...rest} render={({location})=>{
         return localStorage.getItem("islogedIn") === "true" ? children   : <Redirect to={{pathname:"/login", state:{from:location}}} />
       }}>
-        
       </Route>)
   }
-
 
   return (
     <div className="App">
       <Router>
+      {isSession && <SessionConfirmationPopup  isToggle={setIsSession}/>}
         {/* <Suspense fallback={<Loading />}> */}
           <Header /> 
           <Switch>
@@ -110,7 +121,6 @@ function AppRouter() {
 }
 
 export default AppRouter;
-
 
 // const Home = lazy(() => import('./Pages/Home/Home'));
 // const Login = lazy(() => import('./Pages/Login/Login'));
