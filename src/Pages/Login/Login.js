@@ -3,6 +3,8 @@ import API from "../../Services/BaseService";
 import { useHistory,useLocation } from "react-router-dom";
 import ls from 'local-storage';
 import { store } from 'react-notifications-component';
+import { useForm } from "react-hook-form";
+
 import {
   Form,
   Input,
@@ -17,7 +19,8 @@ import {
 const Login = () => {
   const history = useHistory();
   const {state} = useLocation();
- 
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
   const [redirectToRefferrer, setRedirectToRefferrer] = useState(false);
@@ -27,14 +30,16 @@ const Login = () => {
     localStorage.setItem("islogedIn", false)
   })
 
-  const loginhandleSubmit = (event) => {
+  const loginhandleSubmit = (value) => {
     // setOpenLoader(true);
-    event.preventDefault();
+    // event.preventDefault();
+    console.log("my======",value)
     setRedirectToRefferrer(true)
+    const {email, password} = value
     localStorage.setItem("islogedIn", false)
     let request = {
-      email: emailId,
-      password: password
+      email,
+      password
     };
     API.post("buyer/login", request)
       .then((response) => {
@@ -67,19 +72,41 @@ const Login = () => {
           <div className="dealar-login">
             <img alt="Google" src={process.env.PUBLIC_URL +"/images/Logo_final.png"} />
           </div>
-          <form onSubmit={loginhandleSubmit}>
+          <form onSubmit={handleSubmit(loginhandleSubmit)}>
             <h2 className="title"> Dealer login</h2>
            
 
             <div className="email-login">
-		   <div className="tbox">
-       <input className="textbox " type="text" placeholder="" id="uname" required onChange={(e) => setEmailId(e.target.value)} />
+		  <div className="tbox">
+        <input className="textbox " type="text" placeholder="" id="uname" name="email"
+          {...register("email", {
+            required: "This input is required.",
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: "Must match the email format"
+            }
+          })}
+          onChange={(e) => setEmailId(e.target.value)} />
 				 <label  for="uname" className={emailId !="" ? "input-has-value" : ""}>User Name</label>
+         <p className="form-input-error">{errors.email?.message}</p>
 			</div>
 			 
 			 <div className="tbox">
-       <input className="textbox" type="password" placeholder="" id="psw" required onChange={(e) => setPassword(e.target.value)} />
+        <input className="textbox" type="password" placeholder="" id="psw" name="password"
+          {...register("password", {
+            required: "This input is required.",
+            // pattern: {
+            //   value: /\d+/,
+            //   message: "This input is number only."
+            // },
+            minLength: {
+              value: 8,
+              message: "This input must exceed 8 characters"
+            }
+          })}
+          onChange={(e) => setPassword(e.target.value)} />
 				 <label for="psw" className={password != "" ? "input-has-value" : "" }>Password</label>
+         <p className="form-input-error">{errors.password?.message}</p>
 			 </div>
 		  </div>
             <div className="row">

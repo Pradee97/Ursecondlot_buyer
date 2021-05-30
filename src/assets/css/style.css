@@ -6352,3 +6352,6 @@ table td .ant-btn span{
 table td .ant-btn:hover span, table td .ant-btn:hover i{
   color: #002768;
 }
+.form-input-error{
+  color: red;
+}
