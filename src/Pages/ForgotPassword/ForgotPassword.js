@@ -16,15 +16,14 @@ const ForgotPassword = () => {
     const [isOpen, setIsOpen] = useState(false);
     let value=window.location.href.split("id=");
     const changehandleSubmit = (event) => {
+        event.preventDefault();
         let request = {
             password:password,
             user_id:value[1]
         }
-        alert("======1====>",request)
         API.post("forgotpassword/update", request).then((response) => {
-            alert("======111====>",response)
+            console.log("======111====>",response)
             if (response.success == true) {
-                alert("=====2=====>",response)
                 togglePopup()
                 setPopupTitle("Forgot Password");
                 setPopupMsg("Change Password Successfully Updated");
@@ -34,8 +33,6 @@ const ForgotPassword = () => {
                 setPopupActionPath("/login")
 
             } else {
-                //   history.push("error");
-                alert("=====3=====>",response)
                 togglePopup()
                 setPopupTitle("Change Password");
                 setPopupMsg("Change Password is not Updated, Please try Again");
@@ -45,7 +42,6 @@ const ForgotPassword = () => {
             }
         },
             (error) => {
-                alert("=====4=====>",error)
                 togglePopup()
                 setPopupTitle("Error");
                 setPopupMsg("Something went wrong, Please try Again");
