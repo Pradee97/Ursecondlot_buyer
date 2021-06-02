@@ -197,7 +197,7 @@ const Document = () => {
                                                         <div class="docdetails">
                                                             <h5>Copy of Dealer license</h5>
                                                             <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc1.doc_name} class="img-fluid" alt="" />
-                                                            <p><a href={doc1.doc_name}>{doc1.doc_name.split("_")[1]}</a></p>
+                                                            <div><a href={doc1.doc_name}>{doc1.doc_name.split("_")[1]}</a></div>
                                                             <p>
                                                                 <div class="upload-btn-wrapper updateFile">
                                                                     <a class="btn"> Update File</a>
@@ -221,7 +221,7 @@ const Document = () => {
                                                         <div class="docdetails">
                                                             <h5>Copy of Dealer license</h5>
                                                             <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc2.doc_name} class="img-fluid" alt="" />
-                                                            <p><a href={doc2.doc_name}>{doc2.doc_name.split("_")[1]}</a></p>
+                                                            <div><a href={doc2.doc_name}>{doc2.doc_name.split("_")[1]}</a></div>
                                                             <p>
                                                                 <div class="upload-btn-wrapper updateFile">
                                                                     <a class="btn"> Update File</a>
@@ -247,7 +247,7 @@ const Document = () => {
                                                     </div> : <div class="docdetails">
                                                         <h5>Copy of Dealer license</h5>
                                                         <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc3.doc_name} class="img-fluid" alt="" />
-                                                        <p><a href={doc3.doc_name}>{doc3.doc_name.split("_")[1]}</a></p>
+                                                        <div><a href={doc3.doc_name}>{doc3.doc_name.split("_")[1]}</a></div>
                                                         <p>
                                                             <div class="upload-btn-wrapper updateFile">
                                                                 <a class="btn"> Update File</a>
@@ -278,7 +278,7 @@ const Document = () => {
                                                         <div class="docdetails">
                                                             <h5>Copy of Dealer license</h5>
                                                             <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc4.doc_name} class="img-fluid" alt="" />
-                                                            <p><a href={doc4.doc_name}>{doc4.doc_name.split("_")[1]}</a></p>
+                                                            <div><a href={doc4.doc_name}>{doc4.doc_name.split("_")[1]}</a></div>
                                                             <p>
                                                                 <div class="upload-btn-wrapper updateFile">
                                                                     <a class="btn"> Update File</a>
@@ -302,7 +302,7 @@ const Document = () => {
                                                         <div class="docdetails">
                                                             <h5>Copy of Dealer license</h5>
                                                             <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc5.doc_name} class="img-fluid" alt="" />
-                                                            <p><a href={doc5.doc_name}>{doc5.doc_name.split("_")[1]}</a></p>
+                                                            <div><a href={doc5.doc_name}>{doc5.doc_name.split("_")[1]}</a></div>
                                                             <p>
                                                                 <div class="upload-btn-wrapper updateFile">
                                                                     <a class="btn"> Update File</a>
@@ -326,7 +326,7 @@ const Document = () => {
                                                      <div class="docdetails">
                                                      <h5>Copy of Dealer license</h5>
                                                      <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc6.doc_name} class="img-fluid" alt="" />
-                                                     <p><a href={doc6.doc_name}>{doc6.doc_name.split("_")[1]}</a></p>
+                                                     <div><a href={doc6.doc_name}>{doc6.doc_name.split("_")[1]}</a></div>
                                                      <p>
                                                          <div class="upload-btn-wrapper updateFile">
                                                              <a class="btn"> Update File</a>
@@ -354,7 +354,7 @@ const Document = () => {
                                                     <div class="docdetails">
                                                     <h5>Copy of Dealer license</h5>
                                                     <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc7.doc_name} class="img-fluid" alt="" />
-                                                    <p><a href={doc7.doc_name}>{doc7.doc_name.split("_")[1]}</a></p>
+                                                    <div><a href={doc7.doc_name}>{doc7.doc_name.split("_")[1]}</a></div>
                                                     <p>
                                                         <div class="upload-btn-wrapper updateFile">
                                                             <a class="btn"> Update File</a>
@@ -378,7 +378,7 @@ const Document = () => {
                                                     <div class="docdetails">
                                                     <h5>Copy of Dealer license</h5>
                                                     <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc8.doc_name} class="img-fluid" alt="" />
-                                                    <p><a href={doc8.doc_name}>{doc8.doc_name.split("_")[1]}</a></p>
+                                                    <div><a href={doc8.doc_name}>{doc8.doc_name.split("_")[1]}</a></div>
                                                     <p>
                                                         <div class="upload-btn-wrapper updateFile">
                                                             <a class="btn"> Update File</a>
@@ -402,7 +402,7 @@ const Document = () => {
                                                     <div class="docdetails">
                                                     <h5>Copy of Dealer license</h5>
                                                     <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc9.doc_name} class="img-fluid" alt="" />
-                                                    <p><a href={doc9.doc_name}>{doc9.doc_name.split("_")[1]}</a></p>
+                                                    <div><a href={doc9.doc_name}>{doc9.doc_name.split("_")[1]}</a></div>
                                                     <p>
                                                         <div class="upload-btn-wrapper updateFile">
                                                             <a class="btn"> Update File</a>
@@ -430,7 +430,7 @@ const Document = () => {
                                                     <div class="docdetails">
                                                     <h5>Copy of Dealer license</h5>
                                                     <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc10.doc_name} class="img-fluid" alt="" />
-                                                    <p><a href={doc10.doc_name}>{doc10.doc_name.split("_")[1]}</a></p>
+                                                    <div><a href={doc10.doc_name}>{doc10.doc_name.split("_")[1]}</a></div>
                                                     <p>
                                                         <div class="upload-btn-wrapper updateFile">
                                                             <a class="btn"> Update File</a>
@@ -455,7 +455,7 @@ const Document = () => {
                                                     <div class="docdetails">
                                                     <h5>Copy of Dealer license</h5>
                                                     <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc11.doc_name} class="img-fluid" alt="" />
-                                                    <p><a href={doc11.doc_name}>{doc11.doc_name.split("_")[1]}</a></p>
+                                                    <div><a href={doc11.doc_name}>{doc11.doc_name.split("_")[1]}</a></div>
                                                     <p>
                                                         <div class="upload-btn-wrapper updateFile">
                                                             <a class="btn"> Update File</a>
