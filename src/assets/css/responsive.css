@@ -91,9 +91,6 @@ padding-right: 20px;
 }
 @media (max-width: 1300px) {
 	
-
-	
-	
 	
 }
 
@@ -176,7 +173,30 @@ padding-right: 20px;
     flex: 50% 1 !important;
     max-width: 50% !important;
 }
-	
+.topLeft{
+    padding-left: 40px;
+}
+.rightMenu{
+    margin-right: 20px;
+}
+#header .container-fluid, #footer .container-fluid {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+#hero h1{
+    font-size: 40px;
+}
+#hero h2 {
+   font-size: 20px;
+}
+.container {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+.about .aboutblock{
+    padding:  20px;
+}
+
 	
 }
 
