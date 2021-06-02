@@ -46,6 +46,7 @@ import ForgotPassword from './Pages/ForgotPassword/ForgotPassword'
 function AppRouter() {
 
   const timeout = 900000;
+  // const timeout = 30000;
   const [isSession, setIsSession] = useState (false);// for session popup
 
   const handleOnIdle = () =>{
@@ -54,11 +55,11 @@ function AppRouter() {
     }
   } 
 
-  // useIdleTimer({ timeout,   onIdle: handleOnIdle  })
+  useIdleTimer({ timeout,   onIdle: handleOnIdle, crossTab: true  })
 
   const PrivateRoute = ({children, ...rest})=>{
       return (<Route {...rest} render={({location})=>{
-        return localStorage.getItem("islogedIn") === "true" ? children   : <Redirect to={{pathname:"/login", state:{from:location}}} />
+        return localStorage.getItem("islogedIn") === "true" ? children : <Redirect to={{pathname:"/login", state:{from:location}}} />
       }}>
       </Route>)
   }
