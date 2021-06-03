@@ -16,22 +16,22 @@ const loadClearStorage = () => {
       console.log("load last val",ltime[ltime.length-1] )
       console.log("unload last val",ultime[ultime.length-1]  )
       console.log("diff", ltime[ltime.length-1] - ultime[ultime.length-1] )
-      console.log("final time dif",ltime[ltime.length-1] - ultime[ultime.length-1]  > 6000 )
+      console.log("final time dif",ltime[ltime.length-1] - ultime[ultime.length-1]  > 900000 )
 
       console.log("lastActiveTime====",localStorage.getItem("lastActiveTime"))
-      if(ltime[ltime.length-1] - ultime[ultime.length-1]  > 6000){
-        localStorage.clear()
-        window.location.replace("/")
-        console.log("inside if active time diff",ltime[ltime.length-1]- Number(localStorage.getItem("lastActiveTime"))  )
-        // if(localStorage.getItem("lastActiveTime") !== null && ltime[ltime.length-1]- Number(localStorage.getItem("lastActiveTime"))  >6000){
-        //   localStorage.clear()
-        //   window.location.replace("/")
-        // }
+      if(ltime[ltime.length-1] - ultime[ultime.length-1]  > 900000){
+      
+        if(Number(localStorage.getItem("remainingTime" == 0))){
+          localStorage.clear()
+          window.location.replace("/")
+        }
+
       }
     }
-    else if(localStorage.getItem("loadTime").split(",").length>1 && localStorage.getItem("unloadTime") == null){
+    else if(localStorage.getItem("loadTime").split(",").length>=1 && localStorage.getItem("unloadTime") == null){
       console.log("multiple page login")
     }
+    
     else{
       localStorage.clear()
       window.location.replace("/")

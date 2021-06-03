@@ -48,7 +48,7 @@ function AppRouter() {
   const timeout = 900000;
   // const timeout = 30000;
   const [isSession, setIsSession] = useState (false);// for session popup
-  const [lastActive, setLastActive] = useState(+new Date()) 
+  const [remaining, setRemaining] = useState(timeout)
 
   const handleOnIdle = () =>{
     if (localStorage.getItem("islogedIn") === "true") {
@@ -56,7 +56,7 @@ function AppRouter() {
     }
   } 
 
-  const { getLastActiveTime } =useIdleTimer({ timeout,   onIdle: handleOnIdle, crossTab: true  })
+  const { getRemainingTime } =useIdleTimer({ timeout,   onIdle: handleOnIdle, crossTab: true  })
 
   const PrivateRoute = ({children, ...rest})=>{
       return (<Route {...rest} render={({location})=>{
@@ -66,12 +66,11 @@ function AppRouter() {
   }
 
   useEffect(() => {
-    setLastActive(getLastActiveTime())
-    localStorage.setItem("lastActiveTime",getLastActiveTime())
+    setRemaining(getRemainingTime())
+    localStorage.setItem("remainingTime",getRemainingTime())
     setInterval(() => {
-      setLastActive(getLastActiveTime())
-      localStorage.setItem("lastActiveTime",getLastActiveTime())
-
+      setRemaining(getRemainingTime())
+      localStorage.setItem("remainingTime",getRemainingTime())
     }, 1000)
   }, [])
 
