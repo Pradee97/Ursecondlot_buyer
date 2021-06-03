@@ -111,7 +111,7 @@ const Login = () => {
 		  </div>
             <div className="row">
               <div className="col-lg-6 forget-username">
-              <a className="forget-name" href="#">Forgot Username</a>
+              <a className="forget-name" href="/forgotEmail">Forgot Username</a>
               </div>
 
               <div className="col-lg-6 forget">

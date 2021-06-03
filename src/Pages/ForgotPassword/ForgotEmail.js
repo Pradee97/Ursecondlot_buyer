@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 import API from "../../Services/BaseService";
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
-const ForgotPassword = () => {
+const ForgotEmail = () => {
     const history = useHistory();
-    const [password, setPassword] = useState("");
-    const [newPassword, setNewPassword] = useState("");
     const [popupTitle, setPopupTitle] = useState("");
     const [popupMsg, setPopupMsg] = useState("");
     const [popupType, setPopupType] = useState("");
@@ -14,13 +12,13 @@ const ForgotPassword = () => {
     const [popupActionPath, setPopupActionPath] = useState("");
     const [errorMessage, setErrorMessage] = useState('');
     const [isOpen, setIsOpen] = useState(false);
+    const [phoneNo, setPhoneNo]=useState('');
     let value=window.location.href.split("id=");
-    const changehandleSubmit = (event) => {
+    const handleForgotEmail = (event) => {
         let request = {
-            password:password,
-            user_id:value[1]
+            phone_no:phoneNo
         }
-        const services=API.post("forgotpassword/update", request);
+        const services=API.post("forgotEmail/condition", request);
         services.then((response) => {    
         if (response.success == true) {
                 togglePopup()
@@ -61,24 +59,17 @@ const ForgotPassword = () => {
                     <div className="col-lg-4  loginBlock">
                         <button className="back-btn-paymentform backBtn" onClick={() => history.push("/login")}><i class="icofont-arrow-left"></i> Back</button>
                         <div className="col-lg-12 card">
-                            <form className="registrationform" onSubmit={changehandleSubmit} >
-                                <h2 className="title">Forgot Password</h2>
+                            <form className="registrationform" onSubmit={handleForgotEmail} >
+                                <h2 className="title">Forgot Email</h2>
                                 <p className="error-message">{errorMessage}</p>
                                 <div className="row changePassblock">
 
                                     <div className="col-sm-12 form-group">
                                         <div className="tbox">
-                                            <input type="password" id="password" className="textbox" placeholder="" required onChange={(e) => setPassword(e.target.value)} />
-                                            <label for="password" className={password != "" ? "input-has-value" : ""}>Password</label>
+                                            <input type="text" id="phoneNo" className="textbox" placeholder="" required onChange={(e) => setPhoneNo(e.target.value)} />
+                                            <label for="phoneNo" className={phoneNo != "" ? "input-has-value" : ""}>Phone No</label>
                                         </div>
                                     </div>
-                                    <div className="col-sm-12 form-group">
-                                        <div className="tbox">
-                                            <input type="password" id="newPassword" className="textbox" placeholder="" required onChange={(e) => setNewPassword(e.target.value)} />
-                                            <label for="newPassword" className={newPassword != "" ? "input-has-value" : ""}>Confirm Password</label>
-                                        </div>
-                                    </div>
-
                                     <div className="col-lg-12 loginBtn">
                                         <button className="cta-btn">Submit</button>
                                     </div>
@@ -112,4 +103,4 @@ const ForgotPassword = () => {
         </div>
     )
 }
-export default ForgotPassword;
+export default ForgotEmail;

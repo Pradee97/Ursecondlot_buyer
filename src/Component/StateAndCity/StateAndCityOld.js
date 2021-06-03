@@ -73,10 +73,6 @@ const StateAndCity = props => {
     useEffect (()=>{
         if(isEdit){
             // setDefaultZipCodeId(props.defaultStateValue)
-            console.log("is edit=====>",isEdit);
-            console.log("props.defaultStateValue=====>",props.defaultStateValue);
-            console.log("props.defaultCityValue=====>",props.defaultCityValue);
-            console.log("setDefaultZipcodeValue====>",props.defaultZipcodeValue)
             setDefaultStateValue(props.defaultStateValue);
             setDefaultCityValue(props.defaultCityValue);
             setDefaultZipcodeValue(props.defaultZipcodeValue);
@@ -93,7 +89,7 @@ const StateAndCity = props => {
 
     useEffect(() => {
         fetchCountry();
-        fetchState();
+        !isEdit && fetchState();
     }, [isEdit]);
 
     useEffect(() => { setZipcodeId( zipCodeId) }, [zipCodeId])
@@ -118,7 +114,7 @@ const StateAndCity = props => {
     }
 
     const setZipcodeNormal = (data) => {
-        console.log("--------setZipcodeNormal",data)
+        console.log("--------setZipcodeNormal")
         setIsEdit(false)
         if(data.length ===0 ){
             setZipcodeId("")
@@ -127,19 +123,59 @@ const StateAndCity = props => {
         }
         if(data.length==5 ){
             setZipcodeId(data)
-            console.log("====setIsEdit=====>",!isEdit)
         }
     }
 
-    
+    const setZipcodeGoogle = (data) => {
+        if(data.length ===0 ){
+            setZipcodeId("")
+            setCityName('')
+            setStateName('') 
+            setIsEdit(false)
+        }
+        if(data.length !=5 ){
+            setCityName('')
+            setStateName('')
+            setIsEdit(false)
+        }
+        if(data.length==5 ){
+            setIsEdit(false)
+            setZipcodeId(data)
+            const request={zipcode_id: data}
+            API.post("location/condition", request)
+        .then(response => {
+            console.log("google place data response =>",response)
+            if (response.statusText== "OK"
+            ){
+                const {results} = response.data.data
+                if(results.length>0){
+                    console.log("google place data =>",response.data)
+                    console.log("CITY  ",results[0].address_components[1].long_name)
+                    console.log("STATE  ",results[0].address_components[1].long_name)
+                    setCityName( results[0].address_components[1].long_name)
+                    setStateName(results[0].address_components[3].long_name)                
+                }else{
+                    setCityName('')
+                    setStateName('') 
+                    console.log("please enter valid zipcode");
+                }
+               
+            }else{
+                console.log("something went wrong in address api..., try again")
+            }
+            
+        })
+        }
+    }
 
 return (
     <>
         <div className="col-sm-4 form-group selectTbox">
-            <div className="tbox">                
-                        <div className="selcetclass"> 
-                    <select className="form-control custom-select browser-default textbox" required defaultValue={isEdit ? defaultStateValue : stateName}  onChange={handleState}>
-                        {/* <option style={{"display":"none"}}></option> */}
+            <div className="tbox">
+                {!isEdit && zipCodeId == ""?
+                    (<div className="selcetclass"> 
+                    <select className="form-control custom-select browser-default textbox" required defaultValue={stateName}  onChange={handleState}>
+                        <option style={{"display":"none"}}></option>
                         {stateNameList.length>0 &&
                             <>
                                 {stateNameList.map((state, index) => <option key={state.state_id} value={state.state_id}>{state.state_name}</option>)}
@@ -148,14 +184,21 @@ return (
                     </select>
                     <label  for="state_id" className={"input-has-value"}>State</label>
                     </div>
-                    
+                     )
+                    :
+                    (<>
+                        <input type="text" className="form-control textbox" placeholder="" readOnly = {true} value ={ stateName || defaultStateValue} required />
+                        <label  for="state_id" className={"input-has-value"}>State</label>
+                    </>)
+                }
                
             </div>
         </div>
         <div className="col-sm-4 form-group selectTbox">
-            <div className="tbox">              
-                <div className="selcetclass"> 
-                    <select id="City" className="form-control custom-select browser-default textbox" required defaultValue={isEdit ? defaultCityValue : cityName} onChange={setCityName}>
+            <div className="tbox">
+                { !isEdit && zipCodeId == "" ?
+                (<div className="selcetclass"> 
+                    <select id="City" className="form-control custom-select browser-default textbox" required defaultValue={cityName} onChange={handleCity}>
                     <option style={{"display":"none"}}></option>
                         {cityNameList.length>0 &&
                             <>
@@ -164,16 +207,32 @@ return (
                         }
                     </select>
                     <label  for="city_id" className={"input-has-value"}>City</label>
-                </div>                   
+                </div>
+                )
+                :
+                (<>
+                    <input type="text" className="form-control textbox" placeholder="" readOnly = {true} value ={ cityName || defaultCityValue} required />
+                    <label  for="city_id" className={"input-has-value"}>City</label>
+                </>
+                    )}
+                
             </div>
         </div>
         <div className="col-sm-4 form-group">
             <div className="tbox">
-                <div className="selcetclass">                 
-                    <>
+                <div className="selcetclass"> 
+                    {!isEdit && stateName!=="" && cityName !==""  ?
+                    (<>
+                        <input type="text" className="form-control textbox"  placeholder=""  required maxLength="5" onChange={(e) => setZipcodeNormal(e.target.value)} />
+                        <label  for="zipcode_id" className={"input-has-value"}>Zipcode</label>
+                    </>
+                    )
+
+                    :(<>
                         <input type="text" className="form-control textbox" defaultValue={isEdit ? defaultZipcodeValue : zipCodeId} placeholder="" required maxLength="5" onChange={(e) => setZipcodeId(e.target.value)} />
                         {<label  for="zipcode_id" className={"input-has-value"}>Zipcode</label>}
-                    </>                       
+                    </>
+                        )}
                 </div>
             </div>
         </div>

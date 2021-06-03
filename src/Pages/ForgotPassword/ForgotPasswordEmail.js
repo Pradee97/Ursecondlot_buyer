@@ -17,11 +17,9 @@ const ForgotPasswordEmail = () => {
         let request = {
             email: email,
         }
-        alert("======1====>",request)
-        API.post("forgotPassword/condition", request).then((response) => {
-            alert("======111====>",response)
+        const services=API.post("forgotPassword/condition", request)
+        services.then((response) => {
             if (response.success == true) {
-                alert("=====2=====>",response)
                 togglePopup()
                 setPopupTitle("Forgot Password");
                 setPopupMsg("Change Password Successfully Updated");
@@ -29,10 +27,7 @@ const ForgotPasswordEmail = () => {
                 setPopupActionType("redirect");
                 setPopupActionValue("ok");
                 setPopupActionPath("/login")
-
             } else {
-                //   history.push("error");
-                alert("=====3=====>",response)
                 togglePopup()
                 setPopupTitle("Change Password");
                 setPopupMsg("Change Password is not Updated, Please try Again");
@@ -42,7 +37,6 @@ const ForgotPasswordEmail = () => {
             }
         },
             (error) => {
-                alert("=====4=====>",error)
                 togglePopup()
                 setPopupTitle("Error");
                 setPopupMsg("Something went wrong, Please try Again");
