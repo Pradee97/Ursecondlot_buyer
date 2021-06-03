@@ -47,7 +47,9 @@ import ForgotEmail from './Pages/ForgotPassword/ForgotEmail';
 function AppRouter() {
 
   const timeout = 900000;
+  // const timeout = 30000;
   const [isSession, setIsSession] = useState (false);// for session popup
+  const [lastActive, setLastActive] = useState(+new Date()) 
 
   const handleOnIdle = () =>{
     if (localStorage.getItem("islogedIn") === "true") {
@@ -55,14 +57,24 @@ function AppRouter() {
     }
   } 
 
-  // useIdleTimer({ timeout,   onIdle: handleOnIdle  })
+  const { getLastActiveTime } =useIdleTimer({ timeout,   onIdle: handleOnIdle, crossTab: true  })
 
   const PrivateRoute = ({children, ...rest})=>{
       return (<Route {...rest} render={({location})=>{
-        return localStorage.getItem("islogedIn") === "true" ? children   : <Redirect to={{pathname:"/login", state:{from:location}}} />
+        return localStorage.getItem("islogedIn") === "true" ? children : <Redirect to={{pathname:"/login", state:{from:location}}} />
       }}>
       </Route>)
   }
+
+  useEffect(() => {
+    setLastActive(getLastActiveTime())
+    localStorage.setItem("lastActiveTime",getLastActiveTime())
+    setInterval(() => {
+      setLastActive(getLastActiveTime())
+      localStorage.setItem("lastActiveTime",getLastActiveTime())
+
+    }, 1000)
+  }, [])
 
   return (
     <div className="App">

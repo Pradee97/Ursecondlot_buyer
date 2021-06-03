@@ -16,13 +16,14 @@ const ForgotPassword = () => {
     const [isOpen, setIsOpen] = useState(false);
     let value=window.location.href.split("id=");
     const changehandleSubmit = (event) => {
+        event.preventDefault();
         let request = {
             password:password,
             user_id:value[1]
         }
-        const services=API.post("forgotpassword/update", request);
-        services.then((response) => {    
-        if (response.success == true) {
+        API.post("forgotpassword/update", request).then((response) => {
+            console.log("======111====>",response)
+            if (response.success == true) {
                 togglePopup()
                 setPopupTitle("Forgot Password");
                 setPopupMsg("Change Password Successfully Updated");

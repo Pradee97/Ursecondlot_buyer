@@ -50,6 +50,8 @@ const Login = () => {
             history.push("/changepassword");
           }else{
             localStorage.setItem("islogedIn", true)
+            localStorage.getItem("loadTime") !==null ? localStorage.setItem("loadTime", [localStorage.getItem("loadTime"),...[Date.now()]]) : 
+            localStorage.setItem("loadTime", [Date.now()])
             state?.from?.pathname !=="" && state?.from?.pathname !== undefined?  history.push(state.from.pathname) :  history.push("/carList");            
           }
           

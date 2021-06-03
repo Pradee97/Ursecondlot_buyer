@@ -14,11 +14,12 @@ const ForgotPasswordEmail = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [isOpen, setIsOpen] = useState(false);
     const changehandleSubmit = (event) => {
+        event.preventDefault();
         let request = {
             email: email,
         }
-        const services=API.post("forgotPassword/condition", request)
-        services.then((response) => {
+        API.post("forgotPassword/condition", request).then((response) => {
+            console.log("======111====>",response)
             if (response.success == true) {
                 togglePopup()
                 setPopupTitle("Forgot Password");
