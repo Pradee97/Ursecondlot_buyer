@@ -9,6 +9,7 @@ import StateAndCity from '../../Component/StateAndCity/StateAndCity';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import Datetime from 'react-datetime';
 import moment from 'moment';
+import FileBase64 from 'react-file-base64';
 const AddUser = () => {
 	const history = useHistory();
 	let userDetails = ls.get('userDetails');
@@ -29,13 +30,8 @@ const AddUser = () => {
 	const [counter_bid, setCounter_bid] = useState("");
 	const [lot_fee, setLot_fee] = useState("");
 	const [option, setOption] = useState("");
-
 	const [isOpen, setIsOpen] = useState(false);
-
-	const togglePopup = () => {
-		setIsOpen(!isOpen);
-	}
-
+	const [doc,setDoc]=useState("");
 	const [popupTitle, setPopupTitle] = useState("");
 	const [popupMsg, setPopupMsg] = useState("");
 	const [popupType, setPopupType] = useState("");
@@ -45,19 +41,25 @@ const AddUser = () => {
 
 	console.log("=====userDetails====>", userDetails)
 	console.log("======>", userDetails.dealer_id)
+	const togglePopup = () => {
+		setIsOpen(!isOpen);
+	}
+	const getFiles=(file)=>{
+        setDoc(file);
+      }
 	const getStateName = (stateData) => {
 		setStateName(stateData)
 	}
 	const getCityName = (cityData) => {
 		setCityName(cityData)
 	}
-	const setUserPrivileges = (e)=>{
-			setBuyNow("");
-			setCancelBid("");
-			setBid("");
-			setProxy_bid("");
-			setCounter_bid("");
-			setLot_fee("");
+	const setUserPrivileges = (e) => {
+		setBuyNow("");
+		setCancelBid("");
+		setBid("");
+		setProxy_bid("");
+		setCounter_bid("");
+		setLot_fee("");
 	}
 
 	const getZipCodeId = (zipData) => {
@@ -75,7 +77,7 @@ const AddUser = () => {
 	const registrationhandleSubmit = (event) => {
 
 		event.preventDefault();
-		
+
 		let request = {
 			dealer_id: userDetails.dealer_id,
 			first_name: firstName,
@@ -97,6 +99,7 @@ const AddUser = () => {
 			counter_bid: counter_bid === "1" ? 1 : 0,
 			lot_fee: lot_fee === "1" ? 1 : 0,
 			local_flag: 0,
+			image:doc===""?doc:doc.length>0?doc:[doc],
 		};
 		console.log("----request---->", request)
 		API.post("buyer/add", request)
@@ -143,7 +146,7 @@ const AddUser = () => {
 							</div>
 							<div className="row content">
 								<div className="col-lg-3 col-md-4 col-sm-12 accountleftblock">
-								
+
 									<div className="mgaccountuser">
 										<div className="mgaccountuserleft">
 											<img src={process.env.PUBLIC_URL + "/images/userimg.jpg"} className="img-fluid" alt="..." />
@@ -161,15 +164,20 @@ const AddUser = () => {
 								<div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 adduserpagerightblock">
 									<div className="adduserpage-inner">
 										<div className="col-lg-12">
-										
+
 											<form class="adduserpageform" onSubmit={registrationhandleSubmit}>
 												<div className="row">
-												
+
 													<div className="section-title">
-													<button className="back-btn-paymentform backBtn" onClick={() => history.push("/buyers")}><i class="icofont-arrow-left"></i> Back</button>
+														<button className="back-btn-paymentform backBtn" onClick={() => history.push("/buyers")}><i class="icofont-arrow-left"></i> Back</button>
 														<h2>Buyer Details</h2>
 													</div>
+													<div className="col-sm-12 form-group">
+														<img alt="" src="adduser.jpg" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} ></img>
+														<FileBase64 onDone={getFiles} type="hidden" />
+														{/* <button>  <img alt="" for="upload" src="adduser.jpg"  /></button>  */}
 
+													</div>
 													<div className="col-sm-12 form-group">
 														<div className="tbox">
 															<input className="textbox " type="text" placeholder="" id="first_name" required maxLength="30" onChange={(e) => setFirstName(e.target.value)} />
@@ -304,5 +312,4 @@ const AddUser = () => {
 		</div>
 	);
 };
-
 export default AddUser;

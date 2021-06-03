@@ -40,9 +40,10 @@ import EditAddress  from './Pages/ManageAccount/EditAddress';
 import AddLegalAccount  from './Pages/ManageAccount/AddLegalAccount';
 import AddAddress  from './Pages/ManageAccount/AddAddress';
 import EditLegalAccount from './Pages/ManageAccount/EditLegalAccount';
-import EditBuyer from './Pages/ManageAccount/EditBuyer'
+import EditBuyer from './Pages/ManageAccount/EditBuyer';
 import ForgotPasswordEmail from './Pages/ForgotPassword/ForgotPasswordEmail';
-import ForgotPassword from './Pages/ForgotPassword/ForgotPassword'
+import ForgotPassword from './Pages/ForgotPassword/ForgotPassword';
+import ForgotEmail from './Pages/ForgotPassword/ForgotEmail';
 function AppRouter() {
 
   const timeout = 900000;
@@ -95,6 +96,7 @@ function AppRouter() {
             <Route  path="/changepassword" component={ChangePassword}/>
             <Route path="/forgotpasswordemail" component={ForgotPasswordEmail}/>
             <Route path="/forgotpassword" component={ForgotPassword}/>
+            <Route path="/forgotEmail" component={ForgotEmail}/>
 
             <PrivateRoute>
               <Route  path="/floor" component={FloorPlans}/>

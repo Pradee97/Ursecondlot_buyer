@@ -9,7 +9,8 @@ import Popup from '../../Component/Popup/Popup';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import '../../Component/Popup/popup.css';
 import Terms from '../../Component/TermsAndCondition/TermsAndCondition';
-import StateAndCity from '../../Component/StateAndCity/StateAndCity'
+import StateAndCity from '../../Component/StateAndCity/StateAndCity';
+import FileBase64 from 'react-file-base64';
 
 // import '../../assets/css/styles.css';
 import { useState } from 'react';
@@ -38,10 +39,14 @@ const Registration = () => {
     const [popupActionType, setPopupActionType] = useState("");
     const [popupActionValue, setPopupActionValue] = useState("");
     const [popupActionPath, setPopupActionPath] = useState("");
+    const [doc,setDoc]=useState("");
 
     const togglePopup = () => {
         setIsOpen(!isOpen);
     }
+    const getFiles=(file)=>{
+        setDoc(file);
+      }
 
     const toggleCommonPopup = () => {
         setIsCommonPopupOpen(!isCommonPopupOpen);
@@ -80,6 +85,7 @@ const Registration = () => {
             zipcode_id: zipCodeId,
             no_years: option,
             local_flag: 0,
+            image:doc===""?"":doc.length>0?doc:[doc],
         };
         API.post("registration/add", request)
             .then((response) => {
@@ -127,8 +133,16 @@ const Registration = () => {
             <main id="main" className="inner-page">
                 <div className="col-lg-4 card loginBlock">
                     <form className="registrationform" onSubmit={registrationhandleSubmit} >
+                        
                         <h2 className="title"> Dealer Registration</h2>
+                        
                         <div className="row">
+                        <div className="col-sm-12 form-group">
+                        <img alt=""  src="adduser.jpg" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} ></img>
+                        <FileBase64 onDone={ getFiles }  type="hidden"/>
+                                         {/* <button>  <img alt="" for="upload" src="adduser.jpg"  /></button>  */}
+                        
+                        </div>
                             <div className="col-sm-12 form-group">
                                 <div className="tbox">
                                     <input className="textbox " type="text" placeholder="" id="dealer_name" required maxLength="50" onChange={(e) => setDealerName(e.target.value)} />
