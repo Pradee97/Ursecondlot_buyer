@@ -57,7 +57,7 @@ function AppRouter() {
     }
   } 
 
-  const { getRemainingTime } =useIdleTimer({ timeout,   onIdle: handleOnIdle, crossTab: true  })
+  // const { getRemainingTime } =useIdleTimer({ timeout,   onIdle: handleOnIdle, crossTab: true  })
 
   const PrivateRoute = ({children, ...rest})=>{
       return (<Route {...rest} render={({location})=>{
@@ -66,14 +66,14 @@ function AppRouter() {
       </Route>)
   }
 
-  useEffect(() => {
-    setRemaining(getRemainingTime())
-    localStorage.setItem("remainingTime",getRemainingTime())
-    setInterval(() => {
-      setRemaining(getRemainingTime())
-      localStorage.setItem("remainingTime",getRemainingTime())
-    }, 1000)
-  }, [])
+  // useEffect(() => {
+  //   setRemaining(getRemainingTime())
+  //   localStorage.setItem("remainingTime",getRemainingTime())
+  //   setInterval(() => {
+  //     setRemaining(getRemainingTime())
+  //     localStorage.setItem("remainingTime",getRemainingTime())
+  //   }, 1000)
+  // }, [])
 
   return (
     <div className="App">
