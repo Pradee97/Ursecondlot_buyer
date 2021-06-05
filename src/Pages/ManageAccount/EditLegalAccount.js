@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import API from "../../Services/BaseService";
 import { useHistory,useParams } from "react-router-dom";
 // import '../assets/css/styles.css';
@@ -207,33 +208,16 @@ const EditLegalAccount = () => {
                                 defaultCityValue = {city}
                                 defaultZipcodeValue = {zipcode}
                             />
-                            {/* <div class="col-sm-12 form-group">
-                            <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.city_name} class="form-control textbox" placeholder="" required onChange={(e) => setCity(e.target.value)} />
-                                <label for="first_name" className={city !="" ? "input-has-value" : ""}>City</label>
-                            </div>
-                            </div>
+
                             <div class="col-sm-12 form-group">
-                            <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.state_name} class="form-control textbox" placeholder="" required onChange={(e) => setState(e.target.value)} />
-                                <label for="first_name" className={state !="" ? "input-has-value" : ""}>State</label>
-                            </div>
-                            </div>
-                             <div class="col-sm-12 form-group">
-                             <div className="tbox">
-                                <input type="number" defaultValue={accountObjc.zipcode_id} class="form-control textbox" placeholder="" required onChange={(e) => setZipcode(e.target.value)} />
-                                <label for="first_name" className={zipcode !="" ? "input-has-value" : ""}>Zip code</label>
-                            </div> 
-                            </div> */}
-                            <div class="col-sm-12 form-group">
-                            <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.dealer_license_exp} class="form-control textbox" placeholder="" required onChange={(e) => setDealershipLicenseexp(e.target.value)} />
+                            <div className="tbox">  
+                                 <input type="date" defaultValue={moment(accountObjc.dealer_license_exp).format('YYYY-MM-DD')} class="form-control textbox" placeholder="" required onChange={(e) => setDealershipLicenseexp(e.target.value)} />
                                 <label for="first_name" className={dealershipLicenseexp !="" ? "input-has-value" : ""}>Dealership license exp</label>
                             </div> 
                             </div>
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.tax_id_exp} class="form-control textbox" placeholder="" required onChange={(e) => setTaxidexp(e.target.value)} />
+                                <input type="date" defaultValue={moment(accountObjc.tax_id_exp).format('YYYY-MM-DD')} class="form-control textbox" placeholder="" required onChange={(e) => setTaxidexp(e.target.value)} />
                                 <label for="first_name" className={taxidexp!="" ? "input-has-value" : ""}>Tax id exp</label>
                             </div>
                             </div>
