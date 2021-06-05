@@ -93,7 +93,7 @@ const StateAndCity = props => {
 
     useEffect(() => {
         fetchCountry();
-        fetchState();
+        !isEdit && fetchState();
     }, [isEdit]);
 
     useEffect(() => { setZipcodeId( zipCodeId) }, [zipCodeId])
@@ -138,8 +138,9 @@ return (
         <div className="col-sm-4 form-group selectTbox">
             <div className="tbox">                
                         <div className="selcetclass"> 
-                    <select className="form-control custom-select browser-default textbox" required defaultValue={isEdit ? defaultStateValue : stateName}  onChange={handleState}>
-                        {/* <option style={{"display":"none"}}></option> */}
+                        {"test"}{props.defaultStateValue}
+                    <select className="form-control custom-select browser-default textbox" required defaultValue={isEdit ? props.defaultStateValue : stateName}  onChange={handleState}>
+                        <option style={{"display":"none"}}></option>
                         {stateNameList.length>0 &&
                             <>
                                 {stateNameList.map((state, index) => <option key={state.state_id} value={state.state_id}>{state.state_name}</option>)}
@@ -155,7 +156,7 @@ return (
         <div className="col-sm-4 form-group selectTbox">
             <div className="tbox">              
                 <div className="selcetclass"> 
-                    <select id="City" className="form-control custom-select browser-default textbox" required defaultValue={isEdit ? defaultCityValue : cityName} onChange={setCityName}>
+                    <select id="City" className="form-control custom-select browser-default textbox" required defaultValue={isEdit ? props.defaultCityValue : cityName} onChange={setCityName}>
                     <option style={{"display":"none"}}></option>
                         {cityNameList.length>0 &&
                             <>

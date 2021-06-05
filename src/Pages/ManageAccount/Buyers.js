@@ -101,6 +101,7 @@ const Buyers = () => {
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Name</th>
+                                                <th>Image</th>
                                                 <th>Phone</th>
                                                 <th>Email</th>
                                                 <th>Privileges</th>
@@ -112,6 +113,10 @@ const Buyers = () => {
                                         <tr>
                                             <td>{item.user_id}</td>															
                                             <td><span class="cartitlename">{item.first_name} {item.last_name} </span></td>
+                                            <td>{item.image===""?
+                                            <img alt="" src="adduser.jpg" src={process.env.PUBLIC_URL + "/images/adduser.jpg"}/>:
+                                            <img alt="" src={item.image} />
+                                            }</td>
                                             <td>{item.phone_no}</td>
                                             <td>{item.email}</td>
                                             <td>{item.buy_now===1?"Buy Now,":""}{item.cancel_bid===1?"Cancel the bid after 4 hours,":""}{item.bid===1?"Bid,":""}

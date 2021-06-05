@@ -163,7 +163,7 @@ const EditBuyer = () => {
                             <div className="row">
                                 <div className="col-sm-12 form-group">
                                     {image===""?<img alt="" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} />:
-                                    <img alt=""  src={image} />}                                    
+                                    doc===""?<img alt=""  src={image} />:<img alt=""  src={doc.base64} />}                                    
                                     <FileBase64 onDone={getFiles} type="hidden" />
                                 </div>
                                 <div className="col-sm-12 form-group">

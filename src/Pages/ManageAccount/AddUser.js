@@ -46,6 +46,7 @@ const AddUser = () => {
 	}
 	const getFiles=(file)=>{
         setDoc(file);
+		console.log("file=====>",file)
       }
 	const getStateName = (stateData) => {
 		setStateName(stateData)
@@ -173,7 +174,10 @@ const AddUser = () => {
 														<h2>Buyer Details</h2>
 													</div>
 													<div className="col-sm-12 form-group">
-														<img alt="" src="adduser.jpg" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} ></img>
+														{doc===""?<img alt="" src="adduser.jpg" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} ></img>:
+														<img alt="" src="adduser.jpg" src={doc.base64} ></img>
+														
+														}
 														<FileBase64 onDone={getFiles} type="hidden" />
 														{/* <button>  <img alt="" for="upload" src="adduser.jpg"  /></button>  */}
 
