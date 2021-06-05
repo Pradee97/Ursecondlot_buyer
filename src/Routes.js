@@ -57,8 +57,7 @@ function AppRouter() {
     }
   } 
 
-  // const { getRemainingTime } =useIdleTimer({ timeout,   onIdle: handleOnIdle, crossTab: true  })
-
+  const { getRemainingTime } =useIdleTimer({ timeout,   onIdle: handleOnIdle, crossTab: true  })
   const PrivateRoute = ({children, ...rest})=>{
       return (<Route {...rest} render={({location})=>{
         return localStorage.getItem("islogedIn") === "true" ? children : <Redirect to={{pathname:"/login", state:{from:location}}} />
@@ -66,14 +65,14 @@ function AppRouter() {
       </Route>)
   }
 
-  // useEffect(() => {
-  //   setRemaining(getRemainingTime())
-  //   localStorage.setItem("remainingTime",getRemainingTime())
-  //   setInterval(() => {
-  //     setRemaining(getRemainingTime())
-  //     localStorage.setItem("remainingTime",getRemainingTime())
-  //   }, 1000)
-  // }, [])
+  useEffect(() => {
+    setRemaining(getRemainingTime())
+    localStorage.setItem("remainingTime",getRemainingTime())
+    const remainingTime = setInterval(() => {
+      localStorage.setItem("remainingTime",getRemainingTime())
+    }, 1000)
+    return () => clearInterval(remainingTime)
+  },[])
 
   return (
     <div className="App">

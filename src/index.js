@@ -22,8 +22,8 @@ const loadClearStorage = () => {
       if(ltime[ltime.length-1] - ultime[ultime.length-1]  > 900000){
       
         if(Number(localStorage.getItem("remainingTime" == 0))){
-          // localStorage.clear()
-          // window.location.replace("/")
+          localStorage.clear()
+          window.location.replace("/")
         }
 
       }
@@ -33,8 +33,8 @@ const loadClearStorage = () => {
     }
     
     else{
-      // localStorage.clear()
-      // window.location.replace("/")
+      localStorage.clear()
+      window.location.replace("/")
     }
   }
 }

@@ -52,40 +52,19 @@ const StateAndCity = props => {
             .catch(err => { console.log(err); });
     }
 
-    // useEffect(() => {
-    //     if (props.isEdit !==undefined || !props.isEdit) {
-    //         console.log("triggering-----------")
-    //         setStateName(props?.defaultStateValue || "");
-    //         setCityName(props?.defaultCityValue || "");
-    //         setZipcodeId(props?.defaultZipcodeValue || "");
-    //     }
-        
-    // }, []);
-
-    useEffect(() => {
-       
+    useEffect(() => {     
         props.setStateValue(stateName);
         props.setCityValue(cityName);
         props.setZipcodeValue(zipCodeId);
-       
     }, [stateName,cityName,zipCodeId]);
 
     useEffect (()=>{
         if(isEdit){
-            // setDefaultZipCodeId(props.defaultStateValue)
             setDefaultStateValue(props.defaultStateValue);
             setDefaultCityValue(props.defaultCityValue);
             setDefaultZipcodeValue(props.defaultZipcodeValue);
         }
     })
-    // useEffect (()=>{
-    //     if (props.isEdit !==undefined || !props.isEdit) {
-    //             console.log("triggering-----------")
-    //             setStateName(props.defaultStateValue );
-    //             setCityName(props.defaultCityValue );
-    //             setZipcodeId(props.defaultZipcodeValue );
-    //         }
-    // },[stateName, cityName, zipCodeId])
 
     useEffect(() => {
         fetchCountry();
@@ -93,7 +72,6 @@ const StateAndCity = props => {
     }, [isEdit]);
 
     useEffect(() => { setZipcodeId( zipCodeId) }, [zipCodeId])
-
 
     const getAlert = () => {
         alert('clicked');

@@ -4,16 +4,13 @@ import API from "../../Services/BaseService";
 const StateAndCity = props => {
 
     console.log("pppppp",props)
-    // const [defaultZipcodeValue, setDefaultZipcodeValue] = useState(props.defaultZipcodeValue !== undefined ? props.defaultZipcodeValue : "");
     const [defaultZipcodeValue, setDefaultZipcodeValue] = useState(props.defaultZipcodeValue);
     const [zipCodeId, setZipcodeId] = useState("");
     const [isEdit, setIsEdit] = useState(props?.isEdit || false);
     const [country, setCountry] = useState("");
-    // const [defaultStateValue, setDefaultStateValue] = useState(props.defaultStateValue !== undefined ? props.defaultStateValue  :  "");
     const [defaultStateValue, setDefaultStateValue] = useState(props.defaultStateValue);
     const [stateName, setStateName] = useState("");
     const [stateNameList, setStateNameList] = useState([]);
-    // const [defaultCityValue, setDefaultCityValue] = useState(props.defaultCityValue !== undefined ?  props.defaultCityValue : "");
     const [defaultCityValue, setDefaultCityValue] = useState(props.defaultCityValue);
     const [cityName, setCityName] = useState("");
     const [cityNameList, setCityNameList] = useState([]);
@@ -36,6 +33,12 @@ const StateAndCity = props => {
         state.then(res => {
             console.log("res", res.data.data)
             setStateNameList(res.data.data);
+            if(props.isEdit){
+                res.data.data.filter(data=> {
+                    data.state_name?.toLowerCase() === defaultStateValue ?.toLowerCase() && fetchCity(data.state_id)
+                })
+               
+            }
         })
             .catch(err => { console.log(err); });
     }
@@ -52,60 +55,30 @@ const StateAndCity = props => {
             .catch(err => { console.log(err); });
     }
 
-    // useEffect(() => {
-    //     if (props.isEdit !==undefined || !props.isEdit) {
-    //         console.log("triggering-----------")
-    //         setStateName(props?.defaultStateValue || "");
-    //         setCityName(props?.defaultCityValue || "");
-    //         setZipcodeId(props?.defaultZipcodeValue || "");
-    //     }
-        
-    // }, []);
-
     useEffect(() => {
-       
         props.setStateValue(stateName);
         props.setCityValue(cityName);
         props.setZipcodeValue(zipCodeId);
        
-    }, [stateName,cityName,zipCodeId]);
+    }, [stateName, cityName, zipCodeId]);
 
     useEffect (()=>{
         if(isEdit){
-            // setDefaultZipCodeId(props.defaultStateValue)
-            console.log("is edit=====>",isEdit);
-            console.log("props.defaultStateValue=====>",props.defaultStateValue);
-            console.log("props.defaultCityValue=====>",props.defaultCityValue);
-            console.log("setDefaultZipcodeValue====>",props.defaultZipcodeValue)
             setDefaultStateValue(props.defaultStateValue);
             setDefaultCityValue(props.defaultCityValue);
             setDefaultZipcodeValue(props.defaultZipcodeValue);
         }
     })
-    // useEffect (()=>{
-    //     if (props.isEdit !==undefined || !props.isEdit) {
-    //             console.log("triggering-----------")
-    //             setStateName(props.defaultStateValue );
-    //             setCityName(props.defaultCityValue );
-    //             setZipcodeId(props.defaultZipcodeValue );
-    //         }
-    // },[stateName, cityName, zipCodeId])
-
+    
+    useEffect(() => fetchCountry(),[])
+    
     useEffect(() => {
-        fetchCountry();
-        !isEdit && fetchState();
-    }, [isEdit]);
+        fetchState();
+    }, [defaultStateValue]);
 
     useEffect(() => { setZipcodeId( zipCodeId) }, [zipCodeId])
 
-
-    const getAlert = () => {
-        alert('clicked');
-      }
-    
-
     const handleState = (e) => {  
-        console.log("--------handleState") 
         setStateName( stateNameList.filter(data=>data.state_id == e.target.value)[0].state_name)
         fetchCity(e.target.value)
         setZipcodeId("")
@@ -137,13 +110,12 @@ return (
     <>
         <div className="col-sm-4 form-group selectTbox">
             <div className="tbox">                
-                        <div className="selcetclass"> 
-                        {"test"}{props.defaultStateValue}
-                    <select className="form-control custom-select browser-default textbox" required defaultValue={isEdit ? props.defaultStateValue : stateName}  onChange={handleState}>
+                <div className="selcetclass"> 
+                    <select className="form-control custom-select browser-default textbox" required defaultValue={stateName}  onChange={handleState}>
                         <option style={{"display":"none"}}></option>
                         {stateNameList.length>0 &&
                             <>
-                                {stateNameList.map((state, index) => <option key={state.state_id} value={state.state_id}>{state.state_name}</option>)}
+                                {stateNameList.map((state, index) => <option key={state.state_id} value={state.state_id} selected = { isEdit ?  state.state_name === defaultStateValue ? true : false : false} >{state.state_name}</option>)}
                             </>
                         }
                     </select>
@@ -156,11 +128,11 @@ return (
         <div className="col-sm-4 form-group selectTbox">
             <div className="tbox">              
                 <div className="selcetclass"> 
-                    <select id="City" className="form-control custom-select browser-default textbox" required defaultValue={isEdit ? props.defaultCityValue : cityName} onChange={setCityName}>
+                    <select id="City" className="form-control custom-select browser-default textbox" required defaultValue={cityName} onChange={handleCity}>
                     <option style={{"display":"none"}}></option>
                         {cityNameList.length>0 &&
                             <>
-                                {cityNameList.map((city, index) => <option key={city.city_id} value={city.city_name}>{city.city_name}</option>)}
+                                {cityNameList.map((city, index) => <option key={city.city_id} value={city.city_name} selected = { isEdit ?  city.city_name === defaultCityValue ? true : false : false} >{city.city_name}</option>)}
                             </>
                         }
                     </select>
