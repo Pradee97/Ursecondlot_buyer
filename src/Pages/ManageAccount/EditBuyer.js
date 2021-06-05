@@ -162,9 +162,13 @@ const EditBuyer = () => {
                             <h2 className="title"> Edit Buyer </h2>
                             <div className="row">
                                 <div className="col-sm-12 form-group">
+                                <div class="user-upload-btn-wrapper">
                                     {image===""?<img alt="" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} />:
-                                    doc===""?<img alt=""  src={image} />:<img alt=""  src={doc.base64} />}                                    
+                                    doc===""?<img alt=""  src={image} />:<img alt=""  src={doc.base64} />}  
+                                    <span class="proCamera"></span>                                  
                                     <FileBase64 onDone={getFiles} type="hidden" />
+                                    
+                                </div>
                                 </div>
                                 <div className="col-sm-12 form-group">
                                     <div className="tbox">

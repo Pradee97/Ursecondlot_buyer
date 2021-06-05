@@ -97,7 +97,7 @@ const Submenu = () => {
               <li className={location.pathname ==="/cart"? "active nav__menu-item" : "nav__menu-item"} >
                 <img alt="Menu" src={cartImg} onClick={()=>history.push('/cart')}/>
               </li>
-              <li>
+              <li class="topRightUser">
                 <b className="user_name">Welcome {JSON.parse(localStorage.getItem("userDetails")).first_name}</b>
                 
                 <img alt="Menu" src={JSON.parse(localStorage.getItem("userDetails")).image} /> 

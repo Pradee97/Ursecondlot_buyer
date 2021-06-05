@@ -174,14 +174,28 @@ const AddUser = () => {
 														<h2>Buyer Details</h2>
 													</div>
 													<div className="col-sm-12 form-group">
+
+													<div class="user-upload-btn-wrapper">
 														{doc===""?<img alt="" src="adduser.jpg" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} ></img>:
 														<img alt="" src="adduser.jpg" src={doc.base64} ></img>
 														
 														}
+														<span class="proCamera"></span>
 														<FileBase64 onDone={getFiles} type="hidden" />
+														
 														{/* <button>  <img alt="" for="upload" src="adduser.jpg"  /></button>  */}
-
+														
 													</div>
+													</div>
+
+
+
+
+
+
+
+
+
 													<div className="col-sm-12 form-group">
 														<div className="tbox">
 															<input className="textbox " type="text" placeholder="" id="first_name" required maxLength="30" onChange={(e) => setFirstName(e.target.value)} />

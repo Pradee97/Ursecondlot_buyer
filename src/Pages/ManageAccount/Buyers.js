@@ -113,7 +113,7 @@ const Buyers = () => {
                                         <tr>
                                             <td>{item.user_id}</td>															
                                             <td><span class="cartitlename">{item.first_name} {item.last_name} </span></td>
-                                            <td>{item.image===""?
+                                            <td class="userImage">{item.image===""?
                                             <img alt="" src="adduser.jpg" src={process.env.PUBLIC_URL + "/images/adduser.jpg"}/>:
                                             <img alt="" src={item.image} />
                                             }</td>

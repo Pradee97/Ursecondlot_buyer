@@ -138,11 +138,15 @@ const Registration = () => {
                         
                         <div className="row">
                         <div className="col-sm-12 form-group">
+                        <div class="user-upload-btn-wrapper">
                         <img alt=""  src="adduser.jpg" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} ></img>
+                        <span class="proCamera"></span>      
                         <FileBase64 onDone={ getFiles }  type="hidden"/>
                                          {/* <button>  <img alt="" for="upload" src="adduser.jpg"  /></button>  */}
                         
-                        </div>
+                        </div> </div>
+
+
                             <div className="col-sm-12 form-group">
                                 <div className="tbox">
                                     <input className="textbox " type="text" placeholder="" id="dealer_name" required maxLength="50" onChange={(e) => setDealerName(e.target.value)} />
