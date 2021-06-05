@@ -9,6 +9,7 @@ import cartImg from '../../../src/assets/img/cart.svg';
 import chatImg from '../../../src/assets/img/chat.svg';
 import userImg from '../../../src/assets/img/user.svg';
 import hamburgermenuImg from '../../../src/assets/img/hamburger-menu.svg';
+import adduser from '../../../src/assets/img/adduser.jpg'
 // import '../../assets/css/style.css';
 import './header.css';
 import { Alert } from 'antd';
@@ -100,7 +101,7 @@ const Submenu = () => {
               <li class="topRightUser">
                 <b className="user_name">Welcome {JSON.parse(localStorage.getItem("userDetails")).first_name}</b>
                 
-                <img alt="Menu" src={JSON.parse(localStorage.getItem("userDetails")).image} /> 
+                <img alt="Menu" src={JSON.parse(localStorage.getItem("userDetails")).image || adduser} /> 
               </li>
               <li className="nav__menu-item" >
                 <img alt="Menu" src={hamburgermenuImg} />
