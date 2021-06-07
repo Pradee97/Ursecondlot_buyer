@@ -20,18 +20,18 @@ const ForgotPasswordEmail = () => {
         }
         API.post("forgotPassword/condition", request).then((response) => {
             console.log("======111====>",response)
-            if (response.success == true) {
+            if (response.data.success == true) {
                 togglePopup()
                 setPopupTitle("Forgot Password");
-                setPopupMsg("Change Password Successfully Updated");
+                setPopupMsg(" Password Link has been sent to given Email Id ");
                 setPopupType("success");
                 setPopupActionType("redirect");
                 setPopupActionValue("ok");
                 setPopupActionPath("/login")
             } else {
                 togglePopup()
-                setPopupTitle("Change Password");
-                setPopupMsg("Change Password is not Updated, Please try Again");
+                setPopupTitle("Forgot Password");
+                setPopupMsg("Forgot Password is not Updated, Please try Again");
                 setPopupType("error");
                 setPopupActionType("close");
                 setPopupActionValue("close");

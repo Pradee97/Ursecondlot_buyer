@@ -20,7 +20,7 @@ const ForgotEmail = () => {
         }
         const services=API.post("forgotEmail/condition", request);
         services.then((response) => {    
-        if (response.success == true) {
+        if (response.data.success == true) {
                 togglePopup()
                 setPopupTitle("Forgot Password");
                 setPopupMsg("Change Password Successfully Updated");

@@ -23,7 +23,7 @@ const ForgotPassword = () => {
         }
         API.post("forgotpassword/update", request).then((response) => {
             console.log("======111====>",response)
-            if (response.success == true) {
+            if (response.data.success == true) {
                 togglePopup()
                 setPopupTitle("Forgot Password");
                 setPopupMsg("Change Password Successfully Updated");
