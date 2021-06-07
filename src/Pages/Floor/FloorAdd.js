@@ -6,15 +6,18 @@ import Datetime from 'react-datetime';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
+import { useForm } from "react-hook-form";
 
 const FloorAdd = () => {
     const history = useHistory();   
+    const { register, handleSubmit, formState: { errors } } = useForm();
+
     const [isOpen, setIsOpen] = useState(false);
  
     const togglePopup = () => {
       setIsOpen(!isOpen);
     }
-
+    
     const [popupTitle, setPopupTitle] = useState ("");
     const [popupMsg, setPopupMsg] = useState ("");
     const [popupType, setPopupType] = useState ("");
@@ -52,9 +55,9 @@ const FloorAdd = () => {
     // const openDatepicker = (event)=>{
     //     event._calendar.setOpen(true)
     // }
-    const registrationhandleSubmit = (event) => {
+    const floorhandleSubmit = (data) => {
         // setOpenLoader(true);
-        event.preventDefault();
+        // event.preventDefault();
         let request = [{
             contact_name: contactName,
             company_name: companyName,
@@ -112,33 +115,69 @@ const FloorAdd = () => {
                
                 <button className="back-btn-paymentform backBtn" onClick={() => history.push("/floor")}><i class="icofont-arrow-left"></i> Back</button> 
                 <div className="col-lg-12 card">
-                    <form className="registrationform" onSubmit={registrationhandleSubmit} >
+                    <form className="registrationform" onSubmit={handleSubmit(floorhandleSubmit)} >
                         
 
                         <h2 className="title">Add Floor Plan </h2>
                         <div className="row">
                         <div className="col-sm-12 form-group"> 
                             <div className="tbox">
-                                <input type="text"  id="contactName" className="textbox" placeholder="" required onChange={(e) => setContactName(e.target.value)} />
+                                <input type="text"  id="contactName" className="textbox" placeholder="" name="contactName"
+                                 {...register("contactName", {
+                                    required: "This input is required.",
+                                    maxLength: {
+                                        value: 50,
+                                        message: "This input must not exceed 50 characters"
+                                      }
+                                  })}
+                                onChange={(e) => setContactName(e.target.value)} />
                                 <label for="contactName" className={contactName !="" ? "input-has-value" : ""}>Contact Name</label>
+                                <p className="form-input-error">{errors.contactName?.message}</p>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text"  id="companyName" className="textbox" placeholder="" required onChange={(e) => setCompanyName(e.target.value)} />
+                                <input type="text"  id="companyName" className="textbox" placeholder="" name="companyName"
+                                 {...register("companyName", {
+                                    required: "This input is required.",
+                                    maxLength: {
+                                        value: 50,
+                                        message: "This input must not exceed 50 characters"
+                                      }
+                                  })}
+                                onChange={(e) => setCompanyName(e.target.value)} />
                                 <label for="companyName" className={companyName !="" ? "input-has-value" : ""}>Company Name</label>
+                                <p className="form-input-error">{errors.companyName?.message}</p>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" id="branchName" className="textbox" placeholder="" required onChange={(e) => setBranchName(e.target.value)} />
+                                <input type="text" id="branchName" className="textbox" placeholder="" name="branchName"
+                                 {...register("branchName", {
+                                    required: "This input is required.",
+                                    maxLength: {
+                                        value: 50,
+                                        message: "This input must not exceed 50 characters"
+                                      }
+                                  })}
+                                onChange={(e) => setBranchName(e.target.value)} />
                                 <label for="branchName" className={branchName !="" ? "input-has-value" : ""}>Branch Name</label>
+                                <p className="form-input-error">{errors.branchName?.message}</p>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" id="accountNumber" className="textbox" placeholder="" required onChange={(e) => setAccountNumber(e.target.value)} />
+                                <input type="text" id="accountNumber" className="textbox" placeholder="" name="accountNumber"
+                                 {...register("accountNumber", {
+                                    required: "This input is required.",
+                                    maxLength: {
+                                        value: 50,
+                                        message: "This input must not exceed 50 characters"
+                                      }
+                                  })}
+                                onChange={(e) => setAccountNumber(e.target.value)} />
                                 <label for="accountNumber" className={accountNumber !="" ? "input-has-value" : ""}>accountNumber</label>
+                                <p className="form-input-error">{errors.accountNumber?.message}</p>
                             </div>
                             </div>
                             <div className="col-sm-3 form-group">
@@ -154,27 +193,67 @@ const FloorAdd = () => {
                             </div>
                             <div className="col-sm-9 form-group">
                             <div className="tbox">
-                                <input type="text" id="creditLimit" className="textbox" placeholder="" required onChange={(e) => setCreditLimit(e.target.value)} />
+                                <input type="text" id="creditLimit" className="textbox" placeholder="" name="creditLimit"
+                                 {...register("creditLimit", {
+                                    required: "This input is required.",
+                                    maxLength: {
+                                        value: 50,
+                                        message: "This input must not exceed 50 characters"
+                                      }
+                                  })}
+                                onChange={(e) => setCreditLimit(e.target.value)} />
                                 <label for="creditLimit" className={creditLimit !="" ? "input-has-value" : ""}>Credit Limit</label>
+                                <p className="form-input-error">{errors.creditLimit?.message}</p>
                             </div>
                             </div>
                             
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="email" id="emailId" className="textbox" placeholder="" required onChange={(e) => setEmailId(e.target.value)} />
+                                <input type="type" id="emailId" className="textbox" placeholder="" name="email"
+                                  {...register("email", {
+                                    required: "This input is required.",
+                                    pattern: {
+                                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                    message: "Must match the email format"
+                                    }
+                                })}
+                                onChange={(e) => setEmailId(e.target.value)} />
                                 <label for="emailId" className={emailId !="" ? "input-has-value" : ""}>Email Id</label>
+                                <p className="form-input-error">{errors.email?.message}</p>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" id="address" className="textbox" placeholder="" required onChange={(e) => setAddress(e.target.value)} />
+                                <input type="text" id="address" className="textbox" placeholder="" name="address"
+                                 {...register("address", {
+                                    required: "This input is required.",
+                                    maxLength: {
+                                        value: 150,
+                                        message: "This input must not exceed 150 characters"
+                                      }
+                                  })}
+                                onChange={(e) => setAddress(e.target.value)} />
                                 <label for="address" className={address !="" ? "input-has-value" : ""}>Address</label>
+                                <p className="form-input-error">{errors.address?.message}</p>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">                            
-                                <input type="text" id="phoneNumber" className="textbox" placeholder="" required onChange={(e) => setPhoneNumber(e.target.value)} />
+                                <input type="text" id="phoneNumber" className="textbox" placeholder="" name="phoneNumber"
+                                 {...register("phoneNumber", {
+                                    required: "This input is required.",
+                                    minLength: {
+                                        value: 10,
+                                        message: "This input atleast have 10 digits"
+                                      },
+                                    maxLength: {
+                                        value: 15,
+                                        message: "This input must not exceed 15 digits"
+                                      }
+                                })}
+                                onChange={(e) => setPhoneNumber(e.target.value)} />
                                 <label for="phoneNumber" className={phoneNumber !="" ? "input-has-value" : ""}>Phone Number</label>
+                                <p className="form-input-error">{errors.phoneNumber?.message}</p>
                             </div>
                             </div>                           
                             <div className="col-sm-12 form-group datePickerBlock">
@@ -183,7 +262,7 @@ const FloorAdd = () => {
                                         {/* <i class='bx bx-calendar' ></i>                                                      */}
                                         {/* <input type="Date" id="dateOpened" className="textbox" placeholder="" required onChange={(e) => setDateOpened(e.target.value)} />
                                         <label for="dateOpened" className={dateOpened !="" ? "input-has-value" : ""}>Date Opened</label>  */}
-                                         <Datetime className="textbox" inputProps={ inputProps } timeFormat={false} dateFormat="DD/MM/YYYY" onChange={floorDate}/> 
+                                         <Datetime className="textbox" inputProps={ inputProps } timeFormat={false} dateFormat="DD/MM/YYYY" name="Date" onChange={floorDate}/> 
                                         <label  for="meeting_date" className={"input-has-value"}>Date Opened</label> 
                                    
                                 </div> 
@@ -191,13 +270,19 @@ const FloorAdd = () => {
                                                      
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                            <select className="form-control textbox" required onChange={(e) => setAccountOpened(e.target.value)}>
+                            <select className="form-control textbox" placeholder="" name="accountOpened"
+                            {...register("accountOpened", {
+                                required: "This input is required."
+                            })}
+                            onChange={(e) => setAccountOpened(e.target.value)}>
                             <option disabled>Account Opened</option>
                             <option value="Yes">Yes</option>
                             <option selected>No</option>
                             </select>
 
                             <label  for="account_Opened" className={accountOpened!="" ? "input-has-value" : ""}>Account Opened</label>
+                            <p className="form-input-error">{errors.accountOpened?.message}</p>
+
                                 {/* <input type="text" className="form-control" placeholder="Account Opened" required onChange={(e) => setAccountOpened(e.target.value)} /> */}
                             </div>
                             </div>
