@@ -177,8 +177,7 @@ const AddUser = () => {
 
 													<div class="user-upload-btn-wrapper">
 														{doc===""?<img alt="" src="adduser.jpg" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} ></img>:
-														<img alt="" src="adduser.jpg" src={doc.base64} ></img>
-														
+														<img alt="" src="adduser.jpg" src={doc.base64} ></img>														
 														}
 														<span class="proCamera"></span>
 														<FileBase64 onDone={getFiles} type="hidden" />

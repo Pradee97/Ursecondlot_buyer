@@ -33,7 +33,7 @@ const EditMyProfile = () => {
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
     const [zipcode, setZipcode] = useState("");
-    const [locationName, setLocationName] = useState("");
+    // const [locationName, setLocationName] = useState("");
     const [isOpen, setIsOpen] = useState(false);
     
     const [popupTitle, setPopupTitle] = useState ("");
@@ -77,7 +77,7 @@ const EditMyProfile = () => {
             setCity(res.data.data[0].city_name);
             setState(res.data.data[0].state_name);
             setZipcode(res.data.data[0].zipcode_id); 
-            setLocationName(res.data.data[0].address);
+            // setLocationName(res.data.data[0].address);
             setMyProfileObj(res.data.data[0]);
         })
             .catch(err => { console.log(err); });
@@ -99,7 +99,7 @@ const EditMyProfile = () => {
             city_id: city,
             state_id: state,
             zipcode_id: zipcode,
-            address: locationName,
+            address: address,
             active:1,
             // buyer_id: userDetails.user_id
            
@@ -221,12 +221,12 @@ const EditMyProfile = () => {
                             </div>
                             </div> */}
 
-                            <div className="col-sm-12 form-group">
+                            {/* <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={myProfileObjc.address} className="form-control textbox" placeholder="" required onChange={(e) => setLocationName(e.target.value)} />
                                 <label for="address" className={locationName !="" ? "input-has-value" : ""}>Location Name</label>
                             </div>
-                            </div>
+                            </div> */}
                                                      
                     
                             <div className="col-lg-12 loginBtn">

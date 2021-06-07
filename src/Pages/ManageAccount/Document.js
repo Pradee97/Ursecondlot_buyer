@@ -8,7 +8,8 @@ import Popup from '../../Component/Popup/Popup';
 import '../../Component/Popup/popup.css';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import FileBase64 from 'react-file-base64';
-import { Button } from 'antd';
+import { Button, Upload } from 'antd';
+const { Dragger } = Upload;
 
 const Document = () => {
     const history = useHistory();
@@ -185,14 +186,14 @@ const Document = () => {
                                             <div class="row">
                                                 <div class="col-lg-4 col-md-4">
                                                     {doc1 === "" ? <div class="docdetails">
-                                                        <h5>Copy of Dealer license</h5>
+                                                    <Dragger onChange={(e) => getFiles(e, "Dealer license")}><h5>Copy of Dealer license</h5>
                                                         <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} class="img-fluid" alt="" />
-                                                        <p> Drag and drop her or
+                                                         <h5>Drag and drop her or</h5>
                                                             <div class="upload-btn-wrapper">
                                                                 <a class="btn"> Upload File</a>
                                                                 <FileBase64 onDone={(e) => getFiles(e, "Dealer license")} />
-                                                            </div>
-                                                        </p>
+                                                            </div></Dragger>
+                                                            
                                                     </div> :
                                                         <div class="docdetails">
                                                             <h5>Copy of Dealer license</h5>

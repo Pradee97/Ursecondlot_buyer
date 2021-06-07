@@ -82,7 +82,7 @@ const MyProfile = () => {
 
                                   <tr>
                                    <td>Email Id<span>{item.email}</span></td>
-                                   <td>Location name<span>{item.address}</span></td>
+                                   {/* <td>Location name<span>{item.address}</span></td> */}
                                  </tr>	
                                </table>                             								
                            </div>

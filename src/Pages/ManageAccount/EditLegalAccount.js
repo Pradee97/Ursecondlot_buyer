@@ -39,7 +39,7 @@ const EditLegalAccount = () => {
     const togglePopup = () => {
       setIsOpen(!isOpen);
     }
-
+    
     const [popupTitle, setPopupTitle] = useState ("");
     const [popupMsg, setPopupMsg] = useState ("");
     const [popupType, setPopupType] = useState ("");
@@ -83,6 +83,8 @@ const EditLegalAccount = () => {
             setTaxidexp(res.data.data[0].tax_id_exp);
 
             setAccountObj(res.data.data[0])
+            console.log("-====res.data.data[0].dealer_license_exp=====>",res.data.data[0].dealer_license_exp)
+            console.log("================>",moment(accountObjc.dealer_license_exp).format('YYYY-MM-DD'))
         })
             .catch(err => { console.log(err); });
     }
@@ -211,13 +213,13 @@ const EditLegalAccount = () => {
 
                             <div class="col-sm-12 form-group">
                             <div className="tbox">  
-                                 <input type="date" defaultValue={moment(accountObjc.dealer_license_exp).format('YYYY-MM-DD')} class="form-control textbox" placeholder="" required onChange={(e) => setDealershipLicenseexp(e.target.value)} />
+                                 <input type="date" defaultValue={accountObjc.dealer_license_exp===undefined?"":accountObjc.dealer_license_exp.substring(0,10)} class="form-control textbox" placeholder="" required onChange={(e) => setDealershipLicenseexp(e.target.value)} />
                                 <label for="first_name" className={dealershipLicenseexp !="" ? "input-has-value" : ""}>Dealership license exp</label>
                             </div> 
                             </div>
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="date" defaultValue={moment(accountObjc.tax_id_exp).format('YYYY-MM-DD')} class="form-control textbox" placeholder="" required onChange={(e) => setTaxidexp(e.target.value)} />
+                                <input type="date" defaultValue={accountObjc.tax_id_exp===undefined?"":accountObjc.tax_id_exp.substring(0,10)} class="form-control textbox" placeholder="" required onChange={(e) => setTaxidexp(e.target.value)} />
                                 <label for="first_name" className={taxidexp!="" ? "input-has-value" : ""}>Tax id exp</label>
                             </div>
                             </div>

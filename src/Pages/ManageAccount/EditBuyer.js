@@ -46,6 +46,7 @@ const EditBuyer = () => {
         setIsOpen(!isOpen);
     }
     const getFiles = (file) => {
+        console.log("======>",file)
         setDoc(file);
     }
 
@@ -163,8 +164,9 @@ const EditBuyer = () => {
                             <div className="row">
                                 <div className="col-sm-12 form-group">
                                 <div class="user-upload-btn-wrapper">
-                                    {image===""?<img alt="" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} />:
-                                    doc===""?<img alt=""  src={image} />:<img alt=""  src={doc.base64} />}  
+                                    {image==="" && doc===""?<img alt="" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} />:                                    
+                                    doc===""?<img alt=""  src={image} />:
+                                    <img alt=""  src={doc.base64} />}  
                                     <span class="proCamera"></span>                                  
                                     <FileBase64 onDone={getFiles} type="hidden" />
                                     

@@ -139,7 +139,9 @@ const Registration = () => {
                         <div className="row">
                         <div className="col-sm-12 form-group">
                         <div class="user-upload-btn-wrapper">
-                        <img alt=""  src="adduser.jpg" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} ></img>
+                        {doc===""?<img alt="" src="adduser.jpg" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} ></img>:
+														<img alt="" src="adduser.jpg" src={doc.base64} ></img>														
+														}
                         <span class="proCamera"></span>      
                         <FileBase64 onDone={ getFiles }  type="hidden"/>
                                          {/* <button>  <img alt="" for="upload" src="adduser.jpg"  /></button>  */}
