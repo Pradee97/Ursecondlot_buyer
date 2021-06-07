@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import DatePicker from 'react-datetime';
 import Datetime from 'react-datetime';
 import moment from 'moment';
+import { useForm } from "react-hook-form";
 import 'react-datetime/css/react-datetime.css';
 import Popup from '../../Component/Popup/Popup';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
@@ -17,6 +18,8 @@ import { useState } from 'react';
 
 const Registration = () => {
     const history = useHistory();
+
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
     const [isOpen, setIsOpen] = useState(false);
     const [isCommonPopupOpen, setIsCommonPopupOpen] = useState(false);
@@ -66,12 +69,12 @@ const Registration = () => {
         setDate(event.format("DD/MM/YYYY"))
     }
    
-    const registrationhandleSubmit = (event) => {
+    const registrationhandleSubmit = (data) => {
         // setOpenLoader(true);
-        event.preventDefault();
+        // event.preventDefault();
         let request = {
             dealer_name: dealerName,
-            first_name: firstName,
+            first_name:firstName,
             last_name: lastName,
             email: email,
             phone_no: phoneNumber,
@@ -132,7 +135,7 @@ const Registration = () => {
         <div>
             <main id="main" className="inner-page">
                 <div className="col-lg-4 card loginBlock">
-                    <form className="registrationform" onSubmit={registrationhandleSubmit} >
+                    <form className="registrationform" onSubmit={handleSubmit(registrationhandleSubmit)} >
                         
                         <h2 className="title"> Dealer Registration</h2>
                         
@@ -149,39 +152,100 @@ const Registration = () => {
 
                             <div className="col-sm-12 form-group">
                                 <div className="tbox">
-                                    <input className="textbox " type="text" placeholder="" id="dealer_name" required maxLength="50" onChange={(e) => setDealerName(e.target.value)} />
+                                    <input className="textbox " type="text" placeholder="" id="dealer_name" name="dealerName"
+                                    {...register("dealerName", {
+                                        required: "This input is required.",
+                                        maxLength: {
+                                            value: 50,
+                                            message: "This input must not exceed 50 characters"
+                                          }
+                                      })}
+                                      onChange={(e) => setDealerName(e.target.value)} />
                                     <label for="dealer_name" className={dealerName != "" ? "input-has-value" : ""}>Dealer name</label>
+                                    <p className="form-input-error">{errors.dealerName?.message}</p>
                                 </div>
                             </div>
                             <div className="col-sm-12 form-group">
                                 <div className="tbox">
-                                    <input className="textbox " type="text" placeholder="" id="first_name" required maxLength="30" onChange={(e) => setFirstName(e.target.value)} />
+                                    <input className="textbox " type="text" placeholder="" id="first_name" name="firstName"
+                                    {...register("firstName", {
+                                        required: "This input is required.",
+                                        maxLength: {
+                                            value: 50,
+                                            message: "This input must not exceed 50 characters"
+                                          }
+                                      })}
+                                      onChange={(e) => setFirstName(e.target.value)} />
                                     <label for="first_name" className={firstName != "" ? "input-has-value" : ""}>First Name</label>
+                                    <p className="form-input-error">{errors.firstName?.message}</p>
                                 </div>
                             </div>
                             <div className="col-sm-12 form-group">
                                 <div className="tbox">
-                                    <input className="textbox " type="text" placeholder="" id="last_name" required maxLength="30" onChange={(e) => setLastName(e.target.value)} />
+                                    <input className="textbox " type="text" placeholder="" id="last_name" name="lastName"
+                                    {...register("lastName", {
+                                        required: "This input is required.",
+                                        maxLength: {
+                                            value: 50,
+                                            message: "This input must not exceed 50 characters"
+                                          }
+                                      })}
+                                      onChange={(e) => setLastName(e.target.value)} />
                                     <label for="last_name" className={lastName != "" ? "input-has-value" : ""}>Last Name</label>
+                                    <p className="form-input-error">{errors.lastName?.message}</p>
                                 </div>
                             </div>
                             <div className="col-sm-12 form-group">
                                 <div className="tbox">
-                                    <input className="textbox " type="text" placeholder="" id="phone_no" required onChange={(e) => setPhoneNumber(e.target.value)} />
+                                    <input className="textbox " type="tel" placeholder="" id="phone_no" name="phoneNumber"
+                                    {...register("phoneNumber", {
+                                        required: "This input is required.",
+                                        // pattern: {
+                                        // value: "\(\d{3}\)[ ]?\d{3}[-]?\d{4}",
+                                        // message: "Accept only numbers and hypen('-') "
+                                        // },
+                                        minLength: {
+                                            value: 10,
+                                            message: "This input atleast have 10 digits"
+                                          },
+                                        maxLength: {
+                                            value: 15,
+                                            message: "This input must not exceed 15 digits"
+                                          }
+                                    })}
+                                    onChange={(e) => setPhoneNumber(e.target.value)} />
                                     <label for="phone_no" className={phoneNumber != "" ? "input-has-value" : ""}>Phone</label>
+                                    <p className="form-input-error">{errors.phoneNumber?.message}</p>
                                 </div>
                             </div>
                             <div className="col-sm-12 form-group">
                                 <div className="tbox">
-                                    <input className="textbox" type="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Invalid email address" placeholder="" id="email" required onChange={(e) => setEmail(e.target.value)} />
+                                    <input className="textbox" type="text" placeholder="" id="email" name="email"
+                                    {...register("email", {
+                                        required: "This input is required.",
+                                        pattern: {
+                                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                        message: "Must match the email format"
+                                        }
+                                    })}
+                                    onChange={(e) => setEmail(e.target.value)} /> 
                                     <label for="email" className={email != "" ? "input-has-value" : ""}>Email</label>
-
+                                    <p className="form-input-error">{errors.email?.message}</p>
                                 </div>
                             </div>
                             <div className="col-sm-12 form-group">
                                 <div className="tbox">
-                                    <input className="textbox " type="text" placeholder="" id="address" maxLength="300" required onChange={(e) => setAddress(e.target.value)} />
+                                    <input className="textbox " type="text" placeholder="" id="address" name="address"
+                                    {...register("address", {
+                                        required: "This input is required.",
+                                        maxLength: {
+                                            value: 150,
+                                            message: "This input must not exceed 150 characters"
+                                          }
+                                      })}
+                                      onChange={(e) => setAddress(e.target.value)} /> 
                                     <label for="address" className={address != "" ? "input-has-value" : ""}>Address</label>
+                                    <p className="form-input-error">{errors.address?.message}</p>
                                 </div>
                             </div>
 
@@ -194,7 +258,11 @@ const Registration = () => {
                             <div className="col-sm-8 form-group">
                                 <div className="tbox">
                                     {/* {/ <lable for="drop" className={option !="" ? "input-has-value" : ""}>How many years in car business</lable> /} */}
-                                    <select id="drop" placeholder="" required className="form-control custom-select browser-default textbox" required onChange={(e) => setOption(e.target.value)}>
+                                    <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" 
+                                    {...register("option", {
+                                        required: "This input is required."
+                                    })}
+                                    onChange={(e) => setOption(e.target.value)}>
                                         <option style={{"display":"none"}}></option>
                                         <option value="Less then 1">Less then 1</option>
                                         <option value="1-3">1-3</option>
@@ -204,8 +272,8 @@ const Registration = () => {
                                         <option value="15-20">15-20</option>
                                         <option value="More then 20">More then 20</option>
                                     </select>
-
                                     <label for="no_years" className={"input-has-value"}>How many years in car business</label>
+                                    <p className="form-input-error">{errors.option?.message}</p>
                                 </div>
                             </div>
 
@@ -220,15 +288,21 @@ const Registration = () => {
                                 <div className="tbox">
                                 <div className="textbox">
                                 
-                                    <Datetime inputProps={ inputProps } timeFormat={false} dateFormat="DD/MM/YYYY" isValidDate={disablePastDt} onChange={registrationDate}/>
+                                    <Datetime inputProps={ inputProps } timeFormat={false} dateFormat="DD/MM/YYYY" name="Date" isValidDate={disablePastDt} onChange={registrationDate}/>
                                     <label  for="meeting_date" className={date!="" ? "input-has-value" : ""}>Select Date</label>
+                                    <p className="form-input-error">{errors.Date?.message}</p>
                                 </div>
                                 </div>
                             </div>
                             <div className="col-sm-6 form-group timepicker">
                                 <div className="tbox">
-                                    <input type="time" className="form-control textbox" placeholder="Select Time" required onChange={(e) => setTime(e.target.value)} />
+                                    <input type="time" className="form-control textbox" placeholder="Select Time" name="Time"
+                                     {...register("Time", {
+                                        required: "This input is required."
+                                    })}
+                                    onChange={(e) => setTime(e.target.value)} />
                                     <label for="meeting_time" className={"input-has-value"}>Select Time</label>
+                                    <p className="form-input-error">{errors.Time?.message}</p>
                                 </div>
                             </div>
                             <div className="col-sm-12 form-group agreetab">
