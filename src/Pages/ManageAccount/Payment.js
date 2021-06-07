@@ -17,14 +17,17 @@ import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccount
 import API from "../../Services/BaseService";
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import StateAndCity from '../../Component/StateAndCity/StateAndCity'
+import { useForm } from "react-hook-form";
 
 const Payment = () => {
     const history = useHistory();
     const [isOpen, setIsOpen] = useState(false);
+    const { register, handleSubmit, formState: { errors } } = useForm();
  
     const togglePopup = () => {
       setIsOpen(!isOpen);
     }
+
 
     const [popupTitle, setPopupTitle] = useState ("");
     const [popupMsg, setPopupMsg] = useState ("");
@@ -113,9 +116,9 @@ const Payment = () => {
         setDoc(event.target.files[0]);        
       };
 
-    const paymenthandleSubmit= (event) => {
+    const paymenthandleSubmit= (data) => {
         // setOpenLoader(true);
-        event.preventDefault();        
+        // event.preventDefault();        
         console.log("=====docdoc====>",doc)
         let request = {
             buyer_id: userDetails.user_id,
@@ -229,56 +232,119 @@ const Payment = () => {
 
 
                                         <div className="paymentform card col-lg-12">
-                                            <form className="backaccountform addpaymentform" onSubmit={paymenthandleSubmit}>
+                                            <form className="backaccountform addpaymentform" onSubmit={handleSubmit(paymenthandleSubmit)}>
                                                 <h2 className="title"> Bank account information</h2>
                                                 <div className="row">
 
 
                                                     <div className="col-sm-12 form-group topforms">
                                                         <div className="tbox">
-                                                            <input type="text" className="textbox" name="dname" id="name-d" placeholder="" required  onChange={(e) => setDealershipName(e.target.value)} />
+                                                            <input type="text" className="textbox" name="dealershipName" id="name-d" placeholder="" 
+                                                          {...register("dealershipName", {
+                                                            required: "This input is required.",
+                                                            maxLength: {
+                                                                value: 50,
+                                                                message: "This input must not exceed 50 characters"
+                                                              }
+                                                          })}
+                                                            onChange={(e) => setDealershipName(e.target.value)} />
                                                             <label for="name-d" className={dealershipName !="" ? "input-has-value" : ""}>Dealership name</label>
+                                                            <p className="form-input-error">{errors.dealershipName?.message}</p>
                                                         </div>
                                                     </div>
                                                     <div className="col-sm-12 form-group">
                                                         <div className="tbox">
-                                                            <input type="text" className="textbox" name="fname" id="name-f" placeholder="" required  onChange={(e) => setAccountHolderName(e.target.value)} />
+                                                            <input type="text" className="textbox" name="accountHolderName" id="name-f" placeholder="" 
+                                                           {...register("accountHolderName", {
+                                                            required: "This input is required.",
+                                                            maxLength: {
+                                                                value: 50,
+                                                                message: "This input must not exceed 50 characters"
+                                                              }
+                                                          })}
+                                                            onChange={(e) => setAccountHolderName(e.target.value)} />
                                                             <label for="name-f" className={accountHolderName !="" ? "input-has-value" : ""}>Signer on account"</label>
+                                                            <p className="form-input-error">{errors.accountHolderName?.message}</p>
                                                         </div>
                                                     </div>
 
                                                     <div className="col-sm-12 form-group">
                                                         <div className="tbox">
-                                                            <input type="text" className="textbox" name="lname" id="name-l" placeholder="" required  onChange={(e) => setBankName(e.target.value)} />
+                                                            <input type="text" className="textbox" name="bankName" id="name-l" placeholder="" 
+                                                          {...register("bankName", {
+                                                            required: "This input is required.",
+                                                            maxLength: {
+                                                                value: 50,
+                                                                message: "This input must not exceed 50 characters"
+                                                              }
+                                                          })}
+                                                            onChange={(e) => setBankName(e.target.value)} />
                                                             <label for="name-b" className={bankName !="" ? "input-has-value" : ""}>Bank name</label>
+                                                            <p className="form-input-error">{errors.bankName?.message}</p>
                                                         </div>
                                                     </div>
 
                                                     <div className="col-sm-12 form-group">
                                                         <div className="tbox">
-                                                            <input type="text" className="textbox" name="anumber" id="anumber" placeholder="" required  onChange={(e) => setAccountNumber(e.target.value)} />
+                                                            <input type="text" className="textbox" name="accountNumber" id="anumber" placeholder="" 
+                                                           {...register("accountNumber", {
+                                                            required: "This input is required.",
+                                                            maxLength: {
+                                                                value: 50,
+                                                                message: "This input must not exceed 50 characters"
+                                                              }
+                                                          })}
+                                                            onChange={(e) => setAccountNumber(e.target.value)} />
                                                             <label for="anumber" className={accountNumber !="" ? "input-has-value" : ""}>Account number</label>
+                                                            <p className="form-input-error">{errors.accountNumber?.message}</p>
                                                         </div>
                                                     </div>
 
                                                     <div className="col-sm-12 form-group">
                                                         <div className="tbox">
-                                                            <input type="text" className="textbox" name="achnumber" id="achnumber" placeholder="" required  onChange={(e) => setACHNumber(e.target.value)} />
+                                                            <input type="text" className="textbox" name="ACHnumber" id="achnumber" placeholder="" 
+                                                          {...register("ACHnumber", {
+                                                            required: "This input is required.",
+                                                            maxLength: {
+                                                                value: 50,
+                                                                message: "This input must not exceed 50 characters"
+                                                              }
+                                                          })}
+                                                            onChange={(e) => setACHNumber(e.target.value)} />
                                                             <label for="achnumber" className={ACHnumber !="" ? "input-has-value" : ""}>ACH number</label>
+                                                            <p className="form-input-error">{errors.ACHnumber?.message}</p>
                                                         </div>
                                                     </div>
 
                                                     <div className="col-sm-12 form-group">
                                                         <div className="tbox">
-                                                            <input type="text" className="textbox" name="rtnumber" id="rtnumber" placeholder="" required  onChange={(e) => setRoutingNumber(e.target.value)} />
+                                                            <input type="text" className="textbox" name="routingNumber" id="rtnumber" placeholder="" 
+                                                          {...register("routingNumber", {
+                                                            required: "This input is required.",
+                                                            maxLength: {
+                                                                value: 50,
+                                                                message: "This input must not exceed 50 characters"
+                                                              }
+                                                          })}
+                                                            onChange={(e) => setRoutingNumber(e.target.value)} />
                                                             <label for="rtnumber" className={routingNumber !="" ? "input-has-value" : ""}>Routing number</label>
+                                                            <p className="form-input-error">{errors.routingNumber?.message}</p>
                                                         </div>
                                                     </div>
 
                                                     <div className="col-sm-12 form-group">
                                                         <div className="tbox">
-                                                            <input type="text" className="textbox" name="baddress" id="baddress" placeholder="" required  onChange={(e) => setBankAddress(e.target.value)} />
+                                                            <input type="text" className="textbox" name="bankAddress" id="baddress" placeholder="" 
+                                                           {...register("bankAddress", {
+                                                            required: "This input is required.",
+                                                            maxLength: {
+                                                                value: 150,
+                                                                message: "This input must not exceed 150 characters"
+                                                              }
+                                                          })}
+                                                            onChange={(e) => setBankAddress(e.target.value)} />
                                                             <label for="baddress" className={bankAddress !="" ? "input-has-value" : ""}>Bank address</label>
+                                                            <p className="form-input-error">{errors.bankAddress?.message}</p>
                                                         </div>
                                                     </div>
                                                     <StateAndCity 
@@ -289,8 +355,17 @@ const Payment = () => {
 
                                                     <div className="col-sm-12 form-group">
                                                         <div className="tbox">
-                                                            <input type="text" className="textbox" name="ahaddress" id="ahaddress" placeholder="" required  onChange={(e) => setAccountHolderAddress(e.target.value)} />
+                                                            <input type="text" className="textbox" name="accountHolderAddress" id="ahaddress" placeholder="" 
+                                                          {...register("accountHolderAddress", {
+                                                            required: "This input is required.",
+                                                            maxLength: {
+                                                                value: 150,
+                                                                message: "This input must not exceed 150 characters"
+                                                              }
+                                                          })}
+                                                            onChange={(e) => setAccountHolderAddress(e.target.value)} />
                                                             <label for="ahaddress" className={accountHolderAddress !="" ? "input-has-value" : ""}>Account Holder Address</label>
+                                                            <p className="form-input-error">{errors.accountHolderAddress?.message}</p>
                                                         </div>
                                                     </div>
 

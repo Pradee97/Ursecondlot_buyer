@@ -7,11 +7,15 @@ import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccount
 import ls from 'local-storage';
 import StateAndCity from '../../Component/StateAndCity/StateAndCity';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
+import { useForm } from "react-hook-form";
 import Datetime from 'react-datetime';
 import moment from 'moment';
 import FileBase64 from 'react-file-base64';
 const AddUser = () => {
 	const history = useHistory();
+
+    const { register, handleSubmit, formState: { errors } } = useForm();
+
 	let userDetails = ls.get('userDetails');
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
@@ -75,10 +79,10 @@ const AddUser = () => {
 	const disablePastDt = current => {
 		return current.isAfter(yesterday);
 	};
-	const registrationhandleSubmit = (event) => {
+	const registrationhandleSubmit = (data) => {
 
-		event.preventDefault();
-
+		// event.preventDefault();
+		
 		let request = {
 			dealer_id: userDetails.dealer_id,
 			first_name: firstName,
@@ -165,8 +169,9 @@ const AddUser = () => {
 								<div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 adduserpagerightblock">
 									<div className="adduserpage-inner">
 										<div className="col-lg-12">
+										
+											<form class="adduserpageform" onSubmit={handleSubmit(registrationhandleSubmit)}>
 
-											<form class="adduserpageform" onSubmit={registrationhandleSubmit}>
 												<div className="row">
 
 													<div className="section-title">
@@ -198,33 +203,81 @@ const AddUser = () => {
 
 													<div className="col-sm-12 form-group">
 														<div className="tbox">
-															<input className="textbox " type="text" placeholder="" id="first_name" required maxLength="30" onChange={(e) => setFirstName(e.target.value)} />
+															<input className="textbox " type="text" placeholder="" id="first_name"  maxLength="30" name="firstName"
+															 {...register("firstName", {
+																required: "This input is required.",
+																maxLength: {
+																	value: 50,
+																	message: "This input must not exceed 50 characters"
+																  }
+															  })}
+															onChange={(e) => setFirstName(e.target.value)} />
 															<label for="first_name" className={firstName != "" ? "input-has-value" : ""}>First Name</label>
+															<p className="form-input-error">{errors.firstName?.message}</p>
 														</div>
 													</div>
 													<div className="col-sm-12 form-group">
 														<div className="tbox">
-															<input className="textbox " type="text" placeholder="" id="last_name" required maxLength="30" onChange={(e) => setLastName(e.target.value)} />
+															<input className="textbox " type="text" placeholder="" id="last_name"  maxLength="30" name="lastName"
+															 {...register("lastName", {
+																required: "This input is required.",
+																maxLength: {
+																	value: 50,
+																	message: "This input must not exceed 50 characters"
+																  }
+															  })}
+															onChange={(e) => setLastName(e.target.value)} />
 															<label for="last_name" className={lastName != "" ? "input-has-value" : ""}>Last Name</label>
+															<p className="form-input-error">{errors.lastName?.message}</p>
 														</div>
 													</div>
 													<div className="col-sm-12 form-group">
 														<div className="tbox">
-															<input className="textbox " type="text" placeholder="" id="phone_no" required onChange={(e) => setPhoneNumber(e.target.value)} />
+															<input className="textbox " type="text" placeholder="" id="phone_no"  name="phoneNumber"
+															 {...register("phoneNumber", {
+																required: "This input is required.",
+																	minLength: {
+																	value: 10,
+																	message: "This input atleast have 10 digits"
+																  },
+																maxLength: {
+																	value: 15,
+																	message: "This input must not exceed 15 digits"
+																  }
+															})}
+															onChange={(e) => setPhoneNumber(e.target.value)} />
 															<label for="phone_no" className={phoneNumber != "" ? "input-has-value" : ""}>Phone</label>
-														</div>
+															<p className="form-input-error">{errors.phoneNumber?.message}</p>
+												    	</div>
 													</div>
 													<div className="col-sm-12 form-group">
 														<div className="tbox">
-															<input className="textbox" type="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Invalid email address" placeholder="" id="email" required onChange={(e) => setEmail(e.target.value)} />
+															<input className="textbox" type="text"  placeholder="" id="email" name="email"
+															 {...register("email", {
+																required: "This input is required.",
+																pattern: {
+																value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+																message: "Must match the email format"
+																}
+															})}
+															onChange={(e) => setEmail(e.target.value)} />
 															<label for="email" className={email != "" ? "input-has-value" : ""}>Email</label>
-
+															<p className="form-input-error">{errors.email?.message}</p>
 														</div>
 													</div>
 													<div className="col-sm-12 form-group">
 														<div className="tbox">
-															<input className="textbox " type="text" placeholder="" id="address" maxLength="300" required onChange={(e) => setAddress(e.target.value)} />
+															<input className="textbox " type="text" placeholder="" id="address" maxLength="300" name="address"
+															 {...register("address", {
+																required: "This input is required.",
+																maxLength: {
+																	value: 150,
+																	message: "This input must not exceed 150 characters"
+																  }
+															  })}
+															onChange={(e) => setAddress(e.target.value)} />
 															<label for="address" className={address != "" ? "input-has-value" : ""}>Address</label>
+															<p className="form-input-error">{errors.address?.message}</p>
 														</div>
 													</div>
 
@@ -237,8 +290,16 @@ const AddUser = () => {
 													<div className="col-sm-8 form-group selectTbox">
 														<div className="tbox">
 															{/* {/ <lable for="drop" className={option !="" ? "input-has-value" : ""}>How many years in car business</lable> /} */}
-															<select id="drop" placeholder="" required className="form-control custom-select browser-default textbox" required onChange={(e) => setOption(e.target.value)}>
-																<option disabled >How many years in car business</option>
+															<select id="drop" placeholder="" name="dropoption" className="form-control custom-select browser-default textbox" 
+															 {...register("dropoption", {
+																required: "This input is required.",
+																maxLength: {
+																	value: 50,
+																	message: "This input must not exceed 50 characters"
+																  }
+															  })}
+															onChange={(e) => setOption(e.target.value)}>
+																{/* <option disabled >How many years in car business</option> */}
 																<option value="Less then 1">Less then 1</option>
 																<option value="1-3">1-3</option>
 																<option value="3-5">3-5</option>
@@ -249,6 +310,7 @@ const AddUser = () => {
 															</select>
 
 															<label for="no_years" className={"input-has-value"}>How many years in car business</label>
+															<p className="form-input-error">{errors.dropoption?.message}</p>
 														</div>
 													</div>
 
