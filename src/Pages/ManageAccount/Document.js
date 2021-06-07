@@ -186,13 +186,13 @@ const Document = () => {
                                             <div class="row">
                                                 <div class="col-lg-4 col-md-4">
                                                     {doc1 === "" ? <div class="docdetails">
-                                                    <Dragger onChange={(e) => getFiles(e, "Dealer license")}><h5>Copy of Dealer license</h5>
+                                                    <h5>Copy of Dealer license</h5>
                                                         <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} class="img-fluid" alt="" />
                                                          <h5>Drag and drop her or</h5>
                                                             <div class="upload-btn-wrapper">
                                                                 <a class="btn"> Upload File</a>
                                                                 <FileBase64 onDone={(e) => getFiles(e, "Dealer license")} />
-                                                            </div></Dragger>
+                                                            </div>
                                                             
                                                     </div> :
                                                         <div class="docdetails">
