@@ -78,12 +78,28 @@ const Document = () => {
     useEffect(() => {
         getDocuments();
     }, []);
-    const deleteFiles = (document_id)=>{
+
+    const deleteFileConfirmation = (document_id) => {
+        console.log("document_id====",document_id)
+        localStorage.setItem("deletDocumentId",document_id)
+        togglePopup()
+        setPopupTitle("Document Delete");
+        setPopupMsg("are ");
+        setPopupType("confirm");
+        setPopupActionType("confirm");
+    }
+    const deleteingFile= ()=>{
+        
+        // setIsOpen(!isOpen);
+        togglePopup()
+         const document_id = localStorage.getItem("deletDocumentId")
+         console.log("document_id==222==",document_id)
         let request = {
-            document_id: document_id
+            document_id
         };
         const deleteFile=API.post('documentDelete/update',request)
         deleteFile.then(response=>{
+            console.log("delete res====", response)
             if (response.data.success) {
                 togglePopup()
                 setPopupTitle("Document Delete");
@@ -91,7 +107,9 @@ const Document = () => {
                 setPopupType("success");
                 setPopupActionType("redirect");
                 setPopupActionValue("ok");
-                setPopupActionPath("/document")
+                // setPopupActionValue("close");
+                setPopupActionPath("/document");
+                // setPopupActionType("close");
             } else {
                 togglePopup()
                 setPopupTitle("Document Deleted");
@@ -204,7 +222,7 @@ const Document = () => {
                                                                     <a class="btn"> Update File</a>
                                                                     <FileBase64 onDone={(e) => updateFiles(e, doc1.document_id)} />
                                                                 </div>
-                                                                <a class="btn deleteFile" onClick={(e)=>deleteFiles(doc1.document_id)}> Delete File</a>
+                                                                <a class="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc1.document_id)}> Delete File</a>
                                                             </p>
                                                         </div>}
                                                 </div>
@@ -229,7 +247,7 @@ const Document = () => {
                                                                     <FileBase64 onDone={(e) => updateFiles(e, doc2.document_id)} />
                                                                 </div>
 
-                                                                <a class="btn deleteFile" onClick={(e)=>deleteFiles(doc2.document_id)}> Delete File</a>
+                                                                <a class="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc2.document_id)}> Delete File</a>
                                                             </p>
                                                         </div>
                                                     }
@@ -255,7 +273,7 @@ const Document = () => {
                                                                 <FileBase64 onDone={(e) => updateFiles(e, doc3.document_id)} />
                                                             </div>
 
-                                                            <a class="btn deleteFile" onclick={(e)=>deleteFiles(doc3.document_id)}> Delete File</a>
+                                                            <a class="btn deleteFile" onclick={(e)=>deleteFileConfirmation(doc3.document_id)}> Delete File</a>
                                                         </p>
                                                     </div>
                                                     }
@@ -285,7 +303,7 @@ const Document = () => {
                                                                     <a class="btn"> Update File</a>
                                                                     <FileBase64 onDone={(e) => updateFiles(e, doc4.document_id)} />
                                                                 </div>
-                                                                <a class="btn deleteFile" onClick={(e)=>deleteFiles(doc4.document_id)}> Delete File</a>
+                                                                <a class="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc4.document_id)}> Delete File</a>
                                                             </p>
                                                         </div>}
                                                 </div>
@@ -309,7 +327,7 @@ const Document = () => {
                                                                     <a class="btn"> Update File</a>
                                                                     <FileBase64 onDone={(e) => updateFiles(e, doc5.document_id)} />
                                                                 </div>
-                                                                <a class="btn deleteFile" onClick={(e)=>deleteFiles(doc5.document_id)}> Delete File</a>
+                                                                <a class="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc5.document_id)}> Delete File</a>
                                                             </p>
                                                         </div>}
                                                 </div>
@@ -333,7 +351,7 @@ const Document = () => {
                                                              <a class="btn"> Update File</a>
                                                              <FileBase64 onDone={(e) => updateFiles(e, doc6.document_id)} />
                                                          </div>
-                                                         <a class="btn deleteFile" onClick={(e)=>deleteFiles(doc6.document_id)}> Delete File</a>
+                                                         <a class="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc6.document_id)}> Delete File</a>
                                                      </p>
                                                  </div>}
                                                 </div>                                                
@@ -361,7 +379,7 @@ const Document = () => {
                                                             <a class="btn"> Update File</a>
                                                             <FileBase64 onDone={(e) => updateFiles(e, doc7.document_id)} />
                                                         </div>
-                                                        <a class="btn deleteFile" onClick={(e)=>deleteFiles(doc7.document_id)}> Delete File</a>
+                                                        <a class="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc7.document_id)}> Delete File</a>
                                                     </p>
                                                 </div>}
                                                 </div>
@@ -385,7 +403,7 @@ const Document = () => {
                                                             <a class="btn"> Update File</a>
                                                             <FileBase64 onDone={(e) => updateFiles(e, doc8.document_id)} />
                                                         </div>
-                                                        <a class="btn deleteFile" onClick={(e)=>deleteFiles(doc8.document_id)}> Delete File</a>
+                                                        <a class="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc8.document_id)}> Delete File</a>
                                                     </p>
                                                 </div>}
                                                 </div>
@@ -409,7 +427,7 @@ const Document = () => {
                                                             <a class="btn"> Update File</a>
                                                             <FileBase64 onDone={(e) => updateFiles(e, doc9.document_id)} />
                                                         </div>
-                                                        <a class="btn deleteFile" onClick={(e)=>deleteFiles(doc9.document_id)}> Delete File</a>
+                                                        <a class="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc9.document_id)}> Delete File</a>
                                                     </p>
                                                 </div>}
                                                 </div>
@@ -437,7 +455,7 @@ const Document = () => {
                                                             <a class="btn"> Update File</a>
                                                             <FileBase64 onDone={(e) => updateFiles(e, doc10.document_id)} />
                                                         </div>
-                                                        <a class="btn deleteFile" onClick={(e)=>deleteFiles(doc10.document_id)}> Delete File</a>
+                                                        <a class="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc10.document_id)}> Delete File</a>
                                                     </p>
                                                 </div>}
                                                 </div>
@@ -462,7 +480,7 @@ const Document = () => {
                                                             <a class="btn"> Update File</a>
                                                             <FileBase64 onDone={(e) => updateFiles(e, doc11.document_id)} />
                                                         </div>
-                                                        <a class="btn deleteFile" onClick={(e)=>deleteFiles(doc11.document_id)}> Delete File</a>
+                                                        <a class="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc11.document_id)}> Delete File</a>
                                                     </p>
                                                 </div>}
                                                 </div>
@@ -493,6 +511,7 @@ const Document = () => {
                         popupActionType={popupActionType}
                         popupActionValue={popupActionValue}
                         popupActionPath={popupActionPath}
+                        Confirmation={deleteingFile}
                     />}
             </main>
         </div>
