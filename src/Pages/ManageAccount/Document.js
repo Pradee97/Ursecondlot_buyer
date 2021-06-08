@@ -84,34 +84,29 @@ const Document = () => {
         localStorage.setItem("deletDocumentId",document_id)
         togglePopup()
         setPopupTitle("Document Delete");
-        setPopupMsg("are ");
+        setPopupMsg("Are you sure, You want to delete this!");
         setPopupType("confirm");
         setPopupActionType("confirm");
     }
+
     const deleteingFile= ()=>{
-        
-        // setIsOpen(!isOpen);
-        togglePopup()
+        setIsOpen(false);
          const document_id = localStorage.getItem("deletDocumentId")
-         console.log("document_id==222==",document_id)
         let request = {
             document_id
         };
         const deleteFile=API.post('documentDelete/update',request)
         deleteFile.then(response=>{
-            console.log("delete res====", response)
             if (response.data.success) {
-                togglePopup()
+                setIsOpen(true);
                 setPopupTitle("Document Delete");
                 setPopupMsg("Document Successfully Deleted");
                 setPopupType("success");
                 setPopupActionType("redirect");
                 setPopupActionValue("ok");
-                // setPopupActionValue("close");
                 setPopupActionPath("/document");
-                // setPopupActionType("close");
             } else {
-                togglePopup()
+                setIsOpen(true);
                 setPopupTitle("Document Deleted");
                 setPopupMsg("Document is not Deleted, Please try Again");
                 setPopupType("error");
