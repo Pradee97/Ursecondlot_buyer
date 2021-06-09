@@ -315,7 +315,7 @@ const AddUser = () => {
 
 												</div>
 												<div className="section-title">
-													<h2>Buyer Privileges</h2>
+													<h2 className="buyertitle">Buyer Privileges</h2>
 												</div>
 												<div class="col-sm-12">
 													<div class="radio input-group privileges">

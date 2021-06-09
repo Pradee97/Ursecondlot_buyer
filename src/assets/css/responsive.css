@@ -130,7 +130,9 @@ padding-right: 20px;
     flex: 33.33% 1 !important;
     max-width: 33.33% !important;
 }
-	
+.adduserpageforminner .form-group label {    
+    font-size: 14px!important;
+}
 
 	
 }
@@ -193,6 +195,10 @@ padding-right: 20px;
     padding:  20px;
 }
 
+.adduserpageforminner .col-sm-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
 	
 }
 
@@ -252,7 +258,9 @@ padding-right: 20px;
 
 @media (max-width: 640px) {
 	
-	
+	.adduserpageforminner .form-group {
+        padding: 3px!important;
+    }   
 	
 	
 	
