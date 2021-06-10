@@ -14,6 +14,7 @@ const StateAndCity = props => {
     const [defaultCityValue, setDefaultCityValue] = useState(props.defaultCityValue);
     const [cityName, setCityName] = useState("");
     const [cityNameList, setCityNameList] = useState([]);
+    const [zipcodeList, setZipcodeList] = useState([]);
     
     
 
@@ -54,16 +55,29 @@ const StateAndCity = props => {
         })
             .catch(err => { console.log(err); });
     }
+    function fetchZipcode(e) {
+        let request = {
+            city_id: e
+        };
+        const state = API.post('zipcode/condition', request);
+        state.then(res => {
+            console.log("zipcode", res.data.data)
+            setZipcodeList(res.data.data);
+        })
+            .catch(err => { console.log(err); });
+    }
 
     useEffect(() => {
-        props.setStateValue(stateName);
-        props.setCityValue(cityName);
-        props.setZipcodeValue(zipCodeId);
-       
+        if(stateName && cityName && zipCodeId){
+        props.setStateValue(stateNameList.filter(data=>data.state_name == stateName)[0].state_id);
+        props.setCityValue(cityNameList.filter(data=>data.city_name==cityName)[0].city_id);
+        props.setZipcodeValue(zipcodeList.filter(data=>data.zipcode==zipCodeId)[0].zipcode_id);   
+        }    
     }, [stateName, cityName, zipCodeId]);
 
     useEffect (()=>{
         if(isEdit){
+            console.log("====defaultZipcodeValue===>",props.defaultZipcodeValue,props.defaultStateValue,props.defaultCityValue)
             setDefaultStateValue(props.defaultStateValue);
             setDefaultCityValue(props.defaultCityValue);
             setDefaultZipcodeValue(props.defaultZipcodeValue);
@@ -80,14 +94,23 @@ const StateAndCity = props => {
 
     const handleState = (e) => {  
         setStateName( stateNameList.filter(data=>data.state_id == e.target.value)[0].state_name)
+        setCityNameList("");
+        setZipcodeList("");
         fetchCity(e.target.value)
         setZipcodeId("")
     }
 
     const handleCity = (e) => {
-        console.log("--------handleCity")
-        setCityName(e.target.value)
+        setCityName(cityNameList.filter(data=>data.city_id==e.target.value)[0].city_name)
+        setZipcodeList("");
+        fetchZipcode(e.target.value)
+        //setCityName(e.target.value)
         setZipcodeId("")
+    }
+
+    const handleZipcode = (e) => {
+
+        setZipcodeId(e.target.value)
     }
 
     const setZipcodeNormal = (data) => {
@@ -132,7 +155,7 @@ return (
                     <option style={{"display":"none"}}></option>
                         {cityNameList.length>0 &&
                             <>
-                                {cityNameList.map((city, index) => <option key={city.city_id} value={city.city_name} selected = { isEdit ?  city.city_name === defaultCityValue ? true : false : false} >{city.city_name}</option>)}
+                                {cityNameList.map((city, index) => <option key={city.city_id} value={city.city_id} selected = { isEdit ?  city.city_name === defaultCityValue ? true : false : false} >{city.city_name}</option>)}
                             </>
                         }
                     </select>
@@ -140,7 +163,22 @@ return (
                 </div>                   
             </div>
         </div>
-        <div className="col-sm-4 form-group">
+        <div className="col-sm-4 form-group selectTbox">
+            <div className="tbox">              
+                <div className="selcetclass"> 
+                    <select id="zipcode_id" className="form-control custom-select browser-default textbox" required defaultValue={defaultZipcodeValue} onChange={handleZipcode}>
+                    <option style={{"display":"none"}}></option>
+                        {zipcodeList.length>0 &&
+                            <>
+                                {zipcodeList.map((zipcode, index) => <option key={zipcode.zipcode_id} value={zipcode.zipcode} selected = { isEdit ?  zipcode.zipcode === defaultZipcodeValue ? true : false : false} >{zipcode.zipcode}</option>)}
+                            </>
+                        }
+                    </select>
+                    <label  for="zipcode_id" className={"input-has-value"}>Zipcode</label>
+                </div>                   
+            </div>
+        </div>
+        {/* <div className="col-sm-4 form-group">
             <div className="tbox">
                 <div className="selcetclass">                 
                     <>
@@ -149,7 +187,7 @@ return (
                     </>                       
                 </div>
             </div>
-        </div>
+        </div> */}
     </>
 )}
 

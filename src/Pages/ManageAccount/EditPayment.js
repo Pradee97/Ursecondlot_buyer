@@ -73,7 +73,6 @@ const EditPayment = () => {
         event.preventDefault();        
     
         let request = {
-
             dealership_name: dealershipName,
             acc_name: accountHolderName,      
             bank_name: bankName,

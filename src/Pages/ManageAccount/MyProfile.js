@@ -77,7 +77,7 @@ const MyProfile = () => {
                                  </tr>	
                                    <tr>
                                    <td>Mobile phone<span>{item.mobile_no}</span></td>
-                                   <td>Zip code<span>{item.zipcode_id}</span></td>
+                                   <td>Zip code<span>{item.zipcode}</span></td>
                                  </tr>
 
                                   <tr>

@@ -78,7 +78,7 @@ const EditBuyer = () => {
             setAddress(res.data.data[0].address);
             setCity(res.data.data[0].city_name);
             setState(res.data.data[0].state_name);
-            setZipcode(res.data.data[0].zipcode_id);
+            setZipcode(res.data.data[0].zipcode);
             setLocationName(res.data.data[0].address);
             setMyProfileObj(res.data.data[0]);
             setBuyNow(res.data.data[0].buy_now);
@@ -158,6 +158,7 @@ const EditBuyer = () => {
     return (
         <div>
             <main id="main" className="inner-page">
+                <div className="editprofile">
             <div className="container" >
 			<div className="row content">
             <div className="col-lg-3 col-md-4 col-sm-12 mgaccountleftblock">
@@ -174,11 +175,13 @@ const EditBuyer = () => {
                   </div>
                   <ManageAccountLinks />
                 </div>
-                <div className="col-lg-4  loginBlock">
-                    <button className="back-btn-paymentform backBtn" onClick={() => history.push("/buyers")}><i class="icofont-arrow-left"></i> Back</button>
-                    <div className="col-lg-12 card loginBlock myprofileeditform">
+                <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0">
+                    <div className="col-lg-12 myprofileeditform">
                         <form className="registrationform" onSubmit={updateMyProfile} >
-                            <h2 className="title"> Edit Buyer </h2>
+                            <div className="section-title">
+								<button className="back-btn-paymentform backBtn" onClick={() => history.push("/buyers")}><i class="icofont-arrow-left"></i> Back</button>
+								<h2>Edit Buyer</h2>
+							</div>
                             <div className="row">
                                 <div className="col-sm-12 form-group">
                                 <div class="user-upload-btn-wrapper">
@@ -242,7 +245,7 @@ const EditBuyer = () => {
                                     </div>
                                 </div>
                                 <div className="section-title">
-                                    <h2>Buyer Privileges</h2>
+                                <h2 className="buyertitle">Buyer Privileges</h2>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="radio input-group privileges">
@@ -287,7 +290,7 @@ const EditBuyer = () => {
                                 </div>
                             </div>
                         </form>
-                    </div></div></div></div>
+                    </div></div></div></div></div>
                 <section id="playstoreBlock" className="playstoreBlock">
                     <div className="container">
                         <div className="row content">

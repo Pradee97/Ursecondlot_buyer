@@ -5920,7 +5920,7 @@ Documents page
 Add Users
 --------------------------------------*/
 
-.adduserpageform .adduserpageforminner{
+.adduserpageform .adduserpageforminner , .registrationform .adduserpageforminner {
     margin: 10px 0px;
     margin-left: 0px;
     margin-left: 20px;
@@ -6073,6 +6073,33 @@ ul.ant-pagination li{
 .timepicker .tbox .textbox + label{
   font-size: 16px;
 }
+
+.adduserpageform .section-title h2.buyertitle , .editprofile .section-title h2.buyertitle {
+  text-align: left;
+  font-size: 20px;
+  margin-top: 20px;
+  clear: both;
+}
+.editprofile .registrationform{
+  max-width: 640px;
+    margin: auto;
+}
+.editprofile .myprofileeditform{
+    margin: 0 auto;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    box-shadow: 0px 3px 6px #ddd;
+    border-radius: .25rem;
+    padding: 30px;
+}
+.editprofile .section-title h2 {
+  text-align: center;
+  font-size: 20px;
+  margin-top: 20px;
+  clear: both;
+}
+
 
 /*--------------------------------------------------------
 Manage Account

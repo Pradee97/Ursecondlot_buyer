@@ -74,8 +74,9 @@ const EditAddress = () => {
             setCity(res.data.data[0].city_name);
             setState(res.data.data[0].state_name);
             setZIpCode(res.data.data[0].zipcode_id);
-            setZIpCode(res.data.data[0].location);
-            setZIpCode(res.data.data[0].instructions);
+            setLocation(res.data.data[0].location);
+            setInstruction(res.data.data[0].instructions);
+            setZIpCode(res.data.data[0].zipcode);
             setAccountObj(res.data.data[0])
         })
             .catch(err => { console.log(err); });
