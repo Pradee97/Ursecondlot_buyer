@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import '../../assets/css/responsive.css';
 import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
+import {  Button  } from 'antd';
 
 
 const PaymentInfo = () => {
@@ -66,7 +67,8 @@ const PaymentInfo = () => {
                                         <div className="add-floors">
                                            
                                                 <div className="add-accounts">
-                                                    <a className="add-account-btns" href="/payment"><i class="icofont-plus"></i> Add Bank Account</a>
+                                                <Button className="add-account-btns" onClick={() => history.push("/payment")}><i class="icofont-plus"></i> Add Bank Account</Button>
+                                            {/*<a className="add-account-btns" href="/payment"><i class="icofont-plus"></i> Add Bank Account</a> */}
                                                 </div>
                                             
                                         </div>

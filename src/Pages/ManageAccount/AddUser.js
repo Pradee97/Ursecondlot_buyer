@@ -192,14 +192,6 @@ const AddUser = () => {
 													</div>
 													</div>
 
-
-
-
-
-
-
-
-
 													<div className="col-sm-12 form-group">
 														<div className="tbox">
 															<input className="textbox " type="text" placeholder="" id="first_name"  maxLength="30" name="firstName"

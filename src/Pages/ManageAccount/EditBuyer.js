@@ -160,6 +160,10 @@ const EditBuyer = () => {
             <main id="main" className="inner-page">
                 <div className="editprofile">
             <div className="container" >
+            <div className="adduserpageblock col-lg-12">
+               <div className="section-title">
+                 <h2>Buyers</h2>
+               </div>
 			<div className="row content">
             <div className="col-lg-3 col-md-4 col-sm-12 mgaccountleftblock">
                   <div className="mgaccountuser">
@@ -290,7 +294,7 @@ const EditBuyer = () => {
                                 </div>
                             </div>
                         </form>
-                    </div></div></div></div></div>
+                    </div></div></div></div></div></div>
                 <section id="playstoreBlock" className="playstoreBlock">
                     <div className="container">
                         <div className="row content">
