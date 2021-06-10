@@ -3,9 +3,9 @@ import API from "../../Services/BaseService";
 
 const StateAndCity = props => {
 
-    console.log("pppppp",props)
+    console.log("pppppp===",props)
     const [defaultZipcodeValue, setDefaultZipcodeValue] = useState(props.defaultZipcodeValue);
-    const [zipCodeId, setZipcodeId] = useState("");
+    const [zipCodeId, setZipcodeId] = useState( "");
     const [isEdit, setIsEdit] = useState(props?.isEdit || false);
     const [country, setCountry] = useState("");
     const [defaultStateValue, setDefaultStateValue] = useState(props.defaultStateValue);
@@ -35,8 +35,13 @@ const StateAndCity = props => {
             console.log("res", res.data.data)
             setStateNameList(res.data.data);
             if(props.isEdit){
+
+                console.log("fetch state and edit trueeeeee")
                 res.data.data.filter(data=> {
-                    data.state_name?.toLowerCase() === defaultStateValue ?.toLowerCase() && fetchCity(data.state_id)
+                    if(data.state_name?.toLowerCase() === defaultStateValue ?.toLowerCase()){
+                        setStateName(data.state_name)
+                        fetchCity(data.state_id)
+                    } 
                 })
                
             }
@@ -52,6 +57,16 @@ const StateAndCity = props => {
         state.then(res => {
             console.log("city", res.data.data)
             setCityNameList(res.data.data);
+            if(props.isEdit){
+
+                console.log("city edit=====",res.data.data)
+                res.data.data.filter(data=> {
+                    if(data.city_name?.toLowerCase() === defaultCityValue ?.toLowerCase()){
+                        setCityName(data.city_name)
+                        fetchZipcode(data.city_id)
+                    }
+                })
+            }
         })
             .catch(err => { console.log(err); });
     }
@@ -63,15 +78,33 @@ const StateAndCity = props => {
         state.then(res => {
             console.log("zipcode", res.data.data)
             setZipcodeList(res.data.data);
+            if(props.isEdit){
+                res.data.data.filter(data=>{
+                    data.zipcode==defaultZipcodeValue && setZipcodeId(data.zipcode)
+                }
+                    )
+            }
         })
             .catch(err => { console.log(err); });
     }
 
+    // useEffect(() => {
+    //     alert("sdfsd")
+    //     if(stateName && cityName && zipCodeId){
+    //     props.setStateValue(stateNameList.filter(data=>data.state_name == stateName)[0].state_id);
+    //     props.setCityValue(cityNameList.filter(data=>data.city_name==cityName)[0].city_id);
+    //     props.setZipcodeValue(zipcodeList.filter(data=>data.zipcode==zipCodeId)[0].zipcode_id);   
+    //     }    
+    // }, [stateName, cityName, zipCodeId]);
+
     useEffect(() => {
-        if(stateName && cityName && zipCodeId){
-        props.setStateValue(stateNameList.filter(data=>data.state_name == stateName)[0].state_id);
-        props.setCityValue(cityNameList.filter(data=>data.city_name==cityName)[0].city_id);
-        props.setZipcodeValue(zipcodeList.filter(data=>data.zipcode==zipCodeId)[0].zipcode_id);   
+        console.log("sssssss=====",stateName ,"====", cityName ,"====", zipCodeId)
+        if((stateName || props.defaultStateValue) && (cityName || props.defaultCityValue) && (zipCodeId || props.defaultZipcodeValue)){
+        props.setStateValue(stateNameList.filter(data=> data.state_name == stateName || data.state_name == props.defaultStateValue)[0]?.state_id);
+        props.setCityValue(cityNameList.filter(data=> data.city_name==cityName || data.city_name==props.defaultCityValue)[0]?.city_id);
+        console.log("zipcodeList====",zipcodeList.filter(data=>data.zipcode==zipCodeId ||data.zipcode == props.defaultZipcodeValue));
+        console.log("zipCodeId====",zipCodeId);
+        props.setZipcodeValue(zipcodeList.filter(data=>data.zipcode==zipCodeId ||data.zipcode == props.defaultZipcodeValue)[0]?.zipcode_id);   
         }    
     }, [stateName, cityName, zipCodeId]);
 
@@ -80,54 +113,42 @@ const StateAndCity = props => {
             console.log("====defaultZipcodeValue===>",props.defaultZipcodeValue,props.defaultStateValue,props.defaultCityValue)
             setDefaultStateValue(props.defaultStateValue);
             setDefaultCityValue(props.defaultCityValue);
-            setDefaultZipcodeValue(props.defaultZipcodeValue);
+            setDefaultZipcodeValue(props.defaultZipcodeValue); 
         }
     })
     
     useEffect(() => fetchCountry(),[])
     
     useEffect(() => {
-        fetchState();
+        fetchState(); 
     }, [defaultStateValue]);
 
     useEffect(() => { setZipcodeId( zipCodeId) }, [zipCodeId])
 
-    const handleState = (e) => {  
+    const handleState = (e) => {
+        alert("Dfdfd state")  
         setStateName( stateNameList.filter(data=>data.state_id == e.target.value)[0].state_name)
-        setCityNameList("");
-        setZipcodeList("");
+        // setCityNameList("");
+        // setZipcodeList("");
         fetchCity(e.target.value)
+        setCityName("")
         setZipcodeId("")
     }
 
     const handleCity = (e) => {
         setCityName(cityNameList.filter(data=>data.city_id==e.target.value)[0].city_name)
-        setZipcodeList("");
+        // setZipcodeList("");
         fetchZipcode(e.target.value)
         //setCityName(e.target.value)
         setZipcodeId("")
     }
 
     const handleZipcode = (e) => {
-
-        setZipcodeId(e.target.value)
+        setZipcodeId(zipcodeList.filter(data=>data.zipcode==e.target.value)[0].zipcode); 
+        // setZipcodeId(e.target.value)
     }
 
-    const setZipcodeNormal = (data) => {
-        console.log("--------setZipcodeNormal",data)
-        setIsEdit(false)
-        if(data.length ===0 ){
-            setZipcodeId("")
-            setCityName('')
-            setStateName('') 
-        }
-        if(data.length==5 ){
-            setZipcodeId(data)
-            console.log("====setIsEdit=====>",!isEdit)
-        }
-    }
-
-    
+  
 
 return (
     <>
@@ -164,9 +185,9 @@ return (
             </div>
         </div>
         <div className="col-sm-4 form-group selectTbox">
-            <div className="tbox">              
+            <div className="tbox">        
                 <div className="selcetclass"> 
-                    <select id="zipcode_id" className="form-control custom-select browser-default textbox" required defaultValue={defaultZipcodeValue} onChange={handleZipcode}>
+                    <select id="zipcode_id" className="form-control custom-select browser-default textbox" required defaultValue={zipCodeId} onChange={handleZipcode}>
                     <option style={{"display":"none"}}></option>
                         {zipcodeList.length>0 &&
                             <>
