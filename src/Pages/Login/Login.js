@@ -101,10 +101,10 @@ const Login = () => {
             //   value: /\d+/,
             //   message: "This input is number only."
             // },
-            minLength: {
-              value: 8,
-              message: "This input must exceed 8 characters"
-            }
+            // minLength: {
+            //   value: 8,
+            //   message: "This input must exceed 8 characters"
+            // }
           })}
           onChange={(e) => setPassword(e.target.value)} />
 				 <label for="psw" className={password != "" ? "input-has-value" : "" }>Password</label>

@@ -69,7 +69,7 @@ const EditAddress = () => {
             setMobilePhone(res.data.data[0].mobile_no);
             setCity(res.data.data[0].city_name);
             setState(res.data.data[0].state_name);
-            setZIpCode(res.data.data[0].zipcode_id);
+            setZIpCode(res.data.data[0].zipcode);
             setAccountObj(res.data.data[0])
         })
             .catch(err => { console.log(err); });

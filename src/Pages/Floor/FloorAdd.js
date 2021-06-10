@@ -167,7 +167,7 @@ const FloorAdd = () => {
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" id="accountNumber" className="textbox" placeholder="" name="accountNumber"
+                                <input type="text" id="accountNumber"  className="textbox" placeholder="" name="accountNumber"
                                  {...register("accountNumber", {
                                     required: "This input is required.",
                                     maxLength: {
@@ -212,7 +212,7 @@ const FloorAdd = () => {
                                 <input type="type" id="emailId" className="textbox" placeholder="" name="email"
                                   {...register("email", {
                                     required: "This input is required.",
-                                    pattern: {
+                                   pattern : {
                                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                                     message: "Must match the email format"
                                     }
@@ -249,7 +249,11 @@ const FloorAdd = () => {
                                     maxLength: {
                                         value: 15,
                                         message: "This input must not exceed 15 digits"
-                                      }
+                                      },
+                                      pattern : {
+                                        value: /^[1-9]\d*(\d+)?$/i,
+                                        message: "This input must be Number"
+                                        }
                                 })}
                                 onChange={(e) => setPhoneNumber(e.target.value)} />
                                 <label for="phoneNumber" className={phoneNumber !="" ? "input-has-value" : ""}>Phone Number</label>

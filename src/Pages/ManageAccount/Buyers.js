@@ -128,9 +128,7 @@ const Buyers = () => {
                                         <tr><td colspan="6" ng-show="0">
                                         <b>There's No Data</b>
                                             </td>
-                                        </tr>}
-                                        
-                                        
+                                        </tr>}                                       
                                         </table>            
                                     </div>
 					            </div>

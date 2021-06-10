@@ -78,7 +78,7 @@ const EditLegalAccount = () => {
             setAddress(res.data.data[0].address);
             setCity(res.data.data[0].city_name);
             setState(res.data.data[0].state_name);
-            setZipcode(res.data.data[0].zipcode_id);
+            setZipcode(res.data.data[0].zipcode);
             setDealershipLicenseexp(res.data.data[0].dealer_license_exp);
             setTaxidexp(res.data.data[0].tax_id_exp);
 

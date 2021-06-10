@@ -76,7 +76,7 @@ const EditMyProfile = () => {
             setAddress(res.data.data[0].address);
             setCity(res.data.data[0].city_name);
             setState(res.data.data[0].state_name);
-            setZipcode(res.data.data[0].zipcode_id); 
+            setZipcode(res.data.data[0].zipcode); 
             // setLocationName(res.data.data[0].address);
             setMyProfileObj(res.data.data[0]);
         })

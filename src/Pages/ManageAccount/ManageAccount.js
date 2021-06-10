@@ -115,7 +115,7 @@ const ManageAccount = () => {
                           </tr>
                           <tr>
                             <td>Mobile<span>{item.mobile_no}</span></td>
-                            <td>Zip code<span>{item.zipcode_id}</span></td>
+                            <td>Zip code<span>{item.zipcode}</span></td>
                           </tr>
                         </table>
                       </div>
@@ -144,7 +144,7 @@ const ManageAccount = () => {
                           </tr>
                           <tr>
                             <td>Mobile phone<span>{item.mobile_no}</span></td>
-                            <td>Zip code<span>{item.zipcode_id}</span></td>
+                            <td>Zip code<span>{item.zipcode}</span></td>
                           </tr>
                         </table>
                         <h4>Location name</h4>
@@ -183,7 +183,7 @@ const ManageAccount = () => {
                           </tr>
                           <tr>
                             <td>EIN number<span>{item.ein_no}</span></td>
-                            <td>Zip code<span>{item.zipcode_id}</span></td>
+                            <td>Zip code<span>{item.zipcode}</span></td>
                           </tr>
                           <tr>
                             <td>Dealership license<span>{item.dealer_license}</span></td>
