@@ -132,7 +132,7 @@ const ManageAccount = () => {
                           <thead></thead>
                           <tr>
                             <td>First name<span>{item.first_name}</span></td>
-                            <td>Address<span>{item.location}</span></td>
+                            <td>Address<span>{item.address}</span></td>
                           </tr>
                           <tr>
                             <td>Last name<span>{item.last_name}</span></td>
@@ -148,9 +148,9 @@ const ManageAccount = () => {
                           </tr>
                         </table>
                         <h4>Location name</h4>
-                        <h6>Horizon fairway - Computer number 693</h6>
+                        <h6>{item.location}</h6>
                         <h4>Instructions</h4>
-                        <h6>Computer number 693</h6>
+                        <h6>{item.instructions}</h6>
                       </div>
                     </div>
                   ) :
@@ -194,11 +194,11 @@ const ManageAccount = () => {
                             <td>Tax id exp<span>{item.tax_id_exp.substring(0,10)}</span></td>
                           </tr>
                         </table>
-                        <h4>Location name</h4>
+                        {/* <h4>Location name</h4>
                         <h6>Horizon fairway - Computer number 693</h6>
 
                         <h4>Instructions</h4>
-                        <h6>Computer number 693</h6>
+                        <h6>Computer number 693</h6> */}
                       </div>
 
                     </div>

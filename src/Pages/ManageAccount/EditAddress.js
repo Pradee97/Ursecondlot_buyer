@@ -30,6 +30,8 @@ const EditAddress = () => {
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
     const [zipCode, setZIpCode] = useState("");
+    const [location, setLocation] = useState("");
+    const [instruction, setInstruction] = useState("");
   
     const [isOpen, setIsOpen] = useState(false);
  
@@ -72,6 +74,8 @@ const EditAddress = () => {
             setCity(res.data.data[0].city_name);
             setState(res.data.data[0].state_name);
             setZIpCode(res.data.data[0].zipcode_id);
+            setZIpCode(res.data.data[0].location);
+            setZIpCode(res.data.data[0].instructions);
             setAccountObj(res.data.data[0])
         })
             .catch(err => { console.log(err); });
@@ -92,7 +96,8 @@ const EditAddress = () => {
             city_id: city,
             state_id: state,
             zipcode_id: zipCode,
-            location: address,
+            location: location,
+            instructions: instruction,
             // buyer_address_id:buyeraddress,
             active:1
            
@@ -165,28 +170,28 @@ const EditAddress = () => {
 
                         <div class="col-sm-12 form-group">
                         <div className="tbox">
-                                <input type="text"  defaultValue={accountObjc.first_name} class="textbox" placeholder="First name" required onChange={(e) => setFirstName(e.target.value)} />
+                                <input type="text"  defaultValue={accountObjc.first_name} class="textbox" placeholder="" required onChange={(e) => setFirstName(e.target.value)} />
                                 <label for="first_name" className={"input-has-value"}>First Name</label>
                             </div> </div>
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.last_name} class="textbox" placeholder="Last name" required onChange={(e) => setLastName(e.target.value)} />
+                                <input type="text" defaultValue={accountObjc.last_name} class="textbox" placeholder="" required onChange={(e) => setLastName(e.target.value)} />
                                 <label for="last_name"  className={"input-has-value"}>Last name</label>
                             </div> </div>
                         
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.phone_no} class="textbox" placeholder="Primary phone" required onChange={(e) => setPrimaryPhone(e.target.value)} />
+                                <input type="text" defaultValue={accountObjc.phone_no} class="textbox" placeholder="" required onChange={(e) => setPrimaryPhone(e.target.value)} />
                                 <label for="primary_phone"  className={"input-has-value"}>Primary Phone</label>
                             </div> </div>
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.mobile_no} class="textbox" placeholder="Mobile phone" required onChange={(e) => setMobilePhone(e.target.value)} />
+                                <input type="text" defaultValue={accountObjc.mobile_no} class="textbox" placeholder="" required onChange={(e) => setMobilePhone(e.target.value)} />
                                 <label for="mobile_phone"  className={"input-has-value"}>Mobile Phone</label>
                             </div> </div>
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.location} class="textbox" placeholder="Address" required onChange={(e) => setAddress(e.target.value)} />
+                                <input type="text" defaultValue={accountObjc.address} class="textbox" placeholder="" required onChange={(e) => setAddress(e.target.value)} />
                                 <label for="address"  className={"input-has-value"}>Address</label>
                             </div> </div>
                             <StateAndCity 
@@ -198,6 +203,16 @@ const EditAddress = () => {
                                 defaultCityValue = {city}
                                 defaultZipcodeValue = {zipCode}
                             />
+                             <div class="col-sm-12 form-group">
+                            <div className="tbox">
+                                <input type="text" defaultValue={accountObjc.location} class="textbox" placeholder="" required onChange={(e) => setLocation(e.target.value)} />
+                                <label for="location"  className={"input-has-value"}>Location</label>
+                            </div> </div>
+                            <div class="col-sm-12 form-group">
+                            <div className="tbox">
+                                <input type="text" defaultValue={accountObjc.instructions} class="textbox" placeholder="" required onChange={(e) => setInstruction(e.target.value)} />
+                                <label for="instructions"  className={"input-has-value"}>Instructions</label>
+                            </div> </div>
                             {/* <div class="col-sm-12 form-group">
                                 <input type="text" defaultValue={accountObjc.city_name} class="form-control" placeholder="City" required onChange={(e) => setCity(e.target.value)} />
                             </div>
