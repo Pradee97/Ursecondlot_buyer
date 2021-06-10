@@ -108,7 +108,13 @@ const AddLegalAccount = () => {
     return (
         <div>
             <main id="main" className="inner-page">
+
+            <div id="addaddress" className="addaddress_block">
             <div className="container" >
+            <div className="addaddressblock col-lg-12">
+            <div className="section-title">
+                                <h2>Add Legal Manage Account</h2>
+                            </div>
 			<div className="row content">
             <div className="col-lg-3 col-md-4 col-sm-12 mgaccountleftblock">
                   <div className="mgaccountuser">
@@ -124,15 +130,16 @@ const AddLegalAccount = () => {
                   </div>
                   <ManageAccountLinks />
                 </div>
-                <div className="col-lg-4  loginBlock flooraddform">
-
-                <button className="back-btn-paymentform backBtn" onClick={() => history.push("/manageaccount")}><i class="icofont-arrow-left"></i> Back</button>              
-
-                <div className="col-lg-12 card">
+                <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0  flooraddform">
+                <div className="adduserpage-inner"> 
+                <div className="col-lg-12">
                     <form className="registrationform" onSubmit={handleSubmit(onhandleSubmit)} >
-                        
-                        <h2 className="title">Add Legal Manage Account </h2>
                         <div className="row">
+
+                        <div className="section-title">
+                        <button className="back-btn-paymentform backBtn" onClick={() => history.push("/manageaccount")}><i class="icofont-arrow-left"></i> Back</button>   
+							<h2>Add Legal Manage Account</h2>
+						</div>
                         <div className="col-sm-12 form-group"> 
                             <div className="tbox">
                                 <input type="text"  id="contactName" className="textbox" placeholder="" name="firstName"
@@ -293,7 +300,7 @@ const AddLegalAccount = () => {
                         </div>
                     </form>
 
-                </div>  </div></div></div>
+                </div>  </div></div></div></div></div></div>
                 <section id="playstoreBlock" className="playstoreBlock">
                     <div className="container">
                         <div className="row content">

@@ -151,7 +151,12 @@ const EditLegalAccount = () => {
     return (
         <div>
             <main id="main" class="inner-page">
+            <div id="addaddress" className="addaddress_block">
             <div className="container" >
+            <div className="addaddressblock col-lg-12">
+            <div className="section-title">
+                                <h2>Edit Legal Manage Account</h2>
+                            </div>
 			<div className="row content">
             <div className="col-lg-3 col-md-4 col-sm-12 mgaccountleftblock">
                   <div className="mgaccountuser">
@@ -167,15 +172,17 @@ const EditLegalAccount = () => {
                   </div>
                   <ManageAccountLinks />
                 </div>
-                <div className="col-lg-4 loginBlock">
-                <button className="back-btn-paymentform backBtn" onClick={() => history.push("/manageaccount")}><i class="icofont-arrow-left"></i> Back</button>
+                <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0  flooraddform">
+                <div className="adduserpage-inner"> 
+                <div className="col-lg-12">
 
-                <div className="col-lg-12 card">
-
-                    <form class="registrationform" onSubmit={updateLegalAccount} >
-                   
-                        <h2 class="title"> Edit Legal Manage Account</h2>
+                    <form class="registrationform" onSubmit={updateLegalAccount} >                   
+                        
                         <div class="row">
+                        <div className="section-title">
+                        <button className="back-btn-paymentform backBtn" onClick={() => history.push("/manageaccount")}><i class="icofont-arrow-left"></i> Back</button>   
+							<h2>Edit Legal Manage Account</h2>
+						</div>
 
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
@@ -247,7 +254,7 @@ const EditLegalAccount = () => {
                         </div>
                     </form>
 
-                </div> </div></div></div>
+                    </div>  </div></div></div></div></div></div>
                 <section id="playstoreBlock" class="playstoreBlock">
                     <div class="container">
                         <div class="row content">

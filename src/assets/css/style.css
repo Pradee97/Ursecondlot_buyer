@@ -5560,6 +5560,17 @@ height: 100%;
 }
 
 
+button.add-account-btns {
+  color: #B6062A;
+  padding: 10px 20px;
+  margin-right: 0px;
+  border-radius: 5px;
+  border: 2px solid #B6062A;
+  font-size: 16px;
+  height: 50px;
+  width: auto;
+}
+
 /*-----------------------------------------
 paymentform 
 -------------------------------------------*/
@@ -6093,13 +6104,27 @@ ul.ant-pagination li{
     border-radius: .25rem;
     padding: 30px;
 }
-.editprofile .section-title h2 {
+.editprofile .registrationform .section-title h2 {
   text-align: center;
   font-size: 20px;
   margin-top: 20px;
   clear: both;
 }
 
+.addaddress_block .registrationform{
+  max-width: 640px;
+    margin: auto;
+}
+.addaddress_block .registrationform .section-title h2 {
+  text-align: center;
+  font-size: 20px;
+  margin-top: 20px;
+  clear: both;
+}
+.addaddress_block .registrationform  .section-title {
+  width: 100%;
+}
+.myprofileeditform
 
 /*--------------------------------------------------------
 Manage Account
@@ -6224,6 +6249,18 @@ Users
 	border-radius: 5px;
 	border: 2px solid #B6062A;
 	font-size: 16px;
+  
+}
+button.add-user-btns {
+  color: #B6062A;
+	padding: 10px 20px;
+	margin-right: 0px;
+	border-radius: 5px;
+	border: 2px solid #B6062A;
+	font-size: 16px;
+  height: 50px;
+  width: auto;
+  
 }
 
 
@@ -6251,6 +6288,29 @@ Users
   font-weight: 500;
   text-transform: capitalize;
 }
+
+.userlisttable table th.th_name {
+   width: 20%;
+}
+.userlisttable table th.th_privileges {
+  width: 20%;
+}
+.userlisttable table th.th_phone {
+  width: 10%;
+}
+.userlisttable table th.th_status {
+  width: 10%;
+}
+.userlisttable table th.th_action {
+  width: 10%;
+}
+.userlisttable table th.th_img {
+  width: 10%;
+}
+.userlisttable table th.th_id {
+  width: 10%;
+}
+
 .userlisttable table {
   border-collapse: collapse;
 }
