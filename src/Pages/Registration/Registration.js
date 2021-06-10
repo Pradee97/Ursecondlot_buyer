@@ -91,34 +91,34 @@ const Registration = () => {
             image:doc===""?"":doc.length>0?doc:[doc],
         };
         console.log("====request==>",request)
-        // API.post("registration/add", request)
-        //     .then((response) => {
-        //         if (response.data.success) {
-        //             const { data } = response;
-        //             console.log("response", response)
-        //             toggleCommonPopup()
-        //             setPopupTitle("Dealer Registered successfully");
-        //             setPopupMsg("Please Activate your account with the link shared to the given email Id");
-        //             setPopupType("success");
-        //             setPopupActionType("redirect");
-        //             setPopupActionValue("ok");
-        //             setPopupActionPath("/login")
-        //         } else {
-        //             toggleCommonPopup()
-        //             setPopupTitle("Error");
-        //             setPopupMsg("registration failed, Please try Again");
-        //             setPopupType("error");
-        //             setPopupActionType("close");
-        //             setPopupActionValue("close");
-        //         }
-        //     }, (error) => {
-        //         toggleCommonPopup()
-        //         setPopupTitle("Error");
-        //         setPopupMsg(error, " Please try Again");
-        //         setPopupType("error");
-        //         setPopupActionType("close");
-        //         setPopupActionValue("close");
-        //     });
+        API.post("registration/add", request)
+            .then((response) => {
+                if (response.data.success) {
+                    const { data } = response;
+                    console.log("response", response)
+                    toggleCommonPopup()
+                    setPopupTitle("Dealer Registered successfully");
+                    setPopupMsg("Please Activate your account with the link shared to the given email Id");
+                    setPopupType("success");
+                    setPopupActionType("redirect");
+                    setPopupActionValue("ok");
+                    setPopupActionPath("/login")
+                } else {
+                    toggleCommonPopup()
+                    setPopupTitle("Error");
+                    setPopupMsg("registration failed, Please try Again");
+                    setPopupType("error");
+                    setPopupActionType("close");
+                    setPopupActionValue("close");
+                }
+            }, (error) => {
+                toggleCommonPopup()
+                setPopupTitle("Error");
+                setPopupMsg(error, " Please try Again");
+                setPopupType("error");
+                setPopupActionType("close");
+                setPopupActionValue("close");
+            });
     }
     const getStateName = (stateData) => {
         setStateName(stateData)
