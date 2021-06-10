@@ -6,6 +6,8 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import StateAndCity from '../../Component/StateAndCity/StateAndCity';
+import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
+
 import {
     Form,
     Input,
@@ -135,6 +137,22 @@ const EditAddress = () => {
     return (
         <div>
             <main id="main" class="inner-page">
+            <div className="container" >
+			<div className="row content">
+            <div className="col-lg-3 col-md-4 col-sm-12 mgaccountleftblock">
+                  <div className="mgaccountuser">
+                    <div className="mgaccountuserleft">
+                      <img src={process.env.PUBLIC_URL + "/images/userimg.jpg"} className="img-fluid" alt="..." />
+                    </div>
+                    <div className="mgaccountuserright">
+                      <h3>Fernand</h3>
+                      <div className="d-flex align-items-center">
+                        <p className="details"><img src={process.env.PUBLIC_URL + "/images/Path.svg"} className="img-fluid" alt="..." /><span>California, Cl</span></p>
+                      </div>
+                    </div>
+                  </div>
+                  <ManageAccountLinks />
+                </div>
                 <div className="col-lg-4 loginBlock">
 
                 <button className="back-btn-paymentform backBtn" onClick={() => history.push("/manageaccount")}><i class="icofont-arrow-left"></i> Back</button>
@@ -197,7 +215,7 @@ const EditAddress = () => {
                         </div>
                     </form>
 
-                </div></div>
+                </div></div></div></div>
                 <section id="playstoreBlock" class="playstoreBlock">
                     <div class="container">
                         <div class="row content">

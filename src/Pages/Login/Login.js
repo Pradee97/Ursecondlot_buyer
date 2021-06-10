@@ -24,7 +24,9 @@ const Login = () => {
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
   const [redirectToRefferrer, setRedirectToRefferrer] = useState(false);
-
+  const [errorMessage, setErrorMessage] = useState("");
+  const [timeout, setTimeout] = useState("");
+ 
   useEffect(()=>{
     // localStorage.clear()
     localStorage.setItem("islogedIn", false)
@@ -56,12 +58,15 @@ const Login = () => {
           }
           
         } else {
-          history.push("error");
-          localStorage.setItem("islogedIn", false)
+          // history.push("error");
+          // localStorage.setItem("islogedIn", false)
+          setTimeout(() => {
+          setErrorMessage("Please provide correct Email/Password");
+        }, 100);
         }
       },
         (error) => {
-
+       
         });
   }
   
@@ -119,6 +124,7 @@ const Login = () => {
               <div className="col-lg-6 forget">
                 <a className="forget-pass" href="/forgotpasswordemail">Forgot password</a>
               </div>
+               <p className="form-input-error">{errorMessage}</p>
               <div className="col-lg-12 loginBtn">
                 <button className="cta-btn">Log In</button>
                 <p>Don't have an account? <a className="forget-name" href="registration">Become a Dealer</a></p>

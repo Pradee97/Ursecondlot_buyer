@@ -99,7 +99,9 @@ const Submenu = () => {
                 <img alt="Menu" src={cartImg} onClick={()=>history.push('/cart')}/>
               </li>
               <li class="topRightUser">
-                <b className="user_name">Welcome {JSON.parse(localStorage.getItem("userDetails")).first_name}</b>                
+                <b className="user_name">Welcome 
+                {JSON.parse(localStorage.getItem("userDetails")).first_name}
+                </b>                
                 <img alt="Menu" src={JSON.parse(localStorage.getItem("userDetails")).image || adduser} /> 
               </li>
               <li className="nav__menu-item" >
