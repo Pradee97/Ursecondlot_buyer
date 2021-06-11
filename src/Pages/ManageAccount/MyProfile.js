@@ -14,7 +14,7 @@ const MyProfile = () => {
       };
       const state = API.post('user_profile/condition', request);
       state.then(res => {
-          console.log("res", res)
+          // console.log("res", res)
           setaccountDetails(res.data.data);
       })
           .catch(err => { console.log(err); });
@@ -89,7 +89,8 @@ const MyProfile = () => {
                            )  :""}
                        </div>
                        <div className="mgaccountrighttableblock mt-3 pt-4"> 
-                           <h3>Manage Account Password<span><a class="ant-btn" href="/changepassword"><i class="icofont-ui-edit"></i> Edit</a></span></h3>
+                           {/* <h3>Manage Account Password<span><a class="ant-btn" href="/changepassword"><i class="icofont-ui-edit"></i> Edit</a></span></h3> */}
+                           <h3>Manage Account Password<span><button class="ant-btn" onClick={() => history.push("/changepassword")}><i class="icofont-ui-edit"></i> Edit</button></span></h3>
                        </div>
                        
                                   
