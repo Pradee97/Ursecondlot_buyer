@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { useState } from 'react';
 import { useEffect } from 'react';
 import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
+import Loading from "../../Component/Loading/Loading";
 import {
   Button
 } from 'antd';
@@ -13,8 +14,10 @@ const ManageAccount = () => {
   const [dealerInfo, setDealerInfo] = useState("");
   const [addressDetails, setaddressDetails] = useState("");
   const [legaldetails, setLegalDetails] = useState("");
+  const [loading,setloading]=useState("");
 
   async function fetchAccountDetails() {
+    setloading(true);
     let request = {
       buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
     };
@@ -23,6 +26,7 @@ const ManageAccount = () => {
       console.log("res", res)
       setaccountDetails(res.data.data);
       setDealerInfo(res.data.data);
+      
     })
       .catch(err => { console.log(err); });
   }
@@ -47,6 +51,7 @@ const ManageAccount = () => {
     state.then(res => {
       console.log("res", res)
       setLegalDetails(res.data.data);
+      setloading(false);
     })
       .catch(err => { console.log(err); });
   }
@@ -69,6 +74,7 @@ const ManageAccount = () => {
   }, []);
   return (
     <div>
+      {loading?<Loading/>:
       <main id="main" className="inner-page">
         <div id="mgaccount" className="mgaccount">
           <div className="container" >
@@ -224,7 +230,7 @@ const ManageAccount = () => {
             </div>
           </div>
         </section>
-      </main>
+      </main>}
     </div>
   );
 };
