@@ -75,7 +75,7 @@ const EditLegalAccount = () => {
             console.log("res", res.data.data)
             setFirstname(res.data.data[0].first_name);
             setLastname(res.data.data[0].last_name);
-            setLegalBusinessname(res.data.data[0].legal_manage_id);
+            setLegalBusinessname(res.data.data[0].bussiness_name);
             setEINnumber(res.data.data[0].ein_no);
             setDealershiplicense(res.data.data[0].dealer_license);
             setTaxid(res.data.data[0].tax_id);
@@ -162,7 +162,7 @@ const EditLegalAccount = () => {
         console.log("res", res.data.data)
         setFirstname(res.data.data[0].first_name);
         setLastname(res.data.data[0].last_name);
-        setLegalBusinessname(res.data.data[0].legal_manage_id);
+        setLegalBusinessname(res.data.data[0].bussiness_name);
         setEINnumber(res.data.data[0].ein_no);
         setDealershiplicense(res.data.data[0].dealer_license);
         setTaxid(res.data.data[0].tax_id);
