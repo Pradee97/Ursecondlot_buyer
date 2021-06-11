@@ -5,15 +5,7 @@ import { useHistory,useParams } from "react-router-dom";
 import { useState } from 'react';
 import { useEffect } from 'react';
 import ls from 'local-storage';
-import {
-    Form,
-    Input,
-    Select,
-    AutoComplete,
-    Radio,
-    notification,
-    Spin,
-} from 'antd';
+import { Button } from 'antd';
 import checkImg from '../../src/assets/img/check.svg';
 
 import '../assets/css/responsive.css';
@@ -68,7 +60,8 @@ const Email = () => {
                                         <p>Email successfull activated</p>
                                         <p>Username and Password sent to email</p>
                                 
-                                        <a href="/login" class="get-started-btn">Dealer Login</a>
+                                        {/* <a href="/login" class="get-started-btn">Dealer Login</a> */}
+                                        <Button className="get-started-btn" onClick={() => history.push("/login")}>Dealer Login</Button>
                                     
                                     </div>
                                     {/* <div class="modalfooter ">

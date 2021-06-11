@@ -49,7 +49,8 @@ const Home = () => {
 				<p>Location of your Dealership</p>
 			  </div>
 			  <div className="modals-footer ">
-				<a className="cta-btns" href="registration">In United States</a>
+				{/* <a className="cta-btns" href="registration">In United States</a> */}
+        <button className="cta-btns" onClick={() => history.push("/registration")}>In United States</button>
 				<button className="cta-btns-primary" onClick={() => {alert('Yet not added')}}>Out of United States</button>
 			  </div>
 			</div>
