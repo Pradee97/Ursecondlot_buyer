@@ -14,7 +14,7 @@ const MyProfile = () => {
       };
       const state = API.post('user_profile/condition', request);
       state.then(res => {
-          console.log("res", res)
+          // console.log("res", res)
           setaccountDetails(res.data.data);
       })
           .catch(err => { console.log(err); });
