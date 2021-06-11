@@ -1,8 +1,6 @@
 import React, {useState, useEffect} from "react"
 import API from "../../Services/BaseService";
-
 const StateAndCity = props => {
-
     console.log("pppppp===",props)
     const [defaultZipcodeValue, setDefaultZipcodeValue] = useState(props.defaultZipcodeValue);
     const [zipCodeId, setZipcodeId] = useState( "");
@@ -15,9 +13,6 @@ const StateAndCity = props => {
     const [cityName, setCityName] = useState("");
     const [cityNameList, setCityNameList] = useState([]);
     const [zipcodeList, setZipcodeList] = useState([]);
-    
-    
-
     async function fetchCountry() {
         const country = API.get('country');
         country.then(res => {
@@ -35,7 +30,6 @@ const StateAndCity = props => {
             console.log("res", res.data.data)
             setStateNameList(res.data.data);
             if(props.isEdit){
-
                 console.log("fetch state and edit trueeeeee")
                 res.data.data.filter(data=> {
                     if(data.state_name?.toLowerCase() === defaultStateValue ?.toLowerCase()){
@@ -88,25 +82,26 @@ const StateAndCity = props => {
             .catch(err => { console.log(err); });
     }
 
+    useEffect(() => {
+       //alert("sdfsd")
+        if(stateName && cityName && zipCodeId ){
+        console.log("=======>",stateNameList,stateName,cityNameList,cityName,zipcodeList,zipCodeId)
+        props.setStateValue(stateNameList.filter(data=>data.state_name == stateName)[0].state_id);
+        props.setCityValue(cityNameList.filter(data=>data.city_name==cityName)[0].city_id);
+        props.setZipcodeValue(zipcodeList.filter(data=>data.zipcode==zipCodeId)[0].zipcode_id);   
+        } 
+    }, [stateName, cityName, zipCodeId]);
+
     // useEffect(() => {
-    //     alert("sdfsd")
-    //     if(stateName && cityName && zipCodeId){
-    //     props.setStateValue(stateNameList.filter(data=>data.state_name == stateName)[0].state_id);
-    //     props.setCityValue(cityNameList.filter(data=>data.city_name==cityName)[0].city_id);
-    //     props.setZipcodeValue(zipcodeList.filter(data=>data.zipcode==zipCodeId)[0].zipcode_id);   
+    //     console.log("sssssss=====",stateName ,"====", cityName ,"====", zipCodeId)
+    //     if((stateName || props.defaultStateValue) && (cityName || props.defaultCityValue) && (zipCodeId || props.defaultZipcodeValue)){
+    //     props.setStateValue(stateNameList.filter(data=> data.state_name == stateName || data.state_name == props.defaultStateValue)[0]?.state_id);
+    //     props.setCityValue(cityNameList.filter(data=> data.city_name==cityName || data.city_name==props.defaultCityValue)[0]?.city_id);
+    //     console.log("zipcodeList====",zipcodeList.filter(data=>data.zipcode==zipCodeId ||data.zipcode == props.defaultZipcodeValue));
+    //     console.log("zipCodeId====",zipCodeId);
+    //     props.setZipcodeValue(zipcodeList.filter(data=>data.zipcode==zipCodeId ||data.zipcode == props.defaultZipcodeValue)[0]?.zipcode_id);   
     //     }    
     // }, [stateName, cityName, zipCodeId]);
-
-    useEffect(() => {
-        console.log("sssssss=====",stateName ,"====", cityName ,"====", zipCodeId)
-        if((stateName || props.defaultStateValue) && (cityName || props.defaultCityValue) && (zipCodeId || props.defaultZipcodeValue)){
-        props.setStateValue(stateNameList.filter(data=> data.state_name == stateName || data.state_name == props.defaultStateValue)[0]?.state_id);
-        props.setCityValue(cityNameList.filter(data=> data.city_name==cityName || data.city_name==props.defaultCityValue)[0]?.city_id);
-        console.log("zipcodeList====",zipcodeList.filter(data=>data.zipcode==zipCodeId ||data.zipcode == props.defaultZipcodeValue));
-        console.log("zipCodeId====",zipCodeId);
-        props.setZipcodeValue(zipcodeList.filter(data=>data.zipcode==zipCodeId ||data.zipcode == props.defaultZipcodeValue)[0]?.zipcode_id);   
-        }    
-    }, [stateName, cityName, zipCodeId]);
 
     useEffect (()=>{
         if(isEdit){
@@ -114,6 +109,8 @@ const StateAndCity = props => {
             setDefaultStateValue(props.defaultStateValue);
             setDefaultCityValue(props.defaultCityValue);
             setDefaultZipcodeValue(props.defaultZipcodeValue); 
+           
+           
         }
     })
     
@@ -126,7 +123,7 @@ const StateAndCity = props => {
     useEffect(() => { setZipcodeId( zipCodeId) }, [zipCodeId])
 
     const handleState = (e) => {
-        alert("Dfdfd state")  
+        //alert("Dfdfd state")  
         setStateName( stateNameList.filter(data=>data.state_id == e.target.value)[0].state_name)
         // setCityNameList("");
         // setZipcodeList("");

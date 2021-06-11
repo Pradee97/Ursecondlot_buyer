@@ -6,7 +6,8 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import StateAndCity from '../../Component/StateAndCity/StateAndCity';
-import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
+import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks";
+import { useForm } from "react-hook-form";
 
 import {
     Form,
@@ -21,6 +22,7 @@ import {
 const EditAddress = () => {
     const history = useHistory();
     const { id } = useParams();
+    let { register, updateAddress, formState: { errors },reset  } = useForm();
     const [accountObjc, setAccountObj] = useState("");
     const [FirstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -82,10 +84,11 @@ const EditAddress = () => {
             .catch(err => { console.log(err); });
     }
   
-    const updateAddress = (event) => {
+    updateAddress = (event) => {
         // setOpenLoader(true);
         event.preventDefault();        
-    
+        console.log("==========type==========>",typeof state);
+       
         let request = {
             buyer_address_id:id,
             buyer_id:JSON.parse(localStorage.getItem("userDetails")).user_id,
@@ -94,15 +97,16 @@ const EditAddress = () => {
             address: address,
             phone_no: primaryPhone,
             mobile_no: mobilePhone,
-            city_id: city,
-            state_id: state,
-            zipcode_id: zipCode,
+            city_id: typeof city==='string'?accountObjc.city_id:city,
+            state_id: typeof state==='string'?accountObjc.state_id:state,
+            zipcode_id: zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode,
             location: location,
             instructions: instruction,
             // buyer_address_id:buyeraddress,
             active:1
            
         };
+        console.log("====request==>",request)
         API
             .post("buyer_address/update", request)
             .then((response) => {
@@ -138,8 +142,29 @@ const EditAddress = () => {
     }
 
     useEffect(() => {
-      fetchAccountDetails();
-    }, []);
+      //fetchAccountDetails();
+      let request = {
+        buyer_address_id:id,
+    };
+    const state = API.post('buyer_address/condition', request);
+    state.then(res => {
+        console.log("res", res.data.data)
+        setFirstName(res.data.data[0].first_name);
+        setLastName(res.data.data[0].last_name);
+        setAddress(res.data.data[0].address);
+        setPrimaryPhone(res.data.data[0].phone_no);
+        setMobilePhone(res.data.data[0].mobile_no);
+        setCity(res.data.data[0].city_name);
+        setState(res.data.data[0].state_name);
+        setZIpCode(res.data.data[0].zipcode_id);
+        setLocation(res.data.data[0].location);
+        setInstruction(res.data.data[0].instructions);
+        setZIpCode(res.data.data[0].zipcode);
+        setAccountObj(res.data.data[0])
+        reset(res.data.data);
+    })
+        .catch(err => { console.log(err); });
+    }, [reset]);
     return (
         <div>
             <main id="main" class="inner-page">

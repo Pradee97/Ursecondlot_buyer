@@ -5,7 +5,8 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import StateAndCity from '../../Component/StateAndCity/StateAndCity'
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
-import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
+import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks";
+import { useForm } from "react-hook-form";
 
 import {
     Form,
@@ -20,6 +21,7 @@ import ls from 'local-storage';
 
 const EditMyProfile = () => {
     const history = useHistory();
+    let { register, updateMyProfile, formState: { errors },reset  } = useForm();
     const { id } = useParams();
     const { user_id } = useParams();
     const { buyer_id } = useParams();
@@ -85,7 +87,7 @@ const EditMyProfile = () => {
     }
    
   
-    const updateMyProfile = (event) => {
+    updateMyProfile = (event) => {
         // setOpenLoader(true);
         event.preventDefault();        
     
@@ -97,9 +99,12 @@ const EditMyProfile = () => {
             mobile_no: mobilePhone,           
             email: emailId,
             address: address,
-            city_id: city,
-            state_id: state,
-            zipcode_id: zipcode,
+            // city_id: city,
+            // state_id: state,
+            // zipcode_id: zipcode,
+            city_id: typeof city==='string'?myProfileObjc.city_id:city,
+            state_id: typeof state==='string'?myProfileObjc.state_id:state,
+            zipcode_id: zipcode===myProfileObjc.zipcode?myProfileObjc.zipcode_id:zipcode,
             address: address,
             active:1,
             // buyer_id: userDetails.user_id
@@ -142,8 +147,29 @@ const EditMyProfile = () => {
     }
 
     useEffect(() => {
-        fetchMyProfileDetails();
-    }, []);
+        //fetchMyProfileDetails();
+        let request = {
+            buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+        };
+        
+        const state = API.post('user_profile/condition',request);
+        state.then(res => {
+            console.log("res", res.data.data)
+            setFirstName(res.data.data[0].first_name);
+            setLastName(res.data.data[0].last_name);
+            setPrimaryPhone(res.data.data[0].phone_no);
+            setMobilephone(res.data.data[0].mobile_no);           
+            setEmailId(res.data.data[0].email);
+            setAddress(res.data.data[0].address);
+            setCity(res.data.data[0].city_name);
+            setState(res.data.data[0].state_name);
+            setZipcode(res.data.data[0].zipcode); 
+            // setLocationName(res.data.data[0].address);
+            setMyProfileObj(res.data.data[0]);
+            reset(res.data.data[0]);
+        })
+            .catch(err => { console.log(err); });
+    }, [reset]);
     return (
         <div>
             <main id="main" className="inner-page">

@@ -5,7 +5,8 @@ import { useHistory,useParams } from "react-router-dom";
 import { useState } from 'react';
 import { useEffect } from 'react';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
-import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
+import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks";
+import { useForm } from "react-hook-form";
 
 import {
     Form,
@@ -19,6 +20,7 @@ import {
 import StateAndCity from '../../Component/StateAndCity/StateAndCity'
 
 const EditDealerInformation = () => {
+    let { register, updateDealerInfo, formState: { errors },reset  } = useForm();
     const history = useHistory();
     const { id } = useParams();
     const [accountObjc, setAccountObj] = useState("");
@@ -78,7 +80,7 @@ const EditDealerInformation = () => {
             .catch(err => { console.log(err); });
     }
   
-    const updateDealerInfo = (event) => {
+     updateDealerInfo = (event) => {
         // setOpenLoader(true);
         event.preventDefault();        
     
@@ -89,9 +91,12 @@ const EditDealerInformation = () => {
             phone_no: primaryPhone,
             mobile_no: mobilePhone,
             address: address,
-            city_id: city,
-            state_id: state,
-            zipcode_id: zipCode,
+            // city_id: city,
+            // state_id: state,
+            // zipcode_id: zipCode,
+            city_id: typeof city==='string'?accountObjc.city_id:city,
+            state_id: typeof state==='string'?accountObjc.state_id:state,
+            zipcode_id: zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode,
             active:1
            
         };
@@ -130,8 +135,26 @@ const EditDealerInformation = () => {
             });
         }
     useEffect(() => {
-      fetchAccountDetails();
-    }, []);
+      //fetchAccountDetails();
+      let request = {
+        buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+    };
+    const state = API.post('user_profile/condition', request);
+    state.then(res => {
+        console.log("res=======>", res.data.data)
+        setFirstname(res.data.data[0].first_name);
+        setLastname(res.data.data[0].last_name);
+        setPrimaryphone(res.data.data[0].phone_no);
+        setMobilephone(res.data.data[0].mobile_no);
+        setAddress(res.data.data[0].address);
+        setCity(res.data.data[0].city_name);
+        setState(res.data.data[0].state_name);
+        setZipcode(res.data.data[0].zipcode);
+        setAccountObj(res.data.data[0])
+        reset(res.data.data[0]);
+    })
+        .catch(err => { console.log(err); });
+    }, [reset]);
     return (
         <div>
             <main id="main" class="inner-page">

@@ -7,7 +7,8 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import StateAndCity from '../../Component/StateAndCity/StateAndCity'
-import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
+import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks";
+import { useForm } from "react-hook-form";
 
 import {
     Form,
@@ -21,6 +22,7 @@ import {
 
 const EditLegalAccount = () => {
     const history = useHistory();
+    let { register, updateLegalAccount, formState: { errors },reset  } = useForm();
     const { id } = useParams();
     const [accountObjc, setAccountObj] = useState("");
     const [firstname, setFirstname] = useState("");
@@ -91,7 +93,7 @@ const EditLegalAccount = () => {
             .catch(err => { console.log(err); });
     }
   
-    const updateLegalAccount = (event) => {
+    updateLegalAccount = (event) => {
         // setOpenLoader(true);
         event.preventDefault();        
     
@@ -103,9 +105,12 @@ const EditLegalAccount = () => {
             dealer_license: dealershiplicense,
             tax_id: taxid,
             address: address,
-            city_id: city,
-            state_id: state,
-            zipcode_id: zipcode,
+            // city_id: city,
+            // state_id: state,
+            // zipcode_id: zipcode,
+            city_id: typeof city==='string'?accountObjc.city_id:city,
+            state_id: typeof state==='string'?accountObjc.state_id:state,
+            zipcode_id: zipcode===accountObjc.zipcode?accountObjc.zipcode_id:zipcode,
             dealer_license_exp: dealershipLicenseexp,
             tax_id_exp: taxidexp,
             bussiness_name:legalBusinessname,
@@ -146,8 +151,32 @@ const EditLegalAccount = () => {
     }
 
     useEffect(() => {
-      fetchAccountDetails();
-    }, []);
+      //fetchAccountDetails();
+      let request = {
+        legal_manage_id: id,
+    };
+  
+       
+        const state = API.post('legal_manage/condition', request);
+        state.then(res => {
+        console.log("res", res.data.data)
+        setFirstname(res.data.data[0].first_name);
+        setLastname(res.data.data[0].last_name);
+        setLegalBusinessname(res.data.data[0].legal_manage_id);
+        setEINnumber(res.data.data[0].ein_no);
+        setDealershiplicense(res.data.data[0].dealer_license);
+        setTaxid(res.data.data[0].tax_id);
+        setAddress(res.data.data[0].address);
+        setCity(res.data.data[0].city_name);
+        setState(res.data.data[0].state_name);
+        setZipcode(res.data.data[0].zipcode);
+        setDealershipLicenseexp(res.data.data[0].dealer_license_exp);
+        setTaxidexp(res.data.data[0].tax_id_exp);
+        setAccountObj(res.data.data[0]);
+        reset(res.data.data[0]);
+    })
+        .catch(err => { console.log(err); });
+    }, [reset]);
     return (
         <div>
             <main id="main" class="inner-page">

@@ -19,7 +19,7 @@ import {
 const Login = () => {
   const history = useHistory();
   const {state} = useLocation();
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors },reset } = useForm();
 
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
@@ -30,7 +30,18 @@ const Login = () => {
   useEffect(()=>{
     // localStorage.clear()
     localStorage.setItem("islogedIn", false)
+    let request = {
+      country_id: 1
+  };
+  const state = API.post('state/condition', request);
+  state.then(res => {
+      console.log("res", res.data.data)
+      reset(res.data.data);
+      
   })
+      .catch(err => { console.log(err); });
+    
+  }, [reset])
 
   const loginhandleSubmit = (value) => {
     // setOpenLoader(true);

@@ -8,9 +8,11 @@ import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import ls from 'local-storage';
 import FileBase64 from 'react-file-base64';
 import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
+import { useForm } from "react-hook-form";
 
 const EditBuyer = () => {
     const history = useHistory();
+    let { register, updateMyProfile, formState: { errors },reset  } = useForm();
     const { id } = useParams();
     const { user_id } = useParams();
     const { buyer_id } = useParams();
@@ -93,7 +95,7 @@ const EditBuyer = () => {
         })
             .catch(err => { console.log(err); });
     }
-    const updateMyProfile = (event) => {
+     updateMyProfile = (event) => {
         // setOpenLoader(true);
         event.preventDefault();
         let request = {
@@ -104,9 +106,12 @@ const EditBuyer = () => {
             mobile_no: mobilePhone,
             email: emailId,
             address: address,
-            city_id: city,
-            state_id: state,
-            zipcode_id: zipcode,
+            city_id: typeof city==='string'?myProfileObjc.city_id:city,
+            state_id: typeof state==='string'?myProfileObjc.state_id:state,
+            zipcode_id: zipcode===myProfileObjc.zipcode?myProfileObjc.zipcode_id:zipcode,
+            // city_id: city,
+            // state_id: state,
+            // zipcode_id: zipcode,
             address: locationName,
             buyer_privileges_id: privileges_id,
             buy_now: buy_now,
@@ -153,8 +158,37 @@ const EditBuyer = () => {
             });
     }
     useEffect(() => {
-        fetchMyProfileDetails();
-    }, []);
+       // fetchMyProfileDetails();
+       let request = {
+        buyer_id: id,
+    };
+    const state = API.post('buyer_details/condition', request);
+    state.then(res => {
+        console.log("res", res.data.data)
+        setFirstName(res.data.data[0].first_name);
+        setLastName(res.data.data[0].last_name);
+        setPrimaryPhone(res.data.data[0].phone_no);
+        setMobilephone(res.data.data[0].mobile_no);
+        setEmailId(res.data.data[0].email);
+        setAddress(res.data.data[0].address);
+        setCity(res.data.data[0].city_name);
+        setState(res.data.data[0].state_name);
+        setZipcode(res.data.data[0].zipcode);
+        setLocationName(res.data.data[0].address);
+        setMyProfileObj(res.data.data[0]);
+        setBuyNow(res.data.data[0].buy_now);
+        setCancelBid(res.data.data[0].cancel_bid)
+        setBid(res.data.data[0].bid)
+        setProxy_bid(res.data.data[0].proxy_bid)
+        setCounter_bid(res.data.data[0].counter_bid)
+        setLot_fee(res.data.data[0].lot_fee)
+        setPriviegesId(res.data.data[0].buyer_privileges_id)
+        setImage(res.data.data[0].image);
+        reset(res.data.data[0]);
+
+    })
+        .catch(err => { console.log(err); });
+    }, [reset]);
     return (
         <div>
             <main id="main" className="inner-page">
