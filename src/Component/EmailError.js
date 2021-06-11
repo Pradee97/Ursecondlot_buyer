@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
+import { Button } from 'antd';
 
 
 
@@ -23,7 +24,8 @@ const EmailError = () => {
                         <p>Please provide Different Email </p>
                     </div>
                     <div class="modalfooter ">
-                        <a class="cta-btns" href="registration">OK</a>
+                        {/* <a class="cta-btns" href="registration">OK</a> */}
+                        <Button className="cta-btns" onClick={() => history.push("/registration")}>OK</Button>
                     </div>
 
                 </div>

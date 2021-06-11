@@ -4,17 +4,7 @@ import { useHistory,useLocation } from "react-router-dom";
 import ls from 'local-storage';
 import { store } from 'react-notifications-component';
 import { useForm } from "react-hook-form";
-
-import {
-  Form,
-  Input,
-  Select,
-  AutoComplete,
-  Radio,
-  notification,
-  Spin,
-} from 'antd';
-
+import { Button } from 'antd';
 
 const Login = () => {
   const history = useHistory();
@@ -118,16 +108,19 @@ const Login = () => {
 		  </div>
             <div className="row">
               <div className="col-lg-6 forget-username">
-              <a className="forget-name" href="/forgotEmail">Forgot Username</a>
+              {/* <a className="forget-name" href="/forgotEmail">Forgot Username</a> */}
+              <Button className="forget-name" onClick={() => history.push("/forgotEmail")}>Forgot Username</Button>
               </div>
 
               <div className="col-lg-6 forget">
-                <a className="forget-pass" href="/forgotpasswordemail">Forgot password</a>
+                {/* <a className="forget-pass" href="/forgotpasswordemail">Forgot password</a> */}
+              <Button className="forget-pass" onClick={() => history.push("/forgotpasswordemail")}>Forgot password</Button>
               </div>
                <p className="form-input-error">{errorMessage}</p>
               <div className="col-lg-12 loginBtn">
                 <button className="cta-btn">Log In</button>
-                <p>Don't have an account? <a className="forget-name" href="registration">Become a Dealer</a></p>
+                {/* <p>Don't have an account? <a className="forget-name" href="registration">Become a Dealer</a></p> */}
+                <p>Don't have an account?<Button className="forget-name" onClick={() => history.push("/registration")}>Become a Dealer</Button></p>
               </div>
             </div>
           </form>
