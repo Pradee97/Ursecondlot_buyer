@@ -131,7 +131,7 @@ const FloorAdd = () => {
                                       }
                                   })}
                                 onChange={(e) => setContactName(e.target.value)} />
-                                <label for="contactName" className={contactName !="" ? "input-has-value" : ""}>Contact Name</label>
+                                <label for="contactName" className={contactName !="" ? "input-has-value" : ""}>Name Contact </label>
                                 <p className="form-input-error">{errors.contactName?.message}</p>
                             </div>
                             </div>
@@ -274,7 +274,7 @@ const FloorAdd = () => {
                                                      
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                            <select className="form-control textbox" placeholder="" name="accountOpened"
+                            <select className="form-control custom-select  textbox" placeholder="" name="accountOpened"
                             {...register("accountOpened", {
                                 required: "This input is required."
                             })}

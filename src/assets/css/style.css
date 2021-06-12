@@ -2533,7 +2533,17 @@ input[type="password"] {
 
 .forget-username{
   text-align: left;
+  float: left;
 }
+.forget .forget-pass{ 
+  float: right;
+}
+.forget-username button, .forget button, .loginBtn p button{
+  border: rgba(255,255,255,.5);
+  padding: 4px 0;
+  box-shadow:none!important;
+}
+
 
 .loginBlock{
 	margin:auto;
@@ -3447,13 +3457,14 @@ SuccessfullModalCenter
   margin-left: 4px;
   color: #fff;
   border-radius: 5px;
-  padding: 6px 25px 7px 25px;
+  padding: 6px 25px 6px 25px;
   white-space: nowrap;
   transition: 0.3s;
   font-size: 20px;
   display: inline-block;
   font-weight: 300;
   background: #bd062c;
+  min-height: 50px;
 }
 .Successfullform .modalbody h2{
 	color: rgb(0, 39, 104);
@@ -4149,10 +4160,12 @@ Search Box"
 	padding-bottom:0px;
 }
 
+
 .floorplanstableblock{
 	text-align:center;
 	margin: auto;
     padding: 0;
+    float: left;
 }
 .floorplanstable table{
     border: 1px solid #ccc;
@@ -4948,9 +4961,9 @@ margin-top: 20px;
 }
 
 .mgaccountrighttableblock h3 button{
-  border:#ddd solid 1px;
+  border:transparent;
+  box-shadow: none!important;
 }
-
 .mgaccountrighttableblock h3 button:hover, .mgaccountrighttableblock h3 button:focus{
   border:#BD062C solid 1px;
 }
@@ -5849,6 +5862,20 @@ paymentform
   height: 22px;
   margin: 0;
   font-size: 16px;
+  font-weight: 600;
+}
+.modalcontent{
+  margin: 0 auto;
+  text-align: center;
+}
+.modalfooter  button.cta-btns {
+  background-color: #bd062c;
+  color: white!important;
+  padding: 6px 30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 3px;
+  border: none;
 }
 /*----------------------------------------------
 
@@ -6185,6 +6212,10 @@ padding-bottom: 15px;
     color: #bd062c;
     padding: 5px 15px;
 }
+.myprofilerighttableblock h3 button {
+  border:transparent;
+  box-shadow: none!important;
+}
 .myprofilerighttableblock h3 button:hover, .myprofilerighttableblock h3 button:focus{
   border:#BD062C solid 1px;
 }
@@ -6450,6 +6481,7 @@ table td .ant-btn:hover span, table td .ant-btn:hover i{
 }
 .form-input-error{
   color: red;
+  text-align: left;
 }
 .topRightUser img{
   width:35px;

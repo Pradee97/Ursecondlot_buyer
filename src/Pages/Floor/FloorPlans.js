@@ -49,12 +49,13 @@ const FloorPlans = () => {
            <div className="col-lg-12 floorplanstableblock">
                <div className="add-floor">
                    {/* <a className="add-floor-btns" href="/flooradd"><i class="icofont-plus"></i>  Add Floor</a> */}
-                   <Button className="add-user-btns" onClick={() => history.push("/flooradd")}><i class="icofont-plus"></i>Add Floor</Button>
+                   <Button autofocus className="add-user-btns" onClick={() => history.push("/flooradd")}><i class="icofont-plus"></i><span>Add Floor</span></Button>
                </div>
+               
                
 
                {floorDetails.length>0?floorDetails.map((item,index) =>
-               <div className="col-lg-12 mt-3 pt-4 floorplanstableblock">
+               <div className="col-lg-12 mt-3 floorplanstableblock">
                <div className="floorplanstable">
                
                    <table>
