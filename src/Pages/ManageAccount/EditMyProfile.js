@@ -205,13 +205,13 @@ const EditMyProfile = () => {
                         
                             <div className="col-sm-12 form-group">
                             <div className="tbox">                           
-                                <input type="text"  defaultValue={myProfileObjc.first_name} className="form-control textbox" placeholder="" required onChange={(e) => setFirstName(e.target.value)} />
+                                <input type="text"  defaultValue={myProfileObjc.first_name} className="form-control textbox" placeholder="" required disabled onChange={(e) => setFirstName(e.target.value)} />
                                 <label for="first_name" className={firstName !="" ? "input-has-value" : ""}>First Name</label>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={myProfileObjc.last_name} className="form-control textbox" placeholder="" required onChange={(e) => setLastName(e.target.value)} />
+                                <input type="text" defaultValue={myProfileObjc.last_name} className="form-control textbox" placeholder="" required disabled onChange={(e) => setLastName(e.target.value)} />
                                 <label for="last_name" className={lastName !="" ? "input-has-value" : ""}>Last Name</label>
                             </div>
                             </div>
@@ -229,7 +229,7 @@ const EditMyProfile = () => {
                             </div>                      
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="email" defaultValue={myProfileObjc.email} className="form-control textbox" placeholder="" required onChange={(e) => setEmailId(e.target.value)} />
+                                <input type="email" defaultValue={myProfileObjc.email} className="form-control textbox" placeholder="" required disabled onChange={(e) => setEmailId(e.target.value)} />
                                 <label for="email" className={emailId !="" ? "input-has-value" : ""}>Email Id</label>
                             </div>
                             </div>

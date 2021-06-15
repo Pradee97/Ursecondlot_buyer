@@ -189,21 +189,25 @@ const AddAddress = () => {
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" id="branchName" className="textbox" placeholder="" name="mobilePhone"
-                                  {...register("mobilePhone", {
-                                    required: "This input is required.",
+                                <input type="text" class="form-control textbox" id="mobileno"  placeholder="" name="mobileno"
+                                  {...register("mobileno", {
+                                    // required: "Phone Number is required.",
+                                    pattern: {
+                                    value: "^\d{10}$",
+                                    message: "Accept only numbers "
+                                    },
                                     minLength: {
                                         value: 10,
-                                        message: "This input atleast have 10 digits"
-                                      },
+                                        message: "Phone Number atleast have 10 digits"
+                                    },
                                     maxLength: {
                                         value: 15,
-                                        message: "This input must not exceed 15 digits"
-                                      }
+                                        message: "Phone Number must not exceed 15 digits"
+                                    }
                                 })}
                                 onChange={(e) => setMobilephone(e.target.value)} />
                                 <label for="branchName" className={mobilePhone !="" ? "input-has-value" : ""}>Mobile phone</label>
-                                <p className="form-input-error">{errors.mobilePhone?.message}</p>
+                                <p className="form-input-error">{errors.mobileno?.message}</p>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group"> 
@@ -243,7 +247,7 @@ const AddAddress = () => {
                             </div>
                             <div className="col-sm-12 form-group"> 
                             <div className="tbox">
-                                <input type="text"  id="contactName" className="textbox" placeholder="" name="instruction"
+                                <input type="text"  id="contactName" className="textbox" placeholder="" name="instruction" autoComplete="off"
                                  {...register("instruction", {
                                     required: "This input is required.",
                                     maxLength: {
