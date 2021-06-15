@@ -377,7 +377,7 @@ const AddLegalAccount = () => {
                                 <label for="phoneNumber" className={"input-has-value"}>Dealership license exp</label>
                                 <p className="form-input-error">{errors.Dealership?.message}</p> */}
                             </div>
-                            {edealerExp==="" && setDealershiplicenseexp===null?<p className="form-input-error"> Dealership license exp is required</p>:""}
+                            {edealerExp==="" && dealershipLicenseexp===null?<p className="form-input-error"> Dealership license exp is required</p>:""}
                             </div>  
                             <div className="col-sm-12 form-group datePickerBlock">
                              <div className="tbox">     

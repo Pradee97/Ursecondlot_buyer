@@ -375,17 +375,17 @@ const FloorAdd = () => {
                                                      
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
+                            {/* <label  for="account_Opened" className={accountOpened!="" ? "input-has-value" : ""}>Account Opened</label> */}
                             <select className="form-control custom-select  textbox" placeholder="" name="accountOpened"
                             {...register("accountOpened", {
                                 required: "This input is required."
                             })}
                             onChange={(e) => setAccountOpened(e.target.value)}>
-                            <option disabled>Account Opened</option>
+                            <option disabled selected value="" style={{display:"none"}}></option>
                             <option value="Yes">Yes</option>
-                            <option >No</option>
+                            <option value="No">No</option>
                             </select>
-
-                            <label  for="account_Opened" className={accountOpened!="" ? "input-has-value" : ""}>Account Opened</label>
+                            <label  for="account_Opened" className={ "input-has-value"}>Account Opened</label>
                             <p className="form-input-error">{errors.accountOpened?.message}</p>
 
                                 {/* <input type="text" className="form-control" placeholder="Account Opened" required onChange={(e) => setAccountOpened(e.target.value)} /> */}
