@@ -62,7 +62,7 @@ const FloorAdd = () => {
     const [emailId, setEmailId] = useState("");
     const [address, setAddress] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
-    const [dateOpened, setDateOpened] = useState("");
+    const [dateOpened, setDateOpened] = useState(null);
     const [accountOpened, setAccountOpened] = useState("");
     // const [stateId, setStateId] = useState("");
     // const [cityName, setCityName] = useState("");
@@ -102,13 +102,14 @@ const FloorAdd = () => {
             email_id: emailId,
             address: address,
             phone_no: phoneNumber,
-            opened_date: moment().format("YYYY-MM-DD"),
+            opened_date: moment(dateOpened).format("YYYY-MM-DD"),
             account_opened: accountOpened,
             buyer_id:userDetails.user_id,
             active:1
             
         }];
         console.log("===",request)
+        // return
         if(dateOpened!==null){
         API.post("floor_plan/add", request)
             .then((response) => {
@@ -144,7 +145,7 @@ const FloorAdd = () => {
             }else{
                 console.log("====dateOpened==>",dateOpened)
                 if(dateOpened===null){
-                setDateOpened("");
+                setDate("");
          }
         }
     }
