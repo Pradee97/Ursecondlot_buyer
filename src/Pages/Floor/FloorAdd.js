@@ -3,12 +3,39 @@ import API from "../../Services/BaseService";
 import { useHistory } from "react-router-dom";
 import ls from 'local-storage';
 import Datetime from 'react-datetime';
+import DatePicker from "react-datepicker";
+import moment from 'moment';
+import { getMonth, getYear } from 'date-fns';
+import "react-datepicker/dist/react-datepicker.css";
 import { useState } from 'react';
 import { useEffect } from 'react';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import { useForm } from "react-hook-form";
 
 const FloorAdd = () => {
+
+    const range = (start, stop, step) => Array.from({ length: (stop - start) / step + 1}, (_, i) => start + (i * step));
+    const [startDate, setStartDate] = useState(new Date());
+    const years = range(1990, getYear(new Date()) + 1, 1);
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+     
+    const dateFormat = 'MM/DD/YYYY';
+    const customFormat = value => `${value.format(dateFormat)}`;
+    const [edate,setDate]=useState ("1");
+
     const history = useHistory();   
     const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -52,6 +79,14 @@ const FloorAdd = () => {
         setDateOpened(event.format("YYYY-MM-DD"))
     }
 
+    // const handleDateChangeRaw = (e) => {
+    //     e.preventDefault();
+    //     console.log("logesh",e)
+        
+    //     // setDateOpened(e.format("YYYY-MM-DD"))
+       
+    // }
+
     // const openDatepicker = (event)=>{
     //     event._calendar.setOpen(true)
     // }
@@ -67,14 +102,14 @@ const FloorAdd = () => {
             email_id: emailId,
             address: address,
             phone_no: phoneNumber,
-            opened_date: dateOpened,
+            opened_date: moment().format("YYYY-MM-DD"),
             account_opened: accountOpened,
             buyer_id:userDetails.user_id,
             active:1
             
         }];
         console.log("===",request)
-        // return
+        if(dateOpened!==null){
         API.post("floor_plan/add", request)
             .then((response) => {
                 if (response.data.success) {
@@ -104,8 +139,14 @@ const FloorAdd = () => {
                     setPopupType("error");
                     setPopupActionType("close");
                     setPopupActionValue("close");
-            });
-
+            })
+            .catch(err => { console.log(err); });
+            }else{
+                console.log("====dateOpened==>",dateOpened)
+                if(dateOpened===null){
+                setDateOpened("");
+         }
+        }
     }
     return (
         <div>
@@ -120,6 +161,21 @@ const FloorAdd = () => {
 
                         <h2 className="title">Add Floor Plan </h2>
                         <div className="row">
+                        <div className="col-sm-12 form-group">
+                            <div className="tbox">
+                                <input type="text"  id="companyName" className="textbox" placeholder="" name="companyName"
+                                 {...register("companyName", {
+                                    required: "This input is required.",
+                                    maxLength: {
+                                        value: 50,
+                                        message: "This input must not exceed 50 characters"
+                                      }
+                                  })}
+                                onChange={(e) => setCompanyName(e.target.value)} />
+                                <label for="companyName" className={companyName !="" ? "input-has-value" : ""}>Company Name</label>
+                                <p className="form-input-error">{errors.companyName?.message}</p>
+                            </div>
+                        </div>
                         <div className="col-sm-12 form-group"> 
                             <div className="tbox">
                                 <input type="text"  id="contactName" className="textbox" placeholder="" name="contactName"
@@ -134,22 +190,7 @@ const FloorAdd = () => {
                                 <label for="contactName" className={contactName !="" ? "input-has-value" : ""}>Name Contact </label>
                                 <p className="form-input-error">{errors.contactName?.message}</p>
                             </div>
-                            </div>
-                            <div className="col-sm-12 form-group">
-                            <div className="tbox">
-                                <input type="text"  id="companyName" className="textbox" placeholder="" name="companyName"
-                                 {...register("companyName", {
-                                    required: "This input is required.",
-                                    maxLength: {
-                                        value: 50,
-                                        message: "This input must not exceed 50 characters"
-                                      }
-                                  })}
-                                onChange={(e) => setCompanyName(e.target.value)} />
-                                <label for="companyName" className={companyName !="" ? "input-has-value" : ""}>Company Name</label>
-                                <p className="form-input-error">{errors.companyName?.message}</p>
-                            </div>
-                            </div>
+                            </div>                           
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" id="branchName" className="textbox" placeholder="" name="branchName"
@@ -266,10 +307,69 @@ const FloorAdd = () => {
                                         {/* <i class='bx bx-calendar' ></i>                                                      */}
                                         {/* <input type="Date" id="dateOpened" className="textbox" placeholder="" required onChange={(e) => setDateOpened(e.target.value)} />
                                         <label for="dateOpened" className={dateOpened !="" ? "input-has-value" : ""}>Date Opened</label>  */}
-                                         <Datetime className="textbox" inputProps={ inputProps } timeFormat={false} dateFormat="DD/MM/YYYY" name="Date" onChange={floorDate}/> 
-                                        <label  for="meeting_date" className={"input-has-value"}>Date Opened</label> 
+                                         {/* <Datetime className="textbox" inputProps={ inputProps } timeFormat={false} dateFormat="DD/MM/YYYY" name="Date" onChange={floorDate}/> 
+                                        <label  for="meeting_date" className={"input-has-value"}>Date Opened</label>  */}
+                                    <DatePicker 
+                                    class="form-control textbox" name="Date" id="Date"
+                                    renderCustomHeader={({
+                                        date,
+                                        changeYear,
+                                        changeMonth,
+                                        decreaseMonth,
+                                        increaseMonth,
+                                        prevMonthButtonDisabled,
+                                        nextMonthButtonDisabled,
+                                    }) => (
+                                        <div
+                                            style={{
+                                            margin: 10,
+                                            display: "flex",
+                                            justifyContent: "center",
+                                            }}
+                                        >
+                                        <button onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
+                                        {"<"}
+                                        </button>
+                                        <select
+                                        value={getYear(date)}
+                                        onChange={({ target: { value } }) => changeYear(value)}
+                                        >
+                                        {years.map((option) => (
+                                            <option key={option} value={option}>
+                                            {option}
+                                            </option>
+                                        ))}
+                                        </select>
+                                                    
+                                        <select
+                                        value={months[getMonth(date)]}
+                                        onChange={({ target: { value } }) =>
+                                            changeMonth(months.indexOf(value))
+                                        }
+                                        >
+                                        {months.map((option) => (
+                                            <option key={option} value={option}>
+                                            {option}
+                                            </option>
+                                        ))}
+                                        </select>
+                                                    
+                                        <button onClick={increaseMonth} disabled={nextMonthButtonDisabled}>
+                                        {">"}
+                                        </button>
+                                        </div>
+                                    )}
+                                            autoComplete="off"
+                                            selected={dateOpened}
+                                            onChange={(date) => setDateOpened(date)}
+                                            isClearable
+                                            placeholderText="Date Opened"
+                                            // onChangeRaw={handleDateChangeRaw}
+                                                        
+                                    />
                                    
                                 </div> 
+                                {edate==="" && dateOpened===null?<p className="form-input-error"> Date  is required</p>:""}
                             </div>
                                                      
                             <div className="col-sm-12 form-group">
@@ -281,7 +381,7 @@ const FloorAdd = () => {
                             onChange={(e) => setAccountOpened(e.target.value)}>
                             <option disabled>Account Opened</option>
                             <option value="Yes">Yes</option>
-                            <option selected>No</option>
+                            <option >No</option>
                             </select>
 
                             <label  for="account_Opened" className={accountOpened!="" ? "input-has-value" : ""}>Account Opened</label>

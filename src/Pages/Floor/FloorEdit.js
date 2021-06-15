@@ -132,19 +132,19 @@ const FloorEdit = () => {
                     <button className="back-btn-paymentform" onClick={() => history.push("/floor")}>Back</button>
                         <h2 className="title"> Edit Floor Plans </h2>
                         <div className="row">
-                        
-                            <div className="col-sm-12 form-group">
-                            <div className="tbox">                           
-                                <input type="text"  defaultValue={floorObjc.contact_name} className="form-control textbox" placeholder="" required onChange={(e) => setContactName(e.target.value)} />
-                                <label for="contact_name" className={contactName !="" ? "input-has-value" : ""}>Contact Name</label>
-                            </div>
-                            </div>
+                            
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={floorObjc.company_name} className="form-control textbox" placeholder="" required onChange={(e) => setCompanyName(e.target.value)} />
                                 <label for="company_name" className={companyName !="" ? "input-has-value" : ""}>Company Name</label>
                             </div>
                             </div>
+                            <div className="col-sm-12 form-group">
+                            <div className="tbox">                           
+                                <input type="text"  defaultValue={floorObjc.contact_name} className="form-control textbox" placeholder="" required onChange={(e) => setContactName(e.target.value)} />
+                                <label for="contact_name" className={contactName !="" ? "input-has-value" : ""}>Contact Name</label>
+                            </div>
+                            </div>                            
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={floorObjc.branch_name} className="form-control textbox" placeholder="" required onChange={(e) => setBranchName(e.target.value)} />
