@@ -58,13 +58,13 @@ const Document = () => {
                 } else if (document[x].buyer_doc_type_id === 6) {
                     setDoc6(document[x])
                 } else if (document[x].buyer_doc_type_id === 7) {
-                    setDoc7(x)
+                    setDoc7(document[x])
                 } else if (document[x].buyer_doc_type_id === 8) {
                     setDoc8(document[x])
                 } else if (document[x].buyer_doc_type_id === 9) {
                     setDoc9(document[x])
                 } else if (document[x].buyer_doc_type_id === 10) {
-                    setDoc10(x)
+                    setDoc10(document[x])
                 } else if (document[x].buyer_doc_type_id === 11) {
                     setDoc11(document[x])
                 }
@@ -455,7 +455,7 @@ const Document = () => {
                                                 </div>}
                                                 </div>
                                                 <div class="col-lg-4 col-md-4">
-                                                {doc10 === "" ?<div class="docdetails">
+                                                {doc11 === "" ?<div class="docdetails">
                                                         <h5>Articles of incorporation.</h5>
                                                         <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} class="img-fluid" alt="" />
 
