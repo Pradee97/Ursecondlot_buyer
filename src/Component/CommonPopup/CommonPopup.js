@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { useHistory } from "react-router-dom";
 import checkImg from '../../../src/assets/img/check.svg';
 import errorImg from '../../../src/assets/img/erroricon.png';
-import warningImg from '../../../src/assets/img/Logo_final.png';
+import warningImg from '../../../src/assets/img/warning.png';
 import "./commonPopup.css"
 
 const CommonPopup = props => {

@@ -5620,6 +5620,11 @@ paymentform
 	float:right;
 	text-align:center;
 }
+.add-floor .ant-btn:hover {
+  color: #fff;
+  background: #002768;
+  border-color:  #002768;
+}
 
 .add-accounts {
     margin:20px 0;
@@ -5728,6 +5733,9 @@ paymentform
     padding-bottom: 20px;
 }
 
+.registrationform .form-control:disabled{ 
+  color: #ccc!important;
+}
 .backaccountform.editpaymentform .topforms , .backaccountform.addpaymentform .topforms {
   margin-top: 30px;
 }
@@ -6073,6 +6081,22 @@ button:focus{
   right: 25px;
   font-size: 25px;
   top: 12px;
+}
+
+.datePickerBlock .react-datepicker-wrapper { 
+  width: 100%;
+}
+.datePickerBlock input {
+  width: 100%;
+}
+*::placeholder {
+  color: #9F9F9F;
+  font-size: 16px;
+    font-weight: 600;
+}
+
+.datePickerBlock .react-datepicker-wrapper:focus-visible {
+  border: 1px solid #ccc;
 }
 
 ul.ant-pagination{
