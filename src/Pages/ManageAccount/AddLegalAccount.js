@@ -4,12 +4,40 @@ import { useHistory } from "react-router-dom";
 import ls from 'local-storage';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import DatePicker from "react-datepicker";
+import moment from 'moment';
+import { getMonth, getYear } from 'date-fns';
+import "react-datepicker/dist/react-datepicker.css";
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import StateAndCity from '../../Component/StateAndCity/StateAndCity';
 import { useForm } from "react-hook-form";
 import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
 
 const AddLegalAccount = () => {
+
+    const range = (start, stop, step) => Array.from({ length: (stop - start) / step + 1}, (_, i) => start + (i * step));
+    const [startDate, setStartDate] = useState(new Date());
+    const years = range(1990, getYear(new Date()) + 1, 1);
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+     
+    const dateFormat = 'MM/DD/YYYY';
+    const customFormat = value => `${value.format(dateFormat)}`;
+    const [etax, setTax]=useState ("1");
+    const [edealerExp, setDealerExp]=useState ("1");
+
     const history = useHistory();   
     const [isOpen, setIsOpen] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -32,8 +60,8 @@ const AddLegalAccount = () => {
     const [dealershiplicense, setDealershiplicense] = useState(""); 
     const [taxid, setTaxid] = useState("");
     const [address, setAddress] = useState("");
-    const [dealershipLicenseexp, setDealershiplicenseexp] = useState("");
-    const [taxidexp, setTaxidexp] = useState("");
+    const [dealershipLicenseexp, setDealershiplicenseexp] = useState(null);
+    const [taxidexp, setTaxidexp] = useState(null);
     const [legalBusinessname, setLegalBusinessname] = useState("");
     const [state, setStateName] = useState("");
 	const [city, setCityName] = useState("");
@@ -51,8 +79,8 @@ const AddLegalAccount = () => {
             ein_no: EINnumber,
             dealer_license: dealershiplicense,
             tax_id: taxid,
-            tax_id_exp: taxidexp,
-            dealer_license_exp: dealershipLicenseexp,
+            tax_id_exp: moment(taxidexp).format("YYYY-MM-DD"),
+            dealer_license_exp: moment(dealershipLicenseexp).format("YYYY-MM-DD"),
             state_id: state,
             city_id: city,
             zipcode_id: zipcode,
@@ -62,6 +90,7 @@ const AddLegalAccount = () => {
         };
         console.log("===",request)
         // return
+        if(taxidexp!==null && dealershipLicenseexp!==null){
         API.post("legal_manage/add", request)
             .then((response) => {
                 if (response.data.success) {
@@ -91,7 +120,17 @@ const AddLegalAccount = () => {
                     setPopupType("error");
                     setPopupActionType("close");
                     setPopupActionValue("close");
-            });
+            })
+            .catch(err => { console.log(err); });
+            }else{
+                console.log("====taxidexp==>",taxidexp)
+                if(taxidexp===null){
+                    setTax("");
+                }
+                if(dealershipLicenseexp===null){
+                    setDealerExp("");
+                }
+        }
 
     }
     const getStateName = (stateData) => {
@@ -270,27 +309,145 @@ const AddLegalAccount = () => {
                                 <label for="phoneNumber" className={zipcode !="" ? "input-has-value" : ""}>Zip code</label>
                             </div> 
                             </div>  */}
-                            <div className="col-sm-12 form-group">
-                             <div className="tbox">                            
-                                <input type="date" id="phoneNumber" className="textbox" placeholder="" name="Dealership"
+                            <div className="col-sm-12 form-group datePickerBlock">
+                             <div className="tbox">  
+                             <DatePicker 
+                                    class="form-control textbox" name="Date" id="Date"
+                                    renderCustomHeader={({
+                                        date,
+                                        changeYear,
+                                        changeMonth,
+                                        decreaseMonth,
+                                        increaseMonth,
+                                        prevMonthButtonDisabled,
+                                        nextMonthButtonDisabled,
+                                    }) => (
+                                        <div
+                                            style={{
+                                            margin: 10,
+                                            display: "flex",
+                                            justifyContent: "center",
+                                            }}
+                                        >
+                                        <button onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
+                                        {"<"}
+                                        </button>
+                                        <select
+                                        value={getYear(date)}
+                                        onChange={({ target: { value } }) => changeYear(value)}
+                                        >
+                                        {years.map((option) => (
+                                            <option key={option} value={option}>
+                                            {option}
+                                            </option>
+                                        ))}
+                                        </select>
+                                                    
+                                        <select
+                                        value={months[getMonth(date)]}
+                                        onChange={({ target: { value } }) =>
+                                            changeMonth(months.indexOf(value))
+                                        }
+                                        >
+                                        {months.map((option) => (
+                                            <option key={option} value={option}>
+                                            {option}
+                                            </option>
+                                        ))}
+                                        </select>
+                                                    
+                                        <button onClick={increaseMonth} disabled={nextMonthButtonDisabled}>
+                                        {">"}
+                                        </button>
+                                        </div>
+                                    )}
+                                            autoComplete="off"
+                                            selected={dealershipLicenseexp}
+                                            onChange={(date) => setDealershiplicenseexp(date)}
+                                            isClearable
+                                            placeholderText="Dealership license exp"
+                                            // onChangeRaw={handleDateChangeRaw}
+                                                        
+                                    />                          
+                                {/* <input type="date" id="phoneNumber" className="textbox" placeholder="" name="Dealership"
                                  {...register("Dealership", {
                                     required: "This input is required."
                                 })}
                                 onChange={(e) => setDealershiplicenseexp(e.target.value)} />
                                 <label for="phoneNumber" className={"input-has-value"}>Dealership license exp</label>
-                                <p className="form-input-error">{errors.Dealership?.message}</p>
+                                <p className="form-input-error">{errors.Dealership?.message}</p> */}
                             </div>
+                            {edealerExp==="" && dealershipLicenseexp===null?<p className="form-input-error"> Dealership license exp is required</p>:""}
                             </div>  
-                            <div className="col-sm-12 form-group">
-                             <div className="tbox">                            
-                                <input type="date" id="phoneNumber" className="textbox" placeholder="" name="Tax"
+                            <div className="col-sm-12 form-group datePickerBlock">
+                             <div className="tbox">     
+                             <DatePicker 
+                                    class="form-control textbox" name="Date" id="Date"
+                                    renderCustomHeader={({
+                                        date,
+                                        changeYear,
+                                        changeMonth,
+                                        decreaseMonth,
+                                        increaseMonth,
+                                        prevMonthButtonDisabled,
+                                        nextMonthButtonDisabled,
+                                    }) => (
+                                        <div
+                                            style={{
+                                            margin: 10,
+                                            display: "flex",
+                                            justifyContent: "center",
+                                            }}
+                                        >
+                                        <button onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
+                                        {"<"}
+                                        </button>
+                                        <select
+                                        value={getYear(date)}
+                                        onChange={({ target: { value } }) => changeYear(value)}
+                                        >
+                                        {years.map((option) => (
+                                            <option key={option} value={option}>
+                                            {option}
+                                            </option>
+                                        ))}
+                                        </select>
+                                                    
+                                        <select
+                                        value={months[getMonth(date)]}
+                                        onChange={({ target: { value } }) =>
+                                            changeMonth(months.indexOf(value))
+                                        }
+                                        >
+                                        {months.map((option) => (
+                                            <option key={option} value={option}>
+                                            {option}
+                                            </option>
+                                        ))}
+                                        </select>
+                                                    
+                                        <button onClick={increaseMonth} disabled={nextMonthButtonDisabled}>
+                                        {">"}
+                                        </button>
+                                        </div>
+                                    )}
+                                            autoComplete="off"
+                                            selected={taxidexp}
+                                            onChange={(date) => setTaxidexp(date)}
+                                            isClearable
+                                            placeholderText="Tax id exp"
+                                            // onChangeRaw={handleDateChangeRaw}
+                                                        
+                                    />                       
+                                {/* <input type="date" id="phoneNumber" className="textbox" placeholder="" name="Tax"
                                  {...register("Tax", {
                                     required: "This input is required."
                                 })}
                                 onChange={(e) => setTaxidexp(e.target.value)} />
                                 <label for="phoneNumber" className={"input-has-value"}>Tax id exp</label>
-                                <p className="form-input-error">{errors.Tax?.message}</p>
+                                <p className="form-input-error">{errors.Tax?.message}</p> */}
                             </div>
+                            {etax==="" && taxidexp===null?<p className="form-input-error"> Tax id exp  is required</p>:""}
                             </div>  
 
                           
