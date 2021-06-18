@@ -42,6 +42,7 @@ const AddUser = () => {
 	const [popupActionType, setPopupActionType] = useState("");
 	const [popupActionValue, setPopupActionValue] = useState("");
 	const [popupActionPath, setPopupActionPath] = useState("")
+    const [image,setImage] = useState("");
 
 	console.log("=====userDetails====>", userDetails)
 	console.log("======>", userDetails.dealer_id)
@@ -79,6 +80,7 @@ const AddUser = () => {
 	const disablePastDt = current => {
 		return current.isAfter(yesterday);
 	};
+	
 	const registrationhandleSubmit = (data) => {
 
 		// event.preventDefault();
@@ -111,6 +113,8 @@ const AddUser = () => {
 			.then((response) => {
 				if (response.data.success) {
 					const { data } = response;
+                    setImage(response.data.data[0].image);
+
 					console.log("response", response)
 					togglePopup()
 					setPopupTitle("Create AddUser");
@@ -154,7 +158,17 @@ const AddUser = () => {
 
 									<div className="mgaccountuser">
 										<div className="mgaccountuserleft">
-											<img src={process.env.PUBLIC_URL + "/images/userimg.jpg"} className="img-fluid" alt="..." />
+										<div className="col-sm-12 form-group">
+                                <div class="user-upload-btn-wrapper">
+                                    {image==="" && doc===""?<img alt="" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} />:                                    
+                                    doc===""?<img alt=""  src={image} />:
+                                    <img alt=""  src={doc.base64} />}  
+                                    <span class="proCamera"></span>                                  
+                                    <FileBase64 onDone={getFiles} type="hidden" />
+                                    
+                                </div>
+                                </div>
+											{/* <img src={process.env.PUBLIC_URL + "/images/userimg.jpg"} className="img-fluid" alt="..." /> */}
 										</div>
 										<div className="mgaccountuserright">
 											<h3>Fernand</h3>

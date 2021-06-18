@@ -202,7 +202,17 @@ const EditBuyer = () => {
             <div className="col-lg-3 col-md-4 col-sm-12 mgaccountleftblock">
                   <div className="mgaccountuser">
                     <div className="mgaccountuserleft">
-                      <img src={process.env.PUBLIC_URL + "/images/userimg.jpg"} className="img-fluid" alt="..." />
+                    <div className="col-sm-12 form-group">
+                                <div class="user-upload-btn-wrapper">
+                                    {image==="" && doc===""?<img alt="" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} />:                                    
+                                    doc===""?<img alt=""  src={image} />:
+                                    <img alt=""  src={doc.base64} />}  
+                                    <span class="proCamera"></span>                                  
+                                    <FileBase64 onDone={getFiles} type="hidden" />
+                                    
+                                </div>
+                                </div>
+                      {/* <img src={process.env.PUBLIC_URL + "/images/userimg.jpg"} className="img-fluid" alt="..." /> */}
                     </div>
                     <div className="mgaccountuserright">
                       <h3>Fernand</h3>

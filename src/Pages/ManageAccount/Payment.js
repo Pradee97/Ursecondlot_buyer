@@ -53,6 +53,12 @@ const Payment = () => {
     const [accountStateName, setAccountStateName] = useState("");
     const [accountZipcodeId, setAccountZipcodeId] = useState("");
     const [doc,setDoc]=useState("");
+    const [image,setImage] = useState("");
+
+    const getFiles = (file) => {
+      console.log("======>",file)
+      setDoc(file);
+  }
     let files= [];
     let userDetails = ls.get('userDetails');
 
@@ -80,6 +86,7 @@ const Payment = () => {
             const request={zipcode_id: data}
         API.post("location/condition", request)
         .then(response => {
+            setImage(response.data.data[0].image);
                
             if (response.statusText== "OK"){
                 console.log("google place data =>",data)
@@ -137,7 +144,9 @@ const Payment = () => {
             acc_city_id: accountCityName,
             acc_zipcode: accountZipcodeId,
             doc_name:doc===""?doc:doc.length>0?doc:[doc],
-            active:1
+            active:1,
+            image:doc===""?doc:doc.length>0?doc:[doc]
+
         }
         
         API
@@ -171,9 +180,7 @@ const Payment = () => {
                     setPopupActionValue("close");
         });
     }
-    const getFiles=(file)=>{
-        setDoc(file);
-      }
+   
     const getStateName=(stateData)=>{
         setStateName(stateData)
     }
@@ -214,7 +221,17 @@ const Payment = () => {
                                 <div className="col-lg-3 col-md-4 col-sm-12 accountleftblock">
                                     <div className="mgaccountuser">
                                         <div className="mgaccountuserleft">
-                                            <img src={process.env.PUBLIC_URL +"/images/userimg.jpg"} className="img-fluid" alt="..." />
+                                        <div className="col-sm-12 form-group">
+                                        <div class="user-upload-btn-wrapper">
+                                            {image==="" && doc===""?<img alt="" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} />:                                    
+                                            doc===""?<img alt=""  src={image} />:
+                                            <img alt=""  src={doc.base64} />}  
+                                            <span class="proCamera"></span>                                  
+                                            <FileBase64 onDone={getFiles} type="hidden" />
+                                            
+                                        </div>
+                                        </div>
+                                            {/* <img src={process.env.PUBLIC_URL +"/images/userimg.jpg"} className="img-fluid" alt="..." /> */}
                                         </div>
                                         <div className="mgaccountuserright">
                                             <h3>Fernand</h3>
