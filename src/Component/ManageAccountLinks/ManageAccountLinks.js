@@ -7,12 +7,26 @@ import DollarSymbolImg from '../../../src/assets/img/dollar-symbol.svg';
 import FeesImg from '../../../src/assets/img/fees.svg';
 import GoogleDocsImg from '../../../src/assets/img/google-docs.svg';
 import ProfileImg from '../../../src/assets/img/profile.svg';
+import adduser from '../../../src/assets/img/adduser.jpg'
 
 
 const ManageAccountLinks = () => {
     const history = useHistory();
     const location = useLocation();
     return(
+        <div>
+             <div className="mgaccountuser">
+                           <div className="mgaccountuserleft">
+                             <img alt="Menu" src={JSON.parse(localStorage.getItem("userDetails")).image || adduser} /> 
+                           </div>
+                           <div className="mgaccountuserright">
+                               <h3>Fernand</h3>
+                               <div className="d-flex align-items-center">
+                                   <p className="details"><img src={process.env.PUBLIC_URL +"/images/Path.svg"} className="img-fluid" alt="..."/><span>California, Cl</span></p>
+                               </div>
+                                   
+                           </div>
+                       </div>
         <div className="mgaccountuserlinks">
             <div className="userlinks">
                 <ul>
@@ -25,6 +39,7 @@ const ManageAccountLinks = () => {
                     <li className={location.pathname ==="/buyers"? "active" : ""} ><img src={ProfileImg} className="img-fluid" alt=""/><a href="JavaScript:void(0)"  onClick={()=>history.push('/buyers')} >Buyers</a></li>  
                 </ul>
             </div>
+        </div>
         </div>
     )
 }

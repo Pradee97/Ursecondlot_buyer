@@ -113,17 +113,7 @@ const AddAddress = () => {
                             </div>
 			<div className="row content">
             <div className="col-lg-3 col-md-4 col-sm-12 mgaccountleftblock">
-                  <div className="mgaccountuser">
-                    <div className="mgaccountuserleft">
-                      <img src={process.env.PUBLIC_URL + "/images/userimg.jpg"} className="img-fluid" alt="..." />
-                    </div>
-                    <div className="mgaccountuserright">
-                      <h3>Fernand</h3>
-                      <div className="d-flex align-items-center">
-                        <p className="details"><img src={process.env.PUBLIC_URL + "/images/Path.svg"} className="img-fluid" alt="..." /><span>California, Cl</span></p>
-                      </div>
-                    </div>
-                  </div>
+                 
                   <ManageAccountLinks />
                 </div>
                 <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 flooraddform">
@@ -191,7 +181,7 @@ const AddAddress = () => {
                             <div className="tbox">
                                 <input type="text" id="branchName" className="textbox" placeholder="" name="mobilePhone"
                                   {...register("mobilePhone", {
-                                    required: "This input is required.",
+                                    // required: "This input is required.",
                                     minLength: {
                                         value: 10,
                                         message: "This input atleast have 10 digits"
@@ -243,7 +233,7 @@ const AddAddress = () => {
                             </div>
                             <div className="col-sm-12 form-group"> 
                             <div className="tbox">
-                                <input type="text"  id="contactName" className="textbox" placeholder="" name="instruction"
+                                <input type="text"  id="contactName" className="textbox" placeholder="" name="instruction" autoComplete="off"
                                  {...register("instruction", {
                                     required: "This input is required.",
                                     maxLength: {

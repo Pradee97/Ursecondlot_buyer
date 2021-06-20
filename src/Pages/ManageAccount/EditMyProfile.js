@@ -181,17 +181,7 @@ const EditMyProfile = () => {
                             </div>
 			<div className="row content">
             <div className="col-lg-3 col-md-4 col-sm-12 mgaccountleftblock">
-                  <div className="mgaccountuser">
-                    <div className="mgaccountuserleft">
-                      <img src={process.env.PUBLIC_URL + "/images/userimg.jpg"} className="img-fluid" alt="..." />
-                    </div>
-                    <div className="mgaccountuserright">
-                      <h3>Fernand</h3>
-                      <div className="d-flex align-items-center">
-                        <p className="details"><img src={process.env.PUBLIC_URL + "/images/Path.svg"} className="img-fluid" alt="..." /><span>California, Cl</span></p>
-                      </div>
-                    </div>
-                  </div>
+                 
                   <ManageAccountLinks />
                 </div>
                 <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 myprofileeditform">                   
@@ -205,13 +195,13 @@ const EditMyProfile = () => {
                         
                             <div className="col-sm-12 form-group">
                             <div className="tbox">                           
-                                <input type="text"  defaultValue={myProfileObjc.first_name} className="form-control textbox" placeholder="" required onChange={(e) => setFirstName(e.target.value)} />
+                                <input type="text"  defaultValue={myProfileObjc.first_name} className="form-control textbox" placeholder="" required disabled onChange={(e) => setFirstName(e.target.value)} />
                                 <label for="first_name" className={firstName !="" ? "input-has-value" : ""}>First Name</label>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={myProfileObjc.last_name} className="form-control textbox" placeholder="" required onChange={(e) => setLastName(e.target.value)} />
+                                <input type="text" defaultValue={myProfileObjc.last_name} className="form-control textbox" placeholder="" required disabled onChange={(e) => setLastName(e.target.value)} />
                                 <label for="last_name" className={lastName !="" ? "input-has-value" : ""}>Last Name</label>
                             </div>
                             </div>
@@ -229,7 +219,7 @@ const EditMyProfile = () => {
                             </div>                      
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="email" defaultValue={myProfileObjc.email} className="form-control textbox" placeholder="" required onChange={(e) => setEmailId(e.target.value)} />
+                                <input type="email" defaultValue={myProfileObjc.email} className="form-control textbox" placeholder="" required disabled onChange={(e) => setEmailId(e.target.value)} />
                                 <label for="email" className={emailId !="" ? "input-has-value" : ""}>Email Id</label>
                             </div>
                             </div>
