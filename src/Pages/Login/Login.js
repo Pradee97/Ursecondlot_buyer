@@ -9,14 +9,11 @@ import { Button } from 'antd';
 const Login = () => {
   const history = useHistory();
   const {state} = useLocation();
-  const { register, handleSubmit, formState: { errors },reset } = useForm();
-
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
-  const [redirectToRefferrer, setRedirectToRefferrer] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [timeout, setTimeout] = useState("");
- 
+ const [errors, setErrors] =useState({email:"", password:""})
   useEffect(()=>{
     // localStorage.clear()
     localStorage.setItem("islogedIn", false)
@@ -25,24 +22,24 @@ const Login = () => {
   };
   const state = API.post('state/condition', request);
   state.then(res => {
-      console.log("res", res.data.data)
-      reset(res.data.data);
-      
+      console.log("res", res.data.data)      
   })
       .catch(err => { console.log(err); });
-    
-  }, [reset])
+  }, [])
 
-  const loginhandleSubmit = (value) => {
-    // setOpenLoader(true);
-    // event.preventDefault();
-    console.log("my======",value)
-    setRedirectToRefferrer(true)
-    const {email, password} = value
+  const loginhandleSubmit = (event) => {
+    event.preventDefault();
+    setErrors({email:"", password:""})
+    if(!emailId) { setErrors({email:"email id is required", password:""}); return}
+    else if( emailId && !new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i).test(emailId) ) {
+      setErrors({email:"Must match the email format", password:""})
+    }
+    else if(!password) { setErrors({email:"", password:"passwaord is required"}); return}
+
     localStorage.setItem("islogedIn", false)
     let request = {
-      email,
-      password
+      email: emailId,
+      password: password
     };
     API.post("buyer/login", request)
       .then((response) => {
@@ -59,7 +56,6 @@ const Login = () => {
           }
           
         } else {
-          // history.push("error");
           // localStorage.setItem("islogedIn", false)
           setTimeout(() => {
           setErrorMessage("Please provide correct Email/Password");
@@ -80,41 +76,23 @@ const Login = () => {
           <div className="dealar-login">
             <img alt="Google" src={process.env.PUBLIC_URL +"/images/Logo_final.png"} />
           </div>
-          <form onSubmit={handleSubmit(loginhandleSubmit)}>
+          <form onSubmit={loginhandleSubmit}>
             <h2 className="title"> Dealer login</h2>
            
 
             <div className="email-login">
 		  <div className="tbox">
         <input className="textbox " type="text" placeholder="" id="uname" name="email"
-          {...register("email", {
-            required: "This input is required.",
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: "Must match the email format"
-            }
-          })}
           onChange={(e) => setEmailId(e.target.value)} />
 				 <label  for="uname" className={emailId !="" ? "input-has-value" : ""}>User Name</label>
-         <p className="form-input-error">{errors.email?.message}</p>
+         <p className="form-input-error">{errors.email}</p>
 			</div>
 			 
 			 <div className="tbox">
         <input className="textbox" type="password" placeholder="" id="psw" name="password"
-          {...register("password", {
-            required: "This input is required.",
-            // pattern: {
-            //   value: /\d+/,
-            //   message: "This input is number only."
-            // },
-            // minLength: {
-            //   value: 8,
-            //   message: "This input must exceed 8 characters"
-            // }
-          })}
           onChange={(e) => setPassword(e.target.value)} />
 				 <label for="psw" className={password != "" ? "input-has-value" : "" }>Password</label>
-         <p className="form-input-error">{errors.password?.message}</p>
+         <p className="form-input-error">{errors.password}</p>
 			 </div>
 		  </div>
             <div className="row">
