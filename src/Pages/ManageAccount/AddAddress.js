@@ -8,19 +8,12 @@ import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import StateAndCity from '../../Component/StateAndCity/StateAndCity';
 import { useForm } from "react-hook-form";
 import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
-import FileBase64 from 'react-file-base64';
 
 const AddAddress = () => {
     const history = useHistory();   
     const [isOpen, setIsOpen] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const [doc, setDoc] = useState("");
-    const [image,setImage] = useState("");
-
-    const getFiles = (file) => {
-      console.log("======>",file)
-      setDoc(file);
-  }
+ 
     const togglePopup = () => {
       setIsOpen(!isOpen);
     }
@@ -60,9 +53,7 @@ const AddAddress = () => {
             buyer_id:userDetails.user_id,
             location:location,
             instructions:instruction,
-            active:1,  
-            image:doc===""?doc:doc.length>0?doc:[doc]
-
+            active:1           
         };
         console.log("===",request)  
         // return
@@ -70,8 +61,6 @@ const AddAddress = () => {
             .then((response) => {
                 if (response.data.success) {
                     const { data } = response;
-                    setImage(response.data.data[0].image);
-
                     togglePopup()
                     setPopupTitle("Create Address");
                     setPopupMsg("Address is successfully created");
@@ -124,27 +113,7 @@ const AddAddress = () => {
                             </div>
 			<div className="row content">
             <div className="col-lg-3 col-md-4 col-sm-12 mgaccountleftblock">
-                  <div className="mgaccountuser">
-                    <div className="mgaccountuserleft">
-                    <div className="col-sm-12 form-group">
-                                <div class="user-upload-btn-wrapper">
-                                    {image==="" && doc===""?<img alt="" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} />:                                    
-                                    doc===""?<img alt=""  src={image} />:
-                                    <img alt=""  src={doc.base64} />}  
-                                    <span class="proCamera"></span>                                  
-                                    <FileBase64 onDone={getFiles} type="hidden" />
-                                    
-                                </div>
-                                </div>
-                      {/* <img src={process.env.PUBLIC_URL + "/images/userimg.jpg"} className="img-fluid" alt="..." /> */}
-                    </div>
-                    <div className="mgaccountuserright">
-                      <h3>Fernand</h3>
-                      <div className="d-flex align-items-center">
-                        <p className="details"><img src={process.env.PUBLIC_URL + "/images/Path.svg"} className="img-fluid" alt="..." /><span>California, Cl</span></p>
-                      </div>
-                    </div>
-                  </div>
+                 
                   <ManageAccountLinks />
                 </div>
                 <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 flooraddform">
@@ -210,25 +179,21 @@ const AddAddress = () => {
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" class="form-control textbox" id="mobileno"  placeholder="" name="mobileno"
-                                  {...register("mobileno", {
-                                    // required: "Phone Number is required.",
-                                    pattern: {
-                                    value: "^\d{10}$",
-                                    message: "Accept only numbers "
-                                    },
+                                <input type="text" id="branchName" className="textbox" placeholder="" name="mobilePhone"
+                                  {...register("mobilePhone", {
+                                    // required: "This input is required.",
                                     minLength: {
                                         value: 10,
-                                        message: "Phone Number atleast have 10 digits"
-                                    },
+                                        message: "This input atleast have 10 digits"
+                                      },
                                     maxLength: {
                                         value: 15,
-                                        message: "Phone Number must not exceed 15 digits"
-                                    }
+                                        message: "This input must not exceed 15 digits"
+                                      }
                                 })}
                                 onChange={(e) => setMobilephone(e.target.value)} />
                                 <label for="branchName" className={mobilePhone !="" ? "input-has-value" : ""}>Mobile phone</label>
-                                <p className="form-input-error">{errors.mobileno?.message}</p>
+                                <p className="form-input-error">{errors.mobilePhone?.message}</p>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group"> 

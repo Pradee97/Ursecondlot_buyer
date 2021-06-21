@@ -200,27 +200,7 @@ const EditBuyer = () => {
                </div>
 			<div className="row content">
             <div className="col-lg-3 col-md-4 col-sm-12 mgaccountleftblock">
-                  <div className="mgaccountuser">
-                    <div className="mgaccountuserleft">
-                    <div className="col-sm-12 form-group">
-                                <div class="user-upload-btn-wrapper">
-                                    {image==="" && doc===""?<img alt="" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} />:                                    
-                                    doc===""?<img alt=""  src={image} />:
-                                    <img alt=""  src={doc.base64} />}  
-                                    <span class="proCamera"></span>                                  
-                                    <FileBase64 onDone={getFiles} type="hidden" />
-                                    
-                                </div>
-                                </div>
-                      {/* <img src={process.env.PUBLIC_URL + "/images/userimg.jpg"} className="img-fluid" alt="..." /> */}
-                    </div>
-                    <div className="mgaccountuserright">
-                      <h3>Fernand</h3>
-                      <div className="d-flex align-items-center">
-                        <p className="details"><img src={process.env.PUBLIC_URL + "/images/Path.svg"} className="img-fluid" alt="..." /><span>California, Cl</span></p>
-                      </div>
-                    </div>
-                  </div>
+                
                   <ManageAccountLinks />
                 </div>
                 <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0">

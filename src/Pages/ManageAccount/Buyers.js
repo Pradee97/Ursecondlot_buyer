@@ -6,31 +6,20 @@ import ls from 'local-storage';
 import API from "../../Services/BaseService";
 import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
 import { Button } from 'antd';
-import FileBase64 from 'react-file-base64';
-                                                              
+
 const Buyers = () => {
     const history = useHistory();
     let userDetails = ls.get('userDetails');
     const [userList,setUserList] = useState("");
     const [data,setData]=useState("");
-    const [doc, setDoc] = useState("");
-    const [image,setImage] = useState("");
-
-    const getFiles = (file) => {
-      console.log("======>",file)
-      setDoc(file);
-  }
     async function getuserDetails() {
         let request = {
-            dealer_id: userDetails.dealer_id,
-            image:doc===""?doc:doc.length>0?doc:[doc]
-
+            dealer_id: userDetails.dealer_id
         };
         const state = API.post('user_list/condition', request);
         state.then(res => {
             console.log("res", res.data.data)
             setUserList(res.data.data);
-            
         })
             .catch(err => { console.log(err); });
     }
@@ -47,8 +36,6 @@ const Buyers = () => {
             console.log("rep search req",request);
             console.log("inside rep search", response.data.data);
             setUserList(response.data.data);
-            setImage(response.data.data[0].image);
-            
         },
         (error) => {
             console.log(error);
@@ -76,28 +63,7 @@ const Buyers = () => {
                </div>
                <div className="row content">
                    <div className="col-lg-3 col-md-6 col-sm-12 accountleftblock">
-                       <div className="mgaccountuser">
-                           <div className="mgaccountuserleft">
-                           <div className="col-sm-12 form-group">
-                                <div class="user-upload-btn-wrapper">
-                                    {image==="" && doc===""?<img alt="" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} />:                                    
-                                    doc===""?<img alt=""  src={image} />:
-                                    <img alt=""  src={doc.base64} />}  
-                                    <span class="proCamera"></span>                                  
-                                    <FileBase64 onDone={getFiles} type="hidden" />
-                                    
-                                </div>
-                                </div>
-                               {/* <img src={process.env.PUBLIC_URL +"/images/userimg.jpg"} className="img-fluid" alt="..."/> */}
-                           </div>
-                           <div className="mgaccountuserright">
-                               <h3>Fernand</h3>
-                               <div className="d-flex align-items-center">
-                                   <p className="details"><img src={process.env.PUBLIC_URL +"/images/Path.svg"} className="img-fluid" alt="..."/><span>California, Cl</span></p>
-                               </div>
-                                   
-                           </div>
-                       </div>
+                      
                        <ManageAccountLinks />
                    </div>
                    <div className="col-lg-9 col-md-12 col-sm-12 pt-4 pt-lg-0 adduserpagerightblock">

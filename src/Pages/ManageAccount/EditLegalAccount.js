@@ -9,7 +9,6 @@ import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import StateAndCity from '../../Component/StateAndCity/StateAndCity'
 import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks";
 import { useForm } from "react-hook-form";
-import FileBase64 from 'react-file-base64';
 
 import {
     Form,
@@ -44,13 +43,6 @@ const EditLegalAccount = () => {
     const togglePopup = () => {
       setIsOpen(!isOpen);
     }
-    const [doc, setDoc] = useState("");
-    const [image,setImage] = useState("");
-
-    const getFiles = (file) => {
-      console.log("======>",file)
-      setDoc(file);
-  }
     
     const [popupTitle, setPopupTitle] = useState ("");
     const [popupMsg, setPopupMsg] = useState ("");
@@ -93,7 +85,6 @@ const EditLegalAccount = () => {
             setZipcode(res.data.data[0].zipcode);
             setDealershipLicenseexp(res.data.data[0].dealer_license_exp);
             setTaxidexp(res.data.data[0].tax_id_exp);
-            setImage(res.data.data[0].image);
 
             setAccountObj(res.data.data[0])
             console.log("-====res.data.data[0].dealer_license_exp=====>",res.data.data[0].dealer_license_exp)
@@ -123,9 +114,7 @@ const EditLegalAccount = () => {
             dealer_license_exp: dealershipLicenseexp,
             tax_id_exp: taxidexp,
             bussiness_name:legalBusinessname,
-            active:1,
-            image:doc===""?doc:doc.length>0?doc:[doc]
-
+            active:1
            
         };
         API
@@ -199,27 +188,7 @@ const EditLegalAccount = () => {
                             </div>
 			<div className="row content">
             <div className="col-lg-3 col-md-4 col-sm-12 mgaccountleftblock">
-                  <div className="mgaccountuser">
-                    <div className="mgaccountuserleft">
-                    <div className="col-sm-12 form-group">
-                                <div class="user-upload-btn-wrapper">
-                                    {image==="" && doc===""?<img alt="" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} />:                                    
-                                    doc===""?<img alt=""  src={image} />:
-                                    <img alt=""  src={doc.base64} />}  
-                                    <span class="proCamera"></span>                                  
-                                    <FileBase64 onDone={getFiles} type="hidden" />
-                                    
-                                </div>
-                                </div>
-                      {/* <img src={process.env.PUBLIC_URL + "/images/userimg.jpg"} className="img-fluid" alt="..." /> */}
-                    </div>
-                    <div className="mgaccountuserright">
-                      <h3>Fernand</h3>
-                      <div className="d-flex align-items-center">
-                        <p className="details"><img src={process.env.PUBLIC_URL + "/images/Path.svg"} className="img-fluid" alt="..." /><span>California, Cl</span></p>
-                      </div>
-                    </div>
-                  </div>
+                  
                   <ManageAccountLinks />
                 </div>
                 <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0  flooraddform">

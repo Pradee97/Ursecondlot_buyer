@@ -49,7 +49,7 @@ const CommonPopup = props => {
                                         <button class="cta-btns" onClick={Confirmation} >ok</button> 
                                     </div>
                                     : popupActionType.toLowerCase() === "redirect" 
-                                    ?   <a class="cta-btns" href={popupActionPath}>{popupActionValue}</a>
+                                    ?   <a class="cta-btns" onClick={() => history.push(popupActionPath)} >{popupActionValue}</a>
                                     :   <button class="cta-btns" onClick={handleClose} >{popupActionValue}</button> 
                                 }
                             </div>

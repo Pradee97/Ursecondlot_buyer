@@ -4,30 +4,18 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import API from "../../Services/BaseService";
 import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
-import FileBase64 from 'react-file-base64';
 
 const MyProfile = () => {
     const history = useHistory();
     const [accountDetails, setaccountDetails] = useState("");
-    const [doc, setDoc] = useState("");
-    const [image,setImage] = useState("");
-
-    const getFiles = (file) => {
-      console.log("======>",file)
-      setDoc(file);
-  }
     async function fetchAccountDetails() {
       let request = {
           buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
-          image:doc===""?doc:doc.length>0?doc:[doc]
-
       };
       const state = API.post('user_profile/condition', request);
       state.then(res => {
           // console.log("res", res)
           setaccountDetails(res.data.data);
-        setImage(res.data.data[0].image);
-
       })
           .catch(err => { console.log(err); });
     }
@@ -49,30 +37,8 @@ const MyProfile = () => {
                  <h2>My Profile</h2>
                </div>
                <div className="row content">
-    
                    <div className="col-lg-3 col-md-4 col-sm-12 accountleftblock">
-                       <div className="mgaccountuser">
-                           <div className="mgaccountuserleft">
-                           <div className="col-sm-12 form-group">
-                                <div class="user-upload-btn-wrapper">
-                                    {image==="" && doc===""?<img alt="" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} />:                                    
-                                    doc===""?<img alt=""  src={image} />:
-                                    <img alt=""  src={doc.base64} />}  
-                                    <span class="proCamera"></span>                                  
-                                    <FileBase64 onDone={getFiles} type="hidden" />
-                                    
-                                </div>
-                                </div>
-                               {/* <img src={process.env.PUBLIC_URL +"/images/userimg.jpg"} className="img-fluid" alt="..."/> */}
-                           </div>
-                           <div className="mgaccountuserright">
-                               <h3>Fernand</h3>
-                               <div className="d-flex align-items-center">
-                                   <p className="details"><img src={process.env.PUBLIC_URL +"/images/Path.svg"} className="img-fluid" alt="..."/><span>California, Cl</span></p>
-                               </div>
-                                   
-                           </div>
-                       </div>
+                      
                        <ManageAccountLinks />
                    </div>
                    <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 myprofilerightblock">
@@ -82,7 +48,6 @@ const MyProfile = () => {
                            
                            <div className="myprofilerighttable">
                              <h3>My Details<span><button class="ant-btn" onClick={() => onHandleEdit(item.user_id)}><i class="icofont-ui-edit"></i> Edit</button></span></h3>	
-                             
                            <p>Location where transport carriers will drop of a vehicle that you have purchased</p>
                            					
                                <table>

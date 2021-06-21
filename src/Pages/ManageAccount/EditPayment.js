@@ -7,7 +7,6 @@ import API from "../../Services/BaseService";
 import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import { useForm } from "react-hook-form";
-import FileBase64 from 'react-file-base64';
 
 const EditPayment = () => {
 
@@ -44,12 +43,7 @@ const EditPayment = () => {
     const [accountZipcodeId, setAccountZipcodeId] = useState("");
     let userDetails = ls.get('userDetails');
     const [doc,setDoc]=useState("");
-    const [image,setImage] = useState("");
 
-    const getFiles = (file) => {
-      console.log("======>",file)
-      setDoc(file);
-  }
     async function fetchpaymentDetails() {
          let request = {
              payment_info_id:id
@@ -66,7 +60,6 @@ const EditPayment = () => {
             setBankAddress(res.data.data.bank_address);
             setAccountHolderAddress(res.data.data.acc_address);
             setPaymentObj(res.data.data);
-            setImage(res.data.data[0].image);
            
         })
             .catch(err => { console.log(err); });
@@ -101,9 +94,7 @@ const EditPayment = () => {
             // acc_state_id: accountStateName,
             // acc_city_id: accountCityName,
             // acc_zipcode: accountZipcodeId,
-            active:1,
-            image:doc===""?doc:doc.length>0?doc:[doc]
-
+            active:1
         };
         API.put("payment_info/edit"+payment_info_id, request)
         .then((response) => {
@@ -156,28 +147,7 @@ const EditPayment = () => {
                             </div>
                             <div className="row content">
                                 <div className="col-lg-3 col-md-4 col-sm-12 accountleftblock">
-                                    <div className="mgaccountuser">
-                                        <div className="mgaccountuserleft">
-                                        <div className="col-sm-12 form-group">
-                                        <div class="user-upload-btn-wrapper">
-                                            {image==="" && doc===""?<img alt="" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} />:                                    
-                                            doc===""?<img alt=""  src={image} />:
-                                            <img alt=""  src={doc.base64} />}  
-                                            <span class="proCamera"></span>                                  
-                                            <FileBase64 onDone={getFiles} type="hidden" />
-                                            
-                                        </div>
-                                        </div>
-                                            {/* <img src={process.env.PUBLIC_URL +"/images/userimg.jpg"} className="img-fluid" alt="..." /> */}
-                                        </div>
-                                        <div className="mgaccountuserright">
-                                            <h3>Fernand</h3>
-                                            <div className="d-flex align-items-center">
-                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/Path.svg"} className="img-fluid" alt="..." /><span>California, Cl</span></p>
-                                            </div>
-
-                                        </div>
-                                    </div>
+                                   
                                     <ManageAccountLinks />
                                 </div>
                                 <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 paymentrightblock">
