@@ -12,6 +12,7 @@ import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import StateAndCity from '../../Component/StateAndCity/StateAndCity';
 import { useForm } from "react-hook-form";
 import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
+import FileBase64 from 'react-file-base64';
 
 const AddLegalAccount = () => {
 
@@ -66,7 +67,13 @@ const AddLegalAccount = () => {
     const [state, setStateName] = useState("");
 	const [city, setCityName] = useState("");
 	const [zipcode, setZipcodeId] = useState("");
+    const [doc, setDoc] = useState("");
+    const [image,setImage] = useState("");
 
+    const getFiles = (file) => {
+      console.log("======>",file)
+      setDoc(file);
+  }
     
     const onhandleSubmit = (data) => {
         // setOpenLoader(true);
@@ -86,7 +93,9 @@ const AddLegalAccount = () => {
             zipcode_id: zipcode,
             address: address,
             bussiness_name: legalBusinessname,
-            active: 1          
+            active: 1,
+            image:doc===""?doc:doc.length>0?doc:[doc]
+
         };
         console.log("===",request)
         // return
@@ -95,6 +104,8 @@ const AddLegalAccount = () => {
             .then((response) => {
                 if (response.data.success) {
                     const { data } = response;
+                    setImage(response.data.data[0].image);
+
                     togglePopup()
                     setPopupTitle("Create Legal manage account");
                     setPopupMsg("Legal manage account is successfully created");
@@ -158,7 +169,17 @@ const AddLegalAccount = () => {
             <div className="col-lg-3 col-md-4 col-sm-12 mgaccountleftblock">
                   <div className="mgaccountuser">
                     <div className="mgaccountuserleft">
-                      <img src={process.env.PUBLIC_URL + "/images/userimg.jpg"} className="img-fluid" alt="..." />
+                    <div className="col-sm-12 form-group">
+                                <div class="user-upload-btn-wrapper">
+                                    {image==="" && doc===""?<img alt="" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} />:                                    
+                                    doc===""?<img alt=""  src={image} />:
+                                    <img alt=""  src={doc.base64} />}  
+                                    <span class="proCamera"></span>                                  
+                                    <FileBase64 onDone={getFiles} type="hidden" />
+                                    
+                                </div>
+                                </div>
+                      {/* <img src={process.env.PUBLIC_URL + "/images/userimg.jpg"} className="img-fluid" alt="..." /> */}
                     </div>
                     <div className="mgaccountuserright">
                       <h3>Fernand</h3>

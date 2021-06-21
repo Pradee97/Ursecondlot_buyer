@@ -7,20 +7,33 @@ import { useEffect } from 'react';
 import '../../assets/css/responsive.css';
 import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
 import {  Button  } from 'antd';
+import FileBase64 from 'react-file-base64';
 
 
 const PaymentInfo = () => {
     const history = useHistory();
     const [paymentinfo, setPaymentInfo] = useState("");
+    const [doc, setDoc] = useState("");
+    const [image,setImage] = useState("");
+
+    const getFiles = (file) => {
+      console.log("======>",file)
+      setDoc(file);
+  }
     let userDetails = ls.get('userDetails');
     async function getPaymentInfo() {
         let request = {
-            buyer_id: userDetails.user_id
+            // buyer_id: userDetails.user_id,
+            buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+            image:doc===""?doc:doc.length>0?doc:[doc]
+
         };
         const state = API.post('payment_info/condition', request);
         state.then(res => {
             console.log("res", res.data.data)
             setPaymentInfo(res.data.data);
+            setImage(res.data.data[0].image);
+
         })
             .catch(err => { console.log(err); });
     }
@@ -49,7 +62,17 @@ const PaymentInfo = () => {
                                 <div className="col-lg-3 col-md-4 col-sm-12 accountleftblock">
                                     <div className="mgaccountuser">
                                         <div className="mgaccountuserleft">
-                                            <img src={process.env.PUBLIC_URL +"/images/userimg.jpg"} className="img-fluid" alt="..." />
+                                        <div className="col-sm-12 form-group">
+                                                <div class="user-upload-btn-wrapper">
+                                                    {image==="" && doc===""?<img alt="" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} />:                                    
+                                                    doc===""?<img alt=""  src={image} />:
+                                                    <img alt=""  src={doc.base64} />}  
+                                                    <span class="proCamera"></span>                                  
+                                                    <FileBase64 onDone={getFiles} type="hidden" />
+                                                    
+                                                </div>
+                                                </div>
+                                            {/* <img src={process.env.PUBLIC_URL +"/images/userimg.jpg"} className="img-fluid" alt="..."/> */}
                                         </div>
                                         <div className="mgaccountuserright">
                                             <h3>Fernand</h3>

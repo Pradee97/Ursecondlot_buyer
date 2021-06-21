@@ -7,6 +7,7 @@ import StateAndCity from '../../Component/StateAndCity/StateAndCity'
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks";
 import { useForm } from "react-hook-form";
+import FileBase64 from 'react-file-base64';
 
 import {
     Form,
@@ -45,7 +46,13 @@ const EditMyProfile = () => {
     const [popupActionType, setPopupActionType] = useState ("");
     const [popupActionValue, setPopupActionValue] = useState ("");
     const [popupActionPath, setPopupActionPath] = useState ("")
-    
+    const [doc, setDoc] = useState("");
+    const [image,setImage] = useState("");
+
+    const getFiles = (file) => {
+      console.log("======>",file)
+      setDoc(file);
+  }
     const togglePopup = () => {
         setIsOpen(!isOpen);
       }
@@ -82,6 +89,8 @@ const EditMyProfile = () => {
             setZipcode(res.data.data[0].zipcode); 
             // setLocationName(res.data.data[0].address);
             setMyProfileObj(res.data.data[0]);
+            setImage(res.data.data[0].image);
+
         })
             .catch(err => { console.log(err); });
     }
@@ -107,6 +116,8 @@ const EditMyProfile = () => {
             zipcode_id: zipcode===myProfileObjc.zipcode?myProfileObjc.zipcode_id:zipcode,
             address: address,
             active:1,
+            image:doc===""?doc:doc.length>0?doc:[doc]
+
             // buyer_id: userDetails.user_id
            
         };
@@ -183,7 +194,17 @@ const EditMyProfile = () => {
             <div className="col-lg-3 col-md-4 col-sm-12 mgaccountleftblock">
                   <div className="mgaccountuser">
                     <div className="mgaccountuserleft">
-                      <img src={process.env.PUBLIC_URL + "/images/userimg.jpg"} className="img-fluid" alt="..." />
+                    <div className="col-sm-12 form-group">
+                                <div class="user-upload-btn-wrapper">
+                                    {image==="" && doc===""?<img alt="" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} />:                                    
+                                    doc===""?<img alt=""  src={image} />:
+                                    <img alt=""  src={doc.base64} />}  
+                                    <span class="proCamera"></span>                                  
+                                    <FileBase64 onDone={getFiles} type="hidden" />
+                                    
+                                </div>
+                                </div>
+                      {/* <img src={process.env.PUBLIC_URL + "/images/userimg.jpg"} className="img-fluid" alt="..." /> */}
                     </div>
                     <div className="mgaccountuserright">
                       <h3>Fernand</h3>
@@ -205,13 +226,13 @@ const EditMyProfile = () => {
                         
                             <div className="col-sm-12 form-group">
                             <div className="tbox">                           
-                                <input type="text"  defaultValue={myProfileObjc.first_name} className="form-control textbox" placeholder="" required onChange={(e) => setFirstName(e.target.value)} />
+                                <input type="text"  defaultValue={myProfileObjc.first_name} className="form-control textbox" placeholder="" required disabled onChange={(e) => setFirstName(e.target.value)} />
                                 <label for="first_name" className={firstName !="" ? "input-has-value" : ""}>First Name</label>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={myProfileObjc.last_name} className="form-control textbox" placeholder="" required onChange={(e) => setLastName(e.target.value)} />
+                                <input type="text" defaultValue={myProfileObjc.last_name} className="form-control textbox" placeholder="" required disabled onChange={(e) => setLastName(e.target.value)} />
                                 <label for="last_name" className={lastName !="" ? "input-has-value" : ""}>Last Name</label>
                             </div>
                             </div>
@@ -229,7 +250,7 @@ const EditMyProfile = () => {
                             </div>                      
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="email" defaultValue={myProfileObjc.email} className="form-control textbox" placeholder="" required onChange={(e) => setEmailId(e.target.value)} />
+                                <input type="email" defaultValue={myProfileObjc.email} className="form-control textbox" placeholder="" required disabled onChange={(e) => setEmailId(e.target.value)} />
                                 <label for="email" className={emailId !="" ? "input-has-value" : ""}>Email Id</label>
                             </div>
                             </div>

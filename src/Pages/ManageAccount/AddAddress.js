@@ -8,12 +8,19 @@ import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import StateAndCity from '../../Component/StateAndCity/StateAndCity';
 import { useForm } from "react-hook-form";
 import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
+import FileBase64 from 'react-file-base64';
 
 const AddAddress = () => {
     const history = useHistory();   
     const [isOpen, setIsOpen] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm();
- 
+    const [doc, setDoc] = useState("");
+    const [image,setImage] = useState("");
+
+    const getFiles = (file) => {
+      console.log("======>",file)
+      setDoc(file);
+  }
     const togglePopup = () => {
       setIsOpen(!isOpen);
     }
@@ -53,7 +60,9 @@ const AddAddress = () => {
             buyer_id:userDetails.user_id,
             location:location,
             instructions:instruction,
-            active:1           
+            active:1,  
+            image:doc===""?doc:doc.length>0?doc:[doc]
+
         };
         console.log("===",request)  
         // return
@@ -61,6 +70,8 @@ const AddAddress = () => {
             .then((response) => {
                 if (response.data.success) {
                     const { data } = response;
+                    setImage(response.data.data[0].image);
+
                     togglePopup()
                     setPopupTitle("Create Address");
                     setPopupMsg("Address is successfully created");
@@ -115,7 +126,17 @@ const AddAddress = () => {
             <div className="col-lg-3 col-md-4 col-sm-12 mgaccountleftblock">
                   <div className="mgaccountuser">
                     <div className="mgaccountuserleft">
-                      <img src={process.env.PUBLIC_URL + "/images/userimg.jpg"} className="img-fluid" alt="..." />
+                    <div className="col-sm-12 form-group">
+                                <div class="user-upload-btn-wrapper">
+                                    {image==="" && doc===""?<img alt="" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} />:                                    
+                                    doc===""?<img alt=""  src={image} />:
+                                    <img alt=""  src={doc.base64} />}  
+                                    <span class="proCamera"></span>                                  
+                                    <FileBase64 onDone={getFiles} type="hidden" />
+                                    
+                                </div>
+                                </div>
+                      {/* <img src={process.env.PUBLIC_URL + "/images/userimg.jpg"} className="img-fluid" alt="..." /> */}
                     </div>
                     <div className="mgaccountuserright">
                       <h3>Fernand</h3>
@@ -189,21 +210,25 @@ const AddAddress = () => {
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" id="branchName" className="textbox" placeholder="" name="mobilePhone"
-                                  {...register("mobilePhone", {
-                                    required: "This input is required.",
+                                <input type="text" class="form-control textbox" id="mobileno"  placeholder="" name="mobileno"
+                                  {...register("mobileno", {
+                                    // required: "Phone Number is required.",
+                                    pattern: {
+                                    value: "^\d{10}$",
+                                    message: "Accept only numbers "
+                                    },
                                     minLength: {
                                         value: 10,
-                                        message: "This input atleast have 10 digits"
-                                      },
+                                        message: "Phone Number atleast have 10 digits"
+                                    },
                                     maxLength: {
                                         value: 15,
-                                        message: "This input must not exceed 15 digits"
-                                      }
+                                        message: "Phone Number must not exceed 15 digits"
+                                    }
                                 })}
                                 onChange={(e) => setMobilephone(e.target.value)} />
                                 <label for="branchName" className={mobilePhone !="" ? "input-has-value" : ""}>Mobile phone</label>
-                                <p className="form-input-error">{errors.mobilePhone?.message}</p>
+                                <p className="form-input-error">{errors.mobileno?.message}</p>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group"> 
@@ -243,7 +268,7 @@ const AddAddress = () => {
                             </div>
                             <div className="col-sm-12 form-group"> 
                             <div className="tbox">
-                                <input type="text"  id="contactName" className="textbox" placeholder="" name="instruction"
+                                <input type="text"  id="contactName" className="textbox" placeholder="" name="instruction" autoComplete="off"
                                  {...register("instruction", {
                                     required: "This input is required.",
                                     maxLength: {

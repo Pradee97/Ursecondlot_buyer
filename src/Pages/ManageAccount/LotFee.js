@@ -8,6 +8,7 @@ import API from "../../Services/BaseService";
 import Popup from '../../Component/Popup/Popup';
 import '../../Component/Popup/popup.css';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
+import FileBase64 from 'react-file-base64';
 
 
 const LotFee = () => {
@@ -29,7 +30,13 @@ const LotFee = () => {
     const [lotValue, setLotValue] = useState("");
     const [popupcontent,setPopupcontent] = useState ("");
     let userDetails = ls.get('userDetails');
+    const [doc, setDoc] = useState("");
+    const [image,setImage] = useState("");
 
+    const getFiles = (file) => {
+      console.log("======>",file)
+      setDoc(file);
+  }
     async function getLotfee() {
         let request = {
             buyer_id: userDetails.user_id,
@@ -38,7 +45,9 @@ const LotFee = () => {
         state.then(res => {
             console.log("res", res.data.data)
             setLotValue(res.data.data.lot_fee) ;
-            setLotFee( res.data.data )
+            setLotFee( res.data.data );
+            setImage(res.data.data[0].image);
+
         })
             .catch(err => { console.log(err); });
     }
@@ -56,7 +65,9 @@ const LotFee = () => {
             let request = {
                 buyer_id: userDetails.user_id,
                 lot_fee: lotValue,
-                active:1
+                active:1,
+                image:doc===""?doc:doc.length>0?doc:[doc]
+
             };
     
             API.post("lot_fee/add",request)
@@ -106,7 +117,17 @@ const LotFee = () => {
                    <div className="col-lg-3 col-md-4 col-sm-12 accountleftblock">
                        <div className="mgaccountuser">
                            <div className="mgaccountuserleft">
-                               <img src={process.env.PUBLIC_URL +"/images/userimg.jpg"} className="img-fluid" alt="..."/>
+                           <div className="col-sm-12 form-group">
+                                <div class="user-upload-btn-wrapper">
+                                    {image==="" && doc===""?<img alt="" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} />:                                    
+                                    doc===""?<img alt=""  src={image} />:
+                                    <img alt=""  src={doc.base64} />}  
+                                    <span class="proCamera"></span>                                  
+                                    <FileBase64 onDone={getFiles} type="hidden" />
+                                    
+                                </div>
+                                </div>
+                               {/* <img src={process.env.PUBLIC_URL +"/images/userimg.jpg"} className="img-fluid" alt="..."/> */}
                            </div>
                            <div className="mgaccountuserright">
                                <h3>Fernand</h3>
