@@ -36,6 +36,12 @@ const EditAddress = () => {
     const [instruction, setInstruction] = useState("");
     const [isOpen, setIsOpen] = useState(false);
     const [firstNameError, setFirstNameError] = useState("")
+    const [lastNameError, setLastNameError] = useState("")
+    const [addressError, setAddressError] = useState("")
+    const [primaryPhoneError, setPrimaryPhoneError] = useState("")
+    const [mobilePhoneError, setMobilePhoneError] = useState("")
+    const [locationError, setLocationError] = useState("")
+    const [instructionError, setInstructionError] = useState("")
  
     const togglePopup = () => {
       setIsOpen(!isOpen);
@@ -107,6 +113,30 @@ const EditAddress = () => {
         console.log("====request==>",request)
         if(!FirstName){
             setFirstNameError("First name is required")
+            return;
+        }
+        else if(!lastName){
+            setLastNameError("Last name is required")
+            return;
+        }
+        else if(!address){
+            setAddressError("Address is required")
+            return;
+        }
+        else if(!primaryPhone){
+            setPrimaryPhoneError("PrimaryPhone is required")
+            return;
+        }
+        else if(!mobilePhone){
+            setMobilePhoneError("MobilePhone is required")
+            return;
+        }
+        else if(!location){
+            setLocationError("Location is required")
+            return;
+        }
+        else if(!instruction){
+            setInstructionError("Instructions is required")
             return;
         }
         console.log("==========FirstName==========>",FirstName);
@@ -184,17 +214,7 @@ const EditAddress = () => {
                             </div>
 			<div className="row content">
             <div className="col-lg-3 col-md-4 col-sm-12 mgaccountleftblock">
-                  <div className="mgaccountuser">
-                    <div className="mgaccountuserleft">
-                      <img src={process.env.PUBLIC_URL + "/images/userimg.jpg"} className="img-fluid" alt="..." />
-                    </div>
-                    <div className="mgaccountuserright">
-                      <h3>Fernand</h3>
-                      <div className="d-flex align-items-center">
-                        <p className="details"><img src={process.env.PUBLIC_URL + "/images/Path.svg"} className="img-fluid" alt="..." /><span>California, Cl</span></p>
-                      </div>
-                    </div>
-                  </div>
+                 
                   <ManageAccountLinks />
                 </div>
                 <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 flooraddform">
@@ -213,30 +233,39 @@ const EditAddress = () => {
                         <div className="tbox">
                                 <input type="text" defaultValue={accountObjc.first_name} class="textbox" placeholder="" onChange={(e) => setFirstName(e.target.value)} />
                                 <label for="first_name" className={"input-has-value"}>First Name</label>
+                                <p className="form-input-error" >{firstNameError}</p>
+
                             </div>
-                            <p className="form-input-error" >{firstNameError}</p>
                             </div>
                             
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={accountObjc.last_name} class="textbox" placeholder="" onChange={(e) => setLastName(e.target.value)} />
                                 <label for="last_name"  className={"input-has-value"}>Last name</label>
+                                <p className="form-input-error" >{lastNameError}</p>
+
                             </div> </div>
                         
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={accountObjc.phone_no} class="textbox" placeholder="" onChange={(e) => setPrimaryPhone(e.target.value)} />
                                 <label for="primary_phone"  className={"input-has-value"}>Primary Phone</label>
+                                <p className="form-input-error" >{primaryPhoneError}</p>
+
                             </div> </div>
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={accountObjc.mobile_no} class="textbox" placeholder="" onChange={(e) => setMobilePhone(e.target.value)} />
                                 <label for="mobile_phone"  className={"input-has-value"}>Mobile Phone</label>
+                                <p className="form-input-error" >{mobilePhoneError}</p>
+
                             </div> </div>
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={accountObjc.address} class="textbox" placeholder="" onChange={(e) => setAddress(e.target.value)} />
                                 <label for="address"  className={"input-has-value"}>Address</label>
+                                <p className="form-input-error" >{addressError}</p>
+
                             </div> </div>
                             <StateAndCity 
                                 setStateValue = { getStateName } 
@@ -251,11 +280,15 @@ const EditAddress = () => {
                             <div className="tbox">
                                 <input type="text" defaultValue={accountObjc.location} class="textbox" placeholder="" onChange={(e) => setLocation(e.target.value)} />
                                 <label for="location"  className={"input-has-value"}>Location</label>
+                                <p className="form-input-error" >{locationError}</p>
+
                             </div> </div>
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={accountObjc.instructions} class="textbox" placeholder="" onChange={(e) => setInstruction(e.target.value)} />
                                 <label for="instructions"  className={"input-has-value"}>Instructions</label>
+                                <p className="form-input-error" >{instructionError}</p>
+
                             </div> </div>
                             {/* <div class="col-sm-12 form-group">
                                 <input type="text" defaultValue={accountObjc.city_name} class="form-control" placeholder="City" onChange={(e) => setCity(e.target.value)} />
