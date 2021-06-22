@@ -46,6 +46,12 @@ const EditBuyer = () => {
     const [popupActionPath, setPopupActionPath] = useState("");
     const [image,setImage] = useState("");
 
+    const [primaryPhoneError, setPrimaryPhoneError] = useState("");
+    const [mobilePhoneError, setMobilephoneError] = useState("");
+    const [addressError, setAddressError] = useState("");
+    const [locationNameError, setLocationNameError] = useState("");
+
+
     const togglePopup = () => {
         setIsOpen(!isOpen);
     }
@@ -98,6 +104,10 @@ const EditBuyer = () => {
      updateMyProfile = (event) => {
         // setOpenLoader(true);
         event.preventDefault();
+        setPrimaryPhoneError("")
+        setMobilephoneError("") 
+        setAddressError("") 
+        setLocationNameError("")
         let request = {
             user_id: id,
             first_name: firstName,
@@ -123,6 +133,24 @@ const EditBuyer = () => {
             image:doc===""?doc:doc.length>0?doc:[doc]
             // buyer_id: userDetails.user_id
         };
+
+        if(!primaryPhone){
+            setPrimaryPhoneError("Primary Phone is required")
+            return;
+        }
+        if(!mobilePhone){
+            setMobilephoneError("Mobile Phone is required")
+            return;
+        }
+        if(!address){
+            setAddressError("Address is required")
+            return;
+        }
+        if(!locationName){
+            setLocationNameError("Location Name is required")
+            return;
+        }
+
         API
             .post("buyer/update", request)
             .then((response) => {
@@ -235,15 +263,17 @@ const EditBuyer = () => {
                                 </div>
                                 <div className="col-sm-12 form-group">
                                     <div className="tbox">
-                                        <input type="text" defaultValue={myProfileObjc.phone_no} className="form-control textbox" placeholder="" required onChange={(e) => setPrimaryPhone(e.target.value)} />
+                                        <input type="text" defaultValue={myProfileObjc.phone_no} className="form-control textbox" placeholder="" onChange={(e) => setPrimaryPhone(e.target.value)} />
                                         <label for="phone_no" className={primaryPhone != "" ? "input-has-value" : ""}>Primary Phone</label>
                                     </div>
+                                    <p className="form-input-error" >{primaryPhoneError}</p>
                                 </div>
                                 <div className="col-sm-12 form-group">
                                     <div className="tbox">
-                                        <input type="text" defaultValue={myProfileObjc.mobile_no} className="form-control textbox" placeholder="" required onChange={(e) => setMobilephone(e.target.value)} />
+                                        <input type="text" defaultValue={myProfileObjc.mobile_no} className="form-control textbox" placeholder="" onChange={(e) => setMobilephone(e.target.value)} />
                                         <label for="mobile_no" className={mobilePhone != "" ? "input-has-value" : ""}>Mobile Phone</label>
                                     </div>
+                                    <p className="form-input-error" >{mobilePhoneError}</p>
                                 </div>
                                 <div className="col-sm-12 form-group">
                                     <div className="tbox">
@@ -253,9 +283,10 @@ const EditBuyer = () => {
                                 </div>
                                 <div className="col-sm-12 form-group">
                                     <div className="tbox">
-                                        <input type="text" defaultValue={myProfileObjc.address} className="form-control textbox" placeholder="" required onChange={(e) => setAddress(e.target.value)} />
+                                        <input type="text" defaultValue={myProfileObjc.address} className="form-control textbox" placeholder="" onChange={(e) => setAddress(e.target.value)} />
                                         <label for="address" className={address != "" ? "input-has-value" : ""}>Address</label>
                                     </div>
+                                    <p className="form-input-error" >{addressError}</p>
                                 </div>
                                 <StateAndCity
                                     setStateValue={getStateName}
@@ -268,9 +299,10 @@ const EditBuyer = () => {
                                 />
                                 <div className="col-sm-12 form-group">
                                     <div className="tbox">
-                                        <input type="text" defaultValue={myProfileObjc.address} className="form-control textbox" placeholder="" required onChange={(e) => setLocationName(e.target.value)} />
+                                        <input type="text" defaultValue={myProfileObjc.address} className="form-control textbox" placeholder="" onChange={(e) => setLocationName(e.target.value)} />
                                         <label for="address" className={locationName != "" ? "input-has-value" : ""}>Location Name</label>
                                     </div>
+                                    <p className="form-input-error" >{locationNameError}</p>
                                 </div>
                                 <div className="section-title">
                                 <h2 className="buyertitle">Buyer Privileges</h2>
