@@ -107,13 +107,14 @@ const EditAddress = () => {
         console.log("====request==>",request)
         if(!FirstName){
             setFirstNameError("First name is required")
+            return;
         }
         console.log("==========FirstName==========>",FirstName);
         console.log("==========lastName==========>",lastName);
         console.log("==========address==========>",address);
         console.log("==========primaryPhone==========>",primaryPhone);
 
-        return
+        
         API
             .post("buyer_address/update", request)
             .then((response) => {
