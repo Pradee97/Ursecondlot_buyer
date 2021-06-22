@@ -45,7 +45,10 @@ const EditMyProfile = () => {
     const [popupActionType, setPopupActionType] = useState ("");
     const [popupActionValue, setPopupActionValue] = useState ("");
     const [popupActionPath, setPopupActionPath] = useState ("")
-    
+    const [addressError, setAddressError] = useState("")
+    const [primaryPhoneError, setPrimaryPhoneError] = useState("")
+    const [mobilePhoneError, setMobilePhoneError] = useState("")
+
     const togglePopup = () => {
         setIsOpen(!isOpen);
       }
@@ -90,7 +93,19 @@ const EditMyProfile = () => {
     updateMyProfile = (event) => {
         // setOpenLoader(true);
         event.preventDefault();        
-    
+        if(!primaryPhone){
+            setPrimaryPhoneError("PrimaryPhone is required")
+            return;
+        }
+        else if(!mobilePhone){
+            setMobilePhoneError("MobilePhone is required")
+            return;
+        }
+        else if(!address){
+            setAddressError("Address is required")
+            return;
+        }
+
         let request = {
             user_id:id,
             first_name: firstName,
@@ -207,14 +222,18 @@ const EditMyProfile = () => {
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={myProfileObjc.phone_no} className="form-control textbox" placeholder="" required onChange={(e) => setPrimaryPhone(e.target.value)} />
+                                <input type="text" defaultValue={myProfileObjc.phone_no} className="form-control textbox" placeholder=""  onChange={(e) => setPrimaryPhone(e.target.value)} />
                                 <label for="phone_no" className={primaryPhone !="" ? "input-has-value" : ""}>Primary Phone</label>
+                                <p className="form-input-error" >{primaryPhoneError}</p>
+
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={myProfileObjc.mobile_no} className="form-control textbox" placeholder="" required onChange={(e) => setMobilephone(e.target.value)} />
+                                <input type="text" defaultValue={myProfileObjc.mobile_no} className="form-control textbox" placeholder=""  onChange={(e) => setMobilephone(e.target.value)} />
                                 <label for="mobile_no" className={mobilePhone !="" ? "input-has-value" : ""}>Mobile Phone</label>
+                                <p className="form-input-error" >{mobilePhoneError}</p>
+
                             </div>
                             </div>                      
                             <div className="col-sm-12 form-group">
@@ -225,8 +244,10 @@ const EditMyProfile = () => {
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={myProfileObjc.address} className="form-control textbox" placeholder="" required onChange={(e) => setAddress(e.target.value)} />
+                                <input type="text" defaultValue={myProfileObjc.address} className="form-control textbox" placeholder=""  onChange={(e) => setAddress(e.target.value)} />
                                 <label for="address" className={address !="" ? "input-has-value" : ""}>Address</label>
+                                <p className="form-input-error" >{addressError}</p>
+
                             </div>
                             </div>
                             <StateAndCity 
