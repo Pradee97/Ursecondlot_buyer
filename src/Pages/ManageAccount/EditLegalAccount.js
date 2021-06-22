@@ -38,6 +38,16 @@ const EditLegalAccount = () => {
     const [dealershipLicenseexp, setDealershipLicenseexp] = useState("");
     const [taxidexp, setTaxidexp] = useState("");
 
+    const [firstnameError, setFirstnameError] = useState("");
+    const [lastnameError, setLastnameError] = useState("");
+    const [legalBusinessnameError, setLegalBusinessnameError] = useState("");
+    const [EINnumberError, setEINnumberError] = useState("");
+    const [dealershiplicenseError, setDealershiplicenseError] = useState("");
+    const [taxidError, setTaxidError] = useState("");
+    const [addressError, setAddressError] = useState("");
+    const [dealershipLicenseexpError, setDealershipLicenseexpError] = useState("");
+    const [taxidexpError, setTaxidexpError] = useState("");
+
     const [isOpen, setIsOpen] = useState(false);
  
     const togglePopup = () => {
@@ -97,6 +107,16 @@ const EditLegalAccount = () => {
         // setOpenLoader(true);
         event.preventDefault();        
     
+        setFirstnameError("")
+        setLastnameError("")
+        setLegalBusinessnameError("")
+        setEINnumberError("")
+        setDealershiplicenseError("")
+        setTaxidError("")
+        setAddressError("")
+        setDealershipLicenseexpError("")
+        setTaxidexpError("")
+
         let request = {
             first_name: firstname,
             last_name: lastname,
@@ -117,6 +137,45 @@ const EditLegalAccount = () => {
             active:1
            
         };
+
+        if(!firstname){
+            setFirstnameError("firstname is required")
+            return;
+        }
+        if(!lastname){
+            setLastnameError("lastname is required")
+            return;
+        }
+        if(!legalBusinessname){
+            setLegalBusinessnameError("Legal Businessname is required")
+            return;
+        }
+        if(!EINnumber){
+            setEINnumberError("EIN Number is required")
+            return;
+        }
+        if(!dealershiplicense){
+            setDealershiplicenseError("Dealership License is required")
+            return;
+        }
+        if(!taxid){
+            setTaxidError("Tax Id is required")
+            return;
+        }
+        if(!address){
+            setAddressError("Address is required")
+            return;
+        }
+        if(!dealershipLicenseexp){
+            setDealershipLicenseexpError("Dealership License exp is required")
+            return;
+        }
+        if(!taxidexp){
+            setTaxidexpError("Tax Id exp is required")
+            return;
+        }
+        
+
         API
             .post('legal_manage/update', request)
             .then((response) => {
@@ -205,45 +264,45 @@ const EditLegalAccount = () => {
 
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text"  defaultValue={accountObjc.first_name} class="form-control textbox" placeholder="" required onChange={(e) => setFirstname(e.target.value)} />
+                                <input type="text"  defaultValue={accountObjc.first_name} class="form-control textbox" placeholder=""  onChange={(e) => setFirstname(e.target.value)} />
                                 <label for="first_name" className={firstname !="" ? "input-has-value" : ""}>First Name</label>
-                            </div>
+                            </div><p className="form-input-error" >{firstnameError}</p>
                             </div>
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.last_name} class="form-control textbox" placeholder="" required onChange={(e) => setLastname(e.target.value)} />
+                                <input type="text" defaultValue={accountObjc.last_name} class="form-control textbox" placeholder=""  onChange={(e) => setLastname(e.target.value)} />
                                 <label for="first_name" className={lastname !="" ? "input-has-value" : ""}>Last Name</label>
-                            </div>
+                            </div><p className="form-input-error" >{lastnameError}</p>
                             </div>
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.bussiness_name} class="form-control textbox" placeholder="" required onChange={(e) => setLegalBusinessname(e.target.value)} />
+                                <input type="text" defaultValue={accountObjc.bussiness_name} class="form-control textbox" placeholder=""  onChange={(e) => setLegalBusinessname(e.target.value)} />
                                 <label for="first_name" className={legalBusinessname !="" ? "input-has-value" : ""}>Legal Business Name</label>
-                            </div>
+                            </div><p className="form-input-error" >{legalBusinessnameError}</p>
                             </div>
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.ein_no} class="form-control textbox" placeholder="" required onChange={(e) => setEINnumber(e.target.value)} />
+                                <input type="text" defaultValue={accountObjc.ein_no} class="form-control textbox" placeholder=""  onChange={(e) => setEINnumber(e.target.value)} />
                                 <label for="first_name" className={EINnumber !="" ? "input-has-value" : ""}>EIN Number</label>
-                            </div>
+                            </div><p className="form-input-error" >{EINnumberError}</p>
                             </div>
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.dealer_license} class="form-control textbox" placeholder="" required onChange={(e) => setDealershiplicense(e.target.value)} />
+                                <input type="text" defaultValue={accountObjc.dealer_license} class="form-control textbox" placeholder=""  onChange={(e) => setDealershiplicense(e.target.value)} />
                                 <label for="first_name" className={dealershiplicense !="" ? "input-has-value" : ""}>Dealership License</label>
-                            </div>
+                            </div><p className="form-input-error" >{dealershiplicenseError}</p>
                             </div>
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.tax_id} class="form-control textbox" placeholder="" required onChange={(e) => setTaxid(e.target.value)} />
+                                <input type="text" defaultValue={accountObjc.tax_id} class="form-control textbox" placeholder=""  onChange={(e) => setTaxid(e.target.value)} />
                                 <label for="first_name" className={taxid !="" ? "input-has-value" : ""}>Tax Id</label>
-                            </div>
+                            </div><p className="form-input-error" >{taxidError}</p>
                             </div>
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.address} class="form-control textbox" placeholder="" required onChange={(e) => setAddress(e.target.value)} />
+                                <input type="text" defaultValue={accountObjc.address} class="form-control textbox" placeholder=""  onChange={(e) => setAddress(e.target.value)} />
                                 <label for="first_name" className={address !="" ? "input-has-value" : ""}>Address</label>
-                            </div>
+                            </div><p className="form-input-error" >{addressError}</p>
                             </div>
                             <StateAndCity 
                                 setStateValue = { getStateName } 
@@ -257,15 +316,15 @@ const EditLegalAccount = () => {
 
                             <div class="col-sm-12 form-group">
                             <div className="tbox">  
-                                 <input type="date" defaultValue={accountObjc.dealer_license_exp===undefined?"":accountObjc.dealer_license_exp.substring(0,10)} class="form-control textbox" placeholder="" required onChange={(e) => setDealershipLicenseexp(e.target.value)} />
+                                 <input type="date" defaultValue={accountObjc.dealer_license_exp===undefined?"":accountObjc.dealer_license_exp.substring(0,10)} class="form-control textbox" placeholder=""  onChange={(e) => setDealershipLicenseexp(e.target.value)} />
                                 <label for="first_name" className={dealershipLicenseexp !="" ? "input-has-value" : ""}>Dealership license exp</label>
-                            </div> 
+                            </div> <p className="form-input-error" >{dealershipLicenseexpError}</p>
                             </div>
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="date" defaultValue={accountObjc.tax_id_exp===undefined?"":accountObjc.tax_id_exp.substring(0,10)} class="form-control textbox" placeholder="" required onChange={(e) => setTaxidexp(e.target.value)} />
+                                <input type="date" defaultValue={accountObjc.tax_id_exp===undefined?"":accountObjc.tax_id_exp.substring(0,10)} class="form-control textbox" placeholder="" onChange={(e) => setTaxidexp(e.target.value)} />
                                 <label for="first_name" className={taxidexp!="" ? "input-has-value" : ""}>Tax id exp</label>
-                            </div>
+                            </div><p className="form-input-error" >{taxidexpError}</p>
                             </div>
                             <div class="col-lg-12 loginBtn">
                                 <button class="cta-btn">Update</button>
