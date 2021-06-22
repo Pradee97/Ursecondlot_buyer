@@ -22,7 +22,7 @@ import {
 const EditAddress = () => {
     const history = useHistory();
     const { id } = useParams();
-    let { register, updateAddress, formState: { errors },reset  } = useForm();
+    // let { register, updateAddress, formState: { errors },reset  } = useForm();
     const [accountObjc, setAccountObj] = useState("");
     const [FirstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -34,8 +34,8 @@ const EditAddress = () => {
     const [zipCode, setZIpCode] = useState("");
     const [location, setLocation] = useState("");
     const [instruction, setInstruction] = useState("");
-  
     const [isOpen, setIsOpen] = useState(false);
+    const [firstNameError, setFirstNameError] = useState("")
  
     const togglePopup = () => {
       setIsOpen(!isOpen);
@@ -58,19 +58,15 @@ const EditAddress = () => {
     const getZipCodeId=(zipData)=>{
         setZIpCode(zipData)
     }
-    
 
-  
     async function fetchAccountDetails() {
-        console.log(id)
+        // console.log(id)
         
         let request = {
             buyer_address_id:id,
-
         };
         const state = API.post('buyer_address/condition', request);
         state.then(res => {
-            console.log("res", res.data.data)
             setFirstName(res.data.data[0].first_name);
             setLastName(res.data.data[0].last_name);
             setAddress(res.data.data[0].address);
@@ -83,16 +79,14 @@ const EditAddress = () => {
             setInstruction(res.data.data[0].instructions);
             setZIpCode(res.data.data[0].zipcode);
             setAccountObj(res.data.data[0])
-
         })
             .catch(err => { console.log(err); });
     }
   
-    updateAddress = (event) => {
+    const updateAddress = (event) => {
         // setOpenLoader(true);
-        event.preventDefault();        
-        console.log("==========type==========>",typeof state);
-       
+        event.preventDefault();   
+        setFirstNameError("")            
         let request = {
             buyer_address_id:id,
             buyer_id:JSON.parse(localStorage.getItem("userDetails")).user_id,
@@ -111,6 +105,15 @@ const EditAddress = () => {
            
         };
         console.log("====request==>",request)
+        if(!FirstName){
+            setFirstNameError("First name is required")
+        }
+        console.log("==========FirstName==========>",FirstName);
+        console.log("==========lastName==========>",lastName);
+        console.log("==========address==========>",address);
+        console.log("==========primaryPhone==========>",primaryPhone);
+
+        return
         API
             .post("buyer_address/update", request)
             .then((response) => {
@@ -165,10 +168,10 @@ const EditAddress = () => {
         setInstruction(res.data.data[0].instructions);
         setZIpCode(res.data.data[0].zipcode);
         setAccountObj(res.data.data[0])
-        reset(res.data.data);
+        // reset(res.data.data);
     })
         .catch(err => { console.log(err); });
-    }, [reset]);
+    }, []);
     return (
         <div>
             <main id="main" class="inner-page">
@@ -180,7 +183,17 @@ const EditAddress = () => {
                             </div>
 			<div className="row content">
             <div className="col-lg-3 col-md-4 col-sm-12 mgaccountleftblock">
-                 
+                  <div className="mgaccountuser">
+                    <div className="mgaccountuserleft">
+                      <img src={process.env.PUBLIC_URL + "/images/userimg.jpg"} className="img-fluid" alt="..." />
+                    </div>
+                    <div className="mgaccountuserright">
+                      <h3>Fernand</h3>
+                      <div className="d-flex align-items-center">
+                        <p className="details"><img src={process.env.PUBLIC_URL + "/images/Path.svg"} className="img-fluid" alt="..." /><span>California, Cl</span></p>
+                      </div>
+                    </div>
+                  </div>
                   <ManageAccountLinks />
                 </div>
                 <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 flooraddform">
@@ -197,28 +210,31 @@ const EditAddress = () => {
 
                         <div class="col-sm-12 form-group">
                         <div className="tbox">
-                                <input type="text"  defaultValue={accountObjc.first_name} class="textbox" placeholder="" required onChange={(e) => setFirstName(e.target.value)} />
+                                <input type="text" defaultValue={accountObjc.first_name} class="textbox" placeholder="" onChange={(e) => setFirstName(e.target.value)} />
                                 <label for="first_name" className={"input-has-value"}>First Name</label>
-                            </div> </div>
+                            </div>
+                            <p className="form-input-error" >{firstNameError}</p>
+                            </div>
+                            
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.last_name} class="textbox" placeholder="" required onChange={(e) => setLastName(e.target.value)} />
+                                <input type="text" defaultValue={accountObjc.last_name} class="textbox" placeholder="" onChange={(e) => setLastName(e.target.value)} />
                                 <label for="last_name"  className={"input-has-value"}>Last name</label>
                             </div> </div>
                         
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.phone_no} class="textbox" placeholder="" required onChange={(e) => setPrimaryPhone(e.target.value)} />
+                                <input type="text" defaultValue={accountObjc.phone_no} class="textbox" placeholder="" onChange={(e) => setPrimaryPhone(e.target.value)} />
                                 <label for="primary_phone"  className={"input-has-value"}>Primary Phone</label>
                             </div> </div>
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.mobile_no} class="textbox" placeholder="" required onChange={(e) => setMobilePhone(e.target.value)} />
+                                <input type="text" defaultValue={accountObjc.mobile_no} class="textbox" placeholder="" onChange={(e) => setMobilePhone(e.target.value)} />
                                 <label for="mobile_phone"  className={"input-has-value"}>Mobile Phone</label>
                             </div> </div>
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.address} class="textbox" placeholder="" required onChange={(e) => setAddress(e.target.value)} />
+                                <input type="text" defaultValue={accountObjc.address} class="textbox" placeholder="" onChange={(e) => setAddress(e.target.value)} />
                                 <label for="address"  className={"input-has-value"}>Address</label>
                             </div> </div>
                             <StateAndCity 
@@ -232,27 +248,27 @@ const EditAddress = () => {
                             />
                              <div class="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.location} class="textbox" placeholder="" required onChange={(e) => setLocation(e.target.value)} />
+                                <input type="text" defaultValue={accountObjc.location} class="textbox" placeholder="" onChange={(e) => setLocation(e.target.value)} />
                                 <label for="location"  className={"input-has-value"}>Location</label>
                             </div> </div>
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.instructions} class="textbox" placeholder="" required onChange={(e) => setInstruction(e.target.value)} />
+                                <input type="text" defaultValue={accountObjc.instructions} class="textbox" placeholder="" onChange={(e) => setInstruction(e.target.value)} />
                                 <label for="instructions"  className={"input-has-value"}>Instructions</label>
                             </div> </div>
                             {/* <div class="col-sm-12 form-group">
-                                <input type="text" defaultValue={accountObjc.city_name} class="form-control" placeholder="City" required onChange={(e) => setCity(e.target.value)} />
+                                <input type="text" defaultValue={accountObjc.city_name} class="form-control" placeholder="City" onChange={(e) => setCity(e.target.value)} />
                             </div>
                             <div class="col-sm-12 form-group">
-                                <input type="text" defaultValue={accountObjc.state_name} class="form-control" placeholder="State" required onChange={(e) => setState(e.target.value)} />
+                                <input type="text" defaultValue={accountObjc.state_name} class="form-control" placeholder="State" onChange={(e) => setState(e.target.value)} />
                             </div>
                             <div class="col-sm-12 form-group">
-                                <input type="number" defaultValue={accountObjc.zipcode_id} class="form-control" placeholder="Zip code" required onChange={(e) => setZIpCode(e.target.value)} />
+                                <input type="number" defaultValue={accountObjc.zipcode_id} class="form-control" placeholder="Zip code" onChange={(e) => setZIpCode(e.target.value)} />
                             </div> */}
                           
                     
                             <div class="col-lg-12 loginBtn">
-                                <button class="cta-btn">Update</button>
+                                <button type="submit" class="cta-btn">Update</button>
                             </div>
                         </div>
                     </form>
