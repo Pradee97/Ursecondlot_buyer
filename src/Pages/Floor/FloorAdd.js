@@ -279,6 +279,18 @@ const FloorAdd = () => {
                                 <p className="form-input-error">{errors.address?.message}</p>
                             </div>
                             </div>
+
+                            <div className="col-sm-4 form-group">
+                                <div className="tbox">
+                                    <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
+                                    <option style={{"display":"none"}}></option>
+                                         <option value="1">+1</option>
+                                        <option value="2">+2</option>
+                                    </select>
+                                    <label for="no_years" className={"input-has-value"}>Country code</label>
+                                </div>
+                            </div>
+
                             <div className="col-sm-12 form-group">
                             <div className="tbox">                            
                                 <input type="text" id="phoneNumber" className="textbox" placeholder="" name="phoneNumber"

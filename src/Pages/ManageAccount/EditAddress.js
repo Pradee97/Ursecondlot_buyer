@@ -245,7 +245,16 @@ const EditAddress = () => {
                                 <p className="form-input-error" >{lastNameError}</p>
 
                             </div> </div>
-                        
+                            <div className="col-sm-4 form-group">
+                                <div className="tbox">
+                                    <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
+                                    <option style={{"display":"none"}}></option>
+                                         <option value="1">+1</option>
+                                        <option value="2">+2</option>
+                                    </select>
+                                    <label for="no_years" className={"input-has-value"}>Country code</label>
+                                </div>
+                            </div>
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={accountObjc.phone_no} class="textbox" placeholder="" onChange={(e) => setPrimaryPhone(e.target.value)} />
@@ -253,6 +262,16 @@ const EditAddress = () => {
                                 <p className="form-input-error" >{primaryPhoneError}</p>
 
                             </div> </div>
+                            <div className="col-sm-4 form-group">
+                                <div className="tbox">
+                                    <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
+                                    <option style={{"display":"none"}}></option>
+                                         <option value="1">+1</option>
+                                        <option value="2">+2</option>
+                                    </select>
+                                    <label for="no_years" className={"input-has-value"}>Country code</label>
+                                </div>
+                            </div>
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={accountObjc.mobile_no} class="textbox" placeholder="" onChange={(e) => setMobilePhone(e.target.value)} />

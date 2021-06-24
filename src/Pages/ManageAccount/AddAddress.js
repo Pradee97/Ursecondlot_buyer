@@ -157,7 +157,16 @@ const AddAddress = () => {
                                 <p className="form-input-error">{errors.lastName?.message}</p>
                             </div>
                             </div>
-                           
+                            <div className="col-sm-4 form-group">
+                                <div className="tbox">
+                                    <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
+                                    <option style={{"display":"none"}}></option>
+                                         <option value="1">+1</option>
+                                        <option value="2">+2</option>
+                                    </select>
+                                    <label for="no_years" className={"input-has-value"}>Country code</label>
+                                </div>
+                            </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text"  id="companyName" className="textbox" placeholder="" name="primaryPhone"
@@ -176,6 +185,16 @@ const AddAddress = () => {
                                 <label for="companyName" className={primaryPhone !="" ? "input-has-value" : ""}>Primary phone</label>
                                 <p className="form-input-error">{errors.primaryPhone?.message}</p>
                             </div>
+                            </div>
+                            <div className="col-sm-4 form-group">
+                                <div className="tbox">
+                                    <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
+                                    <option style={{"display":"none"}}></option>
+                                         <option value="1">+1</option>
+                                        <option value="2">+2</option>
+                                    </select>
+                                    <label for="no_years" className={"input-has-value"}>Country code</label>
+                                </div>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
