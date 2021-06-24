@@ -291,7 +291,7 @@ const FloorAdd = () => {
                                 </div>
                             </div>
 
-                            <div className="col-sm-12 form-group">
+                            <div className="col-sm-8 form-group">
                             <div className="tbox">                            
                                 <input type="text" id="phoneNumber" className="textbox" placeholder="" name="phoneNumber"
                                  {...register("phoneNumber", {

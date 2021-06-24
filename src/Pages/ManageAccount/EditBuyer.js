@@ -280,7 +280,7 @@ const EditBuyer = () => {
                                 </div>
                             </div>
                             
-                                <div className="col-sm-12 form-group">
+                                <div className="col-sm-8 form-group">
                                     <div className="tbox">
                                         <input type="text" defaultValue={myProfileObjc.mobile_no} className="form-control textbox" placeholder="" onChange={(e) => setMobilephone(e.target.value)} />
                                         <label for="mobile_no" className={mobilePhone != "" ? "input-has-value" : ""}>Mobile Phone</label>

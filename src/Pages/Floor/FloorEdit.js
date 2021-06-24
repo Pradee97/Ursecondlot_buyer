@@ -195,7 +195,7 @@ const FloorEdit = () => {
                                 </div>
                             </div>
 
-                            <div className="col-sm-12 form-group">
+                            <div className="col-sm-8 form-group">
                             <div className="tbox">
                                 <input type="number" defaultValue={floorObjc.phone_no} className="form-control textbox" placeholder="" required onChange={(e) => setPhoneNumber(e.target.value)} />
                                 <label for="phone_no" className={phoneNumber !="" ? "input-has-value" : ""}>Phone Number</label>
