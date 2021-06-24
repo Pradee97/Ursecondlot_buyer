@@ -220,7 +220,7 @@ const AddUser = () => {
 														<label for="no_years" className={"input-has-value"}>Country code</label>
 													</div>
 													</div>
-													<div className="col-sm-12 form-group">
+													<div className="col-sm-8 form-group">
 														<div className="tbox">
 															<input className="textbox " type="text" placeholder="" id="phone_no"  name="phoneNumber"
 															 {...register("phoneNumber", {

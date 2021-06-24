@@ -5854,7 +5854,7 @@ paymentform
   margin-bottom: 5px;
 }
 
-.flooraddform .tbox .textbox + label , .flooreditform .tbox .textbox + label {
+.flooraddform .tbox .textbox + label , .flooreditform .tbox .textbox + label , .adduserpageform .tbox .textbox + label {
   position: absolute;
   top: 12px;
   left: 10px;
