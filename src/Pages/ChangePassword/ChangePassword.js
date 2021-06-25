@@ -2,7 +2,8 @@ import React from 'react';
 import API from "../../Services/BaseService";
 import { useHistory,useParams } from "react-router-dom";
 import ls from 'local-storage';
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 // import '../../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -29,11 +30,15 @@ import '../../assets/css/responsive.css';
 
 const ChangePassword = () => {
     const history = useHistory();
+    const eye = <FontAwesomeIcon icon={faEye} />;
     const [oldPassword, setOldPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState('')
     const [isOpen, setIsOpen] = useState(false);
+    const[showPwd,setShowPwd]=useState(false);
+    const[showPwds,setShowPwds]=useState(false);
+    const[showsPwds,setShowsPwds]=useState(false);
 
     const togglePopup = () => {
         setIsOpen(!isOpen);
@@ -50,8 +55,18 @@ const ChangePassword = () => {
 
     let userDetails = ls.get('userDetails');
     console.log("userDetails",userDetails)
-
-
+    function togglepwd(e){
+        e.preventDefault();
+        setShowPwd(!showPwd);
+      }
+      function togglepwds(e){
+        e.preventDefault();
+        setShowPwds(!showPwds);
+      }
+      function togglespwds(e){
+        e.preventDefault();
+        setShowsPwds(!showsPwds);
+      }
     const changehandleSubmit = (event) => {
         event.preventDefault();
         if(newPassword != confirmPassword){
@@ -120,22 +135,22 @@ const ChangePassword = () => {
 
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="password" id="old_password" className="textbox" placeholder="" required onChange={(e) => setOldPassword(e.target.value)} />
-                                <label for="old_password"  className={oldPassword != "" ? "input-has-value" : ""}>Old Password</label>
+                                <input type={showPwd?"text":"password"} id="old_password" className="textbox" placeholder="" required onChange={(e) => setOldPassword(e.target.value)} />
+                                <label for="old_password"  className={oldPassword != "" ? "input-has-value" : ""}>Old Password</label><i for ="password" onClick={togglepwd}>{eye}</i>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="password" id="new_password" className="textbox" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="eg:(It should be Uppercase, Lowercase, Specialcharacter, Numbers and Minimum 8 character)" placeholder="" required onChange={(e) => setNewPassword(e.target.value)} />
-                                <label for="new_password" c className={newPassword != "" ? "input-has-value" : ""}>New Password</label>
+                                <input type={showPwds?"text":"password"} id="new_password" className="textbox" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="eg:(It should be Uppercase, Lowercase, Specialcharacter, Numbers and Minimum 8 character)" placeholder="" required onChange={(e) => setNewPassword(e.target.value)} />
+                                <label for="new_password" c className={newPassword != "" ? "input-has-value" : ""}>New Password</label><i for ="newPassword" onClick={togglepwds}>{eye}</i>
                                 
                             </div>
                             </div>
 
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="password" id="confirm_password" className="textbox" placeholder="" required onChange={(e) => setConfirmPassword(e.target.value)} />
-                                <label for="confirm_password"  className={confirmPassword != "" ? "input-has-value" : ""}>Confirm Password</label>
+                                <input type={showsPwds?"text":"password"} id="confirm_password" className="textbox" placeholder="" required onChange={(e) => setConfirmPassword(e.target.value)} />
+                                <label for="confirm_password"  className={confirmPassword != "" ? "input-has-value" : ""}>Confirm Password</label><i for ="newPassword" onClick={togglespwds}>{eye}</i>
                             </div> 
                             </div>
                             {/* <div className="col-sm-12 form-group">

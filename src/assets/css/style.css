@@ -2459,6 +2459,13 @@ border-left:40px solid transparent;
   padding: 0 80px;
 }
 
+
+.pass-wrapper {
+  position: relative;
+  display: flex;
+  margin-bottom: 14px;
+}
+
 .dealar-login img {
 	max-width:100%;
 	background:#fff;
