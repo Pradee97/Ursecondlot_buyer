@@ -5860,6 +5860,15 @@ paymentform
 .editpaymentform .tbox {
   margin-bottom: 5px;
 }
+.passwordeye{
+  position: absolute;
+  right: 12px;
+  top: 16px;
+}
+.passwordeye:hover {
+  color: #00fcb6;
+  cursor: pointer;
+}
 
 .flooraddform .tbox .textbox + label , .flooreditform .tbox .textbox + label , .adduserpageform .tbox .textbox + label {
   position: absolute;

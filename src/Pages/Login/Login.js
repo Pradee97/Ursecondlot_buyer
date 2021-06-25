@@ -102,7 +102,7 @@ const Login = () => {
         <input className="textbox" type={showPwd?"text":"password"} placeholder="" id="psw" name="password"
           onChange={(e) => setPassword(e.target.value)} 
          />
-				 <label for="psw" className={password != "" ? "input-has-value" : "" }>Password</label><i for ="psw" onClick={togglepwd}>{eye}</i>
+				 <label for="psw" className={password != "" ? "input-has-value" : "" }>Password</label><i for ="psw" className="passwordeye" onClick={togglepwd}>{eye}</i>
          <p className="form-input-error">{errors.password}</p>
 			 </div>
 		  </div>
