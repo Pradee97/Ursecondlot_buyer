@@ -5,6 +5,8 @@ import { useHistory,useParams } from "react-router-dom";
 // import '../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import StateAndCity from '../../Component/StateAndCity/StateAndCity'
 import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks";
@@ -35,8 +37,8 @@ const EditLegalAccount = () => {
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
     const [zipcode, setZipcode] = useState("");
-    const [dealershipLicenseexp, setDealershipLicenseexp] = useState("");
-    const [taxidexp, setTaxidexp] = useState("");
+    const [dealershipLicenseexp, setDealershipLicenseexp] = useState(null);
+    const [taxidexp, setTaxidexp] = useState(null);
 
     const [firstnameError, setFirstnameError] = useState("");
     const [lastnameError, setLastnameError] = useState("");
@@ -52,6 +54,10 @@ const EditLegalAccount = () => {
  
     const togglePopup = () => {
       setIsOpen(!isOpen);
+    }
+
+    const handleDateChangeRaw = (e) => {
+        e.preventDefault();
     }
     
     const [popupTitle, setPopupTitle] = useState ("");
@@ -93,8 +99,8 @@ const EditLegalAccount = () => {
             setCity(res.data.data[0].city_name);
             setState(res.data.data[0].state_name);
             setZipcode(res.data.data[0].zipcode);
-            setDealershipLicenseexp(res.data.data[0].dealer_license_exp);
-            setTaxidexp(res.data.data[0].tax_id_exp);
+            setDealershipLicenseexp(new Date(res.data.data[0].dealer_license_exp));
+            setTaxidexp(new Date(res.data.data[0].tax_id_exp));
 
             setAccountObj(res.data.data[0])
             console.log("-====res.data.data[0].dealer_license_exp=====>",res.data.data[0].dealer_license_exp)
@@ -229,8 +235,8 @@ const EditLegalAccount = () => {
         setCity(res.data.data[0].city_name);
         setState(res.data.data[0].state_name);
         setZipcode(res.data.data[0].zipcode);
-        setDealershipLicenseexp(res.data.data[0].dealer_license_exp);
-        setTaxidexp(res.data.data[0].tax_id_exp);
+        setDealershipLicenseexp(new Date(res.data.data[0].dealer_license_exp));
+        setTaxidexp(new Date(res.data.data[0].tax_id_exp));
         setAccountObj(res.data.data[0]);
         reset(res.data.data[0]);
     })
@@ -316,13 +322,32 @@ const EditLegalAccount = () => {
 
                             <div class="col-sm-12 form-group">
                             <div className="tbox">  
-                                 <input type="date" defaultValue={accountObjc.dealer_license_exp===undefined?"":accountObjc.dealer_license_exp.substring(0,10)} class="form-control textbox" placeholder=""  onChange={(e) => setDealershipLicenseexp(e.target.value)} />
+                                 {/* <input type="date" defaultValue={accountObjc.dealer_license_exp===undefined?"":accountObjc.dealer_license_exp.substring(0,10)} 
+                                 class="form-control textbox" placeholder=""  onChange={(e) => setDealershipLicenseexp(e.target.value)} /> */}
+                                 <DatePicker
+                                    class="form-control textbox" name="dealershipLicenseexp" id="dealershipLicenseexp"                                                        
+                                    autoComplete="off"
+                                    selected={ dealershipLicenseexp == null ? null : dealershipLicenseexp }
+                                    onChange={(date) => setDealershipLicenseexp(date)}
+                                    placeholderText="DOJ"
+                                    onChangeRaw={handleDateChangeRaw}
+                                />
                                 <label for="first_name" className={dealershipLicenseexp !="" ? "input-has-value" : ""}>Dealership license exp</label>
                             </div> <p className="form-input-error" >{dealershipLicenseexpError}</p>
                             </div>
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="date" defaultValue={accountObjc.tax_id_exp===undefined?"":accountObjc.tax_id_exp.substring(0,10)} class="form-control textbox" placeholder="" onChange={(e) => setTaxidexp(e.target.value)} />
+                                {/* <input type="date" 
+                                defaultValue={accountObjc.tax_id_exp===undefined?"":accountObjc.tax_id_exp.substring(0,10)} 
+                                class="form-control textbox" placeholder="" onChange={(e) => setTaxidexp(e.target.value)} /> */}
+                                <DatePicker
+                                    class="form-control textbox" name="taxidexp" id="taxidexp"                                                        
+                                    autoComplete="off"
+                                    selected={ taxidexp == null ? null : taxidexp }
+                                    onChange={(date) => setTaxidexp(date)}
+                                    placeholderText="DOJ"
+                                    onChangeRaw={handleDateChangeRaw}
+                                />
                                 <label for="first_name" className={taxidexp!="" ? "input-has-value" : ""}>Tax id exp</label>
                             </div><p className="form-input-error" >{taxidexpError}</p>
                             </div>
