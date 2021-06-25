@@ -5,15 +5,20 @@ import ls from 'local-storage';
 import { store } from 'react-notifications-component';
 import { useForm } from "react-hook-form";
 import { Button } from 'antd';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 
 const Login = () => {
   const history = useHistory();
+  const eye = <FontAwesomeIcon icon={faEye} />;
   const {state} = useLocation();
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [timeout, setTimeout] = useState("");
- const [errors, setErrors] =useState({email:"", password:""})
+  const [errors, setErrors] =useState({email:"", password:""})
+  const[showPwd,setShowPwd]=useState(false);
+  
   useEffect(()=>{
     // localStorage.clear()
     localStorage.setItem("islogedIn", false)
@@ -26,6 +31,11 @@ const Login = () => {
   })
       .catch(err => { console.log(err); });
   }, [])
+
+  function togglepwd(e){
+    e.preventDefault();
+    setShowPwd(!showPwd);
+  }
 
   const loginhandleSubmit = (event) => {
     event.preventDefault();
@@ -89,9 +99,10 @@ const Login = () => {
 			</div>
 			 
 			 <div className="tbox">
-        <input className="textbox" type="password" placeholder="" id="psw" name="password"
-          onChange={(e) => setPassword(e.target.value)} />
-				 <label for="psw" className={password != "" ? "input-has-value" : "" }>Password</label>
+        <input className="textbox" type={showPwd?"text":"password"} placeholder="" id="psw" name="password"
+          onChange={(e) => setPassword(e.target.value)} 
+         />
+				 <label for="psw" className={password != "" ? "input-has-value" : "" }>Password</label><i for ="psw" onClick={togglepwd}>{eye}</i>
          <p className="form-input-error">{errors.password}</p>
 			 </div>
 		  </div>
