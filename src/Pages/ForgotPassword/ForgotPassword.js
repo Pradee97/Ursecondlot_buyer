@@ -84,13 +84,13 @@ const ForgotPassword = () => {
                                     <div className="col-sm-12 form-group">
                                         <div className="tbox">
                                             <input type={showPwd?"text":"password"} id="password" className="textbox" placeholder="" required onChange={(e) => setPassword(e.target.value)} />
-                                            <label for="password" className={password != "" ? "input-has-value" : ""}>Password</label><i for ="password" onClick={togglepwd}>{eye}</i>
+                                            <label for="password" className={password != "" ? "input-has-value" : ""}>Password</label><i for ="password" className="passwordeye"  onClick={togglepwd}>{eye}</i>
                                         </div>
                                     </div>
                                     <div className="col-sm-12 form-group">
                                         <div className="tbox">
                                             <input type={showPwds?"text":"password"} id="newPassword" className="textbox" placeholder="" required onChange={(e) => setNewPassword(e.target.value)} />
-                                            <label for="newPassword" className={newPassword != "" ? "input-has-value" : ""}>Confirm Password</label><i for ="newPassword" onClick={togglepwds}>{eye}</i>
+                                            <label for="newPassword" className={newPassword != "" ? "input-has-value" : ""}>Confirm Password</label><i for ="newPassword" className="passwordeye"  onClick={togglepwds}>{eye}</i>
                                         </div>
                                     </div>
 
