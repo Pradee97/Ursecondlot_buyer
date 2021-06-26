@@ -2459,6 +2459,13 @@ border-left:40px solid transparent;
   padding: 0 80px;
 }
 
+
+.pass-wrapper {
+  position: relative;
+  display: flex;
+  margin-bottom: 14px;
+}
+
 .dealar-login img {
 	max-width:100%;
 	background:#fff;
@@ -2533,7 +2540,17 @@ input[type="password"] {
 
 .forget-username{
   text-align: left;
+  float: left;
 }
+.forget .forget-pass{ 
+  float: right;
+}
+.forget-username button, .forget button, .loginBtn p button{
+  border: rgba(255,255,255,.5);
+  padding: 4px 0;
+  box-shadow:none!important;
+}
+
 
 .loginBlock{
 	margin:auto;
@@ -3447,13 +3464,14 @@ SuccessfullModalCenter
   margin-left: 4px;
   color: #fff;
   border-radius: 5px;
-  padding: 6px 25px 7px 25px;
+  padding: 6px 25px 6px 25px;
   white-space: nowrap;
   transition: 0.3s;
   font-size: 20px;
   display: inline-block;
   font-weight: 300;
   background: #bd062c;
+  min-height: 50px;
 }
 .Successfullform .modalbody h2{
 	color: rgb(0, 39, 104);
@@ -4149,10 +4167,12 @@ Search Box"
 	padding-bottom:0px;
 }
 
+
 .floorplanstableblock{
 	text-align:center;
 	margin: auto;
     padding: 0;
+    float: left;
 }
 .floorplanstable table{
     border: 1px solid #ccc;
@@ -4948,9 +4968,9 @@ margin-top: 20px;
 }
 
 .mgaccountrighttableblock h3 button{
-  border:#ddd solid 1px;
+  border:transparent;
+  box-shadow: none!important;
 }
-
 .mgaccountrighttableblock h3 button:hover, .mgaccountrighttableblock h3 button:focus{
   border:#BD062C solid 1px;
 }
@@ -4989,7 +5009,7 @@ margin-top: 20px;
 	margin-top:20px;
 	padding-left: 20px;
   text-align: left;
-  font-weight: normal;
+  font-weight: 500;
 }
 .mgaccountrighttableblock h5{
 	color: #002768;
@@ -5560,6 +5580,17 @@ height: 100%;
 }
 
 
+button.add-account-btns {
+  color: #B6062A;
+  padding: 10px 20px;
+  margin-right: 0px;
+  border-radius: 5px;
+  border: 2px solid #B6062A;
+  font-size: 16px;
+  height: 50px;
+  width: auto;
+}
+
 /*-----------------------------------------
 paymentform 
 -------------------------------------------*/
@@ -5595,6 +5626,11 @@ paymentform
 .add-floors{
 	float:right;
 	text-align:center;
+}
+.add-floor .ant-btn:hover {
+  color: #fff;
+  background: #002768;
+  border-color:  #002768;
 }
 
 .add-accounts {
@@ -5704,6 +5740,9 @@ paymentform
     padding-bottom: 20px;
 }
 
+.registrationform .form-control:disabled{ 
+  color: #ccc!important;
+}
 .backaccountform.editpaymentform .topforms , .backaccountform.addpaymentform .topforms {
   margin-top: 30px;
 }
@@ -5821,8 +5860,17 @@ paymentform
 .editpaymentform .tbox {
   margin-bottom: 5px;
 }
+.passwordeye{
+  position: absolute;
+  right: 12px;
+  top: 16px;
+}
+.passwordeye:hover {
+  color: #00fcb6;
+  cursor: pointer;
+}
 
-.flooraddform .tbox .textbox + label , .flooreditform .tbox .textbox + label {
+.flooraddform .tbox .textbox + label , .flooreditform .tbox .textbox + label , .adduserpageform .tbox .textbox + label {
   position: absolute;
   top: 12px;
   left: 10px;
@@ -5838,6 +5886,20 @@ paymentform
   height: 22px;
   margin: 0;
   font-size: 16px;
+  font-weight: 600;
+}
+.modalcontent{
+  margin: 0 auto;
+  text-align: center;
+}
+.modalfooter  button.cta-btns {
+  background-color: #bd062c;
+  color: white!important;
+  padding: 6px 30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 3px;
+  border: none;
 }
 /*----------------------------------------------
 
@@ -5920,7 +5982,7 @@ Documents page
 Add Users
 --------------------------------------*/
 
-.adduserpageform .adduserpageforminner{
+.adduserpageform .adduserpageforminner , .registrationform .adduserpageforminner {
     margin: 10px 0px;
     margin-left: 0px;
     margin-left: 20px;
@@ -6037,6 +6099,22 @@ button:focus{
   top: 12px;
 }
 
+.datePickerBlock .react-datepicker-wrapper { 
+  width: 100%;
+}
+.datePickerBlock input {
+  width: 100%;
+}
+*::placeholder {
+  color: #9F9F9F;
+  font-size: 16px;
+    font-weight: 600;
+}
+
+.datePickerBlock .react-datepicker-wrapper:focus-visible {
+  border: 1px solid #ccc;
+}
+
 ul.ant-pagination{
   margin-top: 20px;
 }
@@ -6073,6 +6151,47 @@ ul.ant-pagination li{
 .timepicker .tbox .textbox + label{
   font-size: 16px;
 }
+
+.adduserpageform .section-title h2.buyertitle , .editprofile .section-title h2.buyertitle {
+  text-align: left;
+  font-size: 20px;
+  margin-top: 20px;
+  clear: both;
+}
+.editprofile .registrationform{
+  max-width: 640px;
+    margin: auto;
+}
+.editprofile .myprofileeditform{
+    margin: 0 auto;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    box-shadow: 0px 3px 6px #ddd;
+    border-radius: .25rem;
+    padding: 30px;
+}
+.editprofile .registrationform .section-title h2 {
+  text-align: center;
+  font-size: 20px;
+  margin-top: 20px;
+  clear: both;
+}
+
+.addaddress_block .registrationform{
+  max-width: 640px;
+    margin: auto;
+}
+.addaddress_block .registrationform .section-title h2 {
+  text-align: center;
+  font-size: 20px;
+  margin-top: 20px;
+  clear: both;
+}
+.addaddress_block .registrationform  .section-title {
+  width: 100%;
+}
+.myprofileeditform
 
 /*--------------------------------------------------------
 Manage Account
@@ -6132,6 +6251,10 @@ padding-bottom: 15px;
   background: #fff;
     color: #bd062c;
     padding: 5px 15px;
+}
+.myprofilerighttableblock h3 button {
+  border:transparent;
+  box-shadow: none!important;
 }
 .myprofilerighttableblock h3 button:hover, .myprofilerighttableblock h3 button:focus{
   border:#BD062C solid 1px;
@@ -6197,6 +6320,18 @@ Users
 	border-radius: 5px;
 	border: 2px solid #B6062A;
 	font-size: 16px;
+  
+}
+button.add-user-btns {
+  color: #B6062A;
+	padding: 10px 20px;
+	margin-right: 0px;
+	border-radius: 5px;
+	border: 2px solid #B6062A;
+	font-size: 16px;
+  height: 50px;
+  width: auto;
+  
 }
 
 
@@ -6224,6 +6359,29 @@ Users
   font-weight: 500;
   text-transform: capitalize;
 }
+
+.userlisttable table th.th_name {
+   width: 20%;
+}
+.userlisttable table th.th_privileges {
+  width: 20%;
+}
+.userlisttable table th.th_phone {
+  width: 10%;
+}
+.userlisttable table th.th_status {
+  width: 10%;
+}
+.userlisttable table th.th_action {
+  width: 10%;
+}
+.userlisttable table th.th_img {
+  width: 10%;
+}
+.userlisttable table th.th_id {
+  width: 10%;
+}
+
 .userlisttable table {
   border-collapse: collapse;
 }
@@ -6363,6 +6521,7 @@ table td .ant-btn:hover span, table td .ant-btn:hover i{
 }
 .form-input-error{
   color: red;
+  text-align: left;
 }
 .topRightUser img{
   width:35px;

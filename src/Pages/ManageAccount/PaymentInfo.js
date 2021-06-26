@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import '../../assets/css/responsive.css';
 import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
+import {  Button  } from 'antd';
 
 
 const PaymentInfo = () => {
@@ -46,18 +47,7 @@ const PaymentInfo = () => {
                             </div>
                             <div className="row content">
                                 <div className="col-lg-3 col-md-4 col-sm-12 accountleftblock">
-                                    <div className="mgaccountuser">
-                                        <div className="mgaccountuserleft">
-                                            <img src={process.env.PUBLIC_URL +"/images/userimg.jpg"} className="img-fluid" alt="..." />
-                                        </div>
-                                        <div className="mgaccountuserright">
-                                            <h3>Fernand</h3>
-                                            <div className="d-flex align-items-center">
-                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/Path.svg"} className="img-fluid" alt="..." /><span>California, Cl</span></p>
-                                            </div>
-
-                                        </div>
-                                    </div>
+                                  
                                     <ManageAccountLinks />
                                 </div>
                                 <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 paymentrightblock ">
@@ -66,7 +56,8 @@ const PaymentInfo = () => {
                                         <div className="add-floors">
                                            
                                                 <div className="add-accounts">
-                                                    <a className="add-account-btns" href="/payment"><i class="icofont-plus"></i> Add Bank Account</a>
+                                                <Button className="add-account-btns" onClick={() => history.push("/payment")}><i class="icofont-plus"></i> Add Bank Account</Button>
+                                            {/*<a className="add-account-btns" href="/payment"><i class="icofont-plus"></i> Add Bank Account</a> */}
                                                 </div>
                                             
                                         </div>

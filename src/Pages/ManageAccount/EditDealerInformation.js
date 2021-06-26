@@ -5,6 +5,8 @@ import { useHistory,useParams } from "react-router-dom";
 import { useState } from 'react';
 import { useEffect } from 'react';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
+import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks";
+import { useForm } from "react-hook-form";
 
 import {
     Form,
@@ -18,6 +20,7 @@ import {
 import StateAndCity from '../../Component/StateAndCity/StateAndCity'
 
 const EditDealerInformation = () => {
+    let { register, updateDealerInfo, formState: { errors },reset  } = useForm();
     const history = useHistory();
     const { id } = useParams();
     const [accountObjc, setAccountObj] = useState("");
@@ -42,7 +45,12 @@ const EditDealerInformation = () => {
     const [popupActionType, setPopupActionType] = useState ("");
     const [popupActionValue, setPopupActionValue] = useState ("");
     const [popupActionPath, setPopupActionPath] = useState ("")
-  
+    const [firstNameError, setFirstNameError] = useState("")
+    const [lastNameError, setLastNameError] = useState("")
+    const [primaryPhoneError, setPrimaryPhoneError] = useState("")
+    const [mobilePhoneError, setMobilePhoneError] = useState("")
+    const [addressError, setAddressError] = useState("")
+
     const getStateName=(stateData)=>{
         setState(stateData)
     }
@@ -71,16 +79,36 @@ const EditDealerInformation = () => {
             setAddress(res.data.data[0].address);
             setCity(res.data.data[0].city_name);
             setState(res.data.data[0].state_name);
-            setZipcode(res.data.data[0].zipcode_id);
+            setZipcode(res.data.data[0].zipcode);
             setAccountObj(res.data.data[0])
         })
             .catch(err => { console.log(err); });
     }
   
-    const updateDealerInfo = (event) => {
+     updateDealerInfo = (event) => {
         // setOpenLoader(true);
         event.preventDefault();        
-    
+        if(!firstName){
+            setFirstNameError("First name is required")
+            return;
+        }
+        else if(!lastName){
+            setLastNameError("Last name is required")
+            return;
+        }
+        else if(!primaryPhone){
+            setPrimaryPhoneError("PrimaryPhone is required")
+            return;
+        }
+        else if(!mobilePhone){
+            setMobilePhoneError("MobilePhone is required")
+            return;
+        }
+        else if(!address){
+            setAddressError("Address is required")
+            return;
+        }
+
         let request = {
             user_id:id,
             first_name: firstName,
@@ -88,9 +116,12 @@ const EditDealerInformation = () => {
             phone_no: primaryPhone,
             mobile_no: mobilePhone,
             address: address,
-            city_id: city,
-            state_id: state,
-            zipcode_id: zipCode,
+            // city_id: city,
+            // state_id: state,
+            // zipcode_id: zipCode,
+            city_id: typeof city==='string'?accountObjc.city_id:city,
+            state_id: typeof state==='string'?accountObjc.state_id:state,
+            zipcode_id: zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode,
             active:1
            
         };
@@ -129,50 +160,109 @@ const EditDealerInformation = () => {
             });
         }
     useEffect(() => {
-      fetchAccountDetails();
-    }, []);
+      //fetchAccountDetails();
+      let request = {
+        buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+    };
+    const state = API.post('user_profile/condition', request);
+    state.then(res => {
+        console.log("res=======>", res.data.data)
+        setFirstname(res.data.data[0].first_name);
+        setLastname(res.data.data[0].last_name);
+        setPrimaryphone(res.data.data[0].phone_no);
+        setMobilephone(res.data.data[0].mobile_no);
+        setAddress(res.data.data[0].address);
+        setCity(res.data.data[0].city_name);
+        setState(res.data.data[0].state_name);
+        setZipcode(res.data.data[0].zipcode);
+        setAccountObj(res.data.data[0])
+        reset(res.data.data[0]);
+    })
+        .catch(err => { console.log(err); });
+    }, [reset]);
     return (
         <div>
             <main id="main" class="inner-page">
-                <div className="col-lg-4  loginBlock">
-                <button className="back-btn-paymentform backBtn" onClick={() => history.push("/manageaccount")}><i class="icofont-arrow-left"></i> Back</button>     
-                <div className="col-lg-12 card">
-                
-                    <form class="registrationform" onSubmit={updateDealerInfo} >
-                   
-                        <h2 class="title"> Edit Dealer Information</h2>
+            <div id="addaddress" className="addaddress_block">
+            <div className="container" >
+            <div className="addaddressblock col-lg-12">
+            <div className="section-title">
+                                <h2> Edit Dealer Information</h2>
+                            </div>
+			<div className="row content">
+            <div className="col-lg-3 col-md-4 col-sm-12 mgaccountleftblock">
+                 
+                  <ManageAccountLinks />
+                </div>
+                <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0  flooraddform">
+                <div className="adduserpage-inner"> 
+                <div className="col-lg-12">
+                    <form class="registrationform" onSubmit={updateDealerInfo} >                   
+                       
                         <div class="row">
+                        <div className="section-title">
+                        <button className="back-btn-paymentform backBtn" onClick={() => history.push("/manageaccount")}><i class="icofont-arrow-left"></i> Back</button>   
+							<h2> Edit Dealer Information</h2>
+						</div>
 
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text"  defaultValue={accountObjc.first_name} class="textbox" placeholder="First name" required onChange={(e) => setFirstname(e.target.value)} />
+                                <input type="text"  defaultValue={accountObjc.first_name} class="textbox" placeholder="First name"  onChange={(e) => setFirstname(e.target.value)} />
                                 <label for="first_name" className={firstName != "" ? "input-has-value" : ""}>First Name</label>
+                                <p className="form-input-error" >{firstNameError}</p>
+
                             </div>
                             </div>
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.last_name} class="textbox" placeholder="Last name" required onChange={(e) => setLastname(e.target.value)} />
+                                <input type="text" defaultValue={accountObjc.last_name} class="textbox" placeholder="Last name"  onChange={(e) => setLastname(e.target.value)} />
                                 <label for="last_name" className={lastName != "" ? "input-has-value" : ""}>Last Name</label>
-                            </div>
-                            </div>
+                                <p className="form-input-error" >{lastNameError}</p>
 
-                            <div class="col-sm-12 form-group">
+                            </div>
+                            </div>
+                            <div className="col-sm-4 form-group">
+                                <div className="tbox">
+                                    <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
+                                    <option style={{"display":"none"}}></option>
+                                         <option value="1">+1</option>
+                                        <option value="2">+2</option>
+                                    </select>
+                                    <label for="no_years" className={"input-has-value"}>Country code</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-8 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.phone_no} class="textbox" placeholder="Primary phone" required onChange={(e) => setPrimaryphone(e.target.value)} />
+                                <input type="text" defaultValue={accountObjc.phone_no} class="textbox" placeholder="Primary phone"  onChange={(e) => setPrimaryphone(e.target.value)} />
                                 <label for="phone_no" className={primaryPhone != "" ? "input-has-value" : ""}>Primary Phone</label>
-                            </div>
-                            </div>
+                                <p className="form-input-error" >{primaryPhoneError}</p>
 
-                            <div class="col-sm-12 form-group">
+                            </div>
+                            </div>
+                            <div className="col-sm-4 form-group">
+                                <div className="tbox">
+                                    <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
+                                    <option style={{"display":"none"}}></option>
+                                         <option value="1">+1</option>
+                                        <option value="2">+2</option>
+                                    </select>
+                                    <label for="no_years" className={"input-has-value"}>Country code</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-8 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.mobile_no} class="textbox" placeholder="Mobile phone" required onChange={(e) => setMobilephone(e.target.value)} />
+                                <input type="text" defaultValue={accountObjc.mobile_no} class="textbox" placeholder="Mobile phone"  onChange={(e) => setMobilephone(e.target.value)} />
                                 <label for="mobile_no" className={mobilePhone != "" ? "input-has-value" : ""}>Mobile Phone</label>
+                                <p className="form-input-error" >{mobilePhoneError}</p>
+
                             </div>
                             </div>
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.address} class="textbox" placeholder="Address" required onChange={(e) => setAddress(e.target.value)} />
+                                <input type="text" defaultValue={accountObjc.address} class="textbox" placeholder="Address"  onChange={(e) => setAddress(e.target.value)} />
                                 <label for="address" className={address != "" ? "input-has-value" : ""}>Address</label>
+                                <p className="form-input-error" >{addressError}</p>
+
                             </div>
                             </div>
                             <StateAndCity 
@@ -204,7 +294,7 @@ const EditDealerInformation = () => {
                         </div>
                     </form>
 
-                </div> </div>
+                    </div>  </div></div></div></div></div></div>
 
 
                 <section id="playstoreBlock" class="playstoreBlock">

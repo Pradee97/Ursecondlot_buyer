@@ -1,11 +1,9 @@
 import React, {useState, useEffect} from "react"
 import API from "../../Services/BaseService";
-
 const StateAndCity = props => {
-
-    console.log("pppppp",props)
+    // console.log("pppppp===",props)
     const [defaultZipcodeValue, setDefaultZipcodeValue] = useState(props.defaultZipcodeValue);
-    const [zipCodeId, setZipcodeId] = useState("");
+    const [zipCodeId, setZipcodeId] = useState( "");
     const [isEdit, setIsEdit] = useState(props?.isEdit || false);
     const [country, setCountry] = useState("");
     const [defaultStateValue, setDefaultStateValue] = useState(props.defaultStateValue);
@@ -14,9 +12,7 @@ const StateAndCity = props => {
     const [defaultCityValue, setDefaultCityValue] = useState(props.defaultCityValue);
     const [cityName, setCityName] = useState("");
     const [cityNameList, setCityNameList] = useState([]);
-    
-    
-
+    const [zipcodeList, setZipcodeList] = useState([]);
     async function fetchCountry() {
         const country = API.get('country');
         country.then(res => {
@@ -31,11 +27,13 @@ const StateAndCity = props => {
         };
         const state = API.post('state/condition', request);
         state.then(res => {
-            console.log("res", res.data.data)
             setStateNameList(res.data.data);
             if(props.isEdit){
                 res.data.data.filter(data=> {
-                    data.state_name?.toLowerCase() === defaultStateValue ?.toLowerCase() && fetchCity(data.state_id)
+                    if(data.state_name?.toLowerCase() === defaultStateValue ?.toLowerCase()){
+                        setStateName(data.state_name)
+                        fetchCity(data.state_id)
+                    } 
                 })
                
             }
@@ -49,69 +47,83 @@ const StateAndCity = props => {
         };
         const state = API.post('city/condition', request);
         state.then(res => {
-            console.log("city", res.data.data)
             setCityNameList(res.data.data);
+            if(props.isEdit){
+                res.data.data.filter(data=> {
+                    if(data.city_name?.toLowerCase() === defaultCityValue ?.toLowerCase()){
+                        setCityName(data.city_name)
+                        fetchZipcode(data.city_id)
+                    }
+                })
+            }
+        })
+            .catch(err => { console.log(err); });
+    }
+    function fetchZipcode(e) {
+        let request = {
+            city_id: e
+        };
+        const state = API.post('zipcode/condition', request);
+        state.then(res => {
+            setZipcodeList(res.data.data);
+            if(props.isEdit){
+                res.data.data.filter(data=>{
+                    data.zipcode==defaultZipcodeValue && setZipcodeId(data.zipcode)
+                }
+                    )
+            }
         })
             .catch(err => { console.log(err); });
     }
 
     useEffect(() => {
-        props.setStateValue(stateName);
-        props.setCityValue(cityName);
-        props.setZipcodeValue(zipCodeId);
-       
+        if(stateName && cityName && zipCodeId ){
+        // console.log("=======>",stateNameList,stateName,cityNameList,cityName,zipcodeList,zipCodeId)
+        props.setStateValue(stateNameList.filter(data=>data.state_name == stateName)[0].state_id);
+        props.setCityValue(cityNameList.filter(data=>data.city_name==cityName)[0].city_id);
+        props.setZipcodeValue(zipcodeList.filter(data=>data.zipcode==zipCodeId)[0].zipcode_id);   
+        } 
     }, [stateName, cityName, zipCodeId]);
 
     useEffect (()=>{
         if(isEdit){
             setDefaultStateValue(props.defaultStateValue);
             setDefaultCityValue(props.defaultCityValue);
-            setDefaultZipcodeValue(props.defaultZipcodeValue);
+            setDefaultZipcodeValue(props.defaultZipcodeValue); 
         }
     })
     
     useEffect(() => fetchCountry(),[])
     
     useEffect(() => {
-        fetchState();
+        fetchState(); 
     }, [defaultStateValue]);
 
     useEffect(() => { setZipcodeId( zipCodeId) }, [zipCodeId])
 
-    const handleState = (e) => {  
+    const handleState = (e) => {
         setStateName( stateNameList.filter(data=>data.state_id == e.target.value)[0].state_name)
         fetchCity(e.target.value)
+        setCityName("")
         setZipcodeId("")
     }
 
     const handleCity = (e) => {
-        console.log("--------handleCity")
-        setCityName(e.target.value)
+        setCityName(cityNameList.filter(data=>data.city_id==e.target.value)[0].city_name)
+        fetchZipcode(e.target.value)
         setZipcodeId("")
     }
 
-    const setZipcodeNormal = (data) => {
-        console.log("--------setZipcodeNormal",data)
-        setIsEdit(false)
-        if(data.length ===0 ){
-            setZipcodeId("")
-            setCityName('')
-            setStateName('') 
-        }
-        if(data.length==5 ){
-            setZipcodeId(data)
-            console.log("====setIsEdit=====>",!isEdit)
-        }
+    const handleZipcode = (e) => {
+        setZipcodeId(zipcodeList.filter(data=>data.zipcode==e.target.value)[0].zipcode); 
     }
-
-    
 
 return (
     <>
         <div className="col-sm-4 form-group selectTbox">
             <div className="tbox">                
                 <div className="selcetclass"> 
-                    <select className="form-control custom-select browser-default textbox" required defaultValue={stateName}  onChange={handleState}>
+                    <select className="form-control custom-select browser-default textbox"  defaultValue={stateName}  onChange={handleState}>
                         <option style={{"display":"none"}}></option>
                         {stateNameList.length>0 &&
                             <>
@@ -121,18 +133,16 @@ return (
                     </select>
                     <label  for="state_id" className={"input-has-value"}>State</label>
                     </div>
-                    
-               
             </div>
         </div>
         <div className="col-sm-4 form-group selectTbox">
             <div className="tbox">              
                 <div className="selcetclass"> 
-                    <select id="City" className="form-control custom-select browser-default textbox" required defaultValue={cityName} onChange={handleCity}>
+                    <select id="City" className="form-control custom-select browser-default textbox"  defaultValue={cityName} onChange={handleCity}>
                     <option style={{"display":"none"}}></option>
                         {cityNameList.length>0 &&
                             <>
-                                {cityNameList.map((city, index) => <option key={city.city_id} value={city.city_name} selected = { isEdit ?  city.city_name === defaultCityValue ? true : false : false} >{city.city_name}</option>)}
+                                {cityNameList.map((city, index) => <option key={city.city_id} value={city.city_id} selected = { isEdit ?  city.city_name === defaultCityValue ? true : false : false} >{city.city_name}</option>)}
                             </>
                         }
                     </select>
@@ -140,7 +150,22 @@ return (
                 </div>                   
             </div>
         </div>
-        <div className="col-sm-4 form-group">
+        <div className="col-sm-4 form-group selectTbox">
+            <div className="tbox">        
+                <div className="selcetclass"> 
+                    <select id="zipcode_id" className="form-control custom-select browser-default textbox"  defaultValue={zipCodeId} onChange={handleZipcode}>
+                    <option style={{"display":"none"}}></option>
+                        {zipcodeList.length>0 &&
+                            <>
+                                {zipcodeList.map((zipcode, index) => <option key={zipcode.zipcode_id} value={zipcode.zipcode} selected = { isEdit ?  zipcode.zipcode === defaultZipcodeValue ? true : false : false} >{zipcode.zipcode}</option>)}
+                            </>
+                        }
+                    </select>
+                    <label  for="zipcode_id" className={"input-has-value"}>Zipcode</label>
+                </div>                   
+            </div>
+        </div>
+        {/* <div className="col-sm-4 form-group">
             <div className="tbox">
                 <div className="selcetclass">                 
                     <>
@@ -149,7 +174,7 @@ return (
                     </>                       
                 </div>
             </div>
-        </div>
+        </div> */}
     </>
 )}
 

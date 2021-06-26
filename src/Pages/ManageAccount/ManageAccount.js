@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { useState } from 'react';
 import { useEffect } from 'react';
 import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
+import Loading from "../../Component/Loading/Loading";
 import {
   Button
 } from 'antd';
@@ -13,8 +14,10 @@ const ManageAccount = () => {
   const [dealerInfo, setDealerInfo] = useState("");
   const [addressDetails, setaddressDetails] = useState("");
   const [legaldetails, setLegalDetails] = useState("");
+  const [loading,setloading]=useState("");
 
   async function fetchAccountDetails() {
+    setloading(true);
     let request = {
       buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
     };
@@ -23,6 +26,7 @@ const ManageAccount = () => {
       console.log("res", res)
       setaccountDetails(res.data.data);
       setDealerInfo(res.data.data);
+      
     })
       .catch(err => { console.log(err); });
   }
@@ -47,6 +51,7 @@ const ManageAccount = () => {
     state.then(res => {
       console.log("res", res)
       setLegalDetails(res.data.data);
+      setloading(false);
     })
       .catch(err => { console.log(err); });
   }
@@ -69,6 +74,7 @@ const ManageAccount = () => {
   }, []);
   return (
     <div>
+      {loading?<Loading/>:
       <main id="main" className="inner-page">
         <div id="mgaccount" className="mgaccount">
           <div className="container" >
@@ -78,17 +84,7 @@ const ManageAccount = () => {
               </div>
               <div className="row content">
                 <div className="col-lg-3 col-md-4 col-sm-12 mgaccountleftblock">
-                  <div className="mgaccountuser">
-                    <div className="mgaccountuserleft">
-                      <img src={process.env.PUBLIC_URL + "/images/userimg.jpg"} className="img-fluid" alt="..." />
-                    </div>
-                    <div className="mgaccountuserright">
-                      <h3>Fernand</h3>
-                      <div className="d-flex align-items-center">
-                        <p className="details"><img src={process.env.PUBLIC_URL + "/images/Path.svg"} className="img-fluid" alt="..." /><span>California, Cl</span></p>
-                      </div>
-                    </div>
-                  </div>
+                 
                   <ManageAccountLinks />
                 </div>
                 <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 mgaccountrightblock">
@@ -115,7 +111,7 @@ const ManageAccount = () => {
                           </tr>
                           <tr>
                             <td>Mobile<span>{item.mobile_no}</span></td>
-                            <td>Zip code<span>{item.zipcode_id}</span></td>
+                            <td>Zip code<span>{item.zipcode}</span></td>
                           </tr>
                         </table>
                       </div>
@@ -132,7 +128,7 @@ const ManageAccount = () => {
                           <thead></thead>
                           <tr>
                             <td>First name<span>{item.first_name}</span></td>
-                            <td>Address<span>{item.location}</span></td>
+                            <td>Address<span>{item.address}</span></td>
                           </tr>
                           <tr>
                             <td>Last name<span>{item.last_name}</span></td>
@@ -144,13 +140,13 @@ const ManageAccount = () => {
                           </tr>
                           <tr>
                             <td>Mobile phone<span>{item.mobile_no}</span></td>
-                            <td>Zip code<span>{item.zipcode_id}</span></td>
+                            <td>Zip code<span>{item.zipcode}</span></td>
                           </tr>
                         </table>
                         <h4>Location name</h4>
-                        <h6>Horizon fairway - Computer number 693</h6>
+                        <h6>{item.location}</h6>
                         <h4>Instructions</h4>
-                        <h6>Computer number 693</h6>
+                        <h6>{item.instructions}</h6>
                       </div>
                     </div>
                   ) :
@@ -183,7 +179,7 @@ const ManageAccount = () => {
                           </tr>
                           <tr>
                             <td>EIN number<span>{item.ein_no}</span></td>
-                            <td>Zip code<span>{item.zipcode_id}</span></td>
+                            <td>Zip code<span>{item.zipcode}</span></td>
                           </tr>
                           <tr>
                             <td>Dealership license<span>{item.dealer_license}</span></td>
@@ -194,11 +190,11 @@ const ManageAccount = () => {
                             <td>Tax id exp<span>{item.tax_id_exp.substring(0,10)}</span></td>
                           </tr>
                         </table>
-                        <h4>Location name</h4>
+                        {/* <h4>Location name</h4>
                         <h6>Horizon fairway - Computer number 693</h6>
 
                         <h4>Instructions</h4>
-                        <h6>Computer number 693</h6>
+                        <h6>Computer number 693</h6> */}
                       </div>
 
                     </div>
@@ -224,7 +220,7 @@ const ManageAccount = () => {
             </div>
           </div>
         </section>
-      </main>
+      </main>}
     </div>
   );
 };

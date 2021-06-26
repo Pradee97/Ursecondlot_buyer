@@ -132,19 +132,19 @@ const FloorEdit = () => {
                     <button className="back-btn-paymentform" onClick={() => history.push("/floor")}>Back</button>
                         <h2 className="title"> Edit Floor Plans </h2>
                         <div className="row">
-                        
-                            <div className="col-sm-12 form-group">
-                            <div className="tbox">                           
-                                <input type="text"  defaultValue={floorObjc.contact_name} className="form-control textbox" placeholder="" required onChange={(e) => setContactName(e.target.value)} />
-                                <label for="contact_name" className={contactName !="" ? "input-has-value" : ""}>Contact Name</label>
-                            </div>
-                            </div>
+                            
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={floorObjc.company_name} className="form-control textbox" placeholder="" required onChange={(e) => setCompanyName(e.target.value)} />
                                 <label for="company_name" className={companyName !="" ? "input-has-value" : ""}>Company Name</label>
                             </div>
                             </div>
+                            <div className="col-sm-12 form-group">
+                            <div className="tbox">                           
+                                <input type="text"  defaultValue={floorObjc.contact_name} className="form-control textbox" placeholder="" required onChange={(e) => setContactName(e.target.value)} />
+                                <label for="contact_name" className={contactName !="" ? "input-has-value" : ""}>Contact Name</label>
+                            </div>
+                            </div>                            
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={floorObjc.branch_name} className="form-control textbox" placeholder="" required onChange={(e) => setBranchName(e.target.value)} />
@@ -183,7 +183,19 @@ const FloorEdit = () => {
                                 <label for="address" className={address !="" ? "input-has-value" : ""}>Address</label>
                             </div>
                             </div>
-                            <div className="col-sm-12 form-group">
+
+                            <div className="col-sm-4 form-group">
+                                <div className="tbox">
+                                    <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
+                                    <option style={{"display":"none"}}></option>
+                                         <option value="1">+1</option>
+                                        <option value="2">+2</option>
+                                    </select>
+                                    <label for="no_years" className={"input-has-value"}>Country code</label>
+                                </div>
+                            </div>
+
+                            <div className="col-sm-8 form-group">
                             <div className="tbox">
                                 <input type="number" defaultValue={floorObjc.phone_no} className="form-control textbox" placeholder="" required onChange={(e) => setPhoneNumber(e.target.value)} />
                                 <label for="phone_no" className={phoneNumber !="" ? "input-has-value" : ""}>Phone Number</label>

@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import StateAndCity from '../../Component/StateAndCity/StateAndCity';
 import { useForm } from "react-hook-form";
+import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
 
 const AddAddress = () => {
     const history = useHistory();   
@@ -33,6 +34,8 @@ const AddAddress = () => {
     const [city, setCityName] = useState("");
     const [state, setStateName] = useState("");
     const [zipCode, setZipcodeId] = useState("");
+    const [location, setLocation] = useState("");
+    const [instruction, setInstruction] = useState("");
 
     const onhandleSubmit = (data) => {
         // setOpenLoader(true);
@@ -48,10 +51,11 @@ const AddAddress = () => {
             state_id: state,
             zipcode_id: zipCode,
             buyer_id:userDetails.user_id,
-            location:address,
+            location:location,
+            instructions:instruction,
             active:1           
         };
-        console.log("===",request)
+        console.log("===",request)  
         // return
         API.post("buyer_address/add", request)
             .then((response) => {
@@ -100,17 +104,29 @@ const AddAddress = () => {
     return (
         <div>
 
-<main id="main" className="inner-page">
-                <div className="col-lg-4 loginBlock flooraddform">
-
-                <button className="back-btn-paymentform backBtn" onClick={() => history.push("/manageaccount")}><i class="icofont-arrow-left"></i> Back</button>
-                <div className="col-lg-12 card">
-
-
-                    <form className="registrationform" onSubmit={handleSubmit(onhandleSubmit)} >
-                                    
-                        <h2 className="title">Add Address </h2>
+            <main id="main" className="inner-page">
+            <div id="addaddress" className="addaddress_block">
+            <div className="container" >
+            <div className="addaddressblock col-lg-12">
+                            <div className="section-title">
+                                <h2>Add Address</h2>
+                            </div>
+			<div className="row content">
+            <div className="col-lg-3 col-md-4 col-sm-12 mgaccountleftblock">
+                 
+                  <ManageAccountLinks />
+                </div>
+                <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 flooraddform">
+                <div className="adduserpage-inner">
+                <div className="col-lg-12">
+                    <form className="registrationform" onSubmit={handleSubmit(onhandleSubmit)} >                                    
+                      
                         <div className="row">
+
+                        <div className="section-title">
+                            <button className="back-btn-paymentform backBtn" onClick={() => history.push("/manageaccount")}><i class="icofont-arrow-left"></i> Back</button>
+							<h2>Add Address </h2>
+						</div>
                         <div className="col-sm-12 form-group"> 
                         <div className="tbox">
                                 <input type="text"  id="contactName" className="textbox" placeholder="" name="firstName"
@@ -141,8 +157,17 @@ const AddAddress = () => {
                                 <p className="form-input-error">{errors.lastName?.message}</p>
                             </div>
                             </div>
-                           
-                            <div className="col-sm-12 form-group">
+                            <div className="col-sm-4 form-group">
+                                <div className="tbox">
+                                    <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
+                                    <option style={{"display":"none"}}></option>
+                                         <option value="1">+1</option>
+                                        <option value="2">+2</option>
+                                    </select>
+                                    <label for="no_years" className={"input-has-value"}>Country code</label>
+                                </div>
+                            </div>
+                            <div className="col-sm-8 form-group">
                             <div className="tbox">
                                 <input type="text"  id="companyName" className="textbox" placeholder="" name="primaryPhone"
                                  {...register("primaryPhone", {
@@ -161,11 +186,21 @@ const AddAddress = () => {
                                 <p className="form-input-error">{errors.primaryPhone?.message}</p>
                             </div>
                             </div>
-                            <div className="col-sm-12 form-group">
+                            <div className="col-sm-4 form-group">
+                                <div className="tbox">
+                                    <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
+                                    <option style={{"display":"none"}}></option>
+                                         <option value="1">+1</option>
+                                        <option value="2">+2</option>
+                                    </select>
+                                    <label for="no_years" className={"input-has-value"}>Country code</label>
+                                </div>
+                            </div>
+                            <div className="col-sm-8 form-group">
                             <div className="tbox">
                                 <input type="text" id="branchName" className="textbox" placeholder="" name="mobilePhone"
                                   {...register("mobilePhone", {
-                                    required: "This input is required.",
+                                    // required: "This input is required.",
                                     minLength: {
                                         value: 10,
                                         message: "This input atleast have 10 digits"
@@ -200,6 +235,36 @@ const AddAddress = () => {
                                 setCityValue={getCityName}
                                 setZipcodeValue={getZipCodeId}
                             />
+                             <div className="col-sm-12 form-group"> 
+                            <div className="tbox">
+                                <input type="text"  id="contactName" className="textbox" placeholder="" name="location"
+                                 {...register("location", {
+                                    required: "This input is required.",
+                                    maxLength: {
+                                        value: 150,
+                                        message: "This input must not exceed 150 characters"
+                                      }
+                                  })}
+                                onChange={(e) => setLocation(e.target.value)} />
+                                <label for="contactName" className={location !="" ? "input-has-value" : ""}>Location</label>
+                                <p className="form-input-error">{errors.location?.message}</p>
+                            </div>
+                            </div>
+                            <div className="col-sm-12 form-group"> 
+                            <div className="tbox">
+                                <input type="text"  id="contactName" className="textbox" placeholder="" name="instruction" autoComplete="off"
+                                 {...register("instruction", {
+                                    required: "This input is required.",
+                                    maxLength: {
+                                        value: 150,
+                                        message: "This input must not exceed 150 characters"
+                                      }
+                                  })}
+                                onChange={(e) => setInstruction(e.target.value)} />
+                                <label for="contactName" className={instruction !="" ? "input-has-value" : ""}>Instructions</label>
+                                <p className="form-input-error">{errors.instruction?.message}</p>
+                            </div>
+                            </div>
                             {/* <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" id="accountNumber" className="textbox" placeholder="" required onChange={(e) => setCity(e.target.value)} />
@@ -227,7 +292,7 @@ const AddAddress = () => {
                         </div>
                     </form>
 
-                </div></div>
+                </div></div></div></div> </div></div></div>
                 <section id="playstoreBlock" className="playstoreBlock">
                     <div className="container">
                         <div className="row content">

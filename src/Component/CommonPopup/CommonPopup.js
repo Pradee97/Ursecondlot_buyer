@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { useHistory } from "react-router-dom";
 import checkImg from '../../../src/assets/img/check.svg';
 import errorImg from '../../../src/assets/img/erroricon.png';
-import warningImg from '../../../src/assets/img/favicon.png';
+import warningImg from '../../../src/assets/img/warning.png';
 import "./commonPopup.css"
 
 const CommonPopup = props => {
@@ -49,7 +49,7 @@ const CommonPopup = props => {
                                         <button class="cta-btns" onClick={Confirmation} >ok</button> 
                                     </div>
                                     : popupActionType.toLowerCase() === "redirect" 
-                                    ?   <a class="cta-btns" href={popupActionPath}>{popupActionValue}</a>
+                                    ?   <a class="cta-btns" onClick={() => history.push(popupActionPath)} >{popupActionValue}</a>
                                     :   <button class="cta-btns" onClick={handleClose} >{popupActionValue}</button> 
                                 }
                             </div>

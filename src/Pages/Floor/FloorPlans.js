@@ -4,19 +4,8 @@ import { useHistory,useParams } from "react-router-dom";
 import './floorplans.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import {
-    Form,
-    // Icon,
-    Input,
-    Select,
-    AutoComplete,
-    Radio,
-    notification,
-    Spin,
-} from 'antd';
-import Icon from '@ant-design/icons';
 import ls from 'local-storage';
-import { Modal, Button } from 'antd';
+import { Button } from 'antd';
 
 
 
@@ -59,12 +48,14 @@ const FloorPlans = () => {
        <div className="row content">
            <div className="col-lg-12 floorplanstableblock">
                <div className="add-floor">
-                   <a className="add-floor-btns" href="/flooradd"><i class="icofont-plus"></i>  Add Floor</a>
+                   {/* <a className="add-floor-btns" href="/flooradd"><i class="icofont-plus"></i>  Add Floor</a> */}
+                   <Button autofocus className="add-user-btns" onClick={() => history.push("/flooradd")}><i class="icofont-plus"></i><span>Add Floor</span></Button>
                </div>
+               
                
 
                {floorDetails.length>0?floorDetails.map((item,index) =>
-               <div className="col-lg-12 mt-3 pt-4 floorplanstableblock">
+               <div className="col-lg-12 mt-3 floorplanstableblock">
                <div className="floorplanstable">
                
                    <table>

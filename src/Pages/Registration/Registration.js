@@ -61,12 +61,12 @@ const Registration = () => {
       };
   
       const inputProps = {
-          placeholder: 'DD/MM/YYYY',
+          placeholder: 'MM/DD/YYYY',
           required:true
       };
       
       const registrationDate = (event) => {
-        setDate(event.format("DD/MM/YYYY"))
+        setDate(event.format("MM/DD/YYYY"))
     }
    
     const registrationhandleSubmit = (data) => {
@@ -90,6 +90,7 @@ const Registration = () => {
             local_flag: 0,
             image:doc===""?"":doc.length>0?doc:[doc],
         };
+        console.log("====request==>",request)
         API.post("registration/add", request)
             .then((response) => {
                 if (response.data.success) {
@@ -156,10 +157,10 @@ const Registration = () => {
                                 <div className="tbox">
                                     <input className="textbox " type="text" placeholder="" id="dealer_name" name="dealerName"
                                     {...register("dealerName", {
-                                        required: "This input is required.",
+                                        required: "Dealer name is required.",
                                         maxLength: {
                                             value: 50,
-                                            message: "This input must not exceed 50 characters"
+                                            message: "Dealer name must not exceed 50 characters"
                                           }
                                       })}
                                       onChange={(e) => setDealerName(e.target.value)} />
@@ -171,10 +172,10 @@ const Registration = () => {
                                 <div className="tbox">
                                     <input className="textbox " type="text" placeholder="" id="first_name" name="firstName"
                                     {...register("firstName", {
-                                        required: "This input is required.",
+                                        required: "First Name is required.",
                                         maxLength: {
                                             value: 50,
-                                            message: "This input must not exceed 50 characters"
+                                            message: "First Name must not exceed 50 characters"
                                           }
                                       })}
                                       onChange={(e) => setFirstName(e.target.value)} />
@@ -186,10 +187,10 @@ const Registration = () => {
                                 <div className="tbox">
                                     <input className="textbox " type="text" placeholder="" id="last_name" name="lastName"
                                     {...register("lastName", {
-                                        required: "This input is required.",
+                                        required: "Last Name is required.",
                                         maxLength: {
                                             value: 50,
-                                            message: "This input must not exceed 50 characters"
+                                            message: "Last Name must not exceed 50 characters"
                                           }
                                       })}
                                       onChange={(e) => setLastName(e.target.value)} />
@@ -197,22 +198,34 @@ const Registration = () => {
                                     <p className="form-input-error">{errors.lastName?.message}</p>
                                 </div>
                             </div>
-                            <div className="col-sm-12 form-group">
+
+                            <div className="col-sm-4 form-group">
                                 <div className="tbox">
-                                    <input className="textbox " type="tel" placeholder="" id="phone_no" name="phoneNumber"
+                                    <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
+                                    <option style={{"display":"none"}}></option>
+                                         <option value="1">+1</option>
+                                        <option value="2">+2</option>
+                                    </select>
+                                    <label for="no_years" className={"input-has-value"}>Country code</label>
+                                </div>
+                            </div>
+                         
+                            <div className="col-sm-8 form-group">
+                                <div className="tbox">
+                                    <input className="textbox " type="tel" placeholder="" id="phone_no" name="phoneNumber" maxLength="15"
                                     {...register("phoneNumber", {
-                                        required: "This input is required.",
-                                        // pattern: {
-                                        // value: "\(\d{3}\)[ ]?\d{3}[-]?\d{4}",
-                                        // message: "Accept only numbers and hypen('-') "
-                                        // },
+                                        required: "Phone Number is required.",
+                                        pattern: {
+                                            value: "\(\d{3}\)[ ]?\d{3}[-]?\d{4}",
+                                            message: "Accept only numbers and hypen('-') "
+                                        },
                                         minLength: {
                                             value: 10,
-                                            message: "This input atleast have 10 digits"
+                                            message: "Phone Number atleast have 10 digits"
                                           },
                                         maxLength: {
                                             value: 15,
-                                            message: "This input must not exceed 15 digits"
+                                            message: "Phone Number must not exceed 15 digits"
                                           }
                                     })}
                                     onChange={(e) => setPhoneNumber(e.target.value)} />
@@ -224,7 +237,7 @@ const Registration = () => {
                                 <div className="tbox">
                                     <input className="textbox" type="text" placeholder="" id="email" name="email"
                                     {...register("email", {
-                                        required: "This input is required.",
+                                        required: "Email Id is required.",
                                         pattern: {
                                         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                                         message: "Must match the email format"
@@ -239,10 +252,10 @@ const Registration = () => {
                                 <div className="tbox">
                                     <input className="textbox " type="text" placeholder="" id="address" name="address"
                                     {...register("address", {
-                                        required: "This input is required.",
+                                        required: "Address is required.",
                                         maxLength: {
                                             value: 150,
-                                            message: "This input must not exceed 150 characters"
+                                            message: "Address must not exceed 150 characters"
                                           }
                                       })}
                                       onChange={(e) => setAddress(e.target.value)} /> 
@@ -262,7 +275,7 @@ const Registration = () => {
                                     {/* {/ <lable for="drop" className={option !="" ? "input-has-value" : ""}>How many years in car business</lable> /} */}
                                     <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" 
                                     {...register("option", {
-                                        required: "This input is required."
+                                        required: "How many years in car business is required."
                                     })}
                                     onChange={(e) => setOption(e.target.value)}>
                                         <option style={{"display":"none"}}></option>
@@ -290,7 +303,7 @@ const Registration = () => {
                                 <div className="tbox">
                                 <div className="textbox">
                                 
-                                    <Datetime inputProps={ inputProps } timeFormat={false} dateFormat="DD/MM/YYYY" name="Date" isValidDate={disablePastDt} onChange={registrationDate}/>
+                                    <Datetime inputProps={ inputProps } timeFormat={false} dateFormat="MM/DD/YYYY" name="Date" isValidDate={disablePastDt} onChange={registrationDate}/>
                                     <label  for="meeting_date" className={date!="" ? "input-has-value" : ""}>Select Date</label>
                                     <p className="form-input-error">{errors.Date?.message}</p>
                                 </div>
@@ -300,7 +313,7 @@ const Registration = () => {
                                 <div className="tbox">
                                     <input type="time" className="form-control textbox" placeholder="Select Time" name="Time"
                                      {...register("Time", {
-                                        required: "This input is required."
+                                        required: "Select Time is required."
                                     })}
                                     onChange={(e) => setTime(e.target.value)} />
                                     <label for="meeting_time" className={"input-has-value"}>Select Time</label>

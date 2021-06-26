@@ -14,7 +14,7 @@ const MyProfile = () => {
       };
       const state = API.post('user_profile/condition', request);
       state.then(res => {
-          console.log("res", res)
+          // console.log("res", res)
           setaccountDetails(res.data.data);
       })
           .catch(err => { console.log(err); });
@@ -38,18 +38,7 @@ const MyProfile = () => {
                </div>
                <div className="row content">
                    <div className="col-lg-3 col-md-4 col-sm-12 accountleftblock">
-                       <div className="mgaccountuser">
-                           <div className="mgaccountuserleft">
-                               <img src={process.env.PUBLIC_URL +"/images/userimg.jpg"} className="img-fluid" alt="..."/>
-                           </div>
-                           <div className="mgaccountuserright">
-                               <h3>Fernand</h3>
-                               <div className="d-flex align-items-center">
-                                   <p className="details"><img src={process.env.PUBLIC_URL +"/images/Path.svg"} className="img-fluid" alt="..."/><span>California, Cl</span></p>
-                               </div>
-                                   
-                           </div>
-                       </div>
+                      
                        <ManageAccountLinks />
                    </div>
                    <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 myprofilerightblock">
@@ -77,7 +66,7 @@ const MyProfile = () => {
                                  </tr>	
                                    <tr>
                                    <td>Mobile phone<span>{item.mobile_no}</span></td>
-                                   <td>Zip code<span>{item.zipcode_id}</span></td>
+                                   <td>Zip code<span>{item.zipcode}</span></td>
                                  </tr>
 
                                   <tr>
@@ -89,7 +78,8 @@ const MyProfile = () => {
                            )  :""}
                        </div>
                        <div className="mgaccountrighttableblock mt-3 pt-4"> 
-                           <h3>Manage Account Password<span><a class="ant-btn" href="/changepassword"><i class="icofont-ui-edit"></i> Edit</a></span></h3>
+                           {/* <h3>Manage Account Password<span><a class="ant-btn" href="/changepassword"><i class="icofont-ui-edit"></i> Edit</a></span></h3> */}
+                           <h3>Manage Account Password<span><button class="ant-btn" onClick={() => history.push("/changepassword")}><i class="icofont-ui-edit"></i> Edit</button></span></h3>
                        </div>
                        
                                   

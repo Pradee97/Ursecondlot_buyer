@@ -62,22 +62,11 @@ const Buyers = () => {
                  <h2>Buyers</h2>
                </div>
                <div className="row content">
-                   <div className="col-lg-3 col-md-4 col-sm-12 accountleftblock">
-                       <div className="mgaccountuser">
-                           <div className="mgaccountuserleft">
-                               <img src={process.env.PUBLIC_URL +"/images/userimg.jpg"} className="img-fluid" alt="..."/>
-                           </div>
-                           <div className="mgaccountuserright">
-                               <h3>Fernand</h3>
-                               <div className="d-flex align-items-center">
-                                   <p className="details"><img src={process.env.PUBLIC_URL +"/images/Path.svg"} className="img-fluid" alt="..."/><span>California, Cl</span></p>
-                               </div>
-                                   
-                           </div>
-                       </div>
+                   <div className="col-lg-3 col-md-6 col-sm-12 accountleftblock">
+                      
                        <ManageAccountLinks />
                    </div>
-                   <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 adduserpagerightblock">
+                   <div className="col-lg-9 col-md-12 col-sm-12 pt-4 pt-lg-0 adduserpagerightblock">
                        <div className="adduserpage-inner"> 
                             <div className="col-lg-12"> 
 
@@ -93,20 +82,22 @@ const Buyers = () => {
 
                                 <div class="col-lg-12 userlisttableblock">
                                     <div class="add-user">
-                                        <a class="add-user-btns" href="/adduser"><i class="icofont-plus"></i> Add User</a>
-                                    </div>					
-                                    <div class="userlisttable">
-                                        <table>
+                                    <Button className="add-user-btns" onClick={() => history.push("/adduser")}><i class="icofont-plus"></i> Add User</Button>
+                                        {/*<a class="add-user-btns" href="/adduser"><i class="icofont-plus"></i> Add User</a>*/}
+                                    </div>
+				
+                                    <div class="userlisttable table-responsive">
+                                        <table className="table table-striped w-auto">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
-                                                <th>Name</th>
-                                                <th>Image</th>
-                                                <th>Phone</th>
+                                                <th className="th_id">ID</th>
+                                                <th className="th_name">Name</th>
+                                                <th className="th_img">Image</th>
+                                                <th className="th_phone">Phone</th>
                                                 {/* <th>Email</th> */}
-                                                <th>Privileges</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
+                                                <th className="th_privileges">Privileges</th>
+                                                <th className="th_status">Status</th>
+                                                <th className="th_action">Action</th>
                                             </tr>
                                         </thead>
                                         {userList.length>0?userList.map((item,index) =>
@@ -128,9 +119,7 @@ const Buyers = () => {
                                         <tr><td colspan="6" ng-show="0">
                                         <b>There's No Data</b>
                                             </td>
-                                        </tr>}
-                                        
-                                        
+                                        </tr>}                                       
                                         </table>            
                                     </div>
 					            </div>

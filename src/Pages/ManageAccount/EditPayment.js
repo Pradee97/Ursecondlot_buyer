@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import API from "../../Services/BaseService";
 import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
+import { useForm } from "react-hook-form";
 
 const EditPayment = () => {
 
@@ -73,7 +74,6 @@ const EditPayment = () => {
         event.preventDefault();        
     
         let request = {
-
             dealership_name: dealershipName,
             acc_name: accountHolderName,      
             bank_name: bankName,
@@ -81,13 +81,19 @@ const EditPayment = () => {
             ach_no: ACHnumber,
             routing_no: routingNumber,
             bank_address: bankAddress,
-            state_id: stateName,
-            city_id: cityName,
-            zipcode: zipCodeId,
+            // state_id: stateName,
+            // city_id: cityName,
+            // zipcode: zipCodeId,
+            city_id: typeof cityName==='string'?paymentObjc.city_id:cityName,
+            state_id: typeof stateName==='string'?paymentObjc.state_id:stateName,
+            zipcode: zipCodeId===paymentObjc.zipcode?paymentObjc.zipcode_id:zipCodeId,
             acc_address: accountHolderAddress,
-            acc_state_id: accountStateName,
-            acc_city_id: accountCityName,
-            acc_zipcode: accountZipcodeId,
+            acc_city_id: typeof accountCityName==='string'?paymentObjc.city_id:accountCityName,
+            acc_state_id: typeof accountStateName==='string'?paymentObjc.state_id:accountStateName,
+            acc_zipcode: accountZipcodeId===paymentObjc.zipcode?paymentObjc.zipcode_id:accountZipcodeId,
+            // acc_state_id: accountStateName,
+            // acc_city_id: accountCityName,
+            // acc_zipcode: accountZipcodeId,
             active:1
         };
         API.put("payment_info/edit"+payment_info_id, request)
@@ -141,18 +147,7 @@ const EditPayment = () => {
                             </div>
                             <div className="row content">
                                 <div className="col-lg-3 col-md-4 col-sm-12 accountleftblock">
-                                    <div className="mgaccountuser">
-                                        <div className="mgaccountuserleft">
-                                            <img src={process.env.PUBLIC_URL +"/images/userimg.jpg"} className="img-fluid" alt="..." />
-                                        </div>
-                                        <div className="mgaccountuserright">
-                                            <h3>Fernand</h3>
-                                            <div className="d-flex align-items-center">
-                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/Path.svg"} className="img-fluid" alt="..." /><span>California, Cl</span></p>
-                                            </div>
-
-                                        </div>
-                                    </div>
+                                   
                                     <ManageAccountLinks />
                                 </div>
                                 <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 paymentrightblock">

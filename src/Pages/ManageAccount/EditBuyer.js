@@ -7,8 +7,12 @@ import StateAndCity from '../../Component/StateAndCity/StateAndCity'
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import ls from 'local-storage';
 import FileBase64 from 'react-file-base64';
+import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
+import { useForm } from "react-hook-form";
+
 const EditBuyer = () => {
     const history = useHistory();
+    let { register, updateMyProfile, formState: { errors },reset  } = useForm();
     const { id } = useParams();
     const { user_id } = useParams();
     const { buyer_id } = useParams();
@@ -41,6 +45,12 @@ const EditBuyer = () => {
     const [popupActionValue, setPopupActionValue] = useState("");
     const [popupActionPath, setPopupActionPath] = useState("");
     const [image,setImage] = useState("");
+
+    const [primaryPhoneError, setPrimaryPhoneError] = useState("");
+    const [mobilePhoneError, setMobilephoneError] = useState("");
+    const [addressError, setAddressError] = useState("");
+    const [locationNameError, setLocationNameError] = useState("");
+
 
     const togglePopup = () => {
         setIsOpen(!isOpen);
@@ -76,7 +86,7 @@ const EditBuyer = () => {
             setAddress(res.data.data[0].address);
             setCity(res.data.data[0].city_name);
             setState(res.data.data[0].state_name);
-            setZipcode(res.data.data[0].zipcode_id);
+            setZipcode(res.data.data[0].zipcode);
             setLocationName(res.data.data[0].address);
             setMyProfileObj(res.data.data[0]);
             setBuyNow(res.data.data[0].buy_now);
@@ -91,9 +101,13 @@ const EditBuyer = () => {
         })
             .catch(err => { console.log(err); });
     }
-    const updateMyProfile = (event) => {
+     updateMyProfile = (event) => {
         // setOpenLoader(true);
         event.preventDefault();
+        setPrimaryPhoneError("")
+        setMobilephoneError("") 
+        setAddressError("") 
+        setLocationNameError("")
         let request = {
             user_id: id,
             first_name: firstName,
@@ -102,9 +116,12 @@ const EditBuyer = () => {
             mobile_no: mobilePhone,
             email: emailId,
             address: address,
-            city_id: city,
-            state_id: state,
-            zipcode_id: zipcode,
+            city_id: typeof city==='string'?myProfileObjc.city_id:city,
+            state_id: typeof state==='string'?myProfileObjc.state_id:state,
+            zipcode_id: zipcode===myProfileObjc.zipcode?myProfileObjc.zipcode_id:zipcode,
+            // city_id: city,
+            // state_id: state,
+            // zipcode_id: zipcode,
             address: locationName,
             buyer_privileges_id: privileges_id,
             buy_now: buy_now,
@@ -116,6 +133,24 @@ const EditBuyer = () => {
             image:doc===""?doc:doc.length>0?doc:[doc]
             // buyer_id: userDetails.user_id
         };
+
+        if(!primaryPhone){
+            setPrimaryPhoneError("Primary Phone is required")
+            return;
+        }
+        if(!mobilePhone){
+            setMobilephoneError("Mobile Phone is required")
+            return;
+        }
+        if(!address){
+            setAddressError("Address is required")
+            return;
+        }
+        if(!locationName){
+            setLocationNameError("Location Name is required")
+            return;
+        }
+
         API
             .post("buyer/update", request)
             .then((response) => {
@@ -151,16 +186,58 @@ const EditBuyer = () => {
             });
     }
     useEffect(() => {
-        fetchMyProfileDetails();
-    }, []);
+       // fetchMyProfileDetails();
+       let request = {
+        buyer_id: id,
+    };
+    const state = API.post('buyer_details/condition', request);
+    state.then(res => {
+        console.log("res", res.data.data)
+        setFirstName(res.data.data[0].first_name);
+        setLastName(res.data.data[0].last_name);
+        setPrimaryPhone(res.data.data[0].phone_no);
+        setMobilephone(res.data.data[0].mobile_no);
+        setEmailId(res.data.data[0].email);
+        setAddress(res.data.data[0].address);
+        setCity(res.data.data[0].city_name);
+        setState(res.data.data[0].state_name);
+        setZipcode(res.data.data[0].zipcode);
+        setLocationName(res.data.data[0].address);
+        setMyProfileObj(res.data.data[0]);
+        setBuyNow(res.data.data[0].buy_now);
+        setCancelBid(res.data.data[0].cancel_bid)
+        setBid(res.data.data[0].bid)
+        setProxy_bid(res.data.data[0].proxy_bid)
+        setCounter_bid(res.data.data[0].counter_bid)
+        setLot_fee(res.data.data[0].lot_fee)
+        setPriviegesId(res.data.data[0].buyer_privileges_id)
+        setImage(res.data.data[0].image);
+        reset(res.data.data[0]);
+
+    })
+        .catch(err => { console.log(err); });
+    }, [reset]);
     return (
         <div>
             <main id="main" className="inner-page">
-                <div className="col-lg-4  loginBlock">
-                    <button className="back-btn-paymentform backBtn" onClick={() => history.push("/buyers")}><i class="icofont-arrow-left"></i> Back</button>
-                    <div className="col-lg-12 card loginBlock myprofileeditform">
+                <div className="editprofile">
+            <div className="container" >
+            <div className="adduserpageblock col-lg-12">
+               <div className="section-title">
+                 <h2>Buyers</h2>
+               </div>
+			<div className="row content">
+            <div className="col-lg-3 col-md-4 col-sm-12 mgaccountleftblock">
+                
+                  <ManageAccountLinks />
+                </div>
+                <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0">
+                    <div className="col-lg-12 myprofileeditform">
                         <form className="registrationform" onSubmit={updateMyProfile} >
-                            <h2 className="title"> Edit Buyer </h2>
+                            <div className="section-title">
+								<button className="back-btn-paymentform backBtn" onClick={() => history.push("/buyers")}><i class="icofont-arrow-left"></i> Back</button>
+								<h2>Edit Buyer</h2>
+							</div>
                             <div className="row">
                                 <div className="col-sm-12 form-group">
                                 <div class="user-upload-btn-wrapper">
@@ -186,15 +263,29 @@ const EditBuyer = () => {
                                 </div>
                                 <div className="col-sm-12 form-group">
                                     <div className="tbox">
-                                        <input type="text" defaultValue={myProfileObjc.phone_no} className="form-control textbox" placeholder="" required onChange={(e) => setPrimaryPhone(e.target.value)} />
+                                        <input type="text" defaultValue={myProfileObjc.phone_no} className="form-control textbox" placeholder="" onChange={(e) => setPrimaryPhone(e.target.value)} />
                                         <label for="phone_no" className={primaryPhone != "" ? "input-has-value" : ""}>Primary Phone</label>
                                     </div>
+                                    <p className="form-input-error" >{primaryPhoneError}</p>
                                 </div>
-                                <div className="col-sm-12 form-group">
+                                
+                                <div className="col-sm-4 form-group">
+                                <div className="tbox">
+                                    <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
+                                    <option style={{"display":"none"}}></option>
+                                         <option value="1">+1</option>
+                                        <option value="2">+2</option>
+                                    </select>
+                                    <label for="no_years" className={"input-has-value"}>Country code</label>
+                                </div>
+                            </div>
+                            
+                                <div className="col-sm-8 form-group">
                                     <div className="tbox">
-                                        <input type="text" defaultValue={myProfileObjc.mobile_no} className="form-control textbox" placeholder="" required onChange={(e) => setMobilephone(e.target.value)} />
+                                        <input type="text" defaultValue={myProfileObjc.mobile_no} className="form-control textbox" placeholder="" onChange={(e) => setMobilephone(e.target.value)} />
                                         <label for="mobile_no" className={mobilePhone != "" ? "input-has-value" : ""}>Mobile Phone</label>
                                     </div>
+                                    <p className="form-input-error" >{mobilePhoneError}</p>
                                 </div>
                                 <div className="col-sm-12 form-group">
                                     <div className="tbox">
@@ -204,9 +295,10 @@ const EditBuyer = () => {
                                 </div>
                                 <div className="col-sm-12 form-group">
                                     <div className="tbox">
-                                        <input type="text" defaultValue={myProfileObjc.address} className="form-control textbox" placeholder="" required onChange={(e) => setAddress(e.target.value)} />
+                                        <input type="text" defaultValue={myProfileObjc.address} className="form-control textbox" placeholder="" onChange={(e) => setAddress(e.target.value)} />
                                         <label for="address" className={address != "" ? "input-has-value" : ""}>Address</label>
                                     </div>
+                                    <p className="form-input-error" >{addressError}</p>
                                 </div>
                                 <StateAndCity
                                     setStateValue={getStateName}
@@ -219,12 +311,13 @@ const EditBuyer = () => {
                                 />
                                 <div className="col-sm-12 form-group">
                                     <div className="tbox">
-                                        <input type="text" defaultValue={myProfileObjc.address} className="form-control textbox" placeholder="" required onChange={(e) => setLocationName(e.target.value)} />
+                                        <input type="text" defaultValue={myProfileObjc.address} className="form-control textbox" placeholder="" onChange={(e) => setLocationName(e.target.value)} />
                                         <label for="address" className={locationName != "" ? "input-has-value" : ""}>Location Name</label>
                                     </div>
+                                    <p className="form-input-error" >{locationNameError}</p>
                                 </div>
                                 <div className="section-title">
-                                    <h2>Buyer Privileges</h2>
+                                <h2 className="buyertitle">Buyer Privileges</h2>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="radio input-group privileges">
@@ -269,7 +362,7 @@ const EditBuyer = () => {
                                 </div>
                             </div>
                         </form>
-                    </div></div>
+                    </div></div></div></div></div></div>
                 <section id="playstoreBlock" className="playstoreBlock">
                     <div className="container">
                         <div className="row content">

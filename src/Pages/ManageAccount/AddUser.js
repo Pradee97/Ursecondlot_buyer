@@ -152,18 +152,6 @@ const AddUser = () => {
 							<div className="row content">
 								<div className="col-lg-3 col-md-4 col-sm-12 accountleftblock">
 
-									<div className="mgaccountuser">
-										<div className="mgaccountuserleft">
-											<img src={process.env.PUBLIC_URL + "/images/userimg.jpg"} className="img-fluid" alt="..." />
-										</div>
-										<div className="mgaccountuserright">
-											<h3>Fernand</h3>
-											<div className="d-flex align-items-center">
-												<p className="details"><img src={process.env.PUBLIC_URL + "/images/Path.svg"} className="img-fluid" alt="..." /><span>California, Cl</span></p>
-											</div>
-
-										</div>
-									</div>
 									<ManageAccountLinks />
 								</div>
 								<div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 adduserpagerightblock">
@@ -191,14 +179,6 @@ const AddUser = () => {
 														
 													</div>
 													</div>
-
-
-
-
-
-
-
-
 
 													<div className="col-sm-12 form-group">
 														<div className="tbox">
@@ -230,7 +210,17 @@ const AddUser = () => {
 															<p className="form-input-error">{errors.lastName?.message}</p>
 														</div>
 													</div>
-													<div className="col-sm-12 form-group">
+													<div className="col-sm-4 form-group">
+													<div className="tbox">
+														<select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
+														<option style={{"display":"none"}}></option>
+															<option value="1">+1</option>
+															<option value="2">+2</option>
+														</select>
+														<label for="no_years" className={"input-has-value"}>Country code</label>
+													</div>
+													</div>
+													<div className="col-sm-8 form-group">
 														<div className="tbox">
 															<input className="textbox " type="text" placeholder="" id="phone_no"  name="phoneNumber"
 															 {...register("phoneNumber", {
@@ -315,7 +305,7 @@ const AddUser = () => {
 
 												</div>
 												<div className="section-title">
-													<h2>Buyer Privileges</h2>
+													<h2 className="buyertitle">Buyer Privileges</h2>
 												</div>
 												<div class="col-sm-12">
 													<div class="radio input-group privileges">
