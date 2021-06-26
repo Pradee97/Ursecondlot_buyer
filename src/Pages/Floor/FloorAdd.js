@@ -291,7 +291,7 @@ const FloorAdd = () => {
                                 </div>
                             </div>
 
-                            <div className="col-sm-8 form-group">
+                            <div className="col-sm-8 form-group phonecode">
                             <div className="tbox">                            
                                 <input type="text" id="phoneNumber" className="textbox" placeholder="" name="phoneNumber"
                                  {...register("phoneNumber", {
@@ -311,6 +311,7 @@ const FloorAdd = () => {
                                 })}
                                 onChange={(e) => setPhoneNumber(e.target.value)} />
                                 <label for="phoneNumber" className={phoneNumber !="" ? "input-has-value" : ""}>Phone Number</label>
+                                <small>Format: (123)455-6789</small>
                                 <p className="form-input-error">{errors.phoneNumber?.message}</p>
                             </div>
                             </div>                           

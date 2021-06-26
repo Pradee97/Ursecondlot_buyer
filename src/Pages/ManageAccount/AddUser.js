@@ -220,7 +220,7 @@ const AddUser = () => {
 														<label for="no_years" className={"input-has-value"}>Country code</label>
 													</div>
 													</div>
-													<div className="col-sm-8 form-group">
+													<div className="col-sm-8 form-group phonecode">
 														<div className="tbox">
 															<input className="textbox " type="text" placeholder="" id="phone_no"  name="phoneNumber"
 															 {...register("phoneNumber", {
@@ -236,6 +236,7 @@ const AddUser = () => {
 															})}
 															onChange={(e) => setPhoneNumber(e.target.value)} />
 															<label for="phone_no" className={phoneNumber != "" ? "input-has-value" : ""}>Phone</label>
+															<small>Format: (123)455-6789</small>
 															<p className="form-input-error">{errors.phoneNumber?.message}</p>
 												    	</div>
 													</div>

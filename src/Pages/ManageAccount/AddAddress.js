@@ -167,7 +167,7 @@ const AddAddress = () => {
                                     <label for="no_years" className={"input-has-value"}>Country code</label>
                                 </div>
                             </div>
-                            <div className="col-sm-8 form-group">
+                            <div className="col-sm-8 form-group phonecode">
                             <div className="tbox">
                                 <input type="text"  id="companyName" className="textbox" placeholder="" name="primaryPhone"
                                  {...register("primaryPhone", {
@@ -183,6 +183,7 @@ const AddAddress = () => {
                                 })}
                                 onChange={(e) => setPrimaryphone(e.target.value)} />
                                 <label for="companyName" className={primaryPhone !="" ? "input-has-value" : ""}>Primary phone</label>
+                                <small>Format: (123)455-6789</small>
                                 <p className="form-input-error">{errors.primaryPhone?.message}</p>
                             </div>
                             </div>
@@ -196,7 +197,7 @@ const AddAddress = () => {
                                     <label for="no_years" className={"input-has-value"}>Country code</label>
                                 </div>
                             </div>
-                            <div className="col-sm-8 form-group">
+                            <div className="col-sm-8 form-group phonecode">
                             <div className="tbox">
                                 <input type="text" id="branchName" className="textbox" placeholder="" name="mobilePhone"
                                   {...register("mobilePhone", {
@@ -212,6 +213,7 @@ const AddAddress = () => {
                                 })}
                                 onChange={(e) => setMobilephone(e.target.value)} />
                                 <label for="branchName" className={mobilePhone !="" ? "input-has-value" : ""}>Mobile phone</label>
+                                <small>Format: (123)455-6789</small>
                                 <p className="form-input-error">{errors.mobilePhone?.message}</p>
                             </div>
                             </div>

@@ -261,10 +261,11 @@ const EditBuyer = () => {
                                         <label for="last_name" className={lastName != "" ? "input-has-value" : ""}>Last Name</label>
                                     </div>
                                 </div>
-                                <div className="col-sm-12 form-group">
+                                <div className="col-sm-12 form-group phonecode">
                                     <div className="tbox">
                                         <input type="text" defaultValue={myProfileObjc.phone_no} className="form-control textbox" placeholder="" onChange={(e) => setPrimaryPhone(e.target.value)} />
                                         <label for="phone_no" className={primaryPhone != "" ? "input-has-value" : ""}>Primary Phone</label>
+                                        <small>Format: (123)455-6789</small>
                                     </div>
                                     <p className="form-input-error" >{primaryPhoneError}</p>
                                 </div>
@@ -280,10 +281,11 @@ const EditBuyer = () => {
                                 </div>
                             </div>
                             
-                                <div className="col-sm-8 form-group">
+                                <div className="col-sm-8 form-group phonecode">
                                     <div className="tbox">
                                         <input type="text" defaultValue={myProfileObjc.mobile_no} className="form-control textbox" placeholder="" onChange={(e) => setMobilephone(e.target.value)} />
                                         <label for="mobile_no" className={mobilePhone != "" ? "input-has-value" : ""}>Mobile Phone</label>
+                                        <small>Format: (123)455-6789</small>
                                     </div>
                                     <p className="form-input-error" >{mobilePhoneError}</p>
                                 </div>
