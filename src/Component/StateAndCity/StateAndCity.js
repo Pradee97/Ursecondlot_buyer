@@ -123,7 +123,7 @@ return (
         <div className="col-sm-4 form-group selectTbox">
             <div className="tbox">                
                 <div className="selcetclass"> 
-                    <select className="form-control custom-select browser-default textbox" required defaultValue={stateName}  onChange={handleState}>
+                    <select className="form-control custom-select browser-default textbox"  defaultValue={stateName}  onChange={handleState}>
                         <option style={{"display":"none"}}></option>
                         {stateNameList.length>0 &&
                             <>
@@ -138,7 +138,7 @@ return (
         <div className="col-sm-4 form-group selectTbox">
             <div className="tbox">              
                 <div className="selcetclass"> 
-                    <select id="City" className="form-control custom-select browser-default textbox" required defaultValue={cityName} onChange={handleCity}>
+                    <select id="City" className="form-control custom-select browser-default textbox"  defaultValue={cityName} onChange={handleCity}>
                     <option style={{"display":"none"}}></option>
                         {cityNameList.length>0 &&
                             <>
@@ -153,7 +153,7 @@ return (
         <div className="col-sm-4 form-group selectTbox">
             <div className="tbox">        
                 <div className="selcetclass"> 
-                    <select id="zipcode_id" className="form-control custom-select browser-default textbox" required defaultValue={zipCodeId} onChange={handleZipcode}>
+                    <select id="zipcode_id" className="form-control custom-select browser-default textbox"  defaultValue={zipCodeId} onChange={handleZipcode}>
                     <option style={{"display":"none"}}></option>
                         {zipcodeList.length>0 &&
                             <>
