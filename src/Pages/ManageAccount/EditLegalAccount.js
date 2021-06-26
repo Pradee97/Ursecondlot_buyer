@@ -320,7 +320,7 @@ const EditLegalAccount = () => {
                                 defaultZipcodeValue = {zipcode}
                             />
 
-                            <div class="col-sm-12 form-group">
+                            <div class="col-sm-12 form-group datePickerBlock">
                             <div className="tbox">  
                                  {/* <input type="date" defaultValue={accountObjc.dealer_license_exp===undefined?"":accountObjc.dealer_license_exp.substring(0,10)} 
                                  class="form-control textbox" placeholder=""  onChange={(e) => setDealershipLicenseexp(e.target.value)} /> */}
@@ -335,7 +335,7 @@ const EditLegalAccount = () => {
                                 <label for="first_name" className={dealershipLicenseexp !="" ? "input-has-value" : ""}>Dealership license exp</label>
                             </div> <p className="form-input-error" >{dealershipLicenseexpError}</p>
                             </div>
-                            <div class="col-sm-12 form-group">
+                            <div class="col-sm-12 form-group datePickerBlock">
                             <div className="tbox">
                                 {/* <input type="date" 
                                 defaultValue={accountObjc.tax_id_exp===undefined?"":accountObjc.tax_id_exp.substring(0,10)} 
