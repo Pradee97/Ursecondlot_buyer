@@ -167,7 +167,7 @@ const AddAddress = () => {
                                     <label for="no_years" className={"input-has-value"}>Country code</label>
                                 </div>
                             </div>
-                            <div className="col-sm-8 form-group">
+                            <div className="col-sm-8 form-group phonecode">
                             <div className="tbox">
                                 <input type="text"  id="companyName" className="textbox" placeholder="" name="primaryPhone"
                                  {...register("primaryPhone", {
@@ -197,7 +197,7 @@ const AddAddress = () => {
                                     <label for="no_years" className={"input-has-value"}>Country code</label>
                                 </div>
                             </div>
-                            <div className="col-sm-8 form-group">
+                            <div className="col-sm-8 form-group phonecode">
                             <div className="tbox">
                                 <input type="text" id="branchName" className="textbox" placeholder="" name="mobilePhone"
                                   {...register("mobilePhone", {

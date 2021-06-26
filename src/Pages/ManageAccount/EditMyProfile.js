@@ -230,7 +230,7 @@ const EditMyProfile = () => {
                                     <label for="no_years" className={"input-has-value"}>Country code</label>
                                 </div>
                             </div>
-                            <div className="col-sm-8 form-group">
+                            <div className="col-sm-8 form-group phonecode">
                             <div className="tbox">
                                 <input type="text" defaultValue={myProfileObjc.phone_no} className="form-control textbox" placeholder=""  onChange={(e) => setPrimaryPhone(e.target.value)} />
                                 <label for="phone_no" className={primaryPhone !="" ? "input-has-value" : ""}>Primary Phone</label>
@@ -249,7 +249,7 @@ const EditMyProfile = () => {
                                     <label for="no_years" className={"input-has-value"}>Country code</label>
                                 </div>
                             </div>
-                            <div className="col-sm-8 form-group">
+                            <div className="col-sm-8 form-group phonecode">
                             <div className="tbox">
                                 <input type="text" defaultValue={myProfileObjc.mobile_no} className="form-control textbox" placeholder=""  onChange={(e) => setMobilephone(e.target.value)} />
                                 <label for="mobile_no" className={mobilePhone !="" ? "input-has-value" : ""}>Mobile Phone</label>

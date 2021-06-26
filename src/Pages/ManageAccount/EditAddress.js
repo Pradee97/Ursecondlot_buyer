@@ -255,7 +255,7 @@ const EditAddress = () => {
                                     <label for="no_years" className={"input-has-value"}>Country code</label>
                                 </div>
                             </div>
-                            <div class="col-sm-8 form-group">
+                            <div class="col-sm-8 form-group phonecode">
                             <div className="tbox">
                                 <input type="text" defaultValue={accountObjc.phone_no} class="textbox" placeholder="" onChange={(e) => setPrimaryPhone(e.target.value)} />
                                 <label for="primary_phone"  className={"input-has-value"}>Primary Phone</label>
@@ -273,7 +273,7 @@ const EditAddress = () => {
                                     <label for="no_years" className={"input-has-value"}>Country code</label>
                                 </div>
                             </div>
-                            <div class="col-sm-8 form-group">
+                            <div class="col-sm-8 form-group phonecode">
                             <div className="tbox">
                                 <input type="text" defaultValue={accountObjc.mobile_no} class="textbox" placeholder="" onChange={(e) => setMobilePhone(e.target.value)} />
                                 <label for="mobile_phone"  className={"input-has-value"}>Mobile Phone</label>
