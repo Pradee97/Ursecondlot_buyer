@@ -61,12 +61,12 @@ const Registration = () => {
       };
   
       const inputProps = {
-          placeholder: 'DD/MM/YYYY',
+          placeholder: 'MM/DD/YYYY',
           required:true
       };
       
       const registrationDate = (event) => {
-        setDate(event.format("DD/MM/YYYY"))
+        setDate(event.format("MM/DD/YYYY"))
     }
    
     const registrationhandleSubmit = (data) => {
@@ -303,7 +303,7 @@ const Registration = () => {
                                 <div className="tbox">
                                 <div className="textbox">
                                 
-                                    <Datetime inputProps={ inputProps } timeFormat={false} dateFormat="DD/MM/YYYY" name="Date" isValidDate={disablePastDt} onChange={registrationDate}/>
+                                    <Datetime inputProps={ inputProps } timeFormat={false} dateFormat="MM/DD/YYYY" name="Date" isValidDate={disablePastDt} onChange={registrationDate}/>
                                     <label  for="meeting_date" className={date!="" ? "input-has-value" : ""}>Select Date</label>
                                     <p className="form-input-error">{errors.Date?.message}</p>
                                 </div>
