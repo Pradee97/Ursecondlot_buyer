@@ -296,6 +296,10 @@ const FloorAdd = () => {
                                 <input type="text" id="phoneNumber" className="textbox" placeholder="" name="phoneNumber"
                                  {...register("phoneNumber", {
                                     required: "This input is required.",
+                                    pattern: {
+                                        value: /\(?([0-9]{3})\)\s?([0-9]{3})([ .-]?)([0-9]{4})/,
+                                        message: "Accept only this Format: (123)455-6789 "
+                                        },
                                     minLength: {
                                         value: 10,
                                         message: "This input atleast have 10 digits"
@@ -304,13 +308,10 @@ const FloorAdd = () => {
                                         value: 15,
                                         message: "This input must not exceed 15 digits"
                                       },
-                                      pattern : {
-                                        value: /^[1-9]\d*(\d+)?$/i,
-                                        message: "This input must be Number"
-                                        }
                                 })}
                                 onChange={(e) => setPhoneNumber(e.target.value)} />
                                 <label for="phoneNumber" className={phoneNumber !="" ? "input-has-value" : ""}>Phone Number</label>
+                                <small>Format: (123)455-6789</small>
                                 <p className="form-input-error">{errors.phoneNumber?.message}</p>
                             </div>
                             </div>                           

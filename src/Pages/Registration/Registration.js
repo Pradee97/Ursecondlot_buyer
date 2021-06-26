@@ -216,9 +216,9 @@ const Registration = () => {
                                     {...register("phoneNumber", {
                                         required: "Phone Number is required.",
                                         pattern: {
-                                            value: "\(\d{3}\)[ ]?\d{3}[-]?\d{4}",
-                                            message: "Accept only numbers and hypen('-') "
-                                        },
+                                            value: /\(?([0-9]{3})\)\s?([0-9]{3})([ .-]?)([0-9]{4})/,
+                                            message: "Accept only this Format: (123)455-6789 "
+                                            },
                                         minLength: {
                                             value: 10,
                                             message: "Phone Number atleast have 10 digits"
@@ -230,6 +230,7 @@ const Registration = () => {
                                     })}
                                     onChange={(e) => setPhoneNumber(e.target.value)} />
                                     <label for="phone_no" className={phoneNumber != "" ? "input-has-value" : ""}>Phone</label>
+                                    <small>Format: (123)455-6789</small>
                                     <p className="form-input-error">{errors.phoneNumber?.message}</p>
                                 </div>
                             </div>

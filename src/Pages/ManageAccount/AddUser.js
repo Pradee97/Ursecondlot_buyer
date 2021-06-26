@@ -225,6 +225,10 @@ const AddUser = () => {
 															<input className="textbox " type="text" placeholder="" id="phone_no"  name="phoneNumber"
 															 {...register("phoneNumber", {
 																required: "This input is required.",
+																pattern: {
+																	value: /\(?([0-9]{3})\)\s?([0-9]{3})([ .-]?)([0-9]{4})/,
+																	message: "Accept only this Format: (123)455-6789 "
+																	},
 																	minLength: {
 																	value: 10,
 																	message: "This input atleast have 10 digits"
