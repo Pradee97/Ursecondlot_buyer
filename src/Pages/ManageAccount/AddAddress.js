@@ -172,6 +172,10 @@ const AddAddress = () => {
                                 <input type="text"  id="companyName" className="textbox" placeholder="" name="primaryPhone"
                                  {...register("primaryPhone", {
                                     required: "This input is required.",
+                                    pattern: {
+                                        value: /\(?([0-9]{3})\)\s?([0-9]{3})([ .-]?)([0-9]{4})/,
+                                        message: "Accept only this Format: (123)455-6789 "
+                                        },
                                     minLength: {
                                         value: 10,
                                         message: "This input atleast have 10 digits"
@@ -201,7 +205,11 @@ const AddAddress = () => {
                             <div className="tbox">
                                 <input type="text" id="branchName" className="textbox" placeholder="" name="mobilePhone"
                                   {...register("mobilePhone", {
-                                    // required: "This input is required.",
+                                    required: "This input is required.",
+                                    pattern: {
+                                        value: /\(?([0-9]{3})\)\s?([0-9]{3})([ .-]?)([0-9]{4})/,
+                                        message: "Accept only this Format: (123)455-6789 "
+                                        },
                                     minLength: {
                                         value: 10,
                                         message: "This input atleast have 10 digits"
