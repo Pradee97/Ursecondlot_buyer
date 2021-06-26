@@ -311,6 +311,7 @@ const FloorAdd = () => {
                                 })}
                                 onChange={(e) => setPhoneNumber(e.target.value)} />
                                 <label for="phoneNumber" className={phoneNumber !="" ? "input-has-value" : ""}>Phone Number</label>
+                                <small>Format: (123)455-6789</small>
                                 <p className="form-input-error">{errors.phoneNumber?.message}</p>
                             </div>
                             </div>                           

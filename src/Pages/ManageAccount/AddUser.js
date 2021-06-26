@@ -236,6 +236,7 @@ const AddUser = () => {
 															})}
 															onChange={(e) => setPhoneNumber(e.target.value)} />
 															<label for="phone_no" className={phoneNumber != "" ? "input-has-value" : ""}>Phone</label>
+															<small>Format: (123)455-6789</small>
 															<p className="form-input-error">{errors.phoneNumber?.message}</p>
 												    	</div>
 													</div>

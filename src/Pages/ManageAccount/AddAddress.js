@@ -183,6 +183,7 @@ const AddAddress = () => {
                                 })}
                                 onChange={(e) => setPrimaryphone(e.target.value)} />
                                 <label for="companyName" className={primaryPhone !="" ? "input-has-value" : ""}>Primary phone</label>
+                                <small>Format: (123)455-6789</small>
                                 <p className="form-input-error">{errors.primaryPhone?.message}</p>
                             </div>
                             </div>
@@ -212,6 +213,7 @@ const AddAddress = () => {
                                 })}
                                 onChange={(e) => setMobilephone(e.target.value)} />
                                 <label for="branchName" className={mobilePhone !="" ? "input-has-value" : ""}>Mobile phone</label>
+                                <small>Format: (123)455-6789</small>
                                 <p className="form-input-error">{errors.mobilePhone?.message}</p>
                             </div>
                             </div>

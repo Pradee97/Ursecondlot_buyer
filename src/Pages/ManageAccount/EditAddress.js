@@ -259,6 +259,7 @@ const EditAddress = () => {
                             <div className="tbox">
                                 <input type="text" defaultValue={accountObjc.phone_no} class="textbox" placeholder="" onChange={(e) => setPrimaryPhone(e.target.value)} />
                                 <label for="primary_phone"  className={"input-has-value"}>Primary Phone</label>
+                                <small>Format: (123)455-6789</small>
                                 <p className="form-input-error" >{primaryPhoneError}</p>
 
                             </div> </div>
@@ -276,6 +277,7 @@ const EditAddress = () => {
                             <div className="tbox">
                                 <input type="text" defaultValue={accountObjc.mobile_no} class="textbox" placeholder="" onChange={(e) => setMobilePhone(e.target.value)} />
                                 <label for="mobile_phone"  className={"input-has-value"}>Mobile Phone</label>
+                                <small>Format: (123)455-6789</small>
                                 <p className="form-input-error" >{mobilePhoneError}</p>
 
                             </div> </div>
