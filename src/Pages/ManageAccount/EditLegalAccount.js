@@ -181,7 +181,7 @@ const EditLegalAccount = () => {
             setTaxidexpError("Tax Id exp is required")
             return;
         }
-        if(!(typeof city==='string'?accountObjc.city_id:city) || !(typeof state==='string'?accountObjc.state_id:state) || !(zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode)){
+        if(!(typeof city==='string'?accountObjc.city_id:city) || !(typeof state==='string'?accountObjc.state_id:state) || !(zipcode===accountObjc.zipcode?accountObjc.zipcode_id:zipcode)){
             setStateAndCityError("state, city and zipcode is required")
             return
         }

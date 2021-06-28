@@ -106,7 +106,7 @@ const EditMyProfile = () => {
             setAddressError("Address is required")
             return;
         }
-        else if(!(typeof city==='string'?myProfileObjc.city_id:city) || !(typeof state==='string'?myProfileObjc.state_id:state) || !(zipCode===myProfileObjc.zipcode?myProfileObjc.zipcode_id:zipCode)){
+        else if(!(typeof city==='string'?myProfileObjc.city_id:city) || !(typeof state==='string'?myProfileObjc.state_id:state) || !(zipcode===myProfileObjc.zipcode?myProfileObjc.zipcode_id:zipcode)){
             setStateAndCityError("state, city and zipcode is required")
             return
         }
