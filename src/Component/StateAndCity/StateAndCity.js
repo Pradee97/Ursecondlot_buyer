@@ -103,6 +103,8 @@ const StateAndCity = props => {
 
     const handleState = (e) => {
         setStateName( stateNameList.filter(data=>data.state_id == e.target.value)[0].state_name)
+        props.isEdit && props.setCityValue(null);
+        props.isEdit && props.setZipcodeValue(null);   
         fetchCity(e.target.value)
         setCityName("")
         setZipcodeId("")
@@ -110,6 +112,7 @@ const StateAndCity = props => {
 
     const handleCity = (e) => {
         setCityName(cityNameList.filter(data=>data.city_id==e.target.value)[0].city_name)
+        props.isEdit && props.setZipcodeValue(null);
         fetchZipcode(e.target.value)
         setZipcodeId("")
     }

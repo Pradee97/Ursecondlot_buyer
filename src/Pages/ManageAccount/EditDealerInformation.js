@@ -50,6 +50,7 @@ const EditDealerInformation = () => {
     const [primaryPhoneError, setPrimaryPhoneError] = useState("")
     const [mobilePhoneError, setMobilePhoneError] = useState("")
     const [addressError, setAddressError] = useState("")
+    const [stateAndCityError, setStateAndCityError] = useState("")
 
     const getStateName=(stateData)=>{
         setState(stateData)
@@ -108,6 +109,10 @@ const EditDealerInformation = () => {
             setAddressError("Address is required")
             return;
         }
+        else if(!(typeof city==='string'?accountObjc.city_id:city) || !(typeof state==='string'?accountObjc.state_id:state) || !(zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode)){
+            setStateAndCityError("state, city and zipcode is required")
+            return
+        }
 
         let request = {
             user_id:id,
@@ -123,10 +128,8 @@ const EditDealerInformation = () => {
             state_id: typeof state==='string'?accountObjc.state_id:state,
             zipcode_id: zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode,
             active:1
-           
         };
         console.log("request==----==",request)
-        return
         API
             .post('user_profile/update', request)
             .then((response) => {
@@ -278,6 +281,7 @@ const EditDealerInformation = () => {
                                 defaultCityValue = {city}
                                 defaultZipcodeValue = {zipCode}
                             />
+                            <p className="form-input-error"> {stateAndCityError} </p>
                             {/* <div class="col-sm-12 form-group">
                                 <input type="text" defaultValue={accountObjc.city_name} class="form-control" placeholder="City" required onChange={(e) => setCity(e.target.value)} />
                             </div>

@@ -48,6 +48,7 @@ const EditMyProfile = () => {
     const [addressError, setAddressError] = useState("")
     const [primaryPhoneError, setPrimaryPhoneError] = useState("")
     const [mobilePhoneError, setMobilePhoneError] = useState("")
+    const [stateAndCityError, setStateAndCityError] = useState("")
 
     const togglePopup = () => {
         setIsOpen(!isOpen);
@@ -104,6 +105,10 @@ const EditMyProfile = () => {
         else if(!address){
             setAddressError("Address is required")
             return;
+        }
+        else if(!(typeof city==='string'?myProfileObjc.city_id:city) || !(typeof state==='string'?myProfileObjc.state_id:state) || !(zipCode===myProfileObjc.zipcode?myProfileObjc.zipcode_id:zipCode)){
+            setStateAndCityError("state, city and zipcode is required")
+            return
         }
 
         let request = {
@@ -281,7 +286,7 @@ const EditMyProfile = () => {
                                 defaultCityValue = {city}
                                 defaultZipcodeValue = {zipcode}
                             />
-                            
+                            <p className="form-input-error"> {stateAndCityError} </p>
                             {/* <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={city} className="form-control textbox" placeholder="" required onChange={(e) => setCity(e.target.value)} />

@@ -49,6 +49,7 @@ const EditLegalAccount = () => {
     const [addressError, setAddressError] = useState("");
     const [dealershipLicenseexpError, setDealershipLicenseexpError] = useState("");
     const [taxidexpError, setTaxidexpError] = useState("");
+    const [stateAndCityError, setStateAndCityError] = useState("")
 
     const [isOpen, setIsOpen] = useState(false);
  
@@ -180,7 +181,10 @@ const EditLegalAccount = () => {
             setTaxidexpError("Tax Id exp is required")
             return;
         }
-        
+        if(!(typeof city==='string'?accountObjc.city_id:city) || !(typeof state==='string'?accountObjc.state_id:state) || !(zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode)){
+            setStateAndCityError("state, city and zipcode is required")
+            return
+        }
 
         API
             .post('legal_manage/update', request)
@@ -319,7 +323,7 @@ const EditLegalAccount = () => {
                                 defaultCityValue = {city}
                                 defaultZipcodeValue = {zipcode}
                             />
-
+                            <p className="form-input-error"> {stateAndCityError} </p>
                             <div class="col-sm-12 form-group datePickerBlock">
                             <div className="tbox">  
                                  {/* <input type="date" defaultValue={accountObjc.dealer_license_exp===undefined?"":accountObjc.dealer_license_exp.substring(0,10)} 

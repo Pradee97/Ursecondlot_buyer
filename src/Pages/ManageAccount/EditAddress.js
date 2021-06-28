@@ -42,7 +42,8 @@ const EditAddress = () => {
     const [mobilePhoneError, setMobilePhoneError] = useState("")
     const [locationError, setLocationError] = useState("")
     const [instructionError, setInstructionError] = useState("")
- 
+    const [stateAndCityError, setStateAndCityError] = useState("")
+
     const togglePopup = () => {
       setIsOpen(!isOpen);
     }
@@ -138,6 +139,10 @@ const EditAddress = () => {
         else if(!instruction){
             setInstructionError("Instructions is required")
             return;
+        }
+        else if(!(typeof city==='string'?accountObjc.city_id:city) || !(typeof state==='string'?accountObjc.state_id:state) || !(zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode)){
+            setStateAndCityError("state, city and zipcode is required")
+            return
         }
         console.log("==========FirstName==========>",FirstName);
         console.log("==========lastName==========>",lastName);
@@ -297,6 +302,7 @@ const EditAddress = () => {
                                 defaultCityValue = {city}
                                 defaultZipcodeValue = {zipCode}
                             />
+                            <p className="form-input-error"> {stateAndCityError} </p>
                              <div class="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={accountObjc.location} class="textbox" placeholder="" onChange={(e) => setLocation(e.target.value)} />

@@ -50,7 +50,7 @@ const EditBuyer = () => {
     const [mobilePhoneError, setMobilephoneError] = useState("");
     const [addressError, setAddressError] = useState("");
     const [locationNameError, setLocationNameError] = useState("");
-
+    const [stateAndCityError, setStateAndCityError] = useState("")
 
     const togglePopup = () => {
         setIsOpen(!isOpen);
@@ -150,7 +150,11 @@ const EditBuyer = () => {
             setLocationNameError("Location Name is required")
             return;
         }
-
+        if(!(typeof city==='string'?myProfileObjc.city_id:city) || !(typeof state==='string'?myProfileObjc.state_id:state) || !(zipCode===myProfileObjc.zipcode?myProfileObjc.zipcode_id:zipCode)){
+            setStateAndCityError("state, city and zipcode is required")
+            return
+        }
+        
         API
             .post("buyer/update", request)
             .then((response) => {
@@ -311,6 +315,7 @@ const EditBuyer = () => {
                                     defaultCityValue={city}
                                     defaultZipcodeValue={zipcode}
                                 />
+                                 <p className="form-input-error"> {stateAndCityError} </p>
                                 <div className="col-sm-12 form-group">
                                     <div className="tbox">
                                         <input type="text" defaultValue={myProfileObjc.address} className="form-control textbox" placeholder="" onChange={(e) => setLocationName(e.target.value)} />
