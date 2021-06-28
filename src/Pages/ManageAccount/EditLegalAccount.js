@@ -149,28 +149,56 @@ const EditLegalAccount = () => {
             setFirstnameError("firstname is required")
             return;
         }
+        else if(firstname.length>50){
+            setFirstnameError("First Name must not exceed 50 characters")
+            return;
+        }
         if(!lastname){
             setLastnameError("lastname is required")
             return;
         }
+        else if(lastname.length>50){
+            setLastnameError("Last Name must not exceed 50 characters")
+            return;
+        } 
         if(!legalBusinessname){
             setLegalBusinessnameError("Legal Businessname is required")
+            return;
+        }
+        else if(legalBusinessname.length>50){
+            setLegalBusinessnameError("Legal Businessname must not exceed 50 characters")
             return;
         }
         if(!EINnumber){
             setEINnumberError("EIN Number is required")
             return;
         }
+        else if(EINnumber.length>50){
+            setEINnumberError("EIN Number must not exceed 50 characters")
+            return;
+        }
         if(!dealershiplicense){
             setDealershiplicenseError("Dealership License is required")
+            return;
+        }
+        else if(dealershiplicense.length>50){
+            setDealershiplicenseError("Dealership License must not exceed 50 characters")
             return;
         }
         if(!taxid){
             setTaxidError("Tax Id is required")
             return;
         }
+        else if(taxid.length>50){
+            setTaxidError("Tax Id must not exceed 50 characters")
+            return;
+        }
         if(!address){
             setAddressError("Address is required")
+            return;
+        }
+        else if(address.length>150){
+            setAddressError("Address must not exceed 150 characters")
             return;
         }
         if(!dealershipLicenseexp){

@@ -90,23 +90,51 @@ const EditDealerInformation = () => {
         // setOpenLoader(true);
         event.preventDefault();        
         if(!firstName){
-            setFirstNameError("First name is required")
+            setFirstNameError("First Name is required")
+            return;
+        }
+        else if(firstName.length>50){
+            setFirstNameError("First Name must not exceed 50 characters")
             return;
         }
         else if(!lastName){
             setLastNameError("Last name is required")
             return;
         }
+        else if(lastName.length>50){
+            setLastNameError("Last Name must not exceed 50 characters")
+            return;
+        }
         else if(!primaryPhone){
-            setPrimaryPhoneError("PrimaryPhone is required")
+            setPrimaryPhoneError("Primary Phone is required")
+            return;
+        }
+        else if(primaryPhone.length<10 || primaryPhone.length>50){
+            setPrimaryPhoneError("Primary Phone must have atleast have 10 digits and must not exceed 15 digits")
+            return;
+        }
+        else if( primaryPhone && !new RegExp(/\(?([0-9]{3})\)\s?([0-9]{3})([ .-]?)([0-9]{4})/).test(primaryPhone) ) {
+            setPrimaryPhoneError("Accept only this Format: (123)455-6789")
             return;
         }
         else if(!mobilePhone){
-            setMobilePhoneError("MobilePhone is required")
+            setMobilePhoneError("Mobile Phone is required")
+            return;
+        }
+        else if(mobilePhone.length<10 || mobilePhone.length>50){
+            setMobilePhoneError("Mobile Phone must have atleast have 10 digits and must not exceed 15 digits")
+            return;
+        }
+        else if( mobilePhone && !new RegExp(/\(?([0-9]{3})\)\s?([0-9]{3})([ .-]?)([0-9]{4})/).test(mobilePhone) ) {
+            setMobilePhoneError("Accept only this Format: (123)455-6789")
             return;
         }
         else if(!address){
             setAddressError("Address is required")
+            return;
+        }
+        else if(address.length>150){
+            setAddressError("Address must not exceed 150 characters")
             return;
         }
         else if(!(typeof city==='string'?accountObjc.city_id:city) || !(typeof state==='string'?accountObjc.state_id:state) || !(zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode)){
