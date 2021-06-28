@@ -125,6 +125,8 @@ const EditDealerInformation = () => {
             active:1
            
         };
+        console.log("request==----==",request)
+        return
         API
             .post('user_profile/update', request)
             .then((response) => {
@@ -225,8 +227,8 @@ const EditDealerInformation = () => {
                                 <div className="tbox">
                                     <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
                                     <option style={{"display":"none"}}></option>
-                                         <option value="1">+1</option>
-                                        <option value="2">+2</option>
+                                         <option value="1" selected >+1</option>
+                                        {/* <option value="2">+2</option> */}
                                     </select>
                                     <label for="no_years" className={"input-has-value"}>Country code</label>
                                 </div>
@@ -244,8 +246,8 @@ const EditDealerInformation = () => {
                                 <div className="tbox">
                                     <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
                                     <option style={{"display":"none"}}></option>
-                                         <option value="1">+1</option>
-                                        <option value="2">+2</option>
+                                         <option value="1" selected>+1</option>
+                                        {/* <option value="2">+2</option> */}
                                     </select>
                                     <label for="no_years" className={"input-has-value"}>Country code</label>
                                 </div>

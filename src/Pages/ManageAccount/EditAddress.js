@@ -249,8 +249,8 @@ const EditAddress = () => {
                                 <div className="tbox">
                                     <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
                                     <option style={{"display":"none"}}></option>
-                                         <option value="1">+1</option>
-                                        <option value="2">+2</option>
+                                         <option value="1" selected>+1</option>
+                                        {/* <option value="2">+2</option> */}
                                     </select>
                                     <label for="no_years" className={"input-has-value"}>Country code</label>
                                 </div>
@@ -267,8 +267,8 @@ const EditAddress = () => {
                                 <div className="tbox">
                                     <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
                                     <option style={{"display":"none"}}></option>
-                                         <option value="1">+1</option>
-                                        <option value="2">+2</option>
+                                         <option value="1" selected>+1</option>
+                                        {/* <option value="2">+2</option> */}
                                     </select>
                                     <label for="no_years" className={"input-has-value"}>Country code</label>
                                 </div>
