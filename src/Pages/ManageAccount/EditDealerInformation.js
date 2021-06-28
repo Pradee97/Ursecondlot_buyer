@@ -97,7 +97,7 @@ const EditDealerInformation = () => {
             setFirstNameError("First Name must not exceed 50 characters")
             return;
         }
-        else if(!lastName){
+        if(!lastName){
             setLastNameError("Last name is required")
             return;
         }
@@ -105,7 +105,7 @@ const EditDealerInformation = () => {
             setLastNameError("Last Name must not exceed 50 characters")
             return;
         }
-        else if(!primaryPhone){
+        if(!primaryPhone){
             setPrimaryPhoneError("Primary Phone is required")
             return;
         }
@@ -117,7 +117,7 @@ const EditDealerInformation = () => {
             setPrimaryPhoneError("Accept only this Format: (123)455-6789")
             return;
         }
-        else if(!mobilePhone){
+        if(!mobilePhone){
             setMobilePhoneError("Mobile Phone is required")
             return;
         }
@@ -129,7 +129,7 @@ const EditDealerInformation = () => {
             setMobilePhoneError("Accept only this Format: (123)455-6789")
             return;
         }
-        else if(!address){
+        if(!address){
             setAddressError("Address is required")
             return;
         }

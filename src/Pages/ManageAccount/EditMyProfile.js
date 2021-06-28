@@ -106,7 +106,7 @@ const EditMyProfile = () => {
             setPrimaryPhoneError("Accept only this Format: (123)455-6789")
             return;
         }
-        else if(!mobilePhone){
+        if(!mobilePhone){
             setMobilePhoneError("Mobile Phone is required")
             return;
         }
@@ -118,7 +118,7 @@ const EditMyProfile = () => {
             setMobilePhoneError("Accept only this Format: (123)455-6789")
             return;
         }
-        else if(!address){
+        if(!address){
             setAddressError("Address is required")
             return;
         }
