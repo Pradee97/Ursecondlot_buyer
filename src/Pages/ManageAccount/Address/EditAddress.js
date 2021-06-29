@@ -1,12 +1,12 @@
 import React from 'react';
-import API from "../../Services/BaseService";
+import API from "../../../Services/BaseService";
 import { useHistory,useParams } from "react-router-dom";
 // import '../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import CommonPopup from '../../Component/CommonPopup/CommonPopup';
-import StateAndCity from '../../Component/StateAndCity/StateAndCity';
-import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks";
+import CommonPopup from '../../../Component/CommonPopup/CommonPopup';
+import StateAndCity from '../../../Component/StateAndCity/StateAndCity';
+import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks";
 import { useForm } from "react-hook-form";
 
 import {
@@ -141,7 +141,7 @@ const EditAddress = () => {
             setPrimaryPhoneError("Primary Phone is required")
             return;
         }
-        else if(primaryPhone.length<10 || primaryPhone.length>50){
+        else if(primaryPhone.length<10 || primaryPhone.length>15){
             setPrimaryPhoneError("Primary Phone must have atleast have 10 digits and must not exceed 15 digits")
             return;
         }
@@ -153,7 +153,7 @@ const EditAddress = () => {
             setMobilePhoneError("Mobile Phone is required")
             return;
         }
-        else if(mobilePhone.length<10 || mobilePhone.length>50){
+        else if(mobilePhone.length<10 || mobilePhone.length>15){
             setMobilePhoneError("Mobile Phone must have atleast have 10 digits and must not exceed 15 digits")
             return;
         }

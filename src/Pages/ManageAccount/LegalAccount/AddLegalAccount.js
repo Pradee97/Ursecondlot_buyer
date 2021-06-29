@@ -1,5 +1,5 @@
 import React from 'react';
-import API from "../../Services/BaseService";
+import API from "../../../Services/BaseService";
 import { useHistory } from "react-router-dom";
 import ls from 'local-storage';
 import { useState } from 'react';
@@ -8,10 +8,10 @@ import DatePicker from "react-datepicker";
 import moment from 'moment';
 import { getMonth, getYear } from 'date-fns';
 import "react-datepicker/dist/react-datepicker.css";
-import CommonPopup from '../../Component/CommonPopup/CommonPopup';
-import StateAndCity from '../../Component/StateAndCity/StateAndCity';
+import CommonPopup from '../../../Component/CommonPopup/CommonPopup';
+import StateAndCity from '../../../Component/StateAndCity/StateAndCity';
 import { useForm } from "react-hook-form";
-import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
+import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks"
 
 const AddLegalAccount = () => {
 
