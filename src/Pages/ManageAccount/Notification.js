@@ -91,9 +91,9 @@ const Notification = () => {
 					setPopupTitle("Create Notification");
 					setPopupMsg("Notification Successfully Created");
 					setPopupType("success");
-					setPopupActionType("redirect");
-					setPopupActionValue("ok");
-					setPopupActionPath("/notification")
+					setPopupActionType("close");
+					setPopupActionValue("close");
+					// setPopupActionPath("/notification")
 
 				} else {
 					togglePopup()

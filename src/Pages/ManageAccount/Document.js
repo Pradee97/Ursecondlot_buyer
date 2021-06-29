@@ -155,9 +155,9 @@ const Document = () => {
                 setPopupTitle("Document Upload");
                 setPopupMsg("Document Successfully Uploaded");
                 setPopupType("success");
-                setPopupActionType("redirect");
-                setPopupActionValue("ok");
-                setPopupActionPath("/document")
+                setPopupActionType("close");
+                setPopupActionValue("close");
+                // setPopupActionPath("/document")
             } else {
                 togglePopup()
                 setPopupTitle("Document Upload");
