@@ -104,10 +104,13 @@ const EditBuyer = () => {
      updateMyProfile = (event) => {
         // setOpenLoader(true);
         event.preventDefault();
+
         setPrimaryPhoneError("")
         setMobilephoneError("") 
         setAddressError("") 
         setLocationNameError("")
+        setStateAndCityError("")
+
         let request = {
             user_id: id,
             first_name: firstName,
@@ -138,20 +141,44 @@ const EditBuyer = () => {
             setPrimaryPhoneError("Primary Phone is required")
             return;
         }
+        else if(primaryPhone.length<10 || primaryPhone.length>50){
+            setPrimaryPhoneError("Primary Phone must have atleast have 10 digits and must not exceed 15 digits")
+            return;
+        }
+        else if( primaryPhone && !new RegExp(/\(?([0-9]{3})\)\s?([0-9]{3})([ .-]?)([0-9]{4})/).test(primaryPhone) ) {
+            setPrimaryPhoneError("Accept only this Format: (123)455-6789")
+            return;
+        }
         if(!mobilePhone){
             setMobilephoneError("Mobile Phone is required")
+            return;
+        }
+        else if(mobilePhone.length<10 || mobilePhone.length>50){
+            setMobilephoneError("Mobile Phone must have atleast have 10 digits and must not exceed 15 digits")
+            return;
+        }
+        else if( mobilePhone && !new RegExp(/\(?([0-9]{3})\)\s?([0-9]{3})([ .-]?)([0-9]{4})/).test(mobilePhone) ) {
+            setMobilephoneError("Accept only this Format: (123)455-6789")
             return;
         }
         if(!address){
             setAddressError("Address is required")
             return;
         }
+        else if(address.length>150){
+            setAddressError("Address must not exceed 150 characters")
+            return;
+        }
         if(!locationName){
             setLocationNameError("Location Name is required")
             return;
         }
+        else if(locationName.length>150){
+            setLocationNameError("Location Name must not exceed 150 characters")
+            return;
+        }
         if(!(typeof city==='string'?myProfileObjc.city_id:city) || !(typeof state==='string'?myProfileObjc.state_id:state) || !(zipcode===myProfileObjc.zipcode?myProfileObjc.zipcode_id:zipcode)){
-            setStateAndCityError("state, city and zipcode is required")
+            setStateAndCityError("State, City and Zipcode is required")
             return
         }
         
