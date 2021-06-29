@@ -3,8 +3,8 @@ import { useHistory , useParams} from "react-router-dom";
 import { useState } from 'react';
 import { useEffect } from 'react';
 import ls from 'local-storage';
-import API from "../../Services/BaseService";
-import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
+import API from "../../../Services/BaseService";
+import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks"
 import { Button } from 'antd';
 
 const Buyers = () => {

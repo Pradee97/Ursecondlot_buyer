@@ -1,13 +1,13 @@
 import React from 'react';
-import API from "../../Services/BaseService";
+import API from "../../../Services/BaseService";
 import { useHistory } from "react-router-dom";
 import ls from 'local-storage';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import CommonPopup from '../../Component/CommonPopup/CommonPopup';
-import StateAndCity from '../../Component/StateAndCity/StateAndCity';
+import CommonPopup from '../../../Component/CommonPopup/CommonPopup';
+import StateAndCity from '../../../Component/StateAndCity/StateAndCity';
 import { useForm } from "react-hook-form";
-import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
+import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks"
 
 const AddAddress = () => {
     const history = useHistory();   
