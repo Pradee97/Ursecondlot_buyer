@@ -92,8 +92,17 @@ const EditAddress = () => {
   
     const updateAddress = (event) => {
         // setOpenLoader(true);
-        event.preventDefault();   
-        setFirstNameError("")            
+        event.preventDefault();  
+
+        setFirstNameError("")  
+        setLastNameError("")
+        setPrimaryPhoneError("")
+        setMobilePhoneError("")
+        setAddressError("")
+        setLocationError("")
+        setInstructionError("")
+        setStateAndCityError("")
+        
         let request = {
             buyer_address_id:id,
             buyer_id:JSON.parse(localStorage.getItem("userDetails")).user_id,
@@ -111,7 +120,7 @@ const EditAddress = () => {
             active:1
            
         };
-        console.log("====request==>",request)
+        // console.log("====request==>",request)
         if(!FirstName){
             setFirstNameError("First name is required")
             return;
@@ -176,7 +185,7 @@ const EditAddress = () => {
             setInstructionError("Instruction must not exceed 150 characters")
             return;
         }
-        else if(!(typeof city==='string'?accountObjc.city_id:city) || !(typeof state==='string'?accountObjc.state_id:state) || !(zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode)){
+        if(!(typeof city==='string'?accountObjc.city_id:city) || !(typeof state==='string'?accountObjc.state_id:state) || !(zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode)){
             setStateAndCityError("state, city and zipcode is required")
             return
         }

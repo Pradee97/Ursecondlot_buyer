@@ -123,6 +123,7 @@ const EditLegalAccount = () => {
         setAddressError("")
         setDealershipLicenseexpError("")
         setTaxidexpError("")
+        setStateAndCityError("")
 
         let request = {
             first_name: firstname,

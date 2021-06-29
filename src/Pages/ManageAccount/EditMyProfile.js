@@ -93,7 +93,13 @@ const EditMyProfile = () => {
   
     updateMyProfile = (event) => {
         // setOpenLoader(true);
-        event.preventDefault();        
+        event.preventDefault();  
+        
+        setPrimaryPhoneError("")
+        setMobilePhoneError("")
+        setAddressError("")
+        setStateAndCityError("")
+
         if(!primaryPhone){
             setPrimaryPhoneError("Primary Phone is required")
             return;
@@ -126,7 +132,7 @@ const EditMyProfile = () => {
             setAddressError("Address must not exceed 150 characters")
             return;
         }
-        else if(!(typeof city==='string'?myProfileObjc.city_id:city) || !(typeof state==='string'?myProfileObjc.state_id:state) || !(zipcode===myProfileObjc.zipcode?myProfileObjc.zipcode_id:zipcode)){
+        if(!(typeof city==='string'?myProfileObjc.city_id:city) || !(typeof state==='string'?myProfileObjc.state_id:state) || !(zipcode===myProfileObjc.zipcode?myProfileObjc.zipcode_id:zipcode)){
             setStateAndCityError("state, city and zipcode is required")
             return
         }

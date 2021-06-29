@@ -104,10 +104,13 @@ const EditBuyer = () => {
      updateMyProfile = (event) => {
         // setOpenLoader(true);
         event.preventDefault();
+
         setPrimaryPhoneError("")
         setMobilephoneError("") 
         setAddressError("") 
         setLocationNameError("")
+        setStateAndCityError("")
+
         let request = {
             user_id: id,
             first_name: firstName,
