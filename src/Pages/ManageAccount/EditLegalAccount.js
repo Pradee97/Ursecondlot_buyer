@@ -147,7 +147,7 @@ const EditLegalAccount = () => {
         };
 
         if(!firstname){
-            setFirstnameError("firstname is required")
+            setFirstnameError("First Name is required")
             return;
         }
         else if(firstname.length>50){
@@ -155,7 +155,7 @@ const EditLegalAccount = () => {
             return;
         }
         if(!lastname){
-            setLastnameError("lastname is required")
+            setLastnameError("Last Name is required")
             return;
         }
         else if(lastname.length>50){
@@ -211,7 +211,7 @@ const EditLegalAccount = () => {
             return;
         }
         if(!(typeof city==='string'?accountObjc.city_id:city) || !(typeof state==='string'?accountObjc.state_id:state) || !(zipcode===accountObjc.zipcode?accountObjc.zipcode_id:zipcode)){
-            setStateAndCityError("state, city and zipcode is required")
+            setStateAndCityError("State, City and Zipcode is required")
             return
         }
 

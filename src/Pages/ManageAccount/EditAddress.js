@@ -122,7 +122,7 @@ const EditAddress = () => {
         };
         // console.log("====request==>",request)
         if(!FirstName){
-            setFirstNameError("First name is required")
+            setFirstNameError("First Name is required")
             return;
         }
         else if(FirstName.length>50){
@@ -130,7 +130,7 @@ const EditAddress = () => {
             return;
         }
         if(!lastName){
-            setLastNameError("Last name is required")
+            setLastNameError("Last Name is required")
             return;
         }
         else if(lastName.length>50){
@@ -186,7 +186,7 @@ const EditAddress = () => {
             return;
         }
         if(!(typeof city==='string'?accountObjc.city_id:city) || !(typeof state==='string'?accountObjc.state_id:state) || !(zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode)){
-            setStateAndCityError("state, city and zipcode is required")
+            setStateAndCityError("State, City and Zipcode is required")
             return
         }
         console.log("==========FirstName==========>",FirstName);

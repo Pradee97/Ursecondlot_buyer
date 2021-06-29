@@ -133,7 +133,7 @@ const EditMyProfile = () => {
             return;
         }
         if(!(typeof city==='string'?myProfileObjc.city_id:city) || !(typeof state==='string'?myProfileObjc.state_id:state) || !(zipcode===myProfileObjc.zipcode?myProfileObjc.zipcode_id:zipcode)){
-            setStateAndCityError("state, city and zipcode is required")
+            setStateAndCityError("State, City and Zipcode is required")
             return
         }
 

@@ -106,7 +106,7 @@ const EditDealerInformation = () => {
             return;
         }
         if(!lastName){
-            setLastNameError("Last name is required")
+            setLastNameError("Last Name is required")
             return;
         }
         else if(lastName.length>50){
@@ -146,7 +146,7 @@ const EditDealerInformation = () => {
             return;
         }
         if(!(typeof city==='string'?accountObjc.city_id:city) || !(typeof state==='string'?accountObjc.state_id:state) || !(zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode)){
-            setStateAndCityError("state, city and zipcode is required")
+            setStateAndCityError("State, City and Zipcode is required")
             return
         }
 
