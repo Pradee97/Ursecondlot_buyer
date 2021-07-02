@@ -11,6 +11,8 @@ import { useForm } from "react-hook-form";
 import Datetime from 'react-datetime';
 import moment from 'moment';
 import FileBase64 from 'react-file-base64';
+import MuiPhoneNumber from 'material-ui-phone-number';
+
 const AddUser = () => {
 	const history = useHistory();
 
@@ -140,6 +142,9 @@ const AddUser = () => {
 			});
 
 	}
+	function handleOnChange(value) {
+        setPhoneNumber(value);
+     }
 	return (
 		<div>
 			<main id="main" class="inner-page">
@@ -210,39 +215,23 @@ const AddUser = () => {
 															<p className="form-input-error">{errors.lastName?.message}</p>
 														</div>
 													</div>
-													<div className="col-sm-4 form-group">
-													<div className="tbox">
-														<select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
-														<option style={{"display":"none"}}></option>
-															<option value="1" selected>+1</option>
-															{/* <option value="2">+2</option> */}
-														</select>
-														<label for="no_years" className={"input-has-value"}>Country code</label>
-													</div>
-													</div>
-													<div className="col-sm-8 form-group phonecode">
-														<div className="tbox">
-															<input className="textbox " type="text" placeholder="" id="phone_no"  name="phoneNumber"
+												
+													<div className="col-sm-12 form-group ">
+														<div className="tbox phoneNumberfield">
+														<MuiPhoneNumber id="phone_no" name="phoneNumber" defaultCountry={'us'} onlyCountries={['us']}  className="textbox" 
 															 {...register("phoneNumber", {
 																required: "This input is required.",
-																pattern: {
-																	value: /\(?([0-9]{3})\)\s?([0-9]{3})([ .-]?)([0-9]{4})/,
-																	message: "Accept only this Format: (123)455-6789 "
-																	},
+																
 																	minLength: {
-																	value: 10,
-																	message: "This input atleast have 10 digits"
-																  },
-																maxLength: {
-																	value: 15,
-																	message: "This input must not exceed 15 digits"
+																	value: 17,
+																	message: "This input must have 10 digits"
 																  }
 															})}
-															onChange={(e) => setPhoneNumber(e.target.value)} />
-															<label for="phone_no" className={phoneNumber != "" ? "input-has-value" : ""}>Phone</label>
-															<small>Format: (123)455-6789</small>
-															<p className="form-input-error">{errors.phoneNumber?.message}</p>
+															// onChange={(e) => setPhoneNumber(e.target.value)} />
+															onChange={handleOnChange} ></MuiPhoneNumber>
+															<label for="phone_no" className={"input-has-value"}>Phone</label>
 												    	</div>
+														<p className="form-input-error">{errors.phoneNumber?.message}</p>
 													</div>
 													<div className="col-sm-12 form-group">
 														<div className="tbox">

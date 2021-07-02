@@ -1,13 +1,14 @@
 import React from 'react';
-import API from "../../Services/BaseService";
+import API from "../../../Services/BaseService";
 import { useHistory,useParams } from "react-router-dom";
 // import '../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import CommonPopup from '../../Component/CommonPopup/CommonPopup';
-import StateAndCity from '../../Component/StateAndCity/StateAndCity';
-import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks";
+import CommonPopup from '../../../Component/CommonPopup/CommonPopup';
+import StateAndCity from '../../../Component/StateAndCity/StateAndCity';
+import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks";
 import { useForm } from "react-hook-form";
+import MuiPhoneNumber from 'material-ui-phone-number';
 
 import {
     Form,
@@ -65,7 +66,7 @@ const EditAddress = () => {
     const getZipCodeId=(zipData)=>{
         setZIpCode(zipData)
     }
-
+   
     async function fetchAccountDetails() {
         // console.log(id)
         
@@ -92,8 +93,17 @@ const EditAddress = () => {
   
     const updateAddress = (event) => {
         // setOpenLoader(true);
-        event.preventDefault();   
-        setFirstNameError("")            
+        event.preventDefault();  
+
+        setFirstNameError("")  
+        setLastNameError("")
+        setPrimaryPhoneError("")
+        setMobilePhoneError("")
+        setAddressError("")
+        setLocationError("")
+        setInstructionError("")
+        setStateAndCityError("")
+        
         let request = {
             buyer_address_id:id,
             buyer_id:JSON.parse(localStorage.getItem("userDetails")).user_id,
@@ -111,37 +121,67 @@ const EditAddress = () => {
             active:1
            
         };
-        console.log("====request==>",request)
+        // console.log("====request==>",request)
         if(!FirstName){
-            setFirstNameError("First name is required")
+            setFirstNameError("First Name is required")
             return;
         }
-        else if(!lastName){
-            setLastNameError("Last name is required")
+        else if(FirstName.length>50){
+            setFirstNameError("First Name must not exceed 50 characters")
             return;
         }
-        else if(!address){
+        if(!lastName){
+            setLastNameError("Last Name is required")
+            return;
+        }
+        else if(lastName.length>50){
+            setLastNameError("Last Name must not exceed 50 characters")
+            return;
+        }       
+        if(!primaryPhone){
+            setPrimaryPhoneError("Primary Phone is required")
+            return;
+        }
+        else if(primaryPhone.length<17 ){
+            setPrimaryPhoneError("Primary Phone must have 10 digits ")
+            return;
+        }
+      
+        if(!mobilePhone){
+            setMobilePhoneError("Mobile Phone is required")
+            return;
+        }
+        else if(mobilePhone.length<17 ){
+            setMobilePhoneError("Mobile Phone must have 10 digits")
+            return;
+        }
+      
+        if(!address){
             setAddressError("Address is required")
             return;
         }
-        else if(!primaryPhone){
-            setPrimaryPhoneError("PrimaryPhone is required")
+        else if(address.length>150){
+            setAddressError("Address must not exceed 150 characters")
             return;
-        }
-        else if(!mobilePhone){
-            setMobilePhoneError("MobilePhone is required")
-            return;
-        }
-        else if(!location){
+        } 
+        if(!location){
             setLocationError("Location is required")
             return;
         }
-        else if(!instruction){
+        else if(location.length>150){
+            setLocationError("Location must not exceed 150 characters")
+            return;
+        }
+        if(!instruction){
             setInstructionError("Instructions is required")
             return;
         }
-        else if(!(typeof city==='string'?accountObjc.city_id:city) || !(typeof state==='string'?accountObjc.state_id:state) || !(zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode)){
-            setStateAndCityError("state, city and zipcode is required")
+        else if(instruction.length>150){
+            setInstructionError("Instruction must not exceed 150 characters")
+            return;
+        }
+        if(!(typeof city==='string'?accountObjc.city_id:city) || !(typeof state==='string'?accountObjc.state_id:state) || !(zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode)){
+            setStateAndCityError("State, City and Zipcode is required")
             return
         }
         console.log("==========FirstName==========>",FirstName);
@@ -208,6 +248,12 @@ const EditAddress = () => {
     })
         .catch(err => { console.log(err); });
     }, []);
+    function handleOnChange(value) {
+        setPrimaryPhone(value);
+     }
+     function handleOnChanges(value) {
+        setMobilePhone(value);
+     }
     return (
         <div>
             <main id="main" class="inner-page">
@@ -250,42 +296,27 @@ const EditAddress = () => {
                                 <p className="form-input-error" >{lastNameError}</p>
 
                             </div> </div>
-                            <div className="col-sm-4 form-group">
-                                <div className="tbox">
-                                    <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
-                                    <option style={{"display":"none"}}></option>
-                                         <option value="1" selected>+1</option>
-                                        {/* <option value="2">+2</option> */}
-                                    </select>
-                                    <label for="no_years" className={"input-has-value"}>Country code</label>
-                                </div>
-                            </div>
-                            <div class="col-sm-8 form-group phonecode">
-                            <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.phone_no} class="textbox" placeholder="" onChange={(e) => setPrimaryPhone(e.target.value)} />
+                         
+                            <div class="col-sm-6 form-group ">
+                            <div className="tbox phoneNumberfield">
+                                
+                            <MuiPhoneNumber value={accountObjc.phone_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={handleOnChange} ></MuiPhoneNumber>
+
+                                {/* <input type="text" defaultValue={accountObjc.phone_no} class="textbox" placeholder="" onChange={(e) => setPrimaryPhone(e.target.value)} /> */}
                                 <label for="primary_phone"  className={"input-has-value"}>Primary Phone</label>
-                                <small>Format: (123)455-6789</small>
-                                <p className="form-input-error" >{primaryPhoneError}</p>
-
-                            </div> </div>
-                            <div className="col-sm-4 form-group">
-                                <div className="tbox">
-                                    <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
-                                    <option style={{"display":"none"}}></option>
-                                         <option value="1" selected>+1</option>
-                                        {/* <option value="2">+2</option> */}
-                                    </select>
-                                    <label for="no_years" className={"input-has-value"}>Country code</label>
-                                </div>
                             </div>
-                            <div class="col-sm-8 form-group phonecode">
-                            <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.mobile_no} class="textbox" placeholder="" onChange={(e) => setMobilePhone(e.target.value)} />
+                            <p className="form-input-error" >{primaryPhoneError}</p>
+                            </div>
+                            
+                            <div class="col-sm-6 form-group ">
+                            <div className="tbox phoneNumberfield">
+                            <MuiPhoneNumber value={accountObjc.mobile_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={handleOnChanges} ></MuiPhoneNumber>
+                                
+                                {/* <input type="text" defaultValue={accountObjc.mobile_no} class="textbox" placeholder="" onChange={(e) => setMobilePhone(e.target.value)} /> */}
                                 <label for="mobile_phone"  className={"input-has-value"}>Mobile Phone</label>
-                                <small>Format: (123)455-6789</small>
-                                <p className="form-input-error" >{mobilePhoneError}</p>
-
-                            </div> </div>
+                            </div> 
+                            <p className="form-input-error" >{mobilePhoneError}</p>
+                            </div>
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={accountObjc.address} class="textbox" placeholder="" onChange={(e) => setAddress(e.target.value)} />
@@ -326,7 +357,6 @@ const EditAddress = () => {
                             <div class="col-sm-12 form-group">
                                 <input type="number" defaultValue={accountObjc.zipcode_id} class="form-control" placeholder="Zip code" onChange={(e) => setZIpCode(e.target.value)} />
                             </div> */}
-                          
                     
                             <div class="col-lg-12 loginBtn">
                                 <button type="submit" class="cta-btn">Update</button>

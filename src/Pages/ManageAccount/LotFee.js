@@ -67,9 +67,9 @@ const LotFee = () => {
                     setPopupTitle("Create LotFee");
                     setPopupMsg("LotFee Successfully Created");
                     setPopupType("success");
-                    setPopupActionType("redirect");
-                    setPopupActionValue("ok");
-                    setPopupActionPath("/lotfee")
+                    setPopupActionType("close");
+                    setPopupActionValue("close");
+                    // setPopupActionPath("/lotfee")
                  } else {
                     togglePopup()
                     setPopupTitle("Create LotFee");

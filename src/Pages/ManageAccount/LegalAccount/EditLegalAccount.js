@@ -1,15 +1,15 @@
 import React from 'react';
 import moment from 'moment';
-import API from "../../Services/BaseService";
+import API from "../../../Services/BaseService";
 import { useHistory,useParams } from "react-router-dom";
 // import '../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import CommonPopup from '../../Component/CommonPopup/CommonPopup';
-import StateAndCity from '../../Component/StateAndCity/StateAndCity'
-import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks";
+import CommonPopup from '../../../Component/CommonPopup/CommonPopup';
+import StateAndCity from '../../../Component/StateAndCity/StateAndCity'
+import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks";
 import { useForm } from "react-hook-form";
 
 import {
@@ -123,6 +123,7 @@ const EditLegalAccount = () => {
         setAddressError("")
         setDealershipLicenseexpError("")
         setTaxidexpError("")
+        setStateAndCityError("")
 
         let request = {
             first_name: firstname,
@@ -146,31 +147,59 @@ const EditLegalAccount = () => {
         };
 
         if(!firstname){
-            setFirstnameError("firstname is required")
+            setFirstnameError("First Name is required")
+            return;
+        }
+        else if(firstname.length>50){
+            setFirstnameError("First Name must not exceed 50 characters")
             return;
         }
         if(!lastname){
-            setLastnameError("lastname is required")
+            setLastnameError("Last Name is required")
             return;
         }
+        else if(lastname.length>50){
+            setLastnameError("Last Name must not exceed 50 characters")
+            return;
+        } 
         if(!legalBusinessname){
             setLegalBusinessnameError("Legal Businessname is required")
+            return;
+        }
+        else if(legalBusinessname.length>50){
+            setLegalBusinessnameError("Legal Businessname must not exceed 50 characters")
             return;
         }
         if(!EINnumber){
             setEINnumberError("EIN Number is required")
             return;
         }
+        else if(EINnumber.length>50){
+            setEINnumberError("EIN Number must not exceed 50 characters")
+            return;
+        }
         if(!dealershiplicense){
             setDealershiplicenseError("Dealership License is required")
+            return;
+        }
+        else if(dealershiplicense.length>50){
+            setDealershiplicenseError("Dealership License must not exceed 50 characters")
             return;
         }
         if(!taxid){
             setTaxidError("Tax Id is required")
             return;
         }
+        else if(taxid.length>50){
+            setTaxidError("Tax Id must not exceed 50 characters")
+            return;
+        }
         if(!address){
             setAddressError("Address is required")
+            return;
+        }
+        else if(address.length>150){
+            setAddressError("Address must not exceed 150 characters")
             return;
         }
         if(!dealershipLicenseexp){
@@ -182,7 +211,7 @@ const EditLegalAccount = () => {
             return;
         }
         if(!(typeof city==='string'?accountObjc.city_id:city) || !(typeof state==='string'?accountObjc.state_id:state) || !(zipcode===accountObjc.zipcode?accountObjc.zipcode_id:zipcode)){
-            setStateAndCityError("state, city and zipcode is required")
+            setStateAndCityError("State, City and Zipcode is required")
             return
         }
 
