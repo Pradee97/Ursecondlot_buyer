@@ -7,6 +7,7 @@ import StateAndCity from '../../../Component/StateAndCity/StateAndCity'
 import CommonPopup from '../../../Component/CommonPopup/CommonPopup';
 import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks";
 import { useForm } from "react-hook-form";
+import MuiPhoneNumber from 'material-ui-phone-number';
 
 import {
     Form,
@@ -223,7 +224,7 @@ const EditMyProfile = () => {
             <div className="container" >
             <div className="addaddressblock col-lg-12">
             <div className="section-title">
-                                <h2>Add Legal Manage Account</h2>
+                                <h2>Edit My Profile</h2>
                             </div>
 			<div className="row content">
             <div className="col-lg-3 col-md-4 col-sm-12 mgaccountleftblock">
@@ -251,40 +252,22 @@ const EditMyProfile = () => {
                                 <label for="last_name" className={lastName !="" ? "input-has-value" : ""}>Last Name</label>
                             </div>
                             </div>
-                            <div className="col-sm-4 form-group">
-                                <div className="tbox">
-                                    <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
-                                    <option style={{"display":"none"}}></option>
-                                         <option value="1" selected>+1</option>
-                                        {/* <option value="2">+2</option> */}
-                                    </select>
-                                    <label for="no_years" className={"input-has-value"}>Country code</label>
-                                </div>
-                            </div>
-                            <div className="col-sm-8 form-group phonecode">
+                           
+                            <div className="col-sm-12 form-group ">
                             <div className="tbox">
-                                <input type="text" defaultValue={myProfileObjc.phone_no} className="form-control textbox" placeholder=""  onChange={(e) => setPrimaryPhone(e.target.value)} />
+                            <MuiPhoneNumber defaultValue={myProfileObjc.phone_no} defaultCountry={'us'} onlyCountries={['us']}  className="form-control textbox" onChange={(e) =>setPrimaryPhone(e.target.value)} ></MuiPhoneNumber>
+                                {/* <input type="text" defaultValue={myProfileObjc.phone_no} className="form-control textbox" placeholder=""  onChange={(e) => setPrimaryPhone(e.target.value)} /> */}
                                 <label for="phone_no" className={primaryPhone !="" ? "input-has-value" : ""}>Primary Phone</label>
-                                <small>Format: (123)455-6789</small>
                                 <p className="form-input-error" >{primaryPhoneError}</p>
 
                             </div>
                             </div>
-                            <div className="col-sm-4 form-group">
-                                <div className="tbox">
-                                    <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
-                                    <option style={{"display":"none"}}></option>
-                                         <option value="1" selected>+1</option>
-                                        {/* <option value="2">+2</option> */}
-                                    </select>
-                                    <label for="no_years" className={"input-has-value"}>Country code</label>
-                                </div>
-                            </div>
-                            <div className="col-sm-8 form-group phonecode">
+                           
+                            <div className="col-sm-12 form-group ">
                             <div className="tbox">
-                                <input type="text" defaultValue={myProfileObjc.mobile_no} className="form-control textbox" placeholder=""  onChange={(e) => setMobilephone(e.target.value)} />
+                            <MuiPhoneNumber defaultValue={myProfileObjc.mobile_no} defaultCountry={'us'} onlyCountries={['us']}  className="form-control textbox" onChange={(e) =>setMobilephone(e.target.value)} ></MuiPhoneNumber>
+                                {/* <input type="text" defaultValue={myProfileObjc.mobile_no} className="form-control textbox" placeholder=""  onChange={(e) => setMobilephone(e.target.value)} /> */}
                                 <label for="mobile_no" className={mobilePhone !="" ? "input-has-value" : ""}>Mobile Phone</label>
-                                <small>Format: (123)455-6789</small>
                                 <p className="form-input-error" >{mobilePhoneError}</p>
 
                             </div>

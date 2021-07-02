@@ -7,7 +7,8 @@ import { useEffect } from 'react';
 import CommonPopup from '../../../Component/CommonPopup/CommonPopup';
 import StateAndCity from '../../../Component/StateAndCity/StateAndCity';
 import { useForm } from "react-hook-form";
-import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks"
+import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks";
+import MuiPhoneNumber from 'material-ui-phone-number';
 
 const AddAddress = () => {
     const history = useHistory();   
@@ -100,7 +101,12 @@ const AddAddress = () => {
 		setZipcodeId(zipData)
 	}
 
-
+    function handleOnChange(value) {
+        setPrimaryphone(value);
+     }
+     function handleOnChanges(value) {
+        setMobilephone(value);
+     }
     return (
         <div>
 
@@ -157,19 +163,11 @@ const AddAddress = () => {
                                 <p className="form-input-error">{errors.lastName?.message}</p>
                             </div>
                             </div>
-                            <div className="col-sm-4 form-group">
-                                <div className="tbox">
-                                    <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
-                                    <option style={{"display":"none"}}></option>
-                                         <option value="1" selected>+1</option>
-                                        {/* <option value="2">+2</option> */}
-                                    </select>
-                                    <label for="no_years" className={"input-has-value"}>Country code</label>
-                                </div>
-                            </div>
-                            <div className="col-sm-8 form-group phonecode">
+                           
+                            <div className="col-sm-12 form-group ">
                             <div className="tbox">
-                                <input type="text"  id="companyName" className="textbox" placeholder="" name="primaryPhone"
+                            <MuiPhoneNumber id="companyName" name="primaryPhone" defaultCountry={'us'} onlyCountries={['us']}  className="textbox" 
+                          
                                  {...register("primaryPhone", {
                                     required: "This input is required.",
                                     pattern: {
@@ -179,31 +177,17 @@ const AddAddress = () => {
                                     minLength: {
                                         value: 10,
                                         message: "This input atleast have 10 digits"
-                                      },
-                                    maxLength: {
-                                        value: 15,
-                                        message: "This input must not exceed 15 digits"
                                       }
                                 })}
-                                onChange={(e) => setPrimaryphone(e.target.value)} />
+                                onChange={handleOnChange} ></MuiPhoneNumber>
                                 <label for="companyName" className={primaryPhone !="" ? "input-has-value" : ""}>Primary phone</label>
-                                <small>Format: (123)455-6789</small>
                                 <p className="form-input-error">{errors.primaryPhone?.message}</p>
                             </div>
                             </div>
-                            <div className="col-sm-4 form-group">
-                                <div className="tbox">
-                                    <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
-                                    <option style={{"display":"none"}}></option>
-                                         <option value="1" selected>+1</option>
-                                        {/* <option value="2">+2</option> */}
-                                    </select>
-                                    <label for="no_years" className={"input-has-value"}>Country code</label>
-                                </div>
-                            </div>
-                            <div className="col-sm-8 form-group phonecode">
+                            
+                            <div className="col-sm-12 form-group ">
                             <div className="tbox">
-                                <input type="text" id="branchName" className="textbox" placeholder="" name="mobilePhone"
+                            <MuiPhoneNumber id="companyName" name="primaryPhone" defaultCountry={'us'} onlyCountries={['us']}  className="textbox" 
                                   {...register("mobilePhone", {
                                     required: "This input is required.",
                                     pattern: {
@@ -213,15 +197,10 @@ const AddAddress = () => {
                                     minLength: {
                                         value: 10,
                                         message: "This input atleast have 10 digits"
-                                      },
-                                    maxLength: {
-                                        value: 15,
-                                        message: "This input must not exceed 15 digits"
                                       }
                                 })}
-                                onChange={(e) => setMobilephone(e.target.value)} />
+                                onChange={handleOnChanges} ></MuiPhoneNumber>
                                 <label for="branchName" className={mobilePhone !="" ? "input-has-value" : ""}>Mobile phone</label>
-                                <small>Format: (123)455-6789</small>
                                 <p className="form-input-error">{errors.mobilePhone?.message}</p>
                             </div>
                             </div>

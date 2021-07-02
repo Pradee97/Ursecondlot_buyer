@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import { useForm } from "react-hook-form";
+import MuiPhoneNumber from 'material-ui-phone-number';
 
 const FloorAdd = () => {
 
@@ -149,6 +150,9 @@ const FloorAdd = () => {
          }
         }
     }
+    function handleOnChange(value) {
+        setPhoneNumber(value);
+     }
     return (
         <div>
             <main id="main" className="inner-page">
@@ -280,20 +284,10 @@ const FloorAdd = () => {
                             </div>
                             </div>
 
-                            <div className="col-sm-4 form-group">
-                                <div className="tbox">
-                                    <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
-                                    <option style={{"display":"none"}}></option>
-                                         <option value="1" selected>+1</option>
-                                        {/* <option value="2">+2</option> */}
-                                    </select>
-                                    <label for="no_years" className={"input-has-value"}>Country code</label>
-                                </div>
-                            </div>
-
-                            <div className="col-sm-8 form-group phonecode">
+                            <div className="col-sm-12 form-group ">
                             <div className="tbox">                            
-                                <input type="text" id="phoneNumber" className="textbox" placeholder="" name="phoneNumber"
+                                <MuiPhoneNumber id="phoneNumber" name="phoneNumber" defaultCountry={'us'} onlyCountries={['us']}  className="textbox" 
+                                    // <input type="text" id="phoneNumber" className="textbox" placeholder="" name="phoneNumber"
                                  {...register("phoneNumber", {
                                     required: "This input is required.",
                                     pattern: {
@@ -303,15 +297,11 @@ const FloorAdd = () => {
                                     minLength: {
                                         value: 10,
                                         message: "This input atleast have 10 digits"
-                                      },
-                                    maxLength: {
-                                        value: 15,
-                                        message: "This input must not exceed 15 digits"
-                                      },
+                                      }
                                 })}
-                                onChange={(e) => setPhoneNumber(e.target.value)} />
+                                onChange={handleOnChange} ></MuiPhoneNumber>
+                                {/* onChange={(e) => setPhoneNumber(e.target.value)} /> */}
                                 <label for="phoneNumber" className={phoneNumber !="" ? "input-has-value" : ""}>Phone Number</label>
-                                <small>Format: (123)455-6789</small>
                                 <p className="form-input-error">{errors.phoneNumber?.message}</p>
                             </div>
                             </div>                           

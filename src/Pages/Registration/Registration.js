@@ -12,6 +12,7 @@ import '../../Component/Popup/popup.css';
 import Terms from '../../Component/TermsAndCondition/TermsAndCondition';
 import StateAndCity from '../../Component/StateAndCity/StateAndCity';
 import FileBase64 from 'react-file-base64';
+import MuiPhoneNumber from 'material-ui-phone-number';
 
 // import '../../assets/css/styles.css';
 import { useState } from 'react';
@@ -131,7 +132,9 @@ const Registration = () => {
     const getZipCodeId = (zipData) => {
         setZipcodeId(zipData)
     }
-
+    function handleOnChange(value) {
+        setPhoneNumber(value);
+     }
     return (
         <div>
             <main id="main" className="inner-page">
@@ -199,20 +202,10 @@ const Registration = () => {
                                 </div>
                             </div>
 
-                            <div className="col-sm-4 form-group">
+                            <div className="col-sm-12 form-group">
                                 <div className="tbox">
-                                    <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
-                                    <option style={{"display":"none"}}></option>
-                                         <option value="1" selected>+1</option>
-                                        {/* <option value="2">+2</option> */}
-                                    </select>
-                                    <label for="no_years" className={"input-has-value"}>Country code</label>
-                                </div>
-                            </div>
-                         
-                            <div className="col-sm-8 form-group">
-                                <div className="tbox">
-                                    <input className="textbox " type="tel" placeholder="" id="phone_no" name="phoneNumber" maxLength="15"
+                                    <MuiPhoneNumber id="phone_no" name="phoneNumber" defaultCountry={'us'} onlyCountries={['us']}  className="textbox" 
+                                    //  <input className="textbox " type="tel" placeholder="" id="phone_no" name="phoneNumber" maxLength="15" 
                                     {...register("phoneNumber", {
                                         required: "Phone Number is required.",
                                         pattern: {
@@ -222,15 +215,11 @@ const Registration = () => {
                                         minLength: {
                                             value: 10,
                                             message: "Phone Number atleast have 10 digits"
-                                          },
-                                        maxLength: {
-                                            value: 15,
-                                            message: "Phone Number must not exceed 15 digits"
                                           }
                                     })}
-                                    onChange={(e) => setPhoneNumber(e.target.value)} />
+                                    onChange={handleOnChange} ></MuiPhoneNumber>
+                                     {/* onChange={(e) => setPhoneNumber(e.target.value)} /> */}
                                     <label for="phone_no" className={phoneNumber != "" ? "input-has-value" : ""}>Phone</label>
-                                    <small>Format: (123)455-6789</small>
                                     <p className="form-input-error">{errors.phoneNumber?.message}</p>
                                 </div>
                             </div>
