@@ -298,8 +298,8 @@ const EditAddress = () => {
 
                             </div> </div>
                          
-                            <div class="col-sm-12 form-group ">
-                            <div className="tbox">
+                            <div class="col-sm-6 form-group ">
+                            <div className="tbox phoneNumberfield">
                                 
                             <MuiPhoneNumber defaultValue={accountObjc.phone_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={(e) => setPrimaryPhone(e.target.value)} ></MuiPhoneNumber>
 
@@ -309,8 +309,8 @@ const EditAddress = () => {
 
                             </div> </div>
                             
-                            <div class="col-sm-12 form-group ">
-                            <div className="tbox">
+                            <div class="col-sm-6 form-group ">
+                            <div className="tbox phoneNumberfield">
                             <MuiPhoneNumber defaultValue={accountObjc.mobile_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={(e) => setMobilePhone(e.target.value)} ></MuiPhoneNumber>
                                 
                                 {/* <input type="text" defaultValue={accountObjc.mobile_no} class="textbox" placeholder="" onChange={(e) => setMobilePhone(e.target.value)} /> */}

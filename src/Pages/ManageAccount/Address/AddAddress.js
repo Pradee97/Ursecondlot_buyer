@@ -164,8 +164,8 @@ const AddAddress = () => {
                             </div>
                             </div>
                            
-                            <div className="col-sm-12 form-group ">
-                            <div className="tbox">
+                            <div className="col-sm-6 form-group ">
+                            <div className="tbox phoneNumberfield">
                             <MuiPhoneNumber id="companyName" name="primaryPhone" defaultCountry={'us'} onlyCountries={['us']}  className="textbox" 
                           
                                  {...register("primaryPhone", {
@@ -180,13 +180,13 @@ const AddAddress = () => {
                                       }
                                 })}
                                 onChange={handleOnChange} ></MuiPhoneNumber>
-                                <label for="companyName" className={primaryPhone !="" ? "input-has-value" : ""}>Primary phone</label>
+                                <label for="companyName" className={"input-has-value"}>Primary phone</label>
                                 <p className="form-input-error">{errors.primaryPhone?.message}</p>
                             </div>
                             </div>
                             
-                            <div className="col-sm-12 form-group ">
-                            <div className="tbox">
+                            <div className="col-sm-6 form-group ">
+                            <div className="tbox phoneNumberfield">
                             <MuiPhoneNumber id="companyName" name="primaryPhone" defaultCountry={'us'} onlyCountries={['us']}  className="textbox" 
                                   {...register("mobilePhone", {
                                     required: "This input is required.",
@@ -200,7 +200,7 @@ const AddAddress = () => {
                                       }
                                 })}
                                 onChange={handleOnChanges} ></MuiPhoneNumber>
-                                <label for="branchName" className={mobilePhone !="" ? "input-has-value" : ""}>Mobile phone</label>
+                                <label for="branchName" className={"input-has-value"}>Mobile phone</label>
                                 <p className="form-input-error">{errors.mobilePhone?.message}</p>
                             </div>
                             </div>
