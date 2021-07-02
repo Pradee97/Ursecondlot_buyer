@@ -30,9 +30,11 @@ const ForgotEmail = () => {
                 setPopupActionPath("/login")
 
             } else {
+                const { data } = response;
                 togglePopup()
                 setPopupTitle("Change Password");
-                setPopupMsg("Change Password is not Updated, Please try Again");
+                // setPopupMsg("Change Password is not Updated, Please try Again");
+                setPopupMsg(data.error);
                 setPopupType("error");
                 setPopupActionType("close");
                 setPopupActionValue("close");

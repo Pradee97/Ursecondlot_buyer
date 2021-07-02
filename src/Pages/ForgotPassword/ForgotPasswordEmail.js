@@ -29,9 +29,11 @@ const ForgotPasswordEmail = () => {
                 setPopupActionValue("ok");
                 setPopupActionPath("/login")
             } else {
+                const { data } = response;
                 togglePopup()
                 setPopupTitle("Forgot Password");
-                setPopupMsg("Forgot Password is not Updated, Please try Again");
+                // setPopupMsg("Forgot Password is not Updated, Please try Again");
+                setPopupMsg(data.errorhi);
                 setPopupType("error");
                 setPopupActionType("close");
                 setPopupActionValue("close");

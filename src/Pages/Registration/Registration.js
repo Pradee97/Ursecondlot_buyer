@@ -90,12 +90,11 @@ const Registration = () => {
             local_flag: 0,
             image:doc===""?"":doc.length>0?doc:[doc],
         };
-        console.log("====request==>",request)
         API.post("registration/add", request)
             .then((response) => {
                 if (response.data.success) {
                     const { data } = response;
-                    console.log("response", response)
+                    console.log("registration response=>", response)
                     toggleCommonPopup()
                     setPopupTitle("Dealer Registered successfully");
                     setPopupMsg("Please Activate your account with the link shared to the given email Id");
@@ -104,9 +103,10 @@ const Registration = () => {
                     setPopupActionValue("ok");
                     setPopupActionPath("/login")
                 } else {
+                    const { data } = response;
                     toggleCommonPopup()
                     setPopupTitle("Error");
-                    setPopupMsg("registration failed, Please try Again");
+                    setPopupMsg(data.error.mailError);
                     setPopupType("error");
                     setPopupActionType("close");
                     setPopupActionValue("close");
