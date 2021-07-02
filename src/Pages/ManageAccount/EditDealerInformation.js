@@ -118,8 +118,8 @@ const EditDealerInformation = () => {
             setPrimaryPhoneError("Primary Phone is required")
             return;
         }
-        else if(primaryPhone.length<10 ){
-            setPrimaryPhoneError("Primary Phone must have atleast have 10 digits")
+        else if(primaryPhone.length<17 ){
+            setPrimaryPhoneError("Primary Phone must have 10 digits")
             return;
         }
        
@@ -127,8 +127,8 @@ const EditDealerInformation = () => {
             setMobilePhoneError("Mobile Phone is required")
             return;
         }
-        else if(mobilePhone.length<10){
-            setMobilePhoneError("Mobile Phone must have atleast have 10 digits")
+        else if(mobilePhone.length<17){
+            setMobilePhoneError("Mobile Phone must have 10 digits")
             return;
         }
         
@@ -264,24 +264,22 @@ const EditDealerInformation = () => {
                             </div>
                             </div>
                            
-                            <div class="col-sm-12 form-group ">
-                            <div className="tbox">
+                            <div class="col-sm-6 form-group ">
+                            <div className="tbox phoneNumberfield">
                             <MuiPhoneNumber value={accountObjc.phone_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={handleOnChange} ></MuiPhoneNumber>
                                  {/* <input type="text" defaultValue={accountObjc.phone_no} class="textbox" placeholder="Primary phone"  onChange={(e) => setPrimaryphone(e.target.value)} /> */}
                                 <label for="phone_no" className={primaryPhone != "" ? "input-has-value" : ""}>Primary Phone</label>
-                                <p className="form-input-error" >{primaryPhoneError}</p>
-
                             </div>
+                                <p className="form-input-error" >{primaryPhoneError}</p>
                             </div>
                             
-                            <div class="col-sm-12 form-group ">
-                            <div className="tbox">
+                            <div class="col-sm-6 form-group ">
+                            <div className="tbox phoneNumberfield">
                             <MuiPhoneNumber value={accountObjc.mobile_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={handleOnChanges} ></MuiPhoneNumber>
                                {/* <input type="text" defaultValue={accountObjc.mobile_no} class="textbox" placeholder="Mobile phone"  onChange={(e) => setMobilephone(e.target.value)} /> */}
                                 <label for="mobile_no" className={mobilePhone != "" ? "input-has-value" : ""}>Mobile Phone</label>
-                                <p className="form-input-error" >{mobilePhoneError}</p>
-
                             </div>
+                            <p className="form-input-error" >{mobilePhoneError}</p>
                             </div>
                             <div class="col-sm-12 form-group">
                             <div className="tbox">

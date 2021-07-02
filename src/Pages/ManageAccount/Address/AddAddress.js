@@ -164,8 +164,8 @@ const AddAddress = () => {
                             </div>
                             </div>
                            
-                            <div className="col-sm-12 form-group ">
-                            <div className="tbox">
+                            <div className="col-sm-6 form-group ">
+                            <div className="tbox phoneNumberfield">
                             <MuiPhoneNumber id="companyName" name="primaryPhone" defaultCountry={'us'} onlyCountries={['us']}  className="textbox" 
                           
                                  {...register("primaryPhone", {
@@ -180,27 +180,24 @@ const AddAddress = () => {
                                       }
                                 })}
                                 onChange={handleOnChange} ></MuiPhoneNumber>
-                                <label for="companyName" className={primaryPhone !="" ? "input-has-value" : ""}>Primary phone</label>
+                                <label for="companyName" className={"input-has-value"}>Primary phone</label>
                                 <p className="form-input-error">{errors.primaryPhone?.message}</p>
                             </div>
                             </div>
                             
-                            <div className="col-sm-12 form-group ">
-                            <div className="tbox">
+                            <div className="col-sm-6 form-group ">
+                            <div className="tbox phoneNumberfield">
                             <MuiPhoneNumber id="companyName" name="primaryPhone" defaultCountry={'us'} onlyCountries={['us']}  className="textbox" 
                                   {...register("mobilePhone", {
                                     required: "This input is required.",
-                                    pattern: {
-                                        value: /\(?([0-9]{3})\)\s?([0-9]{3})([ .-]?)([0-9]{4})/,
-                                        message: "Accept only this Format: (123)455-6789 "
-                                        },
+                                   
                                     minLength: {
-                                        value: 10,
-                                        message: "This input atleast have 10 digits"
+                                        value: 17,
+                                        message: "This input must have 10 digits"
                                       }
                                 })}
                                 onChange={handleOnChanges} ></MuiPhoneNumber>
-                                <label for="branchName" className={mobilePhone !="" ? "input-has-value" : ""}>Mobile phone</label>
+                                <label for="branchName" className={"input-has-value"}>Mobile phone</label>
                                 <p className="form-input-error">{errors.mobilePhone?.message}</p>
                             </div>
                             </div>
