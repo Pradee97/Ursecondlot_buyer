@@ -142,26 +142,20 @@ const EditAddress = () => {
             setPrimaryPhoneError("Primary Phone is required")
             return;
         }
-        else if(primaryPhone.length<10 || primaryPhone.length>15){
-            setPrimaryPhoneError("Primary Phone must have atleast have 10 digits and must not exceed 15 digits")
+        else if(primaryPhone.length<10){
+            setPrimaryPhoneError("Primary Phone must have atleast have 10 digits ")
             return;
         }
-        else if( primaryPhone && !new RegExp(/\(?([0-9]{3})\)\s?([0-9]{3})([ .-]?)([0-9]{4})/).test(primaryPhone) ) {
-            setPrimaryPhoneError("Accept only this Format: (123)455-6789")
-            return;
-        }
+      
         if(!mobilePhone){
             setMobilePhoneError("Mobile Phone is required")
             return;
         }
-        else if(mobilePhone.length<10 || mobilePhone.length>15){
-            setMobilePhoneError("Mobile Phone must have atleast have 10 digits and must not exceed 15 digits")
+        else if(mobilePhone.length<10){
+            setMobilePhoneError("Mobile Phone must have atleast have 10 digits")
             return;
         }
-        else if( mobilePhone && !new RegExp(/\(?([0-9]{3})\)\s?([0-9]{3})([ .-]?)([0-9]{4})/).test(mobilePhone) ) {
-            setMobilePhoneError("Accept only this Format: (123)455-6789")
-            return;
-        }
+      
         if(!address){
             setAddressError("Address is required")
             return;
@@ -254,7 +248,12 @@ const EditAddress = () => {
     })
         .catch(err => { console.log(err); });
     }, []);
-  
+    function handleOnChange(value) {
+        setPrimaryPhone(value);
+     }
+     function handleOnChanges(value) {
+        setMobilePhone(value);
+     }
     return (
         <div>
             <main id="main" class="inner-page">
@@ -301,7 +300,7 @@ const EditAddress = () => {
                             <div class="col-sm-12 form-group ">
                             <div className="tbox">
                                 
-                            <MuiPhoneNumber defaultValue={accountObjc.phone_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={(e) => setPrimaryPhone(e.target.value)} ></MuiPhoneNumber>
+                            <MuiPhoneNumber value={accountObjc.phone_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={handleOnChange} ></MuiPhoneNumber>
 
                                 {/* <input type="text" defaultValue={accountObjc.phone_no} class="textbox" placeholder="" onChange={(e) => setPrimaryPhone(e.target.value)} /> */}
                                 <label for="primary_phone"  className={"input-has-value"}>Primary Phone</label>
@@ -311,7 +310,7 @@ const EditAddress = () => {
                             
                             <div class="col-sm-12 form-group ">
                             <div className="tbox">
-                            <MuiPhoneNumber defaultValue={accountObjc.mobile_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={(e) => setMobilePhone(e.target.value)} ></MuiPhoneNumber>
+                            <MuiPhoneNumber value={accountObjc.mobile_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={handleOnChanges} ></MuiPhoneNumber>
                                 
                                 {/* <input type="text" defaultValue={accountObjc.mobile_no} class="textbox" placeholder="" onChange={(e) => setMobilePhone(e.target.value)} /> */}
                                 <label for="mobile_phone"  className={"input-has-value"}>Mobile Phone</label>

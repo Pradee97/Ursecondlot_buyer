@@ -118,26 +118,20 @@ const EditDealerInformation = () => {
             setPrimaryPhoneError("Primary Phone is required")
             return;
         }
-        else if(primaryPhone.length<10 || primaryPhone.length>15){
-            setPrimaryPhoneError("Primary Phone must have atleast have 10 digits and must not exceed 15 digits")
+        else if(primaryPhone.length<10 ){
+            setPrimaryPhoneError("Primary Phone must have atleast have 10 digits")
             return;
         }
-        else if( primaryPhone && !new RegExp(/\(?([0-9]{3})\)\s?([0-9]{3})([ .-]?)([0-9]{4})/).test(primaryPhone) ) {
-            setPrimaryPhoneError("Accept only this Format: (123)455-6789")
-            return;
-        }
+       
         if(!mobilePhone){
             setMobilePhoneError("Mobile Phone is required")
             return;
         }
-        else if(mobilePhone.length<10 || mobilePhone.length>15){
-            setMobilePhoneError("Mobile Phone must have atleast have 10 digits and must not exceed 15 digits")
+        else if(mobilePhone.length<10){
+            setMobilePhoneError("Mobile Phone must have atleast have 10 digits")
             return;
         }
-        else if( mobilePhone && !new RegExp(/\(?([0-9]{3})\)\s?([0-9]{3})([ .-]?)([0-9]{4})/).test(mobilePhone) ) {
-            setMobilePhoneError("Accept only this Format: (123)455-6789")
-            return;
-        }
+        
         if(!address){
             setAddressError("Address is required")
             return;
@@ -222,6 +216,12 @@ const EditDealerInformation = () => {
     })
         .catch(err => { console.log(err); });
     }, [reset]);
+    function handleOnChange(value) {
+        setPrimaryphone(value);
+     }
+     function handleOnChanges(value) {
+        setMobilephone(value);
+     }
     return (
         <div>
             <main id="main" class="inner-page">
@@ -266,7 +266,7 @@ const EditDealerInformation = () => {
                            
                             <div class="col-sm-12 form-group ">
                             <div className="tbox">
-                            <MuiPhoneNumber defaultValue={accountObjc.phone_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={(e) =>setPrimaryphone(e.target.value)} ></MuiPhoneNumber>
+                            <MuiPhoneNumber value={accountObjc.phone_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={handleOnChange} ></MuiPhoneNumber>
                                  {/* <input type="text" defaultValue={accountObjc.phone_no} class="textbox" placeholder="Primary phone"  onChange={(e) => setPrimaryphone(e.target.value)} /> */}
                                 <label for="phone_no" className={primaryPhone != "" ? "input-has-value" : ""}>Primary Phone</label>
                                 <p className="form-input-error" >{primaryPhoneError}</p>
@@ -276,7 +276,7 @@ const EditDealerInformation = () => {
                             
                             <div class="col-sm-12 form-group ">
                             <div className="tbox">
-                            <MuiPhoneNumber defaultValue={accountObjc.mobile_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={(e) => setMobilephone(e.target.value)} ></MuiPhoneNumber>
+                            <MuiPhoneNumber value={accountObjc.mobile_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={handleOnChanges} ></MuiPhoneNumber>
                                {/* <input type="text" defaultValue={accountObjc.mobile_no} class="textbox" placeholder="Mobile phone"  onChange={(e) => setMobilephone(e.target.value)} /> */}
                                 <label for="mobile_no" className={mobilePhone != "" ? "input-has-value" : ""}>Mobile Phone</label>
                                 <p className="form-input-error" >{mobilePhoneError}</p>
