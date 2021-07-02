@@ -138,7 +138,7 @@ const AddAddress = () => {
                                       }
                                   })}
                                 onChange={(e) => setFirstname(e.target.value)} />
-                                <label for="contactName" className={firstName !="" ? "input-has-value" : ""}>First name</label>
+                                <label htmlFor="contactName" className={firstName !="" ? "input-has-value" : ""}>First name</label>
                                 <p className="form-input-error">{errors.firstName?.message}</p>
                             </div>
                             </div>
@@ -153,7 +153,7 @@ const AddAddress = () => {
                                       }
                                   })}
                                 onChange={(e) => setLastname(e.target.value)} />
-                                <label for="contactName" className={lastName !="" ? "input-has-value" : ""}>Last name</label>
+                                <label htmlFor="contactName" className={lastName !="" ? "input-has-value" : ""}>Last name</label>
                                 <p className="form-input-error">{errors.lastName?.message}</p>
                             </div>
                             </div>
@@ -164,7 +164,7 @@ const AddAddress = () => {
                                          <option value="1" selected>+1</option>
                                         {/* <option value="2">+2</option> */}
                                     </select>
-                                    <label for="no_years" className={"input-has-value"}>Country code</label>
+                                    <label htmlFor="no_years" className={"input-has-value"}>Country code</label>
                                 </div>
                             </div>
                             <div className="col-sm-8 form-group phonecode">
@@ -186,7 +186,7 @@ const AddAddress = () => {
                                       }
                                 })}
                                 onChange={(e) => setPrimaryphone(e.target.value)} />
-                                <label for="companyName" className={primaryPhone !="" ? "input-has-value" : ""}>Primary phone</label>
+                                <label htmlFor="companyName" className={primaryPhone !="" ? "input-has-value" : ""}>Primary phone</label>
                                 <small>Format: (123)455-6789</small>
                                 <p className="form-input-error">{errors.primaryPhone?.message}</p>
                             </div>
@@ -198,7 +198,7 @@ const AddAddress = () => {
                                          <option value="1" selected>+1</option>
                                         {/* <option value="2">+2</option> */}
                                     </select>
-                                    <label for="no_years" className={"input-has-value"}>Country code</label>
+                                    <label htmlFor="no_years" className={"input-has-value"}>Country code</label>
                                 </div>
                             </div>
                             <div className="col-sm-8 form-group phonecode">
@@ -220,7 +220,7 @@ const AddAddress = () => {
                                       }
                                 })}
                                 onChange={(e) => setMobilephone(e.target.value)} />
-                                <label for="branchName" className={mobilePhone !="" ? "input-has-value" : ""}>Mobile phone</label>
+                                <label htmlFor="branchName" className={mobilePhone !="" ? "input-has-value" : ""}>Mobile phone</label>
                                 <small>Format: (123)455-6789</small>
                                 <p className="form-input-error">{errors.mobilePhone?.message}</p>
                             </div>
@@ -236,7 +236,7 @@ const AddAddress = () => {
                                       }
                                   })}
                                 onChange={(e) => setAddress(e.target.value)} />
-                                <label for="contactName" className={address !="" ? "input-has-value" : ""}>Address</label>
+                                <label htmlFor="contactName" className={address !="" ? "input-has-value" : ""}>Address</label>
                                 <p className="form-input-error">{errors.address?.message}</p>
                             </div>
                             </div>
@@ -256,7 +256,7 @@ const AddAddress = () => {
                                       }
                                   })}
                                 onChange={(e) => setLocation(e.target.value)} />
-                                <label for="contactName" className={location !="" ? "input-has-value" : ""}>Location</label>
+                                <label htmlFor="contactName" className={location !="" ? "input-has-value" : ""}>Location</label>
                                 <p className="form-input-error">{errors.location?.message}</p>
                             </div>
                             </div>
@@ -271,7 +271,7 @@ const AddAddress = () => {
                                       }
                                   })}
                                 onChange={(e) => setInstruction(e.target.value)} />
-                                <label for="contactName" className={instruction !="" ? "input-has-value" : ""}>Instructions</label>
+                                <label htmlFor="contactName" className={instruction !="" ? "input-has-value" : ""}>Instructions</label>
                                 <p className="form-input-error">{errors.instruction?.message}</p>
                             </div>
                             </div>

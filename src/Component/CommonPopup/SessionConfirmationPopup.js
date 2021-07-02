@@ -44,18 +44,18 @@ const SessionConfirmationPopup = props => {
 
     return (
         <div className="popup-box">
-            <div id="" class="CommonModels-box">
-                <div class="Commonfullformblock col-lg-9">
-                    <div class="CommonContainer">
-                        <div class="CommonModalcontent">
-                            <div class="CommonModalbody">
+            <div id="" className="CommonModels-box">
+                <div className="Commonfullformblock col-lg-9">
+                    <div className="CommonContainer">
+                        <div className="CommonModalcontent">
+                            <div className="CommonModalbody">
                                 <h2>{"Session Timeout"}</h2>
                                 <p>{`The current session is about to expire in ${countDown}sec`}</p>
                                 <p>{`Would you like to continue the session?`}</p>
                             </div>
-                            <div class="CommonModalfooter session">
-                                <button class="cta-btns" onClick={Continue} >continue</button> 
-                                <button class="cta-btns" onClick={Close} >logout</button> 
+                            <div className="CommonModalfooter session">
+                                <button className="cta-btns" onClick={Continue} >continue</button> 
+                                <button className="cta-btns" onClick={Close} >logout</button> 
                             </div>
                         </div>
                     </div>

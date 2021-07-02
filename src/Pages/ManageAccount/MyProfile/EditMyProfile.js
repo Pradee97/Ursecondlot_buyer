@@ -7,16 +7,6 @@ import StateAndCity from '../../../Component/StateAndCity/StateAndCity'
 import CommonPopup from '../../../Component/CommonPopup/CommonPopup';
 import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks";
 import { useForm } from "react-hook-form";
-
-import {
-    Form,
-    Input,
-    Select,
-    AutoComplete,
-    Radio,
-    notification,
-    Spin,
-} from 'antd';
 import ls from 'local-storage';
 
 const EditMyProfile = () => {
@@ -235,20 +225,20 @@ const EditMyProfile = () => {
                     <form className="registrationform" onSubmit={updateMyProfile} >
                         <div className="row">
                         <div className="section-title">
-                        <button className="back-btn-paymentform backBtn" onClick={() => history.push("/myprofile")}><i class="icofont-arrow-left"></i> Back</button> 
+                        <button className="back-btn-paymentform backBtn" onClick={() => history.push("/myprofile")}><i className="icofont-arrow-left"></i> Back</button> 
 							<h2>Edit My Profile</h2>
 						</div>
                         
                             <div className="col-sm-12 form-group">
                             <div className="tbox">                           
                                 <input type="text"  defaultValue={myProfileObjc.first_name} className="form-control textbox" placeholder="" required disabled onChange={(e) => setFirstName(e.target.value)} />
-                                <label for="first_name" className={firstName !="" ? "input-has-value" : ""}>First Name</label>
+                                <label htmlFor="first_name" className={firstName !="" ? "input-has-value" : ""}>First Name</label>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={myProfileObjc.last_name} className="form-control textbox" placeholder="" required disabled onChange={(e) => setLastName(e.target.value)} />
-                                <label for="last_name" className={lastName !="" ? "input-has-value" : ""}>Last Name</label>
+                                <label htmlFor="last_name" className={lastName !="" ? "input-has-value" : ""}>Last Name</label>
                             </div>
                             </div>
                             <div className="col-sm-4 form-group">
@@ -258,13 +248,13 @@ const EditMyProfile = () => {
                                          <option value="1" selected>+1</option>
                                         {/* <option value="2">+2</option> */}
                                     </select>
-                                    <label for="no_years" className={"input-has-value"}>Country code</label>
+                                    <label htmlFor="no_years" className={"input-has-value"}>Country code</label>
                                 </div>
                             </div>
                             <div className="col-sm-8 form-group phonecode">
                             <div className="tbox">
                                 <input type="text" defaultValue={myProfileObjc.phone_no} className="form-control textbox" placeholder=""  onChange={(e) => setPrimaryPhone(e.target.value)} />
-                                <label for="phone_no" className={primaryPhone !="" ? "input-has-value" : ""}>Primary Phone</label>
+                                <label htmlFor="phone_no" className={primaryPhone !="" ? "input-has-value" : ""}>Primary Phone</label>
                                 <small>Format: (123)455-6789</small>
                                 <p className="form-input-error" >{primaryPhoneError}</p>
 
@@ -277,13 +267,13 @@ const EditMyProfile = () => {
                                          <option value="1" selected>+1</option>
                                         {/* <option value="2">+2</option> */}
                                     </select>
-                                    <label for="no_years" className={"input-has-value"}>Country code</label>
+                                    <label htmlFor="no_years" className={"input-has-value"}>Country code</label>
                                 </div>
                             </div>
                             <div className="col-sm-8 form-group phonecode">
                             <div className="tbox">
                                 <input type="text" defaultValue={myProfileObjc.mobile_no} className="form-control textbox" placeholder=""  onChange={(e) => setMobilephone(e.target.value)} />
-                                <label for="mobile_no" className={mobilePhone !="" ? "input-has-value" : ""}>Mobile Phone</label>
+                                <label htmlFor="mobile_no" className={mobilePhone !="" ? "input-has-value" : ""}>Mobile Phone</label>
                                 <small>Format: (123)455-6789</small>
                                 <p className="form-input-error" >{mobilePhoneError}</p>
 
@@ -292,13 +282,13 @@ const EditMyProfile = () => {
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="email" defaultValue={myProfileObjc.email} className="form-control textbox" placeholder="" required disabled onChange={(e) => setEmailId(e.target.value)} />
-                                <label for="email" className={emailId !="" ? "input-has-value" : ""}>Email Id</label>
+                                <label htmlFor="email" className={emailId !="" ? "input-has-value" : ""}>Email Id</label>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={myProfileObjc.address} className="form-control textbox" placeholder=""  onChange={(e) => setAddress(e.target.value)} />
-                                <label for="address" className={address !="" ? "input-has-value" : ""}>Address</label>
+                                <label htmlFor="address" className={address !="" ? "input-has-value" : ""}>Address</label>
                                 <p className="form-input-error" >{addressError}</p>
 
                             </div>
@@ -316,26 +306,26 @@ const EditMyProfile = () => {
                             {/* <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={city} className="form-control textbox" placeholder="" required onChange={(e) => setCity(e.target.value)} />
-                                <label for="city_id" className={city !="" ? "input-has-value" : ""}>City</label>
+                                <label htmlFor="city_id" className={city !="" ? "input-has-value" : ""}>City</label>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={state} className="form-control textbox" placeholder="" required onChange={(e) => setState(e.target.value)} />
-                                <label for="state_id" className={state !="" ? "input-has-value" : ""}>State</label>
+                                <label htmlFor="state_id" className={state !="" ? "input-has-value" : ""}>State</label>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={zipcode} className="form-control textbox" placeholder="" required onChange={(e) => setZipcode(e.target.value)} />
-                                <label for="zipcode_id" className={zipcode !="" ? "input-has-value" : ""}>Zipcode</label>
+                                <label htmlFor="zipcode_id" className={zipcode !="" ? "input-has-value" : ""}>Zipcode</label>
                             </div>
                             </div> */}
 
                             {/* <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={myProfileObjc.address} className="form-control textbox" placeholder="" required onChange={(e) => setLocationName(e.target.value)} />
-                                <label for="address" className={locationName !="" ? "input-has-value" : ""}>Location Name</label>
+                                <label htmlFor="address" className={locationName !="" ? "input-has-value" : ""}>Location Name</label>
                             </div>
                             </div> */}
                                                      

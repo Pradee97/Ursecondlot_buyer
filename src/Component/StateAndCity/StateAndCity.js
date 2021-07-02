@@ -134,7 +134,7 @@ return (
                             </>
                         }
                     </select>
-                    <label  for="state_id" className={"input-has-value"}>State</label>
+                    <label  htmlFor="state_id" className={"input-has-value"}>State</label>
                     </div>
             </div>
         </div>
@@ -149,7 +149,7 @@ return (
                             </>
                         }
                     </select>
-                    <label  for="city_id" className={"input-has-value"}>City</label>
+                    <label  htmlFor="city_id" className={"input-has-value"}>City</label>
                 </div>                   
             </div>
         </div>
@@ -164,7 +164,7 @@ return (
                             </>
                         }
                     </select>
-                    <label  for="zipcode_id" className={"input-has-value"}>Zipcode</label>
+                    <label  htmlFor="zipcode_id" className={"input-has-value"}>Zipcode</label>
                 </div>                   
             </div>
         </div>
@@ -173,7 +173,7 @@ return (
                 <div className="selcetclass">                 
                     <>
                         <input type="text" className="form-control textbox" defaultValue={isEdit ? defaultZipcodeValue : zipCodeId} placeholder="" required maxLength="5" onChange={(e) => setZipcodeId(e.target.value)} />
-                        {<label  for="zipcode_id" className={"input-has-value"}>Zipcode</label>}
+                        {<label  htmlFor="zipcode_id" className={"input-has-value"}>Zipcode</label>}
                     </>                       
                 </div>
             </div>

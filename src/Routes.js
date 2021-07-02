@@ -1,10 +1,10 @@
-import React, {lazy, Suspense, useState, useEffect} from 'react';
-import {BrowserRouter as Router, Route, Switch, Redirect, useHistory} from "react-router-dom";
+import React, { useState, useEffect} from 'react';
+import {BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom";
 import { useIdleTimer } from 'react-idle-timer'
 import './App.css';
 import SessionConfirmationPopup from "./Component/CommonPopup/SessionConfirmationPopup"
 
-import Loading from './Component/Loading/Loading';
+// import Loading from './Component/Loading/Loading';
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
 import Registration from './Pages/Registration/Registration';

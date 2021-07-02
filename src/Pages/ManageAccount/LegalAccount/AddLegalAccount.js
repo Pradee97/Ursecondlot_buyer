@@ -166,7 +166,7 @@ const AddLegalAccount = () => {
                         <div className="row">
 
                         <div className="section-title">
-                        <button className="back-btn-paymentform backBtn" onClick={() => history.push("/manageaccount")}><i class="icofont-arrow-left"></i> Back</button>   
+                        <button className="back-btn-paymentform backBtn" onClick={() => history.push("/manageaccount")}><i className="icofont-arrow-left"></i> Back</button>   
 							<h2>Add Legal Manage Account</h2>
 						</div>
                         <div className="col-sm-12 form-group"> 
@@ -180,7 +180,7 @@ const AddLegalAccount = () => {
                                       }
                                   })}
                                 onChange={(e) => setFirstname(e.target.value)} />
-                                <label for="contactName" className={firstname !="" ? "input-has-value" : ""}>First name</label>
+                                <label htmlFor="contactName" className={firstname !="" ? "input-has-value" : ""}>First name</label>
                                 <p className="form-input-error">{errors.firstName?.message}</p>
                             </div>
                             </div>
@@ -195,7 +195,7 @@ const AddLegalAccount = () => {
                                       }
                                   })}
                                 onChange={(e) => setLastname(e.target.value)} />
-                                <label for="companyName" className={lastname !="" ? "input-has-value" : ""}>Last name</label>
+                                <label htmlFor="companyName" className={lastname !="" ? "input-has-value" : ""}>Last name</label>
                                 <p className="form-input-error">{errors.lastname?.message}</p>
                             </div>
                             </div>
@@ -210,7 +210,7 @@ const AddLegalAccount = () => {
                                       }
                                   })}
                                 onChange={(e) => setLegalBusinessname(e.target.value)} />
-                                <label for="branchName" className={legalBusinessname !="" ? "input-has-value" : ""}>Legal business name</label>
+                                <label htmlFor="branchName" className={legalBusinessname !="" ? "input-has-value" : ""}>Legal business name</label>
                                 <p className="form-input-error">{errors.legalBusinessname?.message}</p>
                             </div>
                             </div>
@@ -225,7 +225,7 @@ const AddLegalAccount = () => {
                                       }
                                   })}
                                 onChange={(e) => setEINnumber(e.target.value)} />
-                                <label for="accountNumber" className={EINnumber !="" ? "input-has-value" : ""}>EIN number</label>
+                                <label htmlFor="accountNumber" className={EINnumber !="" ? "input-has-value" : ""}>EIN number</label>
                                 <p className="form-input-error">{errors.EINnumber?.message}</p>
                             </div>
                             </div>
@@ -241,7 +241,7 @@ const AddLegalAccount = () => {
                                       }
                                   })}
                                 onChange={(e) => setDealershiplicense(e.target.value)} />
-                                <label for="creditLimit" className={dealershiplicense !="" ? "input-has-value" : ""}>Dealership license</label>
+                                <label htmlFor="creditLimit" className={dealershiplicense !="" ? "input-has-value" : ""}>Dealership license</label>
                                 <p className="form-input-error">{errors.dealershiplicense?.message}</p>
                             </div>
                             </div>
@@ -257,7 +257,7 @@ const AddLegalAccount = () => {
                                       }
                                   })}
                                 onChange={(e) => setTaxid(e.target.value)} />
-                                <label for="emailId" className={taxid !="" ? "input-has-value" : ""}>Tax id</label>
+                                <label htmlFor="emailId" className={taxid !="" ? "input-has-value" : ""}>Tax id</label>
                                 <p className="form-input-error">{errors.taxid?.message}</p>
                             </div>
                             </div>
@@ -272,7 +272,7 @@ const AddLegalAccount = () => {
                                       }
                                   })}
                                 onChange={(e) => setAddress(e.target.value)} />
-                                <label for="address" className={address !="" ? "input-has-value" : ""}>Address</label>
+                                <label htmlFor="address" className={address !="" ? "input-has-value" : ""}>Address</label>
                                 <p className="form-input-error">{errors.address?.message}</p>
                             </div>
                             </div>
@@ -284,19 +284,19 @@ const AddLegalAccount = () => {
                             {/* <div className="col-sm-12 form-group">
                             <div className="tbox">                            
                                 <input type="text" id="phoneNumber" className="textbox" placeholder="" required onChange={(e) => setCity(e.target.value)} />
-                                <label for="phoneNumber" className={city !="" ? "input-has-value" : ""}>City</label>
+                                <label htmlFor="phoneNumber" className={city !="" ? "input-has-value" : ""}>City</label>
                             </div>
                             </div>   
                             <div className="col-sm-12 form-group">
                              <div className="tbox">                            
                                 <input type="text" id="phoneNumber" className="textbox" placeholder="" required onChange={(e) => setState(e.target.value)} />
-                                <label for="phoneNumber" className={state !="" ? "input-has-value" : ""}>State</label>
+                                <label htmlFor="phoneNumber" className={state !="" ? "input-has-value" : ""}>State</label>
                             </div>
                             </div>                                     
                             <div className="col-sm-12 form-group">
                              <div className="tbox">                            
                                 <input type="number" id="phoneNumber" className="textbox" placeholder="" required onChange={(e) => setZipcode(e.target.value)} />
-                                <label for="phoneNumber" className={zipcode !="" ? "input-has-value" : ""}>Zip code</label>
+                                <label htmlFor="phoneNumber" className={zipcode !="" ? "input-has-value" : ""}>Zip code</label>
                             </div> 
                             </div>  */}
                             <div className="col-sm-12 form-group datePickerBlock">
@@ -364,7 +364,7 @@ const AddLegalAccount = () => {
                                     required: "This input is required."
                                 })}
                                 onChange={(e) => setDealershiplicenseexp(e.target.value)} />
-                                <label for="phoneNumber" className={"input-has-value"}>Dealership license exp</label>
+                                <label htmlFor="phoneNumber" className={"input-has-value"}>Dealership license exp</label>
                                 <p className="form-input-error">{errors.Dealership?.message}</p> */}
                             </div>
                             {edealerExp==="" && dealershipLicenseexp===null?<p className="form-input-error"> Dealership license exp is required</p>:""}
@@ -434,7 +434,7 @@ const AddLegalAccount = () => {
                                     required: "This input is required."
                                 })}
                                 onChange={(e) => setTaxidexp(e.target.value)} />
-                                <label for="phoneNumber" className={"input-has-value"}>Tax id exp</label>
+                                <label htmlFor="phoneNumber" className={"input-has-value"}>Tax id exp</label>
                                 <p className="form-input-error">{errors.Tax?.message}</p> */}
                             </div>
                             {etax==="" && taxidexp===null?<p className="form-input-error"> Tax id exp  is required</p>:""}

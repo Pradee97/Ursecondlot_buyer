@@ -155,7 +155,7 @@ const FloorAdd = () => {
                 <div className="col-lg-4 loginBlock flooraddform">
 
                
-                <button className="back-btn-paymentform backBtn" onClick={() => history.push("/floor")}><i class="icofont-arrow-left"></i> Back</button> 
+                <button className="back-btn-paymentform backBtn" onClick={() => history.push("/floor")}><i className="icofont-arrow-left"></i> Back</button> 
                 <div className="col-lg-12 card">
                     <form className="registrationform" onSubmit={handleSubmit(floorhandleSubmit)} >
                         
@@ -173,7 +173,7 @@ const FloorAdd = () => {
                                       }
                                   })}
                                 onChange={(e) => setCompanyName(e.target.value)} />
-                                <label for="companyName" className={companyName !="" ? "input-has-value" : ""}>Company Name</label>
+                                <label htmlFor="companyName" className={companyName !="" ? "input-has-value" : ""}>Company Name</label>
                                 <p className="form-input-error">{errors.companyName?.message}</p>
                             </div>
                         </div>
@@ -188,7 +188,7 @@ const FloorAdd = () => {
                                       }
                                   })}
                                 onChange={(e) => setContactName(e.target.value)} />
-                                <label for="contactName" className={contactName !="" ? "input-has-value" : ""}>Name Contact </label>
+                                <label htmlFor="contactName" className={contactName !="" ? "input-has-value" : ""}>Name Contact </label>
                                 <p className="form-input-error">{errors.contactName?.message}</p>
                             </div>
                             </div>                           
@@ -203,7 +203,7 @@ const FloorAdd = () => {
                                       }
                                   })}
                                 onChange={(e) => setBranchName(e.target.value)} />
-                                <label for="branchName" className={branchName !="" ? "input-has-value" : ""}>Branch Name</label>
+                                <label htmlFor="branchName" className={branchName !="" ? "input-has-value" : ""}>Branch Name</label>
                                 <p className="form-input-error">{errors.branchName?.message}</p>
                             </div>
                             </div>
@@ -218,7 +218,7 @@ const FloorAdd = () => {
                                       }
                                   })}
                                 onChange={(e) => setAccountNumber(e.target.value)} />
-                                <label for="accountNumber" className={accountNumber !="" ? "input-has-value" : ""}>accountNumber</label>
+                                <label htmlFor="accountNumber" className={accountNumber !="" ? "input-has-value" : ""}>accountNumber</label>
                                 <p className="form-input-error">{errors.accountNumber?.message}</p>
                             </div>
                             </div>
@@ -229,7 +229,7 @@ const FloorAdd = () => {
                             <option value="$">$</option>
                             {/* <option disabled>Currency</option> */}
                             </select>
-                            <label  for="no_years" className={"input-has-value"}>Currency</label>
+                            <label  htmlFor="no_years" className={"input-has-value"}>Currency</label>
                                 {/* <input type="text" className="form-control" placeholder="Currency" required /> */}
                                </div>
                             </div>
@@ -244,7 +244,7 @@ const FloorAdd = () => {
                                       }
                                   })}
                                 onChange={(e) => setCreditLimit(e.target.value)} />
-                                <label for="creditLimit" className={creditLimit !="" ? "input-has-value" : ""}>Credit Limit</label>
+                                <label htmlFor="creditLimit" className={creditLimit !="" ? "input-has-value" : ""}>Credit Limit</label>
                                 <p className="form-input-error">{errors.creditLimit?.message}</p>
                             </div>
                             </div>
@@ -260,7 +260,7 @@ const FloorAdd = () => {
                                     }
                                 })}
                                 onChange={(e) => setEmailId(e.target.value)} />
-                                <label for="emailId" className={emailId !="" ? "input-has-value" : ""}>Email Id</label>
+                                <label htmlFor="emailId" className={emailId !="" ? "input-has-value" : ""}>Email Id</label>
                                 <p className="form-input-error">{errors.email?.message}</p>
                             </div>
                             </div>
@@ -275,7 +275,7 @@ const FloorAdd = () => {
                                       }
                                   })}
                                 onChange={(e) => setAddress(e.target.value)} />
-                                <label for="address" className={address !="" ? "input-has-value" : ""}>Address</label>
+                                <label htmlFor="address" className={address !="" ? "input-has-value" : ""}>Address</label>
                                 <p className="form-input-error">{errors.address?.message}</p>
                             </div>
                             </div>
@@ -287,7 +287,7 @@ const FloorAdd = () => {
                                          <option value="1" selected>+1</option>
                                         {/* <option value="2">+2</option> */}
                                     </select>
-                                    <label for="no_years" className={"input-has-value"}>Country code</label>
+                                    <label htmlFor="no_years" className={"input-has-value"}>Country code</label>
                                 </div>
                             </div>
 
@@ -310,7 +310,7 @@ const FloorAdd = () => {
                                       },
                                 })}
                                 onChange={(e) => setPhoneNumber(e.target.value)} />
-                                <label for="phoneNumber" className={phoneNumber !="" ? "input-has-value" : ""}>Phone Number</label>
+                                <label htmlFor="phoneNumber" className={phoneNumber !="" ? "input-has-value" : ""}>Phone Number</label>
                                 <small>Format: (123)455-6789</small>
                                 <p className="form-input-error">{errors.phoneNumber?.message}</p>
                             </div>
@@ -398,7 +398,7 @@ const FloorAdd = () => {
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                             </select>
-                            <label  for="account_Opened" className={ "input-has-value"}>Account Opened</label>
+                            <label  htmlFor="account_Opened" className={ "input-has-value"}>Account Opened</label>
                             <p className="form-input-error">{errors.accountOpened?.message}</p>
 
                                 {/* <input type="text" className="form-control" placeholder="Account Opened" required onChange={(e) => setAccountOpened(e.target.value)} /> */}

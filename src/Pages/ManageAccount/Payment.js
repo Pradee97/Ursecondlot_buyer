@@ -4,15 +4,6 @@ import ls from 'local-storage';
 import { useState } from 'react';
 import FileBase64 from 'react-file-base64';
 import { useEffect } from 'react';
-import {
-    Form,
-    Input,
-    Select,
-    AutoComplete,
-    Radio,
-    notification,
-    Spin,
-} from 'antd';
 import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
 import API from "../../Services/BaseService";
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
@@ -237,7 +228,7 @@ const Payment = () => {
                                                               }
                                                           })}
                                                             onChange={(e) => setDealershipName(e.target.value)} />
-                                                            <label for="name-d" className={dealershipName !="" ? "input-has-value" : ""}>Dealership name</label>
+                                                            <label htmlFor="name-d" className={dealershipName !="" ? "input-has-value" : ""}>Dealership name</label>
                                                             <p className="form-input-error">{errors.dealershipName?.message}</p>
                                                         </div>
                                                     </div>
@@ -252,7 +243,7 @@ const Payment = () => {
                                                               }
                                                           })}
                                                             onChange={(e) => setAccountHolderName(e.target.value)} />
-                                                            <label for="name-f" className={accountHolderName !="" ? "input-has-value" : ""}>Signer on account"</label>
+                                                            <label htmlFor="name-f" className={accountHolderName !="" ? "input-has-value" : ""}>Signer on account"</label>
                                                             <p className="form-input-error">{errors.accountHolderName?.message}</p>
                                                         </div>
                                                     </div>
@@ -268,7 +259,7 @@ const Payment = () => {
                                                               }
                                                           })}
                                                             onChange={(e) => setBankName(e.target.value)} />
-                                                            <label for="name-b" className={bankName !="" ? "input-has-value" : ""}>Bank name</label>
+                                                            <label htmlFor="name-b" className={bankName !="" ? "input-has-value" : ""}>Bank name</label>
                                                             <p className="form-input-error">{errors.bankName?.message}</p>
                                                         </div>
                                                     </div>
@@ -284,7 +275,7 @@ const Payment = () => {
                                                               }
                                                           })}
                                                             onChange={(e) => setAccountNumber(e.target.value)} />
-                                                            <label for="anumber" className={accountNumber !="" ? "input-has-value" : ""}>Account number</label>
+                                                            <label htmlFor="anumber" className={accountNumber !="" ? "input-has-value" : ""}>Account number</label>
                                                             <p className="form-input-error">{errors.accountNumber?.message}</p>
                                                         </div>
                                                     </div>
@@ -300,7 +291,7 @@ const Payment = () => {
                                                               }
                                                           })}
                                                             onChange={(e) => setACHNumber(e.target.value)} />
-                                                            <label for="achnumber" className={ACHnumber !="" ? "input-has-value" : ""}>ACH number</label>
+                                                            <label htmlFor="achnumber" className={ACHnumber !="" ? "input-has-value" : ""}>ACH number</label>
                                                             <p className="form-input-error">{errors.ACHnumber?.message}</p>
                                                         </div>
                                                     </div>
@@ -316,7 +307,7 @@ const Payment = () => {
                                                               }
                                                           })}
                                                             onChange={(e) => setRoutingNumber(e.target.value)} />
-                                                            <label for="rtnumber" className={routingNumber !="" ? "input-has-value" : ""}>Routing number</label>
+                                                            <label htmlFor="rtnumber" className={routingNumber !="" ? "input-has-value" : ""}>Routing number</label>
                                                             <p className="form-input-error">{errors.routingNumber?.message}</p>
                                                         </div>
                                                     </div>
@@ -332,7 +323,7 @@ const Payment = () => {
                                                               }
                                                           })}
                                                             onChange={(e) => setBankAddress(e.target.value)} />
-                                                            <label for="baddress" className={bankAddress !="" ? "input-has-value" : ""}>Bank address</label>
+                                                            <label htmlFor="baddress" className={bankAddress !="" ? "input-has-value" : ""}>Bank address</label>
                                                             <p className="form-input-error">{errors.bankAddress?.message}</p>
                                                         </div>
                                                     </div>
@@ -353,7 +344,7 @@ const Payment = () => {
                                                               }
                                                           })}
                                                             onChange={(e) => setAccountHolderAddress(e.target.value)} />
-                                                            <label for="ahaddress" className={accountHolderAddress !="" ? "input-has-value" : ""}>Account Holder Address</label>
+                                                            <label htmlFor="ahaddress" className={accountHolderAddress !="" ? "input-has-value" : ""}>Account Holder Address</label>
                                                             <p className="form-input-error">{errors.accountHolderAddress?.message}</p>
                                                         </div>
                                                     </div>
@@ -372,14 +363,14 @@ const Payment = () => {
                                                     {/* <div className="col-sm-6 form-group uploadbutton">
                                                     <input type="file" id="upload" className="uploadbox" hidden onChange={onFileChange} /> 
                                                             <FileBase64 multiple={ true } onDone={ getFiles } hidden type="hidden"/>
-                                                            <label for="upload upl"><img src={process.env.PUBLIC_URL +"/images/upload.png"} />Upload Document</label>                                                            <p><b>{doc.name}</b></p>
+                                                            <label htmlFor="upload upl"><img src={process.env.PUBLIC_URL +"/images/upload.png"} />Upload Document</label>                                                            <p><b>{doc.name}</b></p>
                                                     </div>*/}
                                                     <div className="col-sm-6 form-group uploadbtn">
-                                                    <div class="upload-btn-wrapper">
-                                                        <button class="btn"><i class="icofont-upload-alt"></i> Upload Document</button>
+                                                    <div className="upload-btn-wrapper">
+                                                        <button className="btn"><i className="icofont-upload-alt"></i> Upload Document</button>
                                                         <FileBase64 multiple={ true } onDone={ getFiles } hidden type="hidden"/>
                                                     </div>
-                                                    <span class="uploadedFile">{doc.length>0?doc[0].name:doc.name}</span>
+                                                    <span className="uploadedFile">{doc.length>0?doc[0].name:doc.name}</span>
                                                     </div>
                                                    
                                                     <div className="col-lg-12 loginBtn">

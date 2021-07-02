@@ -171,11 +171,11 @@ const Document = () => {
 
     return (
         <div>
-            <main id="main" crassName="inner-page">
-                <div id="documentspage" class="documentspage">
-                    <div class="container" >
-                        <div class="documentspageblock col-lg-12">
-                            <div class="section-title">
+            <main id="main" className="inner-page">
+                <div id="documentspage" className="documentspage">
+                    <div className="container" >
+                        <div className="documentspageblock col-lg-12">
+                            <div className="section-title">
                                 <h2>Documents</h2>
                             </div>
                             <div className="row content">
@@ -183,289 +183,289 @@ const Document = () => {
                                     
                                     <ManageAccountLinks />
                                 </div>
-                                <div class="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 documentsrightblock">
-                                    <div class="documentspage-inner">
-                                        <div class="col-lg-12">
-                                            <div class="row">
-                                                <div class="col-lg-4 col-md-4">
-                                                    {doc1 === "" ? <div class="docdetails">
+                                <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 documentsrightblock">
+                                    <div className="documentspage-inner">
+                                        <div className="col-lg-12">
+                                            <div className="row">
+                                                <div className="col-lg-4 col-md-4">
+                                                    {doc1 === "" ? <div className="docdetails">
                                                     <h5>Copy of Dealer license</h5>
-                                                        <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} class="img-fluid" alt="" />
+                                                        <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} className="img-fluid" alt="" />
                                                          <h5> </h5>
-                                                            <div class="upload-btn-wrapper">
-                                                                <a class="btn"> Upload File</a>
+                                                            <div className="upload-btn-wrapper">
+                                                                <a className="btn"> Upload File</a>
                                                                 <FileBase64 onDone={(e) => getFiles(e, "Dealer license")} />
                                                             </div>
                                                             
                                                     </div> :
-                                                        <div class="docdetails">
+                                                        <div className="docdetails">
                                                             <h5>Copy of Dealer license</h5>
-                                                            <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc1.doc_name} class="img-fluid" alt="" />
+                                                            <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc1.doc_name} className="img-fluid" alt="" />
                                                             <div><a href={doc1.doc_name}>{doc1.doc_name.split("_")[1]}</a></div>
                                                             <p>
-                                                                <div class="upload-btn-wrapper updateFile">
-                                                                    <a class="btn"> Update File</a>
+                                                                <div className="upload-btn-wrapper updateFile">
+                                                                    <a className="btn"> Update File</a>
                                                                     <FileBase64 onDone={(e) => updateFiles(e, doc1.document_id)} />
                                                                 </div>
-                                                                <a class="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc1.document_id)}> Delete File</a>
+                                                                <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc1.document_id)}> Delete File</a>
                                                             </p>
                                                         </div>}
                                                 </div>
-                                                <div class="col-lg-4 col-md-4">
-                                                    {doc2 === "" ? <div class="docdetails">
+                                                <div className="col-lg-4 col-md-4">
+                                                    {doc2 === "" ? <div className="docdetails">
                                                         <h5>Certificate of liability insurance.</h5>
-                                                        <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} class="img-fluid" alt="" />
+                                                        <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} className="img-fluid" alt="" />
                                                         <p>  
-                                                        <div class="upload-btn-wrapper">
-                                                                <a class="btn"> Upload File</a>
+                                                        <div className="upload-btn-wrapper">
+                                                                <a className="btn"> Upload File</a>
                                                                 <FileBase64 onDone={(e) => getFiles(e, "liability insurance")} />
                                                             </div>
                                                         </p>
                                                     </div> :
-                                                        <div class="docdetails">
+                                                        <div className="docdetails">
                                                             <h5>Copy of Dealer license</h5>
-                                                            <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc2.doc_name} class="img-fluid" alt="" />
+                                                            <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc2.doc_name} className="img-fluid" alt="" />
                                                             <div><a href={doc2.doc_name}>{doc2.doc_name.split("_")[1]}</a></div>
                                                             <p>
-                                                                <div class="upload-btn-wrapper updateFile">
-                                                                    <a class="btn"> Update File</a>
+                                                                <div className="upload-btn-wrapper updateFile">
+                                                                    <a className="btn"> Update File</a>
                                                                     <FileBase64 onDone={(e) => updateFiles(e, doc2.document_id)} />
                                                                 </div>
 
-                                                                <a class="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc2.document_id)}> Delete File</a>
+                                                                <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc2.document_id)}> Delete File</a>
                                                             </p>
                                                         </div>
                                                     }
                                                 </div>
-                                                <div class="col-lg-4 col-md-4">
-                                                    {doc3 === "" ? <div class="docdetails">
+                                                <div className="col-lg-4 col-md-4">
+                                                    {doc3 === "" ? <div className="docdetails">
                                                         <h5>Copy of Company check.</h5>
-                                                        <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} class="img-fluid" alt="" />
+                                                        <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} className="img-fluid" alt="" />
 
                                                         <p>  
-                                                        <div class="upload-btn-wrapper">
-                                                                <a class="btn"> Upload File</a>
+                                                        <div className="upload-btn-wrapper">
+                                                                <a className="btn"> Upload File</a>
                                                                 <FileBase64 onDone={(e) => getFiles(e, "company check")} />
                                                             </div>
                                                         </p>
-                                                    </div> : <div class="docdetails">
+                                                    </div> : <div className="docdetails">
                                                         <h5>Copy of Dealer license</h5>
-                                                        <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc3.doc_name} class="img-fluid" alt="" />
+                                                        <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc3.doc_name} className="img-fluid" alt="" />
                                                         <div><a href={doc3.doc_name}>{doc3.doc_name.split("_")[1]}</a></div>
                                                         <p>
-                                                            <div class="upload-btn-wrapper updateFile">
-                                                                <a class="btn"> Update File</a>
+                                                            <div className="upload-btn-wrapper updateFile">
+                                                                <a className="btn"> Update File</a>
                                                                 <FileBase64 onDone={(e) => updateFiles(e, doc3.document_id)} />
                                                             </div>
 
-                                                            <a class="btn deleteFile" onclick={(e)=>deleteFileConfirmation(doc3.document_id)}> Delete File</a>
+                                                            <a className="btn deleteFile" onclick={(e)=>deleteFileConfirmation(doc3.document_id)}> Delete File</a>
                                                         </p>
                                                     </div>
                                                     }
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-12 pt-2 mt-2">
-                                            <div class="row">
-                                                <div class="col-lg-4 col-md-4">
-                                                    {doc4 === "" ? <div class="docdetails">
+                                        <div className="col-lg-12 pt-2 mt-2">
+                                            <div className="row">
+                                                <div className="col-lg-4 col-md-4">
+                                                    {doc4 === "" ? <div className="docdetails">
                                                         <h5>Copy of state sales tax certificate.</h5>
-                                                        <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} class="img-fluid" alt="" />
+                                                        <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} className="img-fluid" alt="" />
 
                                                         <p>  
-                                                        <div class="upload-btn-wrapper">
-                                                                <a class="btn"> Upload File</a>
+                                                        <div className="upload-btn-wrapper">
+                                                                <a className="btn"> Upload File</a>
                                                                 <FileBase64 onDone={(e) => getFiles(e, "state sales tax")} />
                                                             </div>
                                                         </p>
                                                     </div> :
-                                                        <div class="docdetails">
+                                                        <div className="docdetails">
                                                             <h5>Copy of Dealer license</h5>
-                                                            <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc4.doc_name} class="img-fluid" alt="" />
+                                                            <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc4.doc_name} className="img-fluid" alt="" />
                                                             <div><a href={doc4.doc_name}>{doc4.doc_name.split("_")[1]}</a></div>
                                                             <p>
-                                                                <div class="upload-btn-wrapper updateFile">
-                                                                    <a class="btn"> Update File</a>
+                                                                <div className="upload-btn-wrapper updateFile">
+                                                                    <a className="btn"> Update File</a>
                                                                     <FileBase64 onDone={(e) => updateFiles(e, doc4.document_id)} />
                                                                 </div>
-                                                                <a class="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc4.document_id)}> Delete File</a>
+                                                                <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc4.document_id)}> Delete File</a>
                                                             </p>
                                                         </div>}
                                                 </div>
-                                                <div class="col-lg-4 col-md-4">
-                                                    {doc5 === "" ? <div class="docdetails">
+                                                <div className="col-lg-4 col-md-4">
+                                                    {doc5 === "" ? <div className="docdetails">
                                                         <h5>Copy of surety bond (if required by you state).</h5>
-                                                        <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} class="img-fluid" alt="" />
+                                                        <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} className="img-fluid" alt="" />
                                                         <p>  
-                                                        <div class="upload-btn-wrapper">
-                                                                <a class="btn"> Upload File</a>
+                                                        <div className="upload-btn-wrapper">
+                                                                <a className="btn"> Upload File</a>
                                                                 <FileBase64 onDone={(e) => getFiles(e, "surety bond")} />
                                                             </div>
                                                         </p>
                                                     </div> :
-                                                        <div class="docdetails">
+                                                        <div className="docdetails">
                                                             <h5>Copy of Dealer license</h5>
-                                                            <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc5.doc_name} class="img-fluid" alt="" />
+                                                            <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc5.doc_name} className="img-fluid" alt="" />
                                                             <div><a href={doc5.doc_name}>{doc5.doc_name.split("_")[1]}</a></div>
                                                             <p>
-                                                                <div class="upload-btn-wrapper updateFile">
-                                                                    <a class="btn"> Update File</a>
+                                                                <div className="upload-btn-wrapper updateFile">
+                                                                    <a className="btn"> Update File</a>
                                                                     <FileBase64 onDone={(e) => updateFiles(e, doc5.document_id)} />
                                                                 </div>
-                                                                <a class="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc5.document_id)}> Delete File</a>
+                                                                <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc5.document_id)}> Delete File</a>
                                                             </p>
                                                         </div>}
                                                 </div>
-                                                <div class="col-lg-4 col-md-4">
-                                                {doc6 === "" ?<div class="docdetails">
+                                                <div className="col-lg-4 col-md-4">
+                                                {doc6 === "" ?<div className="docdetails">
                                                         <h5>Copy of DMV vehicle dealer bond (in required states).</h5>
-                                                        <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} class="img-fluid" alt="" />
+                                                        <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} className="img-fluid" alt="" />
                                                         <p>  
-                                                        <div class="upload-btn-wrapper">
-                                                                <a class="btn"> Upload File</a>
+                                                        <div className="upload-btn-wrapper">
+                                                                <a className="btn"> Upload File</a>
                                                                 <FileBase64 onDone={(e) => getFiles(e, "DMV vehicle")} />
                                                             </div>
                                                         </p>
                                                     </div>:
-                                                     <div class="docdetails">
+                                                     <div className="docdetails">
                                                      <h5>Copy of Dealer license</h5>
-                                                     <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc6.doc_name} class="img-fluid" alt="" />
+                                                     <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc6.doc_name} className="img-fluid" alt="" />
                                                      <div><a href={doc6.doc_name}>{doc6.doc_name.split("_")[1]}</a></div>
                                                      <p>
-                                                         <div class="upload-btn-wrapper updateFile">
-                                                             <a class="btn"> Update File</a>
+                                                         <div className="upload-btn-wrapper updateFile">
+                                                             <a className="btn"> Update File</a>
                                                              <FileBase64 onDone={(e) => updateFiles(e, doc6.document_id)} />
                                                          </div>
-                                                         <a class="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc6.document_id)}> Delete File</a>
+                                                         <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc6.document_id)}> Delete File</a>
                                                      </p>
                                                  </div>}
                                                 </div>                                                
                                             </div>
                                         </div>
-                                        <div class="col-lg-12 pt-2 mt-2">
-                                            <div class="row">
-                                                <div class="col-lg-4 col-md-4">
-                                                {doc7 === "" ?<div class="docdetails">
+                                        <div className="col-lg-12 pt-2 mt-2">
+                                            <div className="row">
+                                                <div className="col-lg-4 col-md-4">
+                                                {doc7 === "" ?<div className="docdetails">
                                                         <h5>Signed individual guaranty for each owner.</h5>
-                                                        <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} class="img-fluid" alt="" />
+                                                        <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} className="img-fluid" alt="" />
                                                         <p>  
-                                                        <div class="upload-btn-wrapper">
-                                                                <a class="btn"> Upload File</a>
+                                                        <div className="upload-btn-wrapper">
+                                                                <a className="btn"> Upload File</a>
                                                                 <FileBase64 onDone={(e) => getFiles(e, "individual guaranty")} />
                                                             </div>
                                                         </p>
                                                     </div>:
-                                                    <div class="docdetails">
+                                                    <div className="docdetails">
                                                     <h5>Copy of Dealer license</h5>
-                                                    <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc7.doc_name} class="img-fluid" alt="" />
+                                                    <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc7.doc_name} className="img-fluid" alt="" />
                                                     <div><a href={doc7.doc_name}>{doc7.doc_name.split("_")[1]}</a></div>
                                                     <p>
-                                                        <div class="upload-btn-wrapper updateFile">
-                                                            <a class="btn"> Update File</a>
+                                                        <div className="upload-btn-wrapper updateFile">
+                                                            <a className="btn"> Update File</a>
                                                             <FileBase64 onDone={(e) => updateFiles(e, doc7.document_id)} />
                                                         </div>
-                                                        <a class="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc7.document_id)}> Delete File</a>
+                                                        <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc7.document_id)}> Delete File</a>
                                                     </p>
                                                 </div>}
                                                 </div>
-                                                <div class="col-lg-4 col-md-4">
-                                                {doc8 === "" ?<div class="docdetails">
+                                                <div className="col-lg-4 col-md-4">
+                                                {doc8 === "" ?<div className="docdetails">
                                                         <h5>Legible copy of driver’s license for owners and representatives</h5>
-                                                        <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} class="img-fluid" alt="" />
+                                                        <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} className="img-fluid" alt="" />
                                                         <p>  
-                                                        <div class="upload-btn-wrapper">
-                                                                <a class="btn"> Upload File</a>
+                                                        <div className="upload-btn-wrapper">
+                                                                <a className="btn"> Upload File</a>
                                                                 <FileBase64 onDone={(e) => getFiles(e, "owners and representatives")} />
                                                             </div>
                                                         </p>
                                                     </div>:
-                                                    <div class="docdetails">
+                                                    <div className="docdetails">
                                                     <h5>Copy of Dealer license</h5>
-                                                    <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc8.doc_name} class="img-fluid" alt="" />
+                                                    <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc8.doc_name} className="img-fluid" alt="" />
                                                     <div><a href={doc8.doc_name}>{doc8.doc_name.split("_")[1]}</a></div>
                                                     <p>
-                                                        <div class="upload-btn-wrapper updateFile">
-                                                            <a class="btn"> Update File</a>
+                                                        <div className="upload-btn-wrapper updateFile">
+                                                            <a className="btn"> Update File</a>
                                                             <FileBase64 onDone={(e) => updateFiles(e, doc8.document_id)} />
                                                         </div>
-                                                        <a class="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc8.document_id)}> Delete File</a>
+                                                        <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc8.document_id)}> Delete File</a>
                                                     </p>
                                                 </div>}
                                                 </div>
-                                                <div class="col-lg-4 col-md-4">
-                                                {doc9 === "" ?<div class="docdetails">
+                                                <div className="col-lg-4 col-md-4">
+                                                {doc9 === "" ?<div className="docdetails">
                                                         <h5>Signed bank Authorization letter for bank to release information.</h5>
-                                                        <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} class="img-fluid" alt="" />
+                                                        <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} className="img-fluid" alt="" />
                                                         <p>  
-                                                        <div class="upload-btn-wrapper">
-                                                                <a class="btn"> Upload File</a>
+                                                        <div className="upload-btn-wrapper">
+                                                                <a className="btn"> Upload File</a>
                                                                 <FileBase64 onDone={(e) => getFiles(e, "bank Authorization")} />
                                                             </div>
                                                         </p>
                                                     </div>:
-                                                    <div class="docdetails">
+                                                    <div className="docdetails">
                                                     <h5>Copy of Dealer license</h5>
-                                                    <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc9.doc_name} class="img-fluid" alt="" />
+                                                    <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc9.doc_name} className="img-fluid" alt="" />
                                                     <div><a href={doc9.doc_name}>{doc9.doc_name.split("_")[1]}</a></div>
                                                     <p>
-                                                        <div class="upload-btn-wrapper updateFile">
-                                                            <a class="btn"> Update File</a>
+                                                        <div className="upload-btn-wrapper updateFile">
+                                                            <a className="btn"> Update File</a>
                                                             <FileBase64 onDone={(e) => updateFiles(e, doc9.document_id)} />
                                                         </div>
-                                                        <a class="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc9.document_id)}> Delete File</a>
+                                                        <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc9.document_id)}> Delete File</a>
                                                     </p>
                                                 </div>}
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-12 pt-2 mt-2">
-                                            <div class="row">
-                                                <div class="col-lg-4 col-md-4">
-                                                {doc10 === "" ?<div class="docdetails">
+                                        <div className="col-lg-12 pt-2 mt-2">
+                                            <div className="row">
+                                                <div className="col-lg-4 col-md-4">
+                                                {doc10 === "" ?<div className="docdetails">
                                                         <h5>Legible copy of driver’s license for owners and representatives</h5>
-                                                        <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} class="img-fluid" alt="" />
+                                                        <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} className="img-fluid" alt="" />
                                                         <p>  
-                                                        <div class="upload-btn-wrapper">
-                                                                <a class="btn"> Upload File</a>
+                                                        <div className="upload-btn-wrapper">
+                                                                <a className="btn"> Upload File</a>
                                                                 <FileBase64 onDone={(e) => getFiles(e, "representatives")} />
                                                             </div>
                                                         </p>
                                                     </div>:
-                                                    <div class="docdetails">
+                                                    <div className="docdetails">
                                                     <h5>Copy of Dealer license</h5>
-                                                    <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc10.doc_name} class="img-fluid" alt="" />
+                                                    <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc10.doc_name} className="img-fluid" alt="" />
                                                     <div><a href={doc10.doc_name}>{doc10.doc_name.split("_")[1]}</a></div>
                                                     <p>
-                                                        <div class="upload-btn-wrapper updateFile">
-                                                            <a class="btn"> Update File</a>
+                                                        <div className="upload-btn-wrapper updateFile">
+                                                            <a className="btn"> Update File</a>
                                                             <FileBase64 onDone={(e) => updateFiles(e, doc10.document_id)} />
                                                         </div>
-                                                        <a class="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc10.document_id)}> Delete File</a>
+                                                        <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc10.document_id)}> Delete File</a>
                                                     </p>
                                                 </div>}
                                                 </div>
-                                                <div class="col-lg-4 col-md-4">
-                                                {doc11 === "" ?<div class="docdetails">
+                                                <div className="col-lg-4 col-md-4">
+                                                {doc11 === "" ?<div className="docdetails">
                                                         <h5>Articles of incorporation.</h5>
-                                                        <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} class="img-fluid" alt="" />
+                                                        <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} className="img-fluid" alt="" />
 
                                                         <p>  
-                                                        <div class="upload-btn-wrapper">
-                                                                <a class="btn"> Upload File</a>
+                                                        <div className="upload-btn-wrapper">
+                                                                <a className="btn"> Upload File</a>
                                                                 <FileBase64 onDone={(e) => getFiles(e, "Articles of incorporation")} />
                                                             </div>
                                                         </p>
                                                     </div>:
-                                                    <div class="docdetails">
+                                                    <div className="docdetails">
                                                     <h5>Copy of Dealer license</h5>
-                                                    <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc11.doc_name} class="img-fluid" alt="" />
+                                                    <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc11.doc_name} className="img-fluid" alt="" />
                                                     <div><a href={doc11.doc_name}>{doc11.doc_name.split("_")[1]}</a></div>
                                                     <p>
-                                                        <div class="upload-btn-wrapper updateFile">
-                                                            <a class="btn"> Update File</a>
+                                                        <div className="upload-btn-wrapper updateFile">
+                                                            <a className="btn"> Update File</a>
                                                             <FileBase64 onDone={(e) => updateFiles(e, doc11.document_id)} />
                                                         </div>
-                                                        <a class="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc11.document_id)}> Delete File</a>
+                                                        <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc11.document_id)}> Delete File</a>
                                                     </p>
                                                 </div>}
                                                 </div>

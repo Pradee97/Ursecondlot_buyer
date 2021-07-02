@@ -74,7 +74,7 @@ const ForgotPassword = () => {
             <div>
                 <main id="main" className="inner-page">
                     <div className="col-lg-4  loginBlock">
-                        <button className="back-btn-paymentform backBtn" onClick={() => history.push("/login")}><i class="icofont-arrow-left"></i> Back</button>
+                        <button className="back-btn-paymentform backBtn" onClick={() => history.push("/login")}><i className="icofont-arrow-left"></i> Back</button>
                         <div className="col-lg-12 card">
                             <form className="registrationform" onSubmit={changehandleSubmit} >
                                 <h2 className="title">Forgot Password</h2>
@@ -84,13 +84,13 @@ const ForgotPassword = () => {
                                     <div className="col-sm-12 form-group">
                                         <div className="tbox">
                                             <input type={showPwd?"text":"password"} id="password" className="textbox" placeholder="" required onChange={(e) => setPassword(e.target.value)} />
-                                            <label for="password" className={password != "" ? "input-has-value" : ""}>Password</label><i for ="password" className="passwordeye"  onClick={togglepwd}>{eye}</i>
+                                            <label htmlFor="password" className={password != "" ? "input-has-value" : ""}>Password</label><i htmlFor ="password" className="passwordeye"  onClick={togglepwd}>{eye}</i>
                                         </div>
                                     </div>
                                     <div className="col-sm-12 form-group">
                                         <div className="tbox">
                                             <input type={showPwds?"text":"password"} id="newPassword" className="textbox" placeholder="" required onChange={(e) => setNewPassword(e.target.value)} />
-                                            <label for="newPassword" className={newPassword != "" ? "input-has-value" : ""}>Confirm Password</label><i for ="newPassword" className="passwordeye"  onClick={togglepwds}>{eye}</i>
+                                            <label htmlFor="newPassword" className={newPassword != "" ? "input-has-value" : ""}>Confirm Password</label><i htmlFor ="newPassword" className="passwordeye"  onClick={togglepwds}>{eye}</i>
                                         </div>
                                     </div>
 
