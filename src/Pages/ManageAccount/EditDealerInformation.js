@@ -18,6 +18,7 @@ import {
     Spin,
 } from 'antd';
 import StateAndCity from '../../Component/StateAndCity/StateAndCity'
+import MuiPhoneNumber from 'material-ui-phone-number';
 
 const EditDealerInformation = () => {
     let { register, updateDealerInfo, formState: { errors },reset  } = useForm();
@@ -262,40 +263,22 @@ const EditDealerInformation = () => {
 
                             </div>
                             </div>
-                            <div className="col-sm-4 form-group">
-                                <div className="tbox">
-                                    <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
-                                    <option style={{"display":"none"}}></option>
-                                         <option value="1" selected >+1</option>
-                                        {/* <option value="2">+2</option> */}
-                                    </select>
-                                    <label for="no_years" className={"input-has-value"}>Country code</label>
-                                </div>
-                            </div>
-                            <div class="col-sm-8 form-group phonecode">
+                           
+                            <div class="col-sm-12 form-group ">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.phone_no} class="textbox" placeholder="Primary phone"  onChange={(e) => setPrimaryphone(e.target.value)} />
+                            <MuiPhoneNumber defaultValue={accountObjc.phone_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={(e) =>setPrimaryphone(e.target.value)} ></MuiPhoneNumber>
+                                 {/* <input type="text" defaultValue={accountObjc.phone_no} class="textbox" placeholder="Primary phone"  onChange={(e) => setPrimaryphone(e.target.value)} /> */}
                                 <label for="phone_no" className={primaryPhone != "" ? "input-has-value" : ""}>Primary Phone</label>
-                                <small>Format: (123)455-6789</small>
                                 <p className="form-input-error" >{primaryPhoneError}</p>
 
                             </div>
                             </div>
-                            <div className="col-sm-4 form-group">
-                                <div className="tbox">
-                                    <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
-                                    <option style={{"display":"none"}}></option>
-                                         <option value="1" selected>+1</option>
-                                        {/* <option value="2">+2</option> */}
-                                    </select>
-                                    <label for="no_years" className={"input-has-value"}>Country code</label>
-                                </div>
-                            </div>
-                            <div class="col-sm-8 form-group phonecode">
+                            
+                            <div class="col-sm-12 form-group ">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.mobile_no} class="textbox" placeholder="Mobile phone"  onChange={(e) => setMobilephone(e.target.value)} />
+                            <MuiPhoneNumber defaultValue={accountObjc.mobile_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={(e) => setMobilephone(e.target.value)} ></MuiPhoneNumber>
+                               {/* <input type="text" defaultValue={accountObjc.mobile_no} class="textbox" placeholder="Mobile phone"  onChange={(e) => setMobilephone(e.target.value)} /> */}
                                 <label for="mobile_no" className={mobilePhone != "" ? "input-has-value" : ""}>Mobile Phone</label>
-                                <small>Format: (123)455-6789</small>
                                 <p className="form-input-error" >{mobilePhoneError}</p>
 
                             </div>
