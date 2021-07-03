@@ -1,13 +1,11 @@
 import React from 'react';
-import API from "../Services/BaseService";
-import { useHistory,useParams } from "react-router-dom";
-// import '../assets/css/styles.css';
+import { useHistory } from "react-router-dom";
 import { useState } from 'react';
 import { useEffect } from 'react';
 import ls from 'local-storage';
 import { Button } from 'antd';
+import API from "../Services/BaseService";
 import checkImg from '../../src/assets/img/check.svg';
-
 import '../assets/css/responsive.css';
 
 

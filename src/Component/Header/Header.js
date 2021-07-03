@@ -1,18 +1,11 @@
 import React from 'react';
 import { useHistory, useLocation } from "react-router-dom";
-import { useState } from 'react';
-import { useEffect } from 'react';
-import ls from 'local-storage';
-
 import LogoImg from '../../../src/assets/img/Logo_final.png';
 import cartImg from '../../../src/assets/img/cart.svg';
 import chatImg from '../../../src/assets/img/chat.svg';
-import userImg from '../../../src/assets/img/user.svg';
 import hamburgermenuImg from '../../../src/assets/img/hamburger-menu.svg';
 import adduser from '../../../src/assets/img/adduser.jpg'
-// import '../../assets/css/style.css';
 import './header.css';
-import { Alert } from 'antd';
 
 const Header = () => {
   const history = useHistory();

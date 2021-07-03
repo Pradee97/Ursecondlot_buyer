@@ -1,18 +1,10 @@
 import React from 'react';
-import API from "../../Services/BaseService";
-import { useHistory } from "react-router-dom";
-
-// import '../../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import {
-    Table
-} from 'antd';
-
-import { Modal, Button } from 'antd';
+import { Table } from 'antd';
+import API from "../../Services/BaseService";
 
 const Fees = () => {
-    const history = useHistory();
 
     const [feeDetails, setFeeDetails] = useState("");
     const columns = [
