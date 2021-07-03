@@ -1,20 +1,9 @@
 import React from 'react';
-import API from "../../Services/BaseService";
 import { useHistory,useParams } from "react-router-dom";
 // import '../../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import {
-    Form,
-    Input,
-    Select,
-    AutoComplete,
-    Radio,
-    notification,
-    Spin,
-} from 'antd';
-
-import { Modal, Button } from 'antd';
+import API from "../../Services/BaseService";
 
 
 
@@ -63,17 +52,17 @@ const Contactus = () => {
            <h3>Enquiry form</h3>
             
              <div className="form-group">
-               <label for="name">Full Name</label>
+               <label htmlFor="name">Full Name</label>
                  <input type="text" name="name" className="form-control" id="name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
                  <div className="validate"></div>
              </div>
              <div className="form-group">
-               <label for="name">Email</label>
+               <label htmlFor="name">Email</label>
                  <input type="email" className="form-control" name="email" id="email" data-rule="email" data-msg="Please enter a valid email" />
                  <div className="validate"></div>
              </div>
              <div className="form-group">
-               <label for="name">comments</label>
+               <label htmlFor="name">comments</label>
                <textarea className="form-control" name="message" rows="3" data-rule="required" data-msg="Please write something for us"></textarea>
                <div className="validate"></div>
              </div>

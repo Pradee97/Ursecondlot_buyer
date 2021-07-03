@@ -14,7 +14,7 @@ import '../assets/css/responsive.css';
 
 const Email = () => {
     const history = useHistory();
-    const { id } = useParams();
+    // const { id } = useParams();
     let value=window.location.href.split("id=");
     const [status, setValue] = useState("");
     async function handleclick() {
@@ -47,25 +47,25 @@ const Email = () => {
   
     return (
       <div>
-           <main id="main" class="inner-page">
-                <div id="Successfullform" class="Successfullform">
-                    <div class="container">
-                        <div class="Successfullformblock col-lg-6">
-                            <div class="row content">
-                                <div class="modalcontent" style={{marginLeft:"21%"}}>
-                                    <div class="Successfull-icon">
+           <main id="main" className="inner-page">
+                <div id="Successfullform" className="Successfullform">
+                    <div className="container">
+                        <div className="Successfullformblock col-lg-6">
+                            <div className="row content">
+                                <div className="modalcontent" style={{marginLeft:"21%"}}>
+                                    <div className="Successfull-icon">
                                         <img alt="" src={checkImg} />
                                     </div>
-                                    <div class="modalbody">                                       
+                                    <div className="modalbody">                                       
                                         <p>Email successfull activated</p>
                                         <p>Username and Password sent to email</p>
                                 
-                                        {/* <a href="/login" class="get-started-btn">Dealer Login</a> */}
+                                        {/* <a href="/login" className="get-started-btn">Dealer Login</a> */}
                                         <Button className="get-started-btn" onClick={() => history.push("/login")}>Dealer Login</Button>
                                     
                                     </div>
-                                    {/* <div class="modalfooter ">
-                                        <a class="cta-btns" href="/">OK</a>
+                                    {/* <div className="modalfooter ">
+                                        <a className="cta-btns" href="/">OK</a>
                                     </div> */}
 
                                 </div>

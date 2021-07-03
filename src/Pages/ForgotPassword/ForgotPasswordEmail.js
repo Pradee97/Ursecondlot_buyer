@@ -58,7 +58,7 @@ const ForgotPasswordEmail = () => {
             <div>
                 <main id="main" className="inner-page">
                     <div className="col-lg-4  loginBlock">
-                        <button className="back-btn-paymentform backBtn" onClick={() => history.push("/login")}><i class="icofont-arrow-left"></i> Back</button>
+                        <button className="back-btn-paymentform backBtn" onClick={() => history.push("/login")}><i className="icofont-arrow-left"></i> Back</button>
                         <div className="col-lg-12 card">
                             <form className="registrationform" onSubmit={changehandleSubmit} >
                                 <h2 className="title">Forgot Password</h2>
@@ -68,7 +68,7 @@ const ForgotPasswordEmail = () => {
                                     <div className="col-sm-12 form-group">
                                         <div className="tbox">
                                             <input type="email" id="email" className="textbox" placeholder="" required onChange={(e) => setEmail(e.target.value)} />
-                                            <label for="email" className={email != "" ? "input-has-value" : ""}>User Name</label>
+                                            <label htmlFor="email" className={email != "" ? "input-has-value" : ""}>User Name</label>
                                         </div>
                                     </div>
 

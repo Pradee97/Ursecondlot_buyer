@@ -147,7 +147,7 @@ const AddUser = () => {
      }
 	return (
 		<div>
-			<main id="main" class="inner-page">
+			<main id="main" className="inner-page">
 				<div id="adduserpageinner" className="adduserpageinner">
 					<div className="container" >
 						<div className="adduserpageblock col-lg-12">
@@ -173,7 +173,7 @@ const AddUser = () => {
 													</div>
 													<div className="col-sm-12 form-group">
 
-													<div class="user-upload-btn-wrapper">
+													<div className="user-upload-btn-wrapper">
 														{doc===""?<img alt="" src="adduser.jpg" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} ></img>:
 														<img alt="" src="adduser.jpg" src={doc.base64} ></img>														
 														}
@@ -196,7 +196,7 @@ const AddUser = () => {
 																  }
 															  })}
 															onChange={(e) => setFirstName(e.target.value)} />
-															<label for="first_name" className={firstName != "" ? "input-has-value" : ""}>First Name</label>
+															<label htmlFor="first_name" className={firstName != "" ? "input-has-value" : ""}>First Name</label>
 															<p className="form-input-error">{errors.firstName?.message}</p>
 														</div>
 													</div>
@@ -211,7 +211,7 @@ const AddUser = () => {
 																  }
 															  })}
 															onChange={(e) => setLastName(e.target.value)} />
-															<label for="last_name" className={lastName != "" ? "input-has-value" : ""}>Last Name</label>
+															<label htmlFor="last_name" className={lastName != "" ? "input-has-value" : ""}>Last Name</label>
 															<p className="form-input-error">{errors.lastName?.message}</p>
 														</div>
 													</div>
@@ -244,7 +244,7 @@ const AddUser = () => {
 																}
 															})}
 															onChange={(e) => setEmail(e.target.value)} />
-															<label for="email" className={email != "" ? "input-has-value" : ""}>Email</label>
+															<label htmlFor="email" className={email != "" ? "input-has-value" : ""}>Email</label>
 															<p className="form-input-error">{errors.email?.message}</p>
 														</div>
 													</div>
@@ -259,7 +259,7 @@ const AddUser = () => {
 																  }
 															  })}
 															onChange={(e) => setAddress(e.target.value)} />
-															<label for="address" className={address != "" ? "input-has-value" : ""}>Address</label>
+															<label htmlFor="address" className={address != "" ? "input-has-value" : ""}>Address</label>
 															<p className="form-input-error">{errors.address?.message}</p>
 														</div>
 													</div>
@@ -292,7 +292,7 @@ const AddUser = () => {
 																<option value="More then 20">More then 20</option>
 															</select>
 
-															<label for="no_years" className={"input-has-value"}>How many years in car business</label>
+															<label htmlFor="no_years" className={"input-has-value"}>How many years in car business</label>
 															<p className="form-input-error">{errors.dropoption?.message}</p>
 														</div>
 													</div>
@@ -301,47 +301,47 @@ const AddUser = () => {
 												<div className="section-title">
 													<h2 className="buyertitle">Buyer Privileges</h2>
 												</div>
-												<div class="col-sm-12">
-													<div class="radio input-group privileges">
+												<div className="col-sm-12">
+													<div className="radio input-group privileges">
 														<input id="radio-privileges" name="radio" type="radio" value="1" onChange={(e) => setUserPrivileges(e.target.value)} />
-														<label for="radio-privileges" class="radio-label">Select Buyer Privileges</label>
+														<label htmlFor="radio-privileges" className="radio-label">Select Buyer Privileges</label>
 													</div>
 
-													<div class=" row adduserpageforminner">
-														<div class="col-sm-6 form-group input-group">
+													<div className=" row adduserpageforminner">
+														<div className="col-sm-6 form-group input-group">
 															<input type="checkbox" id="buynow" value={buy_now === "1" ? 0 : 1} onChange={(e) => setBuyNow(e.target.value)} />
-															<label for="buynow">Buy now</label>
+															<label htmlFor="buynow">Buy now</label>
 														</div>
-														<div class="col-sm-6 form-group input-group ">
+														<div className="col-sm-6 form-group input-group ">
 															<input type="checkbox" id="cancelbid" value={cancel_bid === "1" ? 0 : 1} onChange={(e) => setCancelBid(e.target.value)} />
-															<label for="cancelbid">Cancel the bid after 4 hours</label>
+															<label htmlFor="cancelbid">Cancel the bid after 4 hours</label>
 														</div>
-														<div class="col-sm-6 form-group input-group ">
+														<div className="col-sm-6 form-group input-group ">
 															<input type="checkbox" id="bid" value={bid === "1" ? 0 : 1} onChange={(e) => setBid(e.target.value)} />
-															<label for="bid">Bid</label>
+															<label htmlFor="bid">Bid</label>
 														</div>
-														<div class="col-sm-6 form-group input-group ">
+														<div className="col-sm-6 form-group input-group ">
 															<input type="checkbox" id="proxybid" value={proxy_bid === "1" ? 0 : 1} onChange={(e) => setProxy_bid(e.target.value)} />
-															<label for="proxybid">Proxy Bid</label>
+															<label htmlFor="proxybid">Proxy Bid</label>
 														</div>
-														<div class="col-sm-6 form-group input-group ">
+														<div className="col-sm-6 form-group input-group ">
 															<input type="checkbox" id="counterbid" value={counter_bid === "1" ? 0 : 1} onChange={(e) => setCounter_bid(e.target.value)} />
-															<label for="counterbid">Counter Bid</label>
+															<label htmlFor="counterbid">Counter Bid</label>
 														</div>
-														<div class="col-sm-6 form-group input-group ">
+														<div className="col-sm-6 form-group input-group ">
 															<input type="checkbox" id="lotfee" value={lot_fee === "1" ? 0 : 1} onChange={(e) => setLot_fee(e.target.value)} />
-															<label for="lotfee">Lot Fee</label>
+															<label htmlFor="lotfee">Lot Fee</label>
 														</div>
 													</div>
 												</div>
-												<div class="col-sm-12">
-													<div class="radio input-group noprivileges">
+												<div className="col-sm-12">
+													<div className="radio input-group noprivileges">
 														<input id="radio-noprivileges" name="radio" type="radio" value="0" onChange={(e) => setUserPrivileges(e.target.value)} />
-														<label for="radio-noprivileges" class="radio-label">No privileges (Only View)</label>
+														<label htmlFor="radio-noprivileges" className="radio-label">No privileges (Only View)</label>
 													</div>
 												</div>
-												<div class="col-lg-12 loginBtn">
-													<button class="cta-btn">Submit</button>
+												<div className="col-lg-12 loginBtn">
+													<button className="cta-btn">Submit</button>
 												</div>
 											</form>
 										</div>

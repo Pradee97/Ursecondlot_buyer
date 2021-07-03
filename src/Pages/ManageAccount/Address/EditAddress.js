@@ -10,15 +10,6 @@ import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAcco
 import { useForm } from "react-hook-form";
 import MuiPhoneNumber from 'material-ui-phone-number';
 
-import {
-    Form,
-    Input,
-    Select,
-    AutoComplete,
-    Radio,
-    notification,
-    Spin,
-} from 'antd';
 
 const EditAddress = () => {
     const history = useHistory();
@@ -256,7 +247,7 @@ const EditAddress = () => {
      }
     return (
         <div>
-            <main id="main" class="inner-page">
+            <main id="main" className="inner-page">
             <div id="addaddress" className="addaddress_block">
             <div className="container" >
             <div className="addaddressblock col-lg-12">
@@ -272,27 +263,27 @@ const EditAddress = () => {
                 <div className="adduserpage-inner">
                 <div className="col-lg-12">               
               
-                    <form class="registrationform" onSubmit={updateAddress} >  
+                    <form className="registrationform" onSubmit={updateAddress} >  
                     
-                        <div class="row">
+                        <div className="row">
                         <div className="section-title">
-                        <button className="back-btn-paymentform backBtn" onClick={() => history.push("/manageaccount")}><i class="icofont-arrow-left"></i> Back</button>
+                        <button className="back-btn-paymentform backBtn" onClick={() => history.push("/manageaccount")}><i className="icofont-arrow-left"></i> Back</button>
 							<h2>Edit Address </h2>
 						</div>
 
-                        <div class="col-sm-12 form-group">
+                        <div className="col-sm-12 form-group">
                         <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.first_name} class="textbox" placeholder="" onChange={(e) => setFirstName(e.target.value)} />
-                                <label for="first_name" className={"input-has-value"}>First Name</label>
+                                <input type="text" defaultValue={accountObjc.first_name} className="textbox" placeholder="" onChange={(e) => setFirstName(e.target.value)} />
+                                <label htmlFor="first_name" className={"input-has-value"}>First Name</label>
                                 <p className="form-input-error" >{firstNameError}</p>
 
                             </div>
                             </div>
                             
-                            <div class="col-sm-12 form-group">
+                            <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.last_name} class="textbox" placeholder="" onChange={(e) => setLastName(e.target.value)} />
-                                <label for="last_name"  className={"input-has-value"}>Last name</label>
+                                <input type="text" defaultValue={accountObjc.last_name} className="textbox" placeholder="" onChange={(e) => setLastName(e.target.value)} />
+                                <label htmlFor="last_name"  className={"input-has-value"}>Last name</label>
                                 <p className="form-input-error" >{lastNameError}</p>
 
                             </div> </div>
@@ -319,8 +310,8 @@ const EditAddress = () => {
                             </div>
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.address} class="textbox" placeholder="" onChange={(e) => setAddress(e.target.value)} />
-                                <label for="address"  className={"input-has-value"}>Address</label>
+                                <input type="text" defaultValue={accountObjc.address} className="textbox" placeholder="" onChange={(e) => setAddress(e.target.value)} />
+                                <label htmlFor="address"  className={"input-has-value"}>Address</label>
                                 <p className="form-input-error" >{addressError}</p>
 
                             </div> </div>
@@ -334,17 +325,17 @@ const EditAddress = () => {
                                 defaultZipcodeValue = {zipCode}
                             />
                             <p className="form-input-error"> {stateAndCityError} </p>
-                             <div class="col-sm-12 form-group">
+                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.location} class="textbox" placeholder="" onChange={(e) => setLocation(e.target.value)} />
-                                <label for="location"  className={"input-has-value"}>Location</label>
+                                <input type="text" defaultValue={accountObjc.location} className="textbox" placeholder="" onChange={(e) => setLocation(e.target.value)} />
+                                <label htmlFor="location"  className={"input-has-value"}>Location</label>
                                 <p className="form-input-error" >{locationError}</p>
 
                             </div> </div>
-                            <div class="col-sm-12 form-group">
+                            <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.instructions} class="textbox" placeholder="" onChange={(e) => setInstruction(e.target.value)} />
-                                <label for="instructions"  className={"input-has-value"}>Instructions</label>
+                                <input type="text" defaultValue={accountObjc.instructions} className="textbox" placeholder="" onChange={(e) => setInstruction(e.target.value)} />
+                                <label htmlFor="instructions"  className={"input-has-value"}>Instructions</label>
                                 <p className="form-input-error" >{instructionError}</p>
 
                             </div> </div>
@@ -358,17 +349,17 @@ const EditAddress = () => {
                                 <input type="number" defaultValue={accountObjc.zipcode_id} class="form-control" placeholder="Zip code" onChange={(e) => setZIpCode(e.target.value)} />
                             </div> */}
                     
-                            <div class="col-lg-12 loginBtn">
-                                <button type="submit" class="cta-btn">Update</button>
+                            <div className="col-lg-12 loginBtn">
+                                <button type="submit" className="cta-btn">Update</button>
                             </div>
                         </div>
                     </form>
 
                     </div></div></div></div> </div></div></div>
-                <section id="playstoreBlock" class="playstoreBlock">
-                    <div class="container">
-                        <div class="row content">
-                            <div class="col-lg-12">
+                <section id="playstoreBlock" className="playstoreBlock">
+                    <div className="container">
+                        <div className="row content">
+                            <div className="col-lg-12">
                                 <img src={process.env.PUBLIC_URL +"/images/appstore.png" }/>
                                 <img src={process.env.PUBLIC_URL +"/images/googleplay.png"} />
                             </div>

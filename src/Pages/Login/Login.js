@@ -94,7 +94,7 @@ const Login = () => {
 		  <div className="tbox">
         <input className="textbox " type="text" placeholder="" id="uname" name="email"
           onChange={(e) => setEmailId(e.target.value)} />
-				 <label  for="uname" className={emailId !="" ? "input-has-value" : ""}>User Name</label>
+				 <label  htmlFor="uname" className={emailId !="" ? "input-has-value" : ""}>User Name</label>
          <p className="form-input-error">{errors.email}</p>
 			</div>
 			 
@@ -102,7 +102,7 @@ const Login = () => {
         <input className="textbox" type={showPwd?"text":"password"} placeholder="" id="psw" name="password"
           onChange={(e) => setPassword(e.target.value)} 
          />
-				 <label for="psw" className={password != "" ? "input-has-value" : "" }>Password</label><i for ="psw" className="passwordeye" onClick={togglepwd}>{eye}</i>
+				 <label htmlFor="psw" className={password != "" ? "input-has-value" : "" }>Password</label><i htmlFor="psw" className="passwordeye" onClick={togglepwd}>{eye}</i>
          <p className="form-input-error">{errors.password}</p>
 			 </div>
 		  </div>

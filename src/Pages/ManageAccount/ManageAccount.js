@@ -90,7 +90,7 @@ const ManageAccount = () => {
                 <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 mgaccountrightblock">
                   {dealerInfo.length > 0 ? dealerInfo.map((item, index) =>
                     <div className="mgaccountrighttableblock">
-                      <h3>Dealer Information <span><Button class="ant-btn" onClick={() => onHandleDealerEdit(item.user_id)}><i class="icofont-ui-edit"></i>  Edit</Button></span></h3>
+                      <h3>Dealer Information <span><Button className="ant-btn" onClick={() => onHandleDealerEdit(item.user_id)}><i className="icofont-ui-edit"></i>  Edit</Button></span></h3>
                       <p>Titles Will be sent to this address title will not be shipped in to physical address</p>
                       <div className="mgaccountrighttable">
                         <h4>Dealer Name</h4>
@@ -120,7 +120,7 @@ const ManageAccount = () => {
                   {addressDetails.length > 0 ? addressDetails.map((item, index) =>
                     <div className="mgaccountrighttableblock mt-3 pt-4">
                       <h3>Address<span>
-                        <Button class="ant-btn" onClick={() => onHandleAddressEdit(item.buyer_address_id)}><i class="icofont-ui-edit"></i>  Edit</Button></span>
+                        <Button className="ant-btn" onClick={() => onHandleAddressEdit(item.buyer_address_id)}><i className="icofont-ui-edit"></i>  Edit</Button></span>
                       </h3>
                       <p>Location where transport carriers will drop of a vehicle that you have purchased</p>
                       <div className="mgaccountrighttable">
@@ -152,14 +152,14 @@ const ManageAccount = () => {
                   ) :
                     <div className="mgaccountrighttableblock mt-3 pt-4">
                       <h3>Address<span>
-                        <Button class="ant-btn" onClick={() => history.push("/addressadd")}><i class="icofont-plus"></i> Add</Button></span>
+                        <Button className="ant-btn" onClick={() => history.push("/addressadd")}><i className="icofont-plus"></i> Add</Button></span>
                       </h3>
                     </div>
                   }
                   {legaldetails.length > 0 ? legaldetails.map((item, index) =>
                     <div className="mgaccountrighttableblock mt-3 pt-4">
                       <h3>Legal manage account<span>                        
-                        <Button class="ant-btn" onClick={() => onHandleEdit(item.legal_manage_id)}><i class="icofont-ui-edit"></i> Edit</Button></span>
+                        <Button className="ant-btn" onClick={() => onHandleEdit(item.legal_manage_id)}><i className="icofont-ui-edit"></i> Edit</Button></span>
                       </h3>
                       <p>Legal document sent to your address</p>
                       <div className="mgaccountrighttable">
@@ -201,7 +201,7 @@ const ManageAccount = () => {
                   ) :
                     <div className="mgaccountrighttableblock mt-3 pt-4">
                       <h3>Legal manage account<span>
-                        <Button class="ant-btn" onClick={() => history.push("/legaladd")}><i class="icofont-plus"></i> Add</Button>
+                        <Button className="ant-btn" onClick={() => history.push("/legaladd")}><i className="icofont-plus"></i> Add</Button>
                       </span> </h3>
                     </div>
                   }
