@@ -100,8 +100,10 @@ const Submenu = () => {
               </li>
               <li className="topRightUser">
                 <b className="user_name">Welcome 
-                {JSON.parse(localStorage.getItem("userDetails")).first_name}
-                </b>                
+                </b> 
+                <b className="user_name">    
+                {JSON.parse(localStorage.getItem("userDetails")).first_name} 
+                </b>          
                 <img alt="Menu" src={JSON.parse(localStorage.getItem("userDetails")).image || adduser} /> 
               </li>
               <li className="nav__menu-item" >

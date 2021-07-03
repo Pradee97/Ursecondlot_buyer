@@ -9,6 +9,7 @@ import ls from 'local-storage';
 import FileBase64 from 'react-file-base64';
 import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks"
 import { useForm } from "react-hook-form";
+import MuiPhoneNumber from 'material-ui-phone-number';
 
 const EditBuyer = () => {
     const history = useHistory();
@@ -141,26 +142,20 @@ const EditBuyer = () => {
             setPrimaryPhoneError("Primary Phone is required")
             return;
         }
-        else if(primaryPhone.length<10 || primaryPhone.length>17){
-            setPrimaryPhoneError("Primary Phone must have atleast have 10 digits and must not exceed 15 digits")
+        else if(primaryPhone.length<17 ){
+            setPrimaryPhoneError("Primary Phone must have 10 digits ")
             return;
         }
-        else if( primaryPhone && !new RegExp(/\(?([0-9]{3})\)\s?([0-9]{3})([ .-]?)([0-9]{4})/).test(primaryPhone) ) {
-            setPrimaryPhoneError("Accept only this Format: (123)455-6789")
-            return;
-        }
+       
         if(!mobilePhone){
             setMobilephoneError("Mobile Phone is required")
             return;
         }
-        else if(mobilePhone.length<10 || mobilePhone.length>17){
-            setMobilephoneError("Mobile Phone must have atleast have 10 digits and must not exceed 15 digits")
+        else if(mobilePhone.length<17 ){
+            setMobilephoneError("Mobile Phone must have 10 digits")
             return;
         }
-        else if( mobilePhone && !new RegExp(/\(?([0-9]{3})\)\s?([0-9]{3})([ .-]?)([0-9]{4})/).test(mobilePhone) ) {
-            setMobilephoneError("Accept only this Format: (123)455-6789")
-            return;
-        }
+        
         if(!address){
             setAddressError("Address is required")
             return;
@@ -248,6 +243,12 @@ const EditBuyer = () => {
     })
         .catch(err => { console.log(err); });
     }, [reset]);
+    function handleOnChange(value) {
+        setPrimaryPhone(value);
+     }
+     function handleOnChanges(value) {
+        setMobilephone(value);
+     }
     return (
         <div>
             <main id="main" className="inner-page">
@@ -292,31 +293,20 @@ const EditBuyer = () => {
                                         <label htmlFor="last_name" className={lastName != "" ? "input-has-value" : ""}>Last Name</label>
                                     </div>
                                 </div>
-                                <div className="col-sm-12 form-group phonecode">
-                                    <div className="tbox">
-                                        <input type="text" defaultValue={myProfileObjc.phone_no} className="form-control textbox" placeholder="" onChange={(e) => setPrimaryPhone(e.target.value)} />
-                                        <label htmlFor="phone_no" className={primaryPhone != "" ? "input-has-value" : ""}>Primary Phone</label>
-                                        <small>Format: (123)455-6789</small>
+                                <div className="col-sm-6 form-group ">
+                                    <div className="tbox phoneNumberfield">
+                                        <MuiPhoneNumber value={myProfileObjc.phone_no} defaultCountry={'us'} onlyCountries={['us']}  className=" textbox" onChange={handleOnChange} ></MuiPhoneNumber>
+                                        {/* <input type="text" defaultValue={myProfileObjc.phone_no} className="form-control textbox" placeholder="" onChange={(e) => setPrimaryPhone(e.target.value)} /> */}
+                                        <label for="phone_no" className={primaryPhone != "" ? "input-has-value" : ""}>Primary Phone</label>
                                     </div>
                                     <p className="form-input-error" >{primaryPhoneError}</p>
                                 </div>
                                 
-                                <div className="col-sm-4 form-group">
-                                <div className="tbox">
-                                    <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
-                                    <option style={{"display":"none"}}></option>
-                                         <option value="1" selected>+1</option>
-                                        {/* <option value="2">+2</option> */}
-                                    </select>
-                                    <label htmlFor="no_years" className={"input-has-value"}>Country code</label>
-                                </div>
-                            </div>
-                            
-                                <div className="col-sm-8 form-group phonecode">
-                                    <div className="tbox">
-                                        <input type="text" defaultValue={myProfileObjc.mobile_no} className="form-control textbox" placeholder="" onChange={(e) => setMobilephone(e.target.value)} />
-                                        <label htmlFor="mobile_no" className={mobilePhone != "" ? "input-has-value" : ""}>Mobile Phone</label>
-                                        <small>Format: (123)455-6789</small>
+                                <div className="col-sm-6 form-group ">
+                                    <div className="tbox phoneNumberfield">
+                                    <MuiPhoneNumber value={myProfileObjc.mobile_no} defaultCountry={'us'} onlyCountries={['us']}  className=" textbox" onChange={handleOnChanges} ></MuiPhoneNumber>
+                                        {/* <input type="text" defaultValue={myProfileObjc.mobile_no} className="form-control textbox" placeholder="" onChange={(e) => setMobilephone(e.target.value)} /> */}
+                                        <label for="mobile_no" className={mobilePhone != "" ? "input-has-value" : ""}>Mobile Phone</label>
                                     </div>
                                     <p className="form-input-error" >{mobilePhoneError}</p>
                                 </div>

@@ -91,10 +91,11 @@ const FloorEdit = () => {
                     setPopupActionValue("ok");
                     setPopupActionPath("/floor")
                 } else {
-                    // history.push("emailerror");
+                    const { data } = response;
                     togglePopup()
                     setPopupTitle("Edit Floor");
-                    setPopupMsg("Floor is not Edited, Please try Again");
+                    // setPopupMsg("Floor is not Edited, Please try Again");
+                    setPopupMsg( data.error.err );
                     setPopupType("error");
                     setPopupActionType("close");
                     setPopupActionValue("close");

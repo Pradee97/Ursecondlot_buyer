@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 
 
 import StateAndCity from '../../Component/StateAndCity/StateAndCity'
+import MuiPhoneNumber from 'material-ui-phone-number';
 
 const EditDealerInformation = () => {
     let { register, updateDealerInfo, formState: { errors },reset  } = useForm();
@@ -109,26 +110,20 @@ const EditDealerInformation = () => {
             setPrimaryPhoneError("Primary Phone is required")
             return;
         }
-        else if(primaryPhone.length<10 || primaryPhone.length>17){
-            setPrimaryPhoneError("Primary Phone must have atleast have 10 digits and must not exceed 15 digits")
+        else if(primaryPhone.length<17 ){
+            setPrimaryPhoneError("Primary Phone must have 10 digits")
             return;
         }
-        else if( primaryPhone && !new RegExp(/\(?([0-9]{3})\)\s?([0-9]{3})([ .-]?)([0-9]{4})/).test(primaryPhone) ) {
-            setPrimaryPhoneError("Accept only this Format: (123)455-6789")
-            return;
-        }
+       
         if(!mobilePhone){
             setMobilePhoneError("Mobile Phone is required")
             return;
         }
-        else if(mobilePhone.length<10 || mobilePhone.length>17){
-            setMobilePhoneError("Mobile Phone must have atleast have 10 digits and must not exceed 15 digits")
+        else if(mobilePhone.length<17){
+            setMobilePhoneError("Mobile Phone must have 10 digits")
             return;
         }
-        else if( mobilePhone && !new RegExp(/\(?([0-9]{3})\)\s?([0-9]{3})([ .-]?)([0-9]{4})/).test(mobilePhone) ) {
-            setMobilePhoneError("Accept only this Format: (123)455-6789")
-            return;
-        }
+        
         if(!address){
             setAddressError("Address is required")
             return;
@@ -213,6 +208,12 @@ const EditDealerInformation = () => {
     })
         .catch(err => { console.log(err); });
     }, [reset]);
+    function handleOnChange(value) {
+        setPrimaryphone(value);
+     }
+     function handleOnChanges(value) {
+        setMobilephone(value);
+     }
     return (
         <div>
             <main id="main" className="inner-page">
@@ -254,43 +255,23 @@ const EditDealerInformation = () => {
 
                             </div>
                             </div>
-                            <div className="col-sm-4 form-group">
-                                <div className="tbox">
-                                    <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
-                                    <option style={{"display":"none"}}></option>
-                                         <option value="1" selected >+1</option>
-                                        {/* <option value="2">+2</option> */}
-                                    </select>
-                                    <label htmlFor="no_years" className={"input-has-value"}>Country code</label>
-                                </div>
+                           
+                            <div class="col-sm-6 form-group ">
+                            <div className="tbox phoneNumberfield">
+                            <MuiPhoneNumber value={accountObjc.phone_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={handleOnChange} ></MuiPhoneNumber>
+                                 {/* <input type="text" defaultValue={accountObjc.phone_no} class="textbox" placeholder="Primary phone"  onChange={(e) => setPrimaryphone(e.target.value)} /> */}
+                                <label for="phone_no" className={primaryPhone != "" ? "input-has-value" : ""}>Primary Phone</label>
                             </div>
-                            <div className="col-sm-8 form-group phonecode">
-                            <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.phone_no} className="textbox" placeholder="Primary phone"  onChange={(e) => setPrimaryphone(e.target.value)} />
-                                <label htmlFor="phone_no" className={primaryPhone != "" ? "input-has-value" : ""}>Primary Phone</label>
-                                <small>Format: (123)455-6789</small>
                                 <p className="form-input-error" >{primaryPhoneError}</p>
-
                             </div>
+                            
+                            <div class="col-sm-6 form-group ">
+                            <div className="tbox phoneNumberfield">
+                            <MuiPhoneNumber value={accountObjc.mobile_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={handleOnChanges} ></MuiPhoneNumber>
+                               {/* <input type="text" defaultValue={accountObjc.mobile_no} class="textbox" placeholder="Mobile phone"  onChange={(e) => setMobilephone(e.target.value)} /> */}
+                                <label for="mobile_no" className={mobilePhone != "" ? "input-has-value" : ""}>Mobile Phone</label>
                             </div>
-                            <div className="col-sm-4 form-group">
-                                <div className="tbox">
-                                    <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
-                                    <option style={{"display":"none"}}></option>
-                                         <option value="1" selected>+1</option>
-                                        {/* <option value="2">+2</option> */}
-                                    </select>
-                                    <label htmlFor="no_years" className={"input-has-value"}>Country code</label>
-                                </div>
-                            </div>
-                            <div className="col-sm-8 form-group phonecode">
-                            <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.mobile_no} className="textbox" placeholder="Mobile phone"  onChange={(e) => setMobilephone(e.target.value)} />
-                                <label htmlFor="mobile_no" className={mobilePhone != "" ? "input-has-value" : ""}>Mobile Phone</label>
-                                <small>Format: (123)455-6789</small>
-                                <p className="form-input-error" >{mobilePhoneError}</p>
-
-                            </div>
+                            <p className="form-input-error" >{mobilePhoneError}</p>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
