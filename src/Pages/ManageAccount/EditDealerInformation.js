@@ -109,7 +109,7 @@ const EditDealerInformation = () => {
             setPrimaryPhoneError("Primary Phone is required")
             return;
         }
-        else if(primaryPhone.length<10 || primaryPhone.length>15){
+        else if(primaryPhone.length<10 || primaryPhone.length>17){
             setPrimaryPhoneError("Primary Phone must have atleast have 10 digits and must not exceed 15 digits")
             return;
         }
@@ -121,7 +121,7 @@ const EditDealerInformation = () => {
             setMobilePhoneError("Mobile Phone is required")
             return;
         }
-        else if(mobilePhone.length<10 || mobilePhone.length>15){
+        else if(mobilePhone.length<10 || mobilePhone.length>17){
             setMobilePhoneError("Mobile Phone must have atleast have 10 digits and must not exceed 15 digits")
             return;
         }

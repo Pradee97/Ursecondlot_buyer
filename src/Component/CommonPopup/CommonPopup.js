@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import { useHistory } from "react-router-dom";
 import checkImg from '../../../src/assets/img/check.svg';
 import errorImg from '../../../src/assets/img/erroricon.png';
 import warningImg from '../../../src/assets/img/warning.png';
 import "./commonPopup.css"
 
-const CommonPopup = props => {
+const CommonPopup = (props) => {
     const history = useHistory();
 
     // Example values for reference
@@ -64,5 +65,17 @@ const CommonPopup = props => {
 
     )
 }
+
+CommonPopup.propTypes = {
+    // props: PropTypes.string,
+    handleClose: PropTypes.func,
+    popupTitle: PropTypes.string,
+    popupMsg: PropTypes.string, 
+    popupType: PropTypes.string, 
+    popupActionType: PropTypes.string, 
+    popupActionValue: PropTypes.string, 
+    popupActionPath: PropTypes.string, 
+    Confirmation: PropTypes.func
+  }
 
 export default CommonPopup;

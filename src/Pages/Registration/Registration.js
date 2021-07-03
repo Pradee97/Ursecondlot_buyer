@@ -1,7 +1,7 @@
 import React from 'react';
 import API from "../../Services/BaseService";
 import { useHistory } from "react-router-dom";
-import DatePicker from 'react-datetime';
+// import DatePicker from 'react-datetime';
 import Datetime from 'react-datetime';
 import moment from 'moment';
 import { useForm } from "react-hook-form";
