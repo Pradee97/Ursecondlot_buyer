@@ -12,15 +12,6 @@ import StateAndCity from '../../../Component/StateAndCity/StateAndCity'
 import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks";
 import { useForm } from "react-hook-form";
 
-import {
-    Form,
-    Input,
-    Select,
-    AutoComplete,
-    Radio,
-    notification,
-    Spin,
-} from 'antd';
 
 const EditLegalAccount = () => {
     const history = useHistory();
@@ -277,7 +268,7 @@ const EditLegalAccount = () => {
     }, [reset]);
     return (
         <div>
-            <main id="main" class="inner-page">
+            <main id="main" className="inner-page">
             <div id="addaddress" className="addaddress_block">
             <div className="container" >
             <div className="addaddressblock col-lg-12">
@@ -293,54 +284,54 @@ const EditLegalAccount = () => {
                 <div className="adduserpage-inner"> 
                 <div className="col-lg-12">
 
-                    <form class="registrationform" onSubmit={updateLegalAccount} >                   
+                    <form className="registrationform" onSubmit={updateLegalAccount} >                   
                         
-                        <div class="row">
+                        <div className="row">
                         <div className="section-title">
-                        <button className="back-btn-paymentform backBtn" onClick={() => history.push("/manageaccount")}><i class="icofont-arrow-left"></i> Back</button>   
+                        <button className="back-btn-paymentform backBtn" onClick={() => history.push("/manageaccount")}><i className="icofont-arrow-left"></i> Back</button>   
 							<h2>Edit Legal Manage Account</h2>
 						</div>
 
-                            <div class="col-sm-12 form-group">
+                            <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text"  defaultValue={accountObjc.first_name} class="form-control textbox" placeholder=""  onChange={(e) => setFirstname(e.target.value)} />
-                                <label for="first_name" className={firstname !="" ? "input-has-value" : ""}>First Name</label>
+                                <input type="text"  defaultValue={accountObjc.first_name} className="form-control textbox" placeholder=""  onChange={(e) => setFirstname(e.target.value)} />
+                                <label htmlFor="first_name" className={firstname !="" ? "input-has-value" : ""}>First Name</label>
                             </div><p className="form-input-error" >{firstnameError}</p>
                             </div>
-                            <div class="col-sm-12 form-group">
+                            <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.last_name} class="form-control textbox" placeholder=""  onChange={(e) => setLastname(e.target.value)} />
-                                <label for="first_name" className={lastname !="" ? "input-has-value" : ""}>Last Name</label>
+                                <input type="text" defaultValue={accountObjc.last_name} className="form-control textbox" placeholder=""  onChange={(e) => setLastname(e.target.value)} />
+                                <label htmlFor="first_name" className={lastname !="" ? "input-has-value" : ""}>Last Name</label>
                             </div><p className="form-input-error" >{lastnameError}</p>
                             </div>
-                            <div class="col-sm-12 form-group">
+                            <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.bussiness_name} class="form-control textbox" placeholder=""  onChange={(e) => setLegalBusinessname(e.target.value)} />
-                                <label for="first_name" className={legalBusinessname !="" ? "input-has-value" : ""}>Legal Business Name</label>
+                                <input type="text" defaultValue={accountObjc.bussiness_name} className="form-control textbox" placeholder=""  onChange={(e) => setLegalBusinessname(e.target.value)} />
+                                <label htmlFor="first_name" className={legalBusinessname !="" ? "input-has-value" : ""}>Legal Business Name</label>
                             </div><p className="form-input-error" >{legalBusinessnameError}</p>
                             </div>
-                            <div class="col-sm-12 form-group">
+                            <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.ein_no} class="form-control textbox" placeholder=""  onChange={(e) => setEINnumber(e.target.value)} />
-                                <label for="first_name" className={EINnumber !="" ? "input-has-value" : ""}>EIN Number</label>
+                                <input type="text" defaultValue={accountObjc.ein_no} className="form-control textbox" placeholder=""  onChange={(e) => setEINnumber(e.target.value)} />
+                                <label htmlFor="first_name" className={EINnumber !="" ? "input-has-value" : ""}>EIN Number</label>
                             </div><p className="form-input-error" >{EINnumberError}</p>
                             </div>
-                            <div class="col-sm-12 form-group">
+                            <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.dealer_license} class="form-control textbox" placeholder=""  onChange={(e) => setDealershiplicense(e.target.value)} />
-                                <label for="first_name" className={dealershiplicense !="" ? "input-has-value" : ""}>Dealership License</label>
+                                <input type="text" defaultValue={accountObjc.dealer_license} className="form-control textbox" placeholder=""  onChange={(e) => setDealershiplicense(e.target.value)} />
+                                <label htmlFor="first_name" className={dealershiplicense !="" ? "input-has-value" : ""}>Dealership License</label>
                             </div><p className="form-input-error" >{dealershiplicenseError}</p>
                             </div>
-                            <div class="col-sm-12 form-group">
+                            <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.tax_id} class="form-control textbox" placeholder=""  onChange={(e) => setTaxid(e.target.value)} />
-                                <label for="first_name" className={taxid !="" ? "input-has-value" : ""}>Tax Id</label>
+                                <input type="text" defaultValue={accountObjc.tax_id} className="form-control textbox" placeholder=""  onChange={(e) => setTaxid(e.target.value)} />
+                                <label htmlFor="first_name" className={taxid !="" ? "input-has-value" : ""}>Tax Id</label>
                             </div><p className="form-input-error" >{taxidError}</p>
                             </div>
-                            <div class="col-sm-12 form-group">
+                            <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.address} class="form-control textbox" placeholder=""  onChange={(e) => setAddress(e.target.value)} />
-                                <label for="first_name" className={address !="" ? "input-has-value" : ""}>Address</label>
+                                <input type="text" defaultValue={accountObjc.address} className="form-control textbox" placeholder=""  onChange={(e) => setAddress(e.target.value)} />
+                                <label htmlFor="first_name" className={address !="" ? "input-has-value" : ""}>Address</label>
                             </div><p className="form-input-error" >{addressError}</p>
                             </div>
                             <StateAndCity 
@@ -353,48 +344,48 @@ const EditLegalAccount = () => {
                                 defaultZipcodeValue = {zipcode}
                             />
                             <p className="form-input-error"> {stateAndCityError} </p>
-                            <div class="col-sm-12 form-group datePickerBlock">
+                            <div className="col-sm-12 form-group datePickerBlock">
                             <div className="tbox">  
                                  {/* <input type="date" defaultValue={accountObjc.dealer_license_exp===undefined?"":accountObjc.dealer_license_exp.substring(0,10)} 
-                                 class="form-control textbox" placeholder=""  onChange={(e) => setDealershipLicenseexp(e.target.value)} /> */}
+                                 className="form-control textbox" placeholder=""  onChange={(e) => setDealershipLicenseexp(e.target.value)} /> */}
                                  <DatePicker
-                                    class="form-control textbox" name="dealershipLicenseexp" id="dealershipLicenseexp"                                                        
+                                    className="form-control textbox" name="dealershipLicenseexp" id="dealershipLicenseexp"                                                        
                                     autoComplete="off"
                                     selected={ dealershipLicenseexp == null ? null : dealershipLicenseexp }
                                     onChange={(date) => setDealershipLicenseexp(date)}
                                     placeholderText="DOJ"
                                     onChangeRaw={handleDateChangeRaw}
                                 />
-                                <label for="first_name" className={dealershipLicenseexp !="" ? "input-has-value" : ""}>Dealership license exp</label>
+                                <label htmlFor="first_name" className={dealershipLicenseexp !="" ? "input-has-value" : ""}>Dealership license exp</label>
                             </div> <p className="form-input-error" >{dealershipLicenseexpError}</p>
                             </div>
-                            <div class="col-sm-12 form-group datePickerBlock">
+                            <div className="col-sm-12 form-group datePickerBlock">
                             <div className="tbox">
                                 {/* <input type="date" 
                                 defaultValue={accountObjc.tax_id_exp===undefined?"":accountObjc.tax_id_exp.substring(0,10)} 
-                                class="form-control textbox" placeholder="" onChange={(e) => setTaxidexp(e.target.value)} /> */}
+                                className="form-control textbox" placeholder="" onChange={(e) => setTaxidexp(e.target.value)} /> */}
                                 <DatePicker
-                                    class="form-control textbox" name="taxidexp" id="taxidexp"                                                        
+                                    className="form-control textbox" name="taxidexp" id="taxidexp"                                                        
                                     autoComplete="off"
                                     selected={ taxidexp == null ? null : taxidexp }
                                     onChange={(date) => setTaxidexp(date)}
                                     placeholderText="DOJ"
                                     onChangeRaw={handleDateChangeRaw}
                                 />
-                                <label for="first_name" className={taxidexp!="" ? "input-has-value" : ""}>Tax id exp</label>
+                                <label htmlFor="first_name" className={taxidexp!="" ? "input-has-value" : ""}>Tax id exp</label>
                             </div><p className="form-input-error" >{taxidexpError}</p>
                             </div>
-                            <div class="col-lg-12 loginBtn">
-                                <button class="cta-btn">Update</button>
+                            <div className="col-lg-12 loginBtn">
+                                <button className="cta-btn">Update</button>
                             </div>
                         </div>
                     </form>
 
                     </div>  </div></div></div></div></div></div>
-                <section id="playstoreBlock" class="playstoreBlock">
-                    <div class="container">
-                        <div class="row content">
-                            <div class="col-lg-12">
+                <section id="playstoreBlock" className="playstoreBlock">
+                    <div className="container">
+                        <div className="row content">
+                            <div className="col-lg-12">
                                 <img src={process.env.PUBLIC_URL +"/images/appstore.png" }/>
                                 <img src={process.env.PUBLIC_URL +"/images/googleplay.png"} />
                             </div>

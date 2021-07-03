@@ -274,7 +274,7 @@ const EditPayment = () => {
 
                                                     <div className="col-sm-6 form-group uploadbutton">
                                                     <input type="file" id="upload" className="uploadbox" hidden onChange={onFileChange} />
-                                                            <label for="upload"><img src={process.env.PUBLIC_URL +"/images/upload.png"} />Upload Document</label>
+                                                            <label htmlFor="upload"><img src={process.env.PUBLIC_URL +"/images/upload.png"} />Upload Document</label>
                                                     </div>
                                                     <div className="col-lg-12 loginBtn">
                                                         <button className="cta-btn">Update</button>

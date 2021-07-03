@@ -28,7 +28,7 @@ const MyProfile = () => {
 
     return (
         <div>
-            <main id="main" class="inner-page">
+            <main id="main" className="inner-page">
    
             <div id="myprofiles" className="myprofiles">
        <div className="container" >
@@ -47,7 +47,7 @@ const MyProfile = () => {
                        
                            
                            <div className="myprofilerighttable">
-                             <h3>My Details<span><button class="ant-btn" onClick={() => onHandleEdit(item.user_id)}><i class="icofont-ui-edit"></i> Edit</button></span></h3>	
+                             <h3>My Details<span><button className="ant-btn" onClick={() => onHandleEdit(item.user_id)}><i className="icofont-ui-edit"></i> Edit</button></span></h3>	
                            <p>Location where transport carriers will drop of a vehicle that you have purchased</p>
                            					
                                <table>
@@ -79,7 +79,7 @@ const MyProfile = () => {
                        </div>
                        <div className="mgaccountrighttableblock mt-3 pt-4"> 
                            {/* <h3>Manage Account Password<span><a class="ant-btn" href="/changepassword"><i class="icofont-ui-edit"></i> Edit</a></span></h3> */}
-                           <h3>Manage Account Password<span><button class="ant-btn" onClick={() => history.push("/changepassword")}><i class="icofont-ui-edit"></i> Edit</button></span></h3>
+                           <h3>Manage Account Password<span><button className="ant-btn" onClick={() => history.push("/changepassword")}><i className="icofont-ui-edit"></i> Edit</button></span></h3>
                        </div>
                        
                                   

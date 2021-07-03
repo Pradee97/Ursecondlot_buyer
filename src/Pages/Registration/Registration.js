@@ -145,13 +145,13 @@ const Registration = () => {
                         
                         <div className="row">
                         <div className="col-sm-12 form-group">
-                        <div class="user-upload-btn-wrapper">
+                        <div className="user-upload-btn-wrapper">
                         {doc===""?<img alt="" src="adduser.jpg" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} ></img>:
 														<img alt="" src="adduser.jpg" src={doc.base64} ></img>														
 														}
-                        <span class="proCamera"></span>      
+                        <span className="proCamera"></span>      
                         <FileBase64 onDone={ getFiles }  type="hidden"/>
-                                         {/* <button>  <img alt="" for="upload" src="adduser.jpg"  /></button>  */}
+                                         {/* <button>  <img alt="" htmlFor="upload" src="adduser.jpg"  /></button>  */}
                         
                         </div> </div>
 
@@ -167,7 +167,7 @@ const Registration = () => {
                                           }
                                       })}
                                       onChange={(e) => setDealerName(e.target.value)} />
-                                    <label for="dealer_name" className={dealerName != "" ? "input-has-value" : ""}>Dealer name</label>
+                                    <label htmlFor="dealer_name" className={dealerName != "" ? "input-has-value" : ""}>Dealer name</label>
                                     <p className="form-input-error">{errors.dealerName?.message}</p>
                                 </div>
                             </div>
@@ -182,7 +182,7 @@ const Registration = () => {
                                           }
                                       })}
                                       onChange={(e) => setFirstName(e.target.value)} />
-                                    <label for="first_name" className={firstName != "" ? "input-has-value" : ""}>First Name</label>
+                                    <label htmlFor="first_name" className={firstName != "" ? "input-has-value" : ""}>First Name</label>
                                     <p className="form-input-error">{errors.firstName?.message}</p>
                                 </div>
                             </div>
@@ -197,7 +197,7 @@ const Registration = () => {
                                           }
                                       })}
                                       onChange={(e) => setLastName(e.target.value)} />
-                                    <label for="last_name" className={lastName != "" ? "input-has-value" : ""}>Last Name</label>
+                                    <label htmlFor="last_name" className={lastName != "" ? "input-has-value" : ""}>Last Name</label>
                                     <p className="form-input-error">{errors.lastName?.message}</p>
                                 </div>
                             </div>
@@ -232,7 +232,7 @@ const Registration = () => {
                                         }
                                     })}
                                     onChange={(e) => setEmail(e.target.value)} /> 
-                                    <label for="email" className={email != "" ? "input-has-value" : ""}>Email</label>
+                                    <label htmlFor="email" className={email != "" ? "input-has-value" : ""}>Email</label>
                                     <p className="form-input-error">{errors.email?.message}</p>
                                 </div>
                             </div>
@@ -247,7 +247,7 @@ const Registration = () => {
                                           }
                                       })}
                                       onChange={(e) => setAddress(e.target.value)} /> 
-                                    <label for="address" className={address != "" ? "input-has-value" : ""}>Address</label>
+                                    <label htmlFor="address" className={address != "" ? "input-has-value" : ""}>Address</label>
                                     <p className="form-input-error">{errors.address?.message}</p>
                                 </div>
                             </div>
@@ -260,7 +260,7 @@ const Registration = () => {
 
                             <div className="col-sm-8 form-group">
                                 <div className="tbox">
-                                    {/* {/ <lable for="drop" className={option !="" ? "input-has-value" : ""}>How many years in car business</lable> /} */}
+                                    {/* {/ <lable htmlFor="drop" className={option !="" ? "input-has-value" : ""}>How many years in car business</lable> /} */}
                                     <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" 
                                     {...register("option", {
                                         required: "How many years in car business is required."
@@ -275,7 +275,7 @@ const Registration = () => {
                                         <option value="15-20">15-20</option>
                                         <option value="More then 20">More then 20</option>
                                     </select>
-                                    <label for="no_years" className={"input-has-value"}>How many years in car business</label>
+                                    <label htmlFor="no_years" className={"input-has-value"}>How many years in car business</label>
                                     <p className="form-input-error">{errors.option?.message}</p>
                                 </div>
                             </div>
@@ -292,7 +292,7 @@ const Registration = () => {
                                 <div className="textbox">
                                 
                                     <Datetime inputProps={ inputProps } timeFormat={false} dateFormat="MM/DD/YYYY" name="Date" isValidDate={disablePastDt} onChange={registrationDate}/>
-                                    <label  for="meeting_date" className={date!="" ? "input-has-value" : ""}>Select Date</label>
+                                    <label  htmlFor="meeting_date" className={date!="" ? "input-has-value" : ""}>Select Date</label>
                                     <p className="form-input-error">{errors.Date?.message}</p>
                                 </div>
                                 </div>
@@ -304,13 +304,13 @@ const Registration = () => {
                                         required: "Select Time is required."
                                     })}
                                     onChange={(e) => setTime(e.target.value)} />
-                                    <label for="meeting_time" className={"input-has-value"}>Select Time</label>
+                                    <label htmlFor="meeting_time" className={"input-has-value"}>Select Time</label>
                                     <p className="form-input-error">{errors.Time?.message}</p>
                                 </div>
                             </div>
                             <div className="col-sm-12 form-group agreetab">
                                 <input type="checkbox" className="form-check d-inline " id="chb" required />
-                                <label for="chb" className="form-check-label"> I Agree for the <a href="JavaScript:void(0)" onClick={togglePopup}>Terms And Conditions</a>
+                                <label htmlFor="chb" className="form-check-label"> I Agree for the <a href="JavaScript:void(0)" onClick={togglePopup}>Terms And Conditions</a>
                                 </label>
                                 {isOpen && <Popup
                                     isClose={false}

@@ -5,13 +5,13 @@ import React from 'react';
 const Terms = (props) => {
   return (
     <>
-        <div id="termspage" class="termspage">
+        <div id="termspage" className="termspage">
       
-            <div class="termspageblock">
-                <div class="row content">
-                        <div class="modalcontent">
+            <div className="termspageblock">
+                <div className="row content">
+                        <div className="modalcontent">
                     
-                            <div class="modalbody">
+                            <div className="modalbody">
                                 <h2>Terms And Conditions </h2>
                                 <h6>SOUTH CHICAGO AUTO ACUTION, LLC</h6>
                                 <p>
@@ -133,8 +133,8 @@ const Terms = (props) => {
                                 30 days - limit applies to branded title- physical evidence of flood is arbitratable Day of sale Air bag deployed.<br></br>
                                 </p>
                             </div>
-                            <div class="modalfooter ">
-                                <a class="cta-btns" href="JavaScript:void(0)" onClick={props.toggle}>Close</a>
+                            <div className="modalfooter ">
+                                <a className="cta-btns" href="JavaScript:void(0)" onClick={props.toggle}>Close</a>
                             </div>
                     </div>
                 </div>

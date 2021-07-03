@@ -267,16 +267,16 @@ const EditBuyer = () => {
                     <div className="col-lg-12 myprofileeditform">
                         <form className="registrationform" onSubmit={updateMyProfile} >
                             <div className="section-title">
-								<button className="back-btn-paymentform backBtn" onClick={() => history.push("/buyers")}><i class="icofont-arrow-left"></i> Back</button>
+								<button className="back-btn-paymentform backBtn" onClick={() => history.push("/buyers")}><i className="icofont-arrow-left"></i> Back</button>
 								<h2>Edit Buyer</h2>
 							</div>
                             <div className="row">
                                 <div className="col-sm-12 form-group">
-                                <div class="user-upload-btn-wrapper">
+                                <div className="user-upload-btn-wrapper">
                                     {image==="" && doc===""?<img alt="" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} />:                                    
                                     doc===""?<img alt=""  src={image} />:
                                     <img alt=""  src={doc.base64} />}  
-                                    <span class="proCamera"></span>                                  
+                                    <span className="proCamera"></span>                                  
                                     <FileBase64 onDone={getFiles} type="hidden" />
                                     
                                 </div>
@@ -284,42 +284,69 @@ const EditBuyer = () => {
                                 <div className="col-sm-12 form-group">
                                     <div className="tbox">
                                         <input type="text" defaultValue={myProfileObjc.first_name} className="form-control textbox" placeholder="" disabled onChange={(e) => setFirstName(e.target.value)} />
-                                        <label for="first_name" className={firstName != "" ? "input-has-value" : ""}>First Name</label>
+                                        <label htmlFor="first_name" className={firstName != "" ? "input-has-value" : ""}>First Name</label>
                                     </div>
                                 </div>
                                 <div className="col-sm-12 form-group">
                                     <div className="tbox">
                                         <input type="text" defaultValue={myProfileObjc.last_name} className="form-control textbox" placeholder="" disabled onChange={(e) => setLastName(e.target.value)} />
-                                        <label for="last_name" className={lastName != "" ? "input-has-value" : ""}>Last Name</label>
+                                        <label htmlFor="last_name" className={lastName != "" ? "input-has-value" : ""}>Last Name</label>
                                     </div>
                                 </div>
+<<<<<<< HEAD
                                 <div className="col-sm-6 form-group ">
                                     <div className="tbox phoneNumberfield">
                                         <MuiPhoneNumber value={myProfileObjc.phone_no} defaultCountry={'us'} onlyCountries={['us']}  className=" textbox" onChange={handleOnChange} ></MuiPhoneNumber>
                                         {/* <input type="text" defaultValue={myProfileObjc.phone_no} className="form-control textbox" placeholder="" onChange={(e) => setPrimaryPhone(e.target.value)} /> */}
                                         <label for="phone_no" className={primaryPhone != "" ? "input-has-value" : ""}>Primary Phone</label>
+=======
+                                <div className="col-sm-12 form-group phonecode">
+                                    <div className="tbox">
+                                        <input type="text" defaultValue={myProfileObjc.phone_no} className="form-control textbox" placeholder="" onChange={(e) => setPrimaryPhone(e.target.value)} />
+                                        <label htmlFor="phone_no" className={primaryPhone != "" ? "input-has-value" : ""}>Primary Phone</label>
+                                        <small>Format: (123)455-6789</small>
+>>>>>>> d3d8fcc1ba00b1348a5f9b208a660aec15bff43b
                                     </div>
                                     <p className="form-input-error" >{primaryPhoneError}</p>
                                 </div>
                                 
+<<<<<<< HEAD
                                 <div className="col-sm-6 form-group ">
                                     <div className="tbox phoneNumberfield">
                                     <MuiPhoneNumber value={myProfileObjc.mobile_no} defaultCountry={'us'} onlyCountries={['us']}  className=" textbox" onChange={handleOnChanges} ></MuiPhoneNumber>
                                         {/* <input type="text" defaultValue={myProfileObjc.mobile_no} className="form-control textbox" placeholder="" onChange={(e) => setMobilephone(e.target.value)} /> */}
                                         <label for="mobile_no" className={mobilePhone != "" ? "input-has-value" : ""}>Mobile Phone</label>
+=======
+                                <div className="col-sm-4 form-group">
+                                <div className="tbox">
+                                    <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
+                                    <option style={{"display":"none"}}></option>
+                                         <option value="1" selected>+1</option>
+                                        {/* <option value="2">+2</option> */}
+                                    </select>
+                                    <label htmlFor="no_years" className={"input-has-value"}>Country code</label>
+                                </div>
+                            </div>
+                            
+                                <div className="col-sm-8 form-group phonecode">
+                                    <div className="tbox">
+                                        <input type="text" defaultValue={myProfileObjc.mobile_no} className="form-control textbox" placeholder="" onChange={(e) => setMobilephone(e.target.value)} />
+                                        <label htmlFor="mobile_no" className={mobilePhone != "" ? "input-has-value" : ""}>Mobile Phone</label>
+                                        <small>Format: (123)455-6789</small>
+>>>>>>> d3d8fcc1ba00b1348a5f9b208a660aec15bff43b
                                     </div>
                                     <p className="form-input-error" >{mobilePhoneError}</p>
                                 </div>
                                 <div className="col-sm-12 form-group">
                                     <div className="tbox">
                                         <input type="email" defaultValue={myProfileObjc.email} className="form-control textbox" placeholder="" disabled required onChange={(e) => setEmailId(e.target.value)} />
-                                        <label for="email" className={emailId != "" ? "input-has-value" : ""}>Email Id</label>
+                                        <label htmlFor="email" className={emailId != "" ? "input-has-value" : ""}>Email Id</label>
                                     </div>
                                 </div>
                                 <div className="col-sm-12 form-group">
                                     <div className="tbox">
                                         <input type="text" defaultValue={myProfileObjc.address} className="form-control textbox" placeholder="" onChange={(e) => setAddress(e.target.value)} />
-                                        <label for="address" className={address != "" ? "input-has-value" : ""}>Address</label>
+                                        <label htmlFor="address" className={address != "" ? "input-has-value" : ""}>Address</label>
                                     </div>
                                     <p className="form-input-error" >{addressError}</p>
                                 </div>
@@ -336,49 +363,49 @@ const EditBuyer = () => {
                                 <div className="col-sm-12 form-group">
                                     <div className="tbox">
                                         <input type="text" defaultValue={myProfileObjc.address} className="form-control textbox" placeholder="" onChange={(e) => setLocationName(e.target.value)} />
-                                        <label for="address" className={locationName != "" ? "input-has-value" : ""}>Location Name</label>
+                                        <label htmlFor="address" className={locationName != "" ? "input-has-value" : ""}>Location Name</label>
                                     </div>
                                     <p className="form-input-error" >{locationNameError}</p>
                                 </div>
                                 <div className="section-title">
                                 <h2 className="buyertitle">Buyer Privileges</h2>
                                 </div>
-                                <div class="col-sm-12">
-                                    <div class="radio input-group privileges">
+                                <div className="col-sm-12">
+                                    <div className="radio input-group privileges">
                                         <input id="radio-privileges" name="radio" type="radio" value="1" onChange={(e) => setUserPrivileges(e.target.value)} />
-                                        <label for="radio-privileges" class="radio-label">Select Buyer Privileges</label>
+                                        <label htmlFor="radio-privileges" className="radio-label">Select Buyer Privileges</label>
                                     </div>
-                                    <div class=" row adduserpageforminner">
-                                        <div class="col-sm-6 form-group input-group">
+                                    <div className=" row adduserpageforminner">
+                                        <div className="col-sm-6 form-group input-group">
                                             <input type="checkbox" id="buynow" value={buy_now === "1" ? 0 : 1} checked={buy_now === 1 ? true : false} onChange={(e) => setBuyNow(e.target.value)} />
-                                            <label for="buynow">Buy now</label>
+                                            <label htmlFor="buynow">Buy now</label>
                                         </div>
-                                        <div class="col-sm-6 form-group input-group ">
+                                        <div className="col-sm-6 form-group input-group ">
                                             <input type="checkbox" id="cancelbid" value={cancel_bid === "1" ? 0 : 1} checked={cancel_bid === 1 ? true : false} onChange={(e) => setCancelBid(e.target.value)} />
-                                            <label for="cancelbid">Cancel the bid after 4 hours</label>
+                                            <label htmlFor="cancelbid">Cancel the bid after 4 hours</label>
                                         </div>
-                                        <div class="col-sm-6 form-group input-group ">
+                                        <div className="col-sm-6 form-group input-group ">
                                             <input type="checkbox" id="bid" value={bid === "1" ? 0 : 1} checked={bid === 1 ? true : false} onChange={(e) => setBid(e.target.value)} />
-                                            <label for="bid">Bid</label>
+                                            <label htmlFor="bid">Bid</label>
                                         </div>
-                                        <div class="col-sm-6 form-group input-group ">
+                                        <div className="col-sm-6 form-group input-group ">
                                             <input type="checkbox" id="proxybid" value={proxy_bid === "1" ? 0 : 1} checked={proxy_bid === 1 ? true : false} onChange={(e) => setProxy_bid(e.target.value)} />
-                                            <label for="proxybid">Proxy Bid</label>
+                                            <label htmlFor="proxybid">Proxy Bid</label>
                                         </div>
-                                        <div class="col-sm-6 form-group input-group ">
+                                        <div className="col-sm-6 form-group input-group ">
                                             <input type="checkbox" id="counterbid" value={counter_bid === "1" ? 0 : 1} checked={counter_bid === 1 ? true : false} onChange={(e) => setCounter_bid(e.target.value)} />
-                                            <label for="counterbid">Counter Bid</label>
+                                            <label htmlFor="counterbid">Counter Bid</label>
                                         </div>
-                                        <div class="col-sm-6 form-group input-group ">
+                                        <div className="col-sm-6 form-group input-group ">
                                             <input type="checkbox" id="lotfee" value={lot_fee === "1" ? 0 : 1} checked={lot_fee === 1 ? true : false} onChange={(e) => setLot_fee(e.target.value)} />
-                                            <label for="lotfee">Lot Fee</label>
+                                            <label htmlFor="lotfee">Lot Fee</label>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-12">
-                                    <div class="radio input-group noprivileges">
+                                <div className="col-sm-12">
+                                    <div className="radio input-group noprivileges">
                                         <input id="radio-noprivileges" name="radio" type="radio" value="0" onChange={(e) => setUserPrivileges(e.target.value)} />
-                                        <label for="radio-noprivileges" class="radio-label">No privileges (Only View)</label>
+                                        <label htmlFor="radio-noprivileges" className="radio-label">No privileges (Only View)</label>
                                     </div>
                                 </div>
                                 <div className="col-lg-12 loginBtn">

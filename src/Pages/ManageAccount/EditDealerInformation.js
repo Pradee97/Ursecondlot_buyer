@@ -8,15 +8,7 @@ import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks";
 import { useForm } from "react-hook-form";
 
-import {
-    Form,
-    Input,
-    Select,
-    AutoComplete,
-    Radio,
-    notification,
-    Spin,
-} from 'antd';
+
 import StateAndCity from '../../Component/StateAndCity/StateAndCity'
 import MuiPhoneNumber from 'material-ui-phone-number';
 
@@ -224,7 +216,7 @@ const EditDealerInformation = () => {
      }
     return (
         <div>
-            <main id="main" class="inner-page">
+            <main id="main" className="inner-page">
             <div id="addaddress" className="addaddress_block">
             <div className="container" >
             <div className="addaddressblock col-lg-12">
@@ -239,26 +231,26 @@ const EditDealerInformation = () => {
                 <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0  flooraddform">
                 <div className="adduserpage-inner"> 
                 <div className="col-lg-12">
-                    <form class="registrationform" onSubmit={updateDealerInfo} >                   
+                    <form className="registrationform" onSubmit={updateDealerInfo} >                   
                        
-                        <div class="row">
+                        <div className="row">
                         <div className="section-title">
-                        <button className="back-btn-paymentform backBtn" onClick={() => history.push("/manageaccount")}><i class="icofont-arrow-left"></i> Back</button>   
+                        <button className="back-btn-paymentform backBtn" onClick={() => history.push("/manageaccount")}><i className="icofont-arrow-left"></i> Back</button>   
 							<h2> Edit Dealer Information</h2>
 						</div>
 
-                            <div class="col-sm-12 form-group">
+                            <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text"  defaultValue={accountObjc.first_name} class="textbox" placeholder="First name"  onChange={(e) => setFirstname(e.target.value)} />
-                                <label for="first_name" className={firstName != "" ? "input-has-value" : ""}>First Name</label>
+                                <input type="text"  defaultValue={accountObjc.first_name} className="textbox" placeholder="First name"  onChange={(e) => setFirstname(e.target.value)} />
+                                <label htmlFor="first_name" className={firstName != "" ? "input-has-value" : ""}>First Name</label>
                                 <p className="form-input-error" >{firstNameError}</p>
 
                             </div>
                             </div>
-                            <div class="col-sm-12 form-group">
+                            <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.last_name} class="textbox" placeholder="Last name"  onChange={(e) => setLastname(e.target.value)} />
-                                <label for="last_name" className={lastName != "" ? "input-has-value" : ""}>Last Name</label>
+                                <input type="text" defaultValue={accountObjc.last_name} className="textbox" placeholder="Last name"  onChange={(e) => setLastname(e.target.value)} />
+                                <label htmlFor="last_name" className={lastName != "" ? "input-has-value" : ""}>Last Name</label>
                                 <p className="form-input-error" >{lastNameError}</p>
 
                             </div>
@@ -281,10 +273,10 @@ const EditDealerInformation = () => {
                             </div>
                             <p className="form-input-error" >{mobilePhoneError}</p>
                             </div>
-                            <div class="col-sm-12 form-group">
+                            <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text" defaultValue={accountObjc.address} class="textbox" placeholder="Address"  onChange={(e) => setAddress(e.target.value)} />
-                                <label for="address" className={address != "" ? "input-has-value" : ""}>Address</label>
+                                <input type="text" defaultValue={accountObjc.address} className="textbox" placeholder="Address"  onChange={(e) => setAddress(e.target.value)} />
+                                <label htmlFor="address" className={address != "" ? "input-has-value" : ""}>Address</label>
                                 <p className="form-input-error" >{addressError}</p>
 
                             </div>
@@ -305,7 +297,7 @@ const EditDealerInformation = () => {
                             <div class="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={accountObjc.state_name} class="textbox" placeholder="State" required onChange={(e) => setState(e.target.value)} />
-                                <label for="state" className={state != "" ? "input-has-value" : ""}>State</label>
+                                <label htmlFor="state" className={state != "" ? "input-has-value" : ""}>State</label>
                             </div>
                             </div>
                             <div class="col-sm-12 form-group">
@@ -313,8 +305,8 @@ const EditDealerInformation = () => {
                             </div> */}
                           
                     
-                            <div class="col-lg-12 loginBtn">
-                                <button class="cta-btn">Update</button>
+                            <div className="col-lg-12 loginBtn">
+                                <button className="cta-btn">Update</button>
                             </div>
                         </div>
                     </form>
@@ -322,10 +314,10 @@ const EditDealerInformation = () => {
                     </div>  </div></div></div></div></div></div>
 
 
-                <section id="playstoreBlock" class="playstoreBlock">
-                    <div class="container">
-                        <div class="row content">
-                            <div class="col-lg-12">
+                <section id="playstoreBlock" className="playstoreBlock">
+                    <div className="container">
+                        <div className="row content">
+                            <div className="col-lg-12">
                                 <img src={process.env.PUBLIC_URL +"/images/appstore.png" }/>
                                 <img src={process.env.PUBLIC_URL +"/images/googleplay.png"} />
                             </div>

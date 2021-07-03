@@ -1,5 +1,4 @@
 import React from 'react';
-import API from "../../Services/BaseService";
 import { useHistory,useParams } from "react-router-dom";
 import ls from 'local-storage';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,21 +6,8 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 // import '../../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
-
+import API from "../../Services/BaseService";
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
-
-import {
-    Form,
-    Input,
-    Select,
-    AutoComplete,
-    Radio,
-    notification,
-    Spin,
-} from 'antd';
-
-
-import { Modal, Button } from 'antd';
 import './ChangePassword.css';
 import '../../assets/css/responsive.css';
 
@@ -125,7 +111,7 @@ const ChangePassword = () => {
             <main id="main" className="inner-page">
                 <div className="col-lg-4  loginBlock">
 
-                <button className="back-btn-paymentform backBtn" onClick={() => history.push("/myprofile")}><i class="icofont-arrow-left"></i> Back</button>
+                <button className="back-btn-paymentform backBtn" onClick={() => history.push("/myprofile")}><i className="icofont-arrow-left"></i> Back</button>
                 <div className="col-lg-12 card">
 
                     <form className="registrationform" onSubmit={changehandleSubmit} >
@@ -136,13 +122,13 @@ const ChangePassword = () => {
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type={showPwd?"text":"password"} id="old_password" className="textbox" placeholder="" required onChange={(e) => setOldPassword(e.target.value)} />
-                                <label for="old_password"  className={oldPassword != "" ? "input-has-value" : ""}>Old Password</label><i for ="password" className="passwordeye"  onClick={togglepwd}>{eye}</i>
+                                <label htmlFor="old_password"  className={oldPassword != "" ? "input-has-value" : ""}>Old Password</label><i htmlFor ="password" className="passwordeye"  onClick={togglepwd}>{eye}</i>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type={showPwds?"text":"password"} id="new_password" className="textbox" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="eg:(It should be Uppercase, Lowercase, Specialcharacter, Numbers and Minimum 8 character)" placeholder="" required onChange={(e) => setNewPassword(e.target.value)} />
-                                <label for="new_password" c className={newPassword != "" ? "input-has-value" : ""}>New Password</label><i for ="newPassword" className="passwordeye"  onClick={togglepwds}>{eye}</i>
+                                <label htmlFor="new_password" c className={newPassword != "" ? "input-has-value" : ""}>New Password</label><i htmlFor ="newPassword" className="passwordeye"  onClick={togglepwds}>{eye}</i>
                                 
                             </div>
                             </div>
@@ -150,7 +136,7 @@ const ChangePassword = () => {
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type={showsPwds?"text":"password"} id="confirm_password" className="textbox" placeholder="" required onChange={(e) => setConfirmPassword(e.target.value)} />
-                                <label for="confirm_password"  className={confirmPassword != "" ? "input-has-value" : ""}>Confirm Password</label><i for ="newPassword" className="passwordeye"  onClick={togglespwds}>{eye}</i>
+                                <label htmlFor="confirm_password"  className={confirmPassword != "" ? "input-has-value" : ""}>Confirm Password</label><i htmlFor ="newPassword" className="passwordeye"  onClick={togglespwds}>{eye}</i>
                             </div> 
                             </div>
                             {/* <div className="col-sm-12 form-group">

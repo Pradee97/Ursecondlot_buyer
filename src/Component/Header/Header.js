@@ -61,7 +61,7 @@ const Submenu = () => {
           <div className="row">
             <div className="col-lg-8 topLeft">
               <div className="socialIcons">
-                <a href="JavaScript:void(0)" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="JavaScript:void(0)" className="facebook"><i className="bx bxl-facebook"></i></a>
                 <a href="JavaScript:void(0)" className="snapchat"><i className="bx bxl-snapchat"></i></a>
                 <a href="JavaScript:void(0)" className="instagram"><i className="bx bxl-instagram"></i></a>
               </div>
@@ -98,11 +98,9 @@ const Submenu = () => {
               <li className={location.pathname ==="/cart"? "active nav__menu-item" : "nav__menu-item"} >
                 <img alt="Menu" src={cartImg} onClick={()=>history.push('/cart')}/>
               </li>
-              <li class="topRightUser">
-                <b className="user_name">Welcome
-                </b> 
-                <b className="user_name">
-                  {JSON.parse(localStorage.getItem("userDetails")).first_name}
+              <li className="topRightUser">
+                <b className="user_name">Welcome 
+                {JSON.parse(localStorage.getItem("userDetails")).first_name}
                 </b>                
                 <img alt="Menu" src={JSON.parse(localStorage.getItem("userDetails")).image || adduser} /> 
               </li>

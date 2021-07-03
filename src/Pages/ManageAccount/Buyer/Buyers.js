@@ -53,7 +53,7 @@ const Buyers = () => {
     }, []);
     return (
         <div>
-            <main id="main" class="inner-page">
+            <main id="main" className="inner-page">
    
             <div id="adduserpage" className="adduserpage">
        <div className="container" >
@@ -70,23 +70,23 @@ const Buyers = () => {
                        <div className="adduserpage-inner"> 
                             <div className="col-lg-12"> 
 
-                            <div class="filtersblock col-lg-9" >
-                                <div class="input-group searchbox">
-                                <input type="text"  class="form-control border" placeholder="Search" onChange={(e) => setData(e.target.value)}></input>
-                                <span class="input-group-append" >
-                                <button class="btn ms-n5" type="button"  id="btntest" name="btntest" disable onClick={searchUser} ><i class='bx bx-search'></i></button>
+                            <div className="filtersblock col-lg-9" >
+                                <div className="input-group searchbox">
+                                <input type="text"  className="form-control border" placeholder="Search" onChange={(e) => setData(e.target.value)}></input>
+                                <span className="input-group-append" >
+                                <button className="btn ms-n5" type="button"  id="btntest" name="btntest" disable onClick={searchUser} ><i className='bx bx-search'></i></button>
                                 </span>
                                 
                                 </div>
                             </div>                                
 
-                                <div class="col-lg-12 userlisttableblock">
-                                    <div class="add-user">
-                                    <Button className="add-user-btns" onClick={() => history.push("/adduser")}><i class="icofont-plus"></i> Add User</Button>
-                                        {/*<a class="add-user-btns" href="/adduser"><i class="icofont-plus"></i> Add User</a>*/}
+                                <div className="col-lg-12 userlisttableblock">
+                                    <div className="add-user">
+                                    <Button className="add-user-btns" onClick={() => history.push("/adduser")}><i className="icofont-plus"></i> Add User</Button>
+                                        {/*<a className="add-user-btns" href="/adduser"><i className="icofont-plus"></i> Add User</a>*/}
                                     </div>
 				
-                                    <div class="userlisttable table-responsive">
+                                    <div className="userlisttable table-responsive">
                                         <table className="table table-striped w-auto">
                                         <thead>
                                             <tr>
@@ -103,8 +103,8 @@ const Buyers = () => {
                                         {userList.length>0?userList.map((item,index) =>
                                         <tr>
                                             <td>{item.user_id}</td>															
-                                            <td><span class="cartitlename">{item.first_name} {item.last_name} </span></td>
-                                            <td class="userImage">{item.image===""?
+                                            <td><span className="cartitlename">{item.first_name} {item.last_name} </span></td>
+                                            <td className="userImage">{item.image===""?
                                             <img alt="" src="adduser.jpg" src={process.env.PUBLIC_URL + "/images/adduser.jpg"}/>:
                                             <img alt="" src={item.image} />
                                             }</td>
@@ -113,7 +113,7 @@ const Buyers = () => {
                                             <td>{item.buy_now===1?"Buy Now,":""}{item.cancel_bid===1?"Cancel the bid after 4 hours,":""}{item.bid===1?"Bid,":""}
                                             {item.proxy_bid===1?"Proxy Bid,":""}{item.counter_bid===1?"Counter Bid,":""}{item.lot_fee===1?"Lot Fee.":""}</td>
                                             <td>{item.status===1?"Active":"InActive"}</td>
-                                            <td><Button class="ant-btn" onClick={() => onHandleEdit(item.user_id)}><i class="icofont-ui-edit"></i> Edit</Button></td>
+                                            <td><Button className="ant-btn" onClick={() => onHandleEdit(item.user_id)}><i className="icofont-ui-edit"></i> Edit</Button></td>
                                         </tr>
                                         ):
                                         <tr><td colspan="6" ng-show="0">

@@ -6,21 +6,21 @@ const Success = () => {
     const history = useHistory();
     return (
         <div>
-            <main id="main" class="inner-page">
-                <div id="Successfullform" class="Successfullform">
-                    <div class="container">
-                        <div class="Successfullformblock col-lg-6">
-                            <div class="content">
-                                <div class="modalcontent">
-                                    <div class="Successfull-icon">
+            <main id="main" className="inner-page">
+                <div id="Successfullform" className="Successfullform">
+                    <div className="container">
+                        <div className="Successfullformblock col-lg-6">
+                            <div className="content">
+                                <div className="modalcontent">
+                                    <div className="Successfull-icon">
                                         <img alt="" src={checkImg} />
                                     </div>
-                                    <div class="modalbody">
+                                    <div className="modalbody">
                                         <h2>successfully submitted</h2>
                                         <p>Please Activate your account with the link shared to the given email Id</p>
                                     </div>
-                                    <div class="modalfooter ">
-                                        <a class="cta-btns" href="/">OK</a>
+                                    <div className="modalfooter ">
+                                        <a className="cta-btns" href="/">OK</a>
                                     </div>
 
                                 </div>
