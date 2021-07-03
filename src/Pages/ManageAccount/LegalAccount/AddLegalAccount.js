@@ -106,7 +106,8 @@ const AddLegalAccount = () => {
                 } else {
                     togglePopup()
                     setPopupTitle("Create Legal manage account");
-                    setPopupMsg("Legal manage account is not Created, Please try Again");
+                    // setPopupMsg("Legal manage account is not Created, Please try Again");
+                    setPopupMsg( response.data.error.err );
                     setPopupType("error");
                     setPopupActionType("close");
                     setPopupActionValue("close");

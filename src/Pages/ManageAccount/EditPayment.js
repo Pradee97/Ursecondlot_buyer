@@ -111,13 +111,13 @@ const EditPayment = () => {
             } else {
                 togglePopup()
                 setPopupTitle("Edit Payment");
-                setPopupMsg("Payment is not Updated, Please try Again");
+                // setPopupMsg("Payment is not Updated, Please try Again");
+                setPopupMsg( response.data.error.err );
                 setPopupType("error");
                 setPopupActionType("close");
                 setPopupActionValue("close");
             }
         }, (error) => {
-            // setOpenLoader(false);
                 togglePopup()
                 setPopupTitle("Error");
                 setPopupMsg( "Something went wrong, Please try Again");

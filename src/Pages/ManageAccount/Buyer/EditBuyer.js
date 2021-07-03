@@ -195,7 +195,8 @@ const EditBuyer = () => {
                     // history.push("emailerror");
                     togglePopup()
                     setPopupTitle("");
-                    setPopupMsg("Buyer is not Edited, Please try Again");
+                    // setPopupMsg("Buyer is not Edited, Please try Again");
+                    setPopupMsg( response.data.error.err );
                     setPopupType("error");
                     setPopupActionType("close");
                     setPopupActionValue("close");

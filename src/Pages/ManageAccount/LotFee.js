@@ -73,7 +73,8 @@ const LotFee = () => {
                  } else {
                     togglePopup()
                     setPopupTitle("Create LotFee");
-                    setPopupMsg("LotFee is not Created, Please try Again");
+                    // setPopupMsg("LotFee is not Created, Please try Again");
+                    setPopupMsg( response.data.error.err );
                     setPopupType("error");
                     setPopupActionType("close");
                     setPopupActionValue("close");

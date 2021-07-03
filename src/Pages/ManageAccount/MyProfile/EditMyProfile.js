@@ -159,7 +159,8 @@ const EditMyProfile = () => {
                     // history.push("emailerror");
                     togglePopup()
                     setPopupTitle("Edit Profile");
-                    setPopupMsg("Profile is not Edited, Please try Again");
+                    // setPopupMsg("Profile is not Edited, Please try Again");
+                    setPopupMsg( response.data.error.err );
                     setPopupType("error");
                     setPopupActionType("close");
                     setPopupActionValue("close");

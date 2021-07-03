@@ -197,7 +197,8 @@ const EditAddress = () => {
                 } else {
                     togglePopup()
                     setPopupTitle("Edit Address");
-                    setPopupMsg("Edit Address is not update, Please try Again");
+                    // setPopupMsg("Edit Address is not update, Please try Again");
+                    setPopupMsg( response.data.error.err );
                     setPopupType("error");
                     setPopupActionType("close");
                     setPopupActionValue("close");

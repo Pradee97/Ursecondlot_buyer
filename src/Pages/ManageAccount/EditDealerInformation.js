@@ -171,7 +171,8 @@ const EditDealerInformation = () => {
                 } else {
                     togglePopup()
                     setPopupTitle("Edit Dealer Information");
-                    setPopupMsg("Edit Dealer Information is not update, Please try Again");
+                    // setPopupMsg("Edit Dealer Information is not update, Please try Again");
+                    setPopupMsg( response.data.error.err );
                     setPopupType("error");
                     setPopupActionType("close");
                     setPopupActionValue("close");

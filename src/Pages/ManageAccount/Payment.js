@@ -147,7 +147,8 @@ const Payment = () => {
                 } else {
                     togglePopup()
                     setPopupTitle("Create Payment");
-                    setPopupMsg("Payment is not Created, Please try Again");
+                    // setPopupMsg("Payment is not Created, Please try Again");
+                    setPopupMsg( response.data.error.err );
                     setPopupType("error");
                     setPopupActionType("close");
                     setPopupActionValue("close");

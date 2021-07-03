@@ -222,7 +222,8 @@ const EditLegalAccount = () => {
                 } else {
                     togglePopup()
                     setPopupTitle("Edit Legal ManageAccount");
-                    setPopupMsg("Edit Legal ManageAccount is not update, Please try Again");
+                    // setPopupMsg("Edit Legal ManageAccount is not update, Please try Again");
+                    setPopupMsg( response.data.error.err );
                     setPopupType("error");
                     setPopupActionType("close");
                     setPopupActionValue("close");

@@ -108,7 +108,8 @@ const Document = () => {
             } else {
                 setIsOpen(true);
                 setPopupTitle("Document Deleted");
-                setPopupMsg("Document is not Deleted, Please try Again");
+                // setPopupMsg("Document is not Deleted, Please try Again");
+                setPopupMsg( response.data.error.err );
                 setPopupType("error");
                 setPopupActionType("close");
                 setPopupActionValue("close");
@@ -133,7 +134,8 @@ const Document = () => {
             } else {
                 togglePopup()
                 setPopupTitle("Document Upload");
-                setPopupMsg("Document is not Updated, Please try Again");
+                // setPopupMsg("Document is not Updated, Please try Again");
+                setPopupMsg( response.data.error.err );
                 setPopupType("error");
                 setPopupActionType("close");
                 setPopupActionValue("close");
@@ -161,7 +163,8 @@ const Document = () => {
             } else {
                 togglePopup()
                 setPopupTitle("Document Upload");
-                setPopupMsg("Document is not Uploaded, Please try Again");
+                // setPopupMsg("Document is not Uploaded, Please try Again");
+                setPopupMsg( response.data.error.err );
                 setPopupType("error");
                 setPopupActionType("close");
                 setPopupActionValue("close");
