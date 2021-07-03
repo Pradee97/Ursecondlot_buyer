@@ -123,18 +123,17 @@ const FloorAdd = () => {
                     setPopupActionType("redirect");
                     setPopupActionValue("ok");
                     setPopupActionPath("/floor")
-
                 } else {
+                    const { data } = response;
                     togglePopup()
                     setPopupTitle("Create Floor");
-                    setPopupMsg("Floor is not Created, Please try Again");
+                    setPopupMsg( data.error.err );
+                    // setPopupMsg("Floor is not Created, Please try Again");
                     setPopupType("error");
                     setPopupActionType("close");
                     setPopupActionValue("close");
                 }
             }, (error) => {
-                // setOpenLoader(false);
-                // console.log(error);
                     togglePopup()
                     setPopupTitle("Error");
                     setPopupMsg( "Something went wrong, Please try Again");

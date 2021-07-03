@@ -67,13 +67,10 @@ const ChangePassword = () => {
          active:1
 
         };
-        // if(newPassword === confirmPassword)
         API.post("changepassword/update", request)
-
           .then((response) => {
             console.log("res", response)
             if (response.data.success == true) {  
-            //   history.push("/login");
             togglePopup()
             setPopupTitle("Change Password");
             setPopupMsg("Change Password Successfully Updated");
@@ -84,10 +81,10 @@ const ChangePassword = () => {
             setPopupActionPath("/login")
 
             } else {
-            //   history.push("error");
+            const { data } = response;
             togglePopup()
             setPopupTitle("Change Password");
-            setPopupMsg("Change Password is not Updated, Please try Again");
+            setPopupMsg(data.error.err);
             setPopupType("error");
             setPopupActionType("close");
             setPopupActionValue("close");

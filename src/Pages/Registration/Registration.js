@@ -107,7 +107,7 @@ const Registration = () => {
                     const { data } = response;
                     toggleCommonPopup()
                     setPopupTitle("Error");
-                    setPopupMsg(data.error.mailError);
+                    setPopupMsg(data.error.err);
                     setPopupType("error");
                     setPopupActionType("close");
                     setPopupActionValue("close");

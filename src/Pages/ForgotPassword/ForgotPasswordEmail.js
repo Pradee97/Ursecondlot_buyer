@@ -33,7 +33,7 @@ const ForgotPasswordEmail = () => {
                 togglePopup()
                 setPopupTitle("Forgot Password");
                 // setPopupMsg("Forgot Password is not Updated, Please try Again");
-                setPopupMsg(data.errorhi);
+                setPopupMsg(data.error.err);
                 setPopupType("error");
                 setPopupActionType("close");
                 setPopupActionValue("close");
