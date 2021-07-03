@@ -1,12 +1,7 @@
 import React from 'react';
-import API from "../../Services/BaseService";
 import { useHistory } from "react-router-dom";
-// import Becomedealer from "./Pages/Becomedealer";
-// import '../../assets/css/styles.css';
 import { useState } from 'react';
-import { useEffect } from 'react';
 import Popup from '../../Component/Popup/Popup';
-
 import '../../Component/Popup/popup.css';
 const Home = () => {
     const history = useHistory();

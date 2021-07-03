@@ -131,7 +131,7 @@ const AddAddress = () => {
                         <div className="row">
 
                         <div className="section-title">
-                            <button className="back-btn-paymentform backBtn" onClick={() => history.push("/manageaccount")}><i class="icofont-arrow-left"></i> Back</button>
+                            <button className="back-btn-paymentform backBtn" onClick={() => history.push("/manageaccount")}><i className="icofont-arrow-left"></i> Back</button>
 							<h2>Add Address </h2>
 						</div>
                         <div className="col-sm-12 form-group"> 
@@ -181,7 +181,7 @@ const AddAddress = () => {
                                       }
                                 })}
                                 onChange={handleOnChange} ></MuiPhoneNumber>
-                                <label for="companyName" className={"input-has-value"}>Primary phone</label>
+                                <label htmlFor="companyName" className={"input-has-value"}>Primary phone</label>
                                 <p className="form-input-error">{errors.primaryPhone?.message}</p>
                             </div>
                             </div>
@@ -198,7 +198,7 @@ const AddAddress = () => {
                                       }
                                 })}
                                 onChange={handleOnChanges} ></MuiPhoneNumber>
-                                <label for="branchName" className={"input-has-value"}>Mobile phone</label>
+                                <label htmlFor="branchName" className={"input-has-value"}>Mobile phone</label>
                                 <p className="form-input-error">{errors.mobilePhone?.message}</p>
                             </div>
                             </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import './popup.css';
 
 const Popup = props => {
@@ -12,5 +13,10 @@ const Popup = props => {
     </div>
   );
 };
+Popup.propTypes = {
+  handleClose: PropTypes.func,
+  content: PropTypes.string,
+  isClose: PropTypes.bool, 
+}
  
 export default Popup;

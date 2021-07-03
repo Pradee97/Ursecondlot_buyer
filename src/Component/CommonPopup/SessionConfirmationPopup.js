@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { useHistory } from "react-router-dom";
+import PropTypes from 'prop-types';
 import "./commonPopup.css"
 
 const SessionConfirmationPopup = props => {
@@ -65,5 +66,8 @@ const SessionConfirmationPopup = props => {
 
     )
 }
+SessionConfirmationPopup.propTypes = {
+    isToggle: PropTypes.func,
+  }
 
 export default SessionConfirmationPopup;

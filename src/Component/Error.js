@@ -1,8 +1,6 @@
 import React from 'react';
-import { useHistory } from "react-router-dom";
 
 const Error = () => {
-    const history = useHistory();
     return (
         <div>
             <main id="main" className="inner-page">

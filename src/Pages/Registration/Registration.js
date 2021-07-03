@@ -213,7 +213,7 @@ const Registration = () => {
                                     })}
                                     onChange={handleOnChange} ></MuiPhoneNumber>
                                      {/* onChange={(e) => setPhoneNumber(e.target.value)} /> */}
-                                    <label for="phone_no" className={"input-has-value"}>Phone</label>
+                                    <label htmlFor="phone_no" className={"input-has-value"}>Phone</label>
                                 </div>
                                 <p className="form-input-error">{errors.phoneNumber?.message}</p>
 
