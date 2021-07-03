@@ -67,7 +67,7 @@ const CommonPopup = (props) => {
 }
 
 CommonPopup.propTypes = {
-    // props: PropTypes.string,
+
     handleClose: PropTypes.func,
     popupTitle: PropTypes.string,
     popupMsg: PropTypes.string, 
