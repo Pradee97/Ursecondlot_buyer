@@ -1,17 +1,14 @@
 import React from 'react';
-import { useHistory } from "react-router-dom";
 import { useState } from 'react';
 import { useEffect } from 'react';
 import ls from 'local-storage';
 import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
 import API from "../../Services/BaseService";
-import Popup from '../../Component/Popup/Popup';
 import '../../Component/Popup/popup.css';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 
 
 const LotFee = () => {
-    const history = useHistory();
     const [isOpen, setIsOpen] = useState(false);
  
     const togglePopup = () => {
@@ -23,11 +20,10 @@ const LotFee = () => {
     const [popupType, setPopupType] = useState ("");
     const [popupActionType, setPopupActionType] = useState ("");
     const [popupActionValue, setPopupActionValue] = useState ("");
-    const [popupActionPath, setPopupActionPath] = useState ("")
+    const [popupActionPath] = useState ("")
 
     const [lotFee, setLotFee]= useState("")
     const [lotValue, setLotValue] = useState("");
-    const [popupcontent,setPopupcontent] = useState ("");
     let userDetails = ls.get('userDetails');
 
     async function getLotfee() {

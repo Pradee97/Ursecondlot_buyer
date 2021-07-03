@@ -1,10 +1,4 @@
 import React from 'react';
-import API from "../Services/BaseService";
-import { useHistory } from "react-router-dom";
-
-// import '../assets/css/styles.css';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 import '../assets/vendor/bootstrap/css/bootstrap.min.css';
 import '../assets/vendor/icofont/icofont.min.css';
@@ -20,7 +14,6 @@ import '../assets/css/style.css';
 
 
 const Footer = () => {
-    const history = useHistory();
     return (
         <div>
             <footer id="footer">

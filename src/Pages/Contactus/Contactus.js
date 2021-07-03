@@ -1,14 +1,7 @@
 import React from 'react';
-import { useHistory,useParams } from "react-router-dom";
-// import '../../assets/css/styles.css';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import API from "../../Services/BaseService";
-
 
 
 const Contactus = () => {
-    const history = useHistory();
     
     return (
         <div>

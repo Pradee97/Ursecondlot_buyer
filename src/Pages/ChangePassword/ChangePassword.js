@@ -1,11 +1,10 @@
 import React from 'react';
-import { useHistory,useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import ls from 'local-storage';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 // import '../../assets/css/styles.css';
 import { useState } from 'react';
-import { useEffect } from 'react';
 import API from "../../Services/BaseService";
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import './ChangePassword.css';
