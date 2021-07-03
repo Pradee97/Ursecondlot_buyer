@@ -4,7 +4,7 @@ const StateAndCity = props => {
     // console.log("pppppp===",props)
     const [defaultZipcodeValue, setDefaultZipcodeValue] = useState(props.defaultZipcodeValue);
     const [zipCodeId, setZipcodeId] = useState( "");
-    const [isEdit, setIsEdit] = useState(props?.isEdit || false);
+    const [isEdit] = useState(props?.isEdit || false);
     const [country, setCountry] = useState("");
     const [defaultStateValue, setDefaultStateValue] = useState(props.defaultStateValue);
     const [stateName, setStateName] = useState("");

@@ -1,7 +1,6 @@
 import React from 'react';
 import API from "../../Services/BaseService";
 import { useHistory } from "react-router-dom";
-import DatePicker from 'react-datetime';
 import Datetime from 'react-datetime';
 import moment from 'moment';
 import { useForm } from "react-hook-form";
@@ -13,8 +12,6 @@ import Terms from '../../Component/TermsAndCondition/TermsAndCondition';
 import StateAndCity from '../../Component/StateAndCity/StateAndCity';
 import FileBase64 from 'react-file-base64';
 import MuiPhoneNumber from 'material-ui-phone-number';
-
-// import '../../assets/css/styles.css';
 import { useState } from 'react';
 
 const Registration = () => {
