@@ -2,11 +2,11 @@ import React from 'react';
 import { useHistory, useParams } from "react-router-dom";
 import { useState } from 'react';
 import { useEffect } from 'react';
-import API from "../../Services/BaseService";
-import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
+import API from "../../../Services/BaseService";
+import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks"
 import ls from 'local-storage';
-import StateAndCity from '../../Component/StateAndCity/StateAndCity';
-import CommonPopup from '../../Component/CommonPopup/CommonPopup';
+import StateAndCity from '../../../Component/StateAndCity/StateAndCity';
+import CommonPopup from '../../../Component/CommonPopup/CommonPopup';
 import { useForm } from "react-hook-form";
 import Datetime from 'react-datetime';
 import moment from 'moment';
@@ -29,12 +29,12 @@ const AddUser = () => {
 	const [stateName, setStateName] = useState("");
 	const [cityName, setCityName] = useState("");
 	const [zipCodeId, setZipcodeId] = useState("");
-	const [buy_now, setBuyNow] = useState("");
-	const [cancel_bid, setCancelBid] = useState("");
-	const [bid, setBid] = useState("");
-	const [proxy_bid, setProxy_bid] = useState("");
-	const [counter_bid, setCounter_bid] = useState("");
-	const [lot_fee, setLot_fee] = useState("");
+	const [buy_now, setBuyNow] = useState(0);
+	const [cancel_bid, setCancelBid] = useState(0);
+	const [bid, setBid] = useState(0);
+	const [proxy_bid, setProxy_bid] = useState(0);
+	const [counter_bid, setCounter_bid] = useState(0);
+	const [lot_fee, setLot_fee] = useState(0);
 	const [option, setOption] = useState("");
 	const [isOpen, setIsOpen] = useState(false);
 	const [doc,setDoc]=useState("");
@@ -44,6 +44,9 @@ const AddUser = () => {
 	const [popupActionType, setPopupActionType] = useState("");
 	const [popupActionValue, setPopupActionValue] = useState("");
 	const [popupActionPath, setPopupActionPath] = useState("")
+	const [selectPivilage, setselectPivilage] = useState(false)
+	const [deselectPivilage, setDeselectPivilage] = useState(true)
+
 
 	console.log("=====userDetails====>", userDetails)
 	console.log("======>", userDetails.dealer_id)
@@ -60,13 +63,22 @@ const AddUser = () => {
 	const getCityName = (cityData) => {
 		setCityName(cityData)
 	}
-	const setUserPrivileges = (e) => {
-		setBuyNow("");
-		setCancelBid("");
-		setBid("");
-		setProxy_bid("");
-		setCounter_bid("");
-		setLot_fee("");
+	const setUserPrivileges = (data) => {
+		if(data==0){
+			setBuyNow(0);
+			setCancelBid(0);
+			setBid(0);
+			setProxy_bid(0);
+			setCounter_bid(0);
+			setLot_fee(0);
+			setDeselectPivilage(true)
+			setselectPivilage(false)
+		}
+		else{
+			setDeselectPivilage(false)
+			setselectPivilage(true)
+		}
+		
 	}
 
 	const getZipCodeId = (zipData) => {
@@ -99,16 +111,23 @@ const AddUser = () => {
 			zipcode_id: zipCodeId,
 			no_years: option,
 			local_flag: 0,
-			buy_now: buy_now === "1" ? 1 : 0,
-			cancel_bid: cancel_bid === "1" ? 1 : 0,
-			bid: bid === "1" ? 1 : 0,
-			proxy_bid: proxy_bid === "1" ? 1 : 0,
-			counter_bid: counter_bid === "1" ? 1 : 0,
-			lot_fee: lot_fee === "1" ? 1 : 0,
+			// buy_now: buy_now === 1 ? 1 : 0,
+			// cancel_bid: cancel_bid === 1 ? 1 : 0,
+			// bid: bid === 1 ? 1 : 0,
+			// proxy_bid: proxy_bid === 1 ? 1 : 0,
+			// counter_bid: counter_bid === 1 ? 1 : 0,
+			// lot_fee: lot_fee === 1 ? 1 : 0,
+			buy_now: buy_now,
+			cancel_bid: cancel_bid,
+			bid: bid,
+			proxy_bid: proxy_bid,
+			counter_bid: counter_bid,
+			lot_fee: lot_fee,
 			local_flag: 0,
 			image:doc===""?doc:doc.length>0?doc:[doc],
 		};
 		console.log("----request---->", request)
+		return
 		API.post("buyer/add", request)
 			.then((response) => {
 				if (response.data.success) {
@@ -303,40 +322,40 @@ const AddUser = () => {
 												</div>
 												<div className="col-sm-12">
 													<div className="radio input-group privileges">
-														<input id="radio-privileges" name="radio" type="radio" value="1" onChange={(e) => setUserPrivileges(e.target.value)} />
+														<input id="radio-privileges" name="radio" type="radio" value= {1} checked={selectPivilage} onChange={(e) => setUserPrivileges(e.target.value)} />
 														<label htmlFor="radio-privileges" className="radio-label">Select Buyer Privileges</label>
 													</div>
 
 													<div className=" row adduserpageforminner">
 														<div className="col-sm-6 form-group input-group">
-															<input type="checkbox" id="buynow" value={buy_now === "1" ? 0 : 1} onChange={(e) => setBuyNow(e.target.value)} />
+															<input type="checkbox" id="buynow" disabled={ deselectPivilage }  checked = { buy_now } value={buy_now} onChange={(e) => setBuyNow(e.target.value)} />
 															<label htmlFor="buynow">Buy now</label>
 														</div>
 														<div className="col-sm-6 form-group input-group ">
-															<input type="checkbox" id="cancelbid" value={cancel_bid === "1" ? 0 : 1} onChange={(e) => setCancelBid(e.target.value)} />
+															<input type="checkbox" id="cancelbid" disabled={ deselectPivilage }  checked = { cancel_bid } value={cancel_bid} onChange={(e) => setCancelBid(e.target.value)} />
 															<label htmlFor="cancelbid">Cancel the bid after 4 hours</label>
 														</div>
 														<div className="col-sm-6 form-group input-group ">
-															<input type="checkbox" id="bid" value={bid === "1" ? 0 : 1} onChange={(e) => setBid(e.target.value)} />
+															<input type="checkbox" id="bid" disabled={ deselectPivilage }  checked = { bid } value={bid} onChange={(e) => setBid(e.target.value)} />
 															<label htmlFor="bid">Bid</label>
 														</div>
 														<div className="col-sm-6 form-group input-group ">
-															<input type="checkbox" id="proxybid" value={proxy_bid === "1" ? 0 : 1} onChange={(e) => setProxy_bid(e.target.value)} />
+															<input type="checkbox" id="proxybid" disabled={ deselectPivilage }  checked = { proxy_bid } value={proxy_bid} onChange={(e) => setProxy_bid(e.target.value)} />
 															<label htmlFor="proxybid">Proxy Bid</label>
 														</div>
 														<div className="col-sm-6 form-group input-group ">
-															<input type="checkbox" id="counterbid" value={counter_bid === "1" ? 0 : 1} onChange={(e) => setCounter_bid(e.target.value)} />
+															<input type="checkbox" id="counterbid" disabled={ deselectPivilage }  checked = { counter_bid } value={counter_bid} onChange={(e) => setCounter_bid(e.target.value)} />
 															<label htmlFor="counterbid">Counter Bid</label>
 														</div>
 														<div className="col-sm-6 form-group input-group ">
-															<input type="checkbox" id="lotfee" value={lot_fee === "1" ? 0 : 1} onChange={(e) => setLot_fee(e.target.value)} />
+															<input type="checkbox" id="lotfee" disabled={ deselectPivilage }  checked = { lot_fee } value={lot_fee} onChange={(e) => setLot_fee(e.target.value)} />
 															<label htmlFor="lotfee">Lot Fee</label>
 														</div>
 													</div>
 												</div>
 												<div className="col-sm-12">
 													<div className="radio input-group noprivileges">
-														<input id="radio-noprivileges" name="radio" type="radio" value="0" onChange={(e) => setUserPrivileges(e.target.value)} />
+														<input id="radio-noprivileges" name="radio" type="radio" value={0} checked = {deselectPivilage} onChange={(e) => setUserPrivileges(e.target.value)} />
 														<label htmlFor="radio-noprivileges" className="radio-label">No privileges (Only View)</label>
 													</div>
 												</div>

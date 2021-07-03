@@ -32,7 +32,7 @@ import EditPayment from './Pages/ManageAccount/EditPayment';
 import Footer from './Component/Footer';
 import Document from './Pages/ManageAccount/Document';
 import Buyers from './Pages/ManageAccount/Buyer/Buyers';
-import AddUser from './Pages/ManageAccount/AddUser';
+import AddUser from './Pages/ManageAccount/Buyer/AddUser';
 import MyProfile  from './Pages/ManageAccount/MyProfile/MyProfile';
 import EditMyProfile  from './Pages/ManageAccount/MyProfile/EditMyProfile';
 import EditDealerInformation from './Pages/ManageAccount/EditDealerInformation';
