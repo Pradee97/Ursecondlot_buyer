@@ -1,8 +1,71 @@
 import React from 'react';
+import API from "../../Services/BaseService";
+import CommonPopup from '../../Component/CommonPopup/CommonPopup';
+import { useForm } from "react-hook-form";
+import { useState } from 'react';
+import { useHistory } from "react-router-dom";
+const Contactus = () => { 
+  const [isOpen, setIsOpen] = useState(false);
+ 
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  }
+    const [popupTitle, setPopupTitle] = useState ("");
+    const [popupMsg, setPopupMsg] = useState ("");
+    const [popupType, setPopupType] = useState ("");
+    const [popupActionType, setPopupActionType] = useState ("");
+    const [popupActionValue, setPopupActionValue] = useState ("");
+    const [popupActionPath, setPopupActionPath] = useState ("");
+    const [name,setName]=useState ("");
+    const [email,setEmailId]=useState ("");
+    const [comments,setComments]=useState ("");
+
+    const history = useHistory();   
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
 
-const Contactus = () => {
-    
+
+  const EmailSubmit = (data) => {    
+    let request = {
+      name,
+      email,
+      comments        
+    };
+  
+    API.post("contactUs/condition", request)
+        .then((response) => {
+          console.log("=========>",response);
+            if (response.data.success) {
+              console.log("==sss=>",response.data);
+                const { data } = response;
+                togglePopup()
+                setPopupTitle("Enquiry Form");
+                setPopupMsg("Mail sent successfully.Thanks you So much for your business");
+                setPopupType("success");
+                setPopupActionType("close");
+                setPopupActionValue("close");
+                //setPopupActionPath("/contactus")
+            } else {
+              console.log("==sss1111=>",response.data);
+                const { data } = response;
+                togglePopup()
+                setPopupTitle("Enquiry Form");
+                setPopupMsg( data.error.err );
+                // setPopupMsg("Floor is not Created, Please try Again");
+                setPopupType("error");
+                setPopupActionType("close");
+                setPopupActionValue("close");
+            }
+        }, (error) => {
+                togglePopup()
+                setPopupTitle("Error");
+                setPopupMsg( "Something went wrong, Please try Again");
+                setPopupType("error");
+                setPopupActionType("close");
+                setPopupActionValue("close");
+        }).catch(err => { console.log(err); });
+       
+}
     return (
         <div>
   <main id="main" className="inner-page">
@@ -14,7 +77,6 @@ const Contactus = () => {
        <div className="section-title">
          <h2>Contact US</h2>
        </div>
-
        <div className="row content">
 
          <div className="col-lg-6 d-flex align-items-stretch">
@@ -41,22 +103,47 @@ const Contactus = () => {
          </div>
 
          <div className="col-lg-6 mt-5 mt-lg-0 d-flex align-items-stretch contactfoms">
-           <form action="forms/contact.php" method="post" role="form" className="php-email-form">
+           <form onSubmit={handleSubmit(EmailSubmit)} method="post" role="form" className="php-email-form">
            <h3>Enquiry form</h3>
             
              <div className="form-group">
                <label htmlFor="name">Full Name</label>
-                 <input type="text" name="name" className="form-control" id="name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                 <input type="text" name="name" className="form-control" id="name"
+                  {...register("name", {
+                    required: "This input is required.",
+                    maxLength: {
+                        value: 50,
+                        message: "This input must not exceed 50 characters"
+                      }
+                  })}
+                onChange={(e) => setName(e.target.value)}/>
                  <div className="validate"></div>
              </div>
              <div className="form-group">
                <label htmlFor="name">Email</label>
-                 <input type="email" className="form-control" name="email" id="email" data-rule="email" data-msg="Please enter a valid email" />
+                 <input type="email" className="form-control" name="email" id="email"  
+                  {...register("email", {
+                    required: "This input is required.",
+                   pattern : {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: "Must match the email format"
+                    }
+                })}
+                onChange={(e) => setEmailId(e.target.value)} />
                  <div className="validate"></div>
              </div>
              <div className="form-group">
                <label htmlFor="name">comments</label>
-               <textarea className="form-control" name="message" rows="3" data-rule="required" data-msg="Please write something for us"></textarea>
+               <textarea className="form-control" name="message" rows="3" 
+               {...register("message", {
+                required: "This input is required.",
+                maxLength: {
+                    value: 150,
+                    message: "This input must not exceed 150 characters"
+                  }
+              })}
+            onChange={(e) => setComments(e.target.value)}
+               ></textarea>
                <div className="validate"></div>
              </div>
              <div className="mb-3">
@@ -64,7 +151,9 @@ const Contactus = () => {
                <div className="error-message"></div>
                <div className="sent-message">Your message has been sent. Thank you!</div>
              </div>
-             <div className="text-center"><button type="submit">Submit</button></div>
+             <div className="text-center">
+             <button className="cta-btn">Submit</button>
+               </div>
            </form>
          </div>
 
@@ -92,6 +181,16 @@ const Contactus = () => {
 
      </div>
    </section>
+   {isOpen && 
+                <CommonPopup 
+                    handleClose= {togglePopup}
+                    popupTitle= {popupTitle}
+                    popupMsg= {popupMsg}
+                    popupType= {popupType}
+                    popupActionType= {popupActionType}
+                    popupActionValue= {popupActionValue}
+                    popupActionPath={popupActionPath}
+                />}
 
   
 
