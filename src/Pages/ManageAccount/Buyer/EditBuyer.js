@@ -29,7 +29,6 @@ const EditBuyer = () => {
     const [state, setState] = useState("");
     const [zipcode, setZipcode] = useState("");
     const [locationName, setLocationName] = useState("");
-    const [user_privileges, setUserPrivileges] = useState("");
     const [buy_now, setBuyNow] = useState("");
     const [cancel_bid, setCancelBid] = useState("");
     const [bid, setBid] = useState("");
@@ -46,12 +45,15 @@ const EditBuyer = () => {
     const [popupActionValue, setPopupActionValue] = useState("");
     const [popupActionPath, setPopupActionPath] = useState("");
     const [image,setImage] = useState("");
-
+    const [selectPrivilege, setselectPrivilege] = useState(false)
+    const [deselectPrivilege, setDeselectPrivilege] = useState(false)
+    const [privilegesObj, setPrivilegesObj] = useState({})
     const [primaryPhoneError, setPrimaryPhoneError] = useState("");
     const [mobilePhoneError, setMobilephoneError] = useState("");
     const [addressError, setAddressError] = useState("");
     const [locationNameError, setLocationNameError] = useState("");
     const [stateAndCityError, setStateAndCityError] = useState("")
+    const [isPrivileges, setIsPrivileges] = useState(false)
 
     const togglePopup = () => {
         setIsOpen(!isOpen);
@@ -72,36 +74,59 @@ const EditBuyer = () => {
     const getZipCodeId = (zipData) => {
         setZipcode(zipData)
     }
-    async function fetchMyProfileDetails() {
-        let request = {
-            buyer_id: id,
-        };
-        const state = API.post('buyer_details/condition', request);
-        state.then(res => {
-            console.log("res", res.data.data)
-            setFirstName(res.data.data[0].first_name);
-            setLastName(res.data.data[0].last_name);
-            setPrimaryPhone(res.data.data[0].phone_no);
-            setMobilephone(res.data.data[0].mobile_no);
-            setEmailId(res.data.data[0].email);
-            setAddress(res.data.data[0].address);
-            setCity(res.data.data[0].city_name);
-            setState(res.data.data[0].state_name);
-            setZipcode(res.data.data[0].zipcode);
-            setLocationName(res.data.data[0].address);
-            setMyProfileObj(res.data.data[0]);
-            setBuyNow(res.data.data[0].buy_now);
-            setCancelBid(res.data.data[0].cancel_bid)
-            setBid(res.data.data[0].bid)
-            setProxy_bid(res.data.data[0].proxy_bid)
-            setCounter_bid(res.data.data[0].counter_bid)
-            setLot_fee(res.data.data[0].lot_fee)
-            setPriviegesId(res.data.data[0].buyer_privileges_id)
-            setImage(res.data.data[0].image);
 
-        })
-            .catch(err => { console.log(err); });
+    const setUserPrivileges = (data) => {
+        if(data==0){
+			setBuyNow(0);
+			setCancelBid(0);
+			setBid(0);
+			setProxy_bid(0);
+			setCounter_bid(0);
+			setLot_fee(0);
+			setDeselectPrivilege(true)
+			setselectPrivilege(false)
+		}
+		else{
+            setBuyNow(privilegesObj?.buyNow || 0);
+            setCancelBid(privilegesObj?.cancelBid || 0)
+            setBid(privilegesObj?.bid || 0)
+            setProxy_bid(privilegesObj?.proxyBid || 0)
+            setCounter_bid(privilegesObj?.scounterBid || 0)
+            setLot_fee(privilegesObj?.lotFee || 0)
+			setDeselectPrivilege(false)
+			setselectPrivilege(true)
+		}
     }
+    // async function fetchMyProfileDetails() {
+    //     let request = {
+    //         buyer_id: id,
+    //     };
+    //     const state = API.post('buyer_details/condition', request);
+    //     state.then(res => {
+    //         console.log("res", res.data.data)
+    //         setFirstName(res.data.data[0].first_name);
+    //         setLastName(res.data.data[0].last_name);
+    //         setPrimaryPhone(res.data.data[0].phone_no);
+    //         setMobilephone(res.data.data[0].mobile_no);
+    //         setEmailId(res.data.data[0].email);
+    //         setAddress(res.data.data[0].address);
+    //         setCity(res.data.data[0].city_name);
+    //         setState(res.data.data[0].state_name);
+    //         setZipcode(res.data.data[0].zipcode);
+    //         setLocationName(res.data.data[0].address);
+    //         setMyProfileObj(res.data.data[0]);
+    //         setBuyNow(res.data.data[0].buy_now);
+    //         setCancelBid(res.data.data[0].cancel_bid)
+    //         setBid(res.data.data[0].bid)
+    //         setProxy_bid(res.data.data[0].proxy_bid)
+    //         setCounter_bid(res.data.data[0].counter_bid)
+    //         setLot_fee(res.data.data[0].lot_fee)
+    //         setPriviegesId(res.data.data[0].buyer_privileges_id)
+    //         setImage(res.data.data[0].image);
+
+    //     })
+    //         .catch(err => { console.log(err); });
+    // }
      updateMyProfile = (event) => {
         // setOpenLoader(true);
         event.preventDefault();
@@ -120,9 +145,9 @@ const EditBuyer = () => {
             mobile_no: mobilePhone,
             email: emailId,
             address: address,
-            city_id: typeof city==='string'?myProfileObjc.city_id:city,
-            state_id: typeof state==='string'?myProfileObjc.state_id:state,
-            zipcode_id: zipcode===myProfileObjc.zipcode?myProfileObjc.zipcode_id:zipcode,
+            city_id: typeof city === 'string' ? myProfileObjc.city_id : city,
+            state_id: typeof state === 'string' ? myProfileObjc.state_id : state,
+            zipcode_id: zipcode === myProfileObjc.zipcode ? myProfileObjc.zipcode_id : zipcode,
             // city_id: city,
             // state_id: state,
             // zipcode_id: zipcode,
@@ -142,7 +167,9 @@ const EditBuyer = () => {
             setPrimaryPhoneError("Primary Phone is required")
             return;
         }
-        else if(primaryPhone.length<17 ){
+
+        else if(primaryPhone.length>17 ){
+            console.log("mobilePhone===",primaryPhone)
             setPrimaryPhoneError("Primary Phone must have 10 digits ")
             return;
         }
@@ -151,7 +178,9 @@ const EditBuyer = () => {
             setMobilephoneError("Mobile Phone is required")
             return;
         }
-        else if(mobilePhone.length<17 ){
+
+        else if(mobilePhone.length>17 ){
+            console.log("mobilePhone===",mobilePhone)
             setMobilephoneError("Mobile Phone must have 10 digits")
             return;
         }
@@ -160,18 +189,22 @@ const EditBuyer = () => {
             setAddressError("Address is required")
             return;
         }
+
         else if(address.length>150){
             setAddressError("Address must not exceed 150 characters")
             return;
         }
+
         if(!locationName){
             setLocationNameError("Location Name is required")
             return;
         }
+
         else if(locationName.length>150){
             setLocationNameError("Location Name must not exceed 150 characters")
             return;
         }
+
         if(!(typeof city==='string'?myProfileObjc.city_id:city) || !(typeof state==='string'?myProfileObjc.state_id:state) || !(zipcode===myProfileObjc.zipcode?myProfileObjc.zipcode_id:zipcode)){
             setStateAndCityError("State, City and Zipcode is required")
             return
@@ -219,7 +252,8 @@ const EditBuyer = () => {
     };
     const state = API.post('buyer_details/condition', request);
     state.then(res => {
-        console.log("res", res.data.data)
+        console.log( "userDetails=>",userDetails)
+        console.log("res=>", res.data.data)
         setFirstName(res.data.data[0].first_name);
         setLastName(res.data.data[0].last_name);
         setPrimaryPhone(res.data.data[0].phone_no);
@@ -240,7 +274,23 @@ const EditBuyer = () => {
         setPriviegesId(res.data.data[0].buyer_privileges_id)
         setImage(res.data.data[0].image);
         reset(res.data.data[0]);
-
+        setPrivilegesObj({
+            buyNow : res.data.data[0].buy_now,
+            cancelBid: res.data.data[0].cancel_bid,
+            bid: res.data.data[0].bid,
+            proxyBid: res.data.data[0].proxy_bid,
+            scounterBid: res.data.data[0].counter_bid,
+            lotFee: res.data.data[0].lot_fee
+        })
+        setIsPrivileges(userDetails.user_id === res.data.data[0].buyer_id ? false : true)
+        if(res.data.data[0].buy_now == 1 || res.data.data[0].cancel_bid == 1 || res.data.data[0].bid == 1 || 
+            res.data.data[0].proxy_bid == 1 || res.data.data[0].counter_bid == 1 || res.data.data[0].lot_fee == 1 ){
+                setselectPrivilege(true)
+                setDeselectPrivilege(false)
+        } else{
+            setselectPrivilege(false)
+            setDeselectPrivilege(true)
+        }
     })
         .catch(err => { console.log(err); });
     }, [reset]);
@@ -341,47 +391,49 @@ const EditBuyer = () => {
                                     </div>
                                     <p className="form-input-error" >{locationNameError}</p>
                                 </div>
-                                <div className="section-title">
-                                <h2 className="buyertitle">Buyer Privileges</h2>
-                                </div>
-                                <div className="col-sm-12">
-                                    <div className="radio input-group privileges">
-                                        <input id="radio-privileges" name="radio" type="radio" value="1" onChange={(e) => setUserPrivileges(e.target.value)} />
-                                        <label htmlFor="radio-privileges" className="radio-label">Select Buyer Privileges</label>
+                                {isPrivileges && <div>
+                                    <div className="section-title">
+                                    <h2 className="buyertitle">Buyer Privileges</h2>
                                     </div>
-                                    <div className=" row adduserpageforminner">
-                                        <div className="col-sm-6 form-group input-group">
-                                            <input type="checkbox" id="buynow" value={buy_now === "1" ? 0 : 1} checked={buy_now === 1 ? true : false} onChange={(e) => setBuyNow(e.target.value)} />
-                                            <label htmlFor="buynow">Buy now</label>
+                                    <div className="col-sm-12">
+                                        <div className="radio input-group privileges">
+                                            <input id="radio-privileges" name="radio" type="radio" value="1" checked={selectPrivilege}  onChange={(e) => setUserPrivileges(e.target.value)} />
+                                            <label htmlFor="radio-privileges" className="radio-label">Select Buyer Privileges</label>
                                         </div>
-                                        <div className="col-sm-6 form-group input-group ">
-                                            <input type="checkbox" id="cancelbid" value={cancel_bid === "1" ? 0 : 1} checked={cancel_bid === 1 ? true : false} onChange={(e) => setCancelBid(e.target.value)} />
-                                            <label htmlFor="cancelbid">Cancel the bid after 4 hours</label>
-                                        </div>
-                                        <div className="col-sm-6 form-group input-group ">
-                                            <input type="checkbox" id="bid" value={bid === "1" ? 0 : 1} checked={bid === 1 ? true : false} onChange={(e) => setBid(e.target.value)} />
-                                            <label htmlFor="bid">Bid</label>
-                                        </div>
-                                        <div className="col-sm-6 form-group input-group ">
-                                            <input type="checkbox" id="proxybid" value={proxy_bid === "1" ? 0 : 1} checked={proxy_bid === 1 ? true : false} onChange={(e) => setProxy_bid(e.target.value)} />
-                                            <label htmlFor="proxybid">Proxy Bid</label>
-                                        </div>
-                                        <div className="col-sm-6 form-group input-group ">
-                                            <input type="checkbox" id="counterbid" value={counter_bid === "1" ? 0 : 1} checked={counter_bid === 1 ? true : false} onChange={(e) => setCounter_bid(e.target.value)} />
-                                            <label htmlFor="counterbid">Counter Bid</label>
-                                        </div>
-                                        <div className="col-sm-6 form-group input-group ">
-                                            <input type="checkbox" id="lotfee" value={lot_fee === "1" ? 0 : 1} checked={lot_fee === 1 ? true : false} onChange={(e) => setLot_fee(e.target.value)} />
-                                            <label htmlFor="lotfee">Lot Fee</label>
+                                        <div className=" row adduserpageforminner">
+                                            <div className="col-sm-6 form-group input-group">
+                                                <input type="checkbox" id="buynow" value={buy_now == 0 ? 1 : 0} checked={buy_now == 1 ? true : false} onChange={(e) => setBuyNow(e.target.value)} />
+                                                <label htmlFor="buynow">Buy now</label>
+                                            </div>
+                                            <div className="col-sm-6 form-group input-group ">
+                                                <input type="checkbox" id="cancelbid" value={cancel_bid == 0 ? 1 : 0} checked={cancel_bid == 1 ? true : false} onChange={(e) => setCancelBid(e.target.value)} />
+                                                <label htmlFor="cancelbid">Cancel the bid after 4 hours</label>
+                                            </div>
+                                            <div className="col-sm-6 form-group input-group ">
+                                                <input type="checkbox" id="bid" value={bid == 0 ? 1 : 0} checked={bid == 1 ? true : false} onChange={(e) => setBid(e.target.value)} />
+                                                <label htmlFor="bid">Bid</label>
+                                            </div>
+                                            <div className="col-sm-6 form-group input-group ">
+                                                <input type="checkbox" id="proxybid" value={proxy_bid == 0 ? 1 : 0} checked={proxy_bid == 1 ? true : false} onChange={(e) => setProxy_bid(e.target.value)} />
+                                                <label htmlFor="proxybid">Proxy Bid</label>
+                                            </div>
+                                            <div className="col-sm-6 form-group input-group ">
+                                                <input type="checkbox" id="counterbid" value={counter_bid == 0 ? 1 : 0} checked={counter_bid == 1 ? true : false} onChange={(e) => setCounter_bid(e.target.value)} />
+                                                <label htmlFor="counterbid">Counter Bid</label>
+                                            </div>
+                                            <div className="col-sm-6 form-group input-group ">
+                                                <input type="checkbox" id="lotfee" value={lot_fee == 0 ? 1 : 0} checked={lot_fee == 1 ? true : false} onChange={(e) => setLot_fee(e.target.value)} />
+                                                <label htmlFor="lotfee">Lot Fee</label>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="col-sm-12">
+                                    <div className="col-sm-12">
                                     <div className="radio input-group noprivileges">
-                                        <input id="radio-noprivileges" name="radio" type="radio" value="0" onChange={(e) => setUserPrivileges(e.target.value)} />
+                                        <input id="radio-noprivileges" name="radio" type="radio" value="0" checked = {deselectPrivilege} onChange={(e) => setUserPrivileges(e.target.value)} />
                                         <label htmlFor="radio-noprivileges" className="radio-label">No privileges (Only View)</label>
                                     </div>
                                 </div>
+                                </div>}
                                 <div className="col-lg-12 loginBtn">
                                     <button className="cta-btn">Update</button>
                                 </div>

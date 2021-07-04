@@ -44,8 +44,8 @@ const AddUser = () => {
 	const [popupActionType, setPopupActionType] = useState("");
 	const [popupActionValue, setPopupActionValue] = useState("");
 	const [popupActionPath, setPopupActionPath] = useState("")
-	const [selectPivilage, setselectPivilage] = useState(false)
-	const [deselectPivilage, setDeselectPivilage] = useState(true)
+	const [selectPivilege, setSelectPivilege] = useState(false)
+	const [deselectPivilege, setDeselectPivilege] = useState(true)
 
 
 	console.log("=====userDetails====>", userDetails)
@@ -71,12 +71,12 @@ const AddUser = () => {
 			setProxy_bid(0);
 			setCounter_bid(0);
 			setLot_fee(0);
-			setDeselectPivilage(true)
-			setselectPivilage(false)
+			setDeselectPivilege(true)
+			setSelectPivilege(false)
 		}
 		else{
-			setDeselectPivilage(false)
-			setselectPivilage(true)
+			setDeselectPivilege(false)
+			setSelectPivilege(true)
 		}
 		
 	}
@@ -94,9 +94,7 @@ const AddUser = () => {
 		return current.isAfter(yesterday);
 	};
 	const registrationhandleSubmit = (data) => {
-
 		// event.preventDefault();
-		
 		let request = {
 			dealer_id: userDetails.dealer_id,
 			first_name: firstName,
@@ -127,7 +125,7 @@ const AddUser = () => {
 			image:doc===""?doc:doc.length>0?doc:[doc],
 		};
 		console.log("----request---->", request)
-		return
+		
 		API.post("buyer/add", request)
 			.then((response) => {
 				if (response.data.success) {
@@ -164,6 +162,15 @@ const AddUser = () => {
 	function handleOnChange(value) {
         setPhoneNumber(value);
      }
+
+	 const PivilegeDate = (data, privilegeType) => {
+		privilegeType === "buy_now" && setBuyNow( data === 0 ? 1 : 0 );
+		privilegeType === "cancel_bid"  && setCancelBid( data === 0 ? 1 : 0 );
+		privilegeType === "bid" && setBid( data === 0 ? 1 : 0 );
+		privilegeType === "proxy_bid" && setProxy_bid( data === 0 ? 1 : 0 );
+		privilegeType === "counter_bid" && setCounter_bid( data === 0 ? 1 : 0 );
+		privilegeType === "lot_fee" && setLot_fee( data === 0 ? 1 : 0 );
+	 }
 	return (
 		<div>
 			<main id="main" className="inner-page">
@@ -181,9 +188,7 @@ const AddUser = () => {
 								<div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 adduserpagerightblock">
 									<div className="adduserpage-inner">
 										<div className="col-lg-12">
-										
 											<form class="adduserpageform" onSubmit={handleSubmit(registrationhandleSubmit)}>
-
 												<div className="row">
 
 													<div className="section-title">
@@ -322,40 +327,40 @@ const AddUser = () => {
 												</div>
 												<div className="col-sm-12">
 													<div className="radio input-group privileges">
-														<input id="radio-privileges" name="radio" type="radio" value= {1} checked={selectPivilage} onChange={(e) => setUserPrivileges(e.target.value)} />
+														<input id="radio-privileges" name="radio" type="radio" value= {1} checked={selectPivilege} onChange={(e) => setUserPrivileges(e.target.value)} />
 														<label htmlFor="radio-privileges" className="radio-label">Select Buyer Privileges</label>
 													</div>
 
 													<div className=" row adduserpageforminner">
 														<div className="col-sm-6 form-group input-group">
-															<input type="checkbox" id="buynow" disabled={ deselectPivilage }  checked = { buy_now } value={buy_now} onChange={(e) => setBuyNow(e.target.value)} />
+															<input type="checkbox" id="buynow" disabled={ deselectPivilege }  checked = { buy_now == 0 ? false : true } value={buy_now == 0 ? 1 : 0 } onChange={(e) => setBuyNow(e.target.value)} />
 															<label htmlFor="buynow">Buy now</label>
 														</div>
 														<div className="col-sm-6 form-group input-group ">
-															<input type="checkbox" id="cancelbid" disabled={ deselectPivilage }  checked = { cancel_bid } value={cancel_bid} onChange={(e) => setCancelBid(e.target.value)} />
+															<input type="checkbox" id="cancelbid" disabled={ deselectPivilege }  checked = { cancel_bid == 0 ? false : true } value={cancel_bid == 0 ? 1 : 0 } onChange={(e) => setCancelBid(e.target.value)} />
 															<label htmlFor="cancelbid">Cancel the bid after 4 hours</label>
 														</div>
 														<div className="col-sm-6 form-group input-group ">
-															<input type="checkbox" id="bid" disabled={ deselectPivilage }  checked = { bid } value={bid} onChange={(e) => setBid(e.target.value)} />
+															<input type="checkbox" id="bid" disabled={ deselectPivilege }  checked = { bid == 0 ? false : true } value={bid == 0 ? 1 : 0 } onChange={(e) => setBid(e.target.value)}/>
 															<label htmlFor="bid">Bid</label>
 														</div>
 														<div className="col-sm-6 form-group input-group ">
-															<input type="checkbox" id="proxybid" disabled={ deselectPivilage }  checked = { proxy_bid } value={proxy_bid} onChange={(e) => setProxy_bid(e.target.value)} />
+															<input type="checkbox" id="proxybid" disabled={ deselectPivilege }  checked = { proxy_bid == 0 ? false : true } value={proxy_bid == 0 ? 1 : 0 } onChange={(e) => setProxy_bid(e.target.value)} />
 															<label htmlFor="proxybid">Proxy Bid</label>
 														</div>
 														<div className="col-sm-6 form-group input-group ">
-															<input type="checkbox" id="counterbid" disabled={ deselectPivilage }  checked = { counter_bid } value={counter_bid} onChange={(e) => setCounter_bid(e.target.value)} />
+															<input type="checkbox" id="counterbid" disabled={ deselectPivilege }  checked = { counter_bid == 0 ? false : true } value={counter_bid == 0 ? 1 : 0 } onChange={(e) => setCounter_bid(e.target.value)} />
 															<label htmlFor="counterbid">Counter Bid</label>
 														</div>
 														<div className="col-sm-6 form-group input-group ">
-															<input type="checkbox" id="lotfee" disabled={ deselectPivilage }  checked = { lot_fee } value={lot_fee} onChange={(e) => setLot_fee(e.target.value)} />
+															<input type="checkbox" id="lotfee" disabled={ deselectPivilege }  checked = { lot_fee == 0 ? false : true } value={lot_fee == 0 ? 1 : 0 } onChange={(e) => setLot_fee(e.target.value)} />
 															<label htmlFor="lotfee">Lot Fee</label>
 														</div>
 													</div>
 												</div>
 												<div className="col-sm-12">
 													<div className="radio input-group noprivileges">
-														<input id="radio-noprivileges" name="radio" type="radio" value={0} checked = {deselectPivilage} onChange={(e) => setUserPrivileges(e.target.value)} />
+														<input id="radio-noprivileges" name="radio" type="radio" value={0} checked = {deselectPivilege} onChange={(e) => setUserPrivileges(e.target.value)} />
 														<label htmlFor="radio-noprivileges" className="radio-label">No privileges (Only View)</label>
 													</div>
 												</div>
