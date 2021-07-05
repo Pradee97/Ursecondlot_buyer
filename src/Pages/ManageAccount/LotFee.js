@@ -24,6 +24,8 @@ const LotFee = () => {
 
     const [lotFee, setLotFee]= useState("")
     const [lotValue, setLotValue] = useState("");
+    const [lotFeeError, setLotFeeError] = useState("")
+
     let userDetails = ls.get('userDetails');
 
     async function getLotfee() {
@@ -49,12 +51,17 @@ const LotFee = () => {
         
         const handlesubimt = () => {
                 //console.log("check",buyer_id)
+                setLotFeeError("")  
+
             let request = {
                 buyer_id: userDetails.user_id,
                 lot_fee: lotValue,
                 active:1
             };
-    
+            if(lotValue === 0 ){
+                setLotFeeError("LotFee must be greater then zero")
+                return;
+            }
             API.post("lot_fee/add",request)
                .then((response) => {
                  console.log("res", response.data.success)
@@ -109,10 +116,11 @@ const LotFee = () => {
                        <p>Your expense or your profit added to the vehicle every time you purchase </p>
                            <div className="form-group col-lg-6 col-md-6 lotfee-form">
                                <div className="input-icon">
-                                 <input type="text" className="form-control" defaultValue={lotFee.lot_fee} onChange={(e) => updateLotValue(e.target.value)}/> 
+                                 <input type="text" className="form-control"  defaultValue={lotFee.lot_fee} value={lotValue} onChange={(e) => updateLotValue(Math.round(e.target.value))}/> 
                                    <i>$</i>
                                </div>
                            </div>
+                           <p className="form-input-error" >{lotFeeError}</p>
                            <div className="col-lg-12 loginBtn">
                                <button className="cta-btn" onClick={handlesubimt}>Submit</button>
                                {/* conclick={handlesubimt} */}

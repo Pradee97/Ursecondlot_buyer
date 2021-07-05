@@ -9,6 +9,8 @@ import '../../Component/Popup/popup.css';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import FileBase64 from 'react-file-base64';
 import { Button, Upload } from 'antd';
+import Loading from "../../Component/Loading/Loading";
+
 const { Dragger } = Upload;
 
 const Document = () => {
@@ -37,7 +39,12 @@ const Document = () => {
     const togglePopup = () => {
         setIsOpen(!isOpen);
     }
+  const [loading,setloading]=useState("");
+
     async function getDocuments() {
+    console.log("inside get document");
+        setloading(true);
+
         let request = {
             buyer_id: userDetails.user_id
         };
@@ -73,6 +80,8 @@ const Document = () => {
             setDocList(res.data.data);
         })
             .catch(err => { console.log(err); });
+      setloading(false);
+
     }
 
     useEffect(() => {
@@ -102,9 +111,9 @@ const Document = () => {
                 setPopupTitle("Document Delete");
                 setPopupMsg("Document Successfully Deleted");
                 setPopupType("success");
-                setPopupActionType("redirect");
+                setPopupActionType("close");
                 setPopupActionValue("ok");
-                setPopupActionPath("/document");
+                // setPopupActionPath("/document");
             } else {
                 setIsOpen(true);
                 setPopupTitle("Document Deleted");
@@ -128,9 +137,9 @@ const Document = () => {
                 setPopupTitle("Document Upload");
                 setPopupMsg("Document Successfully Updated");
                 setPopupType("success");
-                setPopupActionType("redirect");
+                setPopupActionType("close");
                 setPopupActionValue("ok");
-                setPopupActionPath("/document")
+                // setPopupActionPath("/document")
             } else {
                 togglePopup()
                 setPopupTitle("Document Upload");
@@ -174,6 +183,7 @@ const Document = () => {
 
     return (
         <div>
+      {loading?<Loading/>:
             <main id="main" className="inner-page">
                 <div id="documentspage" className="documentspage">
                     <div className="container" >
@@ -502,6 +512,7 @@ const Document = () => {
                         Confirmation={deleteingFile}
                     />}
             </main>
+            }
         </div>
     )
 }
