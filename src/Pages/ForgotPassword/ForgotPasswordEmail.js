@@ -16,7 +16,7 @@ const ForgotPasswordEmail = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const changehandleSubmit = (event) => {
-        event.preventDefault();
+        //event.preventDefault();
         let request = {
             email: email,
         }
