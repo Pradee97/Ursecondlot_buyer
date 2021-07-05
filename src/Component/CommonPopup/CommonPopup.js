@@ -14,20 +14,12 @@ const CommonPopup = props => {
     // const { handleClose, 
     //     popupTitle = "ERROR",
     //     popupMsg = "something went wrong please try again", 
-    //     popupType = 'error',            //("success or error or confirm")
-    //     popupActionType = 'close',      //("redirect  or close or confirm")
-    //     popupActionValue = 'close', 
-    //     popupActionPath } = props;
+    //     popupType = 'error',             //("success or error or confirm")
+    //     popupActionType = 'close',       //("redirect  or close or confirm or refresh")
+    //     popupActionValue = 'close',      //("any string you like to display")
+    //     popupActionPath } = props;       //("where you like to redirect")
 
     const { handleClose, popupTitle, popupMsg, popupType, popupActionType, popupActionValue, popupActionPath, Confirmation } = props;
-    // const Confirmation=()=> {
-    //     const deleteFile=API.post('documentDelete/update',request);
-    //     deleteFile.then(res => {
-            
-    //     })
-    //         .catch(err => { console.log(err); });
-    // }
-
     return (
         <div className="popup-box">
             <div id="" className="CommonModels-box">
@@ -43,16 +35,16 @@ const CommonPopup = props => {
                             </div>
                             <div className="CommonModalfooter ">
                             
-                                {  popupActionType.toLowerCase() === "confirm"   
-                                    ?
-                                    <div className="CommonModalfooter session">
-                                        <button className="cta-btns" onClick={handleClose} >cancel</button>
-                                        <button className="cta-btns" onClick={Confirmation} >ok</button> 
-                                    </div>
-                                    : popupActionType.toLowerCase() === "redirect" 
-                                    ?   <a className="cta-btns" onClick={() => history.push(popupActionPath)} >{popupActionValue}</a>
-                                    :   <button className="cta-btns" onClick={handleClose} >{popupActionValue}</button> 
-                                }
+                             
+                            {popupActionType.toLowerCase() === "confirm" && (<div className="CommonModalfooter session">
+                                <button className="cta-btns" onClick={handleClose} >cancel</button>
+                                <button className="cta-btns" onClick={Confirmation} >ok</button> 
+                            </div>)}
+
+                            {popupActionType.toLowerCase() === "redirect" && <a className="cta-btns" onClick={() => history.push(popupActionPath)} >{popupActionValue}</a> }
+                            {popupActionType.toLowerCase() === "close" && <button className="cta-btns" onClick={handleClose} >{popupActionValue}</button> }
+                            {popupActionType.toLowerCase() === "refresh" && <a class="cta-btns" href={popupActionPath}>{popupActionValue}</a> }
+                            
                             </div>
 
                         </div>

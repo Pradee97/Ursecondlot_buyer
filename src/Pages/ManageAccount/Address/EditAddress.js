@@ -133,7 +133,7 @@ const EditAddress = () => {
             setPrimaryPhoneError("Primary Phone is required")
             return;
         }
-        else if(primaryPhone.length<17 ){
+        else if(primaryPhone.length>17 ){
             setPrimaryPhoneError("Primary Phone must have 10 digits ")
             return;
         }
@@ -142,7 +142,7 @@ const EditAddress = () => {
             setMobilePhoneError("Mobile Phone is required")
             return;
         }
-        else if(mobilePhone.length<17 ){
+        else if(mobilePhone.length>17 ){
             setMobilePhoneError("Mobile Phone must have 10 digits")
             return;
         }
@@ -175,13 +175,7 @@ const EditAddress = () => {
             setStateAndCityError("State, City and Zipcode is required")
             return
         }
-        console.log("==========FirstName==========>",FirstName);
-        console.log("==========lastName==========>",lastName);
-        console.log("==========address==========>",address);
-        console.log("==========primaryPhone==========>",primaryPhone);
-
-        
-        API
+         API
             .post("buyer_address/update", request)
             .then((response) => {
                     if (response.data.success) {
