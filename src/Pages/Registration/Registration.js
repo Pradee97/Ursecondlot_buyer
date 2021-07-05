@@ -13,6 +13,7 @@ import StateAndCity from '../../Component/StateAndCity/StateAndCity';
 import FileBase64 from 'react-file-base64';
 import MuiPhoneNumber from 'material-ui-phone-number';
 import { useState } from 'react';
+import { DatePicker } from 'material-ui';
 
 const Registration = () => {
     const history = useHistory();
@@ -40,13 +41,26 @@ const Registration = () => {
     const [popupActionType, setPopupActionType] = useState("");
     const [popupActionValue, setPopupActionValue] = useState("");
     const [popupActionPath, setPopupActionPath] = useState("");
+    const [edate,setEDate]= useState("1");
     const [doc,setDoc]=useState("");
+    const [state,setState]=useState("1");
+    const [city,setCity]=useState("1");
+    const [zipcode,setZipcode]=useState("1");
+    const [terms,setTerms]=useState("0");
+    const [eterms,setETerms]=useState("0");
+    const [type,setType]=useState("");
 
     const togglePopup = () => {
         setIsOpen(!isOpen);
     }
     const getFiles=(file)=>{
-        setDoc(file);
+        console.log("================>",file.type)
+        if(file.type.includes("jpg") || file.type.includes("jpeg") || file.type.includes("png")){
+            setDoc(file);
+        }else{
+            setType("0");
+        }
+        
       }
 
     const toggleCommonPopup = () => {
@@ -60,7 +74,7 @@ const Registration = () => {
   
       const inputProps = {
           placeholder: 'MM/DD/YYYY',
-          required:true
+          //required:true
       };
       
       const registrationDate = (event) => {
@@ -70,6 +84,8 @@ const Registration = () => {
     const registrationhandleSubmit = (data) => {
         // setOpenLoader(true);
         // event.preventDefault();
+       
+        console.log("===date===",date)
         let request = {
             dealer_name: dealerName,
             first_name:firstName,
@@ -88,6 +104,7 @@ const Registration = () => {
             local_flag: 0,
             image:doc===""?"":doc.length>0?doc:[doc],
         };
+        if(date==="" && stateName!=="" && cityName!=="" && zipCodeId!=="" && terms!=="0"){
         API.post("registration/add", request)
             .then((response) => {
                 if (response.data.success) {
@@ -117,6 +134,27 @@ const Registration = () => {
                 setPopupActionType("close");
                 setPopupActionValue("close");
             });
+        }else{
+
+            if(stateName==="" || stateName===undefined || stateName===null){
+                console.log("====stateName=stateName=>",stateName,cityName,zipCodeId)
+                setState("");
+            }
+            if(cityName==="" || cityName===undefined || cityName===null){
+                console.log("====cityName==>",stateName,cityName,zipCodeId)
+                 setCity("");
+            }
+            if(zipCodeId==="" || zipCodeId===undefined || zipCodeId===null){
+                console.log("====zipCodeId==>",stateName,cityName,zipCodeId)
+                 setZipcode("");
+            }
+            if(date==="" || date===undefined || date===null){
+                setEDate("");
+            }
+            if(terms==="0"){
+                setETerms("1");
+            }
+        }
     }
     const getStateName = (stateData) => {
         setStateName(stateData)
@@ -146,8 +184,10 @@ const Registration = () => {
                         {doc===""?<img alt="" src="adduser.jpg" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} ></img>:
 														<img alt="" src="adduser.jpg" src={doc.base64} ></img>														
 														}
-                        <span className="proCamera"></span>      
+                        <span className="proCamera"></span>
+                        {type==="0"?<p className="form-input-error">Upload only Image format </p>:""}      
                         <FileBase64 onDone={ getFiles }  type="hidden"/>
+                        
                                          {/* <button>  <img alt="" htmlFor="upload" src="adduser.jpg"  /></button>  */}
                         
                         </div> </div>
@@ -254,6 +294,12 @@ const Registration = () => {
                                 setCityValue={getCityName}
                                 setZipcodeValue={getZipCodeId}
                             />
+                            {console.log("======>",state,stateName)}
+                            {(state==="" && stateName==="") ?
+                            <p className="form-input-error"> State,City,zipcode  is required</p>:
+                            cityName===null && city===""?<p className="form-input-error"> City is required</p>:
+                            zipCodeId===null && zipcode===""?<p className="form-input-error"> Zipcode is required</p>:""}
+                                                
 
                             <div className="col-sm-8 form-group">
                                 <div className="tbox">
@@ -288,9 +334,12 @@ const Registration = () => {
                                 <div className="tbox">
                                 <div className="textbox">
                                 
-                                    <Datetime inputProps={ inputProps } timeFormat={false} dateFormat="MM/DD/YYYY" name="Date" isValidDate={disablePastDt} onChange={registrationDate}/>
-                                    <label  htmlFor="meeting_date" className={date!="" ? "input-has-value" : ""}>Select Date</label>
-                                    <p className="form-input-error">{errors.Date?.message}</p>
+                                    <Datetime inputProps={ inputProps } timeFormat={false} dateFormat="MM/DD/YYYY" 
+                                    name="Date" isValidDate={disablePastDt} onChange={registrationDate} 
+                                     id="meeting_date"/>
+                                    <label  htmlFor="meeting_date" className={date === "" || date!==""? "input-has-value" : ""}>Select Date</label> 
+                                    {  date==="" && edate===""?<p className="form-input-error"> Date  is required</p>:""}
+                                    <p className="form-input-error">{errors.date?.message}</p>
                                 </div>
                                 </div>
                             </div>
@@ -306,9 +355,14 @@ const Registration = () => {
                                 </div>
                             </div>
                             <div className="col-sm-12 form-group agreetab">
-                                <input type="checkbox" className="form-check d-inline " id="chb" required />
-                                <label htmlFor="chb" className="form-check-label"> I Agree for the <a href="JavaScript:void(0)" onClick={togglePopup}>Terms And Conditions</a>
+                                <input type="checkbox" className="form-check d-inline " id="chb" 
+                                checked = { terms == 0 ? false : true } value={terms == 0 ? 1 : 0 } onChange={(e) => setTerms(e.target.value)}/>
+                                <label htmlFor="chb" className="form-check-label"> I Agree for the 
+                                <a href="JavaScript:void(0)" onClick={togglePopup}>Terms And Conditions</a>
                                 </label>
+                                {eterms==="1" && terms==="0" ?
+                                <p className="form-input-error"> Agree the Terms And Conditions</p>:""}
+
                                 {isOpen && <Popup
                                     isClose={false}
                                     content={<>
