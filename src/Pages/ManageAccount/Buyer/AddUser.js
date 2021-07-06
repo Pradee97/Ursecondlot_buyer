@@ -46,6 +46,15 @@ const AddUser = () => {
 	const [popupActionPath, setPopupActionPath] = useState("")
 	const [selectPivilege, setSelectPivilege] = useState(false)
 	const [deselectPivilege, setDeselectPivilege] = useState(true)
+	const [firstNameError, setFirstNameError] = useState("");
+    const [lastNameError, setLastNameError] = useState("");
+    const [phoneNumberError, setPhoneNumberError] = useState("");
+    const [emailError, setEmailError] = useState("");
+    const [addressError, setAddressError] = useState("");
+	const [optionError, setoptionError] = useState("");
+	const [state,setState]=useState("1");
+    const [city,setCity]=useState("1");
+    const [zipcode,setZipcode]=useState("1");
 
 
 	console.log("=====userDetails====>", userDetails)
@@ -57,12 +66,13 @@ const AddUser = () => {
         setDoc(file);
 		console.log("file=====>",file)
       }
-	const getStateName = (stateData) => {
+	  const getStateName = (stateData) => {
 		setStateName(stateData)
 	}
 	const getCityName = (cityData) => {
 		setCityName(cityData)
 	}
+	
 	const setUserPrivileges = (data) => {
 		if(data==0){
 			setBuyNow(0);
@@ -95,6 +105,13 @@ const AddUser = () => {
 	};
 	const registrationhandleSubmit = (data) => {
 		// event.preventDefault();
+		
+        setFirstNameError("") 
+        setLastNameError("")
+        setPhoneNumberError("") 
+        setEmailError("") 
+        setAddressError("") 
+        setoptionError("")
 		let request = {
 			dealer_id: userDetails.dealer_id,
 			first_name: firstName,
@@ -124,8 +141,56 @@ const AddUser = () => {
 			local_flag: 0,
 			image:doc===""?doc:doc.length>0?doc:[doc],
 		};
+
+		if(!firstName){
+            setFirstNameError("First Name is required")
+            return;
+        }
+        else if(firstName.length>50){
+            setFirstNameError("First Name must not exceed 50 characters")
+            return;
+        }       
+        if(!lastName){
+            setLastNameError("Last Name is required")
+            return;
+        }
+        else if(lastName.length>50 ){
+            setLastNameError("Last Name must not exceed 50 characters ")
+            return;
+        }
+        if(!phoneNumber){
+            setPhoneNumberError("Phone Number is required")
+            return;
+        }
+        else if(phoneNumber.length<17 ){
+            setPhoneNumberError("Phone Number must have 10 digits ")
+            return;
+        }
+        if(!email){
+            setEmailError("Email  is required")
+            return;
+        }
+        else if(email && !new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i).test(email)){
+            setEmailError("Email  Must match the format")
+            return;
+        }
+        
+        if(!address){
+            setAddressError("Address is required")
+            return;
+        }
+        else if(address.length>150){
+            setAddressError("Address must not exceed 150 characters")
+            return;
+        }       
+        if(!option){
+            setoptionError("How many years in car business is required")
+            return;
+        }
+       
 		console.log("----request---->", request)
 		
+		if(  stateName!=="" && cityName!=="" && zipCodeId!=="" ){
 		API.post("buyer/add", request)
 			.then((response) => {
 				if (response.data.success) {
@@ -156,9 +221,27 @@ const AddUser = () => {
 				setPopupType("error");
 				setPopupActionType("close");
 				setPopupActionValue("close");
-			});
+			});	
 
-	}
+	}else{
+
+		if(stateName==="" || stateName===undefined || stateName===null){
+			console.log("====stateName=stateName=>",stateName,cityName,zipCodeId)
+			setState("");
+		}
+		if(cityName==="" || cityName===undefined || cityName===null){
+			console.log("====cityName==>",stateName,cityName,zipCodeId)
+			 setCity("");
+		}
+		if(zipCodeId==="" || zipCodeId===undefined || zipCodeId===null){
+			console.log("====zipCodeId==>",stateName,cityName,zipCodeId)
+			 setZipcode("");
+		}
+		
+	}	
+}
+
+	
 	function handleOnChange(value) {
         setPhoneNumber(value);
      }
@@ -211,80 +294,43 @@ const AddUser = () => {
 
 													<div className="col-sm-12 form-group">
 														<div className="tbox">
-															<input className="textbox " type="text" placeholder="" id="first_name"  maxLength="30" name="firstName"
-															 {...register("firstName", {
-																required: "This input is required.",
-																maxLength: {
-																	value: 50,
-																	message: "This input must not exceed 50 characters"
-																  }
-															  })}
+															<input className="textbox " type="text" placeholder="" id="first_name"  maxLength="30" name="firstName"												
 															onChange={(e) => setFirstName(e.target.value)} />
 															<label htmlFor="first_name" className={firstName != "" ? "input-has-value" : ""}>First Name</label>
-															<p className="form-input-error">{errors.firstName?.message}</p>
+															<p className="form-input-error" >{firstNameError}</p>
 														</div>
 													</div>
 													<div className="col-sm-12 form-group">
 														<div className="tbox">
 															<input className="textbox " type="text" placeholder="" id="last_name"  maxLength="30" name="lastName"
-															 {...register("lastName", {
-																required: "This input is required.",
-																maxLength: {
-																	value: 50,
-																	message: "This input must not exceed 50 characters"
-																  }
-															  })}
 															onChange={(e) => setLastName(e.target.value)} />
 															<label htmlFor="last_name" className={lastName != "" ? "input-has-value" : ""}>Last Name</label>
-															<p className="form-input-error">{errors.lastName?.message}</p>
+															<p className="form-input-error" >{lastNameError}</p>
 														</div>
 													</div>
 												
 													<div className="col-sm-12 form-group ">
 														<div className="tbox phoneNumberfield">
 														<MuiPhoneNumber id="phone_no" name="phoneNumber" defaultCountry={'us'} onlyCountries={['us']}  className="textbox" 
-															 {...register("phoneNumber", {
-																required: "This input is required.",
-																
-																	minLength: {
-																	value: 17,
-																	message: "This input must have 10 digits"
-																  }
-															})}
-															// onChange={(e) => setPhoneNumber(e.target.value)} />
 															onChange={handleOnChange} ></MuiPhoneNumber>
 															<label for="phone_no" className={"input-has-value"}>Phone</label>
 												    	</div>
-														<p className="form-input-error">{errors.phoneNumber?.message}</p>
+														<p className="form-input-error" >{phoneNumberError}</p>
 													</div>
 													<div className="col-sm-12 form-group">
 														<div className="tbox">
 															<input className="textbox" type="text"  placeholder="" id="email" name="email"
-															 {...register("email", {
-																required: "This input is required.",
-																pattern: {
-																value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-																message: "Must match the email format"
-																}
-															})}
 															onChange={(e) => setEmail(e.target.value)} />
 															<label htmlFor="email" className={email != "" ? "input-has-value" : ""}>Email</label>
-															<p className="form-input-error">{errors.email?.message}</p>
+															<p className="form-input-error" >{emailError}</p>
 														</div>
 													</div>
 													<div className="col-sm-12 form-group">
 														<div className="tbox">
 															<input className="textbox " type="text" placeholder="" id="address" maxLength="300" name="address"
-															 {...register("address", {
-																required: "This input is required.",
-																maxLength: {
-																	value: 150,
-																	message: "This input must not exceed 150 characters"
-																  }
-															  })}
 															onChange={(e) => setAddress(e.target.value)} />
 															<label htmlFor="address" className={address != "" ? "input-has-value" : ""}>Address</label>
-															<p className="form-input-error">{errors.address?.message}</p>
+															<p className="form-input-error" >{addressError}</p>
 														</div>
 													</div>
 
@@ -293,18 +339,15 @@ const AddUser = () => {
 														setCityValue={getCityName}
 														setZipcodeValue={getZipCodeId}
 													/>
+													{(state==="" && stateName==="") ?
+                            						<p className="form-input-error"> State,City,zipcode  is required</p>:
+                            						cityName===null && city===""?<p className="form-input-error"> City is required</p>:
+                            						zipCodeId===null && zipcode===""?<p className="form-input-error"> Zipcode is required</p>:""}
 
 													<div className="col-sm-8 form-group selectTbox">
 														<div className="tbox">
 															{/* {/ <lable for="drop" className={option !="" ? "input-has-value" : ""}>How many years in car business</lable> /} */}
 															<select id="drop" placeholder="" name="dropoption" className="form-control custom-select browser-default textbox" 
-															 {...register("dropoption", {
-																required: "This input is required.",
-																maxLength: {
-																	value: 50,
-																	message: "This input must not exceed 50 characters"
-																  }
-															  })}
 															onChange={(e) => setOption(e.target.value)}>
 																{/* <option disabled >How many years in car business</option> */}
 																<option value="Less then 1">Less then 1</option>
@@ -317,7 +360,7 @@ const AddUser = () => {
 															</select>
 
 															<label htmlFor="no_years" className={"input-has-value"}>How many years in car business</label>
-															<p className="form-input-error">{errors.dropoption?.message}</p>
+															<p className="form-input-error" >{optionError}</p>
 														</div>
 													</div>
 
