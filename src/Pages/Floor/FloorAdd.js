@@ -192,11 +192,7 @@ const FloorAdd = () => {
             setPhoneNumberError("Phone Number is required")
             return;
         }
-        else if(phoneNumber.length<12 ){
-            setPhoneNumberError("Phone Number must have 10 digits ")
-            return;
-        }
-        else if(phoneNumber.length>12 ){
+        else if(phoneNumber.length>17){
             setPhoneNumberError("Phone Number must have 10 digits ")
             return;
         }
@@ -311,14 +307,6 @@ const FloorAdd = () => {
                             <div className="col-sm-9 form-group">
                             <div className="tbox">
                                 <input type="number" id="creditLimit" className="textbox"  placeholder="" name="creditLimit"
-                                 {...register("creditLimit", {
-                                    required: "This input is required.",
-                                   
-                                    maxLength: {
-                                        value: 50,
-                                        message: "This input must not exceed 50 characters"
-                                      }
-                                  })}
                                 onChange={(e) => setCreditLimit(e.target.value)} />
                                 <label htmlFor="creditLimit" className={creditLimit !="" ? "input-has-value" : ""}>Credit Limit</label>
                                 
@@ -356,20 +344,9 @@ const FloorAdd = () => {
                             </div>
                             <div className="col-sm-8 form-group ">
                             <div className="tbox phoneNumberfield">   
-                            <PhoneInput  id="phoneNumber" name="phoneNumber"  country="US" className="textbox" 
-
-                                // <MuiPhoneNumber id="phoneNumber" name="phoneNumber" defaultCountry={'us'} onlyCountries={['us']}  className="textbox" 
-                                    // <input type="text" id="phoneNumber" className="textbox" placeholder="" name="phoneNumber"
-                                //  {...register("phoneNumber", {
-                                //     required: "This input is required.",
-                                //     minLength: {
-                                //         value: 17,
-                                //         message: "This input must not exceed 10 digits"
-                                //       }
-                                // })}
+                            <PhoneInput  id="phone_no" name="phoneNumber"  country="US" className="textbox" maxLength="14" minLength="14"
                                 onChange={handleOnChange} ></PhoneInput>
-                                {/* onChange={(e) => setPhoneNumber(e.target.value)} /> */}
-                                <label for="phoneNumber" className={"input-has-value"}>Phone Number</label>
+                                <label for="phone_no" className={"input-has-value"}>Phone Number</label>
                             </div>
                             
                             <p className="form-input-error" >{phoneNumberError}</p>
