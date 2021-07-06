@@ -35,7 +35,6 @@ const Document = () => {
     const [popupActionType, setPopupActionType] = useState("");
     const [popupActionValue, setPopupActionValue] = useState("");
     const [popupActionPath, setPopupActionPath] = useState("")
-    console.log("======12345====>", ls.get('userDetails'))
     const togglePopup = () => {
         setIsOpen(!isOpen);
     }
@@ -76,7 +75,6 @@ const Document = () => {
                     setDoc11(document[x])
                 }
             }
-            console.log("===doc11====>", doc11)
             setDocList(res.data.data);
         })
             .catch(err => { console.log(err); });
@@ -89,7 +87,7 @@ const Document = () => {
     }, []);
 
     const deleteFileConfirmation = (document_id) => {
-        console.log("document_id====",document_id)
+        // console.log("document_id====",document_id)
         localStorage.setItem("deletDocumentId",document_id)
         togglePopup()
         setPopupTitle("Document Delete");
@@ -111,9 +109,9 @@ const Document = () => {
                 setPopupTitle("Document Delete");
                 setPopupMsg("Document Successfully Deleted");
                 setPopupType("success");
-                setPopupActionType("close");
+                setPopupActionType("refresh");
                 setPopupActionValue("ok");
-                // setPopupActionPath("/document");
+                setPopupActionPath("/document");
             } else {
                 setIsOpen(true);
                 setPopupTitle("Document Deleted");
@@ -137,9 +135,9 @@ const Document = () => {
                 setPopupTitle("Document Upload");
                 setPopupMsg("Document Successfully Updated");
                 setPopupType("success");
-                setPopupActionType("close");
+                setPopupActionType("refresh");
                 setPopupActionValue("ok");
-                // setPopupActionPath("/document")
+                setPopupActionPath("/document")
             } else {
                 togglePopup()
                 setPopupTitle("Document Upload");
@@ -157,18 +155,16 @@ const Document = () => {
             buyer_doc_type: value,
             doc_name: file.length > 0 ? file : [file],
         };
-        console.log("======12345====>", request)
         const upload = API.post('buyer_document/add', request);
         upload.then(response => {
-            console.log("=========>", response)
             if (response.data.success) {
                 togglePopup()
                 setPopupTitle("Document Upload");
                 setPopupMsg("Document Successfully Uploaded");
                 setPopupType("success");
-                setPopupActionType("close");
+                setPopupActionType("refresh");
                 setPopupActionValue("close");
-                // setPopupActionPath("/document")
+                setPopupActionPath("/document")
             } else {
                 togglePopup()
                 setPopupTitle("Document Upload");
