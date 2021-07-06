@@ -12,6 +12,7 @@ import Datetime from 'react-datetime';
 import moment from 'moment';
 import FileBase64 from 'react-file-base64';
 import MuiPhoneNumber from 'material-ui-phone-number';
+import PhoneInput from 'react-phone-number-input/input';
 
 const AddUser = () => {
 	const history = useHistory();
@@ -308,11 +309,33 @@ const AddUser = () => {
 															<p className="form-input-error" >{lastNameError}</p>
 														</div>
 													</div>
-												
-													<div className="col-sm-12 form-group ">
+													<div className="col-sm-4 form-group countrycode">
+													<div className="tbox">
+														<select className="form-control custom-select browser-default textbox"  id="drop" placeholder="" defaultValue="+1">
+															<option value="+1">+1</option>
+														</select>
+														<label  for="drop" className={"input-has-value"}>Country code</label>
+													</div>
+													</div>
+													<div className="col-sm-8 form-group ">
 														<div className="tbox phoneNumberfield">
-														<MuiPhoneNumber id="phone_no" name="phoneNumber" defaultCountry={'us'} onlyCountries={['us']}  className="textbox" 
-															onChange={handleOnChange} ></MuiPhoneNumber>
+														<PhoneInput id="phone_no" name="phoneNumber" country="US" className="textbox" 
+
+														// <MuiPhoneNumber id="phone_no" name="phoneNumber" defaultCountry={'us'} onlyCountries={['us']}  className="textbox" 
+															 {...register("phoneNumber", {
+																required: "This input is required.",
+																
+																	minLength: {
+																	value: 14,
+																	message: "phone Number must have 10 digits"
+																  },
+																  maxLength: {
+																	  value: 14,
+																	  message: "phone Number must have 10 digits"
+																	}
+															})}
+															// onChange={(e) => setPhoneNumber(e.target.value)} />
+															onChange={handleOnChange} ></PhoneInput>
 															<label for="phone_no" className={"input-has-value"}>Phone</label>
 												    	</div>
 														<p className="form-input-error" >{phoneNumberError}</p>

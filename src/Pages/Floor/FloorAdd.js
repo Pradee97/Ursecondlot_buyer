@@ -12,6 +12,7 @@ import { useEffect } from 'react';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import { useForm } from "react-hook-form";
 import MuiPhoneNumber from 'material-ui-phone-number';
+import PhoneInput from 'react-phone-number-input/input';
 
 const FloorAdd = () => {
 
@@ -191,8 +192,12 @@ const FloorAdd = () => {
             setPhoneNumberError("Phone Number is required")
             return;
         }
-        else if(phoneNumber.length<17 ){
-            setPhoneNumberError("Phone Number must have 17 digits ")
+        else if(phoneNumber.length<12 ){
+            setPhoneNumberError("Phone Number must have 10 digits ")
+            return;
+        }
+        else if(phoneNumber.length>12 ){
+            setPhoneNumberError("Phone Number must have 10 digits ")
             return;
         }
         if(!dateOpened){
@@ -305,8 +310,15 @@ const FloorAdd = () => {
                             </div>
                             <div className="col-sm-9 form-group">
                             <div className="tbox">
-                                <input type="text" id="creditLimit" className="textbox" placeholder="" name="creditLimit"
-                                
+                                <input type="number" id="creditLimit" className="textbox"  placeholder="" name="creditLimit"
+                                 {...register("creditLimit", {
+                                    required: "This input is required.",
+                                   
+                                    maxLength: {
+                                        value: 50,
+                                        message: "This input must not exceed 50 characters"
+                                      }
+                                  })}
                                 onChange={(e) => setCreditLimit(e.target.value)} />
                                 <label htmlFor="creditLimit" className={creditLimit !="" ? "input-has-value" : ""}>Credit Limit</label>
                                 
@@ -334,13 +346,29 @@ const FloorAdd = () => {
                                 <p className="form-input-error" >{addressError}</p>
                             </div>
                             </div>
+                            <div className="col-sm-4 form-group countrycode">
+                            <div className="tbox">
+                                <select className="form-control custom-select browser-default textbox"  id="drop" placeholder="" defaultValue="+1">
+                                    <option value="+1">+1</option>
+                                </select>
+                                <label  for="drop" className={"input-has-value"}>Country code</label>
+                            </div>
+                            </div>
+                            <div className="col-sm-8 form-group ">
+                            <div className="tbox phoneNumberfield">   
+                            <PhoneInput  id="phoneNumber" name="phoneNumber"  country="US" className="textbox" 
 
-                            <div className="col-sm-12 form-group ">
-                            <div className="tbox phoneNumberfield">                            
-                                <MuiPhoneNumber id="phoneNumber" name="phoneNumber" defaultCountry={'us'} onlyCountries={['us']}  className="textbox" 
-                                  
-                                onChange={handleOnChange} ></MuiPhoneNumber>
-                                
+                                // <MuiPhoneNumber id="phoneNumber" name="phoneNumber" defaultCountry={'us'} onlyCountries={['us']}  className="textbox" 
+                                    // <input type="text" id="phoneNumber" className="textbox" placeholder="" name="phoneNumber"
+                                //  {...register("phoneNumber", {
+                                //     required: "This input is required.",
+                                //     minLength: {
+                                //         value: 17,
+                                //         message: "This input must not exceed 10 digits"
+                                //       }
+                                // })}
+                                onChange={handleOnChange} ></PhoneInput>
+                                {/* onChange={(e) => setPhoneNumber(e.target.value)} /> */}
                                 <label for="phoneNumber" className={"input-has-value"}>Phone Number</label>
                             </div>
                             

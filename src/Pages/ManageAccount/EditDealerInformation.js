@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks";
 import { useForm } from "react-hook-form";
+import PhoneInput from 'react-phone-number-input/input';
 
 
 import StateAndCity from '../../Component/StateAndCity/StateAndCity'
@@ -109,20 +110,26 @@ const EditDealerInformation = () => {
             setPrimaryPhoneError("Primary Phone is required")
             return;
         }
-        else if(primaryPhone.length<17 ){
+        else if(primaryPhone.length<12 ){
             setPrimaryPhoneError("Primary Phone must have 10 digits")
             return;
         }
-       
+        else if(primaryPhone.length>12 ){
+            setPrimaryPhoneError("Primary Phone must have 10 digits")
+            return;
+        }
         if(!mobilePhone){
             setMobilePhoneError("Mobile Phone is required")
             return;
         }
-        else if(mobilePhone.length<17){
+        else if(mobilePhone.length<12){
             setMobilePhoneError("Mobile Phone must have 10 digits")
             return;
         }
-        
+        else if(mobilePhone.length>12){
+            setMobilePhoneError("Mobile Phone must have 10 digits")
+            return;
+        }
         if(!address){
             setAddressError("Address is required")
             return;
@@ -255,19 +262,35 @@ const EditDealerInformation = () => {
 
                             </div>
                             </div>
-                           
-                            <div class="col-sm-6 form-group ">
+                            <div className="col-sm-4 form-group countrycode">
+                            <div className="tbox">
+                                <select className="form-control custom-select browser-default textbox"  id="drop" placeholder="" defaultValue="+1">
+                                    <option value="+1">+1</option>
+                                </select>
+                                <label  for="drop" className={"input-has-value"}>Country code</label>
+                            </div>
+                            </div>
+                            <div class="col-sm-8 form-group ">
                             <div className="tbox phoneNumberfield">
-                            <MuiPhoneNumber value={accountObjc.phone_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={handleOnChange} ></MuiPhoneNumber>
+                            <PhoneInput value={accountObjc.phone_no} country="US" className="textbox" onChange={handleOnChange} ></PhoneInput>
+                            {/* <MuiPhoneNumber value={accountObjc.phone_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={handleOnChange} ></MuiPhoneNumber> */}
                                  {/* <input type="text" defaultValue={accountObjc.phone_no} class="textbox" placeholder="Primary phone"  onChange={(e) => setPrimaryphone(e.target.value)} /> */}
                                 <label for="phone_no" className={primaryPhone != "" ? "input-has-value" : ""}>Primary Phone</label>
                             </div>
                                 <p className="form-input-error" >{primaryPhoneError}</p>
                             </div>
-                            
-                            <div class="col-sm-6 form-group ">
+                            <div className="col-sm-4 form-group countrycode">
+                            <div className="tbox">
+                                <select className="form-control custom-select browser-default textbox"  id="drop" placeholder="" defaultValue="+1">
+                                    <option value="+1">+1</option>
+                                </select>
+                                <label  for="drop" className={"input-has-value"}>Country code</label>
+                            </div>
+                            </div>
+                            <div class="col-sm-8 form-group ">
                             <div className="tbox phoneNumberfield">
-                            <MuiPhoneNumber value={accountObjc.mobile_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={handleOnChanges} ></MuiPhoneNumber>
+                            <PhoneInput value={accountObjc.mobile_no} country="US" className="textbox" onChange={handleOnChanges} ></PhoneInput>
+                            {/* <MuiPhoneNumber value={accountObjc.mobile_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={handleOnChanges} ></MuiPhoneNumber> */}
                                {/* <input type="text" defaultValue={accountObjc.mobile_no} class="textbox" placeholder="Mobile phone"  onChange={(e) => setMobilephone(e.target.value)} /> */}
                                 <label for="mobile_no" className={mobilePhone != "" ? "input-has-value" : ""}>Mobile Phone</label>
                             </div>

@@ -13,7 +13,7 @@ import StateAndCity from '../../Component/StateAndCity/StateAndCity';
 import FileBase64 from 'react-file-base64';
 import MuiPhoneNumber from 'material-ui-phone-number';
 import { useState } from 'react';
-import { DatePicker } from 'material-ui';
+import PhoneInput from 'react-phone-number-input/input';
 
 const Registration = () => {
     const history = useHistory();
@@ -302,12 +302,31 @@ const Registration = () => {
                                     <p className="form-input-error" >{lastNameError}</p>
                                 </div>
                             </div>
-
-                            <div className="col-sm-12 form-group">
+                            <div className="col-sm-4 form-group countrycode">
+                            <div className="tbox">
+                                <select className="form-control custom-select browser-default textbox"  id="drop" placeholder="" defaultValue="+1">
+                                    <option value="+1">+1</option>
+                                </select>
+                                <label  for="drop" className={"input-has-value"}>Country code</label>
+                            </div>
+                            </div>
+                            <div className="col-sm-8 form-group">
                                 <div className="tbox phoneNumberfield">
-                                    <MuiPhoneNumber id="phone_no" name="phoneNumber" defaultCountry={'us'} onlyCountries={['us']}  className="textbox" 
-                                    onChange={handleOnChange} ></MuiPhoneNumber>
-                                    <label htmlFor="phone_no" className={"input-has-value"}>Phone</label>    
+                                <PhoneInput  id="phone_no" name="phoneNumber" country="US" className="textbox" 
+                                    {...register("phoneNumber", {
+                                        required: "Phone Number is required.",
+                                        minLength: {
+                                            value: 14,
+                                            message: "Phone Number must have 10 digits"
+                                          },
+                                          maxLength: {
+                                            value: 14,
+                                            message: "Phone Number must have 10 digits"
+                                          }
+                                    })}
+                                    onChange={handleOnChange} ></PhoneInput>
+                                     {/* onChange={(e) => setPhoneNumber(e.target.value)} /> */}
+                                    <label htmlFor="phone_no" className={"input-has-value"}>Phone</label>
                                 </div>
                                 <p className="form-input-error" >{phoneNumberError}</p>
 
