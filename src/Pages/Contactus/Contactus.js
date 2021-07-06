@@ -19,9 +19,12 @@ const Contactus = () => {
     const [name,setName]=useState ("");
     const [email,setEmailId]=useState ("");
     const [comments,setComments]=useState ("");
-    const [ename,seteName]=useState ("1");
-    const [eemail,seteEmailId]=useState ("1");
-    const [ecomments,seteComments]=useState ("1");
+    // const [ename,seteName]=useState ("");
+    // const [eemail,seteEmailId]=useState ("");
+    // const [ecomments,seteComments]=useState ("");
+    const [fullNameError, setFullNameError] = useState("");
+    const [emailError, setEmailError] = useState("");
+    const [commentsError,setCommentsError]=useState ("");
 
     const history = useHistory();   
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -29,12 +32,42 @@ const Contactus = () => {
 
 
   const EmailSubmit = (data) => {    
+    setFullNameError("")
+    setEmailError("")
+    setCommentsError("")
+
     let request = {
       name,
       email,
       comments        
     };
-    if(name!=="" && email!=="" && comments!==""){
+    if(!name){
+      setFullNameError("Full Name is required")
+      return;
+    }
+    else if(name.length>50){
+      setFullNameError("Full Name must not exceed 50 characters")
+      return;
+    }       
+
+    else if(!email){
+      setEmailError("Email  is required")
+      return;
+    }
+    else if(email && !new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i).test(email)){
+        setEmailError("Email  Must match the format")
+        return;
+    }
+    else if(!comments){
+      setCommentsError("Address is required")
+      return;
+    }
+    else if(comments.length>250){
+      setCommentsError("Address must not exceed 250 characters")
+      return;
+    }     
+
+    // if(name!=="" && email!=="" && comments!==""){
     API.post("contactUs/condition", request)
         .then((response) => {
           console.log("=========>",response);
@@ -67,18 +100,18 @@ const Contactus = () => {
                 setPopupActionType("close");
                 setPopupActionValue("close");
         }).catch(err => { console.log(err); });
-      }else{
-        if(name==="" || name===undefined || name===null){
-          seteName("");
-      }
-      if(email==="" || email===undefined || email===null){
-        seteEmailId("");
-      }
-      if(comments==="" || comments===undefined || comments===null){
-        seteComments("");
-      }
-      }
-       
+      // }
+      // else{
+      //   if(name==="" || name===undefined || name===null){
+      //     seteName("");
+      // }
+      // if(email==="" || email===undefined || email===null){
+      //   seteEmailId("");
+      // }
+      // if(comments==="" || comments===undefined || comments===null){
+      //   seteComments("");
+      // }
+      // } 
 }
     return (
         <div>
@@ -124,14 +157,16 @@ const Contactus = () => {
                <label htmlFor="name">Full Name</label>
                  <input type="text" name="name" className="form-control" id="name"
                 onChange={(e) => setName(e.target.value)}/>
-                 {  name==="" && ename===""?<p className="form-input-error"> Name is required</p>:""}
+                 {/* {  name==="" && ename===""?<p className="form-input-error"> Name is required</p>:""} */}
+                 <p className="form-input-error" >{fullNameError}</p>
                  <div className="validate"></div>
              </div>
              <div className="form-group">
                <label htmlFor="name">Email</label>
                  <input type="email" className="form-control" name="email" id="email"  
                 onChange={(e) => setEmailId(e.target.value)} />
-                 {  email==="" && eemail===""?<p className="form-input-error"> Email is required</p>:""}
+                 {/* {  email==="" && eemail===""?<p className="form-input-error"> Email is required</p>:""} */}
+                 <p className="form-input-error" >{emailError}</p>
                  <div className="validate"></div>
              </div>
              <div className="form-group">
@@ -139,7 +174,8 @@ const Contactus = () => {
                <textarea className="form-control" name="message" rows="3" 
             onChange={(e) => setComments(e.target.value)}
                ></textarea>
-                {  comments==="" && ecomments===""?<p className="form-input-error"> Comments is required</p>:""}
+                {/* {  comments==="" && ecomments===""?<p className="form-input-error"> Comments is required</p>:""} */}
+                <p className="form-input-error" >{commentsError}</p>
                <div className="validate"></div>
              </div>
              <div className="mb-3">
