@@ -44,17 +44,15 @@ const Buyers = () => {
         if(data!==""){
         API.post("userSearch/condition",request)
         .then((response)=>{
-            if(response.data.data==0){
-                // alert("=====data=======>",request.data)
+            if(response.data.data.length==0){
                 togglePopup()
                 setPopupTitle("Data not found ");
-                // setPopupMsg("No data found");
                 setPopupType("success");
                 setPopupActionType("close");
                 setPopupActionValue("ok");
                 
             }
-            else if(response.data.data !==0){
+            else if(response.data.data.length !==0){
             console.log("=====response=======>",response)
             console.log("rep search req",request);
             console.log("inside rep search", response.data.data);
