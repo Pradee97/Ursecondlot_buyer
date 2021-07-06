@@ -65,13 +65,34 @@ const AddLegalAccount = () => {
     const [legalBusinessname, setLegalBusinessname] = useState("");
     const [state, setStateName] = useState("");
 	const [city, setCityName] = useState("");
-	const [zipcode, setZipcodeId] = useState("");
+    const [zipcode, setZipcodeId] = useState("");
+    
+    const [firstNameError, setFirstNameError] = useState("");
+    const [lastNameError, setLastNameError] = useState("");
+    const [EINnumberError, setEINnumberError] = useState("");
+    const [dealershiplicenseError, setDealershiplicenseError] = useState(""); 
+    const [taxidError, setTaxidError] = useState("");
+    const [addressError, setAddressError] = useState("");
+    const [dealershipLicenseexpError, setDealershiplicenseexpError] = useState("");
+    const [taxidexpError, setTaxidexpError] = useState("");
+    const [legalBusinessnameError, setLegalBusinessnameError] = useState("");
 
     
     const onhandleSubmit = (data) => {
         // setOpenLoader(true);
         // event.preventDefault();        
     
+        setFirstNameError("") 
+        setLastNameError("")
+        setLegalBusinessnameError("") 
+        setEINnumberError("") 
+        setDealershiplicenseError("") 
+        setTaxidError("")
+        setAddressError("")
+        setDealershiplicenseexpError("")
+        setTaxidexpError("")
+      
+
         let request = {
             buyer_id: userDetails.user_id,
             first_name: firstname,
@@ -90,6 +111,73 @@ const AddLegalAccount = () => {
         };
         console.log("===",request)
         // return
+
+    
+    if(!firstname){
+        setFirstNameError("First Name is required")
+        return;
+    }
+    else if(firstname.length>50){
+        setFirstNameError("First Name must not exceed 50 characters")
+        return;
+    }       
+    if(!lastname){
+        setLastNameError("Last Name is required")
+        return;
+    }
+    else if(lastname.length>50 ){
+        setLastNameError("Last Name must not exceed 50 characters ")
+        return;
+    }
+    if(!legalBusinessname){
+        setLegalBusinessnameError("Legal Businessname is required")
+        return;
+    }
+    else if(legalBusinessname.length>50 ){
+        setLegalBusinessnameError("Legal Businessname must have 50 digits ")
+        return;
+    }
+    if(!EINnumber){
+        setEINnumberError("EIN Number is required")
+        return;
+    }
+    else if(EINnumber.length>50 ){
+        setEINnumberError("EIN Number must have 50 digits ")
+        return;
+    }
+    if(!dealershiplicense){
+        setDealershiplicenseError("Dealership License is required")
+        return;
+    }
+    else if(dealershiplicense.length>50 ){
+        setDealershiplicenseError("Dealership License must have 50 digits ")
+        return;
+    }
+    if(!taxid){
+        setTaxidError("Tax Id is required")
+        return;
+    }
+    else if(taxid.length>50 ){
+        setTaxidError("Tax Id must have 50 digits ")
+        return;
+    }  
+    if(!address){
+        setAddressError("Address is required")
+        return;
+    }
+    else if(address.length>150){
+        setAddressError("Address must not exceed 150 characters")
+        return;
+    }       
+    if(!dealershipLicenseexp){
+        setDealershiplicenseexpError("Dealership Licenseexp is required")
+        return;
+    }
+    if(!taxidexp){
+        setTaxidexpError("Tax Idexp is required")
+        return;
+    } 
+
         if(taxidexp!==null && dealershipLicenseexp!==null){
         API.post("legal_manage/add", request)
             .then((response) => {
@@ -173,115 +261,122 @@ const AddLegalAccount = () => {
                         <div className="col-sm-12 form-group"> 
                             <div className="tbox">
                                 <input type="text"  id="contactName" className="textbox" placeholder="" name="firstName"
-                                 {...register("firstName", {
-                                    required: "This input is required.",
-                                    maxLength: {
-                                        value: 50,
-                                        message: "This input must not exceed 50 characters"
-                                      }
-                                  })}
+                                //  {...register("firstName", {
+                                //     required: "This input is required.",
+                                //     maxLength: {
+                                //         value: 50,
+                                //         message: "This input must not exceed 50 characters"
+                                //       }
+                                //   })}
                                 onChange={(e) => setFirstname(e.target.value)} />
                                 <label htmlFor="contactName" className={firstname !="" ? "input-has-value" : ""}>First name</label>
-                                <p className="form-input-error">{errors.firstName?.message}</p>
+                                {/* <p className="form-input-error">{errors.firstName?.message}</p> */}
+                                <p className="form-input-error" >{firstNameError}</p>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text"  id="companyName" className="textbox" placeholder="" name="lastname"
-                                 {...register("lastname", {
-                                    required: "This input is required.",
-                                    maxLength: {
-                                        value: 50,
-                                        message: "This input must not exceed 50 characters"
-                                      }
-                                  })}
+                                //  {...register("lastname", {
+                                //     required: "This input is required.",
+                                //     maxLength: {
+                                //         value: 50,
+                                //         message: "This input must not exceed 50 characters"
+                                //       }
+                                //   })}
                                 onChange={(e) => setLastname(e.target.value)} />
                                 <label htmlFor="companyName" className={lastname !="" ? "input-has-value" : ""}>Last name</label>
-                                <p className="form-input-error">{errors.lastname?.message}</p>
+                                {/* <p className="form-input-error">{errors.lastname?.message}</p> */}
+                                <p className="form-input-error" >{lastNameError}</p>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" id="branchName" className="textbox" placeholder="" name="legalBusinessname"
-                                 {...register("legalBusinessname", {
-                                    required: "This input is required.",
-                                    maxLength: {
-                                        value: 50,
-                                        message: "This input must not exceed 50 characters"
-                                      }
-                                  })}
+                                //  {...register("legalBusinessname", {
+                                //     required: "This input is required.",
+                                //     maxLength: {
+                                //         value: 50,
+                                //         message: "This input must not exceed 50 characters"
+                                //       }
+                                //   })}
                                 onChange={(e) => setLegalBusinessname(e.target.value)} />
                                 <label htmlFor="branchName" className={legalBusinessname !="" ? "input-has-value" : ""}>Legal business name</label>
-                                <p className="form-input-error">{errors.legalBusinessname?.message}</p>
+                                {/* <p className="form-input-error">{errors.legalBusinessname?.message}</p> */}
+                                <p className="form-input-error" >{legalBusinessnameError}</p>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" id="accountNumber" className="textbox" placeholder="" name="EINnumber"
-                                 {...register("EINnumber", {
-                                    required: "This input is required.",
-                                    maxLength: {
-                                        value: 50,
-                                        message: "This input must not exceed 50 characters"
-                                      }
-                                  })}
+                                //  {...register("EINnumber", {
+                                //     required: "This input is required.",
+                                //     maxLength: {
+                                //         value: 50,
+                                //         message: "This input must not exceed 50 characters"
+                                //       }
+                                //   })}
                                 onChange={(e) => setEINnumber(e.target.value)} />
                                 <label htmlFor="accountNumber" className={EINnumber !="" ? "input-has-value" : ""}>EIN number</label>
-                                <p className="form-input-error">{errors.EINnumber?.message}</p>
+                                {/* <p className="form-input-error">{errors.EINnumber?.message}</p> */}
+                                <p className="form-input-error" >{EINnumberError}</p>
                             </div>
                             </div>
                            
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" id="creditLimit" className="textbox" placeholder="" name="dealershiplicense"
-                                 {...register("dealershiplicense", {
-                                    required: "This input is required.",
-                                    maxLength: {
-                                        value: 50,
-                                        message: "This input must not exceed 50 characters"
-                                      }
-                                  })}
+                                //  {...register("dealershiplicense", {
+                                //     required: "This input is required.",
+                                //     maxLength: {
+                                //         value: 50,
+                                //         message: "This input must not exceed 50 characters"
+                                //       }
+                                //   })}
                                 onChange={(e) => setDealershiplicense(e.target.value)} />
                                 <label htmlFor="creditLimit" className={dealershiplicense !="" ? "input-has-value" : ""}>Dealership license</label>
-                                <p className="form-input-error">{errors.dealershiplicense?.message}</p>
+                                {/* <p className="form-input-error">{errors.dealershiplicense?.message}</p> */}
+                                <p className="form-input-error" >{dealershiplicenseError}</p>
                             </div>
                             </div>
                             
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" id="emailId" className="textbox" placeholder="" name="taxid"
-                                 {...register("taxid", {
-                                    required: "This input is required.",
-                                    maxLength: {
-                                        value: 50,
-                                        message: "This input must not exceed 50 characters"
-                                      }
-                                  })}
+                                //  {...register("taxid", {
+                                //     required: "This input is required.",
+                                //     maxLength: {
+                                //         value: 50,
+                                //         message: "This input must not exceed 50 characters"
+                                //       }
+                                //   })}
                                 onChange={(e) => setTaxid(e.target.value)} />
                                 <label htmlFor="emailId" className={taxid !="" ? "input-has-value" : ""}>Tax id</label>
-                                <p className="form-input-error">{errors.taxid?.message}</p>
+                                {/* <p className="form-input-error">{errors.taxid?.message}</p> */}
+                                <p className="form-input-error" >{taxidError}</p>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" id="address" className="textbox" placeholder="" name="address"
-                                 {...register("address", {
-                                    required: "This input is required.",
-                                    maxLength: {
-                                        value: 150,
-                                        message: "This input must not exceed 150 characters"
-                                      }
-                                  })}
+                                //  {...register("address", {
+                                //     required: "This input is required.",
+                                //     maxLength: {
+                                //         value: 150,
+                                //         message: "This input must not exceed 150 characters"
+                                //       }
+                                //   })}
                                 onChange={(e) => setAddress(e.target.value)} />
                                 <label htmlFor="address" className={address !="" ? "input-has-value" : ""}>Address</label>
-                                <p className="form-input-error">{errors.address?.message}</p>
+                                {/* <p className="form-input-error">{errors.address?.message}</p> */}
+                                <p className="form-input-error" >{addressError}</p>
                             </div>
                             </div>
                             <StateAndCity
-														setStateValue={getStateName}
-														setCityValue={getCityName}
-														setZipcodeValue={getZipCodeId}
-													/>
+                                setStateValue={getStateName}
+                                setCityValue={getCityName}
+                                setZipcodeValue={getZipCodeId}
+                            />
                             {/* <div className="col-sm-12 form-group">
                             <div className="tbox">                            
                                 <input type="text" id="phoneNumber" className="textbox" placeholder="" required onChange={(e) => setCity(e.target.value)} />
@@ -368,7 +463,8 @@ const AddLegalAccount = () => {
                                 <label htmlFor="phoneNumber" className={"input-has-value"}>Dealership license exp</label>
                                 <p className="form-input-error">{errors.Dealership?.message}</p> */}
                             </div>
-                            {edealerExp==="" && dealershipLicenseexp===null?<p className="form-input-error"> Dealership license exp is required</p>:""}
+                            <p className="form-input-error" >{dealershipLicenseexpError}</p>
+                            {/* {edealerExp==="" && dealershipLicenseexp===null?<p className="form-input-error"> Dealership license exp is required</p>:""} */}
                             </div>  
                             <div className="col-sm-12 form-group datePickerBlock">
                              <div className="tbox">     
@@ -438,7 +534,8 @@ const AddLegalAccount = () => {
                                 <label htmlFor="phoneNumber" className={"input-has-value"}>Tax id exp</label>
                                 <p className="form-input-error">{errors.Tax?.message}</p> */}
                             </div>
-                            {etax==="" && taxidexp===null?<p className="form-input-error"> Tax id exp  is required</p>:""}
+                            <p className="form-input-error" >{taxidexpError}</p>
+                            {/* {etax==="" && taxidexp===null?<p className="form-input-error"> Tax id exp  is required</p>:""} */}
                             </div>  
 
                           
