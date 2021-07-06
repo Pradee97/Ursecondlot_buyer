@@ -32,16 +32,34 @@ const AddAddress = () => {
     const [address, setAddress] = useState("");
     const [primaryPhone, setPrimaryphone] = useState("");
     const [mobilePhone, setMobilephone] = useState("");
-    const [city, setCityName] = useState("");
-    const [state, setStateName] = useState("");
-    const [zipCode, setZipcodeId] = useState("");
+    const [cityName, setCityName] = useState("");
+    const [stateName, setStateName] = useState("");
+    const [zipCodeId, setZipcodeId] = useState("");
     const [location, setLocation] = useState("");
     const [instruction, setInstruction] = useState("");
+    const [firstNameError, setFirstNameError] = useState("");
+    const [lastNameError, setLastNameError] = useState("");
+    const [addressError, setAddressError] = useState("");
+    const [primaryPhoneError, setPrimaryphoneError] = useState("");
+    const [mobilePhoneError, setMobilephoneError] = useState("");
+    const [locationError, setLocationError] = useState("");
+    const [instructionError, setInstructionError] = useState("");
+    const [state,setState]=useState("1");
+    const [city,setCity]=useState("1");
+    const [zipcode,setZipcode]=useState("1");
+
+
 
     const onhandleSubmit = (data) => {
         // setOpenLoader(true);
         // event.preventDefault();        
-    
+        setFirstNameError("")
+        setLastNameError("")
+        setAddressError("")
+        setPrimaryphoneError("")
+        setMobilephoneError("")
+        setLocationError("")
+        setInstructionError("")
         let request = {
             first_name: firstName,
             last_name: lastName,
@@ -50,14 +68,73 @@ const AddAddress = () => {
             mobile_no: mobilePhone,
             city_id: city,
             state_id: state,
-            zipcode_id: zipCode,
+            zipcode_id: zipCodeId,
             buyer_id:userDetails.user_id,
             location:location,
             instructions:instruction,
             active:1           
         };
+
+        if(!firstName){
+            setFirstNameError("First Name is required")
+            return;
+        }
+        else if(firstName.length>50){
+            setFirstNameError("First Name must not exceed 50 characters")
+            return;
+        }       
+        if(!lastName){
+            setLastNameError("Last Name is required")
+            return;
+        }
+        else if(lastName.length>50 ){
+            setLastNameError("Last Name must not exceed 50 characters ")
+            return;
+        }
+        if(!primaryPhone){
+            setPrimaryphoneError("Phone Number is required")
+            return;
+        }
+        else if(primaryPhone.length>17 ){
+            setPrimaryphoneError("Phone Number must have 10 digits ")
+            return;
+        }
+        if(!mobilePhone){
+            setMobilephoneError("Mobile Phone is required")
+            return;
+        }
+        else if(mobilePhone.length>17 ){
+            setMobilephoneError("Mobile Phone must have 10 digits ")
+            return;
+        }
+        if(!address){
+            setAddressError("Address is required")
+            return;
+        }
+        else if(address.length>150){
+            setAddressError("Address must not exceed 150 characters")
+            return;
+        }
+        if(!location){
+            setLocationError("Location is required")
+            return;
+        }
+        else if(location.length>150){
+            setLocationError("Location must not exceed 150 characters")
+            return;
+        }       
+        if(!instruction){
+            setInstructionError("Instruction is required")
+            return;
+        }
+        else if(instruction.length>150 ){
+            setInstructionError("Instruction must not exceed 150 characters ")
+            return;
+        }
+
         console.log("===",request)  
         // return
+        if(  stateName!=="" && cityName!=="" && zipCodeId!=="" ){
         API.post("buyer_address/add", request)
             .then((response) => {
                 if (response.data.success) {
@@ -91,6 +168,23 @@ const AddAddress = () => {
             });
 
     }
+    else{
+
+		if(stateName==="" || stateName===undefined || stateName===null){
+			console.log("====stateName=stateName=>",stateName,cityName,zipCodeId)
+			setState("");
+		}
+		if(cityName==="" || cityName===undefined || cityName===null){
+			console.log("====cityName==>",stateName,cityName,zipCodeId)
+			 setCity("");
+		}
+		if(zipCodeId==="" || zipCodeId===undefined || zipCodeId===null){
+			console.log("====zipCodeId==>",stateName,cityName,zipCodeId)
+			 setZipcode("");
+		}
+		
+    }	
+}
     const getStateName = (stateData) => {
 		setStateName(stateData)
 	}
@@ -136,32 +230,18 @@ const AddAddress = () => {
 						</div>
                         <div className="col-sm-12 form-group"> 
                         <div className="tbox">
-                                <input type="text"  id="contactName" className="textbox" placeholder="" name="firstName"
-                                 {...register("firstName", {
-                                    required: "This input is required.",
-                                    maxLength: {
-                                        value: 50,
-                                        message: "This input must not exceed 50 characters"
-                                      }
-                                  })}
+                                <input type="text"  id="contactName" className="textbox" placeholder="" name="firstName"                   
                                 onChange={(e) => setFirstname(e.target.value)} />
                                 <label htmlFor="contactName" className={firstName !="" ? "input-has-value" : ""}>First name</label>
-                                <p className="form-input-error">{errors.firstName?.message}</p>
+                                <p className="form-input-error" >{firstNameError}</p>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group"> 
                             <div className="tbox">
                                 <input type="text"  id="contactName" className="textbox" placeholder="" name="lastName"
-                                 {...register("lastName", {
-                                    required: "This input is required.",
-                                    maxLength: {
-                                        value: 50,
-                                        message: "This input must not exceed 50 characters"
-                                      }
-                                  })}
                                 onChange={(e) => setLastname(e.target.value)} />
                                 <label htmlFor="contactName" className={lastName !="" ? "input-has-value" : ""}>Last name</label>
-                                <p className="form-input-error">{errors.lastName?.message}</p>
+                                <p className="form-input-error" >{lastNameError}</p>
                             </div>
                             </div>
                             <div className="col-sm-4 form-group countrycode">
@@ -174,20 +254,10 @@ const AddAddress = () => {
                             </div>
                             <div className="col-sm-8 form-group ">
                             <div className="tbox phoneNumberfield">
-                                <PhoneInput  id="primaryPhone" name="primaryPhone" country="US" class="textbox" 
-                                {...register("primaryPhone", {
-                                    required: "This input is required.",
-                                    minLength: {
-                                        value: 14,
-                                        message: "Primary Phone must have 10 digits"
-                                      },
-                                      maxLength: {
-                                        value: 14,
-                                        message: "Primary Phone must have 10 digits"
-                                      }
-                                })} onChange={handleOnChange} ></PhoneInput>
+                                <PhoneInput  id="primaryPhone" name="primaryPhone" country="US" class="textbox" maxLength="14" minLength="14"
+                                onChange={handleOnChange} ></PhoneInput>
                                 <label htmlFor="companyName" className={"input-has-value"}>Primary phone</label>
-                                <p className="form-input-error">{errors.primaryPhone?.message}</p>
+                                <p className="form-input-error" >{primaryPhoneError}</p>
                             </div>
                             </div>
 
@@ -202,36 +272,18 @@ const AddAddress = () => {
                             <div className="col-sm-8 form-group ">
                             <div className="tbox phoneNumberfield">
                            
-                                <PhoneInput  id="mobilePhone" name="mobilePhone"  country="US" class="textbox" 
-                                {...register("mobilePhone", {
-                                    required: "This input is required.",
-                                    minLength: {
-                                        value: 14,
-                                        message: "Mobile phone must have 10 digits"
-                                      },
-                                    maxLength: {
-                                        value: 14,
-                                        message: "Mobile phone must have 10 digits"
-                                      }
-                                })}
+                                <PhoneInput  id="mobilePhone" name="mobilePhone"  country="US" class="textbox" maxLength="14" minLength="14"
                                 onChange={handleOnChanges} ></PhoneInput>
                                 <label htmlFor="branchName" className={"input-has-value"}>Mobile phone</label>
-                                <p className="form-input-error">{errors.mobilePhone?.message}</p>
+                                <p className="form-input-error" >{mobilePhoneError}</p>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group"> 
                             <div className="tbox">
                                 <input type="text"  id="contactName" className="textbox" placeholder="" name="address"
-                                 {...register("address", {
-                                    required: "This input is required.",
-                                    maxLength: {
-                                        value: 150,
-                                        message: "This input must not exceed 150 characters"
-                                      }
-                                  })}
                                 onChange={(e) => setAddress(e.target.value)} />
                                 <label htmlFor="contactName" className={address !="" ? "input-has-value" : ""}>Address</label>
-                                <p className="form-input-error">{errors.address?.message}</p>
+                                <p className="form-input-error" >{addressError}</p>
                             </div>
                             </div>
                             <StateAndCity
@@ -239,34 +291,25 @@ const AddAddress = () => {
                                 setCityValue={getCityName}
                                 setZipcodeValue={getZipCodeId}
                             />
+                            {(state==="" && stateName==="") ?
+                            <p className="form-input-error"> State,City,zipcode  is required</p>:
+                            cityName===null && city===""?<p className="form-input-error"> City is required</p>:
+                            zipCodeId===null && zipcode===""?<p className="form-input-error"> Zipcode is required</p>:""}
+
                              <div className="col-sm-12 form-group"> 
                             <div className="tbox">
                                 <input type="text"  id="contactName" className="textbox" placeholder="" name="location"
-                                 {...register("location", {
-                                    required: "This input is required.",
-                                    maxLength: {
-                                        value: 150,
-                                        message: "This input must not exceed 150 characters"
-                                      }
-                                  })}
                                 onChange={(e) => setLocation(e.target.value)} />
                                 <label htmlFor="contactName" className={location !="" ? "input-has-value" : ""}>Location</label>
-                                <p className="form-input-error">{errors.location?.message}</p>
+                                <p className="form-input-error" >{locationError}</p>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group"> 
                             <div className="tbox">
                                 <input type="text"  id="contactName" className="textbox" placeholder="" name="instruction" autoComplete="off"
-                                 {...register("instruction", {
-                                    required: "This input is required.",
-                                    maxLength: {
-                                        value: 150,
-                                        message: "This input must not exceed 150 characters"
-                                      }
-                                  })}
                                 onChange={(e) => setInstruction(e.target.value)} />
                                 <label htmlFor="contactName" className={instruction !="" ? "input-has-value" : ""}>Instructions</label>
-                                <p className="form-input-error">{errors.instruction?.message}</p>
+                                <p className="form-input-error" >{instructionError}</p>
                             </div>
                             </div>
                             {/* <div className="col-sm-12 form-group">

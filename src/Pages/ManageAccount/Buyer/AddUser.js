@@ -163,7 +163,7 @@ const AddUser = () => {
             setPhoneNumberError("Phone Number is required")
             return;
         }
-        else if(phoneNumber.length<17 ){
+        else if(phoneNumber.length>17 ){
             setPhoneNumberError("Phone Number must have 10 digits ")
             return;
         }
@@ -319,22 +319,7 @@ const AddUser = () => {
 													</div>
 													<div className="col-sm-8 form-group ">
 														<div className="tbox phoneNumberfield">
-														<PhoneInput id="phone_no" name="phoneNumber" country="US" className="textbox" 
-
-														// <MuiPhoneNumber id="phone_no" name="phoneNumber" defaultCountry={'us'} onlyCountries={['us']}  className="textbox" 
-															 {...register("phoneNumber", {
-																required: "This input is required.",
-																
-																	minLength: {
-																	value: 14,
-																	message: "phone Number must have 10 digits"
-																  },
-																  maxLength: {
-																	  value: 14,
-																	  message: "phone Number must have 10 digits"
-																	}
-															})}
-															// onChange={(e) => setPhoneNumber(e.target.value)} />
+														<PhoneInput id="phone_no" name="phoneNumber" country="US" className="textbox" maxLength="14" minLength="14"
 															onChange={handleOnChange} ></PhoneInput>
 															<label for="phone_no" className={"input-has-value"}>Phone</label>
 												    	</div>
