@@ -49,6 +49,19 @@ const Registration = () => {
     const [terms,setTerms]=useState("0");
     const [eterms,setETerms]=useState("0");
     const [type,setType]=useState("");
+    const [dealerNameError, setDealerNameError] = useState("");
+    const [firstNameError, setFirstNameError] = useState("");
+    const [lastNameError, setLastNameError] = useState("");
+    const [phoneNumberError, setPhoneNumberError] = useState("");
+    const [emailError, setEmailError] = useState("");
+    const [addressError, setAddressError] = useState("");
+    const [dateError, setDateError] = useState("");
+    const [timeError, setTimeError] = useState("");
+    const [stateNameError, setStateNameError] = useState("");
+    const [cityNameError, setCityNameError] = useState("");
+    const [zipCodeIdError, setZipcodeIdError] = useState("");
+    const [numberOfYearsError, setNumberofYearsError] = useState("");
+    const [optionError, setOptionError] = useState("");
 
     const togglePopup = () => {
         setIsOpen(!isOpen);
@@ -84,6 +97,16 @@ const Registration = () => {
     const registrationhandleSubmit = (data) => {
         // setOpenLoader(true);
         // event.preventDefault();
+        
+        setDealerNameError("")
+        setFirstNameError("") 
+        setLastNameError("")
+        setPhoneNumberError("") 
+        setEmailError("") 
+        setAddressError("") 
+        setDateError("")
+        setTimeError("")
+        setNumberofYearsError("")
        
         console.log("===date===",date)
         let request = {
@@ -104,7 +127,72 @@ const Registration = () => {
             local_flag: 0,
             image:doc===""?"":doc.length>0?doc:[doc],
         };
-        if(date!=="" && stateName!=="" && cityName!=="" && zipCodeId!=="" && terms!=="0"){
+
+        if(!dealerName){
+            setDealerNameError("Dealer Name is required")
+            return;
+        }
+        else if(dealerName.length>50){
+            setDealerNameError("Dealer Name must not exceed 50 characters")
+            return;
+        }
+        if(!firstName){
+            setFirstNameError("First Name is required")
+            return;
+        }
+        else if(firstName.length>50){
+            setFirstNameError("First Name must not exceed 50 characters")
+            return;
+        }       
+        if(!lastName){
+            setLastNameError("Last Name is required")
+            return;
+        }
+        else if(lastName.length>50 ){
+            setLastNameError("Last Name must not exceed 50 characters ")
+            return;
+        }
+        if(!phoneNumber){
+            setPhoneNumberError("Phone Number is required")
+            return;
+        }
+        else if(phoneNumber.length<17 ){
+            setPhoneNumberError("Phone Number must have 10 digits ")
+            return;
+        }
+        if(!email){
+            setEmailError("Email  is required")
+            return;
+        }
+        else if(email && !new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i).test(email)){
+            setEmailError("Email  Must match the format")
+            return;
+        }
+        
+        if(!address){
+            setAddressError("Address is required")
+            return;
+        }
+        else if(address.length>150){
+            setAddressError("Address must not exceed 150 characters")
+            return;
+        }       
+        if(!option){
+            setNumberofYearsError("Number Of Years is required")
+            return;
+        }
+        if(!date){
+            setDateError("Date is required")
+            return;
+        } 
+        if(!time){
+            setTimeError("Time is required")
+            return;
+        }                             
+        
+        
+
+        if(  stateName!=="" && cityName!=="" && zipCodeId!=="" && terms!=="0"){
         API.post("registration/add", request)
             .then((response) => {
                 if (response.data.success) {
@@ -147,9 +235,6 @@ const Registration = () => {
             if(zipCodeId==="" || zipCodeId===undefined || zipCodeId===null){
                 console.log("====zipCodeId==>",stateName,cityName,zipCodeId)
                  setZipcode("");
-            }
-            if(date==="" || date===undefined || date===null){
-                setEDate("");
             }
             if(terms==="0"){
                 setETerms("1");
@@ -196,46 +281,25 @@ const Registration = () => {
                             <div className="col-sm-12 form-group">
                                 <div className="tbox">
                                     <input className="textbox " type="text" placeholder="" id="dealer_name" name="dealerName"
-                                    {...register("dealerName", {
-                                        required: "Dealer name is required.",
-                                        maxLength: {
-                                            value: 50,
-                                            message: "Dealer name must not exceed 50 characters"
-                                          }
-                                      })}
                                       onChange={(e) => setDealerName(e.target.value)} />
                                     <label htmlFor="dealer_name" className={dealerName != "" ? "input-has-value" : ""}>Dealer name</label>
-                                    <p className="form-input-error">{errors.dealerName?.message}</p>
+                                    <p className="form-input-error" >{dealerNameError}</p>
                                 </div>
                             </div>
                             <div className="col-sm-12 form-group">
                                 <div className="tbox">
                                     <input className="textbox " type="text" placeholder="" id="first_name" name="firstName"
-                                    {...register("firstName", {
-                                        required: "First Name is required.",
-                                        maxLength: {
-                                            value: 50,
-                                            message: "First Name must not exceed 50 characters"
-                                          }
-                                      })}
                                       onChange={(e) => setFirstName(e.target.value)} />
                                     <label htmlFor="first_name" className={firstName != "" ? "input-has-value" : ""}>First Name</label>
-                                    <p className="form-input-error">{errors.firstName?.message}</p>
+                                    <p className="form-input-error" >{firstNameError}</p>
                                 </div>
                             </div>
                             <div className="col-sm-12 form-group">
                                 <div className="tbox">
                                     <input className="textbox " type="text" placeholder="" id="last_name" name="lastName"
-                                    {...register("lastName", {
-                                        required: "Last Name is required.",
-                                        maxLength: {
-                                            value: 50,
-                                            message: "Last Name must not exceed 50 characters"
-                                          }
-                                      })}
                                       onChange={(e) => setLastName(e.target.value)} />
                                     <label htmlFor="last_name" className={lastName != "" ? "input-has-value" : ""}>Last Name</label>
-                                    <p className="form-input-error">{errors.lastName?.message}</p>
+                                    <p className="form-input-error" >{lastNameError}</p>
                                 </div>
                             </div>
                             <div className="col-sm-4 form-group countrycode">
@@ -264,37 +328,23 @@ const Registration = () => {
                                      {/* onChange={(e) => setPhoneNumber(e.target.value)} /> */}
                                     <label htmlFor="phone_no" className={"input-has-value"}>Phone</label>
                                 </div>
-                                <p className="form-input-error">{errors.phoneNumber?.message}</p>
+                                <p className="form-input-error" >{phoneNumberError}</p>
 
                             </div>
                             <div className="col-sm-12 form-group">
                                 <div className="tbox">
                                     <input className="textbox" type="text" placeholder="" id="email" name="email"
-                                    {...register("email", {
-                                        required: "Email Id is required.",
-                                        pattern: {
-                                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                        message: "Must match the email format"
-                                        }
-                                    })}
                                     onChange={(e) => setEmail(e.target.value)} /> 
                                     <label htmlFor="email" className={email != "" ? "input-has-value" : ""}>Email</label>
-                                    <p className="form-input-error">{errors.email?.message}</p>
+                                    <p className="form-input-error" >{emailError}</p>
                                 </div>
                             </div>
                             <div className="col-sm-12 form-group">
                                 <div className="tbox">
                                     <input className="textbox " type="text" placeholder="" id="address" name="address"
-                                    {...register("address", {
-                                        required: "Address is required.",
-                                        maxLength: {
-                                            value: 150,
-                                            message: "Address must not exceed 150 characters"
-                                          }
-                                      })}
                                       onChange={(e) => setAddress(e.target.value)} /> 
                                     <label htmlFor="address" className={address != "" ? "input-has-value" : ""}>Address</label>
-                                    <p className="form-input-error">{errors.address?.message}</p>
+                                    <p className="form-input-error" >{addressError}</p>
                                 </div>
                             </div>
 
@@ -314,9 +364,6 @@ const Registration = () => {
                                 <div className="tbox">
                                     {/* {/ <lable htmlFor="drop" className={option !="" ? "input-has-value" : ""}>How many years in car business</lable> /} */}
                                     <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" 
-                                    {...register("option", {
-                                        required: "How many years in car business is required."
-                                    })}
                                     onChange={(e) => setOption(e.target.value)}>
                                         <option style={{"display":"none"}}></option>
                                         <option value="Less then 1">Less then 1</option>
@@ -328,7 +375,7 @@ const Registration = () => {
                                         <option value="More then 20">More then 20</option>
                                     </select>
                                     <label htmlFor="no_years" className={"input-has-value"}>How many years in car business</label>
-                                    <p className="form-input-error">{errors.option?.message}</p>
+                                    <p className="form-input-error" >{numberOfYearsError}</p>
                                 </div>
                             </div>
 
@@ -347,20 +394,16 @@ const Registration = () => {
                                     name="Date" isValidDate={disablePastDt} onChange={registrationDate} 
                                      id="meeting_date"/>
                                     <label  htmlFor="meeting_date" className={date === "" || date!==""? "input-has-value" : ""}>Select Date</label> 
-                                    {  date==="" && edate===""?<p className="form-input-error"> Date  is required</p>:""}
-                                    <p className="form-input-error">{errors.date?.message}</p>
+                                    <p className="form-input-error" >{dateError}</p>
                                 </div>
                                 </div>
                             </div>
                             <div className="col-sm-6 form-group timepicker">
                                 <div className="tbox">
                                     <input type="time" className="form-control textbox" placeholder="Select Time" name="Time"
-                                     {...register("Time", {
-                                        required: "Select Time is required."
-                                    })}
                                     onChange={(e) => setTime(e.target.value)} />
                                     <label htmlFor="meeting_time" className={"input-has-value"}>Select Time</label>
-                                    <p className="form-input-error">{errors.Time?.message}</p>
+                                    <p className="form-input-error" >{timeError}</p>
                                 </div>
                             </div>
                             <div className="col-sm-12 form-group agreetab">
