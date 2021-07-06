@@ -338,8 +338,7 @@ const FloorAdd = () => {
                             </div>
                             <div className="col-sm-9 form-group">
                             <div className="tbox">
-<<<<<<< HEAD
-                                <input type="number" id="creditLimit" className="textbox" placeholder="" name="creditLimit"
+                                <input type="text" id="creditLimit" className="textbox" placeholder="" name="creditLimit"
                                  {...register("creditLimit", {
                                     required: "This input is required.",
                                     maxLength: {
@@ -347,16 +346,6 @@ const FloorAdd = () => {
                                         message: "This input must not exceed 50 characters"
                                       }
                                   })}
-=======
-                                <input type="text" id="creditLimit" className="textbox" placeholder="" name="creditLimit"
-                                //  {...register("creditLimit", {
-                                //     required: "This input is required.",
-                                //     maxLength: {
-                                //         value: 50,
-                                //         message: "This input must not exceed 50 characters"
-                                //       }
-                                //   })}
->>>>>>> cf3dff69b594abe6024fbb67f10549ed4211dedf
                                 onChange={(e) => setCreditLimit(e.target.value)} />
                                 <label htmlFor="creditLimit" className={creditLimit !="" ? "input-has-value" : ""}>Credit Limit</label>
                                 {/* <p className="form-input-error">{errors.creditLimit?.message}</p> */}
