@@ -189,18 +189,7 @@ const Registration = () => {
             setTimeError("Time is required")
             return;
         }                             
-        // if(!stateName){
-        //     setStateNameError("Date Opened is required")
-        //     return;
-        // }
-        // if(!cityName){
-        //     setCityNameError("Account Opened is required")
-        //     return;
-        // }
-        // if(!zipCodeId){
-        //     setZipcodeIdError("Account Opened is required")
-        //     return;
-        // }
+        
         
 
         if(  stateName!=="" && cityName!=="" && zipCodeId!=="" && terms!=="0"){

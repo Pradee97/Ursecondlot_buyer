@@ -52,7 +52,9 @@ const AddUser = () => {
     const [emailError, setEmailError] = useState("");
     const [addressError, setAddressError] = useState("");
 	const [optionError, setoptionError] = useState("");
-
+	const [state,setState]=useState("1");
+    const [city,setCity]=useState("1");
+    const [zipcode,setZipcode]=useState("1");
 
 
 	console.log("=====userDetails====>", userDetails)
@@ -188,7 +190,7 @@ const AddUser = () => {
        
 		console.log("----request---->", request)
 		
-		// if(  stateName!=="" && cityName!=="" && zipCodeId!=="" ){
+		if(  stateName!=="" && cityName!=="" && zipCodeId!=="" ){
 		API.post("buyer/add", request)
 			.then((response) => {
 				if (response.data.success) {
@@ -221,22 +223,22 @@ const AddUser = () => {
 				setPopupActionValue("close");
 			});	
 
-	// }else{
+	}else{
 
-	// 	if(stateName==="" || stateName===undefined || stateName===null){
-	// 		console.log("====stateName=stateName=>",stateName,cityName,zipCodeId)
-	// 		setState("");
-	// 	}
-	// 	if(cityName==="" || cityName===undefined || cityName===null){
-	// 		console.log("====cityName==>",stateName,cityName,zipCodeId)
-	// 		 setCity("");
-	// 	}
-	// 	if(zipCodeId==="" || zipCodeId===undefined || zipCodeId===null){
-	// 		console.log("====zipCodeId==>",stateName,cityName,zipCodeId)
-	// 		 setZipcode("");
-	// 	}
+		if(stateName==="" || stateName===undefined || stateName===null){
+			console.log("====stateName=stateName=>",stateName,cityName,zipCodeId)
+			setState("");
+		}
+		if(cityName==="" || cityName===undefined || cityName===null){
+			console.log("====cityName==>",stateName,cityName,zipCodeId)
+			 setCity("");
+		}
+		if(zipCodeId==="" || zipCodeId===undefined || zipCodeId===null){
+			console.log("====zipCodeId==>",stateName,cityName,zipCodeId)
+			 setZipcode("");
+		}
 		
-	// }	
+	}	
 }
 
 	
@@ -337,7 +339,11 @@ const AddUser = () => {
 														setCityValue={getCityName}
 														setZipcodeValue={getZipCodeId}
 													/>
-							
+													{(state==="" && stateName==="") ?
+                            						<p className="form-input-error"> State,City,zipcode  is required</p>:
+                            						cityName===null && city===""?<p className="form-input-error"> City is required</p>:
+                            						zipCodeId===null && zipcode===""?<p className="form-input-error"> Zipcode is required</p>:""}
+
 													<div className="col-sm-8 form-group selectTbox">
 														<div className="tbox">
 															{/* {/ <lable for="drop" className={option !="" ? "input-has-value" : ""}>How many years in car business</lable> /} */}

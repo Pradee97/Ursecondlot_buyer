@@ -63,9 +63,9 @@ const AddLegalAccount = () => {
     const [dealershipLicenseexp, setDealershiplicenseexp] = useState(null);
     const [taxidexp, setTaxidexp] = useState(null);
     const [legalBusinessname, setLegalBusinessname] = useState("");
-    const [state, setStateName] = useState("");
-	const [city, setCityName] = useState("");
-    const [zipcode, setZipcodeId] = useState("");
+    const [stateName, setStateName] = useState("");
+	const [cityName, setCityName] = useState("");
+    const [zipCodeId, setZipcodeId] = useState("");
     
     const [firstNameError, setFirstNameError] = useState("");
     const [lastNameError, setLastNameError] = useState("");
@@ -76,6 +76,9 @@ const AddLegalAccount = () => {
     const [dealershipLicenseexpError, setDealershiplicenseexpError] = useState("");
     const [taxidexpError, setTaxidexpError] = useState("");
     const [legalBusinessnameError, setLegalBusinessnameError] = useState("");
+    const [state,setState]=useState("1");
+    const [city,setCity]=useState("1");
+    const [zipcode,setZipcode]=useState("1");
 
     
     const onhandleSubmit = (data) => {
@@ -178,7 +181,7 @@ const AddLegalAccount = () => {
         return;
     } 
 
-        if(taxidexp!==null && dealershipLicenseexp!==null){
+    if(  stateName!=="" && cityName!=="" && zipCodeId!=="" ){
         API.post("legal_manage/add", request)
             .then((response) => {
                 if (response.data.success) {
@@ -212,12 +215,17 @@ const AddLegalAccount = () => {
             })
             .catch(err => { console.log(err); });
             }else{
-                console.log("====taxidexp==>",taxidexp)
-                if(taxidexp===null){
-                    setTax("");
+                if(stateName==="" || stateName===undefined || stateName===null){
+                    console.log("====stateName=stateName=>",stateName,cityName,zipCodeId)
+                    setState("");
                 }
-                if(dealershipLicenseexp===null){
-                    setDealerExp("");
+                if(cityName==="" || cityName===undefined || cityName===null){
+                    console.log("====cityName==>",stateName,cityName,zipCodeId)
+                     setCity("");
+                }
+                if(zipCodeId==="" || zipCodeId===undefined || zipCodeId===null){
+                    console.log("====zipCodeId==>",stateName,cityName,zipCodeId)
+                     setZipcode("");
                 }
         }
 
@@ -335,6 +343,10 @@ const AddLegalAccount = () => {
                                 setCityValue={getCityName}
                                 setZipcodeValue={getZipCodeId}
                             />
+                            {(state==="" && stateName==="") ?
+                            <p className="form-input-error"> State,City,zipcode  is required</p>:
+                            cityName===null && city===""?<p className="form-input-error"> City is required</p>:
+                            zipCodeId===null && zipcode===""?<p className="form-input-error"> Zipcode is required</p>:""}
                             {/* <div className="col-sm-12 form-group">
                             <div className="tbox">                            
                                 <input type="text" id="phoneNumber" className="textbox" placeholder="" required onChange={(e) => setCity(e.target.value)} />
