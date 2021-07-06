@@ -3,9 +3,10 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { Table } from 'antd';
 import API from "../../Services/BaseService";
+import Loading from"../../Component/Loading/Loading";
 
 const Fees = () => {
-
+    const [loading,setLoading] = useState(true);
     const [feeDetails, setFeeDetails] = useState("");
     const columns = [
         {
@@ -27,6 +28,7 @@ const Fees = () => {
         state.then(res => {
             console.log("res", res)
             setFeeDetails(res.data.data);
+            setLoading(false);
         })
             .catch(err => { console.log(err); });
     }
@@ -50,7 +52,8 @@ const Fees = () => {
                                 <div className="col-lg-6 pt-4 pt-lg-0 feestableBlock">
                                     <div className="feestable">
                                         {/* <h2>Buyer Fee</h2> */}
-                                        <Table columns={columns} dataSource={feeDetails} pagination={false} ></Table>
+                                        {loading?<Loading/>:
+                                        <Table columns={columns} dataSource={feeDetails} pagination={false} ></Table>}
                                     </div>
                                 </div>
                             </div>
