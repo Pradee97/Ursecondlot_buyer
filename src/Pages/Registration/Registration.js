@@ -104,7 +104,7 @@ const Registration = () => {
             local_flag: 0,
             image:doc===""?"":doc.length>0?doc:[doc],
         };
-        if(date==="" && stateName!=="" && cityName!=="" && zipCodeId!=="" && terms!=="0"){
+        if(date!=="" && stateName!=="" && cityName!=="" && zipCodeId!=="" && terms!=="0"){
         API.post("registration/add", request)
             .then((response) => {
                 if (response.data.success) {

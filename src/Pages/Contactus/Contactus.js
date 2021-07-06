@@ -19,6 +19,9 @@ const Contactus = () => {
     const [name,setName]=useState ("");
     const [email,setEmailId]=useState ("");
     const [comments,setComments]=useState ("");
+    const [ename,seteName]=useState ("1");
+    const [eemail,seteEmailId]=useState ("1");
+    const [ecomments,seteComments]=useState ("1");
 
     const history = useHistory();   
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -31,7 +34,7 @@ const Contactus = () => {
       email,
       comments        
     };
-  
+    if(name!=="" && email!=="" && comments!==""){
     API.post("contactUs/condition", request)
         .then((response) => {
           console.log("=========>",response);
@@ -64,6 +67,17 @@ const Contactus = () => {
                 setPopupActionType("close");
                 setPopupActionValue("close");
         }).catch(err => { console.log(err); });
+      }else{
+        if(name==="" || name===undefined || name===null){
+          seteName("");
+      }
+      if(email==="" || email===undefined || email===null){
+        seteEmailId("");
+      }
+      if(comments==="" || comments===undefined || comments===null){
+        seteComments("");
+      }
+      }
        
 }
     return (
@@ -109,41 +123,23 @@ const Contactus = () => {
              <div className="form-group">
                <label htmlFor="name">Full Name</label>
                  <input type="text" name="name" className="form-control" id="name"
-                  {...register("name", {
-                    required: "This input is required.",
-                    maxLength: {
-                        value: 50,
-                        message: "This input must not exceed 50 characters"
-                      }
-                  })}
                 onChange={(e) => setName(e.target.value)}/>
+                 {  name==="" && ename===""?<p className="form-input-error"> Name is required</p>:""}
                  <div className="validate"></div>
              </div>
              <div className="form-group">
                <label htmlFor="name">Email</label>
                  <input type="email" className="form-control" name="email" id="email"  
-                  {...register("email", {
-                    required: "This input is required.",
-                   pattern : {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: "Must match the email format"
-                    }
-                })}
                 onChange={(e) => setEmailId(e.target.value)} />
+                 {  email==="" && eemail===""?<p className="form-input-error"> Email is required</p>:""}
                  <div className="validate"></div>
              </div>
              <div className="form-group">
                <label htmlFor="name">comments</label>
                <textarea className="form-control" name="message" rows="3" 
-               {...register("message", {
-                required: "This input is required.",
-                maxLength: {
-                    value: 150,
-                    message: "This input must not exceed 150 characters"
-                  }
-              })}
             onChange={(e) => setComments(e.target.value)}
                ></textarea>
+                {  comments==="" && ecomments===""?<p className="form-input-error"> Comments is required</p>:""}
                <div className="validate"></div>
              </div>
              <div className="mb-3">
