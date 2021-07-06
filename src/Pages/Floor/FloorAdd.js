@@ -343,7 +343,7 @@ const FloorAdd = () => {
                             </div>
                             <div className="col-sm-9 form-group">
                             <div className="tbox">
-                                <input type="text" id="creditLimit" className="textbox"  placeholder="" name="creditLimit"
+                                <input type="number" id="creditLimit" className="textbox"  placeholder="" name="creditLimit"
                                  {...register("creditLimit", {
                                     required: "This input is required.",
                                    
