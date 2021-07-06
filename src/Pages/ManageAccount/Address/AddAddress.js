@@ -9,6 +9,7 @@ import StateAndCity from '../../../Component/StateAndCity/StateAndCity';
 import { useForm } from "react-hook-form";
 import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks";
 import MuiPhoneNumber from 'material-ui-phone-number';
+import PhoneInput from 'react-phone-number-input/input';
 
 const AddAddress = () => {
     const history = useHistory();   
@@ -164,12 +165,24 @@ const AddAddress = () => {
                                 <p className="form-input-error">{errors.lastName?.message}</p>
                             </div>
                             </div>
-                           
+                            <div className="col-sm-4 form-group countrycode">
+                                                    <div className="tbox">
+                                                        <select className="form-control custom-select browser-default textbox"  id="drop" placeholder="" defaultValue="+1">
+                                                            <option value="+1">+1</option>
+                                                            {/* <option disabled>Currency</option> */}
+                                                        </select>
+                                                        <label  for="drop" className={"input-has-value"}>Country code</label>
+                                                        {/* <input type="text" className="form-control" placeholder="Currency" required /> */}
+                                                    </div>
+                                                </div>
                             <div className="col-sm-6 form-group ">
+                            
                             <div className="tbox phoneNumberfield">
-                            <MuiPhoneNumber id="companyName" name="primaryPhone" defaultCountry={'us'} onlyCountries={['us']}  className="textbox" 
+                            {/* <MuiPhoneNumber id="companyName" name="primaryPhone" defaultCountry={'us'} onlyCountries={['us']}  className="textbox" 
                           
-                                 {...register("primaryPhone", {
+                                
+                                onChange={handleOnChange} ></MuiPhoneNumber> */}
+                                <PhoneInput  id="primaryPhone" name="primaryPhone" country="US" class="textbox"  {...register("primaryPhone", {
                                     required: "This input is required.",
                                     pattern: {
                                         value: /\(?([0-9]{3})\)\s?([0-9]{3})([ .-]?)([0-9]{4})/,
@@ -179,16 +192,24 @@ const AddAddress = () => {
                                         value: 10,
                                         message: "This input atleast have 10 digits"
                                       }
-                                })}
-                                onChange={handleOnChange} ></MuiPhoneNumber>
+                                })} onChange={handleOnChange} ></PhoneInput>
                                 <label htmlFor="companyName" className={"input-has-value"}>Primary phone</label>
                                 <p className="form-input-error">{errors.primaryPhone?.message}</p>
                             </div>
                             </div>
-                            
+                            <div className="col-sm-4 form-group countrycode">
+                                                    <div className="tbox">
+                                                        <select className="form-control custom-select browser-default textbox"  id="drop" placeholder="" defaultValue="+1">
+                                                            <option value="+1">+1</option>
+                                                            {/* <option disabled>Currency</option> */}
+                                                        </select>
+                                                        <label  for="drop" className={"input-has-value"}>Country code</label>
+                                                        {/* <input type="text" className="form-control" placeholder="Currency" required /> */}
+                                                    </div>
+                                                </div>
                             <div className="col-sm-6 form-group ">
                             <div className="tbox phoneNumberfield">
-                            <MuiPhoneNumber id="companyName" name="primaryPhone" defaultCountry={'us'} onlyCountries={['us']}  className="textbox" 
+                            {/* <MuiPhoneNumber id="companyName" name="primaryPhone" defaultCountry={'us'} onlyCountries={['us']}  className="textbox" 
                                   {...register("mobilePhone", {
                                     required: "This input is required.",
                                    
@@ -197,7 +218,16 @@ const AddAddress = () => {
                                         message: "This input must have 10 digits"
                                       }
                                 })}
-                                onChange={handleOnChanges} ></MuiPhoneNumber>
+                                onChange={handleOnChanges} ></MuiPhoneNumber> */}
+                                <PhoneInput  id="mobilePhone" name="mobilePhone"  country="US" class="textbox" {...register("mobilePhone", {
+                                    required: "This input is required.",
+                                   
+                                    minLength: {
+                                        value: 17,
+                                        message: "This input must have 10 digits"
+                                      }
+                                })}
+                                onChange={handleOnChanges} ></PhoneInput>
                                 <label htmlFor="branchName" className={"input-has-value"}>Mobile phone</label>
                                 <p className="form-input-error">{errors.mobilePhone?.message}</p>
                             </div>

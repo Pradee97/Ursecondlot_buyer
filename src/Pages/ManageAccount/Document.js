@@ -9,6 +9,8 @@ import '../../Component/Popup/popup.css';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import FileBase64 from 'react-file-base64';
 import { Button, Upload } from 'antd';
+import Loading from "../../Component/Loading/Loading";
+
 const { Dragger } = Upload;
 
 const Document = () => {
@@ -33,11 +35,15 @@ const Document = () => {
     const [popupActionType, setPopupActionType] = useState("");
     const [popupActionValue, setPopupActionValue] = useState("");
     const [popupActionPath, setPopupActionPath] = useState("")
-    console.log("======12345====>", ls.get('userDetails'))
     const togglePopup = () => {
         setIsOpen(!isOpen);
     }
+  const [loading,setloading]=useState("");
+
     async function getDocuments() {
+    console.log("inside get document");
+        setloading(true);
+
         let request = {
             buyer_id: userDetails.user_id
         };
@@ -69,10 +75,11 @@ const Document = () => {
                     setDoc11(document[x])
                 }
             }
-            console.log("===doc11====>", doc11)
             setDocList(res.data.data);
         })
             .catch(err => { console.log(err); });
+      setloading(false);
+
     }
 
     useEffect(() => {
@@ -80,7 +87,7 @@ const Document = () => {
     }, []);
 
     const deleteFileConfirmation = (document_id) => {
-        console.log("document_id====",document_id)
+        // console.log("document_id====",document_id)
         localStorage.setItem("deletDocumentId",document_id)
         togglePopup()
         setPopupTitle("Document Delete");
@@ -102,7 +109,7 @@ const Document = () => {
                 setPopupTitle("Document Delete");
                 setPopupMsg("Document Successfully Deleted");
                 setPopupType("success");
-                setPopupActionType("redirect");
+                setPopupActionType("refresh");
                 setPopupActionValue("ok");
                 setPopupActionPath("/document");
             } else {
@@ -128,7 +135,7 @@ const Document = () => {
                 setPopupTitle("Document Upload");
                 setPopupMsg("Document Successfully Updated");
                 setPopupType("success");
-                setPopupActionType("redirect");
+                setPopupActionType("refresh");
                 setPopupActionValue("ok");
                 setPopupActionPath("/document")
             } else {
@@ -148,18 +155,16 @@ const Document = () => {
             buyer_doc_type: value,
             doc_name: file.length > 0 ? file : [file],
         };
-        console.log("======12345====>", request)
         const upload = API.post('buyer_document/add', request);
         upload.then(response => {
-            console.log("=========>", response)
             if (response.data.success) {
                 togglePopup()
                 setPopupTitle("Document Upload");
                 setPopupMsg("Document Successfully Uploaded");
                 setPopupType("success");
-                setPopupActionType("close");
+                setPopupActionType("refresh");
                 setPopupActionValue("close");
-                // setPopupActionPath("/document")
+                setPopupActionPath("/document")
             } else {
                 togglePopup()
                 setPopupTitle("Document Upload");
@@ -174,6 +179,7 @@ const Document = () => {
 
     return (
         <div>
+      {loading?<Loading/>:
             <main id="main" className="inner-page">
                 <div id="documentspage" className="documentspage">
                     <div className="container" >
@@ -502,6 +508,7 @@ const Document = () => {
                         Confirmation={deleteingFile}
                     />}
             </main>
+            }
         </div>
     )
 }

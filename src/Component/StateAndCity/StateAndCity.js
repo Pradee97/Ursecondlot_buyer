@@ -78,7 +78,6 @@ const StateAndCity = props => {
 
     useEffect(() => {
         if(stateName && cityName && zipCodeId ){
-        // console.log("=======>",stateNameList,stateName,cityNameList,cityName,zipcodeList,zipCodeId)
         props.setStateValue(stateNameList.filter(data=>data.state_name == stateName)[0].state_id);
         props.setCityValue(cityNameList.filter(data=>data.city_name==cityName)[0].city_id);
         props.setZipcodeValue(zipcodeList.filter(data=>data.zipcode==zipCodeId)[0].zipcode_id);   
@@ -127,7 +126,7 @@ return (
             <div className="tbox">                
                 <div className="selcetclass"> 
                     <select className="form-control custom-select browser-default textbox"  defaultValue={stateName}  onChange={handleState}>
-                        <option style={{"display":"none"}}></option>
+                        <option value={null} style={{"display":"none"}}></option>
                         {stateNameList.length>0 &&
                             <>
                                 {stateNameList.map((state, index) => <option key={state.state_id} value={state.state_id} selected = { isEdit ?  state.state_name === defaultStateValue ? true : false : false} >{state.state_name}</option>)}
@@ -142,7 +141,7 @@ return (
             <div className="tbox">              
                 <div className="selcetclass"> 
                     <select id="City" className="form-control custom-select browser-default textbox"  defaultValue={cityName} onChange={handleCity}>
-                    <option style={{"display":"none"}}></option>
+                    <option value={null} style={{"display":"none"}}></option>
                         {cityNameList.length>0 &&
                             <>
                                 {cityNameList.map((city, index) => <option key={city.city_id} value={city.city_id} selected = { isEdit ?  city.city_name === defaultCityValue ? true : false : false} >{city.city_name}</option>)}
@@ -157,7 +156,7 @@ return (
             <div className="tbox">        
                 <div className="selcetclass"> 
                     <select id="zipcode_id" className="form-control custom-select browser-default textbox"  defaultValue={zipCodeId} onChange={handleZipcode}>
-                    <option style={{"display":"none"}}></option>
+                    <option value={null} style={{"display":"none"}}></option>
                         {zipcodeList.length>0 &&
                             <>
                                 {zipcodeList.map((zipcode, index) => <option key={zipcode.zipcode_id} value={zipcode.zipcode} selected = { isEdit ?  zipcode.zipcode === defaultZipcodeValue ? true : false : false} >{zipcode.zipcode}</option>)}
