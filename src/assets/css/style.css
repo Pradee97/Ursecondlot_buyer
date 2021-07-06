@@ -5955,9 +5955,17 @@ paymentform
 
 .lotfee-inner  p {
     text-align: center;
-    color: #343434;
     font-size: 16px;
     margin: 20px 30px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
 }
 .lotfee-form{
 	margin:20px auto;
