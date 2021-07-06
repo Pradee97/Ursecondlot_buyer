@@ -4,7 +4,8 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import ls from 'local-storage';
 import API from "../../../Services/BaseService";
-import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks"
+import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks";
+import CommonPopup from '../../../Component/CommonPopup/CommonPopup';
 import { Button } from 'antd';
 
 const Buyers = () => {
@@ -12,6 +13,17 @@ const Buyers = () => {
     let userDetails = ls.get('userDetails');
     const [userList,setUserList] = useState("");
     const [data,setData]=useState("");
+    const [isOpen, setIsOpen] = useState(false);
+ 
+    const togglePopup = () => {
+      setIsOpen(!isOpen);
+    }
+    const [popupTitle, setPopupTitle] = useState ("");
+    const [popupMsg, setPopupMsg] = useState ("");
+    const [popupType, setPopupType] = useState ("");
+    const [popupActionType, setPopupActionType] = useState ("");
+    const [popupActionValue, setPopupActionValue] = useState ("");
+    const [popupActionPath, setPopupActionPath] = useState ("")
     async function getuserDetails() {
         let request = {
             dealer_id: userDetails.dealer_id
@@ -24,7 +36,7 @@ const Buyers = () => {
             .catch(err => { console.log(err); });
     }
     function searchUser(){
-        console.log("=====data=======>",data)
+        console.log("=====data=======>",data)        
         let request={
             data: data,
             dealer_id:userDetails.dealer_id
@@ -32,10 +44,23 @@ const Buyers = () => {
         if(data!==""){
         API.post("userSearch/condition",request)
         .then((response)=>{
+            if(response.data.data==0){
+                // alert("=====data=======>",request.data)
+                togglePopup()
+                setPopupTitle("Data not found ");
+                // setPopupMsg("No data found");
+                setPopupType("success");
+                setPopupActionType("close");
+                setPopupActionValue("ok");
+                
+            }
+            else if(response.data.data !==0){
             console.log("=====response=======>",response)
             console.log("rep search req",request);
             console.log("inside rep search", response.data.data);
             setUserList(response.data.data);
+            }
+           
         },
         (error) => {
             console.log(error);
@@ -43,6 +68,7 @@ const Buyers = () => {
         );
         } else {
             setUserList([]);
+           
         }
     }
     function onHandleEdit(e) {
@@ -87,6 +113,7 @@ const Buyers = () => {
                                     </div>
 				
                                     <div className="userlisttable table-responsive">
+                                    {userList.length>0?
                                         <table className="table table-striped w-auto">
                                         <thead>
                                             <tr>
@@ -115,12 +142,13 @@ const Buyers = () => {
                                             <td>{item.status===1?"Active":"InActive"}</td>
                                             <td><Button className="ant-btn" onClick={() => onHandleEdit(item.user_id)}><i className="icofont-ui-edit"></i> Edit</Button></td>
                                         </tr>
-                                        ):
+                                         ):
                                         <tr><td colspan="6" ng-show="0">
                                         <b>There's No Data</b>
                                             </td>
-                                        </tr>}                                       
-                                        </table>            
+                                        </tr>
+                                        }                                       
+                                        </table> :""}            
                                     </div>
 					            </div>
                             </div>
@@ -148,6 +176,16 @@ const Buyers = () => {
 
      </div>
    </section>
+   {isOpen && 
+        <CommonPopup 
+            handleClose= {togglePopup}
+            popupTitle= {popupTitle}
+            popupMsg= {popupMsg}
+            popupType= {popupType}
+            popupActionType= {popupActionType}
+            popupActionValue= {popupActionValue}
+            popupActionPath={popupActionPath}
+        />}
  </main>
     </div>
 
