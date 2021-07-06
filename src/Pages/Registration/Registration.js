@@ -57,11 +57,7 @@ const Registration = () => {
     const [addressError, setAddressError] = useState("");
     const [dateError, setDateError] = useState("");
     const [timeError, setTimeError] = useState("");
-    const [stateNameError, setStateNameError] = useState("");
-    const [cityNameError, setCityNameError] = useState("");
-    const [zipCodeIdError, setZipcodeIdError] = useState("");
     const [numberOfYearsError, setNumberofYearsError] = useState("");
-    const [optionError, setOptionError] = useState("");
 
     const togglePopup = () => {
         setIsOpen(!isOpen);
@@ -156,7 +152,7 @@ const Registration = () => {
             setPhoneNumberError("Phone Number is required")
             return;
         }
-        else if(phoneNumber.length<17 ){
+        else if(phoneNumber.length>17 ){
             setPhoneNumberError("Phone Number must have 10 digits ")
             return;
         }
@@ -312,20 +308,8 @@ const Registration = () => {
                             </div>
                             <div className="col-sm-8 form-group">
                                 <div className="tbox phoneNumberfield">
-                                <PhoneInput  id="phone_no" name="phoneNumber" country="US" className="textbox" 
-                                    {...register("phoneNumber", {
-                                        required: "Phone Number is required.",
-                                        minLength: {
-                                            value: 14,
-                                            message: "Phone Number must have 10 digits"
-                                          },
-                                          maxLength: {
-                                            value: 14,
-                                            message: "Phone Number must have 10 digits"
-                                          }
-                                    })}
+                                <PhoneInput  id="phone_no" name="phoneNumber" country="US" className="textbox" maxLength="14" minLength="14"
                                     onChange={handleOnChange} ></PhoneInput>
-                                     {/* onChange={(e) => setPhoneNumber(e.target.value)} /> */}
                                     <label htmlFor="phone_no" className={"input-has-value"}>Phone</label>
                                 </div>
                                 <p className="form-input-error" >{phoneNumberError}</p>
