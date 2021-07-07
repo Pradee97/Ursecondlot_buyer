@@ -200,12 +200,11 @@ const Document = () => {
                                                     {doc1 === "" ? <div className="docdetails">
                                                     <h5>Copy of Dealer license</h5>
                                                         <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} className="img-fluid" alt="" />
-                                                         <h5> </h5>
-                                                            <div className="upload-btn-wrapper">
+                                                        <p><div className="upload-btn-wrapper">
                                                                 <a className="btn"> Upload File</a>
                                                                 <FileBase64 onDone={(e) => getFiles(e, "Dealer license")} />
                                                             </div>
-                                                            
+                                                            </p>   
                                                     </div> :
                                                         <div className="docdetails">
                                                             <h5>Copy of Dealer license</h5>

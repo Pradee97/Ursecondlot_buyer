@@ -82,6 +82,7 @@ const EditAddress = () => {
             .catch(err => { console.log(err); });
     }
     function formatMobileNO(value){
+        console.log("Value",value);
         var x = value.replace(/\D/g, '').match(/(\d{1})(\d{3})(\d{3})(\d{4})/);
     
         console.log("value of x",x);

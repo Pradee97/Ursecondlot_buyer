@@ -55,6 +55,7 @@ const Payment = () => {
     const [docError,setDocError]=useState("");
     const [state,setState]=useState("1");
     const [city,setCity]=useState("1");
+    const [zipcodeId,setZipCodeId]=useState("1");
     const [zipCode,setZipCode]=useState("1");
 
     let files= [];
@@ -282,7 +283,7 @@ const Payment = () => {
             }
             if(accountZipcodeId==="" || accountZipcodeId===undefined || accountZipcodeId===null){
                 console.log("====zipCodeId==>",stateName,cityName,zipCodeId)
-                 setZipCode("");
+                setZipCode("");
             }
             
         }	

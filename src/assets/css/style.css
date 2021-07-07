@@ -6000,9 +6000,10 @@ Documents page
 	
 .docdetails h5{
 	color: #343434;
-	font-size:16px;
+	font-size:14px;
 	font-weight:500;
 	margin-bottom:20px;
+  min-height: 66px;
 }
 .docdetails p{
 	color: #343434;
