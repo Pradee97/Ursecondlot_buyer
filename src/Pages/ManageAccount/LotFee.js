@@ -46,7 +46,13 @@ const LotFee = () => {
     // useEffect(() => {},[lotValue]);
     const updateLotValue = (data)=>{
         console.log("---------------",data)
-        setLotValue(data)
+        if(!isNaN(data) && data!=="" && data!==undefined)
+        {
+            console.log(data);
+            setLotValue(data)
+        }
+        else
+            setLotValue(0)
     }
         
         const handlesubimt = () => {
