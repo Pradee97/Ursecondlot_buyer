@@ -83,9 +83,16 @@ const StateAndCity = props => {
     }
 
     useEffect(() => {
+        if(!isEdit){
             stateNameList.length>0 && stateName ? props.setStateValue(stateNameList.filter(data=>data.state_name == stateName)[0]?.state_id || null) : props.setStateValue(null);
             cityNameList.length>0 && cityName ?  props.setCityValue(cityNameList.filter(data=>data.city_name==cityName)[0]?.city_id || null)  : props.setCityValue(null);
             zipcodeList.length>0 && zipCodeId ?  props.setZipcodeValue(zipcodeList.filter(data=>data.zipcode==zipCodeId)[0]?.zipcode_id || null) : props.setZipcodeValue(null);   
+        } else if(stateName && cityName && zipCodeId){
+            props.setStateValue(stateNameList.filter(data=>data.state_name == stateName)[0].state_id);
+            props.setCityValue(cityNameList.filter(data=>data.city_name==cityName)[0].city_id);
+            props.setZipcodeValue(zipcodeList.filter(data=>data.zipcode==zipCodeId)[0].zipcode_id);   
+        }
+  
     }, [stateName, cityName, zipCodeId]);
 
     useEffect (()=>{
