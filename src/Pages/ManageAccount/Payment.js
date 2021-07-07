@@ -496,7 +496,7 @@ const Payment = () => {
                                                     {(state==="" && accountStateName==="") ?
                                                     <p className="form-input-error"> State,City,zipcode  is required</p>:
                                                     accountCityName===null && city===""?<p className="form-input-error"> City is required</p>:
-                                                    accountZipcodeId===null && zipcodeId===""?<p className="form-input-error"> Zipcode is required</p>:""}
+                                                    accountZipcodeId===null && zipCodeId===""?<p className="form-input-error"> Zipcode is required</p>:""}
                                                    
 
                                                     <div className="col-sm-6 form-group">
