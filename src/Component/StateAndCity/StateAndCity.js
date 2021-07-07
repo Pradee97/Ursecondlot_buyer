@@ -3,14 +3,14 @@ import API from "../../Services/BaseService";
 const StateAndCity = props => {
     // console.log("pppppp===",props)
     const [defaultZipcodeValue, setDefaultZipcodeValue] = useState(props.defaultZipcodeValue);
-    const [zipCodeId, setZipcodeId] = useState( "");
+    const [zipCodeId, setZipCodeId] = useState( null );
     const [isEdit] = useState(props?.isEdit || false);
     const [country, setCountry] = useState("");
     const [defaultStateValue, setDefaultStateValue] = useState(props.defaultStateValue);
-    const [stateName, setStateName] = useState("");
+    const [stateName, setStateName] = useState(null);
     const [stateNameList, setStateNameList] = useState([]);
     const [defaultCityValue, setDefaultCityValue] = useState(props.defaultCityValue);
-    const [cityName, setCityName] = useState("");
+    const [cityName, setCityName] = useState(null);
     const [cityNameList, setCityNameList] = useState([]);
     const [zipcodeList, setZipcodeList] = useState([]);
     async function fetchCountry() {
@@ -28,10 +28,14 @@ const StateAndCity = props => {
         const state = API.post('state/condition', request);
         state.then(res => {
             setStateNameList(res.data.data);
+            setCityName(null)
+            setZipCodeId(null)
             if(props.isEdit){
                 res.data.data.filter(data=> {
                     if(data.state_name?.toLowerCase() === defaultStateValue ?.toLowerCase()){
                         setStateName(data.state_name)
+                        // setCityName(null)
+                        // setZipCodeId(null)
                         fetchCity(data.state_id)
                     } 
                 })
@@ -48,10 +52,12 @@ const StateAndCity = props => {
         const state = API.post('city/condition', request);
         state.then(res => {
             setCityNameList(res.data.data);
+            setZipCodeId(null)
             if(props.isEdit){
                 res.data.data.filter(data=> {
                     if(data.city_name?.toLowerCase() === defaultCityValue ?.toLowerCase()){
                         setCityName(data.city_name)
+                        // setZipCodeId(null)
                         fetchZipcode(data.city_id)
                     }
                 })
@@ -68,7 +74,7 @@ const StateAndCity = props => {
             setZipcodeList(res.data.data);
             if(props.isEdit){
                 res.data.data.filter(data=>{
-                    data.zipcode==defaultZipcodeValue && setZipcodeId(data.zipcode)
+                    data.zipcode==defaultZipcodeValue && setZipCodeId(data.zipcode)
                 }
                     )
             }
@@ -77,11 +83,9 @@ const StateAndCity = props => {
     }
 
     useEffect(() => {
-        if(stateName && cityName && zipCodeId ){
-        props.setStateValue(stateNameList.filter(data=>data.state_name == stateName)[0].state_id);
-        props.setCityValue(cityNameList.filter(data=>data.city_name==cityName)[0].city_id);
-        props.setZipcodeValue(zipcodeList.filter(data=>data.zipcode==zipCodeId)[0].zipcode_id);   
-        } 
+            stateNameList.length>0 && stateName ? props.setStateValue(stateNameList.filter(data=>data.state_name == stateName)[0]?.state_id || null) : props.setStateValue(null);
+            cityNameList.length>0 && cityName ?  props.setCityValue(cityNameList.filter(data=>data.city_name==cityName)[0]?.city_id || null)  : props.setCityValue(null);
+            zipcodeList.length>0 && zipCodeId ?  props.setZipcodeValue(zipcodeList.filter(data=>data.zipcode==zipCodeId)[0]?.zipcode_id || null) : props.setZipcodeValue(null);   
     }, [stateName, cityName, zipCodeId]);
 
     useEffect (()=>{
@@ -98,26 +102,35 @@ const StateAndCity = props => {
         fetchState(); 
     }, [defaultStateValue]);
 
-    useEffect(() => { setZipcodeId( zipCodeId) }, [zipCodeId])
+    
+const cityAndZipReset=()=>{
+    setCityName(null)
+    setZipCodeId(null)
+}
 
     const handleState = (e) => {
         setStateName( stateNameList.filter(data=>data.state_id == e.target.value)[0].state_name)
         props.isEdit && props.setCityValue(null);
         props.isEdit && props.setZipcodeValue(null);   
+        // cityNameList.length === 0 ? fetchCity(e.target.value): cityAndZipReset()
+        setCityNameList([])
+        setZipcodeList([])
         fetchCity(e.target.value)
-        setCityName("")
-        setZipcodeId("")
+        // setCityName(null)
+        // setZipCodeId(null)
     }
 
     const handleCity = (e) => {
         setCityName(cityNameList.filter(data=>data.city_id==e.target.value)[0].city_name)
         props.isEdit && props.setZipcodeValue(null);
+        // zipcodeList.length === 0 && fetchZipcode(e.target.value)
+        setZipcodeList([])
         fetchZipcode(e.target.value)
-        setZipcodeId("")
+        // setZipCodeId(null)
     }
 
     const handleZipcode = (e) => {
-        setZipcodeId(zipcodeList.filter(data=>data.zipcode==e.target.value)[0].zipcode); 
+        setZipCodeId(zipcodeList.filter(data=>data.zipcode==e.target.value)[0].zipcode); 
     }
 
 return (
@@ -171,7 +184,7 @@ return (
             <div className="tbox">
                 <div className="selcetclass">                 
                     <>
-                        <input type="text" className="form-control textbox" defaultValue={isEdit ? defaultZipcodeValue : zipCodeId} placeholder="" required maxLength="5" onChange={(e) => setZipcodeId(e.target.value)} />
+                        <input type="text" className="form-control textbox" defaultValue={isEdit ? defaultZipcodeValue : zipCodeId} placeholder="" required maxLength="5" onChange={(e) => setZipCodeId(e.target.value)} />
                         {<label  htmlFor="zipcode_id" className={"input-has-value"}>Zipcode</label>}
                     </>                       
                 </div>
