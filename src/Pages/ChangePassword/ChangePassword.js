@@ -26,6 +26,9 @@ const ChangePassword = () => {
     const[showPwd,setShowPwd]=useState(false);
     const[showPwds,setShowPwds]=useState(false);
     const[showsPwds,setShowsPwds]=useState(false);
+    const [oldPasswordError, setOldPasswordError] = useState('');
+    const [newPasswordError, setNewPasswordError] = useState('');
+    const [confirmPasswordError, setConfirmPasswordError] = useState('');
 
     const togglePopup = () => {
         setIsOpen(!isOpen);
@@ -56,11 +59,40 @@ const ChangePassword = () => {
       }
     const changehandleSubmit = (event) => {
         //event.preventDefault();
-        if(newPassword !== confirmPassword){
+        setOldPasswordError("")
+        setNewPasswordError("")
+        setConfirmPasswordError("")
+
+        if(!oldPassword){
+          setOldPasswordError("Old Password is required")
+          return;
+      }
+      else if(oldPassword<8){
+          setOldPasswordError("Old Password must have minimum 8 characters")
+          return;
+      }
+      if(!newPassword){
+          setNewPasswordError("New Password is required")
+          return;
+      }
+      else if(newPassword && !new RegExp(/(^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,}))/).test(newPassword)){
+          setNewPasswordError("New Password must have minimum of 8 characters with the combination of upper ,lower case letters , number and a special character")
+          return;
+      }
+      if(!confirmPassword){
+        setConfirmPasswordError("Confirm Password is required")
+        return;
+    }
+    else if(confirmPassword && !new RegExp(/(^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,}))/).test(confirmPassword)){
+        setConfirmPasswordError("Confirm Password must have minimum of 8 characters with the combination of upper ,lower case letters , number and a special character")
+        return;
+    }
+        else if(newPassword !== confirmPassword){
             setErrorMessage("New password and Confirm password doesn't match ! ");
-        }
+            return;
+          }
         
-        else{
+       
         let request = {
           old_password: oldPassword,
           new_password: newPassword,
@@ -101,9 +133,6 @@ const ChangePassword = () => {
             });
         }
       
-      }
-  
-
     return (
         <div>
             <main id="main" className="inner-page">
@@ -119,55 +148,26 @@ const ChangePassword = () => {
 
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type={showPwd?"text":"password"} id="old_password" className="textbox" placeholder=""  {...register("old_password", {
-                                                            required: "Old Password is required.",
-                                                           
-                                                            minLength: {
-                                                              value: 8,
-                                                              message: "Password must have minimum 8 characters"
-                                                            }
-                                                          })}  onChange={(e) => setOldPassword(e.target.value)} />
+                                <input type={showPwd?"text":"password"} id="old_password" className="textbox" placeholder="" onChange={(e) => setOldPassword(e.target.value)} />
                                 <label htmlFor="old_password"  className={oldPassword != "" ? "input-has-value" : ""}>Old Password</label><i htmlFor ="password" className="passwordeye"  onClick={togglepwd}>{eye}</i>
-                                <p className="form-input-error">{errors.old_password?.message}</p>
+                                <p className="form-input-error" >{oldPasswordError}</p>
                                 
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type={showPwds?"text":"password"} id="new_password" className="textbox"  title="eg:(It should be Uppercase, Lowercase, Specialcharacter, Numbers and Minimum 8 character)" placeholder="" 
-                                {...register("new_password", {
-                                    required: "New Password is required.",
-                                    pattern: {
-                                      value: /(^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,}))/,
-                                      message: "Password must have minimum of 8 characters with the combination of upper ,lower case letters , number and a special character"
-                                    },
-                                    minLength: {
-                                      value: 8,
-                                      message: "Password must have minimum 8 characters"
-                                    }
-                                  })}onChange={(e) => setNewPassword(e.target.value)} />
+                                <input type={showPwds?"text":"password"} id="new_password" className="textbox"  placeholder="" onChange={(e) => setNewPassword(e.target.value)} />
                                 <label htmlFor="new_password" c className={newPassword != "" ? "input-has-value" : ""}>New Password</label><i htmlFor ="newPassword" className="passwordeye"  onClick={togglepwds}>{eye}</i>
-                                <p className="form-input-error">{errors.new_password?.message}</p>
+                                <p className="form-input-error" >{newPasswordError}</p>
                                 
                             </div>
                             </div>
 
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type={showsPwds?"text":"password"} id="confirm_password" className="textbox" placeholder="" 
-                                 {...register("confirm_password", {
-                                    required: "Confirm password is required.",
-                                    pattern: {
-                                      value: /(^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,}))/,
-                                      message: "Password must have minimum of 8 characters with the combination of upper ,lower case letters , number and a special character"
-                                    },
-                                    minLength: {
-                                      value: 8,
-                                      message: "Password must have minimum 8 characters"
-                                    }
-                                  })}onChange={(e) => setConfirmPassword(e.target.value)} />
+                                <input type={showsPwds?"text":"password"} id="confirm_password" className="textbox" placeholder="" onChange={(e) => setConfirmPassword(e.target.value)} />
                                 <label htmlFor="confirm_password"  className={confirmPassword != "" ? "input-has-value" : ""}>Confirm Password</label><i htmlFor ="newPassword" className="passwordeye"  onClick={togglespwds}>{eye}</i>
-                                <p className="form-input-error">{errors.confirm_password?.message}</p>
+                                <p className="form-input-error" >{confirmPasswordError}</p>
                                 <p className="form-input-error">{errorMessage}</p>
                             </div> 
                             </div>

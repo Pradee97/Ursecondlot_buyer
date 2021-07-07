@@ -14,9 +14,22 @@ const ForgotPasswordEmail = () => {
     const [popupActionPath, setPopupActionPath] = useState("");
     const [errorMessage, setErrorMessage] = useState('');
     const [isOpen, setIsOpen] = useState(false);
+    const [emailError, setEmailError] = useState('');
+
     const { register, handleSubmit, formState: { errors } } = useForm();
     const changehandleSubmit = (event) => {
+        setEmailError("")
+
         //event.preventDefault();
+        if(!email){
+            setEmailError("Email ID is required")
+            return;
+        }
+        else if(email && !new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i).test(email)){
+            setEmailError("Must match the email format")
+            return;
+        }
+
         let request = {
             email: email,
         }
@@ -69,15 +82,9 @@ const ForgotPasswordEmail = () => {
 
                                     <div className="col-sm-12 form-group">
                                         <div className="tbox">
-                                            <input type="text" id="email" className="textbox" placeholder="" name="email" {...register("email", {
-                                                    required: "Email ID is required.",
-                                                    pattern: {
-                                                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                                    message: "Must match the email format"
-                                                    }
-                                                })} onChange={(e) => setEmail(e.target.value)} />
+                                            <input type="text" id="email" className="textbox" placeholder="" name="email"  onChange={(e) => setEmail(e.target.value)} />
                                             <label htmlFor="email" className={email != "" ? "input-has-value" : ""}>User Name</label>
-                                            <p className="form-input-error">{errors.email?.message}</p>
+                                            <p className="form-input-error" >{emailError}</p>
                                         </div>
                                     </div>
 

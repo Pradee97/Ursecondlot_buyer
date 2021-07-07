@@ -297,7 +297,7 @@ const EditAddress = () => {
                             </div>
                             </div>
                             <div class="col-sm-8 form-group ">
-                            <div className="tbox phoneNumberfield">
+                            <div className="tbox ">
                             <PhoneInput value={accountObjc.phone_no} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChange} ></PhoneInput>
                             <label for="primary_phone"  className={"input-has-value"}>Primary Phone</label>
                             </div>
@@ -312,7 +312,7 @@ const EditAddress = () => {
                             </div>
                             </div>
                             <div class="col-sm-8 form-group ">
-                            <div className="tbox phoneNumberfield">
+                            <div className="tbox ">
                             <PhoneInput value={accountObjc.mobile_no} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChanges} ></PhoneInput>
                             <label for="mobile_phone"  className={"input-has-value"}>Mobile Phone</label>
                             </div> 

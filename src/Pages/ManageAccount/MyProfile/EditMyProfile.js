@@ -258,7 +258,7 @@ const EditMyProfile = () => {
                             </div>
                             </div>
                             <div className="col-sm-8 form-group ">
-                            <div className="tbox phoneNumberfield">
+                            <div className="tbox ">
                             <PhoneInput value={myProfileObjc.phone_no} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChange} ></PhoneInput>
                             {/* <MuiPhoneNumber value={myProfileObjc.phone_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={handleOnChange} ></MuiPhoneNumber> */}
                                 {/* <input type="text" defaultValue={myProfileObjc.phone_no} className="form-control textbox" placeholder=""  onChange={(e) => setPrimaryPhone(e.target.value)} /> */}
@@ -275,7 +275,7 @@ const EditMyProfile = () => {
                             </div>
                             </div>
                             <div className="col-sm-8 form-group ">
-                            <div className="tbox phoneNumberfield">
+                            <div className="tbox ">
                             <PhoneInput value={myProfileObjc.mobile_no} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChanges} ></PhoneInput>
                             {/* <MuiPhoneNumber value={myProfileObjc.mobile_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={handleOnChanges} ></MuiPhoneNumber> */}
                                 {/* <input type="text" defaultValue={myProfileObjc.mobile_no} className="form-control textbox" placeholder=""  onChange={(e) => setMobilephone(e.target.value)} /> */}

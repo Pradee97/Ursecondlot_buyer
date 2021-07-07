@@ -270,7 +270,7 @@ const EditDealerInformation = () => {
                             </div>
                             </div>
                             <div class="col-sm-8 form-group ">
-                            <div className="tbox phoneNumberfield">
+                            <div className="tbox ">
                             <PhoneInput value={accountObjc.phone_no} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChange} ></PhoneInput>
                             {/* <MuiPhoneNumber value={accountObjc.phone_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={handleOnChange} ></MuiPhoneNumber> */}
                                  {/* <input type="text" defaultValue={accountObjc.phone_no} class="textbox" placeholder="Primary phone"  onChange={(e) => setPrimaryphone(e.target.value)} /> */}
@@ -287,7 +287,7 @@ const EditDealerInformation = () => {
                             </div>
                             </div>
                             <div class="col-sm-8 form-group ">
-                            <div className="tbox phoneNumberfield">
+                            <div className="tbox ">
                             <PhoneInput value={accountObjc.mobile_no} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChanges} ></PhoneInput>
                             {/* <MuiPhoneNumber value={accountObjc.mobile_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={handleOnChanges} ></MuiPhoneNumber> */}
                                {/* <input type="text" defaultValue={accountObjc.mobile_no} class="textbox" placeholder="Mobile phone"  onChange={(e) => setMobilephone(e.target.value)} /> */}

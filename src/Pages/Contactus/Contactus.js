@@ -78,7 +78,7 @@ const Contactus = () => {
                 setPopupTitle("Enquiry Form");
                 setPopupMsg("Mail sent successfully.Thanks you So much for your business");
                 setPopupType("success");
-                setPopupActionType("refresh");
+                setPopupActionType("close");
                 setPopupActionValue("close");
                 // setPopupActionPath("/contactus")
             } else {

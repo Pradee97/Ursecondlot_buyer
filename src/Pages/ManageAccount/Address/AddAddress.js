@@ -260,7 +260,7 @@ const AddAddress = () => {
                             </div>
                             </div>
                             <div className="col-sm-8 form-group ">
-                            <div className="tbox phoneNumberfield">
+                            <div className="tbox ">
                                 <PhoneInput  id="primaryPhone" name="primaryPhone" country="US" class="textbox" maxLength="14" minLength="14"
                                 onChange={handleOnChange} ></PhoneInput>
                                 <label htmlFor="companyName" className={"input-has-value"}>Primary phone</label>
@@ -277,7 +277,7 @@ const AddAddress = () => {
                             </div>
                             </div>
                             <div className="col-sm-8 form-group ">
-                            <div className="tbox phoneNumberfield">
+                            <div className="tbox ">
                            
                                 <PhoneInput  id="mobilePhone" name="mobilePhone"  country="US" class="textbox" maxLength="14" minLength="14"
                                 onChange={handleOnChanges} ></PhoneInput>
