@@ -47,7 +47,7 @@ const Buyers = () => {
             if(response.data.data.length==0){
                 togglePopup()
                 setPopupTitle("Data not found ");
-                setPopupType("success");
+                setPopupType("error");
                 setPopupActionType("close");
                 setPopupActionValue("ok");
                 

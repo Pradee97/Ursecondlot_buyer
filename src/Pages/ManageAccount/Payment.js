@@ -55,7 +55,7 @@ const Payment = () => {
     const [docError,setDocError]=useState("");
     const [state,setState]=useState("1");
     const [city,setCity]=useState("1");
-    const [zipcodeId,setZipCodeId]=useState("1");
+    const [zipCode,setZipCode]=useState("1");
 
     let files= [];
     let userDetails = ls.get('userDetails');
@@ -282,7 +282,7 @@ const Payment = () => {
             }
             if(accountZipcodeId==="" || accountZipcodeId===undefined || accountZipcodeId===null){
                 console.log("====zipCodeId==>",stateName,cityName,zipCodeId)
-                 setZipcode("");
+                 setZipCode("");
             }
             
         }	
@@ -468,7 +468,7 @@ const Payment = () => {
                                                     {(state==="" && stateName==="") ?
                                                     <p className="form-input-error"> State,City,zipcode  is required</p>:
                                                     cityName===null && city===""?<p className="form-input-error"> City is required</p>:
-                                                    zipCodeId===null && zipcode===""?<p className="form-input-error"> Zipcode is required</p>:""}
+                                                    zipCodeId===null && zipCode===""?<p className="form-input-error"> Zipcode is required</p>:""}
 
                                                     <div className="col-sm-12 form-group">
                                                         <div className="tbox">
@@ -495,7 +495,7 @@ const Payment = () => {
                                                     {(state==="" && accountStateName==="") ?
                                                     <p className="form-input-error"> State,City,zipcode  is required</p>:
                                                     accountCityName===null && city===""?<p className="form-input-error"> City is required</p>:
-                                                    accountZipcodeId===null && zipcode===""?<p className="form-input-error"> Zipcode is required</p>:""}
+                                                    accountZipcodeId===null && zipcodeId===""?<p className="form-input-error"> Zipcode is required</p>:""}
                                                    
 
                                                     <div className="col-sm-6 form-group">
