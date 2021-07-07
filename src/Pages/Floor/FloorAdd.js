@@ -120,22 +120,7 @@ const FloorAdd = () => {
         setDateOpenedError("")
         setAccountOpenedError("")
 
-        let request = [{
-            contact_name: contactName,
-            company_name: companyName,
-            branch_name: branchName,
-            account_no: accountNumber,
-            credit_limit: creditLimit,
-            email_id: emailId,
-            address: address,
-            phone_no:formatMobileNO(phoneNumber),
-            opened_date: moment(dateOpened).format("YYYY-MM-DD"),
-            account_opened: accountOpened,
-            buyer_id:userDetails.user_id,
-            active:1
-            
-        }];
-        console.log("===",request)
+       
         // return
 
         if(!companyName){
@@ -211,6 +196,22 @@ const FloorAdd = () => {
             setAccountOpenedError("Account Opened is required")
             return;
         }
+        let request = [{
+            contact_name: contactName,
+            company_name: companyName,
+            branch_name: branchName,
+            account_no: accountNumber,
+            credit_limit: creditLimit,
+            email_id: emailId,
+            address: address,
+            phone_no:formatMobileNO(phoneNumber),
+            opened_date: moment(dateOpened).format("YYYY-MM-DD"),
+            account_opened: accountOpened,
+            buyer_id:userDetails.user_id,
+            active:1
+            
+        }];
+        console.log("===",request)
         
         API.post("floor_plan/add", request)
             .then((response) => {

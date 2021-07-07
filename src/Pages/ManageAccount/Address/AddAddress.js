@@ -67,21 +67,7 @@ const AddAddress = () => {
         setMobilephoneError("")
         setLocationError("")
         setInstructionError("")
-        let request = {
-            first_name: firstName,
-            last_name: lastName,
-            address: address,
-            phone_no: formatMobileNO(primaryPhone),
-            mobile_no: formatMobileNO(mobilePhone),
-            city_id: city,
-            state_id: state,
-            zipcode_id: zipCodeId,
-            buyer_id:userDetails.user_id,
-            location:location,
-            instructions:instruction,
-            active:1           
-        };
-
+       
         if(!firstName){
             setFirstNameError("First Name is required")
             return;
@@ -139,9 +125,24 @@ const AddAddress = () => {
             return;
         }
 
-        console.log("===",request)  
+        
         // return
         if(  stateName!=="" && cityName!=="" && zipCodeId!=="" ){
+            let request = {
+                first_name: firstName,
+                last_name: lastName,
+                address: address,
+                phone_no: formatMobileNO(primaryPhone),
+                mobile_no: formatMobileNO(mobilePhone),
+                city_id: city,
+                state_id: state,
+                zipcode_id: zipCodeId,
+                buyer_id:userDetails.user_id,
+                location:location,
+                instructions:instruction,
+                active:1           
+            };
+            console.log("===",request)  
         API.post("buyer_address/add", request)
             .then((response) => {
                 if (response.data.success) {
