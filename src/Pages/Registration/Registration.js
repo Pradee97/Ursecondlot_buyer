@@ -89,7 +89,14 @@ const Registration = () => {
       const registrationDate = (event) => {
         setDate(event.format("MM/DD/YYYY"))
     }
-   
+    function formatMobileNO(value){
+        var x = value.replace(/\D/g, '').match(/(\d{1})(\d{3})(\d{3})(\d{4})/);
+    
+        console.log("value of x",x);
+        value = '+'+ x[1]+'('+ x[2] +')' + x[3] + '-' + x[4];
+        console.log("mobileno",value);
+        return value;
+     }
     const registrationhandleSubmit = (data) => {
         // setOpenLoader(true);
         // event.preventDefault();
@@ -105,26 +112,6 @@ const Registration = () => {
         setNumberofYearsError("")
         setStateAndCityError("")
        
-        console.log("===date===",date)
-        let request = {
-            dealer_name: dealerName,
-            first_name:firstName,
-            last_name: lastName,
-            email: email,
-            phone_no: phoneNumber,
-            address: address,
-            meeting_date: date,
-            meeting_time: time,
-            active: "0",
-            country_id: "1",
-            state_id: stateName,
-            city_id: cityName,
-            zipcode_id: zipCodeId,
-            no_years: option,
-            local_flag: 0,
-            image: doc==="" ? "" : doc.length>0 ? doc : [doc],
-        };
-
         if(!dealerName){
             setDealerNameError("Dealer Name is required")
             return;
@@ -204,7 +191,26 @@ const Registration = () => {
             setTimeError("Time is required")
             return;
         }                             
-        
+        console.log("===date===",date)
+        let request = {
+            dealer_name: dealerName,
+            first_name:firstName,
+            last_name: lastName,
+            email: email,
+            phone_no: phoneNumber,
+            address: address,
+            meeting_date: date,
+            meeting_time: time,
+            active: "0",
+            country_id: "1",
+            state_id: stateName,
+            city_id: cityName,
+            zipcode_id: zipCodeId,
+            no_years: option,
+            local_flag: 0,
+            image: doc==="" ? "" : doc.length>0 ? doc : [doc],
+        };
+
         if( terms!=="0" ){
         API.post("registration/add", request)
             .then((response) => {
@@ -315,7 +321,7 @@ const Registration = () => {
                             </div>
                             </div>
                             <div className="col-sm-8 form-group">
-                                <div className="tbox phoneNumberfield">
+                                <div className="tbox ">
                                 <PhoneInput  id="phone_no" name="phoneNumber" country="US" className="textbox" maxLength="14" minLength="14"
                                     onChange={handleOnChange} ></PhoneInput>
                                     <label htmlFor="phone_no" className={"input-has-value"}>Phone</label>

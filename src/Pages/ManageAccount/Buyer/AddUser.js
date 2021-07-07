@@ -104,6 +104,14 @@ const AddUser = () => {
 	const disablePastDt = current => {
 		return current.isAfter(yesterday);
 	};
+	function formatMobileNO(value){
+        var x = value.replace(/\D/g, '').match(/(\d{1})(\d{3})(\d{3})(\d{4})/);
+    
+        console.log("value of x",x);
+        value = '+'+ x[1]+'('+ x[2] +')' + x[3] + '-' + x[4];
+        console.log("mobileno",value);
+        return value;
+     }
 	const registrationhandleSubmit = (data) => {
 		// event.preventDefault();
 		
@@ -113,35 +121,7 @@ const AddUser = () => {
         setEmailError("") 
         setAddressError("") 
         setoptionError("")
-		let request = {
-			dealer_id: userDetails.dealer_id,
-			first_name: firstName,
-			last_name: lastName,
-			email: email,
-			phone_no: phoneNumber,
-			address: address,
-			active: "0",
-			country_id: "1",
-			state_id: stateName,
-			city_id: cityName,
-			zipcode_id: zipCodeId,
-			no_years: option,
-			local_flag: 0,
-			// buy_now: buy_now === 1 ? 1 : 0,
-			// cancel_bid: cancel_bid === 1 ? 1 : 0,
-			// bid: bid === 1 ? 1 : 0,
-			// proxy_bid: proxy_bid === 1 ? 1 : 0,
-			// counter_bid: counter_bid === 1 ? 1 : 0,
-			// lot_fee: lot_fee === 1 ? 1 : 0,
-			buy_now: buy_now,
-			cancel_bid: cancel_bid,
-			bid: bid,
-			proxy_bid: proxy_bid,
-			counter_bid: counter_bid,
-			lot_fee: lot_fee,
-			local_flag: 0,
-			image:doc===""?doc:doc.length>0?doc:[doc],
-		};
+		
 
 		if(!firstName){
             setFirstNameError("First Name is required")
@@ -189,9 +169,40 @@ const AddUser = () => {
             return;
         }
        
-		console.log("----request---->", request)
+		
 		
 		if(  stateName!=="" && cityName!=="" && zipCodeId!=="" ){
+			
+			let request = {
+				dealer_id: userDetails.dealer_id,
+				first_name: firstName,
+				last_name: lastName,
+				email: email,
+				phone_no: formatMobileNO(phoneNumber),
+				address: address,
+				active: "0",
+				country_id: "1",
+				state_id: stateName,
+				city_id: cityName,
+				zipcode_id: zipCodeId,
+				no_years: option,
+				local_flag: 0,
+				// buy_now: buy_now === 1 ? 1 : 0,
+				// cancel_bid: cancel_bid === 1 ? 1 : 0,
+				// bid: bid === 1 ? 1 : 0,
+				// proxy_bid: proxy_bid === 1 ? 1 : 0,
+				// counter_bid: counter_bid === 1 ? 1 : 0,
+				// lot_fee: lot_fee === 1 ? 1 : 0,
+				buy_now: buy_now,
+				cancel_bid: cancel_bid,
+				bid: bid,
+				proxy_bid: proxy_bid,
+				counter_bid: counter_bid,
+				lot_fee: lot_fee,
+				local_flag: 0,
+				image:doc===""?doc:doc.length>0?doc:[doc],
+			};
+			console.log("----request---->", request);
 		API.post("buyer/add", request)
 			.then((response) => {
 				if (response.data.success) {
@@ -318,7 +329,7 @@ const AddUser = () => {
 													</div>
 													</div>
 													<div className="col-sm-8 form-group ">
-														<div className="tbox phoneNumberfield">
+														<div className="tbox ">
 														<PhoneInput id="phone_no" name="phoneNumber" country="US" className="textbox" maxLength="14" minLength="14"
 															onChange={handleOnChange} ></PhoneInput>
 															<label for="phone_no" className={"input-has-value"}>Phone</label>

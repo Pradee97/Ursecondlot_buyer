@@ -49,7 +49,14 @@ const AddAddress = () => {
     const [zipcode,setZipcode]=useState("1");
 
 
-
+    function formatMobileNO(value){
+        var x = value.replace(/\D/g, '').match(/(\d{1})(\d{3})(\d{3})(\d{4})/);
+    
+        console.log("value of x",x);
+        value = '+'+ x[1]+'('+ x[2] +')' + x[3] + '-' + x[4];
+        console.log("mobileno",value);
+        return value;
+     }
     const onhandleSubmit = (data) => {
         // setOpenLoader(true);
         // event.preventDefault();        
@@ -60,21 +67,7 @@ const AddAddress = () => {
         setMobilephoneError("")
         setLocationError("")
         setInstructionError("")
-        let request = {
-            first_name: firstName,
-            last_name: lastName,
-            address: address,
-            phone_no: primaryPhone,
-            mobile_no: mobilePhone,
-            city_id: city,
-            state_id: state,
-            zipcode_id: zipCodeId,
-            buyer_id:userDetails.user_id,
-            location:location,
-            instructions:instruction,
-            active:1           
-        };
-
+       
         if(!firstName){
             setFirstNameError("First Name is required")
             return;
@@ -132,9 +125,22 @@ const AddAddress = () => {
             return;
         }
 
-        console.log("===",request)  
-        // return
         if(  stateName!=="" && cityName!=="" && zipCodeId!=="" ){
+            let request = {
+                first_name: firstName,
+                last_name: lastName,
+                address: address,
+                phone_no: formatMobileNO(primaryPhone),
+                mobile_no: formatMobileNO(mobilePhone),
+                city_id: city,
+                state_id: state,
+                zipcode_id: zipCodeId,
+                buyer_id:userDetails.user_id,
+                location:location,
+                instructions:instruction,
+                active:1           
+            };
+            console.log("===",request)  
         API.post("buyer_address/add", request)
             .then((response) => {
                 if (response.data.success) {
@@ -253,7 +259,7 @@ const AddAddress = () => {
                             </div>
                             </div>
                             <div className="col-sm-8 form-group ">
-                            <div className="tbox phoneNumberfield">
+                            <div className="tbox ">
                                 <PhoneInput  id="primaryPhone" name="primaryPhone" country="US" class="textbox" maxLength="14" minLength="14"
                                 onChange={handleOnChange} ></PhoneInput>
                                 <label htmlFor="companyName" className={"input-has-value"}>Primary phone</label>
@@ -270,7 +276,7 @@ const AddAddress = () => {
                             </div>
                             </div>
                             <div className="col-sm-8 form-group ">
-                            <div className="tbox phoneNumberfield">
+                            <div className="tbox ">
                            
                                 <PhoneInput  id="mobilePhone" name="mobilePhone"  country="US" class="textbox" maxLength="14" minLength="14"
                                 onChange={handleOnChanges} ></PhoneInput>

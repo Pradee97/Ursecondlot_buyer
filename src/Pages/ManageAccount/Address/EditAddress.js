@@ -81,7 +81,15 @@ const EditAddress = () => {
         })
             .catch(err => { console.log(err); });
     }
-  
+    function formatMobileNO(value){
+        console.log("Value",value);
+        var x = value.replace(/\D/g, '').match(/(\d{1})(\d{3})(\d{3})(\d{4})/);
+    
+        console.log("value of x",x);
+        value = '+'+ x[1]+'('+ x[2] +')' + x[3] + '-' + x[4];
+        console.log("mobileno",value);
+        return value;
+     }
     const updateAddress = (event) => {
         // setOpenLoader(true);
         event.preventDefault();  
@@ -95,23 +103,7 @@ const EditAddress = () => {
         setInstructionError("")
         setStateAndCityError("")
         
-        let request = {
-            buyer_address_id:id,
-            buyer_id:JSON.parse(localStorage.getItem("userDetails")).user_id,
-            first_name: FirstName,
-            last_name: lastName,
-            address: address,
-            phone_no: primaryPhone,
-            mobile_no: mobilePhone,
-            city_id: typeof city==='string'?accountObjc.city_id:city,
-            state_id: typeof state==='string'?accountObjc.state_id:state,
-            zipcode_id: zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode,
-            location: location,
-            instructions: instruction,
-            // buyer_address_id:buyeraddress,
-            active:1
-           
-        };
+       
         // console.log("====request==>",request)
         if(!FirstName){
             setFirstNameError("First Name is required")
@@ -173,6 +165,24 @@ const EditAddress = () => {
             setStateAndCityError("State, City and Zipcode is required")
             return
         }
+
+        let request = {
+            buyer_address_id:id,
+            buyer_id:JSON.parse(localStorage.getItem("userDetails")).user_id,
+            first_name: FirstName,
+            last_name: lastName,
+            address: address,
+            phone_no: formatMobileNO(primaryPhone),
+            mobile_no: formatMobileNO(mobilePhone),
+            city_id: typeof city==='string'?accountObjc.city_id:city,
+            state_id: typeof state==='string'?accountObjc.state_id:state,
+            zipcode_id: zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode,
+            location: location,
+            instructions: instruction,
+            // buyer_address_id:buyeraddress,
+            active:1
+           
+        };
          API
             .post("buyer_address/update", request)
             .then((response) => {
@@ -289,7 +299,7 @@ const EditAddress = () => {
                             </div>
                             </div>
                             <div class="col-sm-8 form-group ">
-                            <div className="tbox phoneNumberfield">
+                            <div className="tbox ">
                             <PhoneInput value={accountObjc.phone_no} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChange} ></PhoneInput>
                             <label for="primary_phone"  className={"input-has-value"}>Primary Phone</label>
                             </div>
@@ -304,7 +314,7 @@ const EditAddress = () => {
                             </div>
                             </div>
                             <div class="col-sm-8 form-group ">
-                            <div className="tbox phoneNumberfield">
+                            <div className="tbox ">
                             <PhoneInput value={accountObjc.mobile_no} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChanges} ></PhoneInput>
                             <label for="mobile_phone"  className={"input-has-value"}>Mobile Phone</label>
                             </div> 

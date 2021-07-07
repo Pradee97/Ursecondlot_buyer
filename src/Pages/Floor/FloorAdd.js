@@ -82,7 +82,14 @@ const FloorAdd = () => {
         placeholder: 'DD/MM/YYYY',
         required:true
     };
-
+    function formatMobileNO(value){
+        var x = value.replace(/\D/g, '').match(/(\d{1})(\d{3})(\d{3})(\d{4})/);
+    
+        console.log("value of x",x);
+        value = '+'+ x[1]+'('+ x[2] +')' + x[3] + '-' + x[4];
+        console.log("mobileno",value);
+        return value;
+     }
     const floorDate = (event) => {
         setDateOpened(event.format("YYYY-MM-DD"))
     }
@@ -113,22 +120,7 @@ const FloorAdd = () => {
         setDateOpenedError("")
         setAccountOpenedError("")
 
-        let request = [{
-            contact_name: contactName,
-            company_name: companyName,
-            branch_name: branchName,
-            account_no: accountNumber,
-            credit_limit: creditLimit,
-            email_id: emailId,
-            address: address,
-            phone_no: phoneNumber,
-            opened_date: moment(dateOpened).format("YYYY-MM-DD"),
-            account_opened: accountOpened,
-            buyer_id:userDetails.user_id,
-            active:1
-            
-        }];
-        console.log("===",request)
+       
         // return
 
         if(!companyName){
@@ -204,6 +196,22 @@ const FloorAdd = () => {
             setAccountOpenedError("Account Opened is required")
             return;
         }
+        let request = [{
+            contact_name: contactName,
+            company_name: companyName,
+            branch_name: branchName,
+            account_no: accountNumber,
+            credit_limit: creditLimit,
+            email_id: emailId,
+            address: address,
+            phone_no:formatMobileNO(phoneNumber),
+            opened_date: moment(dateOpened).format("YYYY-MM-DD"),
+            account_opened: accountOpened,
+            buyer_id:userDetails.user_id,
+            active:1
+            
+        }];
+        console.log("===",request)
         
         API.post("floor_plan/add", request)
             .then((response) => {
@@ -343,7 +351,7 @@ const FloorAdd = () => {
                             </div>
                             </div>
                             <div className="col-sm-8 form-group ">
-                            <div className="tbox phoneNumberfield">   
+                            <div className="tbox ">   
                             <PhoneInput  id="phone_no" name="phoneNumber"  country="US" className="textbox" maxLength="14" minLength="14"
                                 onChange={handleOnChange} ></PhoneInput>
                                 <label for="phone_no" className={"input-has-value"}>Phone Number</label>

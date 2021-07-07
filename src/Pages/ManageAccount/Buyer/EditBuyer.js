@@ -128,6 +128,14 @@ const EditBuyer = () => {
     //     })
     //         .catch(err => { console.log(err); });
     // }
+    function formatMobileNO(value){
+        var x = value.replace(/\D/g, '').match(/(\d{1})(\d{3})(\d{3})(\d{4})/);
+    
+        console.log("value of x",x);
+        value = '+'+ x[1]+'('+ x[2] +')' + x[3] + '-' + x[4];
+        console.log("mobileno",value);
+        return value;
+     }
      updateMyProfile = (event) => {
         // setOpenLoader(true);
         event.preventDefault();
@@ -138,32 +146,7 @@ const EditBuyer = () => {
         setLocationNameError("")
         setStateAndCityError("")
 
-        let request = {
-            user_id: id,
-            first_name: firstName,
-            last_name: lastName,
-            phone_no: primaryPhone,
-            mobile_no: mobilePhone,
-            email: emailId,
-            address: address,
-            city_id: typeof city === 'string' ? myProfileObjc.city_id : city,
-            state_id: typeof state === 'string' ? myProfileObjc.state_id : state,
-            zipcode_id: zipcode === myProfileObjc.zipcode ? myProfileObjc.zipcode_id : zipcode,
-            // city_id: city,
-            // state_id: state,
-            // zipcode_id: zipcode,
-            address: locationName,
-            buyer_privileges_id: privileges_id,
-            buy_now: buy_now,
-            cancel_bid: cancel_bid,
-            bid: bid,
-            proxy_bid: proxy_bid,
-            counter_bid: counter_bid,
-            lot_fee: lot_fee,
-            image:doc===""?doc:doc.length>0?doc:[doc]
-            // buyer_id: userDetails.user_id
-        };
-
+       
         if(!primaryPhone){
             setPrimaryPhoneError("Primary Phone is required")
             return;
@@ -208,6 +191,33 @@ const EditBuyer = () => {
             setStateAndCityError("State, City and Zipcode is required")
             return
         }
+
+        let request = {
+            user_id: id,
+            first_name: firstName,
+            last_name: lastName,
+            phone_no: formatMobileNO(primaryPhone),
+            mobile_no: formatMobileNO(mobilePhone),
+            email: emailId,
+            address: address,
+            city_id: typeof city === 'string' ? myProfileObjc.city_id : city,
+            state_id: typeof state === 'string' ? myProfileObjc.state_id : state,
+            zipcode_id: zipcode === myProfileObjc.zipcode ? myProfileObjc.zipcode_id : zipcode,
+            // city_id: city,
+            // state_id: state,
+            // zipcode_id: zipcode,
+            address: locationName,
+            buyer_privileges_id: privileges_id,
+            buy_now: buy_now,
+            cancel_bid: cancel_bid,
+            bid: bid,
+            proxy_bid: proxy_bid,
+            counter_bid: counter_bid,
+            lot_fee: lot_fee,
+            image:doc===""?doc:doc.length>0?doc:[doc]
+            // buyer_id: userDetails.user_id
+        };
+
         
         API
             .post("buyer/update", request)
@@ -352,7 +362,7 @@ const EditBuyer = () => {
                             </div>
                             </div>
                                 <div className="col-sm-8 form-group ">
-                                    <div className="tbox phoneNumberfield">
+                                    <div className="tbox ">
                                     <PhoneInput value={myProfileObjc.phone_no} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChange} ></PhoneInput>
                                         {/* <MuiPhoneNumber value={myProfileObjc.phone_no} defaultCountry={'us'} onlyCountries={['us']}  className=" textbox" onChange={handleOnChange} ></MuiPhoneNumber> */}
                                         {/* <input type="text" defaultValue={myProfileObjc.phone_no} className="form-control textbox" placeholder="" onChange={(e) => setPrimaryPhone(e.target.value)} /> */}
@@ -369,7 +379,7 @@ const EditBuyer = () => {
                             </div>
                             </div>
                                 <div className="col-sm-8 form-group ">
-                                    <div className="tbox phoneNumberfield">
+                                    <div className="tbox ">
                                     <PhoneInput value={myProfileObjc.mobile_no} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChanges} ></PhoneInput>
                                     {/* <MuiPhoneNumber value={myProfileObjc.mobile_no} defaultCountry={'us'} onlyCountries={['us']}  className=" textbox" onChange={handleOnChanges} ></MuiPhoneNumber> */}
                                         {/* <input type="text" defaultValue={myProfileObjc.mobile_no} className="form-control textbox" placeholder="" onChange={(e) => setMobilephone(e.target.value)} /> */}
