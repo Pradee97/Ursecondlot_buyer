@@ -95,7 +95,7 @@ const AddAddress = () => {
             setPrimaryphoneError("Phone Number is required")
             return;
         }
-        else if(primaryPhone.length>17 ){
+        else if(primaryPhone.length<12 ){
             setPrimaryphoneError("Phone Number must have 10 digits ")
             return;
         }
@@ -103,7 +103,7 @@ const AddAddress = () => {
             setMobilephoneError("Mobile Phone is required")
             return;
         }
-        else if(mobilePhone.length>17 ){
+        else if(mobilePhone.length<12 ){
             setMobilephoneError("Mobile Phone must have 10 digits ")
             return;
         }

@@ -114,19 +114,11 @@ const EditDealerInformation = () => {
             setPrimaryPhoneError("Primary Phone must have 10 digits")
             return;
         }
-        else if(primaryPhone.length>12 ){
-            setPrimaryPhoneError("Primary Phone must have 10 digits")
-            return;
-        }
         if(!mobilePhone){
             setMobilePhoneError("Mobile Phone is required")
             return;
         }
         else if(mobilePhone.length<12){
-            setMobilePhoneError("Mobile Phone must have 10 digits")
-            return;
-        }
-        else if(mobilePhone.length>12){
             setMobilePhoneError("Mobile Phone must have 10 digits")
             return;
         }
@@ -272,7 +264,7 @@ const EditDealerInformation = () => {
                             </div>
                             <div class="col-sm-8 form-group ">
                             <div className="tbox phoneNumberfield">
-                            <PhoneInput value={accountObjc.phone_no} country="US" className="textbox" onChange={handleOnChange} ></PhoneInput>
+                            <PhoneInput value={accountObjc.phone_no} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChange} ></PhoneInput>
                             {/* <MuiPhoneNumber value={accountObjc.phone_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={handleOnChange} ></MuiPhoneNumber> */}
                                  {/* <input type="text" defaultValue={accountObjc.phone_no} class="textbox" placeholder="Primary phone"  onChange={(e) => setPrimaryphone(e.target.value)} /> */}
                                 <label for="phone_no" className={primaryPhone != "" ? "input-has-value" : ""}>Primary Phone</label>
@@ -289,7 +281,7 @@ const EditDealerInformation = () => {
                             </div>
                             <div class="col-sm-8 form-group ">
                             <div className="tbox phoneNumberfield">
-                            <PhoneInput value={accountObjc.mobile_no} country="US" className="textbox" onChange={handleOnChanges} ></PhoneInput>
+                            <PhoneInput value={accountObjc.mobile_no} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChanges} ></PhoneInput>
                             {/* <MuiPhoneNumber value={accountObjc.mobile_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={handleOnChanges} ></MuiPhoneNumber> */}
                                {/* <input type="text" defaultValue={accountObjc.mobile_no} class="textbox" placeholder="Mobile phone"  onChange={(e) => setMobilephone(e.target.value)} /> */}
                                 <label for="mobile_no" className={mobilePhone != "" ? "input-has-value" : ""}>Mobile Phone</label>
