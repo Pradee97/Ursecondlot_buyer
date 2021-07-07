@@ -30,9 +30,9 @@ const Registration = () => {
     const [address, setAddress] = useState("");
     const [date, setDate] = useState("");
     const [time, setTime] = useState("");
-    const [stateName, setStateName] = useState("");
-    const [cityName, setCityName] = useState("");
-    const [zipCodeId, setZipcodeId] = useState("");
+    const [stateName, setStateName] = useState(null);
+    const [cityName, setCityName] = useState(null);
+    const [zipCodeId, setZipcodeId] = useState(null);
     const [numberOfYears, setNumberofYears] = useState("");
     const [option, setOption] = useState("");
     const [popupTitle, setPopupTitle] = useState("");
@@ -43,9 +43,9 @@ const Registration = () => {
     const [popupActionPath, setPopupActionPath] = useState("");
     const [edate,setEDate]= useState("1");
     const [doc,setDoc]=useState("");
-    const [state,setState]=useState("1");
-    const [city,setCity]=useState("1");
-    const [zipcode,setZipcode]=useState("1");
+    // const [state,setState]=useState("1");
+    // const [city,setCity]=useState("1");
+    // const [zipcode,setZipcode]=useState("1");
     const [terms,setTerms]=useState("0");
     const [eterms,setETerms]=useState("0");
     const [type,setType]=useState("");
@@ -58,6 +58,7 @@ const Registration = () => {
     const [dateError, setDateError] = useState("");
     const [timeError, setTimeError] = useState("");
     const [numberOfYearsError, setNumberofYearsError] = useState("");
+    const [stateAndCityError, setStateAndCityError] = useState("");
 
     const togglePopup = () => {
         setIsOpen(!isOpen);
@@ -69,7 +70,6 @@ const Registration = () => {
         }else{
             setType("0");
         }
-        
       }
 
     const toggleCommonPopup = () => {
@@ -110,9 +110,8 @@ const Registration = () => {
         setDateError("")
         setTimeError("")
         setNumberofYearsError("")
+        setStateAndCityError("")
        
-        console.log("===date===",date)
-        
         if(!dealerName){
             setDealerNameError("Dealer Name is required")
             return;
@@ -161,7 +160,25 @@ const Registration = () => {
         else if(address.length>150){
             setAddressError("Address must not exceed 150 characters")
             return;
-        }       
+        }
+        // console.log("====stateName=>",stateName,cityName,zipCodeId)
+        if(!stateName){
+            console.log("====stateName=>",stateName,cityName,zipCodeId)
+            setStateAndCityError("state is required")
+            return
+        }
+        if(!cityName){
+            console.log("====cityName==>",stateName,cityName,zipCodeId)
+            // setStateAndCityError("city is required")
+            setStateAndCityError("city is required")
+             return
+        }
+        if(!zipCodeId){
+            console.log("====zipCodeId==>",stateName,cityName,zipCodeId)
+            // setStateAndCityError("zipCode is required")
+            setStateAndCityError("zipcode is required")
+             return
+        }
         if(!option){
             setNumberofYearsError("Number Of Years is required")
             return;
@@ -174,29 +191,27 @@ const Registration = () => {
             setTimeError("Time is required")
             return;
         }                             
-        
-        
+        console.log("===date===",date)
+        let request = {
+            dealer_name: dealerName,
+            first_name:firstName,
+            last_name: lastName,
+            email: email,
+            phone_no: phoneNumber,
+            address: address,
+            meeting_date: date,
+            meeting_time: time,
+            active: "0",
+            country_id: "1",
+            state_id: stateName,
+            city_id: cityName,
+            zipcode_id: zipCodeId,
+            no_years: option,
+            local_flag: 0,
+            image: doc==="" ? "" : doc.length>0 ? doc : [doc],
+        };
 
-        if(  stateName!=="" && cityName!=="" && zipCodeId!=="" && terms!=="0"){
-            let request = {
-                dealer_name: dealerName,
-                first_name:firstName,
-                last_name: lastName,
-                email: email,
-                phone_no: formatMobileNO(phoneNumber),
-                address: address,
-                meeting_date: date,
-                meeting_time: time,
-                active: "0",
-                country_id: "1",
-                state_id: stateName,
-                city_id: cityName,
-                zipcode_id: zipCodeId,
-                no_years: option,
-                local_flag: 0,
-                image:doc===""?"":doc.length>0?doc:[doc],
-            };
-    
+        if( terms!=="0" ){
         API.post("registration/add", request)
             .then((response) => {
                 if (response.data.success) {
@@ -228,18 +243,6 @@ const Registration = () => {
             });
         }else{
 
-            if(stateName==="" || stateName===undefined || stateName===null){
-                console.log("====stateName=stateName=>",stateName,cityName,zipCodeId)
-                setState("");
-            }
-            if(cityName==="" || cityName===undefined || cityName===null){
-                console.log("====cityName==>",stateName,cityName,zipCodeId)
-                 setCity("");
-            }
-            if(zipCodeId==="" || zipCodeId===undefined || zipCodeId===null){
-                console.log("====zipCodeId==>",stateName,cityName,zipCodeId)
-                 setZipcode("");
-            }
             if(terms==="0"){
                 setETerms("1");
             }
@@ -247,10 +250,13 @@ const Registration = () => {
     }
     const getStateName = (stateData) => {
         setStateName(stateData)
+        setCityName(null)
+        setZipcodeId(null)
     }
 
     const getCityName = (cityData) => {
         setCityName(cityData)
+        setZipcodeId(null)
     }
 
     const getZipCodeId = (zipData) => {
@@ -339,19 +345,15 @@ const Registration = () => {
                                     <p className="form-input-error" >{addressError}</p>
                                 </div>
                             </div>
-
                             <StateAndCity
                                 setStateValue={getStateName}
                                 setCityValue={getCityName}
                                 setZipcodeValue={getZipCodeId}
                             />
-                            {console.log("======>",state,stateName)}
-                            {(state==="" && stateName==="") ?
-                            <p className="form-input-error"> State,City,zipcode  is required</p>:
-                            cityName===null && city===""?<p className="form-input-error"> City is required</p>:
-                            zipCodeId===null && zipcode===""?<p className="form-input-error"> Zipcode is required</p>:""}
-                                                
-
+                             <div className="col-sm-12 form-group">
+                             <p className="form-input-error"> {stateAndCityError}</p>
+                             </div>                    
+                        
                             <div className="col-sm-8 form-group">
                                 <div className="tbox">
                                     {/* {/ <lable htmlFor="drop" className={option !="" ? "input-has-value" : ""}>How many years in car business</lable> /} */}

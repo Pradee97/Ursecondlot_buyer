@@ -95,7 +95,7 @@ const FloorPlans = () => {
                         
                </div>
                </div>
-                )  :<div>Floor Plan is not added yet</div>}
+                )  :<p>Floor Plan is not added yet</p>}
            </div>
            
           
