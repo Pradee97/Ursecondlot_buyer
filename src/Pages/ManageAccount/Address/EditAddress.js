@@ -103,23 +103,7 @@ const EditAddress = () => {
         setInstructionError("")
         setStateAndCityError("")
         
-        let request = {
-            buyer_address_id:id,
-            buyer_id:JSON.parse(localStorage.getItem("userDetails")).user_id,
-            first_name: FirstName,
-            last_name: lastName,
-            address: address,
-            phone_no: formatMobileNO(primaryPhone),
-            mobile_no: formatMobileNO(mobilePhone),
-            city_id: typeof city==='string'?accountObjc.city_id:city,
-            state_id: typeof state==='string'?accountObjc.state_id:state,
-            zipcode_id: zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode,
-            location: location,
-            instructions: instruction,
-            // buyer_address_id:buyeraddress,
-            active:1
-           
-        };
+       
         // console.log("====request==>",request)
         if(!FirstName){
             setFirstNameError("First Name is required")
@@ -181,6 +165,24 @@ const EditAddress = () => {
             setStateAndCityError("State, City and Zipcode is required")
             return
         }
+
+        let request = {
+            buyer_address_id:id,
+            buyer_id:JSON.parse(localStorage.getItem("userDetails")).user_id,
+            first_name: FirstName,
+            last_name: lastName,
+            address: address,
+            phone_no: formatMobileNO(primaryPhone),
+            mobile_no: formatMobileNO(mobilePhone),
+            city_id: typeof city==='string'?accountObjc.city_id:city,
+            state_id: typeof state==='string'?accountObjc.state_id:state,
+            zipcode_id: zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode,
+            location: location,
+            instructions: instruction,
+            // buyer_address_id:buyeraddress,
+            active:1
+           
+        };
          API
             .post("buyer_address/update", request)
             .then((response) => {

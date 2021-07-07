@@ -112,25 +112,7 @@ const Registration = () => {
         setNumberofYearsError("")
        
         console.log("===date===",date)
-        let request = {
-            dealer_name: dealerName,
-            first_name:firstName,
-            last_name: lastName,
-            email: email,
-            phone_no: formatMobileNO(phoneNumber),
-            address: address,
-            meeting_date: date,
-            meeting_time: time,
-            active: "0",
-            country_id: "1",
-            state_id: stateName,
-            city_id: cityName,
-            zipcode_id: zipCodeId,
-            no_years: option,
-            local_flag: 0,
-            image:doc===""?"":doc.length>0?doc:[doc],
-        };
-
+        
         if(!dealerName){
             setDealerNameError("Dealer Name is required")
             return;
@@ -196,6 +178,25 @@ const Registration = () => {
         
 
         if(  stateName!=="" && cityName!=="" && zipCodeId!=="" && terms!=="0"){
+            let request = {
+                dealer_name: dealerName,
+                first_name:firstName,
+                last_name: lastName,
+                email: email,
+                phone_no: formatMobileNO(phoneNumber),
+                address: address,
+                meeting_date: date,
+                meeting_time: time,
+                active: "0",
+                country_id: "1",
+                state_id: stateName,
+                city_id: cityName,
+                zipcode_id: zipCodeId,
+                no_years: option,
+                local_flag: 0,
+                image:doc===""?"":doc.length>0?doc:[doc],
+            };
+    
         API.post("registration/add", request)
             .then((response) => {
                 if (response.data.success) {
