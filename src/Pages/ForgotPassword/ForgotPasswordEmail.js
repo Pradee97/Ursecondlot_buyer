@@ -70,7 +70,7 @@ const ForgotPasswordEmail = () => {
                                     <div className="col-sm-12 form-group">
                                         <div className="tbox">
                                             <input type="text" id="email" className="textbox" placeholder="" name="email" {...register("email", {
-                                                    required: "EmailID is required.",
+                                                    required: "Email ID is required.",
                                                     pattern: {
                                                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                                                     message: "Must match the email format"

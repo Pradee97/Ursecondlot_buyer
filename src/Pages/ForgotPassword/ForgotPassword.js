@@ -87,7 +87,7 @@ const ForgotPassword = () => {
                         <div className="col-lg-12 card">
                             <form className="registrationform" onSubmit={handleSubmit(changehandleSubmit)} >
                                 <h2 className="title">Forgot Password</h2>
-                                <p className="error-message">{errorMessage}</p>
+                                
                                 <div className="row changePassblock">
 
                                     <div className="col-sm-12 form-group">

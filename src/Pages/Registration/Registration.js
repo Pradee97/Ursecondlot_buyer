@@ -159,7 +159,7 @@ const Registration = () => {
             setPhoneNumberError("Phone Number is required")
             return;
         }
-        else if(phoneNumber.length>17 ){
+        else if(phoneNumber.length<12 ){
             setPhoneNumberError("Phone Number must have 10 digits ")
             return;
         }

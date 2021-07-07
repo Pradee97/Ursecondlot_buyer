@@ -182,22 +182,12 @@ const EditBuyer = () => {
             setPrimaryPhoneError("Primary Phone must have 10 digits ")
             return;
         }
-        else if(primaryPhone.length>12 ){
-            console.log("mobilePhone===",primaryPhone)
-            setPrimaryPhoneError("Primary Phone must have 10 digits ")
-            return;
-        }
         if(!mobilePhone){
             setMobilephoneError("Mobile Phone is required")
             return;
         }
 
         else if(mobilePhone.length<12 ){
-            console.log("mobilePhone===",mobilePhone)
-            setMobilephoneError("Mobile Phone must have 10 digits")
-            return;
-        }
-        else if(mobilePhone.length>12 ){
             console.log("mobilePhone===",mobilePhone)
             setMobilephoneError("Mobile Phone must have 10 digits")
             return;
@@ -371,7 +361,7 @@ const EditBuyer = () => {
                             </div>
                                 <div className="col-sm-8 form-group ">
                                     <div className="tbox phoneNumberfield">
-                                    <PhoneInput value={myProfileObjc.phone_no} country="US" className="textbox" onChange={handleOnChange} ></PhoneInput>
+                                    <PhoneInput value={myProfileObjc.phone_no} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChange} ></PhoneInput>
                                         {/* <MuiPhoneNumber value={myProfileObjc.phone_no} defaultCountry={'us'} onlyCountries={['us']}  className=" textbox" onChange={handleOnChange} ></MuiPhoneNumber> */}
                                         {/* <input type="text" defaultValue={myProfileObjc.phone_no} className="form-control textbox" placeholder="" onChange={(e) => setPrimaryPhone(e.target.value)} /> */}
                                         <label for="phone_no" className={primaryPhone != "" ? "input-has-value" : ""}>Primary Phone</label>
@@ -388,7 +378,7 @@ const EditBuyer = () => {
                             </div>
                                 <div className="col-sm-8 form-group ">
                                     <div className="tbox phoneNumberfield">
-                                    <PhoneInput value={myProfileObjc.mobile_no} country="US" className="textbox" onChange={handleOnChanges} ></PhoneInput>
+                                    <PhoneInput value={myProfileObjc.mobile_no} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChanges} ></PhoneInput>
                                     {/* <MuiPhoneNumber value={myProfileObjc.mobile_no} defaultCountry={'us'} onlyCountries={['us']}  className=" textbox" onChange={handleOnChanges} ></MuiPhoneNumber> */}
                                         {/* <input type="text" defaultValue={myProfileObjc.mobile_no} className="form-control textbox" placeholder="" onChange={(e) => setMobilephone(e.target.value)} /> */}
                                         <label for="mobile_no" className={mobilePhone != "" ? "input-has-value" : ""}>Mobile Phone</label>
