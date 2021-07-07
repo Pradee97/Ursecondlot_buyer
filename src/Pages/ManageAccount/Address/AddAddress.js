@@ -125,8 +125,6 @@ const AddAddress = () => {
             return;
         }
 
-        
-        // return
         if(  stateName!=="" && cityName!=="" && zipCodeId!=="" ){
             let request = {
                 first_name: firstName,
