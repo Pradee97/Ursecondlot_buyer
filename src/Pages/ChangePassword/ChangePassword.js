@@ -134,7 +134,7 @@ const ChangePassword = () => {
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type={showPwds?"text":"password"} id="new_password" className="textbox" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="eg:(It should be Uppercase, Lowercase, Specialcharacter, Numbers and Minimum 8 character)" placeholder="" 
+                                <input type={showPwds?"text":"password"} id="new_password" className="textbox"  title="eg:(It should be Uppercase, Lowercase, Specialcharacter, Numbers and Minimum 8 character)" placeholder="" 
                                 {...register("new_password", {
                                     required: "New Password is required.",
                                     pattern: {
