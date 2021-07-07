@@ -136,21 +136,12 @@ const EditAddress = () => {
         else if(primaryPhone.length<12){
             setPrimaryPhoneError("Primary Phone must have 10 digits ")
             return;
-        }
-        else if(primaryPhone.length>12){
-            setPrimaryPhoneError("Primary Phone must have 10 digits ")
-            return;
-        }
-      
+        }     
         if(!mobilePhone){
             setMobilePhoneError("Mobile Phone is required")
             return;
         }
         else if(mobilePhone.length<12){
-            setMobilePhoneError("Mobile Phone must have 10 digits")
-            return;
-        }
-        else if(mobilePhone.length>12){
             setMobilePhoneError("Mobile Phone must have 10 digits")
             return;
         }
@@ -299,7 +290,7 @@ const EditAddress = () => {
                             </div>
                             <div class="col-sm-8 form-group ">
                             <div className="tbox phoneNumberfield">
-                            <PhoneInput value={accountObjc.phone_no} country="US" className="textbox" onChange={handleOnChange} ></PhoneInput>
+                            <PhoneInput value={accountObjc.phone_no} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChange} ></PhoneInput>
                             <label for="primary_phone"  className={"input-has-value"}>Primary Phone</label>
                             </div>
                             <p className="form-input-error" >{primaryPhoneError}</p>
@@ -314,7 +305,7 @@ const EditAddress = () => {
                             </div>
                             <div class="col-sm-8 form-group ">
                             <div className="tbox phoneNumberfield">
-                            <PhoneInput value={accountObjc.mobile_no} country="US" className="textbox" onChange={handleOnChanges} ></PhoneInput>
+                            <PhoneInput value={accountObjc.mobile_no} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChanges} ></PhoneInput>
                             <label for="mobile_phone"  className={"input-has-value"}>Mobile Phone</label>
                             </div> 
                             <p className="form-input-error" >{mobilePhoneError}</p>
