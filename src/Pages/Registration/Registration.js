@@ -89,7 +89,14 @@ const Registration = () => {
       const registrationDate = (event) => {
         setDate(event.format("MM/DD/YYYY"))
     }
-   
+    function formatMobileNO(value){
+        var x = value.replace(/\D/g, '').match(/(\d{1})(\d{3})(\d{3})(\d{4})/);
+    
+        console.log("value of x",x);
+        value = '+'+ x[1]+'('+ x[2] +')' + x[3] + '-' + x[4];
+        console.log("mobileno",value);
+        return value;
+     }
     const registrationhandleSubmit = (data) => {
         // setOpenLoader(true);
         // event.preventDefault();
@@ -110,7 +117,7 @@ const Registration = () => {
             first_name:firstName,
             last_name: lastName,
             email: email,
-            phone_no: phoneNumber,
+            phone_no: formatMobileNO(phoneNumber),
             address: address,
             meeting_date: date,
             meeting_time: time,

@@ -82,7 +82,14 @@ const EditMyProfile = () => {
             .catch(err => { console.log(err); });
     }
    
-  
+    function formatMobileNO(value){
+        var x = value.replace(/\D/g, '').match(/(\d{1})(\d{3})(\d{3})(\d{4})/);
+    
+        console.log("value of x",x);
+        value = '+'+ x[1]+'('+ x[2] +')' + x[3] + '-' + x[4];
+        console.log("mobileno",value);
+        return value;
+     }
     updateMyProfile = (event) => {
         // setOpenLoader(true);
         event.preventDefault();  
@@ -133,8 +140,8 @@ const EditMyProfile = () => {
             user_id:id,
             first_name: firstName,
             last_name: lastName,
-            phone_no: primaryPhone,
-            mobile_no: mobilePhone,           
+            phone_no: formatMobileNO(primaryPhone),
+            mobile_no: formatMobileNO(mobilePhone),           
             email: emailId,
             address: address,
             // city_id: city,

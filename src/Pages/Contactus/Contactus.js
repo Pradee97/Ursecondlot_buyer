@@ -78,9 +78,9 @@ const Contactus = () => {
                 setPopupTitle("Enquiry Form");
                 setPopupMsg("Mail sent successfully.Thanks you So much for your business");
                 setPopupType("success");
-                setPopupActionType("close");
+                setPopupActionType("refresh");
                 setPopupActionValue("close");
-                //setPopupActionPath("/contactus")
+                // setPopupActionPath("/contactus")
             } else {
               console.log("==sss1111=>",response.data);
                 const { data } = response;

@@ -62,7 +62,7 @@ const ForgotEmail = () => {
                         <button className="back-btn-paymentform backBtn" onClick={() => history.push("/login")}><i className="icofont-arrow-left"></i> Back</button>
                         <div className="col-lg-12 card">
                             <form className="registrationform" onSubmit={handleForgotEmail} >
-                                <h2 className="title">Forgot Email</h2>
+                                <h2 className="title">Forgot Username</h2>
                                 <p className="error-message">{errorMessage}</p>
                                 <div className="row changePassblock">
 

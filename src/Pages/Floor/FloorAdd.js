@@ -82,7 +82,14 @@ const FloorAdd = () => {
         placeholder: 'DD/MM/YYYY',
         required:true
     };
-
+    function formatMobileNO(value){
+        var x = value.replace(/\D/g, '').match(/(\d{1})(\d{3})(\d{3})(\d{4})/);
+    
+        console.log("value of x",x);
+        value = '+'+ x[1]+'('+ x[2] +')' + x[3] + '-' + x[4];
+        console.log("mobileno",value);
+        return value;
+     }
     const floorDate = (event) => {
         setDateOpened(event.format("YYYY-MM-DD"))
     }
@@ -121,7 +128,7 @@ const FloorAdd = () => {
             credit_limit: creditLimit,
             email_id: emailId,
             address: address,
-            phone_no: phoneNumber,
+            phone_no:formatMobileNO(phoneNumber),
             opened_date: moment(dateOpened).format("YYYY-MM-DD"),
             account_opened: accountOpened,
             buyer_id:userDetails.user_id,

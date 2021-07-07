@@ -81,7 +81,14 @@ const EditAddress = () => {
         })
             .catch(err => { console.log(err); });
     }
-  
+    function formatMobileNO(value){
+        var x = value.replace(/\D/g, '').match(/(\d{1})(\d{3})(\d{3})(\d{4})/);
+    
+        console.log("value of x",x);
+        value = '+'+ x[1]+'('+ x[2] +')' + x[3] + '-' + x[4];
+        console.log("mobileno",value);
+        return value;
+     }
     const updateAddress = (event) => {
         // setOpenLoader(true);
         event.preventDefault();  
@@ -101,8 +108,8 @@ const EditAddress = () => {
             first_name: FirstName,
             last_name: lastName,
             address: address,
-            phone_no: primaryPhone,
-            mobile_no: mobilePhone,
+            phone_no: formatMobileNO(primaryPhone),
+            mobile_no: formatMobileNO(mobilePhone),
             city_id: typeof city==='string'?accountObjc.city_id:city,
             state_id: typeof state==='string'?accountObjc.state_id:state,
             zipcode_id: zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode,

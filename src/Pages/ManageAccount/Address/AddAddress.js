@@ -49,7 +49,14 @@ const AddAddress = () => {
     const [zipcode,setZipcode]=useState("1");
 
 
-
+    function formatMobileNO(value){
+        var x = value.replace(/\D/g, '').match(/(\d{1})(\d{3})(\d{3})(\d{4})/);
+    
+        console.log("value of x",x);
+        value = '+'+ x[1]+'('+ x[2] +')' + x[3] + '-' + x[4];
+        console.log("mobileno",value);
+        return value;
+     }
     const onhandleSubmit = (data) => {
         // setOpenLoader(true);
         // event.preventDefault();        
@@ -64,8 +71,8 @@ const AddAddress = () => {
             first_name: firstName,
             last_name: lastName,
             address: address,
-            phone_no: primaryPhone,
-            mobile_no: mobilePhone,
+            phone_no: formatMobileNO(primaryPhone),
+            mobile_no: formatMobileNO(mobilePhone),
             city_id: city,
             state_id: state,
             zipcode_id: zipCodeId,
