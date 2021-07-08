@@ -6405,7 +6405,7 @@ button.add-user-btns {
   width: 20%;
 }
 .userlisttable table th.th_phone {
-  width: 10%;
+  width: 20%;
 }
 .userlisttable table th.th_status {
   width: 10%;
@@ -6433,8 +6433,11 @@ button.add-user-btns {
   padding-left: 20px;
   font-size: 14px;
   text-align: center;
-  padding: 10px 20px;
+  padding: 10px 5px;
   border-right: 1px solid #ddd;
+}
+.userlisttable table td.phonenotab{
+  padding: 10px 5px;
 }
 .userlisttable table td .cartitlename {
   color: #002768;
@@ -6614,11 +6617,21 @@ table td .ant-btn:hover span, table td .ant-btn:hover i{
 
 .backaccountform.addpaymentform p.form-input-error{
   margin: 0;
-    color: #BD062C;
+    color: red;
 }
 
 .suggested-cars .col-md-3 .car-item{
   background: #fff;
+}
+.floor_notfiled_block{
+  display: block;
+  text-align: center;
+  position: relative;
+  top: 50px;
+  left: 7%;
+  font-size: 19px;
+  font-weight: 500;
+  padding-bottom: 30px;
 }
 .phonecode small {
     font-size: 80%;

@@ -141,9 +141,17 @@ const Registration = () => {
             return;
         }
         else if(phoneNumber.length<12 ){
+            console.log("phone",phoneNumber );
+            console.log("phonelength",phoneNumber.length );
+
             setPhoneNumberError("Phone Number must have 10 digits ")
-            return;
-        }
+            
+        //     if(phoneNumber.length==3 && phoneNumber.includes('+1')){
+        //         setPhoneNumberError("Phone Number is required")
+        // }
+                return;
+    }
+         
         if(!email){
             setEmailError("Email  is required")
             return;
@@ -197,7 +205,7 @@ const Registration = () => {
             first_name:firstName,
             last_name: lastName,
             email: email,
-            phone_no: phoneNumber,
+            phone_no: formatMobileNO(phoneNumber),
             address: address,
             meeting_date: date,
             meeting_time: time,
@@ -264,6 +272,9 @@ const Registration = () => {
     }
     function handleOnChange(value) {
         setPhoneNumber(value);
+        console.log("inside handle")
+
+        console.log("phn no", value)
      }
     return (
         <div>
