@@ -42,6 +42,7 @@ const AddAddress = () => {
     const [addressError, setAddressError] = useState("");
     const [primaryPhoneError, setPrimaryphoneError] = useState("");
     const [mobilePhoneError, setMobilephoneError] = useState("");
+    const [stateAndCityError, setStateAndCityError] = useState("");
     const [locationError, setLocationError] = useState("");
     const [instructionError, setInstructionError] = useState("");
     const [state,setState]=useState("1");
@@ -61,10 +62,11 @@ const AddAddress = () => {
         // setOpenLoader(true);
         // event.preventDefault();        
         setFirstNameError("")
-        setLastNameError("")
-        setAddressError("")
+        setLastNameError("") 
         setPrimaryphoneError("")
         setMobilephoneError("")
+        setAddressError("")
+        setStateAndCityError("")
         setLocationError("")
         setInstructionError("")
        
@@ -108,6 +110,23 @@ const AddAddress = () => {
             setAddressError("Address must not exceed 150 characters")
             return;
         }
+        if(!stateName){
+            console.log("====stateName=>",stateName,cityName,zipCodeId)
+            setStateAndCityError("state is required")
+            return
+        }
+        if(!cityName){
+            console.log("====cityName==>",stateName,cityName,zipCodeId)
+            // setStateAndCityError("city is required")
+            setStateAndCityError("city is required")
+             return
+        }
+        if(!zipCodeId){
+            console.log("====zipCodeId==>",stateName,cityName,zipCodeId)
+            // setStateAndCityError("zipCode is required")
+            setStateAndCityError("zipcode is required")
+             return
+        }
         if(!location){
             setLocationError("Location is required")
             return;
@@ -125,7 +144,7 @@ const AddAddress = () => {
             return;
         }
 
-        if(  stateName!=="" && cityName!=="" && zipCodeId!=="" ){
+       
             let request = {
                 first_name: firstName,
                 last_name: lastName,
@@ -173,34 +192,23 @@ const AddAddress = () => {
                     setPopupActionValue("close");
             });
 
-    }
-    else{
-
-		if(stateName==="" || stateName===undefined || stateName===null){
-			console.log("====stateName=stateName=>",stateName,cityName,zipCodeId)
-			setState("");
-		}
-		if(cityName==="" || cityName===undefined || cityName===null){
-			console.log("====cityName==>",stateName,cityName,zipCodeId)
-			 setCity("");
-		}
-		if(zipCodeId==="" || zipCodeId===undefined || zipCodeId===null){
-			console.log("====zipCodeId==>",stateName,cityName,zipCodeId)
-			 setZipcode("");
-		}
-		
-    }	
+    
+    	
 }
-    const getStateName = (stateData) => {
-		setStateName(stateData)
-	}
-	const getCityName = (cityData) => {
-		setCityName(cityData)
-	}
+const getStateName = (stateData) => {
+	setStateName(stateData)
+	setCityName(null)
+	setZipcodeId(null)
+}
 
-	const getZipCodeId = (zipData) => {
-		setZipcodeId(zipData)
-	}
+const getCityName = (cityData) => {
+	setCityName(cityData)
+	setZipcodeId(null)
+}
+
+const getZipCodeId = (zipData) => {
+	setZipcodeId(zipData)
+}
 
     function handleOnChange(value) {
         setPrimaryphone(value);
@@ -297,10 +305,9 @@ const AddAddress = () => {
                                 setCityValue={getCityName}
                                 setZipcodeValue={getZipCodeId}
                             />
-                            {(state==="" && stateName==="") ?
-                            <p className="form-input-error"> State,City,zipcode  is required</p>:
-                            cityName===null && city===""?<p className="form-input-error"> City is required</p>:
-                            zipCodeId===null && zipcode===""?<p className="form-input-error"> Zipcode is required</p>:""}
+                            <div className="col-sm-12 form-group">
+                            <p className="form-input-error"> {stateAndCityError}</p>
+                            </div>
 
                              <div className="col-sm-12 form-group"> 
                             <div className="tbox">
