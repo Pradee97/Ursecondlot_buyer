@@ -219,19 +219,14 @@ const Payment = () => {
             return;
         }
         if(!stateName){
-            console.log("====stateName=>",stateName,cityName,zipCodeId)
             setStateAndCityError("state is required")
             return
         }
         if(!cityName){
-            console.log("====cityName==>",stateName,cityName,zipCodeId)
-            // setStateAndCityError("city is required")
             setStateAndCityError("city is required")
              return
         }
         if(!zipCodeId){
-            console.log("====zipCodeId==>",stateName,cityName,zipCodeId)
-            // setStateAndCityError("zipCode is required")
             setStateAndCityError("zipcode is required")
              return
         } 
@@ -244,19 +239,14 @@ const Payment = () => {
             return;
         }
         if(!accountStateName){
-            console.log("====stateName=>",stateName,cityName,zipCodeId)
             setAccStateAndCityError("state is required")
             return
         }
         if(!accountCityName){
-            console.log("====cityName==>",stateName,cityName,zipCodeId)
-            // setStateAndCityError("city is required")
             setAccStateAndCityError("city is required")
              return
         }
         if(!accountZipcodeId){
-            console.log("====zipCodeId==>",stateName,cityName,zipCodeId)
-            // setStateAndCityError("zipCode is required")
             setAccStateAndCityError("zipcode is required")
              return
         }

@@ -99,6 +99,7 @@ const AddAddress = () => {
             return;
         }
         else if(mobilePhone.length<12 ){
+            console.log("phone=======",mobilePhone.length)
             setMobilephoneError("Mobile Phone must have 10 digits ")
             return;
         }
@@ -111,19 +112,14 @@ const AddAddress = () => {
             return;
         }
         if(!stateName){
-            console.log("====stateName=>",stateName,cityName,zipCodeId)
             setStateAndCityError("state is required")
             return
         }
         if(!cityName){
-            console.log("====cityName==>",stateName,cityName,zipCodeId)
-            // setStateAndCityError("city is required")
             setStateAndCityError("city is required")
              return
         }
         if(!zipCodeId){
-            console.log("====zipCodeId==>",stateName,cityName,zipCodeId)
-            // setStateAndCityError("zipCode is required")
             setStateAndCityError("zipcode is required")
              return
         }

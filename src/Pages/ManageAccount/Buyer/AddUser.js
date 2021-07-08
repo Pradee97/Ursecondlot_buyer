@@ -160,19 +160,14 @@ const AddUser = () => {
             return;
 		}       
 		if(!stateName){
-            console.log("====stateName=>",stateName,cityName,zipCodeId)
             setStateAndCityError("state is required")
             return
         }
         if(!cityName){
-            console.log("====cityName==>",stateName,cityName,zipCodeId)
-            // setStateAndCityError("city is required")
             setStateAndCityError("city is required")
              return
         }
         if(!zipCodeId){
-            console.log("====zipCodeId==>",stateName,cityName,zipCodeId)
-            // setStateAndCityError("zipCode is required")
             setStateAndCityError("zipcode is required")
              return
         }
