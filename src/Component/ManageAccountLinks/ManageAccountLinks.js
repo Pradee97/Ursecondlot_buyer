@@ -20,9 +20,9 @@ const ManageAccountLinks = () => {
                              <img alt="Menu" src={JSON.parse(localStorage.getItem("userDetails")).image || adduser} /> 
                            </div>
                            <div className="mgaccountuserright">
-                               <h3>Fernand</h3>
+                               <h3>{JSON.parse(localStorage.getItem("userDetails")).first_name} {JSON.parse(localStorage.getItem("userDetails")).last_name}</h3>
                                <div className="d-flex align-items-center">
-                                   <p className="details"><img src={process.env.PUBLIC_URL +"/images/Path.svg"} className="img-fluid" alt="..."/><span>California, Cl</span></p>
+                                   <p className="details"><img src={process.env.PUBLIC_URL +"/images/Path.svg"} className="img-fluid" alt="..."/><span>{JSON.parse(localStorage.getItem("userDetails")).address}</span></p>
                                </div>
                                    
                            </div>
