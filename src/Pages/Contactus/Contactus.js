@@ -1,9 +1,10 @@
 import React from 'react';
 import API from "../../Services/BaseService";
-import CommonPopup from '../../Component/CommonPopup/CommonPopup';
+import Popup from '../../Component/Popup/Popup';
 import { useForm } from "react-hook-form";
 import { useState } from 'react';
 import { useHistory } from "react-router-dom";
+import checkImg from '../../../src/assets/img/check.svg';
 const Contactus = () => { 
   const [isOpen, setIsOpen] = useState(false);
  
@@ -29,7 +30,12 @@ const Contactus = () => {
     const history = useHistory();   
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-
+function clear (){
+  setName("")
+  setEmailId("")
+  setComments("")
+  togglePopup();
+}
 
   const EmailSubmit = (data) => {    
     setFullNameError("")
@@ -155,7 +161,7 @@ const Contactus = () => {
             
              <div className="form-group">
                <label htmlFor="name">Full Name</label>
-                 <input type="text" name="name" className="form-control" id="name"
+                 <input type="text" name="name" className="form-control" id="name" value={name}
                 onChange={(e) => setName(e.target.value)}/>
                  {/* {  name==="" && ename===""?<p className="form-input-error"> Name is required</p>:""} */}
                  <p className="form-input-error" >{fullNameError}</p>
@@ -163,7 +169,7 @@ const Contactus = () => {
              </div>
              <div className="form-group">
                <label htmlFor="name">Email</label>
-                 <input type="email" className="form-control" name="email" id="email"  
+                 <input type="text" className="form-control" name="email" id="email"  value={email}
                 onChange={(e) => setEmailId(e.target.value)} />
                  {/* {  email==="" && eemail===""?<p className="form-input-error"> Email is required</p>:""} */}
                  <p className="form-input-error" >{emailError}</p>
@@ -171,7 +177,7 @@ const Contactus = () => {
              </div>
              <div className="form-group">
                <label htmlFor="name">comments</label>
-               <textarea className="form-control" name="message" rows="3" 
+               <textarea className="form-control" name="message" rows="3" value={comments} 
             onChange={(e) => setComments(e.target.value)}
                ></textarea>
                 {/* {  comments==="" && ecomments===""?<p className="form-input-error"> Comments is required</p>:""} */}
@@ -213,7 +219,33 @@ const Contactus = () => {
 
      </div>
    </section>
-   {isOpen && 
+   {isOpen && <Popup
+  content={<>
+              <div className="popup-box">
+                <div id="" className="CommonModels-box">
+                  <div className="Commonfullformblock col-lg-9">
+                    <div className="CommonContainer">
+                        <div className="CommonModalcontent">
+                            <div className="Commonfull-icon">
+                                <img className={"successImg"} alt="" src={ checkImg } />
+                            </div>
+                            <div className="CommonModalbody">
+                                {popupTitle !== "" && <h2>{popupTitle}</h2>}
+                                <p>{popupMsg}</p>
+                            </div>
+                            <div className="CommonModalfooter ">
+                            {popupActionType.toLowerCase() === "close" && <button className="cta-btns" onClick={clear} >OK</button> }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                </div>
+
+        </>}
+    handleClose={togglePopup}
+                />}                         
+   {/* {isOpen && 
                 <CommonPopup 
                     handleClose= {togglePopup}
                     popupTitle= {popupTitle}
@@ -222,7 +254,7 @@ const Contactus = () => {
                     popupActionType= {popupActionType}
                     popupActionValue= {popupActionValue}
                     popupActionPath={popupActionPath}
-                />}
+                />} */}
 
   
 

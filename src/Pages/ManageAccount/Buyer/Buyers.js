@@ -133,7 +133,7 @@ const Buyers = () => {
                                             <img alt="" src="adduser.jpg" src={process.env.PUBLIC_URL + "/images/adduser.jpg"}/>:
                                             <img alt="" src={item.image} />
                                             }</td>
-                                            <td>{item.phone_no}</td>
+                                            <td className="phonenotab">{item.phone_no}</td>
                                             {/* <td>{item.email}</td> */}
                                             <td>{item.buy_now===1?"Buy Now,":""}{item.cancel_bid===1?"Cancel the bid after 4 hours,":""}{item.bid===1?"Bid,":""}
                                             {item.proxy_bid===1?"Proxy Bid,":""}{item.counter_bid===1?"Counter Bid,":""}{item.lot_fee===1?"Lot Fee.":""}</td>
