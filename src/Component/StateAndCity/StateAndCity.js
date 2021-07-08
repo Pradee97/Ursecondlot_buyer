@@ -36,8 +36,6 @@ const StateAndCity = props => {
                     console.log("props.defaultStateValue===",defaultStateValue)
                     if(data.state_name?.toLowerCase() === defaultStateValue ?.toLowerCase()){
                         setStateName(data.state_name)
-                        // setCityName(null)
-                        // setZipCodeId(null)
                         fetchCity(data.state_id)
                     } 
                 })
@@ -89,17 +87,9 @@ const StateAndCity = props => {
             stateNameList.length>0 && stateName ? props.setStateValue(stateNameList.filter(data=>data.state_name == stateName)[0]?.state_id || null) : props.setStateValue(null);
             cityNameList.length>0 && cityName ?  props.setCityValue(cityNameList.filter(data=>data.city_name==cityName)[0]?.city_id || null)  : props.setCityValue(null);
             zipcodeList.length>0 && zipCodeId ?  props.setZipcodeValue(zipcodeList.filter(data=>data.zipcode==zipCodeId)[0]?.zipcode_id || null) : props.setZipcodeValue(null);   
-        } else if(stateName && cityName && zipCodeId){
-            // props.setStateValue(stateNameList.filter(data=>data.state_name == stateName)[0]?.state_id || null);
-            // props.setCityValue(cityNameList.filter(data=>data.city_name==cityName)[0]?.city_id || null);
-            // props.setZipcodeValue(zipcodeList.filter(data=>data.zipcode==zipCodeId)[0]?.zipcode_id || null);   
-        }
+        } 
   
     }, [stateName, cityName, cityName]);
-
-    // useEffect(() => { if(isEdit){props.setStateValue(stateNameList.filter(data=>data.state_name == stateName)[0]?.state_id || null);}},[stateName])
-    // useEffect(() => {if(isEdit){props.setCityValue(cityNameList.filter(data=>data.city_name==cityName)[0]?.city_id || null);}},[cityName])
-    // useEffect(() => {if(isEdit){props.setZipcodeValue(zipcodeList.filter(data=>data.zipcode==zipCodeId)[0]?.zipcode_id || null);   }},[cityName])
 
     useEffect (()=>{
         if(isEdit){
@@ -199,16 +189,6 @@ return (
                 </div>                   
             </div>
         </div>
-        {/* <div className="col-sm-4 form-group">
-            <div className="tbox">
-                <div className="selcetclass">                 
-                    <>
-                        <input type="text" className="form-control textbox" defaultValue={isEdit ? defaultZipcodeValue : zipCodeId} placeholder="" required maxLength="5" onChange={(e) => setZipCodeId(e.target.value)} />
-                        {<label  htmlFor="zipcode_id" className={"input-has-value"}>Zipcode</label>}
-                    </>                       
-                </div>
-            </div>
-        </div> */}
     </>
 )}
 
