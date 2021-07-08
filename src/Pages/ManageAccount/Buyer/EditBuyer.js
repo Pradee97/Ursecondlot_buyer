@@ -8,13 +8,11 @@ import CommonPopup from '../../../Component/CommonPopup/CommonPopup';
 import ls from 'local-storage';
 import FileBase64 from 'react-file-base64';
 import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks"
-import { useForm } from "react-hook-form";
 import MuiPhoneNumber from 'material-ui-phone-number';
 import PhoneInput from 'react-phone-number-input/input';
 
 const EditBuyer = () => {
     const history = useHistory();
-    let { register, updateMyProfile, formState: { errors },reset  } = useForm();
     const { id } = useParams();
     const { user_id } = useParams();
     const { buyer_id } = useParams();
@@ -26,9 +24,9 @@ const EditBuyer = () => {
     const [mobilePhone, setMobilephone] = useState("");
     const [emailId, setEmailId] = useState("");
     const [address, setAddress] = useState("");
-    const [city, setCity] = useState("");
-    const [state, setState] = useState("");
-    const [zipcode, setZipcode] = useState("");
+    const [city, setCity] = useState(null);
+    const [state, setState] = useState(null);
+    const [zipcode, setZipcode] = useState(null);
     const [locationName, setLocationName] = useState("");
     const [buy_now, setBuyNow] = useState("");
     const [cancel_bid, setCancelBid] = useState("");
@@ -136,7 +134,7 @@ const EditBuyer = () => {
         console.log("mobileno",value);
         return value;
      }
-     updateMyProfile = (event) => {
+     const updateMyProfile = (event) => {
         // setOpenLoader(true);
         event.preventDefault();
 
@@ -187,7 +185,9 @@ const EditBuyer = () => {
             return;
         }
 
-        if(!(typeof city==='string'?myProfileObjc.city_id:city) || !(typeof state==='string'?myProfileObjc.state_id:state) || !(zipcode===myProfileObjc.zipcode?myProfileObjc.zipcode_id:zipcode)){
+        if(!(typeof city==='string' ? myProfileObjc.city_id : city) || 
+            !(typeof state==='string' ? myProfileObjc.state_id:state) || 
+            !(zipcode===myProfileObjc.zipcode ? myProfileObjc.zipcode_id : zipcode)){
             setStateAndCityError("State, City and Zipcode is required")
             return
         }
@@ -282,7 +282,6 @@ const EditBuyer = () => {
         setLot_fee(res.data.data[0].lot_fee)
         setPriviegesId(res.data.data[0].buyer_privileges_id)
         setImage(res.data.data[0].image);
-        reset(res.data.data[0]);
         setPrivilegesObj({
             buyNow : res.data.data[0].buy_now,
             cancelBid: res.data.data[0].cancel_bid,
@@ -302,7 +301,7 @@ const EditBuyer = () => {
         }
     })
         .catch(err => { console.log(err); });
-    }, [reset]);
+    },[] );
     function handleOnChange(value) {
         setPrimaryPhone(value);
      }
@@ -461,7 +460,7 @@ const EditBuyer = () => {
                                 </div>
                                 </div>}
                                 <div className="col-lg-12 loginBtn">
-                                    <button className="cta-btn">Update</button>
+                                    <button type="submit" className="cta-btn">Update</button>
                                 </div>
                             </div>
                         </form>

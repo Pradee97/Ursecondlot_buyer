@@ -32,6 +32,8 @@ const StateAndCity = props => {
             setZipCodeId(null)
             if(props.isEdit){
                 res.data.data.filter(data=> {
+                    console.log("data.state_name====",data.state_name)
+                    console.log("props.defaultStateValue===",defaultStateValue)
                     if(data.state_name?.toLowerCase() === defaultStateValue ?.toLowerCase()){
                         setStateName(data.state_name)
                         // setCityName(null)
@@ -74,7 +76,7 @@ const StateAndCity = props => {
             setZipcodeList(res.data.data);
             if(props.isEdit){
                 res.data.data.filter(data=>{
-                    data.zipcode==defaultZipcodeValue && setZipCodeId(data.zipcode)
+                    data.zipcode == defaultZipcodeValue && setZipCodeId(data.zipcode)
                 }
                     )
             }
@@ -88,12 +90,16 @@ const StateAndCity = props => {
             cityNameList.length>0 && cityName ?  props.setCityValue(cityNameList.filter(data=>data.city_name==cityName)[0]?.city_id || null)  : props.setCityValue(null);
             zipcodeList.length>0 && zipCodeId ?  props.setZipcodeValue(zipcodeList.filter(data=>data.zipcode==zipCodeId)[0]?.zipcode_id || null) : props.setZipcodeValue(null);   
         } else if(stateName && cityName && zipCodeId){
-            props.setStateValue(stateNameList.filter(data=>data.state_name == stateName)[0].state_id);
-            props.setCityValue(cityNameList.filter(data=>data.city_name==cityName)[0].city_id);
-            props.setZipcodeValue(zipcodeList.filter(data=>data.zipcode==zipCodeId)[0].zipcode_id);   
+            // props.setStateValue(stateNameList.filter(data=>data.state_name == stateName)[0]?.state_id || null);
+            // props.setCityValue(cityNameList.filter(data=>data.city_name==cityName)[0]?.city_id || null);
+            // props.setZipcodeValue(zipcodeList.filter(data=>data.zipcode==zipCodeId)[0]?.zipcode_id || null);   
         }
   
-    }, [stateName, cityName, zipCodeId]);
+    }, [stateName, cityName, cityName]);
+
+    // useEffect(() => { if(isEdit){props.setStateValue(stateNameList.filter(data=>data.state_name == stateName)[0]?.state_id || null);}},[stateName])
+    // useEffect(() => {if(isEdit){props.setCityValue(cityNameList.filter(data=>data.city_name==cityName)[0]?.city_id || null);}},[cityName])
+    // useEffect(() => {if(isEdit){props.setZipcodeValue(zipcodeList.filter(data=>data.zipcode==zipCodeId)[0]?.zipcode_id || null);   }},[cityName])
 
     useEffect (()=>{
         if(isEdit){
@@ -117,6 +123,8 @@ const cityAndZipReset=()=>{
 
     const handleState = (e) => {
         setStateName( stateNameList.filter(data=>data.state_id == e.target.value)[0].state_name)
+        console.log("state===",stateNameList.filter(data=>data.state_name == e.target.value)[0]?.state_id || null)
+        props.isEdit && props.setStateValue(stateNameList.filter(data=>data.state_id == e.target.value)[0]?.state_id || null);
         props.isEdit && props.setCityValue(null);
         props.isEdit && props.setZipcodeValue(null);   
         // cityNameList.length === 0 ? fetchCity(e.target.value): cityAndZipReset()
@@ -129,6 +137,8 @@ const cityAndZipReset=()=>{
 
     const handleCity = (e) => {
         setCityName(cityNameList.filter(data=>data.city_id==e.target.value)[0].city_name)
+        console.log("city===",cityNameList.filter(data=>data.city_name==e.target.value)[0]?.city_id || null)
+        props.isEdit &&  props.setCityValue(cityNameList.filter(data=>data.city_id==e.target.value)[0]?.city_id || null);
         props.isEdit && props.setZipcodeValue(null);
         // zipcodeList.length === 0 && fetchZipcode(e.target.value)
         setZipcodeList([])
@@ -138,6 +148,8 @@ const cityAndZipReset=()=>{
 
     const handleZipcode = (e) => {
         setZipCodeId(zipcodeList.filter(data=>data.zipcode==e.target.value)[0].zipcode); 
+        console.log("zip====",zipcodeList.filter(data=>data.zipcode==e.target.value)[0]?.zipcode_id || null)
+        props.setZipcodeValue(zipcodeList.filter(data=>data.zipcode==e.target.value)[0]?.zipcode_id || null);
     }
 
 return (
