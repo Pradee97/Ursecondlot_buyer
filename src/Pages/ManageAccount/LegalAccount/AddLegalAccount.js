@@ -76,6 +76,7 @@ const AddLegalAccount = () => {
     const [dealershipLicenseexpError, setDealershiplicenseexpError] = useState("");
     const [taxidexpError, setTaxidexpError] = useState("");
     const [legalBusinessnameError, setLegalBusinessnameError] = useState("");
+    const [stateAndCityError, setStateAndCityError] = useState("");
     const [state,setState]=useState("1");
     const [city,setCity]=useState("1");
     const [zipcode,setZipcode]=useState("1");
@@ -94,6 +95,7 @@ const AddLegalAccount = () => {
         setAddressError("")
         setDealershiplicenseexpError("")
         setTaxidexpError("")
+        setStateAndCityError("")
       
 
         let request = {
@@ -171,7 +173,24 @@ const AddLegalAccount = () => {
     else if(address.length>150){
         setAddressError("Address must not exceed 150 characters")
         return;
-    }       
+    }  
+    if(!stateName){
+        console.log("====stateName=>",stateName,cityName,zipCodeId)
+        setStateAndCityError("state is required")
+        return
+    }
+    if(!cityName){
+        console.log("====cityName==>",stateName,cityName,zipCodeId)
+        // setStateAndCityError("city is required")
+        setStateAndCityError("city is required")
+         return
+    }
+    if(!zipCodeId){
+        console.log("====zipCodeId==>",stateName,cityName,zipCodeId)
+        // setStateAndCityError("zipCode is required")
+        setStateAndCityError("zipcode is required")
+         return
+    }     
     if(!dealershipLicenseexp){
         setDealershiplicenseexpError("Dealership Licenseexp is required")
         return;
@@ -181,7 +200,7 @@ const AddLegalAccount = () => {
         return;
     } 
 
-    if(  stateName!=="" && cityName!=="" && zipCodeId!=="" ){
+    
         API.post("legal_manage/add", request)
             .then((response) => {
                 if (response.data.success) {
@@ -214,32 +233,23 @@ const AddLegalAccount = () => {
                     setPopupActionValue("close");
             })
             .catch(err => { console.log(err); });
-            }else{
-                if(stateName==="" || stateName===undefined || stateName===null){
-                    console.log("====stateName=stateName=>",stateName,cityName,zipCodeId)
-                    setState("");
-                }
-                if(cityName==="" || cityName===undefined || cityName===null){
-                    console.log("====cityName==>",stateName,cityName,zipCodeId)
-                     setCity("");
-                }
-                if(zipCodeId==="" || zipCodeId===undefined || zipCodeId===null){
-                    console.log("====zipCodeId==>",stateName,cityName,zipCodeId)
-                     setZipcode("");
-                }
-        }
+
 
     }
     const getStateName = (stateData) => {
-		setStateName(stateData)
-	}
-	const getCityName = (cityData) => {
-		setCityName(cityData)
-	}
-
-	const getZipCodeId = (zipData) => {
-		setZipcodeId(zipData)
-	}
+        setStateName(stateData)
+        setCityName(null)
+        setZipcodeId(null)
+    }
+    
+    const getCityName = (cityData) => {
+        setCityName(cityData)
+        setZipcodeId(null)
+    }
+    
+    const getZipCodeId = (zipData) => {
+        setZipcodeId(zipData)
+    }
 
     return (
         <div>
@@ -343,10 +353,10 @@ const AddLegalAccount = () => {
                                 setCityValue={getCityName}
                                 setZipcodeValue={getZipCodeId}
                             />
-                            {(state==="" && stateName==="") ?
-                            <p className="form-input-error"> State,City,zipcode  is required</p>:
-                            cityName===null && city===""?<p className="form-input-error"> City is required</p>:
-                            zipCodeId===null && zipcode===""?<p className="form-input-error"> Zipcode is required</p>:""}
+                            <div className="col-sm-12 form-group">
+                            <p className="form-input-error"> {stateAndCityError}</p>
+                            </div>
+                           
                             {/* <div className="col-sm-12 form-group">
                             <div className="tbox">                            
                                 <input type="text" id="phoneNumber" className="textbox" placeholder="" required onChange={(e) => setCity(e.target.value)} />

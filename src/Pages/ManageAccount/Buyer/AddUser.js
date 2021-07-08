@@ -51,7 +51,8 @@ const AddUser = () => {
     const [lastNameError, setLastNameError] = useState("");
     const [phoneNumberError, setPhoneNumberError] = useState("");
     const [emailError, setEmailError] = useState("");
-    const [addressError, setAddressError] = useState("");
+	const [addressError, setAddressError] = useState("");
+	const [stateAndCityError, setStateAndCityError] = useState("");
 	const [optionError, setoptionError] = useState("");
 	const [state,setState]=useState("1");
     const [city,setCity]=useState("1");
@@ -67,12 +68,7 @@ const AddUser = () => {
         setDoc(file);
 		console.log("file=====>",file)
       }
-	  const getStateName = (stateData) => {
-		setStateName(stateData)
-	}
-	const getCityName = (cityData) => {
-		setCityName(cityData)
-	}
+
 	
 	const setUserPrivileges = (data) => {
 		if(data==0){
@@ -92,9 +88,7 @@ const AddUser = () => {
 		
 	}
 
-	const getZipCodeId = (zipData) => {
-		setZipcodeId(zipData)
-	}
+
 	const inputProps = {
 		placeholder: 'DD/MM/YYYY',
 		required: true
@@ -120,7 +114,8 @@ const AddUser = () => {
         setPhoneNumberError("") 
         setEmailError("") 
         setAddressError("") 
-        setoptionError("")
+		setoptionError("")
+		setStateAndCityError("")
 		
 
 		if(!firstName){
@@ -163,7 +158,24 @@ const AddUser = () => {
         else if(address.length>150){
             setAddressError("Address must not exceed 150 characters")
             return;
-        }       
+		}       
+		if(!stateName){
+            console.log("====stateName=>",stateName,cityName,zipCodeId)
+            setStateAndCityError("state is required")
+            return
+        }
+        if(!cityName){
+            console.log("====cityName==>",stateName,cityName,zipCodeId)
+            // setStateAndCityError("city is required")
+            setStateAndCityError("city is required")
+             return
+        }
+        if(!zipCodeId){
+            console.log("====zipCodeId==>",stateName,cityName,zipCodeId)
+            // setStateAndCityError("zipCode is required")
+            setStateAndCityError("zipcode is required")
+             return
+        }
         if(!option){
             setoptionError("How many years in car business is required")
             return;
@@ -171,7 +183,7 @@ const AddUser = () => {
        
 		
 		
-		if(  stateName!=="" && cityName!=="" && zipCodeId!=="" ){
+		
 			
 			let request = {
 				dealer_id: userDetails.dealer_id,
@@ -235,22 +247,22 @@ const AddUser = () => {
 				setPopupActionValue("close");
 			});	
 
-	}else{
-
-		if(stateName==="" || stateName===undefined || stateName===null){
-			console.log("====stateName=stateName=>",stateName,cityName,zipCodeId)
-			setState("");
-		}
-		if(cityName==="" || cityName===undefined || cityName===null){
-			console.log("====cityName==>",stateName,cityName,zipCodeId)
-			 setCity("");
-		}
-		if(zipCodeId==="" || zipCodeId===undefined || zipCodeId===null){
-			console.log("====zipCodeId==>",stateName,cityName,zipCodeId)
-			 setZipcode("");
-		}
 		
-	}	
+}
+
+const getStateName = (stateData) => {
+	setStateName(stateData)
+	setCityName(null)
+	setZipcodeId(null)
+}
+
+const getCityName = (cityData) => {
+	setCityName(cityData)
+	setZipcodeId(null)
+}
+
+const getZipCodeId = (zipData) => {
+	setZipcodeId(zipData)
 }
 
 	
@@ -358,10 +370,9 @@ const AddUser = () => {
 														setCityValue={getCityName}
 														setZipcodeValue={getZipCodeId}
 													/>
-													{(state==="" && stateName==="") ?
-                            						<p className="form-input-error"> State,City,zipcode  is required</p>:
-                            						cityName===null && city===""?<p className="form-input-error"> City is required</p>:
-                            						zipCodeId===null && zipcode===""?<p className="form-input-error"> Zipcode is required</p>:""}
+													<div className="col-sm-12 form-group">
+                                                    <p className="form-input-error"> {stateAndCityError}</p>
+                                                    </div>													
 
 													<div className="col-sm-8 form-group selectTbox">
 														<div className="tbox">
