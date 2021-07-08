@@ -212,6 +212,7 @@ const AddUser = () => {
 			console.log("----request---->", request);
 		API.post("buyer/add", request)
 			.then((response) => {
+				console.log("")
 				if (response.data.success) {
 					const { data } = response;
 					console.log("response", response)
@@ -226,8 +227,7 @@ const AddUser = () => {
 				} else {
 					togglePopup()
 					setPopupTitle("Error");
-					setPopupMsg("AddUser failed, Please try Again");
-					setPopupType("error");
+					setPopupMsg( response.data.error.err);
 					setPopupActionType("close");
 					setPopupActionValue("close");
 				}
