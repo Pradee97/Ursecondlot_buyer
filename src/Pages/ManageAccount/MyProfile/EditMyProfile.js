@@ -10,6 +10,7 @@ import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAcco
 import { useForm } from "react-hook-form";
 import ls from 'local-storage';
 import PhoneInput from 'react-phone-number-input/input';
+import FileBase64 from 'react-file-base64';
 
 const EditMyProfile = () => {
     const history = useHistory();
@@ -41,6 +42,8 @@ const EditMyProfile = () => {
     const [primaryPhoneError, setPrimaryPhoneError] = useState("")
     const [mobilePhoneError, setMobilePhoneError] = useState("")
     const [stateAndCityError, setStateAndCityError] = useState("")
+    const [image,setImage] = useState("");
+    const [doc, setDoc] = useState("");
 
     const togglePopup = () => {
         setIsOpen(!isOpen);
@@ -76,6 +79,8 @@ const EditMyProfile = () => {
             setCity(res.data.data[0].city_name);
             setState(res.data.data[0].state_name);
             setZipcode(res.data.data[0].zipcode); 
+            setImage(res.data.data[0].image);
+            
             // setLocationName(res.data.data[0].address);
             setMyProfileObj(res.data.data[0]);
         })
@@ -137,6 +142,7 @@ const EditMyProfile = () => {
             zipcode_id: zipcode===myProfileObjc.zipcode?myProfileObjc.zipcode_id:zipcode,
             address: address,
             active:1,
+            image:doc===""?doc:doc.length>0?doc:[doc]
             // buyer_id: userDetails.user_id
            
         };
@@ -176,6 +182,10 @@ const EditMyProfile = () => {
             });
 
     }
+    const getFiles = (file) => {
+        console.log("======>",file)
+        setDoc(file);
+    }
 
     useEffect(() => {
         //fetchMyProfileDetails();
@@ -198,6 +208,7 @@ const EditMyProfile = () => {
             // setLocationName(res.data.data[0].address);
             setMyProfileObj(res.data.data[0]);
             reset(res.data.data[0]);
+            setImage(res.data.data[0].image)
         })
             .catch(err => { console.log(err); });
     }, [reset]);
@@ -224,11 +235,22 @@ const EditMyProfile = () => {
                 <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 myprofileeditform">                   
                 <div className="col-lg-12 adduserpage-inner ">
                     <form className="registrationform" onSubmit={updateMyProfile} >
-                        <div className="row">
-                        <div className="section-title">
+                    <div className="section-title">
                         <button className="back-btn-paymentform backBtn" onClick={() => history.push("/myprofile")}><i className="icofont-arrow-left"></i> Back</button> 
 							<h2>Edit My Profile</h2>
 						</div>
+                        <div className="row">
+                        <div className="col-sm-12 form-group">
+                                <div className="user-upload-btn-wrapper">
+                                    {image==="" && doc===""?<img alt="" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} />:                                    
+                                    doc===""?<img alt=""  src={image} />:
+                                    <img alt=""  src={doc.base64} />}  
+                                    <span className="proCamera"></span>                                  
+                                    <FileBase64 onDone={getFiles} type="hidden" />
+                                    
+                                </div>
+                                </div>
+                        
                         
                             <div className="col-sm-12 form-group">
                             <div className="tbox">                           

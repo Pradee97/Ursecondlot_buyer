@@ -50,6 +50,7 @@ const Document = () => {
         const state = API.post('buyer_document/condition', request);
         state.then(res => {
             let document = res.data.data;
+            console.log("====document====>",document)
             for (let x in document) {
                 if (document[x].buyer_doc_type_id === 1) {
                     setDoc1(document[x])
@@ -86,6 +87,7 @@ const Document = () => {
         getDocuments();
     }, []);
 
+
     const deleteFileConfirmation = (document_id) => {
         // console.log("document_id====",document_id)
         localStorage.setItem("deletDocumentId",document_id)
@@ -104,14 +106,42 @@ const Document = () => {
         };
         const deleteFile=API.post('documentDelete/update',request)
         deleteFile.then(response=>{
+            console.log("====response.data====>",response.data)
+            let document = response.data.data;
+            //console.log("========>>",document.buyer_doc_type_id);
+            if (document[0].buyer_doc_type_id === 1) {
+                setDoc1("")
+            } else if (document[0].buyer_doc_type_id ===  2) {
+                setDoc2("")
+            } else if (document[0].buyer_doc_type_id === 3) {
+                setDoc3("")
+            } else if (document[0].buyer_doc_type_id === 4) {
+                setDoc4("")
+            } else if (document[0].buyer_doc_type_id === 5) {
+                setDoc5("")
+            } else if (document[0].buyer_doc_type_id === 6) {
+                setDoc6("")
+            } else if (document[0].buyer_doc_type_id === 7) {
+                setDoc7("")
+            } else if (document[0].buyer_doc_type_id === 8) {
+                setDoc8("")
+            } else if (document[0].buyer_doc_type_id === 9) {
+                setDoc9("")
+            } else if (document[0].buyer_doc_type_id === 10) {
+                setDoc10("")
+            } else if (document[0].buyer_doc_type_id === 11) {
+                setDoc11("")
+            }
             if (response.data.success) {
+                //getDocuments();
                 setIsOpen(true);
                 setPopupTitle("Document Delete");
                 setPopupMsg("Document Successfully Deleted");
                 setPopupType("success");
-                setPopupActionType("refresh");
+                setPopupActionType("close");
                 setPopupActionValue("ok");
-                setPopupActionPath("/document");
+                //getDocuments();
+                //setPopupActionPath("/document");
             } else {
                 setIsOpen(true);
                 setPopupTitle("Document Deleted");
@@ -131,13 +161,40 @@ const Document = () => {
         const upload = API.post('buyer_document/update', request);
         upload.then(response => {
             if (response.data.success) {
+                console.log("====response.data====>",response.data)
+                let document = response.data.data;
+                //console.log("========>>",document.buyer_doc_type_id);
+                if (document[0].buyer_doc_type_id === 1) {
+                    setDoc1(document[0])
+                } else if (document[0].buyer_doc_type_id ===  2) {
+                    setDoc2(document[0])
+                } else if (document[0].buyer_doc_type_id === 3) {
+                    setDoc3(document[0])
+                } else if (document[0].buyer_doc_type_id === 4) {
+                    setDoc4(document[0])
+                } else if (document[0].buyer_doc_type_id === 5) {
+                    setDoc5(document[0])
+                } else if (document[0].buyer_doc_type_id === 6) {
+                    setDoc6(document[0])
+                } else if (document[0].buyer_doc_type_id === 7) {
+                    setDoc7(document[0])
+                } else if (document[0].buyer_doc_type_id === 8) {
+                    setDoc8(document[0])
+                } else if (document.buyer_doc_type_id === 9) {
+                    setDoc9(document[0])
+                } else if (document[0].buyer_doc_type_id === 10) {
+                    setDoc10(document[0])
+                } else if (document[0].buyer_doc_type_id === 11) {
+                    setDoc11(document[0])
+                }
                 togglePopup()
                 setPopupTitle("Document Upload");
                 setPopupMsg("Document Successfully Updated");
                 setPopupType("success");
-                setPopupActionType("refresh");
+                setPopupActionType("close");
                 setPopupActionValue("ok");
-                setPopupActionPath("/document")
+               // getDocuments();
+                //setPopupActionPath("/document")
             } else {
                 togglePopup()
                 setPopupTitle("Document Upload");
@@ -158,13 +215,41 @@ const Document = () => {
         const upload = API.post('buyer_document/add', request);
         upload.then(response => {
             if (response.data.success) {
+                console.log("====response.data====>",response.data)
+                let document = response.data.data;
+                //console.log("========>>",document.buyer_doc_type_id);
+                if (document.buyer_doc_type_id === 1) {
+                    setDoc1(document)
+                } else if (document.buyer_doc_type_id ===  2) {
+                    setDoc2(document)
+                } else if (document.buyer_doc_type_id === 3) {
+                    setDoc3(document)
+                } else if (document.buyer_doc_type_id === 4) {
+                    setDoc4(document)
+                } else if (document.buyer_doc_type_id === 5) {
+                    setDoc5(document)
+                } else if (document.buyer_doc_type_id === 6) {
+                    setDoc6(document)
+                } else if (document.buyer_doc_type_id === 7) {
+                    setDoc7(document)
+                } else if (document.buyer_doc_type_id === 8) {
+                    setDoc8(document)
+                } else if (document.buyer_doc_type_id === 9) {
+                    setDoc9(document)
+                } else if (document.buyer_doc_type_id === 10) {
+                    setDoc10(document)
+                } else if (document.buyer_doc_type_id === 11) {
+                    setDoc11(document)
+                }
+            
                 togglePopup()
                 setPopupTitle("Document Upload");
                 setPopupMsg("Document Successfully Uploaded");
                 setPopupType("success");
-                setPopupActionType("refresh");
+                setPopupActionType("close");
                 setPopupActionValue("close");
-                setPopupActionPath("/document")
+                //getDocuments();
+                //setPopupActionPath("/document")
             } else {
                 togglePopup()
                 setPopupTitle("Document Upload");
@@ -210,7 +295,7 @@ const Document = () => {
                                                         <div className="docdetails">
                                                             <h5>Copy of Dealer license</h5>
                                                             <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc1.doc_name} className="img-fluid" alt="" />
-                                                            <div><a href={doc1.doc_name}>{doc1.doc_name.split("_")[1]}</a></div>
+                                                            <div><a href={doc1.doc_name} target="_blank">{doc1.doc_name.split("_")[1]}</a></div>
                                                             <p>
                                                                 <div className="upload-btn-wrapper updateFile">
                                                                     <a className="btn"> Update File</a>
@@ -232,9 +317,9 @@ const Document = () => {
                                                         </p>
                                                     </div> :
                                                         <div className="docdetails">
-                                                            <h5>Copy of Dealer license</h5>
+                                                            <h5>Certificate of liability insurance.</h5>
                                                             <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc2.doc_name} className="img-fluid" alt="" />
-                                                            <div><a href={doc2.doc_name}>{doc2.doc_name.split("_")[1]}</a></div>
+                                                            <div><a href={doc2.doc_name} target="_blank">{doc2.doc_name.split("_")[1]}</a></div>
                                                             <p>
                                                                 <div className="upload-btn-wrapper updateFile">
                                                                     <a className="btn"> Update File</a>
@@ -260,7 +345,7 @@ const Document = () => {
                                                     </div> : <div className="docdetails">
                                                         <h5>Copy of Dealer license</h5>
                                                         <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc3.doc_name} className="img-fluid" alt="" />
-                                                        <div><a href={doc3.doc_name}>{doc3.doc_name.split("_")[1]}</a></div>
+                                                        <div><a href={doc3.doc_name} target="_blank">{doc3.doc_name.split("_")[1]}</a></div>
                                                         <p>
                                                             <div className="upload-btn-wrapper updateFile">
                                                                 <a className="btn"> Update File</a>
@@ -291,7 +376,7 @@ const Document = () => {
                                                         <div className="docdetails">
                                                             <h5>Copy of Dealer license</h5>
                                                             <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc4.doc_name} className="img-fluid" alt="" />
-                                                            <div><a href={doc4.doc_name}>{doc4.doc_name.split("_")[1]}</a></div>
+                                                            <div><a href={doc4.doc_name} target="_blank">{doc4.doc_name.split("_")[1]}</a></div>
                                                             <p>
                                                                 <div className="upload-btn-wrapper updateFile">
                                                                     <a className="btn"> Update File</a>
@@ -315,7 +400,7 @@ const Document = () => {
                                                         <div className="docdetails">
                                                             <h5>Copy of Dealer license</h5>
                                                             <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc5.doc_name} className="img-fluid" alt="" />
-                                                            <div><a href={doc5.doc_name}>{doc5.doc_name.split("_")[1]}</a></div>
+                                                            <div><a href={doc5.doc_name} target="_blank">{doc5.doc_name.split("_")[1]}</a></div>
                                                             <p>
                                                                 <div className="upload-btn-wrapper updateFile">
                                                                     <a className="btn"> Update File</a>
@@ -339,7 +424,7 @@ const Document = () => {
                                                      <div className="docdetails">
                                                      <h5>Copy of Dealer license</h5>
                                                      <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc6.doc_name} className="img-fluid" alt="" />
-                                                     <div><a href={doc6.doc_name}>{doc6.doc_name.split("_")[1]}</a></div>
+                                                     <div><a href={doc6.doc_name} target="_blank">{doc6.doc_name.split("_")[1]}</a></div>
                                                      <p>
                                                          <div className="upload-btn-wrapper updateFile">
                                                              <a className="btn"> Update File</a>
@@ -367,7 +452,7 @@ const Document = () => {
                                                     <div className="docdetails">
                                                     <h5>Copy of Dealer license</h5>
                                                     <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc7.doc_name} className="img-fluid" alt="" />
-                                                    <div><a href={doc7.doc_name}>{doc7.doc_name.split("_")[1]}</a></div>
+                                                    <div><a href={doc7.doc_name} target="_blank">{doc7.doc_name.split("_")[1]}</a></div>
                                                     <p>
                                                         <div className="upload-btn-wrapper updateFile">
                                                             <a className="btn"> Update File</a>
@@ -391,7 +476,7 @@ const Document = () => {
                                                     <div className="docdetails">
                                                     <h5>Copy of Dealer license</h5>
                                                     <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc8.doc_name} className="img-fluid" alt="" />
-                                                    <div><a href={doc8.doc_name}>{doc8.doc_name.split("_")[1]}</a></div>
+                                                    <div><a href={doc8.doc_name} target="_blank">{doc8.doc_name.split("_")[1]}</a></div>
                                                     <p>
                                                         <div className="upload-btn-wrapper updateFile">
                                                             <a className="btn"> Update File</a>
@@ -415,7 +500,7 @@ const Document = () => {
                                                     <div className="docdetails">
                                                     <h5>Copy of Dealer license</h5>
                                                     <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc9.doc_name} className="img-fluid" alt="" />
-                                                    <div><a href={doc9.doc_name}>{doc9.doc_name.split("_")[1]}</a></div>
+                                                    <div><a href={doc9.doc_name} target="_blank">{doc9.doc_name.split("_")[1]}</a></div>
                                                     <p>
                                                         <div className="upload-btn-wrapper updateFile">
                                                             <a className="btn"> Update File</a>
@@ -443,7 +528,7 @@ const Document = () => {
                                                     <div className="docdetails">
                                                     <h5>Copy of Dealer license</h5>
                                                     <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc10.doc_name} className="img-fluid" alt="" />
-                                                    <div><a href={doc10.doc_name}>{doc10.doc_name.split("_")[1]}</a></div>
+                                                    <div><a href={doc10.doc_name} target="_blank">{doc10.doc_name.split("_")[1]}</a></div>
                                                     <p>
                                                         <div className="upload-btn-wrapper updateFile">
                                                             <a className="btn"> Update File</a>
@@ -468,7 +553,7 @@ const Document = () => {
                                                     <div className="docdetails">
                                                     <h5>Copy of Dealer license</h5>
                                                     <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc11.doc_name} className="img-fluid" alt="" />
-                                                    <div><a href={doc11.doc_name}>{doc11.doc_name.split("_")[1]}</a></div>
+                                                    <div><a href={doc11.doc_name} target="_blank">{doc11.doc_name.split("_")[1]}</a></div>
                                                     <p>
                                                         <div className="upload-btn-wrapper updateFile">
                                                             <a className="btn"> Update File</a>
