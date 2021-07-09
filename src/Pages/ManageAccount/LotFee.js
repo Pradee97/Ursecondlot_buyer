@@ -1,17 +1,14 @@
 import React from 'react';
-import { useHistory } from "react-router-dom";
 import { useState } from 'react';
 import { useEffect } from 'react';
 import ls from 'local-storage';
 import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
 import API from "../../Services/BaseService";
-import Popup from '../../Component/Popup/Popup';
 import '../../Component/Popup/popup.css';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 
 
 const LotFee = () => {
-    const history = useHistory();
     const [isOpen, setIsOpen] = useState(false);
  
     const togglePopup = () => {
@@ -23,11 +20,12 @@ const LotFee = () => {
     const [popupType, setPopupType] = useState ("");
     const [popupActionType, setPopupActionType] = useState ("");
     const [popupActionValue, setPopupActionValue] = useState ("");
-    const [popupActionPath, setPopupActionPath] = useState ("")
+    const [popupActionPath] = useState ("")
 
     const [lotFee, setLotFee]= useState("")
     const [lotValue, setLotValue] = useState("");
-    const [popupcontent,setPopupcontent] = useState ("");
+    const [lotFeeError, setLotFeeError] = useState("")
+
     let userDetails = ls.get('userDetails');
 
     async function getLotfee() {
@@ -48,17 +46,28 @@ const LotFee = () => {
     // useEffect(() => {},[lotValue]);
     const updateLotValue = (data)=>{
         console.log("---------------",data)
-        setLotValue(data)
+        if(!isNaN(data) && data!=="" && data!==undefined)
+        {
+            console.log(data);
+            setLotValue(data)
+        }
+        else
+            setLotValue(0)
     }
         
         const handlesubimt = () => {
                 //console.log("check",buyer_id)
+                setLotFeeError("")  
+
             let request = {
                 buyer_id: userDetails.user_id,
                 lot_fee: lotValue,
                 active:1
             };
-    
+            if(lotValue === 0 ){
+                setLotFeeError("LotFee must be greater then zero")
+                return;
+            }
             API.post("lot_fee/add",request)
                .then((response) => {
                  console.log("res", response.data.success)
@@ -67,13 +76,14 @@ const LotFee = () => {
                     setPopupTitle("Create LotFee");
                     setPopupMsg("LotFee Successfully Created");
                     setPopupType("success");
-                    setPopupActionType("redirect");
-                    setPopupActionValue("ok");
-                    setPopupActionPath("/lotfee")
+                    setPopupActionType("close");
+                    setPopupActionValue("close");
+                    // setPopupActionPath("/lotfee")
                  } else {
                     togglePopup()
                     setPopupTitle("Create LotFee");
-                    setPopupMsg("LotFee is not Created, Please try Again");
+                    // setPopupMsg("LotFee is not Created, Please try Again");
+                    setPopupMsg( response.data.error.err );
                     setPopupType("error");
                     setPopupActionType("close");
                     setPopupActionValue("close");
@@ -112,10 +122,11 @@ const LotFee = () => {
                        <p>Your expense or your profit added to the vehicle every time you purchase </p>
                            <div className="form-group col-lg-6 col-md-6 lotfee-form">
                                <div className="input-icon">
-                                 <input type="text" className="form-control" defaultValue={lotFee.lot_fee} onChange={(e) => updateLotValue(e.target.value)}/> 
+                                 <input type="text" className="form-control"  defaultValue={lotFee.lot_fee} value={lotValue} onChange={(e) => updateLotValue(Math.round(e.target.value))}/> 
                                    <i>$</i>
                                </div>
                            </div>
+                           <p className="form-input-error" >{lotFeeError}</p>
                            <div className="col-lg-12 loginBtn">
                                <button className="cta-btn" onClick={handlesubimt}>Submit</button>
                                {/* conclick={handlesubimt} */}

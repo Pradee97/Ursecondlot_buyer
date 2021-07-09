@@ -4,15 +4,6 @@ import ls from 'local-storage';
 import { useState } from 'react';
 import FileBase64 from 'react-file-base64';
 import { useEffect } from 'react';
-import {
-    Form,
-    Input,
-    Select,
-    AutoComplete,
-    Radio,
-    notification,
-    Spin,
-} from 'antd';
 import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
 import API from "../../Services/BaseService";
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
@@ -53,6 +44,22 @@ const Payment = () => {
     const [accountStateName, setAccountStateName] = useState("");
     const [accountZipcodeId, setAccountZipcodeId] = useState("");
     const [doc,setDoc]=useState("");
+    const [dealershipNameError, setDealershipNameError] = useState("");
+    const [accountHolderNameError, setAccountHolderNameError] = useState("");
+    const [bankNameError, setBankNameError] = useState("");
+    const [accountNumberError, setAccountNumberError] = useState("");
+    const [ACHnumberError, setACHNumberError] = useState("");
+    const [routingNumberError, setRoutingNumberError] = useState("");
+    const [bankAddressError, setBankAddressError] = useState("");
+    const [accountHolderAddressError, setAccountHolderAddressError] = useState("");
+    const [docError,setDocError]=useState("");
+    const [state,setState]=useState("1");
+    const [city,setCity]=useState("1");
+    const [zipcodeId,setZipCodeId]=useState("1");
+    const [zipCode,setZipCode]=useState("1");
+    const [stateAndCityError, setStateAndCityError] = useState("");
+    const [accStateAndCityError,setAccStateAndCityError]=useState("");
+
     let files= [];
     let userDetails = ls.get('userDetails');
 
@@ -78,6 +85,7 @@ const Payment = () => {
             setAccountZipcodeId(data)
             }
             const request={zipcode_id: data}
+           
         API.post("location/condition", request)
         .then(response => {
                
@@ -118,7 +126,20 @@ const Payment = () => {
 
     const paymenthandleSubmit= (data) => {
         // setOpenLoader(true);
-        // event.preventDefault();        
+        // event.preventDefault();    
+        
+        setDealershipNameError("")
+        setAccountHolderNameError("") 
+        setBankNameError("") 
+        setAccountNumberError("")
+        setACHNumberError("")
+        setRoutingNumberError("")
+        setBankAddressError("")
+        setAccountHolderAddressError("")    
+        setStateAndCityError("")
+        setAccStateAndCityError("")
+        setDocError("")
+
         console.log("=====docdoc====>",doc)
         let request = {
             buyer_id: userDetails.user_id,
@@ -140,6 +161,100 @@ const Payment = () => {
             active:1
         }
         
+        if(!dealershipName){
+            setDealershipNameError("Dealership Name is required")
+            return;
+        }
+        else if(dealershipName.length>50){
+            setDealershipNameError("Dealership Name must not exceed 50 characters")
+            return;
+        }
+        if(!accountHolderName){
+            setAccountHolderNameError("Signer on account is required")
+            return;
+        }
+        else if(accountHolderName.length>50){
+            setAccountHolderNameError("Signer on account must not exceed 50 characters")
+            return;
+        }       
+        if(!bankName){
+            setBankNameError("Bank Name is required")
+            return;
+        }
+        else if(bankName.length>50 ){
+            setBankNameError("Bank Name must not exceed 50 characters ")
+            return;
+        }
+      
+        if(!accountNumber){
+            setAccountNumberError("Account Number is required")
+            return;
+        }
+        else if(accountNumber.length>50 ){
+            setAccountNumberError("Account Number must not exceed 50 characters ")
+            return;
+        }
+        if(!ACHnumber){
+            setACHNumberError("ACH Number is required")
+            return;
+        }
+        else if(ACHnumber.length>50){
+            setACHNumberError("ACH Number must not exceed 50 characters")
+            return;
+        }
+        if(!routingNumber){
+            setRoutingNumberError("Routing Number is required")
+            return;
+        }
+        else if(routingNumber.length>50){
+            setRoutingNumberError("Routing Number must not exceed 50 characters")
+            return;
+        }
+        if(!bankAddress){
+            setBankAddressError("Bank Address is required")
+            return;
+        }
+        else if(bankAddress.length>150){
+            setBankAddressError("Bank Address must not exceed 150 characters")
+            return;
+        }
+        if(!stateName){
+            setStateAndCityError("state is required")
+            return
+        }
+        if(!cityName){
+            setStateAndCityError("city is required")
+             return
+        }
+        if(!zipCodeId){
+            setStateAndCityError("zipcode is required")
+             return
+        } 
+        if(!accountHolderAddress){
+            setAccountHolderAddressError("AccountHolder Address is required")
+            return;
+        }
+        else if(accountHolderAddress.length>150){
+            setAccountHolderAddressError("AccountHolder Address must not exceed 150 characters")
+            return;
+        }
+        if(!accountStateName){
+            setAccStateAndCityError("state is required")
+            return
+        }
+        if(!accountCityName){
+            setAccStateAndCityError("city is required")
+             return
+        }
+        if(!accountZipcodeId){
+            setAccStateAndCityError("zipcode is required")
+             return
+        }
+        if(!doc){
+            setDocError("Upload Document is required")
+            return;
+        }
+        
         API
             .post("payment_info/add", request)
             .then((response) => {
@@ -156,7 +271,8 @@ const Payment = () => {
                 } else {
                     togglePopup()
                     setPopupTitle("Create Payment");
-                    setPopupMsg("Payment is not Created, Please try Again");
+                    // setPopupMsg("Payment is not Created, Please try Again");
+                    setPopupMsg( response.data.error.err );
                     setPopupType("error");
                     setPopupActionType("close");
                     setPopupActionValue("close");
@@ -170,28 +286,35 @@ const Payment = () => {
                     setPopupActionType("close");
                     setPopupActionValue("close");
         });
-    }
+   
+    
+}
     const getFiles=(file)=>{
         setDoc(file);
       }
-    const getStateName=(stateData)=>{
+      const getStateName = (stateData) => {
         setStateName(stateData)
+        setCityName(null)
+        setZipcodeId(null)
     }
-
-
-    const getCityName=(cityData)=>{
+    
+    const getCityName = (cityData) => {
         setCityName(cityData)
+        setZipcodeId(null)
     }
-
-    const getZipCodeId=(zipData)=>{
+    
+    const getZipCodeId = (zipData) => {
         setZipcodeId(zipData)
-    }    
+    }   
     const getAccStateName=(stateData)=>{
         setAccountStateName(stateData)
+        setAccountCityName(null)
+        setAccountZipcodeId(null)
     }
 
     const getAccCityName=(cityData)=>{
         setAccountCityName(cityData)
+        setAccountZipcodeId(null)
     }
 
     const getAccZipCodeId=(zipData)=>{
@@ -229,111 +352,62 @@ const Payment = () => {
                                                     <div className="col-sm-12 form-group topforms">
                                                         <div className="tbox">
                                                             <input type="text" className="textbox" name="dealershipName" id="name-d" placeholder="" 
-                                                          {...register("dealershipName", {
-                                                            required: "This input is required.",
-                                                            maxLength: {
-                                                                value: 50,
-                                                                message: "This input must not exceed 50 characters"
-                                                              }
-                                                          })}
                                                             onChange={(e) => setDealershipName(e.target.value)} />
-                                                            <label for="name-d" className={dealershipName !="" ? "input-has-value" : ""}>Dealership name</label>
-                                                            <p className="form-input-error">{errors.dealershipName?.message}</p>
+                                                            <label htmlFor="name-d" className={dealershipName !="" ? "input-has-value" : ""}>Dealership name</label>
+                                                            <p className="form-input-error" >{dealershipNameError}</p>
                                                         </div>
                                                     </div>
                                                     <div className="col-sm-12 form-group">
                                                         <div className="tbox">
                                                             <input type="text" className="textbox" name="accountHolderName" id="name-f" placeholder="" 
-                                                           {...register("accountHolderName", {
-                                                            required: "This input is required.",
-                                                            maxLength: {
-                                                                value: 50,
-                                                                message: "This input must not exceed 50 characters"
-                                                              }
-                                                          })}
                                                             onChange={(e) => setAccountHolderName(e.target.value)} />
-                                                            <label for="name-f" className={accountHolderName !="" ? "input-has-value" : ""}>Signer on account"</label>
-                                                            <p className="form-input-error">{errors.accountHolderName?.message}</p>
+                                                            <label htmlFor="name-f" className={accountHolderName !="" ? "input-has-value" : ""}>Signer on account</label>
+                                                            <p className="form-input-error" >{accountHolderNameError}</p>
                                                         </div>
                                                     </div>
 
                                                     <div className="col-sm-12 form-group">
                                                         <div className="tbox">
                                                             <input type="text" className="textbox" name="bankName" id="name-l" placeholder="" 
-                                                          {...register("bankName", {
-                                                            required: "This input is required.",
-                                                            maxLength: {
-                                                                value: 50,
-                                                                message: "This input must not exceed 50 characters"
-                                                              }
-                                                          })}
                                                             onChange={(e) => setBankName(e.target.value)} />
-                                                            <label for="name-b" className={bankName !="" ? "input-has-value" : ""}>Bank name</label>
-                                                            <p className="form-input-error">{errors.bankName?.message}</p>
+                                                            <label htmlFor="name-b" className={bankName !="" ? "input-has-value" : ""}>Bank name</label>
+                                                            <p className="form-input-error" >{bankNameError}</p>
                                                         </div>
                                                     </div>
 
                                                     <div className="col-sm-12 form-group">
                                                         <div className="tbox">
                                                             <input type="text" className="textbox" name="accountNumber" id="anumber" placeholder="" 
-                                                           {...register("accountNumber", {
-                                                            required: "This input is required.",
-                                                            maxLength: {
-                                                                value: 50,
-                                                                message: "This input must not exceed 50 characters"
-                                                              }
-                                                          })}
                                                             onChange={(e) => setAccountNumber(e.target.value)} />
-                                                            <label for="anumber" className={accountNumber !="" ? "input-has-value" : ""}>Account number</label>
-                                                            <p className="form-input-error">{errors.accountNumber?.message}</p>
+                                                            <label htmlFor="anumber" className={accountNumber !="" ? "input-has-value" : ""}>Account number</label>
+                                                            <p className="form-input-error" >{accountNumberError}</p>
                                                         </div>
                                                     </div>
 
                                                     <div className="col-sm-12 form-group">
                                                         <div className="tbox">
                                                             <input type="text" className="textbox" name="ACHnumber" id="achnumber" placeholder="" 
-                                                          {...register("ACHnumber", {
-                                                            required: "This input is required.",
-                                                            maxLength: {
-                                                                value: 50,
-                                                                message: "This input must not exceed 50 characters"
-                                                              }
-                                                          })}
                                                             onChange={(e) => setACHNumber(e.target.value)} />
-                                                            <label for="achnumber" className={ACHnumber !="" ? "input-has-value" : ""}>ACH number</label>
-                                                            <p className="form-input-error">{errors.ACHnumber?.message}</p>
+                                                            <label htmlFor="achnumber" className={ACHnumber !="" ? "input-has-value" : ""}>ACH number</label>
+                                                            <p className="form-input-error" >{ACHnumberError}</p>
                                                         </div>
                                                     </div>
 
                                                     <div className="col-sm-12 form-group">
                                                         <div className="tbox">
                                                             <input type="text" className="textbox" name="routingNumber" id="rtnumber" placeholder="" 
-                                                          {...register("routingNumber", {
-                                                            required: "This input is required.",
-                                                            maxLength: {
-                                                                value: 50,
-                                                                message: "This input must not exceed 50 characters"
-                                                              }
-                                                          })}
                                                             onChange={(e) => setRoutingNumber(e.target.value)} />
-                                                            <label for="rtnumber" className={routingNumber !="" ? "input-has-value" : ""}>Routing number</label>
-                                                            <p className="form-input-error">{errors.routingNumber?.message}</p>
+                                                            <label htmlFor="rtnumber" className={routingNumber !="" ? "input-has-value" : ""}>Routing number</label>
+                                                            <p className="form-input-error" >{routingNumberError}</p>
                                                         </div>
                                                     </div>
 
                                                     <div className="col-sm-12 form-group">
                                                         <div className="tbox">
                                                             <input type="text" className="textbox" name="bankAddress" id="baddress" placeholder="" 
-                                                           {...register("bankAddress", {
-                                                            required: "This input is required.",
-                                                            maxLength: {
-                                                                value: 150,
-                                                                message: "This input must not exceed 150 characters"
-                                                              }
-                                                          })}
                                                             onChange={(e) => setBankAddress(e.target.value)} />
-                                                            <label for="baddress" className={bankAddress !="" ? "input-has-value" : ""}>Bank address</label>
-                                                            <p className="form-input-error">{errors.bankAddress?.message}</p>
+                                                            <label htmlFor="baddress" className={bankAddress !="" ? "input-has-value" : ""}>Bank address</label>
+                                                            <p className="form-input-error" >{bankAddressError}</p>
                                                         </div>
                                                     </div>
                                                     <StateAndCity 
@@ -341,20 +415,16 @@ const Payment = () => {
                                                         setCityValue ={ getCityName }
                                                         setZipcodeValue ={ getZipCodeId }
                                                     />
+                                                    <div className="col-sm-12 form-group">
+                                                    <p className="form-input-error"> {stateAndCityError}</p>
+                                                    </div>
 
                                                     <div className="col-sm-12 form-group">
                                                         <div className="tbox">
                                                             <input type="text" className="textbox" name="accountHolderAddress" id="ahaddress" placeholder="" 
-                                                          {...register("accountHolderAddress", {
-                                                            required: "This input is required.",
-                                                            maxLength: {
-                                                                value: 150,
-                                                                message: "This input must not exceed 150 characters"
-                                                              }
-                                                          })}
                                                             onChange={(e) => setAccountHolderAddress(e.target.value)} />
-                                                            <label for="ahaddress" className={accountHolderAddress !="" ? "input-has-value" : ""}>Account Holder Address</label>
-                                                            <p className="form-input-error">{errors.accountHolderAddress?.message}</p>
+                                                            <label htmlFor="ahaddress" className={accountHolderAddress !="" ? "input-has-value" : ""}>Account Holder Address</label>
+                                                            <p className="form-input-error" >{accountHolderAddressError}</p>
                                                         </div>
                                                     </div>
 
@@ -363,23 +433,20 @@ const Payment = () => {
                                                         setCityValue ={ getAccCityName }
                                                         setZipcodeValue ={ getAccZipCodeId }
                                                     />
-
-                                                   
+                                                    <div className="col-sm-12 form-group">
+                                                    <p className="form-input-error"> {accStateAndCityError}</p>
+                                                    </div>
 
                                                     <div className="col-sm-6 form-group">
                                                         Signed bank Authorization letter for bank to release information.
                                                     </div>
-                                                    {/* <div className="col-sm-6 form-group uploadbutton">
-                                                    <input type="file" id="upload" className="uploadbox" hidden onChange={onFileChange} /> 
-                                                            <FileBase64 multiple={ true } onDone={ getFiles } hidden type="hidden"/>
-                                                            <label for="upload upl"><img src={process.env.PUBLIC_URL +"/images/upload.png"} />Upload Document</label>                                                            <p><b>{doc.name}</b></p>
-                                                    </div>*/}
                                                     <div className="col-sm-6 form-group uploadbtn">
-                                                    <div class="upload-btn-wrapper">
-                                                        <button class="btn"><i class="icofont-upload-alt"></i> Upload Document</button>
+                                                    <div className="upload-btn-wrapper">
+                                                        <button className="btn"><i className="icofont-upload-alt"></i> Upload Document</button>
                                                         <FileBase64 multiple={ true } onDone={ getFiles } hidden type="hidden"/>
                                                     </div>
-                                                    <span class="uploadedFile">{doc.length>0?doc[0].name:doc.name}</span>
+                                                    <span className="uploadedFile">{doc.length>0?doc[0].name:doc.name}</span>
+                                                    <p className="form-input-error" >{docError}</p>
                                                     </div>
                                                    
                                                     <div className="col-lg-12 loginBtn">

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import API from "../../Services/BaseService";
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 const ForgotPasswordEmail = () => {
@@ -13,8 +14,22 @@ const ForgotPasswordEmail = () => {
     const [popupActionPath, setPopupActionPath] = useState("");
     const [errorMessage, setErrorMessage] = useState('');
     const [isOpen, setIsOpen] = useState(false);
+    const [emailError, setEmailError] = useState('');
+
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const changehandleSubmit = (event) => {
-        event.preventDefault();
+        setEmailError("")
+
+        //event.preventDefault();
+        if(!email){
+            setEmailError("Email ID is required")
+            return;
+        }
+        else if(email && !new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i).test(email)){
+            setEmailError("Must match the email format")
+            return;
+        }
+
         let request = {
             email: email,
         }
@@ -29,9 +44,11 @@ const ForgotPasswordEmail = () => {
                 setPopupActionValue("ok");
                 setPopupActionPath("/login")
             } else {
+                const { data } = response;
                 togglePopup()
                 setPopupTitle("Forgot Password");
-                setPopupMsg("Forgot Password is not Updated, Please try Again");
+                // setPopupMsg("Forgot Password is not Updated, Please try Again");
+                setPopupMsg(data.error.err);
                 setPopupType("error");
                 setPopupActionType("close");
                 setPopupActionValue("close");
@@ -56,17 +73,18 @@ const ForgotPasswordEmail = () => {
             <div>
                 <main id="main" className="inner-page">
                     <div className="col-lg-4  loginBlock">
-                        <button className="back-btn-paymentform backBtn" onClick={() => history.push("/login")}><i class="icofont-arrow-left"></i> Back</button>
+                        <button className="back-btn-paymentform backBtn" onClick={() => history.push("/login")}><i className="icofont-arrow-left"></i> Back</button>
                         <div className="col-lg-12 card">
-                            <form className="registrationform" onSubmit={changehandleSubmit} >
+                            <form className="registrationform" onSubmit={handleSubmit(changehandleSubmit)} >
                                 <h2 className="title">Forgot Password</h2>
                                 <p className="error-message">{errorMessage}</p>
                                 <div className="row changePassblock">
 
                                     <div className="col-sm-12 form-group">
                                         <div className="tbox">
-                                            <input type="email" id="email" className="textbox" placeholder="" required onChange={(e) => setEmail(e.target.value)} />
-                                            <label for="email" className={email != "" ? "input-has-value" : ""}>User Name</label>
+                                            <input type="text" id="email" className="textbox" placeholder="" name="email"  onChange={(e) => setEmail(e.target.value)} />
+                                            <label htmlFor="email" className={email != "" ? "input-has-value" : ""}>User Name</label>
+                                            <p className="form-input-error" >{emailError}</p>
                                         </div>
                                     </div>
 

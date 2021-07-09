@@ -1,22 +1,13 @@
 import React from 'react';
-import API from "../../Services/BaseService";
 import { useHistory,useParams } from "react-router-dom";
 // import '../../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
-
+import ls from 'local-storage';
+import API from "../../Services/BaseService";
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 
-import {
-    Form,
-    Input,
-    Select,
-    AutoComplete,
-    Radio,
-    notification,
-    Spin,
-} from 'antd';
-import ls from 'local-storage';
+
 
 const FloorEdit = () => {
     const history = useHistory();
@@ -100,10 +91,11 @@ const FloorEdit = () => {
                     setPopupActionValue("ok");
                     setPopupActionPath("/floor")
                 } else {
-                    // history.push("emailerror");
+                    const { data } = response;
                     togglePopup()
                     setPopupTitle("Edit Floor");
-                    setPopupMsg("Floor is not Edited, Please try Again");
+                    // setPopupMsg("Floor is not Edited, Please try Again");
+                    setPopupMsg( data.error.err );
                     setPopupType("error");
                     setPopupActionType("close");
                     setPopupActionValue("close");
@@ -136,25 +128,25 @@ const FloorEdit = () => {
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={floorObjc.company_name} className="form-control textbox" placeholder="" required onChange={(e) => setCompanyName(e.target.value)} />
-                                <label for="company_name" className={companyName !="" ? "input-has-value" : ""}>Company Name</label>
+                                <label htmlFor="company_name" className={companyName !="" ? "input-has-value" : ""}>Company Name</label>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">                           
                                 <input type="text"  defaultValue={floorObjc.contact_name} className="form-control textbox" placeholder="" required onChange={(e) => setContactName(e.target.value)} />
-                                <label for="contact_name" className={contactName !="" ? "input-has-value" : ""}>Contact Name</label>
+                                <label htmlFor="contact_name" className={contactName !="" ? "input-has-value" : ""}>Contact Name</label>
                             </div>
                             </div>                            
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={floorObjc.branch_name} className="form-control textbox" placeholder="" required onChange={(e) => setBranchName(e.target.value)} />
-                                <label for="branch_name" className={branchName !="" ? "input-has-value" : ""}>Branch Name</label>
+                                <label htmlFor="branch_name" className={branchName !="" ? "input-has-value" : ""}>Branch Name</label>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={floorObjc.account_no} className="form-control textbox" placeholder="" required onChange={(e) => setAccountNumber(e.target.value)} />
-                                <label for="account_no" className={accountNumber !="" ? "input-has-value" : ""}>Account Number</label>
+                                <label htmlFor="account_no" className={accountNumber !="" ? "input-has-value" : ""}>Account Number</label>
                             </div>
                             </div>
                             <div className="col-sm-3 form-group">
@@ -167,20 +159,20 @@ const FloorEdit = () => {
                             <div className="col-sm-9 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={floorObjc.credit_limit} className="form-control textbox" placeholder="" required onChange={(e) => setCreditLimit(e.target.value)} />
-                                <label for="credit_limit" className={creditLimit !="" ? "input-has-value" : ""}>Credit Limit</label>
+                                <label htmlFor="credit_limit" className={creditLimit !="" ? "input-has-value" : ""}>Credit Limit</label>
                                 
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="email" defaultValue={floorObjc.email_id} className="form-control textbox" placeholder="" required onChange={(e) => setEmailId(e.target.value)} />
-                                <label for="email_id" className={emailId !="" ? "input-has-value" : ""}>Email Id</label>
+                                <label htmlFor="email_id" className={emailId !="" ? "input-has-value" : ""}>Email Id</label>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={floorObjc.address} className="form-control textbox" placeholder="" required onChange={(e) => setAddress(e.target.value)} />
-                                <label for="address" className={address !="" ? "input-has-value" : ""}>Address</label>
+                                <label htmlFor="address" className={address !="" ? "input-has-value" : ""}>Address</label>
                             </div>
                             </div>
 
@@ -188,23 +180,23 @@ const FloorEdit = () => {
                                 <div className="tbox">
                                     <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
                                     <option style={{"display":"none"}}></option>
-                                         <option value="1">+1</option>
-                                        <option value="2">+2</option>
+                                         <option value="1" selected>+1</option>
+                                        {/* <option value="2">+2</option> */}
                                     </select>
-                                    <label for="no_years" className={"input-has-value"}>Country code</label>
+                                    <label htmlFor="no_years" className={"input-has-value"}>Country code</label>
                                 </div>
                             </div>
 
                             <div className="col-sm-8 form-group">
                             <div className="tbox">
                                 <input type="number" defaultValue={floorObjc.phone_no} className="form-control textbox" placeholder="" required onChange={(e) => setPhoneNumber(e.target.value)} />
-                                <label for="phone_no" className={phoneNumber !="" ? "input-has-value" : ""}>Phone Number</label>
+                                <label htmlFor="phone_no" className={phoneNumber !="" ? "input-has-value" : ""}>Phone Number</label>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="Date" value={floorObjc.opened_date} className="form-control textbox" placeholder="" required onChange={(e) => setDateOpened(e.target.value)} />
-                                <label for="opened_date" className={dateOpened !="" ? "input-has-value" : ""}>Date Opened</label>
+                                <label htmlFor="opened_date" className={dateOpened !="" ? "input-has-value" : ""}>Date Opened</label>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
@@ -214,7 +206,7 @@ const FloorEdit = () => {
                             <option value="Yes">Yes</option>
                             <option selected>No</option>
                             </select>
-                            <label  for="account_Opened" className={accountOpened!="" ? "input-has-value" : ""}>Account Opened</label>
+                            <label  htmlFor="account_Opened" className={accountOpened!="" ? "input-has-value" : ""}>Account Opened</label>
                                 {/* <input type="text" defaultValue={floorObjc.account_opened} className="form-control" placeholder="Account Opened" required onChange={(e) => setAccountOpened(e.target.value)} /> */}
                             </div>
                             </div>

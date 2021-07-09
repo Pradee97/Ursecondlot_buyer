@@ -56,7 +56,7 @@ const PaymentInfo = () => {
                                         <div className="add-floors">
                                            
                                                 <div className="add-accounts">
-                                                <Button className="add-account-btns" onClick={() => history.push("/payment")}><i class="icofont-plus"></i> Add Bank Account</Button>
+                                                <Button className="add-account-btns" onClick={() => history.push("/payment")}><i className="icofont-plus"></i> Add Bank Account</Button>
                                             {/*<a className="add-account-btns" href="/payment"><i class="icofont-plus"></i> Add Bank Account</a> */}
                                                 </div>
                                             
@@ -100,7 +100,7 @@ const PaymentInfo = () => {
                                                                 <p>Signed bank Authorization letter for bank to release information. </p>
                                                             <div className="uploadbutton">                                                              
                                                             <a href={item.doc_name}>
-                                                                    <label for="downupload"><img src={process.env.PUBLIC_URL +"/images/download.png"} />Documents</label></a>
+                                                                    <label htmlFor="downupload"><img src={process.env.PUBLIC_URL +"/images/download.png"} />Documents</label></a>
                                                             </div>
                                                             </div>
                                                         </div>

@@ -1,18 +1,11 @@
 import React from 'react';
 import { useHistory, useLocation } from "react-router-dom";
-import { useState } from 'react';
-import { useEffect } from 'react';
-import ls from 'local-storage';
-
 import LogoImg from '../../../src/assets/img/Logo_final.png';
 import cartImg from '../../../src/assets/img/cart.svg';
 import chatImg from '../../../src/assets/img/chat.svg';
-import userImg from '../../../src/assets/img/user.svg';
 import hamburgermenuImg from '../../../src/assets/img/hamburger-menu.svg';
 import adduser from '../../../src/assets/img/adduser.jpg'
-// import '../../assets/css/style.css';
 import './header.css';
-import { Alert } from 'antd';
 
 const Header = () => {
   const history = useHistory();
@@ -61,7 +54,7 @@ const Submenu = () => {
           <div className="row">
             <div className="col-lg-8 topLeft">
               <div className="socialIcons">
-                <a href="JavaScript:void(0)" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="JavaScript:void(0)" className="facebook"><i className="bx bxl-facebook"></i></a>
                 <a href="JavaScript:void(0)" className="snapchat"><i className="bx bxl-snapchat"></i></a>
                 <a href="JavaScript:void(0)" className="instagram"><i className="bx bxl-instagram"></i></a>
               </div>
@@ -98,11 +91,13 @@ const Submenu = () => {
               <li className={location.pathname ==="/cart"? "active nav__menu-item" : "nav__menu-item"} >
                 <img alt="Menu" src={cartImg} onClick={()=>history.push('/cart')}/>
               </li>
-              <li class="topRightUser">
+              <li className="topRightUser">
                 <b className="user_name">Welcome 
-                {/* {JSON.parse(localStorage.getItem("userDetails")).first_name} */}
-                </b>                
-                {/* <img alt="Menu" src={JSON.parse(localStorage.getItem("userDetails")).image || adduser} />  */}
+                </b> 
+                <b className="user_name">    
+                 {JSON.parse(localStorage.getItem("userDetails")).first_name} 
+                </b>          
+                 <img alt="Menu" src={JSON.parse(localStorage.getItem("userDetails")).image || adduser} /> 
               </li>
               <li className="nav__menu-item" >
                 <img alt="Menu" src={hamburgermenuImg} />

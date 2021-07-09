@@ -11,6 +11,8 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import { useForm } from "react-hook-form";
+import MuiPhoneNumber from 'material-ui-phone-number';
+import PhoneInput from 'react-phone-number-input/input';
 
 const FloorAdd = () => {
 
@@ -64,17 +66,30 @@ const FloorAdd = () => {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [dateOpened, setDateOpened] = useState(null);
     const [accountOpened, setAccountOpened] = useState("");
-    // const [stateId, setStateId] = useState("");
-    // const [cityName, setCityName] = useState("");
-    // const [cityId, setCityId] = useState("");
-    // const [zipCodeId, setZipcodeId] = useState("");
-    // const [numberOfYears, setNumberofYears] = useState("");
+    const [companyNameError, setCompanyNameError] = useState("");
+    const [contactNameError, setContactNameError] = useState("");
+    const [branchNameError, setBranchNameError] = useState("");
+    const [accountNumberError, setAccountNumberError] = useState("");
+    const [creditLimitError, setCreditLimitError] = useState("");
+    const [emailIdError, setEmailIdError] = useState("");
+    const [addressError, setAddressError] = useState("");
+    const [phoneNumberError, setPhoneNumberError] = useState("");
+    const [dateOpenedError, setDateOpenedError] = useState("");
+    const [accountOpenedError, setAccountOpenedError] = useState("");
+   
    
     const inputProps = {
         placeholder: 'DD/MM/YYYY',
         required:true
     };
-
+    function formatMobileNO(value){
+        var x = value.replace(/\D/g, '').match(/(\d{1})(\d{3})(\d{3})(\d{4})/);
+    
+        console.log("value of x",x);
+        value = '+'+ x[1]+'('+ x[2] +')' + x[3] + '-' + x[4];
+        console.log("mobileno",value);
+        return value;
+     }
     const floorDate = (event) => {
         setDateOpened(event.format("YYYY-MM-DD"))
     }
@@ -93,6 +108,94 @@ const FloorAdd = () => {
     const floorhandleSubmit = (data) => {
         // setOpenLoader(true);
         // event.preventDefault();
+
+        setCompanyNameError("")
+        setContactNameError("")
+        setBranchNameError("")
+        setAccountNumberError("")
+        setCreditLimitError("")
+        setEmailIdError("")
+        setAddressError("")
+        setPhoneNumberError("")
+        setDateOpenedError("")
+        setAccountOpenedError("")
+
+       
+        // return
+
+        if(!companyName){
+            setCompanyNameError("Company Name is required")
+            return;
+        }
+        else if(companyName.length>50){
+            setCompanyNameError("Company Name must not exceed 50 characters")
+            return;
+        }
+        if(!contactName){
+            setContactNameError("Contact Name is required")
+            return;
+        }
+        else if(contactName.length>50){
+            setContactNameError("ContactName must not exceed 50 characters")
+            return;
+        }       
+        if(!branchName){
+            setBranchNameError("Branch Name is required")
+            return;
+        }
+        else if(branchName.length>50 ){
+            setBranchNameError("Branch Name must not exceed 50 characters ")
+            return;
+        }
+      
+        if(!accountNumber){
+            setAccountNumberError("Account Number is required")
+            return;
+        }
+        else if(accountNumber.length>50 ){
+            setAccountNumberError("Account Number must not exceed 50 characters ")
+            return;
+        }
+        if(!creditLimit){
+            setCreditLimitError("Credit Limit is required")
+            return;
+        }
+        else if(creditLimit.length>50){
+            setCreditLimitError("Credit Limit must not exceed 50 characters")
+            return;
+        } 
+        if(!emailId){
+            setEmailIdError("Email Id is required")
+            return;
+        }
+        else if(emailId && !new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i).test(emailId)){
+            setEmailIdError("Email Id Must match the format")
+            return;
+        }
+        if(!address){
+            setAddressError("Address is required")
+            return;
+        }
+        else if(address.length>150){
+            setAddressError("Address must not exceed 150 characters")
+            return;
+        }        
+        if(!phoneNumber){
+            setPhoneNumberError("Phone Number is required")
+            return;
+        }
+        else if(phoneNumber.length<12){
+            setPhoneNumberError("Phone Number must have 10 digits ")
+            return;
+        }
+        if(!dateOpened){
+            setDateOpenedError("Date Opened is required")
+            return;
+        }
+        if(!accountOpened){
+            setAccountOpenedError("Account Opened is required")
+            return;
+        }
         let request = [{
             contact_name: contactName,
             company_name: companyName,
@@ -101,7 +204,7 @@ const FloorAdd = () => {
             credit_limit: creditLimit,
             email_id: emailId,
             address: address,
-            phone_no: phoneNumber,
+            phone_no:formatMobileNO(phoneNumber),
             opened_date: moment(dateOpened).format("YYYY-MM-DD"),
             account_opened: accountOpened,
             buyer_id:userDetails.user_id,
@@ -109,8 +212,7 @@ const FloorAdd = () => {
             
         }];
         console.log("===",request)
-        // return
-        if(dateOpened!==null){
+        
         API.post("floor_plan/add", request)
             .then((response) => {
                 if (response.data.success) {
@@ -122,18 +224,17 @@ const FloorAdd = () => {
                     setPopupActionType("redirect");
                     setPopupActionValue("ok");
                     setPopupActionPath("/floor")
-
                 } else {
+                    const { data } = response;
                     togglePopup()
                     setPopupTitle("Create Floor");
-                    setPopupMsg("Floor is not Created, Please try Again");
+                    setPopupMsg( data.error.err );
+                    // setPopupMsg("Floor is not Created, Please try Again");
                     setPopupType("error");
                     setPopupActionType("close");
                     setPopupActionValue("close");
                 }
             }, (error) => {
-                // setOpenLoader(false);
-                // console.log(error);
                     togglePopup()
                     setPopupTitle("Error");
                     setPopupMsg( "Something went wrong, Please try Again");
@@ -142,20 +243,18 @@ const FloorAdd = () => {
                     setPopupActionValue("close");
             })
             .catch(err => { console.log(err); });
-            }else{
-                console.log("====dateOpened==>",dateOpened)
-                if(dateOpened===null){
-                setDate("");
-         }
-        }
+       
     }
+    function handleOnChange(value) {
+        setPhoneNumber(value);
+     }
     return (
         <div>
             <main id="main" className="inner-page">
                 <div className="col-lg-4 loginBlock flooraddform">
 
                
-                <button className="back-btn-paymentform backBtn" onClick={() => history.push("/floor")}><i class="icofont-arrow-left"></i> Back</button> 
+                <button className="back-btn-paymentform backBtn" onClick={() => history.push("/floor")}><i className="icofont-arrow-left"></i> Back</button> 
                 <div className="col-lg-12 card">
                     <form className="registrationform" onSubmit={handleSubmit(floorhandleSubmit)} >
                         
@@ -165,61 +264,41 @@ const FloorAdd = () => {
                         <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text"  id="companyName" className="textbox" placeholder="" name="companyName"
-                                 {...register("companyName", {
-                                    required: "This input is required.",
-                                    maxLength: {
-                                        value: 50,
-                                        message: "This input must not exceed 50 characters"
-                                      }
-                                  })}
+                            
                                 onChange={(e) => setCompanyName(e.target.value)} />
-                                <label for="companyName" className={companyName !="" ? "input-has-value" : ""}>Company Name</label>
-                                <p className="form-input-error">{errors.companyName?.message}</p>
+                                <label htmlFor="companyName" className={companyName !="" ? "input-has-value" : ""}>Company Name</label>
+                               
+                                <p className="form-input-error" >{companyNameError}</p>
                             </div>
                         </div>
                         <div className="col-sm-12 form-group"> 
                             <div className="tbox">
                                 <input type="text"  id="contactName" className="textbox" placeholder="" name="contactName"
-                                 {...register("contactName", {
-                                    required: "This input is required.",
-                                    maxLength: {
-                                        value: 50,
-                                        message: "This input must not exceed 50 characters"
-                                      }
-                                  })}
+                               
                                 onChange={(e) => setContactName(e.target.value)} />
-                                <label for="contactName" className={contactName !="" ? "input-has-value" : ""}>Name Contact </label>
-                                <p className="form-input-error">{errors.contactName?.message}</p>
+                                <label htmlFor="contactName" className={contactName !="" ? "input-has-value" : ""}>Name Contact </label>
+                               
+                                <p className="form-input-error" >{contactNameError}</p>
                             </div>
                             </div>                           
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" id="branchName" className="textbox" placeholder="" name="branchName"
-                                 {...register("branchName", {
-                                    required: "This input is required.",
-                                    maxLength: {
-                                        value: 50,
-                                        message: "This input must not exceed 50 characters"
-                                      }
-                                  })}
+                                
                                 onChange={(e) => setBranchName(e.target.value)} />
-                                <label for="branchName" className={branchName !="" ? "input-has-value" : ""}>Branch Name</label>
-                                <p className="form-input-error">{errors.branchName?.message}</p>
+                                <label htmlFor="branchName" className={branchName !="" ? "input-has-value" : ""}>Branch Name</label>
+                               
+                                <p className="form-input-error" >{branchNameError}</p>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" id="accountNumber"  className="textbox" placeholder="" name="accountNumber"
-                                 {...register("accountNumber", {
-                                    required: "This input is required.",
-                                    maxLength: {
-                                        value: 50,
-                                        message: "This input must not exceed 50 characters"
-                                      }
-                                  })}
+                                
                                 onChange={(e) => setAccountNumber(e.target.value)} />
-                                <label for="accountNumber" className={accountNumber !="" ? "input-has-value" : ""}>accountNumber</label>
-                                <p className="form-input-error">{errors.accountNumber?.message}</p>
+                                <label htmlFor="accountNumber" className={accountNumber !="" ? "input-has-value" : ""}>accountNumber</label>
+                                
+                                <p className="form-input-error" >{accountNumberError}</p>
                             </div>
                             </div>
                             <div className="col-sm-3 form-group">
@@ -229,99 +308,61 @@ const FloorAdd = () => {
                             <option value="$">$</option>
                             {/* <option disabled>Currency</option> */}
                             </select>
-                            <label  for="no_years" className={"input-has-value"}>Currency</label>
+                            <label  htmlFor="no_years" className={"input-has-value"}>Currency</label>
                                 {/* <input type="text" className="form-control" placeholder="Currency" required /> */}
                                </div>
                             </div>
                             <div className="col-sm-9 form-group">
                             <div className="tbox">
-                                <input type="text" id="creditLimit" className="textbox" placeholder="" name="creditLimit"
-                                 {...register("creditLimit", {
-                                    required: "This input is required.",
-                                    maxLength: {
-                                        value: 50,
-                                        message: "This input must not exceed 50 characters"
-                                      }
-                                  })}
+                                <input type="number" id="creditLimit" className="textbox"  placeholder="" name="creditLimit"
                                 onChange={(e) => setCreditLimit(e.target.value)} />
-                                <label for="creditLimit" className={creditLimit !="" ? "input-has-value" : ""}>Credit Limit</label>
-                                <p className="form-input-error">{errors.creditLimit?.message}</p>
+                                <label htmlFor="creditLimit" className={creditLimit !="" ? "input-has-value" : ""}>Credit Limit</label>
+                                
+                                <p className="form-input-error" >{creditLimitError}</p>
                             </div>
                             </div>
                             
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="type" id="emailId" className="textbox" placeholder="" name="email"
-                                  {...register("email", {
-                                    required: "This input is required.",
-                                   pattern : {
-                                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                    message: "Must match the email format"
-                                    }
-                                })}
+                               
                                 onChange={(e) => setEmailId(e.target.value)} />
-                                <label for="emailId" className={emailId !="" ? "input-has-value" : ""}>Email Id</label>
-                                <p className="form-input-error">{errors.email?.message}</p>
+                                <label htmlFor="emailId" className={emailId !="" ? "input-has-value" : ""}>Email Id</label>
+                              
+                                <p className="form-input-error" >{emailIdError}</p>
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" id="address" className="textbox" placeholder="" name="address"
-                                 {...register("address", {
-                                    required: "This input is required.",
-                                    maxLength: {
-                                        value: 150,
-                                        message: "This input must not exceed 150 characters"
-                                      }
-                                  })}
+                                
                                 onChange={(e) => setAddress(e.target.value)} />
-                                <label for="address" className={address !="" ? "input-has-value" : ""}>Address</label>
-                                <p className="form-input-error">{errors.address?.message}</p>
+                                <label htmlFor="address" className={address !="" ? "input-has-value" : ""}>Address</label>
+                                
+                                <p className="form-input-error" >{addressError}</p>
                             </div>
                             </div>
-
-                            <div className="col-sm-4 form-group">
-                                <div className="tbox">
-                                    <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" >
-                                    <option style={{"display":"none"}}></option>
-                                         <option value="1">+1</option>
-                                        <option value="2">+2</option>
-                                    </select>
-                                    <label for="no_years" className={"input-has-value"}>Country code</label>
-                                </div>
+                            <div className="col-sm-4 form-group countrycode">
+                            <div className="tbox">
+                                <select className="form-control custom-select browser-default textbox"  id="drop" placeholder="" defaultValue="+1">
+                                    <option value="+1">+1</option>
+                                </select>
+                                <label  for="drop" className={"input-has-value"}>Country code</label>
                             </div>
-
-                            <div className="col-sm-8 form-group">
-                            <div className="tbox">                            
-                                <input type="text" id="phoneNumber" className="textbox" placeholder="" name="phoneNumber"
-                                 {...register("phoneNumber", {
-                                    required: "This input is required.",
-                                    minLength: {
-                                        value: 10,
-                                        message: "This input atleast have 10 digits"
-                                      },
-                                    maxLength: {
-                                        value: 15,
-                                        message: "This input must not exceed 15 digits"
-                                      },
-                                      pattern : {
-                                        value: /^[1-9]\d*(\d+)?$/i,
-                                        message: "This input must be Number"
-                                        }
-                                })}
-                                onChange={(e) => setPhoneNumber(e.target.value)} />
-                                <label for="phoneNumber" className={phoneNumber !="" ? "input-has-value" : ""}>Phone Number</label>
-                                <p className="form-input-error">{errors.phoneNumber?.message}</p>
                             </div>
+                            <div className="col-sm-8 form-group ">
+                            <div className="tbox ">   
+                            <PhoneInput  id="phone_no" name="phoneNumber"  country="US" className="textbox" maxLength="14" minLength="14"
+                                onChange={handleOnChange} ></PhoneInput>
+                                <label for="phone_no" className={"input-has-value"}>Phone Number</label>
+                            </div>
+                            
+                            <p className="form-input-error" >{phoneNumberError}</p>
                             </div>                           
                             <div className="col-sm-12 form-group datePickerBlock">
                                 <div className="tbox">
                                    
-                                        {/* <i class='bx bx-calendar' ></i>                                                      */}
-                                        {/* <input type="Date" id="dateOpened" className="textbox" placeholder="" required onChange={(e) => setDateOpened(e.target.value)} />
-                                        <label for="dateOpened" className={dateOpened !="" ? "input-has-value" : ""}>Date Opened</label>  */}
-                                         {/* <Datetime className="textbox" inputProps={ inputProps } timeFormat={false} dateFormat="DD/MM/YYYY" name="Date" onChange={floorDate}/> 
-                                        <label  for="meeting_date" className={"input-has-value"}>Date Opened</label>  */}
+                                       
                                     <DatePicker 
                                     class="form-control textbox" name="Date" id="Date"
                                     renderCustomHeader={({
@@ -382,25 +423,24 @@ const FloorAdd = () => {
                                     />
                                    
                                 </div> 
-                                {edate==="" && dateOpened===null?<p className="form-input-error"> Date  is required</p>:""}
+                                
+                                <p className="form-input-error" >{dateOpenedError}</p>
                             </div>
                                                      
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                            {/* <label  for="account_Opened" className={accountOpened!="" ? "input-has-value" : ""}>Account Opened</label> */}
+                            
                             <select className="form-control custom-select  textbox" placeholder="" name="accountOpened"
-                            {...register("accountOpened", {
-                                required: "This input is required."
-                            })}
+                            
                             onChange={(e) => setAccountOpened(e.target.value)}>
                             <option disabled selected value="" style={{display:"none"}}></option>
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                             </select>
-                            <label  for="account_Opened" className={ "input-has-value"}>Account Opened</label>
-                            <p className="form-input-error">{errors.accountOpened?.message}</p>
-
-                                {/* <input type="text" className="form-control" placeholder="Account Opened" required onChange={(e) => setAccountOpened(e.target.value)} /> */}
+                            <label  htmlFor="account_Opened" className={ "input-has-value"}>Account Opened</label>
+                            
+                            <p className="form-input-error" >{accountOpenedError}</p>
+                               
                             </div>
                             </div>
 

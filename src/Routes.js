@@ -1,10 +1,10 @@
-import React, {lazy, Suspense, useState, useEffect} from 'react';
-import {BrowserRouter as Router, Route, Switch, Redirect, useHistory} from "react-router-dom";
+import React, { useState, useEffect} from 'react';
+import {BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom";
 import { useIdleTimer } from 'react-idle-timer'
 import './App.css';
 import SessionConfirmationPopup from "./Component/CommonPopup/SessionConfirmationPopup"
 
-import Loading from './Component/Loading/Loading';
+// import Loading from './Component/Loading/Loading';
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
 import Registration from './Pages/Registration/Registration';
@@ -31,16 +31,16 @@ import PaymentInfo from './Pages/ManageAccount/PaymentInfo';
 import EditPayment from './Pages/ManageAccount/EditPayment';
 import Footer from './Component/Footer';
 import Document from './Pages/ManageAccount/Document';
-import Buyers from './Pages/ManageAccount/Buyers';
-import AddUser from './Pages/ManageAccount/AddUser';
-import MyProfile  from './Pages/ManageAccount/MyProfile';
-import EditMyProfile  from './Pages/ManageAccount/EditMyProfile';
+import Buyers from './Pages/ManageAccount/Buyer/Buyers';
+import AddUser from './Pages/ManageAccount/Buyer/AddUser';
+import MyProfile  from './Pages/ManageAccount/MyProfile/MyProfile';
+import EditMyProfile  from './Pages/ManageAccount/MyProfile/EditMyProfile';
 import EditDealerInformation from './Pages/ManageAccount/EditDealerInformation';
-import EditAddress  from './Pages/ManageAccount/EditAddress';
-import AddLegalAccount  from './Pages/ManageAccount/AddLegalAccount';
-import AddAddress  from './Pages/ManageAccount/AddAddress';
-import EditLegalAccount from './Pages/ManageAccount/EditLegalAccount';
-import EditBuyer from './Pages/ManageAccount/EditBuyer';
+import EditAddress  from './Pages/ManageAccount/Address/EditAddress';
+import AddLegalAccount  from './Pages/ManageAccount/LegalAccount/AddLegalAccount';
+import AddAddress  from './Pages/ManageAccount/Address/AddAddress';
+import EditLegalAccount from './Pages/ManageAccount/LegalAccount/EditLegalAccount';
+import EditBuyer from './Pages/ManageAccount/Buyer/EditBuyer';
 import ForgotPasswordEmail from './Pages/ForgotPassword/ForgotPasswordEmail';
 import ForgotPassword from './Pages/ForgotPassword/ForgotPassword';
 import ForgotEmail from './Pages/ForgotPassword/ForgotEmail';

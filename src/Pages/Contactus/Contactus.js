@@ -1,26 +1,124 @@
 import React from 'react';
 import API from "../../Services/BaseService";
-import { useHistory,useParams } from "react-router-dom";
-// import '../../assets/css/styles.css';
+import Popup from '../../Component/Popup/Popup';
+import { useForm } from "react-hook-form";
 import { useState } from 'react';
-import { useEffect } from 'react';
-import {
-    Form,
-    Input,
-    Select,
-    AutoComplete,
-    Radio,
-    notification,
-    Spin,
-} from 'antd';
+import { useHistory } from "react-router-dom";
+import checkImg from '../../../src/assets/img/check.svg';
+const Contactus = () => { 
+  const [isOpen, setIsOpen] = useState(false);
+ 
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  }
+    const [popupTitle, setPopupTitle] = useState ("");
+    const [popupMsg, setPopupMsg] = useState ("");
+    const [popupType, setPopupType] = useState ("");
+    const [popupActionType, setPopupActionType] = useState ("");
+    const [popupActionValue, setPopupActionValue] = useState ("");
+    const [popupActionPath, setPopupActionPath] = useState ("");
+    const [name,setName]=useState ("");
+    const [email,setEmailId]=useState ("");
+    const [comments,setComments]=useState ("");
+    // const [ename,seteName]=useState ("");
+    // const [eemail,seteEmailId]=useState ("");
+    // const [ecomments,seteComments]=useState ("");
+    const [fullNameError, setFullNameError] = useState("");
+    const [emailError, setEmailError] = useState("");
+    const [commentsError,setCommentsError]=useState ("");
 
-import { Modal, Button } from 'antd';
+    const history = useHistory();   
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
+function clear (){
+  setName("")
+  setEmailId("")
+  setComments("")
+  togglePopup();
+}
 
+  const EmailSubmit = (data) => {    
+    setFullNameError("")
+    setEmailError("")
+    setCommentsError("")
 
-const Contactus = () => {
-    const history = useHistory();
-    
+    let request = {
+      name,
+      email,
+      comments        
+    };
+    if(!name){
+      setFullNameError("Full Name is required")
+      return;
+    }
+    else if(name.length>50){
+      setFullNameError("Full Name must not exceed 50 characters")
+      return;
+    }       
+
+    else if(!email){
+      setEmailError("Email  is required")
+      return;
+    }
+    else if(email && !new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i).test(email)){
+        setEmailError("Email  Must match the format")
+        return;
+    }
+    else if(!comments){
+      setCommentsError("Address is required")
+      return;
+    }
+    else if(comments.length>250){
+      setCommentsError("Address must not exceed 250 characters")
+      return;
+    }     
+
+    // if(name!=="" && email!=="" && comments!==""){
+    API.post("contactUs/condition", request)
+        .then((response) => {
+          console.log("=========>",response);
+            if (response.data.success) {
+              console.log("==sss=>",response.data);
+                const { data } = response;
+                togglePopup()
+                setPopupTitle("Enquiry Form");
+                setPopupMsg("Mail sent successfully.Thanks you So much for your business");
+                setPopupType("success");
+                setPopupActionType("close");
+                setPopupActionValue("close");
+                // setPopupActionPath("/contactus")
+            } else {
+              console.log("==sss1111=>",response.data);
+                const { data } = response;
+                togglePopup()
+                setPopupTitle("Enquiry Form");
+                setPopupMsg( data.error.err );
+                // setPopupMsg("Floor is not Created, Please try Again");
+                setPopupType("error");
+                setPopupActionType("close");
+                setPopupActionValue("close");
+            }
+        }, (error) => {
+                togglePopup()
+                setPopupTitle("Error");
+                setPopupMsg( "Something went wrong, Please try Again");
+                setPopupType("error");
+                setPopupActionType("close");
+                setPopupActionValue("close");
+        }).catch(err => { console.log(err); });
+      // }
+      // else{
+      //   if(name==="" || name===undefined || name===null){
+      //     seteName("");
+      // }
+      // if(email==="" || email===undefined || email===null){
+      //   seteEmailId("");
+      // }
+      // if(comments==="" || comments===undefined || comments===null){
+      //   seteComments("");
+      // }
+      // } 
+}
     return (
         <div>
   <main id="main" className="inner-page">
@@ -32,7 +130,6 @@ const Contactus = () => {
        <div className="section-title">
          <h2>Contact US</h2>
        </div>
-
        <div className="row content">
 
          <div className="col-lg-6 d-flex align-items-stretch">
@@ -59,22 +156,32 @@ const Contactus = () => {
          </div>
 
          <div className="col-lg-6 mt-5 mt-lg-0 d-flex align-items-stretch contactfoms">
-           <form action="forms/contact.php" method="post" role="form" className="php-email-form">
+           <form onSubmit={handleSubmit(EmailSubmit)} method="post" role="form" className="php-email-form">
            <h3>Enquiry form</h3>
             
              <div className="form-group">
-               <label for="name">Full Name</label>
-                 <input type="text" name="name" className="form-control" id="name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+               <label htmlFor="name">Full Name</label>
+                 <input type="text" name="name" className="form-control" id="name" value={name}
+                onChange={(e) => setName(e.target.value)}/>
+                 {/* {  name==="" && ename===""?<p className="form-input-error"> Name is required</p>:""} */}
+                 <p className="form-input-error" >{fullNameError}</p>
                  <div className="validate"></div>
              </div>
              <div className="form-group">
-               <label for="name">Email</label>
-                 <input type="email" className="form-control" name="email" id="email" data-rule="email" data-msg="Please enter a valid email" />
+               <label htmlFor="name">Email</label>
+                 <input type="text" className="form-control" name="email" id="email"  value={email}
+                onChange={(e) => setEmailId(e.target.value)} />
+                 {/* {  email==="" && eemail===""?<p className="form-input-error"> Email is required</p>:""} */}
+                 <p className="form-input-error" >{emailError}</p>
                  <div className="validate"></div>
              </div>
              <div className="form-group">
-               <label for="name">comments</label>
-               <textarea className="form-control" name="message" rows="3" data-rule="required" data-msg="Please write something for us"></textarea>
+               <label htmlFor="name">comments</label>
+               <textarea className="form-control" name="message" rows="3" value={comments} 
+            onChange={(e) => setComments(e.target.value)}
+               ></textarea>
+                {/* {  comments==="" && ecomments===""?<p className="form-input-error"> Comments is required</p>:""} */}
+                <p className="form-input-error" >{commentsError}</p>
                <div className="validate"></div>
              </div>
              <div className="mb-3">
@@ -82,7 +189,9 @@ const Contactus = () => {
                <div className="error-message"></div>
                <div className="sent-message">Your message has been sent. Thank you!</div>
              </div>
-             <div className="text-center"><button type="submit">Submit</button></div>
+             <div className="text-center">
+             <button className="cta-btn">Submit</button>
+               </div>
            </form>
          </div>
 
@@ -110,6 +219,42 @@ const Contactus = () => {
 
      </div>
    </section>
+   {isOpen && <Popup
+  content={<>
+              <div className="popup-box">
+                <div id="" className="CommonModels-box">
+                  <div className="Commonfullformblock col-lg-9">
+                    <div className="CommonContainer">
+                        <div className="CommonModalcontent">
+                            <div className="Commonfull-icon">
+                                <img className={"successImg"} alt="" src={ checkImg } />
+                            </div>
+                            <div className="CommonModalbody">
+                                {popupTitle !== "" && <h2>{popupTitle}</h2>}
+                                <p>{popupMsg}</p>
+                            </div>
+                            <div className="CommonModalfooter ">
+                            {popupActionType.toLowerCase() === "close" && <button className="cta-btns" onClick={clear} >OK</button> }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                </div>
+
+        </>}
+    handleClose={togglePopup}
+                />}                         
+   {/* {isOpen && 
+                <CommonPopup 
+                    handleClose= {togglePopup}
+                    popupTitle= {popupTitle}
+                    popupMsg= {popupMsg}
+                    popupType= {popupType}
+                    popupActionType= {popupActionType}
+                    popupActionValue= {popupActionValue}
+                    popupActionPath={popupActionPath}
+                />} */}
 
   
 

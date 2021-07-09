@@ -91,9 +91,9 @@ const Notification = () => {
 					setPopupTitle("Create Notification");
 					setPopupMsg("Notification Successfully Created");
 					setPopupType("success");
-					setPopupActionType("redirect");
-					setPopupActionValue("ok");
-					setPopupActionPath("/notification")
+					setPopupActionType("close");
+					setPopupActionValue("close");
+					// setPopupActionPath("/notification")
 
 				} else {
 					togglePopup()
@@ -143,14 +143,14 @@ const Notification = () => {
 													<div className="col-lg-3 col-md-3">
 														<div className="radio input-group">
 															<input id="radio-instanceemnail" checked={email == "instant" ? true : false} value="instant" name="radio" type="radio" onChange={(e) => setEmail(e.target.value)} />
-															<label for="radio-instanceemnail" className="radio-label">Instant Email</label>
+															<label htmlFor="radio-instanceemnail" className="radio-label">Instant Email</label>
 															<p>Don't miss any deal! we will send you emails immediately with any new bid activity</p>
 														</div>
 													</div>
 													<div className="col-lg-3 col-md-3">
 														<div className="radio input-group">
 															<input id="radio-dailyupdate" checked={email == "daily" ? true : false} value="daily" name="radio" type="radio" onChange={(e) => setEmail(e.target.value)} />
-															<label for="radio-dailyupdate" className="radio-label">Daily Update</label>
+															<label htmlFor="radio-dailyupdate" className="radio-label">Daily Update</label>
 															<p>You will receive an email daily of new bid activity</p>
 														</div>
 													</div>
@@ -158,7 +158,7 @@ const Notification = () => {
 													<div className="col-lg-3 col-md-3">
 														<div className="radio input-group">
 															<input id="radio-weeklyupdate" checked={email == "weekly" ? true : false} value="weekly" name="radio" type="radio" onChange={(e) => setEmail(e.target.value)} />
-															<label for="radio-weeklyupdate" className="radio-label">Weekly Update</label>
+															<label htmlFor="radio-weeklyupdate" className="radio-label">Weekly Update</label>
 															<p>You will receive an email weekly of new bid activity</p>
 														</div>
 													</div>
@@ -166,7 +166,7 @@ const Notification = () => {
 														<Popover content={content} >
 															<div className="radio input-group">
 																<input id="radio-instemnail" checked={email == "no" ? true : false} value="no" name="radio" type="radio"   onChange={(e) => setEmail(e.target.value)} />
-																<label for="radio-instemnail" className="radio-label">Never</label>
+																<label htmlFor="radio-instemnail" className="radio-label">Never</label>
 																<p>you wont receive any emails for bid activity.</p>
 															</div>
 														</Popover>,
@@ -182,14 +182,14 @@ const Notification = () => {
 													<div className="col-lg-3 col-md-3">
 														<div className="radio input-group">
 															<input id="radio-dailyinssms" checked={sms == "instant" ? true : false} value="instant" name="radio" type="radio" onChange={(e) => setSms(e.target.value)} />
-															<label for="radio-dailyinssms" className="radio-label">Instant SMS</label>
+															<label htmlFor="radio-dailyinssms" className="radio-label">Instant SMS</label>
 															<p>Don't miss any deal! we will send you SMS immediately with any new bid activity</p>
 														</div>
 													</div>
 													<div className="col-lg-3 col-md-3">
 														<div className="radio input-group">
 															<input id="radio-dailysms" checked={sms == "daily" ? true : false} value="daily" name="radio" type="radio" onChange={(e) => setSms(e.target.value)} />
-															<label for="radio-dailysms" className="radio-label">Daily Update</label>
+															<label htmlFor="radio-dailysms" className="radio-label">Daily Update</label>
 															<p>You will receive an SMS daily of new bid activity</p>
 														</div>
 													</div>
@@ -197,7 +197,7 @@ const Notification = () => {
 													<div className="col-lg-3 col-md-3">
 														<div className="radio input-group">
 															<input id="radio-weeklysms" checked={sms == "weekly" ? true : false} value="weekly" name="radio" type="radio" onChange={(e) => setSms(e.target.value)} />
-															<label for="radio-weeklysms" className="radio-label"> Weekly Update</label>
+															<label htmlFor="radio-weeklysms" className="radio-label"> Weekly Update</label>
 															<p>You will receive an SMS weekly of new bid activity</p>
 														</div>
 													</div>
@@ -206,7 +206,7 @@ const Notification = () => {
 													<Popover content={content} >
 														<div className="radio input-group">
 															<input id="radio-dailysmsnover" checked={sms == "no" ? true : false} value="no" name="radio" type="radio"   onChange={(e) => setSms(e.target.value)} />
-															<label for="radio-dailysmsnover" className="radio-label">Never</label>
+															<label htmlFor="radio-dailysmsnover" className="radio-label">Never</label>
 															<p>you wont receive any SMS for bid activity.</p>
 														</div>
 														</Popover>
@@ -222,7 +222,7 @@ const Notification = () => {
 													<div className="col-lg-4 col-md-4">
 														<div className="radio input-group">
 															<input id="radio-dailynotificat" checked={push_notification == "yes" ? true : false} value="yes" name="radio" type="radio" onChange={(e) => setPush_notification(e.target.value)} />
-															<label for="radio-dailynotificat" className="radio-label">Yes</label>
+															<label htmlFor="radio-dailynotificat" className="radio-label">Yes</label>
 															<p>You will receive push notifications when any new bid activity directly to your mobile phone.</p>
 														</div>
 													</div>
@@ -231,7 +231,7 @@ const Notification = () => {
 													<Popover content={content} >
 														<div className="radio input-group">
 															<input id="radio-dailyno" checked={push_notification == "no" ? true : false} value="no" name="radio" type="radio" onChange={(e) => setPush_notification(e.target.value)} />
-															<label for="radio-dailyno" className="radio-label">No</label>
+															<label htmlFor="radio-dailyno" className="radio-label">No</label>
 															<p>you wont receive any push notification.</p>
 														</div>
 														</Popover>
@@ -251,14 +251,14 @@ const Notification = () => {
 													<div className="col-lg-4 col-md-4">
 														<div className="radio input-group">
 															<input id="radio-dailycarsno" checked={femail == "daily" ? true : false} value="daily" name="radio" type="radio" onChange={(e) => setFavEmail(e.target.value)} />
-															<label for="radio-dailycarsno" className="radio-label">Daily Update</label>
+															<label htmlFor="radio-dailycarsno" className="radio-label">Daily Update</label>
 															<p>You will receive a daily Email when new vehicle posted matching your Favorite cars</p>
 														</div>
 													</div>
 													<div className="col-lg-4 col-md-4">
 														<div className="radio input-group">
 															<input id="radio-weeklycarsno" checked={femail == "weekly" ? true : false} value="weekly" name="radio" type="radio" onChange={(e) => setFavEmail(e.target.value)} />
-															<label for="radio-weeklycarsno" className="radio-label">Weekly Update</label>
+															<label htmlFor="radio-weeklycarsno" className="radio-label">Weekly Update</label>
 															<p>You will receive a weekly Email when new vehicle posted matching your Favorite cars</p>
 														</div>
 													</div>
@@ -267,7 +267,7 @@ const Notification = () => {
 													<Popover content={content} >
 														<div className="radio input-group">
 															<input id="radio-dailycarsnover" checked={femail == "no" ? true : false} value="no" name="radio" type="radio"   onChange={(e) => setFavEmail(e.target.value)} />
-															<label for="radio-dailycarsnover" className="radio-label">Never</label>
+															<label htmlFor="radio-dailycarsnover" className="radio-label">Never</label>
 															<p>you wont receive any emails With fresh inventory.</p>
 														</div>
 														</Popover>
@@ -283,7 +283,7 @@ const Notification = () => {
 													<div className="col-lg-4 col-md-4">
 														<div className="radio input-group">
 															<input id="radio-dailysmct" checked={fsms == "daily" ? true : false} value="daily" name="radio" type="radio" onChange={(e) => setFavSms(e.target.value)} />
-															<label for="radio-dailysmct" className="radio-label">Daily Update</label>
+															<label htmlFor="radio-dailysmct" className="radio-label">Daily Update</label>
 															<p>You will receive a daily SMS when new vehicle posted matching your Favorite cars</p>
 														</div>
 													</div>
@@ -291,7 +291,7 @@ const Notification = () => {
 													<div className="col-lg-4 col-md-4">
 														<div className="radio input-group">
 															<input id="radio-weeklysmct" checked={fsms == "weekly" ? true : false} value="weekly" name="radio" type="radio" onChange={(e) => setFavSms(e.target.value)} />
-															<label for="radio-weeklysmct" className="radio-label">Weekly Update</label>
+															<label htmlFor="radio-weeklysmct" className="radio-label">Weekly Update</label>
 															<p>You will receive a weekly SMS when new vehicle posted matching your Favorite cars</p>
 														</div>
 													</div>
@@ -301,7 +301,7 @@ const Notification = () => {
 													<Popover content={content} >
 														<div className="radio input-group">
 															<input id="radio-dailysmtnover" checked={fsms == "no" ? true : false} value="no" name="radio" type="radio"   onChange={(e) => setFavSms(e.target.value)} />
-															<label for="radio-dailysmtnover" className="radio-label">Never</label>
+															<label htmlFor="radio-dailysmtnover" className="radio-label">Never</label>
 															<p>you wont receive any SMS With fresh inventory.</p>
 														</div>
 														</Popover>

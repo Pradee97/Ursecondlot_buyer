@@ -1,17 +1,6 @@
 import React from 'react';
-import API from "../../Services/BaseService";
-import { useHistory } from "react-router-dom";
 import ls from 'local-storage';
-
-// import '../../assets/css/styles.css';
-import { useState } from 'react';
-import { useEffect } from 'react';
 import '../../assets/css/responsive.css';
-import {
-    Table
-} from 'antd';
-
-import { Modal, Button } from 'antd';
 
 
 const CarList = () => {

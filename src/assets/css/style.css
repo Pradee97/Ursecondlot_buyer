@@ -269,6 +269,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav-menu a:hover, .nav-menu .active > a, .nav-menu li:hover > a {
   color: #BD062C ;
+  text-decoration: none;
 }
 
 .nav-menu .drop-down ul {
@@ -5888,6 +5889,34 @@ paymentform
   font-size: 16px;
   font-weight: 600;
 }
+
+.registrationform .datePickerBlock .tbox  label {
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  bottom: 0;
+  border-radius: 3px 0 0 3px;
+  padding: 0 5px;
+  background: #fff;
+  color: #9F9F9F;
+  transform: translateZ(0) translateX(0);
+  transition: all 0.3s ease-in;
+  transition-delay: 0.2s;
+  display: inline-block;
+  height: 22px;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.react-datepicker__close-icon::after {
+  background-color: #bd062c;
+  position: relative;
+  right: 34px;
+}
+.datePickerBlock button:hover {
+  background:none;
+}
 .modalcontent{
   margin: 0 auto;
   text-align: center;
@@ -5926,9 +5955,17 @@ paymentform
 
 .lotfee-inner  p {
     text-align: center;
-    color: #343434;
     font-size: 16px;
     margin: 20px 30px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
 }
 .lotfee-form{
 	margin:20px auto;
@@ -5963,9 +6000,10 @@ Documents page
 	
 .docdetails h5{
 	color: #343434;
-	font-size:16px;
+	font-size:14px;
 	font-weight:500;
 	margin-bottom:20px;
+  min-height: 66px;
 }
 .docdetails p{
 	color: #343434;
@@ -6367,7 +6405,7 @@ button.add-user-btns {
   width: 20%;
 }
 .userlisttable table th.th_phone {
-  width: 10%;
+  width: 20%;
 }
 .userlisttable table th.th_status {
   width: 10%;
@@ -6395,8 +6433,11 @@ button.add-user-btns {
   padding-left: 20px;
   font-size: 14px;
   text-align: center;
-  padding: 10px 20px;
+  padding: 10px 5px;
   border-right: 1px solid #ddd;
+}
+.userlisttable table td.phonenotab{
+  padding: 10px 5px;
 }
 .userlisttable table td .cartitlename {
   color: #002768;
@@ -6576,9 +6617,54 @@ table td .ant-btn:hover span, table td .ant-btn:hover i{
 
 .backaccountform.addpaymentform p.form-input-error{
   margin: 0;
-    color: #BD062C;
+    color: red;
 }
 
 .suggested-cars .col-md-3 .car-item{
   background: #fff;
+}
+.floor_notfiled_block{
+  display: block;
+  text-align: center;
+  position: relative;
+  top: 50px;
+  left: 7%;
+  font-size: 19px;
+  font-weight: 500;
+  padding-bottom: 30px;
+}
+.phonecode small {
+    font-size: 80%;
+    font-weight: 400;
+    float: left;
+    margin-top: 5px;
+    color: #9f9f9f;
+    margin-right: 5px;
+}
+.phoneNumberfield .MuiInput-root{
+  float: left;
+}
+
+.phoneNumberfield .MuiInput-underline:hover:not(.Mui-disabled):before, .MuiInput-underline:hover:not(.Mui-disabled):before {
+  border: none;
+}
+.phoneNumberfield .MuiInput-underline:before, .phoneNumberfield .MuiInput-underline:after {
+  border: none;
+}
+
+.tbox.phoneNumberfield{
+  border: lightgray solid 1px;
+  border-radius: 3px;
+  float: left;
+    width: 100%;
+    height: 50px;
+}
+
+.phoneNumberfield .MuiFormControl-root{
+  margin-top: 10px;
+    margin-left: 10px;
+    display: block;
+}
+.MuiInputBase-input{
+  font-size: 14px !important;
 }

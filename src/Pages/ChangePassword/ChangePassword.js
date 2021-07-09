@@ -1,36 +1,23 @@
 import React from 'react';
-import API from "../../Services/BaseService";
-import { useHistory,useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import ls from 'local-storage';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 // import '../../assets/css/styles.css';
 import { useState } from 'react';
-import { useEffect } from 'react';
-
+import API from "../../Services/BaseService";
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
-
-import {
-    Form,
-    Input,
-    Select,
-    AutoComplete,
-    Radio,
-    notification,
-    Spin,
-} from 'antd';
-
-
-import { Modal, Button } from 'antd';
 import './ChangePassword.css';
 import '../../assets/css/responsive.css';
-
+import { useForm } from "react-hook-form";
 
 
 
 const ChangePassword = () => {
     const history = useHistory();
     const eye = <FontAwesomeIcon icon={faEye} />;
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const [errorMsg, setErrorMsg] = useState("");
     const [oldPassword, setOldPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -39,6 +26,9 @@ const ChangePassword = () => {
     const[showPwd,setShowPwd]=useState(false);
     const[showPwds,setShowPwds]=useState(false);
     const[showsPwds,setShowsPwds]=useState(false);
+    const [oldPasswordError, setOldPasswordError] = useState('');
+    const [newPasswordError, setNewPasswordError] = useState('');
+    const [confirmPasswordError, setConfirmPasswordError] = useState('');
 
     const togglePopup = () => {
         setIsOpen(!isOpen);
@@ -68,12 +58,41 @@ const ChangePassword = () => {
         setShowsPwds(!showsPwds);
       }
     const changehandleSubmit = (event) => {
-        event.preventDefault();
-        if(newPassword != confirmPassword){
-                setErrorMessage("Newpassword and Confirmpassword didn't match")
-             }
+        //event.preventDefault();
+        setOldPasswordError("")
+        setNewPasswordError("")
+        setConfirmPasswordError("")
+
+        if(!oldPassword){
+          setOldPasswordError("Old Password is required")
+          return;
+      }
+      else if(oldPassword<8){
+          setOldPasswordError("Old Password must have minimum 8 characters")
+          return;
+      }
+      if(!newPassword){
+          setNewPasswordError("New Password is required")
+          return;
+      }
+      else if(newPassword && !new RegExp(/(^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,}))/).test(newPassword)){
+          setNewPasswordError("New Password must have minimum of 8 characters with the combination of upper ,lower case letters , number and a special character")
+          return;
+      }
+      if(!confirmPassword){
+        setConfirmPasswordError("Confirm Password is required")
+        return;
+    }
+    else if(confirmPassword && !new RegExp(/(^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,}))/).test(confirmPassword)){
+        setConfirmPasswordError("Confirm Password must have minimum of 8 characters with the combination of upper ,lower case letters , number and a special character")
+        return;
+    }
+        else if(newPassword !== confirmPassword){
+            setErrorMessage("New password and Confirm password doesn't match ! ");
+            return;
+          }
         
-        else{
+       
         let request = {
           old_password: oldPassword,
           new_password: newPassword,
@@ -81,13 +100,10 @@ const ChangePassword = () => {
          active:1
 
         };
-        // if(newPassword === confirmPassword)
         API.post("changepassword/update", request)
-
           .then((response) => {
             console.log("res", response)
             if (response.data.success == true) {  
-            //   history.push("/login");
             togglePopup()
             setPopupTitle("Change Password");
             setPopupMsg("Change Password Successfully Updated");
@@ -98,10 +114,10 @@ const ChangePassword = () => {
             setPopupActionPath("/login")
 
             } else {
-            //   history.push("error");
+            const { data } = response;
             togglePopup()
             setPopupTitle("Change Password");
-            setPopupMsg("Change Password is not Updated, Please try Again");
+            setPopupMsg(data.error.err);
             setPopupType("error");
             setPopupActionType("close");
             setPopupActionValue("close");
@@ -117,40 +133,42 @@ const ChangePassword = () => {
             });
         }
       
-      }
-  
-
     return (
         <div>
             <main id="main" className="inner-page">
                 <div className="col-lg-4  loginBlock">
 
-                <button className="back-btn-paymentform backBtn" onClick={() => history.push("/myprofile")}><i class="icofont-arrow-left"></i> Back</button>
+                <button className="back-btn-paymentform backBtn" onClick={() => history.push("/myprofile")}><i className="icofont-arrow-left"></i> Back</button>
                 <div className="col-lg-12 card">
 
-                    <form className="registrationform" onSubmit={changehandleSubmit} >
+                    <form className="registrationform" onSubmit={handleSubmit(changehandleSubmit)} >
                         <h2 className="title">Change Password</h2>
-                        <p className="error-message">{errorMessage}</p>
+                        
                         <div className="row changePassblock">
 
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type={showPwd?"text":"password"} id="old_password" className="textbox" placeholder="" required onChange={(e) => setOldPassword(e.target.value)} />
-                                <label for="old_password"  className={oldPassword != "" ? "input-has-value" : ""}>Old Password</label><i for ="password" className="passwordeye"  onClick={togglepwd}>{eye}</i>
+                                <input type={showPwd?"text":"password"} id="old_password" className="textbox" placeholder="" onChange={(e) => setOldPassword(e.target.value)} />
+                                <label htmlFor="old_password"  className={oldPassword != "" ? "input-has-value" : ""}>Old Password</label><i htmlFor ="password" className="passwordeye"  onClick={togglepwd}>{eye}</i>
+                                <p className="form-input-error" >{oldPasswordError}</p>
+                                
                             </div>
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type={showPwds?"text":"password"} id="new_password" className="textbox" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="eg:(It should be Uppercase, Lowercase, Specialcharacter, Numbers and Minimum 8 character)" placeholder="" required onChange={(e) => setNewPassword(e.target.value)} />
-                                <label for="new_password" c className={newPassword != "" ? "input-has-value" : ""}>New Password</label><i for ="newPassword" className="passwordeye"  onClick={togglepwds}>{eye}</i>
+                                <input type={showPwds?"text":"password"} id="new_password" className="textbox"  placeholder="" onChange={(e) => setNewPassword(e.target.value)} />
+                                <label htmlFor="new_password" c className={newPassword != "" ? "input-has-value" : ""}>New Password</label><i htmlFor ="newPassword" className="passwordeye"  onClick={togglepwds}>{eye}</i>
+                                <p className="form-input-error" >{newPasswordError}</p>
                                 
                             </div>
                             </div>
 
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type={showsPwds?"text":"password"} id="confirm_password" className="textbox" placeholder="" required onChange={(e) => setConfirmPassword(e.target.value)} />
-                                <label for="confirm_password"  className={confirmPassword != "" ? "input-has-value" : ""}>Confirm Password</label><i for ="newPassword" className="passwordeye"  onClick={togglespwds}>{eye}</i>
+                                <input type={showsPwds?"text":"password"} id="confirm_password" className="textbox" placeholder="" onChange={(e) => setConfirmPassword(e.target.value)} />
+                                <label htmlFor="confirm_password"  className={confirmPassword != "" ? "input-has-value" : ""}>Confirm Password</label><i htmlFor ="newPassword" className="passwordeye"  onClick={togglespwds}>{eye}</i>
+                                <p className="form-input-error" >{confirmPasswordError}</p>
+                                <p className="form-input-error">{errorMessage}</p>
                             </div> 
                             </div>
                             {/* <div className="col-sm-12 form-group">

@@ -1,12 +1,10 @@
 import React from 'react';
-import { useHistory } from "react-router-dom";
 import AboutusImg from '../../../src/assets/img/aboutusimg.png';
 import AppStoreImg from '../../../src/assets/img/appstore.png';
 import GooglePlayImg from '../../../src/assets/img/googleplay.png';
 
 
 const About = () => {
-    const history = useHistory();
     
     return (
         <div>
