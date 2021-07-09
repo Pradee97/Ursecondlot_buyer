@@ -39,6 +39,7 @@ const Login = () => {
 
   const loginhandleSubmit = (event) => {
     event.preventDefault();
+    setErrorMessage("")
     setErrors({email:"", password:""})
     if(!emailId) { setErrors({email:"email id is required", password:""}); return}
     else if( emailId && !new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i).test(emailId) ) {
