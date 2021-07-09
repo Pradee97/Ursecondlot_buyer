@@ -51,8 +51,8 @@ const LotFee = () => {
             console.log(data);
             setLotValue(data)
         }
-        else
-            setLotValue(0)
+        // else
+        //     setLotValue(0)
     }
         
         const handlesubimt = () => {

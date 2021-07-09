@@ -375,6 +375,7 @@ const getZipCodeId = (zipData) => {
 															<select id="drop" placeholder="" name="dropoption" className="form-control custom-select browser-default textbox" 
 															onChange={(e) => setOption(e.target.value)}>
 																{/* <option disabled >How many years in car business</option> */}
+																<option style={{"display":"none"}}></option>
 																<option value="Less then 1">Less then 1</option>
 																<option value="1-3">1-3</option>
 																<option value="3-5">3-5</option>
