@@ -225,6 +225,9 @@ const EditBuyer = () => {
                 if (response.data.success) {
                     const { data } = response;
                     console.log("response", response)
+                    if(userDetails.user_id===response.data.data[0].user_id){
+                        ls.set('userDetails', response.data.data[0]);
+                    }                    
                     // history.push("/success");
                     togglePopup()
                     setPopupTitle("");

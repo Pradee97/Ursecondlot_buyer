@@ -342,7 +342,7 @@ const Document = () => {
                                                             </div>
                                                         </p>
                                                     </div> : <div className="docdetails">
-                                                        <h5>Copy of Dealer license</h5>
+                                                        <h5>Copy of Company check.</h5>
                                                         <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc3.doc_name} className="img-fluid" alt="" />
                                                         <div><a href={doc3.doc_name} target="_blank">{doc3.doc_name.split("_")[1]}</a></div>
                                                         <p>
@@ -351,7 +351,7 @@ const Document = () => {
                                                                 <FileBase64 onDone={(e) => updateFiles(e, doc3.document_id)} />
                                                             </div>
 
-                                                            <a className="btn deleteFile" onclick={(e)=>deleteFileConfirmation(doc3.document_id)}> Delete File</a>
+                                                            <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc3.document_id)}> Delete File</a>
                                                         </p>
                                                     </div>
                                                     }
@@ -373,7 +373,7 @@ const Document = () => {
                                                         </p>
                                                     </div> :
                                                         <div className="docdetails">
-                                                            <h5>Copy of Dealer license</h5>
+                                                            <h5>Copy of state sales tax certificate.</h5>
                                                             <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc4.doc_name} className="img-fluid" alt="" />
                                                             <div><a href={doc4.doc_name} target="_blank">{doc4.doc_name.split("_")[1]}</a></div>
                                                             <p>
@@ -397,7 +397,7 @@ const Document = () => {
                                                         </p>
                                                     </div> :
                                                         <div className="docdetails">
-                                                            <h5>Copy of Dealer license</h5>
+                                                            <h5>Copy of surety bond (if required by you state).</h5>
                                                             <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc5.doc_name} className="img-fluid" alt="" />
                                                             <div><a href={doc5.doc_name} target="_blank">{doc5.doc_name.split("_")[1]}</a></div>
                                                             <p>
@@ -421,7 +421,7 @@ const Document = () => {
                                                         </p>
                                                     </div>:
                                                      <div className="docdetails">
-                                                     <h5>Copy of Dealer license</h5>
+                                                     <h5>Copy of DMV vehicle dealer bond (in required states).</h5>
                                                      <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc6.doc_name} className="img-fluid" alt="" />
                                                      <div><a href={doc6.doc_name} target="_blank">{doc6.doc_name.split("_")[1]}</a></div>
                                                      <p>
@@ -449,7 +449,7 @@ const Document = () => {
                                                         </p>
                                                     </div>:
                                                     <div className="docdetails">
-                                                    <h5>Copy of Dealer license</h5>
+                                                    <h5>Signed individual guaranty for each owner.</h5>
                                                     <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc7.doc_name} className="img-fluid" alt="" />
                                                     <div><a href={doc7.doc_name} target="_blank">{doc7.doc_name.split("_")[1]}</a></div>
                                                     <p>
@@ -473,7 +473,7 @@ const Document = () => {
                                                         </p>
                                                     </div>:
                                                     <div className="docdetails">
-                                                    <h5>Copy of Dealer license</h5>
+                                                    <h5>Legible copy of driver’s license for owners and representatives</h5>
                                                     <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc8.doc_name} className="img-fluid" alt="" />
                                                     <div><a href={doc8.doc_name} target="_blank">{doc8.doc_name.split("_")[1]}</a></div>
                                                     <p>
@@ -497,7 +497,7 @@ const Document = () => {
                                                         </p>
                                                     </div>:
                                                     <div className="docdetails">
-                                                    <h5>Copy of Dealer license</h5>
+                                                    <h5>Signed bank Authorization letter for bank to release information.</h5>
                                                     <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc9.doc_name} className="img-fluid" alt="" />
                                                     <div><a href={doc9.doc_name} target="_blank">{doc9.doc_name.split("_")[1]}</a></div>
                                                     <p>
@@ -525,7 +525,7 @@ const Document = () => {
                                                         </p>
                                                     </div>:
                                                     <div className="docdetails">
-                                                    <h5>Copy of Dealer license</h5>
+                                                    <h5>Legible copy of driver’s license for owners and representatives</h5>
                                                     <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc10.doc_name} className="img-fluid" alt="" />
                                                     <div><a href={doc10.doc_name} target="_blank">{doc10.doc_name.split("_")[1]}</a></div>
                                                     <p>
@@ -550,7 +550,7 @@ const Document = () => {
                                                         </p>
                                                     </div>:
                                                     <div className="docdetails">
-                                                    <h5>Copy of Dealer license</h5>
+                                                    <h5>Articles of incorporation.</h5>
                                                     <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc11.doc_name} className="img-fluid" alt="" />
                                                     <div><a href={doc11.doc_name} target="_blank">{doc11.doc_name.split("_")[1]}</a></div>
                                                     <p>
