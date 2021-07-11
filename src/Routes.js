@@ -44,6 +44,7 @@ import EditBuyer from './Pages/ManageAccount/Buyer/EditBuyer';
 import ForgotPasswordEmail from './Pages/ForgotPassword/ForgotPasswordEmail';
 import ForgotPassword from './Pages/ForgotPassword/ForgotPassword';
 import ForgotEmail from './Pages/ForgotPassword/ForgotEmail';
+import Favoritelist from './Pages/ManageAccount/FavoriteList';
 function AppRouter() {
 
   const timeout = 900000;
@@ -112,7 +113,7 @@ function AppRouter() {
               <Route  path="/paymentinfo" component={PaymentInfo}/>
               <Route  path="/editpayment/:id" component={EditPayment}/>
               <Route  path="/document" component={Document}/> 
-              <Route  path="/favorite" component={Inprogress}/>
+              <Route  path="/favorite" component={Favoritelist}/>
               <Route  path="/history" component={Inprogress}/>
               <Route  path="/cart" component={Inprogress}/>
               <Route  path="/chat" component={Inprogress}/>
