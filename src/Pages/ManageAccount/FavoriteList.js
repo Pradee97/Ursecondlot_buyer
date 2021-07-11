@@ -1,10 +1,11 @@
 import React from 'react';
 import lock from '../../assets/img/lock.svg';
 import cars01 from '../../assets/img/cars01.png';
-import appstore from '../../assets/img/appstore.png';
-import googleplay from '../../assets/img/googleplay.png';
 import speedometer from '../../assets/img/speedometer.svg';
 import gasolinePump from '../../assets/img/gasolinePump.svg';
+import appstore from '../../assets/img/appstore.png';
+import googleplay from '../../assets/img/googleplay.png';
+
 
 
 const Favoritelist = () => {
