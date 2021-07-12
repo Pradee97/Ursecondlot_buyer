@@ -1,5 +1,6 @@
 import React from 'react';
 import API from "../../Services/BaseService";
+import ls from 'local-storage';
 import { useHistory,useParams } from "react-router-dom";
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -16,6 +17,7 @@ const EditDealerInformation = () => {
     let { register, updateDealerInfo, formState: { errors },reset  } = useForm();
     const history = useHistory();
     const { id } = useParams();
+    const userDetails = ls.get('userDetails');
     const [accountObjc, setAccountObj] = useState("");
     const [firstName, setFirstname] = useState("");
     const [lastName, setLastname] = useState("");
@@ -65,6 +67,7 @@ const EditDealerInformation = () => {
         };
         const state = API.post('user_profile/condition', request);
         state.then(res => {
+            console.log( "userDetails=>",userDetails)
             console.log("res=======>", res.data.data)
             setFirstname(res.data.data[0].first_name);
             setLastname(res.data.data[0].last_name);
@@ -164,6 +167,7 @@ const EditDealerInformation = () => {
                 if (response.data.success) {
                     const { data } = response;
                     console.log("response", response)
+                    ls.set('userDetails', response.data.data[0]);
                     // history.push("/success");
                     togglePopup()
                     setPopupTitle("Edit Dealer Information");
