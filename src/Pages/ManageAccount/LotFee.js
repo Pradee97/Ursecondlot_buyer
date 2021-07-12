@@ -6,28 +6,21 @@ import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccount
 import API from "../../Services/BaseService";
 import '../../Component/Popup/popup.css';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
-
-
 const LotFee = () => {
     const [isOpen, setIsOpen] = useState(false);
- 
-    const togglePopup = () => {
-      setIsOpen(!isOpen);
-    }
-
-    const [popupTitle, setPopupTitle] = useState ("");
-    const [popupMsg, setPopupMsg] = useState ("");
-    const [popupType, setPopupType] = useState ("");
-    const [popupActionType, setPopupActionType] = useState ("");
-    const [popupActionValue, setPopupActionValue] = useState ("");
-    const [popupActionPath] = useState ("")
-
-    const [lotFee, setLotFee]= useState("")
+    const [popupTitle, setPopupTitle] = useState("");
+    const [popupMsg, setPopupMsg] = useState("");
+    const [popupType, setPopupType] = useState("");
+    const [popupActionType, setPopupActionType] = useState("");
+    const [popupActionValue, setPopupActionValue] = useState("");
+    const [popupActionPath] = useState("")
+    const [lotFee, setLotFee] = useState("")
     const [lotValue, setLotValue] = useState("");
     const [lotFeeError, setLotFeeError] = useState("")
-
     let userDetails = ls.get('userDetails');
-
+    const togglePopup = () => {
+        setIsOpen(!isOpen);
+    }
     async function getLotfee() {
         let request = {
             buyer_id: userDetails.user_id,
@@ -35,43 +28,43 @@ const LotFee = () => {
         const state = API.post('lot_fee/condition', request);
         state.then(res => {
             console.log("res", res.data.data)
-            setLotValue(res.data.data.lot_fee) ;
-            setLotFee( res.data.data )
+            setLotValue(res.data.data.lot_fee);
+            setLotFee(res.data.data)
         })
             .catch(err => { console.log(err); });
     }
-	useEffect(() => {
+    useEffect(() => {
         getLotfee();
-    },[]);
+    }, []);
     // useEffect(() => {},[lotValue]);
-    const updateLotValue = (data)=>{
-        console.log("---------------",data)
-        if(!isNaN(data) && data!=="" && data!==undefined)
-        {
+    const updateLotValue = (data) => {
+        console.log("---------------", data)
+        if (!isNaN(data) && data !== "" && data !== undefined) {
             console.log(data);
             setLotValue(data)
         }
-        else
-            setLotValue(0)
+        else{
+            //setLotValue(0)
+        }
+            
     }
-        
-        const handlesubimt = () => {
-                //console.log("check",buyer_id)
-                setLotFeeError("")  
 
-            let request = {
-                buyer_id: userDetails.user_id,
-                lot_fee: lotValue,
-                active:1
-            };
-            if(lotValue === 0 ){
-                setLotFeeError("LotFee must be greater then zero")
-                return;
-            }
-            API.post("lot_fee/add",request)
-               .then((response) => {
-                 console.log("res", response.data.success)
-                if (response.data.success ) {
+    const handlesubimt = () => {
+        //console.log("check",buyer_id)
+        setLotFeeError("")
+        let request = {
+            buyer_id: userDetails.user_id,
+            lot_fee: lotValue,
+            active: 1
+        };
+        if (lotValue === 0) {
+            setLotFeeError("LotFee must be greater then zero")
+            return;
+        }
+        API.post("lot_fee/add", request)
+            .then((response) => {
+                console.log("res", response.data.success)
+                if (response.data.success) {
                     togglePopup()
                     setPopupTitle("Create LotFee");
                     setPopupMsg("LotFee Successfully Created");
@@ -79,96 +72,81 @@ const LotFee = () => {
                     setPopupActionType("close");
                     setPopupActionValue("close");
                     // setPopupActionPath("/lotfee")
-                 } else {
+                } else {
                     togglePopup()
                     setPopupTitle("Create LotFee");
                     // setPopupMsg("LotFee is not Created, Please try Again");
-                    setPopupMsg( response.data.error.err );
+                    setPopupMsg(response.data.error.err);
                     setPopupType("error");
                     setPopupActionType("close");
                     setPopupActionValue("close");
-                 }
-               },
-                 (error) => {
+                }
+            },
+                (error) => {
                     togglePopup()
                     setPopupTitle("Error");
-                    setPopupMsg( "Something went wrong, Please try Again");
+                    setPopupMsg("Something went wrong, Please try Again");
                     setPopupType("error");
                     setPopupActionType("close");
                     setPopupActionValue("close");
-                 });
-        
-           }
-          
+                });
+    }
+
     return (
         <div>
-
-<main id="main" className="inner-page">
-   
-   
-   <div id="lotfee" className="lotfee">
-       <div className="container">
-           <div className="lotfeeblock col-lg-12">
-               <div className="section-title">
-                 <h2>Lot Fee</h2>
-               </div>
-               <div className="row content">
-                   <div className="col-lg-3 col-md-4 col-sm-12 accountleftblock">
-                      
-                       <ManageAccountLinks />
-                   </div>
-                   <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 lotfeerightblock">
-                       <div className="lotfee-inner">
-                       <p>Your expense or your profit added to the vehicle every time you purchase </p>
-                           <div className="form-group col-lg-6 col-md-6 lotfee-form">
-                               <div className="input-icon">
-                                 <input type="text" className="form-control"  defaultValue={lotFee.lot_fee} value={lotValue} onChange={(e) => updateLotValue(Math.round(e.target.value))}/> 
-                                   <i>$</i>
-                               </div>
-                           </div>
-                           <p className="form-input-error" >{lotFeeError}</p>
-                           <div className="col-lg-12 loginBtn">
-                               <button className="cta-btn" onClick={handlesubimt}>Submit</button>
-                               {/* conclick={handlesubimt} */}
-                           </div>
-                       </div>
-                   </div>
-               </div>
-           </div>
-       </div>
-   </div>
-
-  
-
-   
-   <section id="playstoreBlock" className="playstoreBlock">
-     <div className="container">
-
-
-       <div className="row content">
-         <div className="col-lg-12">
-         <img src={process.env.PUBLIC_URL +"/images/appstore.png"} />
-           <img src={process.env.PUBLIC_URL +"/images/googleplay.png"} />
-         </div>
-        
-       </div>
-
-     </div>
-   </section>
-   {isOpen && 
-                <CommonPopup 
-                    handleClose= {togglePopup}
-                    popupTitle= {popupTitle}
-                    popupMsg= {popupMsg}
-                    popupType= {popupType}
-                    popupActionType= {popupActionType}
-                    popupActionValue= {popupActionValue}
-                    popupActionPath={popupActionPath}
-                />}
-   </main>
+            <main id="main" className="inner-page">
+                <div id="lotfee" className="lotfee">
+                    <div className="container">
+                        <div className="lotfeeblock col-lg-12">
+                            <div className="section-title">
+                                <h2>Lot Fee</h2>
+                            </div>
+                            <div className="row content">
+                                <div className="col-lg-3 col-md-4 col-sm-12 accountleftblock">
+                                    <ManageAccountLinks />
+                                </div>
+                                <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 lotfeerightblock">
+                                    <div className="lotfee-inner">
+                                        <p>Your expense or your profit added to the vehicle every time you purchase </p>
+                                        <div className="form-group col-lg-6 col-md-6 lotfee-form">
+                                            <div className="input-icon">
+                                                <input type="text" className="form-control" defaultValue={lotFee.lot_fee} value={lotValue} onChange={(e) => updateLotValue(Math.round(e.target.value))} />
+                                                <i>$</i>
+                                            </div>
+                                        </div>
+                                        <p className="form-input-error" >{lotFeeError}</p>
+                                        <div className="col-lg-12 loginBtn">
+                                            <button className="cta-btn" onClick={handlesubimt}>Submit</button>
+                                            {/* conclick={handlesubimt} */}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <section id="playstoreBlock" className="playstoreBlock">
+                    <div className="container">
+                        <div className="row content">
+                            <div className="col-lg-12">
+                                <img src={process.env.PUBLIC_URL + "/images/appstore.png"} />
+                                <img src={process.env.PUBLIC_URL + "/images/googleplay.png"} />
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                {isOpen &&
+                    <CommonPopup
+                        handleClose={togglePopup}
+                        popupTitle={popupTitle}
+                        popupMsg={popupMsg}
+                        popupType={popupType}
+                        popupActionType={popupActionType}
+                        popupActionValue={popupActionValue}
+                        popupActionPath={popupActionPath}
+                    />}
+            </main>
         </div>
-
-
     )
 }
 

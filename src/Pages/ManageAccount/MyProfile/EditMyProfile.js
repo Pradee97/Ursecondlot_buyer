@@ -140,7 +140,6 @@ const EditMyProfile = () => {
             phone_no: formatMobileNO(primaryPhone),
             mobile_no: formatMobileNO(mobilePhone),           
             email: emailId,
-            address: address,
             // city_id: city,
             // state_id: state,
             // zipcode_id: zipcode,
@@ -158,6 +157,7 @@ const EditMyProfile = () => {
             .then((response) => {
                 if (response.data.success) {
                     const { data } = response;
+                    ls.set('userDetails', response.data.data[0]);
                     console.log("response", response)
                     // history.push("/success");
                     togglePopup()

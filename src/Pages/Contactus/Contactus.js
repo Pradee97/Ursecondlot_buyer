@@ -65,11 +65,11 @@ function clear (){
         return;
     }
     else if(!comments){
-      setCommentsError("Address is required")
+      setCommentsError("Comments is required")
       return;
     }
     else if(comments.length>250){
-      setCommentsError("Address must not exceed 250 characters")
+      setCommentsError("Comments must not exceed 250 characters")
       return;
     }     
 

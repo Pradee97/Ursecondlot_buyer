@@ -13,17 +13,17 @@ const Buyers = () => {
     let userDetails = ls.get('userDetails');
     const [userList,setUserList] = useState("");
     const [data,setData]=useState("");
-    const [isOpen, setIsOpen] = useState(false);
- 
-    const togglePopup = () => {
-      setIsOpen(!isOpen);
-    }
+    const [isOpen, setIsOpen] = useState(false);    
     const [popupTitle, setPopupTitle] = useState ("");
     const [popupMsg, setPopupMsg] = useState ("");
     const [popupType, setPopupType] = useState ("");
     const [popupActionType, setPopupActionType] = useState ("");
     const [popupActionValue, setPopupActionValue] = useState ("");
-    const [popupActionPath, setPopupActionPath] = useState ("")
+    const [popupActionPath, setPopupActionPath] = useState ("");
+    const [oldUserList,setOldUserList]=useState ("");
+    const togglePopup = () => {
+        setIsOpen(!isOpen);
+      }
     async function getuserDetails() {
         let request = {
             dealer_id: userDetails.dealer_id
@@ -31,6 +31,7 @@ const Buyers = () => {
         const state = API.post('user_list/condition', request);
         state.then(res => {
             console.log("res", res.data.data)
+            setOldUserList(res.data.data);
             setUserList(res.data.data);
         })
             .catch(err => { console.log(err); });
@@ -45,6 +46,7 @@ const Buyers = () => {
         API.post("userSearch/condition",request)
         .then((response)=>{
             if(response.data.data.length==0){
+                setUserList(oldUserList);
                 togglePopup()
                 setPopupTitle("Data not found ");
                 setPopupType("error");
@@ -65,7 +67,7 @@ const Buyers = () => {
           }
         );
         } else {
-            setUserList([]);
+            setUserList(oldUserList);
            
         }
     }

@@ -44,6 +44,14 @@ import EditBuyer from './Pages/ManageAccount/Buyer/EditBuyer';
 import ForgotPasswordEmail from './Pages/ForgotPassword/ForgotPasswordEmail';
 import ForgotPassword from './Pages/ForgotPassword/ForgotPassword';
 import ForgotEmail from './Pages/ForgotPassword/ForgotEmail';
+import Favoritelist from './Pages/ManageAccount/FavoriteList';
+import Search from './Pages/Search';
+import Transport from './Pages/Transport';
+import MyBids from './Pages/MyBids';
+import Cart from './Pages/Cart';
+import Chat from './Pages/Chat';
+import History from './Pages/ManageAccount/History';
+
 function AppRouter() {
 
   const timeout = 900000;
@@ -102,9 +110,9 @@ function AppRouter() {
               <Route  path="/flooradd" component={FloorAdd}/>
               <Route  path="/flooredit/:id" component={FloorEdit}/>
               <Route  path="/carList" component={CarList}/>
-              <Route  path="/search" component={Inprogress}/>
-              <Route  path="/mybids" component={Inprogress}/>
-              <Route  path="/transport" component={Inprogress}/>
+              <Route  path="/search" component={Search}/>
+              <Route  path="/mybids" component={MyBids}/>
+              <Route  path="/transport" component={Transport}/>
               <Route  path="/manageaccount" component={ManageAccount}/>
               <Route  path="/lotfee" component={LotFee}/>
               <Route  path="/notification" component={Notification}/>
@@ -112,10 +120,10 @@ function AppRouter() {
               <Route  path="/paymentinfo" component={PaymentInfo}/>
               <Route  path="/editpayment/:id" component={EditPayment}/>
               <Route  path="/document" component={Document}/> 
-              <Route  path="/favorite" component={Inprogress}/>
-              <Route  path="/history" component={Inprogress}/>
-              <Route  path="/cart" component={Inprogress}/>
-              <Route  path="/chat" component={Inprogress}/>
+              <Route  path="/favorite" component={Favoritelist}/>
+              <Route  path="/history" component={History}/>
+              <Route  path="/cart" component={Cart}/>
+              <Route  path="/chat" component={Chat}/>
               <Route  path="/buyers" component={Buyers}/>
               <Route  path="/adduser" component={AddUser}/>
               <Route  path="/myprofile" component={MyProfile}/>  

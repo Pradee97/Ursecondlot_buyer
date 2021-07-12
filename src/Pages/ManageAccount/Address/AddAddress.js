@@ -262,9 +262,10 @@ const getZipCodeId = (zipData) => {
                                 <label  for="drop" className={"input-has-value"}>Country code</label>
                             </div>
                             </div>
+                          
                             <div className="col-sm-8 form-group ">
                             <div className="tbox ">
-                                <PhoneInput  id="primaryPhone" name="primaryPhone" country="US" class="textbox" maxLength="14" minLength="14"
+                                <PhoneInput  id="primaryPhone" name="primaryPhone" country="US" class="textbox" maxLength="14" minLength="14" value={primaryPhone}
                                 onChange={handleOnChange} ></PhoneInput>
                                 <label htmlFor="companyName" className={"input-has-value"}>Primary phone</label>
                                 <p className="form-input-error" >{primaryPhoneError}</p>
@@ -282,7 +283,7 @@ const getZipCodeId = (zipData) => {
                             <div className="col-sm-8 form-group ">
                             <div className="tbox ">
                            
-                                <PhoneInput  id="mobilePhone" name="mobilePhone"  country="US" class="textbox" maxLength="14" minLength="14"
+                                <PhoneInput  id="mobilePhone" name="mobilePhone"  country="US" class="textbox" maxLength="14" minLength="14" value={mobilePhone}
                                 onChange={handleOnChanges} ></PhoneInput>
                                 <label htmlFor="branchName" className={"input-has-value"}>Mobile phone</label>
                                 <p className="form-input-error" >{mobilePhoneError}</p>

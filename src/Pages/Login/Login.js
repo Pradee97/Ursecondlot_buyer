@@ -39,12 +39,13 @@ const Login = () => {
 
   const loginhandleSubmit = (event) => {
     event.preventDefault();
+    setErrorMessage("")
     setErrors({email:"", password:""})
-    if(!emailId) { setErrors({email:"email id is required", password:""}); return}
+    if(!emailId) { setErrors({email:"Email Id is required", password:""}); return}
     else if( emailId && !new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i).test(emailId) ) {
       setErrors({email:"Must match the email format", password:""})
     }
-    else if(!password) { setErrors({email:"", password:"passwaord is required"}); return}
+    else if(!password) { setErrors({email:"", password:"password is required"}); return}
 
     localStorage.setItem("islogedIn", false)
     let request = {

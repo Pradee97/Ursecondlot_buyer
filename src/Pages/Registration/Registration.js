@@ -333,7 +333,7 @@ const Registration = () => {
                             </div>
                             <div className="col-sm-8 form-group">
                                 <div className="tbox ">
-                                <PhoneInput  id="phone_no" name="phoneNumber" country="US" className="textbox" maxLength="14" minLength="14"
+                                <PhoneInput  id="phone_no" name="phoneNumber" country="US" className="textbox" maxLength="14" minLength="14" value={phoneNumber}
                                     onChange={handleOnChange} ></PhoneInput>
                                     <label htmlFor="phone_no" className={"input-has-value"}>Phone</label>
                                 </div>

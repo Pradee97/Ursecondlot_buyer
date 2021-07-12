@@ -337,7 +337,7 @@ const getZipCodeId = (zipData) => {
 													</div>
 													<div className="col-sm-8 form-group ">
 														<div className="tbox ">
-														<PhoneInput id="phone_no" name="phoneNumber" country="US" className="textbox" maxLength="14" minLength="14"
+														<PhoneInput id="phone_no" name="phoneNumber" country="US" className="textbox" maxLength="14" minLength="14" value={phoneNumber}
 															onChange={handleOnChange} ></PhoneInput>
 															<label for="phone_no" className={"input-has-value"}>Phone</label>
 												    	</div>
@@ -374,7 +374,7 @@ const getZipCodeId = (zipData) => {
 															{/* {/ <lable for="drop" className={option !="" ? "input-has-value" : ""}>How many years in car business</lable> /} */}
 															<select id="drop" placeholder="" name="dropoption" className="form-control custom-select browser-default textbox" 
 															onChange={(e) => setOption(e.target.value)}>
-																{/* <option disabled >How many years in car business</option> */}
+																<option style={{"display":"none" }}></option>
 																<option value="Less then 1">Less then 1</option>
 																<option value="1-3">1-3</option>
 																<option value="3-5">3-5</option>
