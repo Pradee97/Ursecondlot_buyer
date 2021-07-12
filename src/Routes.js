@@ -47,6 +47,8 @@ import ForgotEmail from './Pages/ForgotPassword/ForgotEmail';
 import Favoritelist from './Pages/ManageAccount/FavoriteList';
 import Search from './Pages/Search';
 import Transport from './Pages/Transport';
+import MyBids from './Pages/MyBids';
+
 function AppRouter() {
 
   const timeout = 900000;
@@ -106,7 +108,7 @@ function AppRouter() {
               <Route  path="/flooredit/:id" component={FloorEdit}/>
               <Route  path="/carList" component={CarList}/>
               <Route  path="/search" component={Search}/>
-              <Route  path="/mybids" component={Inprogress}/>
+              <Route  path="/mybids" component={MyBids}/>
               <Route  path="/transport" component={Transport}/>
               <Route  path="/manageaccount" component={ManageAccount}/>
               <Route  path="/lotfee" component={LotFee}/>
