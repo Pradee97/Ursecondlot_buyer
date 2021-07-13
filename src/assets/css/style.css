@@ -6668,3 +6668,200 @@ table td .ant-btn:hover span, table td .ant-btn:hover i{
 .MuiInputBase-input{
   font-size: 14px !important;
 }
+
+
+
+/*History css */
+
+.hissearch{
+	max-width:600px;
+	margin:auto;
+	position:relative;
+	margin-bottom:30px;
+}
+.hissearch i{
+	float: right;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    font-size: 20px;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.hisHead p{
+	float:left;
+	margin-top: 10px;
+    font-size: 20px;
+}
+.hisHead .sortBy{
+	float:right;
+	width:200px;
+}
+
+.historyblock .pickupdetailcontent p.billsalesno{
+	float: left;
+    font-size: 14px;
+    margin: 15px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    border: 1px solid;
+}
+.historyblock .car-item:hover{
+	transform: scale(1);
+}
+
+.historyblock .cars-prices .cta-btns{
+	padding:0;
+	border:none;
+	color:#BD062C;
+	margin:0;
+}
+
+
+.historyblock .cars-prices .cta-btns.invoice{
+	float:right;
+}
+.historyblock .cars-prices.gatepass .cta-btns-primary{
+	    display: block;
+		text-align: center;
+		margin: 0;
+}
+
+.historyblock .cars-prices{
+	
+}
+
+.historyblock .cars-prices.gatepass{
+		margin-top: 0;
+		padding-bottom:0;
+}
+
+.historyblock .lotfee-inner p{
+	padding:0;
+	text-align:left;
+	margin:0;
+}
+.historyblock .sliderBlock h3{
+	font-size:16px;
+	margin-top:30px;
+	clear:both;
+}
+
+#msform {
+	width: 100;
+	margin: 0px auto;
+	text-align: center;
+	position: relative;
+}
+/*progressbar*/
+#progressbar {
+	margin-bottom: 30px;
+	overflow: hidden;
+	/*CSS counters to number the steps*/
+	counter-reset: step;
+}
+#progressbar li {
+	list-style-type: none;
+	color: #444;
+	text-transform: uppercase;
+	font-size: 12px;
+	width: 33.33%;
+	float: left;
+	position: relative;
+}
+#progressbar li:before {
+	content: counter(step);
+	counter-increment: step;
+	width: 20px;
+	line-height: 20px;
+	display: block;
+	font-size: 10px;
+	color: #444;
+	background: #ddd;
+	border-radius: 3px;
+	margin: 0 auto 5px auto;
+}
+/*progressbar connectors*/
+#progressbar li:after {
+	content: '';
+	width: 100%;
+	height: 2px;
+	background: #ddd;
+	position: absolute;
+	left: -40%;
+	top: 20px;
+	z-index: 1; /*put it behind the numbers*/
+}
+#progressbar li:first-child:after {
+	/*connector not needed before the first step*/
+	content: none; 
+}
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+#progressbar li.active:before,  #progressbar li.active:after{
+	background: #BD062C;
+	color: white;
+}
+.sliderBlock .cars-prices{
+	text-align:center;
+		margin-top:30px;
+
+}
+
+
+.sliderBlock .cars-prices .cta-btns{
+	background-color: #fff;
+    color: #343434;
+    padding: 10px 20px;   
+	margin-right:0px;
+    border-radius: 3px;
+    border: 1px solid #707070;
+	font-size:18px;
+	text-align:center;
+}
+
+.sliderBlock p span{
+	color:#bd062c;
+}
+
+.sliderBlock h3 span{
+	color:orange;
+}
+
+.historyblock  .priceBlock p.editbtn{
+	text-align:right;
+	margin-bottom:10px;
+	font-weight:500;
+	font-size:16px;
+}
+.editbtn{
+	float:right;
+}
+
+
+.priceBlock .vehicleimgright{
+	border:#ddd solid 1px;
+	margin-top:20px;
+	padding-top:10px;
+	clear:both;
+}
+.priceBlock .vehicleimgright p{
+	text-align:left;
+	font-size:14px;
+	color:#ccc;
+	font-weight:300;
+	max-width:80%;
+	margin-bottom:15px;
+}
+
+.priceBlock .vehiclerighttotal h3 span{
+	font-weight:500;
+}
+.priceBlock .vehicleimgright h3{
+	clear:both;
+}
+
+.priceBlock .vehicleimgright h4{
+	padding: 0;
+}
