@@ -48,6 +48,11 @@ import Favoritelist from './Pages/ManageAccount/FavoriteList';
 import Search from './Pages/Search';
 import Transport from './Pages/Transport';
 import MyBids from './Pages/MyBids';
+import CarDetail from './Pages/Cardetail';
+import MakeUrBid from './Pages/Makeurbid';
+import Inspection from './Pages/Inspection';
+import MakeurBid from './Pages/Makeurbid';
+import Cardetail from './Pages/Cardetail';
 
 function AppRouter() {
 
@@ -131,6 +136,9 @@ function AppRouter() {
               <Route  path="/legaladd" component={AddLegalAccount}/>
               <Route  path="/addressadd" component={AddAddress}/>
               <Route  path="/buyeredit/:id" component={EditBuyer}/>
+              <Route path="/Makeurbid" component={MakeurBid}></Route>
+              <Route path="/Inspection" component={Inspection}></Route>
+              <Route path="/CarDetail" component={Cardetail}></Route>
             </PrivateRoute>       
           </Switch>
           <Footer />
