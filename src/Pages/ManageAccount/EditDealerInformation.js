@@ -11,7 +11,7 @@ import PhoneInput from 'react-phone-number-input/input';
 
 
 import StateAndCity from '../../Component/StateAndCity/StateAndCity'
-import MuiPhoneNumber from 'material-ui-phone-number';
+
 
 const EditDealerInformation = () => {
     let { register, updateDealerInfo, formState: { errors },reset  } = useForm();

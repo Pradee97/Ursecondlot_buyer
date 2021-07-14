@@ -11,7 +11,6 @@ import '../../Component/Popup/popup.css';
 import Terms from '../../Component/TermsAndCondition/TermsAndCondition';
 import StateAndCity from '../../Component/StateAndCity/StateAndCity';
 import FileBase64 from 'react-file-base64';
-import MuiPhoneNumber from 'material-ui-phone-number';
 import { useState } from 'react';
 import PhoneInput from 'react-phone-number-input/input';
 

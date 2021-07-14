@@ -11,7 +11,6 @@ import { useForm } from "react-hook-form";
 import Datetime from 'react-datetime';
 import moment from 'moment';
 import FileBase64 from 'react-file-base64';
-import MuiPhoneNumber from 'material-ui-phone-number';
 import PhoneInput from 'react-phone-number-input/input';
 
 const AddUser = () => {
