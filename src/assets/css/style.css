@@ -2924,15 +2924,9 @@ popup Dialogbox
 }
 
 .cta-btns-primary:hover{
-	text-decoration: underline;
+	text-decoration: none;
 }
 
-
-.modal-footer a:hover {
-    color: #fff;
-    text-decoration: none;
-    
-}
 
 .suggested-cars .col-md-3{ 
 -ms-flex: 20%;
@@ -2954,7 +2948,7 @@ Car Detail Page
 	
 }
 .back-btn-primary{
-	color:#bd062c;
+	color:#9e8d91;
 	font-size:18px;
 	border: 2px solid #BD062C;
 	padding:10px 20px;
@@ -6667,4 +6661,17 @@ table td .ant-btn:hover span, table td .ant-btn:hover i{
 }
 .MuiInputBase-input{
   font-size: 14px !important;
+}
+
+#hero  .close-icon{
+  color: #fff;
+}
+
+
+.forgotpage .logo{
+  margin-top: 30px;
+}
+
+.forgotpage .logo img{
+  width: auto;
 }

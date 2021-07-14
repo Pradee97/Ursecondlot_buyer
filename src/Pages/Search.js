@@ -23,7 +23,7 @@ const Search = () => {
 							<div class="filtersblock">
 								<h3>Filters<span><a href="#">Reset</a></span></h3>
 								<div class="input-group searchbox">
-									<input class="form-control border-end-0 border" type="text" value="" placeholder="Search" id="search-input"/>
+									<input class="form-control" type="text" value="" placeholder="Search" id="search-input"/>
 									<span class="input-group-append">
 										<button class="btn ms-n5" type="button">
 										<i class="fa fa-search"></i>

@@ -121,7 +121,7 @@ const Login = () => {
               <div className="col-lg-12 loginBtn">
                 <button className="cta-btn">Log In</button>
                 {/* <p>Don't have an account? <a className="forget-name" href="registration">Become a Dealer</a></p> */}
-                <p>Don't have an account?<Button className="forget-name" onClick={() => history.push("/registration")}>Become a Dealer</Button></p>
+                <p>Don't have an account? <Button className="forget-name" onClick={() => history.push("/registration")}> Become a Dealer</Button></p>
               </div>
             </div>
           </form>
