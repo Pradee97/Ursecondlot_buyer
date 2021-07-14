@@ -161,8 +161,8 @@ h1, h2, h3, h4, h5, h6 {
     z-index: 997;
     padding: 5px 0;
     top: 40px;
-	box-shadow: 0px 3px 6px #ddd;
-  text-align: left;
+	box-shadow: 0px 3px 6px #00000029;
+	text-align: left;
 }
 
 #header .container-fluid, #footer .container-fluid{
@@ -2410,8 +2410,8 @@ Cars list
 }
 
 .topLeft{
-	padding-left: 80px;
-  text-align: left;
+	padding-left: 0px;
+	text-align: left;
 }
 .topRight{
 color:#fff;
@@ -2593,7 +2593,7 @@ input[type="text"], input[type="password"]{
 .loginBtn{
 	text-align:center;
 	font-size:14px;
-	/* padding-bottom */
+	
 }
 
 
@@ -5036,6 +5036,13 @@ Form text overlop
   position: relative;
   margin-bottom:15px;
 }
+label.input-has-value {
+	transform: translateY(-110%) translateX(0%) !important;
+	  border-radius: 3px !important;
+	  transition: all 0.1s ease-out !important;
+	  font-size:14px;
+}
+
 .tbox input.textbox {
   display: inline-block;
   width: 100%;
@@ -5079,6 +5086,38 @@ Form text overlop
   transition-delay: 0.2s;
 }
 
+
+
+.adduserpageforminner .form-group input:checked + label::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 8px;
+    left: 9px;
+    width: 6px;
+    height: 14px;
+    border: solid #bd062c;
+        border-top-width: medium;
+        border-right-width: medium;
+        border-bottom-width: medium;
+        border-left-width: medium;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+.adduserpageforminner .form-group label::before {
+    content: '';
+    -webkit-appearance: none;
+    background-color: transparent;
+    border: 1px solid #707070;
+    padding: 10px;
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    cursor: pointer;
+    margin-right: 15px;
+    background: #fff;
+    border: 1px solid #707070;
+}
 
 /*-------------------------------------------------------
 userfavorite-cars
@@ -5552,6 +5591,7 @@ height: 100%;
 	font-size:20px;
 	font-weight:500;
 	display:block;
+	text-align:left;
 }
 .notificationtabblock p{
 	color: #343434;
@@ -6095,33 +6135,34 @@ Add Users
 	font-size:16px;
 	font-weight:500;
 }
-
-label.input-has-value {
-	transform: translateY(-110%) translateX(0%) !important;
-	  border-radius: 3px !important;
-	  transition: all 0.1s ease-out !important;
-	  font-size:14px !important;
-}
-
-
-
-.dropdown-menu.show{
-  left: inherit;
-  right: 0;
+/*------------------------------------------------
+Popup Modal 
+-------------------------------------------------*/
+.modals {   
+	z-index: 1050;
+	display: block;
+	width: 100%;
+	height: 100%;   
+	outline: 0;
+	overflow-x: hidden;
+	overflow-y: auto;
 }
 .contactblock  .form-group label{
   text-align: left;
   float: left;
 }
-
-button{
-  border: none;
-  background: #bd062c;
-  color: #fff;
+.modals-dialog-centered{
+  min-height: calc(100% - 3.5rem);
+	display:flex;
+	align-items: center;
 }
-
-button:hover{
-  background: #002768;
+.modals-dialog {
+  position: relative;
+  width: auto;
+  margin: .5rem;
+  pointer-events: none;
+	display: block;
+	margin: auto;
 }
 
 button:focus{
@@ -6372,299 +6413,62 @@ button.add-user-btns {
   
 }
 
-
-.add-user .add-user-btns:hover, .add-user .add-user-btns:focus{
-	color: #fff;
-  background: #002768;
-  border: 2px solid #002768;
-  text-decoration: none;
-}
-
-.userlisttable table {
-  border: 1px solid #ccc;
-  border-collapse: collapse;
-  margin: 0;
-  padding: 0;
+.popup-box {
+  position: fixed;
+  background: #00000050;
   width: 100%;
-  box-shadow: 0px 3px 6px #ddd;
-}
-
-.userlisttable table th {
-  background:#2C5BAA;
-  color: #fff;
-  font-size: 16px;
-  padding: 15px 10px;
-  font-weight: 500;
-  text-transform: capitalize;
-}
-
-.userlisttable table th.th_name {
-   width: 20%;
-}
-.userlisttable table th.th_privileges {
-  width: 20%;
-}
-.userlisttable table th.th_phone {
-  width: 20%;
-}
-.userlisttable table th.th_status {
-  width: 10%;
-}
-.userlisttable table th.th_action {
-  width: 10%;
-}
-.userlisttable table th.th_img {
-  width: 10%;
-}
-.userlisttable table th.th_id {
-  width: 10%;
-}
-
-.userlisttable table {
-  border-collapse: collapse;
-}
-.userlisttable table tr {
-  border-bottom: 1px solid #ddd;
-  background: #fff;
-}
-
-.userlisttable table td {
-  color: #333;
-  padding-left: 20px;
-  font-size: 14px;
-  text-align: center;
-  padding: 10px 5px;
-  border-right: 1px solid #ddd;
-}
-.userlisttable table td.phonenotab{
-  padding: 10px 5px;
-}
-.userlisttable table td .cartitlename {
-  color: #002768;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.custom-select{
-  background:#fff url("../img/arrowmarks.png") no-repeat right center;  
-}
-.datePickerBlock input{
-  background:#fff url("../img/calender.png") no-repeat right center;  
-}
-
-.backBtn{
-  float: left;
-  padding:0px;
-  margin-bottom: 10px;
-  border-radius: 3px;
-  color: #BD062C;
-  background: transparent;
-  font-size: 16px;
-}
-
-.backBtn:hover{
-  color: #002768;
-  background: transparent;
-}
-
-
-.ant-btn{
-  color: #BD062C;
-}
-
-.ant-btn:hover{
-  color: #BD062C;
-}
-
-.ant-btn i{
-  margin-right: 5px;
-  color: #BD062C;
-  font-size: 12px;
-}
-
-.docdetails a.btn{
-  padding: 0;
-  margin-left: 5px;
-  font-size: 14px;
-  color: #BD062C;
-  text-decoration: underline;
-}
-
-.docdetails .upload-btn-wrapper{
-  display: inline;
-}
-
-.docdetails .upload-btn-wrapper input[type=file]{
-  font-size: 5px;
-  line-height: 20px;
-  padding-left: 5px;
-  color: #BD062C;
-}
-
-.documentspageblock{
-  margin-top: 40px;
-}
-
-.adduserpageform .section-title{
-  width: 100%;
-}
-
-.adduserpageform .section-title h2{
-  text-align: center;
-  font-size: 20px;
-  margin-top: 20px;
-  clear: both;
-}
-
-.mgaccountrightblock, .myprofilesblock, .notificationaccountblock, .paymentaccountblock, .documentspageblock, .adduserpageblock{
-  padding-right: 0;
-}
-
-#topbar a:last-child{
-  margin-right: 0px;
-}
-
-.changePassblock .tbox .textbox + label {
-  font-size: 16px;
-}
-
-.uploadbtn{
-  text-align: center;
-}
-
-.uploadedFile{
-  float: left;
-  width: 100%;
-}
-
-.lotfee-form input{
-  font-size: 20px;
-}
-
-.updateFile{
-  float: left;
-}
-.deleteFile{
-  float: right;
-}
-
-table td .ant-btn{
-  border: none;
-  outline: none;
-  box-shadow: none;
-}
-
-table td .ant-btn span{
-	font-weight:400;	
-}
-table td .ant-btn:hover span, table td .ant-btn:hover i{
-  color: #002768;
-}
-.form-input-error{
-  color: red;
-  text-align: left;
-}
-.topRightUser img{
-  width:35px;
-  height: 35px;
-  border-radius: 50%;
-  border:#ddd solid 1px;
-}
-.userImage img{
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-}
-
-.user-upload-btn-wrapper {
-  display: inline-block;
-  position: relative;
-  margin: auto;
-  width: 140px;
-  height: 140px;
-}
-
-.user-upload-btn-wrapper input[type=file] {
-  font-size: 5px;
-  line-height: 20px;
-  padding-left: 5px;
-  color: #bd062c;
-  position: absolute;
-  left: 0;
+  height: 100%;
   top: 0;
-  opacity: 0;
-  width: 100%;
-    height: 100%;
-    cursor: pointer;
+  left: 0;
+  z-index: 999;
 }
+ 
 
-.user-upload-btn-wrapper img {
-  width: 140px;
-  height: 140px;
-  border:#ddd solid 1px;
-  border-radius: 50%;
-}
 
-.proCamera{
-  background:#fff url("../img/camera.png") no-repeat center center;  
-  width: 35px;
-  height: 35px;
-  position: absolute;
-  bottom: 10px;
-  right: 0px;
-  border-radius: 50%;
-}
 
-.backaccountform.addpaymentform p.form-input-error{
-  margin: 0;
-    color: red;
-}
-
-.suggested-cars .col-md-3 .car-item{
-  background: #fff;
-}
-.floor_notfiled_block{
-  display: block;
-  text-align: center;
+.models-box {
   position: relative;
-  top: 50px;
-  left: 7%;
-  font-size: 19px;
-  font-weight: 500;
-  padding-bottom: 30px;
+  width: 70%;
+  margin: 0 auto;
+  height: auto;
+  max-height: 70vh;
+  margin-top: calc(100vh - 85vh - 20px);
+  background: transparent;
+  border-radius: 4px;
+  overflow: auto;
+  top: 150px;
 }
-.phonecode small {
-    font-size: 80%;
-    font-weight: 400;
-    float: left;
-    margin-top: 5px;
-    color: #9f9f9f;
-    margin-right: 5px;
+.userlinks{
+	text-align:left;
 }
-.phoneNumberfield .MuiInput-root{
-  float: left;
+label.input-has-value {
+	transform: translateY(-110%) translateX(0%) !important;
+	  border-radius: 3px !important;
+	  transition: all 0.1s ease-out !important;
+	  font-size:14px;
 }
-
-.phoneNumberfield .MuiInput-underline:hover:not(.Mui-disabled):before, .MuiInput-underline:hover:not(.Mui-disabled):before {
-  border: none;
-}
-.phoneNumberfield .MuiInput-underline:before, .phoneNumberfield .MuiInput-underline:after {
-  border: none;
-}
-
-.tbox.phoneNumberfield{
-  border: lightgray solid 1px;
-  border-radius: 3px;
-  float: left;
-    width: 100%;
-    height: 50px;
+.error-message{
+	color: red;
+	font-size:20px;
+	font-weight:500;
+	padding:15px 0;
 }
 
-.phoneNumberfield .MuiFormControl-root{
-  margin-top: 10px;
-    margin-left: 10px;
-    display: block;
-}
-.MuiInputBase-input{
-  font-size: 14px !important;
-}
+.close-icon {
+  content: '';
+  cursor: pointer;
+  position: fixed;
+  right: calc(40% - 30px);
+  top: calc(112vh - 85vh - 33px);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  line-height: 32px;
+  background-color: white;
+  text-align: center;
+  font-size: 25px;
+  z-index: 999;
+  color: #000;
+  font-weight: 600;
+  
+  }

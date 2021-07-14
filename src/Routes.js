@@ -48,8 +48,6 @@ import Favoritelist from './Pages/ManageAccount/FavoriteList';
 import Search from './Pages/Search';
 import Transport from './Pages/Transport';
 import MyBids from './Pages/MyBids';
-import CarDetail from './Pages/Cardetail';
-import MakeUrBid from './Pages/Makeurbid';
 import Inspection from './Pages/Inspection';
 import MakeurBid from './Pages/Makeurbid';
 import Cardetail from './Pages/Cardetail';
