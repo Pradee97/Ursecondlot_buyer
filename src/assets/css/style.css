@@ -6531,14 +6531,6 @@ label.input-has-value {
   line-height: 32px;
   background-color: white;
   text-align: center;
-<<<<<<< HEAD
-  font-size: 25px;
-  z-index: 999;
-  color: #000;
-  font-weight: 600;
-  
-  }
-=======
   position: relative;
   top: 50px;
   left: 7%;
@@ -6778,4 +6770,3 @@ label.input-has-value {
 .priceBlock .vehicleimgright h4{
 	padding: 0;
 }
->>>>>>> 908c55285807c680512ebd6d83b39e7b1e0e0a26
