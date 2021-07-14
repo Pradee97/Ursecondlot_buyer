@@ -121,9 +121,9 @@ function AppRouter() {
               <Route  path="/editpayment/:id" component={EditPayment}/>
               <Route  path="/document" component={Document}/> 
               <Route  path="/favorite" component={Favoritelist}/>
-              <Route  path="/history" component={Inprogress}/>
-              <Route  path="/cart" component={Inprogress}/>
-              <Route  path="/chat" component={Inprogress}/>
+              <Route  path="/history" component={History}/>
+              <Route  path="/cart" component={Cart}/>
+              <Route  path="/chat" component={Chat}/>
               <Route  path="/buyers" component={Buyers}/>
               <Route  path="/adduser" component={AddUser}/>
               <Route  path="/myprofile" component={MyProfile}/>  

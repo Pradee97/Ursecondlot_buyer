@@ -55,6 +55,9 @@ padding-right: 20px;
         flex: 25% 1 !important;
         max-width: 25% !important;
     }
+    .search-cars .cars-prices a, .search-cars .cars-prices .cta-btns, .search-cars .cars-prices .cta-btns-primary{
+        margin: 3px;
+    }
         
 }
 
@@ -91,8 +94,9 @@ padding-right: 20px;
 	
 }
 @media (max-width: 1300px) {
-	
-	
+	.search-cars .cars-prices .cta-btns{
+        padding: 10px;
+    }	
 }
 
 @media (max-width: 1200px) {
