@@ -8,7 +8,7 @@ import CommonPopup from '../../../Component/CommonPopup/CommonPopup';
 import ls from 'local-storage';
 import FileBase64 from 'react-file-base64';
 import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks"
-import MuiPhoneNumber from 'material-ui-phone-number';
+
 import PhoneInput from 'react-phone-number-input/input';
 
 const EditBuyer = () => {

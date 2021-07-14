@@ -51,7 +51,8 @@ import MyBids from './Pages/MyBids';
 import Inspection from './Pages/Inspection';
 import MakeurBid from './Pages/Makeurbid';
 import Cardetail from './Pages/Cardetail';
-
+import Cart from './Pages/Cart';
+import Chat from './Pages/Chat';
 function AppRouter() {
 
   const timeout = 900000;
