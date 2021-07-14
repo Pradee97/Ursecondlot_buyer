@@ -290,7 +290,7 @@ const Registration = () => {
 														<img alt="" src="adduser.jpg" src={doc.base64} ></img>														
 														}
                         <span className="proCamera"></span>
-                        {type==="0"?<p className="form-input-error">Upload only Image format </p>:""}      
+                        {type==="0"?<p className="form-input-error">Upload only Image Format </p>:""}      
                         <FileBase64 onDone={ getFiles }  type="hidden"/>
                         
                                          {/* <button>  <img alt="" htmlFor="upload" src="adduser.jpg"  /></button>  */}
