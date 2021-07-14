@@ -271,6 +271,10 @@ h1, h2, h3, h4, h5, h6 {
   color: #BD062C ;
   text-decoration: none;
 }
+.nav__submenu li:hover > a {
+  color: #fff ;
+  text-decoration: none;
+}
 
 .nav-menu .drop-down ul {
   border-radius: 8px;
@@ -1062,6 +1066,11 @@ Cars list
     padding: 8px 15px;   
     border-radius: 3px;
     border: none;
+}
+
+.cars-prices .cta-btns-primary:hover{
+  background: #bd062c;
+  text-decoration: none;
 }
 .more-btn {
     display: inline-block;
@@ -2910,6 +2919,7 @@ popup Dialogbox
   color: white;
   background-color: #002768;
   text-decoration: none;
+  border-color: #002768;
 }
 
 
@@ -3837,13 +3847,16 @@ Search Box"
 
 .leftonsidebox{
 	float:left;
-	background:#F6F6F6;
+	background:#fff;
+  text-align: left;
+  padding: 15px;
 	
 }
 .leftonsidebox h3{
 	color: #002768;
 	font-size:28px;
 	font-weight:500;
+  text-align: left;
 }
 
 .leftonsidebox span{
@@ -3855,8 +3868,16 @@ Search Box"
 .searchbox  .ms-n5 {
     margin-left: -40px;
 }
+
+.searchbox .ms-n5:hover{
+  color: #fff;
+}
 .searchbox .input-group-append{
 	    z-index: 999;
+}
+
+.searchbox .input-group-append i{
+  font-size: 25px;
 }
 
 .searchbox{
@@ -3901,6 +3922,7 @@ Search Box"
   margin-right: 5px;
   background:#fff;
   border: 1px solid #707070;
+  margin-top: -3px;
 }
 
 .vehiclesearch .form-group input:checked + label:after {
@@ -3956,11 +3978,19 @@ Search Box"
 }
 .inner{
 	margin:10px 0px;
-	margin-left:20px;
-	background: #DBDBDB 0% 0% no-repeat padding-box;
+	margin-left:0px;
+	background: #F5F5F5 0% 0% no-repeat padding-box;
+  padding: 15px;
+  margin-bottom: 30px;
 }
-.inner .form-group ,.inner .radio{
-	padding:10px 20px;
+.inner .form-group:last-child{
+  margin-bottom: 0;
+}
+
+
+.inner .input-group{
+  margin-bottom: 10px;
+  font-size: 16px;
 }
 
 .mileageblock .input-group, .yearblock .input-group{
@@ -4070,6 +4100,13 @@ Search Box"
     border: 1px solid #707070;
 	font-size:18px;
 }
+
+.search-cars .cars-prices .cta-btns:hover {
+  background: #002768;
+  color: #fff;
+  border-color: #002768;
+}
+
 .search-cars .cars-prices .cta-btns-primary {
 	font-size:18px;
     background-color: #b8b8b8;
@@ -4078,6 +4115,15 @@ Search Box"
     border-radius: 3px;
     border: none;
 }
+
+.search-cars .cars-prices .cta-btns-primary:hover {
+  background: #bd062c;
+  color: #fff;
+}
+.search-cars .cars-prices a{
+  margin: 20px;
+}
+
 .search-cars .load-more-btn {
     display: inline-block;
     background: rgba(255, 255, 255, 0.2);
@@ -4462,11 +4508,11 @@ MyBids
 	font-size:16px;
 	font-weight:500;
 	color:#fff;	
-	padding:20px 0;
+	padding:0;
 }
 .mybidsheader{
 	background:#2c5baa;
-	padding:20px 10px;
+	padding:15px 10px;
 	text-align:center;
 }
 .mybidsdetailsblock{
@@ -4485,9 +4531,14 @@ MyBids
 	width:30%;
 	
 }
+.mybidsleftvehicle img{
+  border-radius: 5px;
+}
+
 .mybidsrightvehicle{
 	float:right;
 	width:70%;
+  text-align: left;
 }
 
 .mybidsrightvehicle h3{
@@ -4501,7 +4552,7 @@ MyBids
 	margin-left:5px;
 }
 .mybidsrightvehicle .details{
-	margin-bottom:0;
+	margin-bottom:10px;
 }
 
 .mybidssellerdetails{
@@ -4522,20 +4573,28 @@ MyBids
 .mybidsleftseller{
 	float:left;
 	width:70%;
+  text-align: left;
 	
 }
 .mybidsrightseller{
 	float:right;
 	width:30%;
 }
+
+.mybidsrightseller img{
+  border-radius: 5px;
+}
+
 .mybidsleftseller .details span{
-	font-size:12px;
+	font-size:14px;
 	color:#9f9f9f;
 	margin-left:5px;
 }
 .mybidsleftseller .details{
-	margin-bottom:0;
+	margin-bottom:10px;
 }
+
+
 .mybidsbiddetails{
 	float:left;
 	width:100%;
@@ -4607,15 +4666,21 @@ MyBids
 .control-btns-cancel{
 	border:1px solid #bd062c;
 	color: #bd062c;
-	padding: 10px 20px;
+	padding: 8px 20px;
 	margin: 20px 0;
 	border-radius: 3px;	
 	font-size: 14px;
 }
+.control-btns-cancel:focus{
+	border:1px solid #bd062c;
+}
+
 .mybidscontrol li{
 	margin:10px 0px;
 	list-style:none;
 	float:left;
+  width: 100%;
+    margin-bottom: 20px;
 }
 
 /*-------------------------------------------------

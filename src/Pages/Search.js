@@ -23,7 +23,7 @@ const Search = () => {
 							<div class="filtersblock">
 								<h3>Filters<span><a href="#">Reset</a></span></h3>
 								<div class="input-group searchbox">
-									<input class="form-control border-end-0 border" type="text" value="search" id="search-input"/>
+									<input class="form-control border-end-0 border" type="text" value="" placeholder="Search" id="search-input"/>
 									<span class="input-group-append">
 										<button class="btn ms-n5" type="button">
 										<i class="fa fa-search"></i>
@@ -282,7 +282,7 @@ const Search = () => {
 								<h4>Dealership<span><a href="#"><img src={arrowmark}/></a></span></h4>
 								<div class="inner">
 									<div class="radio input-group">
-										<input id="radio-newdealer" name="radio" type="radio" cheid="car"></input>cked/>
+										<input id="radio-newdealer" name="radio" type="radio" cheid="car"></input>
 										<label for="radio-newdealer" class="radio-label">New Car Dealer</label>
 									</div>
 
