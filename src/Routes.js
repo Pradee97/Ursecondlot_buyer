@@ -53,6 +53,7 @@ import MakeurBid from './Pages/Makeurbid';
 import Cardetail from './Pages/Cardetail';
 import Cart from './Pages/Cart';
 import Chat from './Pages/Chat';
+import History from './Pages/ManageAccount/History';
 function AppRouter() {
 
   const timeout = 900000;
@@ -135,9 +136,9 @@ function AppRouter() {
               <Route  path="/legaladd" component={AddLegalAccount}/>
               <Route  path="/addressadd" component={AddAddress}/>
               <Route  path="/buyeredit/:id" component={EditBuyer}/>
-              <Route path="/Makeurbid" component={MakeurBid}></Route>
-              <Route path="/Inspection" component={Inspection}></Route>
-              <Route path="/CarDetail" component={Cardetail}></Route>
+              <Route path="/Makeurbid" component={MakeurBid}/>
+              <Route path="/Inspection" component={Inspection}/>
+              <Route path="/CarDetail" component={Cardetail}/>
             </PrivateRoute>       
           </Switch>
           <Footer />
