@@ -115,7 +115,7 @@ const History = () => {
                     
                     <h3>Title status - <span> Awaiting Title</span></h3>
                     
-                    <div class="cars-prices">
+                    <div class="cars-prices ">
                       <a class="cta-btns" href="#">Price - $1900</a>
                     </div>
                     
