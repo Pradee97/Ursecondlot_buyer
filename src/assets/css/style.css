@@ -2958,14 +2958,17 @@ Car Detail Page
 	
 }
 .back-btn-primary{
-	color:#9e8d91;
+	color:#BD062C;
 	font-size:18px;
 	border: 2px solid #BD062C;
-	padding:10px 20px;
+	padding:6px 15px;
 	border-radius:4px;
 	margin-bottom:20px;
 }
 
+.back-btn-primary:hover, .back-btn-primary:focus{
+  border: 2px solid #BD062C;
+}
 
 .heading-section {
 	text-align: center;
@@ -3149,6 +3152,7 @@ Car Detail Page
 	  color:#bd062c;
 	  font-size:20px;
 	  margin-bottom:15px;
+    text-align: left;
 	  
   }
   .product-count .details {
@@ -3165,6 +3169,11 @@ Car Detail Page
 .product-count .details:last-child {
     border-right: none;
 }
+
+.cars-buy{
+  text-align: left;
+}
+
 .cars-buy .cars-buy-btns{
 	background-color: #bd062c;
     color: white;
@@ -3173,6 +3182,7 @@ Car Detail Page
     border-radius: 3px;
     border: none;
 	font-size:20px;
+  margin-right: 20px;
 }
 .cars-buy .cars-buy-btns-primary{
 	background-color: #b8b8b8;
@@ -3196,6 +3206,7 @@ Car Detail Page
 }
 .carspecifation p{
 	color:#343434;
+  text-align: left;
 }
 .carspecifation span{
 	color:#808080;
@@ -3604,6 +3615,7 @@ ErrorModalCenter
     border: 1px solid rgba(0,0,0,.125);
     border-radius: .25rem;
 	padding:30px 40px;
+  clear: both;
 	
 }
 .inspectionsummery .section-title p {
@@ -3640,7 +3652,7 @@ ErrorModalCenter
 	background:#2c5baa;
 	color:#fff;
 	font-size:23px;
-	padding:20px 0;
+	padding:10px 0;
 	font-weight:400;
 	width:50%;
 }
@@ -3657,6 +3669,10 @@ ErrorModalCenter
    color: #9F9F9F;
    font-size: 16px;
     font-weight: normal;
+}
+
+.inspectionsummeryhead {
+  text-align: left;
 }
 
 .inspectionsummeryhead h2{
@@ -3682,7 +3698,7 @@ ErrorModalCenter
 }
 .inspectiontableBlock .commentsblock h3{
 	color:#343434;
-	padding:20px 0;
+	padding:15px 0;
 	font-size:18px;
 	font-weight:normal;
 }
@@ -7011,3 +7027,16 @@ table td .ant-btn:hover span, table td .ant-btn:hover i{
   width: 100%;
   max-width: 200px;
 }
+
+.inspectionsummery .back-btn{
+  float: left;
+}
+
+.products-details .product-dtl{
+  text-align: left;
+}
+
+.inspectiontable table tr td:first-child{
+  text-align: left;
+}
+

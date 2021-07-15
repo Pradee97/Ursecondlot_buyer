@@ -20,7 +20,7 @@ const Inspection=()=>{
                 <div class="container">
                 
                 <div class="back-btn">
-                        <a class="back-btn-primary" href="#"><i class="bx bx-chevron-left"></i> Back</a>
+                        <a class="backBtn" href="#"><i class="bx bx-chevron-left"></i> Back</a>
                 </div>
                 <div class="inspectionsummeryblock col-lg-12">
 
