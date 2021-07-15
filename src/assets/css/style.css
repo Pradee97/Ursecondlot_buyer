@@ -3764,6 +3764,9 @@ Make your Bid
 }
 .border-bottomtext{
 	margin:10px;
+  text-align: left;
+  font-weight: 600;
+    font-size: 16px;
 }
 .input-icon {
   position: relative;
@@ -3804,7 +3807,8 @@ Make your Bid
 }
 .optional-services{
 	border: 1px solid #ccc;
-	margin:20px 0
+	margin:20px 0;
+  text-align: left;
 }
 .optional-services h4{
 	color:#4e4e4e;
