@@ -2976,10 +2976,9 @@ Car Detail Page
 }
 
 .product-name {
-	font-size: 22px;
+	font-size: 30px;
 	font-weight: 500;
-	line-height: 22px;
-	margin-bottom: 4px;
+	margin-bottom: 10px;
 }
 
 
@@ -7044,3 +7043,105 @@ table td .ant-btn:hover span, table td .ant-btn:hover i{
   text-align: left;
 }
 
+
+
+
+
+
+
+.vehicle-detail-banner .car-slider-desc {
+  max-width: 180px;
+  margin: 0 auto;
+}
+.banner-slider .slider.slider-for {
+  max-width: 84%;
+  padding-right: 35px;
+}
+.banner-slider .slider.slider-nav {
+  max-width: 16%;
+}
+.banner-slider .slider.slider-for,
+.banner-slider .slider.slider-nav {
+  width: 100%;
+  float: left;
+}
+.banner-slider .slider.slider-nav {
+  height: 610px;
+  overflow: hidden;
+
+}
+.slider-banner-image {
+  height: 610px;
+}
+.banner-slider .slider.slider-nav {
+  padding: 20px 0 0;
+padding-top:0;
+}
+.slider-nav .slick-slide.thumbnail-image .thumbImg{
+  max-width: 178px;
+  height: 110px;
+  margin: 0 auto;
+  border: 1px solid #EBEBEB;
+}
+.slider-banner-image img,
+.slider-nav .slick-slide.thumbnail-image .thumbImg img {
+  height: 100%;
+  width:100%;
+  object-fit: cover;
+}
+.slick-vertical .slick-slide:active,
+.slick-vertical .slick-slide:focus,
+.slick-arrow:hover,
+.slick-arrow:focus {
+  border: 0;
+  outline: 0;
+background-repeat: no-repeat;
+  text-align: center;
+  background-position: center;
+  background-color: #F5F5F5;
+}
+.slider-nav .slick-slide.slick-current.thumbnail-image .thumbImg {
+  border: 2px solid #196DB6;
+}
+.slider-nav .slick-slide.slick-current span {
+  color: #196DB6;
+}
+.slider-nav .slick-slide {
+  text-align: center;
+}
+.slider-nav .slick-slide span {
+  font-size: 14px;
+  display: block;
+  padding: 5px 0 15px;
+}
+.slick-arrow {
+  width: 100%;
+  background-color: #F5F5F5;
+  border: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-size: 0;
+  height: 18px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 99;
+height: 30px;
+}
+.slick-prev {
+ top: 0;
+}
+.slick-next {
+ bottom: 0;
+ background-color: #F5F5F5;
+}
+.slick-prev.slick-arrow {
+  background-image: url(../img/uparrow.png);
+}
+.slick-next.slick-arrow {
+  background-image: url(../img/downarrow.png);
+}
+
+.slick-slide img{
+width:100%;
+}
