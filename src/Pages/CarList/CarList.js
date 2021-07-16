@@ -94,7 +94,7 @@ const CarList = () => {
 
                                             <div className="cars-prices">
                                                 <a className="cta-btns" href="#">${item.max_bid}</a>
-                                                <a className="cta-btns-primary" >Make Bid</a>
+                                                <a className="cta-btns-primary" href="JavaScript:void(0)" onClick={togglePopup} >Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
