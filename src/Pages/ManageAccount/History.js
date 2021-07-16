@@ -336,12 +336,15 @@ const History = () => {
               </div>
               
               
-              
+            
               
             </div>
+            
           </div>
+          <div><a class="load-more-btn" href="#">Load More</a></div>
         </div>
       </div>
+     
       </div>
   
      
