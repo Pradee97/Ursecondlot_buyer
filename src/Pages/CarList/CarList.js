@@ -1,5 +1,7 @@
 import React from 'react';
 import ls from 'local-storage';
+import Popup from '../../Component/Popup/Popup';
+import Makeurbid from '../Makeurbid';
 import '../../assets/css/responsive.css';
 import API from "../../Services/BaseService";
 import { useHistory } from "react-router-dom";
@@ -12,6 +14,13 @@ const CarList = () => {
     const [carDetail,setCarDetail]=useState("");
     const [carInventoryDetail,setCarInventoryDetail]=useState("");
     const [carFavInventoryDetail,setFavCarInventoryDetail]=useState("");
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    const togglePopup = () => {
+        setIsOpen(!isOpen);
+    }
+
     console.log("=======>",userDetails.user_id)
     const getrecentCarList=()=>{
         //console.log()
@@ -85,7 +94,7 @@ const CarList = () => {
 
                                             <div className="cars-prices">
                                                 <a className="cta-btns" href="#">${item.max_bid}</a>
-                                                <a className="cta-btns-primary" href="#">Make Bid</a>
+                                                <a className="cta-btns-primary" href="JavaScript:void(0)" onClick={togglePopup}>Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
@@ -222,6 +231,15 @@ const CarList = () => {
            
         
     </main>
+
+	{isOpen && <Popup
+		isClose={false}
+		content={<>
+			<Makeurbid toggle={togglePopup} />
+		</>}
+		handleClose={togglePopup}
+	/>}
+
         </div >
     );
 };

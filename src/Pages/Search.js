@@ -1,4 +1,7 @@
 import React from 'react';
+import { useState } from 'react';
+import Popup from '../Component/Popup/Popup';
+import Makeurbid from '../Pages/Makeurbid';
 import lock from '../assets/img/lock.svg';
 import cars01 from '../assets/img/cars01.png';
 import speedometer from '../assets/img/speedometer.svg';
@@ -7,7 +10,16 @@ import arrowmark from '../assets/img/arrowmark.jpg';
 import appstore from '../assets/img/appstore.png';
 import googleplay from '../assets/img/googleplay.png';
 
+
 const Search = () => {
+
+
+const [isOpen, setIsOpen] = useState(false);
+
+const togglePopup = () => {
+	setIsOpen(!isOpen);
+}
+
     return (
 
         <main id="main" class="inner-page">
@@ -1168,7 +1180,7 @@ const Search = () => {
 												
 												<div class="cars-prices">
 													<a class="cta-btns"  href="#">$1900</a>
-													<a class="cta-btns-primary"  href="#">Make Bid</a>
+													<a class="cta-btns-primary"  href="JavaScript:void(0)" onClick={togglePopup}>Make Bid</a>
 												</div>
 											</div>
 										</div>
@@ -1203,7 +1215,13 @@ const Search = () => {
       </div>
     </section>
 
-   
+	{isOpen && <Popup
+		isClose={false}
+		content={<>
+			<Makeurbid toggle={togglePopup} />
+		</>}
+		handleClose={togglePopup}
+	/>}
 
  
 
