@@ -45,11 +45,11 @@ useEffect(() => {
               <div class="section-title">
                 <h2>My Favorite Car List</h2>
               </div>
-              {carFavInventoryDetail.length>0?carFavInventoryDetail
-              .map((item,index) =>
+              
               <div class="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
               
-
+              {carFavInventoryDetail.length>0?carFavInventoryDetail
+              .map((item,index) =>
                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                   <div class="car-item">
                     <div class="cars-lock">
@@ -73,8 +73,8 @@ useEffect(() => {
                         </div>
                     </div>
                   </div>
-                </div>                                             
-                  </div>):""}
+                </div>  ):""}                                           
+                  </div>
                 </div>
             </div>
           
