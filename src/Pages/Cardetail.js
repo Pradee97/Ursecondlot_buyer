@@ -1,4 +1,10 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import $ from 'jquery'
+import { useHistory, useLocation } from "react-router-dom";
+
+import API from "../Services/BaseService";
+
+
 import lock from '../assets/img/lock.svg';
 import cars01 from '../assets/img/cars01.png';
 import appstore from '../assets/img/appstore.png';
@@ -12,8 +18,78 @@ import tag from '../assets/img/tag.svg';
 import Path from '../assets/img/Path.svg';
 import transmission from '../assets/img/manual-transmission.svg';
 import drivetrain from '../assets/img/drivetrain.svg';
+import cardetail1 from '../assets/img/cardetail1.jpg'
+import cardetail2 from '../assets/img/cardetail2.jpg'
+import cardetail3 from '../assets/img/cardetail3.jpg'
+import cardetail4 from '../assets/img/cardetail4.jpg'
+import cardetail5 from '../assets/img/cardetail5.jpg'
 
 const Cardetail = () =>{
+
+	
+// $( document ).ready(function() {
+// 	$('.slider-for').slick({
+// 		slidesToShow: 1,
+// 		slidesToScroll: 1,
+// 		arrows: false,
+// 		fade: true,
+// 		asNavFor: '.slider-nav'
+// 	});
+// 	$('.slider-nav').slick({
+// 		slidesToShow: 4,
+// 		slidesToScroll: 1,
+// 		vertical:true,
+// 		asNavFor: '.slider-for',
+// 		dots: false,
+// 		focusOnSelect: true,
+// 		verticalSwiping:true,
+// 		responsive: [
+// 		{
+// 			breakpoint: 992,
+// 			settings: {
+// 			  vertical: false,
+// 			}
+// 		},
+// 		{
+// 		  breakpoint: 768,
+// 		  settings: {
+// 			vertical: false,
+// 		  }
+// 		},
+// 		{
+// 		  breakpoint: 580,
+// 		  settings: {
+// 			vertical: false,
+// 			slidesToShow: 3,
+// 		  }
+// 		},
+// 		{
+// 		  breakpoint: 380,
+// 		  settings: {
+// 			vertical: false,
+// 			slidesToShow: 2,
+// 		  }
+// 		}
+// 		]
+// 	});
+// 	});
+
+const [carDetail ,setCarDetail] = useState([]) 
+
+useEffect (()=>{
+	// carDetails/condition
+	const request = {"car_id":1}
+	API.post('carDetails/condition',request).then(res=>{
+		console.log("response",res.data.data);
+	   // const {results} = res.data.data;
+		console.log("Response data",res.data.data);
+		//if(results.length>0){
+		setCarDetail(res.data.data);
+		console.log("car Detail",res.data.data);
+		//}
+	})
+},[])
+	
 return(
     <div>
         
@@ -24,35 +100,68 @@ return(
 				<a class="back-btn-primary" href="#"><i class="bx bx-chevron-left"></i> Back</a>
 			</div>
 	        <div class="row">
-	        	{/* <div class="col-md-6">
-	        		<div class="wrapper">
-						<div class="image-gallery">
-							<main class="primary" style="background-image: url('assets/img/cars02.png');"></main>
-							 <aside class="thumbnails">
-								<a href="#" class="selected thumbnail" data-big="assets/img/cars02.png">
-								  <div class="thumbnail-image" style="background-image: url(assets/img/cars02.png)"></div>
-								</a>
-								<a href="#" class="thumbnail" data-big="assets/img/cars03.png">
-								  <div class="thumbnail-image" style="background-image: url(assets/img/cars03.png)"></div>
-								</a>
-								<a href="#" class="thumbnail" data-big="assets/img/cars04.png">
-								  <div class="thumbnail-image" style="background-image: url(assets/img/cars04.png)"></div>
-								</a>
-								<a href="#" class="thumbnail" data-big="assets/img/cars05.png">
-								  <div class="thumbnail-image" style="background-image: url(assets/img/cars05.png)"></div>
-								</a>
-							</aside>
+			{carDetail.length>0 && <div class="col-md-6">
+
+					<div class="vehicle-detail-banner banner-content clearfix">
+						<div class="banner-slider">
+							<div class="slider slider-for">
+								<div class="slider-banner-image">
+									{/* <img src={cardetail1} alt="" />  */}
+									<img src={carDetail[0].image} alt="no image" /> 
+								</div> 
+								{/* <div class="slider-banner-image">
+									<img src={cardetail2} alt="" /> 
+								</div> 
+								<div class="slider-banner-image">
+									<img src={cardetail3} alt="" /> 
+								</div> 
+								<div class="slider-banner-image">
+									<img src={cardetail4} alt="" /> 
+								</div> 
+								<div class="slider-banner-image">
+									<img src={cardetail5} alt="" /> 
+								</div>  */}
+							
+							</div>
+							<div class="slider slider-nav thumb-image">
+								{/* <div class="thumbnail-image">
+									<div class="thumbImg">
+										<img src={cardetail1} alt="" /> 
+									</div>
+								</div> */}
+								{/* <div class="thumbnail-image">
+									<div class="thumbImg">
+										<img src={cardetail2} alt="" /> 
+									</div>
+								</div>
+								<div class="thumbnail-image">
+									<div class="thumbImg">
+										<img src={cardetail3} alt="" /> 
+									</div>
+								</div>
+								<div class="thumbnail-image">
+									<div class="thumbImg">
+										<img src={cardetail4} alt="" /> 
+									</div>
+								</div>
+								<div class="thumbnail-image">
+									<div class="thumbImg">
+										<img src={cardetail5} alt="" /> 
+									</div>
+								</div>								 */}
+							</div>
 						</div>
 					</div>
-	        	</div> */}
-	        	<div class="col-md-6">
+				</div>}
+	        	{ carDetail.length >0 && 
+					<div class="col-md-6">
 	        		<div class="product-dtl">
         				<div class="product-info">
-		        			<div class="product-name">Honda amaze (2014 model)</div>
+		        			<div class="product-name">{carDetail[0].make}({carDetail[0].model})</div>
 							<p class="productdes">Lorem Ipsum Is Simply Dummy</p>
 		        			<div class="d-flex align-items-center mb-3">
-									<p class="details"><img src={speedometer}  alt=""/><span>31,1241 m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-									<p class="details"><img src={gasolinePump} alt=""/><span>Diesel</span></p>
+									<p class="details"><img src={speedometer}  alt=""/><span>{carDetail[0].miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+									<p class="details"><img src={gasolinePump} alt=""/><span>{carDetail[0].fuel_type}</span></p>
 							</div>
 							<p><span class="dealertaglines">Message From The Dealer-</span> Lorem Ipsum Is Simply Dummy Text Typesetting Industry. Lorem Ipsum</p>
 		        		</div>
@@ -61,7 +170,7 @@ return(
 	        				<div class="col-md-12 carpoints">							  
 								<div class="carpoint">
 									<img src={car}  alt=""/>
-									<span>UN14DF134WVQ149788</span>
+									<span>{carDetail[0].engine}</span>
 									<img src={book}  alt=""/> 
 									<img src={barcode}  alt=""/>
 								</div>
@@ -110,7 +219,7 @@ return(
 								</div>
 	        				</div>
 						</div>
-	        		</div>
+	        		</div> }
 	        	</div>
 	        </div> 
 		</div>
@@ -454,13 +563,10 @@ return(
       </div>
     </section>
 
-   
-
- 
-
   </main>
 
     </div>
 )
+
 }
 export default Cardetail;

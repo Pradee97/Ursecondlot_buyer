@@ -1,7 +1,7 @@
 import React from 'react';
 import appstore from '../assets/img/appstore.png';
 import googleplay from '../assets/img/googleplay.png';
-import $ from 'jquery';
+import $ from 'jquery'
 
 
 const Transport = () => {
