@@ -63,6 +63,7 @@ const Registration = () => {
         setIsOpen(!isOpen);
     }
     const getFiles=(file)=>{
+        setType("")
         console.log("================>",file.type)
         if(file.type.includes("jpg") || file.type.includes("jpeg") || file.type.includes("png")){
             setDoc(file);
