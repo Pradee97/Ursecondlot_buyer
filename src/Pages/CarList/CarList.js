@@ -81,7 +81,7 @@ const CarList = () => {
                                         <div className="cars-lock">
                                             <img src={process.env.PUBLIC_URL +"/images/lock.svg"}  />
                                         </div>
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}/>
+                                        <a href="/Cardetail"><img src={process.env.PUBLIC_URL +"/images/cars01.png"}/></a>
                                         <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
@@ -123,7 +123,8 @@ const CarList = () => {
                                         <div className="cars-lock">
                                             <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
                                         </div>
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"} className="img-fluid" alt="..." />
+                                        <a href="/Cardetail">
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"} className="img-fluid" alt="..." /></a>
                                         <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
@@ -165,7 +166,8 @@ const CarList = () => {
                                         <div className="cars-lock">
                                             <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
                                         </div>
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}className="img-fluid" alt="..." />
+                                        <a href="/Cardetail">
+                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}className="img-fluid" alt="..." /></a>
                                         <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
@@ -207,7 +209,7 @@ const CarList = () => {
                                         <div className="cars-lock">
                                             <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
                                         </div>
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}className="img-fluid" alt="..." />
+                                        <a href="/Cardetail"><img src={process.env.PUBLIC_URL +"/images/cars01.png"}className="img-fluid" alt="..." /></a>
 
                                         <div className="cars-content">
                                             <h3><a href="#">View Details</a></h3>
