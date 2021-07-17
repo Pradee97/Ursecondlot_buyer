@@ -75,6 +75,7 @@ const Cardetail = () =>{
 // 	});
 
 const [carDetail ,setCarDetail] = useState([]) 
+const [carInventoryDetail,setCarInventoryDetail]=useState([]);
 
 useEffect (()=>{
 	// carDetails/condition
@@ -86,6 +87,15 @@ useEffect (()=>{
 		//if(results.length>0){
 		setCarDetail(res.data.data);
 		console.log("car Detail",res.data.data);
+		//}
+	})
+	API.post('BuyerInventoryCarList/condition').then(res=>{
+		console.log("response",res.data.data);
+	   // const {results} = res.data.data;
+		//console.log("Response data",res.data.data);
+		//if(results.length>0){
+			setCarInventoryDetail(res.data.data);
+		console.log("car Inventory Detail",res.data.data);
 		//}
 	})
 },[])
@@ -157,13 +167,13 @@ return(
 					<div class="col-md-6">
 	        		<div class="product-dtl">
         				<div class="product-info">
-		        			<div class="product-name">{carDetail[0].make}({carDetail[0].model})</div>
+		        			<div class="product-name">{carDetail[0].make} {carDetail[0].vehicle_type}({carDetail[0].model})</div>
 							<p class="productdes">Lorem Ipsum Is Simply Dummy</p>
 		        			<div class="d-flex align-items-center mb-3">
 									<p class="details"><img src={speedometer}  alt=""/><span>{carDetail[0].miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
 									<p class="details"><img src={gasolinePump} alt=""/><span>{carDetail[0].fuel_type}</span></p>
 							</div>
-							<p><span class="dealertaglines">Message From The Dealer-</span> Lorem Ipsum Is Simply Dummy Text Typesetting Industry. Lorem Ipsum</p>
+							<p><span class="dealertaglines">Message From The Dealer-</span> {carDetail[0].internal_notes}</p>
 		        		</div>
 	        			
 	        			<div class="row">
@@ -188,7 +198,7 @@ return(
 							<div class="col-md-12 cars-detail-ins">
 	        					<div class="cars-detail-views">
 									<a class="car-btns" href="#">view Inspection</a>
-									<a class="car-btns-primary" href="#"><img src={tag} alt=""/>High Bid :<span> $1500</span></a>
+									<a class="car-btns-primary" href="#"><img src={tag} alt=""/>High Bid :<span> ${carDetail[0].max_bid}</span></a>
 								</div>
 	        				</div>
 	        			</div>
@@ -201,7 +211,7 @@ return(
 									<div class=" d-flex align-items-center mb-3">
 										<p class="details"><img src={Path}  alt=""/><span>Illinois</span></p>
 										<p class="details"><img src="assets/img/persent.svg" alt=""/><span>15%</span></p>
-										<p class="details"><img src="assets/img/road-with-broken-line.svg" alt=""/><span>2.5M</span></p>
+										<p class="details"><img src="assets/img/road-with-broken-line.svg" alt=""/><span>{carDetail[0].mileage} M</span></p>
 									</div>	        										
 								</div>
 							</div>
@@ -224,7 +234,7 @@ return(
 	        </div> 
 		</div>
 	
-	<div id="carspecifation" class="carspecifation">
+		{ carDetail.length >0 && <div id="carspecifation" class="carspecifation">
       <div class="container">
 		  <div class="carspecifationblock col-lg-12">
 			<div class="section-title">
@@ -242,7 +252,7 @@ return(
 					<div class="specifati2">
 					 <p>Automatic</p>
 					 <p>Rwd</p>
-					 <p>Diesel</p>
+					 <p>{carDetail[0].fuel_type}</p>
 					</div>
 				  </div>
 				  <div class="col-lg-2">
@@ -256,7 +266,7 @@ return(
 					<div class="specifati2">
 					 <p>Automatic</p>
 					 <p>Rwd</p>
-					 <p>Diesel</p>
+					 <p>{carDetail[0].fuel_type}</p>
 					</div>
 				  </div>
 				  <div class="col-lg-2">
@@ -270,13 +280,13 @@ return(
 					<div class="specifati2">
 					 <p>Automatic</p>
 					 <p>Rwd</p>
-					 <p>Diesel</p>
+					 <p>{carDetail[0].fuel_type}</p>
 					</div>
 				  </div>
 				</div>
 			</div>
 		</div>
-    </div>
+    </div>}
 	
 	<div id="dealer-cars" class="dealer-cars">
       <div class="container-fluid aos-init aos-animate">
@@ -285,7 +295,8 @@ return(
           <h2>More cars from the dealer</h2>          
         </div>
 
-        <div class="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
+		{carInventoryDetail.length > 0 ? carInventoryDetail
+                            .map((moreCar,index) =><div class="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
 
          <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
             <div class="car-item">
@@ -297,112 +308,21 @@ return(
 				<h4>Best deal</h4>
 			  </div>
               <div class="cars-content">		
-			  <h3><a href="#">Honda amaze (2014 model)</a></h3>
+			  <h3><a href="#">{moreCar.make} {moreCar._type} ({moreCar.model} model)</a></h3>
                 <div class="d-flex align-items-center mb-3">
-                  <p class="details"><img src={speedometer}  alt=""/><span>31,1241 m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-                  <p class="details"><img src={gasolinePump} alt=""/><span>Diesel</span></p>
+                  <p class="details"><img src={speedometer}  alt=""/><span>{moreCar.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <p class="details"><img src={gasolinePump} alt=""/><span>{moreCar.fuel_type}</span></p>
                 </div>
 				
 				<div class="cars-prices">
-					<a class="cta-btns" href="register.html">$1900</a>
+					<a class="cta-btns" href="register.html">${moreCar.min_bid}</a>
 					<a class="cta-btns-primary" href="register.html">Make Bid</a>
 				</div>
               </div>
             </div>
           </div>
-		 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-            <div class="car-item">
-			<div class="cars-lock">
-				<img src={lock} class="img-fluid" alt="..."/>
-			  </div>
-              <img src={cars01} class="img-fluid" alt="..."/>
-			  <div class="cars-tag">
-				<h4>Best deal</h4>
-			  </div>
-              <div class="cars-content">		
-			  <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                <div class="d-flex align-items-center mb-3">
-                  <p class="details"><img src={speedometer}  alt=""/><span>31,1241 m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-                  <p class="details"><img src={gasolinePump} alt=""/><span>Diesel</span></p>
-                </div>
-				
-				<div class="cars-prices">
-					<a class="cta-btns" href="register.html">$1900</a>
-					<a class="cta-btns-primary" href="register.html">Make Bid</a>
-				</div>
-              </div>
-            </div>
-          </div>
-		   <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-            <div class="car-item">
-			<div class="cars-lock">
-				<img src={lock} class="img-fluid" alt="..."/>
-			  </div>
-              <img src={cars01} class="img-fluid" alt="..."/>
-			  <div class="cars-tag">
-				<h4>Best deal</h4>
-			  </div>
-              <div class="cars-content">		
-			  <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                <div class="d-flex align-items-center mb-3">
-                  <p class="details"><img src={speedometer}  alt=""/><span>31,1241 m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-                  <p class="details"><img src={gasolinePump} alt=""/><span>Diesel</span></p>
-                </div>
-				
-				<div class="cars-prices">
-					<a class="cta-btns" href="register.html">$1900</a>
-					<a class="cta-btns-primary" href="register.html">Make Bid</a>
-				</div>
-              </div>
-            </div>
-          </div>
-		   <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-            <div class="car-item">
-			<div class="cars-lock">
-				<img src={lock} class="img-fluid" alt="..."/>
-			  </div>
-              <img src={cars01} class="img-fluid" alt="..."/>
-			  <div class="cars-tag">
-				<h4>Best deal</h4>
-			  </div>
-              <div class="cars-content">		
-			  <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                <div class="d-flex align-items-center mb-3">
-                  <p class="details"><img src={speedometer}  alt=""/><span>31,1241 m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-                  <p class="details"><img src={gasolinePump} alt=""/><span>Diesel</span></p>
-                </div>
-				
-				<div class="cars-prices">
-					<a class="cta-btns" href="register.html">$1900</a>
-					<a class="cta-btns-primary" href="register.html">Make Bid</a>
-				</div>
-              </div>
-            </div>
-          </div>
-		  <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-            <div class="car-item">
-			<div class="cars-lock">
-				<img src={lock} class="img-fluid" alt="..."/>
-			  </div>
-              <img src={cars01} class="img-fluid" alt="..."/>
-			  <div class="cars-tag">
-				<h4>Best deal</h4>
-			  </div>
-              <div class="cars-content">		
-			  <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                <div class="d-flex align-items-center mb-3">
-                  <p class="details"><img src={speedometer}  alt=""/><span>31,1241 m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-                  <p class="details"><img src={gasolinePump} alt=""/><span>Diesel</span></p>
-                </div>
-				
-				<div class="cars-prices">
-					<a class="cta-btns" href="register.html">$1900</a>
-					<a class="cta-btns-primary" href="register.html">Make Bid</a>
-				</div>
-              </div>
-            </div>
-          </div>		
-		  </div>
+		 		
+		  </div>):""}
 		<div class="text-center">
                 <a href="#" class="more-btn">View More<i class="bx bx-chevron-right"></i></a>
               </div>
