@@ -43,7 +43,7 @@ const Login = () => {
     setErrors({email:"", password:""})
     if(!emailId) { setErrors({email:"Email Id is required", password:""}); return}
     else if( emailId && !new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i).test(emailId) ) {
-      setErrors({email:"Must match the email format", password:""})
+      setErrors({email:"Must match the email format", password:""}); return
     }
     else if(!password) { setErrors({email:"", password:"password is required"}); return}
 
