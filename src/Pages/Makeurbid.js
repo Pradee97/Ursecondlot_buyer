@@ -6,7 +6,7 @@ const MakeurBid=()=>{
     return(
         <div>
           
-            <main id="main" class="inner-page">     
+             
                 <div id="makeyourbid" class="makeyourbid">
                     <div class="container">
                         <div class="makeyourbidblock col-lg-12">
@@ -66,18 +66,7 @@ const MakeurBid=()=>{
                 </div>
                 </div>
             </div>           
-            <section id="playstoreBlock" class="playstoreBlock">
-                <div class="container">
-                    <div class="row content">
-                        <div class="col-lg-12">
-                            <img src={appstore} />
-                            <img src={googleplay} />
-                        </div>                    
-                    </div>
-                </div>
-            </section>
-        </main>
-
+           
     </div>
 
     )

@@ -73,7 +73,7 @@ const CarList = () => {
     return (
        
             <div>
-                <main id="main" className="inner-page">
+                <main id="main" className="inner-page carList">
                     <div id="suggested-cars" className="suggested-cars">
                         <div className="container-fluid aos-init aos-animate" data-aos="fade-up">
                             <div className="section-title">
@@ -87,7 +87,7 @@ const CarList = () => {
                                         <div className="cars-lock">
                                             <img src={process.env.PUBLIC_URL +"/images/lock.svg"}  />
                                         </div>
-                                        <img src={item.image}  onClick={()=>{redirectpage(item.car_id)}}/>
+                                        <img className="carImg" src={item.image}  onClick={()=>{redirectpage(item.car_id)}}/>
                                         <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
@@ -127,10 +127,10 @@ const CarList = () => {
                                 <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div className="car-item">
                                         <div className="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
+                                            <img  src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
                                         </div>
                                         <a href="/Cardetail">
-                                        <img src={item.image} className="img-fluid" alt="..." /></a>
+                                        <img className="carImg" src={item.image} className="carImg" alt="..." /></a>
                                         <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
@@ -173,7 +173,7 @@ const CarList = () => {
                                             <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
                                         </div>
                                         <a href="/Cardetail">
-                                        <img src={item.image}className="img-fluid" alt="..." /></a>
+                                        <img className="carImg" src={item.image} alt="..." /></a>
                                         <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
@@ -215,7 +215,7 @@ const CarList = () => {
                                         <div className="cars-lock">
                                             <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
                                         </div>
-                                        <a href="/Cardetail"><img src={process.env.PUBLIC_URL +"/images/cars01.png"}className="img-fluid" alt="..." /></a>
+                                        <a href="/Cardetail"><img src={process.env.PUBLIC_URL +"/images/cars01.png"}className="carImg" alt="..." /></a>
 
                                         <div className="cars-content">
                                             <h3><a href="#">View Details</a></h3>

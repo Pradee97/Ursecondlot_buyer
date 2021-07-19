@@ -320,7 +320,7 @@ return(
 		{sellerCarDetail.length > 0 ? sellerCarDetail
                             .map((moreCar,index) =>
 
-         <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
             <div class="car-item">
 				<div class="cars-lock">
 				<img src={lock} class="img-fluid" alt="..."/>
@@ -362,7 +362,7 @@ return(
 
         <div class="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
 
-         <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
             <div class="car-item">
 			<div class="cars-lock">
 				<img src={lock} class="img-fluid" alt="..."/>

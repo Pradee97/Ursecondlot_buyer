@@ -44,6 +44,9 @@ padding-right: 20px;
     padding: 0 20px;
 }
 
+.dealer-cars .cars-prices .cta-btns-primary{
+    padding: 10px
+}
 	
 }
 
@@ -364,9 +367,8 @@ padding-right: 20px;
 	
 	
 	
-	
-	
 }
+
 @media (max-width: 480px) {
 	
 	.slider-banner-image {
