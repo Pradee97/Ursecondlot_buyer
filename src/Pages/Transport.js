@@ -1,39 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import appstore from '../assets/img/appstore.png';
 import googleplay from '../assets/img/googleplay.png';
-import $ from 'jquery';
-
 
 const Transport = () => {
 
-	$(".tab_content").hide();
-    $(".tab_content:first").show();
+	const [tab1, setTab1] = useState("active")
+	const [tab2, setTab2] = useState("")
+	const [tab3, setTab3] = useState("")
 
-//   / if in tab mode /
-    $("ul.tabs li").click(function() {
+	const tab = (selectedTab = "tab1") => {
 		
-      $(".tab_content").hide();
-      var activeTab = $(this).attr("rel"); 
-      $("#"+activeTab).fadeIn();		
-		
-      $("ul.tabs li").removeClass("active");
-      $(this).addClass("active");
-
-	  $(".tab_drawer_heading").removeClass("d_active");
-	  $(".tab_drawer_heading[rel^='"+activeTab+"']").addClass("d_active");
-	  
-    });
-
-	// / if in drawer mode /
-	$(".tab_drawer_heading").click(function() {
-      
-      $(".tab_content").hide();
-      var d_activeTab = $(this).attr("rel"); 
-      $("#"+d_activeTab).fadeIn();
-	  
-	  $(".tab_drawer_heading").removeClass("d_active");
-      $(this).addClass("d_active");
-	})
+		if (selectedTab==="tab1") {
+			setTab1("active")
+			setTab2("")
+			setTab3("")
+		}
+		else if (selectedTab==="tab2") {
+			setTab1("")
+			setTab2("active")
+			setTab3("")
+		}else if (selectedTab==="tab3") {
+			setTab1("")
+			setTab2("")
+			setTab3("active")
+		}
+    };
 
 return (
 
@@ -47,9 +38,9 @@ return (
 		
 			<div class="tabsoptionblock col-lg-12">
 				<ul class="tabs">
-					<li class="active" rel="tab1">Pickup</li>
-					<li rel="tab2">In Transit</li>
-					<li rel="tab3">Delivered</li>
+					<li class={`${tab1}`} onClick={()=>tab("tab1")} >Pickup</li>
+					<li class={`${tab2}`} onClick={()=>tab("tab2")} >In Transit</li>
+					<li class={`${tab3}`} onClick={()=>tab("tab3")} >Delivered</li>
 				</ul>
 			</div>
 			<div class="searchblock col-lg-12">
@@ -62,7 +53,7 @@ return (
 			</div>
 			<div class="tab_container">
 	
-				<div id="tab1" class="tab_content">
+				<div id="tab1" style={{display:`${tab1 === ""? "none": "block"}`}} class="tab_content">
 					<div class="tab_container-block">
 						<div class="row content col-lg-12">							
 							<div class="col-lg-12 col-md-12">
@@ -156,7 +147,7 @@ return (
 					</div>
 				</div>
 				
-				<div id="tab2" class="tab_content">
+				<div id="tab2" style={{display:`${tab2 === ""? "none": "block"}`}} class="tab_content">
 						<div class="tab_container-block">
 							<div class="row content col-lg-12">
 								<div class="col-lg-5 col-md-5">
@@ -343,7 +334,7 @@ return (
 					</div>
 				</div>
 							
-				<div id="tab3" class="tab_content">
+				<div id="tab3" style={{display:`${tab3 === ""? "none": "block"}`}} class="tab_content">
 						<div class="tab_container-block">
 							<div class="row content col-lg-12">
 								<div class="col-lg-5 col-md-5">
