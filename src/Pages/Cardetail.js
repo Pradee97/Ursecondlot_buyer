@@ -102,6 +102,7 @@ useEffect (()=>{
 		//if(results.length>0){
 		setCarDetail(res.data.data);
 		console.log("car Detail",res.data.data);
+		setLrgImg(res.data.data[0].image);
 		//}
 	})
 	API.post('BuyerInventoryCarList/condition').then(res=>{
@@ -109,7 +110,7 @@ useEffect (()=>{
 	   // const {results} = res.data.data;
 		//console.log("Response data",res.data.data);
 		//if(results.length>0){
-			setCarInventoryDetail(res.data.data);
+		setCarInventoryDetail(res.data.data);
 		console.log("car Inventory Detail",res.data.data);
 		//}
 	})
@@ -135,7 +136,7 @@ return(
     <div id="products-details" class="products-details">
 	 <div class="container">
 			<div class="back-btn">
-				<a class="back-btn-primary" href="#"><i class="bx bx-chevron-left"></i> Back</a>
+				<a class="back-btn-primary" href="/carlist"><i class="bx bx-chevron-left"></i> Back</a>
 			</div>
 	        <div class="row">
 			{carDetail.length>0 && <div class="col-md-6">
