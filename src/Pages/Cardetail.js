@@ -116,49 +116,38 @@ return(
 						<div class="banner-slider">
 							<div class="slider slider-for">
 								<div class="slider-banner-image">
-									{/* <img src={cardetail1} alt="" />  */}
 									<img src={carDetail[0].image} alt="no image" /> 
 								</div> 
-								{/* <div class="slider-banner-image">
-									<img src={cardetail2} alt="" /> 
-								</div> 
-								<div class="slider-banner-image">
-									<img src={cardetail3} alt="" /> 
-								</div> 
-								<div class="slider-banner-image">
-									<img src={cardetail4} alt="" /> 
-								</div> 
-								<div class="slider-banner-image">
-									<img src={cardetail5} alt="" /> 
-								</div>  */}
+								
 							
 							</div>
 							<div class="slider slider-nav thumb-image">
-								{/* <div class="thumbnail-image">
-									<div class="thumbImg">
-										<img src={cardetail1} alt="" /> 
-									</div>
-								</div> */}
-								{/* <div class="thumbnail-image">
-									<div class="thumbImg">
-										<img src={cardetail2} alt="" /> 
-									</div>
-								</div>
+								{carDetail.length>1?
 								<div class="thumbnail-image">
 									<div class="thumbImg">
-										<img src={cardetail3} alt="" /> 
+										<img src={carDetail[1].image} alt="" /> 
 									</div>
-								</div>
+								</div>:""}
+								{carDetail.length>2?
 								<div class="thumbnail-image">
 									<div class="thumbImg">
-										<img src={cardetail4} alt="" /> 
+										<img src={carDetail[2].image} alt="" /> 
 									</div>
-								</div>
+								</div>:""}
+								{carDetail.length>3?
 								<div class="thumbnail-image">
 									<div class="thumbImg">
-										<img src={cardetail5} alt="" /> 
+										<img src={carDetail[3].image} alt="" /> 
 									</div>
-								</div>								 */}
+								</div>:""}
+								{carDetail.length>4?
+								<div class="thumbnail-image">
+									<div class="thumbImg">
+										<img src={carDetail[4].image} alt="" /> 
+									</div>
+								</div>	:""}
+								
+																	
 							</div>
 						</div>
 					</div>
