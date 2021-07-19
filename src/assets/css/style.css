@@ -6,6 +6,7 @@ body {
   font-family: 'Poppins', sans-serif;
   color: #444444;
   font-size: 14px;
+  background: #F5F5F5;
 }
 
 a {
@@ -14,8 +15,7 @@ a {
 
 a:hover {
   color: #002768;
-  text-decoration: none;
-  text-decoration:underline;
+  text-decoration: underline;
 }
 
 a:focus {
@@ -39,6 +39,7 @@ ul {
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Poppins', sans-serif;
 }
+
 
 /*--------------------------------------------------------------
 # Preloader
@@ -160,9 +161,21 @@ h1, h2, h3, h4, h5, h6 {
     z-index: 997;
     padding: 5px 0;
     top: 40px;
-	box-shadow: 0px 3px 6px #00000029;
+	box-shadow: 0px 3px 6px #ddd;
   text-align: left;
 }
+
+#header .container-fluid, #footer .container-fluid{
+  padding-left: 80px;
+  padding-right: 80px;
+}
+
+.container{
+  max-width: 100%;
+  padding-left: 80px;
+  padding-right: 80px;
+}
+
 
 #header.header-scrolled, #header.header-inner-pages {
   background: rgba(40, 58, 90, 0.9);
@@ -256,6 +269,11 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav-menu a:hover, .nav-menu .active > a, .nav-menu li:hover > a {
   color: #BD062C ;
+  text-decoration: none;
+}
+.nav__submenu li:hover > a {
+  color: #fff ;
+  text-decoration: none;
 }
 
 .nav-menu .drop-down ul {
@@ -351,8 +369,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .get-started-btn:hover {
-  background: #bd062c;
+  background: #00163b;
   color: #fff;
+  text-decoration: none;
+
 }
 
 @media (max-width: 768px) {
@@ -475,7 +495,7 @@ h1, h2, h3, h4, h5, h6 {
 #hero {
   background:url("../img/banner.jpg") no-repeat center top;
   width: 100%;
-  height: 580px; 
+  height: 590px; 
 }
 
 #hero .container {
@@ -649,11 +669,9 @@ section {
 }
 
 .section-title h2 {
-  font-size: 32px;
+  font-size: 30px;
   font-weight: 500;
   text-transform: uppercase;
-  margin-bottom: 20px;
-  padding-bottom: 20px;
   position: relative;
   color: #002768;
 }
@@ -764,6 +782,18 @@ section {
 .about .section-title h2 {
 	padding-bottom: 10px;
 }
+
+.aboutblock .content{
+  max-width: 1199px;
+  margin: auto;
+}
+
+.contactblock  .content{
+  max-width: 1199px;
+  margin: auto;
+}
+
+
 .about p {
 	color:#8F8F8F;
 	font-size:16px;
@@ -773,6 +803,11 @@ section {
 .aboutusimg{
 	text-align:center;
 }
+.aboutusimg img{
+  width: 500px;
+  max-width: 100%;
+}
+
 
 
 /*--------------------------------------------------------------
@@ -856,6 +891,7 @@ section {
 	text-align:center;
 	margin: auto;
     padding: 0;
+    max-width: 500px;
 }
 .feestable table{
     border: 1px solid #ccc;
@@ -864,6 +900,8 @@ section {
     padding: 0;
     width: 100%;
     text-align:center;
+    font-size: 16px;
+    font-weight: 500;
 }
  .feestable h2{
 	color:#002768;
@@ -898,6 +936,18 @@ table td span{
 	
 }
 
+
+.ant-table-thead > tr > th{
+  background:#2c5baa;
+	color:#fff;
+  text-align: center;
+}
+.feestable .ant-table-tbody > tr > td:last-child{
+  color: #bd062c;
+}
+
+
+
 /*----------------------------------------------------------------
 Cars list
 ------------------------------------------------------------------*/
@@ -910,25 +960,26 @@ Cars list
 .suggested-cars{
 	background: #F5F5F5 0% 0% no-repeat padding-box;
 	opacity: 1;
-	padding:30px 90px;
+  padding-bottom: 30px;
 }
  .car-item {
     border-radius: 5px;
-    border: 1px solid #eef0ef;
-	box-shadow: 0px 3px 6px #00000029;
+    border: 1px solid #eee;
+	box-shadow: 0px 3px 10px #eee;
 	position:relative;
+  transition: 0.2s;
+  background: #fff;;
 }
 .suggested-cars .section-title h2 ,.inventory-cars .section-title h2 , .recently-cars .section-title h2  {   
-    margin-bottom: 10px; 
-	padding-bottom: 5px;
+    margin-bottom: 0px; 
+	padding-bottom: 0px;
 }
 
-.car-item {
-  transition: 0.2s;
-}
+
 
 .car-item:hover {
   transform: scale(1.2);
+  z-index: 999;
 }
 .cars-lock{	
 	position: absolute;
@@ -974,6 +1025,7 @@ Cars list
 .cars-content h3 {
     font-weight: 700;
     font-size: 20px;
+    text-align: left;
 }
  .cars-content h3 a {
     color: #37423b;
@@ -1001,19 +1053,24 @@ Cars list
  .cars-prices .cta-btns {
     background-color: #fff;
     color: #343434;
-    padding: 10px 20px;   
+    padding: 8px 15px;   
 	margin-right:20px;
     border-radius: 3px;
     border: 1px solid #707070;
-	font-size:18px;
+	font-size:16px;
 }
  .cars-prices .cta-btns-primary {
-	font-size:18px;
+	font-size:16px;
     background-color: #b8b8b8;
     color: white;
-    padding: 10px 20px;   
+    padding: 8px 15px;   
     border-radius: 3px;
     border: none;
+}
+
+.cars-prices .cta-btns-primary:hover{
+  background: #bd062c;
+  text-decoration: none;
 }
 .more-btn {
     display: inline-block;
@@ -1031,17 +1088,17 @@ Cars list
 .inventory-cars , .recently-cars{
 	background: #fff 0% 0% no-repeat padding-box;
 	opacity: 1;
-	padding:30px 90px;
+	padding:30px 0;
 }
 .favorite-cars {
 	background: #fff 0% 0% no-repeat padding-box;
 	opacity: 1;
-	padding:30px 90px;
+	padding:30px 0;
 }
 .favorite-cars .car-item {
     border-radius: 5px;
     border: 1px solid #eef0ef;
-	box-shadow: 0px 3px 6px #00000029;
+	box-shadow: 0px 3px 6px #ddd;
 	position:relative;
 }
 .favorite-cars .section-title h2 {   
@@ -1783,10 +1840,10 @@ Cars list
 /*--------------------------------------------------------------
 # Contact
 --------------------------------------------------------------*/
-.contact .info {
- 
+.contact .info { 
   padding: 30px;  
   width: 100%;
+  text-align: left;
 
 }
 .contactfoms h3{
@@ -1837,6 +1894,7 @@ Cars list
   font-size: 16px;
   color: #707070;
   font-weight:300;
+  text-align: center;
 }
 
 .contact .info p {
@@ -1883,7 +1941,7 @@ Cars list
   width: 100%;
   padding: 30px;
   background: #ECECEC;
-  border-radius:10px;
+  border-radius:5px;
   
 }
 
@@ -2135,6 +2193,7 @@ Cars list
 #footer {
   font-size: 14px;
   background: #00163b;
+  bottom: 0;
 }
 
 #footer .footer-newsletter {
@@ -2320,9 +2379,7 @@ Cars list
 .socialIcons a{
 	color:#fff;
 }
-#topbar{
-	
-}
+
 
 #topbar i{
 	font-size:20px;
@@ -2330,8 +2387,10 @@ Cars list
 }
 
 #topbar a{
-	color:#fff;
-	
+	color:#fff;	
+}
+#topbar a:hover{
+	text-decoration: none;
 }
 
 .topRight{
@@ -2360,13 +2419,12 @@ Cars list
 }
 
 .topLeft{
-	padding-left: 0px;
+	padding-left: 80px;
   text-align: left;
 }
 .topRight{
 color:#fff;
 text-align:right;
-padding-left:20px;
 width:0;
 height:0;
 border-bottom:38px solid #bd062c;
@@ -2375,6 +2433,8 @@ border-left:40px solid transparent;
 
 .rightMenu{
 	margin-top:7px;
+  margin-right: 60px;
+  text-align: right;
 }
 
 .rightMenu i{
@@ -2401,7 +2461,19 @@ border-left:40px solid transparent;
 }
 .inner-page{
 	background:#F5F5F5;
-	padding-top:50px;
+	padding-top:40px;
+  min-height: 760px;
+}
+
+.inner-page .container-fluid{
+  padding: 0 80px;
+}
+
+
+.pass-wrapper {
+  position: relative;
+  display: flex;
+  margin-bottom: 14px;
 }
 
 .dealar-login img {
@@ -2478,7 +2550,17 @@ input[type="password"] {
 
 .forget-username{
   text-align: left;
+  float: left;
 }
+.forget .forget-pass{ 
+  float: right;
+}
+.forget-username button, .forget button, .loginBtn p button{
+  border: rgba(255,255,255,.5);
+  padding: 4px 0;
+  box-shadow:none!important;
+}
+
 
 .loginBlock{
 	margin:auto;
@@ -2543,6 +2625,7 @@ input[type="text"], input[type="password"]{
 .registrationform .form-control{
 	margin-bottom:0;
 	margin-top:0;
+  padding-right: 10px;
 }
 
 .scheduleMeeting{
@@ -2725,6 +2808,61 @@ margin-top: -3px;
 	text-align:left;
 }
 
+
+.registrationform .tbox .textbox + label{
+  position: absolute;
+  top: 14px;
+  left: 10px;
+  bottom: 0;
+  border-radius: 3px 0 0 3px;
+  padding: 0 5px;
+  background: #fff;
+  color: #9F9F9F;
+  transform: translateZ(0) translateX(0);
+  transition: all 0.3s ease-in;
+  transition-delay: 0.2s;
+  display: inline-block;
+  height: 22px;
+  margin: 0;
+  font-size: 14px;
+}
+
+
+.registrationform .tbox .selcetclass .textbox  label{
+  position: absolute;
+  top: -12px;
+  left: 10px;
+  bottom: 0;
+  border-radius: 3px 0 0 3px;
+  padding: 0 5px;
+  background: #fff;
+  color: #9F9F9F;
+  transform: translateZ(0) translateX(0);
+  transition: all 0.3s ease-in;
+  transition-delay: 0.2s;
+  display: inline-block;
+  height: 22px;
+  margin: 0;
+  font-size: 16px;
+}
+
+ .datePickerBlock .tbox .textbox  label{
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  bottom: 0;
+  border-radius: 3px 0 0 3px;
+  padding: 0 5px;
+  background: #fff;
+  color: #9F9F9F;
+  transform: translateZ(0) translateX(0);
+  transition: all 0.3s ease-in;
+  transition-delay: 0.2s;
+  display: inline-block;
+  height: 22px;
+  margin: 0;
+  font-size: 14px;
+}
 /*------------------------------------------------------
 popup Dialogbox
 -------------------------------------------------------*/
@@ -2779,6 +2917,9 @@ popup Dialogbox
 
 .cta-btns:hover{
   color: white;
+  background-color: #002768;
+  text-decoration: none;
+  border-color: #002768;
 }
 
 
@@ -2793,15 +2934,9 @@ popup Dialogbox
 }
 
 .cta-btns-primary:hover{
-	text-decoration: underline;
+	text-decoration: none;
 }
 
-
-.modal-footer a:hover {
-    color: #fff;
-    text-decoration: none;
-    
-}
 
 .suggested-cars .col-md-3{ 
 -ms-flex: 20%;
@@ -2823,14 +2958,17 @@ Car Detail Page
 	
 }
 .back-btn-primary{
-	color:#bd062c;
+	color:#BD062C;
 	font-size:18px;
 	border: 2px solid #BD062C;
-	padding:10px 20px;
+	padding:6px 15px;
 	border-radius:4px;
 	margin-bottom:20px;
 }
 
+.back-btn-primary:hover, .back-btn-primary:focus{
+  border: 2px solid #BD062C;
+}
 
 .heading-section {
 	text-align: center;
@@ -2838,10 +2976,9 @@ Car Detail Page
 }
 
 .product-name {
-	font-size: 22px;
+	font-size: 30px;
 	font-weight: 500;
-	line-height: 22px;
-	margin-bottom: 4px;
+	margin-bottom: 10px;
 }
 
 
@@ -3014,6 +3151,7 @@ Car Detail Page
 	  color:#bd062c;
 	  font-size:20px;
 	  margin-bottom:15px;
+    text-align: left;
 	  
   }
   .product-count .details {
@@ -3030,6 +3168,11 @@ Car Detail Page
 .product-count .details:last-child {
     border-right: none;
 }
+
+.cars-buy{
+  text-align: left;
+}
+
 .cars-buy .cars-buy-btns{
 	background-color: #bd062c;
     color: white;
@@ -3038,6 +3181,7 @@ Car Detail Page
     border-radius: 3px;
     border: none;
 	font-size:20px;
+  margin-right: 20px;
 }
 .cars-buy .cars-buy-btns-primary{
 	background-color: #b8b8b8;
@@ -3057,10 +3201,11 @@ Car Detail Page
     border: 1px solid rgba(0,0,0,.125);
     border-radius: .25rem;
     padding: 30px 40px;
-	box-shadow: 0px 3px 6px #00000029;
+	box-shadow: 0px 3px 6px #ddd;
 }
 .carspecifation p{
 	color:#343434;
+  text-align: left;
 }
 .carspecifation span{
 	color:#808080;
@@ -3080,7 +3225,7 @@ Car Detail Page
 .dealer-cars   .car-item {
     border-radius: 5px;
     border: 1px solid #eef0ef;
-	box-shadow: 0px 3px 6px #00000029;
+	box-shadow: 0px 3px 6px #ddd;
 	position:relative;
 }
 .dealer-cars   .section-title h2 {   
@@ -3197,7 +3342,7 @@ Car Detail Page
 .other-dealer-cars    .car-item {
     border-radius: 5px;
     border: 1px solid #eef0ef;
-	box-shadow: 0px 3px 6px #00000029;
+	box-shadow: 0px 3px 6px #ddd;
 	position:relative;
 }
 .other-dealer-cars    .section-title h2 {   
@@ -3314,6 +3459,7 @@ SuccessfullModalCenter
     border-radius: .25rem;
     padding: 30px 40px;
 	text-align:center;
+  max-width: 600px;
 }
 .Successfullform{
 	background: #F5F5F5;
@@ -3322,10 +3468,25 @@ SuccessfullModalCenter
 	
 .Successfullform .Successfullformblock .Successfull-icon img{
 	background:#27ae60;
-	width:15%;
-	padding: 15px 9px;
+	padding: 15px 11px;
 	border-radius:50%;
 	margin-bottom:20px;
+  width: 50px;
+  height: 50px;
+}
+
+.Successfullform .Successfullformblock .get-started-btn {
+  margin-left: 4px;
+  color: #fff;
+  border-radius: 5px;
+  padding: 6px 25px 6px 25px;
+  white-space: nowrap;
+  transition: 0.3s;
+  font-size: 20px;
+  display: inline-block;
+  font-weight: 300;
+  background: #bd062c;
+  min-height: 50px;
 }
 .Successfullform .modalbody h2{
 	color: rgb(0, 39, 104);
@@ -3453,6 +3614,7 @@ ErrorModalCenter
     border: 1px solid rgba(0,0,0,.125);
     border-radius: .25rem;
 	padding:30px 40px;
+  clear: both;
 	
 }
 .inspectionsummery .section-title p {
@@ -3489,7 +3651,7 @@ ErrorModalCenter
 	background:#2c5baa;
 	color:#fff;
 	font-size:23px;
-	padding:20px 0;
+	padding:10px 0;
 	font-weight:400;
 	width:50%;
 }
@@ -3506,6 +3668,10 @@ ErrorModalCenter
    color: #9F9F9F;
    font-size: 16px;
     font-weight: normal;
+}
+
+.inspectionsummeryhead {
+  text-align: left;
 }
 
 .inspectionsummeryhead h2{
@@ -3531,7 +3697,7 @@ ErrorModalCenter
 }
 .inspectiontableBlock .commentsblock h3{
 	color:#343434;
-	padding:20px 0;
+	padding:15px 0;
 	font-size:18px;
 	font-weight:normal;
 }
@@ -3597,6 +3763,9 @@ Make your Bid
 }
 .border-bottomtext{
 	margin:10px;
+  text-align: left;
+  font-weight: 600;
+    font-size: 16px;
 }
 .input-icon {
   position: relative;
@@ -3616,7 +3785,7 @@ Make your Bid
 }
 
 .input-icon > input {
-  padding-left: 52px;
+  padding-left: 50px;
 	padding-right: 0;
 }
 
@@ -3637,7 +3806,8 @@ Make your Bid
 }
 .optional-services{
 	border: 1px solid #ccc;
-	margin:20px 0
+	margin:20px 0;
+  text-align: left;
 }
 .optional-services h4{
 	color:#4e4e4e;
@@ -3690,13 +3860,16 @@ Search Box"
 
 .leftonsidebox{
 	float:left;
-	background:#F6F6F6;
+	background:#fff;
+  text-align: left;
+  padding: 15px;
 	
 }
 .leftonsidebox h3{
 	color: #002768;
 	font-size:28px;
 	font-weight:500;
+  text-align: left;
 }
 
 .leftonsidebox span{
@@ -3708,8 +3881,16 @@ Search Box"
 .searchbox  .ms-n5 {
     margin-left: -40px;
 }
+
+.searchbox .ms-n5:hover{
+  color: #fff;
+}
 .searchbox .input-group-append{
 	    z-index: 999;
+}
+
+.searchbox .input-group-append i{
+  font-size: 25px;
 }
 
 .searchbox{
@@ -3754,6 +3935,7 @@ Search Box"
   margin-right: 5px;
   background:#fff;
   border: 1px solid #707070;
+  margin-top: -3px;
 }
 
 .vehiclesearch .form-group input:checked + label:after {
@@ -3769,7 +3951,7 @@ Search Box"
   transform: rotate(45deg);
 }
 .radio {
-  margin: 0.5rem;
+  margin: 0;
 }
 .radio input[type="radio"] {
   position: absolute;
@@ -3779,13 +3961,13 @@ Search Box"
   content: '';
   background: #fff;
   border-radius: 100%;
-  border: 1px solid #b4b4b4;
+  border: 2px solid #b4b4b4;
   display: inline-block;
-  width: 1.4em;
-  height: 1.4em;
+  width: 25px;
+  height: 25px;
   position: relative;
-  top: -0.2em;
-  margin-right: 1em;
+  top: -2px;
+  margin-right: 10px;
   vertical-align: top;
   cursor: pointer;
   text-align: center;
@@ -3793,14 +3975,14 @@ Search Box"
 }
 .radio input[type="radio"]:checked + .radio-label:before {
   background-color: #bd062c;
-   box-shadow: inset 0 0 0 4px #f4f4f4;
+   box-shadow: inset 0 0 0 3px #f4f4f4;
 }
 .radio input[type="radio"]:focus + .radio-label:before {
   outline: none;
-  border-color: #3197EE;
+  border-color: #b4b4b4;
 }
 .radio input[type="radio"]:disabled + .radio-label:before {
-  box-shadow: inset 0 0 0 4px #f4f4f4;
+  box-shadow: inset 0 0 0 3px #f4f4f4;
   border-color: #bd062c;
   background: #bd062c; 	
 }
@@ -3809,11 +3991,19 @@ Search Box"
 }
 .inner{
 	margin:10px 0px;
-	margin-left:20px;
-	background: #DBDBDB 0% 0% no-repeat padding-box;
+	margin-left:0px;
+	background: #F5F5F5 0% 0% no-repeat padding-box;
+  padding: 15px;
+  margin-bottom: 30px;
 }
-.inner .form-group ,.inner .radio{
-	padding:10px 20px;
+.inner .form-group:last-child{
+  margin-bottom: 0;
+}
+
+
+.inner .input-group{
+  margin-bottom: 10px;
+  font-size: 16px;
 }
 
 .mileageblock .input-group, .yearblock .input-group{
@@ -3843,7 +4033,7 @@ Search Box"
 .search-cars .car-item {
     border-radius: 5px;
     border: 1px solid #eef0ef;
-	box-shadow: 0px 3px 6px #00000029;
+	box-shadow: 0px 3px 6px #ddd;
 	position:relative;
 }
 .search-cars .cars-lock{	
@@ -3923,6 +4113,13 @@ Search Box"
     border: 1px solid #707070;
 	font-size:18px;
 }
+
+.search-cars .cars-prices .cta-btns:hover {
+  background: #002768;
+  color: #fff;
+  border-color: #002768;
+}
+
 .search-cars .cars-prices .cta-btns-primary {
 	font-size:18px;
     background-color: #b8b8b8;
@@ -3931,6 +4128,15 @@ Search Box"
     border-radius: 3px;
     border: none;
 }
+
+.search-cars .cars-prices .cta-btns-primary:hover {
+  background: #bd062c;
+  color: #fff;
+}
+.search-cars .cars-prices a{
+  margin: 20px;
+}
+
 .search-cars .load-more-btn {
     display: inline-block;
     background: rgba(255, 255, 255, 0.2);
@@ -4018,13 +4224,15 @@ Search Box"
 }
 
 .floorplans .section-title h2 {
-	padding-bottom:10px;
+	padding-bottom:0px;
 }
+
 
 .floorplanstableblock{
 	text-align:center;
 	margin: auto;
     padding: 0;
+    float: left;
 }
 .floorplanstable table{
     border: 1px solid #ccc;
@@ -4032,7 +4240,7 @@ Search Box"
     margin: 0;
     padding: 0;
     width: 100%;
-    box-shadow: 0px 3px 6px #00000029;
+    box-shadow: 0px 3px 6px #ddd;
 }
  .floorplanstable h2{
 	color:#002768;
@@ -4044,8 +4252,8 @@ Search Box"
  .floorplanstable th{
 	background:#2c5baa;
 	color:#fff;
-	font-size:25px;
-	padding:20px 0;
+	font-size:20px;
+	padding:10px 0;
 	font-weight:500;
 	width:100%;
 	text-transform: capitalize;
@@ -4067,13 +4275,22 @@ Search Box"
 }
 
 .add-floor .add-floor-btns{
-	color: B6062A;
-    padding: 10px 20px;
-    margin-right: 0px;
-    border-radius: 5px;
-    border: 2px solid #B6062A;
-    font-size: 16px;
+  color: #B6062A;
+	padding: 10px 20px;
+	margin-right: 0px;
+	border-radius: 5px;
+	border: 2px solid #B6062A;
+	font-size: 16px;
 }
+
+.add-floor .add-floor-btns:hover, .add-floor .add-floor-btns:focus{
+	color: #fff;
+  background: #002768;
+  border: 2px solid #002768;
+  text-decoration: none;
+}
+
+
  .floorplanstable table td span {
     color: #4E4E4E;
     font-size: 14px;
@@ -4081,6 +4298,8 @@ Search Box"
 	width:50%;
 	float:right;
 }
+
+
 
 
 /*------------------------------------------------
@@ -4302,11 +4521,11 @@ MyBids
 	font-size:16px;
 	font-weight:500;
 	color:#fff;	
-	padding:20px 0;
+	padding:0;
 }
 .mybidsheader{
 	background:#2c5baa;
-	padding:20px 10px;
+	padding:15px 10px;
 	text-align:center;
 }
 .mybidsdetailsblock{
@@ -4325,9 +4544,14 @@ MyBids
 	width:30%;
 	
 }
+.mybidsleftvehicle img{
+  border-radius: 5px;
+}
+
 .mybidsrightvehicle{
 	float:right;
 	width:70%;
+  text-align: left;
 }
 
 .mybidsrightvehicle h3{
@@ -4341,7 +4565,7 @@ MyBids
 	margin-left:5px;
 }
 .mybidsrightvehicle .details{
-	margin-bottom:0;
+	margin-bottom:10px;
 }
 
 .mybidssellerdetails{
@@ -4362,19 +4586,25 @@ MyBids
 .mybidsleftseller{
 	float:left;
 	width:70%;
+  text-align: left;
 	
 }
 .mybidsrightseller{
 	float:right;
 	width:30%;
 }
+
+.mybidsrightseller img{
+  border-radius: 5px;
+}
+
 .mybidsleftseller .details span{
-	font-size:12px;
+	font-size:14px;
 	color:#9f9f9f;
 	margin-left:5px;
 }
 .mybidsleftseller .details{
-	margin-bottom:0;
+	margin-bottom:10px;
 }
 .mybidsbiddetails{
 	float:left;
@@ -4447,15 +4677,21 @@ MyBids
 .control-btns-cancel{
 	border:1px solid #bd062c;
 	color: #bd062c;
-	padding: 10px 20px;
+	padding: 8px 20px;
 	margin: 20px 0;
 	border-radius: 3px;	
 	font-size: 14px;
 }
+.control-btns-cancel:focus{
+	border:1px solid #bd062c;
+}
+
 .mybidscontrol li{
 	margin:10px 0px;
 	list-style:none;
 	float:left;
+  width: 100%;
+    margin-bottom: 20px;
 }
 
 /*-------------------------------------------------
@@ -4493,8 +4729,9 @@ notoficationtab
 }
 .notoficationtabblock{
 	position: relative;
-	top:-50px;
-	right:-200px;
+	top:-60px;
+	right:-250px;
+  max-width: 600px;
 	
 }
 .notoficationcontent:last-child {
@@ -4509,7 +4746,7 @@ vehicles Summary
 	word-wrap: break-word;
 	background-color: #fff;
 	background-clip: border-box;
-	box-shadow: 0px 3px 6px #00000029;
+	box-shadow: 0px 3px 6px #ddd;
 	border-radius: .25rem;
 	padding: 20px;
 }
@@ -4518,6 +4755,7 @@ vehicles Summary
 	color: #4E4E4E;
 	font-size:20px;
 	font-weight:500;
+  text-align: left;
 }
 .vehiclesheads h2 span{
 	color: #4E4E4E;
@@ -4537,7 +4775,7 @@ vehicles Summary
 	word-wrap: break-word;
 	background-color: #fff;
 	background-clip: border-box;
-	box-shadow: 0px 3px 6px #00000029;
+	box-shadow: 0px 3px 6px #ddd;
 	border-radius: .25rem;
 	padding: 20px;
 }
@@ -4602,6 +4840,7 @@ vehicles Summary
 	font-weight:500;
 	color: #4E4E4E;	
 	padding:10px 0;
+  text-align: left;
 }
 .vehicleimgright h3 span{
 	font-size:16px;
@@ -4614,6 +4853,7 @@ vehicles Summary
 	font-weight:normal;
 	color: #4E4E4E;	
 	padding:10px 0;
+  text-align: left;
 }
 .vehicleimgright h4 span{
 	font-size:16px;
@@ -4629,6 +4869,7 @@ vehicles Summary
 }
 .vehicleimgright .input-group {
 	display:block;
+  text-align: left;
 }
 .vehiclerighttotal{
 	border-top:1px solid #ddd;
@@ -4639,7 +4880,7 @@ vehicles Summary
 	word-wrap: break-word;
 	background-color: #fff;
 	background-clip: border-box;
-	box-shadow: 0px 3px 6px #00000029;
+	box-shadow: 0px 3px 6px #ddd;
 	border-radius: .25rem;
 	padding: 20px;
 }
@@ -4674,13 +4915,18 @@ vehicles Summary
 .vehicletotal-btns{
 	background-color: #bd062c;
 	color: white;
-	padding: 20px 40px;
+	padding: 10px 20px;
 	margin: 20px 0;
 	border-radius: 3px;
 	border: none;
 	font-size: 20px;
 	font-weight:500;
 }
+
+.vehicletotal-btns:hover{
+  color: #fff;
+}
+
 .vehicletotalbtns{
 	margin:30px 0;
 	text-align:center
@@ -4689,20 +4935,17 @@ vehicles Summary
 Manage Account
 __________________________________________________________*/
 
-.userlinks a:hover, .userlinks .active > a, .userlinks li:hover > a {
-    color: #BD062C;
-}
-
 .userlinks {
   text-align: left;
 }
 
 .notificationtabblock h3 {
   color: #343434;
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 500;
   display: block;
   text-align: left;
+  margin-bottom: 15px;
 }
 
 .bidsemailblock, .bidssmsblock, .bidsnotiblock, .favoriteemailblock, .favoritesmsblock {
@@ -4725,14 +4968,21 @@ __________________________________________________________*/
 	display:flex;
 }
 .mgaccountuserleft{
-	margin-right:5px;
+	margin-right:10px;
 }
 
+.mgaccountuserleft img{
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+}
 
 .mgaccountuserright h3 {
     font-size: 18px;
     font-weight: 500;
     color: #343434;	
+    text-align: left;
+    padding-top: 10px;
 }
 .mgaccountuserright .details span {
     font-size: 14px;
@@ -4745,8 +4995,9 @@ __________________________________________________________*/
 }
 .userlinks li{
 	list-style:none;
-	margin:15px 0;
+	margin:0;
 	color: #4E4E4E;
+  padding-left: 0;
 }
 .userlinks li a{
 	font-size:18px;
@@ -4759,6 +5010,7 @@ border-collapse: collapse;
 margin: 0;
 padding: 0;
 width: 100%;
+margin-top: 20px;
 
 	
 }
@@ -4767,7 +5019,7 @@ width: 100%;
     padding: .35em;
 }
 .mgaccountrighttable table td {
-    width: 40%;
+    width: 50%;
     color: #343434;
     text-align: left;
     padding-left: 20px;
@@ -4781,7 +5033,7 @@ width: 100%;
     color: #707070;
     font-size: 16px;
     font-weight: 500;
-    width: 60%;
+    width: 65%;
     float: right;
 }
 .mgaccountrighttableblock h3{
@@ -4789,37 +5041,78 @@ width: 100%;
 	display:block;
 	font-size:20px;
 	color: #343434;
+  font-weight: 500;
+  margin-bottom: 15px;
+  border-bottom: #eee solid 1px;
+  padding-bottom: 15px;
 }
 .mgaccountrighttableblock h3 span{
-	float:inline-end;
 	color: #BD062C;	
+  float: right;
+  background-color: #fff;
+  font-size: 16px;
+  line-height: 22px;
 }
+
+.mgaccountrighttableblock h3 button{
+  border:transparent;
+  box-shadow: none!important;
+}
+.mgaccountrighttableblock h3 button:hover, .mgaccountrighttableblock h3 button:focus{
+  border:#BD062C solid 1px;
+}
+
+.mgaccountrighttableblock h3 a{
+  border:#ddd solid 1px;
+  font-weight: 400;
+  padding: 4px 15px;
+}
+.mgaccountrighttableblock h3 a:hover, .mgaccountrighttableblock h3 a:focus{
+  border:#BD062C solid 1px;
+  color: #BD062C;
+  text-decoration: none;
+}
+
+
 .mgaccountrighttableblock p{
 	text-align:center;
 	display:block;
 	color: #343434;	
 	font-size:16px;
+  margin-bottom: 20px;
 }
 .mgaccountrighttableblock{
 	margin: 0 auto;
 	word-wrap: break-word;
 	background-color: #fff;
 	background-clip: border-box;
-	box-shadow: 0px 3px 6px #00000029;
+	box-shadow: 0px 3px 5px #ddd;
 	border-radius: .25rem;
 	padding: 30px;
 }
 .mgaccountrighttableblock h4{
 	color: #343434;
-	font-size:16px;
-	margin-top:10px;
+	font-size:18px;
+	margin-top:20px;
 	padding-left: 20px;
+  text-align: left;
+  font-weight: 500;
 }
 .mgaccountrighttableblock h5{
+	color: #002768;
+	font-size:20px;
+	margin-top:10px;
+	padding-left: 20px;
+  text-align: left;
+  font-weight: 500;
+}
+.mgaccountrighttableblock h6{
 	color: #707070;
 	font-size:16px;
 	margin-top:10px;
 	padding-left: 20px;
+  text-align: left;
+ 
 }
 /*---------------------------------------------------
 Form text overlop
@@ -4839,6 +5132,7 @@ Form text overlop
   border-radius: 3px;
   padding: 10px;
   transition: all 0.1s ease-out;
+  background: #fff;
   
 }
 .tbox input.textbox + label {
@@ -4872,6 +5166,38 @@ Form text overlop
 }
 
 
+
+.adduserpageforminner .form-group input:checked + label::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 8px;
+    left: 9px;
+    width: 6px;
+    height: 14px;
+    border: solid #bd062c;
+        border-top-width: medium;
+        border-right-width: medium;
+        border-bottom-width: medium;
+        border-left-width: medium;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+.adduserpageforminner .form-group label::before {
+    content: '';
+    -webkit-appearance: none;
+    background-color: transparent;
+    border: 1px solid #707070;
+    padding: 10px;
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    cursor: pointer;
+    margin-right: 15px;
+    background: #fff;
+    border: 1px solid #707070;
+}
+
 /*-------------------------------------------------------
 userfavorite-cars
 
@@ -4890,7 +5216,7 @@ userfavorite-cars
 .userfavorite-cars .car-item {
     border-radius: 5px;
     border: 1px solid #eef0ef;
-	box-shadow: 0px 3px 6px #00000029;
+	box-shadow: 0px 3px 6px #ddd;
 	position:relative;
 }
 .userfavorite-cars .section-title h2 {   
@@ -4900,6 +5226,7 @@ userfavorite-cars
 
 .car-item {
   transition: 0.2s;
+  margin-top: 3%;
 }
 
 .car-item:hover {
@@ -5307,10 +5634,24 @@ height: 100%;
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
-    box-shadow: 0px 3px 6px #00000029;
+    box-shadow: 0px 3px 6px #ddd;
     border-radius: .25rem;
     padding: 30px;
         padding-top: 30px;
+}
+
+.notificationrighttableblock label{
+  color: #343434;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+}
+
+.notificationrighttableblock  .radio input[type="radio"] + .radio-label:before { 
+  margin-right: 10px; 
+  top: -2px;
+  width: 25px;
+  height: 25px;
 }
 
 .notificationrighttableblock h2{
@@ -5319,34 +5660,63 @@ height: 100%;
 	text-align:center;
 	display:block;
 	font-weight:500;
+  margin-bottom: 20px;
+  border-bottom: #eee solid 1px;
+  padding-bottom: 10px;
 }
 
 .notificationtabblock  h3{
 	color: #343434;
-	font-size:25px;
+	font-size:20px;
 	font-weight:500;
 	display:block;
+	text-align:left;
 }
 .notificationtabblock p{
 	color: #343434;
 	font-size:14px;
 	font-weight:normal;
+  text-align: left;
+  margin-top: 5px;
+    padding-left: 37px;
 }
 .notificationaccountrightblock .save-more-btn {
     display: inline-block;
     background: #BD062C;
-    padding: 6px 30px 8px 30px;
+    padding:10px 20px;
     color: #fff;
     border-radius: 5px;
     transition: all ease-in-out 0.4s;
     font-size: 18px;
     margin-top: 25px;
-    border: 2px solid #bd062c;
+    height: 44px;
+}
+.notificationaccountrightblock .save-more-btn span{
+  color: #fff;
+}
+
+.notificationaccountrightblock .save-more-btn:hover {
+  background: #002768;
+}
+
+
+button.add-account-btns {
+  color: #B6062A;
+  padding: 10px 20px;
+  margin-right: 0px;
+  border-radius: 5px;
+  border: 2px solid #B6062A;
+  font-size: 16px;
+  height: 50px;
+  width: auto;
 }
 
 /*-----------------------------------------
 paymentform 
 -------------------------------------------*/
+
+
+
 .paymentdetailblock{
 	float:left;
 	margin: 0 auto;
@@ -5355,7 +5725,7 @@ paymentform
 	word-wrap: break-word;
 	background-color: #fff;
 	background-clip: border-box;
-	box-shadow: 0px 3px 6px #00000029;
+  box-shadow: 0px 3px 6px #ddd;
 	border-radius: .25rem;
 	padding: 30px;
     padding-top: 30px;
@@ -5368,66 +5738,144 @@ paymentform
 	margin:20px 30px;
 }
 .paymentform {
-	float:left;	
-	
+	margin: auto;
+  max-width: 640px;	
+	border:none
 }
 
 .add-floors{
 	float:right;
 	text-align:center;
 }
+.add-floor .ant-btn:hover {
+  color: #fff;
+  background: #002768;
+  border-color:  #002768;
+}
 
 .add-accounts {
     margin:20px 0;
+    margin-right: 15px;
 }
 .add-account-btns{
-	color: B6062A;
+	color: #B6062A;
 	padding: 10px 20px;
 	margin-right: 0px;
 	border-radius: 5px;
 	border: 2px solid #B6062A;
 	font-size: 16px;
 }
+.add-account-btns:hover, .add-account-btns:focus{
+	color: #fff;
+  background: #002768;
+  border: 2px solid #002768;
+  text-decoration: none;
+}
+
+
 .uploadbutton label{
 	 display: inline-block;
   background: #9F9F9F ;
   color: white;
-  padding: 10px 20px;
+  padding: 8px 10px;
   font-family: sans-serif;
-  border-radius: 0.3rem;
+  border-radius: 3px;
   cursor: pointer;
-  margin-top: 1rem;
+  margin-top: 15px;
+  font-size: 16px;
 }
+
+.uploadbutton label:hover{
+  background: #002768 ;
+}
+
 .uploadbutton {
 	text-align:center;
 	margin:0 auto;
+  float: left;
 }
+
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.uploadbtn .btn {
+  border: 2px solid #9F9F9F;
+  background: #9F9F9F;
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 10px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  line-height: 45px;
+}
+
 
 .backaccountform {
 	float:left;	
 	border: 1px solid #ddd;
-	padding: 0 20px;
+	padding:15px 40px;
 	margin-top:30px;
 }
 
-.backaccountform .title{
+.backaccountform.editpaymentform .title, .backaccountform.addpaymentform .title{
 	color: #4E4E4E;
 	font-size: 20px;
 	font-weight: 500;
 	text-transform: capitalize;
 	text-align: left;
-	position: relative;
-	top: -33px;
+	position: absolute  ;
+	top: -4px;
 	background: #fff;
 	display: inline-block;
+  left: 19px;
+  padding: 0 10px;
 }
+.flooraddform .back-btn-paymentform, .flooreditform  .back-btn-paymentform{
+    float: left; 
+    display: inline-block;
+    padding: 0px;
+    font-size: 16px;
+}
+.flooraddform .registrationform  h2, .flooreditform .registrationform  h2{
+    margin: 20px;
+    color: #002768;
+    font-size: 20px;
+    font-weight: 500;
+    text-transform: uppercase;
+    display: block;
+    padding-bottom: 20px;
+}
+
+.registrationform .form-control:disabled{ 
+  color: #ccc!important;
+}
+.backaccountform.editpaymentform .topforms , .backaccountform.addpaymentform .topforms {
+  margin-top: 30px;
+}
+
+
 .bankinfo{
     float: left;
+    
     
 }
 
 .bankinfo a {
-    float: inline-end;
+    float: right;
     margin-right: 20px;   
     color: #BD062C;
     font-size: 18px;
@@ -5436,6 +5884,8 @@ paymentform
 .bankinfo table {
     float: left;
     padding: 10px 20px;
+    padding-top: -5px;
+    width: 100%;
 }
 
 .bankinfo table tr{
@@ -5447,7 +5897,7 @@ paymentform
     font-size: 14px;
     text-align: left;
     border: none;
-    padding: 20px 10px;
+    padding: 3px 10px;
 	float:left;
 }
 .bankinfo table td {
@@ -5455,7 +5905,7 @@ paymentform
     font-size: 14px;
     text-align: left;
     border: none;
-    padding: 20px 10px;
+    padding: 5px 10px;
 }
 .bankinfos{
 	border: 1px solid #ddd;
@@ -5474,6 +5924,17 @@ paymentform
     margin: 20px 30px;
 	display:inline-block;
 }
+
+
+.paymentdetailblock p{
+  text-align: center;
+  color: #4E4E4E;
+  font-size: 14px;
+  margin: 20px 15px;
+  display: inline-block;
+  float: left;
+  margin-top: 25px;
+}
 .bankinfo .bankinfos h4{
     color: #4E4E4E;
     font-size: 20px;
@@ -5484,11 +5945,117 @@ paymentform
     top: -33px;
     background: #fff;
     display: inline-block;
+    float: left;
+    padding: 0 10px;
+    left: 10px;
+}
+.bankinfotable{
+  float: left;
+  display: contents;
+}
+.paymentinfoblocks button {
+  border: none;
+  background: none;
+  color: #BD062C;
+  font-size:18px;
+  font-weight: 500;
+  float: right;
+  display: inline-block;
 }
 
+.editpaymentform .tbox label{
+  position: relative;
+    top: 12px;
+    left: 10px;
+    bottom: 0;    
+    padding: 0 5px;
+    background: #fff;
+    color: #9F9F9F;    
+    display: inline-block;
+    height: 22px;
+    margin: 0;
+    font-size: 16px;
+    float: left;
+}
+.editpaymentform .tbox {
+  margin-bottom: 5px;
+}
+.passwordeye{
+  position: absolute;
+  right: 12px;
+  top: 16px;
+}
+.passwordeye:hover {
+  color: #00fcb6;
+  cursor: pointer;
+}
+
+.flooraddform .tbox .textbox + label , .flooreditform .tbox .textbox + label , .adduserpageform .tbox .textbox + label {
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  bottom: 0;
+  border-radius: 3px 0 0 3px;
+  padding: 0 5px;
+  background: #fff;
+  color: #9F9F9F;
+  transform: translateZ(0) translateX(0);
+  transition: all 0.3s ease-in;
+  transition-delay: 0.2s;
+  display: inline-block;
+  height: 22px;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.registrationform .datePickerBlock .tbox  label {
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  bottom: 0;
+  border-radius: 3px 0 0 3px;
+  padding: 0 5px;
+  background: #fff;
+  color: #9F9F9F;
+  transform: translateZ(0) translateX(0);
+  transition: all 0.3s ease-in;
+  transition-delay: 0.2s;
+  display: inline-block;
+  height: 22px;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.react-datepicker__close-icon::after {
+  background-color: #bd062c;
+  position: relative;
+  right: 34px;
+}
+.datePickerBlock button:hover {
+  background:none;
+}
+.modalcontent{
+  margin: 0 auto;
+  text-align: center;
+}
+.modalfooter  button.cta-btns {
+  background-color: #bd062c;
+  color: white!important;
+  padding: 6px 30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 3px;
+  border: none;
+}
 /*----------------------------------------------
 
 ------------------------------------------------*/
+.lotfeerightblock{
+  padding-right: 0;
+}
+
 .lotfee-inner {
     float: left;
     margin: 0 auto;
@@ -5498,21 +6065,31 @@ paymentform
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
-    box-shadow: 0px 3px 6px #00000029;
+    box-shadow: 0px 3px 6px #ddd;
     border-radius: .25rem;
     padding: 30px;
-    padding-top: 30px;   
+    padding-top: 30px;  
+    width: 100%; 
 }
 
 .lotfee-inner  p {
     text-align: center;
-    color: #343434;
     font-size: 16px;
     margin: 20px 30px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
 }
 .lotfee-form{
 	margin:20px auto;
 	display:block;
+  max-width: 300px;
 }
 
 
@@ -5526,7 +6103,7 @@ Documents page
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
-    box-shadow: 0px 3px 6px #00000029;
+    box-shadow: 0px 3px 6px #ddd;
     border-radius: .25rem;
     padding: 30px;
         padding-top: 30px;
@@ -5543,21 +6120,26 @@ Documents page
 .docdetails h5{
 	color: #343434;
 	font-size:14px;
-	font-weight:normal;
+	font-weight:500;
 	margin-bottom:20px;
+  min-height: 66px;
 }
 .docdetails p{
 	color: #343434;
-	font-size:12px;
-	font-weight:normal;
-	margin:20px 0;
+	font-size:14px;
+	font-weight:400;
+	margin-top:20px;
+  margin-bottom: 0;
+  float: left;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 /*------------------------------------
 Add Users
 --------------------------------------*/
 
-.adduserpageform .adduserpageforminner{
+.adduserpageform .adduserpageforminner , .registrationform .adduserpageforminner {
     margin: 10px 0px;
     margin-left: 0px;
     margin-left: 20px;
@@ -5569,7 +6151,7 @@ Add Users
     position: relative;
     cursor: pointer;
 	color: #707070;
-	font-size:20px;
+	font-size:16px;
 }
 .adduserpageforminner .form-group input {
     padding: 0;
@@ -5593,22 +6175,43 @@ Add Users
     background: #fff;
     border: 1px solid #707070;
 }
+.adduserpageforminner .form-group input:checked + label::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 5px;
+  left: 9px;
+  width: 6px;
+  height: 14px;
+  border: solid #bd062c;
+      border-top-width: medium;
+      border-right-width: medium;
+      border-bottom-width: medium;
+      border-left-width: medium;
+  border-top-width: medium;
+  border-right-width: medium;
+  border-bottom-width: medium;
+  border-left-width: medium;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
 
 .adduserpage-inner {  
     margin: 0 auto;
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
-    box-shadow: 0px 3px 6px #00000029;
+    box-shadow: 0px 3px 6px #ddd;
     border-radius: .25rem;
     padding: 30px;
 }
 .adduserpageform{
-	margin-top:20px;
+  max-width: 640px;
+  margin: auto;
 }
 .privileges label, .noprivileges label {
-	color: #4E4E4E;
-	font-size:22px;
+	color: #343434;
+	font-size:16px;
 	font-weight:500;
 }
 
@@ -5616,7 +6219,7 @@ label.input-has-value {
 	transform: translateY(-110%) translateX(0%) !important;
 	  border-radius: 3px !important;
 	  transition: all 0.1s ease-out !important;
-	  font-size:14px;
+	  font-size:14px !important;
 }
 
 
@@ -5653,6 +6256,22 @@ button:focus{
   top: 12px;
 }
 
+.datePickerBlock .react-datepicker-wrapper { 
+  width: 100%;
+}
+.datePickerBlock input {
+  width: 100%;
+}
+*::placeholder {
+  color: #9F9F9F;
+  font-size: 16px;
+    font-weight: 600;
+}
+
+.datePickerBlock .react-datepicker-wrapper:focus-visible {
+  border: 1px solid #ccc;
+}
+
 ul.ant-pagination{
   margin-top: 20px;
 }
@@ -5668,4 +6287,861 @@ ul.ant-pagination li{
   height: 25px;
   line-height: 12px;
   cursor: pointer;
+}
+.selectTbox label {
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  bottom: 0;
+  border-radius: 3px 0 0 3px;
+  padding: 0 5px;
+  background: #fff;
+  color: #9F9F9F;
+  transform: translateZ(0) translateX(0);
+  transition: all 0.3s ease-in;
+  transition-delay: 0.2s;
+  display: inline-block;
+  height: 22px;
+  margin: 0;
+  font-size: 14px;
+}
+.timepicker .tbox .textbox + label{
+  font-size: 16px;
+}
+
+.adduserpageform .section-title h2.buyertitle , .editprofile .section-title h2.buyertitle {
+  text-align: left;
+  font-size: 20px;
+  margin-top: 20px;
+  clear: both;
+}
+.editprofile .registrationform{
+  max-width: 640px;
+    margin: auto;
+}
+.editprofile .myprofileeditform{
+    margin: 0 auto;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    box-shadow: 0px 3px 6px #ddd;
+    border-radius: .25rem;
+    padding: 30px;
+}
+.editprofile .registrationform .section-title h2 {
+  text-align: center;
+  font-size: 20px;
+  margin-top: 20px;
+  clear: both;
+}
+
+.addaddress_block .registrationform{
+  max-width: 640px;
+    margin: auto;
+}
+.addaddress_block .registrationform .section-title h2 {
+  text-align: center;
+  font-size: 20px;
+  margin-top: 20px;
+  clear: both;
+}
+.addaddress_block .registrationform  .section-title {
+  width: 100%;
+}
+.myprofileeditform
+
+/*--------------------------------------------------------
+Manage Account
+__________________________________________________________*/
+
+.userlinks a:hover, .userlinks .active > a, .userlinks li:hover > a {
+  color: #BD062C;
+}
+.myprofilerighttable table{
+border: none;
+border-collapse: collapse;
+margin: 0;
+padding: 0;
+width: 100%;
+
+
+}
+.myprofilerighttable table tr {
+  border:none;
+  padding: .35em;
+}
+.myprofilerighttable table td {
+  width: 40%;
+  color: #343434;
+  text-align: left;
+  padding-left: 20px;
+  font-weight: 500;
+  font-size: 16px;
+border-left: none;
+border-right: none;
+font-weight: 500;
+}
+.myprofilerighttable table td span {
+  color: #707070;
+  font-size: 16px;
+  font-weight: 500;
+  width: 60%;
+  float: right;
+}
+.myprofilerighttableblock h3{
+text-align:center;
+display:block;
+font-size:20px;
+color: #343434;
+border-bottom: #eee solid 1px;
+padding-bottom: 15px;
+}
+.myprofilerighttableblock h3 span{
+  color: #BD062C;	
+  float: right;
+  background-color: #fff;
+  font-size: 16px;
+}
+
+.myprofilerighttableblock h3 button{
+  border:#ddd solid 1px;
+  background: #fff;
+    color: #bd062c;
+    padding: 5px 15px;
+}
+.myprofilerighttableblock h3 button {
+  border:transparent;
+  box-shadow: none!important;
+}
+.myprofilerighttableblock h3 button:hover, .myprofilerighttableblock h3 button:focus{
+  border:#BD062C solid 1px;
+}
+
+.myprofilerighttableblock p{
+text-align:center;
+display:block;
+color: #343434;	
+font-size:16px;
+}
+.myprofilerighttableblock{
+margin: 0 auto;
+word-wrap: break-word;
+background-color: #fff;
+background-clip: border-box;
+box-shadow: 0px 3px 6px #ddd;
+border-radius: .25rem;
+padding: 30px;
+}
+.myprofilerighttableblock h4{
+color: #343434;
+font-size:16px;
+margin-top:10px;
+padding-left: 20px;
+}
+.myprofilerighttableblock h5{
+color: #707070;
+font-size:16px;
+margin-top:10px;
+padding-left: 20px;
+}
+/*----------------------------------------------------
+Users
+------------------------------------------------------*/
+
+.filtersblock {
+  margin: 0 auto;
+  padding: 0 auto;
+  text-align: center;
+  display: block;
+  color: #B8B8B8;
+}
+.filtersblock .searchbox {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+.userlisttableblock {
+  text-align: center;
+  margin: auto;
+  padding: 0;
+}
+.add-user {
+  float: right;
+  display: block;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.add-user .add-user-btns {
+  color: #B6062A;
+	padding: 10px 20px;
+	margin-right: 0px;
+	border-radius: 5px;
+	border: 2px solid #B6062A;
+	font-size: 16px;
+  
+}
+button.add-user-btns {
+  color: #B6062A;
+	padding: 10px 20px;
+	margin-right: 0px;
+	border-radius: 5px;
+	border: 2px solid #B6062A;
+	font-size: 16px;
+  height: 50px;
+  width: auto;
+  
+}
+
+
+.add-user .add-user-btns:hover, .add-user .add-user-btns:focus{
+	color: #fff;
+  background: #002768;
+  border: 2px solid #002768;
+  text-decoration: none;
+}
+
+.userlisttable table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  box-shadow: 0px 3px 6px #ddd;
+}
+
+.userlisttable table th {
+  background:#2C5BAA;
+  color: #fff;
+  font-size: 16px;
+  padding: 15px 10px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.userlisttable table th.th_name {
+   width: 20%;
+}
+.userlisttable table th.th_privileges {
+  width: 20%;
+}
+.userlisttable table th.th_phone {
+  width: 20%;
+}
+.userlisttable table th.th_status {
+  width: 10%;
+}
+.userlisttable table th.th_action {
+  width: 10%;
+}
+.userlisttable table th.th_img {
+  width: 10%;
+}
+.userlisttable table th.th_id {
+  width: 10%;
+}
+
+.userlisttable table {
+  border-collapse: collapse;
+}
+.userlisttable table tr {
+  border-bottom: 1px solid #ddd;
+  background: #fff;
+}
+
+.userlisttable table td {
+  color: #333;
+  padding-left: 20px;
+  font-size: 14px;
+  text-align: center;
+  padding: 10px 5px;
+  border-right: 1px solid #ddd;
+}
+.userlisttable table td.phonenotab{
+  padding: 10px 5px;
+}
+.userlisttable table td .cartitlename {
+  color: #002768;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.custom-select{
+  background:#fff url("../img/arrowmarks.png") no-repeat right center;  
+}
+.datePickerBlock input{
+  background:#fff url("../img/calender.png") no-repeat right center;  
+}
+
+.backBtn{
+  float: left;
+  padding:0px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  color: #BD062C;
+  background: transparent;
+  font-size: 16px;
+}
+
+.backBtn:hover{
+  color: #002768;
+  background: transparent;
+}
+
+
+.ant-btn{
+  color: #BD062C;
+}
+
+.ant-btn:hover{
+  color: #BD062C;
+}
+
+.ant-btn i{
+  margin-right: 5px;
+  color: #BD062C;
+  font-size: 12px;
+}
+
+.docdetails a.btn{
+  padding: 0;
+  margin-left: 5px;
+  font-size: 14px;
+  color: #BD062C;
+  text-decoration: underline;
+}
+
+.docdetails .upload-btn-wrapper{
+  display: inline;
+}
+
+.docdetails .upload-btn-wrapper input[type=file]{
+  font-size: 5px;
+  line-height: 20px;
+  padding-left: 5px;
+  color: #BD062C;
+}
+
+.documentspageblock{
+  margin-top: 40px;
+}
+
+.adduserpageform .section-title{
+  width: 100%;
+}
+
+.adduserpageform .section-title h2{
+  text-align: center;
+  font-size: 20px;
+  margin-top: 20px;
+  clear: both;
+}
+
+.mgaccountrightblock, .myprofilesblock, .notificationaccountblock, .paymentaccountblock, .documentspageblock, .adduserpageblock{
+  padding-right: 0;
+}
+
+#topbar a:last-child{
+  margin-right: 0px;
+}
+
+.changePassblock .tbox .textbox + label {
+  font-size: 16px;
+}
+
+.uploadbtn{
+  text-align: center;
+}
+
+.uploadedFile{
+  float: left;
+  width: 100%;
+}
+
+.lotfee-form input{
+  font-size: 20px;
+}
+
+.updateFile{
+  float: left;
+}
+.deleteFile{
+  float: right;
+}
+
+table td .ant-btn{
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+table td .ant-btn span{
+	font-weight:400;	
+}
+table td .ant-btn:hover span, table td .ant-btn:hover i{
+  color: #002768;
+}
+.form-input-error{
+  color: red;
+  text-align: left;
+}
+.topRightUser img{
+  width:35px;
+  height: 35px;
+  border-radius: 50%;
+  border:#ddd solid 1px;
+}
+.userImage img{
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.user-upload-btn-wrapper {
+  display: inline-block;
+  position: relative;
+  margin: auto;
+  width: 140px;
+  height: 140px;
+}
+
+.user-upload-btn-wrapper input[type=file] {
+  font-size: 5px;
+  line-height: 20px;
+  padding-left: 5px;
+  color: #bd062c;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.user-upload-btn-wrapper img {
+  width: 140px;
+  height: 140px;
+  border:#ddd solid 1px;
+  border-radius: 50%;
+}
+
+.proCamera{
+  background:#fff url("../img/camera.png") no-repeat center center;  
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  bottom: 10px;
+  right: 0px;
+  border-radius: 50%;
+}
+
+.backaccountform.addpaymentform p.form-input-error{
+  margin: 0;
+    color: red;
+}
+
+.suggested-cars .col-md-3 .car-item{
+  background: #fff;
+}
+.floor_notfiled_block{
+  display: block;
+  text-align: center;
+  position: relative;
+  top: 50px;
+  left: 7%;
+  font-size: 19px;
+  font-weight: 500;
+  padding-bottom: 30px;
+}
+.phonecode small {
+    font-size: 80%;
+    font-weight: 400;
+    float: left;
+    margin-top: 5px;
+    color: #9f9f9f;
+    margin-right: 5px;
+}
+.phoneNumberfield .MuiInput-root{
+  float: left;
+}
+
+.phoneNumberfield .MuiInput-underline:hover:not(.Mui-disabled):before, .MuiInput-underline:hover:not(.Mui-disabled):before {
+  border: none;
+}
+.phoneNumberfield .MuiInput-underline:before, .phoneNumberfield .MuiInput-underline:after {
+  border: none;
+}
+
+.tbox.phoneNumberfield{
+  border: lightgray solid 1px;
+  border-radius: 3px;
+  float: left;
+    width: 100%;
+    height: 50px;
+}
+
+.phoneNumberfield .MuiFormControl-root{
+  margin-top: 10px;
+    margin-left: 10px;
+    display: block;
+}
+.MuiInputBase-input{
+  font-size: 14px !important;
+}
+
+#hero  .close-icon{
+  color: #fff;
+}
+
+
+.forgotpage .logo{
+  margin-top: 30px;
+}
+
+.forgotpage .logo img{
+  width: auto;
+}
+.user-upload-btn-wrapper .form-input-error{
+  text-align: center;
+}
+
+.datePickerBlock input::placeholder {
+  font-weight: 400;
+}
+
+
+/*History css */
+
+.hissearch{
+	max-width:800px;
+	margin:auto;
+	position:relative;
+	margin-bottom:30px;
+}
+.hissearch i{
+	float: right;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    font-size: 20px;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.hisHead p{
+	float:left;
+	margin-top: 10px;
+    font-size: 20px;
+}
+.hisHead .sortBy{
+	float:right;
+	width:200px;
+}
+
+.historyblock .pickupdetailcontent p.billsalesno{
+	float: left;
+    font-size: 14px;
+    margin: 15px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    border: 1px solid;
+}
+.historyblock .car-item:hover{
+	transform: scale(1);
+}
+
+.historyblock .cars-prices .cta-btns{
+	padding:0;
+	border:none;
+	color:#BD062C;
+	margin:0;
+  float: left;
+}
+
+.historyblock .cars-prices .cta-btns:hover{
+  background: none;
+  text-decoration: underline;
+}
+
+.historyblock .cars-prices .cta-btns.invoice{
+	float:right;
+}
+.historyblock .cars-prices.gatepass .cta-btns-primary{
+	    display: block;
+		text-align: center;
+		margin: 0;
+}
+
+.historyblock .cars-prices{
+	margin-bottom: 15px;
+  margin-top:0;
+}
+
+.historyblock .cars-prices.gatepass{
+		margin-top: 0;
+		padding-bottom:0;
+}
+
+.historyblock .lotfee-inner p{
+	padding:0;
+	text-align:left;
+	margin:0;
+}
+.historyblock .sliderBlock h3{
+	font-size:16px;
+	margin-top:30px;
+	clear:both;
+  text-align: left;
+}
+
+#msform {
+	width: 100;
+	margin: 0px auto;
+	text-align: center;
+	position: relative;
+}
+/*progressbar*/
+#progressbar {
+	margin-bottom: 30px;
+	overflow: hidden;
+	/*CSS counters to number the steps*/
+	counter-reset: step;
+}
+#progressbar li {
+	list-style-type: none;
+	color: #444;
+	text-transform: uppercase;
+	font-size: 12px;
+	width: 33.33%;
+	float: left;
+	position: relative;
+}
+#progressbar li:before {
+	content: counter(step);
+	counter-increment: step;
+	width: 20px;
+	line-height: 20px;
+	display: block;
+	font-size: 10px;
+	color: #444;
+	background: #ddd;
+	border-radius: 3px;
+	margin: 0 auto 5px auto;
+}
+/*progressbar connectors*/
+#progressbar li:after {
+	content: '';
+	width: 100%;
+	height: 2px;
+	background: #ddd;
+	position: absolute;
+	left: -40%;
+	top: 20px;
+	z-index: 1; /*put it behind the numbers*/
+}
+#progressbar li:first-child:after {
+	/*connector not needed before the first step*/
+	content: none; 
+}
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+#progressbar li.active:before,  #progressbar li.active:after{
+	background: #BD062C;
+	color: white;
+}
+.sliderBlock .cars-prices{
+	text-align:center;
+		margin-top:30px;
+
+}
+
+
+.sliderBlock .cars-prices .cta-btns{
+	background-color: #fff;
+    color: #343434;
+    padding: 10px 20px;   
+	margin-right:0px;
+    border-radius: 3px;
+    border: 1px solid #707070;
+	font-size:18px;
+	text-align:center;
+  float: none;
+}
+
+.sliderBlock p span{
+	color:#bd062c;
+}
+
+.sliderBlock h3 span{
+	color:orange;
+}
+
+.historyblock  .priceBlock p.editbtn{
+	text-align:right;
+	margin-bottom:10px;
+	font-weight:500;
+	font-size:16px;
+}
+.editbtn{
+	float:right;
+}
+
+
+.priceBlock .vehicleimgright{
+	border:#ddd solid 1px;
+	margin-top:20px;
+	padding-top:10px;
+	clear:both;
+}
+.priceBlock .vehicleimgright p{
+	text-align:left;
+	font-size:14px;
+	color:#ccc;
+	font-weight:300;
+	max-width:80%;
+	margin-bottom:15px;
+}
+
+.priceBlock .vehiclerighttotal h3 span{
+	font-weight:500;
+}
+.priceBlock .vehicleimgright h3{
+	clear:both;
+  text-align: left;
+}
+
+.priceBlock .vehicleimgright h4{
+	padding: 0;
+  text-align: left;
+}
+.inner .radio.form-group:last-child {
+  margin-bottom: 0;
+}
+
+.historyblock .lotfee-inner{
+  margin-bottom: 30px;
+}
+
+
+.historyblock .car-item{
+  margin-top: 0;
+}
+
+.vehicleimgleft  img{
+  width: 100%;
+  max-width: 200px;
+}
+
+.inspectionsummery .back-btn{
+  float: left;
+}
+
+.products-details .product-dtl{
+  text-align: left;
+}
+
+.inspectiontable table tr td:first-child{
+  text-align: left;
+}
+
+
+
+
+
+
+
+.vehicle-detail-banner .car-slider-desc {
+  max-width: 180px;
+  margin: 0 auto;
+}
+.banner-slider .slider.slider-for {
+  max-width: 84%;
+  padding-right: 35px;
+}
+.banner-slider .slider.slider-nav {
+  max-width: 16%;
+}
+.banner-slider .slider.slider-for,
+.banner-slider .slider.slider-nav {
+  width: 100%;
+  float: left;
+}
+.banner-slider .slider.slider-nav {
+  height: 610px;
+  overflow: hidden;
+
+}
+.slider-banner-image {
+  height: 610px;
+}
+.banner-slider .slider.slider-nav {
+  padding: 20px 0 0;
+padding-top:0;
+}
+.slider-nav .slick-slide.thumbnail-image .thumbImg{
+  max-width: 178px;
+  height: 110px;
+  margin: 0 auto;
+  border: 1px solid #EBEBEB;
+}
+.slider-banner-image img,
+.slider-nav .slick-slide.thumbnail-image .thumbImg img {
+  height: 100%;
+  width:100%;
+  object-fit: cover;
+}
+.slick-vertical .slick-slide:active,
+.slick-vertical .slick-slide:focus,
+.slick-arrow:hover,
+.slick-arrow:focus {
+  border: 0;
+  outline: 0;
+background-repeat: no-repeat;
+  text-align: center;
+  background-position: center;
+  background-color: #F5F5F5;
+}
+.slider-nav .slick-slide.slick-current.thumbnail-image .thumbImg {
+  border: 2px solid #196DB6;
+}
+.slider-nav .slick-slide.slick-current span {
+  color: #196DB6;
+}
+.slider-nav .slick-slide {
+  text-align: center;
+}
+.slider-nav .slick-slide span {
+  font-size: 14px;
+  display: block;
+  padding: 5px 0 15px;
+}
+.slick-arrow {
+  width: 100%;
+  background-color: #F5F5F5;
+  border: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-size: 0;
+  height: 18px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 99;
+height: 30px;
+}
+.slick-prev {
+ top: 0;
+}
+.slick-next {
+ bottom: 0;
+ background-color: #F5F5F5;
+}
+.slick-prev.slick-arrow {
+  background-image: url(../img/uparrow.png);
+}
+.slick-next.slick-arrow {
+  background-image: url(../img/downarrow.png);
+}
+
+.slick-slide img{
+width:100%;
 }

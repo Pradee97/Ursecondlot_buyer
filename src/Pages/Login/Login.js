@@ -3,65 +3,80 @@ import API from "../../Services/BaseService";
 import { useHistory,useLocation } from "react-router-dom";
 import ls from 'local-storage';
 import { store } from 'react-notifications-component';
-import {
-  Form,
-  Input,
-  Select,
-  AutoComplete,
-  Radio,
-  notification,
-  Spin,
-} from 'antd';
-
+import { useForm } from "react-hook-form";
+import { Button } from 'antd';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 
 const Login = () => {
   const history = useHistory();
-  const location = useLocation();
- 
+  const eye = <FontAwesomeIcon icon={faEye} />;
+  const {state} = useLocation();
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
-
+  const [errorMessage, setErrorMessage] = useState("");
+  const [timeout, setTimeout] = useState("");
+  const [errors, setErrors] =useState({email:"", password:""})
+  const[showPwd,setShowPwd]=useState(false);
+  
   useEffect(()=>{
     // localStorage.clear()
     localStorage.setItem("islogedIn", false)
+    let request = {
+      country_id: 1
+  };
+  const state = API.post('state/condition', request);
+  state.then(res => {
+      console.log("res", res.data.data)      
   })
+      .catch(err => { console.log(err); });
+  }, [])
+
+  function togglepwd(e){
+    e.preventDefault();
+    setShowPwd(!showPwd);
+  }
 
   const loginhandleSubmit = (event) => {
-    // setOpenLoader(true);
     event.preventDefault();
+    setErrorMessage("")
+    setErrors({email:"", password:""})
+    if(!emailId) { setErrors({email:"Email Id is required", password:""}); return}
+    else if( emailId && !new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i).test(emailId) ) {
+      setErrors({email:"Must match the email format", password:""}); return
+    }
+    else if(!password) { setErrors({email:"", password:"password is required"}); return}
+
     localStorage.setItem("islogedIn", false)
     let request = {
       email: emailId,
       password: password
     };
-    API.post("http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/buyer/login", request)
+    API.post("buyer/login", request)
       .then((response) => {
         console.log("resresponse.data.data", response.data.data)
         if (response.data.success == true) {
           ls.set('userDetails', response.data.data);
           if(response.data.data.local_flag == '0'){
-            history.push("/ChangePassword");
+            history.push("/changepassword");
           }else{
             localStorage.setItem("islogedIn", true)
-            history.push("/carList");
+            localStorage.getItem("loadTime") !==null ? localStorage.setItem("loadTime", [localStorage.getItem("loadTime"),...[Date.now()]]) : 
+            localStorage.setItem("loadTime", [Date.now()])
+            state?.from?.pathname !=="" && state?.from?.pathname !== undefined?  history.push(state.from.pathname) :  history.push("/carList");            
           }
           
         } else {
-          history.push("error");
-          localStorage.setItem("islogedIn", false)
+          // localStorage.setItem("islogedIn", false)
+          setTimeout(() => {
+          setErrorMessage("Please provide correct Email/Password");
+        }, 100);
         }
       },
         (error) => {
-
+       
         });
-
   }
-  
-   
-   
-  
-     
-
   
   return (
 
@@ -77,27 +92,36 @@ const Login = () => {
            
 
             <div className="email-login">
-		   <div className="tbox">
-       <input className="textbox " type="text" placeholder="" id="uname" required onChange={(e) => setEmailId(e.target.value)} />
-				 <label  for="uname" className={emailId !="" ? "input-has-value" : ""}>User Name</label>
+		  <div className="tbox">
+        <input className="textbox " type="text" placeholder="" id="uname" name="email"
+          onChange={(e) => setEmailId(e.target.value)} />
+				 <label  htmlFor="uname" className={emailId !="" ? "input-has-value" : ""}>User Name</label>
+         <p className="form-input-error">{errors.email}</p>
 			</div>
 			 
 			 <div className="tbox">
-       <input className="textbox" type="password" placeholder="" id="psw" required onChange={(e) => setPassword(e.target.value)} />
-				 <label for="psw" className={password != "" ? "input-has-value" : "" }>Password</label>
+        <input className="textbox" type={showPwd?"text":"password"} placeholder="" id="psw" name="password"
+          onChange={(e) => setPassword(e.target.value)} 
+         />
+				 <label htmlFor="psw" className={password != "" ? "input-has-value" : "" }>Password</label><i htmlFor="psw" className="passwordeye" onClick={togglepwd}>{eye}</i>
+         <p className="form-input-error">{errors.password}</p>
 			 </div>
 		  </div>
             <div className="row">
               <div className="col-lg-6 forget-username">
-              <a className="forget-name" href="#">Forgot Username</a>
+              {/* <a className="forget-name" href="/forgotEmail">Forgot Username</a> */}
+              <Button className="forget-name" onClick={() => history.push("/forgotEmail")}>Forgot Username</Button>
               </div>
 
               <div className="col-lg-6 forget">
-                <a className="forget-pass" href="#">Forgot password</a>
+                {/* <a className="forget-pass" href="/forgotpasswordemail">Forgot password</a> */}
+              <Button className="forget-pass" onClick={() => history.push("/forgotpasswordemail")}>Forgot password</Button>
               </div>
+               <p className="form-input-error">{errorMessage}</p>
               <div className="col-lg-12 loginBtn">
                 <button className="cta-btn">Log In</button>
-                <p>Don't have an account? <a className="forget-name" href="registration">Become a Dealer</a></p>
+                {/* <p>Don't have an account? <a className="forget-name" href="registration">Become a Dealer</a></p> */}
+                <p>Don't have an account? <Button className="forget-name" onClick={() => history.push("/registration")}> Become a Dealer</Button></p>
               </div>
             </div>
           </form>

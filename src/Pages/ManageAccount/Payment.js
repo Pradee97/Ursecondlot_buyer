@@ -1,23 +1,32 @@
 import React from 'react';
-import API from "../../Services/BaseService";
 import { useHistory } from "react-router-dom";
 import ls from 'local-storage';
-// import '../../assets/css/styles.css';
 import { useState } from 'react';
+import FileBase64 from 'react-file-base64';
 import { useEffect } from 'react';
-import {
-    Form,
-    Input,
-    Select,
-    AutoComplete,
-    Radio,
-    notification,
-    Spin,
-} from 'antd';
+import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
+import API from "../../Services/BaseService";
+import CommonPopup from '../../Component/CommonPopup/CommonPopup';
+import StateAndCity from '../../Component/StateAndCity/StateAndCity'
+import { useForm } from "react-hook-form";
 
 const Payment = () => {
     const history = useHistory();
-    const [payment, setPayment] = useState("");
+    const [isOpen, setIsOpen] = useState(false);
+    const { register, handleSubmit, formState: { errors } } = useForm();
+ 
+    const togglePopup = () => {
+      setIsOpen(!isOpen);
+    }
+
+
+    const [popupTitle, setPopupTitle] = useState ("");
+    const [popupMsg, setPopupMsg] = useState ("");
+    const [popupType, setPopupType] = useState ("");
+    const [popupActionType, setPopupActionType] = useState ("");
+    const [popupActionValue, setPopupActionValue] = useState ("");
+    const [popupActionPath, setPopupActionPath] = useState ("")
+   
 
     const [buyerId, setBuyerId] = useState("");
     const [dealershipName, setDealershipName] = useState("");
@@ -34,6 +43,24 @@ const Payment = () => {
     const [accountCityName, setAccountCityName] = useState("");
     const [accountStateName, setAccountStateName] = useState("");
     const [accountZipcodeId, setAccountZipcodeId] = useState("");
+    const [doc,setDoc]=useState("");
+    const [dealershipNameError, setDealershipNameError] = useState("");
+    const [accountHolderNameError, setAccountHolderNameError] = useState("");
+    const [bankNameError, setBankNameError] = useState("");
+    const [accountNumberError, setAccountNumberError] = useState("");
+    const [ACHnumberError, setACHNumberError] = useState("");
+    const [routingNumberError, setRoutingNumberError] = useState("");
+    const [bankAddressError, setBankAddressError] = useState("");
+    const [accountHolderAddressError, setAccountHolderAddressError] = useState("");
+    const [docError,setDocError]=useState("");
+    const [state,setState]=useState("1");
+    const [city,setCity]=useState("1");
+    const [zipcodeId,setZipCodeId]=useState("1");
+    const [zipCode,setZipCode]=useState("1");
+    const [stateAndCityError, setStateAndCityError] = useState("");
+    const [accStateAndCityError,setAccStateAndCityError]=useState("");
+
+    let files= [];
     let userDetails = ls.get('userDetails');
 
     const setZipcode = (data, con) => {
@@ -58,7 +85,8 @@ const Payment = () => {
             setAccountZipcodeId(data)
             }
             const request={zipcode_id: data}
-        API.post("http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/location/condition", request)
+           
+        API.post("location/condition", request)
         .then(response => {
                
             if (response.statusText== "OK"){
@@ -92,11 +120,27 @@ const Payment = () => {
         }
         
     }
+    const onFileChange = (event) => {
+        setDoc(event.target.files[0]);        
+      };
 
-    const paymenthandleSubmit= (event) => {
+    const paymenthandleSubmit= (data) => {
         // setOpenLoader(true);
-        event.preventDefault();        
-    
+        // event.preventDefault();    
+        
+        setDealershipNameError("")
+        setAccountHolderNameError("") 
+        setBankNameError("") 
+        setAccountNumberError("")
+        setACHNumberError("")
+        setRoutingNumberError("")
+        setBankAddressError("")
+        setAccountHolderAddressError("")    
+        setStateAndCityError("")
+        setAccStateAndCityError("")
+        setDocError("")
+
+        console.log("=====docdoc====>",doc)
         let request = {
             buyer_id: userDetails.user_id,
             dealership_name: dealershipName,
@@ -113,23 +157,168 @@ const Payment = () => {
             acc_state_id: accountStateName,
             acc_city_id: accountCityName,
             acc_zipcode: accountZipcodeId,
+            doc_name:doc===""?doc:doc.length>0?doc:[doc],
             active:1
         }
         
+        if(!dealershipName){
+            setDealershipNameError("Dealership Name is required")
+            return;
+        }
+        else if(dealershipName.length>50){
+            setDealershipNameError("Dealership Name must not exceed 50 characters")
+            return;
+        }
+        if(!accountHolderName){
+            setAccountHolderNameError("Signer on account is required")
+            return;
+        }
+        else if(accountHolderName.length>50){
+            setAccountHolderNameError("Signer on account must not exceed 50 characters")
+            return;
+        }       
+        if(!bankName){
+            setBankNameError("Bank Name is required")
+            return;
+        }
+        else if(bankName.length>50 ){
+            setBankNameError("Bank Name must not exceed 50 characters ")
+            return;
+        }
+      
+        if(!accountNumber){
+            setAccountNumberError("Account Number is required")
+            return;
+        }
+        else if(accountNumber.length>50 ){
+            setAccountNumberError("Account Number must not exceed 50 characters ")
+            return;
+        }
+        if(!ACHnumber){
+            setACHNumberError("ACH Number is required")
+            return;
+        }
+        else if(ACHnumber.length>50){
+            setACHNumberError("ACH Number must not exceed 50 characters")
+            return;
+        }
+        if(!routingNumber){
+            setRoutingNumberError("Routing Number is required")
+            return;
+        }
+        else if(routingNumber.length>50){
+            setRoutingNumberError("Routing Number must not exceed 50 characters")
+            return;
+        }
+        if(!bankAddress){
+            setBankAddressError("Bank Address is required")
+            return;
+        }
+        else if(bankAddress.length>150){
+            setBankAddressError("Bank Address must not exceed 150 characters")
+            return;
+        }
+        if(!stateName){
+            setStateAndCityError("state is required")
+            return
+        }
+        if(!cityName){
+            setStateAndCityError("city is required")
+             return
+        }
+        if(!zipCodeId){
+            setStateAndCityError("zipcode is required")
+             return
+        } 
+        if(!accountHolderAddress){
+            setAccountHolderAddressError("AccountHolder Address is required")
+            return;
+        }
+        else if(accountHolderAddress.length>150){
+            setAccountHolderAddressError("AccountHolder Address must not exceed 150 characters")
+            return;
+        }
+        if(!accountStateName){
+            setAccStateAndCityError("state is required")
+            return
+        }
+        if(!accountCityName){
+            setAccStateAndCityError("city is required")
+             return
+        }
+        if(!accountZipcodeId){
+            setAccStateAndCityError("zipcode is required")
+             return
+        }
+        if(!doc){
+            setDocError("Upload Document is required")
+            return;
+        }
+        
         API
-            .post("http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/payment_info/add", request)
+            .post("payment_info/add", request)
             .then((response) => {
                 if (response.data.success) {
                     const { data } = response;
                     console.log("response", response)
-                    history.push("paymentinfo");
+                    togglePopup()
+                    setPopupTitle("Create Payment");
+                    setPopupMsg("Payment Successfully Created");
+                    setPopupType("success");
+                    setPopupActionType("redirect");
+                    setPopupActionValue("ok");
+                    setPopupActionPath("/paymentinfo")
                 } else {
-                    // history.push("emailerror");
+                    togglePopup()
+                    setPopupTitle("Create Payment");
+                    // setPopupMsg("Payment is not Created, Please try Again");
+                    setPopupMsg( response.data.error.err );
+                    setPopupType("error");
+                    setPopupActionType("close");
+                    setPopupActionValue("close");
                 }
             }, (error) => {
                 // setOpenLoader(false);
-                console.log(error);
-            });
+                    togglePopup()
+                    setPopupTitle("Error");
+                    setPopupMsg( "Something went wrong, Please try Again");
+                    setPopupType("error");
+                    setPopupActionType("close");
+                    setPopupActionValue("close");
+        });
+   
+    
+}
+    const getFiles=(file)=>{
+        setDoc(file);
+      }
+      const getStateName = (stateData) => {
+        setStateName(stateData)
+        setCityName(null)
+        setZipcodeId(null)
+    }
+    
+    const getCityName = (cityData) => {
+        setCityName(cityData)
+        setZipcodeId(null)
+    }
+    
+    const getZipCodeId = (zipData) => {
+        setZipcodeId(zipData)
+    }   
+    const getAccStateName=(stateData)=>{
+        setAccountStateName(stateData)
+        setAccountCityName(null)
+        setAccountZipcodeId(null)
+    }
+
+    const getAccCityName=(cityData)=>{
+        setAccountCityName(cityData)
+        setAccountZipcodeId(null)
+    }
+
+    const getAccZipCodeId=(zipData)=>{
+        setAccountZipcodeId(zipData)
     }
 
     return (
@@ -142,155 +331,124 @@ const Payment = () => {
                     <div className="container" >
                         <div className="paymentaccountblock col-lg-12">
                             <div className="section-title">
-                                <h2>Payment Summary</h2>
+                                <h2>Create Financials</h2>
                             </div>
                             <div className="row content">
                                 <div className="col-lg-3 col-md-4 col-sm-12 accountleftblock">
-                                    <div className="mgaccountuser">
-                                        <div className="mgaccountuserleft">
-                                            <img src={process.env.PUBLIC_URL +"/images/userimg.jpg"} className="img-fluid" alt="..." />
-                                        </div>
-                                        <div className="mgaccountuserright">
-                                            <h3>Fernand</h3>
-                                            <div className="d-flex align-items-center">
-                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/Path.svg"} className="img-fluid" alt="..." /><span>California, Cl</span></p>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                    <div className="mgaccountuserlinks">
-                                        <div className="userlinks">
-                                            <li><img src={process.env.PUBLIC_URL +"/images/Icon awesome-user.svg"} className="img-fluid" alt="" /><a href="/manageaccount">Account</a></li>
-                                            <li><img src={process.env.PUBLIC_URL +"/images/Icon awesome-bell.svg"} className="img-fluid" alt="" /><a href="/notification">Notification</a></li>
-                                            <li className="active"><img src={process.env.PUBLIC_URL +"/images/dollar-symbol.svg"} className="img-fluid" alt="" /><a href="/paymentinfo">Payment</a></li>
-                                            <li><img src={process.env.PUBLIC_URL +"/images/fees.svg"} className="img-fluid" alt="" /><a href="/lotfee">Lot Fee</a></li>
-                                            <li><img src={process.env.PUBLIC_URL +"/images/google-docs.svg"} className="img-fluid" alt="" /><a href="documents.html">Document</a></li>
-                                            <li><img src={process.env.PUBLIC_URL +"/images/profile.svg"} className="img-fluid" alt="" /><a href="adduser.html">Add User</a></li>
-                                        </div>
-                                    </div>
+                                   
+                                    <ManageAccountLinks />
                                 </div>
                                 <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 paymentrightblock">
                                     <div className="paymentdetailblock">
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</p>
+                                        <p>Thank you for providing us the information of your bank system. We going to use this for make charegs to your account when you purchase a car.To assure easy transaction for your business</p>
 
 
-                                        <div className="paymentform col-lg-12">
-                                            <form className="backaccountform" onSubmit={paymenthandleSubmit}>
+                                        <div className="paymentform card col-lg-12">
+                                            <form className="backaccountform addpaymentform" onSubmit={handleSubmit(paymenthandleSubmit)}>
                                                 <h2 className="title"> Bank account information</h2>
                                                 <div className="row">
 
 
-                                                    <div className="col-sm-12 form-group">
+                                                    <div className="col-sm-12 form-group topforms">
                                                         <div className="tbox">
-                                                            <input type="text" className="textbox" name="dname" id="name-d" placeholder="" required  onChange={(e) => setDealershipName(e.target.value)} />
-                                                            <label for="name-d" className={dealershipName !="" ? "input-has-value" : ""}>Dealership name</label>
+                                                            <input type="text" className="textbox" name="dealershipName" id="name-d" placeholder="" 
+                                                            onChange={(e) => setDealershipName(e.target.value)} />
+                                                            <label htmlFor="name-d" className={dealershipName !="" ? "input-has-value" : ""}>Dealership name</label>
+                                                            <p className="form-input-error" >{dealershipNameError}</p>
                                                         </div>
                                                     </div>
                                                     <div className="col-sm-12 form-group">
                                                         <div className="tbox">
-                                                            <input type="text" className="textbox" name="fname" id="name-f" placeholder="" required  onChange={(e) => setAccountHolderName(e.target.value)} />
-                                                            <label for="name-f" className={accountHolderName !="" ? "input-has-value" : ""}>Account holder name</label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="col-sm-12 form-group">
-                                                        <div className="tbox">
-                                                            <input type="text" className="textbox" name="lname" id="name-l" placeholder="" required  onChange={(e) => setBankName(e.target.value)} />
-                                                            <label for="name-b" className={bankName !="" ? "input-has-value" : ""}>Bank name</label>
+                                                            <input type="text" className="textbox" name="accountHolderName" id="name-f" placeholder="" 
+                                                            onChange={(e) => setAccountHolderName(e.target.value)} />
+                                                            <label htmlFor="name-f" className={accountHolderName !="" ? "input-has-value" : ""}>Signer on account</label>
+                                                            <p className="form-input-error" >{accountHolderNameError}</p>
                                                         </div>
                                                     </div>
 
                                                     <div className="col-sm-12 form-group">
                                                         <div className="tbox">
-                                                            <input type="text" className="textbox" name="anumber" id="anumber" placeholder="" required  onChange={(e) => setAccountNumber(e.target.value)} />
-                                                            <label for="anumber" className={accountNumber !="" ? "input-has-value" : ""}>Account number</label>
+                                                            <input type="text" className="textbox" name="bankName" id="name-l" placeholder="" 
+                                                            onChange={(e) => setBankName(e.target.value)} />
+                                                            <label htmlFor="name-b" className={bankName !="" ? "input-has-value" : ""}>Bank name</label>
+                                                            <p className="form-input-error" >{bankNameError}</p>
                                                         </div>
                                                     </div>
 
                                                     <div className="col-sm-12 form-group">
                                                         <div className="tbox">
-                                                            <input type="text" className="textbox" name="achnumber" id="achnumber" placeholder="" required  onChange={(e) => setACHNumber(e.target.value)} />
-                                                            <label for="achnumber" className={ACHnumber !="" ? "input-has-value" : ""}>ACH number</label>
+                                                            <input type="text" className="textbox" name="accountNumber" id="anumber" placeholder="" 
+                                                            onChange={(e) => setAccountNumber(e.target.value)} />
+                                                            <label htmlFor="anumber" className={accountNumber !="" ? "input-has-value" : ""}>Account number</label>
+                                                            <p className="form-input-error" >{accountNumberError}</p>
                                                         </div>
                                                     </div>
 
                                                     <div className="col-sm-12 form-group">
                                                         <div className="tbox">
-                                                            <input type="text" className="textbox" name="rtnumber" id="rtnumber" placeholder="" required  onChange={(e) => setRoutingNumber(e.target.value)} />
-                                                            <label for="rtnumber" className={routingNumber !="" ? "input-has-value" : ""}>Routing number</label>
+                                                            <input type="text" className="textbox" name="ACHnumber" id="achnumber" placeholder="" 
+                                                            onChange={(e) => setACHNumber(e.target.value)} />
+                                                            <label htmlFor="achnumber" className={ACHnumber !="" ? "input-has-value" : ""}>ACH number</label>
+                                                            <p className="form-input-error" >{ACHnumberError}</p>
                                                         </div>
                                                     </div>
 
                                                     <div className="col-sm-12 form-group">
                                                         <div className="tbox">
-                                                            <input type="text" className="textbox" name="baddress" id="baddress" placeholder="" required  onChange={(e) => setBankAddress(e.target.value)} />
-                                                            <label for="baddress" className={bankAddress !="" ? "input-has-value" : ""}>Bank address</label>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-sm-4 form-group">
-                                                        <div className="tbox">
-                                                            {/* <select id="state" className="form-control custom-select browser-default">
-                                                                <option value={stateName}>State</option>
-                                                            </select> */}
-                                                            <input type="text" className="form-control" placeholder="state" value ={stateName} required  />
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-sm-4 form-group">
-                                                        <div className="tbox">
-                                                            {/* <select id="city" className="form-control custom-select browser-default">
-                                                                <option value= {cityName} >City</option>
-                                                            </select> */}
-                                                            <input type="text" className="form-control" placeholder="city" value ={cityName} required  /> 
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="col-sm-4 form-group">
-                                                        <div className="tbox">
-                                                        {/* <select id="zipcode" className="form-control custom-select browser-default">
-                                                                <option value="USA">Zipcode</option>
-                                                            </select> */}
-                                                            <input id="zipcode" className="form-control custom-select browser-default" placeholder="Zipcode" required onChange={(e) => setZipcode(e.target.value,1)} />
+                                                            <input type="text" className="textbox" name="routingNumber" id="rtnumber" placeholder="" 
+                                                            onChange={(e) => setRoutingNumber(e.target.value)} />
+                                                            <label htmlFor="rtnumber" className={routingNumber !="" ? "input-has-value" : ""}>Routing number</label>
+                                                            <p className="form-input-error" >{routingNumberError}</p>
                                                         </div>
                                                     </div>
 
                                                     <div className="col-sm-12 form-group">
                                                         <div className="tbox">
-                                                            <input type="text" className="textbox" name="ahaddress" id="ahaddress" placeholder="" required  onChange={(e) => setAccountHolderAddress(e.target.value)} />
-                                                            <label for="ahaddress" className={accountHolderAddress !="" ? "input-has-value" : ""}>Account Holder Address</label>
+                                                            <input type="text" className="textbox" name="bankAddress" id="baddress" placeholder="" 
+                                                            onChange={(e) => setBankAddress(e.target.value)} />
+                                                            <label htmlFor="baddress" className={bankAddress !="" ? "input-has-value" : ""}>Bank address</label>
+                                                            <p className="form-input-error" >{bankAddressError}</p>
+                                                        </div>
+                                                    </div>
+                                                    <StateAndCity 
+                                                        setStateValue = { getStateName } 
+                                                        setCityValue ={ getCityName }
+                                                        setZipcodeValue ={ getZipCodeId }
+                                                    />
+                                                    <div className="col-sm-12 form-group">
+                                                    <p className="form-input-error"> {stateAndCityError}</p>
+                                                    </div>
+
+                                                    <div className="col-sm-12 form-group">
+                                                        <div className="tbox">
+                                                            <input type="text" className="textbox" name="accountHolderAddress" id="ahaddress" placeholder="" 
+                                                            onChange={(e) => setAccountHolderAddress(e.target.value)} />
+                                                            <label htmlFor="ahaddress" className={accountHolderAddress !="" ? "input-has-value" : ""}>Account Holder Address</label>
+                                                            <p className="form-input-error" >{accountHolderAddressError}</p>
                                                         </div>
                                                     </div>
 
-                                                    <div className="col-sm-4 form-group">
-                                                        <div className="tbox">
-                                                            {/* <select id="state" className="form-control custom-select browser-default">
-                                                                <option value="US">State</option>
-                                                            </select> */}
-                                                             <input type="text" className="form-control" placeholder="state" value ={accountStateName} required  />
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-sm-4 form-group">
-                                                        <div className="tbox">
-                                                            {/* <select id="city" className="form-control custom-select browser-default">
-                                                                <option value="USA">City</option>
-                                                            </select> */}
-                                                            <input type="text" className="form-control" placeholder="city" value ={accountCityName} required  /> 
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="col-sm-4 form-group">
-                                                        <div className="tbox">
-                                                            {/* <select id="zipcode" className="form-control custom-select browser-default">
-                                                                <option value="USA">Zipcode</option>
-                                                            </select> */}
-                                                            <input id="zipcode" className="form-control custom-select browser-default" placeholder="Zipcode" required onChange={(e) => setZipcode(e.target.value,2)} />
-                                                        </div>
+                                                    <StateAndCity 
+                                                        setStateValue = { getAccStateName } 
+                                                        setCityValue ={ getAccCityName }
+                                                        setZipcodeValue ={ getAccZipCodeId }
+                                                    />
+                                                    <div className="col-sm-12 form-group">
+                                                    <p className="form-input-error"> {accStateAndCityError}</p>
                                                     </div>
 
                                                     <div className="col-sm-6 form-group">
-                                                        <p>Signed bank Authorization letter for bank to release information. </p>
+                                                        Signed bank Authorization letter for bank to release information.
                                                     </div>
-
+                                                    <div className="col-sm-6 form-group uploadbtn">
+                                                    <div className="upload-btn-wrapper">
+                                                        <button className="btn"><i className="icofont-upload-alt"></i> Upload Document</button>
+                                                        <FileBase64 multiple={ true } onDone={ getFiles } hidden type="hidden"/>
+                                                    </div>
+                                                    <span className="uploadedFile">{doc.length>0?doc[0].name:doc.name}</span>
+                                                    <p className="form-input-error" >{docError}</p>
+                                                    </div>
+                                                   
                                                     <div className="col-lg-12 loginBtn">
                                                         <button className="cta-btn">Submit</button>
                                                     </div>
@@ -329,7 +487,16 @@ const Payment = () => {
                         </div>
                     </section>
 
-               
+                {isOpen && 
+                <CommonPopup 
+                    handleClose= {togglePopup}
+                    popupTitle= {popupTitle}
+                    popupMsg= {popupMsg}
+                    popupType= {popupType}
+                    popupActionType= {popupActionType}
+                    popupActionValue= {popupActionValue}
+                    popupActionPath={popupActionPath}
+                />}
 
 
 
