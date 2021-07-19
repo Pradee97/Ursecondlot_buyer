@@ -46,7 +46,7 @@ const CarList = () => {
         })
     }
 
-    function redirectpage(pathid){
+    const redirectpage=(pathid)=>{
         //e.preventDefault();
         history.push("/cardetail/"+pathid);
     }
@@ -87,7 +87,7 @@ const CarList = () => {
                                         <div className="cars-lock">
                                             <img src={process.env.PUBLIC_URL +"/images/lock.svg"}  />
                                         </div>
-                                        <img src={item.image}  onclick={redirectpage(item.car_id)}/>
+                                        <img src={item.image}  onClick={()=>{redirectpage(item.car_id)}}/>
                                         <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>

@@ -114,20 +114,22 @@ useEffect (()=>{
 		//if(results.length>0){
 		setCarInventoryDetail(res.data.data);
 		console.log("car Inventory Detail",res.data.data);
+		const req={
+			"seller_id":res.data.data[0].seller_id
+		};
+		API.post('SellerCarList/condition',req).then(res=>{
+			console.log("response",res.data.data);
+		   // const {results} = res.data.data;
+			//console.log("Response data",res.data.data);
+			//if(results.length>0){
+				setSellerCarDetail(res.data.data);
+			console.log("Seller car Inventory Detail",res.data.data);
+			//}
+		})
 		//}
 	})
-	const req={
-		"seller_id":1
-	};
-	API.post('SellerCarList/condition',req).then(res=>{
-		console.log("response",res.data.data);
-	   // const {results} = res.data.data;
-		//console.log("Response data",res.data.data);
-		//if(results.length>0){
-			setSellerCarDetail(res.data.data);
-		console.log("Seller car Inventory Detail",res.data.data);
-		//}
-	})
+	
+	
 
 },[])
 	
