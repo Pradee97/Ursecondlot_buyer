@@ -81,7 +81,7 @@ const CarList = () => {
                                         <div className="cars-lock">
                                             <img src={process.env.PUBLIC_URL +"/images/lock.svg"}  />
                                         </div>
-                                        <a href="/Cardetail"><img src={process.env.PUBLIC_URL +"/images/cars01.png"}/></a>
+                                        <a href="/Cardetail"><img src={item.image}/></a>
                                         <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
@@ -124,7 +124,7 @@ const CarList = () => {
                                             <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
                                         </div>
                                         <a href="/Cardetail">
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"} className="img-fluid" alt="..." /></a>
+                                        <img src={item.image} className="img-fluid" alt="..." /></a>
                                         <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
@@ -167,7 +167,7 @@ const CarList = () => {
                                             <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
                                         </div>
                                         <a href="/Cardetail">
-                                        <img src={process.env.PUBLIC_URL +"/images/cars01.png"}className="img-fluid" alt="..." /></a>
+                                        <img src={item.image}className="img-fluid" alt="..." /></a>
                                         <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
