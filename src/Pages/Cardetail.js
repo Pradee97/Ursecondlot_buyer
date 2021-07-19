@@ -1,10 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import $ from 'jquery'
 import { useHistory, useLocation } from "react-router-dom";
-
 import API from "../Services/BaseService";
-
-
 import lock from '../assets/img/lock.svg';
 import cars01 from '../assets/img/cars01.png';
 import appstore from '../assets/img/appstore.png';
@@ -76,7 +73,25 @@ const Cardetail = () =>{
 
 const [carDetail ,setCarDetail] = useState([]) 
 const [carInventoryDetail,setCarInventoryDetail]=useState([]);
-
+const [sellerCarDetail,setSellerCarDetail]=useState([]);
+const [lrgImg,setLrgImg]=useState("");
+function img1Click(img){
+	loadLrgImg(img.target.src);
+}
+function img2Click(img){
+	console.log("values passed",img);
+	console.log("Imgfile",img.target.src);
+	loadLrgImg(img.target.src);
+}
+function img3Click(img){
+	loadLrgImg(img.target.src);
+}
+function img4Click(img){
+	loadLrgImg(img.target.src);
+}
+function loadLrgImg(img){
+	setLrgImg(img);
+}
 useEffect (()=>{
 	// carDetails/condition
 	const request = {"car_id":1}
@@ -98,6 +113,19 @@ useEffect (()=>{
 		console.log("car Inventory Detail",res.data.data);
 		//}
 	})
+	const req={
+		"seller_id":1
+	};
+	API.post('SellerCarList/condition',req).then(res=>{
+		console.log("response",res.data.data);
+	   // const {results} = res.data.data;
+		//console.log("Response data",res.data.data);
+		//if(results.length>0){
+			setSellerCarDetail(res.data.data);
+		console.log("Seller car Inventory Detail",res.data.data);
+		//}
+	})
+
 },[])
 	
 return(
@@ -116,7 +144,7 @@ return(
 						<div class="banner-slider">
 							<div class="slider slider-for">
 								<div class="slider-banner-image">
-									<img src={carDetail[0].image} alt="no image" /> 
+									<img  src={lrgImg} alt="no image" /> 
 								</div> 
 								
 							
@@ -125,25 +153,25 @@ return(
 								{carDetail.length>1?
 								<div class="thumbnail-image">
 									<div class="thumbImg">
-										<img src={carDetail[1].image} alt="" /> 
+										<img src={carDetail[1].image} alt="" onClick={img1Click} /> 
 									</div>
 								</div>:""}
 								{carDetail.length>2?
 								<div class="thumbnail-image">
 									<div class="thumbImg">
-										<img src={carDetail[2].image} alt="" /> 
+										<img src={carDetail[2].image} alt="" onClick={img2Click} /> 
 									</div>
 								</div>:""}
 								{carDetail.length>3?
 								<div class="thumbnail-image">
 									<div class="thumbImg">
-										<img src={carDetail[3].image} alt="" /> 
+										<img src={carDetail[3].image} alt="" onClick={img3Click} /> 
 									</div>
 								</div>:""}
 								{carDetail.length>4?
 								<div class="thumbnail-image">
 									<div class="thumbImg">
-										<img src={carDetail[4].image} alt="" /> 
+										<img src={carDetail[4].image} alt="" onClick={img4Click} /> 
 									</div>
 								</div>	:""}
 								
@@ -186,8 +214,8 @@ return(
 							<div class="row">	
 							<div class="col-md-12 cars-detail-ins">
 	        					<div class="cars-detail-views">
-									<a class="car-btns" href="#">view Inspection</a>
-									<a class="car-btns-primary" href="#"><img src={tag} alt=""/>High Bid :<span> ${carDetail[0].max_bid}</span></a>
+									<a class="car-btns" href="/inspection">view Inspection</a>
+									<a class="car-btns-primary" href="/makeurbid"><img src={tag} alt=""/>High Bid :<span> ${carDetail[0].max_bid}</span></a>
 								</div>
 	        				</div>
 	        			</div>
@@ -214,7 +242,7 @@ return(
 							<div class="col-md-12">
 	        					<div class="cars-buy">
 									<a class="cars-buy-btns" href="#">Buy now</a>
-									<a class="cars-buy-btns-primary" href="#">Make Bid</a>
+									<a class="cars-buy-btns-primary" href="/makeurbid">Make Bid</a>
 								</div>
 	        				</div>
 						</div>
@@ -283,19 +311,19 @@ return(
         <div class="section-title">
           <h2>More cars from the dealer</h2>          
         </div>
-
-		{carInventoryDetail.length > 0 ? carInventoryDetail
-                            .map((moreCar,index) =><div class="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
+		<div class="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
+		{sellerCarDetail.length > 0 ? sellerCarDetail
+                            .map((moreCar,index) =>
 
          <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
             <div class="car-item">
-			<div class="cars-lock">
+				<div class="cars-lock">
 				<img src={lock} class="img-fluid" alt="..."/>
-			  </div>
-              <img src={cars01} class="img-fluid" alt="..."/>
-			  <div class="cars-tag">
-				<h4>Best deal</h4>
-			  </div>
+			  	</div>
+              	<img src={cars01} class="img-fluid" alt="..."/>
+				<div class="cars-tag">
+					<h4>Best deal</h4>
+				</div>
               <div class="cars-content">		
 			  <h3><a href="#">{moreCar.make} {moreCar._type} ({moreCar.model} model)</a></h3>
                 <div class="d-flex align-items-center mb-3">
@@ -304,14 +332,15 @@ return(
                 </div>
 				
 				<div class="cars-prices">
-					<a class="cta-btns" href="register.html">${moreCar.min_bid}</a>
-					<a class="cta-btns-primary" href="register.html">Make Bid</a>
+					<a class="cta-btns" href="">${moreCar.min_bid}</a>
+					<a class="cta-btns-primary" href="/makeurbid">Make Bid</a>
 				</div>
               </div>
             </div>
           </div>
 		 		
-		  </div>):""}
+		  ):""}
+		  </div>
 		<div class="text-center">
                 <a href="#" class="more-btn">View More<i class="bx bx-chevron-right"></i></a>
               </div>
@@ -347,7 +376,7 @@ return(
 				
 				<div class="cars-prices">
 					<a class="cta-btns" href="register.html">$1900</a>
-					<a class="cta-btns-primary" href="register.html">Make Bid</a>
+					<a class="cta-btns-primary" href="/makeurbid">Make Bid</a>
 				</div>
               </div>
             </div>
@@ -370,7 +399,7 @@ return(
 				
 				<div class="cars-prices">
 					<a class="cta-btns" href="register.html">$1900</a>
-					<a class="cta-btns-primary" href="register.html">Make Bid</a>
+					<a class="cta-btns-primary" href="/makeurbid">Make Bid</a>
 				</div>
               </div>
             </div>
@@ -393,7 +422,7 @@ return(
 				
 				<div class="cars-prices">
 					<a class="cta-btns" href="register.html">$1900</a>
-					<a class="cta-btns-primary" href="register.html">Make Bid</a>
+					<a class="cta-btns-primary" href="/makeurbid">Make Bid</a>
 				</div>
               </div>
             </div>
@@ -416,7 +445,7 @@ return(
 				
 				<div class="cars-prices">
 					<a class="cta-btns" href="register.html">$1900</a>
-					<a class="cta-btns-primary" href="register.html">Make Bid</a>
+					<a class="cta-btns-primary" href="/makeurbid">Make Bid</a>
 				</div>
               </div>
             </div>
@@ -439,7 +468,7 @@ return(
 				
 				<div class="cars-prices">
 					<a class="cta-btns" href="register.html">$1900</a>
-					<a class="cta-btns-primary" href="register.html">Make Bid</a>
+					<a class="cta-btns-primary" href="/makeurbid">Make Bid</a>
 				</div>
               </div>
             </div>
