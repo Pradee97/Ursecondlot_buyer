@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import $ from 'jquery'
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import API from "../Services/BaseService";
 import lock from '../assets/img/lock.svg';
 import cars01 from '../assets/img/cars01.png';
@@ -70,9 +70,10 @@ const Cardetail = () =>{
 // 		]
 // 	});
 // 	});
-
+const [sellerId,setSellerId]=useState("");
 const [carDetail ,setCarDetail] = useState([]) 
 const [carInventoryDetail,setCarInventoryDetail]=useState([]);
+const { id } = useParams();
 const [sellerCarDetail,setSellerCarDetail]=useState([]);
 const [lrgImg,setLrgImg]=useState("");
 function img1Click(img){
@@ -94,7 +95,8 @@ function loadLrgImg(img){
 }
 useEffect (()=>{
 	// carDetails/condition
-	const request = {"car_id":1}
+	console.log("id value",id)
+	const request = {"car_id":id}
 	API.post('carDetails/condition',request).then(res=>{
 		console.log("response",res.data.data);
 	   // const {results} = res.data.data;
@@ -112,20 +114,22 @@ useEffect (()=>{
 		//if(results.length>0){
 		setCarInventoryDetail(res.data.data);
 		console.log("car Inventory Detail",res.data.data);
+		const req={
+			"seller_id":res.data.data[0].seller_id
+		};
+		API.post('SellerCarList/condition',req).then(res=>{
+			console.log("response",res.data.data);
+		   // const {results} = res.data.data;
+			//console.log("Response data",res.data.data);
+			//if(results.length>0){
+				setSellerCarDetail(res.data.data);
+			console.log("Seller car Inventory Detail",res.data.data);
+			//}
+		})
 		//}
 	})
-	const req={
-		"seller_id":1
-	};
-	API.post('SellerCarList/condition',req).then(res=>{
-		console.log("response",res.data.data);
-	   // const {results} = res.data.data;
-		//console.log("Response data",res.data.data);
-		//if(results.length>0){
-			setSellerCarDetail(res.data.data);
-		console.log("Seller car Inventory Detail",res.data.data);
-		//}
-	})
+	
+	
 
 },[])
 	

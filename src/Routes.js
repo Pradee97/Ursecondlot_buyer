@@ -138,7 +138,7 @@ function AppRouter() {
               <Route  path="/buyeredit/:id" component={EditBuyer}/>
               <Route path="/Makeurbid" component={MakeurBid}/>
               <Route path="/Inspection" component={Inspection}/>
-              <Route path="/CarDetail" component={Cardetail}/>
+              <Route path="/CarDetail/:id" component={Cardetail}/>
             </PrivateRoute>       
           </Switch>
           <Footer />

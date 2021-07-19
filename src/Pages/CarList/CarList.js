@@ -4,7 +4,7 @@ import Popup from '../../Component/Popup/Popup';
 import Makeurbid from '../Makeurbid';
 import '../../assets/css/responsive.css';
 import API from "../../Services/BaseService";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useState } from 'react';
 import { useEffect } from 'react';
 
@@ -46,6 +46,11 @@ const CarList = () => {
         })
     }
 
+    const redirectpage=(pathid)=>{
+        //e.preventDefault();
+        history.push("/cardetail/"+pathid);
+    }
+
     const getFavCarList=()=>{
         let request={
             buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id
@@ -63,6 +68,7 @@ const CarList = () => {
 
 
     },[]);
+    
 
     return (
        
@@ -81,7 +87,7 @@ const CarList = () => {
                                         <div className="cars-lock">
                                             <img src={process.env.PUBLIC_URL +"/images/lock.svg"}  />
                                         </div>
-                                        <a href="/Cardetail"><img src={item.image}/></a>
+                                        <img src={item.image}  onClick={()=>{redirectpage(item.car_id)}}/>
                                         <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
