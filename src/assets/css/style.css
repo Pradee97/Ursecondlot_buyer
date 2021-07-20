@@ -6692,6 +6692,7 @@ table td .ant-btn:hover span, table td .ant-btn:hover i{
 .form-input-error{
   color: red;
   text-align: left;
+  margin-bottom: 5px;
 }
 .topRightUser img{
   width:35px;
@@ -7178,4 +7179,20 @@ img.carImg{
 
 .makeyourbid .container{
   padding: 0;
+}
+
+.contactblock  .cta-btn{
+  width: auto;
+}
+.saveSearch{
+  text-align: left;
+}
+
+.saveSearch .cta-btn{
+  width: auto;
+  margin: 0;
+    margin-bottom: 5px;
+}
+.distanceBlock{
+  margin-bottom: 30px;
 }

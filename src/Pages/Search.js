@@ -27,34 +27,28 @@ const togglePopup = () => {
 		<div id="vehiclesearch"class="vehiclesearch">
 			<div class="container">
 				<div class="section-title">
-					<h2>Vehicle Search</h2> 
+					<h2>Vehicle Search</h2>
+
+					 
 				</div>
 			    <div class="row content">
 					<div class="col-lg-3">
+					<div class="saveSearch"><button class="cta-btn" type="button">Save Search </button></div>
 						<div class="leftonsidebox">
 							<div class="filtersblock">
 								<h3>Filters<span><a href="#">Reset</a></span></h3>
-								<div class="input-group searchbox">
-									<input class="form-control" type="text" value="" placeholder="Search" id="search-input"/>
-									<span class="input-group-append">
-										<button class="btn ms-n5" type="button">
-										<i class="fa fa-search"></i>
-									</button>
-									</span>
-								</div>
-							</div>
-							<div class="vehicleblock">
-								<h4>Vehicle</h4>
 								<div class="input-group">
 									<select id="vehiclename1"  class="form-control custom-select browser-default">
-										<option value="USA">Honda amaze (2014 model)</option>
+										<option value="Saved Search">Saved Search</option>
 									</select>
 								</div>
+								
+							</div>
+							<div class="distanceBlock">
+								<h4>Distance</h4>
 								<div class="input-group">
-									<select id="vehiclename2"  class="form-control custom-select browser-default">
-										<option value="USA">Make</option>
-									</select>
-								</div>
+								<input class="form-control" type="text" value="" placeholder="50km" />
+								</div>								
 							</div>
 							
 							<div class="sortbyblock">
