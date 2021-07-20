@@ -10,9 +10,8 @@ import '../assets/vendor/owl.carousel/assets/owl.carousel.min.css';
 import '../assets/vendor/aos/aos.css';
 import "../assets/vendor/slick/css/slick.min.css";
 
-
 import '../assets/css/style.css';
-
+import '../assets/css/responsive.css';
 
 const Footer = () => {
     return (
