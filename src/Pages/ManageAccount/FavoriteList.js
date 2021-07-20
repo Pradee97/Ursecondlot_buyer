@@ -38,7 +38,9 @@ useEffect(() => {
   return (
       <div>
         <main id="main" class="inner-page">
-
+        <div class="back-btn">
+                        <a class="back-btn-primary" href="/carlist"><i class="bx bx-chevron-left"></i> Back</a>
+            </div>
           <div id="suggested-cars" class="suggested-cars">
             <div class="container-fluid aos-init aos-animate" data-aos="fade-up">
 

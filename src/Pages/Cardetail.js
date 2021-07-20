@@ -485,10 +485,6 @@ return(
 		</div>
     </div>
 
-   
-   
-
-   
 
     <section id="playstoreBlock" class="playstoreBlock">
       <div class="container">

@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom
 import { useIdleTimer } from 'react-idle-timer'
 import './App.css';
 import SessionConfirmationPopup from "./Component/CommonPopup/SessionConfirmationPopup"
-
+import Suggested from './Pages/SuggestedCars';
 // import Loading from './Component/Loading/Loading';
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
@@ -54,6 +54,10 @@ import Cardetail from './Pages/Cardetail';
 import Cart from './Pages/Cart';
 import Chat from './Pages/Chat';
 import History from './Pages/ManageAccount/History';
+import SuggestedCars from './Pages/SuggestedCars';
+import recentcars from './Pages/RecentlyAddedCars';
+import inventoryCars from './Pages/InventoryCars';
+import InventoryCars from './Pages/InventoryCars';
 function AppRouter() {
 
   const timeout = 900000;
@@ -117,6 +121,9 @@ function AppRouter() {
               <Route  path="/transport" component={Transport}/>
               <Route  path="/manageaccount" component={ManageAccount}/>
               <Route  path="/lotfee" component={LotFee}/>
+              <Route path="/suggestedcars" component={SuggestedCars}/>
+              <Route path="/Recentlyaddedcars" component={recentcars}/>
+              <Route path="/InventoryCars" component={InventoryCars}/>
               <Route  path="/notification" component={Notification}/>
               <Route  path="/payment" component={Payment}/>
               <Route  path="/paymentinfo" component={PaymentInfo}/>
@@ -139,6 +146,7 @@ function AppRouter() {
               <Route path="/Makeurbid" component={MakeurBid}/>
               <Route path="/Inspection" component={Inspection}/>
               <Route path="/CarDetail/:id" component={Cardetail}/>
+
             </PrivateRoute>       
           </Switch>
           <Footer />
