@@ -80,8 +80,9 @@ const CarList = () => {
                                 <h2>Suggested cars</h2>
                             </div>
                             <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
-                            {carDetail.length>0?carDetail
-                            .map((item,index) =>
+                            {carDetail.length>0?carDetail.slice(0, 4)
+                            .map((item) =>
+                            
                                 <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div className="car-item">
                                         <div className="cars-lock">
@@ -107,7 +108,7 @@ const CarList = () => {
                                 </div>):""}
                                </div>
                             <div className="text-center">
-                                <a href="#" className="more-btn">View More <i className="bx bx-chevron-right"></i></a>
+                                <a href="/suggestedcars" className="more-btn">View More <i className="bx bx-chevron-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -122,7 +123,7 @@ const CarList = () => {
                             </div>
 
                             <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
-                            {carInventoryDetail.length>0?carInventoryDetail
+                            {carInventoryDetail.length>0?carInventoryDetail.slice(0, 4)
                             .map((item,index) =>
                                 <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div className="car-item">
@@ -152,7 +153,7 @@ const CarList = () => {
                                 </div>
 
                             <div className="text-center">
-                                <a href="#" className="more-btn">See More Make Search <i className="bx bx-chevron-right"></i></a>
+                                <a href="/InventoryCars" className="more-btn">See More Make Search <i className="bx bx-chevron-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -165,7 +166,7 @@ const CarList = () => {
                             </div>
 
                             <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
-                            {carDetail.length>0?carDetail
+                            {carDetail.length>0?carDetail.slice(0, 4)
                                         .map((item,index) =>
                                 <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div className="car-item">
@@ -194,7 +195,7 @@ const CarList = () => {
                                 </div>):""}
                                 </div>
                             <div className="text-center">
-                                <a href="#" className="more-btn">See More Make Search <i className="bx bx-chevron-right"></i></a>
+                                <a href="/recentlyAddedCars" className="more-btn">See More Make Search <i className="bx bx-chevron-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -227,7 +228,7 @@ const CarList = () => {
 
 
                         <div className="text-center">
-                            <a href="#" className="more-btn">View Favorite List <i className="bx bx-chevron-right"></i></a>
+                            <a href="/favorite" className="more-btn">View Favorite List <i className="bx bx-chevron-right"></i></a>
                         </div>
                     </div>
                 
