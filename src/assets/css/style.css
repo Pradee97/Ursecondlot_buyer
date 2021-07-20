@@ -3202,6 +3202,12 @@ Car Detail Page
     border: none;
 	font-size:20px;
 }
+.cars-buy .cars-buy-btns:hover, .cars-buy .cars-buy-btns-primary:hover{
+	background-color: #002768;
+    color: white;
+    text-decoration: none;
+}
+
 
 .carspecifation .carspecifationblock {
     margin: 0 auto;
@@ -3223,9 +3229,9 @@ Car Detail Page
 }
 
 .dealer-cars .col-md-3{ 
--ms-flex: 25%;
-    flex:  25%;
-    max-width:25%;
+  -ms-flex: 20%;
+    flex:  20%;
+    max-width:20%;
 }
 .dealer-cars   {
 	background: #fff 0% 0% no-repeat padding-box;
@@ -3340,9 +3346,9 @@ Car Detail Page
 }
 
 .other-dealer-cars  .col-md-3{ 
--ms-flex: 25%;
-    flex:  25%;
-    max-width:25%;
+-ms-flex: 20%;
+    flex:  20%;
+    max-width:20%;
 }
 .other-dealer-cars    {
 	background: #fff 0% 0% no-repeat padding-box;
@@ -7222,5 +7228,9 @@ img.carImg{
 }
 .historyImg img{
   width: auto;
+}
+
+.carBrand img{
+  border-radius: 5px;
 }
 

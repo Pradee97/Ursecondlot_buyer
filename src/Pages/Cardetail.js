@@ -4,6 +4,7 @@ import { useHistory, useLocation, useParams } from "react-router-dom";
 import API from "../Services/BaseService";
 import lock from '../assets/img/lock.svg';
 import cars01 from '../assets/img/cars01.png';
+import carbrand from '../assets/img/carshonda.jpg';
 import appstore from '../assets/img/appstore.png';
 import googleplay from '../assets/img/googleplay.png';
 import speedometer from '../assets/img/speedometer.svg';
@@ -219,7 +220,7 @@ return(
 							<div class="row">	
 							<div class="col-md-12 cars-detail-ins">
 	        					<div class="cars-detail-views">
-									<a class="car-btns" href="/inspection">view Inspection</a>
+									<a class="car-btns" href="/inspection">View Inspection</a>
 									<a class="car-btns-primary" href="/makeurbid"><img src={tag} alt=""/>High Bid :<span> ${carDetail[0].max_bid}</span></a>
 								</div>
 	        				</div>
@@ -238,8 +239,8 @@ return(
 								</div>
 							</div>
 							<div class="col-md-6">
-								<div class="product-count">	        				
-									<img src={speedometer}  alt=""/>
+								<div class="product-count carBrand">	        				
+									<img src={carbrand}  alt=""/>
 								</div>
 							</div>	        				
 	        			</div>
