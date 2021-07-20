@@ -58,8 +58,9 @@ const History = () => {
                     <div class="pickupdetailcontent">
                       <p class="billsalesno">Bill Of sale# 45876</p>
                     </div>
-                      
+                      <div className="historyImg">
                         <img src={cars01} class="img-fluid" alt="..."/>
+                        </div>
                         <div class="cars-tag">
                         <h4>Best deal</h4>
                         </div>
@@ -154,8 +155,9 @@ const History = () => {
                     <div class="pickupdetailcontent">
                       <p class="billsalesno">Bill Of sale# 45876</p>
                     </div>
-                      
+                    <div className="historyImg">
                         <img src={cars01} class="img-fluid" alt="..."/>
+                        </div>
                         <div class="cars-tag">
                         <h4>Best deal</h4>
                         </div>
@@ -249,8 +251,9 @@ const History = () => {
                     <div class="pickupdetailcontent">
                       <p class="billsalesno">Bill Of sale# 45876</p>
                     </div>
-                      
+                    <div className="historyImg">
                         <img src={cars01} class="img-fluid" alt="..."/>
+                        </div>
                         <div class="cars-tag">
                         <h4>Best deal</h4>
                         </div>

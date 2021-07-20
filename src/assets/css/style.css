@@ -7196,3 +7196,31 @@ img.carImg{
 .distanceBlock{
   margin-bottom: 30px;
 }
+
+.load-more-btn {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 6px 30px 8px 30px;
+  color: #bd062c;
+  border-radius: 5px;
+  transition: all ease-in-out 0.4s;
+  font-size: 18px;
+  margin-top: 25px;
+  border: 2px solid #bd062c;
+}
+
+.load-more-btn:focus, .load-more-btn:hover {
+  border: 2px solid #bd062c;
+  color: #bd062c;
+}
+
+.historyImg{
+  max-height: 200px;
+  overflow: hidden;
+  width: 100%;
+  background: #f5f5f5;
+}
+.historyImg img{
+  width: auto;
+}
+
