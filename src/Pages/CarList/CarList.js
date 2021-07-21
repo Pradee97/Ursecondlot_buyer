@@ -11,7 +11,7 @@ import { useEffect } from 'react';
 const CarList = () => {
     const history = useHistory();
     let userDetails = ls.get('userDetails');
-    const [carDetail,setCarDetail]=useState("");
+    const [carDetail,setCarDetail]=useState([]);
     const [carInventoryDetail,setCarInventoryDetail]=useState("");
     const [carFavInventoryDetail,setFavCarInventoryDetail]=useState("");
 
@@ -26,7 +26,8 @@ const CarList = () => {
         let request={
             buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id
         }
-        API.post('BuyerNewCarList/condition').then(res=>{
+        console.log("+++++++++==++",request)
+        API.post('BuyerNewCarList/condition',request).then(res=>{
             console.log("response",res.data.data);
            // const {results} = res.data.data;
             console.log("Response data",res.data.data);
@@ -40,7 +41,7 @@ const CarList = () => {
         let request={
             buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id
         }
-        API.post('BuyerInventoryCarList/condition').then(res=>{
+        API.post('BuyerInventoryCarList/condition',request).then(res=>{
             console.log("response",res.data.data);
            // const {results} = res.data.data;
             //console.log("Response data",res.data.data);
