@@ -108,7 +108,10 @@ useEffect (()=>{
 		setLrgImg(res.data.data[0].image);
 		//}
 	})
-	API.post('BuyerInventoryCarList/condition').then(res=>{
+	let rq={
+		buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id
+	};
+	API.post('BuyerInventoryCarList/condition',rq).then(res=>{
 		console.log("response",res.data.data);
 	   // const {results} = res.data.data;
 		//console.log("Response data",res.data.data);
@@ -116,7 +119,8 @@ useEffect (()=>{
 		setCarInventoryDetail(res.data.data);
 		console.log("car Inventory Detail",res.data.data);
 		const req={
-			"seller_id":res.data.data[0].seller_id
+			"seller_id":res.data.data[0].seller_id,
+			buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id
 		};
 		API.post('SellerCarList/condition',req).then(res=>{
 			console.log("response",res.data.data);

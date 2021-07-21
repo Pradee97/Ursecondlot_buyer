@@ -80,7 +80,7 @@ const togglePopup = () => {
 								<div class="inner">
 									<div class="form-group input-group">
 										<input type="checkbox" id="florida"/>
-										<label for="lorida">Florida</label>
+										<label for="florida">Florida</label>
 									</div>
 									<div class="form-group input-group ">
 										<input type="checkbox" id="california"/>
