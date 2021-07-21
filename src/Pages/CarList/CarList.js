@@ -23,7 +23,9 @@ const CarList = () => {
 
     console.log("=======>",userDetails.user_id)
     const getrecentCarList=()=>{
-        //console.log()
+        let request={
+            buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id
+        }
         API.post('BuyerNewCarList/condition').then(res=>{
             console.log("response",res.data.data);
            // const {results} = res.data.data;
@@ -35,6 +37,9 @@ const CarList = () => {
         })
     }
     const getInventoryCarList=()=>{
+        let request={
+            buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id
+        }
         API.post('BuyerInventoryCarList/condition').then(res=>{
             console.log("response",res.data.data);
            // const {results} = res.data.data;
@@ -61,6 +66,23 @@ const CarList = () => {
             console.log("Car Fav Inventory Detail",res.data.data);
         })
     }
+
+    const addFavourite=(carid)=>{
+        let request={
+            buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+            car_id:carid,
+            active:0,
+            buyer_favourite_id:3
+        }
+        console.log("request",request);
+        API.post('buyer_favourite/add',request).then(res=>{
+            // setaddFavourite(res.data.data);
+            console.log("add Fav Inventory Detail",res.data.data);
+        })
+    }
+
+    
+
     useEffect(() => {
         getrecentCarList();
         getInventoryCarList();
@@ -86,7 +108,7 @@ const CarList = () => {
                                 <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div className="car-item">
                                         <div className="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"}  />
+                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} onClick={()=>{addFavourite(item.car_id)}} />
                                         </div>
                                         <img className="carImg" src={item.image}  onClick={()=>{redirectpage(item.car_id)}}/>
                                         <div className="cars-tag">
