@@ -67,12 +67,24 @@ const CarList = () => {
             console.log("Car Fav Inventory Detail",res.data.data);
         })
     }
+    const removeFav=(carid)=>{
+        let request={
+            buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+            car_id:carid,
+            active:0
+        }
+        console.log("Reoving from fav list",request);
+        API.post('buyer_favourite/add',request).then(res=>{
+            // setaddFavourite(res.data.data);
+            console.log("Remove Fav Inventory Detail",res.data.data);
+        })
+    }
 
     const addFavourite=(carid)=>{
         let request={
             buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
             car_id:carid,
-            active:1,
+            active:1
         }
         console.log("request",request);
         API.post('buyer_favourite/add',request).then(res=>{
@@ -108,7 +120,8 @@ const CarList = () => {
                                 <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div className="car-item">
                                         <div className="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} onClick={()=>{addFavourite(item.car_id)}} />
+
+                                            <img src={(carDetail.isFavourite===0)? process.env.PUBLIC_URL +"/images/lock.svg":process.env.PUBLIC_URL +"/images/fees.svg"} onClick={()=>(carDetail.isFavourite===0)?addFavourite(item.car_id):removeFav(item.car_id)} />
                                         </div>
                                         <img className="carImg" src={item.image}  onClick={()=>{redirectpage(item.car_id)}}/>
                                         <div className="cars-tag">

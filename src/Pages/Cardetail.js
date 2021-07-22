@@ -23,7 +23,7 @@ import cardetail4 from '../assets/img/cardetail4.jpg'
 import cardetail5 from '../assets/img/cardetail5.jpg'
 
 const Cardetail = () =>{
-
+	const history = useHistory();
 	
 // $( document ).ready(function() {
 // 	$('.slider-for').slick({
@@ -77,6 +77,12 @@ const [carInventoryDetail,setCarInventoryDetail]=useState([]);
 const { id } = useParams();
 const [sellerCarDetail,setSellerCarDetail]=useState([]);
 const [lrgImg,setLrgImg]=useState("");
+
+const redirectpage=(pathid)=>{
+	//e.preventDefault();
+	history.push("/MoreCarFromSeller/"+pathid);
+}
+
 function img1Click(img){
 	loadLrgImg(img.target.src);
 }
@@ -321,6 +327,7 @@ return(
         <div class="section-title">
           <h2>More cars from the dealer</h2>          
         </div>
+
 		<div class="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
 		{sellerCarDetail.length > 0 ? sellerCarDetail
                             .map((moreCar,index) =>
@@ -330,7 +337,7 @@ return(
 				<div class="cars-lock">
 				<img src={lock} class="img-fluid" alt="..."/>
 			  	</div>
-              	<img src={cars01} class="img-fluid" alt="..."/>
+              	<img src={moreCar.image} class="img-fluid" alt="..."/>
 				<div class="cars-tag">
 					<h4>Best deal</h4>
 				</div>
@@ -351,9 +358,11 @@ return(
 		 		
 		  ):""}
 		  </div>
+		  {sellerCarDetail.length > 0 ? sellerCarDetail.slice(0,1)
+                            .map((moreCar,index) =>
 		<div class="text-center">
-                <a href="#" class="more-btn">View More<i class="bx bx-chevron-right"></i></a>
-              </div>
+                <a href="JavaScript:void(0)" onClick={()=>{redirectpage(moreCar.seller_id)}} class="more-btn">View More<i class="bx bx-chevron-right"></i></a>
+              </div>):""}
 		</div>
     </div>
 	

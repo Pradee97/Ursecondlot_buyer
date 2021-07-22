@@ -58,6 +58,7 @@ import SuggestedCars from './Pages/SuggestedCars';
 import recentcars from './Pages/RecentlyAddedCars';
 import inventoryCars from './Pages/InventoryCars';
 import InventoryCars from './Pages/InventoryCars';
+import MoreCarFromSeller from './Pages/MoreCarFromSeller';
 function AppRouter() {
 
   const timeout = 900000;
@@ -121,9 +122,9 @@ function AppRouter() {
               <Route  path="/transport" component={Transport}/>
               <Route  path="/manageaccount" component={ManageAccount}/>
               <Route  path="/lotfee" component={LotFee}/>
-              <Route path="/suggestedcars" component={SuggestedCars}/>
-              <Route path="/Recentlyaddedcars" component={recentcars}/>
-              <Route path="/InventoryCars" component={InventoryCars}/>
+              <Route  path="/suggestedcars" component={SuggestedCars}/>
+              <Route  path="/Recentlyaddedcars" component={recentcars}/>
+              <Route  path="/InventoryCars" component={InventoryCars}/>
               <Route  path="/notification" component={Notification}/>
               <Route  path="/payment" component={Payment}/>
               <Route  path="/paymentinfo" component={PaymentInfo}/>
@@ -146,6 +147,8 @@ function AppRouter() {
               <Route path="/Makeurbid" component={MakeurBid}/>
               <Route path="/Inspection" component={Inspection}/>
               <Route path="/CarDetail/:id" component={Cardetail}/>
+              <Route path="/MoreCarFromSeller/:id" component={MoreCarFromSeller}/>
+
 
             </PrivateRoute>       
           </Switch>
