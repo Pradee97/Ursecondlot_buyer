@@ -8,7 +8,10 @@ const InventoryCars = () => {
     const [carInventoryDetail,setCarInventoryDetail]=useState("");
     const history = useHistory();
     const getInventoryCarList=()=>{
-        API.post('BuyerInventoryCarList/condition').then(res=>{
+        let request={
+            buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id
+        }
+        API.post('BuyerInventoryCarList/condition',request).then(res=>{
             console.log("response",res.data.data);
            // const {results} = res.data.data;
             //console.log("Response data",res.data.data);
