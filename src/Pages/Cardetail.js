@@ -337,7 +337,7 @@ return(
 				<div class="cars-lock">
 				<img src={lock} class="img-fluid" alt="..."/>
 			  	</div>
-              	<img src={cars01} class="img-fluid" alt="..."/>
+              	<img src={moreCar.image} class="img-fluid" alt="..."/>
 				<div class="cars-tag">
 					<h4>Best deal</h4>
 				</div>

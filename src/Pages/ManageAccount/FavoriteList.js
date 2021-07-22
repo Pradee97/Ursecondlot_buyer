@@ -55,7 +55,7 @@ useEffect(() => {
                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                   <div class="car-item">
                     <div class="cars-lock">
-                      <img src={lock} class="img-fluid" alt="..." />
+                      <img src={(carFavInventoryDetail.isFavourite===0)? lock : speedometer}  class="img-fluid" alt="..." />
                     </div>
                         <img src={cars01} class="img-fluid" alt="..." />
                         <div class="cars-tag">
