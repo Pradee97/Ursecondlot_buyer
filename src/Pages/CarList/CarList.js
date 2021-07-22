@@ -72,8 +72,7 @@ const CarList = () => {
         let request={
             buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
             car_id:carid,
-            active:0,
-            buyer_favourite_id:3
+            active:1,
         }
         console.log("request",request);
         API.post('buyer_favourite/add',request).then(res=>{
