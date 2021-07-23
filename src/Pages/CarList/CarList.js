@@ -162,6 +162,7 @@ const CarList = () => {
                                         <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>:""}
+                                        
                                         <div className="cars-content">
                                             <h3><a href="#">{item.make} ({item.model} model)</a></h3>
                                             <div className="d-flex align-items-center mb-3">
