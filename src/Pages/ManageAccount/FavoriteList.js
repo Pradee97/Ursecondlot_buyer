@@ -4,12 +4,14 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import ls from 'local-storage';
 import API from "../../Services/BaseService";
-import lock from '../../assets/img/lock.svg';
 import cars01 from '../../assets/img/cars01.png';
 import speedometer from '../../assets/img/speedometer.svg';
 import gasolinePump from '../../assets/img/gasolinePump.svg';
 import appstore from '../../assets/img/appstore.png';
 import googleplay from '../../assets/img/googleplay.png';
+import lock from '../../assets/img/lock.svg';
+import locked from '../../assets/img/locked.svg';
+import Loading from '../../Component/Loading/Loading';
 
 
 
@@ -18,25 +20,53 @@ const Favoritelist = () => {
   const history = useHistory();
   let userDetails = ls.get('userDetails');
   const [carFavInventoryDetail,setFavCarInventoryDetail]=useState("");
+  const [loading,setLoading] = useState(true);
+  const [favCarFlag,setFavCarFlag]=useState(false);
 
   console.log("=======>",userDetails.user_id)
+
   const getFavCarList=()=>{
+
     let request={
         buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id
     }
+
     console.log("request",request);
     API.post('BuyerFavoriteCarList/condition',request).then(res=>{
         setFavCarInventoryDetail(res.data.data);
         console.log("Car Fav Inventory Detail",res.data.data);
-    })
+        setLoading(false);
+    }).catch(err=>{console.log(err);});
+}
+
+const addRemoveFavourite=(carid,state,flag)=>{
+  console.log("inside addremove");
+
+  let request={
+      buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+      car_id:carid,
+      active: !state
+  }
+  console.log("request",request);
+  API.post('buyer_favourite/add',request).then(res=>{
+      // setaddFavourite(res.data.data);
+      console.log("add Fav Inventory Detail",res.data.data);
+
+      if(flag==='fav'){
+          setFavCarFlag(!favCarFlag)
+
+      }
+      
+  })
 }
 
 useEffect(() => {
   getFavCarList();
-},[]);
+},[favCarFlag]);
 
   return (
       <div>
+        {loading?<Loading/>:
         <main id="main" class="inner-page">
         <div class="back-btn">
                         <a class="back-btn-primary" href="/carlist"><i class="bx bx-chevron-left"></i> Back</a>
@@ -55,9 +85,9 @@ useEffect(() => {
                 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                   <div class="car-item">
                     <div class="cars-lock">
-                      <img src={(carFavInventoryDetail.isFavourite===0)? lock : speedometer}  class="img-fluid" alt="..." />
+                    <img src={(item.isFavourite===0)? lock : locked}  onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'fav')} />
                     </div>
-                        <img src={cars01} class="img-fluid" alt="..." />
+                        <img src={item.image} class="img-fluid" alt="..." />
                         <div class="cars-tag">
                           <h4>Best deal</h4>
                         </div>
@@ -98,7 +128,7 @@ useEffect(() => {
           </section>
 
         </main>
-       
+}
       </div>  
     )
 }
