@@ -4,6 +4,8 @@ import Popup from '../../Component/Popup/Popup';
 import Makeurbid from '../Makeurbid';
 import '../../assets/css/responsive.css';
 import API from "../../Services/BaseService";
+import lock from '../../assets/img/lock.svg';
+import locked from '../../assets/img/locked.svg';
 import { useHistory, useParams } from "react-router-dom";
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -14,6 +16,9 @@ const CarList = () => {
     const [carDetail,setCarDetail]=useState([]);
     const [carInventoryDetail,setCarInventoryDetail]=useState("");
     const [carFavInventoryDetail,setFavCarInventoryDetail]=useState("");
+    const [recentCarFlag,setrecentCarFlag]=useState(false);
+    const [inventoryCarFlag,setInventoryCarFlag]=useState(false);
+    const [favCarFlag,setFavCarFlag]=useState(false);
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -35,6 +40,7 @@ const CarList = () => {
             setCarDetail(res.data.data);
             console.log("car Detail",res.data.data);
             //}
+            //setrecentCarFlag(!recentCarFlag)
         })
     }
     const getInventoryCarList=()=>{
@@ -49,6 +55,7 @@ const CarList = () => {
                 setCarInventoryDetail(res.data.data);
             console.log("car Inventory Detail",res.data.data);
             //}
+            //setInventoryCarFlag(!inventoryCarFlag)
         })
     }
 
@@ -65,6 +72,7 @@ const CarList = () => {
         API.post('BuyerFavoriteCarList/condition',request).then(res=>{
             setFavCarInventoryDetail(res.data.data);
             console.log("Car Fav Inventory Detail",res.data.data);
+            //setFavCarFlag(!favCarFlag)
         })
     }
     const removeFav=(carid)=>{
@@ -84,12 +92,37 @@ const CarList = () => {
         let request={
             buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
             car_id:carid,
-            active:1
+            active:0
+        }
+        console.log("Reoving from fav list",request);
+        API.post('buyer_favourite/add',request).then(res=>{
+            // setaddFavourite(res.data.data);
+            console.log("Remove Fav Inventory Detail",res.data.data);
+        })
+    }
+
+    const addRemoveFavourite=(carid,state,flag)=>{
+        console.log("inside addremove");
+        let request={
+            buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+            car_id:carid,
+            active: !state
         }
         console.log("request",request);
         API.post('buyer_favourite/add',request).then(res=>{
             // setaddFavourite(res.data.data);
             console.log("add Fav Inventory Detail",res.data.data);
+
+            if(flag==='inv'){
+                setInventoryCarFlag(!inventoryCarFlag)
+            }
+            else if(flag==='fav'){
+                setFavCarFlag(!favCarFlag)
+
+            }
+            else if(flag==='recent'){
+                setrecentCarFlag(!recentCarFlag)
+            }
         })
     }
 
@@ -100,9 +133,26 @@ const CarList = () => {
         getInventoryCarList();
         getFavCarList();
 
-
     },[]);
+
     
+    useEffect(() => {
+        getrecentCarList();
+        
+    },[recentCarFlag]);
+
+    
+    useEffect(() => {
+        
+        getInventoryCarList();
+
+    },[inventoryCarFlag]);
+    useEffect(() => {
+        
+        getFavCarList();
+
+
+    },[favCarFlag]);
 
     return (
        
@@ -121,7 +171,8 @@ const CarList = () => {
                                     <div className="car-item">
                                         <div className="cars-lock">
 
-                                            <img src={(carDetail.isFavourite===0)? process.env.PUBLIC_URL +"/images/lock.svg":process.env.PUBLIC_URL +"/images/fees.svg"} onClick={()=>(carDetail.isFavourite===0)?addFavourite(item.car_id):removeFav(item.car_id)} />
+                                            {/* <img src={(item.isFavourite===0)? locked : lock} onClick={()=>(item.isFavourite===0)?addFavourite(item.car_id):removeFav(item.car_id)} /> */}
+                                            <img src={(item.isFavourite===0)? locked : lock} onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'recent')} />
                                         </div>
                                         <img className="carImg" src={item.image}  onClick={()=>{redirectpage(item.car_id)}}/>
                                         <div className="cars-tag">
@@ -163,10 +214,12 @@ const CarList = () => {
                                 <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div className="car-item">
                                         <div className="cars-lock">
-                                            <img  src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
+                                        {/* <img src={(item.isFavourite===0)? lock : locked} onClick={()=>(item.isFavourite===0)?addFavourite(item.car_id):removeFav(item.car_id)} /> */}
+                                       
+                                    <img src={(item.isFavourite===0)? lock : locked}  onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'inv')} />
                                         </div>
-                                        <a href="/Cardetail">
-                                        <img className="carImg" src={item.image} className="carImg" alt="..." /></a>
+                                        
+                                        <img className="carImg" src={item.image} onClick={()=>{redirectpage(item.car_id)}} className="carImg" alt="..." />
                                         <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
@@ -188,7 +241,7 @@ const CarList = () => {
                                 </div>
 
                             <div className="text-center">
-                                <a href="/InventoryCars" className="more-btn">See More Make Search <i className="bx bx-chevron-right"></i></a>
+                                <a href="/InventoryCars" className="more-btn">View More<i className="bx bx-chevron-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -206,10 +259,13 @@ const CarList = () => {
                                 <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div className="car-item">
                                         <div className="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
+                                        <img src={(item.isFavourite===0)? lock : locked}  onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'recent')} />
+                                        {/* onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'fav')}  */}
+                                        {/* <img src={(carDetail.isFavourite===0)? lock : locked} onClick={()=>(carDetail.isFavourite===0)?addFavourite(item.car_id):removeFav(item.car_id)} /> */}
+
                                         </div>
-                                        <a href="/Cardetail">
-                                        <img className="carImg" src={item.image} alt="..." /></a>
+                                        
+                                        <img className="carImg" src={item.image} onClick={()=>{redirectpage(item.car_id)}} alt="..." />
                                         <div className="cars-tag">
                                             <h4>Best deal</h4>
                                         </div>
@@ -230,7 +286,7 @@ const CarList = () => {
                                 </div>):""}
                                 </div>
                             <div className="text-center">
-                                <a href="/recentlyAddedCars" className="more-btn">See More Make Search <i className="bx bx-chevron-right"></i></a>
+                                <a href="/recentlyAddedCars" className="more-btn">View More<i className="bx bx-chevron-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -249,9 +305,9 @@ const CarList = () => {
                                 <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div className="car-item">
                                         <div className="cars-lock">
-                                            <img src={process.env.PUBLIC_URL +"/images/lock.svg"} className="img-fluid" alt="..." />
+                                        <img src={(item.isFavourite===0)? lock : locked}  onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'fav')} />
                                         </div>
-                                        <a href="/Cardetail"><img src={process.env.PUBLIC_URL +"/images/cars01.png"}className="carImg" alt="..." /></a>
+                                        <img src={item.image} onClick={()=>{redirectpage(item.car_id)}} className="carImg" alt="..." />
 
                                         <div className="cars-content">
                                             <h3><a href="#">View Details</a></h3>
@@ -263,7 +319,7 @@ const CarList = () => {
 
 
                         <div className="text-center">
-                            <a href="/favorite" className="more-btn">View Favorite List <i className="bx bx-chevron-right"></i></a>
+                            <a href="/favorite" className="more-btn">View More <i className="bx bx-chevron-right"></i></a>
                         </div>
                     </div>
                 
