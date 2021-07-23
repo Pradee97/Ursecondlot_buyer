@@ -206,7 +206,7 @@ return(
 									<p class="details"><img src={speedometer}  alt=""/><span>{carDetail[0].miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
 									<p class="details"><img src={gasolinePump} alt=""/><span>{carDetail[0].fuel_type}</span></p>
 							</div>
-							<p><span class="dealertaglines">Message From The Dealer-</span> {carDetail[0].internal_notes}</p>
+							<p><span class="dealertaglines">Message From The Dealer-</span> {carDetail[0].dealer_message}</p>
 		        		</div>
 	        			
 	        			<div class="row">

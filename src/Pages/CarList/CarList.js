@@ -9,9 +9,12 @@ import locked from '../../assets/img/locked.svg';
 import { useHistory, useParams } from "react-router-dom";
 import { useState } from 'react';
 import { useEffect } from 'react';
+import Loading from"../../Component/Loading/Loading";
+
 
 const CarList = () => {
     const history = useHistory();
+    const [loading,setLoading] = useState(true);
     let userDetails = ls.get('userDetails');
     const [carDetail,setCarDetail]=useState([]);
     const [carInventoryDetail,setCarInventoryDetail]=useState("");
@@ -39,9 +42,10 @@ const CarList = () => {
             //if(results.length>0){
             setCarDetail(res.data.data);
             console.log("car Detail",res.data.data);
+            setLoading(false);
             //}
             //setrecentCarFlag(!recentCarFlag)
-        })
+        }) .catch(err => { console.log(err); });
     }
     const getInventoryCarList=()=>{
         let request={
@@ -54,9 +58,10 @@ const CarList = () => {
             //if(results.length>0){
                 setCarInventoryDetail(res.data.data);
             console.log("car Inventory Detail",res.data.data);
+            setLoading(false);
             //}
             //setInventoryCarFlag(!inventoryCarFlag)
-        })
+        }).catch(err=>{console.log(err);});
     }
 
     const redirectpage=(pathid)=>{
@@ -72,35 +77,11 @@ const CarList = () => {
         API.post('BuyerFavoriteCarList/condition',request).then(res=>{
             setFavCarInventoryDetail(res.data.data);
             console.log("Car Fav Inventory Detail",res.data.data);
+            setLoading(false);
             //setFavCarFlag(!favCarFlag)
-        })
+        }).catch(err=>{console.log(err);});
     }
-    const removeFav=(carid)=>{
-        let request={
-            buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
-            car_id:carid,
-            active:0
-        }
-        console.log("Reoving from fav list",request);
-        API.post('buyer_favourite/add',request).then(res=>{
-            // setaddFavourite(res.data.data);
-            console.log("Remove Fav Inventory Detail",res.data.data);
-        })
-    }
-
-    const addFavourite=(carid)=>{
-        let request={
-            buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
-            car_id:carid,
-            active:0
-        }
-        console.log("Reoving from fav list",request);
-        API.post('buyer_favourite/add',request).then(res=>{
-            // setaddFavourite(res.data.data);
-            console.log("Remove Fav Inventory Detail",res.data.data);
-        })
-    }
-
+   
     const addRemoveFavourite=(carid,state,flag)=>{
         console.log("inside addremove");
         let request={
@@ -157,7 +138,9 @@ const CarList = () => {
     return (
        
             <div>
+                {loading?<Loading/>:
                 <main id="main" className="inner-page carList">
+                     
                     <div id="suggested-cars" className="suggested-cars">
                         <div className="container-fluid aos-init aos-animate" data-aos="fade-up">
                             <div className="section-title">
@@ -175,9 +158,10 @@ const CarList = () => {
                                             <img src={(item.isFavourite===0)? locked : lock} onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'recent')} />
                                         </div>
                                         <img className="carImg" src={item.image}  onClick={()=>{redirectpage(item.car_id)}}/>
+                                        {item.isbestSale?
                                         <div className="cars-tag">
                                             <h4>Best deal</h4>
-                                        </div>
+                                        </div>:""}
                                         <div className="cars-content">
                                             <h3><a href="#">{item.make} ({item.model} model)</a></h3>
                                             <div className="d-flex align-items-center mb-3">
@@ -220,9 +204,10 @@ const CarList = () => {
                                         </div>
                                         
                                         <img className="carImg" src={item.image} onClick={()=>{redirectpage(item.car_id)}} className="carImg" alt="..." />
+                                        {item.isbestSale?
                                         <div className="cars-tag">
                                             <h4>Best deal</h4>
-                                        </div>
+                                        </div>:""}
                                         <div className="cars-content">
                                             <h3><a href="#">{item.make} ({item.model} model)</a></h3>
                                             <div className="d-flex align-items-center mb-3">
@@ -266,9 +251,10 @@ const CarList = () => {
                                         </div>
                                         
                                         <img className="carImg" src={item.image} onClick={()=>{redirectpage(item.car_id)}} alt="..." />
+                                        {item.isbestSale?
                                         <div className="cars-tag">
                                             <h4>Best deal</h4>
-                                        </div>
+                                        </div>:""}
                                         <div className="cars-content">
                                             <h3><a href="#">{item.make} ({item.model} model)</a></h3>
                                             <div className="d-flex align-items-center mb-3">
@@ -322,7 +308,7 @@ const CarList = () => {
                             <a href="/favorite" className="more-btn">View More <i className="bx bx-chevron-right"></i></a>
                         </div>
                     </div>
-                
+        
 
 
 {isOpen && <Popup
@@ -333,11 +319,11 @@ const CarList = () => {
 		handleClose={togglePopup}
 	/>}
 
-               
+         
            
         
     </main>
-
+}
 	
 
         </div >
