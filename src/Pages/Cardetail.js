@@ -223,7 +223,7 @@ return(
 							<div class="row">
 							<div class="col-md-12">							
 								<div class="titlestatus mt-3">
-								<p><img src={book} alt=""/><span>Title status</span> - Title with the dealer</p>
+								<p><img src={book} alt=""/><span>Title status</span> -{carDetail[0].title_status}</p>
 								</div>
 	        				</div>
 							</div>
@@ -240,7 +240,7 @@ return(
 						<div class="row">
 	        				<div class="col-md-6">
 								<div class="product-count">
-									<h3>Used Car Dealer</h3>
+									<h3>{carDetail[0].dealer_type}</h3>
 									<div class=" d-flex align-items-center mb-3">
 										<p class="details"><img src={Path}  alt=""/><span>Illinois</span></p>
 										<p class="details"><img src="assets/img/persent.svg" alt=""/><span>15%</span></p>
