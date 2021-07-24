@@ -277,8 +277,8 @@ const CarList = () => {
                             </div>
                         </div>
                     </div>
-
-                    <div id="favorite-cars" className="favorite-cars">
+                    
+                    <div id="favorite-cars" className="recently-cars">
                         <div className="container-fluid aos-init aos-animate" data-aos="fade-up">
 
                             <div className="section-title">
@@ -289,18 +289,35 @@ const CarList = () => {
                             <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
                             {carFavInventoryDetail.length>0?carFavInventoryDetail
                             .map((item,index) =>
-                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                                    <div className="car-item">
-                                        <div className="cars-lock">
-                                        <img src={(item.isFavourite===0)? lock : locked}  onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'fav')} />
-                                        </div>
-                                        <img src={item.image} onClick={()=>{redirectpage(item.car_id)}} className="carImg" alt="..." />
+                            <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                            <div className="car-item">
+                                <div className="cars-lock">
+                                <img src={(item.isFavourite===0)? lock : locked}  onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'recent')} />
+                                {/* onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'fav')}  */}
+                                {/* <img src={(carDetail.isFavourite===0)? lock : locked} onClick={()=>(carDetail.isFavourite===0)?addFavourite(item.car_id):removeFav(item.car_id)} /> */}
 
-                                        <div className="cars-content">
-                                            <h3><a href="#">View Details</a></h3>
-                                        </div>
+                                </div>
+                                
+                                <img className="carImg" src={item.image} onClick={()=>{redirectpage(item.car_id)}} alt="..." />
+                                {item.isbestSale?
+                                <div className="cars-tag">
+                                    <h4>Best deal</h4>
+                                </div>:""}
+                                <div className="cars-content">
+                                    <h3><a href="#">{item.make} ({item.model} model)</a></h3>
+                                    <div className="d-flex align-items-center mb-3">
+                                        <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
                                     </div>
-                                </div>):""}
+
+                                    <div className="cars-prices">
+                                        <a className="cta-btns" href="#">${item.max_bid}</a>
+                                        <a className="cta-btns-primary" href="#">Make Bid</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>):""}
                                 </div>
                         </div>
 
