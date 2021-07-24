@@ -119,6 +119,7 @@ const CarList = () => {
     
     useEffect(() => {
         getrecentCarList();
+        getFavCarList();
         
     },[recentCarFlag]);
 
@@ -126,6 +127,7 @@ const CarList = () => {
     useEffect(() => {
         
         getInventoryCarList();
+        getFavCarList();
 
     },[inventoryCarFlag]);
     useEffect(() => {
