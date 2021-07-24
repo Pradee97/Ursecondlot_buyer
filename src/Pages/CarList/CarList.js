@@ -289,7 +289,7 @@ const CarList = () => {
                            
 
                             <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
-                            {carFavInventoryDetail.length>0?carFavInventoryDetail
+                            {carFavInventoryDetail.length>0?carFavInventoryDetail.slice(0,4)
                             .map((item,index) =>
                             <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                             <div className="car-item">

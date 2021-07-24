@@ -21,6 +21,7 @@ import cardetail2 from '../assets/img/cardetail2.jpg'
 import cardetail3 from '../assets/img/cardetail3.jpg'
 import cardetail4 from '../assets/img/cardetail4.jpg'
 import cardetail5 from '../assets/img/cardetail5.jpg'
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 const Cardetail = () =>{
 	const history = useHistory();
@@ -78,6 +79,8 @@ const [carInventoryDetail,setCarInventoryDetail]=useState([]);
 const { id } = useParams();
 const [sellerCarDetail,setSellerCarDetail]=useState([]);
 const [lrgImg,setLrgImg]=useState("");
+const [copied, setCopied] = useState(false);
+const [data, setData] = useState("");
 
 const redirectpage=(pathid)=>{
 	//e.preventDefault();
@@ -226,9 +229,15 @@ return(
 								
 									<img src={car}  alt=""/>
 									<span>{carDetail[0].engine}</span>
-									<img src={book} onClick={copytoclipboard} alt=""/> 
+									<CopyToClipboard text={carDetail[0].engine} onCopy={() => setCopied(true)}>
+									<img src={book} onClick={copytoclipboard} alt=""/>
+									</CopyToClipboard>
+									
+									{/* <img src={book} onClick={copytoclipboard} alt=""/>  */}
 									<img src={barcode}  alt=""/>
+									
 								</div>
+								{copied ? <p>Copied !</p> : ""}
 							</div>
 						</div>
 							
