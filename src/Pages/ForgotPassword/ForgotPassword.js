@@ -37,6 +37,7 @@ const ForgotPassword = () => {
         //event.preventDefault();
         setPasswordError("")
         setNewPasswordError("")
+        setErrorMessage("")
 
         if(!password){
             setPasswordError("password is required")

@@ -59,6 +59,7 @@ import recentcars from './Pages/RecentlyAddedCars';
 import inventoryCars from './Pages/InventoryCars';
 import InventoryCars from './Pages/InventoryCars';
 import MoreCarFromSeller from './Pages/MoreCarFromSeller';
+import Checkout from './Pages/Checkout';
 function AppRouter() {
 
   const timeout = 900000;
@@ -148,6 +149,7 @@ function AppRouter() {
               <Route path="/Inspection" component={Inspection}/>
               <Route path="/CarDetail/:id" component={Cardetail}/>
               <Route path="/MoreCarFromSeller/:id" component={MoreCarFromSeller}/>
+              <Route path="/checkout" component={Checkout}/>
 
 
             </PrivateRoute>       
