@@ -155,7 +155,7 @@ const CarList = () => {
                                         <div className="cars-lock">
 
                                             {/* <img src={(item.isFavourite===0)? locked : lock} onClick={()=>(item.isFavourite===0)?addFavourite(item.car_id):removeFav(item.car_id)} /> */}
-                                            <img src={(item.isFavourite===0)? locked : lock} onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'recent')} />
+                                            <img src={(item.isFavourite===0)? lock : locked} onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'recent')} />
                                         </div>
                                         <img className="carImg" src={item.image}  onClick={()=>{redirectpage(item.car_id)}}/>
                                         {item.isbestSale?

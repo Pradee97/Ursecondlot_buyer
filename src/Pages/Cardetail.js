@@ -210,8 +210,11 @@ return(
 		        		</div>
 	        			
 	        			<div class="row">
-	        				<div class="col-md-12 carpoints">							  
+						
+	        				<div class="col-md-12 carpoints">
+							<label   className= "input-has-value">VIN Number</label>		  
 								<div class="carpoint">
+								
 									<img src={car}  alt=""/>
 									<span>{carDetail[0].engine}</span>
 									<img src={book}  alt=""/> 
@@ -243,7 +246,7 @@ return(
 									<h3>{carDetail[0].dealer_type}</h3>
 									<div class=" d-flex align-items-center mb-3">
 										<p class="details"><img src={Path}  alt=""/><span>Illinois</span></p>
-										<p class="details"><img src="assets/img/persent.svg" alt=""/><span>15%</span></p>
+										
 										<p class="details"><img src="assets/img/road-with-broken-line.svg" alt=""/><span>{carDetail[0].mileage} M</span></p>
 									</div>	        										
 								</div>
