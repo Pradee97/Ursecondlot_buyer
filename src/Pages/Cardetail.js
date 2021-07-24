@@ -71,6 +71,7 @@ const Cardetail = () =>{
 // 		]
 // 	});
 // 	});
+const [copySuccess, setCopySuccess] = useState('');
 const [sellerId,setSellerId]=useState("");
 const [carDetail ,setCarDetail] = useState([]) 
 const [carInventoryDetail,setCarInventoryDetail]=useState([]);
@@ -82,7 +83,14 @@ const redirectpage=(pathid)=>{
 	//e.preventDefault();
 	history.push("/MoreCarFromSeller/"+pathid);
 }
-
+function copytoclipboard(e) {
+    //textAreaRef.current.select();
+    document.execCommand('copy');
+    // This is just personal preference.
+    // I prefer to not show the the whole text area selected.
+    e.target.focus();
+    setCopySuccess('Copied!');
+  };
 function img1Click(img){
 	loadLrgImg(img.target.src);
 }
@@ -153,6 +161,7 @@ return(
 			<div class="back-btn">
 				<a class="back-btn-primary" href="/carlist"><i class="bx bx-chevron-left"></i> Back</a>
 			</div>
+
 	        <div class="row">
 			{carDetail.length>0 && <div class="col-md-6">
 
@@ -201,7 +210,7 @@ return(
 	        		<div class="product-dtl">
         				<div class="product-info">
 		        			<div class="product-name">{carDetail[0].make} {carDetail[0].vehicle_type}({carDetail[0].model})</div>
-							<p class="productdes">Lorem Ipsum Is Simply Dummy</p>
+							<p class="productdes">{carDetail[0].car_description}</p>
 		        			<div class="d-flex align-items-center mb-3">
 									<p class="details"><img src={speedometer}  alt=""/><span>{carDetail[0].miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
 									<p class="details"><img src={gasolinePump} alt=""/><span>{carDetail[0].fuel_type}</span></p>
@@ -217,7 +226,7 @@ return(
 								
 									<img src={car}  alt=""/>
 									<span>{carDetail[0].engine}</span>
-									<img src={book}  alt=""/> 
+									<img src={book} onClick={copytoclipboard} alt=""/> 
 									<img src={barcode}  alt=""/>
 								</div>
 							</div>
