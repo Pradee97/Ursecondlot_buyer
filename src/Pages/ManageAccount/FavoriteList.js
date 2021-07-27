@@ -23,8 +23,7 @@ const Favoritelist = () => {
   const [loading,setLoading] = useState(true);
   const [favCarFlag,setFavCarFlag]=useState(false);
   const [data,setData]=useState("");
-  const [repDetails, setRepDetails] = useState("");
-  const [totalRecords, setTotalRecords] = useState(0);
+  
 
   console.log("=======>",userDetails.user_id)
 
@@ -76,11 +75,11 @@ const OnSearch = (e) => {
 const onKeydowninSearch = (event) => {
   if (event.key === 'Enter') {
       // setCurrentPage(1)
-      searchRep();
+      searchFav();
     }
 }
 
-const searchRep = () => {
+const searchFav = () => {
   console.log("/////////",data)
   let request={
     buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
@@ -119,7 +118,7 @@ const searchRep = () => {
                 <div className="input-group searchbox ">
                     <input type="text"  className="form-control border"  placeholder="model/make" onKeyDown={onKeydowninSearch} onChange={OnSearch}></input>
                     <span className="input-group-append" >
-                    <button className="btn ms-n5" type="button" id="btntest" name="btntest" onClick={searchRep} ><i className='bx bx-search'></i></button>
+                    <button className="btn ms-n5" type="button" id="btntest" name="btntest" onClick={searchFav} ><i className='bx bx-search'></i></button>
                     </span>                                
                 </div>
             </div>

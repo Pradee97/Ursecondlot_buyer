@@ -15,7 +15,8 @@ const InventoryCars = () => {
     const [carInventoryDetail,setCarInventoryDetail]=useState("");
     const [inventoryCarFlag,setInventoryCarFlag]=useState(false);
     const [loading,setLoading] = useState(true);
-    
+    const [data,setData]=useState("");
+
     const getInventoryCarList=()=>{
 
         let request={
@@ -63,6 +64,38 @@ const InventoryCars = () => {
        
     },[inventoryCarFlag]);
 
+    const OnSearch = (e) => {
+        setData(e.target.value)
+        console.log("/////////=====",e.target.value)
+      }
+      
+      const onKeydowninSearch = (event) => {
+        if (event.key === 'Enter') {
+            // setCurrentPage(1)
+            searchCarInventoryDetail();
+          }
+      }
+      
+      const searchCarInventoryDetail = () => {
+        console.log("/////////",data)
+        let request={
+          buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+          data: data
+            
+        }
+        API.post("BuyerInventoryCarSearch/condition",request)
+        .then((res)=>{
+           
+            setCarInventoryDetail(res.data.data);
+         
+        },
+        (error) => {
+            console.log(error);
+          }
+        )
+        .catch(err => { console.log(err); });
+      }
+
     return(
         <div>
             {loading?<Loading/>:
@@ -76,7 +109,14 @@ const InventoryCars = () => {
                             <div className="section-title">
                                 <h2>inventory</h2>
                             </div>
-
+                            <div className="filtersblock  col-lg-6 SalesRepsSearch  row" >
+                                <div className="input-group searchbox ">
+                                    <input type="text"  className="form-control border"  placeholder="model/make" onKeyDown={onKeydowninSearch} onChange={OnSearch}></input>
+                                    <span className="input-group-append" >
+                                    <button className="btn ms-n5" type="button" id="btntest" name="btntest" onClick={searchCarInventoryDetail} ><i className='bx bx-search'></i></button>
+                                    </span>                                
+                                </div>
+                            </div>
                             <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
                             {carInventoryDetail.length>0?carInventoryDetail
                             .map((item,index) =>
