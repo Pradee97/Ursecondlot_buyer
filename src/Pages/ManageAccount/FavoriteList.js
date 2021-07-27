@@ -22,6 +22,9 @@ const Favoritelist = () => {
   const [carFavInventoryDetail,setFavCarInventoryDetail]=useState("");
   const [loading,setLoading] = useState(true);
   const [favCarFlag,setFavCarFlag]=useState(false);
+  const [data,setData]=useState("");
+  const [repDetails, setRepDetails] = useState("");
+  const [totalRecords, setTotalRecords] = useState(0);
 
   console.log("=======>",userDetails.user_id)
 
@@ -33,7 +36,7 @@ const Favoritelist = () => {
 
     console.log("request",request);
     API.post('BuyerFavoriteCarList/condition',request).then(res=>{
-        setFavCarInventoryDetail(res.data.data);
+        setFavCarInventoryDetail(res.data.data);      
         console.log("Car Fav Inventory Detail",res.data.data);
         setLoading(false);
     }).catch(err=>{console.log(err);});
@@ -64,6 +67,39 @@ useEffect(() => {
   getFavCarList();
 },[favCarFlag]);
 
+
+const OnSearch = (e) => {
+  setData(e.target.value)
+  console.log("/////////=====",e.target.value)
+}
+
+const onKeydowninSearch = (event) => {
+  if (event.key === 'Enter') {
+      // setCurrentPage(1)
+      searchRep();
+    }
+}
+
+const searchRep = () => {
+  console.log("/////////",data)
+  let request={
+    buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+    data: data
+      
+  }
+  API.post("BuyerFavoriteCarSearch/condition",request)
+  .then((res)=>{
+     
+     setFavCarInventoryDetail(res.data.data);    
+   
+  },
+  (error) => {
+      console.log(error);
+    }
+  )
+  .catch(err => { console.log(err); });
+}
+
   return (
       <div>
         {loading?<Loading/>:
@@ -75,9 +111,19 @@ useEffect(() => {
             <div class="container-fluid aos-init aos-animate" data-aos="fade-up">
 
               <div class="section-title">
-                <h2>My Favorite Car List</h2>
+                <h2>My Favorite Car List  <img src={locked} /></h2>
               </div>
               
+
+              <div className="filtersblock  col-lg-6 SalesRepsSearch  row" >
+                <div className="input-group searchbox ">
+                    <input type="text"  className="form-control border"  placeholder="model/make" onKeyDown={onKeydowninSearch} onChange={OnSearch}></input>
+                    <span className="input-group-append" >
+                    <button className="btn ms-n5" type="button" id="btntest" name="btntest" onClick={searchRep} ><i className='bx bx-search'></i></button>
+                    </span>                                
+                </div>
+            </div>
+
               <div class="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
               
               {carFavInventoryDetail.length>0?carFavInventoryDetail
