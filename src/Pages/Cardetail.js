@@ -76,6 +76,7 @@ const [copySuccess, setCopySuccess] = useState('');
 const [sellerId,setSellerId]=useState("");
 const [carDetail ,setCarDetail] = useState([]) 
 const [carInventoryDetail,setCarInventoryDetail]=useState([]);
+const [otherDealerCarDetail,setOtherDealerCarDetail]=useState([]);
 const { id } = useParams();
 const [sellerCarDetail,setSellerCarDetail]=useState([]);
 const [lrgImg,setLrgImg]=useState("");
@@ -84,7 +85,17 @@ const [data, setData] = useState("");
 
 const redirectpage=(pathid)=>{
 	//e.preventDefault();
+	history.push("/carDetail/"+pathid);
+}
+
+const redirectpagemorecarseller=(pathid)=>{
+	//e.preventDefault();
 	history.push("/MoreCarFromSeller/"+pathid);
+}
+
+const redirectpagesimilarcar=(pathid)=>{
+	//e.preventDefault();
+	history.push("/similarCarFromSeller/"+pathid);
 }
 function copytoclipboard(e) {
     //textAreaRef.current.select();
@@ -108,6 +119,8 @@ function img3Click(img){
 function img4Click(img){
 	loadLrgImg(img.target.src);
 }
+
+
 function loadLrgImg(img){
 	setLrgImg(img);
 }
@@ -139,14 +152,25 @@ useEffect (()=>{
 			"seller_id":res.data.data[0].seller_id,
 			buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id
 		};
-		API.post('SellerCarList/condition',req).then(res=>{
-			console.log("response",res.data.data);
+		API.post('SellerCarList/condition',req).then(resp=>{
+			console.log("response",resp.data.data);
 		   // const {results} = res.data.data;
 			//console.log("Response data",res.data.data);
 			//if(results.length>0){
-				setSellerCarDetail(res.data.data);
-			console.log("Seller car Inventory Detail",res.data.data);
+				setSellerCarDetail(resp.data.data);
+			console.log("Seller car Inventory Detail",resp.data.data);
 			//}
+		})
+		const req_samecar={
+			"make":res.data.data[0].make,
+			buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id
+		}
+		console.log("other dealer car req",req_samecar);
+		API.post('OtherDealerCarList/condition',req_samecar).then(response=>{
+			console.log("otherdealercar list",response.data.data);
+			setOtherDealerCarDetail(response.data.data);
+			console.log("other dealer car req",req_samecar);
+			console.log("otherdealercar list",response.data.data);
 		})
 		//}
 	})
@@ -358,7 +382,7 @@ return(
 				<div class="cars-lock">
 				<img src={lock} class="img-fluid" alt="..."/>
 			  	</div>
-              	<img src={moreCar.image} class="img-fluid" alt="..."/>
+              	<img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id)}} class="img-fluid" alt="..."/>
 				<div class="cars-tag">
 					<h4>Best deal</h4>
 				</div>
@@ -382,7 +406,7 @@ return(
 		  {sellerCarDetail.length > 0 ? sellerCarDetail.slice(0,1)
                             .map((moreCar,index) =>
 		<div class="text-center">
-                <a href="JavaScript:void(0)" onClick={()=>{redirectpage(moreCar.seller_id)}} class="more-btn">View More<i class="bx bx-chevron-right"></i></a>
+                <a href="JavaScript:void(0)" onClick={()=>{redirectpagemorecarseller(moreCar.seller_id)}} class="more-btn">View More<i class="bx bx-chevron-right"></i></a>
               </div>):""}
 		</div>
     </div>
@@ -396,127 +420,38 @@ return(
         </div>
 
         <div class="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
-
-         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
-            <div class="car-item">
-			<div class="cars-lock">
-				<img src={lock} class="img-fluid" alt="..."/>
-			  </div>
-              <img src={cars01} class="img-fluid" alt="..."/>
-			  <div class="cars-tag">
-				<h4>Best deal</h4>
-			  </div>
-              <div class="cars-content">		
-			  <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                <div class="d-flex align-items-center mb-3">
-                  <p class="details"><img src={speedometer}  alt=""/><span>31,1241 m</span></p>
-                  {/* &nbsp;&nbsp;&nbsp;&nbsp; */}
-                  <p class="details"><img src={gasolinePump} alt=""/><span>Diesel</span></p>
-                </div>
+		{otherDealerCarDetail.length > 0 ? otherDealerCarDetail
+                            .map((moreCar,index) =>
+							<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+							<div class="car-item">
+								<div class="cars-lock">
+								<img src={lock} class="img-fluid" alt="..."/>
+								  </div>
+								  <img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id)}} class="img-fluid" alt="..."/>
+								<div class="cars-tag">
+									<h4>Best deal</h4>
+								</div>
+							  <div class="cars-content">		
+							  <h3><a href="#">{moreCar.make} {moreCar._type} ({moreCar.model} model)</a></h3>
+								<div class="d-flex align-items-center mb-3">
+								  <p class="details"><img src={speedometer}  alt=""/><span>{moreCar.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+								  <p class="details"><img src={gasolinePump} alt=""/><span>{moreCar.fuel_type}</span></p>
+								</div>
+								
+								<div class="cars-prices">
+									<a class="cta-btns" href="">${moreCar.min_bid}</a>
+									<a class="cta-btns-primary" href="/makeurbid">Make Bid</a>
+								</div>
+							  </div>
+							</div>
+						  </div>):""}
 				
-				<div class="cars-prices">
-					<a class="cta-btns" href="register.html">$1900</a>
-					<a class="cta-btns-primary" href="/makeurbid">Make Bid</a>
-				</div>
-              </div>
-            </div>
-          </div>
-		 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-            <div class="car-item">
-			<div class="cars-lock">
-				<img src={lock} class="img-fluid" alt="..."/>
-			  </div>
-              <img src={cars01} class="img-fluid" alt="..."/>
-			  <div class="cars-tag">
-				<h4>Best deal</h4>
-			  </div>
-              <div class="cars-content">		
-			  <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                <div class="d-flex align-items-center mb-3">
-                  <p class="details"><img src={speedometer}  alt=""/><span>31,1241 m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-                  <p class="details"><img src={gasolinePump} alt=""/><span>Diesel</span></p>
-                </div>
-				
-				<div class="cars-prices">
-					<a class="cta-btns" href="register.html">$1900</a>
-					<a class="cta-btns-primary" href="/makeurbid">Make Bid</a>
-				</div>
-              </div>
-            </div>
-          </div>
-		   <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-            <div class="car-item">
-			<div class="cars-lock">
-				<img src={lock} class="img-fluid" alt="..."/>
-			  </div>
-              <img src={cars01} class="img-fluid" alt="..."/>
-			  <div class="cars-tag">
-				<h4>Best deal</h4>
-			  </div>
-              <div class="cars-content">		
-			  <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                <div class="d-flex align-items-center mb-3">
-                  <p class="details"><img src={speedometer}  alt=""/><span>31,1241 m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-                  <p class="details"><img src={gasolinePump} alt=""/><span>Diesel</span></p>
-                </div>
-				
-				<div class="cars-prices">
-					<a class="cta-btns" href="register.html">$1900</a>
-					<a class="cta-btns-primary" href="/makeurbid">Make Bid</a>
-				</div>
-              </div>
-            </div>
-          </div>
-		   <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-            <div class="car-item">
-			<div class="cars-lock">
-				<img src={lock} class="img-fluid" alt="..."/>
-			  </div>
-              <img src={cars01} class="img-fluid" alt="..."/>
-			  <div class="cars-tag">
-				<h4>Best deal</h4>
-			  </div>
-              <div class="cars-content">		
-			  <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                <div class="d-flex align-items-center mb-3">
-                  <p class="details"><img src={speedometer}  alt=""/><span>31,1241 m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-                  <p class="details"><img src={gasolinePump} alt=""/><span>Diesel</span></p>
-                </div>
-				
-				<div class="cars-prices">
-					<a class="cta-btns" href="register.html">$1900</a>
-					<a class="cta-btns-primary" href="/makeurbid">Make Bid</a>
-				</div>
-              </div>
-            </div>
-          </div>
-		  <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-            <div class="car-item">
-			<div class="cars-lock">
-				<img src={lock} class="img-fluid" alt="..."/>
-			  </div>
-              <img src={cars01} class="img-fluid" alt="..."/>
-			  <div class="cars-tag">
-				<h4>Best deal</h4>
-			  </div>
-              <div class="cars-content">		
-			  <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                <div class="d-flex align-items-center mb-3">
-                  <p class="details"><img src={speedometer}  alt=""/><span>31,1241 m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-                  <p class="details"><img src={gasolinePump} alt=""/><span>Diesel</span></p>
-                </div>
-				
-				<div class="cars-prices">
-					<a class="cta-btns" href="register.html">$1900</a>
-					<a class="cta-btns-primary" href="/makeurbid">Make Bid</a>
-				</div>
-              </div>
-            </div>
-          </div>		
 		  </div>
+		  {otherDealerCarDetail.length > 0 ? otherDealerCarDetail.slice(0,1)
+                            .map((moreCar,index) =>
 		<div class="text-center">
-                <a href="#" class="more-btn">View More<i class="bx bx-chevron-right"></i></a>
-              </div>
+                <a href="#" class="more-btn"  onClick={()=>{redirectpagesimilarcar(carDetail[0].make)}} >View More<i class="bx bx-chevron-right"></i></a>
+              </div>):""}
 		</div>
     </div>
 

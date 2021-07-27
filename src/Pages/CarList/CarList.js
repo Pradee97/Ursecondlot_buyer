@@ -120,18 +120,20 @@ const CarList = () => {
     useEffect(() => {
         getrecentCarList();
         getFavCarList();
+        getInventoryCarList();
         
     },[recentCarFlag]);
 
     
     useEffect(() => {
-        
+        getrecentCarList();
         getInventoryCarList();
         getFavCarList();
 
     },[inventoryCarFlag]);
     useEffect(() => {
-        
+        getrecentCarList();
+        getInventoryCarList();
         getFavCarList();
 
 

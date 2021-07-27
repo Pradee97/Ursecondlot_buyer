@@ -56,6 +56,7 @@ import Chat from './Pages/Chat';
 import History from './Pages/ManageAccount/History';
 import SuggestedCars from './Pages/SuggestedCars';
 import recentcars from './Pages/RecentlyAddedCars';
+import SimilarCars from './Pages/similarCarFromSeller';
 import inventoryCars from './Pages/InventoryCars';
 import InventoryCars from './Pages/InventoryCars';
 import MoreCarFromSeller from './Pages/MoreCarFromSeller';
@@ -149,6 +150,7 @@ function AppRouter() {
               <Route path="/Inspection" component={Inspection}/>
               <Route path="/CarDetail/:id" component={Cardetail}/>
               <Route path="/MoreCarFromSeller/:id" component={MoreCarFromSeller}/>
+              <Route path="/SimilarCarFromSeller/:id" component={SimilarCars}/>
               <Route path="/checkout" component={Checkout}/>
 
 
