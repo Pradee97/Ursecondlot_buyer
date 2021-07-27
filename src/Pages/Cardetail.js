@@ -261,7 +261,7 @@ return(
 									<img src={barcode}  alt=""/>
 									
 								</div>
-								{copied ? <p>Copied !</p> : ""}
+								{/* {copied ? <p>Copied !</p> : ""} */}
 							</div>
 						</div>
 							

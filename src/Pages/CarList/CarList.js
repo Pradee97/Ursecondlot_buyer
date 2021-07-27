@@ -231,7 +231,7 @@ const CarList = () => {
                                 </div>
 
                             <div className="text-center">
-                                <a href="/InventoryCars" className="more-btn">View More<i className="bx bx-chevron-right"></i></a>
+                                <a href="/InventoryCars" className="more-btn">See More Make Search<i className="bx bx-chevron-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -277,7 +277,7 @@ const CarList = () => {
                                 </div>):""}
                                 </div>
                             <div className="text-center">
-                                <a href="/recentlyAddedCars" className="more-btn">View More<i className="bx bx-chevron-right"></i></a>
+                                <a href="/recentlyAddedCars" className="more-btn">See More Make Search<i className="bx bx-chevron-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -286,7 +286,7 @@ const CarList = () => {
                         <div className="container-fluid aos-init aos-animate" data-aos="fade-up">
 
                             <div className="section-title">
-                                <h2>favorite list</h2>
+                                <h2>favorite list  <img src={locked} /></h2>
                             </div>
                            
 
@@ -327,7 +327,7 @@ const CarList = () => {
 
 
                         <div className="text-center">
-                            <a href="/favorite" className="more-btn">View More <i className="bx bx-chevron-right"></i></a>
+                            <a href="/favorite" className="more-btn">View Favorite List  <i className="bx bx-chevron-right"></i></a>
                         </div>
                     </div>
         

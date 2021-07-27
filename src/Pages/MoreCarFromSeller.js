@@ -1,33 +1,22 @@
 import React, {useState, useEffect} from 'react';
-import $ from 'jquery'
 import { useHistory, useLocation, useParams } from "react-router-dom";
 import API from "../Services/BaseService";
 import lock from '../assets/img/lock.svg';
-import cars01 from '../assets/img/cars01.png';
-import carbrand from '../assets/img/carshonda.jpg';
 import appstore from '../assets/img/appstore.png';
 import googleplay from '../assets/img/googleplay.png';
 import speedometer from '../assets/img/speedometer.svg';
 import gasolinePump from '../assets/img/gasolinePump.svg';
-import car from '../assets/img/car.svg';
-import book from '../assets/img/book.svg';
-import barcode from '../assets/img/barcode.svg';
-import tag from '../assets/img/tag.svg';
-import Path from '../assets/img/Path.svg';
-import transmission from '../assets/img/manual-transmission.svg';
-import drivetrain from '../assets/img/drivetrain.svg';
-import cardetail1 from '../assets/img/cardetail1.jpg'
-import cardetail2 from '../assets/img/cardetail2.jpg'
-import cardetail3 from '../assets/img/cardetail3.jpg'
-import cardetail4 from '../assets/img/cardetail4.jpg'
-import cardetail5 from '../assets/img/cardetail5.jpg'
 
 const MoreCarFromSeller = () =>{
+
     const { id } = useParams();
     const [sellerCarDetail,setSellerCarDetail]=useState([]);
     const history = useHistory();
     console.log("id from cardetail",id);
+    const [data,setData]=useState("");
+
     const getMoreCarFromSeller=()=>{
+
     let request={
         "seller_id":id,
         buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id
@@ -46,6 +35,39 @@ useEffect(() => {
     getMoreCarFromSeller();
    
 },[]);
+
+const OnSearch = (e) => {
+  setData(e.target.value)
+  console.log("/////////=====",e.target.value)
+}
+
+const onKeydowninSearch = (event) => {
+  if (event.key === 'Enter') {
+      // setCurrentPage(1)
+      searchSellerCarDetail();
+    }
+}
+
+const searchSellerCarDetail = () => {
+  console.log("/////////",data)
+  let request={
+    "seller_id":id,
+    buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+    data: data
+      
+  }
+  API.post("SellerCarSearch/condition",request)
+  .then((resp)=>{
+     
+    setSellerCarDetail(resp.data.data);
+   
+  },
+  (error) => {
+      console.log(error);
+    }
+  )
+  .catch(err => { console.log(err); });
+}
     
 return(
     <div>
@@ -62,6 +84,14 @@ return(
         <div class="section-title">
           <h2>More cars from the dealer</h2>          
         </div>
+        <div className="filtersblock  col-lg-6 SalesRepsSearch  row" >
+          <div className="input-group searchbox ">
+              <input type="text"  className="form-control border"  placeholder="model/make" onKeyDown={onKeydowninSearch} onChange={OnSearch}></input>
+              <span className="input-group-append" >
+              <button className="btn ms-n5" type="button" id="btntest" name="btntest" onClick={searchSellerCarDetail} ><i className='bx bx-search'></i></button>
+              </span>                                
+          </div>
+      </div>
 		<div class="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
 		{sellerCarDetail.length > 0 ? sellerCarDetail
                             .map((moreCar,index) =>
