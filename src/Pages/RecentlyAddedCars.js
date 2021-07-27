@@ -14,6 +14,7 @@ const RecentlyAddedCars = () => {
     const [carDetail ,setCarDetail] = useState([]);
     const [recentCarFlag,setrecentCarFlag]=useState(false);
     const [loading,setLoading] = useState(true);
+    const [data,setData]=useState("");
     
     const getrecentCarList=()=>{
 
@@ -61,6 +62,38 @@ const RecentlyAddedCars = () => {
        
     },[recentCarFlag]);
 
+    const OnSearch = (e) => {
+        setData(e.target.value)
+        console.log("/////////=====",e.target.value)
+      }
+      
+      const onKeydowninSearch = (event) => {
+        if (event.key === 'Enter') {
+            // setCurrentPage(1)
+            searchCarInventoryDetail();
+          }
+      }
+      
+      const searchCarInventoryDetail = () => {
+        console.log("/////////",data)
+        let request={
+          buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+          data: data
+            
+        }
+        API.post("BuyerNewCarSearch/condition",request)
+        .then((res)=>{
+           
+            setCarDetail(res.data.data);
+         
+        },
+        (error) => {
+            console.log(error);
+          }
+        )
+        .catch(err => { console.log(err); });
+      }
+
     return(
         <div>
             {loading?<Loading/>:
@@ -73,6 +106,14 @@ const RecentlyAddedCars = () => {
 
                         <div className="section-title">
                                 <h2>Recently Added Cars</h2>
+                            </div>
+                            <div className="filtersblock  col-lg-6 SalesRepsSearch  row" >
+                                <div className="input-group searchbox ">
+                                    <input type="text"  className="form-control border"  placeholder="model/make" onKeyDown={onKeydowninSearch} onChange={OnSearch}></input>
+                                    <span className="input-group-append" >
+                                    <button className="btn ms-n5" type="button" id="btntest" name="btntest" onClick={searchCarInventoryDetail} ><i className='bx bx-search'></i></button>
+                                    </span>                                
+                                </div>
                             </div>
                             <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
                             {carDetail.length>0?carDetail.map((item) =>
