@@ -2543,7 +2543,7 @@ input[type="password"] {
   padding: 10px 20px;
   margin-top: 20px;
   margin-bottom: 20px;
-  width: 100%;
+  width:auto;
   border-radius: 3px;
   border: none;
 }
@@ -7232,5 +7232,38 @@ img.carImg{
 
 .carBrand img{
   border-radius: 5px;
+}
+
+
+
+.checkoutReview{
+	margin:auto;
+}
+
+.checkoutReview h2{
+	font-size:20px;
+}
+
+.checkoutReview .vehiclesheadspaydetails{
+	box-shadow: none;
+    border-radius: 0;
+}
+
+.checkoutReview .cta-btn{
+	border:#bd062c 2px solid;
+	font-size:18px;
+	margin:10px;
+}
+
+.cancel-btn{
+	background:transparent;
+	color:#bd062c;
+	border:#bd062c 2px solid;
+}
+
+.checkoutReview .cta-btn:hover{
+	border:#002768 2px solid;
+	color:#fff;
+	
 }
 
