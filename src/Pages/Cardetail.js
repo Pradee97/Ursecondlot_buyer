@@ -127,7 +127,11 @@ function loadLrgImg(img){
 useEffect (()=>{
 	// carDetails/condition
 	console.log("id value",id)
-	const request = {"car_id":id}
+	const request = {
+		"car_id":id,
+		"buyer_id": JSON.parse(localStorage.getItem("userDetails")).user_id,
+		"seller_id": 1 }
+	
 	API.post('carDetails/condition',request).then(res=>{
 		console.log("response",res.data.data);
 	   // const {results} = res.data.data;
