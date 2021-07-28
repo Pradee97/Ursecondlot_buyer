@@ -2,7 +2,6 @@ import React from 'react';
 import API from "../../Services/BaseService";
 import { useHistory } from "react-router-dom";
 import ls from 'local-storage';
-import Datetime from 'react-datetime';
 import DatePicker from "react-datepicker";
 import moment from 'moment';
 import { getMonth, getYear } from 'date-fns';
@@ -11,7 +10,6 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import { useForm } from "react-hook-form";
-import MuiPhoneNumber from 'material-ui-phone-number';
 import PhoneInput from 'react-phone-number-input/input';
 
 const FloorAdd = () => {

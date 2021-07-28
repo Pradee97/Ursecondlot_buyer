@@ -11,7 +11,6 @@ import '../../Component/Popup/popup.css';
 import Terms from '../../Component/TermsAndCondition/TermsAndCondition';
 import StateAndCity from '../../Component/StateAndCity/StateAndCity';
 import FileBase64 from 'react-file-base64';
-import MuiPhoneNumber from 'material-ui-phone-number';
 import { useState } from 'react';
 import PhoneInput from 'react-phone-number-input/input';
 
@@ -64,6 +63,7 @@ const Registration = () => {
         setIsOpen(!isOpen);
     }
     const getFiles=(file)=>{
+        setType("")
         console.log("================>",file.type)
         if(file.type.includes("jpg") || file.type.includes("jpeg") || file.type.includes("png")){
             setDoc(file);
@@ -291,7 +291,7 @@ const Registration = () => {
 														<img alt="" src="adduser.jpg" src={doc.base64} ></img>														
 														}
                         <span className="proCamera"></span>
-                        {type==="0"?<p className="form-input-error">Upload only Image format </p>:""}      
+                        {type==="0"?<p className="form-input-error">Upload only Image Format </p>:""}      
                         <FileBase64 onDone={ getFiles }  type="hidden"/>
                         
                                          {/* <button>  <img alt="" htmlFor="upload" src="adduser.jpg"  /></button>  */}
@@ -403,14 +403,18 @@ const Registration = () => {
                                 </div>
                                 </div>
                             </div>
+                            
                             <div className="col-sm-6 form-group timepicker">
-                                <div className="tbox">
-                                    <input type="time" className="form-control textbox" placeholder="Select Time" name="Time"
+                                <form novalidate>
+                                <div className="tbox"> 
+                                    <input type="time" className="form-control textbox" placeholder="Select Time" name="Time" 
                                     onChange={(e) => setTime(e.target.value)} />
                                     <label htmlFor="meeting_time" className={"input-has-value"}>Select Time</label>
                                     <p className="form-input-error" >{timeError}</p>
                                 </div>
+                                </form>
                             </div>
+                            
                             <div className="col-sm-12 form-group agreetab">
                                 <input type="checkbox" className="form-check d-inline " id="chb" 
                                 checked = { terms == 0 ? false : true } value={terms == 0 ? 1 : 0 } onChange={(e) => setTerms(e.target.value)}/>

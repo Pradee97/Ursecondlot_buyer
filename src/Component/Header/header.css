@@ -48,7 +48,8 @@ nav ul {
     right: 0;
 }
 .nav__submenu-item:hover {
-    background: #002768
+    background: #002768;
+    color:#fff;
 }
 
 ul.nav__submenu{

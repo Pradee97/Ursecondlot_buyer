@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom
 import { useIdleTimer } from 'react-idle-timer'
 import './App.css';
 import SessionConfirmationPopup from "./Component/CommonPopup/SessionConfirmationPopup"
-
+import Suggested from './Pages/SuggestedCars';
 // import Loading from './Component/Loading/Loading';
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
@@ -48,10 +48,19 @@ import Favoritelist from './Pages/ManageAccount/FavoriteList';
 import Search from './Pages/Search';
 import Transport from './Pages/Transport';
 import MyBids from './Pages/MyBids';
+import Inspection from './Pages/Inspection';
+import MakeurBid from './Pages/Makeurbid';
+import Cardetail from './Pages/Cardetail';
 import Cart from './Pages/Cart';
 import Chat from './Pages/Chat';
 import History from './Pages/ManageAccount/History';
-
+import SuggestedCars from './Pages/SuggestedCars';
+import recentcars from './Pages/RecentlyAddedCars';
+import SimilarCars from './Pages/similarCarFromSeller';
+import inventoryCars from './Pages/InventoryCars';
+import InventoryCars from './Pages/InventoryCars';
+import MoreCarFromSeller from './Pages/MoreCarFromSeller';
+import Checkout from './Pages/Checkout';
 function AppRouter() {
 
   const timeout = 900000;
@@ -115,6 +124,9 @@ function AppRouter() {
               <Route  path="/transport" component={Transport}/>
               <Route  path="/manageaccount" component={ManageAccount}/>
               <Route  path="/lotfee" component={LotFee}/>
+              <Route  path="/suggestedcars" component={SuggestedCars}/>
+              <Route  path="/Recentlyaddedcars" component={recentcars}/>
+              <Route  path="/InventoryCars" component={InventoryCars}/>
               <Route  path="/notification" component={Notification}/>
               <Route  path="/payment" component={Payment}/>
               <Route  path="/paymentinfo" component={PaymentInfo}/>
@@ -134,6 +146,14 @@ function AppRouter() {
               <Route  path="/legaladd" component={AddLegalAccount}/>
               <Route  path="/addressadd" component={AddAddress}/>
               <Route  path="/buyeredit/:id" component={EditBuyer}/>
+              <Route path="/Makeurbid" component={MakeurBid}/>
+              <Route path="/Inspection" component={Inspection}/>
+              <Route path="/CarDetail/:id" component={Cardetail}/>
+              <Route path="/MoreCarFromSeller/:id" component={MoreCarFromSeller}/>
+              <Route path="/SimilarCarFromSeller/:id" component={SimilarCars}/>
+              <Route path="/checkout" component={Checkout}/>
+
+
             </PrivateRoute>       
           </Switch>
           <Footer />

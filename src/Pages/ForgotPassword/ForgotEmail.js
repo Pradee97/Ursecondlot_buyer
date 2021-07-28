@@ -58,9 +58,10 @@ const ForgotEmail = () => {
         <div>
             <div>
                 <main id="main" className="inner-page">
-                    <div className="col-lg-4  loginBlock">
+                    <div className="col-lg-4  loginBlock forgotpage">
                         <button className="back-btn-paymentform backBtn" onClick={() => history.push("/login")}><i className="icofont-arrow-left"></i> Back</button>
                         <div className="col-lg-12 card">
+                        <div className="logo"><img alt="" src={process.env.PUBLIC_URL +"/images/Logo_final.png"} /></div>
                             <form className="registrationform" onSubmit={handleForgotEmail} >
                                 <h2 className="title">Forgot Username</h2>
                                 <p className="error-message">{errorMessage}</p>

@@ -1,9 +1,19 @@
 import React from 'react';
+import { useState } from 'react';
 import vehicles from '../assets/img/vehicles.jpg'
 import appstore from '../assets/img/appstore.png';
 import googleplay from '../assets/img/googleplay.png';
+import Checkout from '../Pages/Checkout';
+import Popup from '../Component/Popup/Popup';
 
 const Cart = () => {
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    const togglePopup = () => {
+        setIsOpen(!isOpen);
+    }
+
     return (
 
         <main id="main" class="inner-page">
@@ -82,7 +92,7 @@ const Cart = () => {
                             </select>
                         </div>
                         <div class="vehicletotalbtns"> 
-                            <a class="vehicletotal-btns" href="#">Review & Checkout</a>
+                            <a class="vehicletotal-btns" href="JavaScript:void(0)" onClick={togglePopup}>Review & Checkout</a>
                         </div>
                         
                         
@@ -91,6 +101,13 @@ const Cart = () => {
             </div>
     </div>
           </div>
+          {isOpen && <Popup
+            isClose={false}
+            content={<>
+                <Checkout toggle={togglePopup} />
+            </>}
+            handleClose={togglePopup}
+        />}
         </div>
     
        

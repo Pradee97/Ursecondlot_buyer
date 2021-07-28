@@ -1,4 +1,7 @@
 import React from 'react';
+import { useState } from 'react';
+import Popup from '../Component/Popup/Popup';
+import Makeurbid from '../Pages/Makeurbid';
 import lock from '../assets/img/lock.svg';
 import cars01 from '../assets/img/cars01.png';
 import speedometer from '../assets/img/speedometer.svg';
@@ -7,7 +10,16 @@ import arrowmark from '../assets/img/arrowmark.jpg';
 import appstore from '../assets/img/appstore.png';
 import googleplay from '../assets/img/googleplay.png';
 
+
 const Search = () => {
+
+
+const [isOpen, setIsOpen] = useState(false);
+
+const togglePopup = () => {
+	setIsOpen(!isOpen);
+}
+
     return (
 
         <main id="main" class="inner-page">
@@ -15,34 +27,28 @@ const Search = () => {
 		<div id="vehiclesearch"class="vehiclesearch">
 			<div class="container">
 				<div class="section-title">
-					<h2>Vehicle Search</h2> 
+					<h2>Vehicle Search</h2>
+
+					 
 				</div>
 			    <div class="row content">
 					<div class="col-lg-3">
+					<div class="saveSearch"><button class="cta-btn" type="button">Save Search </button></div>
 						<div class="leftonsidebox">
 							<div class="filtersblock">
 								<h3>Filters<span><a href="#">Reset</a></span></h3>
-								<div class="input-group searchbox">
-									<input class="form-control border-end-0 border" type="text" value="search" id="search-input"/>
-									<span class="input-group-append">
-										<button class="btn ms-n5" type="button">
-										<i class="fa fa-search"></i>
-									</button>
-									</span>
-								</div>
-							</div>
-							<div class="vehicleblock">
-								<h4>Vehicle</h4>
 								<div class="input-group">
 									<select id="vehiclename1"  class="form-control custom-select browser-default">
-										<option value="USA">Honda amaze (2014 model)</option>
+										<option value="Saved Search">Saved Search</option>
 									</select>
 								</div>
+								
+							</div>
+							<div class="distanceBlock">
+								<h4>Distance</h4>
 								<div class="input-group">
-									<select id="vehiclename2"  class="form-control custom-select browser-default">
-										<option value="USA">Make</option>
-									</select>
-								</div>
+								<input class="form-control" type="text" value="" placeholder="50km" />
+								</div>								
 							</div>
 							
 							<div class="sortbyblock">
@@ -74,7 +80,7 @@ const Search = () => {
 								<div class="inner">
 									<div class="form-group input-group">
 										<input type="checkbox" id="florida"/>
-										<label for="lorida">Florida</label>
+										<label for="florida">Florida</label>
 									</div>
 									<div class="form-group input-group ">
 										<input type="checkbox" id="california"/>
@@ -282,7 +288,7 @@ const Search = () => {
 								<h4>Dealership<span><a href="#"><img src={arrowmark}/></a></span></h4>
 								<div class="inner">
 									<div class="radio input-group">
-										<input id="radio-newdealer" name="radio" type="radio" cheid="car"></input>cked/>
+										<input id="radio-newdealer" name="radio" type="radio" cheid="car"></input>
 										<label for="radio-newdealer" class="radio-label">New Car Dealer</label>
 									</div>
 
@@ -1168,7 +1174,7 @@ const Search = () => {
 												
 												<div class="cars-prices">
 													<a class="cta-btns"  href="#">$1900</a>
-													<a class="cta-btns-primary"  href="#">Make Bid</a>
+													<a class="cta-btns-primary"  href="JavaScript:void(0)" onClick={togglePopup}>Make Bid</a>
 												</div>
 											</div>
 										</div>
@@ -1203,7 +1209,13 @@ const Search = () => {
       </div>
     </section>
 
-   
+	{isOpen && <Popup
+		isClose={false}
+		content={<>
+			<Makeurbid toggle={togglePopup} />
+		</>}
+		handleClose={togglePopup}
+	/>}
 
  
 

@@ -43,7 +43,7 @@ const Login = () => {
     setErrors({email:"", password:""})
     if(!emailId) { setErrors({email:"Email Id is required", password:""}); return}
     else if( emailId && !new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i).test(emailId) ) {
-      setErrors({email:"Must match the email format", password:""})
+      setErrors({email:"Must match the email format", password:""}); return
     }
     else if(!password) { setErrors({email:"", password:"password is required"}); return}
 
@@ -121,7 +121,7 @@ const Login = () => {
               <div className="col-lg-12 loginBtn">
                 <button className="cta-btn">Log In</button>
                 {/* <p>Don't have an account? <a className="forget-name" href="registration">Become a Dealer</a></p> */}
-                <p>Don't have an account?<Button className="forget-name" onClick={() => history.push("/registration")}>Become a Dealer</Button></p>
+                <p>Don't have an account? <Button className="forget-name" onClick={() => history.push("/registration")}> Become a Dealer</Button></p>
               </div>
             </div>
           </form>
