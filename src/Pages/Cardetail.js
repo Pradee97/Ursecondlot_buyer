@@ -126,9 +126,7 @@ function img4Click(img){
 function loadLrgImg(img){
 	setLrgImg(img);
 }
-useEffect (()=>{
-	// carDetails/condition
-	console.log("id value",id)
+function CarDetailList(){
 	const request = {
 		"car_id":id,
 		"buyer_id": JSON.parse(localStorage.getItem("userDetails")).user_id,
@@ -145,7 +143,9 @@ useEffect (()=>{
 		setDistance(res.data.distance);
 		setLrgImg(res.data.data[0].image);
 		//}
-	})
+	});
+}
+function BuyerInventoryCarDetailList(){
 	let rq={
 		buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id
 	};
@@ -181,7 +181,14 @@ useEffect (()=>{
 			console.log("otherdealercar list",response.data.data);
 		})
 		//}
-	})
+	});
+}
+
+useEffect (()=>{
+	// carDetails/condition
+	console.log("id value",id)
+	CarDetailList();
+	BuyerInventoryCarDetailList();
 	
 	
 
@@ -333,43 +340,35 @@ return(
 					 <p><img src={transmission}/> <span>Transmission</span></p>
 					 <p><img src={drivetrain}/> <span>Drivetrain</span></p>
 					 <p><img src={gasolinePump}/> <span>Fuel Type</span></p>
+					 <p><img src={transmission}/> <span>Radio</span></p>
 					</div>
 				  </div>
 				  <div class="col-lg-2">
 					<div class="specifati2">
-					 <p>Automatic</p>
-					 <p>Rwd</p>
+					 <p>{carDetail[0].transmission}</p>
+					 <p>{carDetail[0].drivetrain}</p>
 					 <p>{carDetail[0].fuel_type}</p>
+					 <p>{carDetail[0].radio}</p>
 					</div>
 				  </div>
 				  <div class="col-lg-2">
 					<div class="specifati">
-					 <p><img src={transmission}/> <span>Transmission</span></p>
-					 <p><img src={drivetrain}/> <span>Drivetrain</span></p>
-					 <p><img src={gasolinePump}/> <span>Fuel Type</span></p>
+					 
+					 <p><img src={drivetrain}/> <span>Color</span></p>
+					 <p><img src={gasolinePump}/> <span>Engine</span></p>
+					 <p><img src={gasolinePump}/> <span>Vehile Type</span></p>
 					</div>
 				  </div>
 				  <div class="col-lg-2">
 					<div class="specifati2">
-					 <p>Automatic</p>
-					 <p>Rwd</p>
-					 <p>{carDetail[0].fuel_type}</p>
+					 
+					 <p>{carDetail[0].color}</p>
+					 <p>{carDetail[0].engine}</p>
+					 <p>{carDetail[0].vehicle_type}</p>
+					 
 					</div>
 				  </div>
-				  <div class="col-lg-2">
-					<div class="specifati">
-					 <p><img src={transmission}/> <span>Transmission</span></p>
-					 <p><img src={drivetrain}/> <span>Drivetrain</span></p>
-					 <p><img src={gasolinePump}/> <span>Fuel Type</span></p>
-					</div>
-				  </div>
-				  <div class="col-lg-2">
-					<div class="specifati2">
-					 <p>Automatic</p>
-					 <p>Rwd</p>
-					 <p>{carDetail[0].fuel_type}</p>
-					</div>
-				  </div>
+				 
 				</div>
 			</div>
 		</div>
