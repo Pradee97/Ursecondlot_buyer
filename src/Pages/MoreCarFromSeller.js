@@ -6,6 +6,7 @@ import appstore from '../assets/img/appstore.png';
 import googleplay from '../assets/img/googleplay.png';
 import speedometer from '../assets/img/speedometer.svg';
 import gasolinePump from '../assets/img/gasolinePump.svg';
+import locked from '../../src/assets/img/locked.svg';
 
 const MoreCarFromSeller = () =>{
 
@@ -14,6 +15,7 @@ const MoreCarFromSeller = () =>{
     const history = useHistory();
     console.log("id from cardetail",id);
     const [data,setData]=useState("");
+    const [moreCarFlag,setMoreCarFlag]=useState(false);
 
     const getMoreCarFromSeller=()=>{
 
@@ -68,6 +70,29 @@ const searchSellerCarDetail = () => {
   )
   .catch(err => { console.log(err); });
 }
+
+const addRemoveFavourite=(carid,state,flag)=>{
+  console.log("inside addremove");
+  let request={
+      buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+      car_id:carid,
+      active: !state
+  }
+  console.log("request",request);
+  API.post('buyer_favourite/add',request).then(res=>{
+      // setaddFavourite(res.data.data);
+      console.log("add Fav Inventory Detail",res.data.data);
+
+      if(flag==='morecar'){
+        setMoreCarFlag(!moreCarFlag)
+      }
+  })
+}
+
+useEffect(() => {
+  getMoreCarFromSeller();
+ 
+},[moreCarFlag]);
     
 return(
     <div>
@@ -86,7 +111,7 @@ return(
         </div>
         <div className="filtersblock  col-lg-6 SalesRepsSearch  row" >
           <div className="input-group searchbox ">
-              <input type="text"  className="form-control border"  placeholder="model/make" onKeyDown={onKeydowninSearch} onChange={OnSearch}></input>
+              <input type="text"  className="form-control border"  placeholder="model/make/year" onKeyDown={onKeydowninSearch} onChange={OnSearch}></input>
               <span className="input-group-append" >
               <button className="btn ms-n5" type="button" id="btntest" name="btntest" onClick={searchSellerCarDetail} ><i className='bx bx-search'></i></button>
               </span>                                
@@ -94,17 +119,18 @@ return(
       </div>
 		<div class="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
 		{sellerCarDetail.length > 0 ? sellerCarDetail
-                            .map((moreCar,index) =>
+                            .map((moreCar,item,index) =>
 
          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
             <div class="car-item">
 				<div class="cars-lock">
-				<img src={lock} class="img-fluid" alt="..."/>
+				<img src={(moreCar.isFavourite===0)? locked : lock} onClick={()=>addRemoveFavourite(moreCar.car_id,moreCar.isFavourite,'morecar')} />
 			  	</div>
               	<img src={moreCar.image} class="img-fluid" alt="..."/>
+        {moreCar.isbestSale?
 				<div class="cars-tag">
-					<h4>Best deal</h4>
-				</div>
+					<h4>{moreCar.deal_name}</h4>
+				</div>:""}
               <div class="cars-content">		
 			  <h3><a href="#">{moreCar.make} {moreCar._type} ({moreCar.model} model)</a></h3>
                 <div class="d-flex align-items-center mb-3">

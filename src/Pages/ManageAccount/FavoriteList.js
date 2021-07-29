@@ -116,7 +116,7 @@ const searchFav = () => {
 
               <div className="filtersblock  col-lg-6 SalesRepsSearch  row" >
                 <div className="input-group searchbox ">
-                    <input type="text"  className="form-control border"  placeholder="model/make" onKeyDown={onKeydowninSearch} onChange={OnSearch}></input>
+                    <input type="text"  className="form-control border"  placeholder="model/make/year" onKeyDown={onKeydowninSearch} onChange={OnSearch}></input>
                     <span className="input-group-append" >
                     <button className="btn ms-n5" type="button" id="btntest" name="btntest" onClick={searchFav} ><i className='bx bx-search'></i></button>
                     </span>                                
@@ -133,9 +133,10 @@ const searchFav = () => {
                     <img src={(item.isFavourite===0)? lock : locked}  onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'fav')} />
                     </div>
                         <img src={item.image} class="img-fluid" alt="..." />
+                        {item.isbestSale?
                         <div class="cars-tag">
                           <h4>Best deal</h4>
-                        </div>
+                        </div>:""}
                         <div class="cars-content">
                         <h3><a href="#">{item.make} ({item.model} model)</a></h3>
                         <div class="d-flex align-items-center mb-3">

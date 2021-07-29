@@ -82,6 +82,8 @@ const [sellerCarDetail,setSellerCarDetail]=useState([]);
 const [lrgImg,setLrgImg]=useState("");
 const [copied, setCopied] = useState(false);
 const [data, setData] = useState("");
+const [distance,setDistance] = useState("");
+
 
 const redirectpage=(pathid)=>{
 	//e.preventDefault();
@@ -127,7 +129,11 @@ function loadLrgImg(img){
 useEffect (()=>{
 	// carDetails/condition
 	console.log("id value",id)
-	const request = {"car_id":id}
+	const request = {
+		"car_id":id,
+		"buyer_id": JSON.parse(localStorage.getItem("userDetails")).user_id,
+		"seller_id": 1 }
+	
 	API.post('carDetails/condition',request).then(res=>{
 		console.log("response",res.data.data);
 	   // const {results} = res.data.data;
@@ -135,6 +141,8 @@ useEffect (()=>{
 		//if(results.length>0){
 		setCarDetail(res.data.data);
 		console.log("car Detail",res.data.data);
+		console.log("car distance added",res.data.distance);
+		setDistance(res.data.distance);
 		setLrgImg(res.data.data[0].image);
 		//}
 	})
@@ -178,6 +186,7 @@ useEffect (()=>{
 	
 
 },[])
+
 	
 return(
     <div>
@@ -289,7 +298,7 @@ return(
 									<div class=" d-flex align-items-center mb-3">
 										<p class="details"><img src={Path}  alt=""/><span>Illinois</span></p>
 										
-										<p class="details"><img src="assets/img/road-with-broken-line.svg" alt=""/><span>{carDetail[0].mileage} M</span></p>
+										<p class="details"><img src="assets/img/road-with-broken-line.svg" alt=""/><span>{distance} M</span></p>
 									</div>	        										
 								</div>
 							</div>
@@ -383,9 +392,11 @@ return(
 				<img src={lock} class="img-fluid" alt="..."/>
 			  	</div>
               	<img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id)}} class="img-fluid" alt="..."/>
+				  {moreCar.isbestSale?
 				<div class="cars-tag">
-					<h4>Best deal</h4>
-				</div>
+					<h4>{moreCar.deal_name}</h4>
+				
+				</div>:""}
               <div class="cars-content">		
 			  <h3><a href="#">{moreCar.make} {moreCar._type} ({moreCar.model} model)</a></h3>
                 <div class="d-flex align-items-center mb-3">
@@ -428,9 +439,10 @@ return(
 								<img src={lock} class="img-fluid" alt="..."/>
 								  </div>
 								  <img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id)}} class="img-fluid" alt="..."/>
+								  {moreCar.isbestSale?
 								<div class="cars-tag">
-									<h4>Best deal</h4>
-								</div>
+									<h4>{moreCar.deal_name}</h4>
+								</div>:""}
 							  <div class="cars-content">		
 							  <h3><a href="#">{moreCar.make} {moreCar._type} ({moreCar.model} model)</a></h3>
 								<div class="d-flex align-items-center mb-3">

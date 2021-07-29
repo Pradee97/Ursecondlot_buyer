@@ -137,7 +137,7 @@ const Buyers = () => {
                                             }</td>
                                             <td className="phonenotab">{item.phone_no}</td>
                                             {/* <td>{item.email}</td> */}
-                                            <td>{item.buy_now===1?"Buy Now,":""}{item.cancel_bid===1?"Cancel the bid after 4 hours,":""}{item.bid===1?"Bid,":""}
+                                            <td>{item.buy_now===1?"Buy Now,":"No privileges"}{item.cancel_bid===1?"Cancel the bid after 4 hours,":""}{item.bid===1?"Bid,":""}
                                             {item.proxy_bid===1?"Proxy Bid,":""}{item.counter_bid===1?"Counter Bid,":""}{item.lot_fee===1?"Lot Fee.":""}</td>
                                             <td>{item.status===1?"Active":"InActive"}</td>
                                             <td><Button className="ant-btn" onClick={() => onHandleEdit(item.user_id)}><i className="icofont-ui-edit"></i> Edit</Button></td>
