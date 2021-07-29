@@ -164,7 +164,7 @@ const CarList = () => {
                                         <img className="carImg" src={item.image}  onClick={()=>{redirectpage(item.car_id)}}/>
                                         {item.isbestSale?
                                         <div className="cars-tag">
-                                            <h4>Best deal</h4>
+                                            <h4>{item.deal_name}</h4>
                                         </div>:""}
                                         
                                         <div className="cars-content">
@@ -211,7 +211,7 @@ const CarList = () => {
                                         <img className="carImg" src={item.image} onClick={()=>{redirectpage(item.car_id)}} className="carImg" alt="..." />
                                         {item.isbestSale?
                                         <div className="cars-tag">
-                                            <h4>Best deal</h4>
+                                            <h4>{item.deal_name}</h4>
                                         </div>:""}
                                         <div className="cars-content">
                                             <h3><a href="#">{item.make} ({item.model} model)</a></h3>
@@ -258,7 +258,7 @@ const CarList = () => {
                                         <img className="carImg" src={item.image} onClick={()=>{redirectpage(item.car_id)}} alt="..." />
                                         {item.isbestSale?
                                         <div className="cars-tag">
-                                            <h4>Best deal</h4>
+                                            <h4>{item.deal_name}</h4>
                                         </div>:""}
                                         <div className="cars-content">
                                             <h3><a href="#">{item.make} ({item.model} model)</a></h3>
@@ -305,7 +305,7 @@ const CarList = () => {
                                 <img className="carImg" src={item.image} onClick={()=>{redirectpage(item.car_id)}} alt="..." />
                                 {item.isbestSale?
                                 <div className="cars-tag">
-                                    <h4>Best deal</h4>
+                                    <h4>{item.deal_name}</h4>
                                 </div>:""}
                                 <div className="cars-content">
                                     <h3><a href="#">{item.make} ({item.model} model)</a></h3>

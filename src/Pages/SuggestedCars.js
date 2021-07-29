@@ -125,7 +125,7 @@ const SuggestedCars = () => {
                                         <img className="carImg" src={item.image}  onClick={()=>{redirectpage(item.car_id)}}/>
                                         {item.isbestSale?
                                         <div className="cars-tag">
-                                            <h4>Best deal</h4>
+                                            <h4>{item.deal_name}</h4>
                                         </div>:""}
                                         <div className="cars-content">
                                             <h3><a href="#">{item.make} ({item.model} model)</a></h3>
