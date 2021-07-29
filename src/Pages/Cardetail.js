@@ -392,7 +392,8 @@ return(
               	<img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id)}} class="img-fluid" alt="..."/>
 				  {item.isbestSale?
 				<div class="cars-tag">
-					<h4>Best deal</h4>
+					<h4>{item.deal_name}</h4>
+				
 				</div>:""}
               <div class="cars-content">		
 			  <h3><a href="#">{moreCar.make} {moreCar._type} ({moreCar.model} model)</a></h3>
@@ -438,7 +439,7 @@ return(
 								  <img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id)}} class="img-fluid" alt="..."/>
 								  {item.isbestSale?
 								<div class="cars-tag">
-									<h4>Best deal</h4>
+									<h4>{item.deal_name}</h4>
 								</div>:""}
 							  <div class="cars-content">		
 							  <h3><a href="#">{moreCar.make} {moreCar._type} ({moreCar.model} model)</a></h3>

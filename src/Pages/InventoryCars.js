@@ -129,7 +129,7 @@ const InventoryCars = () => {
                                         <img className="carImg" src={item.image} className="carImg" alt="..." /></a>
                                         {item.isbestSale?
                                         <div className="cars-tag">
-                                            <h4>Best deal</h4>
+                                            <h4>{item.deal_name}</h4>
                                         </div>:""}
                                         <div className="cars-content">
                                             <h3><a href="#">{item.make} ({item.model} model)</a></h3>

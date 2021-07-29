@@ -102,9 +102,9 @@ return(
 				<img src={lock} class="img-fluid" alt="..."/>
 			  	</div>
               	<img src={moreCar.image} class="img-fluid" alt="..."/>
-                {item.isbestSale?
+        {item.isbestSale?
 				<div class="cars-tag">
-					<h4>Best deal</h4>
+					<h4>{item.deal_name}</h4>
 				</div>:""}
               <div class="cars-content">		
 			  <h3><a href="#">{moreCar.make} {moreCar._type} ({moreCar.model} model)</a></h3>
