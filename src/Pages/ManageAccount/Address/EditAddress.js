@@ -168,7 +168,7 @@ const EditAddress = () => {
 
         let request = {
             buyer_address_id:id,
-            buyer_id:JSON.parse(localStorage.getItem("userDetails")).user_id,
+            buyer_dealer_id:JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
             first_name: FirstName,
             last_name: lastName,
             address: address,

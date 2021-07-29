@@ -14,8 +14,6 @@ import PhoneInput from 'react-phone-number-input/input';
 const EditBuyer = () => {
     const history = useHistory();
     const { id } = useParams();
-    const { user_id } = useParams();
-    const { buyer_id } = useParams();
     const userDetails = ls.get('userDetails');
     const [myProfileObjc, setMyProfileObj] = useState("");
     const [firstName, setFirstName] = useState("");
@@ -193,7 +191,7 @@ const EditBuyer = () => {
         }
 
         let request = {
-            user_id: id,
+            buyer_id: id,
             first_name: firstName,
             last_name: lastName,
             phone_no: formatMobileNO(primaryPhone),
@@ -215,7 +213,6 @@ const EditBuyer = () => {
             counter_bid: counter_bid,
             lot_fee: lot_fee,
             image:doc===""?doc:doc.length>0?doc:[doc]
-            // buyer_id: userDetails.user_id
         };
 
         
@@ -225,7 +222,7 @@ const EditBuyer = () => {
                 if (response.data.success) {
                     const { data } = response;
                     console.log("response", response)
-                    if(userDetails.user_id===response.data.data[0].user_id){
+                    if(userDetails.buyer_id===response.data.data[0].buyer_id){
                         ls.set('userDetails', response.data.data[0]);
                     }                    
                     // history.push("/success");
@@ -293,7 +290,7 @@ const EditBuyer = () => {
             scounterBid: res.data.data[0].counter_bid,
             lotFee: res.data.data[0].lot_fee
         })
-        setIsPrivileges(userDetails.user_id === res.data.data[0].buyer_id ? false : true)
+        setIsPrivileges(userDetails.buyer_id === res.data.data[0].buyer_id ? false : true)
         if(res.data.data[0].buy_now == 1 || res.data.data[0].cancel_bid == 1 || res.data.data[0].bid == 1 || 
             res.data.data[0].proxy_bid == 1 || res.data.data[0].counter_bid == 1 || res.data.data[0].lot_fee == 1 ){
                 setselectPrivilege(true)

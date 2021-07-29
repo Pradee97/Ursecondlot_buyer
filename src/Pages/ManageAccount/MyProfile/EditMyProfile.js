@@ -15,8 +15,6 @@ const EditMyProfile = () => {
     const history = useHistory();
     let { register, updateMyProfile, formState: { errors },reset  } = useForm();
     const { id } = useParams();
-    const { user_id } = useParams();
-    const { buyer_id } = useParams();
     const userDetails=ls.get('userDetails');
     const [myProfileObjc, setMyProfileObj] = useState("");
     const [firstName, setFirstName] = useState("");
@@ -63,10 +61,10 @@ const EditMyProfile = () => {
 
     async function fetchMyProfileDetails() {
         let request = {
-            buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+            buyer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_id,
         };
         
-        const state = API.post('user_profile/condition',request);
+        const state = API.post('buyer_profile/condition',request);
         state.then(res => {
             console.log("res", res.data.data)
             setFirstName(res.data.data[0].first_name);
@@ -133,7 +131,7 @@ const EditMyProfile = () => {
         }
 
         let request = {
-            user_id:id,
+            buyer_id:id,
             first_name: firstName,
             last_name: lastName,
             phone_no: formatMobileNO(primaryPhone),
@@ -148,7 +146,6 @@ const EditMyProfile = () => {
             address: address,
             active:1,
             image:doc===""?doc:doc.length>0?doc:[doc]
-            // buyer_id: userDetails.user_id
            
         };
         API
@@ -196,10 +193,10 @@ const EditMyProfile = () => {
     useEffect(() => {
         //fetchMyProfileDetails();
         let request = {
-            buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+            buyer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_id,
         };
         
-        const state = API.post('user_profile/condition',request);
+        const state = API.post('buyer_profile/condition',request);
         state.then(res => {
             console.log("res", res.data.data)
             setFirstName(res.data.data[0].first_name);

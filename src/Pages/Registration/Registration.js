@@ -209,7 +209,7 @@ const Registration = () => {
             address: address,
             meeting_date: date,
             meeting_time: time,
-            active: "0",
+            active: 1,
             country_id: "1",
             state_id: stateName,
             city_id: cityName,

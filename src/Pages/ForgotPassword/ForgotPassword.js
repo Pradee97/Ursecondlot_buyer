@@ -62,7 +62,7 @@ const ForgotPassword = () => {
         
         let request = {
             password:password,
-            user_id:value[1]
+            buyer_id:value[1]
         }
         API.post("forgotpassword/update", request).then((response) => {
             console.log("======111====>",response)

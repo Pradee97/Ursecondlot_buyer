@@ -30,7 +30,7 @@ const SimilarCarFromSeller = () =>{
     const getMoreSimilarCars=()=>{
     let request={
         "make":id,
-        buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id
+        buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
     }
 
     console.log("+++++++++++++++",request)

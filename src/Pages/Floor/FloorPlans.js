@@ -12,10 +12,9 @@ const FloorPlans = () => {
   const history = useHistory();
   const [floorDetails, setFloorDetails] = useState("");
   let userDetails = ls.get('userDetails');
-  console.log("====userDetails.user_id====>", userDetails.user_id)
   async function fetchBuyerFloorPlans() {
     let request = {
-      buyer_id: userDetails.user_id,
+      buyer_dealer_id: userDetails.buyer_dealer_id,
     };
     const state = API.post('floor_plan/condition', request);
     state.then(res => {

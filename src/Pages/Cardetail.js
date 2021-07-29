@@ -139,7 +139,7 @@ useEffect (()=>{
 		//}
 	})
 	let rq={
-		buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id
+		buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
 	};
 	API.post('BuyerInventoryCarList/condition',rq).then(res=>{
 		console.log("response",res.data.data);
@@ -150,7 +150,7 @@ useEffect (()=>{
 		console.log("car Inventory Detail",res.data.data);
 		const req={
 			"seller_id":res.data.data[0].seller_id,
-			buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id
+			buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
 		};
 		API.post('SellerCarList/condition',req).then(resp=>{
 			console.log("response",resp.data.data);
@@ -163,7 +163,7 @@ useEffect (()=>{
 		})
 		const req_samecar={
 			"make":res.data.data[0].make,
-			buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id
+			buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
 		}
 		console.log("other dealer car req",req_samecar);
 		API.post('OtherDealerCarList/condition',req_samecar).then(response=>{
