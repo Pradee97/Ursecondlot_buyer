@@ -133,9 +133,10 @@ const searchFav = () => {
                     <img src={(item.isFavourite===0)? lock : locked}  onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'fav')} />
                     </div>
                         <img src={item.image} class="img-fluid" alt="..." />
+                        {item.isbestSale?
                         <div class="cars-tag">
                           <h4>Best deal</h4>
-                        </div>
+                        </div>:""}
                         <div class="cars-content">
                         <h3><a href="#">{item.make} ({item.model} model)</a></h3>
                         <div class="d-flex align-items-center mb-3">
