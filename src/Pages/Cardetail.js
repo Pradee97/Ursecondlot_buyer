@@ -84,6 +84,7 @@ const [copied, setCopied] = useState(false);
 const [data, setData] = useState("");
 const [distance,setDistance] = useState("");
 
+
 const redirectpage=(pathid)=>{
 	//e.preventDefault();
 	history.push("/carDetail/"+pathid);
@@ -185,6 +186,7 @@ useEffect (()=>{
 	
 
 },[])
+
 	
 return(
     <div>
@@ -382,7 +384,7 @@ return(
 
 		<div class="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
 		{sellerCarDetail.length > 0 ? sellerCarDetail
-                            .map((moreCar,item,index) =>
+                            .map((moreCar,index) =>
 
          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
             <div class="car-item">
@@ -390,9 +392,9 @@ return(
 				<img src={lock} class="img-fluid" alt="..."/>
 			  	</div>
               	<img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id)}} class="img-fluid" alt="..."/>
-				  {item.isbestSale?
+				  {moreCar.isbestSale?
 				<div class="cars-tag">
-					<h4>{item.deal_name}</h4>
+					<h4>{moreCar.deal_name}</h4>
 				
 				</div>:""}
               <div class="cars-content">		
@@ -430,16 +432,16 @@ return(
 
         <div class="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
 		{otherDealerCarDetail.length > 0 ? otherDealerCarDetail
-                            .map((moreCar,item,index) =>
+                            .map((moreCar,index) =>
 							<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
 							<div class="car-item">
 								<div class="cars-lock">
 								<img src={lock} class="img-fluid" alt="..."/>
 								  </div>
 								  <img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id)}} class="img-fluid" alt="..."/>
-								  {item.isbestSale?
+								  {moreCar.isbestSale?
 								<div class="cars-tag">
-									<h4>{item.deal_name}</h4>
+									<h4>{moreCar.deal_name}</h4>
 								</div>:""}
 							  <div class="cars-content">		
 							  <h3><a href="#">{moreCar.make} {moreCar._type} ({moreCar.model} model)</a></h3>

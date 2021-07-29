@@ -1,32 +1,20 @@
 import React, {useState, useEffect} from 'react';
-import $ from 'jquery'
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import API from "../Services/BaseService";
 import lock from '../assets/img/lock.svg';
-import cars01 from '../assets/img/cars01.png';
-import carbrand from '../assets/img/carshonda.jpg';
 import appstore from '../assets/img/appstore.png';
 import googleplay from '../assets/img/googleplay.png';
 import speedometer from '../assets/img/speedometer.svg';
 import gasolinePump from '../assets/img/gasolinePump.svg';
-import car from '../assets/img/car.svg';
-import book from '../assets/img/book.svg';
-import barcode from '../assets/img/barcode.svg';
-import tag from '../assets/img/tag.svg';
-import Path from '../assets/img/Path.svg';
-import transmission from '../assets/img/manual-transmission.svg';
-import drivetrain from '../assets/img/drivetrain.svg';
-import cardetail1 from '../assets/img/cardetail1.jpg'
-import cardetail2 from '../assets/img/cardetail2.jpg'
-import cardetail3 from '../assets/img/cardetail3.jpg'
-import cardetail4 from '../assets/img/cardetail4.jpg'
-import cardetail5 from '../assets/img/cardetail5.jpg'
+import locked from '../../src/assets/img/locked.svg';
 
 const SimilarCarFromSeller = () =>{
     const { id } = useParams();
     const [similarCarDetail,setSimilarCarDetail]=useState([]);
     const history = useHistory();
+    const [similarCarFromSellerFlag,setSimilarCarFromSellerFlag]=useState(false);
     console.log("id from cardetail",id);
+
     const getMoreSimilarCars=()=>{
     let request={
         "make":id,
@@ -51,6 +39,31 @@ useEffect(() => {
    
 },[]);
     
+const addRemoveFavourite=(carid,state,flag)=>{
+  console.log("inside addremove");
+  let request={
+      buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+      car_id:carid,
+      active: !state
+  }
+  console.log("request",request);
+  API.post('buyer_favourite/add',request).then(res=>{
+      // setaddFavourite(res.data.data);
+      console.log("add Fav Inventory Detail",res.data.data);
+
+      if(flag==='SimilarCarFromSellerFlag'){
+        setSimilarCarFromSellerFlag(!similarCarFromSellerFlag)
+      }
+  })
+}
+
+useEffect(() => {
+  getMoreSimilarCars();
+ 
+},[similarCarFromSellerFlag]);
+
+
+
 return(
     <div>
         
@@ -68,17 +81,17 @@ return(
         </div>
 		<div class="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
 		{similarCarDetail.length > 0 ? similarCarDetail
-                            .map((moreCar,item,index) =>
+                            .map((moreCar,index) =>
 
          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
             <div class="car-item">
 				<div class="cars-lock">
-				<img src={lock} class="img-fluid" alt="..."/>
+				<img src={(moreCar.isFavourite===0)? locked : lock} onClick={()=>addRemoveFavourite(moreCar.car_id,moreCar.isFavourite,'SimilarCarFromSellerFlag')} />
 			  	</div>
               	<img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id)}} class="img-fluid" alt="..."/>
-                {item.isbestSale?
+                {moreCar.isbestSale?
 				<div class="cars-tag">
-					<h4>{item.deal_name}</h4>
+					<h4>{moreCar.deal_name}</h4>
 				
 				</div>:""}
               <div class="cars-content">		
