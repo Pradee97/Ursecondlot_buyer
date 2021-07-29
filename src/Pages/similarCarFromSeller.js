@@ -68,7 +68,7 @@ return(
         </div>
 		<div class="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
 		{similarCarDetail.length > 0 ? similarCarDetail
-                            .map((moreCar,index) =>
+                            .map((moreCar,item,index) =>
 
          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
             <div class="car-item">
@@ -76,9 +76,11 @@ return(
 				<img src={lock} class="img-fluid" alt="..."/>
 			  	</div>
               	<img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id)}} class="img-fluid" alt="..."/>
+                {item.isbestSale?
 				<div class="cars-tag">
 					<h4>{item.deal_name}</h4>
-				</div>
+				
+				</div>:""}
               <div class="cars-content">		
 			  <h3><a href="#">{moreCar.make} {moreCar._type} ({moreCar.model} model)</a></h3>
                 <div class="d-flex align-items-center mb-3">

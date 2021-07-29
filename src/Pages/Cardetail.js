@@ -82,6 +82,7 @@ const [sellerCarDetail,setSellerCarDetail]=useState([]);
 const [lrgImg,setLrgImg]=useState("");
 const [copied, setCopied] = useState(false);
 const [data, setData] = useState("");
+const [distance,setDistance] = useState("");
 
 const redirectpage=(pathid)=>{
 	//e.preventDefault();
@@ -139,6 +140,8 @@ useEffect (()=>{
 		//if(results.length>0){
 		setCarDetail(res.data.data);
 		console.log("car Detail",res.data.data);
+		console.log("car distance added",res.data.distance);
+		setDistance(res.data.distance);
 		setLrgImg(res.data.data[0].image);
 		//}
 	})
@@ -293,7 +296,7 @@ return(
 									<div class=" d-flex align-items-center mb-3">
 										<p class="details"><img src={Path}  alt=""/><span>Illinois</span></p>
 										
-										<p class="details"><img src="assets/img/road-with-broken-line.svg" alt=""/><span>{carDetail[0].mileage} M</span></p>
+										<p class="details"><img src="assets/img/road-with-broken-line.svg" alt=""/><span>{distance} M</span></p>
 									</div>	        										
 								</div>
 							</div>
@@ -379,7 +382,7 @@ return(
 
 		<div class="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
 		{sellerCarDetail.length > 0 ? sellerCarDetail
-                            .map((moreCar,index) =>
+                            .map((moreCar,item,index) =>
 
          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
             <div class="car-item">
@@ -387,9 +390,11 @@ return(
 				<img src={lock} class="img-fluid" alt="..."/>
 			  	</div>
               	<img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id)}} class="img-fluid" alt="..."/>
+				  {item.isbestSale?
 				<div class="cars-tag">
 					<h4>{item.deal_name}</h4>
-				</div>
+				
+				</div>:""}
               <div class="cars-content">		
 			  <h3><a href="#">{moreCar.make} {moreCar._type} ({moreCar.model} model)</a></h3>
                 <div class="d-flex align-items-center mb-3">
@@ -425,16 +430,17 @@ return(
 
         <div class="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
 		{otherDealerCarDetail.length > 0 ? otherDealerCarDetail
-                            .map((moreCar,index) =>
+                            .map((moreCar,item,index) =>
 							<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
 							<div class="car-item">
 								<div class="cars-lock">
 								<img src={lock} class="img-fluid" alt="..."/>
 								  </div>
 								  <img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id)}} class="img-fluid" alt="..."/>
+								  {item.isbestSale?
 								<div class="cars-tag">
 									<h4>{item.deal_name}</h4>
-								</div>
+								</div>:""}
 							  <div class="cars-content">		
 							  <h3><a href="#">{moreCar.make} {moreCar._type} ({moreCar.model} model)</a></h3>
 								<div class="d-flex align-items-center mb-3">
