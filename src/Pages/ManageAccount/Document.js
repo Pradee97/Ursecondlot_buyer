@@ -45,7 +45,7 @@ const Document = () => {
         setloading(true);
 
         let request = {
-            buyer_id: userDetails.user_id
+            buyer_dealer_id: userDetails.buyer_dealer_id
         };
         const state = API.post('buyer_document/condition', request);
         state.then(res => {
@@ -208,7 +208,7 @@ const Document = () => {
     }
     const getFiles = (file, value) => {
         let request = {
-            buyer_id: userDetails.user_id,
+            buyer_dealer_id: userDetails.buyer_dealer_id,
             buyer_doc_type: value,
             doc_name: file.length > 0 ? file : [file],
         };

@@ -26,7 +26,7 @@ const Buyers = () => {
       }
     async function getuserDetails() {
         let request = {
-            dealer_id: userDetails.dealer_id
+            buyer_dealer_id: userDetails.buyer_dealer_id
         };
         const state = API.post('user_list/condition', request);
         state.then(res => {
@@ -40,7 +40,7 @@ const Buyers = () => {
         console.log("=====data=======>",data)        
         let request={
             data: data,
-            dealer_id:userDetails.dealer_id
+            buyer_dealer_id:userDetails.buyer_dealer_id
         }
         if(data!==""){
         API.post("userSearch/condition",request)
@@ -129,7 +129,7 @@ const Buyers = () => {
                                         </thead>
                                         {userList.length>0?userList.map((item,index) =>
                                         <tr>
-                                            <td>{item.user_id}</td>															
+                                            <td>{item.buyer_id}</td>															
                                             <td><span className="cartitlename">{item.first_name} {item.last_name} </span></td>
                                             <td className="userImage">{item.image===""?
                                             <img alt="" src="adduser.jpg" src={process.env.PUBLIC_URL + "/images/adduser.jpg"}/>:
@@ -140,7 +140,7 @@ const Buyers = () => {
                                             <td>{item.buy_now===1?"Buy Now,":"No privileges"}{item.cancel_bid===1?"Cancel the bid after 4 hours,":""}{item.bid===1?"Bid,":""}
                                             {item.proxy_bid===1?"Proxy Bid,":""}{item.counter_bid===1?"Counter Bid,":""}{item.lot_fee===1?"Lot Fee.":""}</td>
                                             <td>{item.status===1?"Active":"InActive"}</td>
-                                            <td><Button className="ant-btn" onClick={() => onHandleEdit(item.user_id)}><i className="icofont-ui-edit"></i> Edit</Button></td>
+                                            <td><Button className="ant-btn" onClick={() => onHandleEdit(item.buyer_id)}><i className="icofont-ui-edit"></i> Edit</Button></td>
                                         </tr>
                                          ):
                                         <tr><td colspan="6" ng-show="0">

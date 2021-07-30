@@ -63,7 +63,7 @@ const EditDealerInformation = () => {
         console.log(id)
         
         let request = {
-            buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+            buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
         };
         const state = API.post('user_profile/condition', request);
         state.then(res => {
@@ -146,8 +146,8 @@ const EditDealerInformation = () => {
         }
 
         let request = {
-            user_id:id,
-            first_name: firstName,
+            buyer_dealer_id:id,
+            dealer_name: firstName,
             last_name: lastName,
             phone_no: formatMobileNO(primaryPhone),
             mobile_no: formatMobileNO(mobilePhone),
@@ -200,7 +200,7 @@ const EditDealerInformation = () => {
     useEffect(() => {
       //fetchAccountDetails();
       let request = {
-        buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+        buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
     };
     const state = API.post('user_profile/condition', request);
     state.then(res => {
@@ -249,7 +249,16 @@ const EditDealerInformation = () => {
 							<h2> Edit Dealer Information</h2>
 						</div>
 
-                            <div className="col-sm-12 form-group">
+                        <div className="col-sm-12 form-group">
+                            <div className="tbox">
+                                <input type="text"  defaultValue={accountObjc.dealer_name} className="textbox" placeholder="Dealer Name"  onChange={(e) => setFirstname(e.target.value)} />
+                                <label htmlFor="first_name" className={firstName != "" ? "input-has-value" : ""}>Dealer Name</label>
+                                <p className="form-input-error" >{firstNameError}</p>
+
+                            </div>
+                            </div>
+        
+                            {/* <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text"  defaultValue={accountObjc.first_name} className="textbox" placeholder="First name"  onChange={(e) => setFirstname(e.target.value)} />
                                 <label htmlFor="first_name" className={firstName != "" ? "input-has-value" : ""}>First Name</label>
@@ -264,8 +273,8 @@ const EditDealerInformation = () => {
                                 <p className="form-input-error" >{lastNameError}</p>
 
                             </div>
-                            </div>
-                            <div className="col-sm-4 form-group countrycode">
+                            </div> */}
+                            {/* <div className="col-sm-4 form-group countrycode">
                             <div className="tbox">
                                 <select className="form-control custom-select browser-default textbox"  id="drop" placeholder="" defaultValue="+1">
                                     <option value="+1">+1</option>
@@ -278,7 +287,7 @@ const EditDealerInformation = () => {
                             <PhoneInput value={accountObjc.phone_no} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChange} ></PhoneInput>
                             {/* <MuiPhoneNumber value={accountObjc.phone_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={handleOnChange} ></MuiPhoneNumber> */}
                                  {/* <input type="text" defaultValue={accountObjc.phone_no} class="textbox" placeholder="Primary phone"  onChange={(e) => setPrimaryphone(e.target.value)} /> */}
-                                <label for="phone_no" className={primaryPhone != "" ? "input-has-value" : ""}>Primary Phone</label>
+                                {/* <label for="phone_no" className={primaryPhone != "" ? "input-has-value" : ""}>Primary Phone</label>
                             </div>
                                 <p className="form-input-error" >{primaryPhoneError}</p>
                             </div>
@@ -289,15 +298,15 @@ const EditDealerInformation = () => {
                                 </select>
                                 <label  for="drop" className={"input-has-value"}>Country code</label>
                             </div>
-                            </div>
+                            </div> */} 
                             <div class="col-sm-8 form-group ">
-                            <div className="tbox ">
+                            {/* <div className="tbox ">
                             <PhoneInput value={accountObjc.mobile_no} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChanges} ></PhoneInput>
                             {/* <MuiPhoneNumber value={accountObjc.mobile_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={handleOnChanges} ></MuiPhoneNumber> */}
                                {/* <input type="text" defaultValue={accountObjc.mobile_no} class="textbox" placeholder="Mobile phone"  onChange={(e) => setMobilephone(e.target.value)} /> */}
-                                <label for="mobile_no" className={mobilePhone != "" ? "input-has-value" : ""}>Mobile Phone</label>
+                                {/* <label for="mobile_no" className={mobilePhone != "" ? "input-has-value" : ""}>Mobile Phone</label>
                             </div>
-                            <p className="form-input-error" >{mobilePhoneError}</p>
+                            <p className="form-input-error" >{mobilePhoneError}</p> */} 
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">

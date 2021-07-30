@@ -150,7 +150,7 @@ const AddAddress = () => {
                 city_id: city,
                 state_id: state,
                 zipcode_id: zipCodeId,
-                buyer_id:userDetails.user_id,
+                buyer_dealer_id:userDetails.buyer_dealer_id,
                 location:location,
                 instructions:instruction,
                 active:1           

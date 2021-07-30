@@ -99,7 +99,7 @@ const AddLegalAccount = () => {
       
 
         let request = {
-            buyer_id: userDetails.user_id,
+            buyer_dealer_id: userDetails.buyer_dealer_id,
             first_name: firstname,
             last_name: lastname,                                           
             ein_no: EINnumber,

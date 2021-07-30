@@ -19,7 +19,7 @@ const ManageAccount = () => {
   async function fetchAccountDetails() {
     setloading(true);
     let request = {
-      buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+      buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
     };
     const state = API.post('user_profile/condition', request);
     state.then(res => {
@@ -32,7 +32,7 @@ const ManageAccount = () => {
   }
   async function fetchAddressDetails() {
     let request = {
-      buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+      buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
     };
     const state = API.post('buyerAddress/condition', request);
     state.then(res => {
@@ -45,7 +45,7 @@ const ManageAccount = () => {
 
   async function fetchLegalDetails() {
     let request = {
-      buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+      buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
     };
     const state = API.post('legalAccccount/condition', request);
     state.then(res => {
@@ -90,7 +90,7 @@ const ManageAccount = () => {
                 <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 mgaccountrightblock">
                   {dealerInfo.length > 0 ? dealerInfo.map((item, index) =>
                     <div className="mgaccountrighttableblock">
-                      <h3>Dealer Information <span><Button className="ant-btn" onClick={() => onHandleDealerEdit(item.user_id)}><i className="icofont-ui-edit"></i>  Edit</Button></span></h3>
+                      <h3>Dealer Information <span><Button className="ant-btn" onClick={() => onHandleDealerEdit(item.buyer_dealer_id)}><i className="icofont-ui-edit"></i>  Edit</Button></span></h3>
                       <p>Titles Will be sent to this address title will not be shipped in to physical address</p>
                       <div className="mgaccountrighttable">
                         <h4>Dealer Name</h4>
@@ -98,21 +98,16 @@ const ManageAccount = () => {
                         <table>
                           <thead></thead>
                           <tr>
-                            <td>First name<span>{item.first_name}</span></td>
+                            {/* <td>First name<span>{item.first_name}</span></td> */}
                             <td>Address <span>{item.address}</span></td>
-                          </tr>
-                          <tr>
-                            <td>Last name<span>{item.last_name}</span></td>
-                            <td>City<span>{item.city_name}</span></td>
-                          </tr>
-                          <tr>
-                            <td>Phone<span>{item.phone_no}</span></td>
                             <td>State<span>{item.state_name}</span></td>
                           </tr>
                           <tr>
-                            <td>Mobile<span>{item.mobile_no}</span></td>
+                            {/* <td>Last name<span>{item.last_name}</span></td> */}
+                            <td>City<span>{item.city_name}</span></td>
                             <td>Zip code<span>{item.zipcode}</span></td>
                           </tr>
+                         
                         </table>
                       </div>
                     </div>

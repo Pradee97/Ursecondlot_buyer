@@ -58,7 +58,7 @@ const ChangePassword = () => {
         let request = {
           old_password: oldPassword,
           new_password: newPassword,
-         user_id: userDetails.user_id,
+         buyer_id: userDetails.buyer_id,
          active:1
 
         };

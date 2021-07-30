@@ -109,6 +109,13 @@ const Cart = () => {
             handleClose={togglePopup}
         />}
         </div>
+
+
+
+        
+        
+
+
     
        
     
