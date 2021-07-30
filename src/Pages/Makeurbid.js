@@ -34,22 +34,37 @@ const MakeurBid=()=>{
                                 </div>
                             </div>
                             
-                            <div class="form-group col-lg-6 col-md-6 ">
-                                <input type="checkbox" id="seller" class="seller" name="seller"></input><label>Display Max Bid To Seller</label>
-                            </div>
+                           
+                            <div className="col-lg-6 form-group customCheckbox">
+                                        <input type="checkbox" className="form-check d-inline " id="chb3" />
+                                        <label htmlFor="chb3" className="form-check-label">Display Max Bid To Seller  </label>                               
+                                    </div>
+
+                           
+
                             
                             <div class="form-group col-lg-12 col-md-12">				
                                 <input type="text" class="form-control" placeholder="Add a Commend (Optional)"></input>
                             </div>
                                 <div class=" col-lg-12 col-md-12">
-                                    <div class="optional-services">
-                                    <h4>Optional Services</h4>
-                                    <div class="form-group col-lg-6 col-md-6 ">
-                                        <input type="checkbox" id="transportation" class="transportation" name="transportation"></input><label>Transportation</label>
+                                    <div class="optional-services row">
+                                    <h4 class=" col-lg-12">Optional Services</h4>
+
+                                    <div className="col-lg-6 form-group customCheckbox">
+                                        <input type="checkbox" className="form-check d-inline " id="chb2" />
+                                        <label htmlFor="chb2" className="form-check-label">Transportation  </label>                               
                                     </div>
-                                    <div class="form-group col-lg-12 col-md-12 ">
-                                        <input type="checkbox" id="sellerpurchase" class="sellerpurchase" name="sellerpurchase"></input><label>Save this option for next purchase</label>
+
+                                    <div className="col-lg-6 form-group">
+                                        <span>$300 </span>                              
                                     </div>
+
+                                    <div className="col-lg-12 form-group customCheckbox">
+                                        <input type="checkbox" className="form-check d-inline " id="chb1" />
+                                        <label htmlFor="chb1" className="form-check-label"> Save this option for next purchase  </label>                               
+                                    </div>
+
+                                    
                                 </div>
                                 </div>
                     

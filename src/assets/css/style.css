@@ -3830,6 +3830,7 @@ Make your Bid
 	font-size:16px;
 	text-align:center;
 	margin-top:15px;
+  margin-bottom: 20px;
 }
 .optional-services .transportation{
     margin-right: 10px;
@@ -3869,6 +3870,21 @@ Make your Bid
 	font-size:20px;
 	font-weight:500;
 }
+
+.makeyourbid-send-btns:hover{
+  background:#002768;
+  border:2px solid  #002768;
+  color: #fff;
+  text-decoration: none;
+}
+
+.makeyourbid-cancle-btns:hover, .makeyourbid-cancle-btns:focus{
+  background:#bd062c;
+   border:2px solid  #bd062c;
+   color: #fff;
+   text-decoration: none;
+}
+
 
 /*----------------------------------------------------
 Search Box"
@@ -4336,8 +4352,8 @@ Transport
 	height: auto;
 }
 .tabsoptionblock ul.tabs li {
-	padding: 20px 21px;	
-	border-right: 1px solid #707070;
+	padding: 10px;	
+	border-right: 1px solid #ccc;
 	background-color: #fff;
 	position: relative;
 	width: 33.33%;
@@ -4376,6 +4392,7 @@ Transport
     border-radius: .25rem;
     padding: 30px 0px;
 	margin-bottom:20px;
+  padding-bottom: 0;
 	
 }
 .searchblock{
@@ -4390,12 +4407,13 @@ Transport
 }
 .modeldetails span{
 	color: #bd062c;
-    padding: 10px 20px;
+    padding: 7px 20px;
     margin-top: 20px;
     margin-bottom: 20px;
     border-radius: 3px;
     border: 1px solid #bd062c;
 	font-size:16px;
+  margin-right: 20px;
 }
 .modeldetail h3{
 	font-size:20px;
@@ -4412,12 +4430,13 @@ Transport
 }
 
 .modeldetailprice h3{
-	font-size:20px;
+	font-size:16px;
 	color: #343434;
 	font-weight:500;
 	text-align:center;
 	border: 1px solid #707070;
 	padding:10px;
+  display: inline-block;
 }
 
 .modeldetailprice span {
@@ -4433,9 +4452,10 @@ Transport
 	color: #4E4E4E;
 	font-size:14px;
 	font-weight:500;
+  margin-bottom: 5px;
 }
 .modeldetailcontent{
-	margin:20px 0;
+	margin:10px 0;
 }
 .modeldetailcontent .subhead{
 	color: #B8B8B8;
@@ -4490,14 +4510,13 @@ ul.tabs li.active {
 	font-size:20px;
 	padding:10px 20px;
 	color:#BD062C;
-	margin-top:20px;
-	margin-right:10px;
+	display: inline-block;
 	
 }
 
 .pickupdetailcontent p.subhead{
 	color: #4e4e4e;
-	font-size:20px;
+	font-size:16px;
 	font-weight:300;
 }
 .pickupdetailcontent p.subheadstatus{
@@ -4915,6 +4934,7 @@ vehicles Summary
 	font-weight:500;
 	color: #4E4E4E;	
 	padding:10px 0;
+  text-align: left;
 }
 .vehicletotal h3 span{
 	font-size:16px;
@@ -4926,6 +4946,7 @@ vehicles Summary
 	font-size:14px;
 	font-weight:500;
 	color: #4E4E4E;	
+  text-align: left;
 	padding:10px 0;
 }
 .vehicletotal-btns{
@@ -4941,6 +4962,8 @@ vehicles Summary
 
 .vehicletotal-btns:hover{
   color: #fff;
+  text-decoration: none;
+  background-color: #002768;
 }
 
 .vehicletotalbtns{
@@ -5049,8 +5072,7 @@ margin-top: 20px;
     color: #707070;
     font-size: 16px;
     font-weight: 500;
-    width: 65%;
-    float: right;
+    float: left;
 }
 .mgaccountrighttableblock h3{
 	text-align:center;
@@ -7263,7 +7285,107 @@ img.carImg{
 
 .checkoutReview .cta-btn:hover{
 	border:#002768 2px solid;
-	color:#fff;
-	
+	color:#fff;	
 }
 
+
+.checkoutReview .cancel-btn:hover{
+	border:#bd062c 2px solid;
+	color:#bd062c;	
+}
+
+.mgaccountrighttable table td span.tdcol1{
+  width: 200px;
+  float: left;
+  color: #000;
+}
+hr{
+  margin: 0;
+}
+form.timePicker{
+  padding: 0;
+}
+.marAuto{
+  margin: auto;
+}
+.achBlock h2{
+  text-align: left;
+}
+
+.makeyourbid .makeyourbidblock .input-icon > i{
+  border-right: #ccc solid 1px;
+    padding-right: 8px;
+    padding: 8px;
+    left: 10px;
+    padding-right: 10px;
+    font-size: 20px;
+}
+
+
+.customCheckbox  label {
+  position: relative;
+  cursor: pointer;
+}
+.customCheckbox  label::before {
+  content: '';
+-webkit-appearance: none;
+background-color: transparent;
+border: 1px solid #707070;
+padding: 10px;
+display: inline-block;
+position: relative;
+vertical-align: middle;
+cursor: pointer;
+margin-right: 5px;
+background: #fff;
+border: 1px solid #707070;
+margin-top: -3px;
+}
+.customCheckbox  input:checked + label::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 2px;
+  left: 9px;
+  width: 6px;
+  height: 14px;
+  border: solid #bd062c;
+      border-top-width: medium;
+      border-right-width: medium;
+      border-bottom-width: medium;
+      border-left-width: medium;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.customCheckbox  label{
+  cursor: pointer;
+}
+.customCheckbox  input {
+  padding: 0;
+  height: initial;
+  width: initial;
+  margin-bottom: 0;
+  display: none!important;
+  cursor: pointer;
+}
+.customCheckbox {
+	float:left;
+	text-align:left;
+}
+
+.transport .searchbox{
+  max-width: 800px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.transport .searchbox .input-group-append i{
+  color: #666;
+}
+
+.transport .searchbox .searchBtn{
+  background: #fff;
+  border: 1px solid #dee2e6;
+  border-left: none;
+  padding-right: 15px;
+}
