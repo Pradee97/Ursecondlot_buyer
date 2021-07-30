@@ -93,45 +93,45 @@ const EditDealerInformation = () => {
         // setOpenLoader(true);
         event.preventDefault();    
         
-        setFirstNameError("")
-        setLastNameError("")
-        setPrimaryPhoneError("")
-        setMobilePhoneError("")
+         setFirstNameError("")
+        // setLastNameError("")
+        // setPrimaryPhoneError("")
+        // setMobilePhoneError("")
         setAddressError("")
         setStateAndCityError("")
 
         if(!firstName){
-            setFirstNameError("First Name is required")
+            setFirstNameError("Dealer Name is required")
             return;
         }
         else if(firstName.length>50){
-            setFirstNameError("First Name must not exceed 50 characters")
+            setFirstNameError("Dealer Name must not exceed 50 characters")
             return;
         }
-        if(!lastName){
-            setLastNameError("Last Name is required")
-            return;
-        }
-        else if(lastName.length>50){
-            setLastNameError("Last Name must not exceed 50 characters")
-            return;
-        }
-        if(!primaryPhone){
-            setPrimaryPhoneError("Primary Phone is required")
-            return;
-        }
-        else if(primaryPhone.length<12 ){
-            setPrimaryPhoneError("Primary Phone must have 10 digits")
-            return;
-        }
-        if(!mobilePhone){
-            setMobilePhoneError("Mobile Phone is required")
-            return;
-        }
-        else if(mobilePhone.length<12){
-            setMobilePhoneError("Mobile Phone must have 10 digits")
-            return;
-        }
+        // if(!lastName){
+        //     setLastNameError("Last Name is required")
+        //     return;
+        // }
+        // else if(lastName.length>50){
+        //     setLastNameError("Last Name must not exceed 50 characters")
+        //     return;
+        // }
+        // if(!primaryPhone){
+        //     setPrimaryPhoneError("Primary Phone is required")
+        //     return;
+        // }
+        // else if(primaryPhone.length<12 ){
+        //     setPrimaryPhoneError("Primary Phone must have 10 digits")
+        //     return;
+        // }
+        // if(!mobilePhone){
+        //     setMobilePhoneError("Mobile Phone is required")
+        //     return;
+        // }
+        // else if(mobilePhone.length<12){
+        //     setMobilePhoneError("Mobile Phone must have 10 digits")
+        //     return;
+        // }
         if(!address){
             setAddressError("Address is required")
             return;
@@ -148,9 +148,9 @@ const EditDealerInformation = () => {
         let request = {
             buyer_dealer_id:id,
             dealer_name: firstName,
-            last_name: lastName,
-            phone_no: formatMobileNO(primaryPhone),
-            mobile_no: formatMobileNO(mobilePhone),
+            // last_name: lastName,
+            // phone_no: formatMobileNO(primaryPhone),
+            // mobile_no: formatMobileNO(mobilePhone),
             address: address,
             // city_id: city,
             // state_id: state,
@@ -205,10 +205,10 @@ const EditDealerInformation = () => {
     const state = API.post('user_profile/condition', request);
     state.then(res => {
         console.log("res=======>", res.data.data)
-        setFirstname(res.data.data[0].first_name);
-        setLastname(res.data.data[0].last_name);
-        setPrimaryphone(res.data.data[0].phone_no);
-        setMobilephone(res.data.data[0].mobile_no);
+        setFirstname(res.data.data[0].dealer_name);
+        // setLastname(res.data.data[0].last_name);
+        // setPrimaryphone(res.data.data[0].phone_no);
+        // setMobilephone(res.data.data[0].mobile_no);
         setAddress(res.data.data[0].address);
         setCity(res.data.data[0].city_name);
         setState(res.data.data[0].state_name);
