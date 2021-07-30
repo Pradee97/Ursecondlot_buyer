@@ -7,9 +7,10 @@ import googleplay from '../assets/img/googleplay.png';
 import speedometer from '../assets/img/speedometer.svg';
 import gasolinePump from '../assets/img/gasolinePump.svg';
 import locked from '../../src/assets/img/locked.svg';
-
+import { useDispatch, useSelector } from 'react-redux';
+import CarListAction from './CarList/CarListAction';
 const MoreCarFromSeller = () =>{
-
+  const dispatch = useDispatch();
     const { id } = useParams();
     const [sellerCarDetail,setSellerCarDetail]=useState([]);
     const history = useHistory();
@@ -70,6 +71,13 @@ const searchSellerCarDetail = () => {
   )
   .catch(err => { console.log(err); });
 }
+   
+const redirectpage=(pathid,seller_id)=>{
+  //e.preventDefault();
+  console.log("seller_id+++++",seller_id)
+  dispatch(CarListAction.sellerid(seller_id))
+  history.push("/cardetail/"+pathid);
+}
 
 const addRemoveFavourite=(carid,state,flag)=>{
   console.log("inside addremove");
@@ -126,7 +134,7 @@ return(
 				<div class="cars-lock">
 				<img src={(moreCar.isFavourite===0)? locked : lock} onClick={()=>addRemoveFavourite(moreCar.car_id,moreCar.isFavourite,'morecar')} />
 			  	</div>
-              	<img src={moreCar.image} class="img-fluid" alt="..."/>
+              	<img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id,item.seller_id)}} class="img-fluid" alt="..."/>
         {moreCar.isbestSale?
 				<div class="cars-tag">
 					<h4>{moreCar.deal_name}</h4>

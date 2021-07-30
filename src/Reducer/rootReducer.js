@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import CarListReeducer from '../Pages/CarList/CarListReducer'
+import CarListReducer from '../Pages/CarList/CarListReducer'
 
 // import todos from './todos'
 // import counter from '../Pages/ReduxTest/counterReducer'
@@ -10,5 +10,5 @@ import CarListReeducer from '../Pages/CarList/CarListReducer'
 // })
 
 export default combineReducers({
-  CarListReeducer
+  CarListReducer
   })
