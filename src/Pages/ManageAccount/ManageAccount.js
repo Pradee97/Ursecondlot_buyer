@@ -98,21 +98,16 @@ const ManageAccount = () => {
                         <table>
                           <thead></thead>
                           <tr>
-                            <td>First name<span>{item.first_name}</span></td>
+                            {/* <td>First name<span>{item.first_name}</span></td> */}
                             <td>Address <span>{item.address}</span></td>
-                          </tr>
-                          <tr>
-                            <td>Last name<span>{item.last_name}</span></td>
-                            <td>City<span>{item.city_name}</span></td>
-                          </tr>
-                          <tr>
-                            <td>Phone<span>{item.phone_no}</span></td>
                             <td>State<span>{item.state_name}</span></td>
                           </tr>
                           <tr>
-                            <td>Mobile<span>{item.mobile_no}</span></td>
+                            {/* <td>Last name<span>{item.last_name}</span></td> */}
+                            <td>City<span>{item.city_name}</span></td>
                             <td>Zip code<span>{item.zipcode}</span></td>
                           </tr>
+                         
                         </table>
                       </div>
                     </div>

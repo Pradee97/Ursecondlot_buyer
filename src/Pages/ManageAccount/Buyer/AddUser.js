@@ -180,7 +180,7 @@ const AddUser = () => {
 		
 			
 			let request = {
-				dealer_id: userDetails.dealer_id,
+				buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
 				first_name: firstName,
 				last_name: lastName,
 				email: email,

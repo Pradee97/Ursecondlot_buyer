@@ -109,7 +109,7 @@ const RecentlyAddedCars = () => {
                             </div>
                             <div className="filtersblock  col-lg-6 SalesRepsSearch  row" >
                                 <div className="input-group searchbox ">
-                                    <input type="text"  className="form-control border"  placeholder="model/make" onKeyDown={onKeydowninSearch} onChange={OnSearch}></input>
+                                    <input type="text"  className="form-control border"  placeholder="model/make/year" onKeyDown={onKeydowninSearch} onChange={OnSearch}></input>
                                     <span className="input-group-append" >
                                     <button className="btn ms-n5" type="button" id="btntest" name="btntest" onClick={searchCarInventoryDetail} ><i className='bx bx-search'></i></button>
                                     </span>                                
@@ -126,7 +126,7 @@ const RecentlyAddedCars = () => {
                                         <img className="carImg" src={item.image}  onClick={()=>{redirectpage(item.car_id)}}/>
                                         {item.isbestSale?
                                         <div className="cars-tag">
-                                            <h4>Best deal</h4>
+                                            <h4>{item.deal_name}</h4>
                                         </div>:""}
                                         <div className="cars-content">
                                             <h3><a href="#">{item.make} ({item.model} model)</a></h3>
