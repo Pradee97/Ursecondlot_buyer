@@ -127,14 +127,7 @@ const Payment = () => {
     const paymenthandleSubmit= (data) => {
         // setOpenLoader(true);
         // event.preventDefault();    
-        if(!doc)
-        {
-        setType("1");
-        }
-        else
-        {
-            setType("");
-        }
+       
         setDealershipNameError("")
         setAccountHolderNameError("") 
         setBankNameError("") 
@@ -261,6 +254,15 @@ const Payment = () => {
         //     setDocError("Upload Document is required")
         //     return;
         // }
+        if(!doc)
+        {
+        setType("1");
+        return;
+        }
+        else
+        {
+            setType("");
+        }
         if( type!=="1" ){
             console.log("tyoe",type);
         API
@@ -305,7 +307,7 @@ const Payment = () => {
         //if(file[0].type.includes("jpg") || file.type.includes("jpeg") || file.type.includes("png")){
             setDoc(file);
         // }else{
-        //     setType("0");
+            setType("");
         // }
         //setType("")
       }
