@@ -90,7 +90,7 @@ const ManageAccount = () => {
                 <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 mgaccountrightblock">
                   {dealerInfo.length > 0 ? dealerInfo.map((item, index) =>
                     <div className="mgaccountrighttableblock">
-                      <h3>Dealer Information <span><Button className="ant-btn" onClick={() => onHandleDealerEdit(item.dealer_id)}><i className="icofont-ui-edit"></i>  Edit</Button></span></h3>
+                      <h3>Dealer Information <span><Button className="ant-btn" onClick={() => onHandleDealerEdit(item.buyer_dealer_id)}><i className="icofont-ui-edit"></i>  Edit</Button></span></h3>
                       <p>Titles Will be sent to this address title will not be shipped in to physical address</p>
                       <div className="mgaccountrighttable">
                         <h4>Dealer Name</h4>
