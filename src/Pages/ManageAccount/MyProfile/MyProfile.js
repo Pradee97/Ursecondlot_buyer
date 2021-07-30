@@ -10,9 +10,9 @@ const MyProfile = () => {
     const [accountDetails, setaccountDetails] = useState("");
     async function fetchAccountDetails() {
       let request = {
-          buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+          buyer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_id,
       };
-      const state = API.post('user_profile/condition', request);
+      const state = API.post('buyer_profile/condition', request);
       state.then(res => {
           // console.log("res", res)
           setaccountDetails(res.data.data);
@@ -47,7 +47,7 @@ const MyProfile = () => {
                        
                            
                            <div className="myprofilerighttable">
-                             <h3>My Details<span><button className="ant-btn" onClick={() => onHandleEdit(item.user_id)}><i className="icofont-ui-edit"></i> Edit</button></span></h3>	
+                             <h3>My Details<span><button className="ant-btn" onClick={() => onHandleEdit(item.buyer_id)}><i className="icofont-ui-edit"></i> Edit</button></span></h3>	
                            <p>Location where transport carriers will drop of a vehicle that you have purchased</p>
                            					
                                <table>

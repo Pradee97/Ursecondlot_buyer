@@ -205,7 +205,7 @@ const FloorAdd = () => {
             phone_no:formatMobileNO(phoneNumber),
             opened_date: moment(dateOpened).format("YYYY-MM-DD"),
             account_opened: accountOpened,
-            buyer_id:userDetails.user_id,
+            buyer_dealer_id:userDetails.buyer_dealer_id,
             active:1
             
         }];

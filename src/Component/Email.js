@@ -19,7 +19,7 @@ const Email = () => {
         
             console.log("check",value[1])
             let request = {
-                user_id: value[1]
+                buyer_id: value[1]
               };
 
         API.post("user_active/update",request)

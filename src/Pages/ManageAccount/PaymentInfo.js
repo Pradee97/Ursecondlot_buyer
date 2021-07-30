@@ -15,7 +15,7 @@ const PaymentInfo = () => {
     let userDetails = ls.get('userDetails');
     async function getPaymentInfo() {
         let request = {
-            buyer_id: userDetails.user_id
+            buyer_dealer_id: userDetails.buyer_dealer_id
         };
         const state = API.post('payment_info/condition', request);
         state.then(res => {

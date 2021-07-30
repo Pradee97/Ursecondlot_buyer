@@ -20,7 +20,7 @@ const InventoryCars = () => {
     const getInventoryCarList=()=>{
 
         let request={
-            buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id
+            buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
         }
 
         API.post('BuyerInventoryCarList/condition',request).then(res=>{
@@ -43,7 +43,7 @@ const InventoryCars = () => {
     const addRemoveFavourite=(carid,state,flag)=>{
         console.log("inside addremove");
         let request={
-            buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+            buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
             car_id:carid,
             active: !state
         }
@@ -79,7 +79,7 @@ const InventoryCars = () => {
       const searchCarInventoryDetail = () => {
         console.log("/////////",data)
         let request={
-          buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+            buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
           data: data
             
         }
