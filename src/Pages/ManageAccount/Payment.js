@@ -142,7 +142,7 @@ const Payment = () => {
 
         console.log("=====docdoc====>",doc)
         let request = {
-            buyer_id: userDetails.user_id,
+            buyer_dealer_id: userDetails.buyer_dealer_id,
             dealership_name: dealershipName,
             acc_name: accountHolderName,      
             bank_name: bankName,

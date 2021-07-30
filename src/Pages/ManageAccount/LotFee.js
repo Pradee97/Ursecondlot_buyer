@@ -23,7 +23,7 @@ const LotFee = () => {
     }
     async function getLotfee() {
         let request = {
-            buyer_id: userDetails.user_id,
+            buyer_dealer_id: userDetails.buyer_dealer_id,
         };
         const state = API.post('lot_fee/condition', request);
         state.then(res => {
@@ -53,7 +53,7 @@ const LotFee = () => {
         //console.log("check",buyer_id)
         setLotFeeError("")
         let request = {
-            buyer_id: userDetails.user_id,
+            buyer_dealer_id: userDetails.buyer_dealer_id,
             lot_fee: lotValue,
             active: 1
         };

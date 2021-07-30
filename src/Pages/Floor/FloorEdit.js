@@ -73,7 +73,7 @@ const FloorEdit = () => {
             opened_date: dateOpened,
             account_opened: accountOpened,
             active:1,
-            buyer_id: userDetails.user_id
+            buyer_dealer_id: userDetails.buyer_dealer_id
            
         };
         API

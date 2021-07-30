@@ -63,7 +63,7 @@ const EditDealerInformation = () => {
         console.log(id)
         
         let request = {
-            buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+            buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
         };
         const state = API.post('user_profile/condition', request);
         state.then(res => {
@@ -146,8 +146,8 @@ const EditDealerInformation = () => {
         }
 
         let request = {
-            user_id:id,
-            first_name: firstName,
+            buyer_dealer_id:id,
+            dealer_name: firstName,
             last_name: lastName,
             phone_no: formatMobileNO(primaryPhone),
             mobile_no: formatMobileNO(mobilePhone),
@@ -200,7 +200,7 @@ const EditDealerInformation = () => {
     useEffect(() => {
       //fetchAccountDetails();
       let request = {
-        buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+        buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
     };
     const state = API.post('user_profile/condition', request);
     state.then(res => {
@@ -249,7 +249,16 @@ const EditDealerInformation = () => {
 							<h2> Edit Dealer Information</h2>
 						</div>
 
-                            <div className="col-sm-12 form-group">
+                        <div className="col-sm-12 form-group">
+                            <div className="tbox">
+                                <input type="text"  defaultValue={accountObjc.first_name} className="textbox" placeholder="Dealer Name"  onChange={(e) => setFirstname(e.target.value)} />
+                                <label htmlFor="first_name" className={firstName != "" ? "input-has-value" : ""}>Dealer Name</label>
+                                <p className="form-input-error" >{firstNameError}</p>
+
+                            </div>
+                            </div>
+        
+                            {/* <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text"  defaultValue={accountObjc.first_name} className="textbox" placeholder="First name"  onChange={(e) => setFirstname(e.target.value)} />
                                 <label htmlFor="first_name" className={firstName != "" ? "input-has-value" : ""}>First Name</label>
@@ -264,7 +273,7 @@ const EditDealerInformation = () => {
                                 <p className="form-input-error" >{lastNameError}</p>
 
                             </div>
-                            </div>
+                            </div> */}
                             <div className="col-sm-4 form-group countrycode">
                             <div className="tbox">
                                 <select className="form-control custom-select browser-default textbox"  id="drop" placeholder="" defaultValue="+1">

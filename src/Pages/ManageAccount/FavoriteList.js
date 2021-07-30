@@ -23,14 +23,10 @@ const Favoritelist = () => {
   const [loading,setLoading] = useState(true);
   const [favCarFlag,setFavCarFlag]=useState(false);
   const [data,setData]=useState("");
-  
-
-  console.log("=======>",userDetails.user_id)
-
   const getFavCarList=()=>{
 
     let request={
-        buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id
+      buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
     }
 
     console.log("request",request);
@@ -45,7 +41,7 @@ const addRemoveFavourite=(carid,state,flag)=>{
   console.log("inside addremove");
 
   let request={
-      buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+      buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
       car_id:carid,
       active: !state
   }
@@ -82,7 +78,7 @@ const onKeydowninSearch = (event) => {
 const searchFav = () => {
   console.log("/////////",data)
   let request={
-    buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+    buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
     data: data
       
   }

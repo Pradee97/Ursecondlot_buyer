@@ -48,7 +48,7 @@ const Notification = () => {
 
 	async function getNotification() {
 		let request = {
-			buyer_id: userDetails.user_id,
+			buyer_dealer_id: userDetails.buyer_dealer_id,
 
 		};
 		const state = API.post('notification/condition', request);
@@ -71,7 +71,7 @@ const Notification = () => {
 	const savehandleclick = () => {
 
 		let request = {
-			buyer_id: userDetails.user_id,
+			buyer_dealer_id: userDetails.buyer_dealer_id,
 			email: email,
 			sms: sms,
 			push_notification: push_notification,
