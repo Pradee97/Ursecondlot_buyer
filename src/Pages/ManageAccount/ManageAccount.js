@@ -112,7 +112,16 @@ const ManageAccount = () => {
                           <tr>
                             <td><span className="tdcol1">Mobile</span><span>{item.mobile_no}</span></td>
                             <td><span className="tdcol1">Zip code</span><span>{item.zipcode}</span></td>
+                            {/* <td>First name<span>{item.first_name}</span></td> */}
+                            <td><span className="tdcol1">Address </span><span>{item.address}</span></td>
+                            <td><span className="tdcol1">State</span><span>{item.state_name}</span></td>
                           </tr>
+                          <tr>
+                            {/* <td>Last name<span>{item.last_name}</span></td> */}
+                            <td><span className="tdcol1">City</span><span>{item.city_name}</span></td>
+                            <td><span className="tdcol1">Zip code</span><span>{item.zipcode}</span></td>
+                          </tr>
+                         
                         </table>
                       </div>
                     </div>

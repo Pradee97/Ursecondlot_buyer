@@ -73,11 +73,12 @@ const EditAddress = () => {
             setMobilePhone(res.data.data[0].mobile_no);
             setCity(res.data.data[0].city_name);
             setState(res.data.data[0].state_name);
-            setZIpCode(res.data.data[0].zipcode_id);
+            //setZIpCode(res.data.data[0].zipcode_id);
             setLocation(res.data.data[0].location);
             setInstruction(res.data.data[0].instructions);
             setZIpCode(res.data.data[0].zipcode);
             setAccountObj(res.data.data[0])
+            console.log("zipcode value from res",res.data.data[0].zipcode);
         })
             .catch(err => { console.log(err); });
     }
@@ -335,7 +336,9 @@ const EditAddress = () => {
                                 defaultStateValue = {state}
                                 defaultCityValue = {city}
                                 defaultZipcodeValue = {zipCode}
+                                
                             />
+                            {console.log("below component",zipCode)}
                             <p className="form-input-error"> {stateAndCityError} </p>
                              <div className="col-sm-12 form-group">
                             <div className="tbox">
