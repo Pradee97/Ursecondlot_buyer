@@ -50,14 +50,20 @@ const EditBuyer = () => {
     const [addressError, setAddressError] = useState("");
     const [locationNameError, setLocationNameError] = useState("");
     const [stateAndCityError, setStateAndCityError] = useState("")
-    const [isPrivileges, setIsPrivileges] = useState(false)
+    const [isPrivileges, setIsPrivileges] = useState(false);
+    const [type,setType]=useState("");
 
     const togglePopup = () => {
         setIsOpen(!isOpen);
     }
     const getFiles = (file) => {
-        console.log("======>",file)
-        setDoc(file);
+        setType("")
+        console.log("================>",file.type)
+        if(file.type.includes("jpg") || file.type.includes("jpeg") || file.type.includes("png")){
+            setDoc(file);
+        }else{
+            setType("0");
+        }
     }
 
     const getStateName = (stateData) => {
@@ -335,7 +341,8 @@ const EditBuyer = () => {
                                     {image==="" && doc===""?<img alt="" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} />:                                    
                                     doc===""?<img alt=""  src={image} />:
                                     <img alt=""  src={doc.base64} />}  
-                                    <span className="proCamera"></span>                                  
+                                    <span className="proCamera"></span>   
+                                    {type==="0"?<p className="form-input-error">Upload only Image Format </p>:""}                               
                                     <FileBase64 onDone={getFiles} type="hidden" />
                                     
                                 </div>
