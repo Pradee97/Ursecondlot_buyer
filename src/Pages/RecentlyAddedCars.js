@@ -121,7 +121,7 @@ const RecentlyAddedCars = () => {
                                 <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div className="car-item">
                                         <div className="cars-lock">
-                                        <img src={(item.isFavourite===0)? locked : lock} onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'recent')} />
+                                        <img src={(item.isFavourite===0)? lock : locked} onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'recent')} />
                                         </div>
                                         <img className="carImg" src={item.image}  onClick={()=>{redirectpage(item.car_id)}}/>
                                         {item.isbestSale?
