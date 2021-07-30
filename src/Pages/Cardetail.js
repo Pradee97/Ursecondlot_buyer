@@ -129,9 +129,9 @@ function loadLrgImg(img){
 function CarDetailList(){
 	const request = {
 		"car_id":id,
-		"buyer_id": JSON.parse(localStorage.getItem("userDetails")).user_id,
+		"buyer_dealer_id": JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
 		"seller_id": 1 }
-	
+	console.log("request for car detail",request)
 	API.post('carDetails/condition',request).then(res=>{
 		console.log("response",res.data.data);
 	   // const {results} = res.data.data;

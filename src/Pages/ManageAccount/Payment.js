@@ -27,7 +27,7 @@ const Payment = () => {
     const [popupActionValue, setPopupActionValue] = useState ("");
     const [popupActionPath, setPopupActionPath] = useState ("")
    
-
+    const[type,setType]=useState("");
     const [buyerId, setBuyerId] = useState("");
     const [dealershipName, setDealershipName] = useState("");
     const [accountHolderName, setAccountHolderName] = useState("");
@@ -127,7 +127,14 @@ const Payment = () => {
     const paymenthandleSubmit= (data) => {
         // setOpenLoader(true);
         // event.preventDefault();    
-        
+        if(!doc)
+        {
+        setType("1");
+        }
+        else
+        {
+            setType("");
+        }
         setDealershipNameError("")
         setAccountHolderNameError("") 
         setBankNameError("") 
@@ -250,11 +257,12 @@ const Payment = () => {
             setAccStateAndCityError("zipcode is required")
              return
         }
-        if(!doc){
-            setDocError("Upload Document is required")
-            return;
-        }
-        
+        // if(!doc){
+        //     setDocError("Upload Document is required")
+        //     return;
+        // }
+        if( type!=="1" ){
+            console.log("tyoe",type);
         API
             .post("payment_info/add", request)
             .then((response) => {
@@ -287,10 +295,19 @@ const Payment = () => {
                     setPopupActionValue("close");
         });
    
-    
+        }
 }
     const getFiles=(file)=>{
-        setDoc(file);
+        //setDoc(file);
+       
+        console.log("file",file)
+        console.log("================>",file[0].type)
+        //if(file[0].type.includes("jpg") || file.type.includes("jpeg") || file.type.includes("png")){
+            setDoc(file);
+        // }else{
+        //     setType("0");
+        // }
+        //setType("")
       }
       const getStateName = (stateData) => {
         setStateName(stateData)
@@ -446,7 +463,9 @@ const Payment = () => {
                                                         <FileBase64 multiple={ true } onDone={ getFiles } hidden type="hidden"/>
                                                     </div>
                                                     <span className="uploadedFile">{doc.length>0?doc[0].name:doc.name}</span>
-                                                    <p className="form-input-error" >{docError}</p>
+                                                    {/* <p className="form-input-error" >{docError}</p> */}
+                                                    {/* {type==="0"?<p className="form-input-error">Upload only Image Format </p>:""}  */}
+                                                    {type==="1"?<p className="form-input-error">File Upload Mandatory </p>:""} 
                                                     </div>
                                                    
                                                     <div className="col-lg-12 loginBtn">
