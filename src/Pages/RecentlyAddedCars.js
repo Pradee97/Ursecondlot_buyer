@@ -35,11 +35,12 @@ const RecentlyAddedCars = () => {
         }).catch(err => { console.log(err); });
     }
 
-    const redirectpage=(pathid)=>{
+    const redirectpage=(pathid,seller_id)=>{
         //e.preventDefault();
+        console.log("seller_id+++++",seller_id)
+        dispatch(CarListAction.sellerid(seller_id))
         history.push("/cardetail/"+pathid);
     }
-
     const addRemoveFavourite=(carid,state,flag)=>{
         console.log("inside addremove");
         let request={

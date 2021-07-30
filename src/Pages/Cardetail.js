@@ -426,12 +426,7 @@ return(
 								<img src={(moreCar.isFavourite===0)? locked : lock} onClick={()=>addRemoveFavourite(moreCar.car_id,moreCar.isFavourite,'SimilarCarFromSellerFlag')} />
 								  </div>
 								  <img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id)}} class="carImg" alt="..."/>
-								  {moreCar.isbestSale?
-								  <img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id)}} class="carImg" alt="..."/>
-								  {/* {moreCar.isbestSale?
-								<div class="cars-tag">
-									<h4>{moreCar.deal_name}</h4>
-								</div>:""} */}
+								  
 							  <div class="cars-content">		
 							  <h3><a href="#">{moreCar.make} {moreCar._type} ({moreCar.model} model)</a></h3>
 								<div class="d-flex align-items-center mb-3">
