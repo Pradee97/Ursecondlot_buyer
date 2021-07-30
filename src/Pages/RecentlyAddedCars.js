@@ -7,7 +7,8 @@ import { useEffect } from 'react';
 import lock from '../../src/assets/img/lock.svg';
 import locked from '../../src/assets/img/locked.svg';
 import Loading from '../Component/Loading/Loading';
-
+import { useDispatch, useSelector } from 'react-redux';
+import CarListAction from './CarList/CarListAction';
 const RecentlyAddedCars = () => {
 
     const history = useHistory();
@@ -15,7 +16,7 @@ const RecentlyAddedCars = () => {
     const [recentCarFlag,setrecentCarFlag]=useState(false);
     const [loading,setLoading] = useState(true);
     const [data,setData]=useState("");
-    
+    const dispatch = useDispatch();
     const getrecentCarList=()=>{
 
         let request={
@@ -34,11 +35,12 @@ const RecentlyAddedCars = () => {
         }).catch(err => { console.log(err); });
     }
 
-    const redirectpage=(pathid)=>{
+    const redirectpage=(pathid,seller_id)=>{
         //e.preventDefault();
+        console.log("seller_id+++++",seller_id)
+        dispatch(CarListAction.sellerid(seller_id))
         history.push("/cardetail/"+pathid);
     }
-
     const addRemoveFavourite=(carid,state,flag)=>{
         console.log("inside addremove");
         let request={
@@ -123,7 +125,7 @@ const RecentlyAddedCars = () => {
                                         <div className="cars-lock">
                                         <img src={(item.isFavourite===0)? lock : locked} onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'recent')} />
                                         </div>
-                                        <img className="carImg" src={item.image}  onClick={()=>{redirectpage(item.car_id)}}/>
+                                        <img className="carImg" src={item.image}  onClick={()=>{redirectpage(item.car_id,item.seller_id)}}/>
                                         {item.isbestSale?
                                         <div className="cars-tag">
                                             <h4>{item.deal_name}</h4>

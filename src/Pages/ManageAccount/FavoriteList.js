@@ -12,7 +12,8 @@ import googleplay from '../../assets/img/googleplay.png';
 import lock from '../../assets/img/lock.svg';
 import locked from '../../assets/img/locked.svg';
 import Loading from '../../Component/Loading/Loading';
-
+import { useDispatch, useSelector } from 'react-redux';
+import CarListAction from '../CarList/CarListAction';
 
 
 const Favoritelist = () => {
@@ -23,6 +24,7 @@ const Favoritelist = () => {
   const [loading,setLoading] = useState(true);
   const [favCarFlag,setFavCarFlag]=useState(false);
   const [data,setData]=useState("");
+  const dispatch = useDispatch();
   const getFavCarList=()=>{
 
     let request={
@@ -36,7 +38,12 @@ const Favoritelist = () => {
         setLoading(false);
     }).catch(err=>{console.log(err);});
 }
-
+const redirectpage=(pathid,seller_id)=>{
+  //e.preventDefault();
+  console.log("seller_id+++++",seller_id)
+  dispatch(CarListAction.sellerid(seller_id))
+  history.push("/cardetail/"+pathid);
+}
 const addRemoveFavourite=(carid,state,flag)=>{
   console.log("inside addremove");
 
@@ -74,6 +81,7 @@ const onKeydowninSearch = (event) => {
       searchFav();
     }
 }
+
 
 const searchFav = () => {
   console.log("/////////",data)
@@ -128,7 +136,7 @@ const searchFav = () => {
                     <div class="cars-lock">
                     <img src={(item.isFavourite===0)? lock : locked}  onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'fav')} />
                     </div>
-                        <img src={item.image} class="carImg" alt="..." />
+                        <img src={item.image} class="carImg" onClick={()=>{redirectpage(item.car_id,item.seller_id)}} alt="..." />
                         {item.isbestSale?
                         <div class="cars-tag">
                           <h4>Best deal</h4>

@@ -23,57 +23,11 @@ import cardetail4 from '../assets/img/cardetail4.jpg'
 import cardetail5 from '../assets/img/cardetail5.jpg'
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import locked from '../../src/assets/img/locked.svg';
-
+import { useDispatch, useSelector } from 'react-redux';
+import CarListReducer from './CarList/CarListReducer';
 
 const Cardetail = () =>{
-	const history = useHistory();
-	
-// $( document ).ready(function() {
-// 	$('.slider-for').slick({
-// 		slidesToShow: 1,
-// 		slidesToScroll: 1,
-// 		arrows: false,
-// 		fade: true,
-// 		asNavFor: '.slider-nav'
-// 	});
-// 	$('.slider-nav').slick({
-// 		slidesToShow: 4,
-// 		slidesToScroll: 1,
-// 		vertical:true,
-// 		asNavFor: '.slider-for',
-// 		dots: false,
-// 		focusOnSelect: true,
-// 		verticalSwiping:true,
-// 		responsive: [
-// 		{
-// 			breakpoint: 992,
-// 			settings: {
-// 			  vertical: false,
-// 			}
-// 		},
-// 		{
-// 		  breakpoint: 768,
-// 		  settings: {
-// 			vertical: false,
-// 		  }
-// 		},
-// 		{
-// 		  breakpoint: 580,
-// 		  settings: {
-// 			vertical: false,
-// 			slidesToShow: 3,
-// 		  }
-// 		},
-// 		{
-// 		  breakpoint: 380,
-// 		  settings: {
-// 			vertical: false,
-// 			slidesToShow: 2,
-// 		  }
-// 		}
-// 		]
-// 	});
-// 	});
+const history = useHistory();
 const [copySuccess, setCopySuccess] = useState('');
 const [sellerId,setSellerId]=useState("");
 const [carDetail ,setCarDetail] = useState([]) 
@@ -87,7 +41,8 @@ const [data, setData] = useState("");
 const [distance,setDistance] = useState("");
 const [moreCarFlag,setMoreCarFlag]=useState(false);
 const [similarCarFromSellerFlag,setSimilarCarFromSellerFlag]=useState(false);
-
+const selectedSellerId = useSelector(state => state.CarListReducer.payload);	
+console.log("sellerid from carlist",selectedSellerId);
 const redirectpage=(pathid)=>{
 	//e.preventDefault();
 	history.push("/carDetail/"+pathid);
@@ -133,7 +88,7 @@ function CarDetailList(){
 	const request = {
 	"car_id":id,
 	"buyer_dealer_id": JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
-	"seller_id": 1 }
+	"seller_id": selectedSellerId }
 	console.log("request for car detail",request)
 	API.post('carDetails/condition',request).then(res=>{
 	console.log("response",res.data.data);
@@ -471,12 +426,7 @@ return(
 								<img src={(moreCar.isFavourite===0)? locked : lock} onClick={()=>addRemoveFavourite(moreCar.car_id,moreCar.isFavourite,'SimilarCarFromSellerFlag')} />
 								  </div>
 								  <img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id)}} class="carImg" alt="..."/>
-								  {moreCar.isbestSale?
-								  <img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id)}} class="carImg" alt="..."/>
-								  {/* {moreCar.isbestSale?
-								<div class="cars-tag">
-									<h4>{moreCar.deal_name}</h4>
-								</div>:""} */}
+								  
 							  <div class="cars-content">		
 							  <h3><a href="#">{moreCar.make} {moreCar._type} ({moreCar.model} model)</a></h3>
 								<div class="d-flex align-items-center mb-3">

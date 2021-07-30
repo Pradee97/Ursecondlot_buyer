@@ -2,7 +2,7 @@ import React from 'react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import AppRouter from './Routes';
-import { rootReducer } from "./Reducer/rootReducer";
+import rootReducer from "./Reducer/rootReducer";
 
 function App() {
   let store = createStore(rootReducer);
