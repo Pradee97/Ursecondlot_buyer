@@ -378,7 +378,7 @@ return(
 				<div class="cars-lock">
 				<img src={(moreCar.isFavourite===0)? locked : lock} onClick={()=>addRemoveFavourite(moreCar.car_id,moreCar.isFavourite,'morecar')} />
 			  	</div>
-              	<img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id)}} class="img-fluid" alt="..."/>
+              	<img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id)}} class="carImg" alt="..."/>
 				  {moreCar.isbestSale?
 				<div class="cars-tag">
 					<h4>{moreCar.deal_name}</h4>
@@ -425,7 +425,9 @@ return(
 								<div class="cars-lock">
 								<img src={(moreCar.isFavourite===0)? locked : lock} onClick={()=>addRemoveFavourite(moreCar.car_id,moreCar.isFavourite,'SimilarCarFromSellerFlag')} />
 								  </div>
-								  <img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id)}} class="img-fluid" alt="..."/>
+								  <img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id)}} class="carImg" alt="..."/>
+								  {moreCar.isbestSale?
+								  <img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id)}} class="carImg" alt="..."/>
 								  {/* {moreCar.isbestSale?
 								<div class="cars-tag">
 									<h4>{moreCar.deal_name}</h4>

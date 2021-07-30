@@ -108,7 +108,7 @@ const searchFav = () => {
             <div class="container-fluid aos-init aos-animate" data-aos="fade-up">
 
               <div class="section-title">
-                <h2>My Favorite Car List  <img src={locked} /></h2>
+                <h2>My Favorite Car List</h2>
               </div>
               
 
@@ -130,7 +130,7 @@ const searchFav = () => {
                     <div class="cars-lock">
                     <img src={(item.isFavourite===0)? lock : locked}  onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'fav')} />
                     </div>
-                        <img src={item.image} class="img-fluid" alt="..." />
+                        <img src={item.image} class="carImg" alt="..." />
                         {item.isbestSale?
                         <div class="cars-tag">
                           <h4>Best deal</h4>

@@ -20,7 +20,7 @@ const History = () => {
         </div>
 
         <div class="row content">
-			<div class="col-lg-6 col-md-6">
+			<div class="col-lg-6 col-md-6 marAuto achBlock">
 				<h2>ACH Payment</h2>
 				<div class="vehiclesheadspaydetails">
 					<div class="row">

@@ -23,12 +23,14 @@ const Submenu = () => {
         <li className="nav__submenu-item ">
           <a href="JavaScript:void(0)" onClick={()=>history.push('/manageaccount')}>Manage Account</a>
         </li>
+        <hr></hr>
         <li className="nav__submenu-item ">
           <a href="JavaScript:void(0)" onClick={()=>history.push('/contactus')}>Contact Us</a>
         </li>
         <li className="nav__submenu-item ">
           <a href="JavaScript:void(0)" onClick={()=>history.push('/about')}>About Us</a>
         </li>
+        <hr></hr>
         <li className="nav__submenu-item ">
         <a href="JavaScript:void(0)" onClick={()=>{history.push('/');localStorage.clear()}}>Logout</a>
         </li>

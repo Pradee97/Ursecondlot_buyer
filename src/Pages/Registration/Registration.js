@@ -405,7 +405,7 @@ const Registration = () => {
                             </div>
                             
                             <div className="col-sm-6 form-group timepicker">
-                                <form novalidate>
+                                <form novalidate className="timePicker">
                                 <div className="tbox"> 
                                     <input type="time" className="form-control textbox" placeholder="Select Time" name="Time" 
                                     onChange={(e) => setTime(e.target.value)} />
