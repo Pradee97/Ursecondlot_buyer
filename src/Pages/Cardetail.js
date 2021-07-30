@@ -25,9 +25,10 @@ import {CopyToClipboard} from 'react-copy-to-clipboard';
 import locked from '../../src/assets/img/locked.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import CarListReducer from './CarList/CarListReducer';
-
+import CarListAction from './CarList/CarListAction';
 const Cardetail = () =>{
 const history = useHistory();
+const dispatch = useDispatch();
 const [copySuccess, setCopySuccess] = useState('');
 const [sellerId,setSellerId]=useState("");
 const [carDetail ,setCarDetail] = useState([]) 
@@ -43,19 +44,21 @@ const [moreCarFlag,setMoreCarFlag]=useState(false);
 const [similarCarFromSellerFlag,setSimilarCarFromSellerFlag]=useState(false);
 const selectedSellerId = useSelector(state => state.CarListReducer.payload);	
 console.log("sellerid from carlist",selectedSellerId);
-const redirectpage=(pathid)=>{
+const redirectpage=(pathid,seller_id)=>{
 	//e.preventDefault();
-	history.push("/carDetail/"+pathid);
-}
+	console.log("seller_id+++++",seller_id)
+	dispatch(CarListAction.sellerid(seller_id))
+	history.push("/cardetail/"+pathid);
+  }
 
 const redirectpagemorecarseller=(pathid)=>{
 	//e.preventDefault();
-	history.push("/MoreCarFromSeller/"+pathid);
+	history.push("/MoreCarFromBuyer/"+pathid);
 }
 
 const redirectpagesimilarcar=(pathid)=>{
 	//e.preventDefault();
-	history.push("/similarCarFromSeller/"+pathid);
+	history.push("/similarCarFromBuyer/"+pathid);
 }
 function copytoclipboard(e) {
     //textAreaRef.current.select();
@@ -378,7 +381,7 @@ return(
 				<div class="cars-lock">
 				<img src={(moreCar.isFavourite===0)? locked : lock} onClick={()=>addRemoveFavourite(moreCar.car_id,moreCar.isFavourite,'morecar')} />
 			  	</div>
-              	<img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id)}} class="carImg" alt="..."/>
+              	<img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id,moreCar.seller_id)}} class="carImg" alt="..."/>
 				  {moreCar.isbestSale?
 				<div class="cars-tag">
 					<h4>{moreCar.deal_name}</h4>
@@ -425,7 +428,7 @@ return(
 								<div class="cars-lock">
 								<img src={(moreCar.isFavourite===0)? locked : lock} onClick={()=>addRemoveFavourite(moreCar.car_id,moreCar.isFavourite,'SimilarCarFromSellerFlag')} />
 								  </div>
-								  <img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id)}} class="carImg" alt="..."/>
+								  <img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id,moreCar.seller_id)}} class="carImg" alt="..."/>
 								  
 							  <div class="cars-content">		
 							  <h3><a href="#">{moreCar.make} {moreCar._type} ({moreCar.model} model)</a></h3>
