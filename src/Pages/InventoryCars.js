@@ -7,7 +7,8 @@ import { useEffect } from 'react';
 import lock from '../../src/assets/img/lock.svg';
 import locked from '../../src/assets/img/locked.svg';
 import Loading from '../Component/Loading/Loading';
-
+import { useDispatch, useSelector } from 'react-redux';
+import CarListAction from './CarList/CarListAction';
 
 const InventoryCars = () => {
 
@@ -16,7 +17,7 @@ const InventoryCars = () => {
     const [inventoryCarFlag,setInventoryCarFlag]=useState(false);
     const [loading,setLoading] = useState(true);
     const [data,setData]=useState("");
-
+    const dispatch = useDispatch();
     const getInventoryCarList=()=>{
 
         let request={
@@ -35,8 +36,10 @@ const InventoryCars = () => {
         }).catch(err=>{console.log(err);});
     }
 
-    const redirectpage=(pathid)=>{
+    const redirectpage=(pathid,seller_id)=>{
         //e.preventDefault();
+        console.log("seller_id+++++",seller_id)
+        dispatch(CarListAction.sellerid(seller_id))
         history.push("/cardetail/"+pathid);
     }
 

@@ -10,10 +10,12 @@ import { useHistory, useParams } from "react-router-dom";
 import { useState } from 'react';
 import { useEffect } from 'react';
 import Loading from"../../Component/Loading/Loading";
-
+import { useDispatch, useSelector } from 'react-redux';
+import CarListAction from './CarListAction';
 
 const CarList = () => {
     const history = useHistory();
+    const dispatch = useDispatch();
     const [loading,setLoading] = useState(true);
     let userDetails = ls.get('userDetails');
     const [carDetail,setCarDetail]=useState([]);
@@ -63,9 +65,10 @@ const CarList = () => {
             //setInventoryCarFlag(!inventoryCarFlag)
         }).catch(err=>{console.log(err);});
     }
-
-    const redirectpage=(pathid)=>{
+    const redirectpage=(pathid,seller_id)=>{
         //e.preventDefault();
+        console.log("seller_id+++++",seller_id)
+        dispatch(CarListAction.sellerid(seller_id))
         history.push("/cardetail/"+pathid);
     }
 
@@ -161,7 +164,7 @@ const CarList = () => {
                                             {/* <img src={(item.isFavourite===0)? locked : lock} onClick={()=>(item.isFavourite===0)?addFavourite(item.car_id):removeFav(item.car_id)} /> */}
                                             <img src={(item.isFavourite===0)? lock : locked} onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'recent')} />
                                         </div>
-                                        <img className="carImg" src={item.image}  onClick={()=>{redirectpage(item.car_id)}}/>
+                                        <img className="carImg" src={item.image}  onClick={()=>{redirectpage(item.car_id,item.seller_id)}}/>
                                         {item.isbestSale?
                                         <div className="cars-tag">
                                             <h4>{item.deal_name}</h4>
@@ -208,7 +211,7 @@ const CarList = () => {
                                     <img src={(item.isFavourite===0)? lock : locked}  onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'inv')} />
                                         </div>
                                         
-                                        <img className="carImg" src={item.image} onClick={()=>{redirectpage(item.car_id)}} className="carImg" alt="..." />
+                                        <img className="carImg" src={item.image} onClick={()=>{redirectpage(item.car_id,item.seller_id)}} className="carImg" alt="..." />
                                         {item.isbestSale?
                                         <div className="cars-tag">
                                             <h4>{item.deal_name}</h4>
@@ -255,7 +258,7 @@ const CarList = () => {
 
                                         </div>
                                         
-                                        <img className="carImg" src={item.image} onClick={()=>{redirectpage(item.car_id)}} alt="..." />
+                                        <img className="carImg" src={item.image} onClick={()=>{redirectpage(item.car_id,item.seller_id)}} alt="..." />
                                         {item.isbestSale?
                                         <div className="cars-tag">
                                             <h4>{item.deal_name}</h4>
@@ -302,7 +305,7 @@ const CarList = () => {
 
                                 </div>
                                 
-                                <img className="carImg" src={item.image} onClick={()=>{redirectpage(item.car_id)}} alt="..." />
+                                <img className="carImg" src={item.image} onClick={()=>{redirectpage(item.car_id,item.seller_id)}} alt="..." />
                                 {item.isbestSale?
                                 <div className="cars-tag">
                                     <h4>{item.deal_name}</h4>

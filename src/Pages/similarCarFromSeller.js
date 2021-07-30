@@ -7,14 +7,15 @@ import googleplay from '../assets/img/googleplay.png';
 import speedometer from '../assets/img/speedometer.svg';
 import gasolinePump from '../assets/img/gasolinePump.svg';
 import locked from '../../src/assets/img/locked.svg';
-
+import { useDispatch, useSelector } from 'react-redux';
+import CarListAction from './CarList/CarListAction';
 const SimilarCarFromSeller = () =>{
     const { id } = useParams();
     const [similarCarDetail,setSimilarCarDetail]=useState([]);
     const history = useHistory();
     const [similarCarFromSellerFlag,setSimilarCarFromSellerFlag]=useState(false);
     console.log("id from cardetail",id);
-
+    const dispatch = useDispatch();
     const getMoreSimilarCars=()=>{
     let request={
         "make":id,
@@ -30,9 +31,11 @@ const SimilarCarFromSeller = () =>{
     })
 }
     
-const redirectpage=(pathid)=>{
-	//e.preventDefault();
-	history.push("/carDetail/"+pathid);
+const redirectpage=(pathid,seller_id)=>{
+  //e.preventDefault();
+  console.log("seller_id+++++",seller_id)
+  dispatch(CarListAction.sellerid(seller_id))
+  history.push("/cardetail/"+pathid);
 }
 useEffect(() => {
     getMoreSimilarCars();

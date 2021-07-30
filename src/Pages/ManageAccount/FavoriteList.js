@@ -12,7 +12,8 @@ import googleplay from '../../assets/img/googleplay.png';
 import lock from '../../assets/img/lock.svg';
 import locked from '../../assets/img/locked.svg';
 import Loading from '../../Component/Loading/Loading';
-
+import { useDispatch, useSelector } from 'react-redux';
+import CarListAction from './CarList/CarListAction';
 
 
 const Favoritelist = () => {
@@ -23,6 +24,7 @@ const Favoritelist = () => {
   const [loading,setLoading] = useState(true);
   const [favCarFlag,setFavCarFlag]=useState(false);
   const [data,setData]=useState("");
+  const dispatch = useDispatch();
   const getFavCarList=()=>{
 
     let request={
