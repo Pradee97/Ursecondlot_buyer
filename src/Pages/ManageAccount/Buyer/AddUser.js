@@ -55,7 +55,8 @@ const AddUser = () => {
 	const [optionError, setoptionError] = useState("");
 	const [state,setState]=useState("1");
     const [city,setCity]=useState("1");
-    const [zipcode,setZipcode]=useState("1");
+	const [zipcode,setZipcode]=useState("1");
+	const [type,setType]=useState("");
 
 
 	console.log("=====userDetails====>", userDetails)
@@ -64,8 +65,13 @@ const AddUser = () => {
 		setIsOpen(!isOpen);
 	}
 	const getFiles=(file)=>{
-        setDoc(file);
-		console.log("file=====>",file)
+        setType("")
+        console.log("================>",file.type)
+        if(file.type.includes("jpg") || file.type.includes("jpeg") || file.type.includes("png")){
+            setDoc(file);
+        }else{
+            setType("0");
+        }
       }
 
 	
@@ -303,6 +309,7 @@ const getZipCodeId = (zipData) => {
 														<img alt="" src="adduser.jpg" src={doc.base64} ></img>														
 														}
 														<span class="proCamera"></span>
+														{type==="0"?<p className="form-input-error">Upload only Image Format </p>:""}
 														<FileBase64 onDone={getFiles} type="hidden" />
 														
 														{/* <button>  <img alt="" for="upload" src="adduser.jpg"  /></button>  */}
