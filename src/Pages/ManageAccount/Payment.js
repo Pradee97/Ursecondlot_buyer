@@ -307,7 +307,7 @@ const Payment = () => {
         //if(file[0].type.includes("jpg") || file.type.includes("jpeg") || file.type.includes("png")){
             setDoc(file);
         // }else{
-        //     setType("0");
+            setType("");
         // }
         //setType("")
       }

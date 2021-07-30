@@ -42,7 +42,7 @@ useEffect(() => {
 const addRemoveFavourite=(carid,state,flag)=>{
   console.log("inside addremove");
   let request={
-      buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+    buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
       car_id:carid,
       active: !state
   }
@@ -89,11 +89,11 @@ return(
 				<img src={(moreCar.isFavourite===0)? locked : lock} onClick={()=>addRemoveFavourite(moreCar.car_id,moreCar.isFavourite,'SimilarCarFromSellerFlag')} />
 			  	</div>
               	<img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id)}} class="img-fluid" alt="..."/>
-                {moreCar.isbestSale?
+                {/* {moreCar.isbestSale?
 				<div class="cars-tag">
 					<h4>{moreCar.deal_name}</h4>
 				
-				</div>:""}
+				</div>:""} */}
               <div class="cars-content">		
 			  <h3><a href="#">{moreCar.make} {moreCar._type} ({moreCar.model} model)</a></h3>
                 <div class="d-flex align-items-center mb-3">

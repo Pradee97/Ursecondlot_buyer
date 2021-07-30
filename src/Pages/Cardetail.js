@@ -22,6 +22,8 @@ import cardetail3 from '../assets/img/cardetail3.jpg'
 import cardetail4 from '../assets/img/cardetail4.jpg'
 import cardetail5 from '../assets/img/cardetail5.jpg'
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+import locked from '../../src/assets/img/locked.svg';
+
 
 const Cardetail = () =>{
 	const history = useHistory();
@@ -83,7 +85,8 @@ const [lrgImg,setLrgImg]=useState("");
 const [copied, setCopied] = useState(false);
 const [data, setData] = useState("");
 const [distance,setDistance] = useState("");
-
+const [moreCarFlag,setMoreCarFlag]=useState(false);
+const [similarCarFromSellerFlag,setSimilarCarFromSellerFlag]=useState(false);
 
 const redirectpage=(pathid)=>{
 	//e.preventDefault();
@@ -128,71 +131,101 @@ function loadLrgImg(img){
 }
 function CarDetailList(){
 	const request = {
-		"car_id":id,
-		"buyer_dealer_id": JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
-		"seller_id": 1 }
+	"car_id":id,
+	"buyer_dealer_id": JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
+	"seller_id": 1 }
 	console.log("request for car detail",request)
 	API.post('carDetails/condition',request).then(res=>{
-		console.log("response",res.data.data);
-	   // const {results} = res.data.data;
-		console.log("Response data",res.data.data);
-		//if(results.length>0){
-		setCarDetail(res.data.data);
-		console.log("car Detail",res.data.data);
-		console.log("car distance added",res.data.distance);
-		setDistance(res.data.distance);
-		setLrgImg(res.data.data[0].image);
-		//}
+	console.log("response",res.data.data);
+	// const {results} = res.data.data;
+	console.log("Response data",res.data.data);
+	//if(results.length>0){
+	setCarDetail(res.data.data);
+	console.log("car Detail",res.data.data);
+	console.log("car distance added",res.data.distance);
+	setDistance(res.data.distance);
+	setLrgImg(res.data.data[0].image);
+	//}
 	});
-}
-function BuyerInventoryCarDetailList(){
+	}
+	function BuyerInventoryCarDetailList(){
 	let rq={
-		buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+	buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
 	};
 	API.post('BuyerInventoryCarList/condition',rq).then(res=>{
-		console.log("response",res.data.data);
-	   // const {results} = res.data.data;
-		//console.log("Response data",res.data.data);
-		//if(results.length>0){
-		setCarInventoryDetail(res.data.data);
-		console.log("car Inventory Detail",res.data.data);
-		const req={
-			"seller_id":res.data.data[0].seller_id,
-			buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
-		};
-		API.post('SellerCarList/condition',req).then(resp=>{
-			console.log("response",resp.data.data);
-		   // const {results} = res.data.data;
-			//console.log("Response data",res.data.data);
-			//if(results.length>0){
-				setSellerCarDetail(resp.data.data);
-			console.log("Seller car Inventory Detail",resp.data.data);
-			//}
-		})
-		const req_samecar={
-			"make":res.data.data[0].make,
-			buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
-		}
-		console.log("other dealer car req",req_samecar);
-		API.post('OtherDealerCarList/condition',req_samecar).then(response=>{
-			console.log("otherdealercar list",response.data.data);
-			setOtherDealerCarDetail(response.data.data);
-			console.log("other dealer car req",req_samecar);
-			console.log("otherdealercar list",response.data.data);
-		})
-		//}
+	console.log("response",res.data.data);
+	// const {results} = res.data.data;
+	//console.log("Response data",res.data.data);
+	//if(results.length>0){
+	setCarInventoryDetail(res.data.data);
+	console.log("car Inventory Detail",res.data.data);
+	const req={
+	"seller_id":res.data.data[0].seller_id,
+	buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+	};
+	API.post('SellerCarList/condition',req).then(resp=>{
+	console.log("response",resp.data.data);
+	// const {results} = res.data.data;
+	//console.log("Response data",res.data.data);
+	//if(results.length>0){
+	setSellerCarDetail(resp.data.data);
+	console.log("Seller car Inventory Detail",resp.data.data);
+	//}
+	})
+	const req_samecar={
+	"make":res.data.data[0].make,
+	buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+	}
+	console.log("other dealer car req",req_samecar);
+	API.post('OtherDealerCarList/condition',req_samecar).then(response=>{
+	console.log("otherdealercar list",response.data.data);
+	setOtherDealerCarDetail(response.data.data);
+	console.log("other dealer car req",req_samecar);
+	console.log("otherdealercar list",response.data.data);
+	})
+	//}
 	});
-}
-
-useEffect (()=>{
+	}
+	
+	useEffect (()=>{
 	// carDetails/condition
 	console.log("id value",id)
 	CarDetailList();
 	BuyerInventoryCarDetailList();
 	
 	
+	
+	},[])
 
-},[])
+const addRemoveFavourite=(carid,state,flag)=>{
+	console.log("inside addremove");
+	let request={
+		buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
+		car_id:carid,
+		active: !state
+	}
+	console.log("request",request);
+	API.post('buyer_favourite/add',request).then(res=>{
+		// setaddFavourite(res.data.data);
+		console.log("add Fav Inventory Detail",res.data.data);
+
+		if(flag==='morecar'){
+			setMoreCarFlag(!moreCarFlag)
+		  }
+		else if(flag==='SimilarCarFromSellerFlag'){
+			setSimilarCarFromSellerFlag(!similarCarFromSellerFlag)
+		  }
+		
+	})
+}
+
+useEffect (()=>{
+	
+	BuyerInventoryCarDetailList();
+	
+	
+	
+	},[moreCarFlag,similarCarFromSellerFlag])
 
 	
 return(
@@ -388,7 +421,7 @@ return(
          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
             <div class="car-item">
 				<div class="cars-lock">
-				<img src={lock} class="img-fluid" alt="..."/>
+				<img src={(moreCar.isFavourite===0)? locked : lock} onClick={()=>addRemoveFavourite(moreCar.car_id,moreCar.isFavourite,'morecar')} />
 			  	</div>
               	<img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id)}} class="img-fluid" alt="..."/>
 				  {moreCar.isbestSale?
@@ -435,13 +468,13 @@ return(
 							<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
 							<div class="car-item">
 								<div class="cars-lock">
-								<img src={lock} class="img-fluid" alt="..."/>
+								<img src={(moreCar.isFavourite===0)? locked : lock} onClick={()=>addRemoveFavourite(moreCar.car_id,moreCar.isFavourite,'SimilarCarFromSellerFlag')} />
 								  </div>
 								  <img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id)}} class="img-fluid" alt="..."/>
-								  {moreCar.isbestSale?
+								  {/* {moreCar.isbestSale?
 								<div class="cars-tag">
 									<h4>{moreCar.deal_name}</h4>
-								</div>:""}
+								</div>:""} */}
 							  <div class="cars-content">		
 							  <h3><a href="#">{moreCar.make} {moreCar._type} ({moreCar.model} model)</a></h3>
 								<div class="d-flex align-items-center mb-3">

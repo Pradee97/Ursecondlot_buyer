@@ -13,7 +13,7 @@ const Terms = (props) => {
                     
                             <div className="modalbody">
                                 <h2>Terms And Conditions </h2>
-                                <h6>SOUTH CHICAGO AUTO ACUTION, LLC</h6>
+                                <h6>URS SECOND LOT</h6>
                                 <p>
                                 1.	The South Chicago Auto Auction (SCAA) is Dealers only Auction. Absolutely no retail buyers are allowed on the premises.<br></br>
                                 2.	All Dealers must be registered with this auction to buy or sell vehicles. Dealers must be registered before doing any business.<br></br>
