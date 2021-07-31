@@ -72,12 +72,15 @@ return(
         
         <main id="main" class="inner-page-cars">
     
-			<div class="back-btn">
-				<a class="back-btn-primary" href="/carlist"><i class="bx bx-chevron-left"></i> Back</a>
-			</div>		
+				
 	
 	<div id="dealer-cars" class="dealer-cars">
       <div class="container-fluid aos-init aos-animate">
+
+      <div class="back-btn">
+				<a class="back-btn-primary" href="/carlist"><i class="bx bx-chevron-left"></i> Back</a>
+			</div>
+
       {/* <div class="container-fluid aos-init aos-animate" data-aos="fade-up"> */}
         <div class="section-title">
           <h2>More cars from the dealer</h2>          

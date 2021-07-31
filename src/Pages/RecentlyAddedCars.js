@@ -100,11 +100,13 @@ const RecentlyAddedCars = () => {
         <div>
             {loading?<Loading/>:
              <main id="main" className="inner-page carList">
-             <div class="back-btn">
-                        <a class="back-btn-primary" href="/carlist"><i class="bx bx-chevron-left"></i> Back</a>
-            </div>
+            
              <div id="recently-cars" className="recently-cars">
                         <div className="container-fluid aos-init aos-animate" data-aos="fade-up">
+
+                        <div class="back-btn">
+                        <a class="back-btn-primary" href="/carlist"><i class="bx bx-chevron-left"></i> Back</a>
+            </div>
 
                         <div className="section-title">
                                 <h2>Recently Added Cars</h2>

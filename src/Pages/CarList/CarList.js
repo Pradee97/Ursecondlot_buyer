@@ -289,7 +289,7 @@ const CarList = () => {
                         <div className="container-fluid aos-init aos-animate" data-aos="fade-up">
 
                             <div className="section-title">
-                                <h2>favorite list  <img src={locked} /></h2>
+                                <h2>favorite list </h2>
                             </div>
                            
 
