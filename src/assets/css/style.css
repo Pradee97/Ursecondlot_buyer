@@ -7234,3 +7234,134 @@ img.carImg{
   border-radius: 5px;
 }
 
+
+
+/* Dropdown CSS */
+
+#topbar ul.dropdown-menu{
+	padding:0;
+	margin:0;
+	max-width:150px;
+	transform: translate3d(60px, 30px, 0px) !important;
+}
+
+#topbar ul.dropdown-menu li{
+	padding:0;
+	margin:0;
+}
+
+#topbar ul.dropdown-menu li a{
+	color:#000;
+	padding: 7px 15px;
+    margin: 0;
+	font-size:14px;
+}
+#topbar ul.dropdown-menu li .dropdown-item:hover, #topbar ul.dropdown-menu li .dropdown-item:focus, #topbar ul.dropdown-menu li .dropdown-item a.active{
+	background:#fff;
+	color:#BD062C;
+}
+
+
+/* Invoice */
+
+.invoiceBlock{
+	max-width: 1000px;
+    margin: auto;
+    border: #ddd solid 1px;
+    padding: 30px;
+}
+
+.invoiceBlock .header{
+	border-bottom:#ddd solid 1px;
+	padding-bottom:20px;
+	margin-bottom:30px;
+}
+
+.invoiceBlock .header_right{
+	text-align:right;
+}
+
+.invoiceBlock .feestableBlock{
+	max-width:100%;
+	clear:both;
+	margin-top:20px;
+}
+.invoiceBlock .headtable table{
+	width:100%;
+	text-align:left;
+}
+
+.invoiceBlock  table{
+	width:100%;
+	text-align:left;
+}
+
+.invoiceBlock table td{	
+	text-align:left;
+	font-size:14px;
+}
+.invoiceBlock  table td span{	
+	font-weight: 500;
+    min-width: 150px;
+    display: inline-block;
+	text-align:left;
+	font-size:14px;
+}
+.infotable{
+	margin-top:20px;
+}
+
+.alignRight{
+	text-align:right !important;
+}
+
+.invoiceBlock .infotable{
+	width:50%;
+	float:left;
+}
+.invoiceBlock .infotable th{
+	padding:10px;
+	font-size:16px;
+	font-weight:600;
+}
+
+.invoiceBlock .infotable td span{
+	color:#000;
+}
+
+.invoiceBlock  table th.priceCol{
+	width:20%;
+	text-align:center;
+}
+
+.invoiceBlock .feestable th{
+	text-align:center;
+	padding:10px 0;
+}
+
+.invoiceBlock .feestable p{
+	color:#999;
+	font-size:14px;
+}
+.invoiceBlock .feestable td span{	
+	
+	min-width: auto;
+	color:#000;
+}
+.invoiceBlock .feestableBlock .feestable table td:last-child{
+	text-align:center;
+}
+
+
+.invoiceBlock .contenttable{
+	float: left;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.invoiceBlock .feestable tfoot td{	
+	background:#F0F0F0;
+	font-size:16px;
+}
+.invoiceBlock .feestable tfoot td span{	
+	font-size:16px;
+}
