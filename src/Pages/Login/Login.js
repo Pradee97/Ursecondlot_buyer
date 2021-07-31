@@ -7,9 +7,13 @@ import { useForm } from "react-hook-form";
 import { Button } from 'antd';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch, useSelector } from 'react-redux';
+import LoginAction from './LoginAction';
+
 
 const Login = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const eye = <FontAwesomeIcon icon={faEye} />;
   const {state} = useLocation();
   const [emailId, setEmailId] = useState("");
@@ -57,7 +61,7 @@ const Login = () => {
         console.log("resresponse.data.data", response.data.data)
         if (response.data.success == true) {
           ls.set('userDetails', response.data.data);
-          
+          dispatch(LoginAction.success(response.data.data));
           if(response.data.data.local_flag == '0'){
             history.push("/changepassword");
           }else{

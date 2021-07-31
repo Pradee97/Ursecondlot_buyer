@@ -3,7 +3,7 @@ const LoginConst = {
     ERROR: 'ERROR'
 };
 
-const CarListAction = {
+const LoginAction = {
     success,
     error
 };
