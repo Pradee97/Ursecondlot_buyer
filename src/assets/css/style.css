@@ -914,7 +914,7 @@ section {
 	background:#2c5baa;
 	color:#fff;
 	font-size:18px;
-	padding:20px 0;
+	padding:10px 0;
 	font-weight:400;
 	width:50%;
 }
@@ -988,11 +988,7 @@ Cars list
     padding: 8px 12px;
     right: 10px;
     top: 10px;
-  cursor: pointer;
-}
-
-.cars-lock:hover{	
-  background: #ddd;
+	
 }
 
 .car-item img{
@@ -1155,7 +1151,6 @@ Cars list
 .favorite-cars .cars-content h3 {
     font-weight: 700;
     font-size: 20px;
-    text-align: center;
 }
 .favorite-cars .cars-content h3 a {
     color: #BD062C;
@@ -2543,7 +2538,7 @@ input[type="password"] {
   padding: 10px 20px;
   margin-top: 20px;
   margin-bottom: 20px;
-  width:auto;
+  width: auto;
   border-radius: 3px;
   border: none;
 }
@@ -2816,7 +2811,7 @@ margin-top: -3px;
 
 .registrationform .tbox .textbox + label{
   position: absolute;
-  top: 14px;
+  top: 12px;
   left: 10px;
   bottom: 0;
   border-radius: 3px 0 0 3px;
@@ -2939,9 +2934,15 @@ popup Dialogbox
 }
 
 .cta-btns-primary:hover{
-	text-decoration: none;
+	text-decoration: underline;
 }
 
+
+.modal-footer a:hover {
+    color: #fff;
+    text-decoration: none;
+    
+}
 
 .suggested-cars .col-md-3{ 
 -ms-flex: 20%;
@@ -2954,27 +2955,22 @@ popup Dialogbox
 Car Detail Page
 ---------------------------------------------------------*/
 .inner-page-cars{
-	 background: #F5F5F5;
-    padding-top: 40px;
+    padding-top: 50px;
 }
 .back-btn{
 	display:block;
 	margin-bottom:20px;
-  text-align: left;
 	
 }
 .back-btn-primary{
-	color:#BD062C;
+	color:#bd062c;
 	font-size:18px;
 	border: 2px solid #BD062C;
-	padding:6px 15px;
+	padding:10px 20px;
 	border-radius:4px;
 	margin-bottom:20px;
 }
 
-.back-btn-primary:hover, .back-btn-primary:focus{
-  border: 2px solid #BD062C;
-}
 
 .heading-section {
 	text-align: center;
@@ -2984,8 +2980,8 @@ Car Detail Page
 .product-name {
 	font-size: 30px;
 	font-weight: 500;
-	margin-bottom: 10px;
-  text-transform: capitalize;
+	line-height: 22px;
+	margin-bottom: 4px;
 }
 
 
@@ -3062,16 +3058,13 @@ Car Detail Page
 }
 
 .thumbnail-image {
-  margin: 0;
+  width: 100px;
+  height: 100px;
+  margin: 20px auto;
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  margin-bottom: 20px;
-}
-
-.thumbnail-image img{
-  width: 100%;
-  height: 140px;
+  border: 4px solid transparent;
 }
 
 .product-info .details span{
@@ -3161,7 +3154,6 @@ Car Detail Page
 	  color:#bd062c;
 	  font-size:20px;
 	  margin-bottom:15px;
-    text-align: left;
 	  
   }
   .product-count .details {
@@ -3178,11 +3170,6 @@ Car Detail Page
 .product-count .details:last-child {
     border-right: none;
 }
-
-.cars-buy{
-  text-align: left;
-}
-
 .cars-buy .cars-buy-btns{
 	background-color: #bd062c;
     color: white;
@@ -3191,7 +3178,6 @@ Car Detail Page
     border-radius: 3px;
     border: none;
 	font-size:20px;
-  margin-right: 20px;
 }
 .cars-buy .cars-buy-btns-primary{
 	background-color: #b8b8b8;
@@ -3202,12 +3188,6 @@ Car Detail Page
     border: none;
 	font-size:20px;
 }
-.cars-buy .cars-buy-btns:hover, .cars-buy .cars-buy-btns-primary:hover{
-	background-color: #002768;
-    color: white;
-    text-decoration: none;
-}
-
 
 .carspecifation .carspecifationblock {
     margin: 0 auto;
@@ -3221,7 +3201,6 @@ Car Detail Page
 }
 .carspecifation p{
 	color:#343434;
-  text-align: left;
 }
 .carspecifation span{
 	color:#808080;
@@ -3229,9 +3208,9 @@ Car Detail Page
 }
 
 .dealer-cars .col-md-3{ 
-  -ms-flex: 20%;
+-ms-flex: 20%;
     flex:  20%;
-    max-width:20%;
+    max-width:  20%;
 }
 .dealer-cars   {
 	background: #fff 0% 0% no-repeat padding-box;
@@ -3348,7 +3327,7 @@ Car Detail Page
 .other-dealer-cars  .col-md-3{ 
 -ms-flex: 20%;
     flex:  20%;
-    max-width:20%;
+    max-width:  20%;
 }
 .other-dealer-cars    {
 	background: #fff 0% 0% no-repeat padding-box;
@@ -3630,7 +3609,6 @@ ErrorModalCenter
     border: 1px solid rgba(0,0,0,.125);
     border-radius: .25rem;
 	padding:30px 40px;
-  clear: both;
 	
 }
 .inspectionsummery .section-title p {
@@ -3667,7 +3645,7 @@ ErrorModalCenter
 	background:#2c5baa;
 	color:#fff;
 	font-size:23px;
-	padding:10px 0;
+	padding:20px 0;
 	font-weight:400;
 	width:50%;
 }
@@ -3684,10 +3662,6 @@ ErrorModalCenter
    color: #9F9F9F;
    font-size: 16px;
     font-weight: normal;
-}
-
-.inspectionsummeryhead {
-  text-align: left;
 }
 
 .inspectionsummeryhead h2{
@@ -3713,7 +3687,7 @@ ErrorModalCenter
 }
 .inspectiontableBlock .commentsblock h3{
 	color:#343434;
-	padding:15px 0;
+	padding:20px 0;
 	font-size:18px;
 	font-weight:normal;
 }
@@ -3758,7 +3732,7 @@ Make your Bid
 ---------------------------------------------*/
 
 .makeyourbid .makeyourbidblock{
-	font-size: 16px;
+	
 	    margin: 0 auto;
     word-wrap: break-word;
     background-color: #fff;
@@ -3779,9 +3753,6 @@ Make your Bid
 }
 .border-bottomtext{
 	margin:10px;
-  text-align: left;
-  font-weight: 600;
-    font-size: 16px;
 }
 .input-icon {
   position: relative;
@@ -3822,15 +3793,13 @@ Make your Bid
 }
 .optional-services{
 	border: 1px solid #ccc;
-	margin:20px 0;
-  text-align: left;
+	margin:20px 0
 }
 .optional-services h4{
 	color:#4e4e4e;
 	font-size:16px;
 	text-align:center;
 	margin-top:15px;
-  margin-bottom: 20px;
 }
 .optional-services .transportation{
     margin-right: 10px;
@@ -3870,21 +3839,6 @@ Make your Bid
 	font-size:20px;
 	font-weight:500;
 }
-
-.makeyourbid-send-btns:hover{
-  background:#002768;
-  border:2px solid  #002768;
-  color: #fff;
-  text-decoration: none;
-}
-
-.makeyourbid-cancle-btns:hover, .makeyourbid-cancle-btns:focus{
-  background:#bd062c;
-   border:2px solid  #bd062c;
-   color: #fff;
-   text-decoration: none;
-}
-
 
 /*----------------------------------------------------
 Search Box"
@@ -4352,8 +4306,8 @@ Transport
 	height: auto;
 }
 .tabsoptionblock ul.tabs li {
-	padding: 10px;	
-	border-right: 1px solid #ccc;
+	padding: 20px 21px;	
+	border-right: 1px solid #707070;
 	background-color: #fff;
 	position: relative;
 	width: 33.33%;
@@ -4392,7 +4346,6 @@ Transport
     border-radius: .25rem;
     padding: 30px 0px;
 	margin-bottom:20px;
-  padding-bottom: 0;
 	
 }
 .searchblock{
@@ -4407,13 +4360,12 @@ Transport
 }
 .modeldetails span{
 	color: #bd062c;
-    padding: 7px 20px;
+    padding: 10px 20px;
     margin-top: 20px;
     margin-bottom: 20px;
     border-radius: 3px;
     border: 1px solid #bd062c;
 	font-size:16px;
-  margin-right: 20px;
 }
 .modeldetail h3{
 	font-size:20px;
@@ -4430,13 +4382,12 @@ Transport
 }
 
 .modeldetailprice h3{
-	font-size:16px;
+	font-size:20px;
 	color: #343434;
 	font-weight:500;
 	text-align:center;
 	border: 1px solid #707070;
 	padding:10px;
-  display: inline-block;
 }
 
 .modeldetailprice span {
@@ -4452,10 +4403,9 @@ Transport
 	color: #4E4E4E;
 	font-size:14px;
 	font-weight:500;
-  margin-bottom: 5px;
 }
 .modeldetailcontent{
-	margin:10px 0;
+	margin:20px 0;
 }
 .modeldetailcontent .subhead{
 	color: #B8B8B8;
@@ -4510,13 +4460,14 @@ ul.tabs li.active {
 	font-size:20px;
 	padding:10px 20px;
 	color:#BD062C;
-	display: inline-block;
+	margin-top:20px;
+	margin-right:10px;
 	
 }
 
 .pickupdetailcontent p.subhead{
 	color: #4e4e4e;
-	font-size:16px;
+	font-size:20px;
 	font-weight:300;
 }
 .pickupdetailcontent p.subheadstatus{
@@ -4641,6 +4592,8 @@ MyBids
 .mybidsleftseller .details{
 	margin-bottom:10px;
 }
+
+
 .mybidsbiddetails{
 	float:left;
 	width:100%;
@@ -4764,9 +4717,8 @@ notoficationtab
 }
 .notoficationtabblock{
 	position: relative;
-	top:-60px;
-	right:-250px;
-  max-width: 600px;
+	top:-50px;
+	right:-200px;
 	
 }
 .notoficationcontent:last-child {
@@ -4790,7 +4742,6 @@ vehicles Summary
 	color: #4E4E4E;
 	font-size:20px;
 	font-weight:500;
-  text-align: left;
 }
 .vehiclesheads h2 span{
 	color: #4E4E4E;
@@ -4875,7 +4826,6 @@ vehicles Summary
 	font-weight:500;
 	color: #4E4E4E;	
 	padding:10px 0;
-  text-align: left;
 }
 .vehicleimgright h3 span{
 	font-size:16px;
@@ -4888,7 +4838,6 @@ vehicles Summary
 	font-weight:normal;
 	color: #4E4E4E;	
 	padding:10px 0;
-  text-align: left;
 }
 .vehicleimgright h4 span{
 	font-size:16px;
@@ -4904,7 +4853,6 @@ vehicles Summary
 }
 .vehicleimgright .input-group {
 	display:block;
-  text-align: left;
 }
 .vehiclerighttotal{
 	border-top:1px solid #ddd;
@@ -4934,7 +4882,6 @@ vehicles Summary
 	font-weight:500;
 	color: #4E4E4E;	
 	padding:10px 0;
-  text-align: left;
 }
 .vehicletotal h3 span{
 	font-size:16px;
@@ -4946,26 +4893,18 @@ vehicles Summary
 	font-size:14px;
 	font-weight:500;
 	color: #4E4E4E;	
-  text-align: left;
 	padding:10px 0;
 }
 .vehicletotal-btns{
 	background-color: #bd062c;
 	color: white;
-	padding: 10px 20px;
+	padding: 20px 40px;
 	margin: 20px 0;
 	border-radius: 3px;
 	border: none;
 	font-size: 20px;
 	font-weight:500;
 }
-
-.vehicletotal-btns:hover{
-  color: #fff;
-  text-decoration: none;
-  background-color: #002768;
-}
-
 .vehicletotalbtns{
 	margin:30px 0;
 	text-align:center
@@ -5072,7 +5011,8 @@ margin-top: 20px;
     color: #707070;
     font-size: 16px;
     font-weight: 500;
-    float: left;
+    width: 65%;
+    float: right;
 }
 .mgaccountrighttableblock h3{
 	text-align:center;
@@ -5203,38 +5143,6 @@ Form text overlop
   transition-delay: 0.2s;
 }
 
-
-
-.adduserpageforminner .form-group input:checked + label::after {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 8px;
-    left: 9px;
-    width: 6px;
-    height: 14px;
-    border: solid #bd062c;
-        border-top-width: medium;
-        border-right-width: medium;
-        border-bottom-width: medium;
-        border-left-width: medium;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
-}
-.adduserpageforminner .form-group label::before {
-    content: '';
-    -webkit-appearance: none;
-    background-color: transparent;
-    border: 1px solid #707070;
-    padding: 10px;
-    display: inline-block;
-    position: relative;
-    vertical-align: middle;
-    cursor: pointer;
-    margin-right: 15px;
-    background: #fff;
-    border: 1px solid #707070;
-}
 
 /*-------------------------------------------------------
 userfavorite-cars
@@ -5708,7 +5616,6 @@ height: 100%;
 	font-size:20px;
 	font-weight:500;
 	display:block;
-	text-align:left;
 }
 .notificationtabblock p{
 	color: #343434;
@@ -6063,7 +5970,7 @@ paymentform
   height: 22px;
   margin: 0;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 600;
 }
 
 .react-datepicker__close-icon::after {
@@ -6720,7 +6627,6 @@ table td .ant-btn:hover span, table td .ant-btn:hover i{
 .form-input-error{
   color: red;
   text-align: left;
-  margin-bottom: 5px;
 }
 .topRightUser img{
   width:35px;
@@ -6827,31 +6733,12 @@ table td .ant-btn:hover span, table td .ant-btn:hover i{
   font-size: 14px !important;
 }
 
-#hero  .close-icon{
-  color: #fff;
-}
-
-
-.forgotpage .logo{
-  margin-top: 30px;
-}
-
-.forgotpage .logo img{
-  width: auto;
-}
-.user-upload-btn-wrapper .form-input-error{
-  text-align: center;
-}
-
-.datePickerBlock input::placeholder {
-  font-weight: 400;
-}
 
 
 /*History css */
 
 .hissearch{
-	max-width:800px;
+	max-width:600px;
 	margin:auto;
 	position:relative;
 	margin-bottom:30px;
@@ -6893,13 +6780,8 @@ table td .ant-btn:hover span, table td .ant-btn:hover i{
 	border:none;
 	color:#BD062C;
 	margin:0;
-  float: left;
 }
 
-.historyblock .cars-prices .cta-btns:hover{
-  background: none;
-  text-decoration: underline;
-}
 
 .historyblock .cars-prices .cta-btns.invoice{
 	float:right;
@@ -6911,8 +6793,7 @@ table td .ant-btn:hover span, table td .ant-btn:hover i{
 }
 
 .historyblock .cars-prices{
-	margin-bottom: 15px;
-  margin-top:0;
+	
 }
 
 .historyblock .cars-prices.gatepass{
@@ -6929,7 +6810,6 @@ table td .ant-btn:hover span, table td .ant-btn:hover i{
 	font-size:16px;
 	margin-top:30px;
 	clear:both;
-  text-align: left;
 }
 
 #msform {
@@ -7003,7 +6883,6 @@ table td .ant-btn:hover span, table td .ant-btn:hover i{
     border: 1px solid #707070;
 	font-size:18px;
 	text-align:center;
-  float: none;
 }
 
 .sliderBlock p span{
@@ -7045,217 +6924,210 @@ table td .ant-btn:hover span, table td .ant-btn:hover i{
 }
 .priceBlock .vehicleimgright h3{
 	clear:both;
-  text-align: left;
 }
 
 .priceBlock .vehicleimgright h4{
 	padding: 0;
-  text-align: left;
-}
-.inner .radio.form-group:last-child {
-  margin-bottom: 0;
-}
-
-.historyblock .lotfee-inner{
-  margin-bottom: 30px;
-}
-
-
-.historyblock .car-item{
-  margin-top: 0;
-}
-
-.vehicleimgleft  img{
-  width: 100%;
-  max-width: 200px;
-}
-
-.inspectionsummery .back-btn{
-  float: left;
-}
-
-.products-details .product-dtl{
-  text-align: left;
-}
-
-.inspectiontable table tr td:first-child{
-  text-align: left;
 }
 
 
 
 
 
-
+/*USE CSS for Slider*/
 
 .vehicle-detail-banner .car-slider-desc {
-  max-width: 180px;
-  margin: 0 auto;
+    max-width: 180px;
+    margin: 0 auto;
 }
 .banner-slider .slider.slider-for {
-  max-width: 84%;
-  padding-right: 20px;
+    max-width: 84%;
+    padding-right: 35px;
 }
 .banner-slider .slider.slider-nav {
-  max-width: 16%;
+    max-width: 16%;
 }
 .banner-slider .slider.slider-for,
 .banner-slider .slider.slider-nav {
-  width: 100%;
-  float: left;
+    width: 100%;
+    float: left;
 }
 .banner-slider .slider.slider-nav {
-  height: 610px;
-  overflow: hidden;
+    height: 610px;
+    overflow: hidden;
 
 }
 .slider-banner-image {
-  height: 610px;
+    height: 610px;
 }
 .banner-slider .slider.slider-nav {
-  padding: 20px 0 0;
-padding-top:0;
+    padding: 20px 0 0;
+	padding-top:0;
 }
 .slider-nav .slick-slide.thumbnail-image .thumbImg{
-  max-width: 178px;
-  height: 110px;
-  margin: 0 auto;
-  border: 1px solid #EBEBEB;
+    max-width: 178px;
+    height: 110px;
+    margin: 0 auto;
+    border: 1px solid #EBEBEB;
 }
 .slider-banner-image img,
 .slider-nav .slick-slide.thumbnail-image .thumbImg img {
-  height: 100%;
-  width:100%;
-  object-fit: cover;
+    height: 100%;
+    width:100%;
+    object-fit: cover;
 }
 .slick-vertical .slick-slide:active,
 .slick-vertical .slick-slide:focus,
 .slick-arrow:hover,
 .slick-arrow:focus {
-  border: 0;
-  outline: 0;
-background-repeat: no-repeat;
-  text-align: center;
-  background-position: center;
-  background-color: #F5F5F5;
+    border: 0;
+    outline: 0;
+	background-repeat: no-repeat;
+    text-align: center;
+    background-position: center;
+    background-color: #F5F5F5;
 }
 .slider-nav .slick-slide.slick-current.thumbnail-image .thumbImg {
-  border: 2px solid #196DB6;
+    border: 2px solid #196DB6;
 }
 .slider-nav .slick-slide.slick-current span {
-  color: #196DB6;
+    color: #196DB6;
 }
 .slider-nav .slick-slide {
-  text-align: center;
+    text-align: center;
 }
 .slider-nav .slick-slide span {
-  font-size: 14px;
-  display: block;
-  padding: 5px 0 15px;
+    font-size: 14px;
+    display: block;
+    padding: 5px 0 15px;
 }
 .slick-arrow {
-  width: 100%;
-  background-color: #F5F5F5;
-  border: 0;
-  background-position: center;
-  background-repeat: no-repeat;
-  font-size: 0;
-  height: 18px;
-  position: absolute;
-  left: 0;
-  right: 0;
-  z-index: 99;
-height: 30px;
+    width: 100%;
+    background-color: #F5F5F5;
+    border: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-size: 0;
+    height: 18px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 99;
+	height: 30px;
 }
 .slick-prev {
- top: 0;
+   top: 0;
 }
 .slick-next {
- bottom: 0;
- background-color: #F5F5F5;
+   bottom: 0;
+   background-color: #F5F5F5;
 }
 .slick-prev.slick-arrow {
-  background-image: url(../img/uparrow.png);
+    background-image: url(../img/uparrow.png);
 }
 .slick-next.slick-arrow {
-  background-image: url(../img/downarrow.png);
+    background-image: url(../img/downarrow.png);
 }
 
 .slick-slide img{
-width:100%;
+	width:100%;
+}
+/*End USE CSS for Slider*/
+
+@media screen and (max-width : 991px) {
+
+	.banner-slider .slider.slider-for,
+	.banner-slider .slider.slider-nav {
+	    max-width: 100%;
+	    float: none;
+	}
+	.banner-slider .slider.slider-for {
+		padding-right: 0;
+	}
+	.banner-slider .slider.slider-nav {
+		height: auto;
+	}
+	.slider-banner-image {
+	    height: 500px;
+	} 
+	.slider.slider-nav.thumb-image {
+        padding: 10px 30px 0;
+	}
+	.slider-nav .slick-slide span {
+		padding: 5px 0;
+	}
+	.slick-arrow {
+		padding: 0;
+	    width: 30px;
+	    height: 30px;
+	    top: 50%;
+	    bottom: 0;
+	    -webkit-transform: translateY(-50%) rotate(-90deg);
+	    -moz-transform: translateY(-50%) rotate(-90deg);
+	    -ms-transform: translateY(-50%) rotate(-90deg);
+	    transform: translateY(-50%) rotate(-90deg);
+	}
+	.slick-prev {
+	    left: 0;
+	    right: unset;
+	}
+	.slick-next {
+	    left: unset;
+	    right: 0;
+   		background-color: transparent;
+	}
+	.vehicle-detail-banner .car-slider-desc {
+    	max-width: 340px;
+	}
+	.bid-tag {
+    	padding: 10px 0 15px;
+	}
+	.slider.slider-nav.thumb-image {
+	   white-space: nowrap;
+	}
+	.thumbnail-image.slick-slide {
+		padding: 0px 5px;
+		min-width: 75px;
+		display: inline-block;
+		float: none;
+	}
 }
 
-img.carImg{
-  height: 220px;
-  max-width: 100%;
+@media screen and (max-width : 767px) {
+	.slider-banner-image {
+	    height: 400px;
+	}
+	.slider.slider-nav.thumb-image {
+    	padding: 0px 20px 0;
+    	margin: 10px 0px 0;
+	}
+	.slider-nav .slick-slide.thumbnail-image .thumbImg {
+		max-width: 140px;
+		height: 80px;
+	}
+	.slick-prev.slick-arrow {
+    	background-position: center 10px;
+	}
+	.slick-next.slick-arrow {
+    	background-position: center 10px, center;
+	}
+	.slider-nav .slick-slide span {
+	    font-size: 12px;
+	    white-space: normal;
+	}
 }
 
-.favorite-cars  img.carImg{
-  height: 260px;
-  max-width: 100%;
+@media screen and (max-width: 580px) {
+	.slider-banner-image {
+	    height:340px;
+	}
 }
 
-
-
-.carList .models-box .inner-page{
- padding: 0;
+@media screen and (max-width : 480px) {
+	.slider-banner-image {
+	    height:280px;
+	}
 }
-
-.carList .models-box{
-  max-width: 800px;
-}
-
-.makeyourbid .container{
-  padding: 0;
-}
-
-.contactblock  .cta-btn{
-  width: auto;
-}
-.saveSearch{
-  text-align: left;
-}
-
-.saveSearch .cta-btn{
-  width: auto;
-  margin: 0;
-    margin-bottom: 5px;
-}
-.distanceBlock{
-  margin-bottom: 30px;
-}
-
-.load-more-btn {
-  display: inline-block;
-  background: rgba(255, 255, 255, 0.2);
-  padding: 6px 30px 8px 30px;
-  color: #bd062c;
-  border-radius: 5px;
-  transition: all ease-in-out 0.4s;
-  font-size: 18px;
-  margin-top: 25px;
-  border: 2px solid #bd062c;
-}
-
-.load-more-btn:focus, .load-more-btn:hover {
-  border: 2px solid #bd062c;
-  color: #bd062c;
-}
-
-.historyImg{
-  max-height: 200px;
-  overflow: hidden;
-  width: 100%;
-  background: #f5f5f5;
-}
-.historyImg img{
-  width: auto;
-}
-
-.carBrand img{
-  border-radius: 5px;
-}
-
 
 
 .checkoutReview{
@@ -7285,110 +7157,141 @@ img.carImg{
 
 .checkoutReview .cta-btn:hover{
 	border:#002768 2px solid;
-	color:#fff;	
+	color:#fff;
+	
 }
 
 
-.checkoutReview .cancel-btn:hover{
-	border:#bd062c 2px solid;
-	color:#bd062c;	
+/* Dropdown CSS */
+
+#topbar ul.dropdown-menu{
+	padding:0;
+	margin:0;
+	max-width:150px;
+	transform: translate3d(60px, 30px, 0px) !important;
 }
 
-.mgaccountrighttable table td span.tdcol1{
-  width: 200px;
-  float: left;
-  color: #000;
-}
-hr{
-  margin: 0;
-}
-form.timePicker{
-  padding: 0;
-}
-.marAuto{
-  margin: auto;
-}
-.achBlock h2{
-  text-align: left;
+#topbar ul.dropdown-menu li{
+	padding:0;
+	margin:0;
 }
 
-.makeyourbid .makeyourbidblock .input-icon > i{
-  border-right: #ccc solid 1px;
-    padding-right: 8px;
-    padding: 8px;
-    left: 10px;
-    padding-right: 10px;
-    font-size: 20px;
+#topbar ul.dropdown-menu li a{
+	color:#000;
+	padding: 7px 15px;
+    margin: 0;
+	font-size:14px;
+}
+#topbar ul.dropdown-menu li .dropdown-item:hover, #topbar ul.dropdown-menu li .dropdown-item:focus, #topbar ul.dropdown-menu li .dropdown-item a.active{
+	background:#fff;
+	color:#BD062C;
 }
 
 
-.customCheckbox  label {
-  position: relative;
-  cursor: pointer;
+/* Invoice */
+
+.invoiceBlock{
+	max-width: 1000px;
+    margin: auto;
+    border: #ddd solid 1px;
+    padding: 30px;
 }
-.customCheckbox  label::before {
-  content: '';
--webkit-appearance: none;
-background-color: transparent;
-border: 1px solid #707070;
-padding: 10px;
-display: inline-block;
-position: relative;
-vertical-align: middle;
-cursor: pointer;
-margin-right: 5px;
-background: #fff;
-border: 1px solid #707070;
-margin-top: -3px;
+
+.invoiceBlock .header{
+	border-bottom:#ddd solid 1px;
+	padding-bottom:20px;
+	margin-bottom:30px;
 }
-.customCheckbox  input:checked + label::after {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 2px;
-  left: 9px;
-  width: 6px;
-  height: 14px;
-  border: solid #bd062c;
-      border-top-width: medium;
-      border-right-width: medium;
-      border-bottom-width: medium;
-      border-left-width: medium;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
+
+.invoiceBlock .header_right{
+	text-align:right;
 }
-.customCheckbox  label{
-  cursor: pointer;
+
+.invoiceBlock .feestableBlock{
+	max-width:100%;
+	clear:both;
+	margin-top:20px;
 }
-.customCheckbox  input {
-  padding: 0;
-  height: initial;
-  width: initial;
-  margin-bottom: 0;
-  display: none!important;
-  cursor: pointer;
-}
-.customCheckbox {
-	float:left;
+.invoiceBlock .headtable table{
+	width:100%;
 	text-align:left;
 }
 
-.transport .searchbox{
-  max-width: 800px;
-  margin: auto;
-  margin-top: 20px;
+.invoiceBlock  table{
+	width:100%;
+	text-align:left;
 }
 
-.transport .searchbox .input-group-append i{
-  color: #666;
+.invoiceBlock table td{	
+	text-align:left;
+	font-size:14px;
+}
+.invoiceBlock  table td span{	
+	font-weight: 500;
+    min-width: 150px;
+    display: inline-block;
+	text-align:left;
+	font-size:14px;
+}
+.infotable{
+	margin-top:20px;
 }
 
-.transport .searchbox .searchBtn{
-  background: #fff;
-  border: 1px solid #dee2e6;
-  border-left: none;
-  padding-right: 15px;
+.alignRight{
+	text-align:right !important;
 }
+
+.invoiceBlock .infotable{
+	width:50%;
+	float:left;
+}
+.invoiceBlock .infotable th{
+	padding:10px;
+	font-size:16px;
+	font-weight:600;
+}
+
+.invoiceBlock .infotable td span{
+	color:#000;
+}
+
+.invoiceBlock  table th.priceCol{
+	width:20%;
+	text-align:center;
+}
+
+.invoiceBlock .feestable th{
+	text-align:center;
+	padding:10px 0;
+}
+
+.invoiceBlock .feestable p{
+	color:#999;
+	font-size:14px;
+}
+.invoiceBlock .feestable td span{	
+	
+	min-width: auto;
+	color:#000;
+}
+.invoiceBlock .feestableBlock .feestable table td:last-child{
+	text-align:center;
+}
+
+
+.invoiceBlock .contenttable{
+	float: left;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.invoiceBlock .feestable tfoot td{	
+	background:#F0F0F0;
+	font-size:16px;
+}
+.invoiceBlock .feestable tfoot td span{	
+	font-size:16px;
+}
+
 
 .invoiceBlock{
 	max-width: 1000px;
