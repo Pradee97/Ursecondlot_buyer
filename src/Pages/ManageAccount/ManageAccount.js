@@ -97,28 +97,17 @@ const ManageAccount = () => {
                         <h5>{item.dealer_name}</h5>
                         <table>
                           <thead></thead>
+                          
                           <tr>
-                            <td><span className="tdcol1">First name</span><span>{item.first_name}</span></td>
                             <td><span className="tdcol1">Address </span><span>{item.address}</span></td>
-                          </tr>
-                          <tr>
-                            <td><span className="tdcol1">Last name</span><span>{item.last_name}</span></td>
                             <td><span className="tdcol1">City</span><span>{item.city_name}</span></td>
-                          </tr>
-                          <tr>
-                            <td><span className="tdcol1">Phone</span><span>{item.phone_no}</span></td>
-                            <td><span className="tdcol1">State</span><span>{item.state_name}</span></td>
-                          </tr>
-                          <tr>
-                            <td><span className="tdcol1">Mobile</span><span>{item.mobile_no}</span></td>
-                            <td><span className="tdcol1">Zip code</span><span>{item.zipcode}</span></td>
                             {/* <td>First name<span>{item.first_name}</span></td> */}
-                            <td><span className="tdcol1">Address </span><span>{item.address}</span></td>
-                            <td><span className="tdcol1">State</span><span>{item.state_name}</span></td>
+                            
+                            
                           </tr>
                           <tr>
                             {/* <td>Last name<span>{item.last_name}</span></td> */}
-                            <td><span className="tdcol1">City</span><span>{item.city_name}</span></td>
+                            <td><span className="tdcol1">State</span><span>{item.state_name}</span></td>
                             <td><span className="tdcol1">Zip code</span><span>{item.zipcode}</span></td>
                           </tr>
                          
