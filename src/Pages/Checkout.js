@@ -12,7 +12,7 @@ const History = () => {
    
 
     <div id="checkoutpage" class="checkoutpage checkoutReview">
-      <div class="container">
+     
 	  <div class="checkoutblock col-lg-12">
 
         <div class="section-title">
@@ -20,7 +20,7 @@ const History = () => {
         </div>
 
         <div class="row content">
-			<div class="col-lg-6 col-md-6 marAuto achBlock">
+			<div class="col-lg-12 col-md-12 marAuto achBlock">
 				<h2>ACH Payment</h2>
 				<div class="vehiclesheadspaydetails">
 					<div class="row">
@@ -62,11 +62,11 @@ const History = () => {
 					</div>
 				</div>
 				
-				<div class="text-center"><a  class="cta-btn cancel-btn" href="/cart">Cancel</a> <button type="submit" class="cta-btn">Checkout</button> </div>
+				<div class="text-center ckreview"><a  class="cta-btn cancel-btn" href="/cart">Cancel</a> <button type="submit" class="cta-btn">Checkout</button> </div>
 				
 			</div>
         </div>
-		</div>
+	
       </div>
     </div>
 	
