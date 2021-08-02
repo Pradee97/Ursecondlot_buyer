@@ -83,7 +83,7 @@ return(
 
       {/* <div class="container-fluid aos-init aos-animate" data-aos="fade-up"> */}
         <div class="section-title">
-          <h2>More cars from the dealer</h2>          
+          <h2>SIMILAR CARS FROM OTHER DEALER</h2>          
         </div>
 		<div class="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
 		{similarCarDetail.length > 0 ? similarCarDetail

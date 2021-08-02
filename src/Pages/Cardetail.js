@@ -417,7 +417,7 @@ return(
       <div class="container-fluid aos-init aos-animate" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Same cars from other dealer</h2>          
+          <h2>Similar Car From Other Dealer</h2>          
         </div>
 
         <div class="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
