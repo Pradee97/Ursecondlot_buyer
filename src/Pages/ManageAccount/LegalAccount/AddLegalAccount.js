@@ -11,7 +11,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import CommonPopup from '../../../Component/CommonPopup/CommonPopup';
 import StateAndCity from '../../../Component/StateAndCity/StateAndCity';
 import { useForm } from "react-hook-form";
-import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks"
+import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks";
+import { useDispatch, useSelector } from 'react-redux';
 
 const AddLegalAccount = () => {
 
@@ -41,6 +42,7 @@ const AddLegalAccount = () => {
     const history = useHistory();   
     const [isOpen, setIsOpen] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
  
     const togglePopup = () => {
       setIsOpen(!isOpen);
@@ -112,7 +114,9 @@ const AddLegalAccount = () => {
             zipcode_id: zipcode,
             address: address,
             bussiness_name: legalBusinessname,
-            active: 1          
+            active: 1,
+            createdBy:JSON.parse(loggedInBuyerId).buyer_id,
+            updatedBy:JSON.parse(loggedInBuyerId).buyer_id          
         };
         console.log("===",request)
         // return

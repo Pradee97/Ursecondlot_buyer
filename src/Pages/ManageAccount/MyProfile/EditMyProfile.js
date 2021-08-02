@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import ls from 'local-storage';
 import PhoneInput from 'react-phone-number-input/input';
 import FileBase64 from 'react-file-base64';
+import { useDispatch, useSelector } from 'react-redux';
 
 const EditMyProfile = () => {
     const history = useHistory();
@@ -41,6 +42,7 @@ const EditMyProfile = () => {
     const [stateAndCityError, setStateAndCityError] = useState("")
     const [image,setImage] = useState("");
     const [doc, setDoc] = useState("");
+    const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
 
     const togglePopup = () => {
         setIsOpen(!isOpen);
@@ -145,7 +147,8 @@ const EditMyProfile = () => {
             zipcode_id: zipcode===myProfileObjc.zipcode?myProfileObjc.zipcode_id:zipcode,
             address: address,
             active:1,
-            image:doc===""?doc:doc.length>0?doc:[doc]
+            image:doc===""?doc:doc.length>0?doc:[doc],
+            updatedBy:JSON.parse(loggedInBuyerId).buyer_id
            
         };
         API

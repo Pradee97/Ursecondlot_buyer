@@ -8,7 +8,7 @@ import CommonPopup from '../../../Component/CommonPopup/CommonPopup';
 import ls from 'local-storage';
 import FileBase64 from 'react-file-base64';
 import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks"
-
+import { useDispatch, useSelector } from 'react-redux';
 import PhoneInput from 'react-phone-number-input/input';
 
 const EditBuyer = () => {
@@ -52,6 +52,7 @@ const EditBuyer = () => {
     const [stateAndCityError, setStateAndCityError] = useState("")
     const [isPrivileges, setIsPrivileges] = useState(false);
     const [type,setType]=useState("");
+    const loggedInBuyerId = useSelector(state => state.LoginReducer.payload); 
 
     const togglePopup = () => {
         setIsOpen(!isOpen);
@@ -218,7 +219,8 @@ const EditBuyer = () => {
             proxy_bid: proxy_bid,
             counter_bid: counter_bid,
             lot_fee: lot_fee,
-            image:doc===""?doc:doc.length>0?doc:[doc]
+            image:doc===""?doc:doc.length>0?doc:[doc],
+            updatedBy:JSON.parse(loggedInBuyerId).buyer_id
         };
 
         
