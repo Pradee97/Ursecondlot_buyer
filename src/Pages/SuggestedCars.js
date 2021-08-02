@@ -35,10 +35,10 @@ const SuggestedCars = () => {
             //}
         }).catch(err => { console.log(err); });
     }
-    const redirectpage=(pathid,seller_id)=>{
+    const redirectpage=(pathid,seller_dealer_id)=>{
         //e.preventDefault();
-        console.log("seller_id+++++",seller_id)
-        dispatch(CarListAction.sellerid(seller_id))
+        console.log("seller_dealer_id+++++",seller_dealer_id)
+        dispatch(CarListAction.sellerid(seller_dealer_id))
         history.push("/cardetail/"+pathid);
     }
 
@@ -492,7 +492,7 @@ const SuggestedCars = () => {
                                         <div className="cars-lock">
                                         <img src={(item.isFavourite===0)? lock : locked} onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'recent')} />
                                         </div>
-                                        <img className="carImg" src={item.image}  onClick={()=>{redirectpage(item.car_id,item.seller_id)}}/>
+                                        <img className="carImg" src={item.image}  onClick={()=>{redirectpage(item.car_id,item.seller_dealer_id)}}/>
                                         {item.isbestSale?
                                         <div className="cars-tag">
                                             <h4>{item.deal_name}</h4>
@@ -501,7 +501,11 @@ const SuggestedCars = () => {
                                             <h3><a href="#">{item.make} ({item.model} model)</a></h3>
                                             <div className="d-flex align-items-center mb-3">
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>Diesel</span></p>
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>    
+                                            </div>
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details"><span>{item.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <p className="details"><img src={item.image}/></p>
                                             </div>
 
                                             <div className="cars-prices">

@@ -39,10 +39,10 @@ const Favoritelist = () => {
         setLoading(false);
     }).catch(err=>{console.log(err);});
 }
-const redirectpage=(pathid,seller_id)=>{
+const redirectpage=(pathid,seller_dealer_id)=>{
   //e.preventDefault();
-  console.log("seller_id+++++",seller_id)
-  dispatch(CarListAction.sellerid(seller_id))
+  console.log("seller_dealer_id+++++",seller_dealer_id)
+  dispatch(CarListAction.sellerid(seller_dealer_id))
   history.push("/cardetail/"+pathid);
 }
 const addRemoveFavourite=(carid,state,flag)=>{
@@ -498,18 +498,21 @@ const searchFav = () => {
                     <div class="cars-lock">
                     <img src={(item.isFavourite===0)? lock : locked}  onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'fav')} />
                     </div>
-                        <img src={item.image} class="carImg" onClick={()=>{redirectpage(item.car_id,item.seller_id)}} alt="..." />
+                        <img src={item.image} class="carImg" onClick={()=>{redirectpage(item.car_id,item.seller_dealer_id)}} alt="..." />
                         {item.isbestSale?
                         <div class="cars-tag">
                           <h4>Best deal</h4>
                         </div>:""}
                         <div class="cars-content">
                         <h3><a href="#">{item.make} ({item.model} model)</a></h3>
-                        <div class="d-flex align-items-center mb-3">
-                            <p class="details"><img src={speedometer} alt="" /><span>{item.miles} m</span></p>
-                            {/* &nbsp;&nbsp;&nbsp;&nbsp; */}
-                            <p class="details"><img src={gasolinePump} alt="" /><span>Diesel</span></p>
-                          </div>
+                        <div className="d-flex align-items-center mb-3">
+							<p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+							<p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>    
+						</div>
+						<div className="d-flex align-items-center mb-3">
+							<p className="details"><span>{item.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+							<p className="details"><img src={item.image}/></p>
+						</div>
 
                         <div class="cars-prices">
                           <a class="cta-btns" href="#">${item.max_bid}</a>

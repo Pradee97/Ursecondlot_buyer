@@ -44,10 +44,10 @@ const [moreCarFlag,setMoreCarFlag]=useState(false);
 const [similarCarFromSellerFlag,setSimilarCarFromSellerFlag]=useState(false);
 const selectedSellerId = useSelector(state => state.CarListReducer.payload);	
 console.log("sellerid from carlist",selectedSellerId);
-const redirectpage=(pathid,seller_id)=>{
+const redirectpage=(pathid,seller_dealer_id)=>{
 	//e.preventDefault();
-	console.log("seller_id+++++",seller_id)
-	dispatch(CarListAction.sellerid(seller_id))
+	console.log("seller_dealer_id+++++",seller_dealer_id)
+	dispatch(CarListAction.sellerid(seller_dealer_id))
 	history.push("/cardetail/"+pathid);
   }
 
@@ -91,7 +91,7 @@ function CarDetailList(){
 	const request = {
 	"car_id":id,
 	"buyer_dealer_id": JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
-	"seller_id": selectedSellerId }
+	"seller_dealer_id": selectedSellerId }
 	console.log("request for car detail",request)
 	API.post('carDetails/condition',request).then(res=>{
 	console.log("response",res.data.data);
@@ -118,7 +118,7 @@ function CarDetailList(){
 	setCarInventoryDetail(res.data.data);
 	console.log("car Inventory Detail",res.data.data);
 	const req={
-	"seller_id":res.data.data[0].seller_id,
+	seller_dealer_id:res.data.data[0].seller_dealer_id,
 	buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
 	};
 	API.post('SellerCarList/condition',req).then(resp=>{
@@ -381,7 +381,7 @@ return(
 				<div class="cars-lock">
 				<img src={(moreCar.isFavourite===0)? locked : lock} onClick={()=>addRemoveFavourite(moreCar.car_id,moreCar.isFavourite,'morecar')} />
 			  	</div>
-              	<img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id,moreCar.seller_id)}} class="carImg" alt="..."/>
+              	<img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id,moreCar.seller_dealer_id)}} class="carImg" alt="..."/>
 				  {moreCar.isbestSale?
 				<div class="cars-tag">
 					<h4>{moreCar.deal_name}</h4>
@@ -389,10 +389,14 @@ return(
 				</div>:""}
               <div class="cars-content">		
 			  <h3><a href="#">{moreCar.make} {moreCar._type} ({moreCar.model} model)</a></h3>
-                <div class="d-flex align-items-center mb-3">
-                  <p class="details"><img src={speedometer}  alt=""/><span>{moreCar.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-                  <p class="details"><img src={gasolinePump} alt=""/><span>{moreCar.fuel_type}</span></p>
-                </div>
+			<div className="d-flex align-items-center mb-3">
+				<p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{moreCar.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+				<p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{moreCar.fuel_type}</span></p>    
+			</div>
+			<div className="d-flex align-items-center mb-3">
+				<p className="details"><span>{moreCar.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+				<p className="details"><img src={moreCar.image}/></p>
+			</div>
 				
 				<div class="cars-prices">
 					<a class="cta-btns" href="">${moreCar.min_bid}</a>
@@ -407,7 +411,7 @@ return(
 		  {sellerCarDetail.length > 0 ? sellerCarDetail.slice(0,1)
                             .map((moreCar,index) =>
 		<div class="text-center">
-                <a href="JavaScript:void(0)" onClick={()=>{redirectpagemorecarseller(moreCar.seller_id)}} class="more-btn">View More<i class="bx bx-chevron-right"></i></a>
+                <a href="JavaScript:void(0)" onClick={()=>{redirectpagemorecarseller(moreCar.seller_dealer_id)}} class="more-btn">View More<i class="bx bx-chevron-right"></i></a>
               </div>):""}
 		</div>
     </div>
@@ -428,13 +432,17 @@ return(
 								<div class="cars-lock">
 								<img src={(moreCar.isFavourite===0)? locked : lock} onClick={()=>addRemoveFavourite(moreCar.car_id,moreCar.isFavourite,'SimilarCarFromSellerFlag')} />
 								  </div>
-								  <img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id,moreCar.seller_id)}} class="carImg" alt="..."/>
+								  <img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id,moreCar.seller_dealer_id)}} class="carImg" alt="..."/>
 								  
 							  <div class="cars-content">		
 							  <h3><a href="#">{moreCar.make} {moreCar._type} ({moreCar.model} model)</a></h3>
-								<div class="d-flex align-items-center mb-3">
-								  <p class="details"><img src={speedometer}  alt=""/><span>{moreCar.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-								  <p class="details"><img src={gasolinePump} alt=""/><span>{moreCar.fuel_type}</span></p>
+							    <div className="d-flex align-items-center mb-3">
+									<p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{moreCar.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+									<p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{moreCar.fuel_type}</span></p>    
+								</div>
+								<div className="d-flex align-items-center mb-3">
+									<p className="details"><span>{moreCar.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+									<p className="details"><img src={moreCar.image}/></p>
 								</div>
 								
 								<div class="cars-prices">
