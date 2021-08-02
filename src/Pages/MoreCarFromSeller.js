@@ -141,10 +141,14 @@ return(
 				</div>:""}
               <div class="cars-content">		
 			  <h3><a href="#">{moreCar.make} {moreCar._type} ({moreCar.model} model)</a></h3>
-                <div class="d-flex align-items-center mb-3">
-                  <p class="details"><img src={speedometer}  alt=""/><span>{moreCar.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-                  <p class="details"><img src={gasolinePump} alt=""/><span>{moreCar.fuel_type}</span></p>
-                </div>
+                <div className="d-flex align-items-center mb-3">
+									<p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{moreCar.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+									<p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{moreCar.fuel_type}</span></p>    
+								</div>
+								<div className="d-flex align-items-center mb-3">
+									<p className="details"><span>{moreCar.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+									<p className="details"><img src={moreCar.image}/></p>
+								</div>
 				
 				<div class="cars-prices">
 					<a class="cta-btns" href="">${moreCar.min_bid}</a>
