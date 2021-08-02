@@ -38,10 +38,10 @@ const Favoritelist = () => {
         setLoading(false);
     }).catch(err=>{console.log(err);});
 }
-const redirectpage=(pathid,seller_id)=>{
+const redirectpage=(pathid,seller_dealer_id)=>{
   //e.preventDefault();
-  console.log("seller_id+++++",seller_id)
-  dispatch(CarListAction.sellerid(seller_id))
+  console.log("seller_dealer_id+++++",seller_dealer_id)
+  dispatch(CarListAction.sellerid(seller_dealer_id))
   history.push("/cardetail/"+pathid);
 }
 const addRemoveFavourite=(carid,state,flag)=>{
@@ -136,7 +136,7 @@ const searchFav = () => {
                     <div class="cars-lock">
                     <img src={(item.isFavourite===0)? lock : locked}  onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'fav')} />
                     </div>
-                        <img src={item.image} class="carImg" onClick={()=>{redirectpage(item.car_id,item.seller_id)}} alt="..." />
+                        <img src={item.image} class="carImg" onClick={()=>{redirectpage(item.car_id,item.seller_dealer_id)}} alt="..." />
                         {item.isbestSale?
                         <div class="cars-tag">
                           <h4>Best deal</h4>
