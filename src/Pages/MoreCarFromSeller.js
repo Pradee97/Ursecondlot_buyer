@@ -21,7 +21,7 @@ const MoreCarFromSeller = () =>{
     const getMoreCarFromSeller=()=>{
 
     let request={
-        "seller_id":id,
+        "seller_dealer_id":id,
         buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
     }
 

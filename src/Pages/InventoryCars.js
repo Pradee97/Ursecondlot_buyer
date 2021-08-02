@@ -36,10 +36,10 @@ const InventoryCars = () => {
         }).catch(err=>{console.log(err);});
     }
 
-    const redirectpage=(pathid,seller_id)=>{
+    const redirectpage=(pathid,seller_dealer_id)=>{
         //e.preventDefault();
-        console.log("seller_id+++++",seller_id)
-        dispatch(CarListAction.sellerid(seller_id))
+        console.log("seller_dealer_id+++++",seller_dealer_id)
+        dispatch(CarListAction.sellerid(seller_dealer_id))
         history.push("/cardetail/"+pathid);
     }
 
@@ -129,7 +129,7 @@ const InventoryCars = () => {
                                         <img src={(item.isFavourite===0)? lock : locked} onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'inv')} />
                                         </div>
                                         <a href="/Cardetail">
-                                        <img className="carImg" src={item.image} className="carImg" alt="..." /></a>
+                                        <img className="carImg" src={item.image} onClick={()=>{redirectpage(item.car_id,item.seller_dealer_id)}} className="carImg" alt="..." /></a>
                                         {item.isbestSale?
                                         <div className="cars-tag">
                                             <h4>{item.deal_name}</h4>
