@@ -8,7 +8,7 @@ import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks";
 import { useForm } from "react-hook-form";
 import PhoneInput from 'react-phone-number-input/input';
-
+import { useDispatch, useSelector } from 'react-redux';
 
 import StateAndCity from '../../Component/StateAndCity/StateAndCity'
 
@@ -45,7 +45,8 @@ const EditDealerInformation = () => {
     const [primaryPhoneError, setPrimaryPhoneError] = useState("")
     const [mobilePhoneError, setMobilePhoneError] = useState("")
     const [addressError, setAddressError] = useState("")
-    const [stateAndCityError, setStateAndCityError] = useState("")
+    const [stateAndCityError, setStateAndCityError] = useState("");
+    const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
 
     const getStateName=(stateData)=>{
         setState(stateData)
@@ -158,7 +159,9 @@ const EditDealerInformation = () => {
             city_id: typeof city==='string'?accountObjc.city_id:city,
             state_id: typeof state==='string'?accountObjc.state_id:state,
             zipcode_id: zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode,
-            active:1
+            active:1,
+            updatedBy:JSON.parse(loggedInBuyerId).buyer_id
+
         };
         console.log("request==----==",request)
         API
