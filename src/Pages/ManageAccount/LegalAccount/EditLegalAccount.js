@@ -11,6 +11,7 @@ import CommonPopup from '../../../Component/CommonPopup/CommonPopup';
 import StateAndCity from '../../../Component/StateAndCity/StateAndCity'
 import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const EditLegalAccount = () => {
@@ -58,6 +59,7 @@ const EditLegalAccount = () => {
     const [popupActionType, setPopupActionType] = useState ("");
     const [popupActionValue, setPopupActionValue] = useState ("");
     const [popupActionPath, setPopupActionPath] = useState ("")
+    const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
   
     const getStateName=(stateData)=>{
         setState(stateData)
@@ -133,7 +135,8 @@ const EditLegalAccount = () => {
             dealer_license_exp: dealershipLicenseexp,
             tax_id_exp: taxidexp,
             bussiness_name:legalBusinessname,
-            active:1
+            active:1,
+            updatedBy:JSON.parse(loggedInBuyerId).buyer_id 
            
         };
 

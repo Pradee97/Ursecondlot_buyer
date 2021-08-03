@@ -2,7 +2,7 @@ export const LoginConst = {
     SUCCESS: 'SUCCESS',
     ERROR: 'ERROR'
 };
-const initialState =  {}
+const initialState = localStorage.getItem("userDetails") || '{}'
 console.log("initialState===",initialState)
 
 const LoginReducer = (state = {payload:initialState}, action) => {

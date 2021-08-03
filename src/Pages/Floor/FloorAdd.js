@@ -11,6 +11,7 @@ import { useEffect } from 'react';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import { useForm } from "react-hook-form";
 import PhoneInput from 'react-phone-number-input/input';
+import { useDispatch, useSelector } from 'react-redux';
 
 const FloorAdd = () => {
 
@@ -74,7 +75,10 @@ const FloorAdd = () => {
     const [phoneNumberError, setPhoneNumberError] = useState("");
     const [dateOpenedError, setDateOpenedError] = useState("");
     const [accountOpenedError, setAccountOpenedError] = useState("");
+    const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);	
    
+    console.log("loggedIN",typeof loggedInBuyerId)
+	console.log("buyer Id +++++++++++++",JSON.parse(loggedInBuyerId).buyer_id);
    
     const inputProps = {
         placeholder: 'DD/MM/YYYY',
@@ -206,7 +210,9 @@ const FloorAdd = () => {
             opened_date: moment(dateOpened).format("YYYY-MM-DD"),
             account_opened: accountOpened,
             buyer_dealer_id:userDetails.buyer_dealer_id,
-            active:1
+            active:1,
+            createdBy:JSON.parse(loggedInBuyerId).buyer_id,
+			updatedBy:JSON.parse(loggedInBuyerId).buyer_id
             
         }];
         console.log("===",request)

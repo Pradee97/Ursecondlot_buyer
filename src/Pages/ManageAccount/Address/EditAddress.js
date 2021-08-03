@@ -9,7 +9,7 @@ import StateAndCity from '../../../Component/StateAndCity/StateAndCity';
 import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks";
 import { useForm } from "react-hook-form";
 import PhoneInput from 'react-phone-number-input/input';
-
+import { useDispatch, useSelector } from 'react-redux';
 
 const EditAddress = () => {
     const history = useHistory();
@@ -34,7 +34,8 @@ const EditAddress = () => {
     const [mobilePhoneError, setMobilePhoneError] = useState("")
     const [locationError, setLocationError] = useState("")
     const [instructionError, setInstructionError] = useState("")
-    const [stateAndCityError, setStateAndCityError] = useState("")
+    const [stateAndCityError, setStateAndCityError] = useState("");
+    const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
 
     const togglePopup = () => {
       setIsOpen(!isOpen);
@@ -181,7 +182,8 @@ const EditAddress = () => {
             location: location,
             instructions: instruction,
             // buyer_address_id:buyeraddress,
-            active:1
+            active:1,
+            updatedBy:JSON.parse(loggedInBuyerId).buyer_id            
            
         };
          API

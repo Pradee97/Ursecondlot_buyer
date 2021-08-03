@@ -9,6 +9,7 @@ import StateAndCity from '../../../Component/StateAndCity/StateAndCity';
 import { useForm } from "react-hook-form";
 import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks";
 import PhoneInput from 'react-phone-number-input/input';
+import { useDispatch, useSelector } from 'react-redux';
 
 const AddAddress = () => {
     const history = useHistory();   
@@ -48,7 +49,7 @@ const AddAddress = () => {
     const [state,setState]=useState("1");
     const [city,setCity]=useState("1");
     const [zipcode,setZipcode]=useState("1");
-
+    const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
 
     function formatMobileNO(value){
         var x = value.replace(/\D/g, '').match(/(\d{1})(\d{3})(\d{3})(\d{4})/);
@@ -153,7 +154,10 @@ const AddAddress = () => {
                 buyer_dealer_id:userDetails.buyer_dealer_id,
                 location:location,
                 instructions:instruction,
-                active:1           
+                active:1,
+                createdBy:JSON.parse(loggedInBuyerId).buyer_id,
+                updatedBy:JSON.parse(loggedInBuyerId).buyer_id
+                
             };
             console.log("===",request)  
         API.post("buyer_address/add", request)

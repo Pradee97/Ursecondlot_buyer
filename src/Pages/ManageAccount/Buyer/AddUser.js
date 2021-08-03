@@ -12,6 +12,8 @@ import Datetime from 'react-datetime';
 import moment from 'moment';
 import FileBase64 from 'react-file-base64';
 import PhoneInput from 'react-phone-number-input/input';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 const AddUser = () => {
 	const history = useHistory();
@@ -57,7 +59,10 @@ const AddUser = () => {
     const [city,setCity]=useState("1");
 	const [zipcode,setZipcode]=useState("1");
 	const [type,setType]=useState("");
+	const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);	
 
+	console.log("loggedIN",typeof loggedInBuyerId)
+	console.log("buyer Id +++++++++++++",JSON.parse(loggedInBuyerId).buyer_id);
 
 	console.log("=====userDetails====>", userDetails)
 	console.log("======>", userDetails.dealer_id)
@@ -213,8 +218,13 @@ const AddUser = () => {
 				lot_fee: lot_fee,
 				local_flag: 0,
 				image:doc===""?doc:doc.length>0?doc:[doc],
+				createdBy:JSON.parse(loggedInBuyerId).buyer_id,
+				updatedBy:JSON.parse(loggedInBuyerId).buyer_id
+
 			};
+			console.log("loggedIn buyer id check",loggedInBuyerId.buyer_id)
 			console.log("----request---->", request);
+
 		API.post("buyer/add", request)
 			.then((response) => {
 				console.log("")
