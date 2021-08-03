@@ -18,6 +18,7 @@ const SuggestedCars = () => {
     const [recentCarFlag,setrecentCarFlag]=useState(false);
     const [loading,setLoading] = useState(true);
     const [data,setData]=useState("");
+	const [makeSearch,setMakeSearch]=useState([]);
     const dispatch = useDispatch();
 
     const getrecentCarList=()=>{
@@ -65,6 +66,14 @@ const SuggestedCars = () => {
        
     },[recentCarFlag]);
 
+	const concatMakeSearch = (selectedValue)=>{
+		console.log("selected chec box valuue",selectedValue)
+		setMakeSearch(prevState => ({
+			arr: [...prevState.makeSearch, selectedValue]
+		  }));
+
+		  console.log("State updated with value selected from check box", makeSearch);
+	}
 
     const OnSearch = (e) => {
         setData(e.target.value)
@@ -80,11 +89,22 @@ const SuggestedCars = () => {
       
       const searchCarDetail = () => {
         console.log("/////////",data)
-        let request={
-            buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
-          data: data
+        // let request={
+        //     buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
+        //   data: data
             
-        }
+        // }
+		let request={
+			buyer_dealer_id:JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
+			model:"",
+			make:["'Honda'","'suzki'"],
+			dealer_type:"",
+			transmission:"",
+			drivetrain:"",
+			year:""
+			
+			}
+
         API.post("BuyerNewCarSearch/condition",request)
         .then((res)=>{
            
@@ -316,11 +336,11 @@ const SuggestedCars = () => {
 								<h4>Make<span><a href="#"><img src={arrowmark}/></a></span></h4>
 								<div class="inner">
 									<div class="form-group input-group ">
-										<input type="checkbox" id="chevrolet"/>
+										<input type="checkbox" id="chevrolet" value="Chevrolet" onClick={()=>concatMakeSearch("Chevrolet")}/>
 										<label for="chevrolet">Chevrolet</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="ford"/>
+										<input type="checkbox" value="ford" id="ford"/>
 										<label for="ford">Ford</label>
 									</div>
 									<div class="form-group input-group ">
@@ -476,14 +496,14 @@ const SuggestedCars = () => {
 						</div>
 					</div>
 
-                            <div className="filtersblock  col-lg-6 SalesRepsSearch  row" >
+                            {/* <div className="filtersblock  col-lg-6 SalesRepsSearch  row" >
                                 <div className="input-group searchbox ">
                                     <input type="text"  className="form-control border"  placeholder="model/make/year" onKeyDown={onKeydowninSearch} onChange={OnSearch}></input>
                                     <span className="input-group-append" >
                                     <button className="btn ms-n5" type="button" id="btntest" name="btntest" onClick={searchCarDetail} ><i className='bx bx-search'></i></button>
                                     </span>                                
                                 </div>
-                            </div>
+                            </div> */}
                             <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
                             {carDetail.length>0?carDetail.map((item) =>
                             
