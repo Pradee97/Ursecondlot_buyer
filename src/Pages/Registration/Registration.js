@@ -1,45 +1,26 @@
 import React from 'react';
 import API from "../../Services/BaseService";
 import { useHistory } from "react-router-dom";
-import DatePicker from 'react-datetime';
 import Datetime from 'react-datetime';
 import moment from 'moment';
+import { useForm } from "react-hook-form";
 import 'react-datetime/css/react-datetime.css';
 import Popup from '../../Component/Popup/Popup';
+import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import '../../Component/Popup/popup.css';
-
-// import '../../assets/css/styles.css';
+import Terms from '../../Component/TermsAndCondition/TermsAndCondition';
+import StateAndCity from '../../Component/StateAndCity/StateAndCity';
+import FileBase64 from 'react-file-base64';
 import { useState } from 'react';
-import { useEffect } from 'react';
-import {
-    Form,
-    Input,
-    Select,
-    AutoComplete,
-    Radio,
-    notification,
-    Spin,
-} from 'antd';
+import PhoneInput from 'react-phone-number-input/input';
 
 const Registration = () => {
     const history = useHistory();
+
+    const { register, handleSubmit, formState: { errors } } = useForm();
+
     const [isOpen, setIsOpen] = useState(false);
- 
-    const togglePopup = () => {
-      setIsOpen(!isOpen);
-    }
-
-
-    const yesterday = moment().subtract(1, 'day');
-    const disablePastDt = current => {
-      return current.isAfter(yesterday);
-    };
-
-    const inputProps = {
-        placeholder: 'Select Date',
-        required:true
-    };
-
+    const [isCommonPopupOpen, setIsCommonPopupOpen] = useState(false);
     const [dealerName, setDealerName] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -48,304 +29,417 @@ const Registration = () => {
     const [address, setAddress] = useState("");
     const [date, setDate] = useState("");
     const [time, setTime] = useState("");
-    const [country, setCountry] = useState("");
-    const [stateName, setStateName] = useState("");
-    const [stateNameList, setStateNameList] = useState([]);
-    // const [stateId, setStateId] = useState("");
-    const [cityName, setCityName] = useState("");
-    const [cityNameList, setCityNameList] = useState([]);
-    // const [cityId, setCityId] = useState("");
-    const [zipCodeId, setZipcodeId] = useState("");
+    const [stateName, setStateName] = useState(null);
+    const [cityName, setCityName] = useState(null);
+    const [zipCodeId, setZipcodeId] = useState(null);
     const [numberOfYears, setNumberofYears] = useState("");
     const [option, setOption] = useState("");
-   
-    async function fetchCountry() {
-        const country = API.get('http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/country');
-        country.then(res => {
-            setCountry(res.data.data[0].country_id);
-        })
-            .catch(err => { console.log(err); });
-    }
-    async function fetchState() {
-        let request = {
-            country_id: 1
-        };
-        const state = API.post('http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/state/condition', request);
-        state.then(res => {
-            console.log("res", res.data.data)
-            setStateNameList(res.data.data);
-        })
-            .catch(err => { console.log(err); });
-    }
-    function fetchCity(e) {
-        let request = {
-            state_id: e
-        };
-        const state = API.post('http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/city/condition', request);
-        state.then(res => {
-            console.log("city", res.data.data)
-            setCityNameList(res.data.data);
-        })
-            .catch(err => { console.log(err); });
-    }
-    useEffect(() => {
-        fetchCountry();
-        fetchState();
-    }, []);
+    const [popupTitle, setPopupTitle] = useState("");
+    const [popupMsg, setPopupMsg] = useState("");
+    const [popupType, setPopupType] = useState("");
+    const [popupActionType, setPopupActionType] = useState("");
+    const [popupActionValue, setPopupActionValue] = useState("");
+    const [popupActionPath, setPopupActionPath] = useState("");
+    const [edate,setEDate]= useState("1");
+    const [doc,setDoc]=useState("");
+    // const [state,setState]=useState("1");
+    // const [city,setCity]=useState("1");
+    // const [zipcode,setZipcode]=useState("1");
+    const [terms,setTerms]=useState("0");
+    const [eterms,setETerms]=useState("0");
+    const [type,setType]=useState("");
+    const [dealerNameError, setDealerNameError] = useState("");
+    const [firstNameError, setFirstNameError] = useState("");
+    const [lastNameError, setLastNameError] = useState("");
+    const [phoneNumberError, setPhoneNumberError] = useState("");
+    const [emailError, setEmailError] = useState("");
+    const [addressError, setAddressError] = useState("");
+    const [dateError, setDateError] = useState("");
+    const [timeError, setTimeError] = useState("");
+    const [numberOfYearsError, setNumberofYearsError] = useState("");
+    const [stateAndCityError, setStateAndCityError] = useState("");
 
-    const handleState = (e) => {   
-        setStateName( stateNameList.filter(data=>data.state_id == e.target.value)[0].state_name)
-        fetchCity(e.target.value)
-        setZipcodeId("")
+    const togglePopup = () => {
+        setIsOpen(!isOpen);
     }
-    const handleCity = (e) => {
-        setCityName(e.target.value)
-        setZipcodeId("")
+    const getFiles=(file)=>{
+        setType("")
+        console.log("================>",file.type)
+        if(file.type.includes("jpg") || file.type.includes("jpeg") || file.type.includes("png")){
+            setDoc(file);
+        }else{
+            setType("0");
+        }
+      }
+
+    const toggleCommonPopup = () => {
+        setIsCommonPopupOpen(!isCommonPopupOpen);
     }
 
-
-    const registrationhandleSubmit = (event) => {
+    const yesterday = moment().subtract(1, 'day');
+    const disablePastDt = current => {
+        return current.isAfter(yesterday);
+      };
+  
+      const inputProps = {
+          placeholder: 'MM/DD/YYYY',
+          //required:true
+      };
+      
+      const registrationDate = (event) => {
+        setDate(event.format("MM/DD/YYYY"))
+    }
+    function formatMobileNO(value){
+        var x = value.replace(/\D/g, '').match(/(\d{1})(\d{3})(\d{3})(\d{4})/);
+    
+        console.log("value of x",x);
+        value = '+'+ x[1]+'('+ x[2] +')' + x[3] + '-' + x[4];
+        console.log("mobileno",value);
+        return value;
+     }
+    const registrationhandleSubmit = (data) => {
         // setOpenLoader(true);
-        event.preventDefault();
+        // event.preventDefault();
+        
+        setDealerNameError("")
+        setFirstNameError("") 
+        setLastNameError("")
+        setPhoneNumberError("") 
+        setEmailError("") 
+        setAddressError("") 
+        setDateError("")
+        setTimeError("")
+        setNumberofYearsError("")
+        setStateAndCityError("")
+       
+        if(!dealerName){
+            setDealerNameError("Dealer Name is required")
+            return;
+        }
+        else if(dealerName.length>50){
+            setDealerNameError("Dealer Name must not exceed 50 characters")
+            return;
+        }
+        if(!firstName){
+            setFirstNameError("First Name is required")
+            return;
+        }
+        else if(firstName.length>50){
+            setFirstNameError("First Name must not exceed 50 characters")
+            return;
+        }       
+        if(!lastName){
+            setLastNameError("Last Name is required")
+            return;
+        }
+        else if(lastName.length>50 ){
+            setLastNameError("Last Name must not exceed 50 characters ")
+            return;
+        }
+        if(!phoneNumber){
+            setPhoneNumberError("Phone Number is required")
+            return;
+        }
+        else if(phoneNumber.length<12 ){
+            console.log("phone",phoneNumber );
+            console.log("phonelength",phoneNumber.length );
+
+            setPhoneNumberError("Phone Number must have 10 digits ")
+            
+        //     if(phoneNumber.length==3 && phoneNumber.includes('+1')){
+        //         setPhoneNumberError("Phone Number is required")
+        // }
+                return;
+    }
+         
+        if(!email){
+            setEmailError("Email  is required")
+            return;
+        }
+        else if(email && !new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i).test(email)){
+            setEmailError("Email  Must match the format")
+            return;
+        }
+        
+        if(!address){
+            setAddressError("Address is required")
+            return;
+        }
+        else if(address.length>150){
+            setAddressError("Address must not exceed 150 characters")
+            return;
+        }
+        // console.log("====stateName=>",stateName,cityName,zipCodeId)
+        if(!stateName){
+            console.log("====stateName=>",stateName,cityName,zipCodeId)
+            setStateAndCityError("state is required")
+            return
+        }
+        if(!cityName){
+            console.log("====cityName==>",stateName,cityName,zipCodeId)
+            // setStateAndCityError("city is required")
+            setStateAndCityError("city is required")
+             return
+        }
+        if(!zipCodeId){
+            console.log("====zipCodeId==>",stateName,cityName,zipCodeId)
+            // setStateAndCityError("zipCode is required")
+            setStateAndCityError("zipcode is required")
+             return
+        }
+        if(!option){
+            setNumberofYearsError("Number Of Years is required")
+            return;
+        }
+        if(!date){
+            setDateError("Date is required")
+            return;
+        } 
+        if(!time){
+            setTimeError("Time is required")
+            return;
+        }                             
+        console.log("===date===",date)
         let request = {
             dealer_name: dealerName,
-            first_name: firstName,
+            first_name:firstName,
             last_name: lastName,
             email: email,
-            phone_no: phoneNumber,
+            phone_no: formatMobileNO(phoneNumber),
             address: address,
             meeting_date: date,
             meeting_time: time,
-            active: "0",
+            active: 1,
             country_id: "1",
             state_id: stateName,
             city_id: cityName,
             zipcode_id: zipCodeId,
             no_years: option,
             local_flag: 0,
+            image: doc==="" ? "" : doc.length>0 ? doc : [doc],
         };
-        API
-            .post("http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/registration/add", request)
+
+        if( terms!=="0" ){
+        API.post("registration/add", request)
             .then((response) => {
                 if (response.data.success) {
                     const { data } = response;
-                    console.log("response", response)
-                    history.push("success");
+                    console.log("registration response=>", response)
+                    toggleCommonPopup()
+                    setPopupTitle("Dealer Registered successfully");
+                    setPopupMsg("Please Activate your account with the link shared to the given email Id");
+                    setPopupType("success");
+                    setPopupActionType("redirect");
+                    setPopupActionValue("ok");
+                    setPopupActionPath("/login")
                 } else {
-                    history.push("emailerror");
+                    const { data } = response;
+                    toggleCommonPopup()
+                    setPopupTitle("Error");
+                    setPopupMsg(data.error.err);
+                    setPopupType("error");
+                    setPopupActionType("close");
+                    setPopupActionValue("close");
                 }
             }, (error) => {
-                // setOpenLoader(false);
-                console.log(error);
+                toggleCommonPopup()
+                setPopupTitle("Error");
+                setPopupMsg(error, " Please try Again");
+                setPopupType("error");
+                setPopupActionType("close");
+                setPopupActionValue("close");
             });
+        }else{
 
-    }
-
-    const setZipcodeNormal = (data) => {
-        if(data.length ===0 ){
-            setZipcodeId("")
-            setCityName('')
-            setStateName('') 
-        }
-        if(data.length==5 ){
-            setZipcodeId(data)
-        }
-    }
-    const setZipcodeGoogle = (data) => {
-        if(data.length ===0 ){
-            setZipcodeId("")
-            setCityName('')
-            setStateName('') 
-        }
-        if(data.length !=5 ){
-            setCityName('')
-            setStateName('') 
-        }
-        if(data.length==5 ){
-            setZipcodeId(data)
-            const request={zipcode_id: data}
-            API.post("http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/location/condition", request)
-        .then(response => {
-            console.log("google place data response =>",response)
-            if (response.statusText== "OK"
-            ){
-                const {results} = response.data.data
-                if(results.length>0){
-                    console.log("google place data =>",response.data)
-                    console.log("CITY  ",results[0].address_components[1].long_name)
-                    console.log("STATE  ",results[0].address_components[1].long_name)
-                    setCityName( results[0].address_components[1].long_name)
-                    setStateName(results[0].address_components[3].long_name)                
-                }else{
-                    setCityName('')
-                    setStateName('') 
-                    console.log("please enter valid zipcode");
-                }
-               
-            }else{
-                console.log("something went wrong in address api..., try again")
+            if(terms==="0"){
+                setETerms("1");
             }
-            
-        })
         }
     }
+    const getStateName = (stateData) => {
+        setStateName(stateData)
+        setCityName(null)
+        setZipcodeId(null)
+    }
+
+    const getCityName = (cityData) => {
+        setCityName(cityData)
+        setZipcodeId(null)
+    }
+
+    const getZipCodeId = (zipData) => {
+        setZipcodeId(zipData)
+    }
+    function handleOnChange(value) {
+        setPhoneNumber(value);
+        console.log("inside handle")
+
+        console.log("phn no", value)
+     }
     return (
         <div>
-             
             <main id="main" className="inner-page">
                 <div className="col-lg-4 card loginBlock">
-                    <form className="registrationform" onSubmit={registrationhandleSubmit} >
+                    <form className="registrationform" onSubmit={handleSubmit(registrationhandleSubmit)} >
+                        
                         <h2 className="title"> Dealer Registration</h2>
+                        
                         <div className="row">
-                        <div className="col-sm-12 form-group"> 
-                        <div className="tbox">
-                            <input className="textbox " type="text" placeholder="" id="dealer_name" required maxLength="50" onChange={(e) => setDealerName(e.target.value)} />
-				            <label  for="dealer_name" className={dealerName !="" ? "input-has-value" : ""}>Dealer name</label>
-                            
-			            </div>
-                        </div>
-                        <div className="col-sm-12 form-group"> 
-                        <div className="tbox">
-                            <input className="textbox " type="text" placeholder="" id="first_name" required maxLength="30" onChange={(e) => setFirstName(e.target.value)} />
-				            <label  for="first_name" className={firstName !="" ? "input-has-value" : ""}>First Name</label>
-			            </div>
-                        </div>
-                        <div className="col-sm-12 form-group"> 
-                        <div className="tbox">
-                            <input className="textbox " type="text" placeholder="" id="last_name" required maxLength="30" onChange={(e) => setLastName(e.target.value)} />
-				            <label  for="last_name" className={lastName !="" ? "input-has-value" : ""}>Last Name</label>
-			            </div>
-                        </div>
                         <div className="col-sm-12 form-group">
-                        <div className="tbox">
-                            <input className="textbox " type="text" placeholder="" id="phone_no" required onChange={(e) => setPhoneNumber(e.target.value)} />
-				            <label  for="phone_no" className={phoneNumber !="" ? "input-has-value" : ""}>Phone</label>
-			            </div>
-                        </div>
-                        <div className="col-sm-12 form-group">
-                        <div className="tbox">
-                            <input className="textbox" type="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Invalid email address"  placeholder="" id="email" required onChange={(e) => setEmail(e.target.value)} />
-				            <label  for="email" className={email !="" ? "input-has-value" : ""}>Email</label>
-                           
-			            </div>
-                        </div>
-                        <div className="col-sm-12 form-group">
-                        <div className="tbox">
-                            <input className="textbox " type="text" placeholder="" id="address" maxLength="300" required onChange={(e) => setAddress(e.target.value)} />
-				            <label  for="address" className={address !="" ? "input-has-value" : ""}>Address</label>
-			            </div>
-                        </div>
+                        <div className="user-upload-btn-wrapper">
+                        {doc===""?<img alt="" src="adduser.jpg" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} ></img>:
+														<img alt="" src="adduser.jpg" src={doc.base64} ></img>														
+														}
+                        <span className="proCamera"></span>
+                        {type==="0"?<p className="form-input-error">Upload only Image Format </p>:""}      
+                        <FileBase64 onDone={ getFiles }  type="hidden"/>
+                        
+                                         {/* <button>  <img alt="" htmlFor="upload" src="adduser.jpg"  /></button>  */}
+                        
+                        </div> </div>
 
 
-                            
-                           
-                            <div className="col-sm-4 form-group">
-                            {zipCodeId == "" ?
-                                 (<select className="form-control custom-select browser-default" required defaultValue={stateName} onChange={handleState}>
-                                    <option>State</option>
-                                    {stateNameList.length>0 &&
-                                        <>
-                                            {stateNameList.map((state, index) => <option key={state.state_id} value={state.state_id}>{state.state_name}</option>)}
-                                        </>
-                                    }
-                                </select> )
-                                :
-                                 (<input type="text" className="form-control" placeholder="state" value ={stateName} required />)}
+                            <div className="col-sm-12 form-group">
+                                <div className="tbox">
+                                    <input className="textbox " type="text" placeholder="" id="dealer_name" name="dealerName"
+                                      onChange={(e) => setDealerName(e.target.value)} />
+                                    <label htmlFor="dealer_name" className={dealerName != "" ? "input-has-value" : ""}>Dealer name</label>
+                                    <p className="form-input-error" >{dealerNameError}</p>
+                                </div>
                             </div>
-                            <div className="col-sm-4 form-group">
-                            {zipCodeId == "" ?
-                                (<select id="City" className="form-control custom-select browser-default" required defaultValue={cityName} onChange={handleCity}>
-                                    <option>City</option>
-                                    {cityNameList.length>0 &&
-                                        <>
-                                            {cityNameList.map((city, index) => <option key={city.city_id} value={city.city_name}>{city.city_name}</option>)}
-                                        </>
-                                    }
-                                </select>)
-                                :
-                                (<input type="text" className="form-control" placeholder="city" value ={cityName} required />)}
+                            <div className="col-sm-12 form-group">
+                                <div className="tbox">
+                                    <input className="textbox " type="text" placeholder="" id="first_name" name="firstName"
+                                      onChange={(e) => setFirstName(e.target.value)} />
+                                    <label htmlFor="first_name" className={firstName != "" ? "input-has-value" : ""}>First Name</label>
+                                    <p className="form-input-error" >{firstNameError}</p>
+                                </div>
                             </div>
-                            <div className="col-sm-4 form-group">
-                            {stateName!=="" && cityName !=="" ?
-                                (<input type="text" className="form-control" placeholder="Zipcode" required maxLength="5" onChange={(e) => setZipcodeNormal(e.target.value)} />)
-
-                                :(<input type="text" className="form-control" placeholder="Zipcode" required maxLength="5" onChange={(e) => setZipcodeGoogle(e.target.value)} />)}
+                            <div className="col-sm-12 form-group">
+                                <div className="tbox">
+                                    <input className="textbox " type="text" placeholder="" id="last_name" name="lastName"
+                                      onChange={(e) => setLastName(e.target.value)} />
+                                    <label htmlFor="last_name" className={lastName != "" ? "input-has-value" : ""}>Last Name</label>
+                                    <p className="form-input-error" >{lastNameError}</p>
+                                </div>
                             </div>
-                            
+                            <div className="col-sm-4 form-group countrycode">
+                            <div className="tbox">
+                                <select className="form-control custom-select browser-default textbox"  id="drop" placeholder="" defaultValue="+1">
+                                    <option value="+1">+1</option>
+                                </select>
+                                <label  for="drop" className={"input-has-value"}>Country code</label>
+                            </div>
+                            </div>
+                            <div className="col-sm-8 form-group">
+                                <div className="tbox ">
+                                <PhoneInput  id="phone_no" name="phoneNumber" country="US" className="textbox" maxLength="14" minLength="14" value={phoneNumber}
+                                    onChange={handleOnChange} ></PhoneInput>
+                                    <label htmlFor="phone_no" className={"input-has-value"}>Phone</label>
+                                </div>
+                                <p className="form-input-error" >{phoneNumberError}</p>
 
+                            </div>
+                            <div className="col-sm-12 form-group">
+                                <div className="tbox">
+                                    <input className="textbox" type="text" placeholder="" id="email" name="email"
+                                    onChange={(e) => setEmail(e.target.value)} /> 
+                                    <label htmlFor="email" className={email != "" ? "input-has-value" : ""}>Email</label>
+                                    <p className="form-input-error" >{emailError}</p>
+                                </div>
+                            </div>
+                            <div className="col-sm-12 form-group">
+                                <div className="tbox">
+                                    <input className="textbox " type="text" placeholder="" id="address" name="address"
+                                      onChange={(e) => setAddress(e.target.value)} /> 
+                                    <label htmlFor="address" className={address != "" ? "input-has-value" : ""}>Address</label>
+                                    <p className="form-input-error" >{addressError}</p>
+                                </div>
+                            </div>
+                            <StateAndCity
+                                setStateValue={getStateName}
+                                setCityValue={getCityName}
+                                setZipcodeValue={getZipCodeId}
+                            />
+                             <div className="col-sm-12 form-group">
+                             <p className="form-input-error"> {stateAndCityError}</p>
+                             </div>                    
+                        
                             <div className="col-sm-8 form-group">
                                 <div className="tbox">
-                                {/* {/ <lable for="drop" className={option !="" ? "input-has-value" : ""}>How many years in car business</lable> /} */}
-                                <select id="drop" placeholder="" required className="form-control custom-select browser-default textbox" required onChange={(e) => setOption(e.target.value)}>
-                                <option value="Default">How many years in car business</option>
-                                <option value="1-3">1-3</option>
-                                <option value="3-5">3-5</option>
-                                <option value="5-10">5-10</option>
-                                <option value="10-15">10-15</option>
-                                <option value="15-20">15-20</option>
-                                <option value="More then 20">More then 20</option>
-                                </select>
+                                    {/* {/ <lable htmlFor="drop" className={option !="" ? "input-has-value" : ""}>How many years in car business</lable> /} */}
+                                    <select id="drop" placeholder=""  className="form-control custom-select browser-default textbox" 
+                                    onChange={(e) => setOption(e.target.value)}>
+                                        <option style={{"display":"none"}}></option>
+                                        <option value="Less then 1">Less then 1</option>
+                                        <option value="1-3">1-3</option>
+                                        <option value="3-5">3-5</option>
+                                        <option value="5-10">5-10</option>
+                                        <option value="10-15">10-15</option>
+                                        <option value="15-20">15-20</option>
+                                        <option value="More then 20">More then 20</option>
+                                    </select>
+                                    <label htmlFor="no_years" className={"input-has-value"}>How many years in car business</label>
+                                    <p className="form-input-error" >{numberOfYearsError}</p>
                                 </div>
                             </div>
 
-                            
+
                             <div className="col-sm-12 form-group scheduleMeeting">
                                 <h2 className="text-center">Schedule Meeting with our Agent</h2>
                                 <p>Thank you for interesting in our platform, Make you money and success.</p>
                             </div>
 
 
-                            <div className="col-sm-6 form-group datePickerBlock">
-                            <i class='bx bx-calendar'></i>
-                                <Datetime inputProps={ inputProps } timeFormat={false} dateFormat="DD/MM/YYYY" isValidDate={disablePastDt}/>
+                            <div className="col-sm-6 form-group datePickerBlock ">
+                                <div className="tbox">
+                                <div className="textbox">
+                                
+                                    <Datetime inputProps={ inputProps } timeFormat={false} dateFormat="MM/DD/YYYY" 
+                                    name="Date" isValidDate={disablePastDt} onChange={registrationDate} 
+                                     id="meeting_date"/>
+                                    <label  htmlFor="meeting_date" className={date === "" || date!==""? "input-has-value" : ""}>Select Date</label> 
+                                    <p className="form-input-error" >{dateError}</p>
+                                </div>
+                                </div>
                             </div>
-                            <div className="col-sm-6 form-group">
-                                <input type="time" className="form-control" placeholder="Select Time" required onChange={(e) => setTime(e.target.value)} />
+                            
+                            <div className="col-sm-6 form-group timepicker">
+                                <form novalidate className="timePicker">
+                                <div className="tbox"> 
+                                    <input type="time" className="form-control textbox" placeholder="Select Time" name="Time" 
+                                    onChange={(e) => setTime(e.target.value)} />
+                                    <label htmlFor="meeting_time" className={"input-has-value"}>Select Time</label>
+                                    <p className="form-input-error" >{timeError}</p>
+                                </div>
+                                </form>
                             </div>
+                            
                             <div className="col-sm-12 form-group agreetab">
-                                <input type="checkbox" className="form-check d-inline" id="chb" required />
-                                <label for="chb" className="form-check-label"> I Agree for the <a href="JavaScript:void(0)" onClick={togglePopup}>Terms And Conditions</a>
+                                <input type="checkbox" className="form-check d-inline " id="chb" 
+                                checked = { terms == 0 ? false : true } value={terms == 0 ? 1 : 0 } onChange={(e) => setTerms(e.target.value)}/>
+                                <label htmlFor="chb" className="form-check-label"> I Agree for the 
+                                <a href="JavaScript:void(0)" onClick={togglePopup}>Terms And Conditions</a>
                                 </label>
-                                {isOpen && <Popup
-      content={<>
-    
-    <div id="termspage" class="termspage">
-      
-		  <div class="termspageblock">
-			   <div class="row content">
-					<div class="modalcontent">
-				
-						<div class="modalbody">
-							<h2>Terms And Conditions </h2>
-							<p>
-							Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the 
-							industry's standard dummy text ever since the 1500s,
-							</p>
-							<p>
-							Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the 
-							industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and 
-							scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap 
-							into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the 
-							release of Letraset sheets containing Lorem Ipsum passages Lorem Ipsum has been the industry's standard 
-							dummy text ever since the 1500s,
-							</p>
-							<p>
-							Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
-							standard dummy text ever since the 1500s,
-							</p>
-						</div>
-						<div class="modalfooter ">
-							<a class="cta-btns" href="JavaScript:void(0)" onClick={togglePopup}>I AGREE</a>
-						</div>
-					</div>
-				</div>
-		  </div>
-	  
-    </div>
+                                {eterms==="1" && terms==="0" ?
+                                <p className="form-input-error"> Agree the Terms And Conditions</p>:""}
 
-      </>}
-      handleClose={togglePopup}
-    />}
+                                {isOpen && <Popup
+                                    isClose={false}
+                                    content={<>
+                                        <Terms toggle={togglePopup} />
+                                    </>}
+                                    handleClose={togglePopup}
+                                />}
+                                {isCommonPopupOpen && <CommonPopup
+                                    handleClose={isCommonPopupOpen}
+                                    popupTitle={popupTitle}
+                                    popupMsg={popupMsg}
+                                    popupType={popupType}
+                                    popupActionType={popupActionType}
+                                    popupActionValue={popupActionValue}
+                                    popupActionPath={popupActionPath}
+                                />}
                             </div>
                             <div className="col-lg-12 loginBtn">
                                 <button className="cta-btn">Submit</button>
@@ -358,14 +452,14 @@ const Registration = () => {
                     <div className="container">
                         <div className="row content">
                             <div className="col-lg-12">
-                                <img src={process.env.PUBLIC_URL +"/images/appstore.png"} />
-                                <img src={process.env.PUBLIC_URL +"/images/googleplay.png"} />
+                                <img src={process.env.PUBLIC_URL + "/images/appstore.png"} />
+                                <img src={process.env.PUBLIC_URL + "/images/googleplay.png"} />
                             </div>
                         </div>
                     </div>
                 </section>
             </main>
-          
+
         </div>
     )
 }

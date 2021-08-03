@@ -1,19 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom'
+import React from 'react';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import AppRouter from './Routes';
-import Footer from './Component/Footer';
-
-
-
-
+import rootReducer from "./Reducer/rootReducer";
 
 function App() {
+  let store = createStore(rootReducer);
   return (
     <>
       <div className="App">
-         
-        <AppRouter />
-        <Footer />
+        <Provider store={store}>
+          <AppRouter />
+        </Provider>
       </div>
     </>
   );

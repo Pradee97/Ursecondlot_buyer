@@ -1,10 +1,19 @@
-@media (max-width: 1700px) {
+@media only screen and (max-width: 1700px) {
 	
-	
-	
-	
-	
-	
+    #topbar .col-lg-8 {
+        -ms-flex: 0 0 60%;
+        flex: 0 0 60%;
+        max-width: 60%;
+    }
+    #topbar .col-lg-4 {
+        -ms-flex: 0 0 40%;
+        flex: 0 0 40%;
+        max-width: 40%;
+    }
+    .dealer-cars .cars-prices .cta-btns, .dealer-cars .cars-prices .cta-btns-primary, .other-dealer-cars .cars-prices .cta-btns-primary, .other-dealer-cars .cars-prices .cta-btns{
+        padding:5px 10px !important;
+        margin-right: 10px !important;
+    }
 }
 
 @media (max-width: 1600px) {
@@ -24,17 +33,43 @@
     background-size: cover;
 	height: 495px;
 }
-	
-	
+.topLeft{
+    padding-left: 20px;
+}	
+.rightMenu{
+    margin-right: 0;
+}
+#header .container-fluid, #footer .container-fluid{
+    padding-left: 20px;
+padding-right: 20px;
+}
+
+.inner-page .container-fluid {
+    padding: 0 20px;
+}
+
+.dealer-cars .cars-prices .cta-btns-primary{
+    padding: 10px
+}
 	
 }
 
 @media (max-width: 1500px) {
-	
-	
-	
-	
-	
+	.car-item {        
+        background: #fff;
+    }
+    .suggested-cars .col-md-3, .inventory-cars .col-md-3, .recently-cars .col-md-3, .favorite-cars .col-md-3 {
+        flex: 25% 1 !important;
+        max-width: 25% !important;
+    }
+    .search-cars .cars-prices a, .search-cars .cars-prices .cta-btns, .search-cars .cars-prices .cta-btns-primary{
+        margin: 3px;
+    }
+    .dealer-cars .col-md-3, .other-dealer-cars  .col-md-3 {
+        flex: 25% 1 !important;
+        max-width: 25% !important;
+    }
+        
 }
 
 @media (max-width: 1400px) {
@@ -42,7 +77,7 @@
 #hero {
     height: 485px;
 }
-	
+
 	
 	
 }
@@ -70,11 +105,9 @@
 	
 }
 @media (max-width: 1300px) {
-	
-
-	
-	
-	
+	.search-cars .cars-prices .cta-btns{
+        padding: 10px;
+    }	
 }
 
 @media (max-width: 1200px) {
@@ -108,7 +141,19 @@
     flex: 0 0 50%;
     max-width: 50%;
 }
-	
+.suggested-cars .col-md-3, .inventory-cars .col-md-3, .recently-cars .col-md-3, .favorite-cars .col-md-3 {
+    flex: 33.33% 1 !important;
+    max-width: 33.33% !important;
+}
+.adduserpageforminner .form-group label {    
+    font-size: 14px!important;
+}
+
+.dealer-cars .col-md-3, .other-dealer-cars .col-md-3 {
+    flex: 33.33% 1 !important;
+    max-width: 33.33% !important;
+}
+
 	
 }
 
@@ -142,8 +187,38 @@
 .contact .info .contacttag {   
     font-size: 14px;   
 }
-	
-	
+.suggested-cars .col-md-3, .inventory-cars .col-md-3, .recently-cars .col-md-3, .favorite-cars .col-md-3 {
+    flex: 50% 1 !important;
+    max-width: 50% !important;
+}
+.topLeft{
+    padding-left: 40px;
+}
+.rightMenu{
+    margin-right: 20px;
+}
+#header .container-fluid, #footer .container-fluid {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+#hero h1{
+    font-size: 40px;
+}
+#hero h2 {
+   font-size: 20px;
+}
+.container {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+.about .aboutblock{
+    padding:  20px;
+}
+
+.adduserpageforminner .col-sm-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
 	
 }
 
@@ -183,7 +258,68 @@
     flex: 0 0 50%;
     max-width: 70%;
 }
+.suggested-cars .col-md-3, .inventory-cars .col-md-3, .recently-cars .col-md-3, .favorite-cars .col-md-3 {
+    flex: 50% 1;
+    max-width: 50%;
+}
 	
+
+
+.banner-slider .slider.slider-for,
+	.banner-slider .slider.slider-nav {
+	    max-width: 100%;
+	    float: none;
+	}
+	.banner-slider .slider.slider-for {
+		padding-right: 0;
+	}
+	.banner-slider .slider.slider-nav {
+		height: auto;
+	}
+	.slider-banner-image {
+	    height: 500px;
+	} 
+	.slider.slider-nav.thumb-image {
+        padding: 10px 30px 0;
+	}
+	.slider-nav .slick-slide span {
+		padding: 5px 0;
+	}
+	.slick-arrow {
+		padding: 0;
+	    width: 30px;
+	    height: 30px;
+	    top: 50%;
+	    bottom: 0;
+	    -webkit-transform: translateY(-50%) rotate(-90deg);
+	    -moz-transform: translateY(-50%) rotate(-90deg);
+	    -ms-transform: translateY(-50%) rotate(-90deg);
+	    transform: translateY(-50%) rotate(-90deg);
+	}
+	.slick-prev {
+	    left: 0;
+	    right: unset;
+	}
+	.slick-next {
+	    left: unset;
+	    right: 0;
+   		background-color: transparent;
+	}
+	.vehicle-detail-banner .car-slider-desc {
+    	max-width: 340px;
+	}
+	.bid-tag {
+    	padding: 10px 0 15px;
+	}
+	.slider.slider-nav.thumb-image {
+	   white-space: nowrap;
+	}
+	.thumbnail-image.slick-slide {
+		padding: 0px 5px;
+		min-width: 75px;
+		display: inline-block;
+		float: none;
+	}
 	
 	
 }
@@ -191,7 +327,27 @@
 
 @media (max-width: 767px) {
 	
-	
+	.slider-banner-image {
+	    height: 400px;
+	}
+	.slider.slider-nav.thumb-image {
+    	padding: 0px 20px 0;
+    	margin: 10px 0px 0;
+	}
+	.slider-nav .slick-slide.thumbnail-image .thumbImg {
+		max-width: 140px;
+		height: 80px;
+	}
+	.slick-prev.slick-arrow {
+    	background-position: center 10px;
+	}
+	.slick-next.slick-arrow {
+    	background-position: center 10px, center;
+	}
+	.slider-nav .slick-slide span {
+	    font-size: 12px;
+	    white-space: normal;
+	}
 	
 	
 	
@@ -199,30 +355,38 @@
 
 @media (max-width: 640px) {
 	
-	
+	.adduserpageforminner .form-group {
+        padding: 3px!important;
+    }   
 	
 	
 	
 }
+@media screen and (max-width: 580px) {
+	.slider-banner-image {
+	    height:340px;
+	}
+}
 
 @media (max-width: 575px) {
 	
-	
-	
-	
-	
+	.suggested-cars .col-md-3, .inventory-cars .col-md-3, .recently-cars .col-md-3, .favorite-cars .col-md-3 {
+        flex: 100% 1;
+        max-width: 100%;
+    }
 }
 
 @media (max-width: 500px) {
 	
 	
 	
-	
-	
 }
+
 @media (max-width: 480px) {
 	
-	
+	.slider-banner-image {
+	    height:280px;
+	}
 	
 	
 	

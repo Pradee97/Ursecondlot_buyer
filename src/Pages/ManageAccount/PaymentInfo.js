@@ -2,12 +2,11 @@ import React from 'react';
 import API from "../../Services/BaseService";
 import { useHistory } from "react-router-dom";
 import ls from 'local-storage';
-// import '../../assets/css/styles.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import {
-    Button
-} from 'antd';
+import '../../assets/css/responsive.css';
+import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
+import {  Button  } from 'antd';
 
 
 const PaymentInfo = () => {
@@ -16,9 +15,9 @@ const PaymentInfo = () => {
     let userDetails = ls.get('userDetails');
     async function getPaymentInfo() {
         let request = {
-            buyer_id: userDetails.user_id
+            buyer_dealer_id: userDetails.buyer_dealer_id
         };
-        const state = API.post('http://ec2-52-87-245-126.compute-1.amazonaws.com:4000/urs2ndlot/v1/payment_info/condition', request);
+        const state = API.post('payment_info/condition', request);
         state.then(res => {
             console.log("res", res.data.data)
             setPaymentInfo(res.data.data);
@@ -26,7 +25,7 @@ const PaymentInfo = () => {
             .catch(err => { console.log(err); });
     }
     function onHandleEdit(e){
-        history.push("/flooredit/"+e);
+        history.push("/editpayment/"+e);
       }
 	useEffect(() => {
         getPaymentInfo()
@@ -44,50 +43,30 @@ const PaymentInfo = () => {
                     <div className="container" >
                         <div className="paymentaccountblock col-lg-12">
                             <div className="section-title">
-                                <h2>Payment Summary</h2>
+                                <h2>Financials</h2>
                             </div>
                             <div className="row content">
                                 <div className="col-lg-3 col-md-4 col-sm-12 accountleftblock">
-                                    <div className="mgaccountuser">
-                                        <div className="mgaccountuserleft">
-                                            <img src={process.env.PUBLIC_URL +"/images/userimg.jpg"} className="img-fluid" alt="..." />
-                                        </div>
-                                        <div className="mgaccountuserright">
-                                            <h3>Fernand</h3>
-                                            <div className="d-flex align-items-center">
-                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/Path.svg"} className="img-fluid" alt="..." /><span>California, Cl</span></p>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                    <div className="mgaccountuserlinks">
-                                        <div className="userlinks">
-                                            <li><img src={process.env.PUBLIC_URL +"/images/Icon awesome-user.svg"} className="img-fluid" alt="" /><a href="/manageaccount">Account</a></li>
-                                            <li><img src={process.env.PUBLIC_URL +"/images/Icon awesome-bell.svg"} className="img-fluid" alt="" /><a href="/notification">Notification</a></li>
-                                            <li className="active"><img src={process.env.PUBLIC_URL +"/images/dollar-symbol.svg"} className="img-fluid" alt="" /><a href="/paymentinfo">Payment</a></li>
-                                            <li><img src={process.env.PUBLIC_URL +"/images/fees.svg"} className="img-fluid" alt="" /><a href="/lotfee">Lot Fee</a></li>
-                                            <li><img src={process.env.PUBLIC_URL +"/images/google-docs.svg"} className="img-fluid" alt="" /><a href="documents.html">Document</a></li>
-                                            <li><img src={process.env.PUBLIC_URL +"/images/profile.svg"} className="img-fluid" alt="" /><a href="adduser.html">Add User</a></li>
-                                        </div>
-                                    </div>
+                                  
+                                    <ManageAccountLinks />
                                 </div>
-                                <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 paymentrightblock">
+                                <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 paymentrightblock ">
                                     <div className="paymentdetailblock">
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</p>
+                                    <p>Thank you for providing us the information of your bank system. We going to use this for make charegs to your account when you purchase a car.To assure easy transaction for your business</p>
                                         <div className="add-floors">
-                                            <div className="row">
+                                           
                                                 <div className="add-accounts">
-                                                    <a className="add-account-btns" href="/payment"><img src={process.env.PUBLIC_URL +"/images/addbtn.jpg"} />Add Bank Account</a>
+                                                <Button className="add-account-btns" onClick={() => history.push("/payment")}><i className="icofont-plus"></i> Add Bank Account</Button>
+                                            {/*<a className="add-account-btns" href="/payment"><i class="icofont-plus"></i> Add Bank Account</a> */}
                                                 </div>
-                                            </div>
+                                            
                                         </div>
                                         {paymentinfo.length>0?paymentinfo.map((item,index) =>
-                                        <div className="col-lg-12 col-md-12 col-sm-12 mt-2 pt-4 bankinfo ">
+                                        <div className="col-lg-12 col-md-12 col-sm-12 mt-2 pt-4 bankinfo paymentinfoblocks">
                                             <div className="bankinfos">
                                                 <h4>Bank Account Information</h4>
                                                 <div className="bankinfotable">
-                                                <Button onClick={() => onHandleEdit(item.payment_info_id)}>Edit</Button>
+                                                {/* <Button onClick={() => onHandleEdit(item.payment_info_id)}>Edit</Button> */}
                                                     <table>
                                                         <tr>
                                                             <td><span>Dealership Name</span></td>
@@ -96,7 +75,7 @@ const PaymentInfo = () => {
                                                             <td>{item.ach_no}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td><span>Account holder name</span></td>
+                                                            <td><span>Signer on account</span></td>
                                                             <td>{item.acc_name}</td>
                                                             <td><span>Routing Number</span></td>
                                                             <td>{item.routing_no}</td>
@@ -117,15 +96,12 @@ const PaymentInfo = () => {
 
                                                     <div className="releaseinfo">
                                                         <div className="row">
-                                                            <div className="col-sm-6 form-group">
+                                                            <div className="col-sm-12">
                                                                 <p>Signed bank Authorization letter for bank to release information. </p>
+                                                            <div className="uploadbutton">                                                              
+                                                            <a href={item.doc_name}>
+                                                                    <label htmlFor="downupload"><img src={process.env.PUBLIC_URL +"/images/download.png"} />Documents</label></a>
                                                             </div>
-
-                                                            <div className="col-sm-6 form-group uploadbutton">
-                                                                <div className="tbox">
-                                                                    <input type="file" id="downupload" hidden />
-                                                                    <label for="downupload"><img src={process.env.PUBLIC_URL +"/images/download.png"} />Document</label>
-                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
