@@ -19,11 +19,16 @@ const SuggestedCars = () => {
     const [loading,setLoading] = useState(true);
     const [data,setData]=useState("");
 	const [makeSearch,setMakeSearch]=useState([]);
-    const dispatch = useDispatch();
+	const dispatch = useDispatch();
+	const [dealerShip,setDealerShip] = useState("");
+	const [from,setFrom] = useState("");
+	const [to,seTo] = useState("");
 
     const getrecentCarList=()=>{
+
         let request={
-            buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+			buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
+			
         }
         API.post('BuyerNewCarList/condition',request).then(res=>{
             console.log("response",res.data.data);
@@ -80,12 +85,7 @@ const SuggestedCars = () => {
         console.log("/////////=====",e.target.value)
       }
       
-      const onKeydowninSearch = (event) => {
-        if (event.key === 'Enter') {
-            // setCurrentPage(1)
-            searchCarDetail();
-          }
-      }
+   
       
       const searchCarDetail = () => {
         console.log("/////////",data)
@@ -98,16 +98,22 @@ const SuggestedCars = () => {
 			buyer_dealer_id:JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
 			model:"",
 			make:["'Honda'","'suzki'"],
-			dealer_type:"",
+			dealer_type:dealerShip,
 			transmission:"",
 			drivetrain:"",
-			year:""
+			year:"",
+			state:"",
+			fromMileage:"",
+			toMileage:"",
+			fromYear:from,
+			toYear:2017
 			
 			}
 
         API.post("BuyerNewCarSearch/condition",request)
         .then((res)=>{
-           
+		   
+			
             setCarDetail(res.data.data);
          
         },
@@ -116,7 +122,20 @@ const SuggestedCars = () => {
           }
         )
         .catch(err => { console.log(err); });
-      }
+	  }
+	  
+	  function onDealerShipClick(e){
+		console.log("event value++++++",e.target.value)
+		setDealerShip(e.target.value);
+		searchCarDetail()
+	  }
+
+	  async function onYearChange (e) {
+		  setFrom(e.target.value);
+		  if(e.target.value.length>4){
+			searchCarDetail()
+		  }
+	  }
 
     return(
         <div>
@@ -309,7 +328,7 @@ const SuggestedCars = () => {
 								<div class="inner">
 									<div class="row">
 										<div class="input-group col-lg-6">
-											<input class="form-control border-end-0 border" type="text" value="" id="from-input" placeholder="From"/>
+											<input class="form-control border-end-0 border" type="text"  id="from-input" placeholder="From"onChange={onYearChange}/>
 										</div>
 										<div class="input-group col-lg-6">
 											<input class="form-control border-end-0 border" type="text" value="" id="to-input" placeholder="To"/>
@@ -323,10 +342,10 @@ const SuggestedCars = () => {
 								<div class="inner">
 									<div class="row">
 										<div class="input-group col-lg-6">
-											<input class="form-control border-end-0 border" type="text" value="" id="from-mileage" placeholder="From"/>
+											<input class="form-control border-end-0 border" type="text"  id="from-mileage" placeholder="From" />
 										</div>
 										<div class="input-group col-lg-6">
-											<input class="form-control border-end-0 border" type="text" value="" id="to-mileage" placeholder="To"/>
+											<input class="form-control border-end-0 border" type="text"  id="to-mileage" placeholder="To" />
 										</div>
 									</div>
 								</div>
@@ -384,22 +403,21 @@ const SuggestedCars = () => {
 								</div>
 
 							</div>
-							
+						
 							<div class="dealershipblock">
 								<h4>Dealership<span><a href="#"><img src={arrowmark}/></a></span></h4>
 								<div class="inner">
 									<div class="radio input-group">
-										<input id="radio-newdealer" name="radio" type="radio" cheid="car"></input>
+										<input id="radio-newdealer" name="radio" type="radio" cheid="car" value="New Car Dealer" onClick={onDealerShipClick}/>
 										<label for="radio-newdealer" class="radio-label">New Car Dealer</label>
 									</div>
 
 									<div class="radio input-group">
-										<input id="radio-useddealer" name="radio" type="radio"/>
+										<input id="radio-useddealer" name="radio" type="radio" value="Used Car Dealer" onClick={onDealerShipClick}/>
 										<label  for="radio-useddealer" class="radio-label">Used Car Dealer</label>
 									</div>
 								</div>
 							</div>
-							
 							<div class="bodystyleblock">
 								<h4>Body Style<span><a href="#"><img src={arrowmark}/></a></span></h4>
 								<div class="inner">
