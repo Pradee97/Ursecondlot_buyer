@@ -155,7 +155,7 @@ const SuggestedCars = () => {
 		let request={
 			buyer_dealer_id:JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
 			model:"",
-			make:makeSearch.length>0?makeSearch:["''"],
+			make:makeSearch.length>0?makeSearch:"",
 			dealer_type:dealerShip,
 			transmission:"",
 			drivetrain:"",
