@@ -101,14 +101,18 @@ const SuggestedCars = () => {
 		searchCarDetail();
 	},[fromMileage,toMileage,makeSearch,drivetrainSearch,transmissionSearch]);
 
-	
-
 
 	function concatMakeSearch  (e){
 		console.log("values passed",e);
 		console.log("selected chec box valuue",e.target.value)
+        if(e.target.checked)
+			setMakeSearch(makeSearch=>[...makeSearch,"'"+e.target.value+"'"]);
+		else if (!e.target.checked)
+			{
+				setMakeSearch(makeSearch.filter(item => item!== "'"+e.target.value+"'" ));
+			
+			}
 
-		setMakeSearch(makeSearch=>[...makeSearch,"'"+e.target.value+"'"]);
 
 		
 	}
@@ -151,7 +155,7 @@ const SuggestedCars = () => {
 		let request={
 			buyer_dealer_id:JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
 			model:"",
-			make:["'Honda'","'suzki'"],
+			make:makeSearch.length>0?makeSearch:["''"],
 			dealer_type:dealerShip,
 			transmission:"",
 			drivetrain:"",
