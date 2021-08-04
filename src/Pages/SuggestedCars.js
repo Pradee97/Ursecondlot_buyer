@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import CarListAction from './CarList/CarListAction';
 import arrowmark from '../../src/assets/img/arrowmark.jpg';
 
+
 const SuggestedCars = () => {
 
     const history = useHistory();
@@ -19,11 +20,16 @@ const SuggestedCars = () => {
     const [loading,setLoading] = useState(true);
     const [data,setData]=useState("");
 	const [makeSearch,setMakeSearch]=useState([]);
+	const [transmissionSearch,setTransmissionSearch]=useState([]);
+	const [drivetrainSearch,setDriveTrainSearch]=useState([]);
+	const [modelSearch,setModelSearch]=useState([]);
 	const dispatch = useDispatch();
 	const [dealerShip,setDealerShip] = useState("");
-	const [from,setFrom] = useState("");
-	const [to,seTo] = useState("");
-
+	const [fromYear,setFromYear] = useState("");
+	const [toYear,setToYear] = useState("");
+	const [fromMileage,setFromMIleage]=useState("");
+	const [toMileage,setToMileage]=useState("");
+	//const [checked, setChecked] = useState(false)
     const getrecentCarList=()=>{
 
         let request={
@@ -71,14 +77,62 @@ const SuggestedCars = () => {
        
     },[recentCarFlag]);
 
-	const concatMakeSearch = (selectedValue)=>{
-		console.log("selected chec box valuue",selectedValue)
-		setMakeSearch(prevState => ({
-			arr: [...prevState.makeSearch, selectedValue]
-		  }));
+	useEffect(()=>{
+		if(fromYear.length>=4){
+			searchCarDetail();
+		}
+		
+	},[fromYear]);
 
-		  console.log("State updated with value selected from check box", makeSearch);
+	useEffect(()=>{
+		if(toYear.length>=4){
+			searchCarDetail();
+		}
+	},[toYear]);
+
+	
+
+	useEffect(()=>{
+		console.log("State updated with value selected from check box", makeSearch);
+		console.log("driveTrain selected",drivetrainSearch);
+		console.log("Transmission selected",transmissionSearch);
+		console.log("From Mileage",fromMileage);
+		console.log("To Mileage",toMileage);
+		searchCarDetail();
+	},[fromMileage,toMileage,makeSearch,drivetrainSearch,transmissionSearch]);
+
+	
+
+
+	function concatMakeSearch  (e){
+		console.log("values passed",e);
+		console.log("selected chec box valuue",e.target.value)
+
+		setMakeSearch(makeSearch=>[...makeSearch,"'"+e.target.value+"'"]);
+
+		
 	}
+
+	
+	function concatTransmissionSearch  (e){
+		console.log("values passed",e);
+		console.log("selected  transmission chec box valuue",e.target.value)
+
+		setTransmissionSearch(transmissionSearch=>[...transmissionSearch,"'"+e.target.value+"'"]);
+
+		
+	}
+
+	
+	function concatDriveTrainSearch  (e){
+		console.log("values passed",e);
+		console.log("selected chec box valuue",e.target.value)
+
+		setDriveTrainSearch(drivetrainSearch=>[...drivetrainSearch,"'"+e.target.value+"'"]);
+
+		
+	}
+
 
     const OnSearch = (e) => {
         setData(e.target.value)
@@ -88,7 +142,7 @@ const SuggestedCars = () => {
    
       
       const searchCarDetail = () => {
-        console.log("/////////",data)
+        //console.log("/////////",data)
         // let request={
         //     buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
         //   data: data
@@ -103,12 +157,13 @@ const SuggestedCars = () => {
 			drivetrain:"",
 			year:"",
 			state:"",
-			fromMileage:"",
-			toMileage:"",
-			fromYear:from,
-			toYear:2017
+			fromMileage:fromMileage,
+			toMileage:toMileage,
+			fromYear:fromYear,
+			toYear:toYear
 			
 			}
+			console.log(" filter search request",request);
 
         API.post("BuyerNewCarSearch/condition",request)
         .then((res)=>{
@@ -130,12 +185,6 @@ const SuggestedCars = () => {
 		searchCarDetail()
 	  }
 
-	  async function onYearChange (e) {
-		  setFrom(e.target.value);
-		  if(e.target.value.length>4){
-			searchCarDetail()
-		  }
-	  }
 
     return(
         <div>
@@ -328,10 +377,10 @@ const SuggestedCars = () => {
 								<div class="inner">
 									<div class="row">
 										<div class="input-group col-lg-6">
-											<input class="form-control border-end-0 border" type="text"  id="from-input" placeholder="From"onChange={onYearChange}/>
+											<input class="form-control border-end-0 border" type="text"  id="from-input" value={fromYear} maxLength="4" placeholder="From" onChange={(e)=>setFromYear(e.target.value)}/>
 										</div>
 										<div class="input-group col-lg-6">
-											<input class="form-control border-end-0 border" type="text" value="" id="to-input" placeholder="To"/>
+											<input class="form-control border-end-0 border" type="text" value={toYear} id="to-input" placeholder="To" maxLength="4" onChange={(e)=>setToYear(e.target.value)}/>
 										</div>
 									</div>
 								</div>
@@ -342,10 +391,10 @@ const SuggestedCars = () => {
 								<div class="inner">
 									<div class="row">
 										<div class="input-group col-lg-6">
-											<input class="form-control border-end-0 border" type="text"  id="from-mileage" placeholder="From" />
+											<input class="form-control border-end-0 border" type="text"  id="from-mileage" placeholder="From" value={fromMileage} onChange={(e)=>setFromMIleage(e.target.value)} />
 										</div>
 										<div class="input-group col-lg-6">
-											<input class="form-control border-end-0 border" type="text"  id="to-mileage" placeholder="To" />
+											<input class="form-control border-end-0 border" type="text"  id="to-mileage" placeholder="To" value={toMileage} onChange={(e)=>setToMileage(e.target.value)} />
 										</div>
 									</div>
 								</div>
@@ -355,27 +404,27 @@ const SuggestedCars = () => {
 								<h4>Make<span><a href="#"><img src={arrowmark}/></a></span></h4>
 								<div class="inner">
 									<div class="form-group input-group ">
-										<input type="checkbox" id="chevrolet" value="Chevrolet" onClick={()=>concatMakeSearch("Chevrolet")}/>
+										<input type="checkbox" id="chevrolet" value="Chevrolet" onClick={concatMakeSearch}/>
 										<label for="chevrolet">Chevrolet</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" value="ford" id="ford"/>
+										<input type="checkbox" value="ford" id="ford" onClick={concatMakeSearch}/>
 										<label for="ford">Ford</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="toyota"/>
+										<input type="checkbox" id="toyota" value="toyota" onClick={concatMakeSearch}/>
 										<label for="toyota">Toyota</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="dodge"/>
+										<input type="checkbox" id="dodge" value="dodge" onClick={concatMakeSearch}/>
 										<label for="dodge">Dodge</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="nissan"/>
+										<input type="checkbox" id="nissan" value="nissan" onClick={concatMakeSearch}/>
 										<label for="nissan">Nissan</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="honda"/>
+										<input type="checkbox" id="honda" value="honda" onClick={concatMakeSearch}/>
 										<label for="honda">Honda</label>
 									</div>
 									<div class="viewblock"><a href="#">View More</a></div>
@@ -472,15 +521,15 @@ const SuggestedCars = () => {
 								<h4>Transmission<span><a href="#"><img src={arrowmark}/></a></span></h4>
 								<div class="inner">
 									<div class="form-group input-group ">
-										<input type="checkbox" id="manual"/>
+										<input type="checkbox" id="manual" value="manual" onClick={concatTransmissionSearch} />
 										<label for="manual">Manual</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="automatic"/>
+										<input type="checkbox" id="automatic" value="automatic" onClick={concatTransmissionSearch}/>
 										<label for="automatic">Automatic</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="otherissues"/>
+										<input type="checkbox" id="otherissues" value="other" onClick={concatTransmissionSearch}/>
 										<label for="otherissues">Other</label>
 									</div>
 								</div>
