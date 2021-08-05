@@ -19,13 +19,9 @@ const Inspection=()=>{
     }
     API.post('inspection/condition',request).then(res=>{
         console.log("response",res.data.data);
-       // const {results} = res.data.data;
-        console.log("Response data",res.data.data);
-        //if(results.length>0){
+       
         setInspection(res.data.data);
-        console.log("car Detail",res.data.data);
-        // setLoading(false);
-        //}
+        
     }).catch(err => { console.log(err); });
 
 
