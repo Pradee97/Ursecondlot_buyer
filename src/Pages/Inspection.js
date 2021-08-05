@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import API from "../Services/BaseService";
 import appstore from '../assets/img/appstore.png';
 import googleplay from '../assets/img/googleplay.png';
 import checkmarkred from '../assets/img/checkmarkred.svg';
@@ -9,6 +10,24 @@ import car from '../assets/img/cars02.png';
 
 
 const Inspection=()=>{
+
+    const [inspection,setInspection]=useState("");
+
+    let request={
+        car_id: 1,
+        
+    }
+    API.post('inspection/condition',request).then(res=>{
+        console.log("response",res.data.data);
+       // const {results} = res.data.data;
+        console.log("Response data",res.data.data);
+        //if(results.length>0){
+        setInspection(res.data.data);
+        console.log("car Detail",res.data.data);
+        // setLoading(false);
+        //}
+    }).catch(err => { console.log(err); });
+
 
     return(
         <div>

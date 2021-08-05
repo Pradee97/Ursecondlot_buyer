@@ -26,6 +26,17 @@ const Favoritelist = () => {
   const [favCarFlag,setFavCarFlag]=useState(false);
   const [data,setData]=useState("");
   const dispatch = useDispatch();
+  const [dealerShip,setDealerShip] = useState("");
+  const [fromYear,setFromYear] = useState("");
+  const [toYear,setToYear] = useState("");
+  const [fromMileage,setFromMIleage]=useState("");
+  const [toMileage,setToMileage]=useState("");
+  const [stateSearch,setStateSearch]=useState([]);
+  const [makeSearch,setMakeSearch]=useState([]);
+  const [transmissionSearch,setTransmissionSearch]=useState([]);
+  const [drivetrainSearch,setDriveTrainSearch]=useState([]);
+  const [bodyTypeSearch,setBodyTypeSearch] = useState([]);
+
   const getFavCarList=()=>{
 
     let request={
@@ -71,38 +82,155 @@ useEffect(() => {
 },[favCarFlag]);
 
 
+useEffect(()=>{
+	if(fromYear.length>=4){
+		searchCarDetail();
+	}
+	
+},[fromYear]);
+
+useEffect(()=>{
+	if(toYear.length>=4){
+		searchCarDetail();
+	}
+},[toYear]);
+
+
+
+useEffect(()=>{
+	console.log("State updated with value selected from check box", makeSearch);
+	console.log("driveTrain selected",drivetrainSearch);
+	console.log("Transmission selected",transmissionSearch);
+	console.log("From Mileage",fromMileage);
+	console.log("To Mileage",toMileage);
+	searchCarDetail();
+},[fromMileage,toMileage,makeSearch,drivetrainSearch,transmissionSearch,stateSearch,bodyTypeSearch]);
+
+
+function concatMakeSearch  (e){
+	console.log("values passed",e);
+	console.log("selected chec box valuue",e.target.value)
+	if(e.target.checked)
+		setMakeSearch(makeSearch=>[...makeSearch,"'"+e.target.value+"'"]);
+	else if (!e.target.checked)
+		{
+			setMakeSearch(makeSearch.filter(item => item!== "'"+e.target.value+"'" ));
+		
+		}
+
+
+	
+}
+
+
+function concatTransmissionSearch  (e){
+	console.log("values passed",e);
+	console.log("selected  transmission chec box valuue",e.target.value)
+	if(e.target.checked){
+	setTransmissionSearch(transmissionSearch=>[...transmissionSearch,"'"+e.target.value+"'"]);
+	}
+	else if (!e.target.checked)
+	{
+		setTransmissionSearch(transmissionSearch.filter(item => item!== "'"+e.target.value+"'" ));
+	
+	}
+	
+}
+
+
+function concatDriveTrainSearch  (e){
+	console.log("values passed",e);
+	console.log("selected chec box valuue",e.target.value)
+	if(e.target.checked){
+	setDriveTrainSearch(drivetrainSearch=>[...drivetrainSearch,"'"+e.target.value+"'"]);
+	}
+	else if (!e.target.checked)
+	{
+		setDriveTrainSearch(drivetrainSearch.filter(item => item!== "'"+e.target.value+"'" ));
+
+	}
+	
+}
+
+function concatStateSearch  (e){
+	console.log("state=======",stateSearch)
+	console.log("values passed",e);
+	console.log("selected chec box valuue",e.target.value)
+	if(e.target.checked){
+	setStateSearch(stateSearch=>[...stateSearch,"'"+e.target.value+"'"]);
+	console.log("selected chec box valuue",e.target.value)
+	
+	}
+	else if (!e.target.checked)
+	{
+		setStateSearch(stateSearch.filter(item => item!== "'"+e.target.value+"'" ));
+		
+	}
+	
+}
+
+function concatBodyTypeSearch  (e){
+	console.log("state=======",bodyTypeSearch)
+	console.log("values passed",e);
+	console.log("selected chec box valuue",e.target.value)
+	if(e.target.checked){
+	setBodyTypeSearch(bodyTypeSearch=>[...bodyTypeSearch,"'"+e.target.value+"'"]);
+	console.log("selected chec box valuue",e.target.value)
+	
+	}
+	else if (!e.target.checked)
+	{
+		setBodyTypeSearch(bodyTypeSearch.filter(item => item!== "'"+e.target.value+"'" ));
+		
+	}
+	
+}
+
 const OnSearch = (e) => {
-  setData(e.target.value)
-  console.log("/////////=====",e.target.value)
-}
-
-const onKeydowninSearch = (event) => {
-  if (event.key === 'Enter') {
-      // setCurrentPage(1)
-      searchFav();
-    }
-}
-
-
-const searchFav = () => {
-  console.log("/////////",data)
-  let request={
-    buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
-    data: data
-      
+	setData(e.target.value)
+	console.log("/////////=====",e.target.value)
   }
-  API.post("BuyerFavoriteCarSearch/condition",request)
-  .then((res)=>{
-     
-     setFavCarInventoryDetail(res.data.data);    
-   
-  },
-  (error) => {
-      console.log(error);
-    }
-  )
-  .catch(err => { console.log(err); });
-}
+  
+
+  
+  const searchCarDetail = () => {
+	
+	let request={
+		buyer_dealer_id:JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
+		model:bodyTypeSearch.length>0?bodyTypeSearch:"",
+		make:makeSearch.length>0?makeSearch:"",
+		dealer_type:dealerShip,
+		transmission:transmissionSearch.length>0?transmissionSearch:"",
+		drivetrain:drivetrainSearch.length>0?drivetrainSearch:"",
+		state:stateSearch.length>0?stateSearch:"",
+		fromMileage:fromMileage,
+		toMileage:toMileage,
+		fromYear:fromYear,
+		toYear:toYear
+		
+		}
+		console.log("state=======",stateSearch)
+		console.log(" filter search request",request);
+
+	API.post("BuyerNewCarSearch/condition",request)
+	.then((res)=>{
+	   
+		
+		setFavCarInventoryDetail(res.data.data);
+	 
+	},
+	(error) => {
+		console.log(error);
+	  }
+	)
+	.catch(err => { console.log(err); });
+  }
+  
+  function onDealerShipClick(e){
+	console.log("event value++++++",e.target.value)
+	setDealerShip(e.target.value);
+	searchCarDetail()
+  }
 
   return (
       <div>
@@ -164,27 +292,27 @@ const searchFav = () => {
 								<h4>States<span><a href="#"><img src={arrowmark}/></a></span></h4>
 								<div class="inner">
 									<div class="form-group input-group">
-										<input type="checkbox" id="florida"/>
+										<input type="checkbox" id="florida" value="florida" onClick={concatStateSearch}/>
 										<label for="florida">Florida</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="california"/>
+										<input type="checkbox" id="california" value="california" onClick={concatStateSearch}/>
 										<label for="california">California</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="delaware"/>
+										<input type="checkbox" id="delaware" value="delaware" onClick={concatStateSearch}/>
 										<label for="delaware">Delaware</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="newmexico"/>
+										<input type="checkbox" id="newmexico" value="newmexico" onClick={concatStateSearch}/>
 										<label for="newmexico">New mexico</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="colorado"/>
+										<input type="checkbox" id="colorado" value="colorado" onClick={concatStateSearch}/>
 										<label for="colorado">Colorado</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="washington"/>
+										<input type="checkbox" id="washington" value="washington" onClick={concatStateSearch}/>
 										<label for="washington">Washington</label>
 									</div>
 								</div>
@@ -293,10 +421,10 @@ const searchFav = () => {
 								<div class="inner">
 									<div class="row">
 										<div class="input-group col-lg-6">
-											<input class="form-control border-end-0 border" type="text" value="" id="from-input" placeholder="From"/>
+											<input class="form-control border-end-0 border" type="text"  id="from-input" value={fromYear} maxLength="4" placeholder="From" onChange={(e)=>setFromYear(e.target.value)}/>
 										</div>
 										<div class="input-group col-lg-6">
-											<input class="form-control border-end-0 border" type="text" value="" id="to-input" placeholder="To"/>
+											<input class="form-control border-end-0 border" type="text" value={toYear} id="to-input" placeholder="To" maxLength="4" onChange={(e)=>setToYear(e.target.value)}/>
 										</div>
 									</div>
 								</div>
@@ -307,10 +435,10 @@ const searchFav = () => {
 								<div class="inner">
 									<div class="row">
 										<div class="input-group col-lg-6">
-											<input class="form-control border-end-0 border" type="text" value="" id="from-mileage" placeholder="From"/>
+											<input class="form-control border-end-0 border" type="text"  id="from-mileage" placeholder="From" value={fromMileage} onChange={(e)=>setFromMIleage(e.target.value)} />
 										</div>
 										<div class="input-group col-lg-6">
-											<input class="form-control border-end-0 border" type="text" value="" id="to-mileage" placeholder="To"/>
+											<input class="form-control border-end-0 border" type="text"  id="to-mileage" placeholder="To" value={toMileage} onChange={(e)=>setToMileage(e.target.value)} />
 										</div>
 									</div>
 								</div>
@@ -320,27 +448,27 @@ const searchFav = () => {
 								<h4>Make<span><a href="#"><img src={arrowmark}/></a></span></h4>
 								<div class="inner">
 									<div class="form-group input-group ">
-										<input type="checkbox" id="chevrolet"/>
+										<input type="checkbox" id="chevrolet" value="Chevrolet" onClick={concatMakeSearch}/>
 										<label for="chevrolet">Chevrolet</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="ford"/>
+										<input type="checkbox" value="ford" id="ford" onClick={concatMakeSearch}/>
 										<label for="ford">Ford</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="toyota"/>
+										<input type="checkbox" id="toyota" value="toyota" onClick={concatMakeSearch}/>
 										<label for="toyota">Toyota</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="dodge"/>
+										<input type="checkbox" id="dodge" value="dodge" onClick={concatMakeSearch}/>
 										<label for="dodge">Dodge</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="nissan"/>
+										<input type="checkbox" id="nissan" value="nissan" onClick={concatMakeSearch}/>
 										<label for="nissan">Nissan</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="honda"/>
+										<input type="checkbox" id="honda" value="honda" onClick={concatMakeSearch}/>
 										<label for="honda">Honda</label>
 									</div>
 									<div class="viewblock"><a href="#">View More</a></div>
@@ -373,12 +501,12 @@ const searchFav = () => {
 								<h4>Dealership<span><a href="#"><img src={arrowmark}/></a></span></h4>
 								<div class="inner">
 									<div class="radio input-group">
-										<input id="radio-newdealer" name="radio" type="radio" cheid="car"></input>
+										<input id="radio-newdealer" name="radio" type="radio" cheid="car" value="New Car Dealer" onClick={onDealerShipClick}/>
 										<label for="radio-newdealer" class="radio-label">New Car Dealer</label>
 									</div>
 
 									<div class="radio input-group">
-										<input id="radio-useddealer" name="radio" type="radio"/>
+										<input id="radio-useddealer" name="radio" type="radio" value="Used Car Dealer" onClick={onDealerShipClick}/>
 										<label  for="radio-useddealer" class="radio-label">Used Car Dealer</label>
 									</div>
 								</div>
@@ -388,47 +516,47 @@ const searchFav = () => {
 								<h4>Body Style<span><a href="#"><img src={arrowmark}/></a></span></h4>
 								<div class="inner">
 									<div class="form-group input-group ">
-										<input type="checkbox" id="car"/>
+										<input type="checkbox" id="car" value="car" onClick={concatBodyTypeSearch}/>
 										<label for="car">Car</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="suv"/>
+										<input type="checkbox" id="suv" value="SUV" onClick={concatBodyTypeSearch}/>
 										<label for="suv">SUV</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="truck"/>
+										<input type="checkbox" id="truck" value="truck" onClick={concatBodyTypeSearch}/>
 										<label for="truck">Truck</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="van"/>
+										<input type="checkbox" id="van" value="van" onClick={concatBodyTypeSearch}/>
 										<label for="van">Van</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="minivan"/>
+										<input type="checkbox" id="minivan" value="miniVan" onClick={concatBodyTypeSearch}/>
 										<label for="minivan">Minivan</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="trailer"/>
+										<input type="checkbox" id="trailer" value="trailer" onClick={concatBodyTypeSearch}/>
 										<label for="trailer">Trailer</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="rv"/>
+										<input type="checkbox" id="rv" value="RV" onClick={concatBodyTypeSearch}/>
 										<label for="rv">RV</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="semi"/>
+										<input type="checkbox" id="semi" value="semi" onClick={concatBodyTypeSearch}/>
 										<label for="semi">Semi</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="tractor"/>
+										<input type="checkbox" id="tractor" value="tractor" onClick={concatBodyTypeSearch}/>
 										<label for="tractor">Tractor</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="semitractor"/>
+										<input type="checkbox" id="semitractor" value="Semi Tractor" onClick={concatBodyTypeSearch}/>
 										<label for="semitractor">Semi Tractor</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="other"/>
+										<input type="checkbox" id="other" value="other" onClick={concatBodyTypeSearch}/>
 										<label for="other">Other</label>
 									</div>
 								</div>
@@ -438,15 +566,15 @@ const searchFav = () => {
 								<h4>Transmission<span><a href="#"><img src={arrowmark}/></a></span></h4>
 								<div class="inner">
 									<div class="form-group input-group ">
-										<input type="checkbox" id="manual"/>
+										<input type="checkbox" id="manual" value="manual" onClick={concatTransmissionSearch} />
 										<label for="manual">Manual</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="automatic"/>
+										<input type="checkbox" id="automatic" value="automatic" onClick={concatTransmissionSearch}/>
 										<label for="automatic">Automatic</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="otherissues"/>
+										<input type="checkbox" id="otherissues" value="other" onClick={concatTransmissionSearch}/>
 										<label for="otherissues">Other</label>
 									</div>
 								</div>
@@ -456,23 +584,23 @@ const searchFav = () => {
 								<h4>Drivetrain<span><a href="#"><img src={arrowmark}/></a></span></h4>
 								<div class="inner">
 									<div class="form-group input-group ">
-										<input type="checkbox" id="twdrive"/>
+										<input type="checkbox" id="twdrive" value="two wheel drive" onClick={concatDriveTrainSearch}/>
 										<label for="twdrive">Two wheel Drive</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="fwdrive"/>
+										<input type="checkbox" id="fwdrive" value="front wheel drive" onClick={concatDriveTrainSearch}/>
 										<label for="fwdrive">Front Wheel drive</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="rwdrive"/>
+										<input type="checkbox" id="rwdrive" value="rear wheel drive" onClick={concatDriveTrainSearch}/>
 										<label for="rwdrive">Rear Wheel Drive</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="fowdrive"/>
+										<input type="checkbox" id="fowdrive" value="four wheel drive" onClick={concatDriveTrainSearch}/>
 										<label for="fowdrive">Four Wheel Drive</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="awdrive"/>
+										<input type="checkbox" id="awdrive" value="all wheel drive" onClick={concatDriveTrainSearch}/>
 										<label for="awdrive">All Wheel Drive</label>
 									</div>
 								</div>
@@ -480,14 +608,14 @@ const searchFav = () => {
 						</div>
 					</div>
 
-              <div className="filtersblock  col-lg-6 SalesRepsSearch  row" >
+              {/* <div className="filtersblock  col-lg-6 SalesRepsSearch  row" >
                 <div className="input-group searchbox ">
                     <input type="text"  className="form-control border"  placeholder="model/make/year" onKeyDown={onKeydowninSearch} onChange={OnSearch}></input>
                     <span className="input-group-append" >
                     <button className="btn ms-n5" type="button" id="btntest" name="btntest" onClick={searchFav} ><i className='bx bx-search'></i></button>
                     </span>                                
                 </div>
-            </div>
+            </div> */}
 
               <div class="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
               
