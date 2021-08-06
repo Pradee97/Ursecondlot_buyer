@@ -45,7 +45,7 @@ const SuggestedCars = () => {
 			buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
 			
         }
-        API.post('BuyerNewCarList/condition',request).then(res=>{
+        API.post('SuggestedCarList/condition',request).then(res=>{
             console.log("response",res.data.data);
            // const {results} = res.data.data;
             console.log("Response data",res.data.data);
@@ -108,7 +108,7 @@ const SuggestedCars = () => {
 		console.log("From Mileage",fromMileage);
 		console.log("To Mileage",toMileage);
 		searchCarDetail();
-	},[fromMileage,toMileage,makeSearch,drivetrainSearch,transmissionSearch,stateSearch,bodyTypeSearch]);
+	},[fromMileage,toMileage,makeSearch,drivetrainSearch,transmissionSearch,stateSearch,bodyTypeSearch,groupSearch]);
 
 
 	function concatMakeSearch  (e){
@@ -225,7 +225,7 @@ const SuggestedCars = () => {
 			console.log("state=======",stateSearch)
 			console.log(" filter search request",request);
 
-        API.post("BuyerNewCarSearch/condition",request)
+        API.post("SuggestedCarSearch/condition",request)
         .then((res)=>{
 		   
 			
