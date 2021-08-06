@@ -119,6 +119,7 @@ const Inspection=()=>{
                         {inspection[0].noise == "Covered"?
                         <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
                         <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
+                        <td></td>
                         </tr>
                         <tr class="">
                         <td>Automatic Transmission Operation</td>
