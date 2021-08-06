@@ -12,8 +12,7 @@ import { useEffect } from 'react';
 import Loading from"../../Component/Loading/Loading";
 import { useDispatch, useSelector } from 'react-redux';
 import CarListAction from './CarListAction';
-import Carousel from "react-multi-carousel";
-// import { Image } from "semantic-ui-react";
+
 const CarList = () => {
     const history = useHistory();
     const dispatch = useDispatch();
