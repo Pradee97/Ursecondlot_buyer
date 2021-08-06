@@ -31,6 +31,13 @@ const SuggestedCars = () => {
 	const [toMileage,setToMileage]=useState("");
 	const [stateSearch,setStateSearch]=useState([]);
 	const [bodyTypeSearch,setBodyTypeSearch] = useState([]);
+	const [engineNoiseSearch,setEngineNoiseSearch]=useState("");
+	const [transmissionIssueSearch,setTransmissionIssueSearch]=useState("");
+	const [historySearch,setHistorySearch]=useState("");
+	const [groupSearch,setGroupSearch]=useState([]);
+	const [salesTypeSearch,setSalesTypeSearch]=useState("");
+	
+
 	//const [checked, setChecked] = useState(false)
     const getrecentCarList=()=>{
 
@@ -188,7 +195,9 @@ const SuggestedCars = () => {
         console.log("/////////=====",e.target.value)
       }
       
-   
+   const reset=()=>{
+
+   }
       
       const searchCarDetail = () => {
         
@@ -203,7 +212,14 @@ const SuggestedCars = () => {
 			fromMileage:fromMileage,
 			toMileage:toMileage,
 			fromYear:fromYear,
-			toYear:toYear
+			toYear:toYear,
+			group:groupSearch.length>0?groupSearch:"",
+			engine_noise:engineNoiseSearch,
+			transmission_issue:transmissionIssueSearch,
+			history:historySearch,
+			sales_type:salesTypeSearch
+
+
 			
 			}
 			console.log("state=======",stateSearch)
@@ -229,6 +245,37 @@ const SuggestedCars = () => {
 		searchCarDetail()
 	  }
 
+     function onTransmissionIssueClick(e){
+		 console.log("Transmission issue selected value",e.target.value);
+		 setTransmissionIssueSearch(e.target.value);
+		 searchCarDetail();
+	 }
+	 function onSaleTypeClick(e){
+		console.log("Sale Type selected value",e.target.value);
+		setSalesTypeSearch(e.target.value);
+		searchCarDetail();
+	}
+	function onHistoryClick(e){
+		console.log("History Search selected value",e.target.value);
+		setHistorySearch(e.target.value);
+		searchCarDetail();
+	}
+	function onEngineNoiseClick(e){
+		console.log("Engine Noise selected value",e.target.value);
+		setEngineNoiseSearch(e.target.value);
+		searchCarDetail();
+	}
+	function onGroupClick(e){
+		console.log("Group selected value",e.target.value);
+		if(e.target.checked)
+		setGroupSearch(groupSearch=>[...groupSearch,"'"+e.target.value+"'"]);
+		else if (!e.target.checked)
+		{
+			setGroupSearch(groupSearch.filter(item => item!== "'"+e.target.value+"'" ));
+		
+		}
+	}
+
 
     return(
         <div>
@@ -246,23 +293,14 @@ const SuggestedCars = () => {
                                 <h2>Suggested cars</h2>
                             </div>
                             <div class="col-lg-3">
-					<div class="saveSearch"><button class="cta-btn" type="button">Save Search </button></div>
+					
 						<div class="leftonsidebox">
 							<div class="filtersblock">
-								<h3>Filters<span><a href="#">Reset</a></span></h3>
-								<div class="input-group">
-									<select id="vehiclename1"  class="form-control custom-select browser-default">
-										<option value="Saved Search">Saved Search</option>
-									</select>
-								</div>
+								<h3>Filters<span><a href="#" onClick={reset}>Reset</a></span></h3>
+								
 								
 							</div>
-							<div class="distanceBlock">
-								<h4>Distance</h4>
-								<div class="input-group">
-								<input class="form-control" type="text" value="" placeholder="50km" />
-								</div>								
-							</div>
+							
 							
 							<div class="sortbyblock">
 								<h4>Sort by</h4>
@@ -322,15 +360,15 @@ const SuggestedCars = () => {
 								<h4>Group<span><a href="#"><img src={arrowmark}/></a></span></h4>
 								<div class="inner">
 									<div class="form-group input-group ">
-										<input type="checkbox" id="deals"/>
+										<input type="checkbox" id="deals" value="Deals Almost Close" onClick={onGroupClick}/>
 										<label for="deals">Deals Almost Close</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="sellersflo"/>
+										<input type="checkbox" id="sellersflo" value="Sellers I Follow" onClick={onGroupClick}/>
 										<label for="sellersflo">Sellers I Follow</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="sellerstit"/>
+										<input type="checkbox" id="sellerstit" value="Seller Has Title" onClick={onGroupClick}/>
 										<label for="sellerstit">Seller Has Title</label>
 									</div>
 								</div>
@@ -340,17 +378,17 @@ const SuggestedCars = () => {
 								<h4>Sales Types<span><a href="#"><img src={arrowmark}/></a></span></h4>
 								<div class="inner">
 									<div class="radio input-group">
-										<input id="radio-any1" name="radio" type="radio" checked/>
+										<input id="radio-any1" name="radio" type="radio" value="Any" onClick={onSaleTypeClick}/>
 										<label for="radio-any1" class="radio-label">Any</label>
 									</div>
 
 									<div class="radio input-group">
-										<input id="radio-buy" name="radio" type="radio"/>
+										<input id="radio-buy" name="radio" type="radio" value="Buy it now" onClick={onSaleTypeClick}/>
 										<label  for="radio-buy" class="radio-label">Buy it now</label>
 									</div>
 									  
 									<div class="radio input-group">
-										<input id="radio-sales" name="radio" type="radio"/>
+										<input id="radio-sales" name="radio" type="radio" value="Sealed Bid Sales" onClick={onSaleTypeClick}/>
 										<label  for="radio-sales" class="radio-label">Sealed Bid Sales</label>
 									</div>
 								</div>
@@ -360,17 +398,17 @@ const SuggestedCars = () => {
 								<h4>Lower Engine Noice<span><a href="#"><img src={arrowmark}/></a></span></h4>
 								<div class="inner">
 									<div class="radio input-group">
-										<input id="radio-any2" name="radio" type="radio" checked/>
+										<input id="radio-any2" name="radio" type="radio" value="Any" onClick={onEngineNoiseClick}/>
 										<label for="radio-any2" class="radio-label">Any</label>
 									</div>
 
 									<div class="radio input-group">
-										<input id="radio-nonoise" name="radio" type="radio"/>
+										<input id="radio-nonoise" name="radio" type="radio" value="No Noise Detected" onClick={onEngineNoiseClick}/>
 										<label  for="radio-nonoise" class="radio-label">No Noise Detected</label>
 									</div>
 									  
 									<div class="radio input-group">
-										<input id="radio-noisedel" name="radio" type="radio"/>
+										<input id="radio-noisedel" name="radio" type="radio" value="Noise Detected" onClick={onEngineNoiseClick}/>
 										<label  for="radio-noisedel" class="radio-label">Noise Detected</label>
 									</div>
 								</div>
@@ -380,17 +418,17 @@ const SuggestedCars = () => {
 								<h4>Transmission Issue<span><a href="#"><img src={arrowmark}/></a></span></h4>
 								<div class="inner">
 									<div class="radio input-group">
-										<input id="radio-any3" name="radio" type="radio" checked/>
+										<input id="radio-any3" name="radio" type="radio" value="Any"  onClick={onTransmissionIssueClick}/>
 										<label for="radio-any3" class="radio-label">Any</label>
 									</div>
 
 									<div class="radio input-group">
-										<input id="radio-noissues" name="radio" type="radio"/>
+										<input id="radio-noissues" name="radio" type="radio" value="No Issue Detected" onClick={onTransmissionIssueClick}/>
 										<label  for="radio-noissues" class="radio-label">No Issue Detected</label>
 									</div>
 									  
 									<div class="radio input-group">
-										<input id="radio-noissues2" name="radio" type="radio"/>
+										<input id="radio-noissues2" name="radio" type="radio" value="Noise Detected"  onClick={onTransmissionIssueClick}/>
 										<label  for="radio-noissues2" class="radio-label">Noise Detected</label>
 									</div>
 								</div>
@@ -400,17 +438,17 @@ const SuggestedCars = () => {
 								<h4>Vehicle History<span><a href="#"><img src={arrowmark}/></a></span></h4>
 								<div class="inner">
 									<div class="radio input-group">
-										<input id="radio-any4" name="radio" type="radio" checked/>
+										<input id="radio-any4" name="radio" type="radio" value="Any" onClick={onHistoryClick}/>
 										<label for="radio-any4" class="radio-label">Any</label>
 									</div>
 
 									<div class="radio input-group">
-										<input id="radio-noreport" name="radio" type="radio"/>
+										<input id="radio-noreport" name="radio" type="radio" value="None reported" onClick={onHistoryClick}/>
 										<label  for="radio-noreport" class="radio-label">None reported</label>
 									</div>
 									  
 									<div class="radio input-group">
-										<input id="radio-noeventreport" name="radio" type="radio"/>
+										<input id="radio-noeventreport" name="radio" type="radio" value="Events reported" onClick={onHistoryClick}/>
 										<label  for="radio-nonoeventreport" class="radio-label">Events reported</label>
 									</div>
 								</div>
