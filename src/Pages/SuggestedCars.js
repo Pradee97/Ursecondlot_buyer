@@ -196,7 +196,11 @@ const SuggestedCars = () => {
       }
       
    const reset=()=>{
-
+	setToMileage("");
+	setFromMIleage("");
+	setToYear("");
+	setFromYear("");
+	
    }
       
       const searchCarDetail = () => {
