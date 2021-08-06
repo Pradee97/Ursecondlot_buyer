@@ -17,6 +17,11 @@ const Inspection=()=>{
     const history = useHistory();
     const dispatch = useDispatch();
     const [inspection,setInspection]=useState("");
+    const [interiorMedia,setInteriorMedia] = useState("");
+    const [mechanicalMedia,setMechanicalMedia] = useState("");
+    const [tiresWheelsMedia,setTiresWheelsMedia] = useState("");
+    const [powerTrainMedia,setPowerTrainMedia] = useState("");
+    const [testDriveMedia,setTestDriveMedia] = useState("");
 
     const getInspectionDetail = () =>{
     let request={
@@ -30,9 +35,81 @@ const Inspection=()=>{
         
     }).catch(err => { console.log(err); });
 }
+
+const InteriorMedia = () =>{
+    let request={
+        car_id: 1,
+        
+    }
+    API.post('interior_media/condition',request).then(res=>{
+        console.log("interior_media/condition",res.data.data);
+       
+        setInteriorMedia(res.data.data);
+        
+    }).catch(err => { console.log(err); });
+}
+
+const MechanicalMedia = () =>{
+    let request={
+        car_id: 1,
+        
+    }
+    API.post('mechanical_media/condition',request).then(res=>{
+        console.log("mechanical_media/condition",res.data.data);
+       
+        setMechanicalMedia(res.data.data);
+        
+    }).catch(err => { console.log(err); });
+}
+
+const TiresWheelsMedia = () =>{
+    let request={
+        car_id: 1,
+        
+    }
+    API.post('tireswheels_media/condition',request).then(res=>{
+        console.log("tireswheels_media",res.data.data);
+       
+        setTiresWheelsMedia(res.data.data);
+        
+    }).catch(err => { console.log(err); });
+}
+
+const PowerTrainMedia = () =>{
+    let request={
+        car_id: 1,
+        
+    }
+    API.post('power_train_media/condition',request).then(res=>{
+        console.log("power_train_media/condition",res.data.data);
+       
+        setPowerTrainMedia(res.data.data);
+        
+    }).catch(err => { console.log(err); });
+}
+
+const TestDriveMedia = () =>{
+    let request={
+        car_id: 1,
+        
+    }
+    API.post('testdrive_media/condition',request).then(res=>{
+        console.log("testdrive_media/condition",res.data.data);
+       
+        setTestDriveMedia(res.data.data);
+        
+    }).catch(err => { console.log(err); });
+}
+
+
+
     useEffect(() => {
         getInspectionDetail();
-        
+        InteriorMedia();
+        MechanicalMedia();
+        TiresWheelsMedia();
+        PowerTrainMedia();
+        TestDriveMedia();
         
     },[]);
 
@@ -149,16 +226,16 @@ const Inspection=()=>{
                         <div class="coveredgallery images-container">
                             <div class="photo-gallery">
                                 <div class="row photos">
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={powerTrainMedia[0]?.media}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={powerTrainMedia[0]?.media}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={powerTrainMedia[0]?.media}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={powerTrainMedia[0]?.media}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={powerTrainMedia[0]?.media}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={powerTrainMedia[0]?.media}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={powerTrainMedia[0]?.media}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={powerTrainMedia[0]?.media}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={powerTrainMedia[0]?.media}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={powerTrainMedia[0]?.media}></img></div>
                                 </div>
                             </div>
                         </div>
@@ -267,20 +344,20 @@ const Inspection=()=>{
                     <div class="commentsblock">
                         <h3>Mechanical Images</h3>
                         </div>
-                        
+                       
                         <div class="mechanicalgallery images-container">
                             <div class="photo-gallery">
                                 <div class="row photos">
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={mechanicalMedia[0]?.media}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={mechanicalMedia[0]?.media}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={mechanicalMedia[0]?.media}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={mechanicalMedia[0]?.media}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={mechanicalMedia[0]?.media}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={mechanicalMedia[0]?.media}></img></div>
+                                    <div class="col-sm-4col-md-2 col-lg-2 item"><img class="img-fluid"  src={mechanicalMedia[0]?.media}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={mechanicalMedia[0]?.media}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={mechanicalMedia[0]?.media}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={mechanicalMedia[0]?.media}></img></div>
                                 </div>
                             </div>
                         </div>
@@ -344,10 +421,10 @@ const Inspection=()=>{
                         <div class="tiresgallery images-container">
                             <div class="photo-gallery">
                                 <div class="row photos">
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={tiresWheelsMedia[0]?.media}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={tiresWheelsMedia[0]?.media}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={tiresWheelsMedia[0]?.media}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={tiresWheelsMedia[0]?.media}></img></div>
                                     
                                 </div>
                             </div>
@@ -428,7 +505,7 @@ const Inspection=()=>{
                         <div class="exteriorgallery images-container">
                             <div class="photo-gallery">
                                 <div class="row photos">
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={mechanicalMedia[0]?.media}></img></div>
                                     <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
                                     <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
                                     <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
@@ -505,12 +582,12 @@ const Inspection=()=>{
                         <div class="interiorgallery images-container">
                             <div class="photo-gallery">
                                 <div class="row photos">
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={interiorMedia[0]?.media}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={interiorMedia[0]?.media}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={interiorMedia[0]?.media}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={interiorMedia[0]?.media}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={interiorMedia[0]?.media}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={interiorMedia[0]?.media}></img></div>
                                     
                                 </div>
                             </div>
