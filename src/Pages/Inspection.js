@@ -18,6 +18,7 @@ const Inspection=()=>{
     const dispatch = useDispatch();
     const [inspection,setInspection]=useState("");
     const [interiorMedia,setInteriorMedia] = useState("");
+    const [exteriorMedia,setExteriorMedia] = useState("");
     const [mechanicalMedia,setMechanicalMedia] = useState("");
     const [tiresWheelsMedia,setTiresWheelsMedia] = useState("");
     const [powerTrainMedia,setPowerTrainMedia] = useState("");
@@ -34,6 +35,19 @@ const Inspection=()=>{
         setInspection(res.data.data);
         
     }).catch(err => { console.log(err); });
+}
+
+const ExteriorMedia=()=>{
+    let request={
+        car_id:1
+    }
+    API.post('exterior_media/condition',request).then(res=>{
+        console.log("exterior_media/condition",res.data.data);
+       
+        setExteriorMedia(res.data.data);
+        
+    }).catch(err => { console.log(err); });
+
 }
 
 const InteriorMedia = () =>{
@@ -105,6 +119,7 @@ const TestDriveMedia = () =>{
 
     useEffect(() => {
         getInspectionDetail();
+        ExteriorMedia();
         InteriorMedia();
         MechanicalMedia();
         TiresWheelsMedia();
@@ -505,11 +520,11 @@ const TestDriveMedia = () =>{
                         <div class="exteriorgallery images-container">
                             <div class="photo-gallery">
                                 <div class="row photos">
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={mechanicalMedia[0]?.media}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={exteriorMedia[0]?.media}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={exteriorMedia[0]?.media}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={exteriorMedia[0]?.media}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={exteriorMedia[0]?.media}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={exteriorMedia[0]?.media}></img></div>
                                     
                                 </div>
                             </div>
