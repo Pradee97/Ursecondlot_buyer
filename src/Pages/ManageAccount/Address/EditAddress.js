@@ -9,7 +9,7 @@ import StateAndCity from '../../../Component/StateAndCity/StateAndCity';
 import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks";
 import { useForm } from "react-hook-form";
 import PhoneInput from 'react-phone-number-input/input';
-
+import { useDispatch, useSelector } from 'react-redux';
 
 const EditAddress = () => {
     const history = useHistory();
@@ -34,7 +34,8 @@ const EditAddress = () => {
     const [mobilePhoneError, setMobilePhoneError] = useState("")
     const [locationError, setLocationError] = useState("")
     const [instructionError, setInstructionError] = useState("")
-    const [stateAndCityError, setStateAndCityError] = useState("")
+    const [stateAndCityError, setStateAndCityError] = useState("");
+    const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
 
     const togglePopup = () => {
       setIsOpen(!isOpen);
@@ -73,11 +74,12 @@ const EditAddress = () => {
             setMobilePhone(res.data.data[0].mobile_no);
             setCity(res.data.data[0].city_name);
             setState(res.data.data[0].state_name);
-            setZIpCode(res.data.data[0].zipcode_id);
+            //setZIpCode(res.data.data[0].zipcode_id);
             setLocation(res.data.data[0].location);
             setInstruction(res.data.data[0].instructions);
             setZIpCode(res.data.data[0].zipcode);
             setAccountObj(res.data.data[0])
+            console.log("zipcode value from res",res.data.data[0].zipcode);
         })
             .catch(err => { console.log(err); });
     }
@@ -180,7 +182,8 @@ const EditAddress = () => {
             location: location,
             instructions: instruction,
             // buyer_address_id:buyeraddress,
-            active:1
+            active:1,
+            updatedBy:JSON.parse(loggedInBuyerId).buyer_id            
            
         };
          API
@@ -335,7 +338,9 @@ const EditAddress = () => {
                                 defaultStateValue = {state}
                                 defaultCityValue = {city}
                                 defaultZipcodeValue = {zipCode}
+                                
                             />
+                            {console.log("below component",zipCode)}
                             <p className="form-input-error"> {stateAndCityError} </p>
                              <div className="col-sm-12 form-group">
                             <div className="tbox">

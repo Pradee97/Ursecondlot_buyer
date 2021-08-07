@@ -97,15 +97,18 @@ const ManageAccount = () => {
                         <h5>{item.dealer_name}</h5>
                         <table>
                           <thead></thead>
+                          
                           <tr>
+                            <td><span className="tdcol1">Address </span><span>{item.address}</span></td>
+                            <td><span className="tdcol1">City</span><span>{item.city_name}</span></td>
                             {/* <td>First name<span>{item.first_name}</span></td> */}
-                            <td>Address <span>{item.address}</span></td>
-                            <td>State<span>{item.state_name}</span></td>
+                            
+                            
                           </tr>
                           <tr>
                             {/* <td>Last name<span>{item.last_name}</span></td> */}
-                            <td>City<span>{item.city_name}</span></td>
-                            <td>Zip code<span>{item.zipcode}</span></td>
+                            <td><span className="tdcol1">State</span><span>{item.state_name}</span></td>
+                            <td><span className="tdcol1">Zip code</span><span>{item.zipcode}</span></td>
                           </tr>
                          
                         </table>
@@ -122,20 +125,20 @@ const ManageAccount = () => {
                         <table>
                           <thead></thead>
                           <tr>
-                            <td>First name<span>{item.first_name}</span></td>
-                            <td>Address<span>{item.address}</span></td>
+                            <td><span className="tdcol1">First name</span><span>{item.first_name}</span></td>
+                            <td><span className="tdcol1">Address</span><span>{item.address}</span></td>
                           </tr>
                           <tr>
-                            <td>Last name<span>{item.last_name}</span></td>
-                            <td>City<span>{item.city_name}</span></td>
+                            <td><span className="tdcol1">Last name</span><span>{item.last_name}</span></td>
+                            <td><span className="tdcol1">City</span><span>{item.city_name}</span></td>
                           </tr>
                           <tr>
-                            <td>Primary phone<span>{item.phone_no}</span></td>
-                            <td>State<span>{item.state_name}</span></td>
+                            <td><span className="tdcol1">Primary phone</span><span>{item.phone_no}</span></td>
+                            <td><span className="tdcol1">State</span><span>{item.state_name}</span></td>
                           </tr>
                           <tr>
-                            <td>Mobile phone<span>{item.mobile_no}</span></td>
-                            <td>Zip code<span>{item.zipcode}</span></td>
+                            <td><span className="tdcol1">Mobile phone</span><span>{item.mobile_no}</span></td>
+                            <td><span className="tdcol1">Zip code</span><span>{item.zipcode}</span></td>
                           </tr>
                         </table>
                         <h4>Location name</h4>
@@ -161,28 +164,28 @@ const ManageAccount = () => {
                         <table>
                           <thead></thead>
                           <tr>
-                            <td>First name<span>{item.first_name}</span></td>
-                            <td>Address<span>{item.address}</span></td>
+                            <td><span className="tdcol1">First name</span><span>{item.first_name}</span></td>
+                            <td><span className="tdcol1">Address</span><span>{item.address}</span></td>
                           </tr>
                           <tr>
-                            <td>Last name<span>{item.last_name}</span></td>
-                            <td>City<span>{item.city_name}</span></td>
+                            <td><span className="tdcol1">Last name</span><span>{item.last_name}</span></td>
+                            <td><span className="tdcol1">City</span><span>{item.city_name}</span></td>
                           </tr>
                           <tr>
-                            <td>Legal business name<span>{item.bussiness_name}</span></td>
-                            <td>State<span>{item.state_name}</span></td>
+                            <td><span className="tdcol1">Legal business name</span><span>{item.bussiness_name}</span></td>
+                            <td><span className="tdcol1">State</span><span>{item.state_name}</span></td>
                           </tr>
                           <tr>
-                            <td>EIN number<span>{item.ein_no}</span></td>
-                            <td>Zip code<span>{item.zipcode}</span></td>
+                            <td><span className="tdcol1">EIN number</span><span>{item.ein_no}</span></td>
+                            <td><span className="tdcol1">Zip code</span><span>{item.zipcode}</span></td>
                           </tr>
                           <tr>
-                            <td>Dealership license<span>{item.dealer_license}</span></td>
-                            <td>Dealership license exp<span>{item.dealer_license_exp.substring(0,10)}</span></td>
+                            <td><span className="tdcol1">Dealership license</span><span>{item.dealer_license}</span></td>
+                            <td><span className="tdcol1">Dealership license exp</span><span>{item.dealer_license_exp.substring(0,10)}</span></td>
                           </tr>
                           <tr>
-                            <td>Tax id<span>{item.tax_id}</span></td>
-                            <td>Tax id exp<span>{item.tax_id_exp.substring(0,10)}</span></td>
+                            <td><span className="tdcol1">Tax id</span><span>{item.tax_id}</span></td>
+                            <td><span className="tdcol1">Tax id exp</span><span>{item.tax_id_exp.substring(0,10)}</span></td>
                           </tr>
                         </table>
                         {/* <h4>Location name</h4>

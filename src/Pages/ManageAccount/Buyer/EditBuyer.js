@@ -8,7 +8,7 @@ import CommonPopup from '../../../Component/CommonPopup/CommonPopup';
 import ls from 'local-storage';
 import FileBase64 from 'react-file-base64';
 import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks"
-
+import { useDispatch, useSelector } from 'react-redux';
 import PhoneInput from 'react-phone-number-input/input';
 
 const EditBuyer = () => {
@@ -50,14 +50,21 @@ const EditBuyer = () => {
     const [addressError, setAddressError] = useState("");
     const [locationNameError, setLocationNameError] = useState("");
     const [stateAndCityError, setStateAndCityError] = useState("")
-    const [isPrivileges, setIsPrivileges] = useState(false)
+    const [isPrivileges, setIsPrivileges] = useState(false);
+    const [type,setType]=useState("");
+    const loggedInBuyerId = useSelector(state => state.LoginReducer.payload); 
 
     const togglePopup = () => {
         setIsOpen(!isOpen);
     }
     const getFiles = (file) => {
-        console.log("======>",file)
-        setDoc(file);
+        setType("")
+        console.log("================>",file.type)
+        if(file.type.includes("jpg") || file.type.includes("jpeg") || file.type.includes("png")){
+            setDoc(file);
+        }else{
+            setType("0");
+        }
     }
 
     const getStateName = (stateData) => {
@@ -212,7 +219,8 @@ const EditBuyer = () => {
             proxy_bid: proxy_bid,
             counter_bid: counter_bid,
             lot_fee: lot_fee,
-            image:doc===""?doc:doc.length>0?doc:[doc]
+            image:doc===""?doc:doc.length>0?doc:[doc],
+            updatedBy:JSON.parse(loggedInBuyerId).buyer_id
         };
 
         
@@ -335,7 +343,8 @@ const EditBuyer = () => {
                                     {image==="" && doc===""?<img alt="" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} />:                                    
                                     doc===""?<img alt=""  src={image} />:
                                     <img alt=""  src={doc.base64} />}  
-                                    <span className="proCamera"></span>                                  
+                                    <span className="proCamera"></span>   
+                                    {type==="0"?<p className="form-input-error">Upload only Image Format </p>:""}                               
                                     <FileBase64 onDone={getFiles} type="hidden" />
                                     
                                 </div>

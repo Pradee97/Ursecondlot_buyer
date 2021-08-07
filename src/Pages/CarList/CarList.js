@@ -10,10 +10,12 @@ import { useHistory, useParams } from "react-router-dom";
 import { useState } from 'react';
 import { useEffect } from 'react';
 import Loading from"../../Component/Loading/Loading";
-
+import { useDispatch, useSelector } from 'react-redux';
+import CarListAction from './CarListAction';
 
 const CarList = () => {
     const history = useHistory();
+    const dispatch = useDispatch();
     const [loading,setLoading] = useState(true);
     let userDetails = ls.get('userDetails');
     const [carDetail,setCarDetail]=useState([]);
@@ -22,13 +24,30 @@ const CarList = () => {
     const [recentCarFlag,setrecentCarFlag]=useState(false);
     const [inventoryCarFlag,setInventoryCarFlag]=useState(false);
     const [favCarFlag,setFavCarFlag]=useState(false);
+    const [suggestedCarDetail,setSuggestedCarDetail]=useState("");
 
     const [isOpen, setIsOpen] = useState(false);
 
     const togglePopup = () => {
         setIsOpen(!isOpen);
     }
-
+    const getSuggestedCarList=()=>{
+        let request={
+            buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+        }
+        console.log("+++++++++==++",request)
+        API.post('SuggestedCarList/condition',request).then(res=>{
+            console.log("response",res.data.data);
+           // const {results} = res.data.data;
+            console.log("Response data",res.data.data);
+            //if(results.length>0){
+            setSuggestedCarDetail(res.data.data);
+            console.log("car Detail",res.data.data);
+            setLoading(false);
+            //}
+            //setrecentCarFlag(!recentCarFlag)
+        }) .catch(err => { console.log(err); });
+    }
     
     const getrecentCarList=()=>{
         let request={
@@ -63,9 +82,10 @@ const CarList = () => {
             //setInventoryCarFlag(!inventoryCarFlag)
         }).catch(err=>{console.log(err);});
     }
-
-    const redirectpage=(pathid)=>{
+    const redirectpage=(pathid,seller_dealer_id)=>{
         //e.preventDefault();
+        console.log("seller_dealer_id+++++",seller_dealer_id)
+        dispatch(CarListAction.sellerid(seller_dealer_id))
         history.push("/cardetail/"+pathid);
     }
 
@@ -110,6 +130,7 @@ const CarList = () => {
     
 
     useEffect(() => {
+        getSuggestedCarList();
         getrecentCarList();
         getInventoryCarList();
         getFavCarList();
@@ -151,7 +172,7 @@ const CarList = () => {
                                 <h2>Suggested cars</h2>
                             </div>
                             <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
-                            {carDetail.length>0?carDetail.slice(0, 4)
+                            {suggestedCarDetail.length>0?suggestedCarDetail.slice(0, 4)
                             .map((item) =>
                             
                                 <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
@@ -161,7 +182,7 @@ const CarList = () => {
                                             {/* <img src={(item.isFavourite===0)? locked : lock} onClick={()=>(item.isFavourite===0)?addFavourite(item.car_id):removeFav(item.car_id)} /> */}
                                             <img src={(item.isFavourite===0)? lock : locked} onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'recent')} />
                                         </div>
-                                        <img className="carImg" src={item.image}  onClick={()=>{redirectpage(item.car_id)}}/>
+                                        <img className="carImg" src={item.image}  onClick={()=>{redirectpage(item.car_id,item.seller_dealer_id)}}/>
                                         {item.isbestSale?
                                         <div className="cars-tag">
                                             <h4>{item.deal_name}</h4>
@@ -171,7 +192,11 @@ const CarList = () => {
                                             <h3><a href="#">{item.make} ({item.model} model)</a></h3>
                                             <div className="d-flex align-items-center mb-3">
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>    
+                                            </div>
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details"><span>{item.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <p className="details"><img src={item.image}/></p>
                                             </div>
 
                                             <div className="cars-prices">
@@ -208,7 +233,7 @@ const CarList = () => {
                                     <img src={(item.isFavourite===0)? lock : locked}  onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'inv')} />
                                         </div>
                                         
-                                        <img className="carImg" src={item.image} onClick={()=>{redirectpage(item.car_id)}} className="carImg" alt="..." />
+                                        <img className="carImg" src={item.image} onClick={()=>{redirectpage(item.car_id,item.seller_dealer_id)}} className="carImg" alt="..." />
                                         {item.isbestSale?
                                         <div className="cars-tag">
                                             <h4>{item.deal_name}</h4>
@@ -216,9 +241,12 @@ const CarList = () => {
                                         <div className="cars-content">
                                             <h3><a href="#">{item.make} ({item.model} model)</a></h3>
                                             <div className="d-flex align-items-center mb-3">
-                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>    
+                                            </div>
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details"><span>{item.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <p className="details"><img src={item.image}/></p>
                                             </div>
 
                                             <div className="cars-prices">
@@ -231,7 +259,7 @@ const CarList = () => {
                                 </div>
 
                             <div className="text-center">
-                                <a href="/InventoryCars" className="more-btn">See More Make Search<i className="bx bx-chevron-right"></i></a>
+                                <a href="/InventoryCars" className="more-btn">View More<i className="bx bx-chevron-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -255,7 +283,7 @@ const CarList = () => {
 
                                         </div>
                                         
-                                        <img className="carImg" src={item.image} onClick={()=>{redirectpage(item.car_id)}} alt="..." />
+                                        <img className="carImg" src={item.image} onClick={()=>{redirectpage(item.car_id,item.seller_dealer_id)}} alt="..." />
                                         {item.isbestSale?
                                         <div className="cars-tag">
                                             <h4>{item.deal_name}</h4>
@@ -263,9 +291,12 @@ const CarList = () => {
                                         <div className="cars-content">
                                             <h3><a href="#">{item.make} ({item.model} model)</a></h3>
                                             <div className="d-flex align-items-center mb-3">
-                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>    
+                                            </div>
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details"><span>{item.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <p className="details"><img src={item.image}/></p>
                                             </div>
 
                                             <div className="cars-prices">
@@ -277,7 +308,7 @@ const CarList = () => {
                                 </div>):""}
                                 </div>
                             <div className="text-center">
-                                <a href="/recentlyAddedCars" className="more-btn">See More Make Search<i className="bx bx-chevron-right"></i></a>
+                                <a href="/recentlyAddedCars" className="more-btn">View More<i className="bx bx-chevron-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -286,7 +317,7 @@ const CarList = () => {
                         <div className="container-fluid aos-init aos-animate" data-aos="fade-up">
 
                             <div className="section-title">
-                                <h2>favorite list  <img src={locked} /></h2>
+                                <h2>favorite list </h2>
                             </div>
                            
 
@@ -302,7 +333,7 @@ const CarList = () => {
 
                                 </div>
                                 
-                                <img className="carImg" src={item.image} onClick={()=>{redirectpage(item.car_id)}} alt="..." />
+                                <img className="carImg" src={item.image} onClick={()=>{redirectpage(item.car_id,item.seller_dealer_id)}} alt="..." />
                                 {item.isbestSale?
                                 <div className="cars-tag">
                                     <h4>{item.deal_name}</h4>
@@ -310,9 +341,12 @@ const CarList = () => {
                                 <div className="cars-content">
                                     <h3><a href="#">{item.make} ({item.model} model)</a></h3>
                                     <div className="d-flex align-items-center mb-3">
-                                        <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>
-      &nbsp;&nbsp;&nbsp;&nbsp;
-      <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>
+                                        <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>    
+                                    </div>
+                                    <div className="d-flex align-items-center mb-3">
+                                        <p className="details"><span>{item.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <p className="details"><img src={item.image}/></p>
                                     </div>
 
                                     <div className="cars-prices">
@@ -327,7 +361,7 @@ const CarList = () => {
 
 
                         <div className="text-center">
-                            <a href="/favorite" className="more-btn">View Favorite List  <i className="bx bx-chevron-right"></i></a>
+                            <a href="/favorite" className="more-btn">View More  <i className="bx bx-chevron-right"></i></a>
                         </div>
                     </div>
         

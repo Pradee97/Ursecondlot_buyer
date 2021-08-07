@@ -47,7 +47,7 @@ return (
 				<div class="input-group searchbox">
 					<input class="form-control border-end-0 border" type="text" value="search" id="search-input"/>
 					<span class="input-group-append">
-						<button class="btn ms-n5" type="button"><i class="fa fa-search"></i></button>
+						<button class="searchBtn" type="button"><i class="fa fa-search"></i></button>
 					</span>
 				</div>
 			</div>
@@ -66,7 +66,7 @@ return (
 						<div class="row content col-lg-12">
 							<div class="col-lg-4 col-md-4 bordercontent">
 								<div class="pickupdetailcontent">
-									<p class="billsalesno">Bill Of sale# 45876</p>
+									<p class="billsalesno">Bill Of sale# <br></br>45876</p>
 								</div>						
 							</div>
 							<div class="col-lg-4 col-md-4 bordercontent">
@@ -96,7 +96,7 @@ return (
 						<div class="row content col-lg-12">
 							<div class="col-lg-4 col-md-4 bordercontent">
 								<div class="pickupdetailcontent">
-									<p class="billsalesno">Bill Of sale# 45876</p>
+									<p class="billsalesno">Bill Of sale#<br></br> 45876</p>
 								</div>						
 							</div>
 							<div class="col-lg-4 col-md-4 bordercontent">
@@ -125,7 +125,7 @@ return (
 						<div class="row content col-lg-12">
 							<div class="col-lg-4 col-md-4 bordercontent">
 								<div class="pickupdetailcontent">
-									<p class="billsalesno">Bill Of sale# 45876</p>
+									<p class="billsalesno">Bill Of sale# <br></br> 45876</p>
 								</div>						
 							</div>
 							<div class="col-lg-4 col-md-4 bordercontent">

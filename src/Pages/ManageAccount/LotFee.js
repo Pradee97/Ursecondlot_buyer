@@ -57,10 +57,10 @@ const LotFee = () => {
             lot_fee: lotValue,
             active: 1
         };
-        if (lotValue === 0) {
-            setLotFeeError("LotFee must be greater then zero")
-            return;
-        }
+        // if (lotValue === 0) {
+        //     setLotFeeError("LotFee must be greater then zero")
+        //     return;
+        // }
         API.post("lot_fee/add", request)
             .then((response) => {
                 console.log("res", response.data.success)

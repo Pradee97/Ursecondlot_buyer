@@ -31,7 +31,7 @@ const History = () => {
                     <p>250 Vehicles Purchased</p>
                     
                     <div class="sortBy">
-                        <div class="col-sm-12 form-group">  
+                        <div class="col-sm-12 form-group mr-0 pr-0">  
                           <div class="tbox">			
                           <select id="" class="form-control box">
                             <option value="USA">Sort By</option>

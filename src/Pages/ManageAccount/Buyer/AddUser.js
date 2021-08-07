@@ -12,6 +12,8 @@ import Datetime from 'react-datetime';
 import moment from 'moment';
 import FileBase64 from 'react-file-base64';
 import PhoneInput from 'react-phone-number-input/input';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 const AddUser = () => {
 	const history = useHistory();
@@ -55,8 +57,12 @@ const AddUser = () => {
 	const [optionError, setoptionError] = useState("");
 	const [state,setState]=useState("1");
     const [city,setCity]=useState("1");
-    const [zipcode,setZipcode]=useState("1");
+	const [zipcode,setZipcode]=useState("1");
+	const [type,setType]=useState("");
+	const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);	
 
+	console.log("loggedIN",typeof loggedInBuyerId)
+	console.log("buyer Id +++++++++++++",JSON.parse(loggedInBuyerId).buyer_id);
 
 	console.log("=====userDetails====>", userDetails)
 	console.log("======>", userDetails.dealer_id)
@@ -64,8 +70,13 @@ const AddUser = () => {
 		setIsOpen(!isOpen);
 	}
 	const getFiles=(file)=>{
-        setDoc(file);
-		console.log("file=====>",file)
+        setType("")
+        console.log("================>",file.type)
+        if(file.type.includes("jpg") || file.type.includes("jpeg") || file.type.includes("png")){
+            setDoc(file);
+        }else{
+            setType("0");
+        }
       }
 
 	
@@ -207,8 +218,13 @@ const AddUser = () => {
 				lot_fee: lot_fee,
 				local_flag: 0,
 				image:doc===""?doc:doc.length>0?doc:[doc],
+				createdBy:JSON.parse(loggedInBuyerId).buyer_id,
+				updatedBy:JSON.parse(loggedInBuyerId).buyer_id
+
 			};
+			console.log("loggedIn buyer id check",loggedInBuyerId.buyer_id)
 			console.log("----request---->", request);
+
 		API.post("buyer/add", request)
 			.then((response) => {
 				console.log("")
@@ -303,6 +319,7 @@ const getZipCodeId = (zipData) => {
 														<img alt="" src="adduser.jpg" src={doc.base64} ></img>														
 														}
 														<span class="proCamera"></span>
+														{type==="0"?<p className="form-input-error">Upload only Image Format </p>:""}
 														<FileBase64 onDone={getFiles} type="hidden" />
 														
 														{/* <button>  <img alt="" for="upload" src="adduser.jpg"  /></button>  */}

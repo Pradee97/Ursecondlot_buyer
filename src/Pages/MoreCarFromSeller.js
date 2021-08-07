@@ -7,9 +7,10 @@ import googleplay from '../assets/img/googleplay.png';
 import speedometer from '../assets/img/speedometer.svg';
 import gasolinePump from '../assets/img/gasolinePump.svg';
 import locked from '../../src/assets/img/locked.svg';
-
+import { useDispatch, useSelector } from 'react-redux';
+import CarListAction from './CarList/CarListAction';
 const MoreCarFromSeller = () =>{
-
+  const dispatch = useDispatch();
     const { id } = useParams();
     const [sellerCarDetail,setSellerCarDetail]=useState([]);
     const history = useHistory();
@@ -20,7 +21,7 @@ const MoreCarFromSeller = () =>{
     const getMoreCarFromSeller=()=>{
 
     let request={
-        "seller_id":id,
+        "seller_dealer_id":id,
         buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
     }
 
@@ -70,11 +71,18 @@ const searchSellerCarDetail = () => {
   )
   .catch(err => { console.log(err); });
 }
+   
+const redirectpage=(pathid,seller_id)=>{
+  //e.preventDefault();
+  console.log("seller_id+++++",seller_id)
+  dispatch(CarListAction.sellerid(seller_id))
+  history.push("/cardetail/"+pathid);
+}
 
 const addRemoveFavourite=(carid,state,flag)=>{
   console.log("inside addremove");
   let request={
-      buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+    buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
       car_id:carid,
       active: !state
   }
@@ -126,17 +134,21 @@ return(
 				<div class="cars-lock">
 				<img src={(moreCar.isFavourite===0)? locked : lock} onClick={()=>addRemoveFavourite(moreCar.car_id,moreCar.isFavourite,'morecar')} />
 			  	</div>
-              	<img src={moreCar.image} class="img-fluid" alt="..."/>
+              	<img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id,item.seller_id)}} class="img-fluid" alt="..."/>
         {moreCar.isbestSale?
 				<div class="cars-tag">
 					<h4>{moreCar.deal_name}</h4>
 				</div>:""}
               <div class="cars-content">		
 			  <h3><a href="#">{moreCar.make} {moreCar._type} ({moreCar.model} model)</a></h3>
-                <div class="d-flex align-items-center mb-3">
-                  <p class="details"><img src={speedometer}  alt=""/><span>{moreCar.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-                  <p class="details"><img src={gasolinePump} alt=""/><span>{moreCar.fuel_type}</span></p>
-                </div>
+                <div className="d-flex align-items-center mb-3">
+									<p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{moreCar.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+									<p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{moreCar.fuel_type}</span></p>    
+								</div>
+								<div className="d-flex align-items-center mb-3">
+									<p className="details"><span>{moreCar.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+									<p className="details"><img src={moreCar.image}/></p>
+								</div>
 				
 				<div class="cars-prices">
 					<a class="cta-btns" href="">${moreCar.min_bid}</a>

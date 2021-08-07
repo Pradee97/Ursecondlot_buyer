@@ -180,7 +180,7 @@ const Document = () => {
                     setDoc7(document[0])
                 } else if (document[0].buyer_doc_type_id === 8) {
                     setDoc8(document[0])
-                } else if (document.buyer_doc_type_id === 9) {
+                } else if (document[0].buyer_doc_type_id === 9) {
                     setDoc9(document[0])
                 } else if (document[0].buyer_doc_type_id === 10) {
                     setDoc10(document[0])

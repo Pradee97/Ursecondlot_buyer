@@ -59,7 +59,7 @@ import recentcars from './Pages/RecentlyAddedCars';
 import SimilarCars from './Pages/similarCarFromSeller';
 import inventoryCars from './Pages/InventoryCars';
 import InventoryCars from './Pages/InventoryCars';
-import MoreCarFromSeller from './Pages/MoreCarFromSeller';
+import MoreCarFromBuyer from './Pages/MoreCarFromSeller';
 import Checkout from './Pages/Checkout';
 function AppRouter() {
 
@@ -149,8 +149,8 @@ function AppRouter() {
               <Route path="/Makeurbid" component={MakeurBid}/>
               <Route path="/Inspection" component={Inspection}/>
               <Route path="/CarDetail/:id" component={Cardetail}/>
-              <Route path="/MoreCarFromSeller/:id" component={MoreCarFromSeller}/>
-              <Route path="/SimilarCarFromSeller/:id" component={SimilarCars}/>
+              <Route path="/MoreCarFromBuyer/:id" component={MoreCarFromBuyer}/>
+              <Route path="/SimilarCarFromBuyer/:id" component={SimilarCars}/>
               <Route path="/checkout" component={Checkout}/>
 
 

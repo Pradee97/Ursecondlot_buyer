@@ -22,56 +22,13 @@ import cardetail3 from '../assets/img/cardetail3.jpg'
 import cardetail4 from '../assets/img/cardetail4.jpg'
 import cardetail5 from '../assets/img/cardetail5.jpg'
 import {CopyToClipboard} from 'react-copy-to-clipboard';
-
+import locked from '../../src/assets/img/locked.svg';
+import { useDispatch, useSelector } from 'react-redux';
+import CarListReducer from './CarList/CarListReducer';
+import CarListAction from './CarList/CarListAction';
 const Cardetail = () =>{
-	const history = useHistory();
-	
-// $( document ).ready(function() {
-// 	$('.slider-for').slick({
-// 		slidesToShow: 1,
-// 		slidesToScroll: 1,
-// 		arrows: false,
-// 		fade: true,
-// 		asNavFor: '.slider-nav'
-// 	});
-// 	$('.slider-nav').slick({
-// 		slidesToShow: 4,
-// 		slidesToScroll: 1,
-// 		vertical:true,
-// 		asNavFor: '.slider-for',
-// 		dots: false,
-// 		focusOnSelect: true,
-// 		verticalSwiping:true,
-// 		responsive: [
-// 		{
-// 			breakpoint: 992,
-// 			settings: {
-// 			  vertical: false,
-// 			}
-// 		},
-// 		{
-// 		  breakpoint: 768,
-// 		  settings: {
-// 			vertical: false,
-// 		  }
-// 		},
-// 		{
-// 		  breakpoint: 580,
-// 		  settings: {
-// 			vertical: false,
-// 			slidesToShow: 3,
-// 		  }
-// 		},
-// 		{
-// 		  breakpoint: 380,
-// 		  settings: {
-// 			vertical: false,
-// 			slidesToShow: 2,
-// 		  }
-// 		}
-// 		]
-// 	});
-// 	});
+const history = useHistory();
+const dispatch = useDispatch();
 const [copySuccess, setCopySuccess] = useState('');
 const [sellerId,setSellerId]=useState("");
 const [carDetail ,setCarDetail] = useState([]) 
@@ -83,21 +40,26 @@ const [lrgImg,setLrgImg]=useState("");
 const [copied, setCopied] = useState(false);
 const [data, setData] = useState("");
 const [distance,setDistance] = useState("");
+const [moreCarFlag,setMoreCarFlag]=useState(false);
+const [similarCarFromSellerFlag,setSimilarCarFromSellerFlag]=useState(false);
+const selectedSellerId = useSelector(state => state.CarListReducer.payload);
 
-
-const redirectpage=(pathid)=>{
+console.log("sellerid from carlist",selectedSellerId);
+const redirectpage=(pathid,seller_dealer_id)=>{
 	//e.preventDefault();
-	history.push("/carDetail/"+pathid);
-}
+	console.log("seller_dealer_id+++++",seller_dealer_id)
+	dispatch(CarListAction.sellerid(seller_dealer_id))
+	history.push("/cardetail/"+pathid);
+  }
 
 const redirectpagemorecarseller=(pathid)=>{
 	//e.preventDefault();
-	history.push("/MoreCarFromSeller/"+pathid);
+	history.push("/MoreCarFromBuyer/"+pathid);
 }
 
 const redirectpagesimilarcar=(pathid)=>{
 	//e.preventDefault();
-	history.push("/similarCarFromSeller/"+pathid);
+	history.push("/similarCarFromBuyer/"+pathid);
 }
 function copytoclipboard(e) {
     //textAreaRef.current.select();
@@ -128,71 +90,101 @@ function loadLrgImg(img){
 }
 function CarDetailList(){
 	const request = {
-		"car_id":id,
-		"buyer_dealer_id": JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
-		"seller_id": 1 }
+	"car_id":id,
+	"buyer_dealer_id": JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
+	"seller_dealer_id": selectedSellerId }
 	console.log("request for car detail",request)
 	API.post('carDetails/condition',request).then(res=>{
-		console.log("response",res.data.data);
-	   // const {results} = res.data.data;
-		console.log("Response data",res.data.data);
-		//if(results.length>0){
-		setCarDetail(res.data.data);
-		console.log("car Detail",res.data.data);
-		console.log("car distance added",res.data.distance);
-		setDistance(res.data.distance);
-		setLrgImg(res.data.data[0].image);
-		//}
+	console.log("response",res.data.data);
+	// const {results} = res.data.data;
+	console.log("Response data",res.data.data);
+	//if(results.length>0){
+	setCarDetail(res.data.data);
+	console.log("car Detail",res.data.data);
+	console.log("car distance added",res.data.distance);
+	setDistance(res.data.distance);
+	setLrgImg(res.data.data[0].image);
+	//}
 	});
-}
-function BuyerInventoryCarDetailList(){
+	}
+	function BuyerInventoryCarDetailList(){
 	let rq={
-		buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+	buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
 	};
 	API.post('BuyerInventoryCarList/condition',rq).then(res=>{
-		console.log("response",res.data.data);
-	   // const {results} = res.data.data;
-		//console.log("Response data",res.data.data);
-		//if(results.length>0){
-		setCarInventoryDetail(res.data.data);
-		console.log("car Inventory Detail",res.data.data);
-		const req={
-			"seller_id":res.data.data[0].seller_id,
-			buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
-		};
-		API.post('SellerCarList/condition',req).then(resp=>{
-			console.log("response",resp.data.data);
-		   // const {results} = res.data.data;
-			//console.log("Response data",res.data.data);
-			//if(results.length>0){
-				setSellerCarDetail(resp.data.data);
-			console.log("Seller car Inventory Detail",resp.data.data);
-			//}
-		})
-		const req_samecar={
-			"make":res.data.data[0].make,
-			buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
-		}
-		console.log("other dealer car req",req_samecar);
-		API.post('OtherDealerCarList/condition',req_samecar).then(response=>{
-			console.log("otherdealercar list",response.data.data);
-			setOtherDealerCarDetail(response.data.data);
-			console.log("other dealer car req",req_samecar);
-			console.log("otherdealercar list",response.data.data);
-		})
-		//}
+	console.log("response",res.data.data);
+	// const {results} = res.data.data;
+	//console.log("Response data",res.data.data);
+	//if(results.length>0){
+	setCarInventoryDetail(res.data.data);
+	console.log("car Inventory Detail",res.data.data);
+	const req={
+	seller_dealer_id:res.data.data[0].seller_dealer_id,
+	buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+	};
+	API.post('SellerCarList/condition',req).then(resp=>{
+	console.log("response",resp.data.data);
+	// const {results} = res.data.data;
+	//console.log("Response data",res.data.data);
+	//if(results.length>0){
+	setSellerCarDetail(resp.data.data);
+	console.log("Seller car Inventory Detail",resp.data.data);
+	//}
+	})
+	const req_samecar={
+	"make":res.data.data[0].make,
+	buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+	}
+	console.log("other dealer car req",req_samecar);
+	API.post('OtherDealerCarList/condition',req_samecar).then(response=>{
+	console.log("otherdealercar list",response.data.data);
+	setOtherDealerCarDetail(response.data.data);
+	console.log("other dealer car req",req_samecar);
+	console.log("otherdealercar list",response.data.data);
+	})
+	//}
 	});
-}
-
-useEffect (()=>{
+	}
+	
+	useEffect (()=>{
 	// carDetails/condition
 	console.log("id value",id)
 	CarDetailList();
 	BuyerInventoryCarDetailList();
 	
 	
+	
+	},[id])
 
-},[])
+const addRemoveFavourite=(carid,state,flag)=>{
+	console.log("inside addremove");
+	let request={
+		buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
+		car_id:carid,
+		active: !state
+	}
+	console.log("request",request);
+	API.post('buyer_favourite/add',request).then(res=>{
+		// setaddFavourite(res.data.data);
+		console.log("add Fav Inventory Detail",res.data.data);
+
+		if(flag==='morecar'){
+			setMoreCarFlag(!moreCarFlag)
+		  }
+		else if(flag==='SimilarCarFromSellerFlag'){
+			setSimilarCarFromSellerFlag(!similarCarFromSellerFlag)
+		  }
+		
+	})
+}
+
+useEffect (()=>{
+	
+	BuyerInventoryCarDetailList();
+	
+	
+	
+	},[moreCarFlag,similarCarFromSellerFlag])
 
 	
 return(
@@ -388,9 +380,9 @@ return(
          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
             <div class="car-item">
 				<div class="cars-lock">
-				<img src={lock} class="img-fluid" alt="..."/>
+				<img src={(moreCar.isFavourite===0)? locked : lock} onClick={()=>addRemoveFavourite(moreCar.car_id,moreCar.isFavourite,'morecar')} />
 			  	</div>
-              	<img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id)}} class="img-fluid" alt="..."/>
+              	<img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id,moreCar.seller_dealer_id)}} class="carImg" alt="..."/>
 				  {moreCar.isbestSale?
 				<div class="cars-tag">
 					<h4>{moreCar.deal_name}</h4>
@@ -398,10 +390,14 @@ return(
 				</div>:""}
               <div class="cars-content">		
 			  <h3><a href="#">{moreCar.make} {moreCar._type} ({moreCar.model} model)</a></h3>
-                <div class="d-flex align-items-center mb-3">
-                  <p class="details"><img src={speedometer}  alt=""/><span>{moreCar.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-                  <p class="details"><img src={gasolinePump} alt=""/><span>{moreCar.fuel_type}</span></p>
-                </div>
+			<div className="d-flex align-items-center mb-3">
+				<p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{moreCar.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+				<p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{moreCar.fuel_type}</span></p>    
+			</div>
+			<div className="d-flex align-items-center mb-3">
+				<p className="details"><span>{moreCar.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+				<p className="details"><img src={moreCar.image}/></p>
+			</div>
 				
 				<div class="cars-prices">
 					<a class="cta-btns" href="">${moreCar.min_bid}</a>
@@ -416,7 +412,7 @@ return(
 		  {sellerCarDetail.length > 0 ? sellerCarDetail.slice(0,1)
                             .map((moreCar,index) =>
 		<div class="text-center">
-                <a href="JavaScript:void(0)" onClick={()=>{redirectpagemorecarseller(moreCar.seller_id)}} class="more-btn">View More<i class="bx bx-chevron-right"></i></a>
+                <a href="JavaScript:void(0)" onClick={()=>{redirectpagemorecarseller(moreCar.seller_dealer_id)}} class="more-btn">View More<i class="bx bx-chevron-right"></i></a>
               </div>):""}
 		</div>
     </div>
@@ -426,7 +422,7 @@ return(
       <div class="container-fluid aos-init aos-animate" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Same cars from other dealer</h2>          
+          <h2>Similar Car From Other Dealer</h2>          
         </div>
 
         <div class="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
@@ -435,18 +431,19 @@ return(
 							<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
 							<div class="car-item">
 								<div class="cars-lock">
-								<img src={lock} class="img-fluid" alt="..."/>
+								<img src={(moreCar.isFavourite===0)? locked : lock} onClick={()=>addRemoveFavourite(moreCar.car_id,moreCar.isFavourite,'SimilarCarFromSellerFlag')} />
 								  </div>
-								  <img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id)}} class="img-fluid" alt="..."/>
-								  {moreCar.isbestSale?
-								<div class="cars-tag">
-									<h4>{moreCar.deal_name}</h4>
-								</div>:""}
+								  <img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id,moreCar.seller_dealer_id)}} class="carImg" alt="..."/>
+								  
 							  <div class="cars-content">		
 							  <h3><a href="#">{moreCar.make} {moreCar._type} ({moreCar.model} model)</a></h3>
-								<div class="d-flex align-items-center mb-3">
-								  <p class="details"><img src={speedometer}  alt=""/><span>{moreCar.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-								  <p class="details"><img src={gasolinePump} alt=""/><span>{moreCar.fuel_type}</span></p>
+							    <div className="d-flex align-items-center mb-3">
+									<p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{moreCar.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+									<p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{moreCar.fuel_type}</span></p>    
+								</div>
+								<div className="d-flex align-items-center mb-3">
+									<p className="details"><span>{moreCar.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+									<p className="details"><img src={moreCar.image}/></p>
 								</div>
 								
 								<div class="cars-prices">
