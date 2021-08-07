@@ -107,14 +107,18 @@ return(
         
         <main id="main" class="inner-page-cars">
     
-			<div class="back-btn">
-				<a class="back-btn-primary" href="/carlist"><i class="bx bx-chevron-left"></i> Back</a>
-			</div>		
+				
 	
 	<div id="dealer-cars" class="dealer-cars">
       <div class="container-fluid aos-init aos-animate">
+
+      
+
       {/* <div class="container-fluid aos-init aos-animate" data-aos="fade-up"> */}
         <div class="section-title">
+        <div class="back-btn">
+				<a class="back-btn-primary" href="/carlist"><i class="bx bx-chevron-left"></i> Back</a>
+			</div>
           <h2>More cars from the dealer</h2>          
         </div>
         <div className="filtersblock  col-lg-6 SalesRepsSearch  row" >
@@ -134,7 +138,7 @@ return(
 				<div class="cars-lock">
 				<img src={(moreCar.isFavourite===0)? locked : lock} onClick={()=>addRemoveFavourite(moreCar.car_id,moreCar.isFavourite,'morecar')} />
 			  	</div>
-              	<img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id,item.seller_id)}} class="img-fluid" alt="..."/>
+              	<img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id,item.seller_id)}} class="carImg" alt="..."/>
         {moreCar.isbestSale?
 				<div class="cars-tag">
 					<h4>{moreCar.deal_name}</h4>
