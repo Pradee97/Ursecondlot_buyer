@@ -13,6 +13,7 @@ import StateAndCity from '../../Component/StateAndCity/StateAndCity';
 import FileBase64 from 'react-file-base64';
 import { useState, useEffect } from 'react';
 import PhoneInput from 'react-phone-number-input/input';
+import momentTimezone from 'moment-timezone';
 
 const Registration = () => {
     const history = useHistory();
@@ -60,7 +61,7 @@ const Registration = () => {
     const [stateAndCityError, setStateAndCityError] = useState("");
     const [myTimezone, SetMyTimezone] = useState([])
     const [timezoneActiveFlag, SetTimezoneActiveFlag] = useState(true)
-    const [myTimezoneValue, SetMyTimezoneValue] =  useState(121)
+    const [myTimezoneValue, SetMyTimezoneValue] =  useState(1)
 
     useEffect(()=>{
         API.post("timezone/condition")
@@ -113,7 +114,7 @@ const Registration = () => {
     const registrationhandleSubmit = (data) => {
         // setOpenLoader(true);
         // event.preventDefault();
-        
+
         setDealerNameError("")
         setFirstNameError("") 
         setLastNameError("")
@@ -212,7 +213,14 @@ const Registration = () => {
             setTimeError("Time is required")
             return;
         }                             
-        console.log("===date===",date)
+        // console.log("===date==222==",moment(new Date(`${date} ${time}`)).tz(myTimezone.filter((data)=> data.timezone_id == myTimezoneValue)[0].timezone_name).format('MM/DD/YYYY'))
+        // console.log("===time==222==",moment(new Date(`${date} ${time}`)).tz(myTimezone.filter((data)=> data.timezone_id == myTimezoneValue)[0].timezone_name).format('HH:mm'))
+       
+        const UTC_updateDate = moment(new Date(`${date} ${time}`)).tz(myTimezone.filter((data)=> data.timezone_id == myTimezoneValue)[0].timezone_name).format('MM/DD/YYYY')
+        const UTC_updateTime = moment(new Date(`${date} ${time}`)).tz(myTimezone.filter((data)=> data.timezone_id == myTimezoneValue)[0].timezone_name).format('HH:mm')
+        console.log("UTC_updateTime==",UTC_updateTime)
+        console.log("UTC_updateDate==",UTC_updateDate)
+        
         let request = {
             dealer_name: dealerName,
             first_name:firstName,
@@ -220,8 +228,8 @@ const Registration = () => {
             email: email,
             phone_no: formatMobileNO(phoneNumber),
             address: address,
-            meeting_date: date,
-            meeting_time: time,
+            meeting_date: UTC_updateDate, //date,
+            meeting_time: UTC_updateTime, //time,
             active: 1,
             country_id: "1",
             state_id: stateName,
@@ -442,7 +450,7 @@ const Registration = () => {
                                             <option key={data.timezone_id} 
                                                 checked={timezoneActiveFlag && data.timezone_id == myTimezoneValue ? true : false}
                                                 value={data.timezone_id}
-                                            >{data.timezone}</option> 
+                                            >{data.timezone_name}</option> 
                                         )}
                                     </select>
                                     <label  for="drop" className={"input-has-value"}> Time Zone</label>
