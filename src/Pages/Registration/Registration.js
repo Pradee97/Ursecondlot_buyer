@@ -11,7 +11,7 @@ import '../../Component/Popup/popup.css';
 import Terms from '../../Component/TermsAndCondition/TermsAndCondition';
 import StateAndCity from '../../Component/StateAndCity/StateAndCity';
 import FileBase64 from 'react-file-base64';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PhoneInput from 'react-phone-number-input/input';
 
 const Registration = () => {
@@ -58,7 +58,20 @@ const Registration = () => {
     const [timeError, setTimeError] = useState("");
     const [numberOfYearsError, setNumberofYearsError] = useState("");
     const [stateAndCityError, setStateAndCityError] = useState("");
+    const [myTimezone, SetMyTimezone] = useState([])
+    const [timezoneActiveFlag, SetTimezoneActiveFlag] = useState(true)
+    const [myTimezoneValue, SetMyTimezoneValue] =  useState(121)
 
+    useEffect(()=>{
+        API.post("timezone/condition")
+            .then((response) => {
+                console.log("timezone res====", response.data.data)
+                SetMyTimezone(response.data.data)
+            })
+            .catch(()=>{
+                console.log("")
+            })
+    },[])
     const togglePopup = () => {
         setIsOpen(!isOpen);
     }
@@ -217,6 +230,7 @@ const Registration = () => {
             no_years: option,
             local_flag: 0,
             image: doc==="" ? "" : doc.length>0 ? doc : [doc],
+            timezone_id: myTimezoneValue
         };
 
         if( terms!=="0" ){
@@ -413,6 +427,26 @@ const Registration = () => {
                                     <p className="form-input-error" >{timeError}</p>
                                 </div>
                                 </form>
+                            </div>
+                            
+                            <div className="col-sm-12 form-group countrycode">
+                                <div className="tbox">
+                                    <select className="form-control custom-select browser-default textbox"
+                                        id="drop"
+                                        placeholder=""
+                                        value={myTimezoneValue}
+                                        onChange={(e) => SetMyTimezoneValue( e.target.value) }
+                                        >
+                                        <option value={null} style={{"display":"none"}}></option>
+                                        {myTimezone.length > 0 && myTimezone.map((data)=>
+                                            <option key={data.timezone_id} 
+                                                checked={timezoneActiveFlag && data.timezone_id == myTimezoneValue ? true : false}
+                                                value={data.timezone_id}
+                                            >{data.timezone}</option> 
+                                        )}
+                                    </select>
+                                    <label  for="drop" className={"input-has-value"}> Time Zone</label>
+                                </div>
                             </div>
                             
                             <div className="col-sm-12 form-group agreetab">
