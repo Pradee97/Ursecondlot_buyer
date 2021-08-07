@@ -77,12 +77,13 @@ return(
 	<div id="dealer-cars" class="dealer-cars">
       <div class="container-fluid aos-init aos-animate">
 
-      <div class="back-btn">
-				<a class="back-btn-primary" href="/carlist"><i class="bx bx-chevron-left"></i> Back</a>
-			</div>
+      
 
       {/* <div class="container-fluid aos-init aos-animate" data-aos="fade-up"> */}
         <div class="section-title">
+        <div class="back-btn">
+				<a class="back-btn-primary" href="/carlist"><i class="bx bx-chevron-left"></i> Back</a>
+			</div>
           <h2>SIMILAR CARS FROM OTHER DEALER</h2>          
         </div>
 		<div class="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
@@ -94,7 +95,7 @@ return(
 				<div class="cars-lock">
 				<img src={(moreCar.isFavourite===0)? locked : lock} onClick={()=>addRemoveFavourite(moreCar.car_id,moreCar.isFavourite,'SimilarCarFromSellerFlag')} />
 			  	</div>
-              	<img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id,moreCar.seller_dealer_id)}} class="img-fluid" alt="..."/>
+              	<img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id,moreCar.seller_dealer_id)}} class="carImg" alt="..."/>
                 {/* {moreCar.isbestSale?
 				<div class="cars-tag">
 					<h4>{moreCar.deal_name}</h4>
