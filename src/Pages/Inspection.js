@@ -241,16 +241,9 @@ const TestDriveMedia = () =>{
                         <div class="coveredgallery images-container">
                             <div class="photo-gallery">
                                 <div class="row photos">
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={powerTrainMedia[0]?.media}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={powerTrainMedia[0]?.media}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={powerTrainMedia[0]?.media}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={powerTrainMedia[0]?.media}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={powerTrainMedia[0]?.media}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={powerTrainMedia[0]?.media}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={powerTrainMedia[0]?.media}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={powerTrainMedia[0]?.media}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={powerTrainMedia[0]?.media}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={powerTrainMedia[0]?.media}></img></div>
+                                {powerTrainMedia.Length>0?powerTrainMedia.map((item)=>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={item?.media}></img></div>
+                                    ):""}
                                 </div>
                             </div>
                         </div>
@@ -363,16 +356,9 @@ const TestDriveMedia = () =>{
                         <div class="mechanicalgallery images-container">
                             <div class="photo-gallery">
                                 <div class="row photos">
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={mechanicalMedia[0]?.media}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={mechanicalMedia[0]?.media}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={mechanicalMedia[0]?.media}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={mechanicalMedia[0]?.media}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={mechanicalMedia[0]?.media}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={mechanicalMedia[0]?.media}></img></div>
-                                    <div class="col-sm-4col-md-2 col-lg-2 item"><img class="img-fluid"  src={mechanicalMedia[0]?.media}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={mechanicalMedia[0]?.media}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={mechanicalMedia[0]?.media}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={mechanicalMedia[0]?.media}></img></div>
+                                {mechanicalMedia.Length>0?mechanicalMedia.map((item)=>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={item?.media}></img></div>
+                                    ):""}
                                 </div>
                             </div>
                         </div>
@@ -436,11 +422,9 @@ const TestDriveMedia = () =>{
                         <div class="tiresgallery images-container">
                             <div class="photo-gallery">
                                 <div class="row photos">
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={tiresWheelsMedia[0]?.media}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={tiresWheelsMedia[0]?.media}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={tiresWheelsMedia[0]?.media}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={tiresWheelsMedia[0]?.media}></img></div>
-                                    
+                                     {tiresWheelsMedia.Length>0?tiresWheelsMedia.map((item)=>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={item?.media}></img></div>
+                                    ):""}
                                 </div>
                             </div>
                         </div>
@@ -520,11 +504,11 @@ const TestDriveMedia = () =>{
                         <div class="exteriorgallery images-container">
                             <div class="photo-gallery">
                                 <div class="row photos">
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={exteriorMedia[0]?.media}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={exteriorMedia[0]?.media}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={exteriorMedia[0]?.media}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={exteriorMedia[0]?.media}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={exteriorMedia[0]?.media}></img></div>
+                                {exteriorMedia.Length>0?exteriorMedia.map((item)=>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={item?.media}></img></div>
+                                    ):""}
+                                    
+                                    
                                     
                                 </div>
                             </div>
@@ -597,12 +581,9 @@ const TestDriveMedia = () =>{
                         <div class="interiorgallery images-container">
                             <div class="photo-gallery">
                                 <div class="row photos">
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={interiorMedia[0]?.media}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={interiorMedia[0]?.media}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={interiorMedia[0]?.media}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={interiorMedia[0]?.media}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={interiorMedia[0]?.media}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={interiorMedia[0]?.media}></img></div>
+                                    {interiorMedia.length>0?interiorMedia.map((item)=>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={item?.media}></img></div>
+                                    ):""}
                                     
                                 </div>
                             </div>
