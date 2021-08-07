@@ -232,8 +232,10 @@ const SuggestedCars = () => {
         API.post("SuggestedCarSearch/condition",request)
         .then((res)=>{
 		   
-			
-            setCarDetail(res.data.data);
+			if(res.data.data.length>0)
+            	setCarDetail(res.data.data);
+			else
+				getrecentCarList();
          
         },
         (error) => {
