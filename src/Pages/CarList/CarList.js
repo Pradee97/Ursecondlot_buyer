@@ -130,6 +130,7 @@ const CarList = () => {
     
 
     useEffect(() => {
+        getSuggestedCarList();
         getrecentCarList();
         getInventoryCarList();
         getFavCarList();

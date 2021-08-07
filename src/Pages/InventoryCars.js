@@ -222,8 +222,10 @@ const InventoryCars = () => {
         API.post("BuyerInventoryCarSearch/condition",request)
         .then((res)=>{
 		   
-			
-            setCarInventoryDetail(res.data.data);
+			if(res.data.data.length>0)
+            	setCarInventoryDetail(res.data.data);
+			else
+				getInventoryCarList();
          
         },
         (error) => {

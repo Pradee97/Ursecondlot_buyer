@@ -9,7 +9,7 @@ import car from '../assets/img/cars02.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory  } from "react-router-dom";
 import CarListAction from '../../src/Pages/CarList/CarListAction';
-
+import ReactPlayer from 'react-player';
 
 const Inspection=()=>{
 
@@ -582,7 +582,16 @@ const TestDriveMedia = () =>{
                             <div class="photo-gallery">
                                 <div class="row photos">
                                     {interiorMedia.length>0?interiorMedia.map((item)=>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={item?.media}></img></div>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item">
+                                        {item?.media.indexOf('mp4')>0?(
+                                         <ReactPlayer
+                                         url={item?.media}
+                                         className='react-player'
+                                         playing
+                                         width='100%'
+                                         height='100%'
+                                       />):<img class="img-fluid" src={item?.media}></img>}
+                                    </div>
                                     ):""}
                                     
                                 </div>
