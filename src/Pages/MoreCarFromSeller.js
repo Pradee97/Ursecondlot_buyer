@@ -39,17 +39,17 @@ useEffect(() => {
    
 },[]);
 
-const OnSearch = (e) => {
-  setData(e.target.value)
-  console.log("/////////=====",e.target.value)
-}
+// const OnSearch = (e) => {
+//   setData(e.target.value)
+//   console.log("/////////=====",e.target.value)
+// }
 
-const onKeydowninSearch = (event) => {
-  if (event.key === 'Enter') {
-      // setCurrentPage(1)
-      searchSellerCarDetail();
-    }
-}
+// const onKeydowninSearch = (event) => {
+//   if (event.key === 'Enter') {
+//       // setCurrentPage(1)
+//       searchSellerCarDetail();
+//     }
+// }
 
 const searchSellerCarDetail = () => {
   console.log("/////////",data)
@@ -116,19 +116,19 @@ return(
 
       {/* <div class="container-fluid aos-init aos-animate" data-aos="fade-up"> */}
         <div class="section-title">
-        <div class="back-btn">
+        <div>
 				<a class="back-btn-primary" href="/carlist"><i class="bx bx-chevron-left"></i> Back</a>
 			</div>
           <h2>More cars from the dealer</h2>          
         </div>
-        <div className="filtersblock  col-lg-6 SalesRepsSearch  row" >
+        {/* <div className="filtersblock  col-lg-6 SalesRepsSearch  row" >
           <div className="input-group searchbox ">
               <input type="text"  className="form-control border"  placeholder="model/make/year" onKeyDown={onKeydowninSearch} onChange={OnSearch}></input>
               <span className="input-group-append" >
               <button className="btn ms-n5" type="button" id="btntest" name="btntest" onClick={searchSellerCarDetail} ><i className='bx bx-search'></i></button>
               </span>                                
           </div>
-      </div>
+      </div> */}
 		<div class="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
 		{sellerCarDetail.length > 0 ? sellerCarDetail
                             .map((moreCar,item,index) =>

@@ -333,7 +333,7 @@ const SuggestedCars = () => {
                     
                             <div className="section-title">
 
-							<div class="back-btn">
+							<div >
 								<a class="back-btn-primary" href="/carlist"><i class="bx bx-chevron-left"></i> Back</a>
 							</div>
 

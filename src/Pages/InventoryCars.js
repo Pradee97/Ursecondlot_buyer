@@ -281,7 +281,7 @@ const InventoryCars = () => {
                         <div className="container-fluid aos-init aos-animate" data-aos="fade-up">
                         
                             <div className="section-title">
-							<div class="back-btn">
+							<div>
 							<a class="back-btn-primary" href="/carlist"><i class="bx bx-chevron-left"></i> Back</a>
 						</div>
 
