@@ -278,7 +278,7 @@ const RecentlyAddedCars = () => {
 
                         
 							<div className="section-title">
-								<div class="back-btn">
+								<div>
 									<a class="back-btn-primary" href="/carlist"><i class="bx bx-chevron-left"></i> Back</a>
 								</div>
                                 <h2>Recently Added Cars</h2>
