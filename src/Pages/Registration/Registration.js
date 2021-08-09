@@ -13,7 +13,7 @@ import StateAndCity from '../../Component/StateAndCity/StateAndCity';
 import FileBase64 from 'react-file-base64';
 import { useState, useEffect } from 'react';
 import PhoneInput from 'react-phone-number-input/input';
-//import momentTimezone from 'moment-timezone';
+import momentTimezone from 'moment-timezone';
 
 const Registration = () => {
     const history = useHistory();
