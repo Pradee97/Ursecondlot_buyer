@@ -24,13 +24,30 @@ const CarList = () => {
     const [recentCarFlag,setrecentCarFlag]=useState(false);
     const [inventoryCarFlag,setInventoryCarFlag]=useState(false);
     const [favCarFlag,setFavCarFlag]=useState(false);
+    const [suggestedCarDetail,setSuggestedCarDetail]=useState("");
 
     const [isOpen, setIsOpen] = useState(false);
 
     const togglePopup = () => {
         setIsOpen(!isOpen);
     }
-
+    const getSuggestedCarList=()=>{
+        let request={
+            buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+        }
+        console.log("+++++++++==++",request)
+        API.post('SuggestedCarList/condition',request).then(res=>{
+            console.log("response",res.data.data);
+           // const {results} = res.data.data;
+            console.log("Response data",res.data.data);
+            //if(results.length>0){
+            setSuggestedCarDetail(res.data.data);
+            console.log("car Detail",res.data.data);
+            setLoading(false);
+            //}
+            //setrecentCarFlag(!recentCarFlag)
+        }) .catch(err => { console.log(err); });
+    }
     
     const getrecentCarList=()=>{
         let request={
@@ -113,6 +130,7 @@ const CarList = () => {
     
 
     useEffect(() => {
+        getSuggestedCarList();
         getrecentCarList();
         getInventoryCarList();
         getFavCarList();
@@ -154,7 +172,7 @@ const CarList = () => {
                                 <h2>Suggested cars</h2>
                             </div>
                             <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
-                            {carDetail.length>0?carDetail.slice(0, 4)
+                            {suggestedCarDetail.length>0?suggestedCarDetail.slice(0, 4)
                             .map((item) =>
                             
                                 <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
@@ -241,7 +259,7 @@ const CarList = () => {
                                 </div>
 
                             <div className="text-center">
-                                <a href="/InventoryCars" className="more-btn">See More Make Search<i className="bx bx-chevron-right"></i></a>
+                                <a href="/InventoryCars" className="more-btn">View More<i className="bx bx-chevron-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -290,7 +308,7 @@ const CarList = () => {
                                 </div>):""}
                                 </div>
                             <div className="text-center">
-                                <a href="/recentlyAddedCars" className="more-btn">See More Make Search<i className="bx bx-chevron-right"></i></a>
+                                <a href="/recentlyAddedCars" className="more-btn">View More<i className="bx bx-chevron-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -343,7 +361,7 @@ const CarList = () => {
 
 
                         <div className="text-center">
-                            <a href="/favorite" className="more-btn">View Favorite List  <i className="bx bx-chevron-right"></i></a>
+                            <a href="/favorite" className="more-btn">View More  <i className="bx bx-chevron-right"></i></a>
                         </div>
                     </div>
         

@@ -42,7 +42,8 @@ const [data, setData] = useState("");
 const [distance,setDistance] = useState("");
 const [moreCarFlag,setMoreCarFlag]=useState(false);
 const [similarCarFromSellerFlag,setSimilarCarFromSellerFlag]=useState(false);
-const selectedSellerId = useSelector(state => state.CarListReducer.payload);	
+const selectedSellerId = useSelector(state => state.CarListReducer.payload);
+
 console.log("sellerid from carlist",selectedSellerId);
 const redirectpage=(pathid,seller_dealer_id)=>{
 	//e.preventDefault();
@@ -153,7 +154,7 @@ function CarDetailList(){
 	
 	
 	
-	},[])
+	},[id])
 
 const addRemoveFavourite=(carid,state,flag)=>{
 	console.log("inside addremove");

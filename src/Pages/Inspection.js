@@ -1,15 +1,139 @@
-import React from 'react';
+import React, { useState , useEffect } from 'react';
+import API from "../Services/BaseService";
 import appstore from '../assets/img/appstore.png';
 import googleplay from '../assets/img/googleplay.png';
 import checkmarkred from '../assets/img/checkmarkred.svg';
 import checkmark from '../assets/img/checkmark.svg';
 import iconarrowback from '../assets/img/ionic-ios-arrow-back.svg';
 import car from '../assets/img/cars02.png';
-
-
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory  } from "react-router-dom";
+import CarListAction from '../../src/Pages/CarList/CarListAction';
+import ReactPlayer from 'react-player';
 
 const Inspection=()=>{
 
+    
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const [inspection,setInspection]=useState("");
+    const [interiorMedia,setInteriorMedia] = useState("");
+    const [exteriorMedia,setExteriorMedia] = useState("");
+    const [mechanicalMedia,setMechanicalMedia] = useState("");
+    const [tiresWheelsMedia,setTiresWheelsMedia] = useState("");
+    const [powerTrainMedia,setPowerTrainMedia] = useState("");
+    const [testDriveMedia,setTestDriveMedia] = useState("");
+
+    const getInspectionDetail = () =>{
+    let request={
+        car_id: 1,
+        
+    }
+    API.post('inspection/condition',request).then(res=>{
+        console.log("response",res.data.data);
+       
+        setInspection(res.data.data);
+        
+    }).catch(err => { console.log(err); });
+}
+
+const ExteriorMedia=()=>{
+    let request={
+        car_id:1
+    }
+    API.post('exterior_media/condition',request).then(res=>{
+        console.log("exterior_media/condition",res.data.data);
+       
+        setExteriorMedia(res.data.data);
+        
+    }).catch(err => { console.log(err); });
+
+}
+
+const InteriorMedia = () =>{
+    let request={
+        car_id: 1,
+        
+    }
+    API.post('interior_media/condition',request).then(res=>{
+        console.log("interior_media/condition",res.data.data);
+       
+        setInteriorMedia(res.data.data);
+        
+    }).catch(err => { console.log(err); });
+}
+
+const MechanicalMedia = () =>{
+    let request={
+        car_id: 1,
+        
+    }
+    API.post('mechanical_media/condition',request).then(res=>{
+        console.log("mechanical_media/condition",res.data.data);
+       
+        setMechanicalMedia(res.data.data);
+        
+    }).catch(err => { console.log(err); });
+}
+
+const TiresWheelsMedia = () =>{
+    let request={
+        car_id: 1,
+        
+    }
+    API.post('tireswheels_media/condition',request).then(res=>{
+        console.log("tireswheels_media",res.data.data);
+       
+        setTiresWheelsMedia(res.data.data);
+        
+    }).catch(err => { console.log(err); });
+}
+
+const PowerTrainMedia = () =>{
+    let request={
+        car_id: 1,
+        
+    }
+    API.post('power_train_media/condition',request).then(res=>{
+        console.log("power_train_media/condition",res.data.data);
+       
+        setPowerTrainMedia(res.data.data);
+        
+    }).catch(err => { console.log(err); });
+}
+
+const TestDriveMedia = () =>{
+    let request={
+        car_id: 1,
+        
+    }
+    API.post('testdrive_media/condition',request).then(res=>{
+        console.log("testdrive_media/condition",res.data.data);
+       
+        setTestDriveMedia(res.data.data);
+        
+    }).catch(err => { console.log(err); });
+}
+
+
+
+    useEffect(() => {
+        getInspectionDetail();
+        ExteriorMedia();
+        InteriorMedia();
+        MechanicalMedia();
+        TiresWheelsMedia();
+        PowerTrainMedia();
+        TestDriveMedia();
+        
+    },[]);
+
+    const redirectpage=(pathid,seller_dealer_id)=>{
+        // e.preventDefault();
+        console.log("seller_dealer_id+++++",seller_dealer_id)
+        dispatch(CarListAction.sellerid(seller_dealer_id))
+        history.push("/cardetail/"+pathid);
+    }
     return(
         <div>
             
@@ -17,10 +141,11 @@ const Inspection=()=>{
    
    
             <div id="inspectionsummery" class="inspectionsummery">
+            {inspection.length>0?
                 <div class="container">
                 
                 <div class="back-btn">
-                        <a class="backBtn" href="#"><i class="bx bx-chevron-left"></i> Back</a>
+                        <a class="backBtn" href="JavaScript:void(0)" onClick={()=>{redirectpage(inspection[0].car_id,inspection[0].seller_dealer_id)}} ><i class="bx bx-chevron-left"></i> Back</a>
                 </div>
                 <div class="inspectionsummeryblock col-lg-12">
 
@@ -28,15 +153,15 @@ const Inspection=()=>{
                     <h2>Inspection Summary</h2>
                 </div>
                 <div class="inspectionsummeryhead ">
-                    <h2>Honda Amaze (2014 Model)</h2>
+                    <h2>{inspection[0].make} ({inspection[0].model} Model)</h2>
                     <div class="row content">
                         <div class="col-lg-6 pt-4 pt-lg-0">
                             <p>Inspection Date & TIME:<span>06 jan 11.45pM </span></p>
-                            <p>Inspection name:<span>Bruce willis</span></p>
+                            <p>Inspection name:<span>{inspection[0].name}</span></p>
                         </div>
                         <div class="col-lg-6 pt-4 pt-lg-0">
                             <p>Colour:<span>Metallic Blue</span></p>
-                            <p>Vim:<span>UN14DF134WVQ149788</span></p>
+                            <p>Vim:<span>{inspection[0].vin_no}</span></p>
                         </div>
                     </div>
                 </div>
@@ -63,8 +188,7 @@ const Inspection=()=>{
                     
                     
                     <div class="commentstextblock">
-                    <p>Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum Has Been The Industry's Standard Dummy 
-                    Text Ever Since The 1500S, Lorem Ipsum Has Been The Industry's Standard Dummy Text Ever Since The 1500S,</p>
+                    <p>{inspection[0].comments}</p>
                     </div>
                     
                     <div class="inspectiontable">          
@@ -84,15 +208,15 @@ const Inspection=()=>{
                         
                         <tr class="">
                         <td>Engine Bottom End Noise</td>
-                        <td><span class="tablecheck"><img src={checkmark}></img></span></td>
-                        <td></td>
+                        {inspection[0].noise == "Covered"?
+                        <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
+                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
                         </tr>
                         <tr class="">
                         <td>Automatic Transmission Operation</td>
-                        <td></td>
-                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>
-                        <td></td>
+                        <td></td>{inspection[0].auto_transmission == "Covered"?
+                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>:<td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}       
                         </tr>
                         <tr class="">
                         <td>Transfer Case Operation</td>
@@ -117,16 +241,9 @@ const Inspection=()=>{
                         <div class="coveredgallery images-container">
                             <div class="photo-gallery">
                                 <div class="row photos">
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
+                                {powerTrainMedia.Length>0?powerTrainMedia.map((item)=>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={item?.media}></img></div>
+                                    ):""}
                                 </div>
                             </div>
                         </div>
@@ -137,8 +254,7 @@ const Inspection=()=>{
                     
                     
                     <div class="commentstextblock">
-                    <p>Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum Has Been The Industry's Standard Dummy 
-                    Text Ever Since The 1500S, Lorem Ipsum Has Been The Industry's Standard Dummy Text Ever Since The 1500S,</p>
+                    <p>{inspection[0].comments}</p>
                     </div>
                     
                     <div class="inspectiontable">          
@@ -158,56 +274,74 @@ const Inspection=()=>{
                         
                         <tr class="">
                         <td>Engine Upper End</td>
-                        <td><span class="tablecheck"><img src={checkmark}></img></span></td>
+                        {inspection[0].upper_end == "Good"?
+                        <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
+                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
                         <td></td>
                         </tr>
                         <tr class="">
                         <td>Engine Bottom End</td>
                         <td></td>
-                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>
+                        {inspection[0].bottam_end == "Good"?
+                        <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
+                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
                         </tr>
                         <tr class="">
                         <td>Catalytic Converter Present</td>
                         <td></td>
-                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>
+                        {inspection[0].catalytic_converter == "Good"?
+                        <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
+                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
                         </tr>
                         
                         <tr class="">
                         <td>Heater Runs Hot</td>
-                        <td><span class="tablecheck"><img src={checkmark}></img></span></td>
+                        {inspection[0].heater_runs == "Good"?
+                        <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
+                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
                         <td></td>
                         </tr>
                         <tr class="">
                         <td>A/c Runs Hot</td>
-                        <td><span class="tablecheck"><img src={checkmark}></img></span></td>
+                        {inspection[0].ac_runs == "Good"?
+                        <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
+                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
                         <td></td>
                         </tr>
                         <tr class="">
                         <td>No Check Engine Light At Startup</td>
-                        <td><span class="tablecheck"><img src={checkmark}></img></span></td>
+                        {inspection[0].engine_light == "Good"?
+                        <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
+                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
                         <td></td>
                         </tr>
                         <tr class="">
                         <td>No Abs</td>
                         <td></td>
-                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>
+                        {inspection[0].no_ads == "Good"?
+                        <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
+                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
                         </tr>
                         <tr class="">
                         <td>No SRS/Airbag Light</td>
-                        <td><span class="tablecheck"><img src={checkmark}></img></span></td>
+                        {inspection[0].no_srs == "Good"?
+                        <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
+                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
                         <td></td>
                         </tr>
                         <tr class="">
                         <td>Differential Operation</td>
-                        <td><span class="tablecheck"><img src={checkmark}></img></span></td>
+                        {inspection[0].differential_operation == "Good"?
+                        <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
+                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
                         <td></td>
                         </tr>
@@ -218,20 +352,13 @@ const Inspection=()=>{
                     <div class="commentsblock">
                         <h3>Mechanical Images</h3>
                         </div>
-                        
+                       
                         <div class="mechanicalgallery images-container">
                             <div class="photo-gallery">
                                 <div class="row photos">
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
+                                {mechanicalMedia.Length>0?mechanicalMedia.map((item)=>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={item?.media}></img></div>
+                                    ):""}
                                 </div>
                             </div>
                         </div>
@@ -242,8 +369,7 @@ const Inspection=()=>{
                     
                     
                     <div class="commentstextblock">
-                    <p>Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum Has Been The Industry's Standard Dummy 
-                    Text Ever Since The 1500S, Lorem Ipsum Has Been The Industry's Standard Dummy Text Ever Since The 1500S,</p>
+                    <p>{inspection[0].comments}</p>
                     </div>
                     
                     <div class="inspectiontable">          
@@ -263,7 +389,9 @@ const Inspection=()=>{
                         
                         <tr class="">
                         <td>5/32 Tread Depth</td>
-                        <td><span class="tablecheck"><img src={checkmark}></img></span></td>
+                        {inspection[0].tread_depth == "Good"?
+                        <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
+                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
                         <td></td>
                         </tr>
@@ -271,13 +399,17 @@ const Inspection=()=>{
                         <tr class="">
                         <td>Four Tires Condition</td>
                         <td></td>
-                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>
+                        {inspection[0].four_tires_condition == "Good"?
+                        <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
+                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
                         </tr>
                         
                         <tr class="">
                         <td>Any Scratches On The Wheels</td>
-                        <td><span class="tablecheck"><img src={checkmark}></img></span></td>
+                        {/* {inspection[0].breaking_senses == "Good"?
+                        <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
+                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>} */}
                         <td></td>
                         <td></td>
                         </tr>
@@ -290,11 +422,9 @@ const Inspection=()=>{
                         <div class="tiresgallery images-container">
                             <div class="photo-gallery">
                                 <div class="row photos">
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    
+                                     {tiresWheelsMedia.Length>0?tiresWheelsMedia.map((item)=>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={item?.media}></img></div>
+                                    ):""}
                                 </div>
                             </div>
                         </div>
@@ -305,8 +435,7 @@ const Inspection=()=>{
                     
                     
                     <div class="commentstextblock">
-                    <p>Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum Has Been The Industry's Standard Dummy 
-                    Text Ever Since The 1500S, Lorem Ipsum Has Been The Industry's Standard Dummy Text Ever Since The 1500S,</p>
+                    <p>{inspection[0].comments}</p>
                     </div>
                     <div class="inspectiontable">          
                         <table>
@@ -325,7 +454,9 @@ const Inspection=()=>{
                         
                         <tr class="">
                         <td>No Visible Rust</td>
-                        <td><span class="tablecheck"><img src={checkmark}></img></span></td>
+                        {inspection[0].visible_rust == "Good"?
+                        <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
+                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
                         <td></td>
                         </tr>
@@ -333,26 +464,34 @@ const Inspection=()=>{
                         <tr class="">
                         <td>No Colour Fade</td>
                         <td></td>
-                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>
+                        {inspection[0].color_fade == "Good"?
+                        <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
+                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
                         </tr>
                         <tr class="">
                         <td>No Glass Damaged</td>
                         <td></td>
-                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>
+                        {inspection[0].glass_damage == "Good"?
+                        <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
+                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
                         </tr>
                         
                         <tr class="">
                         <td>No Exterior Scratches</td>
-                        <td><span class="tablecheck"><img src={checkmark}></img></span></td>
+                        {inspection[0].scratches == "Good"?
+                        <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
+                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
                         <td></td>
                         </tr>
                         
                         <tr class="">
                         <td>No Side Mirror Damage</td>
-                        <td><span class="tablecheck"><img src={checkmark}></img></span></td>
+                        {inspection[0].side_mirror == "Good"?
+                        <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
+                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
                         <td></td>
                         </tr>
@@ -365,11 +504,11 @@ const Inspection=()=>{
                         <div class="exteriorgallery images-container">
                             <div class="photo-gallery">
                                 <div class="row photos">
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
+                                {exteriorMedia.Length>0?exteriorMedia.map((item)=>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={item?.media}></img></div>
+                                    ):""}
+                                    
+                                    
                                     
                                 </div>
                             </div>
@@ -381,8 +520,7 @@ const Inspection=()=>{
                     
                     
                     <div class="commentstextblock">
-                    <p>Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum Has Been The Industry's Standard Dummy 
-                    Text Ever Since The 1500S, Lorem Ipsum Has Been The Industry's Standard Dummy Text Ever Since The 1500S,</p>
+                    <p>{inspection[0].comments}</p>
                     </div>
                     
                     
@@ -403,7 +541,9 @@ const Inspection=()=>{
                         
                         <tr class="">
                         <td>No Visible Damage</td>
-                        <td><span class="tablecheck"><img src={checkmark}></img></span></td>
+                        {inspection[0].visible_damage == "Good"?
+                        <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
+                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
                         <td></td>
                         </tr>
@@ -411,20 +551,25 @@ const Inspection=()=>{
                         <tr class="">
                         <td>Frond Seat Conditions</td>
                         <td></td>
-                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>
+                        {inspection[0].front_seat == "Good"?
+                        <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
+                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
                         </tr>
                         <tr class="">
                         <td>Back Seat Condition</td>
                         <td></td>
-                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>
+                        {/* {inspection[0].automatic_transmission == "Good"?
+                        <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
+                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>} */}
                         <td></td>
                         </tr>
                         
                         <tr class="">
                         <td>No Major Visible Damage</td>
-                        <td><span class="tablecheck"><img src={checkmark}></img></span></td>
-                        <td></td>
+                        {inspection[0].major_damage == "Good"?
+                        <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
+                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
                         </tr>
                         </table>            
@@ -436,12 +581,18 @@ const Inspection=()=>{
                         <div class="interiorgallery images-container">
                             <div class="photo-gallery">
                                 <div class="row photos">
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={car}></img></div>
+                                    {interiorMedia.length>0?interiorMedia.map((item)=>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item">
+                                        {item?.media.indexOf('mp4')>0?(
+                                         <ReactPlayer
+                                         url={item?.media}
+                                         className='react-player'
+                                         playing
+                                         width='100%'
+                                         height='100%'
+                                       />):<img class="img-fluid" src={item?.media}></img>}
+                                    </div>
+                                    ):""}
                                     
                                 </div>
                             </div>
@@ -453,8 +604,7 @@ const Inspection=()=>{
                     
                     
                     <div class="commentstextblock">
-                    <p>Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum Has Been The Industry's Standard Dummy 
-                    Text Ever Since The 1500S, Lorem Ipsum Has Been The Industry's Standard Dummy Text Ever Since The 1500S,</p>
+                    <p>{inspection[0].comments}</p>
                     </div>
                     
                     <div class="inspectiontable">          
@@ -474,13 +624,17 @@ const Inspection=()=>{
                         <tr class="">
                         <td>Automatic Transmission</td>
                         <td></td>
-                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>
+                        {inspection[0].automatic_transmission == "Good"?
+                        <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
+                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
                         </tr>
                         
                         <tr class="">
                         <td>Manual Transmission</td>
-                        <td><span class="tablecheck"><img src={checkmark}></img></span></td>
+                        {inspection[0].manual_transmission == "Good"?
+                        <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
+                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
                         <td></td>
                         </tr>
@@ -488,32 +642,42 @@ const Inspection=()=>{
                         <tr class="">
                         <td>Exilator Level</td>
                         <td></td>
-                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>
+                        {inspection[0].exilator_level == "Good"?
+                        <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
+                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
                         </tr>
                         
                         <tr class="">
                         <td>Breaking Senses</td>
-                        <td><span class="tablecheck"><img src={checkmark}></img></span></td>
+                        {inspection[0].breaking_senses == "Good"?
+                        <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
+                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
                         <td></td>
                         </tr>
                         <tr class="">
                         <td>Steering Controls</td>
                         <td></td>
-                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>
+                        {/* {inspection[0].side_mirror == "Good"?
+                        <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
+                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>} */}
                         <td></td>
                         </tr>
                         <tr class="">
                         <td>Transfer Case</td>
                         <td></td>
-                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>
+                        {inspection[0].transfer_case == "Good"?
+                        <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
+                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
                         </tr>
                         <tr class="">
                         <td>Differential</td>
                         <td></td>
-                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>
+                        {inspection[0].differential == "Good"?
+                        <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
+                        <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
                         </tr>
                         
@@ -526,8 +690,7 @@ const Inspection=()=>{
                     
                     
                     <div class="commentstextblock">
-                    <p>Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum Has Been The Industry's Standard Dummy 
-                    Text Ever Since The 1500S, Lorem Ipsum Has Been The Industry's Standard Dummy Text Ever Since The 1500S,</p>
+                    <p>{inspection[0].comments}</p>
                     </div>
                     
                     
@@ -541,11 +704,11 @@ const Inspection=()=>{
             
             
                 </div>
-                
+:""}
             </div>
+         
+            
 
-            
-            
             <div class="inspectionbottom-back-btn">
                         <a class="back-btn-primary" href="#"><i class="bx bx-chevron-left"></i> Back</a>
             </div>

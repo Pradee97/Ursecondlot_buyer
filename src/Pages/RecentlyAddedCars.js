@@ -18,7 +18,23 @@ const RecentlyAddedCars = () => {
     const [recentCarFlag,setrecentCarFlag]=useState(false);
     const [loading,setLoading] = useState(true);
     const [data,setData]=useState("");
-    const dispatch = useDispatch();
+	const dispatch = useDispatch();
+	const [dealerShip,setDealerShip] = useState("");
+	const [fromYear,setFromYear] = useState("");
+	const [toYear,setToYear] = useState("");
+	const [fromMileage,setFromMIleage]=useState("");
+	const [toMileage,setToMileage]=useState("");
+	const [stateSearch,setStateSearch]=useState([]);
+	const [makeSearch,setMakeSearch]=useState([]);
+	const [transmissionSearch,setTransmissionSearch]=useState([]);
+	const [drivetrainSearch,setDriveTrainSearch]=useState([]);
+	const [bodyTypeSearch,setBodyTypeSearch] = useState([]);
+	const [engineNoiseSearch,setEngineNoiseSearch]=useState("");
+	const [transmissionIssueSearch,setTransmissionIssueSearch]=useState("");
+	const [historySearch,setHistorySearch]=useState("");
+	const [groupSearch,setGroupSearch]=useState([]);
+	const [salesTypeSearch,setSalesTypeSearch]=useState("");
+
     const getrecentCarList=()=>{
 
         let request={
@@ -66,28 +82,145 @@ const RecentlyAddedCars = () => {
        
     },[recentCarFlag]);
 
+    useEffect(()=>{
+		if(fromYear.length>=4){
+			searchCarDetail();
+		}
+		
+	},[fromYear]);
+
+	useEffect(()=>{
+		if(toYear.length>=4){
+			searchCarDetail();
+		}
+	},[toYear]);
+
+	
+
+	useEffect(()=>{
+		console.log("State updated with value selected from check box", makeSearch);
+		console.log("driveTrain selected",drivetrainSearch);
+		console.log("Transmission selected",transmissionSearch);
+		console.log("From Mileage",fromMileage);
+		console.log("To Mileage",toMileage);
+		searchCarDetail();
+	},[fromMileage,toMileage,makeSearch,drivetrainSearch,transmissionSearch,stateSearch,bodyTypeSearch,groupSearch]);
+
+
+	function concatMakeSearch  (e){
+		console.log("values passed",e);
+		console.log("selected chec box valuue",e.target.value)
+        if(e.target.checked)
+			setMakeSearch(makeSearch=>[...makeSearch,"'"+e.target.value+"'"]);
+		else if (!e.target.checked)
+			{
+				setMakeSearch(makeSearch.filter(item => item!== "'"+e.target.value+"'" ));
+			
+			}
+
+
+		
+	}
+
+	
+	function concatTransmissionSearch  (e){
+		console.log("values passed",e);
+		console.log("selected  transmission chec box valuue",e.target.value)
+		if(e.target.checked){
+		setTransmissionSearch(transmissionSearch=>[...transmissionSearch,"'"+e.target.value+"'"]);
+		}
+		else if (!e.target.checked)
+		{
+			setTransmissionSearch(transmissionSearch.filter(item => item!== "'"+e.target.value+"'" ));
+		
+		}
+		
+	}
+
+	
+	function concatDriveTrainSearch  (e){
+		console.log("values passed",e);
+		console.log("selected chec box valuue",e.target.value)
+		if(e.target.checked){
+		setDriveTrainSearch(drivetrainSearch=>[...drivetrainSearch,"'"+e.target.value+"'"]);
+		}
+		else if (!e.target.checked)
+		{
+			setDriveTrainSearch(drivetrainSearch.filter(item => item!== "'"+e.target.value+"'" ));
+
+		}
+		
+	}
+
+	function concatStateSearch  (e){
+		console.log("state=======",stateSearch)
+		console.log("values passed",e);
+		console.log("selected chec box valuue",e.target.value)
+		if(e.target.checked){
+		setStateSearch(stateSearch=>[...stateSearch,"'"+e.target.value+"'"]);
+		console.log("selected chec box valuue",e.target.value)
+		
+		}
+		else if (!e.target.checked)
+		{
+			setStateSearch(stateSearch.filter(item => item!== "'"+e.target.value+"'" ));
+			
+		}
+		
+	}
+
+	function concatBodyTypeSearch  (e){
+		console.log("state=======",bodyTypeSearch)
+		console.log("values passed",e);
+		console.log("selected chec box valuue",e.target.value)
+		if(e.target.checked){
+		setBodyTypeSearch(bodyTypeSearch=>[...bodyTypeSearch,"'"+e.target.value+"'"]);
+		console.log("selected chec box valuue",e.target.value)
+		
+		}
+		else if (!e.target.checked)
+		{
+			setBodyTypeSearch(bodyTypeSearch.filter(item => item!== "'"+e.target.value+"'" ));
+			
+		}
+		
+	}
+
     const OnSearch = (e) => {
         setData(e.target.value)
         console.log("/////////=====",e.target.value)
       }
       
-      const onKeydowninSearch = (event) => {
-        if (event.key === 'Enter') {
-            // setCurrentPage(1)
-            searchCarInventoryDetail();
-          }
-      }
+   
       
-      const searchCarInventoryDetail = () => {
-        console.log("/////////",data)
-        let request={
-            buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
-          data: data
-            
-        }
+      const searchCarDetail = () => {
+        
+		let request={
+			buyer_dealer_id:JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
+			model:bodyTypeSearch.length>0?bodyTypeSearch:"",
+			make:makeSearch.length>0?makeSearch:"",
+			dealer_type:dealerShip,
+			transmission:transmissionSearch.length>0?transmissionSearch:"",
+			drivetrain:drivetrainSearch.length>0?drivetrainSearch:"",
+			state:stateSearch.length>0?stateSearch:"",
+			fromMileage:fromMileage,
+			toMileage:toMileage,
+			fromYear:fromYear,
+			toYear:toYear,
+			group:groupSearch.length>0?groupSearch:"",
+			engine_noise:engineNoiseSearch,
+			transmission_issue:transmissionIssueSearch,
+			history:historySearch,
+			sales_type:salesTypeSearch
+			
+			}
+			console.log("state=======",stateSearch)
+			console.log(" filter search request",request);
+
         API.post("BuyerNewCarSearch/condition",request)
         .then((res)=>{
-           
+		   
+			
             setCarDetail(res.data.data);
          
         },
@@ -96,38 +229,71 @@ const RecentlyAddedCars = () => {
           }
         )
         .catch(err => { console.log(err); });
-      }
+	  }
+	  
+	  function onDealerShipClick(e){
+		console.log("event value++++++",e.target.value)
+		setDealerShip(e.target.value);
+		searchCarDetail()
+	  }
+
+	  function onTransmissionIssueClick(e){
+		console.log("Transmission issue selected value",e.target.value);
+		setTransmissionIssueSearch(e.target.value);
+		searchCarDetail();
+	}
+	function onSaleTypeClick(e){
+	   console.log("Sale Type selected value",e.target.value);
+	   setSalesTypeSearch(e.target.value);
+	   searchCarDetail();
+   }
+   function onHistoryClick(e){
+	   console.log("History Search selected value",e.target.value);
+	   setHistorySearch(e.target.value);
+	   searchCarDetail();
+   }
+   function onEngineNoiseClick(e){
+	   console.log("Engine Noise selected value",e.target.value);
+	   setEngineNoiseSearch(e.target.value);
+	   searchCarDetail();
+   }
+   function onGroupClick(e){
+	   console.log("Group selected value",e.target.value);
+	   if(e.target.checked)
+	   setGroupSearch(groupSearch=>[...groupSearch,"'"+e.target.value+"'"]);
+	   else if (!e.target.checked)
+	   {
+		   setGroupSearch(groupSearch.filter(item => item!== "'"+e.target.value+"'" ));
+	   
+	   }
+   }
 
     return(
         <div>
             {loading?<Loading/>:
              <main id="main" className="inner-page carList">
             
-             <div id="recently-cars" className="recently-cars">
+             <div id="recently-cars" className="recently-cars vehiclesearch">
                         <div className="container-fluid aos-init aos-animate" data-aos="fade-up">
 
-                        <div class="back-btn">
-                        <a class="back-btn-primary" href="/carlist"><i class="bx bx-chevron-left"></i> Back</a>
-            </div>
+                        
+							<div className="section-title">
+								<div class="back-btn">
+									<a class="back-btn-primary" href="/carlist"><i class="bx bx-chevron-left"></i> Back</a>
+								</div>
+                                <h2>Recently Added Cars</h2>
+                            </div>
             
-            <div class="col-lg-3">
-					<div class="saveSearch"><button class="cta-btn" type="button">Save Search </button></div>
+					<div class="row content">
+            			<div class="col-lg-3">
+					
 						<div class="leftonsidebox">
 							<div class="filtersblock">
 								<h3>Filters<span><a href="#">Reset</a></span></h3>
-								<div class="input-group">
-									<select id="vehiclename1"  class="form-control custom-select browser-default">
-										<option value="Saved Search">Saved Search</option>
-									</select>
-								</div>
+								
 								
 							</div>
-							<div class="distanceBlock">
-								<h4>Distance</h4>
-								<div class="input-group">
-								<input class="form-control" type="text" value="" placeholder="50km" />
-								</div>								
-							</div>
+							
 							
 							<div class="sortbyblock">
 								<h4>Sort by</h4>
@@ -157,27 +323,27 @@ const RecentlyAddedCars = () => {
 								<h4>States<span><a href="#"><img src={arrowmark}/></a></span></h4>
 								<div class="inner">
 									<div class="form-group input-group">
-										<input type="checkbox" id="florida"/>
+										<input type="checkbox" id="florida" value="florida" onClick={concatStateSearch}/>
 										<label for="florida">Florida</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="california"/>
+										<input type="checkbox" id="california" value="california" onClick={concatStateSearch}/>
 										<label for="california">California</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="delaware"/>
+										<input type="checkbox" id="delaware" value="delaware" onClick={concatStateSearch}/>
 										<label for="delaware">Delaware</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="newmexico"/>
+										<input type="checkbox" id="newmexico" value="newmexico" onClick={concatStateSearch}/>
 										<label for="newmexico">New mexico</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="colorado"/>
+										<input type="checkbox" id="colorado" value="colorado" onClick={concatStateSearch}/>
 										<label for="colorado">Colorado</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="washington"/>
+										<input type="checkbox" id="washington" value="washington" onClick={concatStateSearch}/>
 										<label for="washington">Washington</label>
 									</div>
 								</div>
@@ -187,15 +353,15 @@ const RecentlyAddedCars = () => {
 								<h4>Group<span><a href="#"><img src={arrowmark}/></a></span></h4>
 								<div class="inner">
 									<div class="form-group input-group ">
-										<input type="checkbox" id="deals"/>
+										<input type="checkbox" id="deals" value="Deals Almost Close" onClick={onGroupClick}/>
 										<label for="deals">Deals Almost Close</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="sellersflo"/>
+										<input type="checkbox" id="sellersflo" value="Sellers I Follow" onClick={onGroupClick}/>
 										<label for="sellersflo">Sellers I Follow</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="sellerstit"/>
+										<input type="checkbox" id="sellerstit" value="Seller Has Title" onClick={onGroupClick}/>
 										<label for="sellerstit">Seller Has Title</label>
 									</div>
 								</div>
@@ -205,17 +371,17 @@ const RecentlyAddedCars = () => {
 								<h4>Sales Types<span><a href="#"><img src={arrowmark}/></a></span></h4>
 								<div class="inner">
 									<div class="radio input-group">
-										<input id="radio-any1" name="radio" type="radio" checked/>
+										<input id="radio-any1" name="radio" type="radio" value="Any" onClick={onSaleTypeClick}/>
 										<label for="radio-any1" class="radio-label">Any</label>
 									</div>
 
 									<div class="radio input-group">
-										<input id="radio-buy" name="radio" type="radio"/>
+										<input id="radio-buy" name="radio" type="radio" value="Buy it now" onClick={onSaleTypeClick}/>
 										<label  for="radio-buy" class="radio-label">Buy it now</label>
 									</div>
 									  
 									<div class="radio input-group">
-										<input id="radio-sales" name="radio" type="radio"/>
+										<input id="radio-sales" name="radio" type="radio" value="Sealed Bid Sales" onClick={onSaleTypeClick}/>
 										<label  for="radio-sales" class="radio-label">Sealed Bid Sales</label>
 									</div>
 								</div>
@@ -225,17 +391,17 @@ const RecentlyAddedCars = () => {
 								<h4>Lower Engine Noice<span><a href="#"><img src={arrowmark}/></a></span></h4>
 								<div class="inner">
 									<div class="radio input-group">
-										<input id="radio-any2" name="radio" type="radio" checked/>
+										<input id="radio-any2" name="radio" type="radio" value="Any" onClick={onEngineNoiseClick}/>
 										<label for="radio-any2" class="radio-label">Any</label>
 									</div>
 
 									<div class="radio input-group">
-										<input id="radio-nonoise" name="radio" type="radio"/>
+										<input id="radio-nonoise" name="radio" type="radio" value="No Noise Detected" onClick={onEngineNoiseClick}/>
 										<label  for="radio-nonoise" class="radio-label">No Noise Detected</label>
 									</div>
 									  
 									<div class="radio input-group">
-										<input id="radio-noisedel" name="radio" type="radio"/>
+										<input id="radio-noisedel" name="radio" type="radio" value="Noise Detected" onClick={onEngineNoiseClick}/>
 										<label  for="radio-noisedel" class="radio-label">Noise Detected</label>
 									</div>
 								</div>
@@ -245,17 +411,17 @@ const RecentlyAddedCars = () => {
 								<h4>Transmission Issue<span><a href="#"><img src={arrowmark}/></a></span></h4>
 								<div class="inner">
 									<div class="radio input-group">
-										<input id="radio-any3" name="radio" type="radio" checked/>
+										<input id="radio-any3" name="radio" type="radio" value="Any"  onClick={onTransmissionIssueClick}/>
 										<label for="radio-any3" class="radio-label">Any</label>
 									</div>
 
 									<div class="radio input-group">
-										<input id="radio-noissues" name="radio" type="radio"/>
+										<input id="radio-noissues" name="radio" type="radio" value="No Issue Detected" onClick={onTransmissionIssueClick}/>
 										<label  for="radio-noissues" class="radio-label">No Issue Detected</label>
 									</div>
 									  
 									<div class="radio input-group">
-										<input id="radio-noissues2" name="radio" type="radio"/>
+										<input id="radio-noissues2" name="radio" type="radio" value="Noise Detected"  onClick={onTransmissionIssueClick}/>
 										<label  for="radio-noissues2" class="radio-label">Noise Detected</label>
 									</div>
 								</div>
@@ -265,17 +431,17 @@ const RecentlyAddedCars = () => {
 								<h4>Vehicle History<span><a href="#"><img src={arrowmark}/></a></span></h4>
 								<div class="inner">
 									<div class="radio input-group">
-										<input id="radio-any4" name="radio" type="radio" checked/>
+										<input id="radio-any4" name="radio" type="radio" value="Any" onClick={onHistoryClick}/>
 										<label for="radio-any4" class="radio-label">Any</label>
 									</div>
 
 									<div class="radio input-group">
-										<input id="radio-noreport" name="radio" type="radio"/>
+										<input id="radio-noreport" name="radio" type="radio" value="None reported" onClick={onHistoryClick}/>
 										<label  for="radio-noreport" class="radio-label">None reported</label>
 									</div>
 									  
 									<div class="radio input-group">
-										<input id="radio-noeventreport" name="radio" type="radio"/>
+										<input id="radio-noeventreport" name="radio" type="radio" value="Events reported" onClick={onHistoryClick}/>
 										<label  for="radio-nonoeventreport" class="radio-label">Events reported</label>
 									</div>
 								</div>
@@ -286,10 +452,10 @@ const RecentlyAddedCars = () => {
 								<div class="inner">
 									<div class="row">
 										<div class="input-group col-lg-6">
-											<input class="form-control border-end-0 border" type="text" value="" id="from-input" placeholder="From"/>
+											<input class="form-control border-end-0 border" type="text"  id="from-input" value={fromYear} maxLength="4" placeholder="From" onChange={(e)=>setFromYear(e.target.value)}/>
 										</div>
 										<div class="input-group col-lg-6">
-											<input class="form-control border-end-0 border" type="text" value="" id="to-input" placeholder="To"/>
+											<input class="form-control border-end-0 border" type="text" value={toYear} id="to-input" placeholder="To" maxLength="4" onChange={(e)=>setToYear(e.target.value)}/>
 										</div>
 									</div>
 								</div>
@@ -300,10 +466,10 @@ const RecentlyAddedCars = () => {
 								<div class="inner">
 									<div class="row">
 										<div class="input-group col-lg-6">
-											<input class="form-control border-end-0 border" type="text" value="" id="from-mileage" placeholder="From"/>
+											<input class="form-control border-end-0 border" type="text"  id="from-mileage" placeholder="From" value={fromMileage} onChange={(e)=>setFromMIleage(e.target.value)} />
 										</div>
 										<div class="input-group col-lg-6">
-											<input class="form-control border-end-0 border" type="text" value="" id="to-mileage" placeholder="To"/>
+											<input class="form-control border-end-0 border" type="text"  id="to-mileage" placeholder="To" value={toMileage} onChange={(e)=>setToMileage(e.target.value)} />
 										</div>
 									</div>
 								</div>
@@ -313,27 +479,27 @@ const RecentlyAddedCars = () => {
 								<h4>Make<span><a href="#"><img src={arrowmark}/></a></span></h4>
 								<div class="inner">
 									<div class="form-group input-group ">
-										<input type="checkbox" id="chevrolet"/>
+										<input type="checkbox" id="chevrolet" value="Chevrolet" onClick={concatMakeSearch}/>
 										<label for="chevrolet">Chevrolet</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="ford"/>
+										<input type="checkbox" value="ford" id="ford" onClick={concatMakeSearch}/>
 										<label for="ford">Ford</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="toyota"/>
+										<input type="checkbox" id="toyota" value="toyota" onClick={concatMakeSearch}/>
 										<label for="toyota">Toyota</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="dodge"/>
+										<input type="checkbox" id="dodge" value="dodge" onClick={concatMakeSearch}/>
 										<label for="dodge">Dodge</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="nissan"/>
+										<input type="checkbox" id="nissan" value="nissan" onClick={concatMakeSearch}/>
 										<label for="nissan">Nissan</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="honda"/>
+										<input type="checkbox" id="honda" value="honda" onClick={concatMakeSearch}/>
 										<label for="honda">Honda</label>
 									</div>
 									<div class="viewblock"><a href="#">View More</a></div>
@@ -366,12 +532,12 @@ const RecentlyAddedCars = () => {
 								<h4>Dealership<span><a href="#"><img src={arrowmark}/></a></span></h4>
 								<div class="inner">
 									<div class="radio input-group">
-										<input id="radio-newdealer" name="radio" type="radio" cheid="car"></input>
+										<input id="radio-newdealer" name="radio" type="radio" cheid="car" value="New Car Dealer" onClick={onDealerShipClick}/>
 										<label for="radio-newdealer" class="radio-label">New Car Dealer</label>
 									</div>
 
 									<div class="radio input-group">
-										<input id="radio-useddealer" name="radio" type="radio"/>
+										<input id="radio-useddealer" name="radio" type="radio" value="Used Car Dealer" onClick={onDealerShipClick}/>
 										<label  for="radio-useddealer" class="radio-label">Used Car Dealer</label>
 									</div>
 								</div>
@@ -381,47 +547,47 @@ const RecentlyAddedCars = () => {
 								<h4>Body Style<span><a href="#"><img src={arrowmark}/></a></span></h4>
 								<div class="inner">
 									<div class="form-group input-group ">
-										<input type="checkbox" id="car"/>
+										<input type="checkbox" id="car" value="car" onClick={concatBodyTypeSearch}/>
 										<label for="car">Car</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="suv"/>
+										<input type="checkbox" id="suv" value="SUV" onClick={concatBodyTypeSearch}/>
 										<label for="suv">SUV</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="truck"/>
+										<input type="checkbox" id="truck" value="truck" onClick={concatBodyTypeSearch}/>
 										<label for="truck">Truck</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="van"/>
+										<input type="checkbox" id="van" value="van" onClick={concatBodyTypeSearch}/>
 										<label for="van">Van</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="minivan"/>
+										<input type="checkbox" id="minivan" value="miniVan" onClick={concatBodyTypeSearch}/>
 										<label for="minivan">Minivan</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="trailer"/>
+										<input type="checkbox" id="trailer" value="trailer" onClick={concatBodyTypeSearch}/>
 										<label for="trailer">Trailer</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="rv"/>
+										<input type="checkbox" id="rv" value="RV" onClick={concatBodyTypeSearch}/>
 										<label for="rv">RV</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="semi"/>
+										<input type="checkbox" id="semi" value="semi" onClick={concatBodyTypeSearch}/>
 										<label for="semi">Semi</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="tractor"/>
+										<input type="checkbox" id="tractor" value="tractor" onClick={concatBodyTypeSearch}/>
 										<label for="tractor">Tractor</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="semitractor"/>
+										<input type="checkbox" id="semitractor" value="Semi Tractor" onClick={concatBodyTypeSearch}/>
 										<label for="semitractor">Semi Tractor</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="other"/>
+										<input type="checkbox" id="other" value="other" onClick={concatBodyTypeSearch}/>
 										<label for="other">Other</label>
 									</div>
 								</div>
@@ -431,15 +597,15 @@ const RecentlyAddedCars = () => {
 								<h4>Transmission<span><a href="#"><img src={arrowmark}/></a></span></h4>
 								<div class="inner">
 									<div class="form-group input-group ">
-										<input type="checkbox" id="manual"/>
+										<input type="checkbox" id="manual" value="manual" onClick={concatTransmissionSearch} />
 										<label for="manual">Manual</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="automatic"/>
+										<input type="checkbox" id="automatic" value="automatic" onClick={concatTransmissionSearch}/>
 										<label for="automatic">Automatic</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="otherissues"/>
+										<input type="checkbox" id="otherissues" value="other" onClick={concatTransmissionSearch}/>
 										<label for="otherissues">Other</label>
 									</div>
 								</div>
@@ -449,44 +615,43 @@ const RecentlyAddedCars = () => {
 								<h4>Drivetrain<span><a href="#"><img src={arrowmark}/></a></span></h4>
 								<div class="inner">
 									<div class="form-group input-group ">
-										<input type="checkbox" id="twdrive"/>
+										<input type="checkbox" id="twdrive" value="two wheel drive" onClick={concatDriveTrainSearch}/>
 										<label for="twdrive">Two wheel Drive</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="fwdrive"/>
+										<input type="checkbox" id="fwdrive" value="front wheel drive" onClick={concatDriveTrainSearch}/>
 										<label for="fwdrive">Front Wheel drive</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="rwdrive"/>
+										<input type="checkbox" id="rwdrive" value="rear wheel drive" onClick={concatDriveTrainSearch}/>
 										<label for="rwdrive">Rear Wheel Drive</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="fowdrive"/>
+										<input type="checkbox" id="fowdrive" value="four wheel drive" onClick={concatDriveTrainSearch}/>
 										<label for="fowdrive">Four Wheel Drive</label>
 									</div>
 									<div class="form-group input-group ">
-										<input type="checkbox" id="awdrive"/>
+										<input type="checkbox" id="awdrive" value="all wheel drive" onClick={concatDriveTrainSearch}/>
 										<label for="awdrive">All Wheel Drive</label>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-                        <div className="section-title">
-                                <h2>Recently Added Cars</h2>
-                            </div>
-                            <div className="filtersblock  col-lg-6 SalesRepsSearch  row" >
+                       
+                            {/* <div className="filtersblock  col-lg-6 SalesRepsSearch  row" >
                                 <div className="input-group searchbox ">
                                     <input type="text"  className="form-control border"  placeholder="model/make/year" onKeyDown={onKeydowninSearch} onChange={OnSearch}></input>
                                     <span className="input-group-append" >
                                     <button className="btn ms-n5" type="button" id="btntest" name="btntest" onClick={searchCarInventoryDetail} ><i className='bx bx-search'></i></button>
                                     </span>                                
                                 </div>
-                            </div>
+                            </div> */}
+							<div className="col-lg-9">
                             <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
                             {carDetail.length>0?carDetail.map((item) =>
                             
-                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+								<div className="col-lg-4 col-md-4 col-sm-6 col-xs-6">
                                     <div className="car-item">
                                         <div className="cars-lock">
                                         <img src={(item.isFavourite===0)? lock : locked} onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'recent')} />
@@ -516,6 +681,8 @@ const RecentlyAddedCars = () => {
                                 </div>):""}
                             </div>
                         </div>
+						</div>
+						</div>
                     </div>
                </main>
 }
