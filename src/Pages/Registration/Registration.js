@@ -14,6 +14,7 @@ import FileBase64 from 'react-file-base64';
 import { useState, useEffect } from 'react';
 import PhoneInput from 'react-phone-number-input/input';
 import momentTimezone from 'moment-timezone';
+import { CodeSharp } from '@material-ui/icons';
 
 const Registration = () => {
     const history = useHistory();
@@ -216,11 +217,27 @@ const Registration = () => {
         // console.log("===date==222==",moment(new Date(`${date} ${time}`)).tz(myTimezone.filter((data)=> data.timezone_id == myTimezoneValue)[0].timezone_name).format('MM/DD/YYYY'))
         // console.log("===time==222==",moment(new Date(`${date} ${time}`)).tz(myTimezone.filter((data)=> data.timezone_id == myTimezoneValue)[0].timezone_name).format('HH:mm'))
        
-        const UTC_updateDate = moment(new Date(`${date} ${time}`)).tz(myTimezone.filter((data)=> data.timezone_id == myTimezoneValue)[0].timezone_name).format('MM/DD/YYYY')
-        const UTC_updateTime = moment(new Date(`${date} ${time}`)).tz(myTimezone.filter((data)=> data.timezone_id == myTimezoneValue)[0].timezone_name).format('HH:mm')
-        console.log("UTC_updateTime==",UTC_updateTime)
-        console.log("UTC_updateDate==",UTC_updateDate)
+        // const UTC_updateDate = moment(new Date(`${date} ${time}`)).tz(myTimezone.filter((data)=> data.timezone_id == myTimezoneValue)[0].timezone_name).format('MM/DD/YYYY')
+        // const UTC_updateTime = moment(new Date(`${date} ${time}`)).tz(myTimezone.filter((data)=> data.timezone_id == myTimezoneValue)[0].timezone_name).format('HH:mm')
+        // console.log("UTC_updateTime==",UTC_updateTime)
+        // console.log("UTC_updateDate==",UTC_updateDate)
         
+
+        const selecteDateAndTime = moment(`${date} ${time}`).tz(myTimezone.filter((data)=> data.timezone_id == myTimezoneValue)[0].timezone_name, true);
+        const UTC_updateDateAndTime = moment.utc(selecteDateAndTime).format('MM/DD/YYYY HH:mm')
+        const UTC_updateDate = moment.utc(selecteDateAndTime).format('MM/DD/YYYY')
+        const UTC_updateTime = moment.utc(selecteDateAndTime).format('HH:mm')
+        const checkWithChicagoTime = moment(selecteDateAndTime).tz('America/Chicago').format('HH:mm') >= "10:00" && moment(selecteDateAndTime).tz('America/Chicago').format('HH:mm') <= "16:00";
+        console.log("selecteDateAndTime:",selecteDateAndTime)
+        console.log("UTC_updateDateAndTime:",UTC_updateDateAndTime)
+        console.log("UTC_updateDate:",UTC_updateDate)
+        console.log("UTC_updateTime:",UTC_updateTime)
+        console.log("checkWithChicagoTime:", checkWithChicagoTime)
+
+        if(!checkWithChicagoTime){
+          setTimeError("Seleted Meeting Time should be betwen on 10:00 AM to 04:00 PM of CDT (America/Chicago)")
+          return;
+        }
         let request = {
             dealer_name: dealerName,
             first_name:firstName,
