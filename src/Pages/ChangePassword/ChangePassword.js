@@ -62,6 +62,7 @@ const ChangePassword = () => {
         setOldPasswordError("")
         setNewPasswordError("")
         setConfirmPasswordError("")
+        setErrorMessage("")
 
         if(!oldPassword){
           setOldPasswordError("Old Password is required")
