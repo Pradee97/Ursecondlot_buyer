@@ -36,6 +36,7 @@ const SuggestedCars = () => {
 	const [historySearch,setHistorySearch]=useState("");
 	const [groupSearch,setGroupSearch]=useState([]);
 	const [salesTypeSearch,setSalesTypeSearch]=useState("");
+	const [stateSearchToggle,setStateSearchToggle]=useState(0);
 	
 
 	//const [checked, setChecked] = useState(false)
@@ -85,6 +86,10 @@ const SuggestedCars = () => {
         getrecentCarList();
        
     },[recentCarFlag]);
+
+	useEffect(()=>{
+
+	},[stateSearchToggle]);
 
 	useEffect(()=>{
 		if(fromYear.length>=4){
@@ -282,6 +287,39 @@ const SuggestedCars = () => {
 		}
 	}
 
+	const States=()=>
+		<div class="inner">
+									<div class="form-group input-group">
+										<input type="checkbox" id="florida" value="florida" onClick={concatStateSearch}/>
+										<label for="florida">Florida</label>
+									</div>
+									<div class="form-group input-group ">
+										<input type="checkbox" id="california" value="california" onClick={concatStateSearch}/>
+										<label for="california">California</label>
+									</div>
+									<div class="form-group input-group ">
+										<input type="checkbox" id="delaware" value="delaware" onClick={concatStateSearch}/>
+										<label for="delaware">Delaware</label>
+									</div>
+									<div class="form-group input-group ">
+										<input type="checkbox" id="newmexico" value="newmexico" onClick={concatStateSearch}/>
+										<label for="newmexico">New mexico</label>
+									</div>
+									<div class="form-group input-group ">
+										<input type="checkbox" id="colorado" value="colorado" onClick={concatStateSearch}/>
+										<label for="colorado">Colorado</label>
+									</div>
+									<div class="form-group input-group ">
+										<input type="checkbox" id="washington" value="washington" onClick={concatStateSearch}/>
+										<label for="washington">Washington</label>
+									</div>
+								</div>
+	
+
+	function toggleStateSearch(){
+		console.log("Show/Hide",!stateSearchToggle);
+		setStateSearchToggle(!stateSearchToggle)
+	}
 
     return(
         <div>
@@ -339,33 +377,8 @@ const SuggestedCars = () => {
 						
 						
 							<div class="statesblock">
-								<h4>States<span><a href="#"><img src={arrowmark}/></a></span></h4>
-								<div class="inner">
-									<div class="form-group input-group">
-										<input type="checkbox" id="florida" value="florida" onClick={concatStateSearch}/>
-										<label for="florida">Florida</label>
-									</div>
-									<div class="form-group input-group ">
-										<input type="checkbox" id="california" value="california" onClick={concatStateSearch}/>
-										<label for="california">California</label>
-									</div>
-									<div class="form-group input-group ">
-										<input type="checkbox" id="delaware" value="delaware" onClick={concatStateSearch}/>
-										<label for="delaware">Delaware</label>
-									</div>
-									<div class="form-group input-group ">
-										<input type="checkbox" id="newmexico" value="newmexico" onClick={concatStateSearch}/>
-										<label for="newmexico">New mexico</label>
-									</div>
-									<div class="form-group input-group ">
-										<input type="checkbox" id="colorado" value="colorado" onClick={concatStateSearch}/>
-										<label for="colorado">Colorado</label>
-									</div>
-									<div class="form-group input-group ">
-										<input type="checkbox" id="washington" value="washington" onClick={concatStateSearch}/>
-										<label for="washington">Washington</label>
-									</div>
-								</div>
+								<h4>States<span ><img   onClick={toggleStateSearch} src={arrowmark}/></span></h4>
+								{stateSearchToggle?<States></States>:""}
 							</div>
 							
 							<div class="groupblock">
