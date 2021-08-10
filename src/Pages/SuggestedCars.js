@@ -822,7 +822,7 @@ function toggleDriveTrainSearch(){
                                             </div>
                                         </div>
                                     </div>
-                                </div>):"No Data Found"}
+                                </div>):<div><p>No Data Found</p></div>}
                             </div>
 							</div></div>
                         </div>

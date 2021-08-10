@@ -59,7 +59,7 @@ const Search = () => {
 			
         }
         API.post('BuyerInventoryCarList/condition',request).then(res=>{
-			
+
             console.log("response",res.data.data);
             setCarDetail(res.data.data); 
             setLoading(false);
@@ -243,13 +243,11 @@ const Search = () => {
 			console.log("state=======",stateSearch)
 			console.log(" filter search request",request);
 
-        API.post("SuggestedCarSearch/condition",request)
+        API.post("BuyerInventoryCarSearch/condition",request)
         .then((res)=>{
 		   
-			if(res.data.data.length>0)
-            	setCarDetail(res.data.data);
-			else
-			VehicleSearch();
+            setCarDetail(res.data.data);
+			
          
         },
         (error) => {
@@ -819,7 +817,7 @@ function toggleDriveTrainSearch(){
                                             </div>
                                         </div>
                                     </div>
-                                </div>):""}
+                                </div>):<div><p>No Data Found</p></div>}
                             </div>
 							</div></div>
                         </div>
