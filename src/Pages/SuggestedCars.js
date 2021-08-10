@@ -430,7 +430,7 @@ function toggleDriveTrainSearch(){
 							</div>
 							
 							
-							<div class="sortbyblock">
+							{/* <div class="sortbyblock">
 								<h4>Sort by</h4>
 								<div class="row">
 									<div class="form-group input-group col-lg-6">
@@ -451,7 +451,7 @@ function toggleDriveTrainSearch(){
 										<label for="classic">Classic</label>
 									</div>
 								</div>
-							</div>
+							</div> */}
 						
 						
 							<div class="statesblock">
@@ -507,17 +507,17 @@ function toggleDriveTrainSearch(){
 								<h4>Sales Types<span><img onClick={toggleSalesTypesSearch} src={arrowmark}/></span></h4>
 								{salesTypesSearchToggle?(<div class="inner">
 										<div class="radio input-group">
-											<input id="radio-any1" name="radio" type="radio" value="Any" onClick={onSaleTypeClick}/>
+											<input id="radio-any1" name="salesTypesRadio" type="radio" value="Any" onClick={onSaleTypeClick}/>
 											<label for="radio-any1" class="radio-label">Any</label>
 										</div>
 
 										<div class="radio input-group">
-											<input id="radio-buy" name="radio" type="radio" value="Buy it now" onClick={onSaleTypeClick}/>
+											<input id="radio-buy" name="salesTypesRadio" type="radio" value="Buy it now" onClick={onSaleTypeClick}/>
 											<label  for="radio-buy" class="radio-label">Buy it now</label>
 										</div>
 											
 										<div class="radio input-group">
-											<input id="radio-sales" name="radio" type="radio" value="Sealed Bid Sales" onClick={onSaleTypeClick}/>
+											<input id="radio-sales" name="salesTypesRadio" type="radio" value="Sealed Bid Sales" onClick={onSaleTypeClick}/>
 											<label  for="radio-sales" class="radio-label">Sealed Bid Sales</label>
 										</div>
 									</div>
@@ -528,17 +528,17 @@ function toggleDriveTrainSearch(){
 								<h4>Lower Engine Noice<span><img onClick={toggleLowerEngineNoiceSearch} src={arrowmark}/></span></h4>
 								{lowerEngineNoiceSearchToggle?(<div class="inner">
 										<div class="radio input-group">
-											<input id="radio-any2" name="radio" type="radio" value="Any" onClick={onEngineNoiseClick}/>
+											<input id="radio-any2" name="lowerEngineNoiceRadio" type="radio" value="Any" onClick={onEngineNoiseClick}/>
 											<label for="radio-any2" class="radio-label">Any</label>
 										</div>
 
 										<div class="radio input-group">
-											<input id="radio-nonoise" name="radio" type="radio" value="No Noise Detected" onClick={onEngineNoiseClick}/>
+											<input id="radio-nonoise" name="lowerEngineNoiceRadio" type="radio" value="No Noise Detected" onClick={onEngineNoiseClick}/>
 											<label  for="radio-nonoise" class="radio-label">No Noise Detected</label>
 										</div>
 											
 										<div class="radio input-group">
-											<input id="radio-noisedel" name="radio" type="radio" value="Noise Detected" onClick={onEngineNoiseClick}/>
+											<input id="radio-noisedel" name="lowerEngineNoiceRadio" type="radio" value="Noise Detected" onClick={onEngineNoiseClick}/>
 											<label  for="radio-noisedel" class="radio-label">Noise Detected</label>
 										</div>
 									</div>
@@ -549,17 +549,17 @@ function toggleDriveTrainSearch(){
 								<h4>Transmission Issue<span><img onClick={toggleTransmissionIssueSearch} src={arrowmark}/></span></h4>
 								{transmissionIssueSearchToggle?(<div class="inner">
 										<div class="radio input-group">
-											<input id="radio-any3" name="radio" type="radio" value="Any"  onClick={onTransmissionIssueClick}/>
+											<input id="radio-any3" name="transmissionIssueRadio" type="radio" value="Any"  onClick={onTransmissionIssueClick}/>
 											<label for="radio-any3" class="radio-label">Any</label>
 										</div>
 
 										<div class="radio input-group">
-											<input id="radio-noissues" name="radio" type="radio" value="No Issue Detected" onClick={onTransmissionIssueClick}/>
+											<input id="radio-noissues" name="transmissionIssueRadio" type="radio" value="No Issue Detected" onClick={onTransmissionIssueClick}/>
 											<label  for="radio-noissues" class="radio-label">No Issue Detected</label>
 										</div>
 											
 										<div class="radio input-group">
-											<input id="radio-noissues2" name="radio" type="radio" value="Noise Detected"  onClick={onTransmissionIssueClick}/>
+											<input id="radio-noissues2" name="transmissionIssueRadio" type="radio" value="Noise Detected"  onClick={onTransmissionIssueClick}/>
 											<label  for="radio-noissues2" class="radio-label">Noise Detected</label>
 										</div>
 									</div>
@@ -570,18 +570,18 @@ function toggleDriveTrainSearch(){
 								<h4>Vehicle History<span><img onClick={toggleVehicleHistorySearch} src={arrowmark}/></span></h4>
 								{vehicleHistorySearchToggle?(<div class="inner">
 									<div class="radio input-group">
-										<input id="radio-any4" name="radio" type="radio" value="Any" onClick={onHistoryClick}/>
+										<input id="radio-any4" name="vehicleHistoryRadio" type="radio" value="Any" onClick={onHistoryClick}/>
 										<label for="radio-any4" class="radio-label">Any</label>
 									</div>
 
 									<div class="radio input-group">
-										<input id="radio-noreport" name="radio" type="radio" value="None reported" onClick={onHistoryClick}/>
+										<input id="radio-noreport" name="vehicleHistoryRadio" type="radio" value="None reported" onClick={onHistoryClick}/>
 										<label  for="radio-noreport" class="radio-label">None reported</label>
 									</div>
 										
 									<div class="radio input-group">
-										<input id="radio-noeventreport" name="radio" type="radio" value="Events reported" onClick={onHistoryClick}/>
-										<label  for="radio-nonoeventreport" class="radio-label">Events reported</label>
+										<input id="radio-noeventreport" name="vehicleHistoryRadio" type="radio" value="Events reported" onClick={onHistoryClick}/>
+										<label  for="radio-noeventreport" class="radio-label">Events reported</label>
 									</div>
 								</div>):""}
 							</div>
@@ -648,38 +648,37 @@ function toggleDriveTrainSearch(){
 							</div>
 							
 							
-							<div class="sellertypeblock">
+							{/* <div class="sellertypeblock">
 								<h4>Seller Type<span><img onClick={toggleSellerTypeSearch} src={arrowmark}/></span></h4>
 								{sellerTypeSearchToggle?(<div class="inner">
 									<div class="radio input-group">
-										<input id="radio-any5" name="radio" type="radio" checked/>
+										<input id="radio-any5" name="sellerTypeRadio" type="radio" />
 										<label for="radio-any5" class="radio-label">Any</label>
 									</div>
 
 									<div class="radio input-group">
-										<input id="radio-franchise" name="radio" type="radio"/>
+										<input id="radio-franchise" name="sellerTypeRadio" type="radio"/>
 										<label  for="radio-franchise" class="radio-label">Franchise</label>
 									</div>
-										
 									<div class="radio input-group">
-										<input id="radio-independent" name="radio" type="radio"/>
+										<input id="radio-independent" name="sellerTypeRadio" type="radio"/>
 										<label  for="radio-independent" class="radio-label">Independent</label>
 									</div>
 								</div>
 							):""}
 
-														</div>
+														</div> */}
 													
 														<div class="dealershipblock">
 															<h4>Dealership<span><img onClick={toggleDealershipSearch} src={arrowmark}/></span></h4>
 															{dealershipSearchToggle?(<div class="inner">
 									<div class="radio input-group">
-										<input id="radio-newdealer" name="radio" type="radio" cheid="car" value="New Car Dealer" onClick={onDealerShipClick}/>
+										<input id="radio-newdealer" name="sellerTypeRadio" type="radio" cheid="car" value="New Car Dealer" onClick={onDealerShipClick}/>
 										<label for="radio-newdealer" class="radio-label">New Car Dealer</label>
 									</div>
 
 									<div class="radio input-group">
-										<input id="radio-useddealer" name="radio" type="radio" value="Used Car Dealer" onClick={onDealerShipClick}/>
+										<input id="radio-useddealer" name="sellerTypeRadio" type="radio" value="Used Car Dealer" onClick={onDealerShipClick}/>
 										<label  for="radio-useddealer" class="radio-label">Used Car Dealer</label>
 									</div>
 								</div>):""}
@@ -822,7 +821,7 @@ function toggleDriveTrainSearch(){
                                             </div>
                                         </div>
                                     </div>
-                                </div>):"No Data Found"}
+                                </div>):<div className="floor_notfiled_block"><p>No Data Found</p></div>}
                             </div>
 							</div></div>
                         </div>
