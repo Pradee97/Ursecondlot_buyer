@@ -249,10 +249,10 @@ const SuggestedCars = () => {
         API.post("SuggestedCarSearch/condition",request)
         .then((res)=>{
 		   
-			if(res.data.data.length>0)
+			//if(res.data.data.length>0)
             	setCarDetail(res.data.data);
-			else
-				getrecentCarList();
+			// else
+			// 	getrecentCarList();
          
         },
         (error) => {
@@ -822,7 +822,7 @@ function toggleDriveTrainSearch(){
                                             </div>
                                         </div>
                                     </div>
-                                </div>):""}
+                                </div>):"No Data Found"}
                             </div>
 							</div></div>
                         </div>
