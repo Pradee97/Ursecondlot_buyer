@@ -403,7 +403,7 @@ setDriveTrainSearchToggle(!driveTrainSearchToggle)
 							</div>
 							
 							
-							<div class="sortbyblock">
+							{/* <div class="sortbyblock">
 								<h4>Sort by</h4>
 								<div class="row">
 									<div class="form-group input-group col-lg-6">
@@ -424,7 +424,7 @@ setDriveTrainSearchToggle(!driveTrainSearchToggle)
 										<label for="classic">Classic</label>
 									</div>
 								</div>
-							</div>
+							</div> */}
 						
 						
 							<div class="statesblock">
@@ -554,7 +554,7 @@ setDriveTrainSearchToggle(!driveTrainSearchToggle)
 										
 									<div class="radio input-group">
 										<input id="radio-noeventreport" name="radio" type="radio" value="Events reported" onClick={onHistoryClick}/>
-										<label  for="radio-nonoeventreport" class="radio-label">Events reported</label>
+										<label  for="radio-noeventreport" class="radio-label">Events reported</label>
 									</div>
 								</div>):""}
 							</div>
@@ -621,7 +621,7 @@ setDriveTrainSearchToggle(!driveTrainSearchToggle)
 							</div>
 							
 							
-							<div class="sellertypeblock">
+							{/* <div class="sellertypeblock">
 								<h4>Seller Type<span><img onClick={toggleSellerTypeSearch} src={arrowmark}/></span></h4>
 								{sellerTypeSearchToggle?(<div class="inner">
 									<div class="radio input-group">
@@ -641,7 +641,7 @@ setDriveTrainSearchToggle(!driveTrainSearchToggle)
 								</div>
 							):""}
 
-														</div>
+														</div> */}
 													
 														<div class="dealershipblock">
 															<h4>Dealership<span><img onClick={toggleDealershipSearch} src={arrowmark}/></span></h4>
