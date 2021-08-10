@@ -127,93 +127,94 @@ const Registration = () => {
         setNumberofYearsError("")
         setStateAndCityError("")
        
-        if(!dealerName){
-            setDealerNameError("Dealer Name is required")
-            return;
-        }
-        else if(dealerName.length>50){
-            setDealerNameError("Dealer Name must not exceed 50 characters")
-            return;
-        }
-        if(!firstName){
-            setFirstNameError("First Name is required")
-            return;
-        }
-        else if(firstName.length>50){
-            setFirstNameError("First Name must not exceed 50 characters")
-            return;
-        }       
-        if(!lastName){
-            setLastNameError("Last Name is required")
-            return;
-        }
-        else if(lastName.length>50 ){
-            setLastNameError("Last Name must not exceed 50 characters ")
-            return;
-        }
-        if(!phoneNumber){
-            setPhoneNumberError("Phone Number is required")
-            return;
-        }
-        else if(phoneNumber.length<12 ){
-            console.log("phone",phoneNumber );
-            console.log("phonelength",phoneNumber.length );
+    //     if(!dealerName){
+    //         setDealerNameError("Dealer Name is required")
+    //         return;
+    //     }
+    //     else if(dealerName.length>50){
+    //         setDealerNameError("Dealer Name must not exceed 50 characters")
+    //         return;
+    //     }
+    //     if(!firstName){
+    //         setFirstNameError("First Name is required")
+    //         return;
+    //     }
+    //     else if(firstName.length>50){
+    //         setFirstNameError("First Name must not exceed 50 characters")
+    //         return;
+    //     }       
+    //     if(!lastName){
+    //         setLastNameError("Last Name is required")
+    //         return;
+    //     }
+    //     else if(lastName.length>50 ){
+    //         setLastNameError("Last Name must not exceed 50 characters ")
+    //         return;
+    //     }
+    //     if(!phoneNumber){
+    //         setPhoneNumberError("Phone Number is required")
+    //         return;
+    //     }
+    //     else if(phoneNumber.length<12 ){
+    //         console.log("phone",phoneNumber );
+    //         console.log("phonelength",phoneNumber.length );
 
-            setPhoneNumberError("Phone Number must have 10 digits ")
+    //         setPhoneNumberError("Phone Number must have 10 digits ")
             
-        //     if(phoneNumber.length==3 && phoneNumber.includes('+1')){
-        //         setPhoneNumberError("Phone Number is required")
-        // }
-                return;
-    }
+    //     //     if(phoneNumber.length==3 && phoneNumber.includes('+1')){
+    //     //         setPhoneNumberError("Phone Number is required")
+    //     // }
+    //             return;
+    // }
          
-        if(!email){
-            setEmailError("Email  is required")
-            return;
-        }
-        else if(email && !new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i).test(email)){
-            setEmailError("Email  Must match the format")
-            return;
-        }
+    //     if(!email){
+    //         setEmailError("Email  is required")
+    //         return;
+    //     }
+    //     else if(email && !new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i).test(email)){
+    //         setEmailError("Email  Must match the format")
+    //         return;
+    //     }
         
-        if(!address){
-            setAddressError("Address is required")
-            return;
-        }
-        else if(address.length>150){
-            setAddressError("Address must not exceed 150 characters")
-            return;
-        }
-        // console.log("====stateName=>",stateName,cityName,zipCodeId)
-        if(!stateName){
-            console.log("====stateName=>",stateName,cityName,zipCodeId)
-            setStateAndCityError("state is required")
-            return
-        }
-        if(!cityName){
-            console.log("====cityName==>",stateName,cityName,zipCodeId)
-            // setStateAndCityError("city is required")
-            setStateAndCityError("city is required")
-             return
-        }
-        if(!zipCodeId){
-            console.log("====zipCodeId==>",stateName,cityName,zipCodeId)
-            // setStateAndCityError("zipCode is required")
-            setStateAndCityError("zipcode is required")
-             return
-        }
-        if(!option){
-            setNumberofYearsError("Number Of Years is required")
-            return;
-        }
-        if(!date){
-            setDateError("Date is required")
-            return;
-        } 
-        if(!time){
-            setTimeError("Time is required")
-            return;
-        }                             
+    //     if(!address){
+    //         setAddressError("Address is required")
+    //         return;
+    //     }
+    //     else if(address.length>150){
+    //         setAddressError("Address must not exceed 150 characters")
+    //         return;
+    //     }
+    //     // console.log("====stateName=>",stateName,cityName,zipCodeId)
+    //     if(!stateName){
+    //         console.log("====stateName=>",stateName,cityName,zipCodeId)
+    //         setStateAndCityError("state is required")
+    //         return
+    //     }
+    //     if(!cityName){
+    //         console.log("====cityName==>",stateName,cityName,zipCodeId)
+    //         // setStateAndCityError("city is required")
+    //         setStateAndCityError("city is required")
+    //          return
+    //     }
+    //     if(!zipCodeId){
+    //         console.log("====zipCodeId==>",stateName,cityName,zipCodeId)
+    //         // setStateAndCityError("zipCode is required")
+    //         setStateAndCityError("zipcode is required")
+    //          return
+    //     }
+    //     if(!option){
+    //         setNumberofYearsError("Number Of Years is required")
+    //         return;
+    //     }
+    //     if(!date){
+    //         setDateError("Date is required")
+    //         return;
+    //     } 
+    //     if(!time){
+    //         setTimeError("Time is required")
+    //         return;
+    //     } 
+
         // console.log("===date==222==",moment(new Date(`${date} ${time}`)).tz(myTimezone.filter((data)=> data.timezone_id == myTimezoneValue)[0].timezone_name).format('MM/DD/YYYY'))
         // console.log("===time==222==",moment(new Date(`${date} ${time}`)).tz(myTimezone.filter((data)=> data.timezone_id == myTimezoneValue)[0].timezone_name).format('HH:mm'))
        
@@ -224,15 +225,17 @@ const Registration = () => {
         
 
         const selecteDateAndTime = moment(`${date} ${time}`).tz(myTimezone.filter((data)=> data.timezone_id == myTimezoneValue)[0].timezone_name, true);
-        const UTC_updateDateAndTime = moment.utc(selecteDateAndTime).format('MM/DD/YYYY HH:mm')
+        // const UTC_updateDateAndTime = moment.utc(selecteDateAndTime).format('MM/DD/YYYY HH:mm')
+        const UTCFullData= moment.utc(selecteDateAndTime).format()
         const UTC_updateDate = moment.utc(selecteDateAndTime).format('MM/DD/YYYY')
         const UTC_updateTime = moment.utc(selecteDateAndTime).format('HH:mm')
-        const checkWithChicagoTime = moment(selecteDateAndTime).tz('America/Chicago').format('HH:mm') >= "10:00" && moment(selecteDateAndTime).tz('America/Chicago').format('HH:mm') <= "16:00";
+        const checkWithChicagoTime = moment(UTCFullData).tz('America/Chicago').format('HH:mm') >= "10:00" && moment(UTCFullData).tz('America/Chicago').format('HH:mm') <= "16:00";
         console.log("selecteDateAndTime:",selecteDateAndTime)
-        console.log("UTC_updateDateAndTime:",UTC_updateDateAndTime)
+        console.log("UTCFullData:",UTCFullData)
         console.log("UTC_updateDate:",UTC_updateDate)
         console.log("UTC_updateTime:",UTC_updateTime)
         console.log("checkWithChicagoTime:", checkWithChicagoTime)
+        console.log("-------:", moment(UTCFullData).tz('America/Chicago').format('MM/DD/YYYY HH:mm'))
 
         if(!checkWithChicagoTime){
           setTimeError("Seleted Meeting Time should be betwen on 10:00 AM to 04:00 PM of CDT (America/Chicago)")
