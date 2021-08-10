@@ -11,8 +11,9 @@ import '../../Component/Popup/popup.css';
 import Terms from '../../Component/TermsAndCondition/TermsAndCondition';
 import StateAndCity from '../../Component/StateAndCity/StateAndCity';
 import FileBase64 from 'react-file-base64';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PhoneInput from 'react-phone-number-input/input';
+import momentTimezone from 'moment-timezone';
 
 const Registration = () => {
     const history = useHistory();
@@ -58,7 +59,20 @@ const Registration = () => {
     const [timeError, setTimeError] = useState("");
     const [numberOfYearsError, setNumberofYearsError] = useState("");
     const [stateAndCityError, setStateAndCityError] = useState("");
+    const [myTimezone, SetMyTimezone] = useState([])
+    const [timezoneActiveFlag, SetTimezoneActiveFlag] = useState(true)
+    const [myTimezoneValue, SetMyTimezoneValue] =  useState(1)
 
+    useEffect(()=>{
+        API.post("timezone/condition")
+            .then((response) => {
+                console.log("timezone res====", response.data.data)
+                SetMyTimezone(response.data.data)
+            })
+            .catch(()=>{
+                console.log("")
+            })
+    },[])
     const togglePopup = () => {
         setIsOpen(!isOpen);
     }
@@ -100,7 +114,7 @@ const Registration = () => {
     const registrationhandleSubmit = (data) => {
         // setOpenLoader(true);
         // event.preventDefault();
-        
+
         setDealerNameError("")
         setFirstNameError("") 
         setLastNameError("")
@@ -199,7 +213,14 @@ const Registration = () => {
             setTimeError("Time is required")
             return;
         }                             
-        console.log("===date===",date)
+        // console.log("===date==222==",moment(new Date(`${date} ${time}`)).tz(myTimezone.filter((data)=> data.timezone_id == myTimezoneValue)[0].timezone_name).format('MM/DD/YYYY'))
+        // console.log("===time==222==",moment(new Date(`${date} ${time}`)).tz(myTimezone.filter((data)=> data.timezone_id == myTimezoneValue)[0].timezone_name).format('HH:mm'))
+       
+        const UTC_updateDate = moment(new Date(`${date} ${time}`)).tz(myTimezone.filter((data)=> data.timezone_id == myTimezoneValue)[0].timezone_name).format('MM/DD/YYYY')
+        const UTC_updateTime = moment(new Date(`${date} ${time}`)).tz(myTimezone.filter((data)=> data.timezone_id == myTimezoneValue)[0].timezone_name).format('HH:mm')
+        console.log("UTC_updateTime==",UTC_updateTime)
+        console.log("UTC_updateDate==",UTC_updateDate)
+        
         let request = {
             dealer_name: dealerName,
             first_name:firstName,
@@ -207,8 +228,8 @@ const Registration = () => {
             email: email,
             phone_no: formatMobileNO(phoneNumber),
             address: address,
-            meeting_date: date,
-            meeting_time: time,
+            meeting_date: UTC_updateDate, //date,
+            meeting_time: UTC_updateTime, //time,
             active: 1,
             country_id: "1",
             state_id: stateName,
@@ -217,6 +238,7 @@ const Registration = () => {
             no_years: option,
             local_flag: 0,
             image: doc==="" ? "" : doc.length>0 ? doc : [doc],
+            timezone_id: myTimezoneValue
         };
 
         if( terms!=="0" ){
@@ -413,6 +435,26 @@ const Registration = () => {
                                     <p className="form-input-error" >{timeError}</p>
                                 </div>
                                 </form>
+                            </div>
+                            
+                            <div className="col-sm-12 form-group countrycode">
+                                <div className="tbox">
+                                    <select className="form-control custom-select browser-default textbox"
+                                        id="drop"
+                                        placeholder=""
+                                        value={myTimezoneValue}
+                                        onChange={(e) => SetMyTimezoneValue( e.target.value) }
+                                        >
+                                        <option value={null} style={{"display":"none"}}></option>
+                                        {myTimezone.length > 0 && myTimezone.map((data)=>
+                                            <option key={data.timezone_id} 
+                                                checked={timezoneActiveFlag && data.timezone_id == myTimezoneValue ? true : false}
+                                                value={data.timezone_id}
+                                            >{data.timezone_name}</option> 
+                                        )}
+                                    </select>
+                                    <label  for="drop" className={"input-has-value"}> Time Zone</label>
+                                </div>
                             </div>
                             
                             <div className="col-sm-12 form-group agreetab">

@@ -280,13 +280,12 @@ function onGroupClick(e){
         {/* <div class="back-btn">
                         <a class="back-btn-primary" href="/carlist"><i class="bx bx-chevron-left"></i> Back</a>
             </div> */}
-          <div id="suggested-cars" class="suggested-cars vehiclesearch">
+          <div id="suggested-cars" class="suggested-cars">
             <div class="container-fluid aos-init aos-animate" data-aos="fade-up">
 
               <div class="section-title">
                 <h2>My Favorite Car List</h2>
               </div>
-			  <div class="row content">
               <div class="col-lg-3">
 					
 						<div class="leftonsidebox">
@@ -650,13 +649,11 @@ function onGroupClick(e){
                 </div>
             </div> */}
 
-		<div className="col-lg-9">
-
               <div class="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
               
               {carFavInventoryDetail.length>0?carFavInventoryDetail
               .map((item,index) =>
-			  <div className="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                   <div class="car-item">
                     <div class="cars-lock">
                     <img src={(item.isFavourite===0)? lock : locked}  onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'fav')} />
@@ -685,8 +682,6 @@ function onGroupClick(e){
                   </div>
                 </div>  ):""}                                           
                   </div>
-				  </div>
-				  </div>
                 </div>
             </div>
           

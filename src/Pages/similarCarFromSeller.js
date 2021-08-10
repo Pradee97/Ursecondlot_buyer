@@ -81,7 +81,7 @@ return(
 
       {/* <div class="container-fluid aos-init aos-animate" data-aos="fade-up"> */}
         <div class="section-title">
-        <div class="back-btn">
+        <div >
 				<a class="back-btn-primary" href="/carlist"><i class="bx bx-chevron-left"></i> Back</a>
 			</div>
           <h2>SIMILAR CARS FROM OTHER DEALER</h2>          

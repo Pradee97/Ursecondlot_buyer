@@ -952,9 +952,9 @@ table td span{
 Cars list
 ------------------------------------------------------------------*/
 .suggested-cars .col-md-3 , .inventory-cars .col-md-3, .recently-cars .col-md-3, .favorite-cars .col-md-3{ 
--ms-flex: 20%;
-    flex:  20%;
-    max-width:  20%;
+-ms-flex: 25%;
+    flex:  25%;
+    max-width:  25%;
 
 }
 .suggested-cars{
@@ -2945,9 +2945,9 @@ popup Dialogbox
 
 
 .suggested-cars .col-md-3{ 
--ms-flex: 20%;
-    flex:  20%;
-    max-width:  20%;
+-ms-flex: 25%;
+    flex:  25%;
+    max-width:  25%;
 
 }
 
@@ -4053,10 +4053,11 @@ Search Box"
 
 .leftonsidebox h4{
 	color: #343434;
-	font-size:20px;
+	font-size:18px;
 	font-weight:500;
-	margin:10px 0;
-	
+	margin:20px 0;
+  border-bottom: #eee solid 1px;
+  padding-bottom: 10px;
 }
 
 .search-cars{
@@ -7188,7 +7189,7 @@ width:100%;
 }
 
 img.carImg{
-  height: 220px;
+  height: 280px;
   max-width: 100%;
 }
 
@@ -7596,4 +7597,11 @@ margin-top: -3px;
 }
 .dealer-cars .back-btn{
   float: left;
+}
+
+
+.section-title .back-btn-primary{
+  float: left;
+  position: relative;
+  z-index: 9999;
 }
