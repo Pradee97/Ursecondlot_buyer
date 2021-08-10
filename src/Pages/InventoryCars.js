@@ -795,7 +795,7 @@ setDriveTrainSearchToggle(!driveTrainSearchToggle)
                                             </div>
                                         </div>
                                     </div>
-                                </div>):<div><p>No Data Found</p></div>}
+                                </div>):<div className="floor_notfiled_block"><p>No Data Found</p></div>}
                                 </div>
 
                            
