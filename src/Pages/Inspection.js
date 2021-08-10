@@ -10,12 +10,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation, useParams } from "react-router-dom";
 import CarListAction from '../../src/Pages/CarList/CarListAction';
 import ReactPlayer from 'react-player';
-
+import Loading from '../Component/Loading/Loading';
 const Inspection=()=>{
 
     
     const history = useHistory();
     const dispatch = useDispatch();
+    const [loading,setLoading] = useState(true);
     const [inspection,setInspection]=useState("");
     const [interiorMedia,setInteriorMedia] = useState("");
     const [exteriorMedia,setExteriorMedia] = useState("");
@@ -111,7 +112,7 @@ const TestDriveMedia = () =>{
         console.log("testdrive_media/condition",res.data.data);
        
         setTestDriveMedia(res.data.data);
-        
+        setLoading(false);
     }).catch(err => { console.log(err); });
 }
 
@@ -136,7 +137,7 @@ const TestDriveMedia = () =>{
     }
     return(
         <div>
-            
+            {loading?<Loading/>:
             <main id="main" class="inner-page">
    
    
@@ -363,10 +364,11 @@ const TestDriveMedia = () =>{
                         </div>
                        
                         <div class="mechanicalgallery images-container">
-                                               
+                                            
+                        
                             <div class="photo-gallery">
                                 <div class="row photos">
-                                    {mechanicalMedia.length>0?mechanicalMedia.map((item)=>
+                                    {tiresWheelsMedia.length>0?tiresWheelsMedia.map((item)=>
                                     <div class="col-sm-4 col-md-2 col-lg-2 item">
                                         {item?.media.indexOf('mp4')>0?(
                                          <ReactPlayer
@@ -382,7 +384,6 @@ const TestDriveMedia = () =>{
                                 </div>
                             </div>
                         </div>
-                        
                         <div class="commentsblock">
                     <h3>Comments</h3>
                     </div>
@@ -771,7 +772,7 @@ const TestDriveMedia = () =>{
 
             </main>
 
-
+                    }
         </div>
     )
 }
