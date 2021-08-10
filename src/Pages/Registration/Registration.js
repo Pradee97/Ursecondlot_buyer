@@ -62,7 +62,7 @@ const Registration = () => {
     const [stateAndCityError, setStateAndCityError] = useState("");
     const [myTimezone, SetMyTimezone] = useState([])
     const [timezoneActiveFlag, SetTimezoneActiveFlag] = useState(true)
-    const [myTimezoneValue, SetMyTimezoneValue] =  useState(1)
+    const [myTimezoneValue, SetMyTimezoneValue] =  useState(36)
 
     useEffect(()=>{
         API.post("timezone/condition")
