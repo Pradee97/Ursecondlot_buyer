@@ -153,6 +153,7 @@ const CarList = () => {
         getrecentCarList();
         getFavCarList();
         getInventoryCarList();
+        getSuggestedCarList();
         
     },[recentCarFlag]);
 
@@ -161,13 +162,14 @@ const CarList = () => {
         getrecentCarList();
         getInventoryCarList();
         getFavCarList();
+        getSuggestedCarList();
 
     },[inventoryCarFlag]);
     useEffect(() => {
         getrecentCarList();
         getInventoryCarList();
         getFavCarList();
-
+        getSuggestedCarList();
 
     },[favCarFlag]);
 
