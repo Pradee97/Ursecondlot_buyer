@@ -821,7 +821,7 @@ function toggleDriveTrainSearch(){
                                             </div>
                                         </div>
                                     </div>
-                                </div>):"No Data Found"}
+                                </div>):<div className="floor_notfiled_block"><p>No Data Found</p></div>}
                             </div>
 							</div></div>
                         </div>
