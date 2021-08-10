@@ -12,8 +12,19 @@ import { useEffect } from 'react';
 import Loading from"../../Component/Loading/Loading";
 import { useDispatch, useSelector } from 'react-redux';
 import CarListAction from './CarListAction';
+// import Carousel from 'react-material-ui-carousel'
+import Carousel from "react-multi-carousel";
+// import SimpleImageSlider from "react-simple-image-slider"
+import { Paper, Button } from '@material-ui/core'
 
 const CarList = () => {
+    const responsive={
+        desktop: {
+            breakpoint: { max: 3000, min: 1024 },
+            items: 3,
+            paritialVisibilityGutter: 60
+          }
+    }
     const history = useHistory();
     const dispatch = useDispatch();
     const [loading,setLoading] = useState(true);
@@ -142,6 +153,7 @@ const CarList = () => {
         getrecentCarList();
         getFavCarList();
         getInventoryCarList();
+        getSuggestedCarList();
         
     },[recentCarFlag]);
 
@@ -150,13 +162,14 @@ const CarList = () => {
         getrecentCarList();
         getInventoryCarList();
         getFavCarList();
+        getSuggestedCarList();
 
     },[inventoryCarFlag]);
     useEffect(() => {
         getrecentCarList();
         getInventoryCarList();
         getFavCarList();
-
+        getSuggestedCarList();
 
     },[favCarFlag]);
 
@@ -213,8 +226,7 @@ const CarList = () => {
                         </div>
                     </div>
 
-
-
+                   
                     <div id="inventory-cars" className="inventory-cars">
                         <div className="container-fluid aos-init aos-animate" data-aos="fade-up">
 
