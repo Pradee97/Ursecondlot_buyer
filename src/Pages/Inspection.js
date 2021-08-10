@@ -238,23 +238,25 @@ const TestDriveMedia = () =>{
                         <h3>Covered Items Images/Videos</h3>
                         </div>
                         
-                        <div class="coveredgallery images-container">
+                        <div class="coveredgallery images-container">                         
                             <div class="photo-gallery">
                                 <div class="row photos">
-                                {powerTrainMedia.Length>0?powerTrainMedia.map((item)=>
-                                     {item?.media.indexOf('mp4')>0?(
-                                        <ReactPlayer
-                                        url={item?.media}
-                                        className='react-player'
-                                        playing
-                                        width='100%'
-                                        height='100%'
-                                      />):<img class="img-fluid" src={item?.media}></img>}
+                                    {powerTrainMedia.length>0?powerTrainMedia.map((item)=>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item">
+                                        {item?.media.indexOf('mp4')>0?(
+                                         <ReactPlayer
+                                         url={item?.media}
+                                         className='react-player'
+                                         playing
+                                         width='100%'
+                                         height='100%'
+                                       />):<img class="img-fluid" src={item?.media}></img>}
+                                    </div>
                                     ):""}
+                                    
                                 </div>
                             </div>
                         </div>
-                        
                         <div class="commentsblock">
                     <h3>Comments</h3>
                     </div>
@@ -361,18 +363,22 @@ const TestDriveMedia = () =>{
                         </div>
                        
                         <div class="mechanicalgallery images-container">
+                                               
                             <div class="photo-gallery">
                                 <div class="row photos">
-                                {mechanicalMedia.Length>0?mechanicalMedia.map((item)=>
-                                    {item?.media.indexOf('mp4')>0?(
-                                        <ReactPlayer
-                                        url={item?.media}
-                                        className='react-player'
-                                        playing
-                                        width='100%'
-                                        height='100%'
-                                      />):<img class="img-fluid" src={item?.media}></img>}
+                                    {mechanicalMedia.length>0?mechanicalMedia.map((item)=>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item">
+                                        {item?.media.indexOf('mp4')>0?(
+                                         <ReactPlayer
+                                         url={item?.media}
+                                         className='react-player'
+                                         playing
+                                         width='100%'
+                                         height='100%'
+                                       />):<img class="img-fluid" src={item?.media}></img>}
+                                    </div>
                                     ):""}
+                                    
                                 </div>
                             </div>
                         </div>
@@ -436,20 +442,22 @@ const TestDriveMedia = () =>{
                         <div class="tiresgallery images-container">
                             <div class="photo-gallery">
                                 <div class="row photos">
-                                     {tiresWheelsMedia.Length>0?tiresWheelsMedia.map((item)=>
-                                     {item?.media.indexOf('mp4')>0?(
-                                        <ReactPlayer
-                                        url={item?.media}
-                                        className='react-player'
-                                        playing
-                                        width='100%'
-                                        height='100%'
-                                      />):<img class="img-fluid" src={item?.media}></img>}
+                                    {tiresWheelsMedia.length>0?tiresWheelsMedia.map((item)=>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item">
+                                        {item?.media.indexOf('mp4')>0?(
+                                         <ReactPlayer
+                                         url={item?.media}
+                                         className='react-player'
+                                         playing
+                                         width='100%'
+                                         height='100%'
+                                       />):<img class="img-fluid" src={item?.media}></img>}
+                                    </div>
                                     ):""}
+                                    
                                 </div>
                             </div>
                         </div>
-                        
                         <div class="commentsblock">
                     <h3>Comments</h3>
                     </div>
@@ -522,26 +530,25 @@ const TestDriveMedia = () =>{
                         <h3>Exterior Images</h3>
                         </div>
                         
-                        <div class="exteriorgallery images-container">
+                          <div class="exteriorgallery images-container">
                             <div class="photo-gallery">
                                 <div class="row photos">
-                                {exteriorMedia.Length>0?exteriorMedia.map((item)=>
-                                     {item?.media.indexOf('mp4')>0?(
-                                        <ReactPlayer
-                                        url={item?.media}
-                                        className='react-player'
-                                        playing
-                                        width='100%'
-                                        height='100%'
-                                      />):<img class="img-fluid" src={item?.media}></img>}
+                                    {exteriorMedia.length>0?exteriorMedia.map((item)=>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item">
+                                        {item?.media.indexOf('mp4')>0?(
+                                         <ReactPlayer
+                                         url={item?.media}
+                                         className='react-player'
+                                         playing
+                                         width='100%'
+                                         height='100%'
+                                       />):<img class="img-fluid" src={item?.media}></img>}
+                                    </div>
                                     ):""}
-                                    
-                                    
                                     
                                 </div>
                             </div>
                         </div>
-                        
                         <div class="commentsblock">
                     <h3>Comments</h3>
                     </div>
