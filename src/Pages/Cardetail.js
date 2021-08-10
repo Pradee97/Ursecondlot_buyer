@@ -26,6 +26,8 @@ import locked from '../../src/assets/img/locked.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import CarListReducer from './CarList/CarListReducer';
 import CarListAction from './CarList/CarListAction';
+import Loading from '../Component/Loading/Loading';
+
 const Cardetail = () =>{
 const history = useHistory();
 const dispatch = useDispatch();
@@ -43,6 +45,7 @@ const [distance,setDistance] = useState("");
 const [moreCarFlag,setMoreCarFlag]=useState(false);
 const [similarCarFromSellerFlag,setSimilarCarFromSellerFlag]=useState(false);
 const selectedSellerId = useSelector(state => state.CarListReducer.payload);
+const [loading,setLoading] = useState(true);
 
 console.log("sellerid from carlist",selectedSellerId);
 const redirectpage=(pathid,seller_dealer_id)=>{
@@ -101,6 +104,7 @@ function CarDetailList(){
 	//if(results.length>0){
 	setCarDetail(res.data.data);
 	console.log("car Detail",res.data.data);
+	setLoading(false);
 	console.log("car distance added",res.data.distance);
 	setDistance(res.data.distance);
 	setLrgImg(res.data.data[0].image);
@@ -189,7 +193,7 @@ useEffect (()=>{
 	
 return(
     <div>
-        
+         {loading?<Loading/>:
         <main id="main" class="inner-page-cars">
     <div id="products-details" class="products-details">
 	 <div class="container">
@@ -481,7 +485,7 @@ return(
     </section>
 
   </main>
-
+}
     </div>
 )
 
