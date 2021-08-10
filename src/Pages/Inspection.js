@@ -7,7 +7,7 @@ import checkmark from '../assets/img/checkmark.svg';
 import iconarrowback from '../assets/img/ionic-ios-arrow-back.svg';
 import car from '../assets/img/cars02.png';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory  } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import CarListAction from '../../src/Pages/CarList/CarListAction';
 import ReactPlayer from 'react-player';
 
@@ -23,10 +23,10 @@ const Inspection=()=>{
     const [tiresWheelsMedia,setTiresWheelsMedia] = useState("");
     const [powerTrainMedia,setPowerTrainMedia] = useState("");
     const [testDriveMedia,setTestDriveMedia] = useState("");
-
+    const { id } = useParams();
     const getInspectionDetail = () =>{
     let request={
-        car_id: 1,
+        car_id: id,
         
     }
     API.post('inspection/condition',request).then(res=>{
@@ -39,7 +39,7 @@ const Inspection=()=>{
 
 const ExteriorMedia=()=>{
     let request={
-        car_id:1
+        car_id:id
     }
     API.post('exterior_media/condition',request).then(res=>{
         console.log("exterior_media/condition",res.data.data);
@@ -52,7 +52,7 @@ const ExteriorMedia=()=>{
 
 const InteriorMedia = () =>{
     let request={
-        car_id: 1,
+        car_id: id,
         
     }
     API.post('interior_media/condition',request).then(res=>{
@@ -65,7 +65,7 @@ const InteriorMedia = () =>{
 
 const MechanicalMedia = () =>{
     let request={
-        car_id: 1,
+        car_id: id,
         
     }
     API.post('mechanical_media/condition',request).then(res=>{
@@ -78,7 +78,7 @@ const MechanicalMedia = () =>{
 
 const TiresWheelsMedia = () =>{
     let request={
-        car_id: 1,
+        car_id: id,
         
     }
     API.post('tireswheels_media/condition',request).then(res=>{
@@ -91,7 +91,7 @@ const TiresWheelsMedia = () =>{
 
 const PowerTrainMedia = () =>{
     let request={
-        car_id: 1,
+        car_id: id,
         
     }
     API.post('power_train_media/condition',request).then(res=>{
@@ -104,7 +104,7 @@ const PowerTrainMedia = () =>{
 
 const TestDriveMedia = () =>{
     let request={
-        car_id: 1,
+        car_id: id,
         
     }
     API.post('testdrive_media/condition',request).then(res=>{

@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import { useHistory, useParams } from "react-router-dom";
 import API from "../Services/BaseService";
-import lock from '../assets/img/lock.svg';
+import lock from '../assets/img/lock.png';
 import appstore from '../assets/img/appstore.png';
 import googleplay from '../assets/img/googleplay.png';
 import speedometer from '../assets/img/speedometer.svg';
 import gasolinePump from '../assets/img/gasolinePump.svg';
-import locked from '../../src/assets/img/locked.svg';
+import locked from '../../src/assets/img/locked.png';
 import { useDispatch, useSelector } from 'react-redux';
 import CarListAction from './CarList/CarListAction';
 const SimilarCarFromSeller = () =>{
