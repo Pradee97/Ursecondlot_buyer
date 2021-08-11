@@ -10,6 +10,7 @@ import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAcco
 import { useForm } from "react-hook-form";
 import PhoneInput from 'react-phone-number-input/input';
 import { useDispatch, useSelector } from 'react-redux';
+import Loading from '../../../Component/Loading/Loading';
 
 const EditAddress = () => {
     const history = useHistory();
@@ -36,6 +37,7 @@ const EditAddress = () => {
     const [instructionError, setInstructionError] = useState("")
     const [stateAndCityError, setStateAndCityError] = useState("");
     const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
+    const [loading,setLoading] = useState(true);
 
     const togglePopup = () => {
       setIsOpen(!isOpen);
@@ -240,7 +242,8 @@ const EditAddress = () => {
         setLocation(res.data.data[0].location);
         setInstruction(res.data.data[0].instructions);
         setZIpCode(res.data.data[0].zipcode);
-        setAccountObj(res.data.data[0])
+        setAccountObj(res.data.data[0]);
+        setLoading(false);
         // reset(res.data.data);
     })
         .catch(err => { console.log(err); });
@@ -253,6 +256,7 @@ const EditAddress = () => {
      }
     return (
         <div>
+            {loading?<Loading/>:
             <main id="main" className="inner-page">
             <div id="addaddress" className="addaddress_block">
             <div className="container" >
@@ -394,7 +398,7 @@ const EditAddress = () => {
                     popupActionPath={popupActionPath}
                 />}
             </main>
-          
+}  
         </div>
 
 

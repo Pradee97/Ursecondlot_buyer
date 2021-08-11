@@ -9,7 +9,7 @@ import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccount
 import { useForm } from "react-hook-form";
 import PhoneInput from 'react-phone-number-input/input';
 import { useDispatch, useSelector } from 'react-redux';
-
+import Loading from '../../Component/Loading/Loading';
 import StateAndCity from '../../Component/StateAndCity/StateAndCity'
 
 
@@ -27,7 +27,7 @@ const EditDealerInformation = () => {
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
     const [zipCode, setZipcode] = useState("");
-
+    const [loading,setLoading] = useState(true);
     const [isOpen, setIsOpen] = useState(false);
  
     const togglePopup = () => {
@@ -70,6 +70,7 @@ const EditDealerInformation = () => {
         state.then(res => {
             console.log( "userDetails=>",userDetails)
             console.log("res=======>", res.data.data)
+          
             setFirstname(res.data.data[0].first_name);
             setLastname(res.data.data[0].last_name);
             setPrimaryphone(res.data.data[0].phone_no);
@@ -78,9 +79,12 @@ const EditDealerInformation = () => {
             setCity(res.data.data[0].city_name);
             setState(res.data.data[0].state_name);
             setZipcode(res.data.data[0].zipcode);
-            setAccountObj(res.data.data[0])
+            setAccountObj(res.data.data[0]);
+            
         })
             .catch(err => { console.log(err); });
+          
+      
     }
     function formatMobileNO(value){
         var x = value.replace(/\D/g, '').match(/(\d{1})(\d{3})(\d{3})(\d{4})/);
@@ -218,8 +222,11 @@ const EditDealerInformation = () => {
         setZipcode(res.data.data[0].zipcode);
         setAccountObj(res.data.data[0])
         reset(res.data.data[0]);
+        setLoading(false);
     })
+    
         .catch(err => { console.log(err); });
+        
     }, [reset]);
     function handleOnChange(value) {
         setPrimaryphone(value);
@@ -229,6 +236,7 @@ const EditDealerInformation = () => {
      }
     return (
         <div>
+             {loading?<Loading/>:
             <main id="main" className="inner-page">
             <div id="addaddress" className="addaddress_block">
             <div className="container" >
@@ -373,7 +381,7 @@ const EditDealerInformation = () => {
                     popupActionPath={popupActionPath}
                 />}
             </main>
-          
+}
         </div>
 
 
