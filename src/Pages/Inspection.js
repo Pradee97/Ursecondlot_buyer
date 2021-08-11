@@ -7,15 +7,16 @@ import checkmark from '../assets/img/checkmark.svg';
 import iconarrowback from '../assets/img/ionic-ios-arrow-back.svg';
 import car from '../assets/img/cars02.png';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory  } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import CarListAction from '../../src/Pages/CarList/CarListAction';
 import ReactPlayer from 'react-player';
-
+import Loading from '../Component/Loading/Loading';
 const Inspection=()=>{
 
     
     const history = useHistory();
     const dispatch = useDispatch();
+    const [loading,setLoading] = useState(true);
     const [inspection,setInspection]=useState("");
     const [interiorMedia,setInteriorMedia] = useState("");
     const [exteriorMedia,setExteriorMedia] = useState("");
@@ -23,10 +24,10 @@ const Inspection=()=>{
     const [tiresWheelsMedia,setTiresWheelsMedia] = useState("");
     const [powerTrainMedia,setPowerTrainMedia] = useState("");
     const [testDriveMedia,setTestDriveMedia] = useState("");
-
+    const { id } = useParams();
     const getInspectionDetail = () =>{
     let request={
-        car_id: 1,
+        car_id: id,
         
     }
     API.post('inspection/condition',request).then(res=>{
@@ -39,7 +40,7 @@ const Inspection=()=>{
 
 const ExteriorMedia=()=>{
     let request={
-        car_id:1
+        car_id:id
     }
     API.post('exterior_media/condition',request).then(res=>{
         console.log("exterior_media/condition",res.data.data);
@@ -52,7 +53,7 @@ const ExteriorMedia=()=>{
 
 const InteriorMedia = () =>{
     let request={
-        car_id: 1,
+        car_id: id,
         
     }
     API.post('interior_media/condition',request).then(res=>{
@@ -65,7 +66,7 @@ const InteriorMedia = () =>{
 
 const MechanicalMedia = () =>{
     let request={
-        car_id: 1,
+        car_id: id,
         
     }
     API.post('mechanical_media/condition',request).then(res=>{
@@ -78,7 +79,7 @@ const MechanicalMedia = () =>{
 
 const TiresWheelsMedia = () =>{
     let request={
-        car_id: 1,
+        car_id: id,
         
     }
     API.post('tireswheels_media/condition',request).then(res=>{
@@ -91,7 +92,7 @@ const TiresWheelsMedia = () =>{
 
 const PowerTrainMedia = () =>{
     let request={
-        car_id: 1,
+        car_id: id,
         
     }
     API.post('power_train_media/condition',request).then(res=>{
@@ -104,14 +105,14 @@ const PowerTrainMedia = () =>{
 
 const TestDriveMedia = () =>{
     let request={
-        car_id: 1,
+        car_id: id,
         
     }
     API.post('testdrive_media/condition',request).then(res=>{
         console.log("testdrive_media/condition",res.data.data);
        
         setTestDriveMedia(res.data.data);
-        
+        setLoading(false);
     }).catch(err => { console.log(err); });
 }
 
@@ -136,7 +137,7 @@ const TestDriveMedia = () =>{
     }
     return(
         <div>
-            
+            {loading?<Loading/>:
             <main id="main" class="inner-page">
    
    
@@ -238,16 +239,25 @@ const TestDriveMedia = () =>{
                         <h3>Covered Items Images/Videos</h3>
                         </div>
                         
-                        <div class="coveredgallery images-container">
+                        <div class="coveredgallery images-container">                         
                             <div class="photo-gallery">
                                 <div class="row photos">
-                                {powerTrainMedia.Length>0?powerTrainMedia.map((item)=>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={item?.media}></img></div>
+                                    {powerTrainMedia.length>0?powerTrainMedia.map((item)=>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item">
+                                        {item?.media.indexOf('mp4')>0?(
+                                         <ReactPlayer
+                                         url={item?.media}
+                                         className='react-player'
+                                         playing
+                                         width='100%'
+                                         height='100%'
+                                       />):<img class="img-fluid" src={item?.media}></img>}
+                                    </div>
                                     ):""}
+                                    
                                 </div>
                             </div>
                         </div>
-                        
                         <div class="commentsblock">
                     <h3>Comments</h3>
                     </div>
@@ -354,15 +364,26 @@ const TestDriveMedia = () =>{
                         </div>
                        
                         <div class="mechanicalgallery images-container">
+                                            
+                        
                             <div class="photo-gallery">
                                 <div class="row photos">
-                                {mechanicalMedia.Length>0?mechanicalMedia.map((item)=>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={item?.media}></img></div>
+                                    {tiresWheelsMedia.length>0?tiresWheelsMedia.map((item)=>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item">
+                                        {item?.media.indexOf('mp4')>0?(
+                                         <ReactPlayer
+                                         url={item?.media}
+                                         className='react-player'
+                                         playing
+                                         width='100%'
+                                         height='100%'
+                                       />):<img class="img-fluid" src={item?.media}></img>}
+                                    </div>
                                     ):""}
+                                    
                                 </div>
                             </div>
                         </div>
-                        
                         <div class="commentsblock">
                     <h3>Comments</h3>
                     </div>
@@ -422,13 +443,22 @@ const TestDriveMedia = () =>{
                         <div class="tiresgallery images-container">
                             <div class="photo-gallery">
                                 <div class="row photos">
-                                     {tiresWheelsMedia.Length>0?tiresWheelsMedia.map((item)=>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={item?.media}></img></div>
+                                    {tiresWheelsMedia.length>0?tiresWheelsMedia.map((item)=>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item">
+                                        {item?.media.indexOf('mp4')>0?(
+                                         <ReactPlayer
+                                         url={item?.media}
+                                         className='react-player'
+                                         playing
+                                         width='100%'
+                                         height='100%'
+                                       />):<img class="img-fluid" src={item?.media}></img>}
+                                    </div>
                                     ):""}
+                                    
                                 </div>
                             </div>
                         </div>
-                        
                         <div class="commentsblock">
                     <h3>Comments</h3>
                     </div>
@@ -501,19 +531,25 @@ const TestDriveMedia = () =>{
                         <h3>Exterior Images</h3>
                         </div>
                         
-                        <div class="exteriorgallery images-container">
+                          <div class="exteriorgallery images-container">
                             <div class="photo-gallery">
                                 <div class="row photos">
-                                {exteriorMedia.Length>0?exteriorMedia.map((item)=>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item"><img class="img-fluid" src={item?.media}></img></div>
+                                    {exteriorMedia.length>0?exteriorMedia.map((item)=>
+                                    <div class="col-sm-4 col-md-2 col-lg-2 item">
+                                        {item?.media.indexOf('mp4')>0?(
+                                         <ReactPlayer
+                                         url={item?.media}
+                                         className='react-player'
+                                         playing
+                                         width='100%'
+                                         height='100%'
+                                       />):<img class="img-fluid" src={item?.media}></img>}
+                                    </div>
                                     ):""}
-                                    
-                                    
                                     
                                 </div>
                             </div>
                         </div>
-                        
                         <div class="commentsblock">
                     <h3>Comments</h3>
                     </div>
@@ -736,7 +772,7 @@ const TestDriveMedia = () =>{
 
             </main>
 
-
+                    }
         </div>
     )
 }

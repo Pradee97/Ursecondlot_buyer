@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import $ from 'jquery'
 import { useHistory, useLocation, useParams } from "react-router-dom";
 import API from "../Services/BaseService";
-import lock from '../assets/img/lock.svg';
+import lock from '../assets/img/lock.png';
 import cars01 from '../assets/img/cars01.png';
 import carbrand from '../assets/img/carshonda.jpg';
 import appstore from '../assets/img/appstore.png';
@@ -22,10 +22,12 @@ import cardetail3 from '../assets/img/cardetail3.jpg'
 import cardetail4 from '../assets/img/cardetail4.jpg'
 import cardetail5 from '../assets/img/cardetail5.jpg'
 import {CopyToClipboard} from 'react-copy-to-clipboard';
-import locked from '../../src/assets/img/locked.svg';
+import locked from '../../src/assets/img/locked.png';
 import { useDispatch, useSelector } from 'react-redux';
 import CarListReducer from './CarList/CarListReducer';
 import CarListAction from './CarList/CarListAction';
+import Loading from '../Component/Loading/Loading';
+
 const Cardetail = () =>{
 const history = useHistory();
 const dispatch = useDispatch();
@@ -43,6 +45,7 @@ const [distance,setDistance] = useState("");
 const [moreCarFlag,setMoreCarFlag]=useState(false);
 const [similarCarFromSellerFlag,setSimilarCarFromSellerFlag]=useState(false);
 const selectedSellerId = useSelector(state => state.CarListReducer.payload);
+const [loading,setLoading] = useState(true);
 
 console.log("sellerid from carlist",selectedSellerId);
 const redirectpage=(pathid,seller_dealer_id)=>{
@@ -50,6 +53,10 @@ const redirectpage=(pathid,seller_dealer_id)=>{
 	console.log("seller_dealer_id+++++",seller_dealer_id)
 	dispatch(CarListAction.sellerid(seller_dealer_id))
 	history.push("/cardetail/"+pathid);
+  }
+
+  const redirecttoInspection=(pathid)=>{
+	  history.push("/Inspection/"+pathid);
   }
 
 const redirectpagemorecarseller=(pathid)=>{
@@ -101,6 +108,7 @@ function CarDetailList(){
 	//if(results.length>0){
 	setCarDetail(res.data.data);
 	console.log("car Detail",res.data.data);
+	setLoading(false);
 	console.log("car distance added",res.data.distance);
 	setDistance(res.data.distance);
 	setLrgImg(res.data.data[0].image);
@@ -189,7 +197,7 @@ useEffect (()=>{
 	
 return(
     <div>
-        
+         {loading?<Loading/>:
         <main id="main" class="inner-page-cars">
     <div id="products-details" class="products-details">
 	 <div class="container">
@@ -283,7 +291,7 @@ return(
 							<div class="row">	
 							<div class="col-md-12 cars-detail-ins">
 	        					<div class="cars-detail-views">
-									<a class="car-btns" href="/inspection">View Inspection</a>
+									<a class="car-btns" onClick={()=>redirecttoInspection(carDetail[0].car_id)}>View Inspection</a>
 									<a class="car-btns-primary" href="/makeurbid"><img src={tag} alt=""/>High Bid :<span> ${carDetail[0].max_bid}</span></a>
 								</div>
 	        				</div>
@@ -481,7 +489,7 @@ return(
     </section>
 
   </main>
-
+}
     </div>
 )
 
