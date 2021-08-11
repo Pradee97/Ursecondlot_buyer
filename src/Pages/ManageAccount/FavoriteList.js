@@ -123,7 +123,7 @@ useEffect(()=>{
 	console.log("From Mileage",fromMileage);
 	console.log("To Mileage",toMileage);
 	searchCarDetail();
-},[fromMileage,toMileage,makeSearch,drivetrainSearch,transmissionSearch,stateSearch,bodyTypeSearch,dealerShip,salesTypeSearch,historySearch,transmissionIssueSearch,engineNoiseSearch]);
+},[fromMileage,toMileage,makeSearch,drivetrainSearch,transmissionSearch,stateSearch,groupSearch,bodyTypeSearch,dealerShip,salesTypeSearch,historySearch,transmissionIssueSearch,engineNoiseSearch]);
 
 
 function concatMakeSearch  (e){

@@ -10,11 +10,12 @@ import Popup from '../../Component/Popup/Popup';
 import '../../Component/Popup/popup.css';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import 'antd/dist/antd.css';
-
+import Loading from '../../Component/Loading/Loading';
 
 const Notification = () => {
 	const history = useHistory();
 	const [isOpen, setIsOpen] = useState(false);
+	const [loading,setLoading] = useState(true);
 
 	const togglePopup = () => {
 		setIsOpen(!isOpen);
@@ -60,6 +61,7 @@ const Notification = () => {
 			setPush_notification(res.data.data.push_notification)
 			setFavEmail(res.data.data.favorite_email)
 			setFavSms(res.data.data.favorite_sms)
+			setLoading(false)
 		})
 			.catch(err => { console.log(err); });
 	}
@@ -118,7 +120,7 @@ const Notification = () => {
 
 	return (
 		<div>
-
+{loading?<Loading/>:
 			<main id="main" className="inner-page">
 
 
@@ -340,6 +342,7 @@ const Notification = () => {
 						popupActionPath={popupActionPath}
 					/>}
 			</main>
+}
 		</div>
 	);
 };

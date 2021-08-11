@@ -3,11 +3,14 @@ import { useHistory , useParams} from "react-router-dom";
 import { useState } from 'react';
 import { useEffect } from 'react';
 import API from "../../../Services/BaseService";
-import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks"
+import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks";
+import Loading from '../../../Component/Loading/Loading';
 
 const MyProfile = () => {
     const history = useHistory();
     const [accountDetails, setaccountDetails] = useState("");
+    const [loading,setLoading] = useState(true);
+
     async function fetchAccountDetails() {
       let request = {
           buyer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_id,
@@ -16,6 +19,7 @@ const MyProfile = () => {
       state.then(res => {
           // console.log("res", res)
           setaccountDetails(res.data.data);
+          setLoading(false);
       })
           .catch(err => { console.log(err); });
     }
@@ -28,6 +32,7 @@ const MyProfile = () => {
 
     return (
         <div>
+          {loading?<Loading/>:
             <main id="main" className="inner-page">
    
             <div id="myprofiles" className="myprofiles">
@@ -107,6 +112,7 @@ const MyProfile = () => {
      </div>
    </section>
  </main>
+}
     </div>
 
 

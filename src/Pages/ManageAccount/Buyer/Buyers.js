@@ -7,6 +7,7 @@ import API from "../../../Services/BaseService";
 import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks";
 import CommonPopup from '../../../Component/CommonPopup/CommonPopup';
 import { Button } from 'antd';
+import Loading from '../../../Component/Loading/Loading';
 
 const Buyers = () => {
     const history = useHistory();
@@ -21,6 +22,8 @@ const Buyers = () => {
     const [popupActionValue, setPopupActionValue] = useState ("");
     const [popupActionPath, setPopupActionPath] = useState ("");
     const [oldUserList,setOldUserList]=useState ("");
+    const [loading,setLoading] = useState(true);
+
     const togglePopup = () => {
         setIsOpen(!isOpen);
       }
@@ -33,6 +36,7 @@ const Buyers = () => {
             console.log("res", res.data.data)
             setOldUserList(res.data.data);
             setUserList(res.data.data);
+            setLoading(false);
         })
             .catch(err => { console.log(err); });
     }
@@ -79,6 +83,7 @@ const Buyers = () => {
     }, []);
     return (
         <div>
+             {loading?<Loading/>:
             <main id="main" className="inner-page">
    
             <div id="adduserpage" className="adduserpage">
@@ -187,6 +192,7 @@ const Buyers = () => {
             popupActionPath={popupActionPath}
         />}
  </main>
+}
     </div>
 
 
