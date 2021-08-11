@@ -3897,6 +3897,7 @@ Search Box"
 	background:#fff;
   text-align: left;
   padding: 15px;
+  width: 100%;
 	
 }
 .leftonsidebox h3{
@@ -4058,6 +4059,10 @@ Search Box"
 	margin:20px 0;
   border-bottom: #eee solid 1px;
   padding-bottom: 10px;
+}
+
+.leftonsidebox h4 span{
+  cursor: pointer;
 }
 
 .search-cars{
