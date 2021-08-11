@@ -7,12 +7,14 @@ import { useEffect } from 'react';
 import '../../assets/css/responsive.css';
 import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks"
 import {  Button  } from 'antd';
-
+import Loading from '../../Component/Loading/Loading';
 
 const PaymentInfo = () => {
     const history = useHistory();
     const [paymentinfo, setPaymentInfo] = useState("");
+    const [loading,setLoading] = useState(true);
     let userDetails = ls.get('userDetails');
+
     async function getPaymentInfo() {
         let request = {
             buyer_dealer_id: userDetails.buyer_dealer_id
@@ -21,6 +23,7 @@ const PaymentInfo = () => {
         state.then(res => {
             console.log("res", res.data.data)
             setPaymentInfo(res.data.data);
+            setLoading(false);
         })
             .catch(err => { console.log(err); });
     }
@@ -35,7 +38,7 @@ const PaymentInfo = () => {
 
     return (
         <div>
-
+{loading?<Loading/>:
             <main id="main" className="inner-page">
 
 
@@ -143,7 +146,7 @@ const PaymentInfo = () => {
 
 
             </main>
-
+}
         </div>
 
 

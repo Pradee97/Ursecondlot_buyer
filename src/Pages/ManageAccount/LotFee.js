@@ -6,6 +6,8 @@ import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccount
 import API from "../../Services/BaseService";
 import '../../Component/Popup/popup.css';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
+import Loading from '../../Component/Loading/Loading';
+
 const LotFee = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [popupTitle, setPopupTitle] = useState("");
@@ -18,6 +20,8 @@ const LotFee = () => {
     const [lotValue, setLotValue] = useState("");
     const [lotFeeError, setLotFeeError] = useState("")
     let userDetails = ls.get('userDetails');
+    const [loading,setLoading] = useState(true);
+
     const togglePopup = () => {
         setIsOpen(!isOpen);
     }
@@ -29,7 +33,8 @@ const LotFee = () => {
         state.then(res => {
             console.log("res", res.data.data)
             setLotValue(res.data.data.lot_fee);
-            setLotFee(res.data.data)
+            setLotFee(res.data.data);
+            setLoading(false);
         })
             .catch(err => { console.log(err); });
     }
@@ -94,6 +99,7 @@ const LotFee = () => {
 
     return (
         <div>
+            {loading?<Loading/>:
             <main id="main" className="inner-page">
                 <div id="lotfee" className="lotfee">
                     <div className="container">
@@ -146,6 +152,7 @@ const LotFee = () => {
                         popupActionPath={popupActionPath}
                     />}
             </main>
+            }
         </div>
     )
 }

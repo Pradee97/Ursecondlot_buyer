@@ -11,7 +11,7 @@ import ls from 'local-storage';
 import PhoneInput from 'react-phone-number-input/input';
 import FileBase64 from 'react-file-base64';
 import { useDispatch, useSelector } from 'react-redux';
-import Loading from '../../../Component/Loading/Loading';
+
 
 const EditMyProfile = () => {
     const history = useHistory();
@@ -30,7 +30,7 @@ const EditMyProfile = () => {
     const [zipcode, setZipcode] = useState("");
     // const [locationName, setLocationName] = useState("");
     const [isOpen, setIsOpen] = useState(false);
-    const [loading,setLoading] = useState(true);
+   
     
     const [popupTitle, setPopupTitle] = useState ("");
     const [popupMsg, setPopupMsg] = useState ("");
@@ -217,7 +217,7 @@ const EditMyProfile = () => {
             setMyProfileObj(res.data.data[0]);
             reset(res.data.data[0]);
             setImage(res.data.data[0].image);
-            setLoading(false)
+           
         })
             .catch(err => { console.log(err); });
     }, [reset]);
@@ -229,7 +229,7 @@ const EditMyProfile = () => {
      }
     return (
         <div>
-            {loading?<Loading/>:
+        
             <main id="main" className="inner-page">
             <div id="addaddress" className="addaddress_block">
             <div className="container" >
@@ -387,7 +387,7 @@ const EditMyProfile = () => {
                     popupActionPath={popupActionPath}
                 />}
             </main>
-}
+
         </div>
 
 

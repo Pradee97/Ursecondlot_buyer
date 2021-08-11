@@ -9,7 +9,7 @@ import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccount
 import { useForm } from "react-hook-form";
 import PhoneInput from 'react-phone-number-input/input';
 import { useDispatch, useSelector } from 'react-redux';
-import Loading from '../../Component/Loading/Loading';
+
 import StateAndCity from '../../Component/StateAndCity/StateAndCity'
 
 
@@ -27,7 +27,7 @@ const EditDealerInformation = () => {
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
     const [zipCode, setZipcode] = useState("");
-    const [loading,setLoading] = useState(true);
+    
     const [isOpen, setIsOpen] = useState(false);
  
     const togglePopup = () => {
@@ -222,7 +222,7 @@ const EditDealerInformation = () => {
         setZipcode(res.data.data[0].zipcode);
         setAccountObj(res.data.data[0])
         reset(res.data.data[0]);
-        setLoading(false);
+      
     })
     
         .catch(err => { console.log(err); });
@@ -236,7 +236,7 @@ const EditDealerInformation = () => {
      }
     return (
         <div>
-             {loading?<Loading/>:
+        
             <main id="main" className="inner-page">
             <div id="addaddress" className="addaddress_block">
             <div className="container" >
@@ -381,7 +381,7 @@ const EditDealerInformation = () => {
                     popupActionPath={popupActionPath}
                 />}
             </main>
-}
+
         </div>
 
 
