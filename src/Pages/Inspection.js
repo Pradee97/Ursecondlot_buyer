@@ -245,13 +245,13 @@ const TestDriveMedia = () =>{
                                     {powerTrainMedia.length>0?powerTrainMedia.map((item)=>
                                     <div class="col-sm-4 col-md-2 col-lg-2 item">
                                         {item?.media.indexOf('mp4')>0?(
-                                         <ReactPlayer
-                                         url={item?.media}
-                                         className='react-player'
-                                         playing
-                                         width='100%'
-                                         height='100%'
-                                       />):<img class="img-fluid" src={item?.media}></img>}
+                                  
+                                    <video autobuffer controls autoplay  width='100%'
+                                    height='100%'>
+                                        <source id="mp4" src={item?.media} type="video/mp4"></source>
+                                    </video>
+                                
+                                    ):<img class="img-fluid" src={item?.media}></img>}
                                     </div>
                                     ):""}
                                     
@@ -371,13 +371,11 @@ const TestDriveMedia = () =>{
                                     {tiresWheelsMedia.length>0?tiresWheelsMedia.map((item)=>
                                     <div class="col-sm-4 col-md-2 col-lg-2 item">
                                         {item?.media.indexOf('mp4')>0?(
-                                         <ReactPlayer
-                                         url={item?.media}
-                                         className='react-player'
-                                         playing
-                                         width='100%'
-                                         height='100%'
-                                       />):<img class="img-fluid" src={item?.media}></img>}
+                                         <video autobuffer controls autoplay  width='100%'
+                                         height='100%'>
+                                             <source id="mp4" src={item?.media} type="video/mp4"></source>
+                                         </video>
+                                         ):<img class="img-fluid" src={item?.media}></img>}
                                     </div>
                                     ):""}
                                     
@@ -446,13 +444,11 @@ const TestDriveMedia = () =>{
                                     {tiresWheelsMedia.length>0?tiresWheelsMedia.map((item)=>
                                     <div class="col-sm-4 col-md-2 col-lg-2 item">
                                         {item?.media.indexOf('mp4')>0?(
-                                         <ReactPlayer
-                                         url={item?.media}
-                                         className='react-player'
-                                         playing
-                                         width='100%'
-                                         height='100%'
-                                       />):<img class="img-fluid" src={item?.media}></img>}
+                                        <video autobuffer controls autoplay  width='100%'
+                                        height='100%'>
+                                            <source id="mp4" src={item?.media} type="video/mp4"></source>
+                                        </video>
+                                        ):<img class="img-fluid" src={item?.media}></img>}
                                     </div>
                                     ):""}
                                     
@@ -537,13 +533,11 @@ const TestDriveMedia = () =>{
                                     {exteriorMedia.length>0?exteriorMedia.map((item)=>
                                     <div class="col-sm-4 col-md-2 col-lg-2 item">
                                         {item?.media.indexOf('mp4')>0?(
-                                         <ReactPlayer
-                                         url={item?.media}
-                                         className='react-player'
-                                         playing
-                                         width='100%'
-                                         height='100%'
-                                       />):<img class="img-fluid" src={item?.media}></img>}
+                                        <video autobuffer controls autoplay  width='100%'
+                                        height='100%'>
+                                            <source id="mp4" src={item?.media} type="video/mp4"></source>
+                                        </video>
+                                        ):<img class="img-fluid" src={item?.media}></img>}
                                     </div>
                                     ):""}
                                     
@@ -620,13 +614,11 @@ const TestDriveMedia = () =>{
                                     {interiorMedia.length>0?interiorMedia.map((item)=>
                                     <div class="col-sm-4 col-md-2 col-lg-2 item">
                                         {item?.media.indexOf('mp4')>0?(
-                                         <ReactPlayer
-                                         url={item?.media}
-                                         className='react-player'
-                                         playing
-                                         width='100%'
-                                         height='100%'
-                                       />):<img class="img-fluid" src={item?.media}></img>}
+                                         <video autobuffer controls autoplay  width='100%'
+                                         height='100%'>
+                                             <source id="mp4" src={item?.media} type="video/mp4"></source>
+                                         </video>
+                                         ):<img class="img-fluid" src={item?.media}></img>}
                                     </div>
                                     ):""}
                                     
