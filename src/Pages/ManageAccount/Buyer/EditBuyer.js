@@ -10,7 +10,7 @@ import FileBase64 from 'react-file-base64';
 import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks"
 import { useDispatch, useSelector } from 'react-redux';
 import PhoneInput from 'react-phone-number-input/input';
-
+import Loading from '../../../Component/Loading/Loading';
 
 const EditBuyer = () => {
     const history = useHistory();
@@ -54,7 +54,7 @@ const EditBuyer = () => {
     const [isPrivileges, setIsPrivileges] = useState(false);
     const [type,setType]=useState("");
     const loggedInBuyerId = useSelector(state => state.LoginReducer.payload); 
-   
+    const [loading,setLoading] = useState(true);
 
     const togglePopup = () => {
         setIsOpen(!isOpen);
@@ -309,7 +309,7 @@ const EditBuyer = () => {
             setselectPrivilege(false)
             setDeselectPrivilege(true)
         }
-        
+        setLoading(false); 
     })
         .catch(err => { console.log(err); });
     },[] );
@@ -321,7 +321,7 @@ const EditBuyer = () => {
      }
     return (
         <div>
-           
+           {loading?<Loading/>:
             <main id="main" className="inner-page">
                 <div className="editprofile">
             <div className="container" >
@@ -499,7 +499,7 @@ const EditBuyer = () => {
                         popupActionPath={popupActionPath}
                     />}
             </main>
-
+}
         </div>
     )
 }

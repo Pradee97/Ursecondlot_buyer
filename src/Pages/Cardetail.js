@@ -340,7 +340,7 @@ return(
 					 <p><img src={transmission}/> <span>Transmission</span></p>
 					 <p><img src={drivetrain}/> <span>Drivetrain</span></p>
 					 <p><img src={gasolinePump}/> <span>Fuel Type</span></p>
-					 <p><img src={transmission}/> <span>Radio</span></p>
+					 
 					</div>
 				  </div>
 				  <div class="col-lg-2">
@@ -348,13 +348,27 @@ return(
 					 <p>{carDetail[0].transmission}</p>
 					 <p>{carDetail[0].drivetrain}</p>
 					 <p>{carDetail[0].fuel_type}</p>
-					 <p>{carDetail[0].radio}</p>
+					 
+					</div>
+				  </div>
+				  <div class="col-lg-2">
+					<div class="specifati">
+					<p><img src={transmission}/> <span>Radio</span></p>
+					 <p><img src={drivetrain}/> <span>Color</span></p>
+					
+					</div>
+				  </div>
+				  <div class="col-lg-2">
+					<div class="specifati2">
+					<p>{carDetail[0].radio}</p>
+					 <p>{carDetail[0].color}</p>
+					
+					 
 					</div>
 				  </div>
 				  <div class="col-lg-2">
 					<div class="specifati">
 					 
-					 <p><img src={drivetrain}/> <span>Color</span></p>
 					 <p><img src={gasolinePump}/> <span>Engine</span></p>
 					 <p><img src={gasolinePump}/> <span>Vehile Type</span></p>
 					</div>
@@ -362,7 +376,6 @@ return(
 				  <div class="col-lg-2">
 					<div class="specifati2">
 					 
-					 <p>{carDetail[0].color}</p>
 					 <p>{carDetail[0].engine}</p>
 					 <p>{carDetail[0].vehicle_type}</p>
 					 
