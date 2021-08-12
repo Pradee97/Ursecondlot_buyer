@@ -9,7 +9,7 @@ import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccount
 import { useForm } from "react-hook-form";
 import PhoneInput from 'react-phone-number-input/input';
 import { useDispatch, useSelector } from 'react-redux';
-
+import Loading from '../../Component/Loading/Loading';
 import StateAndCity from '../../Component/StateAndCity/StateAndCity'
 
 
@@ -27,7 +27,7 @@ const EditDealerInformation = () => {
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
     const [zipCode, setZipcode] = useState("");
-    
+    const [loading,setLoading] = useState(true);
     const [isOpen, setIsOpen] = useState(false);
  
     const togglePopup = () => {
@@ -47,6 +47,9 @@ const EditDealerInformation = () => {
     const [addressError, setAddressError] = useState("")
     const [stateAndCityError, setStateAndCityError] = useState("");
     const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
+    const buyer_id=JSON.parse(loggedInBuyerId).buyer_id;
+    const buyer_dealer_id=JSON.parse(loggedInBuyerId).buyer_dealer_id;
+    
 
     const getStateName=(stateData)=>{
         setState(stateData)
@@ -64,7 +67,7 @@ const EditDealerInformation = () => {
         console.log(id)
         
         let request = {
-            buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
+            buyer_dealer_id: buyer_dealer_id,
         };
         const state = API.post('user_profile/condition', request);
         state.then(res => {
@@ -164,7 +167,7 @@ const EditDealerInformation = () => {
             state_id: typeof state==='string'?accountObjc.state_id:state,
             zipcode_id: zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode,
             active:1,
-            updatedBy:JSON.parse(loggedInBuyerId).buyer_id
+            updatedBy:buyer_id
 
         };
         console.log("request==----==",request)
@@ -207,7 +210,7 @@ const EditDealerInformation = () => {
     useEffect(() => {
       //fetchAccountDetails();
       let request = {
-        buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
+        buyer_dealer_id: buyer_dealer_id,
     };
     const state = API.post('user_profile/condition', request);
     state.then(res => {
@@ -222,12 +225,13 @@ const EditDealerInformation = () => {
         setZipcode(res.data.data[0].zipcode);
         setAccountObj(res.data.data[0])
         reset(res.data.data[0]);
-      
+        setLoading(false);
+
     })
     
         .catch(err => { console.log(err); });
         
-    }, [reset]);
+    }, [reset,buyer_id,buyer_dealer_id]);
     function handleOnChange(value) {
         setPrimaryphone(value);
      }
@@ -236,7 +240,7 @@ const EditDealerInformation = () => {
      }
     return (
         <div>
-        
+        {loading?<Loading/>:
             <main id="main" className="inner-page">
             <div id="addaddress" className="addaddress_block">
             <div className="container" >
@@ -381,7 +385,7 @@ const EditDealerInformation = () => {
                     popupActionPath={popupActionPath}
                 />}
             </main>
-
+}
         </div>
 
 
