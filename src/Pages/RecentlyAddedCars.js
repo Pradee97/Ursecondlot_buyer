@@ -386,14 +386,19 @@ setDriveTrainSearchToggle(!driveTrainSearchToggle)
             {loading?<Loading/>:
              <main id="main" className="inner-page carList">
             
-             <div id="recently-cars" className="recently-cars">
+             <div id="recently-cars" className="recently-cars vehiclesearch">
                         <div className="container-fluid aos-init aos-animate" data-aos="fade-up">
 
-                        <div class="back-btn">
-                        <a class="back-btn-primary" href="/carlist"><i class="bx bx-chevron-left"></i> Back</a>
-            </div>
+                        
+							<div className="section-title">
+								<div class="back-btn">
+									<a class="back-btn-primary" href="/carlist"><i class="bx bx-chevron-left"></i> Back</a>
+								</div>
+                                <h2>Recently Added Cars</h2>
+                            </div>
             
-            <div class="col-lg-3">
+					<div class="row content">
+            			<div class="col-lg-3">
 					
 						<div class="leftonsidebox">
 							<div class="filtersblock">
@@ -764,10 +769,11 @@ setDriveTrainSearchToggle(!driveTrainSearchToggle)
                                     </span>                                
                                 </div>
                             </div> */}
+							<div className="col-lg-9">
                             <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
                             {carDetail.length>0?carDetail.map((item) =>
                             
-                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+								<div className="col-lg-4 col-md-4 col-sm-6 col-xs-6">
                                     <div className="car-item">
                                         <div className="cars-lock">
                                         <img src={(item.isFavourite===0)? lock : locked} onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'recent')} />
@@ -797,6 +803,8 @@ setDriveTrainSearchToggle(!driveTrainSearchToggle)
                                 </div>):<div className="floor_notfiled_block"><p>No Data Found</p></div>}
                             </div>
                         </div>
+						</div>
+						</div>
                     </div>
                </main>
 }
