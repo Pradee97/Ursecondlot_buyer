@@ -201,7 +201,7 @@ const EditMyProfile = () => {
     useEffect(() => {
         //fetchMyProfileDetails();
         let request = {
-            buyer_id: buyer_dealer_id,
+            buyer_id: buyer_id,
         };
         
         const state = API.post('buyer_profile/condition',request);
@@ -220,7 +220,7 @@ const EditMyProfile = () => {
             setMyProfileObj(res.data.data[0]);
             reset(res.data.data[0]);
             setImage(res.data.data[0].image);
-            // setLoading(false);
+            setLoading(false);
            
         })
             .catch(err => { console.log(err); });
@@ -233,7 +233,7 @@ const EditMyProfile = () => {
      }
     return (
         <div>
-        {/* {loading?<Loading/>: */}
+        {loading?<Loading/>:
             <main id="main" className="inner-page">
             <div id="addaddress" className="addaddress_block">
             <div className="container" >
@@ -391,7 +391,7 @@ const EditMyProfile = () => {
                     popupActionPath={popupActionPath}
                 />}
             </main>
-{/* } */}
+}
         </div>
 
 
