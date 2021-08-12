@@ -758,9 +758,7 @@ setDriveTrainSearchToggle(!driveTrainSearchToggle)
 							</div>
 						</div>
 					</div>
-                        <div className="section-title">
-                                <h2>Recently Added Cars</h2>
-                            </div>
+                       
                             {/* <div className="filtersblock  col-lg-6 SalesRepsSearch  row" >
                                 <div className="input-group searchbox ">
                                     <input type="text"  className="form-control border"  placeholder="model/make/year" onKeyDown={onKeydowninSearch} onChange={OnSearch}></input>

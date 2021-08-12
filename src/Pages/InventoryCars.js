@@ -393,9 +393,7 @@ setDriveTrainSearchToggle(!driveTrainSearchToggle)
                         <a class="back-btn-primary" href="/carlist"><i class="bx bx-chevron-left"></i> Back</a>
             </div>
                             <div className="section-title">
-							<div class="back-btn">
-							<a class="back-btn-primary" href="/carlist"><i class="bx bx-chevron-left"></i> Back</a>
-						</div>
+							
 
                                 <h2>inventory</h2>
                             </div>

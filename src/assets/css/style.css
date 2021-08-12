@@ -1080,15 +1080,14 @@ Cars list
 }
 .more-btn {
     display: inline-block;
-    background: rgba(255, 255, 255, 0.2);
+    background:#F5F5F5;
     padding: 5px;
     color: #bd062c;
     border-radius: 50px;
     transition: all ease-in-out 0.4s;
 	font-size:18px;
-	padding-top:25px;
-	margin-top:25px;
   margin-bottom: 25px;
+  margin-top: 20px;
 }
 
 
@@ -3230,15 +3229,15 @@ Car Detail Page
 }
 
 .dealer-cars .col-md-3{ 
-  -ms-flex: 20%;
-    flex:  20%;
-    max-width:20%;
+  -ms-flex: 25%;
+    flex:  25%;
+    max-width:25%;
     margin-bottom: 20px;
 }
 .dealer-cars   {
 	background: #f5f5f5;
 	opacity: 1;
-	padding:30px 90px;
+	padding:10px 90px;
 }
 .dealer-cars   .car-item {
     border-radius: 5px;
@@ -3348,9 +3347,9 @@ Car Detail Page
 }
 
 .other-dealer-cars  .col-md-3{ 
--ms-flex: 20%;
-    flex:  20%;
-    max-width:20%;
+-ms-flex: 25%;
+    flex:  25%;
+    max-width:25%;
 }
 .other-dealer-cars    {
 	background: #fff 0% 0% no-repeat padding-box;
@@ -3898,6 +3897,7 @@ Search Box"
   text-align: left;
   padding: 15px;
   width: 100%;
+  margin-bottom: 50px;
 	
 }
 .leftonsidebox h3{
@@ -6168,7 +6168,7 @@ Documents page
 	font-size:14px;
 	font-weight:500;
 	margin-bottom:20px;
-  min-height: 66px;
+  min-height: 40px;
 }
 .docdetails p{
 	color: #343434;
@@ -7582,6 +7582,9 @@ margin-top: -3px;
 
 .vehiclesearch .back-btn{
   float: left;
+  position: relative;
+  z-index: 9999;
+  margin-bottom: 0;
 }
 
 .suggestedCarsPage.suggested-cars .col-md-3 {
@@ -7602,6 +7605,9 @@ margin-top: -3px;
 }
 .dealer-cars .back-btn{
   float: left;
+  position: relative;
+  z-index: 9999;
+  margin-bottom: 0;
 }
 
 
