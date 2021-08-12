@@ -12,7 +12,7 @@ import StateAndCity from '../../../Component/StateAndCity/StateAndCity'
 import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from 'react-redux';
-
+import Loading from '../../../Component/Loading/Loading';
 
 const EditLegalAccount = () => {
     const history = useHistory();
@@ -43,7 +43,7 @@ const EditLegalAccount = () => {
     const [dealershipLicenseexpError, setDealershipLicenseexpError] = useState("");
     const [taxidexpError, setTaxidexpError] = useState("");
     const [stateAndCityError, setStateAndCityError] = useState("")
-
+    const [loading,setLoading] = useState(true);
     const [isOpen, setIsOpen] = useState(false);
  
     const togglePopup = () => {
@@ -269,14 +269,15 @@ const EditLegalAccount = () => {
         setTaxidexp(new Date(res.data.data[0].tax_id_exp));
         setAccountObj(res.data.data[0]);
         reset(res.data.data[0]);
-      
+        setLoading(false);
         
     })
         .catch(err => { console.log(err); });
     }, [reset]);
+    
     return (
         <div>
-          
+          {loading?<Loading/>:
             <main id="main" className="inner-page">
             <div id="addaddress" className="addaddress_block">
             <div className="container" >
@@ -412,7 +413,7 @@ const EditLegalAccount = () => {
                     popupActionPath={popupActionPath}
                 />}
             </main>
-
+}
         </div>
 
 

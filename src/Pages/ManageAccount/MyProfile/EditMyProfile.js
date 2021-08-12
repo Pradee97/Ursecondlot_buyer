@@ -11,7 +11,7 @@ import ls from 'local-storage';
 import PhoneInput from 'react-phone-number-input/input';
 import FileBase64 from 'react-file-base64';
 import { useDispatch, useSelector } from 'react-redux';
-
+import Loading from '../../../Component/Loading/Loading';
 
 const EditMyProfile = () => {
     const history = useHistory();
@@ -45,6 +45,9 @@ const EditMyProfile = () => {
     const [image,setImage] = useState("");
     const [doc, setDoc] = useState("");
     const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
+    const buyer_id=JSON.parse(loggedInBuyerId).buyer_id;
+    const buyer_dealer_id=JSON.parse(loggedInBuyerId).buyer_dealer_id;
+    const [loading,setLoading] = useState(true);
 
     const togglePopup = () => {
         setIsOpen(!isOpen);
@@ -65,7 +68,7 @@ const EditMyProfile = () => {
 
     async function fetchMyProfileDetails() {
         let request = {
-            buyer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_id,
+            buyer_id: buyer_dealer_id,
         };
         
         const state = API.post('buyer_profile/condition',request);
@@ -150,7 +153,7 @@ const EditMyProfile = () => {
             address: address,
             active:1,
             image:doc===""?doc:doc.length>0?doc:[doc],
-            updatedBy:JSON.parse(loggedInBuyerId).buyer_id
+            updatedBy:buyer_id
            
         };
         API
@@ -198,7 +201,7 @@ const EditMyProfile = () => {
     useEffect(() => {
         //fetchMyProfileDetails();
         let request = {
-            buyer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_id,
+            buyer_id: buyer_dealer_id,
         };
         
         const state = API.post('buyer_profile/condition',request);
@@ -217,10 +220,11 @@ const EditMyProfile = () => {
             setMyProfileObj(res.data.data[0]);
             reset(res.data.data[0]);
             setImage(res.data.data[0].image);
+            // setLoading(false);
            
         })
             .catch(err => { console.log(err); });
-    }, [reset]);
+    }, [reset,buyer_id,buyer_dealer_id]);
     function handleOnChange(value) {
         setPrimaryPhone(value);
      }
@@ -229,7 +233,7 @@ const EditMyProfile = () => {
      }
     return (
         <div>
-        
+        {/* {loading?<Loading/>: */}
             <main id="main" className="inner-page">
             <div id="addaddress" className="addaddress_block">
             <div className="container" >
@@ -387,7 +391,7 @@ const EditMyProfile = () => {
                     popupActionPath={popupActionPath}
                 />}
             </main>
-
+{/* } */}
         </div>
 
 
