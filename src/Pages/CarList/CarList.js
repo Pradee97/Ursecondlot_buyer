@@ -185,7 +185,7 @@ const CarList = () => {
                                 <h2>Suggested cars</h2>
                             </div>
                             <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
-                            {suggestedCarDetail.length>0?suggestedCarDetail.slice(0, 4)
+                            {suggestedCarDetail?.length>0?suggestedCarDetail?.slice(0, 4)
                             .map((item) =>
                             
                                 <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
@@ -235,7 +235,7 @@ const CarList = () => {
                             </div>
 
                             <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
-                            {carInventoryDetail.length>0?carInventoryDetail.slice(0, 4)
+                            {carInventoryDetail?.length>0?carInventoryDetail?.slice(0, 4)
                             .map((item,index) =>
                                 <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                                     <div className="car-item">

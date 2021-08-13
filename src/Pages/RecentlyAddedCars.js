@@ -4,7 +4,7 @@ import API from "../Services/BaseService";
 import { useHistory, useParams } from "react-router-dom";
 import { useState } from 'react';
 import { useEffect } from 'react';
-import lock from '../../src/assets/img/locked.png';
+import lock from '../../src/assets/img/lock.png';
 import locked from '../../src/assets/img/locked.png';
 import Loading from '../Component/Loading/Loading';
 import { useDispatch, useSelector } from 'react-redux';
