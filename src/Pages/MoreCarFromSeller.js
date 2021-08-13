@@ -9,7 +9,10 @@ import gasolinePump from '../assets/img/gasolinePump.svg';
 import locked from '../../src/assets/img/locked.png';
 import { useDispatch, useSelector } from 'react-redux';
 import CarListAction from './CarList/CarListAction';
+import Loading from"../Component/Loading/Loading";
+
 const MoreCarFromSeller = () =>{
+
   const dispatch = useDispatch();
     const { id } = useParams();
     const [sellerCarDetail,setSellerCarDetail]=useState([]);
@@ -17,6 +20,7 @@ const MoreCarFromSeller = () =>{
     console.log("id from cardetail",id);
     const [data,setData]=useState("");
     const [moreCarFlag,setMoreCarFlag]=useState(false);
+    const [loading,setLoading] = useState(true);
 
     const getMoreCarFromSeller=()=>{
 
@@ -30,6 +34,7 @@ const MoreCarFromSeller = () =>{
         console.log("seller ====response",resp.data.data);
         setSellerCarDetail(resp.data.data);
         console.log("Seller car Inventory Detail",resp.data.data);
+        setLoading(false);
     
     })
 }
@@ -104,7 +109,7 @@ useEffect(() => {
     
 return(
     <div>
-        
+        {loading?<Loading/>:
         <main id="main" class="inner-page-cars">
     
 				
@@ -187,7 +192,7 @@ return(
     </section>
 
   </main>
-
+}
     </div>
 )
 

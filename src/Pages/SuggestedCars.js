@@ -50,6 +50,13 @@ const SuggestedCars = () => {
 	const [bodyStyleSearchToggle,setBodyStyleSearchToggle] = useState(0);
 	const [transmissionSearchToggle,setTransmissionSearchToggle] = useState(0);
 	const [driveTrainSearchToggle,setDriveTrainSearchToggle] = useState(0);
+	const [stateNameList, setStateNameList] = useState([]);
+	const [make,setMake] = useState("");
+	const [bodyStyle,setBodyStyle] = useState("");
+	const [reset,setReset] = useState(true);
+	const [viewMoreState,setViewMoreState]=useState(false);
+	const [viewMoreMake,setViewMoreMake]=useState(false);
+	const [viewMoreBodyStyle,setViewMoreBodyStyle]=useState(false);
 
 	//const [checked, setChecked] = useState(false)
     const getrecentCarList=()=>{
@@ -212,13 +219,18 @@ const SuggestedCars = () => {
         console.log("/////////=====",e.target.value)
       }
       
-   const reset=()=>{
-	setToMileage("");
-	setFromMIleage("");
-	setToYear("");
-	setFromYear("");
+//    const reset=()=>{
+// 	setToMileage("");
+// 	setFromMIleage("");
+// 	setToYear("");
+// 	setFromYear("");
 	
-   }
+//    }
+
+const clear = () => {
+	console.log("clearrrrrrrrrr")
+	setReset(false);
+}
       
       const searchCarDetail = () => {
         
@@ -399,6 +411,46 @@ function toggleDriveTrainSearch(){
 	setDriveTrainSearchToggle(!driveTrainSearchToggle)
 }
 
+const getState = () => {
+	let request = {
+		country_id: 1
+	};
+	const state = API.post('state/condition', request);
+	state.then(res => {
+		setStateNameList(res.data.data);
+	
+	})
+		.catch(err => { console.log(err); });
+}
+
+const getMake = () => {
+	
+	const state = API.post('car_make/condition');
+	state.then(res => {
+		setMake(res.data.data);
+	
+	})
+		.catch(err => { console.log(err); });
+}
+
+const getBodyStyle = () => {
+	
+	const state = API.post('car_bodystyle/condition');
+	state.then(res => {
+		setBodyStyle(res.data.data);
+	
+	})
+		.catch(err => { console.log(err); });
+}
+
+useEffect(() => {
+
+	getState();
+	getMake();
+	getBodyStyle();
+   
+},[reset]);
+
     return(
         <div>
             {loading?<Loading/>:
@@ -424,7 +476,7 @@ function toggleDriveTrainSearch(){
 					
 						<div class="leftonsidebox">
 							<div class="filtersblock">
-								<h3>Filters<span><a href="#" onClick={reset}>Reset</a></span></h3>
+								<h3>Filters<span><a href="#" onClick={clear}>Reset</a></span></h3>
 								
 								
 							</div>
@@ -452,36 +504,41 @@ function toggleDriveTrainSearch(){
 									</div>
 								</div>
 							</div> */}
-						
-						
-							<div class="statesblock">
+						<div class="statesblock">
+
 								<h4>States<span ><img   onClick={toggleStateSearch} src={arrowmark}/></span></h4>
-								{stateSearchToggle?(<div class="inner">
-									<div class="form-group input-group">
-										<input type="checkbox" id="florida" value="florida" onClick={concatStateSearch}/>
-										<label for="florida">Florida</label>
-									</div>
-									<div class="form-group input-group ">
-										<input type="checkbox" id="california" value="california" onClick={concatStateSearch}/>
-										<label for="california">California</label>
-									</div>
-									<div class="form-group input-group ">
-										<input type="checkbox" id="delaware" value="delaware" onClick={concatStateSearch}/>
-										<label for="delaware">Delaware</label>
-									</div>
-									<div class="form-group input-group ">
-										<input type="checkbox" id="newmexico" value="newmexico" onClick={concatStateSearch}/>
-										<label for="newmexico">New mexico</label>           
-									</div>
-									<div class="form-group input-group ">
-										<input type="checkbox" id="colorado" value="colorado" onClick={concatStateSearch}/>
-										<label for="colorado">Colorado</label>
-									</div>
-									<div class="form-group input-group ">
-										<input type="checkbox" id="washington" value="washington" onClick={concatStateSearch}/>
-										<label for="washington">Washington</label>
-									</div>
-								</div>):""}
+
+								{stateSearchToggle?
+								<div class="inner">
+									{viewMoreState?
+
+										(stateNameList.length>0?stateNameList.map((stateName) =>
+											
+												<div class="form-group input-group ">
+													<input type="checkbox" id={stateName.state_name} value={stateName.state_name} onClick={concatStateSearch}/>
+													<label for={stateName.state_name}>{stateName.state_name}</label>
+												</div>
+												
+											)
+											:""):
+											
+								
+										(stateNameList.length>0?stateNameList.slice(0,6).map((stateName) =>
+										<div>
+											<div class="form-group input-group ">
+												<input type="checkbox" id={stateName.state_name} value={stateName.state_name} onClick={concatStateSearch}/>
+												<label for={stateName.state_name}>{stateName.state_name}</label>
+											</div>
+										</div>
+										):""	)}
+
+									{viewMoreState?
+										<div class="viewblock"><a href="JavaScript:void(0)" onClick={()=>setViewMoreState(false)}>View Less</a></div>:
+										<div class="viewblock"><a href="JavaScript:void(0)" onClick={()=>setViewMoreState(true)}>View More</a></div>
+									}
+
+									</div>:""}
+							
 							</div>
 							
 							<div class="groupblock">
@@ -603,7 +660,8 @@ function toggleDriveTrainSearch(){
 							
 							<div class="mileageblock">
 								<h4>Mileage<span><img onClick={toggleMileageSearch} src={arrowmark}/></span></h4>
-								{mileageSearchToggle?(<div class="inner">
+								{mileageSearchToggle?(
+								<div class="inner">
 									<div class="row">
 										<div class="input-group col-lg-6">
 											<input class="form-control border-end-0 border" type="text"  id="from-mileage" placeholder="From" value={fromMileage} onChange={(e)=>setFromMIleage(e.target.value)} />
@@ -618,33 +676,36 @@ function toggleDriveTrainSearch(){
 							
 							<div class="makeblock">
 								<h4>Make<span><img onClick={toggleMakeSearch} src={arrowmark}/></span></h4>
-								{makeSearchToggle?(<div class="inner">
-									<div class="form-group input-group ">
-										<input type="checkbox" id="chevrolet" value="Chevrolet" onClick={concatMakeSearch}/>
-										<label for="chevrolet">Chevrolet</label>
-									</div>
-									<div class="form-group input-group ">
-										<input type="checkbox" value="ford" id="ford" onClick={concatMakeSearch}/>
-										<label for="ford">Ford</label>
-									</div>
-									<div class="form-group input-group ">
-										<input type="checkbox" id="toyota" value="toyota" onClick={concatMakeSearch}/>
-										<label for="toyota">Toyota</label>
-									</div>
-									<div class="form-group input-group ">
-										<input type="checkbox" id="dodge" value="dodge" onClick={concatMakeSearch}/>
-										<label for="dodge">Dodge</label>
-									</div>
-									<div class="form-group input-group ">
-										<input type="checkbox" id="nissan" value="nissan" onClick={concatMakeSearch}/>
-										<label for="nissan">Nissan</label>
-									</div>
-									<div class="form-group input-group ">
-										<input type="checkbox" id="honda" value="honda" onClick={concatMakeSearch}/>
-										<label for="honda">Honda</label>
-									</div>
-									<div class="viewblock"><a href="#">View More</a></div>
-								</div>):""}
+								{makeSearchToggle?
+								<div class="inner">
+									{viewMoreMake?
+
+										(make.length>0?make.map((make) =>
+											
+												<div class="form-group input-group ">
+													<input type="checkbox" id={make.car_name} value={make.car_name} onClick={concatMakeSearch}/>
+													<label for={make.car_name} >{make.car_name}</label>
+												</div>
+												
+											)
+											:""):
+											
+								
+										(make.length>0?make.slice(0,6).map((make) =>
+										
+										<div>
+											<div class="form-group input-group ">
+												<input type="checkbox" id={make.car_name} value={make.car_name} onClick={concatMakeSearch}/>
+												<label for={make.car_name} >{make.car_name}</label>
+											</div>
+										
+										</div>
+										):""	)}
+										{viewMoreMake?
+										<div class="viewblock"><a href="JavaScript:void(0)" onClick={()=>setViewMoreMake(false)}>View Less</a></div>:
+										<div class="viewblock"><a href="JavaScript:void(0)" onClick={()=>setViewMoreMake(true)}>View More</a></div>}
+									</div>:""}
+								
 							</div>
 							
 							
@@ -683,54 +744,38 @@ function toggleDriveTrainSearch(){
 									</div>
 								</div>):""}
 							</div>
+
 							<div class="bodystyleblock">
 								<h4>Body Style<span><img onClick={toggleBodyStyleSearch} src={arrowmark}/></span></h4>
-								{bodyStyleSearchToggle?(<div class="inner">
-									<div class="form-group input-group ">
-										<input type="checkbox" id="car" value="car" onClick={concatBodyTypeSearch}/>
-										<label for="car">Car</label>
-									</div>
-									<div class="form-group input-group ">
-										<input type="checkbox" id="suv" value="SUV" onClick={concatBodyTypeSearch}/>
-										<label for="suv">SUV</label>
-									</div>
-									<div class="form-group input-group ">
-										<input type="checkbox" id="truck" value="truck" onClick={concatBodyTypeSearch}/>
-										<label for="truck">Truck</label>
-									</div>
-									<div class="form-group input-group ">
-										<input type="checkbox" id="van" value="van" onClick={concatBodyTypeSearch}/>
-										<label for="van">Van</label>
-									</div>
-									<div class="form-group input-group ">
-										<input type="checkbox" id="minivan" value="miniVan" onClick={concatBodyTypeSearch}/>
-										<label for="minivan">Minivan</label>
-									</div>
-									<div class="form-group input-group ">
-										<input type="checkbox" id="trailer" value="trailer" onClick={concatBodyTypeSearch}/>
-										<label for="trailer">Trailer</label>
-									</div>
-									<div class="form-group input-group ">
-										<input type="checkbox" id="rv" value="RV" onClick={concatBodyTypeSearch}/>
-										<label for="rv">RV</label>
-									</div>
-									<div class="form-group input-group ">
-										<input type="checkbox" id="semi" value="semi" onClick={concatBodyTypeSearch}/>
-										<label for="semi">Semi</label>
-									</div>
-									<div class="form-group input-group ">
-										<input type="checkbox" id="tractor" value="tractor" onClick={concatBodyTypeSearch}/>
-										<label for="tractor">Tractor</label>
-									</div>
-									<div class="form-group input-group ">
-										<input type="checkbox" id="semitractor" value="Semi Tractor" onClick={concatBodyTypeSearch}/>
-										<label for="semitractor">Semi Tractor</label>
-									</div>
-									<div class="form-group input-group ">
-										<input type="checkbox" id="other" value="other" onClick={concatBodyTypeSearch}/>
-										<label for="other">Other</label>
-									</div>
-								</div>):""}
+
+								{bodyStyleSearchToggle?
+								<div class="inner">
+									{viewMoreBodyStyle?
+
+										(bodyStyle.length>0?bodyStyle.map((bodyStyle) =>
+											
+												<div class="form-group input-group ">
+													<input type="checkbox" id={bodyStyle.style_name} value={bodyStyle.style_name} onClick={concatBodyTypeSearch}/>
+													<label for={bodyStyle.style_name} >{bodyStyle.style_name}</label>
+												</div>
+												
+											)
+											:""):
+											
+								
+										(bodyStyle.length>0?bodyStyle.slice(0,6).map((bodyStyle) =>
+										<div>
+											<div class="form-group input-group ">
+												<input type="checkbox" id={bodyStyle.style_name} value={bodyStyle.style_name} onClick={concatBodyTypeSearch}/>
+												<label for={bodyStyle.style_name} >{bodyStyle.style_name}</label>
+											</div>
+											
+										</div>
+										):""	)}
+											{viewMoreBodyStyle?
+											<div class="viewblock"><a href="JavaScript:void(0)" onClick={()=>setViewMoreBodyStyle(false)}>View Less</a></div>:
+											<div class="viewblock"><a href="JavaScript:void(0)" onClick={()=>setViewMoreBodyStyle(true)}>View More</a></div>}
+									</div>:""}
 							</div>
 							
 							<div class="transmissionblock">
