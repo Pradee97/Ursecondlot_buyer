@@ -424,10 +424,8 @@ const getState = () => {
 }
 
 const getMake = () => {
-	let request = {
-		country_id: 1
-	};
-	const state = API.post('car_make/condition', request);
+	
+	const state = API.post('car_make/condition');
 	state.then(res => {
 		setMake(res.data.data);
 	
@@ -436,10 +434,8 @@ const getMake = () => {
 }
 
 const getBodyStyle = () => {
-	let request = {
-		country_id: 1
-	};
-	const state = API.post('car_bodystyle/condition', request);
+	
+	const state = API.post('car_bodystyle/condition');
 	state.then(res => {
 		setBodyStyle(res.data.data);
 	
@@ -454,6 +450,7 @@ useEffect(() => {
 	getBodyStyle();
    
 },[reset]);
+
     return(
         <div>
             {loading?<Loading/>:
@@ -747,6 +744,7 @@ useEffect(() => {
 									</div>
 								</div>):""}
 							</div>
+
 							<div class="bodystyleblock">
 								<h4>Body Style<span><img onClick={toggleBodyStyleSearch} src={arrowmark}/></span></h4>
 
