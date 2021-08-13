@@ -13,7 +13,7 @@ import ReactPlayer from 'react-player';
 import Loading from '../Component/Loading/Loading';
 const Inspection=()=>{
 
-    
+     
     const history = useHistory();
     const dispatch = useDispatch();
     const [loading,setLoading] = useState(true);
