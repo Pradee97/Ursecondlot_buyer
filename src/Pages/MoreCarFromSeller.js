@@ -9,7 +9,10 @@ import gasolinePump from '../assets/img/gasolinePump.svg';
 import locked from '../../src/assets/img/locked.png';
 import { useDispatch, useSelector } from 'react-redux';
 import CarListAction from './CarList/CarListAction';
+import Loading from"../Component/Loading/Loading";
+
 const MoreCarFromSeller = () =>{
+
   const dispatch = useDispatch();
     const { id } = useParams();
     const [sellerCarDetail,setSellerCarDetail]=useState([]);
@@ -17,6 +20,7 @@ const MoreCarFromSeller = () =>{
     console.log("id from cardetail",id);
     const [data,setData]=useState("");
     const [moreCarFlag,setMoreCarFlag]=useState(false);
+    const [loading,setLoading] = useState(true);
 
     const getMoreCarFromSeller=()=>{
 
@@ -30,6 +34,7 @@ const MoreCarFromSeller = () =>{
         console.log("seller ====response",resp.data.data);
         setSellerCarDetail(resp.data.data);
         console.log("Seller car Inventory Detail",resp.data.data);
+        setLoading(false);
     
     })
 }
@@ -104,7 +109,7 @@ useEffect(() => {
     
 return(
     <div>
-        
+        {loading?<Loading/>:
         <main id="main" class="inner-page-cars">
     
 				
@@ -112,13 +117,13 @@ return(
 	<div id="dealer-cars" class="dealer-cars">
       <div class="container-fluid aos-init aos-animate">
 
-      
+      <div class="back-btn">
+				<a class="back-btn-primary" href="/carlist"><i class="bx bx-chevron-left"></i> Back</a>
+			</div>
 
       {/* <div class="container-fluid aos-init aos-animate" data-aos="fade-up"> */}
         <div class="section-title">
-        <div>
-				<a class="back-btn-primary" href="/carlist"><i class="bx bx-chevron-left"></i> Back</a>
-			</div>
+       
           <h2>More cars from the dealer</h2>          
         </div>
         {/* <div className="filtersblock  col-lg-6 SalesRepsSearch  row" >
@@ -187,7 +192,7 @@ return(
     </section>
 
   </main>
-
+}
     </div>
 )
 

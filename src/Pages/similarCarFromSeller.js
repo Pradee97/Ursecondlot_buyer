@@ -9,13 +9,18 @@ import gasolinePump from '../assets/img/gasolinePump.svg';
 import locked from '../../src/assets/img/locked.png';
 import { useDispatch, useSelector } from 'react-redux';
 import CarListAction from './CarList/CarListAction';
+import Loading from"../Component/Loading/Loading";
+
 const SimilarCarFromSeller = () =>{
+
     const { id } = useParams();
     const [similarCarDetail,setSimilarCarDetail]=useState([]);
     const history = useHistory();
     const [similarCarFromSellerFlag,setSimilarCarFromSellerFlag]=useState(false);
     console.log("id from cardetail",id);
     const dispatch = useDispatch();
+    const [loading,setLoading] = useState(true);
+
     const getMoreSimilarCars=()=>{
     let request={
         "make":id,
@@ -27,6 +32,7 @@ const SimilarCarFromSeller = () =>{
         console.log("similar cars from other dealers ====response",resp.data.data);
         setSimilarCarDetail(resp.data.data);
         console.log("similar car  Detail",resp.data.data);
+        setLoading(false);
     
     })
 }
@@ -69,7 +75,7 @@ useEffect(() => {
 
 return(
     <div>
-        
+         {loading?<Loading/>:
         <main id="main" class="inner-page-cars">
     
 				
@@ -81,7 +87,7 @@ return(
 
       {/* <div class="container-fluid aos-init aos-animate" data-aos="fade-up"> */}
         <div class="section-title">
-        <div >
+        <div class="back-btn">
 				<a class="back-btn-primary" href="/carlist"><i class="bx bx-chevron-left"></i> Back</a>
 			</div>
           <h2>SIMILAR CARS FROM OTHER DEALER</h2>          
@@ -143,7 +149,7 @@ return(
     </section>
 
   </main>
-
+}
     </div>
 )
 
