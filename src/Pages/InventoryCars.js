@@ -4,7 +4,7 @@ import API from "../Services/BaseService";
 import { useHistory, useParams } from "react-router-dom";
 import { useState } from 'react';
 import { useEffect } from 'react';
-import lock from '../../src/assets/img/locked.png';
+import lock from '../../src/assets/img/lock.png';
 import locked from '../../src/assets/img/locked.png';
 import Loading from '../Component/Loading/Loading';
 import { useDispatch, useSelector } from 'react-redux';
@@ -394,10 +394,8 @@ const clear = () => {
 }
 
 const getState = () => {
-	let request = {
-		country_id: 1
-	};
-	const state = API.post('state/condition', request);
+	
+	const state = API.post('stateList/condition');
 	state.then(res => {
 		setStateNameList(res.data.data);
 	
@@ -465,7 +463,7 @@ useEffect(() => {
 							</div>
 							
 							
-							{/* <div class="sortbyblock">
+							<div class="sortbyblock">
 								<h4>Sort by</h4>
 								<div class="row">
 									<div class="form-group input-group col-lg-6">
@@ -486,8 +484,150 @@ useEffect(() => {
 										<label for="classic">Classic</label>
 									</div>
 								</div>
-							</div> */}
+							</div>
 						
+							<div class="yearblock">
+								<h4>Year<span><img onClick={toggleYearSearch} src={arrowmark}/></span></h4>
+								{yearSearchToggle?(<div class="inner">
+									<div class="row">
+										<div class="input-group col-lg-6">
+											<input class="form-control border-end-0 border" type="text"  id="from-input" value={fromYear} maxLength="4" placeholder="From" onChange={(e)=>setFromYear(e.target.value)}/>
+										</div>
+										<div class="input-group col-lg-6">
+											<input class="form-control border-end-0 border" type="text" value={toYear} id="to-input" placeholder="To" maxLength="4" onChange={(e)=>setToYear(e.target.value)}/>
+										</div>
+									</div>
+								</div>
+							):""}
+							</div>
+
+							<div class="mileageblock">
+								<h4>Mileage<span><img onClick={toggleMileageSearch} src={arrowmark}/></span></h4>
+								{mileageSearchToggle?(<div class="inner">
+									<div class="row">
+										<div class="input-group col-lg-6">
+											<input class="form-control border-end-0 border" type="text"  id="from-mileage" placeholder="From" value={fromMileage} onChange={(e)=>setFromMIleage(e.target.value)} />
+										</div>
+										<div class="input-group col-lg-6">
+											<input class="form-control border-end-0 border" type="text"  id="to-mileage" placeholder="To" value={toMileage} onChange={(e)=>setToMileage(e.target.value)} />
+										</div>
+									</div>
+								</div>
+							):""}
+							</div>
+
+							<div class="makeblock">
+								<h4>Make<span><img onClick={toggleMakeSearch} src={arrowmark}/></span></h4>
+								{makeSearchToggle?
+								<div class="inner">
+									{viewMoreMake?
+
+										(make.length>0?make.map((make) =>
+											
+												<div class="form-group input-group ">
+													<input type="checkbox" id={make.car_name} value={make.car_name} onClick={concatMakeSearch}/>
+													<label for={make.car_name} >{make.car_name}</label>
+												</div>
+												
+											)
+											:""):
+											
+								
+										(make.length>0?make.slice(0,6).map((make) =>
+										
+										<div>
+											<div class="form-group input-group ">
+												<input type="checkbox" id={make.car_name} value={make.car_name} onClick={concatMakeSearch}/>
+												<label for={make.car_name} >{make.car_name}</label>
+											</div>
+										
+										</div>
+										):""	)}
+										{viewMoreMake?
+										<div class="viewblock"><a href="JavaScript:void(0)" onClick={()=>setViewMoreMake(false)}>View Less</a></div>:
+										<div class="viewblock"><a href="JavaScript:void(0)" onClick={()=>setViewMoreMake(true)}>View More</a></div>}
+									</div>:""}
+								
+							</div>
+
+							<div class="drivetrainblock">
+								<h4>Drivetrain<span><img onClick={toggleDriveTrainSearch} src={arrowmark}/></span></h4>
+								{driveTrainSearchToggle?(<div class="inner">
+									<div class="form-group input-group ">
+										<input type="checkbox" id="twdrive" value="two wheel drive" onClick={concatDriveTrainSearch}/>
+										<label for="twdrive">Two wheel Drive</label>
+									</div>
+									<div class="form-group input-group ">
+										<input type="checkbox" id="fwdrive" value="front wheel drive" onClick={concatDriveTrainSearch}/>
+										<label for="fwdrive">Front Wheel drive</label>
+									</div>
+									<div class="form-group input-group ">
+										<input type="checkbox" id="rwdrive" value="rear wheel drive" onClick={concatDriveTrainSearch}/>
+										<label for="rwdrive">Rear Wheel Drive</label>
+									</div>
+									<div class="form-group input-group ">
+										<input type="checkbox" id="fowdrive" value="four wheel drive" onClick={concatDriveTrainSearch}/>
+										<label for="fowdrive">Four Wheel Drive</label>
+									</div>
+									<div class="form-group input-group ">
+										<input type="checkbox" id="awdrive" value="all wheel drive" onClick={concatDriveTrainSearch}/>
+										<label for="awdrive">All Wheel Drive</label>
+									</div>
+								</div>
+						):""}
+							</div>
+
+							<div class="transmissionblock">
+								<h4>Transmission<span><img onClick={toggleTransmissionSearch} src={arrowmark}/></span></h4>
+								{transmissionSearchToggle?(<div class="inner">
+									<div class="form-group input-group ">
+										<input type="checkbox" id="manual" value="manual" onClick={concatTransmissionSearch} />
+										<label for="manual">Manual</label>
+									</div>
+									<div class="form-group input-group ">
+										<input type="checkbox" id="automatic" value="automatic" onClick={concatTransmissionSearch}/>
+										<label for="automatic">Automatic</label>
+									</div>
+									<div class="form-group input-group ">
+										<input type="checkbox" id="otherissues" value="other" onClick={concatTransmissionSearch}/>
+										<label for="otherissues">Other</label>
+									</div>
+								</div>
+							):""}
+							</div>
+
+							<div class="bodystyleblock">
+								<h4>Body Style<span><img onClick={toggleBodyStyleSearch} src={arrowmark}/></span></h4>
+
+								{bodyStyleSearchToggle?
+								<div class="inner">
+									{viewMoreBodyStyle?
+
+										(bodyStyle.length>0?bodyStyle.map((bodyStyle) =>
+											
+												<div class="form-group input-group ">
+													<input type="checkbox" id={bodyStyle.style_name} value={bodyStyle.style_name} onClick={concatBodyTypeSearch}/>
+													<label for={bodyStyle.style_name} >{bodyStyle.style_name}</label>
+												</div>
+												
+											)
+											:""):
+											
+								
+										(bodyStyle.length>0?bodyStyle.slice(0,6).map((bodyStyle) =>
+										<div>
+											<div class="form-group input-group ">
+												<input type="checkbox" id={bodyStyle.style_name} value={bodyStyle.style_name} onClick={concatBodyTypeSearch}/>
+												<label for={bodyStyle.style_name} >{bodyStyle.style_name}</label>
+											</div>
+											
+										</div>
+										):""	)}
+											{viewMoreBodyStyle?
+											<div class="viewblock"><a href="JavaScript:void(0)" onClick={()=>setViewMoreBodyStyle(false)}>View Less</a></div>:
+											<div class="viewblock"><a href="JavaScript:void(0)" onClick={()=>setViewMoreBodyStyle(true)}>View More</a></div>}
+									</div>:""}
+							</div>
 						
 						<div class="statesblock">
 
@@ -526,25 +666,6 @@ useEffect(() => {
 							
 							</div>
 							
-							<div class="groupblock">
-								<h4>Group<span><img onClick={toggleGroupSearch} src={arrowmark}/></span></h4>
-								{groupSearchToggle?(<div class="inner">
-											<div class="form-group input-group ">
-												<input type="checkbox" id="deals" value="Deals Almost Close" onClick={onGroupClick}/>
-												<label for="deals">Deals Almost Close</label>
-											</div>
-											<div class="form-group input-group ">
-												<input type="checkbox" id="sellersflo" value="Sellers I Follow" onClick={onGroupClick}/>
-												<label for="sellersflo">Sellers I Follow</label>
-											</div>
-											<div class="form-group input-group ">
-												<input type="checkbox" id="sellerstit" value="Seller Has Title" onClick={onGroupClick}/>
-												<label for="sellerstit">Seller Has Title</label>
-											</div>
-										</div>
-								):""}
-							</div>
-							
 							<div class="salestypesblock">
 								<h4>Sales Types<span><img onClick={toggleSalesTypesSearch} src={arrowmark}/></span></h4>
 								{salesTypesSearchToggle?(<div class="inner">
@@ -565,9 +686,69 @@ useEffect(() => {
 									</div>
 								):""}
 							</div>
-							
+
+							{/* <div class="sellertypeblock">
+								<h4>Seller Type<span><img onClick={toggleSellerTypeSearch} src={arrowmark}/></span></h4>
+								{sellerTypeSearchToggle?(<div class="inner">
+									<div class="radio input-group">
+										<input id="radio-any5" name="sellerTypeRadio" type="radio" />
+										<label for="radio-any5" class="radio-label">Any</label>
+									</div>
+
+									<div class="radio input-group">
+										<input id="radio-franchise" name="sellerTypeRadio" type="radio"/>
+										<label  for="radio-franchise" class="radio-label">Franchise</label>
+									</div>
+									<div class="radio input-group">
+										<input id="radio-independent" name="sellerTypeRadio" type="radio"/>
+										<label  for="radio-independent" class="radio-label">Independent</label>
+									</div>
+								</div>
+							):""}
+
+								</div> */}
+
+							<div class="groupblock">
+								<h4>Seller<span><img onClick={toggleGroupSearch} src={arrowmark}/></span></h4>
+								{groupSearchToggle?(<div class="inner">
+											{/* <div class="form-group input-group ">
+												<input type="checkbox" id="deals" value="Deals Almost Close" onClick={onGroupClick}/>
+												<label for="deals">Deals Almost Close</label>
+											</div> */}
+											<div class="form-group input-group ">
+												<input type="checkbox" id="sellersflo" value="Sellers I Follow" onClick={onGroupClick}/>
+												<label for="sellersflo">Sellers I Follow</label>
+											</div>
+											<div class="form-group input-group ">
+												<input type="checkbox" id="sellerstit" value="Seller Has Title" onClick={onGroupClick}/>
+												<label for="sellerstit">Seller Has Title</label>
+											</div>
+										</div>
+								):""}
+							</div>
+
+							<div class="vehiclehistoryblock">
+								<h4>Vehicle History<span><img onClick={toggleVehicleHistorySearch} src={arrowmark}/></span></h4>
+								{vehicleHistorySearchToggle?(<div class="inner">
+									<div class="radio input-group">
+										<input id="radio-any4" name="vehicleHistoryRadio" type="radio" value="Any" onClick={onHistoryClick}/>
+										<label for="radio-any4" class="radio-label">Any</label>
+									</div>
+
+									<div class="radio input-group">
+										<input id="radio-noreport" name="vehicleHistoryRadio" type="radio" value="None reported" onClick={onHistoryClick}/>
+										<label  for="radio-noreport" class="radio-label">None reported</label>
+									</div>
+										
+									<div class="radio input-group">
+										<input id="radio-noeventreport" name="vehicleHistoryRadio" type="radio" value="Events reported" onClick={onHistoryClick}/>
+										<label  for="radio-noeventreport" class="radio-label">Events reported</label>
+									</div>
+								</div>):""}
+							</div>
+
 							<div class="lowerblock">
-								<h4>Lower Engine Noice<span><img onClick={toggleLowerEngineNoiceSearch} src={arrowmark}/></span></h4>
+								<h4>Lower Engine Notice<span><img onClick={toggleLowerEngineNoiceSearch} src={arrowmark}/></span></h4>
 								{lowerEngineNoiceSearchToggle?(<div class="inner">
 										<div class="radio input-group">
 											<input id="radio-any2" name="lowerEngineNoiceRadio" type="radio" value="Any" onClick={onEngineNoiseClick}/>
@@ -586,7 +767,7 @@ useEffect(() => {
 									</div>
 								):""}
 							</div>
-							
+
 							<div class="transmissionissblock">
 								<h4>Transmission Issue<span><img onClick={toggleTransmissionIssueSearch} src={arrowmark}/></span></h4>
 								{transmissionIssueSearchToggle?(<div class="inner">
@@ -607,116 +788,10 @@ useEffect(() => {
 									</div>
 								):""}
 							</div>
-							
-							<div class="vehiclehistoryblock">
-								<h4>Vehicle History<span><img onClick={toggleVehicleHistorySearch} src={arrowmark}/></span></h4>
-								{vehicleHistorySearchToggle?(<div class="inner">
-									<div class="radio input-group">
-										<input id="radio-any4" name="vehicleHistoryRadio" type="radio" value="Any" onClick={onHistoryClick}/>
-										<label for="radio-any4" class="radio-label">Any</label>
-									</div>
 
-									<div class="radio input-group">
-										<input id="radio-noreport" name="vehicleHistoryRadio" type="radio" value="None reported" onClick={onHistoryClick}/>
-										<label  for="radio-noreport" class="radio-label">None reported</label>
-									</div>
-										
-									<div class="radio input-group">
-										<input id="radio-noeventreport" name="vehicleHistoryRadio" type="radio" value="Events reported" onClick={onHistoryClick}/>
-										<label  for="radio-noeventreport" class="radio-label">Events reported</label>
-									</div>
-								</div>):""}
-							</div>
-							
-							<div class="yearblock">
-								<h4>Year<span><img onClick={toggleYearSearch} src={arrowmark}/></span></h4>
-								{yearSearchToggle?(<div class="inner">
-									<div class="row">
-										<div class="input-group col-lg-6">
-											<input class="form-control border-end-0 border" type="text"  id="from-input" value={fromYear} maxLength="4" placeholder="From" onChange={(e)=>setFromYear(e.target.value)}/>
-										</div>
-										<div class="input-group col-lg-6">
-											<input class="form-control border-end-0 border" type="text" value={toYear} id="to-input" placeholder="To" maxLength="4" onChange={(e)=>setToYear(e.target.value)}/>
-										</div>
-									</div>
-								</div>
-							):""}
-							</div>
-							
-							<div class="mileageblock">
-								<h4>Mileage<span><img onClick={toggleMileageSearch} src={arrowmark}/></span></h4>
-								{mileageSearchToggle?(<div class="inner">
-									<div class="row">
-										<div class="input-group col-lg-6">
-											<input class="form-control border-end-0 border" type="text"  id="from-mileage" placeholder="From" value={fromMileage} onChange={(e)=>setFromMIleage(e.target.value)} />
-										</div>
-										<div class="input-group col-lg-6">
-											<input class="form-control border-end-0 border" type="text"  id="to-mileage" placeholder="To" value={toMileage} onChange={(e)=>setToMileage(e.target.value)} />
-										</div>
-									</div>
-								</div>
-							):""}
-							</div>
-							
-							<div class="makeblock">
-								<h4>Make<span><img onClick={toggleMakeSearch} src={arrowmark}/></span></h4>
-								{makeSearchToggle?
-								<div class="inner">
-									{viewMoreMake?
-
-										(make.length>0?make.map((make) =>
-											
-												<div class="form-group input-group ">
-													<input type="checkbox" id={make.car_name} value={make.car_name} onClick={concatMakeSearch}/>
-													<label for={make.car_name} >{make.car_name}</label>
-												</div>
-												
-											)
-											:""):
-											
-								
-										(make.length>0?make.slice(0,6).map((make) =>
-										
-										<div>
-											<div class="form-group input-group ">
-												<input type="checkbox" id={make.car_name} value={make.car_name} onClick={concatMakeSearch}/>
-												<label for={make.car_name} >{make.car_name}</label>
-											</div>
-										
-										</div>
-										):""	)}
-										{viewMoreMake?
-										<div class="viewblock"><a href="JavaScript:void(0)" onClick={()=>setViewMoreMake(false)}>View Less</a></div>:
-										<div class="viewblock"><a href="JavaScript:void(0)" onClick={()=>setViewMoreMake(true)}>View More</a></div>}
-									</div>:""}
-								
-							</div>
-							
-							
-							{/* <div class="sellertypeblock">
-								<h4>Seller Type<span><img onClick={toggleSellerTypeSearch} src={arrowmark}/></span></h4>
-								{sellerTypeSearchToggle?(<div class="inner">
-									<div class="radio input-group">
-										<input id="radio-any5" name="sellerTypeRadio" type="radio" />
-										<label for="radio-any5" class="radio-label">Any</label>
-									</div>
-
-									<div class="radio input-group">
-										<input id="radio-franchise" name="sellerTypeRadio" type="radio"/>
-										<label  for="radio-franchise" class="radio-label">Franchise</label>
-									</div>
-									<div class="radio input-group">
-										<input id="radio-independent" name="sellerTypeRadio" type="radio"/>
-										<label  for="radio-independent" class="radio-label">Independent</label>
-									</div>
-								</div>
-							):""}
-
-														</div> */}
-													
-														<div class="dealershipblock">
-															<h4>Dealership<span><img onClick={toggleDealershipSearch} src={arrowmark}/></span></h4>
-															{dealershipSearchToggle?(<div class="inner">
+							<div class="dealershipblock">
+								<h4>Dealership<span><img onClick={toggleDealershipSearch} src={arrowmark}/></span></h4>
+								{dealershipSearchToggle?(<div class="inner">
 									<div class="radio input-group">
 										<input id="radio-newdealer" name="sellerTypeRadio" type="radio" cheid="car" value="New Car Dealer" onClick={onDealerShipClick}/>
 										<label for="radio-newdealer" class="radio-label">New Car Dealer</label>
@@ -729,84 +804,24 @@ useEffect(() => {
 								</div>):""}
 							</div>
 
-							<div class="bodystyleblock">
-								<h4>Body Style<span><img onClick={toggleBodyStyleSearch} src={arrowmark}/></span></h4>
-
-								{bodyStyleSearchToggle?
-								<div class="inner">
-									{viewMoreBodyStyle?
-
-										(bodyStyle.length>0?bodyStyle.map((bodyStyle) =>
-											
-												<div class="form-group input-group ">
-													<input type="checkbox" id={bodyStyle.style_name} value={bodyStyle.style_name} onClick={concatBodyTypeSearch}/>
-													<label for={bodyStyle.style_name} >{bodyStyle.style_name}</label>
-												</div>
-												
-											)
-											:""):
-											
-								
-										(bodyStyle.length>0?bodyStyle.slice(0,6).map((bodyStyle) =>
-										<div>
+							{/* <div class="groupblock">
+								<h4>Group<span><img onClick={toggleGroupSearch} src={arrowmark}/></span></h4>
+								{groupSearchToggle?(<div class="inner">
 											<div class="form-group input-group ">
-												<input type="checkbox" id={bodyStyle.style_name} value={bodyStyle.style_name} onClick={concatBodyTypeSearch}/>
-												<label for={bodyStyle.style_name} >{bodyStyle.style_name}</label>
+												<input type="checkbox" id="deals" value="Deals Almost Close" onClick={onGroupClick}/>
+												<label for="deals">Deals Almost Close</label>
 											</div>
-											
+											<div class="form-group input-group ">
+												<input type="checkbox" id="sellersflo" value="Sellers I Follow" onClick={onGroupClick}/>
+												<label for="sellersflo">Sellers I Follow</label>
+											</div>
+											<div class="form-group input-group ">
+												<input type="checkbox" id="sellerstit" value="Seller Has Title" onClick={onGroupClick}/>
+												<label for="sellerstit">Seller Has Title</label>
+											</div>
 										</div>
-										):""	)}
-											{viewMoreBodyStyle?
-											<div class="viewblock"><a href="JavaScript:void(0)" onClick={()=>setViewMoreBodyStyle(false)}>View Less</a></div>:
-											<div class="viewblock"><a href="JavaScript:void(0)" onClick={()=>setViewMoreBodyStyle(true)}>View More</a></div>}
-									</div>:""}
-							</div>
-							
-							<div class="transmissionblock">
-								<h4>Transmission<span><img onClick={toggleTransmissionSearch} src={arrowmark}/></span></h4>
-								{transmissionSearchToggle?(<div class="inner">
-									<div class="form-group input-group ">
-										<input type="checkbox" id="manual" value="manual" onClick={concatTransmissionSearch} />
-										<label for="manual">Manual</label>
-									</div>
-									<div class="form-group input-group ">
-										<input type="checkbox" id="automatic" value="automatic" onClick={concatTransmissionSearch}/>
-										<label for="automatic">Automatic</label>
-									</div>
-									<div class="form-group input-group ">
-										<input type="checkbox" id="otherissues" value="other" onClick={concatTransmissionSearch}/>
-										<label for="otherissues">Other</label>
-									</div>
-								</div>
-							):""}
-							</div>
-							
-							<div class="drivetrainblock">
-								<h4>Drivetrain<span><img onClick={toggleDriveTrainSearch} src={arrowmark}/></span></h4>
-								{driveTrainSearchToggle?(<div class="inner">
-									<div class="form-group input-group ">
-										<input type="checkbox" id="twdrive" value="two wheel drive" onClick={concatDriveTrainSearch}/>
-										<label for="twdrive">Two wheel Drive</label>
-									</div>
-									<div class="form-group input-group ">
-										<input type="checkbox" id="fwdrive" value="front wheel drive" onClick={concatDriveTrainSearch}/>
-										<label for="fwdrive">Front Wheel drive</label>
-									</div>
-									<div class="form-group input-group ">
-										<input type="checkbox" id="rwdrive" value="rear wheel drive" onClick={concatDriveTrainSearch}/>
-										<label for="rwdrive">Rear Wheel Drive</label>
-									</div>
-									<div class="form-group input-group ">
-										<input type="checkbox" id="fowdrive" value="four wheel drive" onClick={concatDriveTrainSearch}/>
-										<label for="fowdrive">Four Wheel Drive</label>
-									</div>
-									<div class="form-group input-group ">
-										<input type="checkbox" id="awdrive" value="all wheel drive" onClick={concatDriveTrainSearch}/>
-										<label for="awdrive">All Wheel Drive</label>
-									</div>
-								</div>
-						):""}
-							</div>
+								):""}
+							</div> */}
 						</div>
 					</div>
                             {/* <div className="filtersblock  col-lg-6 SalesRepsSearch  row" >
