@@ -10,7 +10,8 @@ import Loading from '../Component/Loading/Loading';
 import { useDispatch, useSelector } from 'react-redux';
 import CarListAction from './CarList/CarListAction';
 import arrowmark from '../../src/assets/img/arrowmark.jpg';
-
+import SaveSearchPopup from '../Component/Popup/SaveSearchPopup';
+import Popup from '../Component/Popup/Popup';
 
 const Search = () => {
 
@@ -57,9 +58,14 @@ const Search = () => {
 	const [viewMoreState,setViewMoreState]=useState(false);
 	const [viewMoreMake,setViewMoreMake]=useState(false);
 	const [viewMoreBodyStyle,setViewMoreBodyStyle]=useState(false);
-
+	const [isOpen, setIsOpen] = useState(false);
 
 	//const [checked, setChecked] = useState(false)
+
+	const togglePopup = () => {
+        setIsOpen(!isOpen);
+    }
+
     const VehicleSearch=()=>{
 
         let request={
@@ -471,7 +477,7 @@ useEffect(() => {
 							<div class="row content">
 
                             <div class="col-lg-3">
-							<div class="saveSearch"><button class="cta-btn" type="button">Save Search </button></div>
+							<div class="saveSearch"><button class="cta-btn" type="button" onClick={togglePopup}>Save Search </button></div>
 							
 							<div class="leftonsidebox">
 								<div class="filtersblock">
@@ -901,6 +907,15 @@ useEffect(() => {
                     </div>
                </main>
 }
+
+								{isOpen && <Popup
+                                    isClose={false}
+                                    content={<>
+                                        <SaveSearchPopup toggle={togglePopup} />
+                                    </>}
+                                    handleClose={togglePopup}
+                                />}					
+
         </div>
     )
 }
