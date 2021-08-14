@@ -455,10 +455,21 @@ useEffect(() => {
             			<div class="col-lg-3">
 					
 						<div class="leftonsidebox">
-							<div class="filtersblock">
-								<h3>Filters<span><a href="#" onClick={clear} >Reset</a></span></h3>
-								
-								
+						<div class="filtersblock">
+									<h3>Filters<span><a href="#" onClick={clear}>Reset</a></span></h3>	
+	
+									<div class="input-group">
+										<select id="vehiclename1"  class="form-control custom-select browser-default">
+											<option value="Saved Search">Saved Search</option>
+										</select>
+									</div>
+								</div>
+							
+							<div class="distanceBlock">
+								<h4>Distance</h4>
+								<div class="input-group">
+								<input class="form-control" type="text" value="" placeholder="50km" />
+								</div>								
 							</div>
 							
 							
@@ -858,7 +869,7 @@ useEffect(() => {
                                             </div>
 
                                             <div className="cars-prices">
-                                                <a className="cta-btns" href="#">${item.max_bid}</a>
+                                                <a className="cta-btns" href="#">High Bid ${item.max_bid}</a>
                                                 <a className="cta-btns-primary" href="JavaScript:void(0)" >Make Bid</a>
                                             </div>
                                         </div>

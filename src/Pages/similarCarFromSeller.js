@@ -119,7 +119,7 @@ return(
         </div>
 				
 				<div class="cars-prices">
-					<a class="cta-btns" href="">${moreCar.min_bid}</a>
+					<a class="cta-btns" href="">High Bid ${moreCar.min_bid}</a>
 					<a class="cta-btns-primary" href="/makeurbid">Make Bid</a>
 				</div>
               </div>
