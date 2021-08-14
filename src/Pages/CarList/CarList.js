@@ -213,7 +213,7 @@ const CarList = () => {
                                             </div>
 
                                             <div className="cars-prices">
-                                                <a className="cta-btns" href="#">${item.max_bid}</a>
+                                                <a className="cta-btns" href="#">High Bid ${item.max_bid}</a>
                                                 <a className="cta-btns-primary" href="JavaScript:void(0)" onClick={togglePopup} >Make Bid</a>
                                             </div>
                                         </div>
@@ -262,7 +262,7 @@ const CarList = () => {
                                             </div>
 
                                             <div className="cars-prices">
-                                                <a className="cta-btns" href="#">${item.max_bid}</a>
+                                                <a className="cta-btns" href="#">High Bid ${item.max_bid}</a>
                                                 <a className="cta-btns-primary" href="#">Make Bid</a>
                                             </div>
                                         </div>
@@ -312,7 +312,7 @@ const CarList = () => {
                                             </div>
 
                                             <div className="cars-prices">
-                                                <a className="cta-btns" href="#">${item.max_bid}</a>
+                                                <a className="cta-btns" href="#">High Bid ${item.max_bid}</a>
                                                 <a className="cta-btns-primary" href="#">Make Bid</a>
                                             </div>
                                         </div>
@@ -362,7 +362,7 @@ const CarList = () => {
                                     </div>
 
                                     <div className="cars-prices">
-                                        <a className="cta-btns" href="#">${item.max_bid}</a>
+                                        <a className="cta-btns" href="#">High Bid ${item.max_bid}</a>
                                         <a className="cta-btns-primary" href="#">Make Bid</a>
                                     </div>
                                 </div>
