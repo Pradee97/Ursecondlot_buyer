@@ -453,7 +453,7 @@ useEffect(() => {
             
 					<div class="row content">
             			<div class="col-lg-3">
-					
+						<div class="saveSearch"><button class="cta-btn" type="button">Save Search </button></div>
 						<div class="leftonsidebox">
 						<div class="filtersblock">
 									<h3>Filters<span><a href="#" onClick={clear}>Reset</a></span></h3>	
