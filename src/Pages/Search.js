@@ -59,6 +59,12 @@ const Search = () => {
 	const [viewMoreMake,setViewMoreMake]=useState(false);
 	const [viewMoreBodyStyle,setViewMoreBodyStyle]=useState(false);
 	const [isOpen, setIsOpen] = useState(false);
+	const [saveSearchName,setSaveSearchName]=useState("");
+	const [saveSearchRequest,setSaveSearchRequest]=useState("");
+
+	const getSaveSearchName=(saveSearchName)=>{
+        setSaveSearchName(saveSearchName)
+    }
 
 	//const [checked, setChecked] = useState(false)
 
@@ -86,6 +92,20 @@ const Search = () => {
         dispatch(CarListAction.sellerid(seller_dealer_id))
         history.push("/cardetail/"+pathid);
     }
+	
+
+	
+	  const getSavedSearch = () =>{
+	
+		let request ={
+	
+		  buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
+	
+		}
+	
+		API.post("savedSearch/condition", request)
+	
+	  }
 
     const addRemoveFavourite=(carid,state,flag)=>{
         console.log("inside addremove");
@@ -911,7 +931,9 @@ useEffect(() => {
 								{isOpen && <Popup
                                     isClose={false}
                                     content={<>
-                                        <SaveSearchPopup toggle={togglePopup} />
+                                        <SaveSearchPopup toggle={togglePopup}
+										  saveSearchReq={saveSearchRequest}
+										  />
                                     </>}
                                     handleClose={togglePopup}
                                 />}					
