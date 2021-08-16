@@ -7,8 +7,9 @@ const SaveSearchPopup = (props) =>{
 
   const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);	
   const [saveSearchName,setSaveSearchName] = useState("");
-  const SavedSearchAdd = () =>{
   const [saveSearchReq, setSaveSearchReq] = useState(props.saveSearchRequest);
+  const saveSearchAdd=()=>{
+    
 		let request ={
 	
 			  buyer_dealer_id: JSON.parse(loggedInBuyerId).buyer_dealer_id,
@@ -18,15 +19,14 @@ const SaveSearchPopup = (props) =>{
 			  updatedBy: JSON.parse(loggedInBuyerId).buyer_id
 			  
 		}
-	
+	console.log("Save Search Request : ",request);
 		API.post("savedSearch/add", request).then(res=>{
 	
 		console.log("saveeeeee",res.data.data)
-		setSaveSearchAdd(res.data.data)
+		//setSaveSearchAdd(res.data.data)
 	
-		})
-	  }
-	
+    })
+  }
 
   return (
  

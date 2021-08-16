@@ -61,10 +61,32 @@ const Search = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [saveSearchName,setSaveSearchName]=useState("");
 	const [saveSearchRequest,setSaveSearchRequest]=useState("");
-
+ 	const [savedSearch,setSavedSearch]=useState("");
 	const getSaveSearchName=(saveSearchName)=>{
         setSaveSearchName(saveSearchName)
     }
+
+	async function ShowSaveSearch(){
+		setSaveSearchRequest({
+			model:bodyTypeSearch.length>0?bodyTypeSearch:"",
+			make:makeSearch.length>0?makeSearch:"",
+			dealer_type:dealerShip,
+			transmission:transmissionSearch.length>0?transmissionSearch:"",
+			drivetrain:drivetrainSearch.length>0?drivetrainSearch:"",
+			state:stateSearch.length>0?stateSearch:"",
+			fromMileage:fromMileage,
+			toMileage:toMileage,
+			fromYear:fromYear,
+			toYear:toYear,
+			group:groupSearch.length>0?groupSearch:"",
+			engine_noise:engineNoiseSearch,
+			transmission_issue:transmissionIssueSearch,
+			history:historySearch,
+			sales_type:salesTypeSearch
+
+		})
+		togglePopup();
+	}
 
 	//const [checked, setChecked] = useState(false)
 
@@ -99,11 +121,16 @@ const Search = () => {
 	
 		let request ={
 	
-		  buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
+		  buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
 	
 		}
 	
-		API.post("savedSearch/condition", request)
+		API.post("savedSearch/condition", request).then(res => {
+			setSaveSearchRequest(res.data.data);
+			console.log("Saved Search request from service");
+		
+		})
+			.catch(err => { console.log(err); });
 	
 	  }
 
@@ -497,7 +524,7 @@ useEffect(() => {
 							<div class="row content">
 
                             <div class="col-lg-3">
-							<div class="saveSearch"><button class="cta-btn" type="button" onClick={togglePopup}>Save Search </button></div>
+							<div class="saveSearch"><button class="cta-btn" type="button" onClick={ShowSaveSearch}>Save Search </button></div>
 							
 							<div class="leftonsidebox">
 								<div class="filtersblock">
