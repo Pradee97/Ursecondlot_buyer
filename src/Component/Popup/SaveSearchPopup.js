@@ -30,24 +30,31 @@ const SaveSearchPopup = (props) =>{
 
   return (
  
-    <div>
-      <main>
-        <div>
-          <h2 className="title"> Save Search </h2>
-        </div>
-        <div>
-          <p>To save a new search instead, please provide a new name</p>
-        </div>
-        <div>
-          <input className="textbox " type="text" placeholder="" onChange={(e)=>setSaveSearchName(e.target.value)} />
-        </div>
-        <div>
-          <button onClick={props.toggle}>Cancel</button>    <button onClick={saveSearchAdd}>save</button>                       
-        </div>
-   </main>
- </div>
+<div>
+    <div id="" className="saveSearchBlock">
+      
+            <div className="termspageblock">
+                <div className="row content">
+                <span onClick={props.toggle} className="close-icon">x</span> 
+                        <div className="modalcontent">
+                        
+                            <div className="modalbody">
+                              <h2 className="title"> Save Search </h2>
+                              <div class="input-group col-md-12">
+                              <input className="textbox " type="text" placeholder="" onChange={(e)=>setSaveSearchName(e.target.value)} />
+                              </div>
 
+                              <div class="input-group col-md-12 btns">
+                              <button className="cta-btns" onClick={props.toggle}>Cancel</button>    <button  className="cta-btns" onClick={saveSearchAdd}>Save</button>    
+                              </div>     
+                            </div>
+                       </div>
+                   </div>
+              </div>
+      </div>
 
+    
+      </div>
     )
     }
 

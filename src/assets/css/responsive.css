@@ -69,6 +69,15 @@ padding-right: 20px;
         flex: 25% 1 !important;
         max-width: 25% !important;
     }
+    img.carImg {
+        height: 200px;
+    }
+    .dealer-cars .cars-prices .cta-btns, .other-dealer-cars .cars-prices .cta-btns{
+        font-size: 16px;
+    }
+    .dealer-cars .cars-content h3 a, .other-dealer-cars .cars-content h3 a{
+        font-size: 16px;
+    }
         
 }
 
