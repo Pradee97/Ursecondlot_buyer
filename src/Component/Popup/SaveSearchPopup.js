@@ -8,6 +8,7 @@ const SaveSearchPopup = (props) =>{
   const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);	
   const [saveSearchName,setSaveSearchName] = useState("");
   const [saveSearchReq, setSaveSearchReq] = useState(props.saveSearchRequest);
+  
   const saveSearchAdd=()=>{
     
 		let request ={
