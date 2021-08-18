@@ -985,10 +985,12 @@ Cars list
 	position: absolute;
     background: #fff;
     border-radius: 50px;
-    padding: 8px 12px;
     right: 10px;
     top: 10px;
-  cursor: pointer;
+   cursor: pointer;
+   width: 40px;
+   height: 40px;
+   line-height: 40px;
 }
 
 .cars-lock:hover{	
@@ -999,7 +1001,7 @@ Cars list
 	width:100%;
 }
  .cars-lock img{
-	width:15px;	
+	width:20px;	
 }
 .cars-content {
     padding: 15px;
@@ -3250,17 +3252,19 @@ Car Detail Page
 	padding-bottom: 5px;
 }
 
-.dealer-cars   .cars-lock{	
+.dealer-cars .cars-lock{	
 	position: absolute;
     background: #fff;
-    border-radius: 50px;
-    padding: 8px 12px;
+    border-radius: 50%;
     right: 10px;
     top: 10px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
 	
 }
 .dealer-cars   .cars-lock img{
-	width:15px;	
+	width:20px !important;	
 }
 .dealer-cars   .cars-content {
     padding: 15px;
@@ -3370,14 +3374,15 @@ Car Detail Page
 .other-dealer-cars    .cars-lock{	
 	position: absolute;
     background: #fff;
-    border-radius: 50px;
-    padding: 8px 12px;
+    border-radius: 50%;
     right: 10px;
     top: 10px;
-	
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
 }
 .other-dealer-cars    .cars-lock img{
-	width:15px;	
+	width:20px !important;	
 }
 .other-dealer-cars    .cars-content {
     padding: 15px;
@@ -6794,10 +6799,13 @@ table td .ant-btn:hover span, table td .ant-btn:hover i{
   text-align: center;
   position: relative;
   top: 50px;
-  left: 7%;
-  font-size: 19px;
+  left: 0;
+  font-size: 20px;
   font-weight: 500;
-  padding-bottom: 30px;
+  text-align: center;
+  width: 100%;
+  background: #fff;
+  padding: 50px;
 }
 .phonecode small {
     font-size: 80%;
@@ -7615,4 +7623,25 @@ margin-top: -3px;
   float: left;
   position: relative;
   z-index: 9999;
+}
+
+
+.saveSearchBlock .modalcontent{
+  text-align: center;
+  width: 100%;
+}
+
+.saveSearchBlock .modalcontent input{
+   width: 100%;
+   height: 40px;
+}
+
+.saveSearchBlock .modalcontent .btns{
+  text-align: center;
+    display: block;
+    margin-top: 10px;
+}
+
+.saveSearchBlock .termspageblock{
+  padding-bottom: 20px;
 }

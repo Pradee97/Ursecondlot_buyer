@@ -10,7 +10,8 @@ import Loading from '../Component/Loading/Loading';
 import { useDispatch, useSelector } from 'react-redux';
 import CarListAction from './CarList/CarListAction';
 import arrowmark from '../../src/assets/img/arrowmark.jpg';
-
+import SaveSearchPopup from '../Component/Popup/SaveSearchPopup';
+import Popup from '../Component/Popup/Popup';
 
 const Search = () => {
 
@@ -57,9 +58,44 @@ const Search = () => {
 	const [viewMoreState,setViewMoreState]=useState(false);
 	const [viewMoreMake,setViewMoreMake]=useState(false);
 	const [viewMoreBodyStyle,setViewMoreBodyStyle]=useState(false);
+	const [isOpen, setIsOpen] = useState(false);
+	const [saveSearchName,setSaveSearchName]=useState("");
+	const [saveSearchRequest,setSaveSearchRequest]=useState("");
+	 const [savedSearch,setSavedSearch]=useState("");
+	 const [saveSearchEnter,setSaveSearchEnter] = useState("");
+	const [saveSearchRequestPopup,setSaveSearchRequestPopup] = useState("");
 
+
+	async function ShowSaveSearch(){
+		console.log("-------------------------inside show save search fn");
+		setSaveSearchRequestPopup({
+			model:bodyTypeSearch.length>0?bodyTypeSearch:"",
+			make:makeSearch.length>0?makeSearch:"",
+			dealer_type:dealerShip,
+			transmission:transmissionSearch.length>0?transmissionSearch:"",
+			drivetrain:drivetrainSearch.length>0?drivetrainSearch:"",
+			state:stateSearch.length>0?stateSearch:"",
+			fromMileage:fromMileage,
+			toMileage:toMileage,
+			fromYear:fromYear,
+			toYear:toYear,
+			group:groupSearch.length>0?groupSearch:"",
+			engine_noise:engineNoiseSearch,
+			transmission_issue:transmissionIssueSearch,
+			history:historySearch,
+			sales_type:salesTypeSearch
+
+		})
+		console.log("After assigning setSavesearchpopuo, value:",setSaveSearchRequestPopup)
+		togglePopup();
+	}
 
 	//const [checked, setChecked] = useState(false)
+
+	const togglePopup = () => {
+        setIsOpen(!isOpen);
+    }
+
     const VehicleSearch=()=>{
 
         let request={
@@ -80,6 +116,42 @@ const Search = () => {
         dispatch(CarListAction.sellerid(seller_dealer_id))
         history.push("/cardetail/"+pathid);
     }
+	
+
+	
+	  const getSavedSearch = () =>{
+	
+		let request ={
+	
+		  buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+	
+		}
+	
+		API.post("savedSearch/condition", request).then(res => {
+			setSaveSearchRequest(res.data.data);
+			console.log("Saved Search request from service");
+		
+		})
+			.catch(err => { console.log(err); });
+	
+	  }
+
+	  const getSavedSearchEnter = () =>{
+	
+		console.log("save search enter response ========", saveSearchEnter)
+	
+		API.post("BuyerInventoryCarList/condition", saveSearchEnter).then(res => {
+			console.log("set save search enter _________", res.data.data)
+			setCarDetail(res.data.data);
+			//setSaveSearchEnter(res.data.data);
+			console.log("Saved Search enter from service");
+			console.log("save search enter response +++++++++++++", saveSearchEnter)
+		
+		})
+			.catch(err => { console.log(err); });
+	
+	  }
+
 
     const addRemoveFavourite=(carid,state,flag)=>{
         console.log("inside addremove");
@@ -100,9 +172,15 @@ const Search = () => {
     }
 
     useEffect(() => {
-        VehicleSearch();
+		VehicleSearch();
+		getSavedSearch();
+		
        
-    },[recentCarFlag]);
+	},[recentCarFlag]);
+	
+	useEffect(()=>{
+		getSavedSearchEnter();
+	},[saveSearchEnter])
 
 	useEffect(()=>{
 
@@ -471,14 +549,27 @@ useEffect(() => {
 							<div class="row content">
 
                             <div class="col-lg-3">
-					
-						<div class="leftonsidebox">
-							<div class="filtersblock">
-								<h3>Filters<span><a href="#" onClick={clear}>Reset</a></span></h3>
-								
-								
-							</div>
+							<div class="saveSearch"><button class="cta-btn" type="button" onClick={ShowSaveSearch}>Save Search </button></div>
 							
+							<div class="leftonsidebox">
+								<div class="filtersblock">
+									<h3>Filters<span><a href="#" onClick={clear}>Reset</a></span></h3>	
+	
+									<div class="input-group">
+										<select id="SavedSearchNames"  class="form-control custom-select browser-default" onChange={(e)=>{setSaveSearchEnter(e.target.value);console.log("onchange-=======")}} >
+										{saveSearchRequest.length>0?saveSearchRequest.map((saveSearchRequest) =>
+											<option key={saveSearchRequest.name}  value={saveSearchRequest.search_request} >{saveSearchRequest.name}</option>
+										):""}
+										</select>
+									</div>
+								</div>
+							
+							<div class="distanceBlock">
+								<h4>Distance</h4>
+								<div class="input-group">
+								<input class="form-control" type="text" value="" placeholder="50km" />
+								</div>								
+							</div>
 							
 							<div class="sortbyblock">
 								<h4>Sort by</h4>
@@ -878,7 +969,7 @@ useEffect(() => {
                                             </div>
 
                                             <div className="cars-prices">
-                                                <a className="cta-btns" href="#">${item.max_bid}</a>
+                                                <a className="cta-btns" href="#">High Bid ${item.max_bid}</a>
                                                 <a className="cta-btns-primary" href="JavaScript:void(0)" >Make Bid</a>
                                             </div>
                                         </div>
@@ -890,6 +981,17 @@ useEffect(() => {
                     </div>
                </main>
 }
+
+								{isOpen && <Popup
+                                    isClose={false}
+                                    content={<>
+                                        <SaveSearchPopup toggle={togglePopup}
+										  saveSearchReq={saveSearchRequest}
+										  />
+                                    </>}
+                                    handleClose={togglePopup}
+                                />}					
+
         </div>
     )
 }
