@@ -61,13 +61,14 @@ const Search = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [saveSearchName,setSaveSearchName]=useState("");
 	const [saveSearchRequest,setSaveSearchRequest]=useState("");
- 	const [savedSearch,setSavedSearch]=useState("");
-	const getSaveSearchName=(saveSearchName)=>{
-        setSaveSearchName(saveSearchName)
-    }
+	 const [savedSearch,setSavedSearch]=useState("");
+	 const [saveSearchEnter,setSaveSearchEnter] = useState("");
+	const [saveSearchRequestPopup,setSaveSearchRequestPopup] = useState("");
+
 
 	async function ShowSaveSearch(){
-		setSaveSearchRequest({
+		console.log("-------------------------inside show save search fn");
+		setSaveSearchRequestPopup({
 			model:bodyTypeSearch.length>0?bodyTypeSearch:"",
 			make:makeSearch.length>0?makeSearch:"",
 			dealer_type:dealerShip,
@@ -85,6 +86,7 @@ const Search = () => {
 			sales_type:salesTypeSearch
 
 		})
+		console.log("After assigning setSavesearchpopuo, value:",setSaveSearchRequestPopup)
 		togglePopup();
 	}
 
@@ -134,6 +136,23 @@ const Search = () => {
 	
 	  }
 
+	  const getSavedSearchEnter = () =>{
+	
+		console.log("save search enter response ========", saveSearchEnter)
+	
+		API.post("BuyerInventoryCarList/condition", saveSearchEnter).then(res => {
+			console.log("set save search enter _________", res.data.data)
+			setCarDetail(res.data.data);
+			//setSaveSearchEnter(res.data.data);
+			console.log("Saved Search enter from service");
+			console.log("save search enter response +++++++++++++", saveSearchEnter)
+		
+		})
+			.catch(err => { console.log(err); });
+	
+	  }
+
+
     const addRemoveFavourite=(carid,state,flag)=>{
         console.log("inside addremove");
         let request={
@@ -153,9 +172,15 @@ const Search = () => {
     }
 
     useEffect(() => {
-        VehicleSearch();
+		VehicleSearch();
+		getSavedSearch();
+		
        
-    },[recentCarFlag]);
+	},[recentCarFlag]);
+	
+	useEffect(()=>{
+		getSavedSearchEnter();
+	},[saveSearchEnter])
 
 	useEffect(()=>{
 
@@ -531,8 +556,10 @@ useEffect(() => {
 									<h3>Filters<span><a href="#" onClick={clear}>Reset</a></span></h3>	
 	
 									<div class="input-group">
-										<select id="SavedSearchNames"  class="form-control custom-select browser-default">
-											<option value="Saved Search">Saved Search</option>
+										<select id="SavedSearchNames"  class="form-control custom-select browser-default" onChange={(e)=>{setSaveSearchEnter(e.target.value);console.log("onchange-=======")}} >
+										{saveSearchRequest.length>0?saveSearchRequest.map((saveSearchRequest) =>
+											<option key={saveSearchRequest.name}  value={saveSearchRequest.search_request} >{saveSearchRequest.name}</option>
+										):""}
 										</select>
 									</div>
 								</div>
