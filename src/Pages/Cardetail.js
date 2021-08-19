@@ -29,6 +29,7 @@ import CarListAction from './CarList/CarListAction';
 import Loading from '../Component/Loading/Loading';
 import Popup from '../Component/Popup/Popup';
 import Makeurbid from '../Pages/Makeurbid';
+import BuyNow from '../Pages/BuyNow';
 
 const Cardetail = () =>{
 
@@ -53,9 +54,14 @@ const [loading,setLoading] = useState(true);
 console.log("selescted seller id_______",selectedSellerId)
 
 const [isOpen, setIsOpen] = useState(false);
+const [open,setOpen] = useState(false);
 
-const togglePopup = () => {
+const toggleMakeBid = () => {
 	setIsOpen(!isOpen);
+}
+
+const toggleBuyNow = () => {
+	setOpen(!open);
 }
 
 console.log("sellerid from carlist",selectedSellerId);
@@ -309,9 +315,9 @@ return(
 							<div class="col-md-12 cars-detail-ins">
 	        					<div class="cars-detail-views">
 									<a class="car-btns" onClick={()=>redirecttoInspection(carDetail[0].car_id)}>View Inspection</a>
-									<a class="car-btns-primary" href=""><img src={tag} alt=""/>High Bid :<span> ${carDetail[0].max_bid}</span></a>
+									<a class="car-btns-primary" href=""><img src={tag} alt=""/>High Bid :<span> ${carDetail[0].high_bid}</span></a>
 								</div>
-								{carDetail[0].counter_bid=="" || null || undefined ?"":
+								{carDetail[0].counter_bid==""|| "null"?"":
 								<div class="cars-detail-views">
 									
 									<a class="car-btns-primary" href=""><img src={tag} alt=""/>Counter Bid :<span> ${carDetail[0].counter_bid}</span></a>
@@ -340,8 +346,8 @@ return(
 						<div class="row">
 							<div class="col-md-12">
 	        					<div class="cars-buy">
-									<a class="cars-buy-btns" href="#">Buy now</a>
-									<a class="cars-buy-btns-primary" onClick={togglePopup}>Make Bid</a>
+									{/* <a class="cars-buy-btns" onClick={toggleBuyNow}>Buy now</a> */}
+									<a class="cars-buy-btns-primary" onClick={toggleMakeBid}>Make Bid</a>
 								</div>
 	        				</div>
 						</div>
@@ -443,8 +449,8 @@ return(
 			</div>
 				
 				<div class="cars-prices">
-					<a class="cta-btns" href="">High Bid ${moreCar.min_bid}</a>
-					<a class="cta-btns-primary" onClick={togglePopup}>Make Bid</a>
+					<a class="cta-btns" href="">High Bid ${moreCar.high_bid}</a>
+					<a class="cta-btns-primary" onClick={toggleMakeBid}>Make Bid</a>
 				</div>
               </div>
             </div>
@@ -490,8 +496,8 @@ return(
 								</div>
 								
 								<div class="cars-prices">
-									<a class="cta-btns" href="">High Bid ${moreCar.min_bid}</a>
-									<a class="cta-btns-primary" onClick={togglePopup}>Make Bid</a>
+									<a class="cta-btns" href="">High Bid ${moreCar.high_bid}</a>
+									<a class="cta-btns-primary" onClick={toggleMakeBid}>Make Bid</a>
 								</div>
 							  </div>
 							</div>
@@ -526,9 +532,17 @@ return(
 	{isOpen && <Popup
 		isClose={false}
 		content={<>
-			<Makeurbid toggle={togglePopup} />
+			<Makeurbid toggle={toggleMakeBid} />
 		</>}
-		handleClose={togglePopup}
+		handleClose={toggleMakeBid}
+	/>}
+
+	{open && <Popup
+		isClose={false}
+		content={<>
+			<BuyNow toggle={toggleBuyNow} />
+		</>}
+		handleClose={toggleBuyNow}
 	/>}
 
   </main>
