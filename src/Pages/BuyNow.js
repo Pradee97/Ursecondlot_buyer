@@ -1,92 +1,106 @@
-import React , {useState, useEffect} from 'react';
-import {  useParams } from "react-router-dom";
+import React from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
 import API from "../Services/BaseService";
-import Logo from '../assets/img/Logo_final.png';
+import { useHistory, useLocation, useParams } from "react-router-dom";
+import CommonPopup from '../Component/CommonPopup/CommonPopup';
 
-const BuyNow =(props) =>{
+const BuyNow=(props)=>{
 
-    const { id } = useParams();
-    const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
-    const eye = <FontAwesomeIcon icon={faEye} />;
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [errorMessage, setErrorMessage] = useState("");
-    const [timeout, setTimeout] = useState("");
-    const [errors, setErrors] =useState({email:"", password:""})
-    const[showPwd,setShowPwd]=useState(false);
-
-    function togglepwd(e){
-        e.preventDefault();
-        setShowPwd(!showPwd);
-    }
-
-    const CarBuy =()=>{
-
-        console.log("inside addremove");
-        let request={
-            buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
-            car_id:id,
-            email:email,
-            password:password,
-            high_bid:1343,
-            createdBy:JSON.parse(loggedInBuyerId).buyer_id,
-            updatedBy:JSON.parse(loggedInBuyerId).buyer_id 
-
-        }
-
-        console.log("request",request);
-        API.post('carbuy/add',request).then((response)=>{
-            console.log("car buy response", response.data.data)
-
-           
-        })
-    }
-
-   
-
-    return (
-
-        <div>
-          
-          <main id="main" className="inner-page">
-            <div className="col-lg-4 card loginBlock">
-            <span onClick={props.toggle} className="close-icon">x</span> 
-              <div className="dealar-login">
-                <img alt="Google" src={Logo} />
-              </div>
-              <form onSubmit={CarBuy}>
-                <h2 className="title"> Buy Now</h2>
-               
-    
-                <div className="email-login">
-                    <div className="tbox">
-                        <input className="textbox " type="text" placeholder="" id="uname" name="email"onChange={(e) => setEmail(e.target.value)} />
-                        <label  htmlFor="uname" className={email !="" ? "input-has-value" : ""}>User Name</label>
-                
-                    </div>
-                    
-                    <div className="tbox">
-                        <input className="textbox" type={showPwd?"text":"password"} placeholder="" id="psw" name="password" onChange={(e) => setPassword(e.target.value)} />
-                        <label htmlFor="psw" className={password != "" ? "input-has-value" : "" }>Password</label><i htmlFor="psw" className="passwordeye" onClick={togglepwd}>{eye}</i>
-                
-                    </div>
-                    <div className="col-lg-12 loginBtn">
-                        <button className="cta-btn">Log In</button>
-                                
-                    </div>
-                </div>
-               
-              </form>
-            </div>
-            
-          </main>
-    
-        </div>
-      )
-
+  
+  const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
+  const [userName,setUserName] = useState("");
+  const [password,setPassword] = useState("");
+  const { id } = useParams();
+  
+  const [isCommonPopupOpen, setIsCommonPopupOpen] = useState(false);
+  const [popupTitle, setPopupTitle] = useState("");
+  const [popupMsg, setPopupMsg] = useState("");
+  const [popupType, setPopupType] = useState("");
+  const [popupActionType, setPopupActionType] = useState("");
+  const [popupActionValue, setPopupActionValue] = useState("");
+  const [popupActionPath, setPopupActionPath] = useState("");
+  const toggleCommonPopup = () => {
+    setIsCommonPopupOpen(!isCommonPopupOpen);
 }
+const handleAccepts=()=>{
+    
+		let request ={
 
-export default BuyNow;
+            buyer_dealer_id:JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id, 
+            car_id:id, 
+            email:userName,
+            password:password,
+            high_bid:"1400",
+            updatedBy:JSON.parse(loggedInBuyerId).buyer_id ,
+            createdBy:JSON.parse(loggedInBuyerId).buyer_id 
+            
+		}
+	
+		API.post("carbuy/update", request).then(response=>{
+	
+		
+        if (response.data.success) {
+            const { data } = response;
+            toggleCommonPopup()
+            setPopupTitle("Buyed Successfully");
+            setPopupMsg("Thank you so much for your business, We thank you to let us earn your business.");
+            setPopupType("success");
+            setPopupActionType("close");
+            setPopupActionValue("ok");
+            
+        } else {
+            const { data } = response;
+            toggleCommonPopup()
+            setPopupTitle("Error");
+            setPopupMsg(data.error.err);
+            setPopupType("error");
+            setPopupActionType("close");
+            setPopupActionValue("close");
+        }
+    })
+}
+  return (
+ 
+<div>
+    <div id="" className="saveSearchBlock">
+      
+            <div className="termspageblock">
+                <div className="row content">
+                        <div className="modalcontent">
+                        
+                            <div className="modalbody">
+                              <h2 className="title"> Buy Now </h2>
+                              <div class="input-group col-md-12">
+                                  
+                                  
+                              </div>
+                              <div class="input-group col-md-12">
+                              <input className="textbox " type="text" placeholder="Email" onChange={(e)=>setUserName(e.target.value)} />
+                              </div>
+                              <div class="input-group col-md-12">
+                              <input className="textbox " type="text" placeholder="Password" onChange={(e)=>setPassword(e.target.value)} />
+                              </div>
+                              <div class="input-group col-md-12 btns">
+                              <button className="cta-btns" onClick={props.toggle}>Cancel</button>    <button  className="cta-btns" onClick={handleAccepts}>Accept</button>    
+                              </div>     
+                            </div>
+                       </div>
+                   </div>
+              </div>
+      </div>
+
+      {isCommonPopupOpen && <CommonPopup
+				handleClose={isCommonPopupOpen}
+				popupTitle={popupTitle}
+				popupMsg={popupMsg}
+				popupType={popupType}
+				popupActionType={popupActionType}
+				popupActionValue={popupActionValue}
+				popupActionPath={popupActionPath}
+			/>}
+      </div>
+    )
+    }
+
+    export default BuyNow;
