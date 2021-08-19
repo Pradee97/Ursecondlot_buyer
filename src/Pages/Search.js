@@ -61,8 +61,8 @@ const Search = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [saveSearchName,setSaveSearchName]=useState("");
 	const [saveSearchRequest,setSaveSearchRequest]=useState("");
-	 const [savedSearch,setSavedSearch]=useState("");
-	 const [saveSearchEnter,setSaveSearchEnter] = useState("");
+	const [savedSearch,setSavedSearch]=useState("");
+	const [saveSearchEnter,setSaveSearchEnter] = useState("");
 	const [saveSearchRequestPopup,setSaveSearchRequestPopup] = useState("");
 
 
