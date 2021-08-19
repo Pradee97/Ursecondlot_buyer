@@ -29,7 +29,7 @@ import CarListAction from './CarList/CarListAction';
 import Loading from '../Component/Loading/Loading';
 import Popup from '../Component/Popup/Popup';
 import Makeurbid from '../Pages/Makeurbid';
-import BuyNow from '../Pages/BuyNow';
+// import BuyNow from '../Pages/BuyNow';
 
 const Cardetail = () =>{
 
@@ -346,7 +346,7 @@ return(
 						<div class="row">
 							<div class="col-md-12">
 	        					<div class="cars-buy">
-									{/* <a class="cars-buy-btns" onClick={toggleBuyNow}>Buy now</a> */}
+									<a class="cars-buy-btns" href="#">Buy now</a>
 									<a class="cars-buy-btns-primary" onClick={toggleMakeBid}>Make Bid</a>
 								</div>
 	        				</div>
@@ -540,7 +540,7 @@ return(
 	{open && <Popup
 		isClose={false}
 		content={<>
-			<BuyNow toggle={toggleBuyNow} />
+			{/* <BuyNow toggle={toggleBuyNow} /> */}
 		</>}
 		handleClose={toggleBuyNow}
 	/>}
