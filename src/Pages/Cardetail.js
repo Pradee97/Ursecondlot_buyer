@@ -31,6 +31,8 @@ import Popup from '../Component/Popup/Popup';
 import Makeurbid from '../Pages/Makeurbid';
 
 const Cardetail = () =>{
+
+	
 const history = useHistory();
 const dispatch = useDispatch();
 const [copySuccess, setCopySuccess] = useState('');
@@ -48,7 +50,7 @@ const [moreCarFlag,setMoreCarFlag]=useState(false);
 const [similarCarFromSellerFlag,setSimilarCarFromSellerFlag]=useState(false);
 const selectedSellerId = useSelector(state => state.CarListReducer.payload);
 const [loading,setLoading] = useState(true);
-
+console.log("selescted seller id_______",selectedSellerId)
 
 const [isOpen, setIsOpen] = useState(false);
 
@@ -105,10 +107,16 @@ function loadLrgImg(img){
 	setLrgImg(img);
 }
 function CarDetailList(){
+
 	const request = {
+
 	"car_id":id,
 	"buyer_dealer_id": JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
-	"seller_dealer_id": selectedSellerId }
+	"seller_dealer_id": selectedSellerId 
+
+}
+
+
 	console.log("request for car detail",request)
 	API.post('carDetails/condition',request).then(res=>{
 	console.log("response",res.data.data);
@@ -301,7 +309,7 @@ return(
 							<div class="col-md-12 cars-detail-ins">
 	        					<div class="cars-detail-views">
 									<a class="car-btns" onClick={()=>redirecttoInspection(carDetail[0].car_id)}>View Inspection</a>
-									<a class="car-btns-primary" href="/makeurbid"><img src={tag} alt=""/>High Bid :<span> ${carDetail[0].max_bid}</span></a>
+									<a class="car-btns-primary" href=""><img src={tag} alt=""/>High Bid :<span> ${carDetail[0].max_bid}</span></a>
 								</div>
 	        				</div>
 	        			</div>
