@@ -27,6 +27,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import CarListReducer from './CarList/CarListReducer';
 import CarListAction from './CarList/CarListAction';
 import Loading from '../Component/Loading/Loading';
+import Popup from '../Component/Popup/Popup';
+import Makeurbid from '../Pages/Makeurbid';
 
 const Cardetail = () =>{
 const history = useHistory();
@@ -46,6 +48,13 @@ const [moreCarFlag,setMoreCarFlag]=useState(false);
 const [similarCarFromSellerFlag,setSimilarCarFromSellerFlag]=useState(false);
 const selectedSellerId = useSelector(state => state.CarListReducer.payload);
 const [loading,setLoading] = useState(true);
+
+
+const [isOpen, setIsOpen] = useState(false);
+
+const togglePopup = () => {
+	setIsOpen(!isOpen);
+}
 
 console.log("sellerid from carlist",selectedSellerId);
 const redirectpage=(pathid,seller_dealer_id)=>{
@@ -319,7 +328,7 @@ return(
 							<div class="col-md-12">
 	        					<div class="cars-buy">
 									<a class="cars-buy-btns" href="#">Buy now</a>
-									<a class="cars-buy-btns-primary" href="/makeurbid">Make Bid</a>
+									<a class="cars-buy-btns-primary" onClick={togglePopup}>Make Bid</a>
 								</div>
 	        				</div>
 						</div>
@@ -422,7 +431,7 @@ return(
 				
 				<div class="cars-prices">
 					<a class="cta-btns" href="">High Bid ${moreCar.min_bid}</a>
-					<a class="cta-btns-primary" href="/makeurbid">Make Bid</a>
+					<a class="cta-btns-primary" onClick={togglePopup}>Make Bid</a>
 				</div>
               </div>
             </div>
@@ -469,7 +478,7 @@ return(
 								
 								<div class="cars-prices">
 									<a class="cta-btns" href="">High Bid ${moreCar.min_bid}</a>
-									<a class="cta-btns-primary" href="/makeurbid">Make Bid</a>
+									<a class="cta-btns-primary" onClick={togglePopup}>Make Bid</a>
 								</div>
 							  </div>
 							</div>
@@ -500,6 +509,14 @@ return(
 
       </div>
     </section>
+
+	{isOpen && <Popup
+		isClose={false}
+		content={<>
+			<Makeurbid toggle={togglePopup} />
+		</>}
+		handleClose={togglePopup}
+	/>}
 
   </main>
 }
