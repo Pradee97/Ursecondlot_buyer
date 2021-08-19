@@ -71,6 +71,7 @@ const Search = () => {
 		console.log("-------------------------inside show save search fn");
 		
 		let savesearchreq_popup={
+			buyer_dealer_id:JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
 			model:bodyTypeSearch.length>0?bodyTypeSearch:"",
 			make:makeSearch.length>0?makeSearch:"",
 			dealer_type:dealerShip,
@@ -88,7 +89,7 @@ const Search = () => {
 			sales_type:salesTypeSearch
 
 		}
-		dispatch(SearchAction.searchrequest("test"))
+		dispatch(SearchAction.searchrequest(savesearchreq_popup))
 		console.log("After assigning setSavesearchpopuo, value:",savesearchreq_popup)
 		togglePopup();
 	}
@@ -560,7 +561,7 @@ useEffect(() => {
 									<h3>Filters<span><a href="#" onClick={clear}>Reset</a></span></h3>	
 	
 									<div class="input-group">
-										<select id="SavedSearchNames"  class="form-control custom-select browser-default" onChange={(e)=>{setSaveSearchEnter(e.target.value);console.log("onchange-=======",e.target.value)}} >
+										<select id="SavedSearchNames"  class="form-control custom-select browser-default" onChange={(e)=>{setSaveSearchEnter(JSON.parse(e.target.value));console.log("onchange-=======",e.target.value)}} >
 											<option value="0">Select SavedSearch</option>
 										{saveSearchRequest.length>0?saveSearchRequest.map((saveSearchRequest) =>
 											<option key={saveSearchRequest.name}  value={saveSearchRequest.search_request} >{saveSearchRequest.name}</option>

@@ -4,11 +4,12 @@ import API from "../../Services/BaseService";
 import { useDispatch, useSelector } from 'react-redux';
 import SearchReducer from '../../Pages/SearchReducer';
 import SearchAction from '../../Pages/SearchAction';
+import { useHistory, useParams } from "react-router-dom";
 const SaveSearchPopup = (props) =>{
 
   const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);	
   const [saveSearchName,setSaveSearchName] = useState("");
-  
+  const history=useHistory();
   const saveSearchReq = useSelector(state => state.SearchReducer.payload);
   const saveSearchAdd=()=>{
     
@@ -28,6 +29,7 @@ const SaveSearchPopup = (props) =>{
 		//setSaveSearchAdd(res.data.data)
 	
     })
+    props.toggle();
   }
 
   return (
