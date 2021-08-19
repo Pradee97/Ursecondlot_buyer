@@ -48,7 +48,7 @@ const [data, setData] = useState("");
 const [distance,setDistance] = useState("");
 const [moreCarFlag,setMoreCarFlag]=useState(false);
 const [similarCarFromSellerFlag,setSimilarCarFromSellerFlag]=useState(false);
-const selectedSellerId = useSelector(state => state.CarListReducer.SELLERID.payload);
+const selectedSellerId = useSelector(state => state.CarListReducer.payload);
 const [loading,setLoading] = useState(true);
 console.log("selescted seller id_______",selectedSellerId)
 
@@ -309,7 +309,7 @@ return(
 							<div class="col-md-12 cars-detail-ins">
 	        					<div class="cars-detail-views">
 									<a class="car-btns" onClick={()=>redirecttoInspection(carDetail[0].car_id)}>View Inspection</a>
-									<a class="car-btns-primary" href="/makeurbid"><img src={tag} alt=""/>High Bid :<span> ${carDetail[0].max_bid}</span></a>
+									<a class="car-btns-primary" href=""><img src={tag} alt=""/>High Bid :<span> ${carDetail[0].max_bid}</span></a>
 								</div>
 	        				</div>
 	        			</div>
