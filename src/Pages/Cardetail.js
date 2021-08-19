@@ -311,6 +311,11 @@ return(
 									<a class="car-btns" onClick={()=>redirecttoInspection(carDetail[0].car_id)}>View Inspection</a>
 									<a class="car-btns-primary" href=""><img src={tag} alt=""/>High Bid :<span> ${carDetail[0].max_bid}</span></a>
 								</div>
+								{carDetail[0].counter_bid=="" || null || undefined ?"":
+								<div class="cars-detail-views">
+									
+									<a class="car-btns-primary" href=""><img src={tag} alt=""/>Counter Bid :<span> ${carDetail[0].counter_bid}</span></a>
+								</div>}
 	        				</div>
 	        			</div>
 						</div>
