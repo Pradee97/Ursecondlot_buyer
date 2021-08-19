@@ -1,14 +1,15 @@
 import React from 'react';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import API from "../../Services/BaseService";
-
+import { useDispatch, useSelector } from 'react-redux';
+import SearchReducer from '../../Pages/SearchReducer';
+import SearchAction from '../../Pages/SearchAction';
 const SaveSearchPopup = (props) =>{
 
   const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);	
   const [saveSearchName,setSaveSearchName] = useState("");
-  const [saveSearchReq, setSaveSearchReq] = useState(props.saveSearchRequest);
   
+  const saveSearchReq = useSelector(state => state.SearchReducer.payload);
   const saveSearchAdd=()=>{
     
 		let request ={
