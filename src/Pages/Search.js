@@ -7,11 +7,12 @@ import { useEffect } from 'react';
 import lock from '../../src/assets/img/lock.png';
 import locked from '../../src/assets/img/locked.png';
 import Loading from '../Component/Loading/Loading';
-import { useDispatch, useSelector } from 'react-redux';
 import CarListAction from './CarList/CarListAction';
 import arrowmark from '../../src/assets/img/arrowmark.jpg';
 import SaveSearchPopup from '../Component/Popup/SaveSearchPopup';
 import Popup from '../Component/Popup/Popup';
+import { useDispatch, useSelector } from 'react-redux';
+import SearchAction from '../Pages/SearchAction';
 
 const Search = () => {
 
@@ -68,7 +69,8 @@ const Search = () => {
 
 	async function ShowSaveSearch(){
 		console.log("-------------------------inside show save search fn");
-		setSaveSearchRequestPopup({
+		
+		let savesearchreq_popup={
 			model:bodyTypeSearch.length>0?bodyTypeSearch:"",
 			make:makeSearch.length>0?makeSearch:"",
 			dealer_type:dealerShip,
@@ -85,8 +87,9 @@ const Search = () => {
 			history:historySearch,
 			sales_type:salesTypeSearch
 
-		})
-		console.log("After assigning setSavesearchpopuo, value:",setSaveSearchRequestPopup)
+		}
+		dispatch(SearchAction.searchrequest("test"))
+		console.log("After assigning setSavesearchpopuo, value:",savesearchreq_popup)
 		togglePopup();
 	}
 
@@ -139,8 +142,8 @@ const Search = () => {
 	  const getSavedSearchEnter = () =>{
 	
 		console.log("save search enter response ========", saveSearchEnter)
-	
-		API.post("BuyerInventoryCarList/condition", saveSearchEnter).then(res => {
+	    if(saveSearchEnter!="0"){
+		API.post("BuyerInventoryCarSearch/condition", saveSearchEnter).then(res => {
 			console.log("set save search enter _________", res.data.data)
 			setCarDetail(res.data.data);
 			//setSaveSearchEnter(res.data.data);
@@ -149,6 +152,7 @@ const Search = () => {
 		
 		})
 			.catch(err => { console.log(err); });
+		}
 	
 	  }
 
@@ -556,7 +560,8 @@ useEffect(() => {
 									<h3>Filters<span><a href="#" onClick={clear}>Reset</a></span></h3>	
 	
 									<div class="input-group">
-										<select id="SavedSearchNames"  class="form-control custom-select browser-default" onChange={(e)=>{setSaveSearchEnter(e.target.value);console.log("onchange-=======")}} >
+										<select id="SavedSearchNames"  class="form-control custom-select browser-default" onChange={(e)=>{setSaveSearchEnter(e.target.value);console.log("onchange-=======",e.target.value)}} >
+											<option value="0">Select SavedSearch</option>
 										{saveSearchRequest.length>0?saveSearchRequest.map((saveSearchRequest) =>
 											<option key={saveSearchRequest.name}  value={saveSearchRequest.search_request} >{saveSearchRequest.name}</option>
 										):""}
@@ -986,7 +991,7 @@ useEffect(() => {
                                     isClose={false}
                                     content={<>
                                         <SaveSearchPopup toggle={togglePopup}
-										  saveSearchReq={saveSearchRequest}
+										 
 										  />
                                     </>}
                                     handleClose={togglePopup}
