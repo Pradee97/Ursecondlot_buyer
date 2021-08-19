@@ -870,7 +870,7 @@ useEffect(() => {
                                             </div>
 
                                             <div className="cars-prices">
-                                                <a className="cta-btns" href="#">High Bid ${item.max_bid}</a>
+                                                <a className="cta-btns" href="#">High Bid ${item.high_bid}</a>
                                                 <a className="cta-btns-primary" href="#">Make Bid</a>
                                             </div>
                                         </div>

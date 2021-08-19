@@ -5,6 +5,7 @@ import {  useParams } from "react-router-dom";
 import API from "../Services/BaseService";
 import Popup from '../Component/Popup/Popup';
 import Terms from '../Component/TermsAndCondition/TermsAndCondition';
+import CommonPopup from '../Component/CommonPopup/CommonPopup';
 
 const MakeurBid=(props)=>{
 
@@ -17,6 +18,13 @@ const MakeurBid=(props)=>{
     const [transportation,setTransportation] = useState("no");
     const [display,setDisplay]=useState("no");
     const [save,setSave] = useState("");
+
+    const [popupTitle, setPopupTitle] = useState ("");
+    const [popupMsg, setPopupMsg] = useState ("");
+    const [popupType, setPopupType] = useState ("");
+    const [popupActionType, setPopupActionType] = useState ("");
+    const [popupActionValue, setPopupActionValue] = useState ("");
+    const [popupActionPath, setPopupActionPath] = useState ("")
 
     const togglePopup = () => {
         setIsOpen(!isOpen);
@@ -80,6 +88,25 @@ const MakeurBid=(props)=>{
         API.post('makeBid/add',request).then(res=>{
          
             console.log("",res.data.data);
+            if (res.data.success) {
+                const { data } = res;
+                togglePopup()
+                setPopupTitle("Mkae Bid");
+                setPopupMsg("Ur Bid is successfully created.Thanks you So much for your business");
+                setPopupType("success");
+                setPopupActionType("close");
+                setPopupActionValue("close");
+                
+            } else {
+                const { data } = res;
+                togglePopup()
+                setPopupTitle("Make Bid");
+                setPopupMsg( data.error.err );
+                // setPopupMsg("Floor is not Created, Please try Again");
+                setPopupType("error");
+                setPopupActionType("close");
+                setPopupActionValue("close");
+            }
 
         })
     }
@@ -176,6 +203,16 @@ const MakeurBid=(props)=>{
                 </>}
                 handleClose={togglePopup}
             />}
+            {isOpen && 
+                <CommonPopup 
+                    handleClose= {togglePopup}
+                    popupTitle= {popupTitle}
+                    popupMsg= {popupMsg}
+                    popupType= {popupType}
+                    popupActionType= {popupActionType}
+                    popupActionValue= {popupActionValue}
+                    popupActionPath={popupActionPath}
+                />}
 
     </div>
 
