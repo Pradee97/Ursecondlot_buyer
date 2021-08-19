@@ -1,5 +1,6 @@
 export const CarListConst = {
     SELLERID: 'SELLERID',
+    COUNTERBID: 'COUNTERBID',
     ERROR: 'ERROR'
 };
 const initialState =  {}
@@ -12,6 +13,14 @@ const CarListReducer = (state = {payload:initialState}, action) => {
             console.log("Payload",action)
             return {
                 carlist: 'carlist-sellerid',
+                payload: action.payload
+
+            };
+        case CarListConst.COUNTERBID:
+            console.log("inside counterbid reducer")
+            console.log("Payload",action)
+            return {
+                carlist: 'carlist-counterbid',
                 payload: action.payload
 
             };

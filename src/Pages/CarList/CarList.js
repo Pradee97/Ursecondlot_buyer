@@ -93,10 +93,11 @@ const CarList = () => {
             //setInventoryCarFlag(!inventoryCarFlag)
         }).catch(err=>{console.log(err);});
     }
-    const redirectpage=(pathid,seller_dealer_id)=>{
+    const redirectpage=(pathid,seller_dealer_id,counter_bid)=>{
         //e.preventDefault();
         console.log("seller_dealer_id+++++",seller_dealer_id)
         dispatch(CarListAction.sellerid(seller_dealer_id))
+        dispatch(CarListAction.counterbid(counter_bid))
         history.push("/cardetail/"+pathid);
     }
 
@@ -195,7 +196,7 @@ const CarList = () => {
                                             {/* <img src={(item.isFavourite===0)? locked : lock} onClick={()=>(item.isFavourite===0)?addFavourite(item.car_id):removeFav(item.car_id)} /> */}
                                             <img src={(item.isFavourite===0)? lock : locked} onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'recent')} />
                                         </div>
-                                        <img className="carImg" src={item.image}  onClick={()=>{redirectpage(item.car_id,item.seller_dealer_id)}}/>
+                                        <img className="carImg" src={item.image}  onClick={()=>{redirectpage(item.car_id,item.seller_dealer_id,item.counter_bid)}}/>
                                         {item.isbestSale?
                                         <div className="cars-tag">
                                             <h4>{item.deal_name}</h4>
@@ -245,7 +246,7 @@ const CarList = () => {
                                     <img src={(item.isFavourite===0)? lock : locked}  onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'inv')} />
                                         </div>
                                         
-                                        <img className="carImg" src={item.image} onClick={()=>{redirectpage(item.car_id,item.seller_dealer_id)}} className="carImg" alt="..." />
+                                        <img className="carImg" src={item.image} onClick={()=>{redirectpage(item.car_id,item.seller_dealer_id,item.counter_bid)}} className="carImg" alt="..." />
                                         {item.isbestSale?
                                         <div className="cars-tag">
                                             <h4>{item.deal_name}</h4>

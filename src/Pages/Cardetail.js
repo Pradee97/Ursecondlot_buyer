@@ -31,6 +31,8 @@ import Popup from '../Component/Popup/Popup';
 import Makeurbid from '../Pages/Makeurbid';
 
 const Cardetail = () =>{
+
+	
 const history = useHistory();
 const dispatch = useDispatch();
 const [copySuccess, setCopySuccess] = useState('');
@@ -46,9 +48,9 @@ const [data, setData] = useState("");
 const [distance,setDistance] = useState("");
 const [moreCarFlag,setMoreCarFlag]=useState(false);
 const [similarCarFromSellerFlag,setSimilarCarFromSellerFlag]=useState(false);
-const selectedSellerId = useSelector(state => state.CarListReducer.payload);
+const selectedSellerId = useSelector(state => state.CarListReducer.SELLERID.payload);
 const [loading,setLoading] = useState(true);
-
+console.log("selescted seller id_______",selectedSellerId)
 
 const [isOpen, setIsOpen] = useState(false);
 
@@ -105,10 +107,16 @@ function loadLrgImg(img){
 	setLrgImg(img);
 }
 function CarDetailList(){
+
 	const request = {
+
 	"car_id":id,
 	"buyer_dealer_id": JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
-	"seller_dealer_id": selectedSellerId }
+	"seller_dealer_id": selectedSellerId 
+
+}
+
+
 	console.log("request for car detail",request)
 	API.post('carDetails/condition',request).then(res=>{
 	console.log("response",res.data.data);
