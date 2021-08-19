@@ -12,6 +12,7 @@ const MakeurBid=(props)=>{
     const { id } = useParams();
     const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
     const [isOpen, setIsOpen] = useState(false);
+    const [open, setOpen] = useState(false);
     const [comments,setComments] = useState("");
     const [highBid,setHighBid] = useState("");
     const [proxyBid,setProxyBid] = useState("");
@@ -29,7 +30,10 @@ const MakeurBid=(props)=>{
     const togglePopup = () => {
         setIsOpen(!isOpen);
     }
-
+    
+    const toggleTerms = () => {
+        setOpen(!open);
+    }
   
     function toggleViewDisplay(){
         console.log("inside toggle fn Del admin");
@@ -91,7 +95,7 @@ const MakeurBid=(props)=>{
             if (res.data.success) {
                 const { data } = res;
                 togglePopup()
-                setPopupTitle("Mkae Bid");
+                setPopupTitle("Make Bid");
                 setPopupMsg("Ur Bid is successfully created.Thanks you So much for your business");
                 setPopupType("success");
                 setPopupActionType("close");
@@ -196,12 +200,12 @@ const MakeurBid=(props)=>{
                 </div>
             </div>    
 
-            {isOpen && <Popup
+            {open && <Popup
                 isClose={false}
                 content={<>
-                    <Terms toggle={togglePopup} />
+                    <Terms toggle={toggleTerms} />
                 </>}
-                handleClose={togglePopup}
+                handleClose={toggleTerms}
             />}
             {isOpen && 
                 <CommonPopup 
