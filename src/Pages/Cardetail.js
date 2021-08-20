@@ -221,7 +221,7 @@ useEffect (()=>{
 return(
     <div>
          {loading?<Loading/>:
-        <main id="main" class="inner-page-cars">
+        <main id="main" class="inner-page-cars carDetailsPage">
     <div id="products-details" class="products-details">
 	 <div class="container">
 			<div class="back-btn">

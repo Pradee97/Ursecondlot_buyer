@@ -3857,7 +3857,7 @@ Make your Bid
 	margin:20px auto;
 }
 .makeyourbid-cancle-btns{
-	color: #bd062c;
+	color: #bd062c !important;
     padding: 10px 30px;
     margin-right: 20px;
     border-radius: 3px;
@@ -3887,7 +3887,7 @@ Make your Bid
 .makeyourbid-cancle-btns:hover, .makeyourbid-cancle-btns:focus{
   background:#bd062c;
    border:2px solid  #bd062c;
-   color: #fff;
+   color: #fff !important;
    text-decoration: none;
 }
 
@@ -7211,8 +7211,6 @@ img.carImg{
   max-width: 100%;
 }
 
-
-
 .carList .models-box .inner-page{
  padding: 0;
 }
@@ -7645,3 +7643,9 @@ margin-top: -3px;
 .saveSearchBlock .termspageblock{
   padding-bottom: 20px;
 }
+
+.carDetailsPage .models-box{
+  max-width: 800px;
+  max-height: 80vh;
+}
+

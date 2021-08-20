@@ -51,6 +51,16 @@ padding-right: 20px;
 .dealer-cars .cars-prices .cta-btns-primary{
     padding: 10px
 }
+
+.cars-prices a{
+    width: 100%;
+    display: block;
+    margin-bottom: 0;
+}
+img.carImg {
+    height: 220px !important;
+    max-width: 100%;
+}
 	
 }
 
