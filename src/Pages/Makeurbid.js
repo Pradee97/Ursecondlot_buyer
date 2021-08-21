@@ -28,7 +28,7 @@ const MakeurBid=(props)=>{
     const [popupActionValue, setPopupActionValue] = useState ("");
     const [popupActionPath, setPopupActionPath] = useState ("")
 
-    console.log("check hign bid value by redux",useSelector(state => state.CarDetailsReducer.payload))
+    console.log("check hign bid value by redux",carHighBid)
 
     const togglePopup = () => {
         setIsOpen(!isOpen);

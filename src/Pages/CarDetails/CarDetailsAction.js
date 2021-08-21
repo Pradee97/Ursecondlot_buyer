@@ -4,12 +4,11 @@ const CarDetailsConst = {
 };
 
 const CarDetailsAction = {
-    cardetails,
+    highBid,
     error
 };
 
-
-function cardetails(payload) {
+function highBid(payload) {
     return { type: CarDetailsConst.HIGHBID, payload };
 }
 

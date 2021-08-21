@@ -29,6 +29,7 @@ import CarListAction from '../CarList/CarListAction';
 import Loading from '../../Component/Loading/Loading';
 import Popup from '../../Component/Popup/Popup';
 import Makeurbid from '../../Pages/Makeurbid';
+import CarDetailsAction from '../CarDetails/CarDetailsAction';
 // import BuyNow from '../Pages/BuyNow';
 
 const Cardetail = () =>{
@@ -56,7 +57,8 @@ console.log("selescted seller id_______",selectedSellerId)
 const [isOpen, setIsOpen] = useState(false);
 const [open,setOpen] = useState(false);
 
-const toggleMakeBid = () => {
+const toggleMakeBid = (high_bid) => {
+	dispatch(CarDetailsAction.highBid(high_bid))
 	setIsOpen(!isOpen);
 }
 
@@ -347,7 +349,7 @@ return(
 							<div class="col-md-12">
 	        					<div class="cars-buy">
 									<a class="cars-buy-btns" href="#">Buy now</a>
-									<a class="cars-buy-btns-primary" onClick={toggleMakeBid}>Make Bid</a>
+									<a class="cars-buy-btns-primary" onClick={toggleMakeBid(carDetail[0].high_bid)}>Make Bid</a>
 								</div>
 	        				</div>
 						</div>
