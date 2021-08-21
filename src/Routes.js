@@ -61,6 +61,7 @@ import inventoryCars from './Pages/InventoryCars';
 import InventoryCars from './Pages/InventoryCars';
 import MoreCarFromBuyer from './Pages/MoreCarFromSeller';
 import Checkout from './Pages/Checkout';
+
 function AppRouter() {
 
   const timeout = 900000;
