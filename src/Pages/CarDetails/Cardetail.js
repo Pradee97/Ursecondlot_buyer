@@ -1,34 +1,34 @@
 import React, {useState, useEffect} from 'react';
 import $ from 'jquery'
 import { useHistory, useLocation, useParams } from "react-router-dom";
-import API from "../Services/BaseService";
-import lock from '../assets/img/lock.png';
-import cars01 from '../assets/img/cars01.png';
-import carbrand from '../assets/img/carshonda.jpg';
-import appstore from '../assets/img/appstore.png';
-import googleplay from '../assets/img/googleplay.png';
-import speedometer from '../assets/img/speedometer.svg';
-import gasolinePump from '../assets/img/gasolinePump.svg';
-import car from '../assets/img/car.svg';
-import book from '../assets/img/book.svg';
-import barcode from '../assets/img/barcode.svg';
-import tag from '../assets/img/tag.svg';
-import Path from '../assets/img/Path.svg';
-import transmission from '../assets/img/manual-transmission.svg';
-import drivetrain from '../assets/img/drivetrain.svg';
-import cardetail1 from '../assets/img/cardetail1.jpg'
-import cardetail2 from '../assets/img/cardetail2.jpg'
-import cardetail3 from '../assets/img/cardetail3.jpg'
-import cardetail4 from '../assets/img/cardetail4.jpg'
-import cardetail5 from '../assets/img/cardetail5.jpg'
+import API from "../../Services/BaseService";
+import lock from '../../assets/img/lock.png';
+import cars01 from '../../assets/img/cars01.png';
+import carbrand from '../../assets/img/carshonda.jpg';
+import appstore from '../../assets/img/appstore.png';
+import googleplay from '../../assets/img/googleplay.png';
+import speedometer from '../../assets/img/speedometer.svg';
+import gasolinePump from '../../assets/img/gasolinePump.svg';
+import car from '../../assets/img/car.svg';
+import book from '../../assets/img/book.svg';
+import barcode from '../../assets/img/barcode.svg';
+import tag from '../../assets/img/tag.svg';
+import Path from '../../assets/img/Path.svg';
+import transmission from '../../assets/img/manual-transmission.svg';
+import drivetrain from '../../assets/img/drivetrain.svg';
+import cardetail1 from '../../assets/img/cardetail1.jpg'
+import cardetail2 from '../../assets/img/cardetail2.jpg'
+import cardetail3 from '../../assets/img/cardetail3.jpg'
+import cardetail4 from '../../assets/img/cardetail4.jpg'
+import cardetail5 from '../../assets/img/cardetail5.jpg'
 import {CopyToClipboard} from 'react-copy-to-clipboard';
-import locked from '../../src/assets/img/locked.png';
+import locked from '../../assets/img/locked.png';
 import { useDispatch, useSelector } from 'react-redux';
-import CarListReducer from './CarList/CarListReducer';
-import CarListAction from './CarList/CarListAction';
-import Loading from '../Component/Loading/Loading';
-import Popup from '../Component/Popup/Popup';
-import Makeurbid from '../Pages/Makeurbid';
+import CarListReducer from '../CarList/CarListReducer';
+import CarListAction from '../CarList/CarListAction';
+import Loading from '../../Component/Loading/Loading';
+import Popup from '../../Component/Popup/Popup';
+import Makeurbid from '../../Pages/Makeurbid';
 // import BuyNow from '../Pages/BuyNow';
 
 const Cardetail = () =>{

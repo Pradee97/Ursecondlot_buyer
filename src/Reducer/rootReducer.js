@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 import CarListReducer from '../Pages/CarList/CarListReducer'
 import LoginReducer from '../Pages/Login/LoginReducer'
 import SearchReducer from '../Pages/SearchReducer'
+import CarDetailsReducer from '../Pages/CarDetails/CarDetailsReducer';
 // import todos from './todos'
 // import counter from '../Pages/ReduxTest/counterReducer'
 
@@ -13,5 +14,6 @@ import SearchReducer from '../Pages/SearchReducer'
 export default combineReducers({
   CarListReducer,
   LoginReducer,
-  SearchReducer
+  SearchReducer,
+  CarDetailsReducer
   })

@@ -10,6 +10,7 @@ import CommonPopup from '../Component/CommonPopup/CommonPopup';
 const MakeurBid=(props)=>{
 
     const { id } = useParams();
+    const carHighBid = useSelector(state => state.CarDetailsReducer.payload);
     const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
     const [isOpen, setIsOpen] = useState(false);
     const [open, setOpen] = useState(false);
@@ -26,6 +27,8 @@ const MakeurBid=(props)=>{
     const [popupActionType, setPopupActionType] = useState ("");
     const [popupActionValue, setPopupActionValue] = useState ("");
     const [popupActionPath, setPopupActionPath] = useState ("")
+
+    console.log("check hign bid value by redux",useSelector(state => state.CarDetailsReducer.payload))
 
     const togglePopup = () => {
         setIsOpen(!isOpen);
@@ -96,7 +99,7 @@ const MakeurBid=(props)=>{
                 const { data } = res;
                 togglePopup()
                 setPopupTitle("Make Bid");
-                setPopupMsg("Ur Bid is successfully created.Thanks you So much for your business");
+                setPopupMsg("Your Bid is successfully created.Thanks you So much for your business");
                 setPopupType("success");
                 setPopupActionType("close");
                 setPopupActionValue("close");
@@ -115,11 +118,11 @@ const MakeurBid=(props)=>{
         })
     }
 
-    useEffect(() => {
-		MakeBid();
+    // useEffect(() => {
+	// 	MakeBid();
 		
        
-	},[]);
+	// },[]);
 
     return(
         <div>
@@ -133,7 +136,7 @@ const MakeurBid=(props)=>{
                             </div>
                     
                             <div class="border-block"></div>
-                            <p class="border-bottomtext">Your bid can't be Lower than $12500</p>
+                            <p class="border-bottomtext">Your bid can't be Lower than $</p>
                             <div class="row content">			
                             <div class="form-group col-lg-6 col-md-6">
                                 <div class="input-icon">
@@ -187,7 +190,7 @@ const MakeurBid=(props)=>{
                                 </div>
                     
                             <div class=" col-lg-12 policylink">
-                                <a href="JavaScript:void(0)" onClick={togglePopup} >Policy document</a>
+                                <a href="JavaScript:void(0)" onClick={toggleTerms} >Policy document</a>
                             </div>
                             
                             <div class="col-lg-12 makeyourbid-btn">
