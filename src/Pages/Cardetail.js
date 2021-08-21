@@ -304,6 +304,15 @@ return(
 								</div>
 								{/* {copied ? <p>Copied !</p> : ""} */}
 							</div>
+
+							<div class="col-md-12 carpoints">
+							<label   className= "input-has-value">Inventory Number</label>		  
+								<div class="carpoint">								
+									<span>{carDetail[0].inventory_no}</span>									
+									
+								</div>
+							</div>
+
 						</div>
 							
 							<div class="row">
@@ -451,6 +460,8 @@ return(
 			</div>
 				
 				<div class="cars-prices">
+					<a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a>
+          			<a className="cta-btns" href="#">Seller Price ${moreCar.max_bid}</a>
 					<a class="cta-btns" href="">High Bid ${moreCar.high_bid}</a>
 					<a class="cta-btns-primary" onClick={toggleMakeBid}>Make Bid</a>
 				</div>
@@ -498,6 +509,8 @@ return(
 								</div>
 								
 								<div class="cars-prices">
+									<a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a>
+          							<a className="cta-btns" href="#">Seller Price ${moreCar.max_bid}</a>
 									<a class="cta-btns" href="">High Bid ${moreCar.high_bid}</a>
 									<a class="cta-btns-primary" onClick={toggleMakeBid}>Make Bid</a>
 								</div>

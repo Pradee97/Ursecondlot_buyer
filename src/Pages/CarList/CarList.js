@@ -211,8 +211,9 @@ const CarList = () => {
                                                 <p className="details"><span>{item.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <p className="details"><img src={item.image}/></p>
                                             </div>
-
+                                  
                                             <div className="cars-prices">
+                                                <a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a>
                                                 <a className="cta-btns" href="#">Seller Price ${item.max_bid}</a>
                                                 <a className="cta-btns" href="#">High Bid ${item.high_bid}</a>
                                                 <a className="cta-btns-primary" href="JavaScript:void(0)" onClick={togglePopup} >Make Bid</a>
@@ -261,8 +262,9 @@ const CarList = () => {
                                                 <p className="details"><span>{item.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <p className="details"><img src={item.image}/></p>
                                             </div>
-
+                                           
                                             <div className="cars-prices">
+                                            <a className="cta-btns" href="#">Inventory Number{item.inventory_no}</a>
                                                 <a className="cta-btns" href="#">Seller Price ${item.max_bid}</a>
                                                 <a className="cta-btns" href="#">High Bid ${item.high_bid}</a>
                                                 <a className="cta-btns-primary" href="#">Make Bid</a>
@@ -312,8 +314,9 @@ const CarList = () => {
                                                 <p className="details"><span>{item.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <p className="details"><img src={item.image}/></p>
                                             </div>
-
+                                            
                                             <div className="cars-prices">
+                                            <a className="cta-btns" href="#">Inventory Number{item.inventory_no}</a>
                                                 <a className="cta-btns" href="#">Seller Price ${item.max_bid}</a>
                                                 <a className="cta-btns" href="#">High Bid ${item.high_bid}</a>
                                                 <a className="cta-btns-primary" href="#">Make Bid</a>
@@ -363,8 +366,9 @@ const CarList = () => {
                                         <p className="details"><span>{item.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
                                         <p className="details"><img src={item.image}/></p>
                                     </div>
-
+                                   
                                     <div className="cars-prices">
+                                        <a className="cta-btns" href="#">Inventory Number{item.inventory_no}</a>
                                         <a className="cta-btns" href="#">Seller Price ${item.max_bid}</a>
                                         <a className="cta-btns" href="#">High Bid ${item.high_bid}</a>
                                         <a className="cta-btns-primary" href="#">Make Bid</a>
