@@ -13,8 +13,12 @@ import Loading from"../../Component/Loading/Loading";
 import { useDispatch, useSelector } from 'react-redux';
 import CarListAction from './CarListAction';
 // import Carousel from 'react-material-ui-carousel'
-import Carousel from "react-multi-carousel";
+// import Carousel from "react-multi-carousel";
 // import SimpleImageSlider from "react-simple-image-slider"
+import OwlCarousel from 'react-owl-carousel';
+import 'owl.carousel/dist/assets/owl.carousel.css';
+import 'owl.carousel/dist/assets/owl.theme.default.css';
+
 import { Paper, Button } from '@material-ui/core'
 
 const CarList = () => {
@@ -38,7 +42,9 @@ const CarList = () => {
     const [suggestedCarDetail,setSuggestedCarDetail]=useState("");
 
     const [isOpen, setIsOpen] = useState(false);
-
+    const options = {
+        items: 4,
+    };
     const togglePopup = () => {
         setIsOpen(!isOpen);
     }
@@ -184,11 +190,13 @@ const CarList = () => {
                             <div className="section-title">
                                 <h2>Suggested cars</h2>
                             </div>
-                            <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
-                            {suggestedCarDetail?.length>0?suggestedCarDetail?.slice(0, 4)
+                            {/* <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100"> */}
+                            <OwlCarousel className='owl-theme row aos-init aos-animate' data-aos="zoom-in" data-aos-delay="100" 
+                                loop margin={10} nav autoplay>
+                            {suggestedCarDetail?.length>0?suggestedCarDetail
                             .map((item) =>
                             
-                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                <div>
                                     <div className="car-item">
                                         <div className="cars-lock">
 
@@ -221,7 +229,8 @@ const CarList = () => {
                                         </div>
                                     </div>
                                 </div>):""}
-                               </div>
+                               {/* </div> */}
+                               </OwlCarousel>
                             <div className="text-center">
                                 <a href="/suggestedcars" className="more-btn">View More <i className="bx bx-chevron-right"></i></a>
                             </div>
@@ -236,10 +245,12 @@ const CarList = () => {
                                 <h2>inventory</h2>
                             </div>
 
-                            <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
-                            {carInventoryDetail?.length>0?carInventoryDetail?.slice(0, 4)
+                            {/* <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100"> */}
+                            <OwlCarousel className='owl-theme row aos-init aos-animate' data-aos="zoom-in" data-aos-delay="100" 
+                                loop margin={10} nav autoplay>
+                            {carInventoryDetail?.length>0?carInventoryDetail
                             .map((item,index) =>
-                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                <div>
                                     <div className="car-item">
                                         <div className="cars-lock">
                                         {/* <img src={(item.isFavourite===0)? lock : locked} onClick={()=>(item.isFavourite===0)?addFavourite(item.car_id):removeFav(item.car_id)} /> */}
@@ -272,7 +283,7 @@ const CarList = () => {
                                         </div>
                                     </div>
                                 </div>):""}
-                                </div>
+                                </OwlCarousel>
 
                             <div className="text-center">
                                 <a href="/InventoryCars" className="more-btn">View More<i className="bx bx-chevron-right"></i></a>
@@ -287,10 +298,12 @@ const CarList = () => {
                                 <h2>Recently Added Cars</h2>
                             </div>
 
-                            <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
-                            {carDetail.length>0?carDetail.slice(0, 4)
+                            {/* <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100"> */}
+                            <OwlCarousel className='owl-theme row aos-init aos-animate' data-aos="zoom-in" data-aos-delay="100" 
+                                loop margin={10} nav autoplay>
+                            {carDetail.length>0?carDetail
                                         .map((item,index) =>
-                                <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                                <div >
                                     <div className="car-item">
                                         <div className="cars-lock">
                                         <img src={(item.isFavourite===0)? lock : locked}  onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'recent')} />
@@ -324,7 +337,7 @@ const CarList = () => {
                                         </div>
                                     </div>
                                 </div>):""}
-                                </div>
+                                </OwlCarousel>
                             <div className="text-center">
                                 <a href="/recentlyAddedCars" className="more-btn">View More<i className="bx bx-chevron-right"></i></a>
                             </div>
@@ -339,10 +352,12 @@ const CarList = () => {
                             </div>
                            
 
-                            <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
-                            {carFavInventoryDetail.length>0?carFavInventoryDetail.slice(0,4)
+                            {/* <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100"> */}
+                            <OwlCarousel className='owl-theme row aos-init aos-animate' data-aos="zoom-in" data-aos-delay="100" 
+                                loop margin={10} nav autoplay>
+                            {carFavInventoryDetail.length>0?carFavInventoryDetail
                             .map((item,index) =>
-                            <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                            <div>
                             <div className="car-item">
                                 <div className="cars-lock">
                                 <img src={(item.isFavourite===0)? lock : locked}  onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'recent')} />
@@ -376,7 +391,7 @@ const CarList = () => {
                                 </div>
                             </div>
                         </div>):""}
-                                </div>
+                        </OwlCarousel>
                         </div>
 
 
