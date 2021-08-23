@@ -869,8 +869,10 @@ useEffect(() => {
 						</div>
 
                         <div class="cars-prices">
-                          <a class="cta-btns" href="#">High Bid ${item.high_bid}</a>
-                          <a class="cta-btns-primary" href="#">Make Bid</a>
+							<a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a>
+                        	<a className="cta-btns" href="#">Seller Price ${item.max_bid}</a>
+                          	<a class="cta-btns" href="#">High Bid ${item.high_bid}</a>
+                          	<a class="cta-btns-primary" href="#">Make Bid</a>
                         </div>
                     </div>
                   </div>

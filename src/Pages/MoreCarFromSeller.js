@@ -160,6 +160,8 @@ return(
 								</div>
 				
 				<div class="cars-prices">
+          <a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a>
+          <a className="cta-btns" href="#">Seller Price ${moreCar.max_bid}</a>
 					<a class="cta-btns" href="">High Bid ${moreCar.min_bid}</a>
 					<a class="cta-btns-primary" href="/makeurbid">Make Bid</a>
 				</div>
