@@ -1,6 +1,7 @@
 export const CarDetailsConst = {
     HIGHBID: 'HIGHBID',
     MINBID : 'MINBID',
+    SAVEPURCHASE: 'SAVEPURCHASE',
     ERROR: 'ERROR'
 };
 const initialState =  {}
@@ -11,14 +12,20 @@ const CarDetailsReducer = (state = {payload:initialState}, action) => {
         case CarDetailsConst.HIGHBID:
             return {
                 cardetails: 'cardetails-highbid',
-                highbid: action.highBid
+                payload: action.payload
             };
         case CarDetailsConst.MINBID:
             return {
                 cardetails: 'cardetails-minbid',
-                minbid: action.payload
+                payload: action.payload
 
             };
+        case CarDetailsConst.SAVEPURCHASE:
+        return {
+            cardetails: 'cardetails-savepurchase',
+            payload: action.payload
+
+        };
         case CarDetailsConst.ERROR:
             return {
                 cardetails: 'cardetails-fail',
