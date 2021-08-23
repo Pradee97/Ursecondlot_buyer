@@ -99,15 +99,15 @@ const MakeurBid=(props)=>{
 
         }
         else if(!highBid<carHighBid+50){
-
-            if(carHighBid!=0){
-                setHighBidError("High Bid should not lower than " +Number(carHighBid+50))
-                return;
-            }
-            else{
-                setHighBidError("High Bid should not lower than " +Number(carMinBid))
-                return;
-            }
+            setHighBidError("High Bid should not lower than " +Number(carHighBid+50))
+            // if(carHighBid!=0){
+            //     setHighBidError("High Bid should not lower than " +Number(carHighBid+50))
+            //     return;
+            // }
+            // else{
+            //     setHighBidError("High Bid should not lower than " +Number(carMinBid))
+            //     return;
+            // }
 
         }
 
