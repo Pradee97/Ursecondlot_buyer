@@ -9,7 +9,7 @@ import locked from '../../src/assets/img/locked.png';
 import Loading from '../Component/Loading/Loading';
 import { useDispatch, useSelector } from 'react-redux';
 import CarListAction from './CarList/CarListAction';
-import CarListAction from './CarList/CarListAction';
+import FilterSearchAction from '../Component/FilterSearchCars/FilterSearchAction';
 import FilterSearchCars from '../Component/FilterSearchCars/FilterSearchCars';
 
 const RecentlyAddedCars = () => {

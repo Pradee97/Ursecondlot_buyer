@@ -14,16 +14,16 @@ const FilterSearchAction = {
 
 
 function searchrequest(payload) {
-    return { type: SearchConst.SEARCHREQUEST, payload };
+    return { type: FilterSearchConst.SEARCHREQUEST, payload };
 }
 function searchresult(payload) {
-    return { type: SearchConst.SEARCHRESULT, payload };
+    return { type: FilterSearchConst.SEARCHRESULT, payload };
 }
 function apiname(payload) {
-    return { type: SearchConst.APINAME, payload };
+    return { type: FilterSearchConst.APINAME, payload };
 }
 function error(payload) {
-    return { type: SearchConst.ERROR, payload };
+    return { type: FilterSearchConst.ERROR, payload };
 }
 
 export default FilterSearchAction;
