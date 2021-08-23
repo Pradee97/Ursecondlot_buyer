@@ -57,6 +57,7 @@ console.log("selescted seller id_______",selectedSellerId)
 const [isOpen, setIsOpen] = useState(false);
 const [open,setOpen] = useState(false);
 
+const highBid= useSelector(state => state.CarDetailsReducer.payload.high_bid);
 
 const toggleMakeBid = (high_bid,min_bid,save_purchase) => {
 	console.log("check the high bid value",high_bid)
@@ -67,6 +68,7 @@ const toggleMakeBid = (high_bid,min_bid,save_purchase) => {
 	}
 	//dispatch(CarDetailsAction.highBid(high_bid))
 	dispatch(CarDetailsAction.minBid(makebiddispatch))
+	
 	setIsOpen(!isOpen);
 }
 
@@ -195,7 +197,7 @@ function CarDetailList(){
 	
 	
 	
-	},[id])
+	},[id,highBid])
 
 const addRemoveFavourite=(carid,state,flag)=>{
 	console.log("inside addremove");
