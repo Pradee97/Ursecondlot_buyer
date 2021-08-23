@@ -3232,6 +3232,7 @@ Car Detail Page
 .carspecifation p{
 	color:#343434;
   text-align: left;
+  display: flex;
 }
 .carspecifation span{
 	color:#808080;
@@ -6324,7 +6325,7 @@ button:focus{
 *::placeholder {
   color: #9F9F9F;
   font-size: 16px;
-    font-weight: 600;
+    font-weight: 400;
 }
 
 .datePickerBlock .react-datepicker-wrapper:focus-visible {
@@ -7654,7 +7655,7 @@ margin-top: -3px;
 
 .carDetailsPage .models-box{
   max-width: 800px;
-  max-height: 80vh;
+  max-height: fit-content;
 }
 
 
@@ -7708,6 +7709,10 @@ margin-top: -3px;
   margin: 0;
   margin-bottom: 0px;
   display: inline-block;
+}
+
+.models-box .section-title{
+  padding-bottom: 10px;
 }
 
 
