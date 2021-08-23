@@ -14,6 +14,7 @@ import SearchAction from '../../Pages/SearchAction';
 
 const FilterSearchCars=()=>{
     const history = useHistory();
+	const [apiName,setApiName]=useState([]);
     const [carDetail ,setCarDetail] = useState([]);
     const [recentCarFlag,setrecentCarFlag]=useState(false);
     const [loading,setLoading] = useState(true);
@@ -330,7 +331,7 @@ const FilterSearchCars=()=>{
 			console.log("state=======",stateSearch)
 			console.log(" filter search request",request);
 
-        API.post("BuyerInventoryCarSearch/condition",request)
+        API.post("BuyerNewCarSearch/condition",request)
         .then((res)=>{
 		   
             setCarDetail(res.data.data);
