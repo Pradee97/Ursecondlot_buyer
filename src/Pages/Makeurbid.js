@@ -16,7 +16,7 @@ const MakeurBid=(props)=>{
     const { id } = useParams();
     const carHighBid = useSelector(state => state.CarDetailsReducer.payload.high_bid);  
     const carMinBid = useSelector(state => state.CarDetailsReducer.payload.min_bid);
-    // const carMinBid = useSelector(state => state.CarDetailsReducer.payload.save_purchase);
+    const carSavePurchase = useSelector(state => state.CarDetailsReducer.payload.save_purchase);
     const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
     const [isOpen, setIsOpen] = useState(false);
     const [open, setOpen] = useState(false);
@@ -26,6 +26,7 @@ const MakeurBid=(props)=>{
     const [transportation,setTransportation] = useState("no");
     const [display,setDisplay]=useState("no");
     const [save,setSave] = useState("no");
+    const [transportFlag,setTransportFlag] = useState(false);
 
     const [popupTitle, setPopupTitle] = useState ("");
     const [popupMsg, setPopupMsg] = useState ("");
@@ -38,10 +39,18 @@ const MakeurBid=(props)=>{
     const [alertimg,setAlertImg] = useState("");
     const [toggleMakeBidPopupOpen,setToggleMakeBidPopupOpen]= useState(true);
     const [highBidError, setHighBidError] = useState("");
+
     if(carHighBid=="" || carHighBid==null || carHighBid==undefined || carHighBid==0){
         carHighBid=carMinBid
     }
 
+    if(carSavePurchase=="" || carSavePurchase==null || carSavePurchase=="no" ){
+
+        setTransportFlag(false)
+    }
+    else {
+        setTransportFlag(true)
+    }
     console.log("hig bid payload value",carHighBid);
     console.log("check the high bid value in redux",useSelector(state => state.CarDetailsReducer.payload.high_bid))
     console.log("check the min bid value in redux",useSelector(state => state.CarDetailsReducer.payload.min_bid))
@@ -224,7 +233,10 @@ const MakeurBid=(props)=>{
                                     <h4 class=" col-lg-12">Optional Services</h4>
 
                                     <div className="col-lg-6 form-group customCheckbox">
+                                        {transportFlag?
+                                        <input type="checkbox" className="form-check d-inline " id="chb2" checked onClick={toggleViewTransportation}/>:
                                         <input type="checkbox" className="form-check d-inline " id="chb2" onClick={toggleViewTransportation}/>
+                                        }
                                         <label htmlFor="chb2" className="form-check-label">Transportation  </label>                               
                                     </div>
 
