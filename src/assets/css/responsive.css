@@ -97,8 +97,10 @@ img.carImg {
     height: 485px;
 }
 
-	
-	
+.carspecifation .container{
+    max-width: 100%;
+}
+
 }
 
 @media (max-width: 1335px) {
@@ -339,6 +341,12 @@ img.carImg {
 		display: inline-block;
 		float: none;
 	}
+
+    .carspecifationblock .col-lg-2{
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    
 	
 	
 }
