@@ -13,9 +13,9 @@ import errorImg from '../../src/assets/img/erroricon.png';
 const MakeurBid=(props)=>{
 
     const { id } = useParams();
-    const carHighBid = useSelector(state => state.CarDetailsReducer.payload);
-   
-    const carMinBid = useSelector(state => state.CarDetailsReducer.minbid);
+    const carHighBid = useSelector(state => state.CarDetailsReducer.payload.high_bid);  
+    const carMinBid = useSelector(state => state.CarDetailsReducer.payload.min_bid);
+    // const carMinBid = useSelector(state => state.CarDetailsReducer.payload.save_purchase);
     const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
     const [isOpen, setIsOpen] = useState(false);
     const [open, setOpen] = useState(false);
@@ -40,9 +40,9 @@ const MakeurBid=(props)=>{
 
 
     console.log("hig bid payload value",carHighBid);
-    console.log("check the high bid value in redux",useSelector(state => state.CarDetailsReducer.highbid))
-    console.log("check the min bid value in redux",useSelector(state => state.CarDetailsReducer.minbid))
-    console.log("hig bid car detail value",useSelector(state => state.CarDetailsReducer.cardetails))
+    console.log("check the high bid value in redux",useSelector(state => state.CarDetailsReducer.payload.high_bid))
+    console.log("check the min bid value in redux",useSelector(state => state.CarDetailsReducer.payload.min_bid))
+    console.log("check the save purchase in redux",useSelector(state => state.CarDetailsReducer.payload.save_purchase))
     console.log("check hign bid value by redux",carHighBid)
 
     const togglePopup = () => {
@@ -93,10 +93,22 @@ const MakeurBid=(props)=>{
     const MakeBid =()=>{
 
         if(!highBid){
+
             setHighBidError("High Bid should not be empty" )
+            return;
+
         }
         else if(!highBid<carHighBid+50){
-            setHighBidError("High Bid should not lower than" +Number(carHighBid+50))
+
+            if(carHighBid!=0){
+                setHighBidError("High Bid should not lower than " +Number(carHighBid+50))
+                return;
+            }
+            else{
+                setHighBidError("High Bid should not lower than " +Number(carMinBid))
+                return;
+            }
+
         }
 
         console.log("inside addremove");
@@ -168,12 +180,12 @@ const MakeurBid=(props)=>{
                             </div>
                     
                             <div class="border-block"></div>
-                            <p class="border-bottomtext">Your bid can't be Lower than $</p>
+                            <p class="border-bottomtext">Your bid can't be Lower than $ {carMinBid}</p>
                             <div class="row content">			
                             <div class="form-group col-lg-6 col-md-6">
                                 {carHighBid == "" || carHighBid == null || carHighBid == undefined ?
                                 <div class="input-icon">
-                                <input type="text" class="form-control" placeholder={carMinBid+50}onChange={(e)=>setHighBid(e.target.value)}></input>
+                                <input type="text" class="form-control" placeholder={carMinBid}onChange={(e)=>setHighBid(e.target.value)}></input>
                                 <i>$</i>
                                 </div>:
                                 <div class="input-icon">
@@ -189,7 +201,7 @@ const MakeurBid=(props)=>{
                             
                             <div class="form-group col-lg-6 col-md-6">
                                 <div class="input-icon">
-                                    <input type="text" class="form-control" placeholder="" onChange={(e)=>setProxyBid(e.target.value)}></input>
+                                    <input type="text" class="form-control" placeholder="Max Bid (Optional)" onChange={(e)=>setProxyBid(e.target.value)}></input>
                                     <i>$</i>
                                 </div>
                             </div>

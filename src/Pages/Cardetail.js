@@ -58,10 +58,15 @@ const [isOpen, setIsOpen] = useState(false);
 const [open,setOpen] = useState(false);
 
 
-const toggleMakeBid = (high_bid,min_bid) => {
+const toggleMakeBid = (high_bid,min_bid,save_purchase) => {
 	console.log("check the high bid value",high_bid)
-	dispatch(CarDetailsAction.highBid(high_bid))
-	dispatch(CarDetailsAction.minBid(min_bid))
+	let makebiddispatch={
+		high_bid: high_bid,
+		min_bid: min_bid,
+		save_purchase: save_purchase
+	}
+	//dispatch(CarDetailsAction.highBid(high_bid))
+	dispatch(CarDetailsAction.minBid(makebiddispatch))
 	setIsOpen(!isOpen);
 }
 
