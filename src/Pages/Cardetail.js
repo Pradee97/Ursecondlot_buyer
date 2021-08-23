@@ -369,7 +369,7 @@ return(
 							<div class="col-md-12">
 	        					<div class="cars-buy">
 									<a class="cars-buy-btns" href="#">Buy now</a>
-									<a class="cars-buy-btns-primary" onClick={()=>toggleMakeBid(carDetail[0].high_bid,carDetail[0].min_bid)}>Make Bid</a>
+									<a class="cars-buy-btns-primary" onClick={()=>toggleMakeBid(carDetail[0].high_bid,carDetail[0].min_bid,carDetail[0].save_purchase)}>Make Bid</a>
 								</div>
 	        				</div>
 						</div>
