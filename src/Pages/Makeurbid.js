@@ -16,9 +16,10 @@ const MakeurBid=(props)=>{
 
     const history = useHistory();
     const dispatch = useDispatch();
-    const { id } = useParams();
-    const carHighBid = useSelector(state => state.CarDetailsReducer.payload.high_bid);  
-    const carMinBid = useSelector(state => state.CarDetailsReducer.payload.min_bid);
+    const [id,setId] = useState(useSelector(state => state.CarDetailsReducer.payload.car_id));
+    const [redirectPage,setRedirectPage] = useState(useSelector(state => state.CarDetailsReducer.payload.redirectPage));
+    const [carHighBid,setCarHighBid] = useState(useSelector(state => state.CarDetailsReducer.payload.high_bid));  
+    const [carMinBid,setCarMinBid] = useState(useSelector(state => state.CarDetailsReducer.payload.min_bid));
     const carSavePurchase = useSelector(state => state.CarDetailsReducer.payload.save_purchase);
     const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
     const [isOpen, setIsOpen] = useState(false);
@@ -46,7 +47,7 @@ const MakeurBid=(props)=>{
     const [highBidError, setHighBidError] = useState("");
 
     if(carHighBid=="" || carHighBid==null || carHighBid==undefined || carHighBid==0){
-        carHighBid=carMinBid
+        setCarHighBid(carMinBid)
     }
 
     // if(carSavePurchase=="" || carSavePurchase==null || carSavePurchase=="no" ){
@@ -116,12 +117,18 @@ const MakeurBid=(props)=>{
         let makebiddispatch={
             high_bid: highBid,
             min_bid: carMinBid,
-            save_purchase: carSavePurchase
+            save_purchase: carSavePurchase,
+            
         }
         //dispatch(CarDetailsAction.highBid(high_bid))
         dispatch(CarDetailsAction.minBid(makebiddispatch))
         console.log("redirection checking for car detail" , id)
+        if (redirectPage=="cardetail"){
         history.push("/cardetail/"+id)
+        }
+        else{
+            history.push("/carlist")
+        }
         props.toggle()
     }
 
