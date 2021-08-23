@@ -271,7 +271,7 @@ const CarList = () => {
                                             <h4>{item.deal_name}</h4>
                                         </div>:""}
                                         <div className="cars-content">
-                                            <h3><a href="#">{item.make} ({item.model} model)</a></h3>
+                                            <h3><a href="JavaScript:void(0)" title = {`${item.make} (${item.model}) model`}>{item.make} ({item.model} model)</a></h3>
                                             <div className="d-flex align-items-center mb-3">
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>    
@@ -328,7 +328,7 @@ const CarList = () => {
                                             <h4>{item.deal_name}</h4>
                                         </div>:""}
                                         <div className="cars-content">
-                                            <h3><a href="#">{item.make} ({item.model} model)</a></h3>
+                                            <h3><a href="JavaScript:void(0)" title = {`${item.make} (${item.model}) model`}>{item.make} ({item.model} model)</a></h3>
                                             <div className="d-flex align-items-center mb-3">
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>    
@@ -385,7 +385,7 @@ const CarList = () => {
                                     <h4>{item.deal_name}</h4>
                                 </div>:""}
                                 <div className="cars-content">
-                                    <h3><a href="#">{item.make} ({item.model} model)</a></h3>
+                                    <h3><a href="JavaScript:void(0)" title = {`${item.make} (${item.model}) model`}>{item.make} ({item.model} model)</a></h3>
                                     <div className="d-flex align-items-center mb-3">
                                         <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
                                         <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>    
