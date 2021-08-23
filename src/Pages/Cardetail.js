@@ -22,13 +22,14 @@ import cardetail3 from '../assets/img/cardetail3.jpg'
 import cardetail4 from '../assets/img/cardetail4.jpg'
 import cardetail5 from '../assets/img/cardetail5.jpg'
 import {CopyToClipboard} from 'react-copy-to-clipboard';
-import locked from '../../src/assets/img/locked.png';
+import locked from '../assets/img/locked.png';
 import { useDispatch, useSelector } from 'react-redux';
 import CarListReducer from './CarList/CarListReducer';
 import CarListAction from './CarList/CarListAction';
 import Loading from '../Component/Loading/Loading';
 import Popup from '../Component/Popup/Popup';
-import Makeurbid from '../Pages/Makeurbid';
+import Makeurbid from './Makeurbid';
+import CarDetailsAction from './CarDetails/CarDetailsAction';
 // import BuyNow from '../Pages/BuyNow';
 
 const Cardetail = () =>{
@@ -56,7 +57,8 @@ console.log("selescted seller id_______",selectedSellerId)
 const [isOpen, setIsOpen] = useState(false);
 const [open,setOpen] = useState(false);
 
-const toggleMakeBid = () => {
+const toggleMakeBid = (high_bid) => {
+	// dispatch(CarDetailsAction.highBid(high_bid))
 	setIsOpen(!isOpen);
 }
 
@@ -302,6 +304,15 @@ return(
 								</div>
 								{/* {copied ? <p>Copied !</p> : ""} */}
 							</div>
+
+							<div class="col-md-12 carpoints">
+							<label   className= "input-has-value">Inventory Number</label>		  
+								<div class="carpoint">								
+									<span>{carDetail[0].inventory_no}</span>									
+									
+								</div>
+							</div>
+
 						</div>
 							
 							<div class="row">
@@ -449,6 +460,8 @@ return(
 			</div>
 				
 				<div class="cars-prices">
+					<a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a>
+          			<a className="cta-btns" href="#">Seller Price ${moreCar.max_bid}</a>
 					<a class="cta-btns" href="">High Bid ${moreCar.high_bid}</a>
 					<a class="cta-btns-primary" onClick={toggleMakeBid}>Make Bid</a>
 				</div>
@@ -496,6 +509,8 @@ return(
 								</div>
 								
 								<div class="cars-prices">
+									<a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a>
+          							<a className="cta-btns" href="#">Seller Price ${moreCar.max_bid}</a>
 									<a class="cta-btns" href="">High Bid ${moreCar.high_bid}</a>
 									<a class="cta-btns-primary" onClick={toggleMakeBid}>Make Bid</a>
 								</div>
