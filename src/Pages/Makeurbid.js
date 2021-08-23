@@ -9,6 +9,7 @@ import CommonPopup from '../Component/CommonPopup/CommonPopup';
 import Item from 'antd/lib/list/Item';
 import checkImg from '../../src/assets/img/check.svg';
 import errorImg from '../../src/assets/img/erroricon.png';
+import '../Component/CommonPopup/commonPopup.css'
 
 const MakeurBid=(props)=>{
 
@@ -37,7 +38,9 @@ const MakeurBid=(props)=>{
     const [alertimg,setAlertImg] = useState("");
     const [toggleMakeBidPopupOpen,setToggleMakeBidPopupOpen]= useState(true);
     const [highBidError, setHighBidError] = useState("");
-
+    if(carHighBid=="" || carHighBid==null || carHighBid==undefined || carHighBid==0){
+        carHighBid=carMinBid
+    }
 
     console.log("hig bid payload value",carHighBid);
     console.log("check the high bid value in redux",useSelector(state => state.CarDetailsReducer.payload.high_bid))
@@ -97,21 +100,26 @@ const MakeurBid=(props)=>{
 
             setHighBidError("High Bid should not be empty" )
             return;
-
         }
-        else if(highBid<carHighBid+50){
+        else if (highBid<carHighBid+50){
             setHighBidError("High Bid should not lower than " +Number(carHighBid+50))
             return;
-            // if(carHighBid!=0){
-            //     setHighBidError("High Bid should not lower than " +Number(carHighBid+50))
-            //     return;
-            // }
-            // else{
-            //     setHighBidError("High Bid should not lower than " +Number(carMinBid))
-            //     return;
-            // }
-
+            
         }
+        else if(carHighBid!==0){
+                setHighBidError("High Bid should not lower than " +Number(carMinBid+50))
+                // return;
+            }
+        
+           
+
+        
+        // else if(highBid<carHighBid+50){
+        //     setHighBidError("High Bid should not lower than " +Number(carHighBid+50))
+        //     return;
+           
+
+        // }
 
         console.log("inside addremove");
         let request={
@@ -182,12 +190,14 @@ const MakeurBid=(props)=>{
                             </div>
                     
                             <div class="border-block"></div>
-                            <p class="border-bottomtext">Your bid can't be Lower than $ {carMinBid}</p>
+                            {carHighBid == "" || carHighBid == null || carHighBid == undefined ?
+                            <p class="border-bottomtext">Your bid can't be Lower than $ {carMinBid+50}</p>:
+                            <p class="border-bottomtext">Your bid can't be Lower than $ {carHighBid+50}</p>}
                             <div class="row content">			
                             <div class="form-group col-lg-6 col-md-6">
                                 {carHighBid == "" || carHighBid == null || carHighBid == undefined ?
                                 <div class="input-icon">
-                                <input type="text" class="form-control" placeholder={carMinBid}onChange={(e)=>setHighBid(e.target.value)}></input>
+                                <input type="text" class="form-control" placeholder={carMinBid+50}onChange={(e)=>setHighBid(e.target.value)}></input>
                                 <i>$</i>
                                 </div>:
                                 <div class="input-icon">
@@ -258,8 +268,7 @@ const MakeurBid=(props)=>{
                 (<div className="modalcontent">
                 {/* <img src={checkImg}></img>  */}
              <div className="Commonfull-icon">
-                {alertimg?<img src={checkImg} className="success" alt="..." />:
-                <img src={errorImg} className="success" alt="..." />}
+             <img alt="" className={alertimg === checkImg ?  "successImg " : "errorImg"} src={alertimg}></img>
              
                  </div>
              <div className="modalbody">
