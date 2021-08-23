@@ -286,7 +286,7 @@ const CarList = () => {
                                                 <a className="cta-btns" href="#">High Bid $ 0</a>:
                                                 <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                                 } 
-                                                <a className="cta-btns-primary" href="#">Make Bid</a>
+                                                <a className="cta-btns-primary" onClick={()=>togglePopup(item.high_bid)} >Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
@@ -400,7 +400,7 @@ const CarList = () => {
                                         <a className="cta-btns" href="#">High Bid $ 0</a>:
                                         <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                         } 
-                                        <a className="cta-btns-primary" href="#">Make Bid</a>
+                                        <a className="cta-btns-primary" onClick={()=>togglePopup(item.high_bid)}>Make Bid</a>
                                     </div>
                                 </div>
                             </div>
