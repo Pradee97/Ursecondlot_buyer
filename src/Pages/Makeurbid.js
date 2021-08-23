@@ -9,13 +9,14 @@ import CommonPopup from '../Component/CommonPopup/CommonPopup';
 import Item from 'antd/lib/list/Item';
 import checkImg from '../../src/assets/img/check.svg';
 import errorImg from '../../src/assets/img/erroricon.png';
+import '../Component/CommonPopup/commonPopup.css'
 
 const MakeurBid=(props)=>{
 
     const { id } = useParams();
-    const carHighBid = useSelector(state => state.CarDetailsReducer.payload);
-   
-    const carMinBid = useSelector(state => state.CarDetailsReducer.minbid);
+    const carHighBid = useSelector(state => state.CarDetailsReducer.payload.high_bid);  
+    const carMinBid = useSelector(state => state.CarDetailsReducer.payload.min_bid);
+    const carSavePurchase = useSelector(state => state.CarDetailsReducer.payload.save_purchase);
     const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
     const [isOpen, setIsOpen] = useState(false);
     const [open, setOpen] = useState(false);
@@ -25,6 +26,7 @@ const MakeurBid=(props)=>{
     const [transportation,setTransportation] = useState("no");
     const [display,setDisplay]=useState("no");
     const [save,setSave] = useState("no");
+    const [transportFlag,setTransportFlag] = useState(false);
 
     const [popupTitle, setPopupTitle] = useState ("");
     const [popupMsg, setPopupMsg] = useState ("");
@@ -38,11 +40,21 @@ const MakeurBid=(props)=>{
     const [toggleMakeBidPopupOpen,setToggleMakeBidPopupOpen]= useState(true);
     const [highBidError, setHighBidError] = useState("");
 
+    if(carHighBid=="" || carHighBid==null || carHighBid==undefined || carHighBid==0){
+        carHighBid=carMinBid
+    }
 
+    if(carSavePurchase=="" || carSavePurchase==null || carSavePurchase=="no" ){
+
+        setTransportFlag(false)
+    }
+    else {
+        setTransportFlag(true)
+    }
     console.log("hig bid payload value",carHighBid);
-    console.log("check the high bid value in redux",useSelector(state => state.CarDetailsReducer.highbid))
-    console.log("check the min bid value in redux",useSelector(state => state.CarDetailsReducer.minbid))
-    console.log("hig bid car detail value",useSelector(state => state.CarDetailsReducer.cardetails))
+    console.log("check the high bid value in redux",useSelector(state => state.CarDetailsReducer.payload.high_bid))
+    console.log("check the min bid value in redux",useSelector(state => state.CarDetailsReducer.payload.min_bid))
+    console.log("check the save purchase in redux",useSelector(state => state.CarDetailsReducer.payload.save_purchase))
     console.log("check hign bid value by redux",carHighBid)
 
     const togglePopup = () => {
@@ -92,12 +104,18 @@ const MakeurBid=(props)=>{
 
     const MakeBid =()=>{
 
+        setHighBidError("")
         if(!highBid){
+
             setHighBidError("High Bid should not be empty" )
+            return;
         }
-        else if(!highBid<carHighBid+50){
-            setHighBidError("High Bid should not lower than" +Number(carHighBid+50))
+        else if (highBid<carHighBid+50){
+            setHighBidError("High Bid should not lower than " +Number(carHighBid+50))
+            return;
+            
         }
+       
 
         console.log("inside addremove");
         let request={
@@ -121,7 +139,7 @@ const MakeurBid=(props)=>{
             console.log("",res.data.data);
             if (res.data.success) {
                 setToggleMakeBidPopupOpen(false);
-                setAlertImg(true);
+                setAlertImg(checkImg);
                 setAlertMessage("Your Bid is successfully created.Thanks you So much for your business")
                 // const { data } = res;
                 // togglePopup()
@@ -168,7 +186,10 @@ const MakeurBid=(props)=>{
                             </div>
                     
                             <div class="border-block"></div>
-                            <p class="border-bottomtext">Your bid can't be Lower than $</p>
+                            {carHighBid == "" || carHighBid == null || carHighBid == undefined ?
+                            <p class="border-bottomtext">Your bid can't be Lower than $ {carMinBid+50}</p>:
+                            <p class="border-bottomtext">Your bid can't be Lower than $ {carHighBid+50}</p>}
+                            <p> Segment of Bidding </p>
                             <div class="row content">			
                             <div class="form-group col-lg-6 col-md-6">
                                 {carHighBid == "" || carHighBid == null || carHighBid == undefined ?
@@ -184,12 +205,13 @@ const MakeurBid=(props)=>{
                                 <p>{highBidError}</p>
                             </div>
                             <div class="form-group col-lg-6 col-md-6">
+                                
                                 <h2>Buyer Fee</h2>
                             </div>
                             
                             <div class="form-group col-lg-6 col-md-6">
                                 <div class="input-icon">
-                                    <input type="text" class="form-control" placeholder="" onChange={(e)=>setProxyBid(e.target.value)}></input>
+                                    <input type="text" class="form-control" placeholder="Max Bid (Optional)" onChange={(e)=>setProxyBid(e.target.value)}></input>
                                     <i>$</i>
                                 </div>
                             </div>
@@ -211,7 +233,10 @@ const MakeurBid=(props)=>{
                                     <h4 class=" col-lg-12">Optional Services</h4>
 
                                     <div className="col-lg-6 form-group customCheckbox">
+                                        {transportFlag?
+                                        <input type="checkbox" className="form-check d-inline " id="chb2" checked onClick={toggleViewTransportation}/>:
                                         <input type="checkbox" className="form-check d-inline " id="chb2" onClick={toggleViewTransportation}/>
+                                        }
                                         <label htmlFor="chb2" className="form-check-label">Transportation  </label>                               
                                     </div>
 
@@ -241,11 +266,15 @@ const MakeurBid=(props)=>{
                 </div>
                 </div>):
                 
-                (<div className="modalcontent">
+                (
+                    <div className="popup-box">
+                         <div id="" className="CommonModels-box">
+                         <div className="Commonfullformblock col-lg-9">
+                         <div className="CommonContainer">
+                         <div className="CommonModalcontent">
                 {/* <img src={checkImg}></img>  */}
              <div className="Commonfull-icon">
-                {alertimg?<img src={checkImg} className="success" alt="..." />:
-                <img src={errorImg} className="success" alt="..." />}
+             <img alt="" className={alertimg === checkImg ?  "successImg"  : "errorImg" } src={alertimg}></img>
              
                  </div>
              <div className="modalbody">
@@ -260,6 +289,10 @@ const MakeurBid=(props)=>{
                    </div> 
                </div>
              </div>
+            </div>
+            </div>
+            </div>
+            </div>
             </div>)}
                 
             </div>    

@@ -544,7 +544,7 @@ useEffect(() => {
 	
 									<div class="input-group">
 										<select id="SavedSearchNames"  class="form-control custom-select browser-default" onChange={(e)=>{setSaveSearchEnter(JSON.parse(e.target.value));console.log("onchange-=======",e.target.value)}} >
-											<option value="0">Select SavedSearch</option>
+											<option value="0"> Saved Search</option>
 										{saveSearchRequest.length>0?saveSearchRequest.map((saveSearchRequest) =>
 											<option key={saveSearchRequest.name}  value={saveSearchRequest.search_request} >{saveSearchRequest.name}</option>
 										):""}

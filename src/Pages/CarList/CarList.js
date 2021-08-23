@@ -22,11 +22,13 @@ import CarDetailsAction from '../CarDetails/CarDetailsAction';
 
 import { Paper, Button } from '@material-ui/core'
 
+
+
 const CarList = () => {
     const responsive={
         desktop: {
             breakpoint: { max: 3000, min: 1024 },
-            items: 3,
+            items: 4,
             paritialVisibilityGutter: 60
           }
     }
@@ -194,7 +196,7 @@ const CarList = () => {
                             </div>
                             {/* <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100"> */}
                             <OwlCarousel className='owl-theme row aos-init aos-animate' data-aos="zoom-in" data-aos-delay="100" 
-                                loop margin={10} nav autoplay>
+                                loop margin={10} items={4} dots ={false} nav autoplay={false} navText ={['<i class="icofont-block-left"></i>','<i class="icofont-block-right"></i>']}>
                             {suggestedCarDetail?.length>0?suggestedCarDetail
                             .map((item) =>
                             
@@ -212,7 +214,7 @@ const CarList = () => {
                                         </div>:""}
                                         
                                         <div className="cars-content">
-                                            <h3><a href="#">{item.make} ({item.model} model)</a></h3>
+                                            <h3><a href="JavaScript:void(0)" title = {`${item.make} (${item.model}) model`}>{item.make} ({item.model} model)</a></h3>
                                             <div className="d-flex align-items-center mb-3">
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>    
@@ -252,7 +254,7 @@ const CarList = () => {
 
                             {/* <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100"> */}
                             <OwlCarousel className='owl-theme row aos-init aos-animate' data-aos="zoom-in" data-aos-delay="100" 
-                                loop margin={10} nav autoplay>
+                                loop margin={10} items={4} dots ={false} nav autoplay={false} navText ={['<i class="icofont-block-left"></i>','<i class="icofont-block-right"></i>']}>
                             {carInventoryDetail?.length>0?carInventoryDetail
                             .map((item,index) =>
                                 <div>
@@ -269,7 +271,7 @@ const CarList = () => {
                                             <h4>{item.deal_name}</h4>
                                         </div>:""}
                                         <div className="cars-content">
-                                            <h3><a href="#">{item.make} ({item.model} model)</a></h3>
+                                            <h3><a href="JavaScript:void(0)" title = {`${item.make} (${item.model}) model`}>{item.make} ({item.model} model)</a></h3>
                                             <div className="d-flex align-items-center mb-3">
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>    
@@ -286,7 +288,7 @@ const CarList = () => {
                                                 <a className="cta-btns" href="#">High Bid $ 0</a>:
                                                 <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                                 } 
-                                                <a className="cta-btns-primary" href="#">Make Bid</a>
+                                                <a className="cta-btns-primary" onClick={()=>togglePopup(item.high_bid)} >Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
@@ -308,7 +310,7 @@ const CarList = () => {
 
                             {/* <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100"> */}
                             <OwlCarousel className='owl-theme row aos-init aos-animate' data-aos="zoom-in" data-aos-delay="100" 
-                                loop margin={10} nav autoplay>
+                               loop margin={10} items={4} dots ={false} nav autoplay={false} navText ={['<i class="icofont-block-left"></i>','<i class="icofont-block-right"></i>']}>
                             {carDetail.length>0?carDetail
                                         .map((item,index) =>
                                 <div >
@@ -326,7 +328,7 @@ const CarList = () => {
                                             <h4>{item.deal_name}</h4>
                                         </div>:""}
                                         <div className="cars-content">
-                                            <h3><a href="#">{item.make} ({item.model} model)</a></h3>
+                                            <h3><a href="JavaScript:void(0)" title = {`${item.make} (${item.model}) model`}>{item.make} ({item.model} model)</a></h3>
                                             <div className="d-flex align-items-center mb-3">
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>    
@@ -365,7 +367,7 @@ const CarList = () => {
 
                             {/* <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100"> */}
                             <OwlCarousel className='owl-theme row aos-init aos-animate' data-aos="zoom-in" data-aos-delay="100" 
-                                loop margin={10} nav autoplay>
+                                loop margin={10} items={4} dots ={false} nav autoplay={false} navText ={['<i class="icofont-block-left"></i>','<i class="icofont-block-right"></i>']}>
                             {carFavInventoryDetail.length>0?carFavInventoryDetail
                             .map((item,index) =>
                             <div>
@@ -383,7 +385,7 @@ const CarList = () => {
                                     <h4>{item.deal_name}</h4>
                                 </div>:""}
                                 <div className="cars-content">
-                                    <h3><a href="#">{item.make} ({item.model} model)</a></h3>
+                                    <h3><a href="JavaScript:void(0)" title = {`${item.make} (${item.model}) model`}>{item.make} ({item.model} model)</a></h3>
                                     <div className="d-flex align-items-center mb-3">
                                         <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
                                         <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>    
@@ -400,7 +402,7 @@ const CarList = () => {
                                         <a className="cta-btns" href="#">High Bid $ 0</a>:
                                         <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                         } 
-                                        <a className="cta-btns-primary" href="#">Make Bid</a>
+                                        <a className="cta-btns-primary" onClick={()=>togglePopup(item.high_bid)}>Make Bid</a>
                                     </div>
                                 </div>
                             </div>

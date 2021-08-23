@@ -58,10 +58,15 @@ const [isOpen, setIsOpen] = useState(false);
 const [open,setOpen] = useState(false);
 
 
-const toggleMakeBid = (high_bid,min_bid) => {
+const toggleMakeBid = (high_bid,min_bid,save_purchase) => {
 	console.log("check the high bid value",high_bid)
-	dispatch(CarDetailsAction.highBid(high_bid))
-	dispatch(CarDetailsAction.minBid(min_bid))
+	let makebiddispatch={
+		high_bid: high_bid,
+		min_bid: min_bid,
+		save_purchase: save_purchase
+	}
+	//dispatch(CarDetailsAction.highBid(high_bid))
+	dispatch(CarDetailsAction.minBid(makebiddispatch))
 	setIsOpen(!isOpen);
 }
 
@@ -329,7 +334,10 @@ return(
 							<div class="col-md-12 cars-detail-ins">
 	        					<div class="cars-detail-views">
 									<a class="car-btns" onClick={()=>redirecttoInspection(carDetail[0].car_id)}>View Inspection</a>
+									{carDetail[0].high_bid=="" || carDetail[0].high_bid==null || carDetail[0].high_bid==undefined?
+									<a class="car-btns-primary" href=""><img src={tag} alt=""/>High Bid :<span> ${carDetail[0].min_bid}</span></a>:
 									<a class="car-btns-primary" href=""><img src={tag} alt=""/>High Bid :<span> ${carDetail[0].high_bid}</span></a>
+									}
 								</div>
 								{carDetail[0].counter_bid==""|| "null"?"":
 								<div class="cars-detail-views">
@@ -361,7 +369,7 @@ return(
 							<div class="col-md-12">
 	        					<div class="cars-buy">
 									<a class="cars-buy-btns" href="#">Buy now</a>
-									<a class="cars-buy-btns-primary" onClick={()=>toggleMakeBid(carDetail[0].high_bid,carDetail[0].min_bid)}>Make Bid</a>
+									<a class="cars-buy-btns-primary" onClick={()=>toggleMakeBid(carDetail[0].high_bid,carDetail[0].min_bid,carDetail[0].save_purchase)}>Make Bid</a>
 								</div>
 	        				</div>
 						</div>
