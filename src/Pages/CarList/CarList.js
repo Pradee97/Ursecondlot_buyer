@@ -22,11 +22,13 @@ import CarDetailsAction from '../CarDetails/CarDetailsAction';
 
 import { Paper, Button } from '@material-ui/core'
 
+
+
 const CarList = () => {
     const responsive={
         desktop: {
             breakpoint: { max: 3000, min: 1024 },
-            items: 3,
+            items: 4,
             paritialVisibilityGutter: 60
           }
     }
@@ -194,7 +196,7 @@ const CarList = () => {
                             </div>
                             {/* <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100"> */}
                             <OwlCarousel className='owl-theme row aos-init aos-animate' data-aos="zoom-in" data-aos-delay="100" 
-                                loop margin={10} nav autoplay>
+                                loop margin={10} items={4} dots ={false} nav autoplay={false} navText ={['<i class="icofont-block-left"></i>','<i class="icofont-block-right"></i>']}>
                             {suggestedCarDetail?.length>0?suggestedCarDetail
                             .map((item) =>
                             
@@ -252,7 +254,7 @@ const CarList = () => {
 
                             {/* <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100"> */}
                             <OwlCarousel className='owl-theme row aos-init aos-animate' data-aos="zoom-in" data-aos-delay="100" 
-                                loop margin={10} nav autoplay>
+                                loop margin={10} items={4} dots ={false} nav autoplay={false} navText ={['<i class="icofont-block-left"></i>','<i class="icofont-block-right"></i>']}>
                             {carInventoryDetail?.length>0?carInventoryDetail
                             .map((item,index) =>
                                 <div>
@@ -308,7 +310,7 @@ const CarList = () => {
 
                             {/* <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100"> */}
                             <OwlCarousel className='owl-theme row aos-init aos-animate' data-aos="zoom-in" data-aos-delay="100" 
-                                loop margin={10} nav autoplay>
+                               loop margin={10} items={4} dots ={false} nav autoplay={false} navText ={['<i class="icofont-block-left"></i>','<i class="icofont-block-right"></i>']}>
                             {carDetail.length>0?carDetail
                                         .map((item,index) =>
                                 <div >
@@ -365,7 +367,7 @@ const CarList = () => {
 
                             {/* <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100"> */}
                             <OwlCarousel className='owl-theme row aos-init aos-animate' data-aos="zoom-in" data-aos-delay="100" 
-                                loop margin={10} nav autoplay>
+                                loop margin={10} items={4} dots ={false} nav autoplay={false} navText ={['<i class="icofont-block-left"></i>','<i class="icofont-block-right"></i>']}>
                             {carFavInventoryDetail.length>0?carFavInventoryDetail
                             .map((item,index) =>
                             <div>

@@ -1017,6 +1017,7 @@ Cars list
     color: #fff;
 	display:inline;
 	font-weight:normal;
+  text-transform: capitalize;
 }
  .cars-content .details {
     margin: 0;
@@ -1032,6 +1033,9 @@ Cars list
     font-weight: 700;
     font-size: 20px;
     text-align: left;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
  .cars-content h3 a {
     color: #37423b;
@@ -1064,6 +1068,8 @@ Cars list
     border-radius: 3px;
     border: 1px solid #707070;
 	font-size:16px;
+  display: inline-block;
+  margin: 5px;
 }
  .cars-prices .cta-btns-primary {
 	font-size:16px;
@@ -1073,6 +1079,8 @@ Cars list
     border-radius: 3px;
     border: none;
     border: #b8b8b8 1px solid;
+    display: inline-block;
+  margin: 5px;
 }
 
 .cars-prices .cta-btns-primary:hover{
@@ -7648,4 +7656,58 @@ margin-top: -3px;
   max-width: 800px;
   max-height: 80vh;
 }
+
+
+
+
+.owl-carousel  .car-item:hover {
+  transform: scale(1);
+  z-index: 999;
+}
+
+.owl-carousel .cars-lock img{
+  width: 20px;
+  margin: auto;
+  margin-top: 11px;
+}
+
+
+
+
+.owl-theme .owl-nav [class*='owl-']:hover{
+  background: transparent;
+}
+.owl-prev, .owl-next {
+  position: absolute;
+  top: 25%;
+  transform: translateY(-50%);
+  display: block !important;
+  border:0px solid black;
+}
+.owl-prev { left: 0px; }
+.owl-next { right: 0px; }
+.owl-prev i, .owl-next i {transform : scale(2,5); color: #ccc; font-size: 40px;}
+
+.owl-prev i:hover, .owl-next i:hover { color: #dd0000; }
+
+
+.owl-carousel .car-item{
+  float: left;
+    position: relative;
+    width: 100%;
+}
+
+.owl-carousel .cars-prices .cta-btns{
+  margin: 0;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.owl-carousel .cars-prices .cta-btns-primary {
+  margin: 0;
+  margin-bottom: 0px;
+  display: inline-block;
+}
+
 
