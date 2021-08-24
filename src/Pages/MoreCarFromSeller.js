@@ -10,17 +10,23 @@ import locked from '../../src/assets/img/locked.png';
 import { useDispatch, useSelector } from 'react-redux';
 import CarListAction from './CarList/CarListAction';
 import Loading from"../Component/Loading/Loading";
+import Popup from '../Component/Popup/Popup';
+import Makeurbid from './Makeurbid';
+import CarDetailsAction from './CarDetails/CarDetailsAction';
 
 const MoreCarFromSeller = () =>{
 
   const dispatch = useDispatch();
-    const { id } = useParams();
-    const [sellerCarDetail,setSellerCarDetail]=useState([]);
-    const history = useHistory();
-    console.log("id from cardetail",id);
-    const [data,setData]=useState("");
-    const [moreCarFlag,setMoreCarFlag]=useState(false);
-    const [loading,setLoading] = useState(true);
+  const { id } = useParams();
+  const [sellerCarDetail,setSellerCarDetail]=useState([]);
+  const history = useHistory();
+  console.log("id from cardetail",id);
+  const [data,setData]=useState("");
+  const [moreCarFlag,setMoreCarFlag]=useState(false);
+  const [loading,setLoading] = useState(true);
+
+  const [isOpen, setIsOpen] = useState(false);
+  const highBid= useSelector(state => state.CarDetailsReducer.payload.high_bid);
 
     const getMoreCarFromSeller=()=>{
 
@@ -38,11 +44,26 @@ const MoreCarFromSeller = () =>{
     
     })
 }
-    
+  
+const toggleMakeBid = (high_bid,min_bid,car_id,save_purchase) => {
+  console.log("check the high bid value",high_bid)
+  let makebiddispatch={
+    high_bid: high_bid,
+    min_bid: min_bid,
+    car_id : car_id,
+    save_purchase: save_purchase,
+    redirectPage: "morecarfrombuyer"
+  }
+  //dispatch(CarDetailsAction.highBid(high_bid))
+  dispatch(CarDetailsAction.minBid(makebiddispatch))
+  
+  setIsOpen(!isOpen);
+}
+
 useEffect(() => {
     getMoreCarFromSeller();
    
-},[]);
+},[highBid]);
 
 // const OnSearch = (e) => {
 //   setData(e.target.value)
@@ -143,7 +164,7 @@ return(
 				<div class="cars-lock">
 				<img src={(moreCar.isFavourite===0)? locked : lock} onClick={()=>addRemoveFavourite(moreCar.car_id,moreCar.isFavourite,'morecar')} />
 			  	</div>
-              	<img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id,item.seller_id)}} class="carImg" alt="..."/>
+              	<img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id,moreCar.seller_id)}} class="carImg" alt="..."/>
         {moreCar.isbestSale?
 				<div class="cars-tag">
 					<h4>{moreCar.deal_name}</h4>
@@ -162,8 +183,11 @@ return(
 				<div class="cars-prices">
           <a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a>
           <a className="cta-btns" href="#">Seller Price ${moreCar.max_bid}</a>
-					<a class="cta-btns" href="">High Bid ${moreCar.min_bid}</a>
-					<a class="cta-btns-primary" href="/makeurbid">Make Bid</a>
+					{moreCar.high_bid=="" || moreCar.high_bid== null || moreCar.high_bid== undefined?
+          <a className="cta-btns" href="#">High Bid $ {moreCar.min_bid}</a>:
+          <a className="cta-btns" href="#">High Bid $ {moreCar.high_bid}</a>
+          }
+					<a class="cta-btns-primary" onClick={()=>toggleMakeBid(moreCar.high_bid,moreCar.min_bid,moreCar.car_id,moreCar.save_purchase)}>Make Bid</a>
 				</div>
               </div>
             </div>
@@ -192,7 +216,13 @@ return(
 
       </div>
     </section>
-
+    {isOpen && <Popup
+      isClose={false}
+      content={<>
+        <Makeurbid toggle={toggleMakeBid} />
+      </>}
+      handleClose={toggleMakeBid}
+    />}
   </main>
 }
     </div>

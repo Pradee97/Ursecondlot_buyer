@@ -139,6 +139,9 @@ const MakeurBid=(props)=>{
         else if(redirectPage=="favorite") {
         history.push("/favorite")
         }
+        else if(redirectPage=="morecarfrombuyer") {
+        history.push("/morecarfrombuyer/"+1)
+        }
         else if(redirectPage=="recentlyaddedcars") {
         history.push("/recentlyaddedcars")
         }
