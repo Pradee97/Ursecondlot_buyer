@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState,useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {  useParams } from "react-router-dom";
+import {  useHistory, useParams } from "react-router-dom";
 import API from "../Services/BaseService";
 import Popup from '../Component/Popup/Popup';
 import Terms from '../Component/TermsAndCondition/TermsAndCondition';
@@ -9,13 +9,17 @@ import CommonPopup from '../Component/CommonPopup/CommonPopup';
 import Item from 'antd/lib/list/Item';
 import checkImg from '../../src/assets/img/check.svg';
 import errorImg from '../../src/assets/img/erroricon.png';
-import '../Component/CommonPopup/commonPopup.css'
+import '../Component/CommonPopup/commonPopup.css';
+import CarDetailsAction from '../Pages/CarDetails/CarDetailsAction'
 
 const MakeurBid=(props)=>{
 
-    const { id } = useParams();
-    const carHighBid = useSelector(state => state.CarDetailsReducer.payload.high_bid);  
-    const carMinBid = useSelector(state => state.CarDetailsReducer.payload.min_bid);
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const [id,setId] = useState(useSelector(state => state.CarDetailsReducer.payload.car_id));
+    const [redirectPage,setRedirectPage] = useState(useSelector(state => state.CarDetailsReducer.payload.redirectPage));
+    const [carHighBid,setCarHighBid] = useState(useSelector(state => state.CarDetailsReducer.payload.high_bid));  
+    const [carMinBid,setCarMinBid] = useState(useSelector(state => state.CarDetailsReducer.payload.min_bid));
     const carSavePurchase = useSelector(state => state.CarDetailsReducer.payload.save_purchase);
     const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
     const [isOpen, setIsOpen] = useState(false);
@@ -27,6 +31,8 @@ const MakeurBid=(props)=>{
     const [display,setDisplay]=useState("no");
     const [save,setSave] = useState("no");
     const [transportFlag,setTransportFlag] = useState(false);
+    const [reset,setReset]=useState("");
+
 
     const [popupTitle, setPopupTitle] = useState ("");
     const [popupMsg, setPopupMsg] = useState ("");
@@ -41,16 +47,16 @@ const MakeurBid=(props)=>{
     const [highBidError, setHighBidError] = useState("");
 
     if(carHighBid=="" || carHighBid==null || carHighBid==undefined || carHighBid==0){
-        carHighBid=carMinBid
+        setCarHighBid(carMinBid)
     }
 
-    if(carSavePurchase=="" || carSavePurchase==null || carSavePurchase=="no" ){
+    // if(carSavePurchase=="" || carSavePurchase==null || carSavePurchase=="no" ){
 
-        setTransportFlag(false)
-    }
-    else {
-        setTransportFlag(true)
-    }
+    //     setTransportFlag(false)
+    // }
+    // else {
+    //     setTransportFlag(true)
+    // }
     console.log("hig bid payload value",carHighBid);
     console.log("check the high bid value in redux",useSelector(state => state.CarDetailsReducer.payload.high_bid))
     console.log("check the min bid value in redux",useSelector(state => state.CarDetailsReducer.payload.min_bid))
@@ -102,6 +108,30 @@ const MakeurBid=(props)=>{
         }
     }
 
+    const OnOkClick = () =>{
+        props.toggle()
+        setReset(true)
+    } 
+
+    const redirect = () => {
+        let makebiddispatch={
+            high_bid: highBid,
+            min_bid: carMinBid,
+            save_purchase: carSavePurchase,
+            
+        }
+        //dispatch(CarDetailsAction.highBid(high_bid))
+        dispatch(CarDetailsAction.minBid(makebiddispatch))
+        console.log("redirection checking for car detail" , id)
+        if (redirectPage=="cardetail"){
+        history.push("/cardetail/"+id)
+        }
+        else{
+            history.push("/carlist")
+        }
+        props.toggle()
+    }
+
     const MakeBid =()=>{
 
         setHighBidError("")
@@ -115,8 +145,7 @@ const MakeurBid=(props)=>{
             return;
             
         }
-       
-
+   
         console.log("inside addremove");
         let request={
             buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
@@ -167,11 +196,11 @@ const MakeurBid=(props)=>{
         })
     }
 
-    // useEffect(() => {
-	// 	MakeBid();
+    useEffect(() => {
+		// MakeBid();
 		
        
-	// },[]);
+	},[reset]);
 
     return(
         <div>
@@ -285,7 +314,7 @@ const MakeurBid=(props)=>{
                        </div>
                    
                    <div class="col-md-12 btns">
-                    <button className="cta-btns" onClick={props.toggle}>ok</button>      
+                    <button className="cta-btns" onClick={redirect}>ok</button>      
                    </div> 
                </div>
              </div>

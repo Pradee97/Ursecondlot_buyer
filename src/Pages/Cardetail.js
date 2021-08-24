@@ -57,16 +57,20 @@ console.log("selescted seller id_______",selectedSellerId)
 const [isOpen, setIsOpen] = useState(false);
 const [open,setOpen] = useState(false);
 
+const highBid= useSelector(state => state.CarDetailsReducer.payload.high_bid);
 
 const toggleMakeBid = (high_bid,min_bid,save_purchase) => {
 	console.log("check the high bid value",high_bid)
 	let makebiddispatch={
 		high_bid: high_bid,
 		min_bid: min_bid,
-		save_purchase: save_purchase
+		car_id : id,
+		save_purchase: save_purchase,
+		redirectPage: "cardetail"
 	}
 	//dispatch(CarDetailsAction.highBid(high_bid))
 	dispatch(CarDetailsAction.minBid(makebiddispatch))
+	
 	setIsOpen(!isOpen);
 }
 
@@ -195,7 +199,7 @@ function CarDetailList(){
 	
 	
 	
-	},[id])
+	},[id,highBid])
 
 const addRemoveFavourite=(carid,state,flag)=>{
 	console.log("inside addremove");
@@ -337,13 +341,12 @@ return(
 									{carDetail[0].high_bid=="" || carDetail[0].high_bid==null || carDetail[0].high_bid==undefined?
 									<a class="car-btns-primary" href=""><img src={tag} alt=""/>High Bid :<span> ${carDetail[0].min_bid}</span></a>:
 									<a class="car-btns-primary" href=""><img src={tag} alt=""/>High Bid :<span> ${carDetail[0].high_bid}</span></a>
+									}&nbsp;&nbsp;&nbsp;&nbsp;
+									{carDetail[0].counter_bid=="" || carDetail[0].counter_bid== null || carDetail[0].counter_bid== undefined ?"":
+									<a class="car-btns-primary" href=""><img src={tag} alt=""/>Counter Bid :<span> $ {carDetail[0].counter_bid}</span></a>
 									}
 								</div>
-								{carDetail[0].counter_bid==""|| "null"?"":
-								<div class="cars-detail-views">
-									
-									<a class="car-btns-primary" href=""><img src={tag} alt=""/>Counter Bid :<span> ${carDetail[0].counter_bid}</span></a>
-								</div>}
+								
 	        				</div>
 	        			</div>
 						</div>
