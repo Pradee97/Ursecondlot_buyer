@@ -11,6 +11,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import CarListAction from './CarList/CarListAction';
 import FilterSearchAction from '../Component/FilterSearchCars/FilterSearchAction';
 import FilterSearchCars from '../Component/FilterSearchCars/FilterSearchCars';
+import Popup from '../Component/Popup/Popup';
+import Makeurbid from './Makeurbid';
+import CarDetailsAction from './CarDetails/CarDetailsAction';
 
 const RecentlyAddedCars = () => {
 
@@ -56,6 +59,9 @@ const [reset,setReset] = useState(true);
 const [viewMoreState,setViewMoreState]=useState(false);
 const [viewMoreMake,setViewMoreMake]=useState(false);
 const [viewMoreBodyStyle,setViewMoreBodyStyle]=useState(false);
+
+const [isOpen, setIsOpen] = useState(false);
+const highBid= useSelector(state => state.CarDetailsReducer.payload.high_bid);
 const [apiName,setApiName]=useState("")
 
     const getrecentCarList=()=>{
@@ -74,7 +80,22 @@ const [apiName,setApiName]=useState("")
             setLoading(false);
             //}
         }).catch(err => { console.log(err); });
-    }
+	}
+	
+	const toggleMakeBid = (high_bid,min_bid,car_id,save_purchase) => {
+		console.log("check the high bid value",high_bid)
+		let makebiddispatch={
+			high_bid: high_bid,
+			min_bid: min_bid,
+			car_id : car_id,
+			save_purchase: save_purchase,
+			redirectPage: "recentlyaddedcars"
+		}
+		//dispatch(CarDetailsAction.highBid(high_bid))
+		dispatch(CarDetailsAction.minBid(makebiddispatch))
+		
+		setIsOpen(!isOpen);
+	}
 
     const redirectpage=(pathid,seller_dealer_id)=>{
         //e.preventDefault();
@@ -103,7 +124,9 @@ const [apiName,setApiName]=useState("")
     useEffect(() => {
         getrecentCarList();
 		dispatch(FilterSearchAction.apiname(apiName))
-    },[recentCarFlag]);
+    },[recentCarFlag,highBid]);
+		
+  
 
    
 
@@ -294,8 +317,11 @@ const [apiName,setApiName]=useState("")
                                             <div className="cars-prices">
 												<a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a>
                                                 <a className="cta-btns" href="#">Seller Price ${item.max_bid}</a>
-                                                <a className="cta-btns" href="#">High Bid ${item.high_bid}</a>
-                                                <a className="cta-btns-primary" href="JavaScript:void(0)" >Make Bid</a>
+                                                {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?
+												<a className="cta-btns" href="#">High Bid $ {item.min_bid}</a>:
+												<a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
+												}
+                                                <a className="cta-btns-primary" onClick={()=>toggleMakeBid(item.high_bid,item.min_bid,item.car_id,item.save_purchase)} >Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
@@ -305,6 +331,13 @@ const [apiName,setApiName]=useState("")
 						</div>
 						</div>
                     </div>
+					{isOpen && <Popup
+						isClose={false}
+						content={<>
+							<Makeurbid toggle={toggleMakeBid} />
+						</>}
+						handleClose={toggleMakeBid}
+					/>}
                </main>
 }
         </div>
