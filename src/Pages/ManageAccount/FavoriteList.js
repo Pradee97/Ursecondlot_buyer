@@ -15,6 +15,9 @@ import Loading from '../../Component/Loading/Loading';
 import { useDispatch, useSelector } from 'react-redux';
 import CarListAction from '../CarList/CarListAction';
 import arrowmark from '../../assets/img/arrowmark.jpg';
+import Popup from '../../Component/Popup/Popup';
+import Makeurbid from '../Makeurbid';
+import CarDetailsAction from '../CarDetails/CarDetailsAction';
 
 
 const Favoritelist = () => {
@@ -63,6 +66,10 @@ const [viewMoreState,setViewMoreState]=useState(false);
 const [viewMoreMake,setViewMoreMake]=useState(false);
 const [viewMoreBodyStyle,setViewMoreBodyStyle]=useState(false);
 
+const [isOpen, setIsOpen] = useState(false);
+const highBid= useSelector(state => state.CarDetailsReducer.payload.high_bid);
+
+
   const getFavCarList=()=>{
 
     let request={
@@ -103,9 +110,24 @@ const addRemoveFavourite=(carid,state,flag)=>{
   })
 }
 
+const toggleMakeBid = (high_bid,min_bid,car_id,save_purchase) => {
+	console.log("check the high bid value",high_bid)
+	let makebiddispatch={
+		high_bid: high_bid,
+		min_bid: min_bid,
+		car_id : car_id,
+		save_purchase: save_purchase,
+		redirectPage: "favorite"
+	}
+	//dispatch(CarDetailsAction.highBid(high_bid))
+	dispatch(CarDetailsAction.minBid(makebiddispatch))
+	
+	setIsOpen(!isOpen);
+}
+
 useEffect(() => {
   getFavCarList();
-},[favCarFlag]);
+},[favCarFlag,highBid]);
 
 
 useEffect(()=>{
@@ -871,8 +893,11 @@ useEffect(() => {
                         <div class="cars-prices">
 							<a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a>
                         	<a className="cta-btns" href="#">Seller Price ${item.max_bid}</a>
-                          	<a class="cta-btns" href="#">High Bid ${item.high_bid}</a>
-                          	<a class="cta-btns-primary" href="#">Make Bid</a>
+							{item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?
+							<a className="cta-btns" href="#">High Bid $ {item.min_bid}</a>:
+							<a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
+							}
+                          	<a class="cta-btns-primary" onClick={()=>toggleMakeBid(item.high_bid,item.min_bid,item.car_id,item.save_purchase)}>Make Bid</a>
                         </div>
                     </div>
                   </div>
@@ -899,7 +924,13 @@ useEffect(() => {
 
             </div>
           </section>
-
+		{isOpen && <Popup
+			isClose={false}
+			content={<>
+				<Makeurbid toggle={toggleMakeBid} />
+			</>}
+			handleClose={toggleMakeBid}
+		/>}
         </main>
 }
       </div>  

@@ -246,7 +246,7 @@ const CarList = () => {
                                                 <a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a>
                                                 <a className="cta-btns" href="#">Seller Price $ {item.max_bid}</a>
                                                 {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?
-                                                <a className="cta-btns" href="#">High Bid $ 0</a>:
+                                                <a className="cta-btns" href="#">High Bid $ {item.min_bid}</a>:
                                                 <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                                 }   
                                                 <a className="cta-btns-primary" href="JavaScript:void(0)" onClick={()=>togglePopup(item.high_bid,item.min_bid,item.car_id)} >Make Bid</a>
@@ -303,7 +303,7 @@ const CarList = () => {
                                             <a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a>
                                                 <a className="cta-btns" href="#">Seller Price $ {item.max_bid}</a>
                                                 {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?
-                                                <a className="cta-btns" href="#">High Bid $ 0</a>:
+                                                <a className="cta-btns" href="#">High Bid $ {item.min_bid}</a>:
                                                 <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                                 } 
                                                 <a className="cta-btns-primary" onClick={()=>togglePopup(item.high_bid,item.min_bid,item.car_id)} >Make Bid</a>
@@ -360,7 +360,7 @@ const CarList = () => {
                                             <a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a>
                                                 <a className="cta-btns" href="#">Seller Price $ {item.max_bid}</a>
                                                 {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?
-                                                <a className="cta-btns" href="#">High Bid $ 0</a>:
+                                                <a className="cta-btns" href="#">High Bid $ {item.min_bid}</a>:
                                                 <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                                 } 
                                                 <a className="cta-btns-primary" onClick={()=>togglePopup(item.high_bid,item.min_bid,item.car_id)}>Make Bid</a>
@@ -417,7 +417,7 @@ const CarList = () => {
                                         <a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a>
                                         <a className="cta-btns" href="#">Seller Price $ {item.max_bid}</a>
                                         {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?
-                                        <a className="cta-btns" href="#">High Bid $ 0</a>:
+                                        <a className="cta-btns" href="#">High Bid $ {item.min_bid}</a>:
                                         <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                         } 
                                         <a className="cta-btns-primary" onClick={()=>togglePopup(item.high_bid,item.min_bid,item.car_id)}>Make Bid</a>
