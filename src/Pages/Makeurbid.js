@@ -194,7 +194,7 @@ const MakeurBid=(props)=>{
                             <div class="form-group col-lg-6 col-md-6">
                                 {carHighBid == "" || carHighBid == null || carHighBid == undefined ?
                                 <div class="input-icon">
-                                <input type="text" class="form-control" placeholder={carMinBid+50}onChange={(e)=>setHighBid(e.target.value)}></input>
+                                <input type="text" class="form-control" placeholder={carMinBid}onChange={(e)=>setHighBid(e.target.value)}></input>
                                 <i>$</i>
                                 </div>:
                                 <div class="input-icon">
