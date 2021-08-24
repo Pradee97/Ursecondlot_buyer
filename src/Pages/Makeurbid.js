@@ -176,8 +176,8 @@ const MakeurBid=(props)=>{
             transportation: transportation,
             display: display,
             active:1,
-            createdBy:JSON.parse(loggedInBuyerId).buyer_id ,
-            updatedBy:JSON.parse(loggedInBuyerId).buyer_id ,
+            createdBy:JSON.parse(localStorage.getItem("userDetails")).buyer_id,
+            updatedBy:JSON.parse(localStorage.getItem("userDetails")).buyer_id,
             transportation_charge:"300",
             save_purchase: save
         }
@@ -219,7 +219,7 @@ const MakeurBid=(props)=>{
 
     useEffect(() => {
 		// MakeBid();
-		
+		console.log("Counter bid time : ",time);
        
 	},[reset]);
 
