@@ -133,6 +133,9 @@ const MakeurBid=(props)=>{
         else if(redirectPage=="suggestedcars") {
         history.push("/suggestedcars")
         }
+        else if(redirectPage=="inventorycars") {
+        history.push("/inventorycars")
+        }
         else{
             history.push("/carlist")
         }
