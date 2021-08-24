@@ -61,7 +61,7 @@ const [open,setOpen] = useState(false);
 
 const highBid= useSelector(state => state.CarDetailsReducer.payload.high_bid);
 
-const toggleMakeBid = (high_bid,min_bid,save_purchase,car_id,time,counterbuyerid) => {
+const toggleMakeBid = (high_bid,min_bid,save_purchase,car_id,time,counterbuyerid,maxbid) => {
 	console.log("check the high bid value",high_bid)
 	let makebiddispatch={
 		high_bid: high_bid,
@@ -70,7 +70,8 @@ const toggleMakeBid = (high_bid,min_bid,save_purchase,car_id,time,counterbuyerid
 		save_purchase: save_purchase,
 		redirectPage: "cardetail",
 		time:time,
-		counter_buyerid:counterbuyerid
+		counter_buyerid:counterbuyerid,
+		max_bid:maxbid
 	}
 	//dispatch(CarDetailsAction.highBid(high_bid))
 	dispatch(CarDetailsAction.minBid(makebiddispatch))
@@ -377,7 +378,7 @@ return(
 	        					<div class="cars-buy">
 									<a class="cars-buy-btns" href="#">Buy now</a>
 									{buyer_dealer_id==carDetail[0].counter_buyer_dealer_id? <a class="cars-buy-btns-primary">Highest Bid</a> :
-									<a class="cars-buy-btns-primary" onClick={()=>toggleMakeBid(carDetail[0].high_bid,carDetail[0].min_bid,carDetail[0].save_purchase,carDetail[0].car_id,carDetail[0].time,carDetail[0].counter_buyer_dealer_id)}>Make Bid</a>}
+									<a class="cars-buy-btns-primary" onClick={()=>toggleMakeBid(carDetail[0].high_bid,carDetail[0].min_bid,carDetail[0].save_purchase,carDetail[0].car_id,carDetail[0].time,carDetail[0].counter_buyer_dealer_id,carDetail[0].max_bid)}>Make Bid</a>}
 								</div>
 	        				</div>
 						</div>

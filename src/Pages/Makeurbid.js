@@ -17,6 +17,7 @@ const MakeurBid=(props)=>{
     const history = useHistory();
     const dispatch = useDispatch();
     const [id,setId] = useState(useSelector(state => state.CarDetailsReducer.payload.car_id));
+    const [maxbid,setMaxBid] = useState(useSelector(state => state.CarDetailsReducer.payload.max_bid));
     const [sellerId,setSellerId] = useState(useSelector(state => state.CarDetailsReducer.payload.seller_dealer_id));
     const [make,setMake] = useState(useSelector(state => state.CarDetailsReducer.payload.make));
     const [redirectPage,setRedirectPage] = useState(useSelector(state => state.CarDetailsReducer.payload.redirectPage));
@@ -35,7 +36,7 @@ const MakeurBid=(props)=>{
     const [transportation,setTransportation] = useState("no");
     const [display,setDisplay]=useState("no");
     const [save,setSave] = useState("no");
-    const [transportFlag,setTransportFlag] = useState(false);
+    const [transportFlag,setTransportFlag] = useState("");
     const [reset,setReset]=useState("");
     const buyerId = JSON.parse(loggedInBuyerId).buyer_id
 
@@ -63,16 +64,14 @@ const MakeurBid=(props)=>{
     // else {
     //     setTransportFlag(true)
     // }
-    console.log("hig bid payload value",carHighBid);
-    console.log("check the high bid value in redux",useSelector(state => state.CarDetailsReducer.payload.high_bid))
-    console.log("check the min bid value in redux",useSelector(state => state.CarDetailsReducer.payload.min_bid))
-    console.log("check the save purchase in redux",useSelector(state => state.CarDetailsReducer.payload.save_purchase))
-    console.log("check hign bid value by redux",carHighBid)
+    console.log("carsavepurchase",carSavePurchase);
+    
 
     const togglePopup = () => {
         setIsOpen(!isOpen);
     }
 
+    
     const toggleTerms = () => {
         setOpen(!open);
     }
@@ -173,6 +172,10 @@ const MakeurBid=(props)=>{
             return;
             
         }
+        // else if(highBid>maxbid){
+        //     setHighBidError("High Bid should not be greater than Seller Bid " +Number(carHighBid+50))
+        //     return;
+        // }
    
         console.log("inside addremove");
         let request={
@@ -224,10 +227,21 @@ const MakeurBid=(props)=>{
 
         })
     }
-
+ const assigntransportFlag=()=>{
+    if(carSavePurchase=="" || carSavePurchase==null || carSavePurchase=="no" ){
+        console.log("save purchase is null ");
+        setTransportFlag(false);
+        //setAlertMessage("Hi");
+    }
+    else
+    {
+        setTransportFlag(true);
+    }
+ }
     useEffect(() => {
 		// MakeBid();
 		console.log("Counter bid time : ",time);
+        assigntransportFlag();
        
 	},[reset]);
 
