@@ -17,6 +17,7 @@ const MakeurBid=(props)=>{
     const history = useHistory();
     const dispatch = useDispatch();
     const [id,setId] = useState(useSelector(state => state.CarDetailsReducer.payload.car_id));
+    const [maxbid,setMaxBid] = useState(useSelector(state => state.CarDetailsReducer.payload.max_bid));
     const [sellerId,setSellerId] = useState(useSelector(state => state.CarDetailsReducer.payload.seller_dealer_id));
     const [make,setMake] = useState(useSelector(state => state.CarDetailsReducer.payload.make));
     const [redirectPage,setRedirectPage] = useState(useSelector(state => state.CarDetailsReducer.payload.redirectPage));
@@ -171,6 +172,10 @@ const MakeurBid=(props)=>{
             return;
             
         }
+        // else if(highBid>maxbid){
+        //     setHighBidError("High Bid should not be greater than Seller Bid " +Number(carHighBid+50))
+        //     return;
+        // }
    
         console.log("inside addremove");
         let request={
