@@ -43,14 +43,15 @@ const SimilarCarFromSeller = () =>{
     })
 }
 
-const toggleMakeBid = (high_bid,min_bid,car_id,save_purchase) => {
+const toggleMakeBid = (high_bid,min_bid,car_id,save_purchase,make) => {
   console.log("check the high bid value",high_bid)
   let makebiddispatch={
     high_bid: high_bid,
     min_bid: min_bid,
     car_id : car_id,
     save_purchase: save_purchase,
-    redirectPage: "similarCarFromBuyer"
+    redirectPage: "similarCarFromBuyer",
+    make: make
   }
   //dispatch(CarDetailsAction.highBid(high_bid))
   dispatch(CarDetailsAction.minBid(makebiddispatch))
@@ -147,7 +148,7 @@ return(
           <a className="cta-btns" href="#">High Bid $ {moreCar.min_bid}</a>:
           <a className="cta-btns" href="#">High Bid $ {moreCar.high_bid}</a>
           }
-					<a class="cta-btns-primary" onClick={()=>toggleMakeBid(moreCar.high_bid,moreCar.min_bid,moreCar.car_id,moreCar.save_purchase)}>Make Bid</a>
+					<a class="cta-btns-primary" onClick={()=>toggleMakeBid(moreCar.high_bid,moreCar.min_bid,moreCar.car_id,moreCar.save_purchase,moreCar.make)}>Make Bid</a>
 				</div>
               </div>
             </div>

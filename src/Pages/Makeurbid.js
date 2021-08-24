@@ -17,6 +17,8 @@ const MakeurBid=(props)=>{
     const history = useHistory();
     const dispatch = useDispatch();
     const [id,setId] = useState(useSelector(state => state.CarDetailsReducer.payload.car_id));
+    const [sellerId,setSellerId] = useState(useSelector(state => state.CarDetailsReducer.payload.seller_dealer_id));
+    const [make,setMake] = useState(useSelector(state => state.CarDetailsReducer.payload.make));
     const [redirectPage,setRedirectPage] = useState(useSelector(state => state.CarDetailsReducer.payload.redirectPage));
     const [carHighBid,setCarHighBid] = useState(useSelector(state => state.CarDetailsReducer.payload.high_bid));  
     const [carMinBid,setCarMinBid] = useState(useSelector(state => state.CarDetailsReducer.payload.min_bid));
@@ -140,10 +142,16 @@ const MakeurBid=(props)=>{
         history.push("/favorite")
         }
         else if(redirectPage=="morecarfrombuyer") {
-        history.push("/morecarfrombuyer/"+1)
+        history.push("/morecarfrombuyer/"+sellerId)
         }
         else if(redirectPage=="recentlyaddedcars") {
         history.push("/recentlyaddedcars")
+        }
+        else if(redirectPage=="similarcarfrombuyer") {
+        history.push("/similarcarfrombuyer/"+make)
+        }
+        else if(redirectPage=="search") {
+        history.push("/search")
         }
         else{
             history.push("/carlist")
