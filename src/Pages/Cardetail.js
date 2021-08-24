@@ -61,12 +61,12 @@ const [open,setOpen] = useState(false);
 
 const highBid= useSelector(state => state.CarDetailsReducer.payload.high_bid);
 
-const toggleMakeBid = (high_bid,min_bid,save_purchase) => {
+const toggleMakeBid = (high_bid,min_bid,save_purchase,car_id) => {
 	console.log("check the high bid value",high_bid)
 	let makebiddispatch={
 		high_bid: high_bid,
 		min_bid: min_bid,
-		car_id : id,
+		car_id : car_id,
 		save_purchase: save_purchase,
 		redirectPage: "cardetail"
 	}
@@ -374,7 +374,7 @@ return(
 							<div class="col-md-12">
 	        					<div class="cars-buy">
 									<a class="cars-buy-btns" href="#">Buy now</a>
-									<a class="cars-buy-btns-primary" onClick={()=>toggleMakeBid(carDetail[0].high_bid,carDetail[0].min_bid,carDetail[0].save_purchase)}>Make Bid</a>
+									<a class="cars-buy-btns-primary" onClick={()=>toggleMakeBid(carDetail[0].high_bid,carDetail[0].min_bid,carDetail[0].save_purchase,carDetail[0].car_id)}>Make Bid</a>
 								</div>
 	        				</div>
 						</div>
@@ -479,7 +479,7 @@ return(
 					<a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a>
           			<a className="cta-btns" href="#">Seller Price ${moreCar.max_bid}</a>
 					<a class="cta-btns" href="">High Bid ${moreCar.high_bid}</a>
-					<a class="cta-btns-primary" onClick={toggleMakeBid}>Make Bid</a>
+					<a class="cta-btns-primary" onClick={()=>toggleMakeBid(moreCar.high_bid,moreCar.min_bid,moreCar.save_purchase,moreCar.car_id)}>Make Bid</a>
 				</div>
               </div>
             </div>
@@ -528,7 +528,7 @@ return(
 									<a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a>
           							<a className="cta-btns" href="#">Seller Price ${moreCar.max_bid}</a>
 									<a class="cta-btns" href="">High Bid ${moreCar.high_bid}</a>
-									<a class="cta-btns-primary" onClick={toggleMakeBid}>Make Bid</a>
+									<a class="cta-btns-primary" onClick={()=>toggleMakeBid(moreCar.high_bid,moreCar.min_bid,moreCar.save_purchase,moreCar.car_id)}>Make Bid</a>
 								</div>
 							  </div>
 							</div>

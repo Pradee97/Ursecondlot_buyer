@@ -10,11 +10,14 @@ import Loading from '../Component/Loading/Loading';
 import { useDispatch, useSelector } from 'react-redux';
 import CarListAction from './CarList/CarListAction';
 import arrowmark from '../../src/assets/img/arrowmark.jpg';
-
+import Popup from '../Component/Popup/Popup';
+import Makeurbid from './Makeurbid';
+import CarDetailsAction from './CarDetails/CarDetailsAction';
 
 const SuggestedCars = () => {
 
-    const history = useHistory();
+	const history = useHistory();
+	const { id } = useParams();
     const [carDetail ,setCarDetail] = useState([]);
     const [recentCarFlag,setrecentCarFlag]=useState(false);
     const [loading,setLoading] = useState(true);
@@ -57,6 +60,9 @@ const SuggestedCars = () => {
 	const [viewMoreState,setViewMoreState]=useState(false);
 	const [viewMoreMake,setViewMoreMake]=useState(false);
 	const [viewMoreBodyStyle,setViewMoreBodyStyle]=useState(false);
+	const [isOpen, setIsOpen] = useState(false);
+
+	const highBid= useSelector(state => state.CarDetailsReducer.payload.high_bid);
 
 	//const [checked, setChecked] = useState(false)
     const getrecentCarList=()=>{
@@ -231,7 +237,25 @@ const clear = () => {
 	console.log("clearrrrrrrrrr")
 	setReset(false);
 }
-      
+const toggleMakeBid = (high_bid,min_bid,car_id,save_purchase) => {
+	console.log("check the high bid value",high_bid)
+	let makebiddispatch={
+		high_bid: high_bid,
+		min_bid: min_bid,
+		car_id : car_id,
+		save_purchase: save_purchase,
+		redirectPage: "suggestedcars"
+	}
+	//dispatch(CarDetailsAction.highBid(high_bid))
+	dispatch(CarDetailsAction.minBid(makebiddispatch))
+	
+	setIsOpen(!isOpen);
+}
+
+useEffect(()=>{
+	getrecentCarList()
+},[highBid]);
+
       const searchCarDetail = () => {
         
 		let request={
@@ -891,10 +915,10 @@ useEffect(() => {
 												<a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a>
                                                 <a className="cta-btns" href="#">Seller Price $ {item.max_bid}</a>
                                                 {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?
-                                                <a className="cta-btns" href="#">High Bid $ 0</a>:
+                                                <a className="cta-btns" href="#">High Bid $ {item.min_bid}</a>:
                                                 <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                                 } 
-                                                <a className="cta-btns-primary" href="JavaScript:void(0)" >Make Bid</a>
+                                                <a className="cta-btns-primary" onClick={()=>toggleMakeBid(item.high_bid,item.min_bid,item.car_id,item.save_purchase)} >Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
@@ -903,6 +927,13 @@ useEffect(() => {
 							</div></div>
                         </div>
                     </div>
+					{isOpen && <Popup
+						isClose={false}
+						content={<>
+							<Makeurbid toggle={toggleMakeBid} />
+						</>}
+						handleClose={toggleMakeBid}
+					/>}
                </main>
 }
         </div>

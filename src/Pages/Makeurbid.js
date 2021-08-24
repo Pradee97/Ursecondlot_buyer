@@ -32,6 +32,7 @@ const MakeurBid=(props)=>{
     const [save,setSave] = useState("no");
     const [transportFlag,setTransportFlag] = useState(false);
     const [reset,setReset]=useState("");
+    const buyerId = JSON.parse(loggedInBuyerId).buyer_id
 
 
     const [popupTitle, setPopupTitle] = useState ("");
@@ -126,14 +127,18 @@ const MakeurBid=(props)=>{
         if (redirectPage=="cardetail"){
         history.push("/cardetail/"+id)
         }
+        else if(redirectPage=="suggestedcars") {
+        history.push("/suggestedcars")
+        }
         else{
             history.push("/carlist")
         }
+        
         props.toggle()
     }
 
     const MakeBid =()=>{
-
+        console.log("check the request in make bid", )
         setHighBidError("")
         if(!highBid){
 
@@ -163,6 +168,7 @@ const MakeurBid=(props)=>{
         }
 
         console.log("request",request);
+        console.log("check the request in make bid",request)
         API.post('makeBid/add',request).then(res=>{
          
             console.log("",res.data.data);
@@ -216,8 +222,8 @@ const MakeurBid=(props)=>{
                     
                             <div class="border-block"></div>
                             {carHighBid == "" || carHighBid == null || carHighBid == undefined ?
-                            <p class="border-bottomtext">Your bid can't be Lower than $ {carMinBid+50}</p>:
-                            <p class="border-bottomtext">Your bid can't be Lower than $ {carHighBid+50}</p>}
+                            <p class="border-bottomtext">Your bid can't be Lower than $ {carMinBid}</p>:
+                            <p class="border-bottomtext">Your bid can't be Lower than $ {carHighBid}</p>}
                             <p> Segment of Bidding </p>
                             <div class="row content">			
                             <div class="form-group col-lg-6 col-md-6">
