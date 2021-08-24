@@ -3794,7 +3794,7 @@ Make your Bid
 }
 .border-bottomtext{
 	margin:10px;
-  text-align: left;
+  text-align: center;
   font-weight: 600;
     font-size: 16px;
 }
@@ -3839,6 +3839,7 @@ Make your Bid
 	border: 1px solid #ccc;
 	margin:20px 0;
   text-align: left;
+  margin-top: 0;
 }
 .optional-services h4{
 	color:#4e4e4e;
@@ -3859,7 +3860,7 @@ Make your Bid
 }
 .makeyourbidblock  .policylink{
 	text-align:center;
-	margin:20px auto;
+	margin:10px auto;
 }
 .makeyourbid-btn{
 	text-align:center;
@@ -7655,7 +7656,7 @@ margin-top: -3px;
 
 .carDetailsPage .models-box{
   max-width: 800px;
-  max-height: fit-content;
+  max-height: 660px;
 }
 
 
@@ -7715,4 +7716,7 @@ margin-top: -3px;
   padding-bottom: 10px;
 }
 
+.makeyourbidblock .form-group p{
+  margin-bottom: 0;
+}
 
