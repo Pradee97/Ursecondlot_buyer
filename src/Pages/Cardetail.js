@@ -453,7 +453,7 @@ return(
         </div>
 
 		<div class="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
-		{sellerCarDetail.length > 0 ? sellerCarDetail
+		{sellerCarDetail.length > 0 ? sellerCarDetail.slice(0,4)
                             .map((moreCar,index) =>
 
          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">

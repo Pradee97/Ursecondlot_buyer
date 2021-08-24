@@ -52,7 +52,8 @@ const toggleMakeBid = (high_bid,min_bid,car_id,save_purchase) => {
     min_bid: min_bid,
     car_id : car_id,
     save_purchase: save_purchase,
-    redirectPage: "morecarfrombuyer"
+    redirectPage: "morecarfrombuyer",
+    seller_dealer_id:id
   }
   //dispatch(CarDetailsAction.highBid(high_bid))
   dispatch(CarDetailsAction.minBid(makebiddispatch))
