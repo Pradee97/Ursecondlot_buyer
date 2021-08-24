@@ -150,6 +150,9 @@ const MakeurBid=(props)=>{
         else if(redirectPage=="similarcarfrombuyer") {
         history.push("/similarcarfrombuyer/"+make)
         }
+        else if(redirectPage=="search") {
+        history.push("/search")
+        }
         else{
             history.push("/carlist")
         }
