@@ -1,6 +1,7 @@
 export const FilterSearchConst = {
     SEARCHREQUEST: 'SEARCHREQUEST',
     SEARCHRESULT:   'SEARCHRESULT',
+    APINAME:    'APINAME',
     ERROR: 'ERROR'
 };
 const initialState =  {}
@@ -12,7 +13,7 @@ const FilterSearchReducer = (state = {payload:initialState}, action) => {
             console.log("inside success reducer")
             console.log("Payload",action)
             return {
-                search: 'filtersearch-searchrequest',
+                filtersearch: 'filtersearch-searchrequest',
                 payload: action.payload
 
             };
@@ -20,17 +21,25 @@ const FilterSearchReducer = (state = {payload:initialState}, action) => {
             console.log("inside success reducer")
             console.log("Payload",action)
             return {
-                search: 'filtersearch-searchresult',
+                filtersearch: 'filtersearch-searchresult',
                 payload: action.payload
 
+            };
+        case FilterSearchConst.APINAME:
+            console.log("inside err reducer")
+            console.log("Payload",action.payload)
+            return {
+                filtersearch: 'filtersearch-apiname',
+                payload: action.payload
             };
         case FilterSearchConst.ERROR:
             console.log("inside err reducer")
             console.log("Payload",action.payload)
             return {
-                search: 'filtersearch-fail',
+                filtersearch: 'filtersearch-fail',
                 payload: action.payload
             };
+       
         default:
             console.log("Inside default of the reducer");
             console.log("Payload - state",state)
