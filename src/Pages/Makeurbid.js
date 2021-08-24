@@ -20,8 +20,11 @@ const MakeurBid=(props)=>{
     const [redirectPage,setRedirectPage] = useState(useSelector(state => state.CarDetailsReducer.payload.redirectPage));
     const [carHighBid,setCarHighBid] = useState(useSelector(state => state.CarDetailsReducer.payload.high_bid));  
     const [carMinBid,setCarMinBid] = useState(useSelector(state => state.CarDetailsReducer.payload.min_bid));
+    const [time,setTime] = useState(useSelector(state => state.CarDetailsReducer.payload.time));
+    const [counterBuyerId,setCounterBuyerId] = useState(useSelector(state => state.CarDetailsReducer.payload.counter_buyerid));
     const carSavePurchase = useSelector(state => state.CarDetailsReducer.payload.save_purchase);
     const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
+    const [buyer_dealer_id,setBuyer_Dealer_Id]=useState(JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id);
     const [isOpen, setIsOpen] = useState(false);
     const [open, setOpen] = useState(false);
     const [comments,setComments] = useState("");
@@ -130,6 +133,18 @@ const MakeurBid=(props)=>{
         else if(redirectPage=="suggestedcars") {
         history.push("/suggestedcars")
         }
+        else if(redirectPage=="inventorycars") {
+        history.push("/inventorycars")
+        }
+        else if(redirectPage=="favorite") {
+        history.push("/favorite")
+        }
+        else if(redirectPage=="morecarfrombuyer") {
+        history.push("/morecarfrombuyer/"+1)
+        }
+        else if(redirectPage=="recentlyaddedcars") {
+        history.push("/recentlyaddedcars")
+        }
         else{
             history.push("/carlist")
         }
@@ -161,8 +176,8 @@ const MakeurBid=(props)=>{
             transportation: transportation,
             display: display,
             active:1,
-            createdBy:JSON.parse(loggedInBuyerId).buyer_id ,
-            updatedBy:JSON.parse(loggedInBuyerId).buyer_id ,
+            createdBy:JSON.parse(localStorage.getItem("userDetails")).buyer_id,
+            updatedBy:JSON.parse(localStorage.getItem("userDetails")).buyer_id,
             transportation_charge:"300",
             save_purchase: save
         }
@@ -204,7 +219,7 @@ const MakeurBid=(props)=>{
 
     useEffect(() => {
 		// MakeBid();
-		
+		console.log("Counter bid time : ",time);
        
 	},[reset]);
 
@@ -215,6 +230,7 @@ const MakeurBid=(props)=>{
                 <div id="makeyourbid" class="makeyourbid">
                 {toggleMakeBidPopupOpen?
                     (<div class="container">
+                        {time>20 || time==null || time==undefined ?
                         <div class="makeyourbidblock col-lg-12">
                             <div class="section-title">
                                 <h2>Make Your Bid</h2>
@@ -229,7 +245,7 @@ const MakeurBid=(props)=>{
                             <div class="form-group col-lg-6 col-md-6">
                                 {carHighBid == "" || carHighBid == null || carHighBid == undefined ?
                                 <div class="input-icon">
-                                <input type="text" class="form-control" placeholder={carMinBid+50}onChange={(e)=>setHighBid(e.target.value)}></input>
+                                <input type="text" class="form-control" placeholder={carMinBid}onChange={(e)=>setHighBid(e.target.value)}></input>
                                 <i>$</i>
                                 </div>:
                                 <div class="input-icon">
@@ -298,7 +314,13 @@ const MakeurBid=(props)=>{
                             </div>
                     </div>
                     
-                </div>
+                </div>:
+                <div>
+                    <p>Make Bid is in progess</p>
+                    <div class="col-md-12 btns">
+                    <button className="cta-btns" onClick={redirect}>ok</button>      
+                   </div> 
+                </div>}
                 </div>):
                 
                 (

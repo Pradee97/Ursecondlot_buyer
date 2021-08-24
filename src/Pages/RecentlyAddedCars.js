@@ -9,7 +9,11 @@ import locked from '../../src/assets/img/locked.png';
 import Loading from '../Component/Loading/Loading';
 import { useDispatch, useSelector } from 'react-redux';
 import CarListAction from './CarList/CarListAction';
+import FilterSearchAction from '../Component/FilterSearchCars/FilterSearchAction';
 import FilterSearchCars from '../Component/FilterSearchCars/FilterSearchCars';
+import Popup from '../Component/Popup/Popup';
+import Makeurbid from './Makeurbid';
+import CarDetailsAction from './CarDetails/CarDetailsAction';
 
 const RecentlyAddedCars = () => {
 
@@ -56,6 +60,9 @@ const [viewMoreState,setViewMoreState]=useState(false);
 const [viewMoreMake,setViewMoreMake]=useState(false);
 const [viewMoreBodyStyle,setViewMoreBodyStyle]=useState(false);
 
+const [isOpen, setIsOpen] = useState(false);
+const highBid= useSelector(state => state.CarDetailsReducer.payload.high_bid);
+const [apiName,setApiName]=useState("")
 
     const getrecentCarList=()=>{
 
@@ -73,7 +80,22 @@ const [viewMoreBodyStyle,setViewMoreBodyStyle]=useState(false);
             setLoading(false);
             //}
         }).catch(err => { console.log(err); });
-    }
+	}
+	
+	const toggleMakeBid = (high_bid,min_bid,car_id,save_purchase) => {
+		console.log("check the high bid value",high_bid)
+		let makebiddispatch={
+			high_bid: high_bid,
+			min_bid: min_bid,
+			car_id : car_id,
+			save_purchase: save_purchase,
+			redirectPage: "recentlyaddedcars"
+		}
+		//dispatch(CarDetailsAction.highBid(high_bid))
+		dispatch(CarDetailsAction.minBid(makebiddispatch))
+		
+		setIsOpen(!isOpen);
+	}
 
     const redirectpage=(pathid,seller_dealer_id)=>{
         //e.preventDefault();
@@ -101,21 +123,12 @@ const [viewMoreBodyStyle,setViewMoreBodyStyle]=useState(false);
 
     useEffect(() => {
         getrecentCarList();
-       
-    },[recentCarFlag]);
-
-    useEffect(()=>{
-		if(fromYear.length>=4){
-			searchCarDetail();
-		}
+		dispatch(FilterSearchAction.apiname(apiName))
+    },[recentCarFlag,highBid]);
 		
-	},[fromYear]);
+  
 
-	useEffect(()=>{
-		if(toYear.length>=4){
-			searchCarDetail();
-		}
-	},[toYear]);
+   
 
 	
 
@@ -253,187 +266,9 @@ const [viewMoreBodyStyle,setViewMoreBodyStyle]=useState(false);
         .catch(err => { console.log(err); });
 	  }
 	  
-	  function onDealerShipClick(e){
-		console.log("event value++++++",e.target.value)
-		setDealerShip(e.target.value);
-		searchCarDetail()
-	  }
-
-	  function onTransmissionIssueClick(e){
-		console.log("Transmission issue selected value",e.target.value);
-		setTransmissionIssueSearch(e.target.value);
-		searchCarDetail();
-	}
-	function onSaleTypeClick(e){
-	   console.log("Sale Type selected value",e.target.value);
-	   setSalesTypeSearch(e.target.value);
-	   searchCarDetail();
-   }
-   function onHistoryClick(e){
-	   console.log("History Search selected value",e.target.value);
-	   setHistorySearch(e.target.value);
-	   searchCarDetail();
-   }
-   function onEngineNoiseClick(e){
-	   console.log("Engine Noise selected value",e.target.value);
-	   setEngineNoiseSearch(e.target.value);
-	   searchCarDetail();
-   }
-   function onGroupClick(e){
-	   console.log("Group selected value",e.target.value);
-	   if(e.target.checked)
-	   setGroupSearch(groupSearch=>[...groupSearch,"'"+e.target.value+"'"]);
-	   else if (!e.target.checked)
-	   {
-		   setGroupSearch(groupSearch.filter(item => item!== "'"+e.target.value+"'" ));
-	   
-	   }
-   }
-
-   function toggleStateSearch(){
-	console.log("Show/Hide",!stateSearchToggle);
-	setStateSearchToggle(!stateSearchToggle)
-}
-
-
-	
-function toggleGroupSearch(){
-	console.log("Show/Hide",!groupSearchToggle);
-	setGroupSearchToggle(!groupSearchToggle)
-}
 
 
 
-function toggleSalesTypesSearch(){
-console.log("Show/Hide",!salesTypesSearchToggle);
-setSalesTypesSearchToggle(!salesTypesSearchToggle)
-}
-
-
-
-function toggleLowerEngineNoiceSearch(){
-console.log("Show/Hide",!lowerEngineNoiceSearchToggle);
-setLowerEngineNoiceSearchToggle(!lowerEngineNoiceSearchToggle)
-}
-
-
-
-function toggleTransmissionIssueSearch(){
-console.log("Show/Hide",!transmissionIssueSearchToggle);
-setTransmissionIssueSearchToggle(!transmissionIssueSearchToggle)
-}
-
-
-
-function toggleVehicleHistorySearch(){
-console.log("Show/Hide",!vehicleHistorySearchToggle);
-setVehicleHistorySearchToggle(!vehicleHistorySearchToggle)
-}
-
-
-
-function toggleYearSearch(){
-console.log("Show/Hide",!yearSearchToggle);
-setYearSearchToggle(!yearSearchToggle)
-}
-
-
-
-function toggleMileageSearch(){
-console.log("Show/Hide",!mileageSearchToggle);
-setMileageSearchToggle(!mileageSearchToggle)
-}
-
-
-
-
-function toggleMakeSearch(){
-console.log("Show/Hide",!makeSearchToggle);
-setMakeSearchToggle(!makeSearchToggle)
-}
-
-
-
-function toggleSellerTypeSearch(){
-console.log("Show/Hide",!sellerTypeSearchToggle);
-setSellerTypeSearchToggle(!sellerTypeSearchToggle)
-}
-
-
-
-function toggleDealershipSearch(){
-console.log("Show/Hide",!dealershipSearchToggle);
-setDealershipSearchToggle(!dealershipSearchToggle)
-}
-
-
-
-
-function toggleBodyStyleSearch(){
-console.log("Show/Hide",!bodyStyleSearchToggle);
-setBodyStyleSearchToggle(!bodyStyleSearchToggle)
-}
-
-
-
-function toggleTransmissionSearch(){
-	console.log("Show/Hide",!transmissionSearchToggle);
-	setTransmissionSearchToggle(!transmissionSearchToggle)
-}
-
-
-	
-function toggleDriveTrainSearch(){
-console.log("Show/Hide",!driveTrainSearchToggle);
-setDriveTrainSearchToggle(!driveTrainSearchToggle)
-}
-
-const clear = () => {
-	console.log("clearrrrrrrrrr")
-	setReset(false);
-}
-
-const getState = () => {
-	
-	const state = API.post('stateList/condition');
-	state.then(res => {
-		setStateNameList(res.data.data);
-	
-	})
-		.catch(err => { console.log(err); });
-}
-
-const getMake = () => {
-	let request = {
-		country_id: 1
-	};
-	const state = API.post('car_make/condition', request);
-	state.then(res => {
-		setMake(res.data.data);
-	
-	})
-		.catch(err => { console.log(err); });
-}
-
-const getBodyStyle = () => {
-	let request = {
-		country_id: 1
-	};
-	const state = API.post('car_bodystyle/condition', request);
-	state.then(res => {
-		setBodyStyle(res.data.data);
-	
-	})
-		.catch(err => { console.log(err); });
-}
-
-useEffect(() => {
-
-	getState();
-	getMake();
-	getBodyStyle();
-   
-},[reset]);
 
     return(
         <div>
@@ -482,8 +317,11 @@ useEffect(() => {
                                             <div className="cars-prices">
 												<a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a>
                                                 <a className="cta-btns" href="#">Seller Price ${item.max_bid}</a>
-                                                <a className="cta-btns" href="#">High Bid ${item.high_bid}</a>
-                                                <a className="cta-btns-primary" href="JavaScript:void(0)" >Make Bid</a>
+                                                {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?
+												<a className="cta-btns" href="#">High Bid $ {item.min_bid}</a>:
+												<a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
+												}
+                                                <a className="cta-btns-primary" onClick={()=>toggleMakeBid(item.high_bid,item.min_bid,item.car_id,item.save_purchase)} >Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
@@ -493,6 +331,13 @@ useEffect(() => {
 						</div>
 						</div>
                     </div>
+					{isOpen && <Popup
+						isClose={false}
+						content={<>
+							<Makeurbid toggle={toggleMakeBid} />
+						</>}
+						handleClose={toggleMakeBid}
+					/>}
                </main>
 }
         </div>
