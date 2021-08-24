@@ -51,22 +51,31 @@ const [distance,setDistance] = useState("");
 const [moreCarFlag,setMoreCarFlag]=useState(false);
 const [similarCarFromSellerFlag,setSimilarCarFromSellerFlag]=useState(false);
 const selectedSellerId = useSelector(state => state.CarListReducer.payload);
+const [buyer_dealer_id,setBuyer_Dealer_Id]=useState(JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id);
+const [carBuyerDealerId,setCarBuyerDealerId]=useState("");
 const [loading,setLoading] = useState(true);
 console.log("selescted seller id_______",selectedSellerId)
 
 const [isOpen, setIsOpen] = useState(false);
 const [open,setOpen] = useState(false);
 
+const highBid= useSelector(state => state.CarDetailsReducer.payload.high_bid);
 
-const toggleMakeBid = (high_bid,min_bid,save_purchase) => {
+const toggleMakeBid = (high_bid,min_bid,save_purchase,car_id,time,counterbuyerid,maxbid) => {
 	console.log("check the high bid value",high_bid)
 	let makebiddispatch={
 		high_bid: high_bid,
 		min_bid: min_bid,
-		save_purchase: save_purchase
+		car_id : car_id,
+		save_purchase: save_purchase,
+		redirectPage: "cardetail",
+		time:time,
+		counter_buyerid:counterbuyerid,
+		max_bid:maxbid
 	}
 	//dispatch(CarDetailsAction.highBid(high_bid))
 	dispatch(CarDetailsAction.minBid(makebiddispatch))
+	
 	setIsOpen(!isOpen);
 }
 
@@ -115,7 +124,7 @@ function img3Click(img){
 	loadLrgImg(img.target.src);
 }
 function img4Click(img){
-	loadLrgImg(img.target.src);
+	loadLrgImg(img.targe .src);
 }
 
 
@@ -195,7 +204,7 @@ function CarDetailList(){
 	
 	
 	
-	},[id])
+	},[id,highBid])
 
 const addRemoveFavourite=(carid,state,flag)=>{
 	console.log("inside addremove");
@@ -335,15 +344,14 @@ return(
 	        					<div class="cars-detail-views">
 									<a class="car-btns" onClick={()=>redirecttoInspection(carDetail[0].car_id)}>View Inspection</a>
 									{carDetail[0].high_bid=="" || carDetail[0].high_bid==null || carDetail[0].high_bid==undefined?
-									<a class="car-btns-primary" href=""><img src={tag} alt=""/>High Bid :<span> ${carDetail[0].min_bid}</span></a>:
-									<a class="car-btns-primary" href=""><img src={tag} alt=""/>High Bid :<span> ${carDetail[0].high_bid}</span></a>
+									<a class="car-btns-primary" href=""><img src={tag} alt=""/>High Bid :<span> $ {carDetail[0].min_bid}</span></a>:
+									<a class="car-btns-primary" href=""><img src={tag} alt=""/>High Bid :<span> $ {carDetail[0].high_bid}</span></a>
+									}&nbsp;&nbsp;&nbsp;&nbsp;
+									{carDetail[0].counter_bid=="" || carDetail[0].counter_bid== null || carDetail[0].counter_bid== undefined ?"":
+									<a class="car-btns-primary" href=""><img src={tag} alt=""/>Counter Bid :<span> $ {carDetail[0].counter_bid}</span></a>
 									}
 								</div>
-								{carDetail[0].counter_bid==""|| "null"?"":
-								<div class="cars-detail-views">
-									
-									<a class="car-btns-primary" href=""><img src={tag} alt=""/>Counter Bid :<span> ${carDetail[0].counter_bid}</span></a>
-								</div>}
+								
 	        				</div>
 	        			</div>
 						</div>
@@ -369,7 +377,8 @@ return(
 							<div class="col-md-12">
 	        					<div class="cars-buy">
 									<a class="cars-buy-btns" href="#">Buy now</a>
-									<a class="cars-buy-btns-primary" onClick={()=>toggleMakeBid(carDetail[0].high_bid,carDetail[0].min_bid,carDetail[0].save_purchase)}>Make Bid</a>
+									{buyer_dealer_id==carDetail[0].counter_buyer_dealer_id? <a class="cars-buy-btns-primary">Highest Bid</a> :
+									<a class="cars-buy-btns-primary" onClick={()=>toggleMakeBid(carDetail[0].high_bid,carDetail[0].min_bid,carDetail[0].save_purchase,carDetail[0].car_id,carDetail[0].time,carDetail[0].counter_buyer_dealer_id,carDetail[0].max_bid)}>Make Bid</a>}
 								</div>
 	        				</div>
 						</div>
@@ -445,7 +454,7 @@ return(
         </div>
 
 		<div class="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
-		{sellerCarDetail.length > 0 ? sellerCarDetail
+		{sellerCarDetail.length > 0 ? sellerCarDetail.slice(0,4)
                             .map((moreCar,index) =>
 
          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
@@ -473,8 +482,11 @@ return(
 				<div class="cars-prices">
 					<a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a>
           			<a className="cta-btns" href="#">Seller Price ${moreCar.max_bid}</a>
-					<a class="cta-btns" href="">High Bid ${moreCar.high_bid}</a>
-					<a class="cta-btns-primary" onClick={toggleMakeBid}>Make Bid</a>
+					{moreCar.high_bid=="" || moreCar.high_bid==null || moreCar.high_bid==undefined?
+					<a className="cta-btns" href="#">High Bid $ {moreCar.min_bid}</a>:
+					<a className="cta-btns" href="#">High Bid $ {moreCar.high_bid}</a>
+					}
+					<a class="cta-btns-primary" onClick={()=>toggleMakeBid(moreCar.high_bid,moreCar.min_bid,moreCar.save_purchase,moreCar.car_id)}>Make Bid</a>
 				</div>
               </div>
             </div>
@@ -522,8 +534,11 @@ return(
 								<div class="cars-prices">
 									<a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a>
           							<a className="cta-btns" href="#">Seller Price ${moreCar.max_bid}</a>
-									<a class="cta-btns" href="">High Bid ${moreCar.high_bid}</a>
-									<a class="cta-btns-primary" onClick={toggleMakeBid}>Make Bid</a>
+									{moreCar.high_bid=="" || moreCar.high_bid==null || moreCar.high_bid==undefined?
+									<a className="cta-btns" href="#">High Bid $ {moreCar.min_bid}</a>:
+									<a className="cta-btns" href="#">High Bid $ {moreCar.high_bid}</a>
+									}
+									<a class="cta-btns-primary" onClick={()=>toggleMakeBid(moreCar.high_bid,moreCar.min_bid,moreCar.save_purchase,moreCar.car_id)}>Make Bid</a>
 								</div>
 							  </div>
 							</div>

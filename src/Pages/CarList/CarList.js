@@ -43,13 +43,24 @@ const CarList = () => {
     const [inventoryCarFlag,setInventoryCarFlag]=useState(false);
     const [favCarFlag,setFavCarFlag]=useState(false);
     const [suggestedCarDetail,setSuggestedCarDetail]=useState("");
+    const [savePurchase,setSavePurchase] = useState(false);
+    const highBid= useSelector(state => state.CarDetailsReducer.payload.high_bid);
 
     const [isOpen, setIsOpen] = useState(false);
     const options = {
         items: 4,
     };
-    const togglePopup = (high_bid) => {
-        dispatch(CarDetailsAction.highBid(high_bid))
+    const togglePopup = (high_bid,min_bid,car_id) => {
+        let makebiddispatch={
+            high_bid: high_bid,
+            min_bid: min_bid,
+            car_id: car_id,
+            save_purchase: savePurchase,
+            redirectPage:"carlist"
+        }
+        console.log("check car id in car list",car_id)
+        //dispatch(CarDetailsAction.highBid(high_bid))
+        dispatch(CarDetailsAction.minBid(makebiddispatch))
         setIsOpen(!isOpen);
     }
     const getSuggestedCarList=()=>{
@@ -148,6 +159,13 @@ const CarList = () => {
         })
     }
 
+    useEffect(() => {
+        getSuggestedCarList();
+        getrecentCarList();
+        getInventoryCarList();
+        getFavCarList();
+
+    },[highBid]);
     
 
     useEffect(() => {
@@ -228,10 +246,10 @@ const CarList = () => {
                                                 <a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a>
                                                 <a className="cta-btns" href="#">Seller Price $ {item.max_bid}</a>
                                                 {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?
-                                                <a className="cta-btns" href="#">High Bid $ 0</a>:
+                                                <a className="cta-btns" href="#">High Bid $ {item.min_bid}</a>:
                                                 <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                                 }   
-                                                <a className="cta-btns-primary" href="JavaScript:void(0)" onClick={()=>togglePopup(item.high_bid)} >Make Bid</a>
+                                                <a className="cta-btns-primary" href="JavaScript:void(0)" onClick={()=>togglePopup(item.high_bid,item.min_bid,item.car_id)} >Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
@@ -285,10 +303,10 @@ const CarList = () => {
                                             <a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a>
                                                 <a className="cta-btns" href="#">Seller Price $ {item.max_bid}</a>
                                                 {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?
-                                                <a className="cta-btns" href="#">High Bid $ 0</a>:
+                                                <a className="cta-btns" href="#">High Bid $ {item.min_bid}</a>:
                                                 <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                                 } 
-                                                <a className="cta-btns-primary" onClick={()=>togglePopup(item.high_bid)} >Make Bid</a>
+                                                <a className="cta-btns-primary" onClick={()=>togglePopup(item.high_bid,item.min_bid,item.car_id)} >Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
@@ -342,10 +360,10 @@ const CarList = () => {
                                             <a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a>
                                                 <a className="cta-btns" href="#">Seller Price $ {item.max_bid}</a>
                                                 {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?
-                                                <a className="cta-btns" href="#">High Bid $ 0</a>:
+                                                <a className="cta-btns" href="#">High Bid $ {item.min_bid}</a>:
                                                 <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                                 } 
-                                                <a className="cta-btns-primary" onClick={()=>togglePopup(item.high_bid)}>Make Bid</a>
+                                                <a className="cta-btns-primary" onClick={()=>togglePopup(item.high_bid,item.min_bid,item.car_id)}>Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
@@ -399,10 +417,10 @@ const CarList = () => {
                                         <a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a>
                                         <a className="cta-btns" href="#">Seller Price $ {item.max_bid}</a>
                                         {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?
-                                        <a className="cta-btns" href="#">High Bid $ 0</a>:
+                                        <a className="cta-btns" href="#">High Bid $ {item.min_bid}</a>:
                                         <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                         } 
-                                        <a className="cta-btns-primary" onClick={()=>togglePopup(item.high_bid)}>Make Bid</a>
+                                        <a className="cta-btns-primary" onClick={()=>togglePopup(item.high_bid,item.min_bid,item.car_id)}>Make Bid</a>
                                     </div>
                                 </div>
                             </div>
