@@ -51,6 +51,8 @@ const [distance,setDistance] = useState("");
 const [moreCarFlag,setMoreCarFlag]=useState(false);
 const [similarCarFromSellerFlag,setSimilarCarFromSellerFlag]=useState(false);
 const selectedSellerId = useSelector(state => state.CarListReducer.payload);
+const [buyer_dealer_id,setBuyer_Dealer_Id]=useState(JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id);
+const [carBuyerDealerId,setCarBuyerDealerId]=useState("");
 const [loading,setLoading] = useState(true);
 console.log("selescted seller id_______",selectedSellerId)
 
@@ -119,7 +121,7 @@ function img3Click(img){
 	loadLrgImg(img.target.src);
 }
 function img4Click(img){
-	loadLrgImg(img.target.src);
+	loadLrgImg(img.targe .src);
 }
 
 
