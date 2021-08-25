@@ -236,6 +236,7 @@ const MakeurBid=(props)=>{
     }
     else
     {
+        console.log("save purchase is coming as yes",)
         setTransportFlag(true);
     }
  }

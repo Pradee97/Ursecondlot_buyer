@@ -488,7 +488,7 @@ return(
 					<a className="cta-btns" href="#">High Bid $ {moreCar.min_bid}</a>:
 					<a className="cta-btns" href="#">High Bid $ {moreCar.high_bid}</a>
 					}
-					<a class="cta-btns-primary" onClick={()=>toggleMakeBid(moreCar.high_bid,moreCar.min_bid,moreCar.save_purchase,moreCar.car_id)}>Make Bid</a>
+					<a class="cta-btns-primary" onClick={()=>toggleMakeBid(moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now)}>Make Bid</a>
 				</div>
               </div>
             </div>
@@ -540,7 +540,7 @@ return(
 									<a className="cta-btns" href="#">High Bid $ {moreCar.min_bid}</a>:
 									<a className="cta-btns" href="#">High Bid $ {moreCar.high_bid}</a>
 									}
-									<a class="cta-btns-primary" onClick={()=>toggleMakeBid(moreCar.high_bid,moreCar.min_bid,moreCar.save_purchase,moreCar.car_id)}>Make Bid</a>
+									<a class="cta-btns-primary" onClick={()=>toggleMakeBid( moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now)}>Make Bid</a>
 								</div>
 							  </div>
 							</div>
