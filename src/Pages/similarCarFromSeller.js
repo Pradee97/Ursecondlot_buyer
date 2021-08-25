@@ -143,9 +143,9 @@ return(
 				<div class="cars-prices">
 
 					{/* <a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a> */}
-          <a className="cta-btns" href="#">Buy It Now ${moreCar.max_bid}</a>
+          <a className="cta-btns" href="#">Buy It Now ${moreCar.max_price}</a>
           {moreCar.high_bid=="" || moreCar.high_bid== null || moreCar.high_bid== undefined?
-          <a className="cta-btns" href="#">High Bid $ {moreCar.min_bid}</a>:
+          <a className="cta-btns" href="#">High Bid $ {moreCar.min_price}</a>:
           <a className="cta-btns" href="#">High Bid $ {moreCar.high_bid}</a>
           }
 					<a class="cta-btns-primary" onClick={()=>toggleMakeBid(moreCar.high_bid,moreCar.min_bid,moreCar.car_id,moreCar.save_purchase,moreCar.make)}>Make Bid</a>
