@@ -61,19 +61,21 @@ const [open,setOpen] = useState(false);
 
 const highBid= useSelector(state => state.CarDetailsReducer.payload.high_bid);
 
-const toggleMakeBid = (high_bid,min_bid,save_purchase,car_id,time,counterbuyerid,maxbid) => {
+const toggleMakeBid = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now) => {
 	console.log("check the high bid value",high_bid)
 	let makebiddispatch={
 		high_bid: high_bid,
-		min_bid: min_bid,
+		min_price: min_price,
 		car_id : car_id,
 		save_purchase: save_purchase,
 		redirectPage: "cardetail",
 		time:time,
 		counter_buyerid:counterbuyerid,
-		max_bid:maxbid
+		max_price:max_price,
+		buy_it_now: buy_it_now
 	}
 	//dispatch(CarDetailsAction.highBid(high_bid))
+	console.log("checking max bid in the car details page", max_price)
 	dispatch(CarDetailsAction.minBid(makebiddispatch))
 	
 	setIsOpen(!isOpen);
@@ -378,7 +380,7 @@ return(
 	        					<div class="cars-buy">
 									<a class="cars-buy-btns" href="#">Buy now</a>
 									{buyer_dealer_id==carDetail[0].counter_buyer_dealer_id? <a class="cars-buy-btns-primary">Highest Bid</a> :
-									<a class="cars-buy-btns-primary" onClick={()=>toggleMakeBid(carDetail[0].high_bid,carDetail[0].min_bid,carDetail[0].save_purchase,carDetail[0].car_id,carDetail[0].time,carDetail[0].counter_buyer_dealer_id,carDetail[0].max_bid)}>Make Bid</a>}
+									<a class="cars-buy-btns-primary" onClick={()=>toggleMakeBid(carDetail[0].high_bid,carDetail[0].min_price,carDetail[0].save_purchase,carDetail[0].car_id,carDetail[0].time,carDetail[0].counter_buyer_dealer_id,carDetail[0].max_price,carDetail[0].buy_it_now)}>Make Bid</a>}
 								</div>
 	        				</div>
 						</div>
@@ -480,8 +482,8 @@ return(
 			</div>
 				
 				<div class="cars-prices">
-					<a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a>
-          			<a className="cta-btns" href="#">Seller Price ${moreCar.max_bid}</a>
+					{/* <a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a> */}
+          			<a className="cta-btns" href="#">Buy It Now ${moreCar.max_bid}</a>
 					{moreCar.high_bid=="" || moreCar.high_bid==null || moreCar.high_bid==undefined?
 					<a className="cta-btns" href="#">High Bid $ {moreCar.min_bid}</a>:
 					<a className="cta-btns" href="#">High Bid $ {moreCar.high_bid}</a>
@@ -532,8 +534,8 @@ return(
 								</div>
 								
 								<div class="cars-prices">
-									<a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a>
-          							<a className="cta-btns" href="#">Seller Price ${moreCar.max_bid}</a>
+									{/* <a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a> */}
+          							<a className="cta-btns" href="#">Buy It Now ${moreCar.max_bid}</a>
 									{moreCar.high_bid=="" || moreCar.high_bid==null || moreCar.high_bid==undefined?
 									<a className="cta-btns" href="#">High Bid $ {moreCar.min_bid}</a>:
 									<a className="cta-btns" href="#">High Bid $ {moreCar.high_bid}</a>
