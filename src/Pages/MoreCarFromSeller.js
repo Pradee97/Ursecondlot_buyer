@@ -182,8 +182,8 @@ return(
 								</div>
 				
 				<div class="cars-prices">
-          <a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a>
-          <a className="cta-btns" href="#">Seller Price ${moreCar.max_bid}</a>
+          {/* <a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a> */}
+          <a className="cta-btns" href="#">Buy It Now ${moreCar.max_bid}</a>
 					{moreCar.high_bid=="" || moreCar.high_bid== null || moreCar.high_bid== undefined?
           <a className="cta-btns" href="#">High Bid $ {moreCar.min_bid}</a>:
           <a className="cta-btns" href="#">High Bid $ {moreCar.high_bid}</a>

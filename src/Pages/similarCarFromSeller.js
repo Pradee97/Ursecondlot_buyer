@@ -20,7 +20,7 @@ const SimilarCarFromSeller = () =>{
     const [similarCarDetail,setSimilarCarDetail]=useState([]);
     const history = useHistory();
     const [similarCarFromSellerFlag,setSimilarCarFromSellerFlag]=useState(false);
-    console.log("id from cardetail",id);
+   
     const dispatch = useDispatch();
     const [loading,setLoading] = useState(true);
 
@@ -33,18 +33,18 @@ const SimilarCarFromSeller = () =>{
         buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
     }
 
-    console.log("+++++++++++++++",request)
+    
     API.post('OtherDealerCarList/condition',request).then(resp=>{
-        console.log("similar cars from other dealers ====response",resp.data.data);
+        
         setSimilarCarDetail(resp.data.data);
-        console.log("similar car  Detail",resp.data.data);
+        
         setLoading(false);
     
     })
 }
 
 const toggleMakeBid = (high_bid,min_bid,car_id,save_purchase,make) => {
-  console.log("check the high bid value",high_bid)
+  
   let makebiddispatch={
     high_bid: high_bid,
     min_bid: min_bid,
@@ -61,7 +61,7 @@ const toggleMakeBid = (high_bid,min_bid,car_id,save_purchase,make) => {
     
 const redirectpage=(pathid,seller_dealer_id)=>{
   //e.preventDefault();
-  console.log("seller_dealer_id+++++",seller_dealer_id)
+ 
   dispatch(CarListAction.sellerid(seller_dealer_id))
   history.push("/cardetail/"+pathid);
 }
@@ -71,16 +71,16 @@ useEffect(() => {
 },[highBid]);
     
 const addRemoveFavourite=(carid,state,flag)=>{
-  console.log("inside addremove");
+ ;
   let request={
     buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
       car_id:carid,
       active: !state
   }
-  console.log("request",request);
+  
   API.post('buyer_favourite/add',request).then(res=>{
       // setaddFavourite(res.data.data);
-      console.log("add Fav Inventory Detail",res.data.data);
+    
 
       if(flag==='SimilarCarFromSellerFlag'){
         setSimilarCarFromSellerFlag(!similarCarFromSellerFlag)
@@ -142,8 +142,8 @@ return(
 				
 				<div class="cars-prices">
 
-					<a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a>
-          <a className="cta-btns" href="#">Seller Price ${moreCar.max_bid}</a>
+					{/* <a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a> */}
+          <a className="cta-btns" href="#">Buy It Now ${moreCar.max_bid}</a>
           {moreCar.high_bid=="" || moreCar.high_bid== null || moreCar.high_bid== undefined?
           <a className="cta-btns" href="#">High Bid $ {moreCar.min_bid}</a>:
           <a className="cta-btns" href="#">High Bid $ {moreCar.high_bid}</a>

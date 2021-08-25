@@ -17,7 +17,7 @@ const MakeurBid=(props)=>{
     const history = useHistory();
     const dispatch = useDispatch();
     const [id,setId] = useState(useSelector(state => state.CarDetailsReducer.payload.car_id));
-    const [maxbid,setMaxBid] = useState(useSelector(state => state.CarDetailsReducer.payload.max_bid));
+    const [maxBid,setMaxBid] = useState(useSelector(state => state.CarDetailsReducer.payload.max_bid));
     const [sellerId,setSellerId] = useState(useSelector(state => state.CarDetailsReducer.payload.seller_dealer_id));
     const [make,setMake] = useState(useSelector(state => state.CarDetailsReducer.payload.make));
     const [redirectPage,setRedirectPage] = useState(useSelector(state => state.CarDetailsReducer.payload.redirectPage));
@@ -52,6 +52,8 @@ const MakeurBid=(props)=>{
     const [alertimg,setAlertImg] = useState("");
     const [toggleMakeBidPopupOpen,setToggleMakeBidPopupOpen]= useState(true);
     const [highBidError, setHighBidError] = useState("");
+
+    console.log("check max bid coming", maxBid)
 
     if(carHighBid=="" || carHighBid==null || carHighBid==undefined || carHighBid==0){
         setCarHighBid(carMinBid)
@@ -262,7 +264,7 @@ const MakeurBid=(props)=>{
                             {carHighBid == "" || carHighBid == null || carHighBid == undefined ?
                             <p class="border-bottomtext">Your bid can't be Lower than $ {carMinBid}</p>:
                             <p class="border-bottomtext">Your bid can't be Lower than $ {carHighBid}</p>}
-                            <p> Segment of Bidding </p>
+                            <p> Segment of Bidding 50</p>
                             <div class="row content">			
                             <div class="form-group col-lg-6 col-md-6">
                                 {carHighBid == "" || carHighBid == null || carHighBid == undefined ?
@@ -278,7 +280,8 @@ const MakeurBid=(props)=>{
                                 <p>{highBidError}</p>
                             </div>
                             <div class="form-group col-lg-6 col-md-6">
-                                
+                            <div className="cars-prices">
+                            <a className="cta-btns" href="#">Buy It Now $ {maxBid}</a></div>
                                 <h2>Buyer Fee</h2>
                             </div>
                             
@@ -299,7 +302,7 @@ const MakeurBid=(props)=>{
 
                             
                             <div class="form-group col-lg-12 col-md-12">				
-                                <input type="text" class="form-control" placeholder="Add a Commend (Optional)" onChange={(e)=>setComments(e.target.value)}></input>
+                                <input type="text" class="form-control" placeholder="Add a Commendt (Optional)" onChange={(e)=>setComments(e.target.value)}></input>
                             </div>
                                 <div class=" col-lg-12 col-md-12">
                                     <div class="optional-services row">

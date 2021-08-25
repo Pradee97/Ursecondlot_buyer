@@ -58,7 +58,7 @@ const CarList = () => {
             save_purchase: savePurchase,
             redirectPage:"carlist"
         }
-        console.log("check car id in car list",car_id)
+        
         //dispatch(CarDetailsAction.highBid(high_bid))
         dispatch(CarDetailsAction.minBid(makebiddispatch))
         setIsOpen(!isOpen);
@@ -67,14 +67,14 @@ const CarList = () => {
         let request={
             buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
         }
-        console.log("+++++++++==++",request)
+        
         API.post('SuggestedCarList/condition',request).then(res=>{
-            console.log("response",res.data.data);
+           
            // const {results} = res.data.data;
-            console.log("Response data",res.data.data);
+            
             //if(results.length>0){
             setSuggestedCarDetail(res.data.data);
-            console.log("car Detail",res.data.data);
+            
             setLoading(false);
             //}
             //setrecentCarFlag(!recentCarFlag)
@@ -85,14 +85,14 @@ const CarList = () => {
         let request={
             buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
         }
-        console.log("+++++++++==++",request)
+       
         API.post('BuyerNewCarList/condition',request).then(res=>{
-            console.log("response",res.data.data);
+            
            // const {results} = res.data.data;
-            console.log("Response data",res.data.data);
+            
             //if(results.length>0){
             setCarDetail(res.data.data);
-            console.log("car Detail",res.data.data);
+            
             setLoading(false);
             //}
             //setrecentCarFlag(!recentCarFlag)
@@ -103,12 +103,12 @@ const CarList = () => {
             buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
         }
         API.post('BuyerInventoryCarList/condition',request).then(res=>{
-            console.log("response",res.data.data);
+            
            // const {results} = res.data.data;
-            //console.log("Response data",res.data.data);
+           
             //if(results.length>0){
                 setCarInventoryDetail(res.data.data);
-            console.log("car Inventory Detail",res.data.data);
+           
             setLoading(false);
             //}
             //setInventoryCarFlag(!inventoryCarFlag)
@@ -116,7 +116,7 @@ const CarList = () => {
     }
     const redirectpage=(pathid,seller_dealer_id)=>{
         //e.preventDefault();
-        console.log("seller_dealer_id+++++",seller_dealer_id)
+        
         dispatch(CarListAction.sellerid(seller_dealer_id))
         history.push("/cardetail/"+pathid);
     }
@@ -125,26 +125,26 @@ const CarList = () => {
         let request={
             buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
         }
-        console.log("request",request);
+        
         API.post('BuyerFavoriteCarList/condition',request).then(res=>{
             setFavCarInventoryDetail(res.data.data);
-            console.log("Car Fav Inventory Detail",res.data.data);
+            
             setLoading(false);
             //setFavCarFlag(!favCarFlag)
         }).catch(err=>{console.log(err);});
     }
    
     const addRemoveFavourite=(carid,state,flag)=>{
-        console.log("inside addremove");
+       
         let request={
             buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
             car_id:carid,
             active: !state
         }
-        console.log("request",request);
+        
         API.post('buyer_favourite/add',request).then(res=>{
             // setaddFavourite(res.data.data);
-            console.log("add Fav Inventory Detail",res.data.data);
+            
 
             if(flag==='inv'){
                 setInventoryCarFlag(!inventoryCarFlag)
@@ -243,8 +243,8 @@ const CarList = () => {
                                             </div>
                                   
                                             <div className="cars-prices">
-                                                <a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a>
-                                                <a className="cta-btns" href="#">Seller Price $ {item.max_bid}</a>
+                                                {/* <a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a> */}
+                                                <a className="cta-btns" href="#">Buy It Now $ {item.max_bid}</a>
                                                 {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?
                                                 <a className="cta-btns" href="#">High Bid $ {item.min_bid}</a>:
                                                 <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
@@ -300,8 +300,8 @@ const CarList = () => {
                                             </div>
                                            
                                             <div className="cars-prices">
-                                            <a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a>
-                                                <a className="cta-btns" href="#">Seller Price $ {item.max_bid}</a>
+                                            {/* <a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a> */}
+                                                <a className="cta-btns" href="#">Buy It Now $ {item.max_bid}</a>
                                                 {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?
                                                 <a className="cta-btns" href="#">High Bid $ {item.min_bid}</a>:
                                                 <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
@@ -357,8 +357,8 @@ const CarList = () => {
                                             </div>
                                             
                                             <div className="cars-prices">
-                                            <a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a>
-                                                <a className="cta-btns" href="#">Seller Price $ {item.max_bid}</a>
+                                            {/* <a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a> */}
+                                                <a className="cta-btns" href="#">Buy It Now $ {item.max_bid}</a>
                                                 {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?
                                                 <a className="cta-btns" href="#">High Bid $ {item.min_bid}</a>:
                                                 <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
@@ -414,8 +414,8 @@ const CarList = () => {
                                     </div>
                                    
                                     <div className="cars-prices">
-                                        <a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a>
-                                        <a className="cta-btns" href="#">Seller Price $ {item.max_bid}</a>
+                                        {/* <a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a> */}
+                                        <a className="cta-btns" href="#">Buy It Now $ {item.max_bid}</a>
                                         {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?
                                         <a className="cta-btns" href="#">High Bid $ {item.min_bid}</a>:
                                         <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>

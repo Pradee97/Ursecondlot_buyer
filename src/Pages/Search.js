@@ -996,8 +996,8 @@ useEffect(() => {
                                             </div>
 
                                             <div className="cars-prices">
-												<a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a>
-                                                <a className="cta-btns" href="#">Seller Price $ {item.max_bid}</a>
+												{/* <a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a> */}
+                                                <a className="cta-btns" href="#">Buy It Now $ {item.max_bid}</a>
                                                 {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?
 												<a className="cta-btns" href="#">High Bid $ {item.min_bid}</a>:
 												<a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>

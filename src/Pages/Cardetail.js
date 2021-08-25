@@ -61,7 +61,7 @@ const [open,setOpen] = useState(false);
 
 const highBid= useSelector(state => state.CarDetailsReducer.payload.high_bid);
 
-const toggleMakeBid = (high_bid,min_bid,save_purchase,car_id,time,counterbuyerid,maxbid) => {
+const toggleMakeBid = (high_bid,min_bid,save_purchase,car_id,time,counterbuyerid,max_bid) => {
 	console.log("check the high bid value",high_bid)
 	let makebiddispatch={
 		high_bid: high_bid,
@@ -71,7 +71,7 @@ const toggleMakeBid = (high_bid,min_bid,save_purchase,car_id,time,counterbuyerid
 		redirectPage: "cardetail",
 		time:time,
 		counter_buyerid:counterbuyerid,
-		max_bid:maxbid
+		max_bid:max_bid
 	}
 	//dispatch(CarDetailsAction.highBid(high_bid))
 	dispatch(CarDetailsAction.minBid(makebiddispatch))
@@ -480,8 +480,8 @@ return(
 			</div>
 				
 				<div class="cars-prices">
-					<a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a>
-          			<a className="cta-btns" href="#">Seller Price ${moreCar.max_bid}</a>
+					{/* <a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a> */}
+          			<a className="cta-btns" href="#">Buy It Now ${moreCar.max_bid}</a>
 					{moreCar.high_bid=="" || moreCar.high_bid==null || moreCar.high_bid==undefined?
 					<a className="cta-btns" href="#">High Bid $ {moreCar.min_bid}</a>:
 					<a className="cta-btns" href="#">High Bid $ {moreCar.high_bid}</a>
@@ -532,8 +532,8 @@ return(
 								</div>
 								
 								<div class="cars-prices">
-									<a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a>
-          							<a className="cta-btns" href="#">Seller Price ${moreCar.max_bid}</a>
+									{/* <a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a> */}
+          							<a className="cta-btns" href="#">Buy It Now ${moreCar.max_bid}</a>
 									{moreCar.high_bid=="" || moreCar.high_bid==null || moreCar.high_bid==undefined?
 									<a className="cta-btns" href="#">High Bid $ {moreCar.min_bid}</a>:
 									<a className="cta-btns" href="#">High Bid $ {moreCar.high_bid}</a>
