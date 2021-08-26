@@ -125,7 +125,7 @@ const MakeurBid=(props)=>{
     const redirect = () => {
         let makebiddispatch={
             high_bid: highBid,
-            min_bid: carMinBid,
+            min_price: carMinBid,
             save_purchase: carSavePurchase,
             
         }
