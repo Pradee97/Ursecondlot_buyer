@@ -245,6 +245,10 @@ const CarList = () => {
                                                 <p className="details"><span>{item.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <p className="details"><img src={item.image}/></p>
                                             </div>
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details">location-<span>{item.location} </span></p>
+                                               
+                                            </div>
                                   
                                             <div className="cars-prices">
                                                 {/* <a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a> */}
@@ -303,7 +307,10 @@ const CarList = () => {
                                                 <p className="details"><span>{item.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <p className="details"><img src={item.image}/></p>
                                             </div>
-                                           
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details">location-<span>{item.location} </span></p>
+                                               
+                                            </div>
                                             <div className="cars-prices">
                                             {/* <a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a> */}
                                                 {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
@@ -361,7 +368,10 @@ const CarList = () => {
                                                 <p className="details"><span>{item.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <p className="details"><img src={item.image}/></p>
                                             </div>
-                                            
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details">location-<span>{item.location} </span></p>
+                                               
+                                            </div>
                                             <div className="cars-prices">
                                             {/* <a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a> */}
                                                 {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
@@ -419,7 +429,10 @@ const CarList = () => {
                                         <p className="details"><span>{item.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
                                         <p className="details"><img src={item.image}/></p>
                                     </div>
-                                   
+                                    <div className="d-flex align-items-center mb-3">
+                                                <p className="details">location-<span>{item.location} </span></p>
+                                               
+                                            </div>
                                     <div className="cars-prices">
                                         {/* <a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a> */}
                                         {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
