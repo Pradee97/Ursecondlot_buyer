@@ -237,13 +237,17 @@ const clear = () => {
 	console.log("clearrrrrrrrrr")
 	setReset(false);
 }
-const toggleMakeBid = (high_bid,min_bid,car_id,save_purchase) => {
+const toggleMakeBid = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now) => {
 	console.log("check the high bid value",high_bid)
 	let makebiddispatch={
 		high_bid: high_bid,
-		min_bid: min_bid,
+		min_price: min_price,
 		car_id : car_id,
 		save_purchase: save_purchase,
+		time:time,
+		counter_buyerid:counterbuyerid,
+		max_price:max_price,
+		buy_it_now: buy_it_now,
 		redirectPage: "suggestedcars"
 	}
 	//dispatch(CarDetailsAction.highBid(high_bid))
@@ -912,13 +916,14 @@ useEffect(() => {
                                             </div>
 
                                             <div className="cars-prices">
-												<a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a>
-                                                <a className="cta-btns" href="#">Seller Price $ {item.max_bid}</a>
-                                                {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?
-                                                <a className="cta-btns" href="#">High Bid $ {item.min_bid}</a>:
+												{/* <a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a> */}
+                                                {item.max_bid=="" || item.max_bid== null || item.max_bid== undefined?"":
+                                                <a className="cta-btns" href="#">Buy It Now $ {item.max_bid}</a>
+                                                }
+                                                {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?"":
                                                 <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                                 } 
-                                                <a className="cta-btns-primary" onClick={()=>toggleMakeBid(item.high_bid,item.min_bid,item.car_id,item.save_purchase)} >Make Bid</a>
+                                                <a className="cta-btns-primary" onClick={()=>toggleMakeBid(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now)} >Make Bid</a>
                                             </div>
                                         </div>
                                     </div>

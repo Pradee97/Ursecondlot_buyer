@@ -13,6 +13,8 @@ import SaveSearchPopup from '../Component/Popup/SaveSearchPopup';
 import Popup from '../Component/Popup/Popup';
 import { useDispatch, useSelector } from 'react-redux';
 import SearchAction from '../Pages/SearchAction';
+import Makeurbid from './Makeurbid';
+import CarDetailsAction from './CarDetails/CarDetailsAction';
 
 const Search = () => {
 
@@ -66,6 +68,9 @@ const Search = () => {
 	const [saveSearchEnter,setSaveSearchEnter] = useState("");
 	const [saveSearchRequestPopup,setSaveSearchRequestPopup] = useState("");
 
+	const [open, setOpen] = useState(false);
+	const highBid= useSelector(state => state.CarDetailsReducer.payload.high_bid);
+
 
 	async function ShowSaveSearch(){
 		console.log("-------------------------inside show save search fn");
@@ -113,7 +118,27 @@ const Search = () => {
             setLoading(false);
             
         }).catch(err => { console.log(err); });
-    }
+	}
+	
+	const toggleMakeBid = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now) => {
+		console.log("check the high bid value",high_bid)
+		let makebiddispatch={
+			high_bid: high_bid,
+			min_price: min_price,
+			car_id : car_id,
+			save_purchase: save_purchase,
+			time:time,
+			counter_buyerid:counterbuyerid,
+			max_price:max_price,
+			buy_it_now: buy_it_now,
+			redirectPage: "search"
+		}
+		//dispatch(CarDetailsAction.highBid(high_bid))
+		dispatch(CarDetailsAction.minBid(makebiddispatch))
+		
+		setOpen(!open);
+	}
+
     const redirectpage=(pathid,seller_dealer_id)=>{
         //e.preventDefault();
         console.log("seller_dealer_id+++++",seller_dealer_id)
@@ -181,7 +206,7 @@ const Search = () => {
 		getSavedSearch();
 		
        
-	},[recentCarFlag]);
+	},[recentCarFlag,highBid]);
 	
 	useEffect(()=>{
 		getSavedSearchEnter();
@@ -975,8 +1000,14 @@ useEffect(() => {
                                             </div>
 
                                             <div className="cars-prices">
-                                                <a className="cta-btns" href="#">High Bid ${item.high_bid}</a>
-                                                <a className="cta-btns-primary" href="JavaScript:void(0)" >Make Bid</a>
+												{/* <a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a> */}
+                                                {item.max_bid=="" || item.max_bid== null || item.max_bid== undefined?"":
+                                                <a className="cta-btns" href="#">Buy It Now $ {item.max_bid}</a>
+                                                }
+                                                {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?"":
+												<a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
+												}
+                                                <a className="cta-btns-primary"onClick={()=>toggleMakeBid(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now)} >Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
@@ -985,6 +1016,13 @@ useEffect(() => {
 							</div></div>
                         </div>
                     </div>
+					{open && <Popup
+						isClose={false}
+						content={<>
+							<Makeurbid toggle={toggleMakeBid} />
+						</>}
+						handleClose={toggleMakeBid}
+					/>}
                </main>
 }
 

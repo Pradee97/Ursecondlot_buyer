@@ -45,14 +45,19 @@ const MoreCarFromSeller = () =>{
     })
 }
   
-const toggleMakeBid = (high_bid,min_bid,car_id,save_purchase) => {
+const toggleMakeBid = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,make) => {
   console.log("check the high bid value",high_bid)
   let makebiddispatch={
     high_bid: high_bid,
-    min_bid: min_bid,
+    min_price: min_price,
     car_id : car_id,
     save_purchase: save_purchase,
-    redirectPage: "morecarfrombuyer"
+    time:time,
+    counter_buyerid:counterbuyerid,
+    max_price:max_price,
+    buy_it_now: buy_it_now,
+    redirectPage: "morecarfrombuyer",
+    seller_dealer_id:id
   }
   //dispatch(CarDetailsAction.highBid(high_bid))
   dispatch(CarDetailsAction.minBid(makebiddispatch))
@@ -181,13 +186,14 @@ return(
 								</div>
 				
 				<div class="cars-prices">
-          <a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a>
-          <a className="cta-btns" href="#">Seller Price ${moreCar.max_bid}</a>
-					{moreCar.high_bid=="" || moreCar.high_bid== null || moreCar.high_bid== undefined?
-          <a className="cta-btns" href="#">High Bid $ {moreCar.min_bid}</a>:
+          {/* <a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a> */}
+          {moreCar.max_bid=="" || moreCar.max_bid== null || moreCar.max_bid== undefined?"":
+          <a className="cta-btns" href="#">Buy It Now $ {moreCar.max_bid}</a>
+          }
+					{moreCar.high_bid=="" || moreCar.high_bid== null || moreCar.high_bid== undefined?"":
           <a className="cta-btns" href="#">High Bid $ {moreCar.high_bid}</a>
           }
-					<a class="cta-btns-primary" onClick={()=>toggleMakeBid(moreCar.high_bid,moreCar.min_bid,moreCar.car_id,moreCar.save_purchase)}>Make Bid</a>
+					<a class="cta-btns-primary" onClick={()=>toggleMakeBid(moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now)}>Make Bid</a>
 				</div>
               </div>
             </div>
