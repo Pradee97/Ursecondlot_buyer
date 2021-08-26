@@ -902,6 +902,9 @@ useEffect(() => {
                                                 {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?"":
 												<a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
 												}
+												{item.counter_bid=="" || item.counter_bid== null || item.counter_bid== undefined?"":
+												<a className="cta-btns" href="#">Counter Bid $ {item.counter_bid}</a>
+												} 
                                                 <a className="cta-btns-primary" onClick={()=>toggleMakeBid(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now)}>Make Bid</a>
                                             </div>
                                         </div>

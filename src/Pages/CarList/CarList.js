@@ -123,6 +123,10 @@ const CarList = () => {
         
         dispatch(CarListAction.sellerid(seller_dealer_id))
         history.push("/cardetail/"+pathid);
+        // history.push({
+        //     pathname: '/cardetail',
+        //     state: {id:pathid},
+        //   });
     }
 
     const getFavCarList=()=>{
@@ -245,6 +249,10 @@ const CarList = () => {
                                                 <p className="details"><span>{item.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <p className="details"><img src={item.image}/></p>
                                             </div>
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details">location-<span>{item.location} </span></p>
+                                               
+                                            </div>
                                   
                                             <div className="cars-prices">
                                                 {/* <a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a> */}
@@ -254,6 +262,9 @@ const CarList = () => {
                                                 {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?"":
                                                 <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                                 }   
+                                                {item.counter_bid=="" || item.counter_bid== null || item.counter_bid== undefined?"":
+                                                <a className="cta-btns" href="#">Counter Bid $ {item.counter_bid}</a>
+                                                }
                                                 <a className="cta-btns-primary" href="JavaScript:void(0)" onClick={()=>togglePopup(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now)} >Make Bid</a>
                                             </div>
                                         </div>
@@ -303,7 +314,10 @@ const CarList = () => {
                                                 <p className="details"><span>{item.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <p className="details"><img src={item.image}/></p>
                                             </div>
-                                           
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details">location-<span>{item.location} </span></p>
+                                               
+                                            </div>
                                             <div className="cars-prices">
                                             {/* <a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a> */}
                                                 {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
@@ -312,6 +326,9 @@ const CarList = () => {
                                                 {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?"":
                                                 <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                                 } 
+                                                {item.counter_bid=="" || item.counter_bid== null || item.counter_bid== undefined?"":
+                                                <a className="cta-btns" href="#">Counter Bid $ {item.counter_bid}</a>
+                                                }
                                                 <a className="cta-btns-primary" onClick={()=>togglePopup(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now)} >Make Bid</a>
                                             </div>
                                         </div>
@@ -361,7 +378,10 @@ const CarList = () => {
                                                 <p className="details"><span>{item.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <p className="details"><img src={item.image}/></p>
                                             </div>
-                                            
+                                            <div className="d-flex align-items-center mb-3">
+                                                <p className="details">location-<span>{item.location} </span></p>
+                                               
+                                            </div>
                                             <div className="cars-prices">
                                             {/* <a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a> */}
                                                 {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
@@ -370,6 +390,9 @@ const CarList = () => {
                                                 {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?"":
                                                 <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                                 } 
+                                                {item.counter_bid=="" || item.counter_bid== null || item.counter_bid== undefined?"":
+                                                <a className="cta-btns" href="#">Counter Bid $ {item.counter_bid}</a>
+                                                }
                                                 <a className="cta-btns-primary" onClick={()=>togglePopup(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now)}>Make Bid</a>
                                             </div>
                                         </div>
@@ -419,7 +442,10 @@ const CarList = () => {
                                         <p className="details"><span>{item.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
                                         <p className="details"><img src={item.image}/></p>
                                     </div>
-                                   
+                                    <div className="d-flex align-items-center mb-3">
+                                                <p className="details">location-<span>{item.location} </span></p>
+                                               
+                                            </div>
                                     <div className="cars-prices">
                                         {/* <a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a> */}
                                         {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
@@ -428,6 +454,9 @@ const CarList = () => {
                                         {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?"":
                                         <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                         } 
+                                        {item.counter_bid=="" || item.counter_bid== null || item.counter_bid== undefined?"":
+                                        <a className="cta-btns" href="#">Counter Bid $ {item.counter_bid}</a>
+                                        }
                                         <a className="cta-btns-primary" onClick={()=>togglePopup(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now)}>Make Bid</a>
                                     </div>
                                 </div>
