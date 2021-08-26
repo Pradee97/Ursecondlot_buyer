@@ -61,19 +61,21 @@ const [open,setOpen] = useState(false);
 
 const highBid= useSelector(state => state.CarDetailsReducer.payload.high_bid);
 
-const toggleMakeBid = (high_bid,min_bid,save_purchase,car_id,time,counterbuyerid,maxbid) => {
+const toggleMakeBid = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now) => {
 	console.log("check the high bid value",high_bid)
 	let makebiddispatch={
 		high_bid: high_bid,
-		min_bid: min_bid,
+		min_price: min_price,
 		car_id : car_id,
 		save_purchase: save_purchase,
 		redirectPage: "cardetail",
 		time:time,
 		counter_buyerid:counterbuyerid,
-		max_bid:maxbid
+		max_price:max_price,
+		buy_it_now: buy_it_now
 	}
 	//dispatch(CarDetailsAction.highBid(high_bid))
+	console.log("checking max bid in the car details page", max_price)
 	dispatch(CarDetailsAction.minBid(makebiddispatch))
 	
 	setIsOpen(!isOpen);
@@ -149,58 +151,65 @@ function CarDetailList(){
 	console.log("Response data",res.data.data);
 	//if(results.length>0){
 	setCarDetail(res.data.data);
+	let make=res.data.data[0].make;
+	let selectedsellerid=res.data.data[0].seller_dealer_id;
 	console.log("car Detail",res.data.data);
 	setLoading(false);
 	console.log("car distance added",res.data.distance);
 	setDistance(res.data.distance);
 	setLrgImg(res.data.data[0].image);
+
+	//buyerinventory car detail list code goes here , this is for similar cars and other cars 
+
+	let rq={
+		buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+		};
+		API.post('BuyerInventoryCarList/condition',rq).then(res=>{
+		console.log("response",res.data.data);
+		// const {results} = res.data.data;
+		//console.log("Response data",res.data.data);
+		//if(results.length>0){
+		setCarInventoryDetail(res.data.data);
+		console.log("car Inventory Detail",res.data.data);
+		const req={
+		seller_dealer_id:selectedsellerid,
+		buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+		};
+		API.post('SellerCarList/condition',req).then(resp=>{
+		console.log("response",resp.data.data);
+		// const {results} = res.data.data;
+		//console.log("Response data",res.data.data);
+		//if(results.length>0){
+		setSellerCarDetail(resp.data.data);
+		console.log("Seller car Inventory Detail",resp.data.data);
+		//}
+		})
+		const req_samecar={
+		"make":make,
+		buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+		}
+		console.log("other dealer car req",req_samecar);
+		API.post('OtherDealerCarList/condition',req_samecar).then(response=>{
+		console.log("otherdealercar list",response.data.data);
+		setOtherDealerCarDetail(response.data.data);
+		console.log("other dealer car req",req_samecar);
+		console.log("otherdealercar list",response.data.data);
+		})
+		//}
+		});
+
 	//}
 	});
 	}
 	function BuyerInventoryCarDetailList(){
-	let rq={
-	buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
-	};
-	API.post('BuyerInventoryCarList/condition',rq).then(res=>{
-	console.log("response",res.data.data);
-	// const {results} = res.data.data;
-	//console.log("Response data",res.data.data);
-	//if(results.length>0){
-	setCarInventoryDetail(res.data.data);
-	console.log("car Inventory Detail",res.data.data);
-	const req={
-	seller_dealer_id:res.data.data[0].seller_dealer_id,
-	buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
-	};
-	API.post('SellerCarList/condition',req).then(resp=>{
-	console.log("response",resp.data.data);
-	// const {results} = res.data.data;
-	//console.log("Response data",res.data.data);
-	//if(results.length>0){
-	setSellerCarDetail(resp.data.data);
-	console.log("Seller car Inventory Detail",resp.data.data);
-	//}
-	})
-	const req_samecar={
-	"make":res.data.data[0].make,
-	buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
-	}
-	console.log("other dealer car req",req_samecar);
-	API.post('OtherDealerCarList/condition',req_samecar).then(response=>{
-	console.log("otherdealercar list",response.data.data);
-	setOtherDealerCarDetail(response.data.data);
-	console.log("other dealer car req",req_samecar);
-	console.log("otherdealercar list",response.data.data);
-	})
-	//}
-	});
+	
 	}
 	
 	useEffect (()=>{
 	// carDetails/condition
 	console.log("id value",id)
 	CarDetailList();
-	BuyerInventoryCarDetailList();
+	//BuyerInventoryCarDetailList();
 	
 	
 	
@@ -230,7 +239,8 @@ const addRemoveFavourite=(carid,state,flag)=>{
 
 useEffect (()=>{
 	
-	BuyerInventoryCarDetailList();
+	//BuyerInventoryCarDetailList();
+	CarDetailList();
 	
 	
 	
@@ -295,6 +305,7 @@ return(
 	        		<div class="product-dtl">
         				<div class="product-info">
 		        			<div class="product-name">{carDetail[0].make} {carDetail[0].vehicle_type}({carDetail[0].model})</div>
+							<a  class="productdes">Inventory Number - {carDetail[0].inventory_no}</a>
 							<p class="productdes">{carDetail[0].car_description}</p>
 		        			<div class="d-flex align-items-center mb-3">
 									<p class="details"><img src={speedometer}  alt=""/><span>{carDetail[0].miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -322,14 +333,6 @@ return(
 								{/* {copied ? <p>Copied !</p> : ""} */}
 							</div>
 
-							<div class="col-md-12 carpoints">
-							<label   className= "input-has-value">Inventory Number</label>		  
-								<div class="carpoint">								
-									<span>{carDetail[0].inventory_no}</span>									
-									
-								</div>
-							</div>
-
 						</div>
 							
 							<div class="row">
@@ -344,7 +347,7 @@ return(
 	        					<div class="cars-detail-views">
 									<a class="car-btns" onClick={()=>redirecttoInspection(carDetail[0].car_id)}>View Inspection</a>
 									{carDetail[0].high_bid=="" || carDetail[0].high_bid==null || carDetail[0].high_bid==undefined?
-									<a class="car-btns-primary" href=""><img src={tag} alt=""/>High Bid :<span> $ {carDetail[0].min_bid}</span></a>:
+									<a class="car-btns-primary" href=""><img src={tag} alt=""/>High Bid :<span> $ {carDetail[0].min_price}</span></a>:
 									<a class="car-btns-primary" href=""><img src={tag} alt=""/>High Bid :<span> $ {carDetail[0].high_bid}</span></a>
 									}&nbsp;&nbsp;&nbsp;&nbsp;
 									{carDetail[0].counter_bid=="" || carDetail[0].counter_bid== null || carDetail[0].counter_bid== undefined ?"":
@@ -378,7 +381,7 @@ return(
 	        					<div class="cars-buy">
 									<a class="cars-buy-btns" href="#">Buy now</a>
 									{buyer_dealer_id==carDetail[0].counter_buyer_dealer_id? <a class="cars-buy-btns-primary">Highest Bid</a> :
-									<a class="cars-buy-btns-primary" onClick={()=>toggleMakeBid(carDetail[0].high_bid,carDetail[0].min_bid,carDetail[0].save_purchase,carDetail[0].car_id,carDetail[0].time,carDetail[0].counter_buyer_dealer_id,carDetail[0].max_bid)}>Make Bid</a>}
+									<a class="cars-buy-btns-primary" onClick={()=>toggleMakeBid(carDetail[0].high_bid,carDetail[0].min_price,carDetail[0].save_purchase,carDetail[0].car_id,carDetail[0].time,carDetail[0].counter_buyer_dealer_id,carDetail[0].max_price,carDetail[0].buy_it_now)}>Make Bid</a>}
 								</div>
 	        				</div>
 						</div>
@@ -480,13 +483,14 @@ return(
 			</div>
 				
 				<div class="cars-prices">
-					<a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a>
-          			<a className="cta-btns" href="#">Seller Price ${moreCar.max_bid}</a>
-					{moreCar.high_bid=="" || moreCar.high_bid==null || moreCar.high_bid==undefined?
-					<a className="cta-btns" href="#">High Bid $ {moreCar.min_bid}</a>:
+					{/* <a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a> */}
+					{moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined?"":
+					<a className="cta-btns" href="#">Buy It Now $ {moreCar.buy_it_now}</a>
+					}
+					{moreCar.high_bid=="" || moreCar.high_bid==null || moreCar.high_bid==undefined?"":
 					<a className="cta-btns" href="#">High Bid $ {moreCar.high_bid}</a>
 					}
-					<a class="cta-btns-primary" onClick={()=>toggleMakeBid(moreCar.high_bid,moreCar.min_bid,moreCar.save_purchase,moreCar.car_id)}>Make Bid</a>
+					<a class="cta-btns-primary" onClick={()=>toggleMakeBid(moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now)}>Make Bid</a>
 				</div>
               </div>
             </div>
@@ -532,13 +536,14 @@ return(
 								</div>
 								
 								<div class="cars-prices">
-									<a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a>
-          							<a className="cta-btns" href="#">Seller Price ${moreCar.max_bid}</a>
-									{moreCar.high_bid=="" || moreCar.high_bid==null || moreCar.high_bid==undefined?
-									<a className="cta-btns" href="#">High Bid $ {moreCar.min_bid}</a>:
+									{/* <a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a> */}
+									{moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined?"":
+									<a className="cta-btns" href="#">Buy It Now $ {moreCar.buy_it_now}</a>
+									}
+									{moreCar.high_bid=="" || moreCar.high_bid==null || moreCar.high_bid==undefined?"":
 									<a className="cta-btns" href="#">High Bid $ {moreCar.high_bid}</a>
 									}
-									<a class="cta-btns-primary" onClick={()=>toggleMakeBid(moreCar.high_bid,moreCar.min_bid,moreCar.save_purchase,moreCar.car_id)}>Make Bid</a>
+									<a class="cta-btns-primary" onClick={()=>toggleMakeBid( moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now)}>Make Bid</a>
 								</div>
 							  </div>
 							</div>

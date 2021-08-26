@@ -20,7 +20,7 @@ const SimilarCarFromSeller = () =>{
     const [similarCarDetail,setSimilarCarDetail]=useState([]);
     const history = useHistory();
     const [similarCarFromSellerFlag,setSimilarCarFromSellerFlag]=useState(false);
-    console.log("id from cardetail",id);
+   
     const dispatch = useDispatch();
     const [loading,setLoading] = useState(true);
 
@@ -33,25 +33,29 @@ const SimilarCarFromSeller = () =>{
         buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
     }
 
-    console.log("+++++++++++++++",request)
+    
     API.post('OtherDealerCarList/condition',request).then(resp=>{
-        console.log("similar cars from other dealers ====response",resp.data.data);
+        
         setSimilarCarDetail(resp.data.data);
-        console.log("similar car  Detail",resp.data.data);
+        
         setLoading(false);
     
     })
 }
 
-const toggleMakeBid = (high_bid,min_bid,car_id,save_purchase,make) => {
-  console.log("check the high bid value",high_bid)
+const toggleMakeBid = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,make) => {
+  
   let makebiddispatch={
-    high_bid: high_bid,
-    min_bid: min_bid,
-    car_id : car_id,
-    save_purchase: save_purchase,
-    redirectPage: "similarcarfrombuyer",
-    make: make
+      high_bid: high_bid,
+			min_price: min_price,
+			car_id : car_id,
+			save_purchase: save_purchase,
+			time:time,
+			counter_buyerid:counterbuyerid,
+			max_price:max_price,
+			buy_it_now: buy_it_now,
+      redirectPage: "similarcarfrombuyer",
+      make: make
   }
   //dispatch(CarDetailsAction.highBid(high_bid))
   dispatch(CarDetailsAction.minBid(makebiddispatch))
@@ -61,7 +65,7 @@ const toggleMakeBid = (high_bid,min_bid,car_id,save_purchase,make) => {
     
 const redirectpage=(pathid,seller_dealer_id)=>{
   //e.preventDefault();
-  console.log("seller_dealer_id+++++",seller_dealer_id)
+ 
   dispatch(CarListAction.sellerid(seller_dealer_id))
   history.push("/cardetail/"+pathid);
 }
@@ -71,16 +75,16 @@ useEffect(() => {
 },[highBid]);
     
 const addRemoveFavourite=(carid,state,flag)=>{
-  console.log("inside addremove");
+ ;
   let request={
     buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
       car_id:carid,
       active: !state
   }
-  console.log("request",request);
+  
   API.post('buyer_favourite/add',request).then(res=>{
       // setaddFavourite(res.data.data);
-      console.log("add Fav Inventory Detail",res.data.data);
+    
 
       if(flag==='SimilarCarFromSellerFlag'){
         setSimilarCarFromSellerFlag(!similarCarFromSellerFlag)
@@ -142,13 +146,14 @@ return(
 				
 				<div class="cars-prices">
 
-					<a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a>
-          <a className="cta-btns" href="#">Seller Price ${moreCar.max_bid}</a>
-          {moreCar.high_bid=="" || moreCar.high_bid== null || moreCar.high_bid== undefined?
-          <a className="cta-btns" href="#">High Bid $ {moreCar.min_bid}</a>:
+					{/* <a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a> */}
+          {moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined?"":
+          <a className="cta-btns" href="#">Buy It Now $ {moreCar.buy_it_now}</a>
+          }
+          {moreCar.high_bid=="" || moreCar.high_bid== null || moreCar.high_bid== undefined?"":
           <a className="cta-btns" href="#">High Bid $ {moreCar.high_bid}</a>
           }
-					<a class="cta-btns-primary" onClick={()=>toggleMakeBid(moreCar.high_bid,moreCar.min_bid,moreCar.car_id,moreCar.save_purchase,moreCar.make)}>Make Bid</a>
+					<a class="cta-btns-primary" onClick={()=>toggleMakeBid(moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now,moreCar.make)}>Make Bid</a>
 				</div>
               </div>
             </div>
