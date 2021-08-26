@@ -290,7 +290,7 @@ const MakeurBid=(props)=>{
                                 }
                                 <p>{highBidError}</p>
                             </div>
-
+{/* 
                             <input
                                 type="range"
                                 id={id}
@@ -301,7 +301,7 @@ const MakeurBid=(props)=>{
                                 // defaultValue={state} // but instead pass state value as default value
                                 onChange={(e)=>setHighBid(e.target.value)}
                                 // onMouseUp={handleChange} 
-                                />
+                                /> */}
 
                             <div class="form-group col-lg-6 col-md-6">
                             
