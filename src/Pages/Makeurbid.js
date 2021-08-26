@@ -293,8 +293,8 @@ const MakeurBid=(props)=>{
                             <div class="form-group col-lg-6 col-md-6">
                             
                             <div className="cars-prices">
-                            {carBuyItNow=="" || carBuyItNow== null || carBuyItNow== undefined ?"":
-                            <a className="cta-btns" href="#">Buy It Now $ {carBuyItNow}</a>}
+                            {carMaxBid=="" || carMaxBid== null || carMaxBid== undefined ?"":
+                            <a className="cta-btns" href="#">Buy It Now $ {carMaxBid}</a>}
                             </div>
                                
                             </div>

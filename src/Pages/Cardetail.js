@@ -305,6 +305,7 @@ return(
 	        		<div class="product-dtl">
         				<div class="product-info">
 		        			<div class="product-name">{carDetail[0].make} {carDetail[0].vehicle_type}({carDetail[0].model})</div>
+							<a  class="productdes">Inventory Number - {carDetail[0].inventory_no}</a>
 							<p class="productdes">{carDetail[0].car_description}</p>
 		        			<div class="d-flex align-items-center mb-3">
 									<p class="details"><img src={speedometer}  alt=""/><span>{carDetail[0].miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -491,9 +492,10 @@ return(
 				
 				<div class="cars-prices">
 					{/* <a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a> */}
-          			<a className="cta-btns" href="#">Buy It Now ${moreCar.max_bid}</a>
-					{moreCar.high_bid=="" || moreCar.high_bid==null || moreCar.high_bid==undefined?
-					<a className="cta-btns" href="#">High Bid $ {moreCar.min_bid}</a>:
+					{moreCar.max_bid=="" || moreCar.max_bid== null || moreCar.max_bid== undefined?"":
+					<a className="cta-btns" href="#">Buy It Now $ {moreCar.max_bid}</a>
+					}
+					{moreCar.high_bid=="" || moreCar.high_bid==null || moreCar.high_bid==undefined?"":
 					<a className="cta-btns" href="#">High Bid $ {moreCar.high_bid}</a>
 					}
 					<a class="cta-btns-primary" onClick={()=>toggleMakeBid(moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now)}>Make Bid</a>
@@ -543,9 +545,10 @@ return(
 								
 								<div class="cars-prices">
 									{/* <a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a> */}
-          							<a className="cta-btns" href="#">Buy It Now ${moreCar.max_bid}</a>
-									{moreCar.high_bid=="" || moreCar.high_bid==null || moreCar.high_bid==undefined?
-									<a className="cta-btns" href="#">High Bid $ {moreCar.min_bid}</a>:
+									{moreCar.max_bid=="" || moreCar.max_bid== null || moreCar.max_bid== undefined?"":
+									<a className="cta-btns" href="#">Buy It Now $ {moreCar.max_bid}</a>
+									}
+									{moreCar.high_bid=="" || moreCar.high_bid==null || moreCar.high_bid==undefined?"":
 									<a className="cta-btns" href="#">High Bid $ {moreCar.high_bid}</a>
 									}
 									<a class="cta-btns-primary" onClick={()=>toggleMakeBid( moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now)}>Make Bid</a>
