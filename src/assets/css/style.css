@@ -1024,10 +1024,13 @@ Cars list
     font-weight: 300;
     font-size: 16px;
     color: #9f9f9f;
+    display: inline-block;
+    margin-right: 10px;
 }
  .cars-content .details img {
-   width:20px;
+   width:16px;
    margin-right:10px;
+   float: left;
 }
 .cars-content h3 {
     font-weight: 700;
@@ -1059,6 +1062,7 @@ Cars list
     margin-top:20px;;
     border-top: none;
     padding-top: 2px;
+    padding-bottom: 0;
 }
  .cars-prices .cta-btns {
     background-color: #fff;
@@ -1073,20 +1077,22 @@ Cars list
 }
  .cars-prices .cta-btns-primary {
 	font-size:16px;
-    background-color: #b8b8b8;
+    background-color: #002768;
     color: white;
     padding: 8px 15px;   
     border-radius: 3px;
     border: none;
-    border: #b8b8b8 1px solid;
+    border: #002768 1px solid;
     display: inline-block;
   margin: 5px;
+
 }
 
 .cars-prices .cta-btns-primary:hover{
   background: #bd062c;
   text-decoration: none;
   border: #bd062c 1px solid;
+  color: #fff;
 }
 .more-btn {
     display: inline-block;
@@ -7688,7 +7694,7 @@ margin-top: -3px;
 }
 .owl-prev { left: 0px; }
 .owl-next { right: 0px; }
-.owl-prev i, .owl-next i {transform : scale(2,5); color: #ccc; font-size: 40px;}
+.owl-prev i, .owl-next i {transform : scale(2,5); color: #002768; font-size: 40px;}
 
 .owl-prev i:hover, .owl-next i:hover { color: #dd0000; }
 
@@ -7719,4 +7725,102 @@ margin-top: -3px;
 .makeyourbidblock .form-group p{
   margin-bottom: 0;
 }
+.dealerType{
+  float: left;
+  width: 100%;
+}
+
+.dealerType .details img{
+  width: 60px;
+  height: 40px;
+  border-radius: 3px;
+  float: right;
+  margin: 0;
+}
+
+.buyitnow{
+  float: right;
+}
+
+.buyitnow span{
+  color: #008d0e !important;
+  border: #008d0e solid 1px;
+  border-radius: 3px;
+  padding: 2px 10px;
+  margin-right: 0 !important;
+  font-size: 14px;
+}
+
+
+.cars-content .d-flex{
+  display: block !important;
+}
+
+.cars-content .d-flex.align-items-center{
+  text-align: left !important;
+}
+
+.cars-content .details:first-child img{
+  width: 20px;
+  margin-top: 5px;
+}
+
+
+.dealerType .details:first-child{
+  width: 70%;
+  float: left;
+}
+
+.dealerType .details:first-child span{
+  width: 100%;
+  float: left;
+}
+
+.dealerType .details:last-child{
+    float: right;
+    text-align: right;
+}
+
+.dlrname{
+  color: #37423b;
+  font-weight: 400;
+}
+
+
+.makeyourbid .tbox i{
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-right: 1px solid lightgray;
+  font-size: 30px;
+}
+
+.makeyourbid .tbox input.textbox + label{
+  left: 60px;
+}
+
+.makeyourbid .tbox input.textbox{
+  padding-left: 63px;
+}
+
+.greentext{
+  color: #008d0e !important;
+  border: #008d0e solid 1px !important;
+}
+
+.makeyourbid .addComment  .tbox input.textbox{
+  padding-left:15px;
+}
+
+.makeyourbid .addComment .tbox input.textbox + label{
+  left: 15px;
+}
+
+
+
+
+
+
+
+
 
