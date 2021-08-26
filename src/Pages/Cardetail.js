@@ -152,6 +152,7 @@ function CarDetailList(){
 	//if(results.length>0){
 	setCarDetail(res.data.data);
 	let make=res.data.data[0].make;
+	let selectedsellerid=res.data.data[0].seller_dealer_id;
 	console.log("car Detail",res.data.data);
 	setLoading(false);
 	console.log("car distance added",res.data.distance);
@@ -171,7 +172,7 @@ function CarDetailList(){
 		setCarInventoryDetail(res.data.data);
 		console.log("car Inventory Detail",res.data.data);
 		const req={
-		seller_dealer_id:res.data.data[0].seller_dealer_id,
+		seller_dealer_id:selectedsellerid,
 		buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
 		};
 		API.post('SellerCarList/condition',req).then(resp=>{
