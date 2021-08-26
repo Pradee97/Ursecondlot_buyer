@@ -147,8 +147,8 @@ return(
 				<div class="cars-prices">
 
 					{/* <a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a> */}
-          {moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined?"":
-          <a className="cta-btns" href="#">Buy It Now $ {moreCar.buy_it_now}</a>
+          {moreCar.counter_bid=="" || moreCar.counter_bid== null || moreCar.counter_bid== undefined?"":
+          <a className="cta-btns" href="#">Buy It Now $ {moreCar.counter_bid}</a>
           }
           {moreCar.high_bid=="" || moreCar.high_bid== null || moreCar.high_bid== undefined?"":
           <a className="cta-btns" href="#">High Bid $ {moreCar.high_bid}</a>

@@ -350,8 +350,8 @@ return(
 									<a class="car-btns-primary" href=""><img src={tag} alt=""/>High Bid :<span> $ {carDetail[0].min_price}</span></a>:
 									<a class="car-btns-primary" href=""><img src={tag} alt=""/>High Bid :<span> $ {carDetail[0].high_bid}</span></a>
 									}&nbsp;&nbsp;&nbsp;&nbsp;
-									{carDetail[0].buy_it_now=="" || carDetail[0].buy_it_now== null || carDetail[0].buy_it_now== undefined ?"":
-									<a class="car-btns-primary" href=""><img src={tag} alt=""/>Buy it Now :<span> $ {carDetail[0].buy_it_now}</span></a>
+									{carDetail[0].counter_bid=="" || carDetail[0].counter_bid== null || carDetail[0].counter_bid== undefined ?"":
+									<a class="car-btns-primary" href=""><img src={tag} alt=""/>Buy it Now :<span> $ {carDetail[0].counter_bid}</span></a>
 									}
 								</div>
 								
@@ -484,8 +484,8 @@ return(
 				
 				<div class="cars-prices">
 					{/* <a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a> */}
-					{moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined?"":
-					<a className="cta-btns" href="#">Buy It Now $ {moreCar.buy_it_now}</a>
+					{moreCar.counter_bid=="" || moreCar.counter_bid== null || moreCar.counter_bid== undefined?"":
+					<a className="cta-btns" href="#">Buy It Now $ {moreCar.counter_bid}</a>
 					}
 					{moreCar.high_bid=="" || moreCar.high_bid==null || moreCar.high_bid==undefined?"":
 					<a className="cta-btns" href="#">High Bid $ {moreCar.high_bid}</a>
@@ -540,8 +540,8 @@ return(
 								
 								<div class="cars-prices">
 									{/* <a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a> */}
-									{moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined?"":
-									<a className="cta-btns" href="#">Buy It Now $ {moreCar.buy_it_now}</a>
+									{moreCar.counter_bid=="" || moreCar.counter_bid== null || moreCar.counter_bid== undefined?"":
+									<a className="cta-btns" href="#">Buy It Now $ {moreCar.counter_bid}</a>
 									}
 									{moreCar.high_bid=="" || moreCar.high_bid==null || moreCar.high_bid==undefined?"":
 									<a className="cta-btns" href="#">High Bid $ {moreCar.high_bid}</a>
