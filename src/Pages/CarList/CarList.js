@@ -123,6 +123,10 @@ const CarList = () => {
         
         dispatch(CarListAction.sellerid(seller_dealer_id))
         history.push("/cardetail/"+pathid);
+        // history.push({
+        //     pathname: '/cardetail',
+        //     state: {id:pathid},
+        //   });
     }
 
     const getFavCarList=()=>{
@@ -258,6 +262,9 @@ const CarList = () => {
                                                 {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?"":
                                                 <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                                 }   
+                                                {item.counter_bid=="" || item.counter_bid== null || item.counter_bid== undefined?"":
+                                                <a className="cta-btns" href="#">Counter Bid $ {item.counter_bid}</a>
+                                                }
                                                 <a className="cta-btns-primary" href="JavaScript:void(0)" onClick={()=>togglePopup(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now)} >Make Bid</a>
                                             </div>
                                         </div>
@@ -319,6 +326,9 @@ const CarList = () => {
                                                 {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?"":
                                                 <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                                 } 
+                                                {item.counter_bid=="" || item.counter_bid== null || item.counter_bid== undefined?"":
+                                                <a className="cta-btns" href="#">Counter Bid $ {item.counter_bid}</a>
+                                                }
                                                 <a className="cta-btns-primary" onClick={()=>togglePopup(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now)} >Make Bid</a>
                                             </div>
                                         </div>
@@ -380,6 +390,9 @@ const CarList = () => {
                                                 {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?"":
                                                 <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                                 } 
+                                                {item.counter_bid=="" || item.counter_bid== null || item.counter_bid== undefined?"":
+                                                <a className="cta-btns" href="#">Counter Bid $ {item.counter_bid}</a>
+                                                }
                                                 <a className="cta-btns-primary" onClick={()=>togglePopup(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now)}>Make Bid</a>
                                             </div>
                                         </div>
@@ -441,6 +454,9 @@ const CarList = () => {
                                         {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?"":
                                         <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                         } 
+                                        {item.counter_bid=="" || item.counter_bid== null || item.counter_bid== undefined?"":
+                                        <a className="cta-btns" href="#">Counter Bid $ {item.counter_bid}</a>
+                                        }
                                         <a className="cta-btns-primary" onClick={()=>togglePopup(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now)}>Make Bid</a>
                                     </div>
                                 </div>
