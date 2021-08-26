@@ -32,7 +32,7 @@ const MakeurBid=(props)=>{
     const [isOpen, setIsOpen] = useState(false);
     const [open, setOpen] = useState(false);
     const [comments,setComments] = useState("");
-    const [highBid,setHighBid] = useState("");
+    const [highBid,setHighBid] = useState(carHighBid);
     const [proxyBid,setProxyBid] = useState("");
     const [transportation,setTransportation] = useState("no");
     const [display,setDisplay]=useState("no");
@@ -53,6 +53,9 @@ const MakeurBid=(props)=>{
     const [alertimg,setAlertImg] = useState("");
     const [toggleMakeBidPopupOpen,setToggleMakeBidPopupOpen]= useState(true);
     const [highBidError, setHighBidError] = useState("");
+    const [proxyBidError, setProxyBidError] = useState("");
+
+    
 
 
     if(carHighBid=="" || carHighBid==null || carHighBid==undefined || carHighBid==0){
@@ -161,17 +164,21 @@ const MakeurBid=(props)=>{
     }
 
     const MakeBid =()=>{
-        console.log("check the request in make bid", )
+        console.log("check the request in make bid", highBid)
         setHighBidError("")
         if(!highBid){
 
             setHighBidError("High Bid should not be empty" )
             return;
         }
-        else if (highBid<carHighBid+50){
+        else if (highBid+50 <carHighBid+50){
             setHighBidError("High Bid should not lower than " +Number(carHighBid+50))
             return;
             
+        }
+        if(proxyBid<=highBid){
+            setProxyBidError("Max Bid price must be greater than high bid");
+            return;
         }
         // else if(highBid>maxbid){
         //     setHighBidError("High Bid should not be greater than Seller Bid " +Number(carHighBid+50))
@@ -296,7 +303,7 @@ const MakeurBid=(props)=>{
                                 {carMaxBid=="" || carMaxBid== null || carMaxBid== undefined?
                                 <div class="tbox">
 
-                                <i>$</i><input type="text" id="maxBid" class="textbox" placeholder="" onChange={(e)=>setProxyBid(e.target.value)}></input>
+                                <i>$</i><input type="text" id="maxBid" class="textbox" defaultValue="" onChange={(e)=>setProxyBid(e.target.value)}></input>
                                 <label htmlFor="maxBid" className={proxyBid != "" ? "input-has-value" : ""}>Max Bid</label>
                                     
                                 </div>:
@@ -306,7 +313,8 @@ const MakeurBid=(props)=>{
                                 <label htmlFor="maxBid" className={proxyBid != "" ? "input-has-value" : ""}>Max Bid</label>
                                
                                 </div>
-                                 }  
+                                 }
+                                 <p>{proxyBidError}</p>  
                             </div>
                             
                            
