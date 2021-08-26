@@ -125,7 +125,7 @@ const MakeurBid=(props)=>{
     const redirect = () => {
         let makebiddispatch={
             high_bid: highBid,
-            min_price: carMinBid,
+            min_bid: carMinBid,
             save_purchase: carSavePurchase,
             
         }
@@ -176,7 +176,7 @@ const MakeurBid=(props)=>{
             return;
             
         }
-        if(proxyBid<=highBid && proxyBid>0){
+        if(proxyBid<=highBid){
             setProxyBidError("Max Bid price must be greater than high bid");
             return;
         }
@@ -306,8 +306,8 @@ const MakeurBid=(props)=>{
                             <div class="form-group col-lg-6 col-md-6">
                             
                             <div className="cars-prices">
-                            {carBuyItNow=="" || carBuyItNow== null || carBuyItNow== undefined ?"":
-                            <a className="cta-btns" href="#">Buy It Now $ {carBuyItNow}</a>}
+                            {carMaxBid=="" || carMaxBid== null || carMaxBid== undefined ?"":
+                            <a className="cta-btns greentext" href="#">Buy It Now $ {carMaxBid}</a>}
                             </div>
                                
                             </div>
@@ -341,7 +341,7 @@ const MakeurBid=(props)=>{
                            
 
                             
-                            <div class="form-group col-lg-12 col-md-12">	
+                            <div class="form-group col-lg-12 col-md-12 addComment">	
                                 <div class="tbox">			
                                     <input type="text" id="comment" class="textbox" placeholder="" onChange={(e)=>setComments(e.target.value)}></input>
                                     <label htmlFor="comment" >Add a Comment (Optional)</label>

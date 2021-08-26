@@ -242,11 +242,19 @@ const CarList = () => {
                                         <div className="cars-content">
                                             <h3><a href="JavaScript:void(0)" title = {`${item.make} (${item.model}) model`}>{item.make} ({item.model} model)</a></h3>
                                             <div className="d-flex align-items-center mb-3">
-                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>    
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>   
+                                                <p className="details buyitnow">
+                                                {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
+                                                    <span>Buy It Now $ {item.buy_it_now}</span>
+                                                }
+                                                </p>
                                             </div>
-                                            <div className="d-flex align-items-center mb-3">
-                                                <p className="details"><span>{item.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <div className="d-flex align-items-center mb-3 dealerType">
+                                                <p className="details">
+                                                <span className="dlrname">{item.dealer_type} </span>
+                                                <span className="dlraddress"><i class="icofont-google-map"></i> 1663 Roy Alley Denver </span>
+                                                </p>
                                                 <p className="details"><img src={item.image}/></p>
                                             </div>
                                             <div className="d-flex align-items-center mb-3">
@@ -259,6 +267,7 @@ const CarList = () => {
                                                 {item.counter_bid=="" || item.counter_bid== null || item.counter_bid== undefined?"":
                                                 <a className="cta-btns" href="#">Buy It Now $ {item.counter_bid}</a>
                                                 }
+
                                                 {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?"":
                                                 <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                                 }   
@@ -307,11 +316,20 @@ const CarList = () => {
                                         <div className="cars-content">
                                             <h3><a href="JavaScript:void(0)" title = {`${item.make} (${item.model}) model`}>{item.make} ({item.model} model)</a></h3>
                                             <div className="d-flex align-items-center mb-3">
-                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>    
+                                                <p className="details buyitnow">
+                                                {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
+                                                    <span>Buy It Now $ {item.buy_it_now}</span>
+                                                }
+                                                </p>
                                             </div>
-                                            <div className="d-flex align-items-center mb-3">
-                                                <p className="details"><span>{item.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <div className="d-flex align-items-center mb-3 dealerType">
+                                                
+                                                <p className="details">
+                                                <span className="dlrname">{item.dealer_type} </span>
+                                                <span className="dlraddress"><i class="icofont-google-map"></i> 1663 Roy Alley Denver </span>
+                                                </p>
                                                 <p className="details"><img src={item.image}/></p>
                                             </div>
                                             <div className="d-flex align-items-center mb-3">
@@ -323,6 +341,7 @@ const CarList = () => {
                                                 {item.counter_bid=="" || item.counter_bid== null || item.counter_bid== undefined?"":
                                                 <a className="cta-btns" href="#">Buy It Now $ {item.counter_bid}</a>
                                                 }
+                                               
                                                 {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?"":
                                                 <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                                 } 
@@ -371,11 +390,19 @@ const CarList = () => {
                                         <div className="cars-content">
                                             <h3><a href="JavaScript:void(0)" title = {`${item.make} (${item.model}) model`}>{item.make} ({item.model} model)</a></h3>
                                             <div className="d-flex align-items-center mb-3">
-                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>    
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>  
+                                                <p className="details buyitnow">
+                                                {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
+                                                    <span>Buy It Now $ {item.buy_it_now}</span>
+                                                }
+                                                </p>  
                                             </div>
-                                            <div className="d-flex align-items-center mb-3">
-                                                <p className="details"><span>{item.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <div className="d-flex align-items-center mb- dealerType">
+                                            <p className="details">
+                                                <span className="dlrname">{item.dealer_type} </span>
+                                                <span className="dlraddress"><i class="icofont-google-map"></i> 1663 Roy Alley Denver </span>
+                                                </p>
                                                 <p className="details"><img src={item.image}/></p>
                                             </div>
                                             <div className="d-flex align-items-center mb-3">
@@ -387,6 +414,7 @@ const CarList = () => {
                                                 {item.counter_bid=="" || item.counter_bid== null || item.counter_bid== undefined?"":
                                                 <a className="cta-btns" href="#">Buy It Now $ {item.counter_bid}</a>
                                                 }
+                                               
                                                 {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?"":
                                                 <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                                 } 
@@ -435,11 +463,19 @@ const CarList = () => {
                                 <div className="cars-content">
                                     <h3><a href="JavaScript:void(0)" title = {`${item.make} (${item.model}) model`}>{item.make} ({item.model} model)</a></h3>
                                     <div className="d-flex align-items-center mb-3">
-                                        <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>    
+                                        <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>
+                                        <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>
+                                        <p className="details buyitnow">
+                                                {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
+                                                    <span>Buy It Now $ {item.buy_it_now}</span>
+                                                }
+                                        </p>
                                     </div>
-                                    <div className="d-flex align-items-center mb-3">
-                                        <p className="details"><span>{item.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <div className="d-flex align-items-center mb-3 dealerType">
+                                        <p className="details">
+                                                <span className="dlrname">{item.dealer_type} </span>
+                                                <span className="dlraddress"><i class="icofont-google-map"></i> 1663 Roy Alley Denver </span>
+                                        </p>
                                         <p className="details"><img src={item.image}/></p>
                                     </div>
                                     <div className="d-flex align-items-center mb-3">
@@ -451,6 +487,7 @@ const CarList = () => {
                                         {item.counter_bid=="" || item.counter_bid== null || item.counter_bid== undefined?"":
                                         <a className="cta-btns" href="#">Buy It Now $ {item.counter_bid}</a>
                                         }
+                                       
                                         {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?"":
                                         <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                         } 
