@@ -39,7 +39,7 @@ const MakeurBid=(props)=>{
     const [save,setSave] = useState("no");
     const [transportFlag,setTransportFlag] = useState("");
     const [reset,setReset]=useState("");
-    const buyerId = JSON.parse(loggedInBuyerId).buyer_id
+    
 
 
     const [popupTitle, setPopupTitle] = useState ("");
@@ -188,8 +188,8 @@ const MakeurBid=(props)=>{
             transportation: transportation,
             display: display,
             active:1,
-            createdBy:JSON.parse(loggedInBuyerId).buyer_id,
-            updatedBy:JSON.parse(loggedInBuyerId).buyer_id,
+            createdBy:JSON.parse(localStorage.getItem("userDetails")).buyer_id,
+            updatedBy:JSON.parse(localStorage.getItem("userDetails")).buyer_id,
             transportation_charge:"300",
             save_purchase: save
         }

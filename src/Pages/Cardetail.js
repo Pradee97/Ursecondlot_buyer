@@ -151,58 +151,64 @@ function CarDetailList(){
 	console.log("Response data",res.data.data);
 	//if(results.length>0){
 	setCarDetail(res.data.data);
+	let make=res.data.data[0].make;
 	console.log("car Detail",res.data.data);
 	setLoading(false);
 	console.log("car distance added",res.data.distance);
 	setDistance(res.data.distance);
 	setLrgImg(res.data.data[0].image);
+
+	//buyerinventory car detail list code goes here , this is for similar cars and other cars 
+
+	let rq={
+		buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+		};
+		API.post('BuyerInventoryCarList/condition',rq).then(res=>{
+		console.log("response",res.data.data);
+		// const {results} = res.data.data;
+		//console.log("Response data",res.data.data);
+		//if(results.length>0){
+		setCarInventoryDetail(res.data.data);
+		console.log("car Inventory Detail",res.data.data);
+		const req={
+		seller_dealer_id:res.data.data[0].seller_dealer_id,
+		buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+		};
+		API.post('SellerCarList/condition',req).then(resp=>{
+		console.log("response",resp.data.data);
+		// const {results} = res.data.data;
+		//console.log("Response data",res.data.data);
+		//if(results.length>0){
+		setSellerCarDetail(resp.data.data);
+		console.log("Seller car Inventory Detail",resp.data.data);
+		//}
+		})
+		const req_samecar={
+		"make":make,
+		buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+		}
+		console.log("other dealer car req",req_samecar);
+		API.post('OtherDealerCarList/condition',req_samecar).then(response=>{
+		console.log("otherdealercar list",response.data.data);
+		setOtherDealerCarDetail(response.data.data);
+		console.log("other dealer car req",req_samecar);
+		console.log("otherdealercar list",response.data.data);
+		})
+		//}
+		});
+
 	//}
 	});
 	}
 	function BuyerInventoryCarDetailList(){
-	let rq={
-	buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
-	};
-	API.post('BuyerInventoryCarList/condition',rq).then(res=>{
-	console.log("response",res.data.data);
-	// const {results} = res.data.data;
-	//console.log("Response data",res.data.data);
-	//if(results.length>0){
-	setCarInventoryDetail(res.data.data);
-	console.log("car Inventory Detail",res.data.data);
-	const req={
-	seller_dealer_id:res.data.data[0].seller_dealer_id,
-	buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
-	};
-	API.post('SellerCarList/condition',req).then(resp=>{
-	console.log("response",resp.data.data);
-	// const {results} = res.data.data;
-	//console.log("Response data",res.data.data);
-	//if(results.length>0){
-	setSellerCarDetail(resp.data.data);
-	console.log("Seller car Inventory Detail",resp.data.data);
-	//}
-	})
-	const req_samecar={
-	"make":res.data.data[0].make,
-	buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
-	}
-	console.log("other dealer car req",req_samecar);
-	API.post('OtherDealerCarList/condition',req_samecar).then(response=>{
-	console.log("otherdealercar list",response.data.data);
-	setOtherDealerCarDetail(response.data.data);
-	console.log("other dealer car req",req_samecar);
-	console.log("otherdealercar list",response.data.data);
-	})
-	//}
-	});
+	
 	}
 	
 	useEffect (()=>{
 	// carDetails/condition
 	console.log("id value",id)
 	CarDetailList();
-	BuyerInventoryCarDetailList();
+	//BuyerInventoryCarDetailList();
 	
 	
 	
@@ -232,7 +238,8 @@ const addRemoveFavourite=(carid,state,flag)=>{
 
 useEffect (()=>{
 	
-	BuyerInventoryCarDetailList();
+	//BuyerInventoryCarDetailList();
+	CarDetailList();
 	
 	
 	
