@@ -333,14 +333,6 @@ return(
 								{/* {copied ? <p>Copied !</p> : ""} */}
 							</div>
 
-							<div class="col-md-12 carpoints">
-							<label   className= "input-has-value">Inventory Number</label>		  
-								<div class="carpoint">								
-									<span>{carDetail[0].inventory_no}</span>									
-									
-								</div>
-							</div>
-
 						</div>
 							
 							<div class="row">
@@ -492,8 +484,8 @@ return(
 				
 				<div class="cars-prices">
 					{/* <a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a> */}
-					{moreCar.max_bid=="" || moreCar.max_bid== null || moreCar.max_bid== undefined?"":
-					<a className="cta-btns" href="#">Buy It Now $ {moreCar.max_bid}</a>
+					{moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined?"":
+					<a className="cta-btns" href="#">Buy It Now $ {moreCar.buy_it_now}</a>
 					}
 					{moreCar.high_bid=="" || moreCar.high_bid==null || moreCar.high_bid==undefined?"":
 					<a className="cta-btns" href="#">High Bid $ {moreCar.high_bid}</a>
@@ -545,8 +537,8 @@ return(
 								
 								<div class="cars-prices">
 									{/* <a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a> */}
-									{moreCar.max_bid=="" || moreCar.max_bid== null || moreCar.max_bid== undefined?"":
-									<a className="cta-btns" href="#">Buy It Now $ {moreCar.max_bid}</a>
+									{moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined?"":
+									<a className="cta-btns" href="#">Buy It Now $ {moreCar.buy_it_now}</a>
 									}
 									{moreCar.high_bid=="" || moreCar.high_bid==null || moreCar.high_bid==undefined?"":
 									<a className="cta-btns" href="#">High Bid $ {moreCar.high_bid}</a>
