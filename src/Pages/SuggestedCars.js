@@ -917,8 +917,8 @@ useEffect(() => {
 
                                             <div className="cars-prices">
 												{/* <a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a> */}
-                                                {item.max_bid=="" || item.max_bid== null || item.max_bid== undefined?"":
-                                                <a className="cta-btns" href="#">Buy It Now $ {item.max_bid}</a>
+                                                {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
+                                                <a className="cta-btns" href="#">Buy It Now $ {item.buy_it_now}</a>
                                                 }
                                                 {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?"":
                                                 <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>

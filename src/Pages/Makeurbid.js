@@ -176,7 +176,7 @@ const MakeurBid=(props)=>{
             return;
             
         }
-        if(proxyBid<=highBid){
+        if(proxyBid<=highBid && proxyBid>0){
             setProxyBidError("Max Bid price must be greater than high bid");
             return;
         }
@@ -293,8 +293,8 @@ const MakeurBid=(props)=>{
                             <div class="form-group col-lg-6 col-md-6">
                             
                             <div className="cars-prices">
-                            {carMaxBid=="" || carMaxBid== null || carMaxBid== undefined ?"":
-                            <a className="cta-btns" href="#">Buy It Now $ {carMaxBid}</a>}
+                            {carBuyItNow=="" || carBuyItNow== null || carBuyItNow== undefined ?"":
+                            <a className="cta-btns" href="#">Buy It Now $ {carBuyItNow}</a>}
                             </div>
                                
                             </div>
