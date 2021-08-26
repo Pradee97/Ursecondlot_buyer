@@ -290,6 +290,19 @@ const MakeurBid=(props)=>{
                                 }
                                 <p>{highBidError}</p>
                             </div>
+{/* 
+                            <input
+                                type="range"
+                                id={id}
+                                min={carHighBid}
+                                // max={}
+                                step={0.5}
+                                // // value={state} // don't set value from state
+                                // defaultValue={state} // but instead pass state value as default value
+                                onChange={(e)=>setHighBid(e.target.value)}
+                                // onMouseUp={handleChange} 
+                                /> */}
+
                             <div class="form-group col-lg-6 col-md-6">
                             
                             <div className="cars-prices">
@@ -299,6 +312,8 @@ const MakeurBid=(props)=>{
                                
                             </div>
                             
+                           
+
                             <div class="form-group col-lg-6 col-md-6">
                                 {carMaxBid=="" || carMaxBid== null || carMaxBid== undefined?
                                 <div class="tbox">
