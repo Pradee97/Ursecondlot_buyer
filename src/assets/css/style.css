@@ -1032,6 +1032,7 @@ Cars list
     color: #999;
     display: inline-block;
     margin-right: 10px;
+    text-transform: capitalize;
 }
  .cars-content .details img {
    width:16px;
@@ -1052,6 +1053,12 @@ Cars list
 	font-size:18px;
 	font-weight:500;
 }
+
+.cars-content h3 a:hover{
+  color: #bd062c;
+  text-decoration: none;
+}
+
  .cars-content p {
     font-size: 14px;
     color: #999;
