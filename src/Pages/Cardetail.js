@@ -309,9 +309,9 @@ return(
 	        		<div class="product-dtl">
         				<div class="product-info">
 		        			<div class="product-name">{carDetail[0].make} {carDetail[0].vehicle_type}({carDetail[0].model})</div>
-							<a  class="productdes">Inventory Number - {carDetail[0].inventory_no}</a>
+							<p  class="productdes">Inventory Number - {carDetail[0].inventory_no}</p>
 							<p class="productdes">{carDetail[0].car_description}</p>
-		        			<div class="d-flex align-items-center mb-3">
+		        			<div class="d-flex align-items-center">
 									<p class="details"><img src={speedometer}  alt=""/><span>{carDetail[0].miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
 									<p class="details"><img src={gasolinePump} alt=""/><span>{carDetail[0].fuel_type}</span></p>
 							</div>

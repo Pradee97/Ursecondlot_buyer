@@ -35,9 +35,9 @@ const MakeurBid=(props)=>{
     const [buyer_dealer_id,setBuyer_Dealer_Id]=useState(JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id);
     const [isOpen, setIsOpen] = useState(false);
     const [open, setOpen] = useState(false);
-    const [comments,setComments] = useState("");
+    const [comments,setComments] = useState(carComments);
     const [highBid,setHighBid] = useState(carHighBid);
-    const [proxyBid,setProxyBid] = useState("");
+    const [proxyBid,setProxyBid] = useState(carProxyBid);
     const [transportation,setTransportation] = useState("no");
     const [display,setDisplay]=useState("no");
     const [save,setSave] = useState("no");
@@ -308,11 +308,15 @@ const MakeurBid=(props)=>{
                             </div>
                     
                             <div class="border-block"></div>
+                           
+                            <div class="row content">	
+                            
                             {carHighBid == "" || carHighBid == null || carHighBid == undefined ?
-                            <p class="border-bottomtext">Your bid can't be Lower than $ {carMinBid}</p>:
-                            <p class="border-bottomtext">Your bid can't be Lower than $ {carHighBid}</p>}
-                            <p> Segment of Bidding $ 50</p>
-                            <div class="row content">			
+                            <div class="border-bottomtext col-lg-6 ">Your bid can't be Lower than $ {carMinBid}</div>:
+                            <div class="border-bottomtext col-lg-6 ">Your bid can't be Lower than $ {carHighBid}</div>}
+                            <div class="border-bottomtext col-lg-6 "> Segment of Bidding $ 50</div>
+
+
                             <div class="form-group col-lg-6 col-md-6">
                                 {carHighBid == "" || carHighBid == null || carHighBid == undefined ?
                                 <div class="tbox">
@@ -345,10 +349,10 @@ const MakeurBid=(props)=>{
 
                             <div class="form-group col-lg-6 col-md-6">
                             
-                            <div className="cars-prices">
+                            
                             {carBuyItNow=="" || carBuyItNow== null || carBuyItNow== undefined ?"":
-                            <a className="cta-btns greentext" href="#">Buy It Now $ {carBuyItNow}</a>}
-                            </div>
+                            <p className="details buyitnow"><span>Buy It Now $ {carBuyItNow}</span></p>}
+                           
                                
                             </div>
                             
@@ -373,7 +377,7 @@ const MakeurBid=(props)=>{
                             </div>
                             
                            
-                            <div className="col-lg-6 form-group customCheckbox">
+                            <div className="col-lg-6 form-group customCheckbox  pt-3">
                             {displayFlag?
                                 <input type="checkbox" className="form-check d-inline " id="chb3" checked onClick={toggleViewDisplay}/>:
                                 <input type="checkbox" className="form-check d-inline " id="chb3" onClick={toggleViewDisplay}/>
