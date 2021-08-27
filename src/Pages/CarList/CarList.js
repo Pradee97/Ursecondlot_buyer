@@ -250,7 +250,7 @@ const CarList = () => {
                                                 }
                                                 </p>
                                             </div>
-                                            <div className="d-flex align-items-center mb-3 dealerType">
+                                            <div className="d-flex align-items-center dealerType">
                                                 <p className="details">
                                                 <span className="dlrname">{item.dealer_type} </span>
                                                 <span className="dlraddress"><i class="icofont-google-map"></i> {item.location}</span>
@@ -320,7 +320,7 @@ const CarList = () => {
                                                 }
                                                 </p>
                                             </div>
-                                            <div className="d-flex align-items-center mb-3 dealerType">
+                                            <div className="d-flex align-items-center dealerType">
                                                 
                                                 <p className="details">
                                                 <span className="dlrname">{item.dealer_type} </span>
@@ -391,7 +391,7 @@ const CarList = () => {
                                                 }
                                                 </p>  
                                             </div>
-                                            <div className="d-flex align-items-center mb- dealerType">
+                                            <div className="d-flex align-items-center dealerType">
                                             <p className="details">
                                                 <span className="dlrname">{item.dealer_type} </span>
                                                 <span className="dlraddress"><i class="icofont-google-map"></i> {item.location} </span>
@@ -461,7 +461,7 @@ const CarList = () => {
                                                 }
                                         </p>
                                     </div>
-                                    <div className="d-flex align-items-center mb-3 dealerType">
+                                    <div className="d-flex align-items-center dealerType">
                                         <p className="details">
                                                 <span className="dlrname">{item.dealer_type} </span>
                                                 <span className="dlraddress"><i class="icofont-google-map"></i> {item.location} </span>

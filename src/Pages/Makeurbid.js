@@ -268,11 +268,15 @@ const MakeurBid=(props)=>{
                             </div>
                     
                             <div class="border-block"></div>
+                           
+                            <div class="row content">	
+                            
                             {carHighBid == "" || carHighBid == null || carHighBid == undefined ?
-                            <p class="border-bottomtext">Your bid can't be Lower than $ {carMinBid}</p>:
-                            <p class="border-bottomtext">Your bid can't be Lower than $ {carHighBid}</p>}
-                            <p> Segment of Bidding $ 50</p>
-                            <div class="row content">			
+                            <div class="border-bottomtext col-lg-6 ">Your bid can't be Lower than $ {carMinBid}</div>:
+                            <div class="border-bottomtext col-lg-6 ">Your bid can't be Lower than $ {carHighBid}</div>}
+                            <div class="border-bottomtext col-lg-6 "> Segment of Bidding $ 50</div>
+
+
                             <div class="form-group col-lg-6 col-md-6">
                                 {carHighBid == "" || carHighBid == null || carHighBid == undefined ?
                                 <div class="tbox">
@@ -305,10 +309,10 @@ const MakeurBid=(props)=>{
 
                             <div class="form-group col-lg-6 col-md-6">
                             
-                            <div className="cars-prices">
+                            
                             {carMaxBid=="" || carMaxBid== null || carMaxBid== undefined ?"":
-                            <a className="cta-btns greentext" href="#">Buy It Now $ {carMaxBid}</a>}
-                            </div>
+                            <p className="details buyitnow"><span>Buy It Now $ {carMaxBid}</span></p>}
+                           
                                
                             </div>
                             
@@ -333,7 +337,7 @@ const MakeurBid=(props)=>{
                             </div>
                             
                            
-                            <div className="col-lg-6 form-group customCheckbox">
+                            <div className="col-lg-6 form-group customCheckbox pt-3">
                                         <input type="checkbox" className="form-check d-inline " id="chb3" onClick={toggleViewDisplay}/>
                                         <label htmlFor="chb3" className="form-check-label">Display Max Bid To Seller  </label>                               
                                     </div>

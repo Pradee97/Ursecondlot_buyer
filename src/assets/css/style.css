@@ -5,7 +5,7 @@
 body {
   font-family: 'Poppins', sans-serif;
   color: #444444;
-  font-size: 14px;
+  font-size: 16px;
   background: #F5F5F5;
 }
 
@@ -23,6 +23,9 @@ a:focus {
   outline: none;
 }
 
+a:not([href]){
+  color: #444;
+}
 
 ul {
     margin: 0;
@@ -1023,7 +1026,7 @@ Cars list
     margin: 0;
     font-weight: 300;
     font-size: 16px;
-    color: #9f9f9f;
+    color: #999;
     display: inline-block;
     margin-right: 10px;
 }
@@ -1041,36 +1044,29 @@ Cars list
     text-overflow: ellipsis;
 }
  .cars-content h3 a {
-    color: #37423b;
+    color: #444;
     transition: 0.3s;
 	font-size:18px;
 	font-weight:500;
 }
  .cars-content p {
     font-size: 14px;
-    color: #777777;
+    color: #999;
 }
  .cars-prices{
-	display: -ms-flexbox;    
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -ms-flex-align: center;
-    align-items: center;
-    -ms-flex-pack: end;
-    justify-content: flex-end;
+	  align-items: center;
     padding:20px 0;
-    margin-top:20px;;
-    border-top: none;
-    padding-top: 2px;
-    padding-bottom: 0;
+    clear: both;
+    float: left;
+    width: 100%;
 }
  .cars-prices .cta-btns {
     background-color: #fff;
-    color: #343434;
+    color: #444;
     padding: 8px 15px;   
 	margin-right:20px;
     border-radius: 3px;
-    border: 1px solid #707070;
+    border: 1px solid #444;
 	font-size:16px;
   display: inline-block;
   margin: 5px;
@@ -1159,7 +1155,7 @@ Cars list
     margin: 0;
     font-weight: 300;
     font-size: 16px;
-    color: #9f9f9f;
+    color: #999;
 }
 .favorite-cars .car-item img{
 	width:100%;
@@ -1181,7 +1177,7 @@ Cars list
 }
 .favorite-cars .cars-content p {
     font-size: 14px;
-    color: #777777;
+    color: #999;
 }
 .favorite-cars .cars-prices{
 	display: -ms-flexbox;    
@@ -1198,16 +1194,16 @@ Cars list
 }
 .favorite-cars .cars-prices .cta-btns {
     background-color: #fff;
-    color: #343434;
+    color: #444;
     padding: 10px 20px;   
 	margin-right:20px;
     border-radius: 3px;
-    border: 1px solid #707070;
+    border: 1px solid #444;
 	font-size:18px;
 }
 .favorite-cars .cars-prices .cta-btns-primary {
 	font-size:18px;
-    background-color: #b8b8b8;
+    background-color: #999;
     color: white;
     padding: 10px 20px;   
     border-radius: 3px;
@@ -1913,7 +1909,7 @@ Cars list
   padding-bottom:10px;
   margin-bottom: 20px;
   font-size: 16px;
-  color: #707070;
+  color: #444;
   font-weight:300;
   text-align: center;
 }
@@ -1922,7 +1918,7 @@ Cars list
   padding-bottom:20px;
   margin-bottom: 20px;
   font-size: 18px;
-  color: #707070;
+  color: #444;
   font-weight:300;
    padding-top: 5px;
 }
@@ -2333,7 +2329,7 @@ Cars list
 }
 
 #footer .footer-top .footer-links ul a {
-  color: #777777;
+  color: #999;
   transition: 0.3s;
   display: inline-block;
   line-height: 1;
@@ -2659,7 +2655,7 @@ input[type="text"], input[type="password"]{
 }
 .scheduleMeeting p{
 	font-size:14px;
-	color: #9F9F9F;
+	color: #999;
 }
 
 
@@ -2680,7 +2676,7 @@ input[type="text"], input[type="password"]{
 	padding: 10px;
 	padding-right:15px;
 	transition: all 0.1s ease-out;
-	color: #9F9F9F;
+	color: #999;
       }
 
 
@@ -2705,7 +2701,7 @@ input[type="text"], input[type="password"]{
 	padding: 10px;
 	padding-right:15px;
 	transition: all 0.1s ease-out;
-	color: #707070;
+	color: #444;
       }
 
 
@@ -2716,7 +2712,7 @@ input[type="text"], input[type="password"]{
   transition: all 0.4s ease;
   height: 0;
   overflow: hidden;
-  color: #9F9F9F;
+  color: #999;
 }
 .time-picker .set-time {
   display: flex;
@@ -2750,7 +2746,7 @@ input[type="text"], input[type="password"]{
   height: 40px;
   font-size: 14px;
   border: transparent;
-  color: #9F9F9F;
+  color: #999;
 }
 .time-picker #submitTime {
   text-align: center;
@@ -2771,7 +2767,7 @@ input[type="text"], input[type="password"]{
   background-color: #fff;
 }
 .timer  input[type="text"] {
-color: #9F9F9F;
+color: #999;
 background:#fff;
 }
 .agreetab label{
@@ -2786,7 +2782,7 @@ background:#fff;
   content: '';
 -webkit-appearance: none;
 background-color: transparent;
-border: 1px solid #707070;
+border: 1px solid #444;
 padding: 10px;
 display: inline-block;
 position: relative;
@@ -2794,7 +2790,7 @@ vertical-align: middle;
 cursor: pointer;
 margin-right: 5px;
 background: #fff;
-border: 1px solid #707070;
+border: 1px solid #444;
 margin-top: -3px;
 }
 .registrationform .form-group.agreetab input:checked + label::after {
@@ -2838,7 +2834,7 @@ margin-top: -3px;
   border-radius: 3px 0 0 3px;
   padding: 0 5px;
   background: #fff;
-  color: #9F9F9F;
+  color: #999;
   transform: translateZ(0) translateX(0);
   transition: all 0.3s ease-in;
   transition-delay: 0.2s;
@@ -2857,7 +2853,7 @@ margin-top: -3px;
   border-radius: 3px 0 0 3px;
   padding: 0 5px;
   background: #fff;
-  color: #9F9F9F;
+  color: #999;
   transform: translateZ(0) translateX(0);
   transition: all 0.3s ease-in;
   transition-delay: 0.2s;
@@ -2875,7 +2871,7 @@ margin-top: -3px;
   border-radius: 3px 0 0 3px;
   padding: 0 5px;
   background: #fff;
-  color: #9F9F9F;
+  color: #999;
   transform: translateZ(0) translateX(0);
   transition: all 0.3s ease-in;
   transition-delay: 0.2s;
@@ -2912,7 +2908,7 @@ popup Dialogbox
 }
 .modal-body p{
 	font-size:22px;
-	color: #707070;
+	color: #444;
 	
 }
 .modal-body{
@@ -3091,18 +3087,19 @@ Car Detail Page
 }
 
 .product-info .details span{
-	color:#4e4e4e;
+	color:#999;
 	margin-left:10px;
 }
 .product-dtl p {
 	font-size: 16px;
 	font-weight:normal;
-	color: #707070;
+	color: #444;
 }
 
 .product-info .details{
-    border-right: #707070 solid 1px;
-	color:#4e4e4e
+    border-right: #444 solid 1px;
+	color:#444;
+  text-transform: capitalize;
 }
 
 
@@ -3115,16 +3112,16 @@ Car Detail Page
 }
 
 .dealertaglines{
-	color:#b8b8b8;
+	color:#999;
 	font-size:16px;
 }
 .productdes{
-	color:#9f9f9f;
+	color:#999;
 	font-size:16px;
 }
 .products-details .carpoint{
 	display:inline;
-	border: 1px solid #707070;
+	border: 1px solid #444;
 	background: #E1E1E1;
 	padding:10px;
 	border-radius:5px;
@@ -3137,13 +3134,13 @@ Car Detail Page
 	margin:0 10px;
 }
 .products-details .titlestatus{
-	color:#343434;
+	color:#444;
 	font-size:16px;
 	
 }
 .products-details .titlestatus span{
 	font-size:16px;
-	color:#9f9f9f;
+	color:#999;
 }
 .products-details .titlestatus img{
 	margin-right:10px;
@@ -3159,8 +3156,8 @@ Car Detail Page
  }
  
   .products-details .cars-detail-views .car-btns-primary{
-	 border: 1px solid #9f9f9f;
-	 color:#343434;
+	 border: 1px solid #999;
+	 color:#444;
 	 font-size:16px;
 	 padding:10px 15px;
 	 border-radius:5px;
@@ -3181,7 +3178,7 @@ Car Detail Page
 	  
   }
   .product-count .details {
-    border-right: #707070 solid 1px;
+    border-right: #444 solid 1px;
     color: #4e4e4e;
 	margin-left:5px;
 }
@@ -3210,7 +3207,7 @@ Car Detail Page
   margin-right: 20px;
 }
 .cars-buy .cars-buy-btns-primary{
-	background-color: #b8b8b8;
+	background-color: #999;
     color: white;
     padding: 10px 30px;
     margin: 20px 0;
@@ -3236,7 +3233,7 @@ Car Detail Page
 	box-shadow: 0px 3px 6px #ddd;
 }
 .carspecifation p{
-	color:#343434;
+	color:#444;
   text-align: left;
   display: flex;
 }
@@ -3300,7 +3297,7 @@ Car Detail Page
     margin: 0;
     font-weight: 300;
     font-size: 16px;
-    color: #9f9f9f;
+    color: #999;
 }
 .dealer-cars   .car-item img{
 	width:100%;
@@ -3314,14 +3311,14 @@ Car Detail Page
     font-size: 20px;
 }
 .dealer-cars   .cars-content h3 a {
-    color: #37423b;
+    color: #444;
     transition: 0.3s;
 	font-size:18px;
 	font-weight:500;
 }
 .dealer-cars   .cars-content p {
     font-size: 14px;
-    color: #777777;
+    color: #999;
 }
 .dealer-cars   .cars-prices{
 	display: -ms-flexbox;    
@@ -3338,16 +3335,16 @@ Car Detail Page
 }
 .dealer-cars   .cars-prices .cta-btns {
     background-color: #fff;
-    color: #343434;
+    color: #444;
     padding: 10px 20px;   
 	margin-right:20px;
     border-radius: 3px;
-    border: 1px solid #707070;
+    border: 1px solid #444;
 	font-size:18px;
 }
 .dealer-cars   .cars-prices .cta-btns-primary {
 	font-size:18px;
-    background-color: #b8b8b8;
+    background-color: #999;
     color: white;
     padding: 10px 20px;   
     border-radius: 3px;
@@ -3418,7 +3415,7 @@ Car Detail Page
     margin: 0;
     font-weight: 300;
     font-size: 16px;
-    color: #9f9f9f;
+    color: #999;
 }
 .other-dealer-cars    .car-item img{
 	width:100%;
@@ -3432,14 +3429,14 @@ Car Detail Page
     font-size: 20px;
 }
 .other-dealer-cars    .cars-content h3 a {
-    color: #37423b;
+    color: #444;
     transition: 0.3s;
 	font-size:18px;
 	font-weight:500;
 }
 .other-dealer-cars    .cars-content p {
     font-size: 14px;
-    color: #777777;
+    color: #999;
 }
 .other-dealer-cars    .cars-prices{
 	display: -ms-flexbox;    
@@ -3456,16 +3453,16 @@ Car Detail Page
 }
 .other-dealer-cars    .cars-prices .cta-btns {
     background-color: #fff;
-    color: #343434;
+    color: #444;
     padding: 10px 20px;   
 	margin-right:20px;
     border-radius: 3px;
-    border: 1px solid #707070;
+    border: 1px solid #444;
 	font-size:18px;
 }
 .other-dealer-cars    .cars-prices .cta-btns-primary {
 	font-size:18px;
-    background-color: #b8b8b8;
+    background-color: #999;
     color: white;
     padding: 10px 20px;   
     border-radius: 3px;
@@ -3702,7 +3699,7 @@ ErrorModalCenter
 }
 
 .inspectiontable table td span {
-   color: #9F9F9F;
+   color: #999;
    font-size: 16px;
     font-weight: normal;
 }
@@ -3712,19 +3709,19 @@ ErrorModalCenter
 }
 
 .inspectionsummeryhead h2{
-	color:#343434;
+	color:#444;
 	font-size:25px;
 	font-weight:500;
 	margin-bottom:20px;
 }
 
 .inspectionsummeryhead p{
-	color:#9f9f9f;
+	color:#999;
 	font-size:18px;
 	font-weight:500;
 }
 .inspectionsummeryhead span{
-	color:#343434;
+	color:#444;
 	font-size:18px;
 	margin-left:5px;
 }
@@ -3733,17 +3730,17 @@ ErrorModalCenter
 	margin:15px 0;
 }
 .inspectiontableBlock .commentsblock h3{
-	color:#343434;
+	color:#444;
 	padding:15px 0;
 	font-size:18px;
 	font-weight:normal;
 }
 .inspectiontableBlock .commentstextblock{
-	border:1px  #707070 solid;
+	border:1px  #444 solid;
 	margin:15px 0;
 }
 .inspectiontableBlock .commentstextblock p{
-	color:#707070;
+	color:#444;
 	padding:20px 15px;
 	font-size:16px;
 	font-weight:normal;
@@ -3751,7 +3748,7 @@ ErrorModalCenter
 }
 .inspectionbg{
 	background:#D0DBEC;
-	color:#343434;
+	color:#444;
 }
 .inspectionbg td{
 	border: 1px solid #ddd;
@@ -3787,6 +3784,7 @@ Make your Bid
     border: 1px solid rgba(0,0,0,.125);
     border-radius: .25rem;
     padding: 30px 40px;
+    padding-top: 15px;
 }
 
 .makeyourbid .makeyourbidblock .section-title h2{
@@ -3799,10 +3797,10 @@ Make your Bid
 	border: 1px solid #ddd;
 }
 .border-bottomtext{
-	margin:10px;
-  text-align: center;
+  text-align:left;
   font-weight: 600;
-    font-size: 16px;
+  font-size: 16px;
+  margin: 20px 0;
 }
 .input-icon {
   position: relative;
@@ -3818,7 +3816,7 @@ Make your Bid
 	font-style: normal;
 	font-size:25px;
 	left:20px;
-	color:#707070;  
+	color:#444;  
 }
 
 .input-icon > input {
@@ -3955,7 +3953,7 @@ Search Box"
 }
 
 .vehicleblock h4 , .sortbyblock h4{
-	color: #343434;
+	color: #444;
 	font-size:20px;
 	font-weight:500;
 	
@@ -3982,7 +3980,7 @@ Search Box"
   content:'';
   -webkit-appearance: none;
   background-color: transparent;
-  border: 1px solid #707070;
+  border: 1px solid #444;
   padding: 10px;
   display: inline-block;
   position: relative;
@@ -3990,7 +3988,7 @@ Search Box"
   cursor: pointer;
   margin-right: 5px;
   background:#fff;
-  border: 1px solid #707070;
+  border: 1px solid #444;
   margin-top: -3px;
 }
 
@@ -4074,7 +4072,7 @@ Search Box"
 }
 
 .leftonsidebox h4{
-	color: #343434;
+	color: #444;
 	font-size:18px;
 	font-weight:500;
 	margin:20px 0;
@@ -4132,7 +4130,7 @@ Search Box"
     margin: 0;
     font-weight: 300;
     font-size: 16px;
-    color: #9f9f9f;
+    color: #999;
 }
 .search-cars .cars-content .details img {
    width:20px;
@@ -4143,14 +4141,14 @@ Search Box"
     font-size: 20px;
 }
 .search-cars .cars-content h3 a {
-    color: #37423b;
+    color: #444;
     transition: 0.3s;
 	font-size:18px;
 	font-weight:500;
 }
 .search-cars .cars-content p {
     font-size: 14px;
-    color: #777777;
+    color: #999;
 }
 .search-cars .cars-prices{
 	display: -ms-flexbox;    
@@ -4167,11 +4165,11 @@ Search Box"
 }
 .search-cars .cars-prices .cta-btns {
     background-color: #fff;
-    color: #343434;
+    color: #444;
     padding: 10px 20px;   
 	margin-right:0px;
     border-radius: 3px;
-    border: 1px solid #707070;
+    border: 1px solid #444;
 	font-size:18px;
 }
 
@@ -4183,7 +4181,7 @@ Search Box"
 
 .search-cars .cars-prices .cta-btns-primary {
 	font-size:18px;
-    background-color: #b8b8b8;
+    background-color: #999;
     color: white;
     padding: 10px 20px;   
     border-radius: 3px;
@@ -4446,7 +4444,7 @@ Transport
 }
 .modeldetail h3{
 	font-size:20px;
-	color: #343434;
+	color: #444;
 	font-weight:500;
 	text-align:center;
 }
@@ -4460,10 +4458,10 @@ Transport
 
 .modeldetailprice h3{
 	font-size:16px;
-	color: #343434;
+	color: #444;
 	font-weight:500;
 	text-align:center;
-	border: 1px solid #707070;
+	border: 1px solid #444;
 	padding:10px;
   display: inline-block;
 }
@@ -4487,7 +4485,7 @@ Transport
 	margin:10px 0;
 }
 .modeldetailcontent .subhead{
-	color: #B8B8B8;
+	color: #999;
 	font-size:14px;
 }
 .modeldetailcontent .subheadstatus{
@@ -4509,7 +4507,7 @@ ul.tabs li.active {
 
 .pickupdetailcontent h3{
 	font-size:20px;
-	color: #343434;
+	color: #444;
 	font-weight:500;
 	text-align:center;
 }
@@ -4522,7 +4520,7 @@ ul.tabs li.active {
 }
 
 .bordercontent{
-	border-right: 1px solid #B8B8B8;
+	border-right: 1px solid #999;
 	margin:20px 0;
 	
 }
@@ -4593,7 +4591,7 @@ MyBids
 	text-align:center;
 }
 .mybidsdetailsblock{
-	border-bottom: 1px solid #B8B8B8;
+	border-bottom: 1px solid #999;
 	padding-bottom:15px;
 }
 .mybidsvehicledetails{
@@ -4601,7 +4599,7 @@ MyBids
 	width:100%;
 	margin:20px 0;
 	padding:10px 0;
-	border-right: 1px solid #B8B8B8;
+	border-right: 1px solid #999;
 }
 .mybidsleftvehicle{
 	float:left;
@@ -4621,11 +4619,11 @@ MyBids
 .mybidsrightvehicle h3{
 	font-size:16px;
 	font-weight:500;
-	color:#343434;
+	color:#444;
 }
 .mybidsrightvehicle .details span{
 	font-size:12px;
-	color:#9f9f9f;
+	color:#999;
 	margin-left:5px;
 }
 .mybidsrightvehicle .details{
@@ -4638,7 +4636,7 @@ MyBids
 	margin:20px 0;
 	padding:10px 0;
 	padding-left:10px;
-	border-right: 1px solid #B8B8B8;
+	border-right: 1px solid #999;
 }
 
 .mybidsleftseller h3{
@@ -4664,7 +4662,7 @@ MyBids
 
 .mybidsleftseller .details span{
 	font-size:14px;
-	color:#9f9f9f;
+	color:#999;
 	margin-left:5px;
 }
 .mybidsleftseller .details{
@@ -4676,7 +4674,7 @@ MyBids
 	margin:20px 0;
 	padding:10px 0;
 	padding-left:10px;
-	border-right: 1px solid #B8B8B8;
+	border-right: 1px solid #999;
 }
 .mybidsbid{
 	text-align:center;
@@ -4690,7 +4688,7 @@ MyBids
 }
 .mybidsbid p{
 	text-align:center;
-	color: #9f9f9f;
+	color: #999;
 	font-size:14px;
 }
 .mybidsbuynowdetails{
@@ -4699,7 +4697,7 @@ MyBids
 	margin:20px 0;
 	padding:10px 0;
 	padding-left:10px;
-	border-right: 1px solid #B8B8B8;
+	border-right: 1px solid #999;
 }
 
 .mybidsuynow{
@@ -4780,7 +4778,7 @@ notoficationtab
 .notoficationbody {
 	float:left;
 	text-align:justify;
-	color: #707070;
+	color: #444;
 	font-size:14px;
 	font-weight:normal;
 }
@@ -4829,7 +4827,7 @@ vehicles Summary
 }
 
 .vehiclesheads h2 span b{
-	color: #343434;
+	color: #444;
 	font-weight:500;
 	
 }
@@ -4872,7 +4870,7 @@ vehicles Summary
     content: '';
     -webkit-appearance: none;
     background-color: transparent;
-    border: 1px solid #707070;
+    border: 1px solid #444;
     padding: 10px;
     display: inline-block;
     position: relative;
@@ -4880,7 +4878,7 @@ vehicles Summary
     cursor: pointer;
     margin-right: 5px;
     background: #fff;
-    border: 1px solid #707070;
+    border: 1px solid #444;
 	
 }
 .vehiclepaycheckbox .form-group input:checked + label::after , .vehicleimgright .form-group input:checked + label::after {
@@ -5008,7 +5006,7 @@ __________________________________________________________*/
 }
 
 .notificationtabblock h3 {
-  color: #343434;
+  color: #444;
   font-size: 20px;
   font-weight: 500;
   display: block;
@@ -5048,7 +5046,7 @@ __________________________________________________________*/
 .mgaccountuserright h3 {
     font-size: 18px;
     font-weight: 500;
-    color: #343434;	
+    color: #444;	
     text-align: left;
     padding-top: 10px;
 }
@@ -5088,7 +5086,7 @@ margin-top: 20px;
 }
 .mgaccountrighttable table td {
     width: 50%;
-    color: #343434;
+    color: #444;
     text-align: left;
     padding-left: 20px;
     font-weight: 500;
@@ -5098,7 +5096,7 @@ margin-top: 20px;
 	font-weight: 500;
 }
 .mgaccountrighttable table td span {
-    color: #707070;
+    color: #444;
     font-size: 16px;
     font-weight: 500;
     float: left;
@@ -5107,7 +5105,7 @@ margin-top: 20px;
 	text-align:center;
 	display:block;
 	font-size:20px;
-	color: #343434;
+	color: #444;
   font-weight: 500;
   margin-bottom: 15px;
   border-bottom: #eee solid 1px;
@@ -5144,7 +5142,7 @@ margin-top: 20px;
 .mgaccountrighttableblock p{
 	text-align:center;
 	display:block;
-	color: #343434;	
+	color: #444;	
 	font-size:16px;
   margin-bottom: 20px;
 }
@@ -5158,7 +5156,7 @@ margin-top: 20px;
 	padding: 30px;
 }
 .mgaccountrighttableblock h4{
-	color: #343434;
+	color: #444;
 	font-size:18px;
 	margin-top:20px;
 	padding-left: 20px;
@@ -5174,7 +5172,7 @@ margin-top: 20px;
   font-weight: 500;
 }
 .mgaccountrighttableblock h6{
-	color: #707070;
+	color: #444;
 	font-size:16px;
 	margin-top:10px;
 	padding-left: 20px;
@@ -5210,7 +5208,7 @@ Form text overlop
     border-radius: 3px 0 0 3px;
     padding: 0 5px;
     background: #fff;
-    color: #9F9F9F;
+    color: #999;
     transform: translateZ(0) translateX(0);
     transition: all 0.3s ease-in;
     transition-delay: 0.2s;
@@ -5254,7 +5252,7 @@ Form text overlop
     content: '';
     -webkit-appearance: none;
     background-color: transparent;
-    border: 1px solid #707070;
+    border: 1px solid #444;
     padding: 10px;
     display: inline-block;
     position: relative;
@@ -5262,7 +5260,7 @@ Form text overlop
     cursor: pointer;
     margin-right: 15px;
     background: #fff;
-    border: 1px solid #707070;
+    border: 1px solid #444;
 }
 
 /*-------------------------------------------------------
@@ -5334,7 +5332,7 @@ userfavorite-cars
     margin: 0;
     font-weight: 300;
     font-size: 16px;
-    color: #9f9f9f;
+    color: #999;
 }
 .userfavorite-cars .cars-content .details img {
    width:20px;
@@ -5345,14 +5343,14 @@ userfavorite-cars
     font-size: 20px;
 }
 .userfavorite-cars .cars-content h3 a {
-    color: #37423b;
+    color: #444;
     transition: 0.3s;
 	font-size:18px;
 	font-weight:500;
 }
 .userfavorite-cars .cars-content p {
     font-size: 14px;
-    color: #777777;
+    color: #999;
 }
 .userfavorite-cars .cars-prices{
 	display: -ms-flexbox;    
@@ -5369,16 +5367,16 @@ userfavorite-cars
 }
 .userfavorite-cars .cars-prices .cta-btns {
     background-color: #fff;
-    color: #343434;
+    color: #444;
     padding: 10px 20px;   
 	margin-right:20px;
     border-radius: 3px;
-    border: 1px solid #707070;
+    border: 1px solid #444;
 	font-size:18px;
 }
 .userfavorite-cars .cars-prices .cta-btns-primary {
 	font-size:18px;
-    background-color: #b8b8b8;
+    background-color: #999;
     color: white;
     padding: 10px 20px;   
     border-radius: 3px;
@@ -5410,14 +5408,14 @@ History
     padding: 0 auto;
     text-align: center;
     display: block;
-    color: #B8B8B8;
+    color: #999;
 }
 .filtersblock .searchbox {
     margin-bottom: 20px;
     padding-bottom: 20px;
 }
 .filtersblock .searchbox .fa {
-    color: #B8B8B8;
+    color: #999;
     font-size: 25px;
 }
 .vehicespurchased{
@@ -5479,7 +5477,7 @@ History
     font-weight: normal;
 }
 .purchasedcars  .cars-content h3 a {
-    color: #343434;
+    color: #444;
     font-size: 14px;
     font-weight: normal;
 }
@@ -5487,7 +5485,7 @@ History
     margin: 0;
     font-weight: 300;
     font-size: 16px;
-    color: #9f9f9f;
+    color: #999;
 }
 .purchasedcars  .cars-content .details img {
     width: 20px;
@@ -5518,7 +5516,7 @@ History
 	color: #BD062C;
 }
 .cta-links-insection{
-    background: #B8B8B8;
+    background: #999;
     color: white;
     padding: 20px;
     margin-top: 20px;
@@ -5590,8 +5588,8 @@ History
 }
 .multi-steps > li.is-active:before {
   background-color: #fff;
-  border-color: #B8B8B8;
-  color:#B8B8B8;
+  border-color: #999;
+  color:#999;
 }
 .multi-steps > li.is-active ~ li {
   color: #808080;
@@ -5605,7 +5603,7 @@ History
 	float:left;
 }
 .purchasedcarss h4{
-	color:#9f9f9f;
+	color:#999;
 	font-size:14px;
 }
 .purchasedcarss h4 span{
@@ -5645,7 +5643,7 @@ History
 .purchasedon h4{
 	float:right;
 	font-size:14px;
-	color: #9F9F9F;
+	color: #999;
 	display:block;
 }
 .purchasedontable{
@@ -5676,7 +5674,7 @@ History
 	padding:20px 10px;
 }
 .purchasedontable table td p{ 
-	color: #9F9F9F;
+	color: #999;
 	font-size:14px;
 }
 
@@ -5708,7 +5706,7 @@ height: 100%;
 }
 
 .notificationrighttableblock label{
-  color: #343434;
+  color: #444;
   font-size: 16px;
   font-weight: 500;
   font-family: 'Poppins', sans-serif;
@@ -5722,7 +5720,7 @@ height: 100%;
 }
 
 .notificationrighttableblock h2{
-	color: #343434;
+	color: #444;
 	font-size:30px;
 	text-align:center;
 	display:block;
@@ -5733,14 +5731,14 @@ height: 100%;
 }
 
 .notificationtabblock  h3{
-	color: #343434;
+	color: #444;
 	font-size:20px;
 	font-weight:500;
 	display:block;
 	text-align:left;
 }
 .notificationtabblock p{
-	color: #343434;
+	color: #444;
 	font-size:14px;
 	font-weight:normal;
   text-align: left;
@@ -5800,7 +5798,7 @@ paymentform
 
 .paymentdetailblock p{
 	text-align:center;
-	color: #343434;
+	color: #444;
 	font-size:16px;
 	margin:20px 30px;
 }
@@ -5842,7 +5840,7 @@ paymentform
 
 .uploadbutton label{
 	 display: inline-block;
-  background: #9F9F9F ;
+  background: #999 ;
   color: white;
   padding: 8px 10px;
   font-family: sans-serif;
@@ -5870,8 +5868,8 @@ paymentform
 }
 
 .uploadbtn .btn {
-  border: 2px solid #9F9F9F;
-  background: #9F9F9F;
+  border: 2px solid #999;
+  background: #999;
   color: #fff;
   padding: 8px 20px;
   border-radius: 3px;
@@ -5960,7 +5958,7 @@ paymentform
 }
 
 .bankinfo table td  span{
-    color: #343434;
+    color: #444;
     font-size: 14px;
     text-align: left;
     border: none;
@@ -5968,7 +5966,7 @@ paymentform
 	float:left;
 }
 .bankinfo table td {
-   color: #707070;
+   color: #444;
     font-size: 14px;
     text-align: left;
     border: none;
@@ -5986,7 +5984,7 @@ paymentform
 
 .releaseinfo p{
 	    text-align: center;
-    color: #343434;
+    color: #444;
     font-size: 16px;
     margin: 20px 30px;
 	display:inline-block;
@@ -6037,7 +6035,7 @@ paymentform
     bottom: 0;    
     padding: 0 5px;
     background: #fff;
-    color: #9F9F9F;    
+    color: #999;    
     display: inline-block;
     height: 22px;
     margin: 0;
@@ -6065,7 +6063,7 @@ paymentform
   border-radius: 3px 0 0 3px;
   padding: 0 5px;
   background: #fff;
-  color: #9F9F9F;
+  color: #999;
   transform: translateZ(0) translateX(0);
   transition: all 0.3s ease-in;
   transition-delay: 0.2s;
@@ -6084,7 +6082,7 @@ paymentform
   border-radius: 3px 0 0 3px;
   padding: 0 5px;
   background: #fff;
-  color: #9F9F9F;
+  color: #999;
   transform: translateZ(0) translateX(0);
   transition: all 0.3s ease-in;
   transition-delay: 0.2s;
@@ -6185,14 +6183,14 @@ Documents page
 }
 	
 .docdetails h5{
-	color: #343434;
+	color: #444;
 	font-size:14px;
 	font-weight:500;
 	margin-bottom:20px;
   min-height: 40px;
 }
 .docdetails p{
-	color: #343434;
+	color: #444;
 	font-size:14px;
 	font-weight:400;
 	margin-top:20px;
@@ -6217,7 +6215,7 @@ Add Users
 .adduserpageforminner .form-group label {
     position: relative;
     cursor: pointer;
-	color: #707070;
+	color: #444;
 	font-size:16px;
 }
 .adduserpageforminner .form-group input {
@@ -6232,7 +6230,7 @@ Add Users
     content: '';
     -webkit-appearance: none;
     background-color: transparent;
-    border: 1px solid #707070;
+    border: 1px solid #444;
     padding: 10px;
     display: inline-block;
     position: relative;
@@ -6240,7 +6238,7 @@ Add Users
     cursor: pointer;
     margin-right: 5px;
     background: #fff;
-    border: 1px solid #707070;
+    border: 1px solid #444;
 }
 .adduserpageforminner .form-group input:checked + label::after {
   content: '';
@@ -6277,7 +6275,7 @@ Add Users
   margin: auto;
 }
 .privileges label, .noprivileges label {
-	color: #343434;
+	color: #444;
 	font-size:16px;
 	font-weight:500;
 }
@@ -6330,7 +6328,7 @@ button:focus{
   width: 100%;
 }
 *::placeholder {
-  color: #9F9F9F;
+  color: #999;
   font-size: 16px;
     font-weight: 400;
 }
@@ -6363,7 +6361,7 @@ ul.ant-pagination li{
   border-radius: 3px 0 0 3px;
   padding: 0 5px;
   background: #fff;
-  color: #9F9F9F;
+  color: #999;
   transform: translateZ(0) translateX(0);
   transition: all 0.3s ease-in;
   transition-delay: 0.2s;
@@ -6439,7 +6437,7 @@ width: 100%;
 }
 .myprofilerighttable table td {
   width: 40%;
-  color: #343434;
+  color: #444;
   text-align: left;
   padding-left: 20px;
   font-weight: 500;
@@ -6449,7 +6447,7 @@ border-right: none;
 font-weight: 500;
 }
 .myprofilerighttable table td span {
-  color: #707070;
+  color: #444;
   font-size: 16px;
   font-weight: 500;
   width: 60%;
@@ -6459,7 +6457,7 @@ font-weight: 500;
 text-align:center;
 display:block;
 font-size:20px;
-color: #343434;
+color: #444;
 border-bottom: #eee solid 1px;
 padding-bottom: 15px;
 }
@@ -6487,7 +6485,7 @@ padding-bottom: 15px;
 .myprofilerighttableblock p{
 text-align:center;
 display:block;
-color: #343434;	
+color: #444;	
 font-size:16px;
 }
 .myprofilerighttableblock{
@@ -6500,13 +6498,13 @@ border-radius: .25rem;
 padding: 30px;
 }
 .myprofilerighttableblock h4{
-color: #343434;
+color: #444;
 font-size:16px;
 margin-top:10px;
 padding-left: 20px;
 }
 .myprofilerighttableblock h5{
-color: #707070;
+color: #444;
 font-size:16px;
 margin-top:10px;
 padding-left: 20px;
@@ -6520,7 +6518,7 @@ Users
   padding: 0 auto;
   text-align: center;
   display: block;
-  color: #B8B8B8;
+  color: #999;
 }
 .filtersblock .searchbox {
   margin-bottom: 20px;
@@ -6828,7 +6826,7 @@ table td .ant-btn:hover span, table td .ant-btn:hover i{
     font-weight: 400;
     float: left;
     margin-top: 5px;
-    color: #9f9f9f;
+    color: #999;
     margin-right: 5px;
 }
 .phoneNumberfield .MuiInput-root{
@@ -7028,11 +7026,11 @@ table td .ant-btn:hover span, table td .ant-btn:hover i{
 
 .sliderBlock .cars-prices .cta-btns{
 	background-color: #fff;
-    color: #343434;
+    color: #444;
     padding: 10px 20px;   
 	margin-right:0px;
     border-radius: 3px;
-    border: 1px solid #707070;
+    border: 1px solid #444;
 	font-size:18px;
 	text-align:center;
   float: none;
@@ -7360,7 +7358,7 @@ form.timePicker{
   content: '';
 -webkit-appearance: none;
 background-color: transparent;
-border: 1px solid #707070;
+border: 1px solid #444;
 padding: 10px;
 display: inline-block;
 position: relative;
@@ -7368,7 +7366,7 @@ vertical-align: middle;
 cursor: pointer;
 margin-right: 5px;
 background: #fff;
-border: 1px solid #707070;
+border: 1px solid #444;
 margin-top: -3px;
 }
 .customCheckbox  input:checked + label::after {
@@ -7708,7 +7706,6 @@ margin-top: -3px;
 .owl-carousel .cars-prices .cta-btns{
   margin: 0;
     margin-right: 10px;
-    margin-bottom: 10px;
     display: inline-block;
 }
 
@@ -7740,13 +7737,14 @@ margin-top: -3px;
 
 .buyitnow{
   float: right;
+  margin-right: 0 !important;
 }
 
 .buyitnow span{
   color: #008d0e !important;
   border: #008d0e solid 1px;
   border-radius: 3px;
-  padding: 2px 10px;
+  padding: 2px 5px;
   margin-right: 0 !important;
   font-size: 14px;
 }
@@ -7779,10 +7777,11 @@ margin-top: -3px;
 .dealerType .details:last-child{
     float: right;
     text-align: right;
+    margin-right: 0;
 }
 
 .dlrname{
-  color: #37423b;
+  color: #444;
   font-weight: 400;
 }
 
@@ -7792,7 +7791,9 @@ margin-top: -3px;
   width: 50px;
   height: 50px;
   border-right: 1px solid lightgray;
-  font-size: 30px;
+  font-size: 22px;
+  font-style: normal;
+  padding-top: 10px;
 }
 
 .makeyourbid .tbox input.textbox + label{
@@ -7815,9 +7816,17 @@ margin-top: -3px;
 .makeyourbid .addComment .tbox input.textbox + label{
   left: 15px;
 }
+.dlraddress i.icofont-google-map{
+  margin-left: -3px;
+}
 
+.makeyourbid .buyitnow{
+  float: left;
+}
 
-
+.makeyourbid .tbox{
+  margin-bottom: 0;
+}
 
 
 
