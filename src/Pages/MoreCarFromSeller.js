@@ -45,7 +45,7 @@ const MoreCarFromSeller = () =>{
     })
 }
   
-const toggleMakeBid = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,make) => {
+const toggleMakeBid = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,make,comments,transportation,display,proxy_bid) => {
   console.log("check the high bid value",high_bid)
   let makebiddispatch={
     high_bid: high_bid,
@@ -57,7 +57,11 @@ const toggleMakeBid = (high_bid,min_price,save_purchase,car_id,time,counterbuyer
     max_price:max_price,
     buy_it_now: buy_it_now,
     redirectPage: "morecarfrombuyer",
-    seller_dealer_id:id
+    seller_dealer_id:id,
+    comments:comments,
+		transportation:transportation,
+		display:display,
+		proxy_bid:proxy_bid,
   }
   //dispatch(CarDetailsAction.highBid(high_bid))
   dispatch(CarDetailsAction.minBid(makebiddispatch))
@@ -187,16 +191,16 @@ return(
 				
 				<div class="cars-prices">
           {/* <a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a> */}
-          {moreCar.counter_bid=="" || moreCar.counter_bid== null || moreCar.counter_bid== undefined?"":
-          <a className="cta-btns" href="#">Buy It Now $ {moreCar.counter_bid}</a>
+          {moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined?"":
+          <a className="cta-btns" href="#">Buy It Now $ {moreCar.buy_it_now}</a>
           }
 					{moreCar.high_bid=="" || moreCar.high_bid== null || moreCar.high_bid== undefined?"":
           <a className="cta-btns" href="#">High Bid $ {moreCar.high_bid}</a>
           }
-          {/* {moreCar.counter_bid=="" || moreCar.counter_bid== null || moreCar.counter_bid== undefined?"":
-					<a className="cta-btns" href="#">Counter Bid $ {moreCar.counter_bid}</a>
+          {/* {moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined?"":
+					<a className="cta-btns" href="#">Counter Bid $ {moreCar.buy_it_now}</a>
 					} */}
-					<a class="cta-btns-primary" onClick={()=>toggleMakeBid(moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now)}>Make Bid</a>
+					<a class="cta-btns-primary" onClick={()=>toggleMakeBid(moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now,moreCar.comments,moreCar.transportation,moreCar.display,moreCar.proxy_bid)}>Make Bid</a>
 				</div>
               </div>
             </div>

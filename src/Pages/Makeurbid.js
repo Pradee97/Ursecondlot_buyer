@@ -20,6 +20,10 @@ const MakeurBid=(props)=>{
     const [carMaxBid,setCarMaxBid] = useState(useSelector(state => state.CarDetailsReducer.payload.max_price));
     const [sellerId,setSellerId] = useState(useSelector(state => state.CarDetailsReducer.payload.seller_dealer_id));
     const [carBuyItNow,setCarBuyItNow] = useState(useSelector(state => state.CarDetailsReducer.payload.buy_it_now));
+    const [carComments,setCarComments] = useState(useSelector(state => state.CarDetailsReducer.payload.comments));
+    const [carDisplay,setCarDisplay] = useState(useSelector(state => state.CarDetailsReducer.payload.display));
+    const [carTransportation,setCarTransportation] = useState(useSelector(state => state.CarDetailsReducer.payload.transportation));
+    const [carProxyBid,setCarProxyBid] = useState(useSelector(state => state.CarDetailsReducer.payload.proxy_bid));
     const [make,setMake] = useState(useSelector(state => state.CarDetailsReducer.payload.make));
     const [redirectPage,setRedirectPage] = useState(useSelector(state => state.CarDetailsReducer.payload.redirectPage));
     const [carHighBid,setCarHighBid] = useState(useSelector(state => state.CarDetailsReducer.payload.high_bid));  
@@ -38,6 +42,8 @@ const MakeurBid=(props)=>{
     const [display,setDisplay]=useState("no");
     const [save,setSave] = useState("no");
     const [transportFlag,setTransportFlag] = useState("");
+    const [displayFlag,setDisplayFlag]=useState("");
+    const [saveFlag,setSaveFlag] = useState("");
     const [reset,setReset]=useState("");
     
 
@@ -81,6 +87,7 @@ const MakeurBid=(props)=>{
     }
   
     function toggleViewDisplay(){
+        
         console.log("inside toggle fn Del admin");
         if(display==="yes")
         {
@@ -168,18 +175,40 @@ const MakeurBid=(props)=>{
         setHighBidError("")
         if(!highBid){
 
-            setHighBidError("High Bid should not be empty" )
+            setHighBidError("High Bid price should not be empty" )
             return;
         }
-        else if (highBid+50 <carHighBid+50){
-            setHighBidError("High Bid should not lower than " +Number(carHighBid+50))
+        else if (highBid <carMinBid){
+            setHighBidError("High Bid price should not lower than " +Number(carHighBid+50))
             return;
             
         }
-        if(proxyBid<=highBid){
+        if((carBuyItNow!=="" && carBuyItNow!== null && carBuyItNow!==undefined && carBuyItNow<highBid)){
+            console.log("checkt the validation for the max and buy it now")
+            setHighBidError("Your high Bid Price is greater than Buy it Now Price");
+            return;
+        
+        }
+        if(!proxyBid){
+            setProxyBidError("Max Bid price should not be empty");
+            return;
+        }
+        else if(proxyBid<=highBid){
             setProxyBidError("Max Bid price must be greater than high bid");
             return;
         }
+        if((carBuyItNow!=="" && carBuyItNow!== null && carBuyItNow!==undefined && carBuyItNow<proxyBid )){
+            console.log("checkt the validation for the max and buy it now")
+            setProxyBidError("Your Max Bid Price is greater than Buy it Now Price");
+            return;
+        
+        }
+        // if (carBuyItNow<proxyBid){
+        //     setProxyBidError("Your Max Bid Price is greater than Buy it Now Price");
+        //     return;
+        // }
+        
+        
         // else if(highBid>maxbid){
         //     setHighBidError("High Bid should not be greater than Seller Bid " +Number(carHighBid+50))
         //     return;
@@ -236,16 +265,27 @@ const MakeurBid=(props)=>{
         })
     }
  const assigntransportFlag=()=>{
+
+    
+    
     if(carSavePurchase=="" || carSavePurchase==null || carSavePurchase=="no" ){
         console.log("save purchase is null ");
         setTransportFlag(false);
+        setSaveFlag(false);
         //setAlertMessage("Hi");
     }
-    else
-    {
+    else{
         console.log("save purchase is coming as yes",)
         setTransportFlag(true);
+        setSaveFlag(true);
     }
+    if(carDisplay=="" || carDisplay==null || carDisplay=="no"){
+        setDisplayFlag(false);
+    }
+    else{
+        setDisplayFlag(true);
+    }
+    
  }
     useEffect(() => {
 		// MakeBid();
@@ -306,8 +346,8 @@ const MakeurBid=(props)=>{
                             <div class="form-group col-lg-6 col-md-6">
                             
                             <div className="cars-prices">
-                            {carMaxBid=="" || carMaxBid== null || carMaxBid== undefined ?"":
-                            <a className="cta-btns greentext" href="#">Buy It Now $ {carMaxBid}</a>}
+                            {carBuyItNow=="" || carBuyItNow== null || carBuyItNow== undefined ?"":
+                            <a className="cta-btns greentext" href="#">Buy It Now $ {carBuyItNow}</a>}
                             </div>
                                
                             </div>
@@ -315,17 +355,17 @@ const MakeurBid=(props)=>{
                            
 
                             <div class="form-group col-lg-6 col-md-6">
-                                {carMaxBid=="" || carMaxBid== null || carMaxBid== undefined?
+                                {carProxyBid=="" || carProxyBid== null || carProxyBid== undefined?
                                 <div class="tbox">
 
-                                <i>$</i><input type="text" id="maxBid" class="textbox" defaultValue="" onChange={(e)=>setProxyBid(e.target.value)}></input>
-                                <label htmlFor="maxBid" className={proxyBid != "" ? "input-has-value" : ""}>Max Bid</label>
+                                <i>$</i><input type="text" id="proxyBid" class="textbox" defaultValue="" onChange={(e)=>setProxyBid(e.target.value)}></input>
+                                <label htmlFor="proxyBid" className={proxyBid != "" ? "input-has-value" : ""}>Max Bid</label>
                                     
                                 </div>:
                                 <div class="tbox">
 
-                                <i>$</i><input type="text" id="maxBid" class="textbox" defaultValue={carMaxBid} onChange={(e)=>setProxyBid(e.target.value)}></input>
-                                <label htmlFor="maxBid" className={proxyBid != "" ? "input-has-value" : ""}>Max Bid</label>
+                                <i>$</i><input type="text" id="proxyBid" class="textbox" defaultValue={carProxyBid} onChange={(e)=>setProxyBid(e.target.value)}></input>
+                                <label htmlFor="proxyBid" className={proxyBid != "" ? "input-has-value" : ""}>Max Bid</label>
                                
                                 </div>
                                  }
@@ -334,19 +374,28 @@ const MakeurBid=(props)=>{
                             
                            
                             <div className="col-lg-6 form-group customCheckbox">
-                                        <input type="checkbox" className="form-check d-inline " id="chb3" onClick={toggleViewDisplay}/>
-                                        <label htmlFor="chb3" className="form-check-label">Display Max Bid To Seller  </label>                               
-                                    </div>
+                            {displayFlag?
+                                <input type="checkbox" className="form-check d-inline " id="chb3" checked onClick={toggleViewDisplay}/>:
+                                <input type="checkbox" className="form-check d-inline " id="chb3" onClick={toggleViewDisplay}/>
+                            }
+                                <label htmlFor="chb3" className="form-check-label">Display Max Bid To Seller  </label>                               
+                            </div>
 
                            
 
-                            
+                            {carComments=="" || carComments==null || carComments==undefined?
                             <div class="form-group col-lg-12 col-md-12 addComment">	
                                 <div class="tbox">			
                                     <input type="text" id="comment" class="textbox" placeholder="" onChange={(e)=>setComments(e.target.value)}></input>
-                                    <label htmlFor="comment" >Add a Comment (Optional)</label>
+                                    <label htmlFor="comment" className={comments != "" ? "input-has-value" : ""} >Add a Comment (Optional)</label>
                                 </div>
+                            </div>:
+                            <div class="form-group col-lg-12 col-md-12 addComment">	
+                            <div class="tbox">			
+                                <input type="text" id="comment" class="textbox" defaultValue={carComments} onChange={(e)=>setComments(e.target.value)}></input>
+                                <label htmlFor="comment" className={comments!= "" ? "input-has-value" : ""}>Add a Comment (Optional)</label>
                             </div>
+                            </div>}
                                 <div class=" col-lg-12 col-md-12">
                                     <div class="optional-services row">
                                     <h4 class=" col-lg-12">Optional Services</h4>
@@ -364,7 +413,10 @@ const MakeurBid=(props)=>{
                                     </div>
 
                                     <div className="col-lg-12 form-group customCheckbox">
+                                    {transportFlag?
+                                        <input type="checkbox" className="form-check d-inline " id="chb1" checked onClick={toggleViewSave}/>:
                                         <input type="checkbox" className="form-check d-inline " id="chb1" onClick={toggleViewSave}/>
+                                    }
                                         <label htmlFor="chb1" className="form-check-label"> Save this option for next purchase  </label>                               
                                     </div>
 
