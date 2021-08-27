@@ -1008,6 +1008,9 @@ Cars list
 }
 .cars-content {
     padding: 15px;
+    padding-bottom: 0;
+    display: inline-block;
+    width: 100%;
 }
  .cars-tag {
 	position: absolute;
@@ -3207,7 +3210,7 @@ Car Detail Page
   margin-right: 20px;
 }
 .cars-buy .cars-buy-btns-primary{
-	background-color: #999;
+	background-color: #002768;
     color: white;
     padding: 10px 30px;
     margin: 20px 0;
@@ -3216,7 +3219,7 @@ Car Detail Page
 	font-size:20px;
 }
 .cars-buy .cars-buy-btns:hover, .cars-buy .cars-buy-btns-primary:hover{
-	background-color: #002768;
+	background-color: #bd062c;
     color: white;
     text-decoration: none;
 }
@@ -3236,6 +3239,7 @@ Car Detail Page
 	color:#444;
   text-align: left;
   display: flex;
+  text-transform: capitalize;
 }
 .carspecifation span{
 	color:#808080;
@@ -3280,6 +3284,7 @@ Car Detail Page
 }
 .dealer-cars   .cars-content {
     padding: 15px;
+    padding-bottom: 0;
 }
 .dealer-cars   .cars-tag {
 	position: absolute;
@@ -3293,63 +3298,20 @@ Car Detail Page
 	display:inline;
 	font-weight:normal;
 }
-.dealer-cars   .cars-content .details {
-    margin: 0;
-    font-weight: 300;
-    font-size: 16px;
-    color: #999;
-}
+
 .dealer-cars   .car-item img{
 	width:100%;
 }
 .dealer-cars   .cars-content .details img {
-   width:20px;
-   margin-right:10px;
+   width:16px;
 }
 .dealer-cars   .cars-content h3 {
     font-weight: 700;
     font-size: 20px;
 }
-.dealer-cars   .cars-content h3 a {
-    color: #444;
-    transition: 0.3s;
-	font-size:18px;
-	font-weight:500;
-}
-.dealer-cars   .cars-content p {
-    font-size: 14px;
-    color: #999;
-}
-.dealer-cars   .cars-prices{
-	display: -ms-flexbox;    
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -ms-flex-align: center;
-    align-items: center;
-    -ms-flex-pack: end;
-    justify-content: flex-end;
-    padding:20px 0;
-    margin-top:20px;;
-    border-top: none;
-    padding-top: 2px;
-}
-.dealer-cars   .cars-prices .cta-btns {
-    background-color: #fff;
-    color: #444;
-    padding: 10px 20px;   
-	margin-right:20px;
-    border-radius: 3px;
-    border: 1px solid #444;
-	font-size:18px;
-}
-.dealer-cars   .cars-prices .cta-btns-primary {
-	font-size:18px;
-    background-color: #999;
-    color: white;
-    padding: 10px 20px;   
-    border-radius: 3px;
-    border: none;
-}
+
+
+
 .dealer-cars   .more-btn {
     display: inline-block;
     background: rgba(255, 255, 255, 0.2);
@@ -3421,8 +3383,7 @@ Car Detail Page
 	width:100%;
 }
 .other-dealer-cars    .cars-content .details img {
-   width:20px;
-   margin-right:10px;
+   width:16px;
 }
 .other-dealer-cars    .cars-content h3 {
     font-weight: 700;
@@ -3451,23 +3412,7 @@ Car Detail Page
     border-top: none;
     padding-top: 2px;
 }
-.other-dealer-cars    .cars-prices .cta-btns {
-    background-color: #fff;
-    color: #444;
-    padding: 10px 20px;   
-	margin-right:20px;
-    border-radius: 3px;
-    border: 1px solid #444;
-	font-size:18px;
-}
-.other-dealer-cars    .cars-prices .cta-btns-primary {
-	font-size:18px;
-    background-color: #999;
-    color: white;
-    padding: 10px 20px;   
-    border-radius: 3px;
-    border: none;
-}
+
 .other-dealer-cars    .more-btn {
     display: inline-block;
     background: rgba(255, 255, 255, 0.2);
@@ -7218,12 +7163,9 @@ width:100%;
 img.carImg{
   height: 280px;
   max-width: 100%;
+  object-fit: cover;
 }
 
-.favorite-cars  img.carImg{
-  height: 260px;
-  max-width: 100%;
-}
 
 .carList .models-box .inner-page{
  padding: 0;
@@ -7611,10 +7553,6 @@ margin-top: -3px;
   flex: 33.333% 1;
   max-width: 33.333%;
 }
-.vehiclesearch img.carImg {
-  height: 280px;
-  max-width: 100%;
-}
 
 .product-count.carBrand{
   text-align: left;
@@ -7725,10 +7663,11 @@ margin-top: -3px;
 .dealerType{
   float: left;
   width: 100%;
+  margin-bottom: 0 !important;
 }
 
 .dealerType .details img{
-  width: 60px;
+  width: 60px !important;
   height: 40px;
   border-radius: 3px;
   float: right;
@@ -7827,7 +7766,6 @@ margin-top: -3px;
 .makeyourbid .tbox{
   margin-bottom: 0;
 }
-
 
 
 

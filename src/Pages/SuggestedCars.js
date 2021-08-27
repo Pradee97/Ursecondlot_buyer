@@ -898,7 +898,7 @@ useEffect(() => {
                             <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
                             {carDetail.length>0?carDetail.map((item) =>
                             
-                                <div className="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                                <div className="col-lg-4 col-md-4 col-sm-6 col-xs-6">
                                     <div className="car-item">
                                         <div className="cars-lock">
                                         <img src={(item.isFavourite===0)? lock : locked} onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'recent')} />

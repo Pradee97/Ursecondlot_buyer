@@ -482,11 +482,14 @@ return(
 			<div className="d-flex align-items-center mb-3">
 				<p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{moreCar.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
 				<p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{moreCar.fuel_type}</span></p>    
+				
+
 				<p className="details buyitnow">
-				{moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined?"":
-				<a className="cta-btns" href="#">Buy It Now $ {moreCar.buy_it_now}</a>
-				}
-				</p> 
+                                                {moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined?"":
+                                                    <span>Buy It Now $ {moreCar.buy_it_now}</span>
+                                                }
+                                                </p> 
+
 			</div>
 			<div className="d-flex align-items-center mb-3 dealerType">
 				<p className="details">
@@ -544,11 +547,13 @@ return(
 							    <div className="d-flex align-items-center mb-3">
 									<p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{moreCar.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
 									<p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{moreCar.fuel_type}</span></p>    
+									
 									<p className="details buyitnow">
-									{moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined?"":
-									<a className="cta-btns" href="#">Buy It Now $ {moreCar.buy_it_now}</a>
-									}
-									</p> 
+                                                {moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined?"":
+                                                    <span>Buy It Now $ {moreCar.buy_it_now}</span>
+                                                }
+                                                </p> 
+
 								</div>
 								<div className="d-flex align-items-center mb-3 dealerType">
 									<p className="details">
