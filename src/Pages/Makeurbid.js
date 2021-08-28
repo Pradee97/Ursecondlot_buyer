@@ -163,7 +163,7 @@ const MakeurBid=(props)=>{
             return;
             
         }
-        if((carBuyItNow!=="" && carBuyItNow!== null && carBuyItNow!==undefined && carBuyItNow<highBid)){
+        if((carBuyItNow!=="" && carBuyItNow!== null && carBuyItNow!==undefined && carBuyItNow!==0 && carBuyItNow<highBid)){
             console.log("checkt the validation for the max and buy it now")
             setHighBidError("Your high Bid Price must be less than Buy it Now Price");
             return;
@@ -175,7 +175,7 @@ const MakeurBid=(props)=>{
         // }
         console.log("check proxy bid",proxyBid)
         console.log("check high bid" , highBid)
-        if((proxyBid!=="" && proxyBid!==null && proxyBid!==undefined)&& (proxyBid<=highBid)){
+        if((proxyBid!=="" && proxyBid!==null && proxyBid!==undefined && proxyBid!==0)&& (proxyBid<=highBid)){
             
             setProxyBidError("Max Bid price must be greater than high bid");
             return;
@@ -185,7 +185,7 @@ const MakeurBid=(props)=>{
             //     return;
             // }
         
-        if((carBuyItNow!=="" && carBuyItNow!== null && carBuyItNow!==undefined && carBuyItNow<proxyBid )){
+        if((carBuyItNow!=="" && carBuyItNow!== null && carBuyItNow!==undefined && carBuyItNow!==0 && carBuyItNow<proxyBid )){
             console.log("check the validation for the max and buy it now")
             setProxyBidError("Your Max Bid Price must be less than Buy it Now Price");
             return;
@@ -310,7 +310,7 @@ const MakeurBid=(props)=>{
                                 {/* {carHighBid == "" || carHighBid == null || carHighBid == undefined ? */}
                                 <div class="tbox">
 
-                                    <i>$</i><input type="text" id="highBid" class="textbox" placeholder="Your New Bid" onChange={(e)=>setHighBid(e.target.value)}></input>                             
+                                    <i>$</i><input type="number" step="50" id="highBid" class="textbox" placeholder="Your New Bid" onChange={(e)=>setHighBid(e.target.value)}></input>                             
                                     <label htmlFor="highBid" className={highBid != "" ? "input-has-value" : ""}>High Bid</label>
 
                                 </div> 
