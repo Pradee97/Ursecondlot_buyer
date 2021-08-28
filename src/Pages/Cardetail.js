@@ -258,11 +258,11 @@ return(
     <div id="products-details" class="products-details">
 	 <div class="container">
 			<div class="back-btn">
-				<a class="back-btn-primary" href="/carlist"><i class="bx bx-chevron-left"></i> Back</a>
+				<a class="back-btn-primary" onClick={() =>  history.goBack()}><i class="bx bx-chevron-left"></i> Back</a>
 			</div>
 
 	        <div class="row">
-			{carDetail.length>0 && <div class="col-md-6">
+			{carDetail.length>0 && <div class="col-md-6"> 
 
 					<div class="vehicle-detail-banner banner-content clearfix">
 						<div class="banner-slider">

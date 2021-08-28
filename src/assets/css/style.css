@@ -7775,6 +7775,19 @@ margin-top: -3px;
 }
 
 
+.makeyourbid .highbidtbox .tbox input.textbox + label {
+  padding-right: 50px;
+}
 
+.makeyourbid .highbidtbox .tbox input.textbox:focus + label, .makeyourbid .highbidtbox .tbox input.textbox + label.input-has-value{
+  padding-right: 10px;
+}
 
+.ant-btn {
+  font-size: 16px;
+}
+
+input[type="checkbox"]:disabled + label{
+  opacity: 0.5;
+}
 

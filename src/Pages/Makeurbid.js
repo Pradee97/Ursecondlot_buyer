@@ -344,7 +344,7 @@ const MakeurBid=(props)=>{
                             <div class="border-bottomtext col-lg-6 "> Segment of Bidding $ 50</div>
 
 
-                            <div class="form-group col-lg-6 col-md-6">
+                            <div class="form-group col-lg-6 col-md-6 highbidtbox">
                                 {/* {carHighBid == "" || carHighBid == null || carHighBid == undefined ? */}
                                 <div class="tbox">
 
@@ -359,7 +359,7 @@ const MakeurBid=(props)=>{
                                     
                                 </div>
                                 } */}
-                                <p className="form-input-error">{highBidError}</p>
+                                <p class="form-input-error">{highBidError}</p>
                             </div>
 {/* 
                             <input
