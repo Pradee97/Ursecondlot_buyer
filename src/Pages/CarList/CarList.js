@@ -50,7 +50,7 @@ const CarList = () => {
     const options = {
         items: 4,
     };
-    const togglePopup = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now) => {
+    const togglePopup = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,comments,transportation,display,proxy_bid) => {
         let makebiddispatch={
             high_bid: high_bid,
             min_price: min_price,
@@ -60,6 +60,10 @@ const CarList = () => {
             counter_buyerid:counterbuyerid,
             max_price:max_price,
             buy_it_now: buy_it_now,
+            comments:comments,
+            transportation:transportation,
+            display:display,
+            proxy_bid:proxy_bid,
             redirectPage:"carlist"
         }
         
@@ -123,6 +127,10 @@ const CarList = () => {
         
         dispatch(CarListAction.sellerid(seller_dealer_id))
         history.push("/cardetail/"+pathid);
+        // history.push({
+        //     pathname: '/cardetail',
+        //     state: {id:pathid},
+        //   });
     }
 
     const getFavCarList=()=>{
@@ -238,23 +246,31 @@ const CarList = () => {
                                         <div className="cars-content">
                                             <h3><a href="JavaScript:void(0)" title = {`${item.make} (${item.model}) model`}>{item.make} ({item.model} model)</a></h3>
                                             <div className="d-flex align-items-center mb-3">
-                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>    
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>   
+                                                <p className="details buyitnow">
+                                                {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
+                                                    <span>Buy It Now $ {item.buy_it_now}</span>
+                                                }
+                                                </p>
                                             </div>
-                                            <div className="d-flex align-items-center mb-3">
-                                                <p className="details"><span>{item.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <div className="d-flex align-items-center dealerType">
+                                                <p className="details">
+                                                <span className="dlrname">{item.dealer_type} </span>
+                                                <span className="dlraddress"><i class="icofont-google-map"></i> {item.location}</span>
+                                                </p>
                                                 <p className="details"><img src={item.image}/></p>
-                                            </div>
+                                            </div>                          
                                   
                                             <div className="cars-prices">
-                                                {/* <a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a> */}
-                                                {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
-                                                <a className="cta-btns" href="#">Buy It Now $ {item.buy_it_now}</a>
-                                                }
+
                                                 {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?"":
                                                 <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                                 }   
-                                                <a className="cta-btns-primary" href="JavaScript:void(0)" onClick={()=>togglePopup(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now)} >Make Bid</a>
+                                                {/* {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
+                                                <a className="cta-btns" href="#">Counter Bid $ {item.buy_it_now}</a>
+                                                } */}
+                                                <a className="cta-btns-primary" href="JavaScript:void(0)" onClick={()=>togglePopup(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid)} >Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
@@ -296,23 +312,36 @@ const CarList = () => {
                                         <div className="cars-content">
                                             <h3><a href="JavaScript:void(0)" title = {`${item.make} (${item.model}) model`}>{item.make} ({item.model} model)</a></h3>
                                             <div className="d-flex align-items-center mb-3">
-                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>    
+                                                <p className="details buyitnow">
+                                                {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
+                                                    <span>Buy It Now $ {item.buy_it_now}</span>
+                                                }
+                                                </p>
                                             </div>
-                                            <div className="d-flex align-items-center mb-3">
-                                                <p className="details"><span>{item.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <div className="d-flex align-items-center dealerType">
+                                                
+                                                <p className="details">
+                                                <span className="dlrname">{item.dealer_type} </span>
+                                                <span className="dlraddress"><i class="icofont-google-map"></i> {item.location} </span>
+                                                </p>
                                                 <p className="details"><img src={item.image}/></p>
                                             </div>
-                                           
+                                            
                                             <div className="cars-prices">
                                             {/* <a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a> */}
-                                                {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
+                                                {/* {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
                                                 <a className="cta-btns" href="#">Buy It Now $ {item.buy_it_now}</a>
-                                                }
+                                                } */}
+                                               
                                                 {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?"":
                                                 <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                                 } 
-                                                <a className="cta-btns-primary" onClick={()=>togglePopup(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now)} >Make Bid</a>
+                                                {/* {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
+                                                <a className="cta-btns" href="#">Counter Bid $ {item.buy_it_now}</a>
+                                                } */}
+                                                <a className="cta-btns-primary" onClick={()=>togglePopup(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid)} >Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
@@ -354,23 +383,35 @@ const CarList = () => {
                                         <div className="cars-content">
                                             <h3><a href="JavaScript:void(0)" title = {`${item.make} (${item.model}) model`}>{item.make} ({item.model} model)</a></h3>
                                             <div className="d-flex align-items-center mb-3">
-                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>    
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>
+                                                <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>  
+                                                <p className="details buyitnow">
+                                                {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
+                                                    <span>Buy It Now $ {item.buy_it_now}</span>
+                                                }
+                                                </p>  
                                             </div>
-                                            <div className="d-flex align-items-center mb-3">
-                                                <p className="details"><span>{item.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <div className="d-flex align-items-center dealerType">
+                                            <p className="details">
+                                                <span className="dlrname">{item.dealer_type} </span>
+                                                <span className="dlraddress"><i class="icofont-google-map"></i> {item.location} </span>
+                                                </p>
                                                 <p className="details"><img src={item.image}/></p>
                                             </div>
                                             
                                             <div className="cars-prices">
                                             {/* <a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a> */}
-                                                {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
+                                                {/* {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
                                                 <a className="cta-btns" href="#">Buy It Now $ {item.buy_it_now}</a>
-                                                }
+                                                } */}
+                                               
                                                 {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?"":
                                                 <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                                 } 
-                                                <a className="cta-btns-primary" onClick={()=>togglePopup(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now)}>Make Bid</a>
+                                                {/* {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
+                                                <a className="cta-btns" href="#">Counter Bid $ {item.buy_it_now}</a>
+                                                } */}
+                                                <a className="cta-btns-primary" onClick={()=>togglePopup(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid)}>Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
@@ -412,23 +453,35 @@ const CarList = () => {
                                 <div className="cars-content">
                                     <h3><a href="JavaScript:void(0)" title = {`${item.make} (${item.model}) model`}>{item.make} ({item.model} model)</a></h3>
                                     <div className="d-flex align-items-center mb-3">
-                                        <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>    
+                                        <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>
+                                        <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>
+                                        <p className="details buyitnow">
+                                        {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
+                                                    <span>Buy It Now $ {item.buy_it_now}</span>
+                                                }
+                                        </p>
                                     </div>
-                                    <div className="d-flex align-items-center mb-3">
-                                        <p className="details"><span>{item.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <div className="d-flex align-items-center dealerType">
+                                        <p className="details">
+                                                <span className="dlrname">{item.dealer_type} </span>
+                                                <span className="dlraddress"><i class="icofont-google-map"></i> {item.location} </span>
+                                        </p>
                                         <p className="details"><img src={item.image}/></p>
                                     </div>
-                                   
+
                                     <div className="cars-prices">
                                         {/* <a className="cta-btns" href="#">Inventory Number {item.inventory_no}</a> */}
-                                        {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
+                                        {/* {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
                                         <a className="cta-btns" href="#">Buy It Now $ {item.buy_it_now}</a>
-                                        }
+                                        } */}
+                                       
                                         {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?"":
                                         <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                         } 
-                                        <a className="cta-btns-primary" onClick={()=>togglePopup(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now)}>Make Bid</a>
+                                        {/* {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
+                                        <a className="cta-btns" href="#">Counter Bid $ {item.buy_it_now}</a>
+                                        } */}
+                                        <a className="cta-btns-primary" onClick={()=>togglePopup(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid)}>Make Bid</a>
                                     </div>
                                 </div>
                             </div>

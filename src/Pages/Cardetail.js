@@ -61,7 +61,7 @@ const [open,setOpen] = useState(false);
 
 const highBid= useSelector(state => state.CarDetailsReducer.payload.high_bid);
 
-const toggleMakeBid = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now) => {
+const toggleMakeBid = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,comments,transportation,display,proxy_bid) => {
 	console.log("check the high bid value",high_bid)
 	let makebiddispatch={
 		high_bid: high_bid,
@@ -72,7 +72,11 @@ const toggleMakeBid = (high_bid,min_price,save_purchase,car_id,time,counterbuyer
 		time:time,
 		counter_buyerid:counterbuyerid,
 		max_price:max_price,
-		buy_it_now: buy_it_now
+		buy_it_now: buy_it_now,
+		comments:comments,
+		transportation:transportation,
+		display:display,
+		proxy_bid:proxy_bid,
 	}
 	//dispatch(CarDetailsAction.highBid(high_bid))
 	console.log("checking max bid in the car details page", max_price)
@@ -254,11 +258,11 @@ return(
     <div id="products-details" class="products-details">
 	 <div class="container">
 			<div class="back-btn">
-				<a class="back-btn-primary" href="/carlist"><i class="bx bx-chevron-left"></i> Back</a>
+				<a class="back-btn-primary" onClick={() =>  history.goBack()}><i class="bx bx-chevron-left"></i> Back</a>
 			</div>
 
 	        <div class="row">
-			{carDetail.length>0 && <div class="col-md-6">
+			{carDetail.length>0 && <div class="col-md-6"> 
 
 					<div class="vehicle-detail-banner banner-content clearfix">
 						<div class="banner-slider">
@@ -305,13 +309,16 @@ return(
 	        		<div class="product-dtl">
         				<div class="product-info">
 		        			<div class="product-name">{carDetail[0].make} {carDetail[0].vehicle_type}({carDetail[0].model})</div>
-							<a  class="productdes">Inventory Number - {carDetail[0].inventory_no}</a>
+							<p  class="productdes">Inventory Number - {carDetail[0].inventory_no}</p>
 							<p class="productdes">{carDetail[0].car_description}</p>
-		        			<div class="d-flex align-items-center mb-3">
+		        			<div class="d-flex align-items-center">
 									<p class="details"><img src={speedometer}  alt=""/><span>{carDetail[0].miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
 									<p class="details"><img src={gasolinePump} alt=""/><span>{carDetail[0].fuel_type}</span></p>
 							</div>
+							{carDetail[0].dealer_message=="" || carDetail[0].dealer_message==null || carDetail[0].dealer_message== undefined?
+							<p><span class="dealertaglines">Message From The Dealer-</span> No Message</p>:
 							<p><span class="dealertaglines">Message From The Dealer-</span> {carDetail[0].dealer_message}</p>
+							}
 		        		</div>
 	        			
 	        			<div class="row">
@@ -350,8 +357,8 @@ return(
 									<a class="car-btns-primary" href=""><img src={tag} alt=""/>High Bid :<span> $ {carDetail[0].min_price}</span></a>:
 									<a class="car-btns-primary" href=""><img src={tag} alt=""/>High Bid :<span> $ {carDetail[0].high_bid}</span></a>
 									}&nbsp;&nbsp;&nbsp;&nbsp;
-									{carDetail[0].counter_bid=="" || carDetail[0].counter_bid== null || carDetail[0].counter_bid== undefined ?"":
-									<a class="car-btns-primary" href=""><img src={tag} alt=""/>Counter Bid :<span> $ {carDetail[0].counter_bid}</span></a>
+									{carDetail[0].buy_it_now=="" || carDetail[0].buy_it_now== null || carDetail[0].buy_it_now== undefined ?"":
+									<a class="car-btns-primary" href=""><img src={tag} alt=""/>Buy it Now :<span> $ {carDetail[0].buy_it_now}</span></a>
 									}
 								</div>
 								
@@ -379,9 +386,11 @@ return(
 						<div class="row">
 							<div class="col-md-12">
 	        					<div class="cars-buy">
+								{carDetail[0].buy_it_now=="" || carDetail[0].buy_it_now== null || carDetail[0].buy_it_now== undefined?"":
 									<a class="cars-buy-btns" href="#">Buy now</a>
+								}
 									{buyer_dealer_id==carDetail[0].counter_buyer_dealer_id? <a class="cars-buy-btns-primary">Highest Bid</a> :
-									<a class="cars-buy-btns-primary" onClick={()=>toggleMakeBid(carDetail[0].high_bid,carDetail[0].min_price,carDetail[0].save_purchase,carDetail[0].car_id,carDetail[0].time,carDetail[0].counter_buyer_dealer_id,carDetail[0].max_price,carDetail[0].buy_it_now)}>Make Bid</a>}
+									<a class="cars-buy-btns-primary" onClick={()=>toggleMakeBid(carDetail[0].high_bid,carDetail[0].min_price,carDetail[0].save_purchase,carDetail[0].car_id,carDetail[0].time,carDetail[0].counter_buyer_dealer_id,carDetail[0].max_price,carDetail[0].buy_it_now,carDetail[0].comments,carDetail[0].transportation,carDetail[0].display,carDetail[0].proxy_bid)}>Make Bid</a>}
 								</div>
 	        				</div>
 						</div>
@@ -476,21 +485,33 @@ return(
 			<div className="d-flex align-items-center mb-3">
 				<p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{moreCar.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
 				<p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{moreCar.fuel_type}</span></p>    
+				
+
+				<p className="details buyitnow">
+                                                {moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined?"":
+                                                    <span>Buy It Now $ {moreCar.buy_it_now}</span>
+                                                }
+                                                </p> 
+
 			</div>
-			<div className="d-flex align-items-center mb-3">
-				<p className="details"><span>{moreCar.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+			<div className="d-flex align-items-center mb-3 dealerType">
+				<p className="details">
+				<span className="dlrname">{moreCar.dealer_type} </span>
+				<span className="dlraddress"><i class="icofont-google-map"></i> {moreCar.location}</span>
+				</p>
 				<p className="details"><img src={moreCar.image}/></p>
 			</div>
 				
 				<div class="cars-prices">
 					{/* <a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a> */}
-					{moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined?"":
-					<a className="cta-btns" href="#">Buy It Now $ {moreCar.buy_it_now}</a>
-					}
+					
 					{moreCar.high_bid=="" || moreCar.high_bid==null || moreCar.high_bid==undefined?"":
 					<a className="cta-btns" href="#">High Bid $ {moreCar.high_bid}</a>
 					}
-					<a class="cta-btns-primary" onClick={()=>toggleMakeBid(moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now)}>Make Bid</a>
+					{/* {moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined?"":
+					<a className="cta-btns" href="#">Counter Bid $ {moreCar.buy_it_now}</a>
+					} */}
+					<a class="cta-btns-primary" onClick={()=>toggleMakeBid(moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now,moreCar.comments,moreCar.transportation,moreCar.display,moreCar.proxy_bid)}>Make Bid</a>
 				</div>
               </div>
             </div>
@@ -529,21 +550,31 @@ return(
 							    <div className="d-flex align-items-center mb-3">
 									<p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{moreCar.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
 									<p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{moreCar.fuel_type}</span></p>    
+									
+									<p className="details buyitnow">
+                                                {moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined?"":
+                                                    <span>Buy It Now $ {moreCar.buy_it_now}</span>
+                                                }
+                                                </p> 
+
 								</div>
-								<div className="d-flex align-items-center mb-3">
-									<p className="details"><span>{moreCar.dealer_type} </span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+								<div className="d-flex align-items-center mb-3 dealerType">
+									<p className="details">
+									<span className="dlrname">{moreCar.dealer_type} </span>
+									<span className="dlraddress"><i class="icofont-google-map"></i> {moreCar.location}</span>
+									</p>
 									<p className="details"><img src={moreCar.image}/></p>
 								</div>
 								
 								<div class="cars-prices">
-									{/* <a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a> */}
-									{moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined?"":
-									<a className="cta-btns" href="#">Buy It Now $ {moreCar.buy_it_now}</a>
-									}
+
 									{moreCar.high_bid=="" || moreCar.high_bid==null || moreCar.high_bid==undefined?"":
 									<a className="cta-btns" href="#">High Bid $ {moreCar.high_bid}</a>
 									}
-									<a class="cta-btns-primary" onClick={()=>toggleMakeBid( moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now)}>Make Bid</a>
+									{/* {moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined?"":
+									<a className="cta-btns" href="#">Counter Bid $ {moreCar.buy_it_now}</a>
+									} */}
+									<a class="cta-btns-primary" onClick={()=>toggleMakeBid( moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now,moreCar.comments,moreCar.transportation,moreCar.display,moreCar.proxy_bid)}>Make Bid</a>
 								</div>
 							  </div>
 							</div>
