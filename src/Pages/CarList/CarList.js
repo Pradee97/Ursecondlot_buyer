@@ -277,9 +277,11 @@ const CarList = () => {
                                 </div>):""}
                                {/* </div> */}
                                </OwlCarousel>
+                               {suggestedCarDetail.length > 0 && suggestedCarDetail.length >4 ? suggestedCarDetail.slice(0,1)
+                                .map(() =>
                             <div className="text-center">
                                 <a href="/suggestedcars" className="more-btn">View More <i className="bx bx-chevron-right"></i></a>
-                            </div>
+                            </div>):""}
                         </div>
                     </div>
 
@@ -347,10 +349,11 @@ const CarList = () => {
                                     </div>
                                 </div>):""}
                                 </OwlCarousel>
-
+                             {suggestedCarDetail.length > 0 && suggestedCarDetail.length >4 ? suggestedCarDetail.slice(0,1)
+                                .map(() =>
                             <div className="text-center">
                                 <a href="/InventoryCars" className="more-btn">View More<i className="bx bx-chevron-right"></i></a>
-                            </div>
+                            </div>):""}
                         </div>
                     </div>
 
@@ -417,9 +420,11 @@ const CarList = () => {
                                     </div>
                                 </div>):""}
                                 </OwlCarousel>
+                                {carDetail.length > 0 && carDetail.length >4 ? carDetail.slice(0,1)
+                                .map(() =>
                             <div className="text-center">
                                 <a href="/recentlyAddedCars" className="more-btn">View More<i className="bx bx-chevron-right"></i></a>
-                            </div>
+                            </div>):""}
                         </div>
                     </div>
                     
@@ -488,11 +493,12 @@ const CarList = () => {
                         </div>):""}
                         </OwlCarousel>
                         </div>
-
-
+                        
+                        {carFavInventoryDetail.length > 0 && carFavInventoryDetail.length >4 ? carFavInventoryDetail.slice(0,1)
+                                .map(() =>
                         <div className="text-center">
                             <a href="/favorite" className="more-btn">View More  <i className="bx bx-chevron-right"></i></a>
-                        </div>
+                        </div>):""}
                     </div>
         
 

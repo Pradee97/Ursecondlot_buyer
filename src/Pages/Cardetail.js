@@ -388,8 +388,8 @@ return(
 								{carDetail[0].buy_it_now=="" || carDetail[0].buy_it_now== null || carDetail[0].buy_it_now== undefined?"":
 									<a class="cars-buy-btns" href="#">Buy now</a>
 								}
-									{buyer_dealer_id==carDetail[0].counter_buyer_dealer_id? <a class="cars-buy-btns-primary">Highest Bid</a> :
-									<a class="cars-buy-btns-primary" onClick={()=>toggleMakeBid(carDetail[0].high_bid,carDetail[0].min_price,carDetail[0].save_purchase,carDetail[0].car_id,carDetail[0].time,carDetail[0].counter_buyer_dealer_id,carDetail[0].max_price,carDetail[0].buy_it_now,carDetail[0].comments,carDetail[0].transportation,carDetail[0].display,carDetail[0].proxy_bid)}>Make Bid</a>}
+									
+									<a class="cars-buy-btns-primary" onClick={()=>toggleMakeBid(carDetail[0].high_bid,carDetail[0].min_price,carDetail[0].save_purchase,carDetail[0].car_id,carDetail[0].time,carDetail[0].counter_buyer_dealer_id,carDetail[0].max_price,carDetail[0].buy_it_now,carDetail[0].comments,carDetail[0].transportation,carDetail[0].display,carDetail[0].proxy_bid)}>Make Bid</a>
 								</div>
 	        				</div>
 						</div>
@@ -518,7 +518,7 @@ return(
 		 		
 		  ):""}
 		  </div>
-		  {sellerCarDetail.length > 0 ? sellerCarDetail.slice(0,1)
+		  {sellerCarDetail.length > 0 && sellerCarDetail.length >4? sellerCarDetail .slice(0,1)
                             .map((moreCar,index) =>
 		<div class="text-center">
                 <a href="JavaScript:void(0)" onClick={()=>{redirectpagemorecarseller(moreCar.seller_dealer_id)}} class="more-btn">View More<i class="bx bx-chevron-right"></i></a>
@@ -580,7 +580,7 @@ return(
 						  </div>):""}
 				
 		  </div>
-		  {otherDealerCarDetail.length > 0 ? otherDealerCarDetail.slice(0,1)
+		  {otherDealerCarDetail.length > 0 && otherDealerCarDetail.length >4 ? otherDealerCarDetail.slice(0,1)
                             .map((moreCar,index) =>
 		<div class="text-center">
                 <a href="#" class="more-btn"  onClick={()=>{redirectpagesimilarcar(carDetail[0].make)}} >View More<i class="bx bx-chevron-right"></i></a>
