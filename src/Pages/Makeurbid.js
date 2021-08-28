@@ -23,7 +23,7 @@ const MakeurBid=(props)=>{
     const [carBuyItNow,setCarBuyItNow] = useState(useSelector(state => state.CarDetailsReducer.payload.buy_it_now));
     const [carComments,setCarComments] = useState(useSelector(state => state.CarDetailsReducer.payload.comments));
     const [carDisplay,setCarDisplay] = useState(useSelector(state => state.CarDetailsReducer.payload.display));
-    const [carTransportation,setCarTransportation] = useState(useSelector(state => state.CarDetailsReducer.payload.transportation));
+    const [carTransportation,setCarTransportation] = useState(useSelector(state => state.CarDetailsReducer.payload.save_purchase === "yes" ? state.CarDetailsReducer.payload.transportation : "no"));
     const [carSavePurchase,setCarSavePurchase] = useState(useSelector(state => state.CarDetailsReducer.payload.save_purchase));
     const [carProxyBid,setCarProxyBid] = useState(useSelector(state => state.CarDetailsReducer.payload.proxy_bid));
     const [make,setMake] = useState(useSelector(state => state.CarDetailsReducer.payload.make));
@@ -176,8 +176,9 @@ const MakeurBid=(props)=>{
         
         }
 
-        if((proxyBid!=="" && proxyBid!==null && proxyBid!==undefined && proxyBid!==0)&& (proxyBid>=highBid)){
-            
+        if((proxyBid!=="" && proxyBid!==null && proxyBid!==undefined && proxyBid!==0)&& (Number(proxyBid)<=Number(highBid))){
+            console.log("highBid===",highBid)
+            console.log("proxyBid===",proxyBid)
             setProxyBidError("Max Bid price must be greater than high bid");
             return;
         }
