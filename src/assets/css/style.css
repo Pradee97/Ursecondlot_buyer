@@ -7787,4 +7787,7 @@ margin-top: -3px;
   font-size: 16px;
 }
 
+input[type="checkbox"]:disabled + label{
+  opacity: 0.5;
+}
 
