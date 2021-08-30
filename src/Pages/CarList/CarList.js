@@ -274,7 +274,7 @@ const CarList = () => {
                                             </div>
                                         </div>
                                     </div>
-                                </div>):""}
+                                </div>): <div className="floor_notfiled_block"><p>Suggested Cars is not added yet</p></div>}
                                {/* </div> */}
                                </OwlCarousel>
                                {suggestedCarDetail.length >4 ? suggestedCarDetail.slice(0,1)
@@ -347,9 +347,9 @@ const CarList = () => {
                                             </div>
                                         </div>
                                     </div>
-                                </div>):""}
+                                </div>): <div className="floor_notfiled_block"><p> Inventory Cars is not added yet</p></div> }
                                 </OwlCarousel>
-                             {carInventoryDetail.length >4 ? suggestedCarDetail.slice(0,1)
+                             {carInventoryDetail.length >4 ? carInventoryDetail.slice(0,1)
                                 .map(() =>
                             <div className="text-center">
                                 <a href="/InventoryCars" className="more-btn">View More<i className="bx bx-chevron-right"></i></a>
@@ -418,7 +418,7 @@ const CarList = () => {
                                             </div>
                                         </div>
                                     </div>
-                                </div>):""}
+                                </div>): <div className="floor_notfiled_block"><p> RecentlyAdded Cars is not added yet</p></div> }
                                 </OwlCarousel>
                                 {carDetail.length >4 ? carDetail.slice(0,1)
                                 .map(() =>
@@ -490,7 +490,7 @@ const CarList = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>):""}
+                        </div>): <div className="floor_notfiled_block"><p> Favorite Cars is not added yet</p></div> }
                         </OwlCarousel>
                         </div>
                         
