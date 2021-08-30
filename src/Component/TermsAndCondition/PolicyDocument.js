@@ -2,7 +2,7 @@ import React from 'react';
 
 
 
-const Terms = (props) => {
+const PolicyDocument = (props) => {
   return (
     <>
         <div id="termspage" className="termspage">
@@ -18,7 +18,7 @@ const Terms = (props) => {
                                 1.	The Urs Second Lot is Dealers only Auction. Absolutely no retail buyers are allowed on the premises.<br></br>
                                 2.	All Dealers must be registered with this auction to buy or sell vehicles. Dealers must be registered before doing any business.<br></br>
                                 3.	All cars purchased must be paid for on the day of the sale either by cash, check, of floor plan.<br></br>
-                                4.	Absolutely – no children or anyone under 18 years of age on Auction grounds.<br></br>
+                                {/* 4.	Absolutely – no children or anyone under 18 years of age on Auction grounds.<br></br>
                                 5.	Auction place to trade automobile could be danger for our safety therefore enter auction on your risk.<br></br>
                                 6.	Must follow come sense for the following:<br></br>
                                 i.	Never stand between cars in auction building.<br></br>
@@ -28,47 +28,47 @@ const Terms = (props) => {
                                 v.	Do not hassle or hustle the drivers, while they are driving or are in a vehicle.<br></br>
                                 vi.	Extreme caution must be used when walking around moving vehicles. Never turn you back to a moving vehicle.<br></br>
                                 vii.Use extreme caution while you or your employees are driving on auction lot.<br></br>
-                                viii.Do not consign any vehicle for sale with bad breaks, fuel leaks, or that start in gear without notifying south Chicago auto auction of the problem first.<br></br>
-                                7.	The dealer owner is the only person authorized to add or delete an Authorized representative.<br></br>
-                                8.	Buyer must pay for vehicle in sale day with cash or a separate company check. The dealership name as indicated on the state license must be imprinted on the company check. No personal or second party checks can be accepted.<br></br>
-                                9.	Cars left on the property must have their keys left in them. Auction is not responsible for any damage, theft or vandalism.<br></br>
-                                10.	The dealer owner is responsible for retrieving an auction identification card in the event of deletion of an authorized representative.<br></br>
-                                11.	The auction assumes absolutely no responsibility for mileage discrepancies. We are only an agent and are not the buyer or seller of cars.<br></br>
-                                12.	No vehicle will be offered for sale without proper serial number identification or correct serial number plate.<br></br>
-                                13.	All dealers and their representatives agree to follow the rules and arbitration polices of this auction at all times.<br></br>
-                                14.	All titles submitted by seller must be in seller’s company name on title or reassignment form – alterations, erasures, or damaged titles will not be accepted.<br></br>
-                                15.	All title attached “TA” sales must be announced. Failure to announce “TA” sales is grounds for rejection.<br></br>
-                                16.	Seller must produce an assignable title within twenty eight (28) days.<br></br>
-                                17.	Buyers are cautioned not to spend any money on “TA” cars until they receive the title. Buyer are also reminded that they are responsible for any physical or mechanical damage that occurs to the car while waiting for the titles. Urs Second Lot will not reimburse any expenses on vehicles returned for lack of titles.<br></br>
-                                18.	After the 28th day the buyer may bring the car back. However, after the 28th day if the title reaches this auction prior to the vehicle being returned, a return will not be allowed. Buyer must notify the auction before the car return, without notice the auction will not be responsible if the seller presents the title in time been ( 3 days from notice otherwise it will be void return)<br></br>
-                                19.	Buyer must check the car back in sell ( auction premises) for no title otherwise the buyer is responsible for automobile.<br></br>
-                                20.	If the seller cannot produce a title and car is returned, the seller will be charged a $100.00 processing fee.<br></br>
-                                21.	Salvage title, previous salvage titles, rebuilt salvage titles, or junk titles must be announced. (salvage titled vehicles can only be sold to salvage licensed dealers.)<br></br>
-                                22.	All dealers must repurchased vehicles with undisclosed title history: i.e. salvage, fire, junk, rebuilt, theft recovery, flood, etc. buyers have 30 days to notify this auction regarding an undisclosed permanently branded title.<br></br>
-                                23.	It is the seller’s obligation to correct any errors made by the auction as to announce “conditions” or information displayed on the vehicle or sale ticket.<br></br>
-                                24.	Seller __ other than announced conditions are not binding on the auction. The auction will not be responsible for administrative errors.<br></br>
-                                25.	South Chicago Auto Auction reserves the right to void any transaction.<br></br>
-                                26.	All cars needing fuel will be charged $9.00.<br></br>
-                                27.	All vehicles are subject to search prior to leaving the auction.<br></br>
-                                28.	All consigned vehicles must be run across the auction block. Any outside transactions must be consummated through Auction management. All sales will be strictly sold “as is”.<br></br>
-                                29.	Buyers are urged to inspected vehicles prior to bidding. Visible flaws and defects; i.e. glass spare tires, body damage, etc. are not arbitratable.<br></br>
-                                30.	The auction does not guarantee manufacturer’s warranty, warranty brooks or plates.<br></br>
-                                31.	The test track is provided to allow an opportunity to determine general reliability issues. It is not to be used as a race track and/or as a tool to caused damage to a vehicle to allow for arbitration and/or rejection.<br></br>
-                                32.	It is the buyer’s responsibility to pay attention to announcements when bidding on a car. If a buyer is unsure why a light is on the sale ticket.<br></br>
-                                33.	Urs Second Lot does not guarantee years of trailers, boats, outboard motors, motorcycle, antique cars or recreational vehicles. These vehicles are always sold “as is.”<br></br>
-                                34.	All dealers must have an approved gate pass in order to remove a vehicle from Urs Second Lot premises.<br></br>
-                                35.	Vehicles left on auction premises are at the owner’s request and risk. All vehicles must have keys in them. Urs Second Lot will not be held responsible for loss or damage (including lost keys).<br></br>np
-                                36.	Changes in dealer registration information such as ownership, authorized buyers, bank, or other pertinent information must be recorded in writing with Urs Second Lot.<br></br>
-                                37.	Urs Second Lot will do everything possible to assist buyers and sellers. Under no circumstances will Urs Second Lot be obligated to buy or take possession of any vehicle for any reason.<br></br>
-                                38.	All 10 years or older vehicle are sold AS IS – no guarantee unless noted otherwise on block ticket.<br></br>
-                                39.	Buyers are responsible for verifying serial numbers and mileage and year reading on all purchases before leaving the sale.<br></br>
-                                40.	When “Title Attached” is not announced at block – buyer has the right to reject vehicle day of sale.<br></br>
-                                41.	Cars sold T/A must be sold with the correct mileage announced or a seller’s fee will apply.<br></br>
-                                42.	If a purchased vehicle title has a correction affidavit attached, Urs Second Lot will not be held responsible if buyer’s state does not accept the correction affidavit.<br></br>
-                                43.	 Urs Second Lot reserves the right to refuse business to anyone at anytime.<br></br>
-                                44.	All if transaction is “one way Ifs” on selling price only. If selling price is agreed upon by seller, the “Buyer” owns the vehicle, subject to regular auction rules. Selling price must be within 11/2 hour of sale time or transaction then becomes a “2 way IF.” Fleet and lease IF’s are one way until 5:00 p.m on sale day.<br></br>
-                                45.	NSF check fee is $150.00 plus check.<br></br>
-                                46.	TA ARBITRATION – NO TITLE The buyer may return a vehicle for no title if the auction has not received a negotiable title from the seller by the end of 28 days). The buyer should use caution against selling or incurring costs, including freight, on any vehicle returned for TA arbitration. The buyer must notify the auction prior to a vehicle being returned. Vehicles should not be drive other than to and from the auction. There will be a $100 no title fee to the seller for all vehicles returned for no title.<br></br>
+                                viii.Do not consign any vehicle for sale with bad breaks, fuel leaks, or that start in gear without notifying south Chicago auto auction of the problem first.<br></br> */}
+                                4.	The dealer owner is the only person authorized to add or delete an Authorized representative.<br></br>
+                                5.	Buyer must pay for vehicle in sale day with cash or a separate company check. The dealership name as indicated on the state license must be imprinted on the company check. No personal or second party checks can be accepted.<br></br>
+                                {/* 9.	Cars left on the property must have their keys left in them. Auction is not responsible for any damage, theft or vandalism.<br></br> */}
+                                6.	The dealer owner is responsible for retrieving an auction identification card in the event of deletion of an authorized representative.<br></br>
+                                7.	The auction assumes absolutely no responsibility for mileage discrepancies. We are only an agent and are not the buyer or seller of cars.<br></br>
+                                8.	No vehicle will be offered for sale without proper serial number identification or correct serial number plate.<br></br>
+                                9.	All dealers and their representatives agree to follow the rules and arbitration polices of this auction at all times.<br></br>
+                                10.	All titles submitted by seller must be in seller’s company name on title or reassignment form – alterations, erasures, or damaged titles will not be accepted.<br></br>
+                                11.	All title attached “TA” sales must be announced. Failure to announce “TA” sales is grounds for rejection.<br></br>
+                                12.	Seller must produce an assignable title within twenty eight (28) days.<br></br>
+                                13.	Buyers are cautioned not to spend any money on “TA” cars until they receive the title. Buyer are also reminded that they are responsible for any physical or mechanical damage that occurs to the car while waiting for the titles. Urs Second Lot will not reimburse any expenses on vehicles returned for lack of titles.<br></br>
+                                14.	After the 28th day the buyer may bring the car back. However, after the 28th day if the title reaches this auction prior to the vehicle being returned, a return will not be allowed. Buyer must notify the auction before the car return, without notice the auction will not be responsible if the seller presents the title in time been ( 3 days from notice otherwise it will be void return)<br></br>
+                                15.	Buyer must check the car back in sell ( auction premises) for no title otherwise the buyer is responsible for automobile.<br></br>
+                                16.	If the seller cannot produce a title and car is returned, the seller will be charged a $100.00 processing fee.<br></br>
+                                17.	Salvage title, previous salvage titles, rebuilt salvage titles, or junk titles must be announced. (salvage titled vehicles can only be sold to salvage licensed dealers.)<br></br>
+                                18.	All dealers must repurchased vehicles with undisclosed title history: i.e. salvage, fire, junk, rebuilt, theft recovery, flood, etc. buyers have 30 days to notify this auction regarding an undisclosed permanently branded title.<br></br>
+                                19.	It is the seller’s obligation to correct any errors made by the auction as to announce “conditions” or information displayed on the vehicle or sale ticket.<br></br>
+                                20.	Seller __ other than announced conditions are not binding on the auction. The auction will not be responsible for administrative errors.<br></br>
+                                21.	South Chicago Auto Auction reserves the right to void any transaction.<br></br>
+                                22.	All cars needing fuel will be charged $9.00.<br></br>
+                                23.	All vehicles are subject to search prior to leaving the auction.<br></br>
+                                24.	All consigned vehicles must be run across the auction block. Any outside transactions must be consummated through Auction management. All sales will be strictly sold “as is”.<br></br>
+                                25.	Buyers are urged to inspected vehicles prior to bidding. Visible flaws and defects; i.e. glass spare tires, body damage, etc. are not arbitratable.<br></br>
+                                26.	The auction does not guarantee manufacturer’s warranty, warranty brooks or plates.<br></br>
+                                27.	The test track is provided to allow an opportunity to determine general reliability issues. It is not to be used as a race track and/or as a tool to caused damage to a vehicle to allow for arbitration and/or rejection.<br></br>
+                                28.	It is the buyer’s responsibility to pay attention to announcements when bidding on a car. If a buyer is unsure why a light is on the sale ticket.<br></br>
+                                29.	Urs Second Lot does not guarantee years of trailers, boats, outboard motors, motorcycle, antique cars or recreational vehicles. These vehicles are always sold “as is.”<br></br>
+                                30.	All dealers must have an approved gate pass in order to remove a vehicle from Urs Second Lot premises.<br></br>
+                                31.	Vehicles left on auction premises are at the owner’s request and risk. All vehicles must have keys in them. Urs Second Lot will not be held responsible for loss or damage (including lost keys).<br></br>np
+                                32.	Changes in dealer registration information such as ownership, authorized buyers, bank, or other pertinent information must be recorded in writing with Urs Second Lot.<br></br>
+                                33.	Urs Second Lot will do everything possible to assist buyers and sellers. Under no circumstances will Urs Second Lot be obligated to buy or take possession of any vehicle for any reason.<br></br>
+                                34.	All 10 years or older vehicle are sold AS IS – no guarantee unless noted otherwise on block ticket.<br></br>
+                                35.	Buyers are responsible for verifying serial numbers and mileage and year reading on all purchases before leaving the sale.<br></br>
+                                36.	When “Title Attached” is not announced at block – buyer has the right to reject vehicle day of sale.<br></br>
+                                37.	Cars sold T/A must be sold with the correct mileage announced or a seller’s fee will apply.<br></br>
+                                38.	If a purchased vehicle title has a correction affidavit attached, Urs Second Lot will not be held responsible if buyer’s state does not accept the correction affidavit.<br></br>
+                                39.	 Urs Second Lot reserves the right to refuse business to anyone at anytime.<br></br>
+                                40.	All if transaction is “one way Ifs” on selling price only. If selling price is agreed upon by seller, the “Buyer” owns the vehicle, subject to regular auction rules. Selling price must be within 11/2 hour of sale time or transaction then becomes a “2 way IF.” Fleet and lease IF’s are one way until 5:00 p.m on sale day.<br></br>
+                                41.	NSF check fee is $150.00 plus check.<br></br>
+                                42.	TA ARBITRATION – NO TITLE The buyer may return a vehicle for no title if the auction has not received a negotiable title from the seller by the end of 28 days). The buyer should use caution against selling or incurring costs, including freight, on any vehicle returned for TA arbitration. The buyer must notify the auction prior to a vehicle being returned. Vehicles should not be drive other than to and from the auction. There will be a $100 no title fee to the seller for all vehicles returned for no title.<br></br>
                                 </p>
                                 <h6>Odometers</h6>
                                 <p>
@@ -144,4 +144,4 @@ const Terms = (props) => {
   );
 }
 
-export default Terms;
+export default PolicyDocument;
