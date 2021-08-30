@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {  useHistory, useParams } from "react-router-dom";
 import API from "../Services/BaseService";
 import Popup from '../Component/Popup/Popup';
-import Terms from '../Component/TermsAndCondition/TermsAndCondition';
+import Terms from '../Component/TermsAndCondition/PolicyDocument';
 import CommonPopup from '../Component/CommonPopup/CommonPopup';
 import Item from 'antd/lib/list/Item';
 import checkImg from '../../src/assets/img/check.svg';
@@ -340,8 +340,8 @@ const MakeurBid=(props)=>{
                             <div class="row content">	
                             
                             {carHighBid == "" || carHighBid == null || carHighBid == undefined ?
-                            <div class="border-bottomtext col-lg-6 ">Your bid can't be Lower than $ {carMinBid}</div>:
-                            <div class="border-bottomtext col-lg-6 ">Your bid can't be Lower than $ {carHighBid}</div>}
+                            <div class="border-bottomtext col-lg-6 ">Your bid can't be Lower than $ {carMinBid+50}</div>:
+                            <div class="border-bottomtext col-lg-6 ">Your bid can't be Lower than $ {carHighBid+50}</div>}
                             <div class="border-bottomtext col-lg-6 "> Segment of Bidding $ 50</div>
 
 
@@ -391,13 +391,13 @@ const MakeurBid=(props)=>{
                                 <div class="tbox">
 
                                 <i>$</i><input type="text" id="proxyBid" class="textbox" defaultValue="" onChange={(e)=>highProxyBidValidation(e.target.value)}></input>
-                                <label htmlFor="proxyBid" className={proxyBid != "" ? "input-has-value" : ""}>Max Bid</label>
+                                <label htmlFor="proxyBid" className={proxyBid != "" ? "input-has-value" : ""}>Max Proxy Bid</label>
                                     
                                 </div>:
                                 <div class="tbox">
 
                                 <i>$</i><input type="text" id="proxyBid" class="textbox" defaultValue={carProxyBid} onChange={(e)=>setProxyBid(e.target.value)}></input>
-                                <label htmlFor="proxyBid" className={proxyBid != "" ? "input-has-value" : ""}>Max Bid</label>
+                                <label htmlFor="proxyBid" className={proxyBid != "" ? "input-has-value" : ""}>Max Proxy Bid</label>
                                
                                 </div>
                                  }
