@@ -397,13 +397,13 @@ const MakeurBid=(props)=>{
                                 <div class="tbox">
 
                                 <i>$</i><input type="text" id="proxyBid" class="textbox" defaultValue="" onChange={(e)=>highProxyBidValidation(e.target.value)}></input>
-                                <label htmlFor="proxyBid" className={proxyBid != "" ? "input-has-value" : ""}>Max Proxy Bid</label>
+                                <label htmlFor="proxyBid" className={proxyBid != "" ? "input-has-value" : ""}>Maximum Proxy Bid</label>
                                     
                                 </div>:
                                 <div class="tbox">
 
                                 <i>$</i><input type="text" id="proxyBid" class="textbox" defaultValue={carProxyBid} onChange={(e)=>setProxyBid(e.target.value)}></input>
-                                <label htmlFor="proxyBid" className={proxyBid != "" ? "input-has-value" : ""}>Max Proxy Bid</label>
+                                <label htmlFor="proxyBid" className={proxyBid != "" ? "input-has-value" : ""}>Maximum Proxy Bid</label>
                                
                                 </div>
                                  }
