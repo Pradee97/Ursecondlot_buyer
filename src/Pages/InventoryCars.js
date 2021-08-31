@@ -60,8 +60,44 @@ const InventoryCars = () => {
 	const [viewMoreBodyStyle,setViewMoreBodyStyle]=useState(false);
 
 	const [isOpen, setIsOpen] = useState(false);
-	const highBid= useSelector(state => state.CarDetailsReducer.payload.high_bid);
+	// const highBid= useSelector(state => state.CarDetailsReducer.payload.high_bid);
 	
+	const [highBid,setHighBid] = useState(null);
+	const [makeBitData, setMakeBitData] = useState({})
+	
+	const getMakeBitValue = (data) => {
+		const highBid = data
+		setHighBid(highBid)
+	}
+
+
+	const toggleMakeBid = () => {
+		setIsOpen(!isOpen);
+	}
+	const setMakeBitValue = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,comments,transportation,display,proxy_bid) => {
+		console.log("check the toggle make bid value")
+		setMakeBitData({
+			carHighBid: high_bid,
+			carMaxBid: min_price,
+			carId : car_id,
+			carSavePurchase: save_purchase,
+			redirectPage: "inventorycars",
+			time:time,
+			counter_buyerid:counterbuyerid,
+			carMaxBid :max_price,
+			buyItNow: buy_it_now,
+			comments:comments,
+			transportation:transportation,
+			display:display,
+			carProxyBid:proxy_bid,
+		})
+	
+		toggleMakeBid()
+		
+		
+		
+	}
+
     const getInventoryCarList=()=>{
 
         let request={
@@ -80,34 +116,38 @@ const InventoryCars = () => {
         }).catch(err=>{console.log(err);});
 	}
 	
-	const toggleMakeBid = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,comments,transportation,display,proxy_bid) => {
-		console.log("check the high bid value",high_bid)
-		let makebiddispatch={
-			high_bid: high_bid,
-			min_price: min_price,
-			car_id : car_id,
-			save_purchase: save_purchase,
-			time:time,
-			counter_buyerid:counterbuyerid,
-			max_price:max_price,
-			buy_it_now: buy_it_now,
-			comments:comments,
-			transportation:transportation,
-			display:display,
-			proxy_bid:proxy_bid,
-			redirectPage: "inventorycars"
-		}
+	// const toggleMakeBid = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,comments,transportation,display,proxy_bid) => {
+	// 	console.log("check the high bid value",high_bid)
+	// 	let makebiddispatch={
+	// 		high_bid: high_bid,
+	// 		min_price: min_price,
+	// 		car_id : car_id,
+	// 		save_purchase: save_purchase,
+	// 		time:time,
+	// 		counter_buyerid:counterbuyerid,
+	// 		max_price:max_price,
+	// 		buy_it_now: buy_it_now,
+	// 		comments:comments,
+	// 		transportation:transportation,
+	// 		display:display,
+	// 		proxy_bid:proxy_bid,
+	// 		redirectPage: "inventorycars"
+	// 	}
 		//dispatch(CarDetailsAction.highBid(high_bid))
-		dispatch(CarDetailsAction.minBid(makebiddispatch))
+	// 	dispatch(CarDetailsAction.minBid(makebiddispatch))
 		
-		setIsOpen(!isOpen);
-	}
+	// 	setIsOpen(!isOpen);
+	// }
 
     const redirectpage=(pathid,seller_dealer_id)=>{
         //e.preventDefault();
         console.log("seller_dealer_id+++++",seller_dealer_id)
         dispatch(CarListAction.sellerid(seller_dealer_id))
-        history.push("/cardetail/"+pathid);
+		// history.push("/cardetail/"+pathid);
+		history.push({
+            pathname: '/cardetail',
+            state: {id:pathid},
+          });
     }
 
     const addRemoveFavourite=(carid,state,flag)=>{
@@ -881,8 +921,8 @@ useEffect(() => {
                                         <div className="cars-lock">
                                         <img src={(item.isFavourite===0)? lock : locked} onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'inv')} />
                                         </div>
-                                        <a href="/Cardetail">
-                                        <img className="carImg" src={item.image} onClick={()=>{redirectpage(item.car_id,item.seller_dealer_id)}} className="carImg" alt="..." /></a>
+                                      
+                                        <img className="carImg" src={item.image} onClick={()=>{redirectpage(item.car_id,item.seller_dealer_id)}} alt="..." />
                                         {item.isbestSale?
                                         <div className="cars-tag">
                                             <h4>{item.deal_name}</h4>
@@ -915,7 +955,7 @@ useEffect(() => {
 												{/* {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
 												<a className="cta-btns" href="#">Counter Bid $ {item.buy_it_now}</a>
 												}  */}
-                                                <a className="cta-btns-primary" onClick={()=>toggleMakeBid(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid)}>Make Bid</a>
+                                                <a className="cta-btns-primary" onClick={()=>setMakeBitValue(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid)}>Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
@@ -929,7 +969,7 @@ useEffect(() => {
 					{isOpen && <Popup
 						isClose={false}
 						content={<>
-							<Makeurbid toggle={toggleMakeBid} />
+							<Makeurbid toggle={toggleMakeBid} setMakeBitValue={makeBitData} getMakeBitValue={getMakeBitValue} />
 						</>}
 						handleClose={toggleMakeBid}
 					/>}
