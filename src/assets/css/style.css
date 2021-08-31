@@ -7803,6 +7803,7 @@ input[type="checkbox"]:disabled + label{
 
 .offerDetailsBlock hr{
   margin-bottom: 20px;
+  margin-top: 20px;
 } 
 
 
@@ -7828,6 +7829,7 @@ input[type="checkbox"]:disabled + label{
 .offerMade{
   color: green;
   text-align: center;
+  margin-bottom: 15px;
 }
 
 .divTable
@@ -7877,3 +7879,15 @@ input[type="checkbox"]:disabled + label{
       width: 100%;
       border-top: #ddd solid 1px;
     }
+
+.offerDetail .left{
+  display: inline-block;
+}
+
+.offerDetail .carBrand{
+ float: right;
+}
+
+.offerDetail p{
+  margin: 0;
+}

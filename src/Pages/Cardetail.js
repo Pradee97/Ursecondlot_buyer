@@ -472,7 +472,7 @@ return(
 							</div>
 							<hr></hr>
 							<div className="offerDetail">
-								<div>
+								<div className="left">
 								<h3>High Bid</h3>
 								<div className="offerPrice">$ {carDetail[0].high_bid}</div>
 								{carDetail[0].buyer_high_bid==carDetail[0].high_bid?
@@ -480,7 +480,7 @@ return(
 								<p>by <span>{carDetail[0].high_bid_buyer_name}</span></p>
 								}
 								</div>
-								<div class="product-count carBrand">	        				
+								<div class="carBrand">	        				
 									<img src={carbrand}  alt=""/>
 								</div>
 							
