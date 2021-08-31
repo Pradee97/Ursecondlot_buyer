@@ -25,7 +25,43 @@ const SimilarCarFromSeller = () =>{
     const [loading,setLoading] = useState(true);
 
     const [isOpen, setIsOpen] = useState(false);
-	  const highBid= useSelector(state => state.CarDetailsReducer.payload.high_bid);
+	  // const highBid= useSelector(state => state.CarDetailsReducer.payload.high_bid);
+
+    const [highBid,setHighBid] = useState(null);
+    const [makeBitData, setMakeBitData] = useState({})
+    
+    const getMakeBitValue = (data) => {
+      const highBid = data
+      setHighBid(highBid)
+    }
+  
+  
+    const toggleMakeBid = () => {
+      setIsOpen(!isOpen);
+    }
+    const setMakeBitValue = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,comments,transportation,display,proxy_bid) => {
+      console.log("check the toggle make bid value")
+      setMakeBitData({
+        carHighBid: high_bid,
+        carMaxBid: min_price,
+        carId : car_id,
+        carSavePurchase: save_purchase,
+        redirectPage: "similarcarfrombuyer",
+        time:time,
+        counter_buyerid:counterbuyerid,
+        carMaxBid :max_price,
+        buyItNow: buy_it_now,
+        comments:comments,
+        transportation:transportation,
+        display:display,
+        carProxyBid:proxy_bid,
+      })
+    
+      toggleMakeBid()
+      
+      
+      
+    }
 
     const getMoreSimilarCars=()=>{
     let request={
@@ -43,35 +79,39 @@ const SimilarCarFromSeller = () =>{
     })
 }
 
-const toggleMakeBid = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,make,comments,transportation,display,proxy_bid) => {
+// const toggleMakeBid = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,make,comments,transportation,display,proxy_bid) => {
   
-  let makebiddispatch={
-      high_bid: high_bid,
-			min_price: min_price,
-			car_id : car_id,
-			save_purchase: save_purchase,
-			time:time,
-			counter_buyerid:counterbuyerid,
-			max_price:max_price,
-			buy_it_now: buy_it_now,
-      redirectPage: "similarcarfrombuyer",
-      make: make,
-      comments:comments,
-      transportation:transportation,
-      display:display,
-      proxy_bid:proxy_bid
-  }
-  //dispatch(CarDetailsAction.highBid(high_bid))
-  dispatch(CarDetailsAction.minBid(makebiddispatch))
+//   let makebiddispatch={
+//       high_bid: high_bid,
+// 			min_price: min_price,
+// 			car_id : car_id,
+// 			save_purchase: save_purchase,
+// 			time:time,
+// 			counter_buyerid:counterbuyerid,
+// 			max_price:max_price,
+// 			buy_it_now: buy_it_now,
+//       redirectPage: "similarcarfrombuyer",
+//       make: make,
+//       comments:comments,
+//       transportation:transportation,
+//       display:display,
+//       proxy_bid:proxy_bid
+//   }
+//   //dispatch(CarDetailsAction.highBid(high_bid))
+//   dispatch(CarDetailsAction.minBid(makebiddispatch))
   
-  setIsOpen(!isOpen);
-}
+//   setIsOpen(!isOpen);
+// }
     
 const redirectpage=(pathid,seller_dealer_id)=>{
   //e.preventDefault();
  
   dispatch(CarListAction.sellerid(seller_dealer_id))
-  history.push("/cardetail/"+pathid);
+  // history.push("/cardetail/"+pathid);
+  history.push({
+    pathname: '/cardetail',
+    state: {id:pathid},
+  });
 }
 useEffect(() => {
     getMoreSimilarCars();
@@ -169,7 +209,7 @@ return(
           {/* {moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined?"":
 					<a className="cta-btns" href="#">Counter Bid $ {moreCar.buy_it_now}</a>
 					} */}
-					<a class="cta-btns-primary" onClick={()=>toggleMakeBid(moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now,moreCar.make,moreCar.comments,moreCar.transportation,moreCar.display,moreCar.proxy_bid)}>Make Bid</a>
+					<a class="cta-btns-primary" onClick={()=>setMakeBitValue(moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now,moreCar.make,moreCar.comments,moreCar.transportation,moreCar.display,moreCar.proxy_bid)}>Make Bid</a>
 				</div>
               </div>
             </div>
@@ -199,7 +239,7 @@ return(
     {isOpen && <Popup
       isClose={false}
       content={<>
-        <Makeurbid toggle={toggleMakeBid} />
+        <Makeurbid toggle={toggleMakeBid} setMakeBitValue={makeBitData} getMakeBitValue={getMakeBitValue} />
       </>}
       handleClose={toggleMakeBid}
     />}

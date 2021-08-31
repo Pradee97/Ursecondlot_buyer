@@ -30,9 +30,10 @@ import Loading from '../Component/Loading/Loading';
 import Popup from '../Component/Popup/Popup';
 import Makeurbid from './Makeurbid';
 import CarDetailsAction from './CarDetails/CarDetailsAction';
+import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 // import BuyNow from '../Pages/BuyNow';
 
-const Cardetail = () =>{
+const Cardetail = (props) =>{
 
 	
 const history = useHistory();
@@ -42,7 +43,7 @@ const [sellerId,setSellerId]=useState("");
 const [carDetail ,setCarDetail] = useState([]) 
 const [carInventoryDetail,setCarInventoryDetail]=useState([]);
 const [otherDealerCarDetail,setOtherDealerCarDetail]=useState([]);
-const { id } = useParams();
+const { id } = props.location.state;
 const [sellerCarDetail,setSellerCarDetail]=useState([]);
 const [lrgImg,setLrgImg]=useState("");
 const [copied, setCopied] = useState(false);
@@ -59,42 +60,75 @@ console.log("selescted seller id_______",selectedSellerId)
 const [isOpen, setIsOpen] = useState(false);
 const [open,setOpen] = useState(false);
 
-const highBid= useSelector(state => state.CarDetailsReducer.payload.high_bid);
 
-const toggleMakeBid = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,comments,transportation,display,proxy_bid) => {
-	console.log("check the high bid value",high_bid)
-	let makebiddispatch={
-		high_bid: high_bid,
-		min_price: min_price,
-		car_id : car_id,
-		save_purchase: save_purchase,
+const [highBid,setHighBid] = useState(null);
+const [makeBitData, setMakeBitData] = useState({})
+
+const getMakeBitValue = (data) => {
+	const highBid = data
+	setHighBid(highBid)
+}
+// const highBid= useSelector(state => state.CarDetailsReducer.payload.high_bid);
+
+const toggleMakeBid = () => {
+	setIsOpen(!isOpen);
+}
+const setMakeBitValue = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,comments,transportation,display,proxy_bid) => {
+	console.log("check the toggle make bid value")
+	setMakeBitData({
+		carHighBid: high_bid,
+		carMaxBid: min_price,
+		carId : car_id,
+		carSavePurchase: save_purchase,
 		redirectPage: "cardetail",
 		time:time,
 		counter_buyerid:counterbuyerid,
-		max_price:max_price,
-		buy_it_now: buy_it_now,
+		carMaxBid :max_price,
+		buyItNow: buy_it_now,
 		comments:comments,
 		transportation:transportation,
 		display:display,
-		proxy_bid:proxy_bid,
-	}
+		carProxyBid:proxy_bid,
+	})
+
+	toggleMakeBid()
+	// return {
+	// 	carHighBid: high_bid,
+	// 	carMaxBid: min_price,
+	// 	carId : car_id,
+	// 	carSavePurchase: save_purchase,
+	// 	redirectPage: "cardetail",
+	// 	time:time,
+	// 	counter_buyerid:counterbuyerid,
+	// 	carMaxBid :max_price,
+	// 	buyItNow: buy_it_now,
+	// 	comments:comments,
+	// 	transportation:transportation,
+	// 	display:display,
+	// 	carProxyBid:proxy_bid,
+	// }
+
 	//dispatch(CarDetailsAction.highBid(high_bid))
-	console.log("checking max bid in the car details page", max_price)
-	dispatch(CarDetailsAction.minBid(makebiddispatch))
+	// console.log("checking max bid in the car details page", max_price)
+	// dispatch(CarDetailsAction.minBid(makebiddispatch))
 	
-	setIsOpen(!isOpen);
+	
 }
 
 const toggleBuyNow = () => {
 	setOpen(!open);
 }
 
-console.log("sellerid from carlist",selectedSellerId);
+
 const redirectpage=(pathid,seller_dealer_id)=>{
 	//e.preventDefault();
-	console.log("seller_dealer_id+++++",seller_dealer_id)
+	
 	dispatch(CarListAction.sellerid(seller_dealer_id))
-	history.push("/cardetail/"+pathid);
+	// history.push("/cardetail/"+pathid);
+	history.push({
+		pathname: '/cardetail',
+		state: {id:pathid},
+	  });
   }
 
   const redirecttoInspection=(pathid)=>{
@@ -111,10 +145,9 @@ const redirectpagesimilarcar=(pathid)=>{
 	history.push("/similarCarFromBuyer/"+pathid);
 }
 function copytoclipboard(e) {
-    //textAreaRef.current.select();
+
     document.execCommand('copy');
-    // This is just personal preference.
-    // I prefer to not show the the whole text area selected.
+   
     e.target.focus();
     setCopySuccess('Copied!');
   };
@@ -147,23 +180,21 @@ function CarDetailList(){
 
 }
 
-
-	console.log("request for car detail",request)
 	API.post('carDetails/condition',request).then(res=>{
-	console.log("response",res.data.data);
-	// const {results} = res.data.data;
-	console.log("Response data",res.data.data);
-	//if(results.length>0){
+
+
 	setCarDetail(res.data.data);
+
 	let make=res.data.data[0].make;
 	let selectedsellerid=res.data.data[0].seller_dealer_id;
-	console.log("car Detail",res.data.data);
+	
 	setLoading(false);
-	console.log("car distance added",res.data.distance);
+
 	setDistance(res.data.distance);
 	setLrgImg(res.data.data[0].image);
+	
 
-	//buyerinventory car detail list code goes here , this is for similar cars and other cars 
+
 
 	let rq={
 		buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
@@ -262,7 +293,7 @@ return(
 			</div>
 
 	        <div class="row">
-			{carDetail.length>0 && <div class="col-md-6"> 
+			{carDetail.length>0 && <div class="col-md-5"> 
 
 					<div class="vehicle-detail-banner banner-content clearfix">
 						<div class="banner-slider">
@@ -305,7 +336,7 @@ return(
 					</div>
 				</div>}
 	        	{ carDetail.length >0 && 
-					<div class="col-md-6">
+					<div class="col-md-4">
 	        		<div class="product-dtl">
         				<div class="product-info">
 		        			<div class="product-name">{carDetail[0].make} {carDetail[0].vehicle_type}({carDetail[0].model})</div>
@@ -359,7 +390,23 @@ return(
 									{carDetail[0].buy_it_now=="" || carDetail[0].buy_it_now== null || carDetail[0].buy_it_now== undefined ?"":
 									<a class="car-btns-primary" href=""><img src={tag} alt=""/>Buy it Now :<span> $ {carDetail[0].buy_it_now}</span></a>
 									}
+									{/* <CountdownCircleTimer
+										isPlaying
+										duration={60}
+										size= {100}
+										strokeWidth= {10}
+										colors={[
+										['#004777', 0.33],
+										['#F7B801', 0.33],
+										['#A30000', 0.33],
+										]}
+									>
+										{({ remainingTime }) => remainingTime}
+									</CountdownCircleTimer> */}
+
+								
 								</div>
+
 								
 	        				</div>
 	        			</div>
@@ -389,11 +436,41 @@ return(
 									<a class="cars-buy-btns" href="#">Buy now</a>
 								}
 									
-									<a class="cars-buy-btns-primary" onClick={()=>toggleMakeBid(carDetail[0].high_bid,carDetail[0].min_price,carDetail[0].save_purchase,carDetail[0].car_id,carDetail[0].time,carDetail[0].counter_buyer_dealer_id,carDetail[0].max_price,carDetail[0].buy_it_now,carDetail[0].comments,carDetail[0].transportation,carDetail[0].display,carDetail[0].proxy_bid)}>Make Bid</a>
+									<a class="cars-buy-btns-primary" onClick={()=>setMakeBitValue(carDetail[0].high_bid,carDetail[0].min_price,carDetail[0].save_purchase,carDetail[0].car_id,carDetail[0].time,carDetail[0].counter_buyer_dealer_id,carDetail[0].max_price,carDetail[0].buy_it_now,carDetail[0].comments,carDetail[0].transportation,carDetail[0].display,carDetail[0].proxy_bid)}>Make Bid</a>
 								</div>
 	        				</div>
 						</div>
 	        		</div> }
+					
+					<div class="col-md-3">
+					<p className="offerMade">{carDetail[0].noofBuyer} Offers made</p>
+						<div className="offerDetailsBlock">
+							
+							<div className="offerDetail">
+								<h3>Last Offer</h3>
+								{carDetail[0].buyer_high_bid=="" || carDetail[0].buyer_high_bid==null || carDetail[0].buyer_high_bid==undefined?
+									<div className="offerPrice">$ 0</div>:
+									<div className="offerPrice">$ {carDetail[0].buyer_high_bid}</div>
+								}
+								<p>by <span>Me</span></p>
+								<p>Less then a minute ago</p>
+							</div>
+							<hr></hr>
+							<div className="offerDetail">
+								<h3>Best Offer</h3>
+								<div className="offerPrice">$ {carDetail[0].high_bid}</div>
+								{carDetail[0].buyer_high_bid==carDetail[0].high_bid?
+								<p>by <span>Me</span></p>:
+								<p>by <span>{carDetail[0].high_bid_buyer_name}</span></p>
+								}
+								<p>Less then a minute ago</p>
+							</div>
+							<a href="#" className="car-btns redBtn">Increase Offer</a>
+							<a href="#">Manage Offers</a>
+
+						</div>
+					</div>
+
 	        	</div>
 	        </div> 
 		</div>
@@ -510,7 +587,7 @@ return(
 					{/* {moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined?"":
 					<a className="cta-btns" href="#">Counter Bid $ {moreCar.buy_it_now}</a>
 					} */}
-					<a class="cta-btns-primary" onClick={()=>toggleMakeBid(moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now,moreCar.comments,moreCar.transportation,moreCar.display,moreCar.proxy_bid)}>Make Bid</a>
+					<a class="cta-btns-primary" onClick={()=>setMakeBitValue(moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now,moreCar.comments,moreCar.transportation,moreCar.display,moreCar.proxy_bid)}>Make Bid</a>
 				</div>
               </div>
             </div>
@@ -573,7 +650,7 @@ return(
 									{/* {moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined?"":
 									<a className="cta-btns" href="#">Counter Bid $ {moreCar.buy_it_now}</a>
 									} */}
-									<a class="cta-btns-primary" onClick={()=>toggleMakeBid( moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now,moreCar.comments,moreCar.transportation,moreCar.display,moreCar.proxy_bid)}>Make Bid</a>
+									<a class="cta-btns-primary" onClick={()=>setMakeBitValue( moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now,moreCar.comments,moreCar.transportation,moreCar.display,moreCar.proxy_bid)}>Make Bid</a>
 								</div>
 							  </div>
 							</div>
@@ -608,7 +685,7 @@ return(
 	{isOpen && <Popup
 		isClose={false}
 		content={<>
-			<Makeurbid toggle={toggleMakeBid} />
+			<Makeurbid toggle={toggleMakeBid} setMakeBitValue={makeBitData} getMakeBitValue={getMakeBitValue} />
 		</>}
 		handleClose={toggleMakeBid}
 	/>}

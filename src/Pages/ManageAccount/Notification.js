@@ -120,7 +120,7 @@ const Notification = () => {
 
 	return (
 		<div>
-{loading?<Loading/>:
+{/* {loading?<Loading/>: */}
 			<main id="main" className="inner-page">
 
 
@@ -342,7 +342,7 @@ const Notification = () => {
 						popupActionPath={popupActionPath}
 					/>}
 			</main>
-}
+{/* } */}
 		</div>
 	);
 };
