@@ -7824,3 +7824,8 @@ input[type="checkbox"]:disabled + label{
   font-size: 16px;
   font-weight: 300;
 }   
+
+.offerMade{
+  color: green;
+  text-align: center;
+}
