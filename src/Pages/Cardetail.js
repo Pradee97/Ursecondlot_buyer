@@ -74,7 +74,7 @@ const toggleMakeBid = () => {
 	setIsOpen(!isOpen);
 }
 const setMakeBitValue = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,comments,transportation,display,proxy_bid) => {
-	console.log("check the toggle make bid value")
+	// console.log("check the toggle make bid value")
 	setMakeBitData({
 		carHighBid: high_bid,
 		carMaxBid: min_price,
