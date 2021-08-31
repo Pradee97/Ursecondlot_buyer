@@ -881,8 +881,8 @@ useEffect(() => {
                                         <div className="cars-lock">
                                         <img src={(item.isFavourite===0)? lock : locked} onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'inv')} />
                                         </div>
-                                        <a href="/Cardetail">
-                                        <img className="carImg" src={item.image} onClick={()=>{redirectpage(item.car_id,item.seller_dealer_id)}} className="carImg" alt="..." /></a>
+                                       
+                                        <img className="carImg" src={item.image} onClick={()=>{redirectpage(item.car_id,item.seller_dealer_id)}} alt="..." />
                                         {item.isbestSale?
                                         <div className="cars-tag">
                                             <h4>{item.deal_name}</h4>
