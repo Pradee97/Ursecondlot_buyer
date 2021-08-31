@@ -346,6 +346,8 @@ return(
 									<p class="details"><img src={speedometer}  alt=""/><span>{carDetail[0].miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
 									<p class="details"><img src={gasolinePump} alt=""/><span>{carDetail[0].fuel_type}</span></p>
 							</div>
+							<div class="row">
+	        				<div class="col-md-6">
 							<div class="product-count">
 									<h3>{carDetail[0].dealer_type}</h3>
 									<div class=" d-flex align-items-center mb-3">
@@ -354,11 +356,14 @@ return(
 										<p class="details"><img src="assets/img/road-with-broken-line.svg" alt=""/><span>{distance} M</span></p>
 									</div>	        										
 								</div>
-							<div class="col-md-6">
+								</div>
+								<div class="col-md-6">
 								<div class="product-count carBrand">	        				
 									<img src={carbrand}  alt=""/>
 								</div>
-							</div>
+								</div>
+								</div>
+							
 							{carDetail[0].dealer_message=="" || carDetail[0].dealer_message==null || carDetail[0].dealer_message== undefined?
 							<p><span class="dealertaglines">Message From The Dealer-</span> No Message</p>:
 							<p><span class="dealertaglines">Message From The Dealer-</span> {carDetail[0].dealer_message}</p>
@@ -397,9 +402,10 @@ return(
 							<div class="col-md-12 cars-detail-ins">
 	        					<div class="cars-detail-views">
 									<a class="car-btns" onClick={()=>redirecttoInspection(carDetail[0].car_id)}>View Inspection</a>
-									{carDetail[0].high_bid=="" || carDetail[0].high_bid==null || carDetail[0].high_bid==undefined?"":
+									{/* {carDetail[0].high_bid=="" || carDetail[0].high_bid==null || carDetail[0].high_bid==undefined?"":
 									<a class="car-btns-primary" href=""><img src={tag} alt=""/>High Bid :<span> $ {carDetail[0].high_bid}</span></a>
-									}&nbsp;&nbsp;&nbsp;&nbsp;
+									} */}
+									&nbsp;&nbsp;&nbsp;&nbsp;
 									{carDetail[0].buy_it_now=="" || carDetail[0].buy_it_now== null || carDetail[0].buy_it_now== undefined ?"":
 									<a class="car-btns-primary" href=""><img src={tag} alt=""/>Buy it Now :<span> $ {carDetail[0].buy_it_now}</span></a>
 									}
@@ -466,17 +472,18 @@ return(
 							</div>
 							<hr></hr>
 							<div className="offerDetail">
+								<div>
 								<h3>High Bid</h3>
 								<div className="offerPrice">$ {carDetail[0].high_bid}</div>
 								{carDetail[0].buyer_high_bid==carDetail[0].high_bid?
 								<p>by <span>Me</span></p>:
 								<p>by <span>{carDetail[0].high_bid_buyer_name}</span></p>
 								}
-								<div class="col-md-6">
+								</div>
 								<div class="product-count carBrand">	        				
 									<img src={carbrand}  alt=""/>
 								</div>
-							</div>	
+							
 								{/* <p>Less then a minute ago</p> */}
 							</div>
 							{/* <a href="#" className="car-btns redBtn">Increase Offer</a>
