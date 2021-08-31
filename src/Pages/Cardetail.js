@@ -448,7 +448,10 @@ return(
 							
 							<div className="offerDetail">
 								<h3>Last Offer</h3>
-							<div className="offerPrice">$ {carDetail[0].buyer_high_bid}</div>
+								{carDetail[0].buyer_high_bid=="" || carDetail[0].buyer_high_bid==null || carDetail[0].buyer_high_bid==undefined?
+									<div className="offerPrice">$ 0</div>:
+									<div className="offerPrice">$ {carDetail[0].buyer_high_bid}</div>
+								}
 								<p>by <span>Me</span></p>
 								<p>Less then a minute ago</p>
 							</div>
