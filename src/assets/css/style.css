@@ -2986,7 +2986,7 @@ Car Detail Page
 	
 }
 .back-btn-primary{
-	color:#BD062C;
+	color:#BD062C !important;
 	font-size:18px;
 	border: 2px solid #BD062C;
 	padding:6px 15px;
