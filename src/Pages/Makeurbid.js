@@ -527,7 +527,7 @@ console.log("check props",props)
                                             
                                                 <div class="divCell">Fees</div>
                                             <div class="divCell">$ {getFeeDetails()}</div>
-                                            </div>)
+                                            </div>
                                             <div class="divRow">
                                                 <div class="divCell">Transportation</div>
                                                 <div class="divCell">$ {transportationFee}</div>
