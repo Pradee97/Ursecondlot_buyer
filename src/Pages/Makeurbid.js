@@ -32,6 +32,7 @@ console.log("check props",props)
     const [carMinBid,setCarMinBid] = useState(props.setMakeBitValue.carMinBid);
     const [time,setTime] = useState(props.setMakeBitValue.time);
     const [counterBuyerId,setCounterBuyerId] = useState(props.setMakeBitValue.counter_buyerid);
+    const [transportationFee,setTransportationFee] = useState(props.setMakeBitValue.transportationCharge || 300);
     const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
     const [buyer_dealer_id,setBuyer_Dealer_Id]=useState(JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id);
     const [isOpen, setIsOpen] = useState(false);
@@ -65,6 +66,7 @@ console.log("check props",props)
     const [highAndProxyFlag, setHighAndProxyFlag] = useState(false)
 
     const [feeDetails, setFeeDetails] = useState("");
+ 
 
     if(carHighBid=="" || carHighBid==null || carHighBid==undefined || carHighBid==0){
         setCarHighBid(carMinBid)
@@ -78,6 +80,7 @@ console.log("check props",props)
     //     setTransportFlag(true)
     // }
 
+
     
     const togglePopup = () => {
         setIsOpen(!isOpen);
@@ -87,7 +90,8 @@ console.log("check props",props)
     const toggleTerms = () => {
         setOpen(!open);
     }
-  
+ 
+
     async function fetchBuyerFees() {
         let request = {
             type: "Buyer"
@@ -338,6 +342,19 @@ console.log("check props",props)
         }
         
     }
+    const getFeeDetails = () =>{
+        return feeDetails.length > 0 ? feeDetails
+            .filter((data)=>{
+                const range = data.fee_price.replaceAll('$',"").split("-")
+                if(range[1]!=="up"){
+                    return Number(range[0]) >= Number(highBid) && Number(highBid)  <= Number(range[1]) 
+                }
+                else{
+                    return Number(range[0]) <= Number(highBid) 
+                }
+                } )[0].fee 
+            : 0
+    }
     const highProxyBidValidation= (data)=> {
         
         console.log("carHighBid====",carHighBid)
@@ -498,24 +515,26 @@ console.log("check props",props)
                                 <div class="col-md-12">
                                     <div class="divTable">
                                             <div class="headRow">
-                                                <div class="divCell">Total</div>
+                                                <div class="divCell">Estimated Cast</div>
                                                 <div  class="divCell"></div>
                                             </div>
                                             <div class="divRow">
-                                                <div class="divCell">Estimated Order Subtotal</div>
-                                                <div class="divCell">$2000</div>
+                                                <div class="divCell">High Bid</div>
+                                                <div class="divCell">$ {highBid}</div>
+                                            </div>
+                                                                                       
+                                            <div class="divRow">
+                                            
+                                                <div class="divCell">Fees</div>
+                                            <div class="divCell">$ {getFeeDetails()}</div>
                                             </div>
                                             <div class="divRow">
-                                                <div class="divCell">Delivery</div>
-                                                <div class="divCell">0</div>
-                                            </div>
-                                            <div class="divRow">
-                                                <div class="divCell">Estimated Tax</div>
-                                                <div class="divCell">$100</div>
+                                                <div class="divCell">Transportation</div>
+                                                <div class="divCell">$ {transportationFee}</div>
                                             </div>
                                             <div class="footRow divRow">
-                                                <div class="divCell">Order Total</div>
-                                                <div  class="divCell">$2100</div>
+                                                <div class="divCell">Total</div>
+                                                <div  class="divCell">$ {Number(highBid) + Number(transportationFee) + Number(getFeeDetails())}</div>
                                             </div>
                                     </div>
                                 </div>

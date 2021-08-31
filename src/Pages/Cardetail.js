@@ -458,21 +458,26 @@ return(
 	        		</div> }
 					
 					<div class="col-md-3">
+					{carDetail[0].noofBuyer=="" || carDetail[0].noofBuyer==null || carDetail[0].noofBuyer==undefined?"":
+					<div>
 					<p className="offerMade">Number of Bids {carDetail[0].noofBuyer} </p>
+					</div>
+					}
 						<div className="offerDetailsBlock">
-							
+						
 							<div className="offerDetail">
+							{carDetail[0].buyer_high_bid=="" || carDetail[0].buyer_high_bid==null || carDetail[0].buyer_high_bid==undefined?"":
+							<div>
 								<h3>Last Bid</h3>
-								{carDetail[0].buyer_high_bid=="" || carDetail[0].buyer_high_bid==null || carDetail[0].buyer_high_bid==undefined?
-									<div className="offerPrice">$ 0</div>:
-									<div className="offerPrice">$ {carDetail[0].buyer_high_bid}</div>
-								}
-								<p>by <span>Me</span></p>
-								{/* <p>Less then a minute ago</p> */}
+									<div className="offerPrice">$ {carDetail[0].buyer_high_bid}</div>						
+									<p>by <span>Me</span></p>
+							</div>
+							}
 							</div>
 							<hr></hr>
 							<div className="offerDetail">
-								<div className="left">
+								{carDetail[0].high_bid=="" || carDetail[0].high_bid==null || carDetail[0].high_bid==undefined?"":
+								<div>
 								<h3>High Bid</h3>
 								<div className="offerPrice">$ {carDetail[0].high_bid}</div>
 								{carDetail[0].buyer_high_bid==carDetail[0].high_bid?
@@ -480,14 +485,14 @@ return(
 								<p>by <span>{carDetail[0].high_bid_buyer_name}</span></p>
 								}
 								</div>
-								<div class="carBrand">	        				
+								}
+								<div class="product-count carBrand">	        				
 									<img src={carbrand}  alt=""/>
 								</div>
 							
-								{/* <p>Less then a minute ago</p> */}
+								
 							</div>
-							{/* <a href="#" className="car-btns redBtn">Increase Offer</a>
-							<a href="#">Manage Offers</a> */}
+							
 
 						</div>
 					</div>
