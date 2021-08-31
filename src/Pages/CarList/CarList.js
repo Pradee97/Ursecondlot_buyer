@@ -311,7 +311,7 @@ const CarList = () => {
                                             </div>
                                         </div>
                                     </div>
-                                </div>): <div className="floor_notfiled_block"><p>Suggested Cars is not added yet</p></div>}
+                                </div>): ""}
                                {/* </div> */}
                                </OwlCarousel>
                                {suggestedCarDetail.length >4 ? suggestedCarDetail.slice(0,1)
@@ -384,7 +384,7 @@ const CarList = () => {
                                             </div>
                                         </div>
                                     </div>
-                                </div>): <div className="floor_notfiled_block"><p> Inventory Cars is not added yet</p></div> }
+                                </div>): ""}
                                 </OwlCarousel>
                              {carInventoryDetail.length >4 ? carInventoryDetail.slice(0,1)
                                 .map(() =>
@@ -455,7 +455,7 @@ const CarList = () => {
                                             </div>
                                         </div>
                                     </div>
-                                </div>): <div className="floor_notfiled_block"><p> RecentlyAdded Cars is not added yet</p></div> }
+                                </div>): "" }
                                 </OwlCarousel>
                                 {carDetail.length >4 ? carDetail.slice(0,1)
                                 .map(() =>
@@ -517,7 +517,7 @@ const CarList = () => {
                                         <a className="cta-btns" href="#">Buy It Now $ {item.buy_it_now}</a>
                                         } */}
                                        
-                                        {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?"":
+                                        {item.high_bid==="" || item.high_bid=== null || item.high_bid=== undefined?"":
                                         <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                         } 
                                         {/* {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
@@ -527,16 +527,16 @@ const CarList = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>): <div className="floor_notfiled_block"><p> Favorite Cars is not added yet</p></div> }
+                        </div>): ""}
                         </OwlCarousel>
-                        </div>
-                        
                         {carFavInventoryDetail.length >4 ? carFavInventoryDetail.slice(0,1)
                                 .map(() =>
-                        <div className="text-center">
-                            <a href="/favorite" className="more-btn">View More  <i className="bx bx-chevron-right"></i></a>
-                        </div>):"no data found"}
+                            <div className="text-center">
+                                <a href="/favorite" className="more-btn">View More<i className="bx bx-chevron-right"></i></a>
+                            </div>):""}
+                        </div>
                     </div>
+                       
         
 
 
