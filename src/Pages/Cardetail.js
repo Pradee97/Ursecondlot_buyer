@@ -443,18 +443,23 @@ return(
 	        		</div> }
 					
 					<div class="col-md-3">
+					<p className="offerMade">{carDetail[0].noofBuyer} Offers made</p>
 						<div className="offerDetailsBlock">
+							
 							<div className="offerDetail">
 								<h3>Last Offer</h3>
-								<div className="offerPrice">$700</div>
+							<div className="offerPrice">$ {carDetail[0].buyer_high_bid}</div>
 								<p>by <span>Me</span></p>
 								<p>Less then a minute ago</p>
 							</div>
 							<hr></hr>
 							<div className="offerDetail">
 								<h3>Best Offer</h3>
-								<div className="offerPrice">$700</div>
-								<p>by <span>Me</span></p>
+								<div className="offerPrice">$ {carDetail[0].high_bid}</div>
+								{carDetail[0].buyer_high_bid==carDetail[0].high_bid?
+								<p>by <span>Me</span></p>:
+								<p>by <span>{carDetail[0].high_bid_buyer_name}</span></p>
+								}
 								<p>Less then a minute ago</p>
 							</div>
 							<a href="#" className="car-btns redBtn">Increase Offer</a>

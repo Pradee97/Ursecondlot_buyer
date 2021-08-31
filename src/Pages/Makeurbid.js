@@ -64,6 +64,7 @@ console.log("check props",props)
     const [onLoadFlag, setOnLoadFlag] = useState(true)
     const [highAndProxyFlag, setHighAndProxyFlag] = useState(false)
 
+    const [feeDetails, setFeeDetails] = useState("");
 
     if(carHighBid=="" || carHighBid==null || carHighBid==undefined || carHighBid==0){
         setCarHighBid(carMinBid)
@@ -87,6 +88,22 @@ console.log("check props",props)
         setOpen(!open);
     }
   
+    async function fetchBuyerFees() {
+        let request = {
+            type: "Buyer"
+        };
+        const state = API.post('fees/condition', request);
+        state.then(res => {
+            console.log("res", res)
+            setFeeDetails(res.data.data);
+            // setLoading(false);
+        })
+            .catch(err => { console.log(err); });
+    }
+    useEffect(() => {
+        fetchBuyerFees();
+    }, []);
+
     function toggleViewDisplay(data){
         
         console.log("inside toggle fn Del admin",data);
