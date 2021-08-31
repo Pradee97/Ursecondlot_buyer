@@ -346,6 +346,19 @@ return(
 									<p class="details"><img src={speedometer}  alt=""/><span>{carDetail[0].miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
 									<p class="details"><img src={gasolinePump} alt=""/><span>{carDetail[0].fuel_type}</span></p>
 							</div>
+							<div class="product-count">
+									<h3>{carDetail[0].dealer_type}</h3>
+									<div class=" d-flex align-items-center mb-3">
+										<p class="details"><img src={Path}  alt=""/><span>Illinois</span></p>
+										
+										<p class="details"><img src="assets/img/road-with-broken-line.svg" alt=""/><span>{distance} M</span></p>
+									</div>	        										
+								</div>
+							<div class="col-md-6">
+								<div class="product-count carBrand">	        				
+									<img src={carbrand}  alt=""/>
+								</div>
+							</div>
 							{carDetail[0].dealer_message=="" || carDetail[0].dealer_message==null || carDetail[0].dealer_message== undefined?
 							<p><span class="dealertaglines">Message From The Dealer-</span> No Message</p>:
 							<p><span class="dealertaglines">Message From The Dealer-</span> {carDetail[0].dealer_message}</p>
@@ -414,20 +427,16 @@ return(
 						
 						<div class="row">
 	        				<div class="col-md-6">
-								<div class="product-count">
+								{/* <div class="product-count">
 									<h3>{carDetail[0].dealer_type}</h3>
 									<div class=" d-flex align-items-center mb-3">
 										<p class="details"><img src={Path}  alt=""/><span>Illinois</span></p>
 										
 										<p class="details"><img src="assets/img/road-with-broken-line.svg" alt=""/><span>{distance} M</span></p>
 									</div>	        										
-								</div>
+								</div> */}
 							</div>
-							<div class="col-md-6">
-								<div class="product-count carBrand">	        				
-									<img src={carbrand}  alt=""/>
-								</div>
-							</div>	        				
+								        				
 	        			</div>
 						<div class="row">
 							<div class="col-md-12">
@@ -443,30 +452,35 @@ return(
 	        		</div> }
 					
 					<div class="col-md-3">
-					<p className="offerMade">{carDetail[0].noofBuyer} Offers made</p>
+					<p className="offerMade">Number of Bids {carDetail[0].noofBuyer} </p>
 						<div className="offerDetailsBlock">
 							
 							<div className="offerDetail">
-								<h3>Last Offer</h3>
+								<h3>Last Bid</h3>
 								{carDetail[0].buyer_high_bid=="" || carDetail[0].buyer_high_bid==null || carDetail[0].buyer_high_bid==undefined?
 									<div className="offerPrice">$ 0</div>:
 									<div className="offerPrice">$ {carDetail[0].buyer_high_bid}</div>
 								}
 								<p>by <span>Me</span></p>
-								<p>Less then a minute ago</p>
+								{/* <p>Less then a minute ago</p> */}
 							</div>
 							<hr></hr>
 							<div className="offerDetail">
-								<h3>Best Offer</h3>
+								<h3>High Bid</h3>
 								<div className="offerPrice">$ {carDetail[0].high_bid}</div>
 								{carDetail[0].buyer_high_bid==carDetail[0].high_bid?
 								<p>by <span>Me</span></p>:
 								<p>by <span>{carDetail[0].high_bid_buyer_name}</span></p>
 								}
-								<p>Less then a minute ago</p>
+								<div class="col-md-6">
+								<div class="product-count carBrand">	        				
+									<img src={carbrand}  alt=""/>
+								</div>
+							</div>	
+								{/* <p>Less then a minute ago</p> */}
 							</div>
-							<a href="#" className="car-btns redBtn">Increase Offer</a>
-							<a href="#">Manage Offers</a>
+							{/* <a href="#" className="car-btns redBtn">Increase Offer</a>
+							<a href="#">Manage Offers</a> */}
 
 						</div>
 					</div>
@@ -570,14 +584,14 @@ return(
                                                 </p> 
 
 			</div>
+			
 			<div className="d-flex align-items-center mb-3 dealerType">
 				<p className="details">
 				<span className="dlrname">{moreCar.dealer_type} </span>
 				<span className="dlraddress"><i class="icofont-google-map"></i> {moreCar.location}</span>
 				</p>
 				<p className="details"><img src={moreCar.image}/></p>
-			</div>
-				
+			</div>				
 				<div class="cars-prices">
 					{/* <a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a> */}
 					
