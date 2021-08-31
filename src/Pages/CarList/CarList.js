@@ -44,33 +44,70 @@ const CarList = () => {
     const [favCarFlag,setFavCarFlag]=useState(false);
     const [suggestedCarDetail,setSuggestedCarDetail]=useState("");
     const [savePurchase,setSavePurchase] = useState(false);
-    const highBid= useSelector(state => state.CarDetailsReducer.payload.high_bid);
+    // const highBid= useSelector(state => state.CarDetailsReducer.payload.high_bid);
 
     const [isOpen, setIsOpen] = useState(false);
     const options = {
         items: 4,
     };
-    const togglePopup = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,comments,transportation,display,proxy_bid) => {
-        let makebiddispatch={
-            high_bid: high_bid,
-            min_price: min_price,
-            car_id : car_id,
-            save_purchase: save_purchase,
-            time:time,
-            counter_buyerid:counterbuyerid,
-            max_price:max_price,
-            buy_it_now: buy_it_now,
-            comments:comments,
-            transportation:transportation,
-            display:display,
-            proxy_bid:proxy_bid,
-            redirectPage:"carlist"
-        }
+
+    const [highBid,setHighBid] = useState(null);
+	const [makeBitData, setMakeBitData] = useState({})
+	
+	const getMakeBitValue = (data) => {
+		const highBid = data
+		setHighBid(highBid)
+	}
+
+
+	const toggleMakeBid = () => {
+		setIsOpen(!isOpen);
+	}
+	const setMakeBitValue = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,comments,transportation,display,proxy_bid) => {
+		console.log("check the toggle make bid value")
+		setMakeBitData({
+			carHighBid: high_bid,
+			carMaxBid: min_price,
+			carId : car_id,
+			carSavePurchase: save_purchase,
+			redirectPage: "carlist",
+			time:time,
+			counter_buyerid:counterbuyerid,
+			carMaxBid :max_price,
+			buyItNow: buy_it_now,
+			comments:comments,
+			transportation:transportation,
+			display:display,
+			carProxyBid:proxy_bid,
+		})
+	
+		toggleMakeBid()
+		
+		
+		
+	}
+
+    // const togglePopup = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,comments,transportation,display,proxy_bid) => {
+    //     let makebiddispatch={
+    //         high_bid: high_bid,
+    //         min_price: min_price,
+    //         car_id : car_id,
+    //         save_purchase: save_purchase,
+    //         time:time,
+    //         counter_buyerid:counterbuyerid,
+    //         max_price:max_price,
+    //         buy_it_now: buy_it_now,
+    //         comments:comments,
+    //         transportation:transportation,
+    //         display:display,
+    //         proxy_bid:proxy_bid,
+    //         redirectPage:"carlist"
+    //     }
         
-        //dispatch(CarDetailsAction.highBid(high_bid))
-        dispatch(CarDetailsAction.minBid(makebiddispatch))
-        setIsOpen(!isOpen);
-    }
+    //     //dispatch(CarDetailsAction.highBid(high_bid))
+    //     dispatch(CarDetailsAction.minBid(makebiddispatch))
+    //     setIsOpen(!isOpen);
+    // }
     const getSuggestedCarList=()=>{
         let request={
             buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
@@ -270,7 +307,7 @@ const CarList = () => {
                                                 {/* {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
                                                 <a className="cta-btns" href="#">Counter Bid $ {item.buy_it_now}</a>
                                                 } */}
-                                                <a className="cta-btns-primary" href="JavaScript:void(0)" onClick={()=>togglePopup(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid)} >Make Bid</a>
+                                                <a className="cta-btns-primary" href="JavaScript:void(0)" onClick={()=>setMakeBitValue(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid)} >Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
@@ -343,17 +380,16 @@ const CarList = () => {
                                                 {/* {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
                                                 <a className="cta-btns" href="#">Counter Bid $ {item.buy_it_now}</a>
                                                 } */}
-                                                <a className="cta-btns-primary" onClick={()=>togglePopup(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid)} >Make Bid</a>
+                                                <a className="cta-btns-primary" onClick={()=>setMakeBitValue(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid)} >Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>):""}
                                 </OwlCarousel>
-                             {suggestedCarDetail.length > 0 && suggestedCarDetail.length >4 ? suggestedCarDetail.slice(0,1)
-                                .map(() =>
+                             {suggestedCarDetail.length > 0 && suggestedCarDetail.length >4 ? 
                             <div className="text-center">
                                 <a href="/InventoryCars" className="more-btn">View More<i className="bx bx-chevron-right"></i></a>
-                            </div>):""}
+                            </div>:""}
                         </div>
                     </div>
 
@@ -414,7 +450,7 @@ const CarList = () => {
                                                 {/* {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
                                                 <a className="cta-btns" href="#">Counter Bid $ {item.buy_it_now}</a>
                                                 } */}
-                                                <a className="cta-btns-primary" onClick={()=>togglePopup(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid)}>Make Bid</a>
+                                                <a className="cta-btns-primary" onClick={()=>setMakeBitValue(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid)}>Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
@@ -486,7 +522,7 @@ const CarList = () => {
                                         {/* {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
                                         <a className="cta-btns" href="#">Counter Bid $ {item.buy_it_now}</a>
                                         } */}
-                                        <a className="cta-btns-primary" onClick={()=>togglePopup(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid)}>Make Bid</a>
+                                        <a className="cta-btns-primary" onClick={()=>setMakeBitValue(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid)}>Make Bid</a>
                                     </div>
                                 </div>
                             </div>
@@ -494,11 +530,10 @@ const CarList = () => {
                         </OwlCarousel>
                         </div>
                         
-                        {carFavInventoryDetail.length > 0 && carFavInventoryDetail.length >4 ? carFavInventoryDetail.slice(0,1)
-                                .map(() =>
+                        { carFavInventoryDetail.length >4 ? 
                         <div className="text-center">
                             <a href="/favorite" className="more-btn">View More  <i className="bx bx-chevron-right"></i></a>
-                        </div>):""}
+                        </div>:"no data found"}
                     </div>
         
 
@@ -506,9 +541,9 @@ const CarList = () => {
 {isOpen && <Popup
 		isClose={false}
 		content={<>
-			<Makeurbid toggle={togglePopup} />
+			<Makeurbid toggle={toggleMakeBid} setMakeBitValue={makeBitData} getMakeBitValue={getMakeBitValue} />
 		</>}
-		handleClose={togglePopup}
+		handleClose={toggleMakeBid}
 	/>}
 
          

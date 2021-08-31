@@ -13,25 +13,25 @@ import '../Component/CommonPopup/commonPopup.css';
 import CarDetailsAction from '../Pages/CarDetails/CarDetailsAction'
 
 const MakeurBid=(props)=>{
-
+console.log("check props",props)
     const history = useHistory();
     const dispatch = useDispatch();
     console.log("check the transport payload",useSelector(state => state.CarDetailsReducer.payload.transportation))
-    const [id,setId] = useState(useSelector(state => state.CarDetailsReducer.payload.car_id));
-    const [carMaxBid,setCarMaxBid] = useState(useSelector(state => state.CarDetailsReducer.payload.max_price));
-    const [sellerId,setSellerId] = useState(useSelector(state => state.CarDetailsReducer.payload.seller_dealer_id));
-    const [carBuyItNow,setCarBuyItNow] = useState(useSelector(state => state.CarDetailsReducer.payload.buy_it_now));
-    const [carComments,setCarComments] = useState(useSelector(state => state.CarDetailsReducer.payload.comments));
-    const [carDisplay,setCarDisplay] = useState(useSelector(state => state.CarDetailsReducer.payload.display));
-    const [carTransportation,setCarTransportation] = useState(useSelector(state => state.CarDetailsReducer.payload.save_purchase === "yes" ? state.CarDetailsReducer.payload.transportation : "no"));
-    const [carSavePurchase,setCarSavePurchase] = useState(useSelector(state => state.CarDetailsReducer.payload.save_purchase));
-    const [carProxyBid,setCarProxyBid] = useState(useSelector(state => state.CarDetailsReducer.payload.proxy_bid));
-    const [make,setMake] = useState(useSelector(state => state.CarDetailsReducer.payload.make));
-    const [redirectPage,setRedirectPage] = useState(useSelector(state => state.CarDetailsReducer.payload.redirectPage));
-    const [carHighBid,setCarHighBid] = useState(useSelector(state => state.CarDetailsReducer.payload.high_bid));  
-    const [carMinBid,setCarMinBid] = useState(useSelector(state => state.CarDetailsReducer.payload.min_price));
-    const [time,setTime] = useState(useSelector(state => state.CarDetailsReducer.payload.time));
-    const [counterBuyerId,setCounterBuyerId] = useState(useSelector(state => state.CarDetailsReducer.payload.counter_buyerid));
+    const [id,setId] = useState(props.setMakeBitValue.carId);
+    const [carMaxBid,setCarMaxBid] = useState(props.setMakeBitValue.carMaxBid);
+    const [sellerId,setSellerId] = useState(props.setMakeBitValue.carSellerDealerId);
+    const [carBuyItNow,setCarBuyItNow] = useState(props.setMakeBitValue.buyItNow);
+    const [carComments,setCarComments] = useState(props.setMakeBitValue.comments);
+    const [carDisplay,setCarDisplay] = useState(props.setMakeBitValue.display);
+    const [carTransportation,setCarTransportation] = useState(props.setMakeBitValue.carSavePurchase === "yes" ?props.setMakeBitValue.transportation : "no");
+    const [carSavePurchase,setCarSavePurchase] = useState(props.setMakeBitValue.carSavePurchase);
+    const [carProxyBid,setCarProxyBid] = useState(props.setMakeBitValue.carProxyBid);
+    const [make,setMake] = useState(props.setMakeBitValue.make);
+    const [redirectPage,setRedirectPage] = useState(props.setMakeBitValue.redirectPage);
+    const [carHighBid,setCarHighBid] = useState(props.setMakeBitValue.carHighBid);  
+    const [carMinBid,setCarMinBid] = useState(props.setMakeBitValue.carMinBid);
+    const [time,setTime] = useState(props.setMakeBitValue.time);
+    const [counterBuyerId,setCounterBuyerId] = useState(props.setMakeBitValue.counter_buyerid);
     const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
     const [buyer_dealer_id,setBuyer_Dealer_Id]=useState(JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id);
     const [isOpen, setIsOpen] = useState(false);
@@ -118,7 +118,8 @@ const MakeurBid=(props)=>{
             
         }
         //dispatch(CarDetailsAction.highBid(high_bid))
-        dispatch(CarDetailsAction.minBid(makebiddispatch))
+        // dispatch(CarDetailsAction.minBid(makebiddispatch))
+        props.getMakeBitValue(makebiddispatch)
         console.log("redirection checking for car detail" , id)
         if (redirectPage=="cardetail"){
         history.push("/cardetail/"+id)
@@ -242,6 +243,24 @@ const MakeurBid=(props)=>{
 
         })
     }
+
+    // async function getLotfee() {
+    //     let request = {
+    //         buyer_dealer_id: userDetails.buyer_dealer_id,
+    //     };
+    //     const state = API.post('lot_fee/condition', request);
+    //     state.then(res => {
+    //         console.log("res", res.data.data)
+    //         setLotValue(res.data.data.lot_fee);
+    //         setLotFee(res.data.data);
+    //         // setLoading(false);
+    //     })
+    //         .catch(err => { console.log(err); });
+    // }
+    // useEffect(() => {
+    //     getLotfee();
+    // }, []);
+
  const assigntransportFlag=()=>{
 
     
