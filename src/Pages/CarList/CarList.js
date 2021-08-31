@@ -163,11 +163,11 @@ const CarList = () => {
         //e.preventDefault();
         
         dispatch(CarListAction.sellerid(seller_dealer_id))
-        history.push("/cardetail/"+pathid);
-        // history.push({
-        //     pathname: '/cardetail',
-        //     state: {id:pathid},
-        //   });
+        // history.push("/cardetail/"+pathid);
+        history.push({
+            pathname: '/cardetail',
+            state: {id:pathid},
+          });
     }
 
     const getFavCarList=()=>{

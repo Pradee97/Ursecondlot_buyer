@@ -33,7 +33,7 @@ import CarDetailsAction from './CarDetails/CarDetailsAction';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 // import BuyNow from '../Pages/BuyNow';
 
-const Cardetail = () =>{
+const Cardetail = (props) =>{
 
 	
 const history = useHistory();
@@ -43,7 +43,7 @@ const [sellerId,setSellerId]=useState("");
 const [carDetail ,setCarDetail] = useState([]) 
 const [carInventoryDetail,setCarInventoryDetail]=useState([]);
 const [otherDealerCarDetail,setOtherDealerCarDetail]=useState([]);
-const { id } = useParams();
+const { id } = props.location.state;
 const [sellerCarDetail,setSellerCarDetail]=useState([]);
 const [lrgImg,setLrgImg]=useState("");
 const [copied, setCopied] = useState(false);
@@ -124,7 +124,11 @@ const redirectpage=(pathid,seller_dealer_id)=>{
 	//e.preventDefault();
 	
 	dispatch(CarListAction.sellerid(seller_dealer_id))
-	history.push("/cardetail/"+pathid);
+	// history.push("/cardetail/"+pathid);
+	history.push({
+		pathname: '/cardetail',
+		state: {id:pathid},
+	  });
   }
 
   const redirecttoInspection=(pathid)=>{
@@ -399,7 +403,10 @@ return(
 									>
 										{({ remainingTime }) => remainingTime}
 									</CountdownCircleTimer> */}
+
+								
 								</div>
+
 								
 	        				</div>
 	        			</div>
