@@ -3159,7 +3159,7 @@ Car Detail Page
 	 border: 1px solid #bd062c;
 	 color:#bd062c;
 	 font-size:16px;
-	 padding:10px 15px;
+	 padding:7px 10px;
 	 border-radius:5px;
 	 margin-right:10px;
 	 display: inline-block;
@@ -3170,7 +3170,7 @@ Car Detail Page
 	 border: 1px solid #999;
 	 color:#444;
 	 font-size:16px;
-	 padding:10px 15px;
+	 padding:7px 10px;
 	 border-radius:5px;
    display: inline-block;
 	 margin-bottom: 10px;
@@ -7564,7 +7564,7 @@ margin-top: -3px;
 }
 
 .product-count.carBrand{
-  text-align: left;
+  text-align: right;
 }
  
 .specifati p img{
@@ -7829,3 +7829,51 @@ input[type="checkbox"]:disabled + label{
   color: green;
   text-align: center;
 }
+
+.divTable
+    {
+        display:  table;
+        width:auto;
+        background-color:#fff;
+        border:1px solid  #ddd;
+        border-spacing:0px;
+        width: 100%;
+        text-align: left;
+    }
+
+    .divRow
+    {
+       display:table-row;
+       width:auto;
+    }
+
+    .divCell
+    {
+        float:left;
+        display:table-column;
+        background-color:#fff;
+        padding: 10px;
+    }
+
+    .headRow{
+      border-bottom: #ddd solid 1px;
+      float: left;
+      width: 100%;
+      font-weight: 600;
+    }
+
+    .divRow .divCell:first-child{
+      width: 80%;
+    }
+
+    .divRow .divCell:last-child{
+      width: 20%;
+      text-align: right;
+    }
+
+    .footRow{
+      font-weight: 600;
+      float: left;
+      width: 100%;
+      border-top: #ddd solid 1px;
+    }

@@ -494,7 +494,33 @@ console.log("check props",props)
                                     
                                 </div>
                                 </div>
+
+                                <div class="col-md-12">
+                                    <div class="divTable">
+                                            <div class="headRow">
+                                                <div class="divCell">Total</div>
+                                                <div  class="divCell"></div>
+                                            </div>
+                                            <div class="divRow">
+                                                <div class="divCell">Estimated Order Subtotal</div>
+                                                <div class="divCell">$2000</div>
+                                            </div>
+                                            <div class="divRow">
+                                                <div class="divCell">Delivery</div>
+                                                <div class="divCell">0</div>
+                                            </div>
+                                            <div class="divRow">
+                                                <div class="divCell">Estimated Tax</div>
+                                                <div class="divCell">$100</div>
+                                            </div>
+                                            <div class="footRow divRow">
+                                                <div class="divCell">Order Total</div>
+                                                <div  class="divCell">$2100</div>
+                                            </div>
+                                    </div>
+                                </div>
                     
+                                    
                             <div class=" col-lg-12 policylink">
                                 <a href="JavaScript:void(0)" onClick={toggleTerms} >Policy document</a>
                             </div>
