@@ -158,18 +158,24 @@ console.log("check props",props)
         
         setHighBidError("")
         setProxyBidError("")
-
-        if(!highBid){
+                console.log("highBid===",highBid)
+            console.log("carMinBid===",carMinBid)
+            console.log("carHighBid===",carHighBid)
+        if(!highBid || !carHighBid){
 
             setHighBidError("High Bid price should not be empty" )
             return;
         }
-        else if (highBid <carMinBid){
+        else if (highBid < (!carHighBid || carHighBid===0 ? carMinBid : carHighBid ) ){
+            console.log("highBid===",highBid)
+            console.log("carMinBid===",carMinBid)
+            console.log("carHighBid===",carHighBid)
             console.log("High Bid price should not lower than " +Number(carHighBid+50))
             setHighBidError("High Bid price should not lower than " +Number(carHighBid+50))
             return;
             
         }
+        
         if((carBuyItNow!=="" && carBuyItNow!== null && carBuyItNow!==undefined && carBuyItNow!==0 && carBuyItNow<highBid)){
             console.log("checkt the validation for the max and buy it now")
             setHighBidError("Your high Bid Price must be less than Buy it Now Price");
@@ -484,7 +490,7 @@ console.log("check props",props)
                     
                 </div>:
                 <div>
-                    <p>Make Bid is in progess</p>
+                    <p>Counter Bid is in progress</p>
                     <div class="col-md-12 btns">
                     <button className="cta-btns" onClick={redirect}>ok</button>      
                    </div> 

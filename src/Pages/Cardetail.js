@@ -558,7 +558,7 @@ return(
 		 		
 		  ):""}
 		  </div>
-		  {sellerCarDetail.length > 0 && sellerCarDetail.length >4? sellerCarDetail .slice(0,1)
+		  {sellerCarDetail.length >4? sellerCarDetail .slice(0,1)
                             .map((moreCar,index) =>
 		<div class="text-center">
                 <a href="JavaScript:void(0)" onClick={()=>{redirectpagemorecarseller(moreCar.seller_dealer_id)}} class="more-btn">View More<i class="bx bx-chevron-right"></i></a>
@@ -620,7 +620,7 @@ return(
 						  </div>):""}
 				
 		  </div>
-		  {otherDealerCarDetail.length > 0 && otherDealerCarDetail.length >4 ? otherDealerCarDetail.slice(0,1)
+		  {otherDealerCarDetail.length >4 ? otherDealerCarDetail.slice(0,1)
                             .map((moreCar,index) =>
 		<div class="text-center">
                 <a href="#" class="more-btn"  onClick={()=>{redirectpagesimilarcar(carDetail[0].make)}} >View More<i class="bx bx-chevron-right"></i></a>

@@ -311,10 +311,10 @@ const CarList = () => {
                                             </div>
                                         </div>
                                     </div>
-                                </div>):""}
+                                </div>): <div className="floor_notfiled_block"><p>Suggested Cars is not added yet</p></div>}
                                {/* </div> */}
                                </OwlCarousel>
-                               {suggestedCarDetail.length > 0 && suggestedCarDetail.length >4 ? suggestedCarDetail.slice(0,1)
+                               {suggestedCarDetail.length >4 ? suggestedCarDetail.slice(0,1)
                                 .map(() =>
                             <div className="text-center">
                                 <a href="/suggestedcars" className="more-btn">View More <i className="bx bx-chevron-right"></i></a>
@@ -384,12 +384,13 @@ const CarList = () => {
                                             </div>
                                         </div>
                                     </div>
-                                </div>):""}
+                                </div>): <div className="floor_notfiled_block"><p> Inventory Cars is not added yet</p></div> }
                                 </OwlCarousel>
-                             {suggestedCarDetail.length > 0 && suggestedCarDetail.length >4 ? 
+                             {carInventoryDetail.length >4 ? carInventoryDetail.slice(0,1)
+                                .map(() =>
                             <div className="text-center">
                                 <a href="/InventoryCars" className="more-btn">View More<i className="bx bx-chevron-right"></i></a>
-                            </div>:""}
+                            </div>):""}
                         </div>
                     </div>
 
@@ -454,9 +455,9 @@ const CarList = () => {
                                             </div>
                                         </div>
                                     </div>
-                                </div>):""}
+                                </div>): <div className="floor_notfiled_block"><p> RecentlyAdded Cars is not added yet</p></div> }
                                 </OwlCarousel>
-                                {carDetail.length > 0 && carDetail.length >4 ? carDetail.slice(0,1)
+                                {carDetail.length >4 ? carDetail.slice(0,1)
                                 .map(() =>
                             <div className="text-center">
                                 <a href="/recentlyAddedCars" className="more-btn">View More<i className="bx bx-chevron-right"></i></a>
@@ -526,14 +527,15 @@ const CarList = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>):""}
+                        </div>): <div className="floor_notfiled_block"><p> Favorite Cars is not added yet</p></div> }
                         </OwlCarousel>
                         </div>
                         
-                        { carFavInventoryDetail.length >4 ? 
+                        {carFavInventoryDetail.length >4 ? carFavInventoryDetail.slice(0,1)
+                                .map(() =>
                         <div className="text-center">
                             <a href="/favorite" className="more-btn">View More  <i className="bx bx-chevron-right"></i></a>
-                        </div>:"no data found"}
+                        </div>):"no data found"}
                     </div>
         
 

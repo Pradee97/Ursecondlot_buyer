@@ -11,6 +11,10 @@ import { useHistory, useLocation, useParams } from "react-router-dom";
 import CarListAction from '../../src/Pages/CarList/CarListAction';
 import ReactPlayer from 'react-player';
 import Loading from '../Component/Loading/Loading';
+import OwlCarousel from 'react-owl-carousel';
+import 'owl.carousel/dist/assets/owl.carousel.css';
+import 'owl.carousel/dist/assets/owl.theme.default.css';
+
 const Inspection=()=>{
 
      
@@ -241,9 +245,11 @@ const TestDriveMedia = () =>{
                         
                         <div class="coveredgallery images-container">                         
                             <div class="photo-gallery">
-                                <div class="row photos">
+                                <OwlCarousel className='owl-theme row photos' 
+                                loop={false} margin={10} items={4} dots ={false} nav autoplay={false} navText ={['<i class="icofont-block-left"></i>','<i class="icofont-block-right"></i>']}>
                                     {powerTrainMedia.length>0?powerTrainMedia.map((item)=>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item">
+                                    
+                                    <div className="">
                                         {item?.media.indexOf('mp4')>0?(
                                   
                                     <video autobuffer controls autoplay  width='100%'
@@ -255,7 +261,7 @@ const TestDriveMedia = () =>{
                                     </div>
                                     ):""}
                                     
-                                </div>
+                                </OwlCarousel>
                             </div>
                         </div>
                         <div class="commentsblock">
@@ -367,9 +373,10 @@ const TestDriveMedia = () =>{
                                             
                         
                             <div class="photo-gallery">
-                                <div class="row photos">
+                                <OwlCarousel className='owl-theme row photos' 
+                                    loop={false} margin={10} items={4} dots ={false} nav autoplay={false} navText ={['<i class="icofont-block-left"></i>','<i class="icofont-block-right"></i>']}>
                                     {tiresWheelsMedia.length>0?tiresWheelsMedia.map((item)=>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item">
+                                    <div class="">
                                         {item?.media.indexOf('mp4')>0?(
                                          <video autobuffer controls autoplay  width='100%'
                                          height='100%'>
@@ -379,7 +386,7 @@ const TestDriveMedia = () =>{
                                     </div>
                                     ):""}
                                     
-                                </div>
+                                </OwlCarousel>
                             </div>
                         </div>
                         <div class="commentsblock">
@@ -440,9 +447,10 @@ const TestDriveMedia = () =>{
                         
                         <div class="tiresgallery images-container">
                             <div class="photo-gallery">
-                                <div class="row photos">
+                                <OwlCarousel className='owl-theme row photos' 
+                                    loop={false} margin={10} items={4} dots ={false} nav autoplay={false} navText ={['<i class="icofont-block-left"></i>','<i class="icofont-block-right"></i>']}>
                                     {tiresWheelsMedia.length>0?tiresWheelsMedia.map((item)=>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item">
+                                    <div class="">
                                         {item?.media.indexOf('mp4')>0?(
                                         <video autobuffer controls autoplay  width='100%'
                                         height='100%'>
@@ -452,7 +460,7 @@ const TestDriveMedia = () =>{
                                     </div>
                                     ):""}
                                     
-                                </div>
+                                </OwlCarousel>
                             </div>
                         </div>
                         <div class="commentsblock">
@@ -529,9 +537,10 @@ const TestDriveMedia = () =>{
                         
                           <div class="exteriorgallery images-container">
                             <div class="photo-gallery">
-                                <div class="row photos">
+                                <OwlCarousel className='owl-theme row photos' 
+                                    loop={false} margin={10} items={4} dots ={false} nav autoplay={false} navText ={['<i class="icofont-block-left"></i>','<i class="icofont-block-right"></i>']}>
                                     {exteriorMedia.length>0?exteriorMedia.map((item)=>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item">
+                                    <div class="">
                                         {item?.media.indexOf('mp4')>0?(
                                         <video autobuffer controls autoplay  width='100%'
                                         height='100%'>
@@ -541,7 +550,7 @@ const TestDriveMedia = () =>{
                                     </div>
                                     ):""}
                                     
-                                </div>
+                                </OwlCarousel>
                             </div>
                         </div>
                         <div class="commentsblock">
@@ -610,9 +619,10 @@ const TestDriveMedia = () =>{
                         
                         <div class="interiorgallery images-container">
                             <div class="photo-gallery">
-                                <div class="row photos">
+                                <OwlCarousel className='owl-theme row photos' 
+                                    loop={false} margin={10} items={4} dots ={false} nav autoplay={false} navText ={['<i class="icofont-block-left"></i>','<i class="icofont-block-right"></i>']}>
                                     {interiorMedia.length>0?interiorMedia.map((item)=>
-                                    <div class="col-sm-4 col-md-2 col-lg-2 item">
+                                    <div class="">
                                         {item?.media.indexOf('mp4')>0?(
                                          <video autobuffer controls autoplay  width='100%'
                                          height='100%'>
@@ -622,7 +632,7 @@ const TestDriveMedia = () =>{
                                     </div>
                                     ):""}
                                     
-                                </div>
+                                </OwlCarousel>
                             </div>
                         </div>
                         
