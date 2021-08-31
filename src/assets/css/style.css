@@ -3162,7 +3162,8 @@ Car Detail Page
 	 padding:10px 15px;
 	 border-radius:5px;
 	 margin-right:10px;
-	 
+	 display: inline-block;
+   margin-bottom: 10px;
  }
  
   .products-details .cars-detail-views .car-btns-primary{
@@ -3171,7 +3172,8 @@ Car Detail Page
 	 font-size:16px;
 	 padding:10px 15px;
 	 border-radius:5px;
-	 
+   display: inline-block;
+	 margin-bottom: 10px;
  }
   .products-details .cars-detail-views .car-btns-primary span{	 
 	 color:#008d0e;
@@ -7791,3 +7793,34 @@ input[type="checkbox"]:disabled + label{
   opacity: 0.5;
 }
 
+.offerDetailsBlock{
+  text-align: left;
+  font-size: 16px;
+  background: #FAFAFA;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.offerDetailsBlock hr{
+  margin-bottom: 20px;
+} 
+
+
+.offerDetailsBlock .car-btns{
+  border: 1px solid #bd062c;
+  color:#bd062c;
+  font-size:16px;
+  padding:10px 15px;
+  border-radius:5px;
+  margin-right:10px;
+  
+}
+
+.offerDetailsBlock p span{
+  color: #bd062c;
+}   
+
+.offerDetailsBlock h3{
+  font-size: 16px;
+  font-weight: 300;
+}   

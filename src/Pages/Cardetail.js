@@ -262,7 +262,7 @@ return(
 			</div>
 
 	        <div class="row">
-			{carDetail.length>0 && <div class="col-md-6"> 
+			{carDetail.length>0 && <div class="col-md-5"> 
 
 					<div class="vehicle-detail-banner banner-content clearfix">
 						<div class="banner-slider">
@@ -305,7 +305,7 @@ return(
 					</div>
 				</div>}
 	        	{ carDetail.length >0 && 
-					<div class="col-md-6">
+					<div class="col-md-4">
 	        		<div class="product-dtl">
         				<div class="product-info">
 		        			<div class="product-name">{carDetail[0].make} {carDetail[0].vehicle_type}({carDetail[0].model})</div>
@@ -394,6 +394,28 @@ return(
 	        				</div>
 						</div>
 	        		</div> }
+					
+					<div class="col-md-3">
+						<div className="offerDetailsBlock">
+							<div className="offerDetail">
+								<h3>Last Offer</h3>
+								<div className="offerPrice">$700</div>
+								<p>by <span>Me</span></p>
+								<p>Less then a minute ago</p>
+							</div>
+							<hr></hr>
+							<div className="offerDetail">
+								<h3>Best Offer</h3>
+								<div className="offerPrice">$700</div>
+								<p>by <span>Me</span></p>
+								<p>Less then a minute ago</p>
+							</div>
+							<a href="#" className="car-btns redBtn">Increase Offer</a>
+							<a href="#">Manage Offers</a>
+
+						</div>
+					</div>
+
 	        	</div>
 	        </div> 
 		</div>
