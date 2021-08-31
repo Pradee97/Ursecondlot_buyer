@@ -522,16 +522,12 @@ console.log("check props",props)
                                                 <div class="divCell">High Bid</div>
                                                 <div class="divCell">$ {highBid}</div>
                                             </div>
-                                            { 
-                                                getFeeDetails()
-                                            }
-                                            {/* {feeDetails?feeDetails
-                                            .map((data)=>
+                                                                                       
                                             <div class="divRow">
                                             
                                                 <div class="divCell">Fees</div>
-                                            <div class="divCell">$ {data.fee}</div>
-                                            </div>):""} */}
+                                            <div class="divCell">$ {getFeeDetails()}</div>
+                                            </div>)
                                             <div class="divRow">
                                                 <div class="divCell">Transportation</div>
                                                 <div class="divCell">$ {transportationFee}</div>
