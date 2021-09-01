@@ -143,10 +143,10 @@ const searchSellerCarDetail = () => {
   .catch(err => { console.log(err); });
 }
    
-const redirectpage=(pathid,seller_id)=>{
+const redirectpage=(pathid,seller_dealer_id)=>{
   //e.preventDefault();
-  console.log("seller_id+++++",seller_id)
-  dispatch(CarListAction.sellerid(seller_id))
+  console.log("seller_dealer_id+++++",seller_dealer_id)
+  dispatch(CarListAction.sellerid(seller_dealer_id))
   // history.push("/cardetail/"+pathid);
   history.push({
     pathname: '/cardetail',
@@ -213,7 +213,7 @@ return(
 				<div class="cars-lock">
 				<img src={(moreCar.isFavourite===0)? locked : lock} onClick={()=>addRemoveFavourite(moreCar.car_id,moreCar.isFavourite,'morecar')} />
 			  	</div>
-              	<img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id,moreCar.seller_id)}} class="carImg" alt="..."/>
+              	<img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id,moreCar.seller_dealer_id)}} class="carImg" alt="..."/>
         {moreCar.isbestSale?
 				<div class="cars-tag">
 					<h4>{moreCar.deal_name}</h4>
