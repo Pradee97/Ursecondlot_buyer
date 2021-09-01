@@ -43,7 +43,7 @@ const [sellerId,setSellerId]=useState("");
 const [carDetail ,setCarDetail] = useState([]) 
 const [carInventoryDetail,setCarInventoryDetail]=useState([]);
 const [otherDealerCarDetail,setOtherDealerCarDetail]=useState([]);
-const { id } = props.location.state;
+const { id, sellerDealerId } = props.location.state;
 const [sellerCarDetail,setSellerCarDetail]=useState([]);
 const [lrgImg,setLrgImg]=useState("");
 const [copied, setCopied] = useState(false);
@@ -51,11 +51,11 @@ const [data, setData] = useState("");
 const [distance,setDistance] = useState("");
 const [moreCarFlag,setMoreCarFlag]=useState(false);
 const [similarCarFromSellerFlag,setSimilarCarFromSellerFlag]=useState(false);
-const selectedSellerId = useSelector(state => state.CarListReducer.payload);
+// const sellerDealerId = useSelector(state => state.CarListReducer.payload);
 const [buyer_dealer_id,setBuyer_Dealer_Id]=useState(JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id);
 const [carBuyerDealerId,setCarBuyerDealerId]=useState("");
 const [loading,setLoading] = useState(true);
-console.log("selescted seller id_______",selectedSellerId)
+console.log("selescted seller id_______",sellerDealerId)
 
 const [isOpen, setIsOpen] = useState(false);
 const [open,setOpen] = useState(false);
@@ -141,11 +141,11 @@ const toggleBuyNow = () => {
 const redirectpage=(pathid,seller_dealer_id)=>{
 	//e.preventDefault();
 	
-	dispatch(CarListAction.sellerid(seller_dealer_id))
+	// dispatch(CarListAction.sellerid(seller_dealer_id))
 	// history.push("/cardetail/"+pathid);
 	history.push({
 		pathname: '/cardetail',
-		state: {id:pathid},
+		state: {id:pathid,sellerDealerId:seller_dealer_id},
 	  });
   }
 
@@ -194,7 +194,7 @@ function CarDetailList(){
 
 	"car_id":id,
 	"buyer_dealer_id": JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
-	"seller_dealer_id": selectedSellerId 
+	"seller_dealer_id": sellerDealerId 
 
 }
 
@@ -204,7 +204,7 @@ function CarDetailList(){
 	setCarDetail(res.data.data);
 
 	let make=res.data.data[0].make;
-	let selectedsellerid=res.data.data[0].seller_dealer_id;
+	let sellerDealerId=res.data.data[0].seller_dealer_id;
 	
 	setLoading(false);
 
@@ -225,7 +225,7 @@ function CarDetailList(){
 		setCarInventoryDetail(res.data.data);
 		console.log("car Inventory Detail",res.data.data);
 		const req={
-		seller_dealer_id:selectedsellerid,
+		seller_dealer_id:sellerDealerId,
 		buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
 		};
 		API.post('SellerCarList/condition',req).then(resp=>{

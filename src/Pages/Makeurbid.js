@@ -524,7 +524,7 @@ console.log("check props",props)
                                 <div class="col-md-12">
                                     <div class="divTable">
                                             <div class="headRow">
-                                                <div class="divCell">Estimated Cast</div>
+                                                <div class="divCell">Estimated Cost</div>
                                                 <div  class="divCell"></div>
                                             </div>
                                             <div class="divRow">

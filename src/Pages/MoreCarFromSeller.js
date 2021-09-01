@@ -147,11 +147,11 @@ const searchSellerCarDetail = () => {
 const redirectpage=(pathid,seller_dealer_id)=>{
   //e.preventDefault();
   console.log("seller_dealer_id+++++",seller_dealer_id)
-  dispatch(CarListAction.sellerid(seller_dealer_id))
+  // dispatch(CarListAction.sellerid(seller_dealer_id))
   // history.push("/cardetail/"+pathid);
   history.push({
     pathname: '/cardetail',
-    state: {id:pathid},
+    state: {id:pathid,sellerDealerId:seller_dealer_id},
   });
 }
 
