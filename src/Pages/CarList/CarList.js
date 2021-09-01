@@ -63,7 +63,7 @@ const CarList = () => {
 	const toggleMakeBid = () => {
 		setIsOpen(!isOpen);
 	}
-	const setMakeBitValue = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,comments,transportation,display,proxy_bid) => {
+	const setMakeBitValue = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,comments,transportation,display,proxy_bid,transportation_charge) => {
 		console.log("check the toggle make bid value")
 		setMakeBitData({
 			carHighBid: high_bid,
@@ -78,7 +78,8 @@ const CarList = () => {
 			comments:comments,
 			transportation:transportation,
 			display:display,
-			carProxyBid:proxy_bid,
+            carProxyBid:proxy_bid,
+            transportationCharge:transportation_charge,
 		})
 	
 		toggleMakeBid()
@@ -307,7 +308,7 @@ const CarList = () => {
                                                 {/* {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
                                                 <a className="cta-btns" href="#">Counter Bid $ {item.buy_it_now}</a>
                                                 } */}
-                                                <a className="cta-btns-primary" href="JavaScript:void(0)" onClick={()=>setMakeBitValue(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid)} >Make Bid</a>
+                                                <a className="cta-btns-primary" href="JavaScript:void(0)" onClick={()=>setMakeBitValue(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid,item.transportation_charge)} >Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
@@ -380,7 +381,7 @@ const CarList = () => {
                                                 {/* {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
                                                 <a className="cta-btns" href="#">Counter Bid $ {item.buy_it_now}</a>
                                                 } */}
-                                                <a className="cta-btns-primary" onClick={()=>setMakeBitValue(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid)} >Make Bid</a>
+                                                <a className="cta-btns-primary" onClick={()=>setMakeBitValue(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid,item.transportation_charge)} >Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
@@ -451,7 +452,7 @@ const CarList = () => {
                                                 {/* {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
                                                 <a className="cta-btns" href="#">Counter Bid $ {item.buy_it_now}</a>
                                                 } */}
-                                                <a className="cta-btns-primary" onClick={()=>setMakeBitValue(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid)}>Make Bid</a>
+                                                <a className="cta-btns-primary" onClick={()=>setMakeBitValue(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid,item.transportation_charge)}>Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
@@ -523,7 +524,7 @@ const CarList = () => {
                                         {/* {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
                                         <a className="cta-btns" href="#">Counter Bid $ {item.buy_it_now}</a>
                                         } */}
-                                        <a className="cta-btns-primary" onClick={()=>setMakeBitValue(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid)}>Make Bid</a>
+                                        <a className="cta-btns-primary" onClick={()=>setMakeBitValue(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid,item.transportation_charge)}>Make Bid</a>
                                     </div>
                                 </div>
                             </div>

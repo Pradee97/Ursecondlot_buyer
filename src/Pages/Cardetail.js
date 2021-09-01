@@ -30,8 +30,8 @@ import Loading from '../Component/Loading/Loading';
 import Popup from '../Component/Popup/Popup';
 import Makeurbid from './Makeurbid';
 import CarDetailsAction from './CarDetails/CarDetailsAction';
-import { CountdownCircleTimer } from 'react-countdown-circle-timer'
-// import BuyNow from '../Pages/BuyNow';
+import Countdown from "react-countdown";
+
 
 const Cardetail = (props) =>{
 
@@ -63,6 +63,23 @@ const [open,setOpen] = useState(false);
 
 const [highBid,setHighBid] = useState(null);
 const [makeBitData, setMakeBitData] = useState({})
+
+const Completionist = () => <span>{""}</span>;
+
+
+const renderer = ({minutes, seconds, completed }) => {
+  if (completed) {
+    
+    return <Completionist />;
+  } else {
+   
+    return (
+      <span>
+      	{minutes}:{seconds}
+      </span>
+    );
+  }
+};
 
 const getMakeBitValue = (data) => {
 	const highBid = data
@@ -293,7 +310,8 @@ return(
 			</div>
 
 	        <div class="row">
-			{carDetail.length>0 && <div class="col-md-5"> 
+			{carDetail.length>0 && 
+					<div className={(carDetail[0].buyer_high_bid=="" || carDetail[0].buyer_high_bid==null || carDetail[0].buyer_high_bid==undefined) && (carDetail[0].high_bid=="" || carDetail[0].high_bid==null || carDetail[0].high_bid==undefined)?"col-md-6":"col-md-5"}> 
 
 					<div class="vehicle-detail-banner banner-content clearfix">
 						<div class="banner-slider">
@@ -335,8 +353,9 @@ return(
 						</div>
 					</div>
 				</div>}
-	        	{ carDetail.length >0 && 
-					<div class="col-md-4">
+				{ carDetail.length >0 && 
+			
+					<div className={(carDetail[0].buyer_high_bid=="" || carDetail[0].buyer_high_bid==null || carDetail[0].buyer_high_bid==undefined) && (carDetail[0].high_bid=="" || carDetail[0].high_bid==null || carDetail[0].high_bid==undefined)?"col-md-6":"col-md-4"}>
 	        		<div class="product-dtl">
         				<div class="product-info">
 		        			<div class="product-name">{carDetail[0].make} {carDetail[0].vehicle_type}({carDetail[0].model})</div>
@@ -346,6 +365,8 @@ return(
 									<p class="details"><img src={speedometer}  alt=""/><span>{carDetail[0].miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
 									<p class="details"><img src={gasolinePump} alt=""/><span>{carDetail[0].fuel_type}</span></p>
 							</div>
+							<div class="row">
+	        				<div class="col-md-6">
 							<div class="product-count">
 									<h3>{carDetail[0].dealer_type}</h3>
 									<div class=" d-flex align-items-center mb-3">
@@ -354,11 +375,14 @@ return(
 										<p class="details"><img src="assets/img/road-with-broken-line.svg" alt=""/><span>{distance} M</span></p>
 									</div>	        										
 								</div>
-							<div class="col-md-6">
+								</div>
+								<div class="col-md-6">
 								<div class="product-count carBrand">	        				
 									<img src={carbrand}  alt=""/>
 								</div>
-							</div>
+								</div>
+								</div>
+							
 							{carDetail[0].dealer_message=="" || carDetail[0].dealer_message==null || carDetail[0].dealer_message== undefined?
 							<p><span class="dealertaglines">Message From The Dealer-</span> No Message</p>:
 							<p><span class="dealertaglines">Message From The Dealer-</span> {carDetail[0].dealer_message}</p>
@@ -397,27 +421,16 @@ return(
 							<div class="col-md-12 cars-detail-ins">
 	        					<div class="cars-detail-views">
 									<a class="car-btns" onClick={()=>redirecttoInspection(carDetail[0].car_id)}>View Inspection</a>
-									{carDetail[0].high_bid=="" || carDetail[0].high_bid==null || carDetail[0].high_bid==undefined?"":
+									{/* {carDetail[0].high_bid=="" || carDetail[0].high_bid==null || carDetail[0].high_bid==undefined?"":
 									<a class="car-btns-primary" href=""><img src={tag} alt=""/>High Bid :<span> $ {carDetail[0].high_bid}</span></a>
-									}&nbsp;&nbsp;&nbsp;&nbsp;
+									} */}
+									&nbsp;&nbsp;&nbsp;&nbsp;
 									{carDetail[0].buy_it_now=="" || carDetail[0].buy_it_now== null || carDetail[0].buy_it_now== undefined ?"":
 									<a class="car-btns-primary" href=""><img src={tag} alt=""/>Buy it Now :<span> $ {carDetail[0].buy_it_now}</span></a>
 									}
-									{/* <CountdownCircleTimer
-										isPlaying
-										duration={60}
-										size= {100}
-										strokeWidth= {10}
-										colors={[
-										['#004777', 0.33],
-										['#F7B801', 0.33],
-										['#A30000', 0.33],
-										]}
-									>
-										{({ remainingTime }) => remainingTime}
-									</CountdownCircleTimer> */}
 
-								
+									{carDetail[0].buyer_high_bid==carDetail[0].high_bid && <Countdown date={Date.now() + (carDetail[0].time!==null && carDetail[0].time < 20 ? carDetail[0].time*60*1000 :0)  } renderer={renderer} />}
+
 								</div>
 
 								
@@ -438,7 +451,7 @@ return(
 							</div>
 								        				
 	        			</div>
-						<div class="row">
+						{carDetail[0].buyer_high_bid==carDetail[0].high_bid &&<div class="row">
 							<div class="col-md-12">
 	        					<div class="cars-buy">
 								{carDetail[0].buy_it_now=="" || carDetail[0].buy_it_now== null || carDetail[0].buy_it_now== undefined?"":
@@ -448,43 +461,51 @@ return(
 									<a class="cars-buy-btns-primary" onClick={()=>setMakeBitValue(carDetail[0].high_bid,carDetail[0].min_price,carDetail[0].save_purchase,carDetail[0].car_id,carDetail[0].time,carDetail[0].counter_buyer_dealer_id,carDetail[0].max_price,carDetail[0].buy_it_now,carDetail[0].comments,carDetail[0].transportation,carDetail[0].display,carDetail[0].proxy_bid)}>Make Bid</a>
 								</div>
 	        				</div>
-						</div>
+						</div>}
 	        		</div> }
 					
 					<div class="col-md-3">
+					{carDetail[0].noofBuyer=="" || carDetail[0].noofBuyer==null || carDetail[0].noofBuyer==undefined?"":
+					<div>
 					<p className="offerMade">Number of Bids {carDetail[0].noofBuyer} </p>
+					</div>
+					}
+				{(carDetail[0].buyer_high_bid=="" || carDetail[0].buyer_high_bid==null || carDetail[0].buyer_high_bid==undefined) && (carDetail[0].high_bid=="" || carDetail[0].high_bid==null || carDetail[0].high_bid==undefined)?"":
 						<div className="offerDetailsBlock">
-							
+						
 							<div className="offerDetail">
+							{carDetail[0].buyer_high_bid=="" || carDetail[0].buyer_high_bid==null || carDetail[0].buyer_high_bid==undefined?"":
+							<div>
 								<h3>Last Bid</h3>
-								{carDetail[0].buyer_high_bid=="" || carDetail[0].buyer_high_bid==null || carDetail[0].buyer_high_bid==undefined?
-									<div className="offerPrice">$ 0</div>:
-									<div className="offerPrice">$ {carDetail[0].buyer_high_bid}</div>
-								}
-								<p>by <span>Me</span></p>
-								{/* <p>Less then a minute ago</p> */}
+									<div className="offerPrice">$ {carDetail[0].buyer_high_bid}</div>						
+									<p>by <span>Me</span></p>
+							</div>
+							}
 							</div>
 							<hr></hr>
 							<div className="offerDetail">
+								{carDetail[0].high_bid=="" || carDetail[0].high_bid==null || carDetail[0].high_bid==undefined?"":
+								<div className="left">
 								<h3>High Bid</h3>
 								<div className="offerPrice">$ {carDetail[0].high_bid}</div>
 								{carDetail[0].buyer_high_bid==carDetail[0].high_bid?
 								<p>by <span>Me</span></p>:
 								<p>by <span>{carDetail[0].high_bid_buyer_name}</span></p>
 								}
-								<div class="col-md-6">
-								<div class="product-count carBrand">	        				
+								</div>
+								}
+								<div class="carBrand">	        				
 									<img src={carbrand}  alt=""/>
 								</div>
-							</div>	
-								{/* <p>Less then a minute ago</p> */}
+							
+								
 							</div>
-							{/* <a href="#" className="car-btns redBtn">Increase Offer</a>
-							<a href="#">Manage Offers</a> */}
+							
 
 						</div>
+}
 					</div>
-
+							
 	        	</div>
 	        </div> 
 		</div>
