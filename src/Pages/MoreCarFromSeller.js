@@ -45,7 +45,7 @@ const MoreCarFromSeller = () =>{
     })
 }
   
-const toggleMakeBid = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,make,comments,transportation,display,proxy_bid) => {
+const toggleMakeBid = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,make,id,comments,transportation,display,proxy_bid) => {
   console.log("check the high bid value",high_bid)
   let makebiddispatch={
     high_bid: high_bid,
@@ -89,7 +89,7 @@ useEffect(() => {
 const searchSellerCarDetail = () => {
   console.log("/////////",data)
   let request={
-    "seller_id":id,
+    "seller_dealer_id":id,
     buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
     data: data
       
@@ -107,10 +107,10 @@ const searchSellerCarDetail = () => {
   .catch(err => { console.log(err); });
 }
    
-const redirectpage=(pathid,seller_id)=>{
+const redirectpage=(pathid,seller_dealer_id)=>{
   //e.preventDefault();
-  console.log("seller_id+++++",seller_id)
-  dispatch(CarListAction.sellerid(seller_id))
+  console.log("seller_dealer_id+++++",seller_dealer_id)
+  dispatch(CarListAction.sellerid(seller_dealer_id))
   history.push("/cardetail/"+pathid);
 }
 
@@ -173,7 +173,7 @@ return(
 				<div class="cars-lock">
 				<img src={(moreCar.isFavourite===0)? locked : lock} onClick={()=>addRemoveFavourite(moreCar.car_id,moreCar.isFavourite,'morecar')} />
 			  	</div>
-              	<img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id,moreCar.seller_id)}} class="carImg" alt="..."/>
+              	<img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id,moreCar.seller_dealer_id)}} class="carImg" alt="..."/>
         {moreCar.isbestSale?
 				<div class="cars-tag">
 					<h4>{moreCar.deal_name}</h4>

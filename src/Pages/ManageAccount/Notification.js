@@ -53,17 +53,17 @@ const Notification = () => {
 
 		};
 		const state = API.post('notification/condition', request);
-		state.then(res => {
+		state.then(res => {setLoading(false)
 			console.log("res", res.data.data)
 			setNotification(res.data.data);
 			setEmail(res.data.data.email)
 			setSms(res.data.data.sms)
 			setPush_notification(res.data.data.push_notification)
 			setFavEmail(res.data.data.favorite_email)
-			setFavSms(res.data.data.favorite_sms)
+			setFavSms(res.data.data.favorite_sms) 
 			setLoading(false)
 		})
-			.catch(err => { console.log(err); });
+		    .catch(err => { console.log(err); });
 	}
 	useEffect(() => {
 		getNotification();
@@ -120,7 +120,7 @@ const Notification = () => {
 
 	return (
 		<div>
-{/* {loading?<Loading/>: */}
+    {loading?<Loading/>: 
 			<main id="main" className="inner-page">
 
 
@@ -342,7 +342,7 @@ const Notification = () => {
 						popupActionPath={popupActionPath}
 					/>}
 			</main>
-{/* } */}
+} 
 		</div>
 	);
 };
