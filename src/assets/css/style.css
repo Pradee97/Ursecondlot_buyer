@@ -2986,7 +2986,7 @@ Car Detail Page
 	
 }
 .back-btn-primary{
-	color:#BD062C;
+	color:#BD062C !important;
 	font-size:18px;
 	border: 2px solid #BD062C;
 	padding:6px 15px;
@@ -3159,19 +3159,21 @@ Car Detail Page
 	 border: 1px solid #bd062c;
 	 color:#bd062c;
 	 font-size:16px;
-	 padding:10px 15px;
+	 padding:7px 10px;
 	 border-radius:5px;
 	 margin-right:10px;
-	 
+	 display: inline-block;
+   margin-bottom: 10px;
  }
  
   .products-details .cars-detail-views .car-btns-primary{
 	 border: 1px solid #999;
 	 color:#444;
 	 font-size:16px;
-	 padding:10px 15px;
+	 padding:7px 10px;
 	 border-radius:5px;
-	 
+   display: inline-block;
+	 margin-bottom: 10px;
  }
   .products-details .cars-detail-views .car-btns-primary span{	 
 	 color:#008d0e;
@@ -7562,7 +7564,7 @@ margin-top: -3px;
 }
 
 .product-count.carBrand{
-  text-align: left;
+  text-align: right;
 }
  
 .specifati p img{
@@ -7791,3 +7793,101 @@ input[type="checkbox"]:disabled + label{
   opacity: 0.5;
 }
 
+.offerDetailsBlock{
+  text-align: left;
+  font-size: 16px;
+  background: #FAFAFA;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.offerDetailsBlock hr{
+  margin-bottom: 20px;
+  margin-top: 20px;
+} 
+
+
+.offerDetailsBlock .car-btns{
+  border: 1px solid #bd062c;
+  color:#bd062c;
+  font-size:16px;
+  padding:10px 15px;
+  border-radius:5px;
+  margin-right:10px;
+  
+}
+
+.offerDetailsBlock p span{
+  color: #bd062c;
+}   
+
+.offerDetailsBlock h3{
+  font-size: 16px;
+  font-weight: 300;
+}   
+
+.offerMade{
+  color: green;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.divTable
+    {
+        display:  table;
+        width:auto;
+        background-color:#fff;
+        border:1px solid  #ddd;
+        border-spacing:0px;
+        width: 100%;
+        text-align: left;
+    }
+
+    .divRow
+    {
+       display:table-row;
+       width:auto;
+    }
+
+    .divCell
+    {
+        float:left;
+        display:table-column;
+        background-color:#fff;
+        padding: 10px;
+    }
+
+    .headRow{
+      border-bottom: #ddd solid 1px;
+      float: left;
+      width: 100%;
+      font-weight: 600;
+    }
+
+    .divRow .divCell:first-child{
+      width: 80%;
+    }
+
+    .divRow .divCell:last-child{
+      width: 20%;
+      text-align: right;
+    }
+
+    .footRow{
+      font-weight: 600;
+      float: left;
+      width: 100%;
+      border-top: #ddd solid 1px;
+    }
+
+.offerDetail .left{
+  display: inline-block;
+}
+
+.offerDetail .carBrand{
+ float: right;
+}
+
+.offerDetail p{
+  margin: 0;
+}
