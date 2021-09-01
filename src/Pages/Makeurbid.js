@@ -23,7 +23,7 @@ console.log("check props",props)
     const [carBuyItNow,setCarBuyItNow] = useState(props.setMakeBitValue.buyItNow);
     const [carComments,setCarComments] = useState(props.setMakeBitValue.comments);
     const [carDisplay,setCarDisplay] = useState(props.setMakeBitValue.display);
-    const [carTransportation,setCarTransportation] = useState(props.setMakeBitValue.carSavePurchase === "yes" ?props.setMakeBitValue.transportation : "no");
+    const [carTransportation,setCarTransportation] = useState(props.setMakeBitValue.carSavePurchase === "yes" ? props.setMakeBitValue.transportation : "no");
     const [carSavePurchase,setCarSavePurchase] = useState(props.setMakeBitValue.carSavePurchase);
     const [carProxyBid,setCarProxyBid] = useState(props.setMakeBitValue.carProxyBid);
     const [make,setMake] = useState(props.setMakeBitValue.make);
@@ -32,7 +32,7 @@ console.log("check props",props)
     const [carMinBid,setCarMinBid] = useState(props.setMakeBitValue.carMinBid);
     const [time,setTime] = useState(props.setMakeBitValue.time);
     const [counterBuyerId,setCounterBuyerId] = useState(props.setMakeBitValue.counter_buyerid);
-    const [transportationFee,setTransportationFee] = useState(props.setMakeBitValue.transportationCharge || 300);
+    const [transportationFee,setTransportationFee] = useState(props.setMakeBitValue.transportationCharge || 0);
     const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
     const [buyer_dealer_id,setBuyer_Dealer_Id]=useState(JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id);
     const [isOpen, setIsOpen] = useState(false);
@@ -343,16 +343,25 @@ console.log("check props",props)
         
     }
     const getFeeDetails = () =>{
+        // return feeDetails.length > 0 ? feeDetails[0].fee : 0
         return feeDetails.length > 0 ? feeDetails
-            .filter((data)=>{
+            .filter((data)=> 
+            // data.fee_price.replaceAll('$',"").split("-")[1]!=="up" ? Number(data.fee_price.replaceAll('$',"").split("-")[0]) >= Number(highBid) && Number(highBid)  <= Number(data.fee_price.replaceAll('$',"").split("-")[1])  : Number(data.fee_price.replaceAll('$',"").split("-")[0]) <= Number(highBid) 
+            {
                 const range = data.fee_price.replaceAll('$',"").split("-")
+                // console.log("range===",range)
+                //return range[1]!=="up" ? Number(range[0]) >= Number(highBid) && Number(highBid)  <= Number(range[1])  : Number(range[0]) <= Number(highBid) 
                 if(range[1]!=="up"){
-                    return Number(range[0]) >= Number(highBid) && Number(highBid)  <= Number(range[1]) 
+                    // console.log("data.fee---",Number(highBid),"====",data.fee )
+                    // console.log("data.fee---",Number(range[0]) >= Number(highBid) && Number(highBid)  <= Number(range[1]) )
+                    return Number(range[0]) <= Number(highBid) && Number(highBid)  <= Number(range[1]) 
                 }
                 else{
                     return Number(range[0]) <= Number(highBid) 
                 }
-                } )[0].fee 
+
+                } 
+                )[0].fee 
             : 0
     }
     const highProxyBidValidation= (data)=> {
@@ -498,7 +507,7 @@ console.log("check props",props)
                                     </div>
 
                                     <div className="col-lg-6 form-group">
-                                        <span>$300 </span>                              
+                                        <span>${transportationFee || 0} </span>                              
                                     </div>
 
                                     <div className="col-lg-12 form-group customCheckbox">
@@ -530,11 +539,11 @@ console.log("check props",props)
                                             </div>
                                             <div class="divRow">
                                                 <div class="divCell">Transportation</div>
-                                                <div class="divCell">$ {transportationFee}</div>
+                                                <div class="divCell">$ {carTransportation === 'yes' ? transportationFee : 0}</div>
                                             </div>
                                             <div class="footRow divRow">
                                                 <div class="divCell">Total</div>
-                                                <div  class="divCell">$ {Number(highBid) + Number(transportationFee) + Number(getFeeDetails())}</div>
+                                                <div  class="divCell">$ {Number(highBid) + Number(carTransportation === 'yes' ? transportationFee : 0) + Number(getFeeDetails())}</div>
                                             </div>
                                     </div>
                                 </div>
