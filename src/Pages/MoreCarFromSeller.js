@@ -89,7 +89,7 @@ useEffect(() => {
 const searchSellerCarDetail = () => {
   console.log("/////////",data)
   let request={
-    "seller_dealer_id":id,
+    "seller_id":id,
     buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
     data: data
       
