@@ -132,7 +132,11 @@ console.log("check props",props)
         props.getMakeBitValue(makebiddispatch)
         console.log("redirection checking for car detail" , id)
         if (redirectPage=="cardetail"){
-        history.push("/cardetail/"+id)
+        // history.push("/cardetail/"+id)
+        history.push({
+            pathname: '/cardetail',
+            state: {id:id},
+          });
         }
         else if(redirectPage=="suggestedcars") {
         history.push("/suggestedcars")
