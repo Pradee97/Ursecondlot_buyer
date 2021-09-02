@@ -6,11 +6,10 @@ import API from "../Services/BaseService";
 import Popup from '../Component/Popup/Popup';
 import Terms from '../Component/TermsAndCondition/PolicyDocument';
 import CommonPopup from '../Component/CommonPopup/CommonPopup';
-import Item from 'antd/lib/list/Item';
 import checkImg from '../../src/assets/img/check.svg';
 import errorImg from '../../src/assets/img/erroricon.png';
 import '../Component/CommonPopup/commonPopup.css';
-import CarDetailsAction from '../Pages/CarDetails/CarDetailsAction'
+import { Slider } from 'antd';
 
 const MakeurBid=(props)=>{
 console.log("check props",props)
@@ -66,21 +65,11 @@ console.log("check props",props)
     const [highAndProxyFlag, setHighAndProxyFlag] = useState(false)
 
     const [feeDetails, setFeeDetails] = useState("");
- 
+    const [sliderHighBid,setSliderHighBid]=useState("");
 
     if(carHighBid=="" || carHighBid==null || carHighBid==undefined || carHighBid==0){
         setCarHighBid(carMinBid)
     }
-
-    // if(carSavePurchase=="" || carSavePurchase==null || carSavePurchase=="no" ){
-
-    //     setTransportFlag(false)
-    // }
-    // else {
-    //     setTransportFlag(true)
-    // }
-
-
     
     const togglePopup = () => {
         setIsOpen(!isOpen);
@@ -179,47 +168,41 @@ console.log("check props",props)
         
         setHighBidError("")
         setProxyBidError("")
-                console.log("highBid===",highBid)
-            console.log("carMinBid===",carMinBid)
-            console.log("carHighBid===",carHighBid)
+
         if(!highBid || !carHighBid){
 
             setHighBidError("High Bid price should not be empty" )
             return;
         }
         else if (highBid < (!carHighBid || carHighBid===0 ? carMinBid : carHighBid ) ){
-            console.log("highBid===",highBid)
-            console.log("carMinBid===",carMinBid)
-            console.log("carHighBid===",carHighBid)
-            console.log("High Bid price should not lower than " +Number(carHighBid+50))
+
             setHighBidError("High Bid price should not lower than " +Number(carHighBid+50))
             return;
             
         }
         
         if((carBuyItNow!=="" && carBuyItNow!== null && carBuyItNow!==undefined && carBuyItNow!==0 && carBuyItNow<highBid)){
-            console.log("checkt the validation for the max and buy it now")
+
             setHighBidError("Your high Bid Price must be less than Buy it Now Price");
             return;
         
         }
 
         if((proxyBid!=="" && proxyBid!==null && proxyBid!==undefined && proxyBid!==0)&& (Number(proxyBid)<=Number(highBid))){
-            console.log("highBid===",highBid)
-            console.log("proxyBid===",proxyBid)
+          
             setProxyBidError("Max Bid price must be greater than high bid");
             return;
         }
 
         
         if((carBuyItNow!=="" && carBuyItNow!== null && carBuyItNow!==undefined && carBuyItNow!==0 && carBuyItNow<proxyBid )){
-            console.log("check the validation for the max and buy it now")
+        
             setProxyBidError("Your Max Bid Price must be less than Buy it Now Price");
             return;
         
         }
  
-        console.log("inside addremove");
+   
         let request={
             buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
             car_id:id,
@@ -235,9 +218,7 @@ console.log("check props",props)
             save_purchase: !carSavePurchase ? "no" : carSavePurchase
         }
 
-        console.log("request",request);
-        console.log("check the request in make bid",request)
-        // return;
+      
         API.post('makeBid/add',request).then(res=>{
          
             console.log("",res.data.data);
@@ -245,27 +226,14 @@ console.log("check props",props)
                 setToggleMakeBidPopupOpen(false);
                 setAlertImg(checkImg);
                 setAlertMessage("Your Bid has been updated")
-                // const { data } = res;
-                // togglePopup()
-                // setPopupTitle("Make Bid");
-                // setPopupMsg("Your Bid is successfully created.Thanks you So much for your business");
-                // setPopupType("success");
-                // setPopupActionType("close");
-                // setPopupActionValue("close");
+              
                 
             } else {
                 const { data } = res;
                 setToggleMakeBidPopupOpen(false);
                 setAlertImg(errorImg);
                 setAlertMessage( data.error.err )
-                // const { data } = res;
-                // togglePopup()
-                // setPopupTitle("Make Bid");
-                // setPopupMsg( data.error.err );
-                // setPopupMsg("Floor is not Created, Please try Again");
-                // setPopupType("error");
-                // setPopupActionType("close");
-                // setPopupActionValue("close");
+
             }
 
         })
@@ -390,6 +358,10 @@ console.log("check props",props)
         
     }
 
+    const onhandleChange=(highBid)=>{
+        setHighBid({highBid})
+    }
+
     return(
         <div>
           
@@ -414,42 +386,37 @@ console.log("check props",props)
 
 
                             <div class="form-group col-lg-6 col-md-6 highbidtbox">
-                                {/* {carHighBid == "" || carHighBid == null || carHighBid == undefined ? */}
+
                                 <div class="tbox">
 
-                                    <i>$</i><input type="number" step="50" id="highBid" class="textbox" placeholder="Your New Bid" onChange={(e)=>highBidValidation(e.target.value)}></input>                             
+                        <i>$</i><input type="number" step="50" id="highBid" class="textbox" placeholder="Your New Bid"  onChange={(e)=>highBidValidation(e.target.value)}></input>                             
                                     <label htmlFor="highBid" className={highBid != "" ? "input-has-value" : ""}>High Bid</label>
 
                                 </div> 
-                                {/* :<div class="tbox">
-                                    
-                                    <i>$</i><input type="text" id="highBid" class="textbox" defaultValue={carHighBid+50} onChange={(e)=>setHighBid(e.target.value)}></input>
-                                    <label htmlFor="highBid" className={highBid != "" ? "input-has-value" : ""}>High Bid</label>
-                                    
-                                </div>
-                                } */}
+
                                 <p class="form-input-error">{highBidError}</p>
                             </div>
-{/* 
-                            <input
-                                type="range"
-                                id={id}
-                                min={carHighBid}
-                                // max={}
-                                step={0.5}
-                                // // value={state} // don't set value from state
-                                // defaultValue={state} // but instead pass state value as default value
-                                onChange={(e)=>setHighBid(e.target.value)}
-                                // onMouseUp={handleChange} 
-                                /> */}
 
                             <div class="form-group col-lg-6 col-md-6">
                             
                             
                             {carBuyItNow=="" || carBuyItNow== null || carBuyItNow== undefined ?"":
                             <p className="details buyitnow"><span>Buy It Now $ {carBuyItNow}</span></p>}
+
+                           {carBuyItNow=="" || carBuyItNow== null || carBuyItNow== undefined ?
+                           <Slider 
+                           range defaultValue={[Number(carHighBid+50),10000]}
+                           step={50}
+                           min={Number(carHighBid+50)} max={10000}  
                            
-                               
+                           />:
+                           <Slider  
+                           range defaultValue={[Number(carHighBid+50),Number(carBuyItNow)]}
+                           step={50}
+                           min={carHighBid+50} max={carBuyItNow}
+                           />}
+
+                            
                             </div>
                             
                            
@@ -472,10 +439,10 @@ console.log("check props",props)
                                  <p className="form-input-error">{proxyBidError}</p>  
                             </div>
                             
-                           
+                            
                             <div className="col-lg-6 form-group customCheckbox  pt-3">
-                                <input type="checkbox" className="form-check d-inline " id="chb3" value={carDisplay == 'yes' ? 'no' : 'yes'} checked={carDisplay == 'yes' ? true : false} onChange={(e)=>{setCarDisplay(e.target.value)}}/>
-                                <label htmlFor="chb3" className="form-check-label">Display Max Bid To Seller  </label>                               
+                                <input type="checkbox" className="form-check d-inline " id="chb3" value={carDisplay == 'yes' ? 'no' : 'yes'} disabled={ proxyBid>0 ? false:true}  checked={carDisplay == 'yes' ? true : false} onChange={(e)=>{setCarDisplay(e.target.value)}}/>
+                                <label htmlFor="chb3" className="form-check-label">Display Maximum Proxy Bid To Seller  </label>                               
                             </div>
 
                            
@@ -565,7 +532,8 @@ console.log("check props",props)
                     <div class="col-md-12 btns">
                     <button className="cta-btns" onClick={redirect}>ok</button>      
                    </div> 
-                </div>}
+                </div>
+            }
                 </div>):
                 
                 (
