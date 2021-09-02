@@ -61,6 +61,8 @@ import inventoryCars from './Pages/InventoryCars';
 import InventoryCars from './Pages/InventoryCars';
 import MoreCarFromBuyer from './Pages/MoreCarFromSeller';
 import Checkout from './Pages/Checkout';
+import ScrollToTop from "./Component/scrollToTop";
+
 
 function AppRouter() {
 
@@ -98,6 +100,7 @@ function AppRouter() {
       {isSession && <SessionConfirmationPopup  isToggle={setIsSession}/>}
         {/* <Suspense fallback={<Loading />}> */}
           <Header /> 
+          <ScrollToTop />
           <Switch>
             <Route exact path="/" component={Home}/>
             <Route  path="/login" component={Login}/>

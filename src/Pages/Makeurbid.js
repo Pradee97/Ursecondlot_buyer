@@ -66,6 +66,7 @@ console.log("check props",props)
 
     const [feeDetails, setFeeDetails] = useState("");
     const [sliderHighBid,setSliderHighBid]=useState("");
+    const [isSliderChnaged, setIsSliderChnaged] = useState(false)
 
     if(carHighBid=="" || carHighBid==null || carHighBid==undefined || carHighBid==0){
         setCarHighBid(carMinBid)
@@ -262,8 +263,6 @@ console.log("check props",props)
 
  const assigntransportFlag=()=>{
 
-    
-    
     if(carSavePurchase=="" || carSavePurchase==null || carSavePurchase=="no" ){
         console.log("save purchase is null ");
         setTransportFlag(false);
@@ -365,7 +364,11 @@ console.log("check props",props)
     const onhandleChange=(highBid)=>{
         setHighBid({highBid})
     }
-
+    const getSliderValue = (highBid) =>{
+        setIsSliderChnaged(true)
+        console.log("my=====highBid====",highBid)
+        setHighBid(highBid)
+    }
     return(
         <div>
           
@@ -393,7 +396,7 @@ console.log("check props",props)
 
                                 <div class="tbox">
 
-                        <i>$</i><input type="number" step="50" id="highBid" class="textbox" placeholder="Your New Bid"  onChange={(e)=>highBidValidation(e.target.value)}></input>                             
+                        <i>$</i><input type="number" step="50" id="highBid" class="textbox" value = {isSliderChnaged && highBid} placeholder="Your New Bid"  onChange={(e)=>highBidValidation(e.target.value)}></input>                             
                                     <label htmlFor="highBid" className={highBid != "" ? "input-has-value" : ""}>High Bid</label>
 
                                 </div> 
@@ -409,13 +412,14 @@ console.log("check props",props)
 
                            {carBuyItNow=="" || carBuyItNow== null || carBuyItNow== undefined ?
                            <Slider 
-                           range defaultValue={[Number(carHighBid+50),10000]}
+                           defaultValue={[Number(carHighBid+50)]}
                            step={50}
+                           disabled={false} 
                            min={Number(carHighBid+50)} max={10000}  
-                           
+                           onChange={getSliderValue}
                            />:
                            <Slider  
-                           range defaultValue={[Number(carHighBid+50),Number(carBuyItNow)]}
+                           defaultValue={[Number(carHighBid+50)]}
                            step={50}
                            min={carHighBid+50} max={carBuyItNow}
                            />}
