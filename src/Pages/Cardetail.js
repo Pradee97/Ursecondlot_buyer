@@ -150,7 +150,11 @@ const redirectpage=(pathid,seller_dealer_id)=>{
   }
 
   const redirecttoInspection=(pathid)=>{
-	  history.push("/Inspection/"+pathid);
+	//   history.push("/Inspection/"+pathid);
+	history.push({
+		pathname: "/Inspection",
+		state: {id:pathid},
+	  });
   }
 
 const redirectpagemorecarseller=(pathid)=>{
@@ -453,7 +457,8 @@ return(
 								        				
 	        			</div>
 						{/* {(carDetail[0].isbuyercounterbid === 'yes'  && (carDetail[0].time !==0 || carDetail[0].time!==null) ) || carDetail[0].isbuyercounterbid !== 'yes' ? */}
-						{(carDetail[0].buyer_high_bid !== carDetail[0].high_bid && carDetail[0].isbuyercounterbid=='me'&& (carDetail[0].time !==0 || carDetail[0].time!==null))|| carDetail[0].buyer_high_bid!== null || carDetail[0].high_bid ||  carDetail[0].buyer_high_bid == carDetail[0].high_bid && carDetail[0].isbuyercounterbid!=='me'?
+						{/* {(carDetail[0].buyer_high_bid == carDetail[0].high_bid && carDetail[0].isbuyercounterbid=='me'&& (carDetail[0].time !==0 || carDetail[0].time!==null))|| carDetail[0].buyer_high_bid!== null || carDetail[0].high_bid ||  carDetail[0].buyer_high_bid == carDetail[0].high_bid && carDetail[0].isbuyercounterbid!=='me'? */}
+						{(carDetail[0].isbuyercounterbid=="me" && carDetail[0].iscounterbid!==null && (carDetail[0].time !==0 || carDetail[0].time!==null)) ||(carDetail[0].iscounterbid==null && (carDetail[0].time !==0 || carDetail[0].time!==null))?
 						<div class="row">
 							<div class="col-md-12">
 	        					<div class="cars-buy">
@@ -465,7 +470,7 @@ return(
 								</div>
 	        				</div>
 						</div>
-						:""} 
+						:<div class="carpoint"> <a class="cars-buy-btns-primary">Locked up for Higher Bid for {carDetail[0].time} minutes</a></div>} 
 	        		</div> }
 					
 					<div class="col-md-3">

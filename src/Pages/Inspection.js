@@ -15,7 +15,7 @@ import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 
-const Inspection=()=>{
+const Inspection=(props)=>{
 
      
     const history = useHistory();
@@ -28,7 +28,7 @@ const Inspection=()=>{
     const [tiresWheelsMedia,setTiresWheelsMedia] = useState("");
     const [powerTrainMedia,setPowerTrainMedia] = useState("");
     const [testDriveMedia,setTestDriveMedia] = useState("");
-    const { id } = useParams();
+    const { id } = props.location.state;
     const getInspectionDetail = () =>{
     let request={
         car_id: id,
@@ -745,14 +745,14 @@ const TestDriveMedia = () =>{
             
             
                 </div>
-:""}
+:"No data found"}
             </div>
          
             
 
-            <div class="inspectionbottom-back-btn">
-                        <a class="back-btn-primary" href="#"><i class="bx bx-chevron-left"></i> Back</a>
-            </div>
+            {/* <div class="inspectionbottom-back-btn">
+                        <a class="back-btn-primary" href="JavaScript:void(0)" onClick={()=>{redirectpage(inspection[0].car_id,inspection[0].seller_dealer_id)}}><i class="bx bx-chevron-left"></i> Back</a>
+            </div> */}
 
             
             <section id="playstoreBlock" class="playstoreBlock">

@@ -151,7 +151,7 @@ function AppRouter() {
               <Route  path="/addressadd" component={AddAddress}/>
               <Route  path="/buyeredit/:id" component={EditBuyer}/>
               <Route path="/Makeurbid" component={MakeurBid}/>
-              <Route path="/Inspection/:id" component={Inspection}/>
+              <Route path="/Inspection" component={Inspection}/>
               <Route path="/CarDetail" component={Cardetail}/>
               <Route path="/MoreCarFromBuyer/:id" component={MoreCarFromBuyer}/>
               <Route path="/SimilarCarFromBuyer/:id" component={SimilarCars}/>
