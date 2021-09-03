@@ -410,6 +410,7 @@ console.log("check props",props)
                             {carBuyItNow=="" || carBuyItNow== null || carBuyItNow== undefined ?"":
                             <p className="details buyitnow"><span>Buy It Now $ {carBuyItNow}</span></p>}
 
+                        <div class="mbSliderBlock">
                            {carBuyItNow=="" || carBuyItNow== null || carBuyItNow== undefined ?
                            <Slider 
                            defaultValue={[Number(carHighBid+50)]}
@@ -423,7 +424,7 @@ console.log("check props",props)
                            step={50}
                            min={carHighBid+50} max={carBuyItNow}
                            />}
-
+                        </div>
                             
                             </div>
                             
