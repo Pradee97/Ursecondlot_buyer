@@ -458,7 +458,7 @@ return(
 	        			</div>
 						{/* {(carDetail[0].isbuyercounterbid === 'yes'  && (carDetail[0].time !==0 || carDetail[0].time!==null) ) || carDetail[0].isbuyercounterbid !== 'yes' ? */}
 						{/* {(carDetail[0].buyer_high_bid == carDetail[0].high_bid && carDetail[0].isbuyercounterbid=='me'&& (carDetail[0].time !==0 || carDetail[0].time!==null))|| carDetail[0].buyer_high_bid!== null || carDetail[0].high_bid ||  carDetail[0].buyer_high_bid == carDetail[0].high_bid && carDetail[0].isbuyercounterbid!=='me'? */}
-						{(carDetail[0].isbuyercounterbid=="me" && carDetail[0].iscounterbid!==null && (carDetail[0].time !==0 || carDetail[0].time!==null)) ||(carDetail[0].iscounterbid==null && (carDetail[0].time !==0 || carDetail[0].time!==null))?
+						{(carDetail[0].isbuyercounterbid=="me" && carDetail[0].iscounterbid!==null && (carDetail[0].time !==0 || carDetail[0].time!==null)) || ((carDetail[0].iscounterbid==null || carDetail[0].iscounterbid=="no" ) && (carDetail[0].isbuyercounterbid==null || carDetail[0].isbuyercounterbid=="not")&&(carDetail[0].time ==0 || carDetail[0].time==null))?
 						<div class="row">
 							<div class="col-md-12">
 	        					<div class="cars-buy">
