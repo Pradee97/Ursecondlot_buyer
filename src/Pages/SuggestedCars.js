@@ -76,23 +76,24 @@ const SuggestedCars = () => {
 	const toggleMakeBid = () => {
 		setIsOpen(!isOpen);
 	}
-	const setMakeBitValue = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,comments,transportation,display,proxy_bid,transportation_charge) => {
+	const setMakeBitValue = (data) => {
 		console.log("check the toggle make bid value")
+		// item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid,item.transportation_charge
 		setMakeBitData({
-			carHighBid: high_bid,
-			carMaxBid: min_price,
-			carId : car_id,
-			carSavePurchase: save_purchase,
+			carHighBid: data.carDetailhigh_bid,
+			carMaxBid: data.min_price,
+			carId : data.car_id,
+			carSavePurchase: data.save_purchase,
 			redirectPage: "suggestedcars",
-			time:time,
-			counter_buyerid:counterbuyerid,
-			carMaxBid :max_price,
-			buyItNow: buy_it_now,
-			comments:comments,
-			transportation:transportation,
-			display:display,
-			carProxyBid:proxy_bid,
-			transportationCharge:transportation_charge,
+			time:data.time,
+			counter_buyerid:data.counter_buyer_dealer_id,
+			carMaxBid :data.max_price,
+			buyItNow: data.buy_it_now,
+			comments:data.comments,
+			transportation:data.transportation,
+			display:data.display,
+			carProxyBid:data.proxy_bid,
+			transportationCharge:data.transportation_charge,
 		})
 	
 		toggleMakeBid()
@@ -939,7 +940,7 @@ useEffect(() => {
                             <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
                             {carDetail.length>0?carDetail.map((item) =>
                             
-                                <div className="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                <div key={item.car_id} className="col-lg-4 col-md-4 col-sm-6 col-xs-6">
                                     <div className="car-item">
                                         <div className="cars-lock">
                                         <img src={(item.isFavourite===0)? lock : locked} onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'recent')} />
@@ -969,13 +970,11 @@ useEffect(() => {
                                             </div>
 
                                             <div className="cars-prices">
-                                                {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?"":
+                                                {!item.high_bid?"":
                                                 <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                                 }
-												{/* {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
-												<a className="cta-btns" href="#">Counter Bid $ {item.buy_it_now}</a>
-												}  */}
-                                                <a className="cta-btns-primary" onClick={()=>setMakeBitValue(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid,item.transportation_charge)} >Make Bid</a>
+
+                                                <a className="cta-btns-primary" onClick={()=>setMakeBitValue(item)} >Make Bid</a>
                                             </div>
                                         </div>
                                     </div>

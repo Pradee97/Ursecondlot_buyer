@@ -186,21 +186,21 @@ console.log("check props",props)
             
         }
         
-        if((carBuyItNow!=="" && carBuyItNow!== null && carBuyItNow!==undefined && carBuyItNow!==0 && carBuyItNow<highBid)){
+        if((carBuyItNow!=="" && carBuyItNow!== null && carBuyItNow!==undefined && carBuyItNow!==0 && (Number(carBuyItNow)<Number(highBid)))){
 
             setHighBidError("Your high Bid Price must be less than Buy it Now Price");
             return;
         
         }
 
-        if((proxyBid!=="" && proxyBid!==null && proxyBid!==undefined && proxyBid!==0)&& (Number(proxyBid)<=Number(highBid))){
+        else if((proxyBid!=="" && proxyBid!==null && proxyBid!==undefined && proxyBid!==0)&& (Number(proxyBid)<=Number(highBid))){
           
             setProxyBidError("Max Bid price must be greater than high bid");
             return;
         }
 
         
-        if((carBuyItNow!=="" && carBuyItNow!== null && carBuyItNow!==undefined && carBuyItNow!==0 && carBuyItNow<proxyBid )){
+        if((carBuyItNow!=="" && carBuyItNow!== null && carBuyItNow!==undefined && carBuyItNow!==0 && (Number(carBuyItNow)<Number(proxyBid)) )){
         
             setProxyBidError("Your Max Bid Price must be less than Buy it Now Price");
             return;
@@ -376,7 +376,7 @@ console.log("check props",props)
                 <div id="makeyourbid" class="makeyourbid">
                 {toggleMakeBidPopupOpen?
                     (<div class="container">
-                        {time>20 || time==null || time==undefined ?
+                        {/* {time>20 || time==null || time==undefined ? */}
                         <div class="makeyourbidblock col-lg-12">
                             <div class="section-title">
                                 <h2>Make Your Bid</h2>
@@ -396,7 +396,7 @@ console.log("check props",props)
 
                                 <div class="tbox">
 
-                        <i>$</i><input type="number" step="50" id="highBid" class="textbox" value = {isSliderChnaged && highBid} placeholder="Your New Bid"  onChange={(e)=>highBidValidation(e.target.value)}></input>                             
+                        <i>$</i><input type="number" step="50" id="highBid" class="textbox" defaultValue = {isSliderChnaged && highBid} placeholder="Your New Bid"  onChange={(e)=>highBidValidation(e.target.value)}></input>                             
                                     <label htmlFor="highBid" className={highBid != "" ? "input-has-value" : ""}>High Bid</label>
 
                                 </div> 
@@ -534,14 +534,15 @@ console.log("check props",props)
                             </div>
                     </div>
                     
-                </div>:
+                </div>
+                {/* :
                 <div>
                     <p>Counter Bid is in progress</p>
                     <div class="col-md-12 btns">
                     <button className="cta-btns" onClick={redirect}>ok</button>      
                    </div> 
                 </div>
-            }
+            } */}
                 </div>):
                 
                 (
