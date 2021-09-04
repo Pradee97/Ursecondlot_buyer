@@ -185,15 +185,16 @@ console.log("check props",props)
             return;
             
         }
-        
+     
         if((carBuyItNow!=="" && carBuyItNow!== null && carBuyItNow!==undefined && carBuyItNow!==0 && (Number(carBuyItNow)<Number(highBid)))){
 
             setHighBidError("Your high Bid Price must be less than Buy it Now Price");
             return;
         
         }
+    
 
-        else if((proxyBid!=="" && proxyBid!==null && proxyBid!==undefined && proxyBid!==0)&& (Number(proxyBid)<=Number(highBid))){
+        if((proxyBid!=="" && proxyBid!==null && proxyBid!==undefined && proxyBid!==0)&& (Number(proxyBid)<=Number(highBid))){
           
             setProxyBidError("Max Bid price must be greater than high bid");
             return;
@@ -407,7 +408,7 @@ console.log("check props",props)
                             <div class="form-group col-lg-6 col-md-6">
                             
                             
-                            {carBuyItNow=="" || carBuyItNow== null || carBuyItNow== undefined ?"":
+                            {carBuyItNow=="" || carBuyItNow== null || carBuyItNow== undefined ||  carBuyItNow== 0?"":
                             <p className="details buyitnow"><span>Buy It Now $ {carBuyItNow}</span></p>}
 
                            {carBuyItNow=="" || carBuyItNow== null || carBuyItNow== undefined ?

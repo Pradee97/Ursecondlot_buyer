@@ -934,7 +934,7 @@ useEffect(() => {
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>  
 												<p className="details buyitnow">
-                                                {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
+                                                {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined || item.buy_it_now== 0?"":
                                                     <span>Buy It Now $ {item.buy_it_now}</span>
                                                 }
                                                 </p>  

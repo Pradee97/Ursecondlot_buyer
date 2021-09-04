@@ -750,9 +750,9 @@ const TestDriveMedia = () =>{
          
             
 
-            {/* <div class="inspectionbottom-back-btn">
-                        <a class="back-btn-primary" href="JavaScript:void(0)" onClick={()=>{redirectpage(inspection[0].car_id,inspection[0].seller_dealer_id)}}><i class="bx bx-chevron-left"></i> Back</a>
-            </div> */}
+            <div class="inspectionbottom-back-btn">
+                        <a class="back-btn-primary" onClick={() =>  history.goBack()}><i class="bx bx-chevron-left"></i> Back</a>
+            </div>
 
             
             <section id="playstoreBlock" class="playstoreBlock">
