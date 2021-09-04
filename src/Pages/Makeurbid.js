@@ -407,7 +407,7 @@ console.log("check props",props)
                             
                             {carBuyItNow && <p className="details buyitnow"><span>Buy It Now $ {carBuyItNow}</span></p>}
 
-                        <div class="mbSliderBlock">
+                        {/* <div class="mbSliderBlock">
                            <Slider 
                            defaultValue={[Number(carHighBid+50)]}
                            step={50}
@@ -415,7 +415,7 @@ console.log("check props",props)
                            min={Number(carHighBid+50)} max={!carBuyItNow ? 10000: carBuyItNow}  
                            onChange={getSliderValue}
                            />
-                        </div>
+                        </div> */}
                             
                             </div>
                             
