@@ -94,7 +94,7 @@ const setMakeBitValue = (high_bid,min_price,save_purchase,car_id,time,counterbuy
 	// console.log("check the toggle make bid value")
 	setMakeBitData({
 		carHighBid: high_bid,
-		carMaxBid: min_price,
+		carMinBid: min_price,
 		carId : car_id,
 		carSavePurchase: save_purchase,
 		redirectPage: "cardetail",
