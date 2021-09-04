@@ -27,7 +27,7 @@ console.log("check props",props)
     const [carProxyBid,setCarProxyBid] = useState(props.setMakeBitValue.carProxyBid);
     const [make,setMake] = useState(props.setMakeBitValue.make);
     const [redirectPage,setRedirectPage] = useState(props.setMakeBitValue.redirectPage);
-    const [carHighBid,setCarHighBid] = useState(props.setMakeBitValue.carHighBid);  
+    const [carHighBid,setCarHighBid] = useState(!props.setMakeBitValue.carHighBid ? props.setMakeBitValue.carMinBid : props.setMakeBitValue.carHighBid);  
     const [carMinBid,setCarMinBid] = useState(props.setMakeBitValue.carMinBid);
     const [time,setTime] = useState(props.setMakeBitValue.time);
     const [counterBuyerId,setCounterBuyerId] = useState(props.setMakeBitValue.counter_buyerid);
@@ -68,9 +68,9 @@ console.log("check props",props)
     const [sliderHighBid,setSliderHighBid]=useState("");
     const [isSliderChnaged, setIsSliderChnaged] = useState(false)
 
-    if(carHighBid=="" || carHighBid==null || carHighBid==undefined || carHighBid==0){
-        setCarHighBid(carMinBid)
-    }
+    // if(!carHighBid){
+    //     setCarHighBid(carMinBid)
+    // }
     
     const togglePopup = () => {
         setIsOpen(!isOpen);
@@ -185,8 +185,8 @@ console.log("check props",props)
             return;
             
         }
-     
-        if((carBuyItNow!=="" && carBuyItNow!== null && carBuyItNow!==undefined && carBuyItNow!==0 && (Number(carBuyItNow)<Number(highBid)))){
+        
+        if(carBuyItNow && (Number(carBuyItNow) < Number(highBid))){
 
             setHighBidError("Your high Bid Price must be less than Buy it Now Price");
             return;
@@ -194,14 +194,14 @@ console.log("check props",props)
         }
     
 
-        if((proxyBid!=="" && proxyBid!==null && proxyBid!==undefined && proxyBid!==0)&& (Number(proxyBid)<=Number(highBid))){
+        else if((proxyBid)&& (Number(proxyBid)<=Number(highBid))){
           
             setProxyBidError("Max Bid price must be greater than high bid");
             return;
         }
 
         
-        if((carBuyItNow!=="" && carBuyItNow!== null && carBuyItNow!==undefined && carBuyItNow!==0 && (Number(carBuyItNow)<Number(proxyBid)) )){
+        if((carBuyItNow && (Number(carBuyItNow)<Number(proxyBid)) )){
         
             setProxyBidError("Your Max Bid Price must be less than Buy it Now Price");
             return;
@@ -245,23 +245,6 @@ console.log("check props",props)
         })
     }
 
-    // async function getLotfee() {
-    //     let request = {
-    //         buyer_dealer_id: userDetails.buyer_dealer_id,
-    //     };
-    //     const state = API.post('lot_fee/condition', request);
-    //     state.then(res => {
-    //         console.log("res", res.data.data)
-    //         setLotValue(res.data.data.lot_fee);
-    //         setLotFee(res.data.data);
-    //         // setLoading(false);
-    //     })
-    //         .catch(err => { console.log(err); });
-    // }
-    // useEffect(() => {
-    //     getLotfee();
-    // }, []);
-
  const assigntransportFlag=()=>{
 
     if(carSavePurchase=="" || carSavePurchase==null || carSavePurchase=="no" ){
@@ -283,12 +266,12 @@ console.log("check props",props)
     }
     
  }
-    useEffect(() => {
-		// MakeBid();
-		console.log("Counter bid time : ",time);
-        assigntransportFlag();
+    // useEffect(() => {
+	// 	// MakeBid();
+	// 	console.log("Counter bid time : ",time);
+    //     assigntransportFlag();
        
-    },[reset]);
+    // },[reset]);
     
     const highBidValidation = (data)=> {
         console.log("carHighBid====",carHighBid)
@@ -333,7 +316,7 @@ console.log("check props",props)
                 }
 
                 } 
-                )[0].fee 
+                )[0]?.fee || 0
             : 0
     }
     const highProxyBidValidation= (data)=> {
@@ -377,7 +360,6 @@ console.log("check props",props)
                 <div id="makeyourbid" class="makeyourbid">
                 {toggleMakeBidPopupOpen?
                     (<div class="container">
-                        {/* {time>20 || time==null || time==undefined ? */}
                         <div class="makeyourbidblock col-lg-12">
                             <div class="section-title">
                                 <h2>Make Your Bid</h2>
@@ -387,9 +369,8 @@ console.log("check props",props)
                            
                             <div class="row content">	
                             
-                            {carHighBid == "" || carHighBid == null || carHighBid == undefined ?
-                            <div class="border-bottomtext col-lg-6 ">Your bid can't be Lower than $ {carMinBid+50}</div>:
-                            <div class="border-bottomtext col-lg-6 ">Your bid can't be Lower than $ {carHighBid+50}</div>}
+                            <div class="border-bottomtext col-lg-6 ">Your bid can't be Lower than $ {!carHighBid ? carMinBid+50 : carHighBid+50}</div>
+                            
                             <div class="border-bottomtext col-lg-6 "> Segment of Bidding $ 50</div>
 
 
@@ -408,30 +389,22 @@ console.log("check props",props)
                             <div class="form-group col-lg-6 col-md-6">
                             
                             
-                            {carBuyItNow=="" || carBuyItNow== null || carBuyItNow== undefined ||  carBuyItNow== 0?"":
-                            <p className="details buyitnow"><span>Buy It Now $ {carBuyItNow}</span></p>}
+                            {carBuyItNow && <p className="details buyitnow"><span>Buy It Now $ {carBuyItNow}</span></p>}
 
-                           {carBuyItNow=="" || carBuyItNow== null || carBuyItNow== undefined ?
+                        <div class="mbSliderBlock">
                            <Slider 
                            defaultValue={[Number(carHighBid+50)]}
                            step={50}
                            disabled={false} 
-                           min={Number(carHighBid+50)} max={10000}  
+                           min={Number(carHighBid+50)} max={!carBuyItNow ? 10000: carBuyItNow}  
                            onChange={getSliderValue}
-                           />:
-                           <Slider  
-                           defaultValue={[Number(carHighBid+50)]}
-                           step={50}
-                           min={carHighBid+50} max={carBuyItNow}
-                           />}
-
+                           />
+                        </div>
                             
                             </div>
                             
-                           
-
                             <div class="form-group col-lg-6 col-md-6">
-                                {carProxyBid=="" || carProxyBid== null || carProxyBid== undefined?
+                                {!carProxyBid ?
                                 <div class="tbox">
 
                                 <i>$</i><input type="text" id="proxyBid" class="textbox" defaultValue="" onChange={(e)=>highProxyBidValidation(e.target.value)}></input>
@@ -456,19 +429,20 @@ console.log("check props",props)
 
                            
 
-                            {carComments=="" || carComments==null || carComments==undefined?
+                            {/* {!carComments?
                             <div class="form-group col-lg-12 col-md-12 addComment">	
                                 <div class="tbox">			
                                     <input type="text" id="comment" class="textbox" placeholder="" onChange={(e)=>setComments(e.target.value)}></input>
                                     <label htmlFor="comment" className={comments != "" ? "input-has-value" : ""} >Add a Comment (Optional)</label>
                                 </div>
-                            </div>:
+                            </div>: */}
                             <div class="form-group col-lg-12 col-md-12 addComment">	
-                            <div class="tbox">			
-                                <input type="text" id="comment" class="textbox" defaultValue={carComments} onChange={(e)=>setComments(e.target.value)}></input>
-                                <label htmlFor="comment" className={comments!= "" ? "input-has-value" : ""}>Add a Comment (Optional)</label>
+                                <div class="tbox">			
+                                    <input type="text" id="comment" class="textbox" defaultValue={carComments || ""} onChange={(e)=>setComments(e.target.value)}></input>
+                                    <label htmlFor="comment" className={comments!= "" ? "input-has-value" : ""}>Add a Comment (Optional)</label>
+                                </div>
                             </div>
-                            </div>}
+                            {/* } */}
                                 <div class=" col-lg-12 col-md-12">
                                     <div class="optional-services row">
                                     <h4 class=" col-lg-12">Optional Services</h4>
@@ -505,7 +479,7 @@ console.log("check props",props)
                                             </div>
                                             <div class="divRow">
                                                 <div class="divCell">High Bid</div>
-                                                <div class="divCell">$ {highBid}</div>
+                                                <div class="divCell">$ {highBid || 0}</div>
                                             </div>
                                                                                        
                                             <div class="divRow">
@@ -519,7 +493,7 @@ console.log("check props",props)
                                             </div>
                                             <div class="footRow divRow">
                                                 <div class="divCell">Total</div>
-                                                <div  class="divCell">$ {Number(highBid) + Number(carTransportation === 'yes' ? transportationFee : 0) + Number(getFeeDetails())}</div>
+                                                <div  class="divCell">$ {(Number(highBid) || 0) + Number(carTransportation === 'yes' ? transportationFee : 0) + Number(getFeeDetails())}</div>
                                             </div>
                                     </div>
                                 </div>

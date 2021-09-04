@@ -7891,3 +7891,49 @@ input[type="checkbox"]:disabled + label{
 .offerDetail p{
   margin: 0;
 }
+.mbSliderBlock{
+  clear: both;
+    float: left;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.ant-slider-rail{
+  height: 8px;
+  border-radius: 5px;
+  background-color: #B8B8B8;
+}
+
+.ant-slider-step{
+  height: 8px;
+  border-radius: 5px;
+}
+.ant-slider-handle{
+  background-color: #fff;
+    border: solid 5px #bd062c;
+    width: 20px;
+    height: 20px;
+    margin-top: -7px;
+}
+
+.ant-slider:hover .ant-slider-handle:not(.ant-tooltip-open) {
+  border-color: #bd062c;
+}
+
+.ant-slider:hover .ant-slider-track {
+  background-color: #bd062c;
+}
+
+.ant-slider-track{
+  background-color: #bd062c;
+  height: 8px;
+  border-radius: 5px;
+}
+
+.ant-slider-handle.ant-tooltip-open {
+  border-color: #bd062c;
+}
+
+.carpoint.lockedcar{
+  margin-left: 15px;
+}

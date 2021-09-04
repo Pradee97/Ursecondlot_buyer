@@ -537,17 +537,14 @@ const CarList = () => {
                             </div>):""}
                         </div>
                     </div>
-                       
-        
 
-
-{isOpen && <Popup
-		isClose={false}
-		content={<>
-			<Makeurbid toggle={toggleMakeBid} setMakeBitValue={makeBitData} getMakeBitValue={getMakeBitValue} />
-		</>}
-		handleClose={toggleMakeBid}
-	/>}
+                    {isOpen && <Popup
+                            isClose={false}
+                            content={<>
+                                <Makeurbid toggle={toggleMakeBid} setMakeBitValue={makeBitData} getMakeBitValue={getMakeBitValue} />
+                            </>}
+                            handleClose={toggleMakeBid}
+                        />}
 
          
            

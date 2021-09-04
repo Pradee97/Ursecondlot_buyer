@@ -441,7 +441,7 @@ return(
 								
 	        				</div>
 	        			</div>
-						</div>
+						
 						
 						<div class="row">
 	        				<div class="col-md-6">
@@ -456,10 +456,12 @@ return(
 							</div>
 								        				
 	        			</div>
+						</div>
+						<div class="row">
 						{/* {(carDetail[0].isbuyercounterbid === 'yes'  && (carDetail[0].time !==0 || carDetail[0].time!==null) ) || carDetail[0].isbuyercounterbid !== 'yes' ? */}
 						{/* {(carDetail[0].buyer_high_bid == carDetail[0].high_bid && carDetail[0].isbuyercounterbid=='me'&& (carDetail[0].time !==0 || carDetail[0].time!==null))|| carDetail[0].buyer_high_bid!== null || carDetail[0].high_bid ||  carDetail[0].buyer_high_bid == carDetail[0].high_bid && carDetail[0].isbuyercounterbid!=='me'? */}
 						{(carDetail[0].isbuyercounterbid=="me" && carDetail[0].iscounterbid!==null && (carDetail[0].time !==0 || carDetail[0].time!==null)) || ((carDetail[0].iscounterbid==null || carDetail[0].iscounterbid=="no" ) && (carDetail[0].isbuyercounterbid==null || carDetail[0].isbuyercounterbid=="not")&&(carDetail[0].time ==0 || carDetail[0].time==null))?
-						<div class="row">
+						
 							<div class="col-md-12">
 	        					<div class="cars-buy">
 								{carDetail[0].buy_it_now=="" || carDetail[0].buy_it_now== null || carDetail[0].buy_it_now== undefined?"":
@@ -469,9 +471,9 @@ return(
 									<a class="cars-buy-btns-primary" onClick={()=>setMakeBitValue(carDetail[0].high_bid,carDetail[0].min_price,carDetail[0].save_purchase,carDetail[0].car_id,carDetail[0].time,carDetail[0].counter_buyer_dealer_id,carDetail[0].max_price,carDetail[0].buy_it_now,carDetail[0].comments,carDetail[0].transportation,carDetail[0].display,carDetail[0].proxy_bid,carDetail[0].transportation_charge)}>Make Bid</a>
 								</div>
 	        				</div>
-						</div>
-						:<div class="carpoint"> <a class="cars-buy-btns-primary">Locked up for Higher Bid for {carDetail[0].time} minutes</a></div>} 
-	        		</div> }
+						
+						:<div class="carpoint lockedcar"> <a class="cars-buy-btns-primary">Locked up for Higher Bid for {carDetail[0].time} minutes</a></div>} 
+	        		</div> </div> }
 					
 					<div class="col-md-3">
 					{carDetail[0].noofBuyer=="" || carDetail[0].noofBuyer==null || carDetail[0].noofBuyer==undefined?"":

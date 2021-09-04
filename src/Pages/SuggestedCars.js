@@ -76,9 +76,8 @@ const SuggestedCars = () => {
 	const toggleMakeBid = () => {
 		setIsOpen(!isOpen);
 	}
-	const setMakeBitValue = (data) => {
+	const assignMakeBitValue = (data) => {
 		console.log("check the toggle make bid value")
-		// item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid,item.transportation_charge
 		setMakeBitData({
 			carHighBid: data.carDetailhigh_bid,
 			carMaxBid: data.min_price,
@@ -95,11 +94,7 @@ const SuggestedCars = () => {
 			carProxyBid:data.proxy_bid,
 			transportationCharge:data.transportation_charge,
 		})
-	
-		toggleMakeBid()
-		
-		
-		
+		setIsOpen(!isOpen);
 	}
 
 	//const [checked, setChecked] = useState(false)
@@ -151,8 +146,7 @@ const SuggestedCars = () => {
 
     useEffect(() => {
         getrecentCarList();
-       
-    },[recentCarFlag]);
+    },[recentCarFlag,highBid]);
 
 	useEffect(()=>{
 
@@ -171,8 +165,6 @@ const SuggestedCars = () => {
 		}
 	},[toYear]);
 
-	
-
 	useEffect(()=>{
 		console.log("State updated with value selected from check box", makeSearch);
 		console.log("driveTrain selected",drivetrainSearch);
@@ -182,6 +174,9 @@ const SuggestedCars = () => {
 		searchCarDetail();
 	},[fromMileage,toMileage,makeSearch,drivetrainSearch,transmissionSearch,stateSearch,bodyTypeSearch,groupSearch,dealerShip,salesTypeSearch,historySearch,transmissionIssueSearch,engineNoiseSearch]);
 
+	// useEffect(()=>{
+	// 	getrecentCarList()
+	// },[highBid]);
 
 	function concatMakeSearch  (e){
 		console.log("values passed",e);
@@ -279,33 +274,6 @@ const clear = () => {
 	console.log("clearrrrrrrrrr")
 	setReset(false);
 }
-// const toggleMakeBid = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,comments,transportation,display,proxy_bid) => {
-// 	console.log("check the high bid value",high_bid)
-// 	let makebiddispatch={
-// 		high_bid: high_bid,
-// 		min_price: min_price,
-// 		car_id : car_id,
-// 		save_purchase: save_purchase,
-// 		time:time,
-// 		counter_buyerid:counterbuyerid,
-// 		max_price:max_price,
-// 		buy_it_now: buy_it_now,
-// 		comments:comments,
-// 		transportation:transportation,
-// 		display:display,
-// 		proxy_bid:proxy_bid,
-// 		redirectPage: "suggestedcars"
-// 	}
-// 	//dispatch(CarDetailsAction.highBid(high_bid))
-// 	dispatch(CarDetailsAction.minBid(makebiddispatch))
-	
-// 	setIsOpen(!isOpen);
-// }
-
-useEffect(()=>{
-	getrecentCarList()
-},[highBid]);
-
       const searchCarDetail = () => {
         
 		let request={
@@ -938,9 +906,9 @@ useEffect(() => {
 
 					<div className="col-lg-9">
                             <div className="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
-                            {carDetail.length>0?carDetail.map((item) =>
+                            {carDetail.length>0?carDetail.map((item,index) =>
                             
-                                <div key={item.car_id} className="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                <div key={index} className="col-lg-4 col-md-4 col-sm-6 col-xs-6">
                                     <div className="car-item">
                                         <div className="cars-lock">
                                         <img src={(item.isFavourite===0)? lock : locked} onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'recent')} />
@@ -951,7 +919,7 @@ useEffect(() => {
                                             <h4>{item.deal_name}</h4>
                                         </div>:""}
                                         <div className="cars-content">
-                                            <h3><a href="#">{item.make} ({item.model} model)</a></h3>
+                                            <h3><a href="JavaScript:void(0)" >{item.make} ({item.model} model)</a></h3>
                                             <div className="d-flex align-items-center mb-3">
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>  
@@ -974,7 +942,7 @@ useEffect(() => {
                                                 <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                                 }
 
-                                                <a className="cta-btns-primary" onClick={()=>setMakeBitValue(item)} >Make Bid</a>
+                                                <a href="JavaScript:void(0)" className="cta-btns-primary" onClick={()=>assignMakeBitValue(item)} >Make Bid</a>
                                             </div>
                                         </div>
                                     </div>
