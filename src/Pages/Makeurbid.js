@@ -12,6 +12,7 @@ import '../Component/CommonPopup/commonPopup.css';
 import { Slider } from 'antd';
 
 const MakeurBid=(props)=>{
+
 console.log("check props",props)
     const history = useHistory();
     const dispatch = useDispatch();
@@ -200,7 +201,7 @@ console.log("check props",props)
 
        
         if(carProxyBid!==proxyBid){
-            
+
             if((proxyBid)&& (Number(proxyBid)<=Number(highBid))){
           
                 setProxyBidError("Max Bid price must be greater than high bid");
@@ -241,7 +242,7 @@ console.log("check props",props)
                 setToggleMakeBidPopupOpen(false);
                 setAlertImg(checkImg);
                 setAlertMessage("Your Bid has been updated")
-              
+                props.getMakeBitValue(carHighBid)
                 
             } else {
                 const { data } = res;
