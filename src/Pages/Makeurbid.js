@@ -192,6 +192,7 @@ console.log("check props",props)
             return;
         
         }
+    
 
         else if((proxyBid)&& (Number(proxyBid)<=Number(highBid))){
           
