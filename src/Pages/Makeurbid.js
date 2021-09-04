@@ -39,13 +39,13 @@ console.log("check props",props)
     const [comments,setComments] = useState(carComments);
     const [highBid,setHighBid] = useState(carHighBid);
     const [proxyBid,setProxyBid] = useState(carProxyBid);
-    const [transportation,setTransportation] = useState("no");
-    const [display,setDisplay]=useState("no");
-    const [save,setSave] = useState("no");
-    const [transportFlag,setTransportFlag] = useState("");
-    const [displayFlag,setDisplayFlag]=useState("");
-    const [saveFlag,setSaveFlag] = useState("");
-    const [reset,setReset]=useState("");
+    // const [transportation,setTransportation] = useState("no");
+    // const [display,setDisplay]=useState("no");
+    // const [save,setSave] = useState("no");
+    // const [transportFlag,setTransportFlag] = useState("");
+    // const [displayFlag,setDisplayFlag]=useState("");
+    // const [saveFlag,setSaveFlag] = useState("");
+    // const [reset,setReset]=useState("");
     
 
 
@@ -66,7 +66,11 @@ console.log("check props",props)
 
     const [feeDetails, setFeeDetails] = useState("");
     const [sliderHighBid,setSliderHighBid]=useState("");
-    const [isSliderChnaged, setIsSliderChnaged] = useState(false)
+    const [isSliderChnaged, setIsSliderChnaged] = useState(false);
+
+    const [terms,setTerms]=useState("0");
+    const [eterms,setETerms]=useState("0");
+    const [maximumProxy,setMaximumProxy] = useState("");
 
     // if(!carHighBid){
     //     setCarHighBid(carMinBid)
@@ -98,28 +102,28 @@ console.log("check props",props)
         fetchBuyerFees();
     }, []);
 
-    function toggleViewDisplay(data){
+    // function toggleViewDisplay(data){
         
-        console.log("inside toggle fn Del admin",data);
-        setCarDisplay(data)
-    }
+    //     console.log("inside toggle fn Del admin",data);
+    //     setCarDisplay(data)
+    // }
 
-    function toggleViewTransportation(data){
-        console.log("inside toggle fn Del admin",data);
+    // function toggleViewTransportation(data){
+    //     console.log("inside toggle fn Del admin",data);
      
-            setCarTransportation(data=="yes"?"no":"yes");
+    //         setCarTransportation(data=="yes"?"no":"yes");
 
-    }
+    // }
 
-    function toggleViewSave(data){
-        console.log("inside toggle fn Del admin");
-        setCarSavePurchase(data=="yes"?"no":"yes");
-    }
+    // function toggleViewSave(data){
+    //     console.log("inside toggle fn Del admin");
+    //     setCarSavePurchase(data=="yes"?"no":"yes");
+    // }
 
-    const OnOkClick = () =>{
-        props.toggle()
-        setReset(true)
-    } 
+    // const OnOkClick = () =>{
+    //     props.toggle()
+    //     setReset(true)
+    // } 
 
     const redirect = () => {
         let makebiddispatch={
@@ -186,7 +190,7 @@ console.log("check props",props)
             
         }
         
-        if(carBuyItNow && (Number(carBuyItNow) < Number(highBid))){
+        if((Number(carBuyItNow)!==0) && (Number(carBuyItNow) < Number(highBid))){
 
             setHighBidError("Your high Bid Price must be less than Buy it Now Price");
             return;
@@ -194,14 +198,19 @@ console.log("check props",props)
         }
     
 
-        else if((proxyBid)&& (Number(proxyBid)<=Number(highBid))){
+       
+        if(carProxyBid!==proxyBid){
+            
+            if((proxyBid)&& (Number(proxyBid)<=Number(highBid))){
           
-            setProxyBidError("Max Bid price must be greater than high bid");
-            return;
+                setProxyBidError("Max Bid price must be greater than high bid");
+                return;
+            }
+            
         }
 
         
-        if((carBuyItNow && (Number(carBuyItNow)<Number(proxyBid)) )){
+        if((Number(carBuyItNow)!==0) && (Number(carBuyItNow)<Number(proxyBid))){
         
             setProxyBidError("Your Max Bid Price must be less than Buy it Now Price");
             return;
@@ -224,7 +233,7 @@ console.log("check props",props)
             save_purchase: !carSavePurchase ? "no" : carSavePurchase
         }
 
-      
+        if( terms!=="0" ){
         API.post('makeBid/add',request).then(res=>{
          
             console.log("",res.data.data);
@@ -242,30 +251,36 @@ console.log("check props",props)
 
             }
 
-        })
-    }
+        });
+    }else{
 
- const assigntransportFlag=()=>{
+        if(terms==="0"){
+            setETerms("1");
+        }
+    }
+}
 
-    if(carSavePurchase=="" || carSavePurchase==null || carSavePurchase=="no" ){
-        console.log("save purchase is null ");
-        setTransportFlag(false);
-        setSaveFlag(false);
-        //setAlertMessage("Hi");
-    }
-    else{
-        console.log("save purchase is coming as yes",)
-        setTransportFlag(true);
-        setSaveFlag(true);
-    }
-    if(carDisplay=="" || carDisplay==null || carDisplay=="no"){
-        setDisplayFlag(false);
-    }
-    else{
-        setDisplayFlag(true);
-    }
+//  const assigntransportFlag=()=>{
+
+//     if(carSavePurchase=="" || carSavePurchase==null || carSavePurchase=="no" ){
+//         console.log("save purchase is null ");
+//         setTransportFlag(false);
+//         setSaveFlag(false);
+//         //setAlertMessage("Hi");
+//     }
+//     else{
+//         console.log("save purchase is coming as yes",)
+//         setTransportFlag(true);
+//         setSaveFlag(true);
+//     }
+//     if(carDisplay=="" || carDisplay==null || carDisplay=="no"){
+//         setDisplayFlag(false);
+//     }
+//     else{
+//         setDisplayFlag(true);
+//     }
     
- }
+//  }
     // useEffect(() => {
 	// 	// MakeBid();
 	// 	console.log("Counter bid time : ",time);
@@ -413,7 +428,7 @@ console.log("check props",props)
                                 </div>:
                                 <div class="tbox">
 
-                                <i>$</i><input type="text" id="proxyBid" class="textbox" defaultValue={carProxyBid} onChange={(e)=>setProxyBid(e.target.value)}></input>
+                                <i>$</i><input type="text" id="proxyBid" class="textbox" defaultValue={carProxyBid} onChange={(e)=>highProxyBidValidation(e.target.value)}></input>
                                 <label htmlFor="proxyBid" className={proxyBid != "" ? "input-has-value" : ""}>Maximum Proxy Bid</label>
                                
                                 </div>
@@ -498,10 +513,20 @@ console.log("check props",props)
                                     </div>
                                 </div>
                     
-                                    
-                            <div class=" col-lg-12 policylink">
+
+                                <div className="col-sm-12 form-group agreetab">
+                                <input type="checkbox" className="form-check d-inline " id="chb" 
+                                checked = { terms == 0 ? false : true } value={terms == 0 ? 1 : 0 } onChange={(e) => setTerms(e.target.value)}/>
+                                <label htmlFor="chb" className="form-check-label">   I Agree for the 
+                                <a href="JavaScript:void(0)" onClick={toggleTerms}> Policy document</a>
+                                </label>
+                                {eterms==="1" && terms==="0" ?
+                                <p className="form-input-error"> Agree the Policy document</p>:""}
+                                </div>
+
+                            {/* <div class=" col-lg-12 policylink">
                                 <a href="JavaScript:void(0)" onClick={toggleTerms} >Policy document</a>
-                            </div>
+                            </div> */}
                             
                             <div class="col-lg-12 makeyourbid-btn">
                                 <a class="makeyourbid-cancle-btns" onClick={props.toggle}>Cancel</a>
