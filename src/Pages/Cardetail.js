@@ -263,12 +263,8 @@ function CarDetailList(){
 	}
 	
 	useEffect (()=>{
-	// carDetails/condition
-	console.log("id value",id)
+
 	CarDetailList();
-	//BuyerInventoryCarDetailList();
-	
-	
 	
 	},[id,highBid])
 

@@ -79,7 +79,7 @@ const SuggestedCars = () => {
 	const assignMakeBitValue = (data) => {
 		console.log("check the toggle make bid value")
 		setMakeBitData({
-			carHighBid: data.carDetailhigh_bid,
+			carHighBid: data.high_bid,
 			carMinBid: data.min_price,
 			carId : data.car_id,
 			carSavePurchase: data.save_purchase,
