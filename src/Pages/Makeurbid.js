@@ -25,6 +25,7 @@ console.log("check props",props)
     const [carDisplay,setCarDisplay] = useState(props.setMakeBitValue.display);
     const [carTransportation,setCarTransportation] = useState(props.setMakeBitValue.carSavePurchase === "yes" ? props.setMakeBitValue.transportation : "no");
     const [carSavePurchase,setCarSavePurchase] = useState(props.setMakeBitValue.carSavePurchase);
+    const [carSavePolicy,setCarSavePolicy] = useState(props.setMakeBitValue.savePolicy||'no');
     const [carProxyBid,setCarProxyBid] = useState(props.setMakeBitValue.carProxyBid);
     const [make,setMake] = useState(props.setMakeBitValue.make);
     const [redirectPage,setRedirectPage] = useState(props.setMakeBitValue.redirectPage);
@@ -69,8 +70,8 @@ console.log("check props",props)
     const [sliderHighBid,setSliderHighBid]=useState("");
     const [isSliderChnaged, setIsSliderChnaged] = useState(false);
 
-    const [terms,setTerms]=useState("0");
-    const [eterms,setETerms]=useState("0");
+    const [terms,setTerms]=useState("no");
+    const [eterms,setETerms]=useState("no");
     const [maximumProxy,setMaximumProxy] = useState("");
 
     // if(!carHighBid){
@@ -231,10 +232,11 @@ console.log("check props",props)
             createdBy:JSON.parse(localStorage.getItem("userDetails")).buyer_id,
             updatedBy:JSON.parse(localStorage.getItem("userDetails")).buyer_id,
             transportation_charge:"300",
-            save_purchase: !carSavePurchase ? "no" : carSavePurchase
+            save_purchase: !carSavePurchase ? "no" : carSavePurchase,
+            save_policy: !terms? "no":terms
         }
 
-        if( terms!=="0" ){
+        if( terms!=="no" ){
         API.post('makeBid/add',request).then(res=>{
          
             console.log("",res.data.data);
@@ -255,8 +257,8 @@ console.log("check props",props)
         });
     }else{
 
-        if(terms==="0"){
-            setETerms("1");
+        if(terms==="no"){
+            setETerms("yes");
         }
     }
 }
@@ -477,7 +479,7 @@ console.log("check props",props)
                                     </div>
 
                                     <div className="col-lg-12 form-group customCheckbox">
-                                        <input type="checkbox" className="form-check d-inline " id="chb1" readOnly = {carTransportation =='no' ? true: false} disabled = {carTransportation =='no' ? true: false} value={carSavePurchase == 'yes' ? 'no' : 'yes'} checked={carSavePurchase==="yes"?true:false} onChange={(e)=>{setCarSavePurchase(e.target.value); setOnLoadFlag(false)}}/>
+                                        <input type="checkbox" className="form-check d-inline " id="chb1" readOnly = {carTransportation =='no' ? true: false} disabled = {carTransportation =='no' ? true: false} value={carSavePurchase == 'yes' ? 'no' : 'yes'} checked={carTransportation==="yes" ?true:false} onChange={(e)=>{setCarSavePurchase(e.target.value)}}/>
                                          {/* <input type="checkbox" className="form-check d-inline " id="chb1" onClick={toggleViewSave}/> */}
                                     
                                         <label htmlFor="chb1" className="form-check-label"> Save this option for next purchase  </label>                               
@@ -517,13 +519,20 @@ console.log("check props",props)
 
                                 <div className="col-sm-12 form-group agreetab">
                                 <input type="checkbox" className="form-check d-inline " id="chb" 
-                                checked = { terms == 0 ? false : true } value={terms == 0 ? 1 : 0 } onChange={(e) => setTerms(e.target.value)}/>
+                                checked = { terms == "no" ? false : true } value={terms == "no" ? "yes" : "no" } onChange={(e) => {setTerms(e.target.value); e.target.value === "0" && setCarSavePolicy('no')}}/>
                                 <label htmlFor="chb" className="form-check-label">   I Agree for the 
                                 <a href="JavaScript:void(0)" onClick={toggleTerms}> Policy document</a>
                                 </label>
-                                {eterms==="1" && terms==="0" ?
+                                {eterms==="yes" && terms==="no" ?
                                 <p className="form-input-error"> Agree the Policy document</p>:""}
                                 </div>
+
+                                 <div className="col-lg-12 form-group customCheckbox">
+                                        <input type="checkbox" className="form-check d-inline " id="chb4" readOnly = {terms =='no' ? true: false} disabled = {terms =='no' ? true: false} value={carSavePolicy == 'yes' ? 'no' : 'yes'} checked={ terms == "no" ? false : true } onChange={(e)=>{setCarSavePolicy(e.target.value)}}/>
+                                         {/* <input type="checkbox" className="form-check d-inline " id="chb1" onClick={toggleViewSave}/> */}
+                                    
+                                        <label htmlFor="chb4" className="form-check-label"> Save this option for next   </label>                               
+                                    </div>
 
                             {/* <div class=" col-lg-12 policylink">
                                 <a href="JavaScript:void(0)" onClick={toggleTerms} >Policy document</a>

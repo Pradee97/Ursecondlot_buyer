@@ -90,7 +90,7 @@ const getMakeBitValue = (data) => {
 const toggleMakeBid = () => {
 	setIsOpen(!isOpen);
 }
-const setMakeBitValue = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,comments,transportation,display,proxy_bid,transportation_charge) => {
+const setMakeBitValue = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,comments,transportation,display,proxy_bid,transportation_charge,save_policy) => {
 	// console.log("check the toggle make bid value")
 	setMakeBitData({
 		carHighBid: high_bid,
@@ -107,6 +107,7 @@ const setMakeBitValue = (high_bid,min_price,save_purchase,car_id,time,counterbuy
 		display:display,
 		carProxyBid:proxy_bid,
 		transportationCharge:transportation_charge,
+		savePolicy:save_policy,
 	})
 
 	toggleMakeBid()
@@ -185,7 +186,7 @@ function img3Click(img){
 	loadLrgImg(img.target.src);
 }
 function img4Click(img){
-	loadLrgImg(img.targe .src);
+	loadLrgImg(img.target.src);
 }
 
 
@@ -371,7 +372,7 @@ return(
 							<div class="product-count">
 									<h3>{carDetail[0].dealer_type}</h3>
 									<div class=" d-flex align-items-center mb-3">
-										<p class="details"><img src={Path}  alt=""/><span>Illinois</span></p>
+										<p class="details"><img src={Path}  alt=""/><span>{carDetail[0].seller_location}</span></p>
 										
 										<p class="details"><img src="assets/img/road-with-broken-line.svg" alt=""/><span>{distance} M</span></p>
 									</div>	        										
@@ -379,7 +380,7 @@ return(
 								</div>
 								<div class="col-md-6">
 								<div class="product-count carBrand">	        				
-									<img src={carbrand}  alt=""/>
+									<img src={carDetail[0].seller_logo}  alt=""/>
 								</div>
 								</div>
 								</div>
@@ -426,13 +427,16 @@ return(
 									<a class="car-btns-primary" href=""><img src={tag} alt=""/>High Bid :<span> $ {carDetail[0].high_bid}</span></a>
 									} */}
 									
-									{carDetail[0].buy_it_now=="" || carDetail[0].buy_it_now== null || carDetail[0].buy_it_now== undefined ?"":
+									{carDetail[0].buy_it_now=="" || carDetail[0].buy_it_now== null || carDetail[0].buy_it_now== undefined || carDetail[0].buy_it_now== 0 ?"":
 									<a class="car-btns-primary ml-2" href=""><img src={tag} alt=""/>Buy it Now :<span> $ {carDetail[0].buy_it_now}</span></a>
 									}
 
-								<div class= {(carDetail[0].time!==null && carDetail[0].time > 0)?"countownBlock":""} >
-									{carDetail[0].buyer_high_bid==carDetail[0].high_bid && <Countdown date={Date.now() + (carDetail[0].time!==null && carDetail[0].time < 20 ? carDetail[0].time*60*1000 :0)  } renderer={renderer} />}
-									</div>
+									{(carDetail[0].buyer_high_bid==carDetail[0].high_bid || carDetail[0].buyer_high_bid!==carDetail[0].high_bid) &&
+									 
+									 <div class= {(carDetail[0].time!==null && carDetail[0].time > 0)?"countownBlock":""} >
+									 	<Countdown date={Date.now() + (carDetail[0].time!==null && carDetail[0].time < 20 ? carDetail[0].time*60*1000 :0)  } renderer={renderer} />
+									</div>}
+									
 								</div>
 
 								
@@ -461,7 +465,7 @@ return(
 						
 							<div class="col-md-12">
 	        					<div class="cars-buy">
-								{carDetail[0].buy_it_now=="" || carDetail[0].buy_it_now== null || carDetail[0].buy_it_now== undefined?"":
+								{carDetail[0].buy_it_now=="" || carDetail[0].buy_it_now== null || carDetail[0].buy_it_now== undefined || carDetail[0].buy_it_now== 0?"":
 									<a class="cars-buy-btns" href="#">Buy now</a>
 								}
 									
@@ -469,7 +473,7 @@ return(
 								</div>
 	        				</div>
 						
-						:<div class="carpoint lockedcar"> <a class="cars-buy-btns-primary">Locked up for Higher Bid for {carDetail[0].time} minutes</a></div>} 
+							:<div class="carpoint lockedcar"> <a class="cars-buy-btns-primary">Locked up for Higher Bid </a></div>} 
 	        		</div> </div> }
 					
 					<div class="col-md-3">
@@ -503,7 +507,7 @@ return(
 								</div>
 								}
 								<div class="carBrand">	        				
-									<img src={carbrand}  alt=""/>
+									<img src={carDetail[0].high_bid_buyer_logo}  alt=""/>
 								</div>
 							
 								
@@ -607,10 +611,10 @@ return(
 				
 
 				<p className="details buyitnow">
-                                                {moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined?"":
-                                                    <span>Buy It Now $ {moreCar.buy_it_now}</span>
-                                                }
-                                                </p> 
+					{moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined || moreCar.buy_it_now== 0?"":
+						<a className="cta-btns" href="#">Buy It Now $ {moreCar.buy_it_now}</a>
+					}
+				</p> 
 
 			</div>
 			
@@ -619,7 +623,7 @@ return(
 				<span className="dlrname">{moreCar.dealer_type} </span>
 				<span className="dlraddress"><i class="icofont-google-map"></i> {moreCar.location}</span>
 				</p>
-				<p className="details"><img src={moreCar.image}/></p>
+				<p className="details"><img src={moreCar.logo}/></p>
 			</div>				
 				<div class="cars-prices">
 					{/* <a className="cta-btns" href="#">Inventory Number {moreCar.inventory_no}</a> */}
@@ -671,8 +675,8 @@ return(
 									<p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{moreCar.fuel_type}</span></p>    
 									
 									<p className="details buyitnow">
-                                                {moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined?"":
-                                                    <span>Buy It Now $ {moreCar.buy_it_now}</span>
+                                                {moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined || moreCar.buy_it_now== 0?"":
+                                                    <a className="cta-btns" href="#">Buy It Now $ {moreCar.buy_it_now}</a>
                                                 }
                                                 </p> 
 
@@ -682,7 +686,7 @@ return(
 									<span className="dlrname">{moreCar.dealer_type} </span>
 									<span className="dlraddress"><i class="icofont-google-map"></i> {moreCar.location}</span>
 									</p>
-									<p className="details"><img src={moreCar.image}/></p>
+									<p className="details"><img src={moreCar.logo}/></p>
 								</div>
 								
 								<div class="cars-prices">

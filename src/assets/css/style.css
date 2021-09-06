@@ -3146,8 +3146,10 @@ Car Detail Page
 .products-details .titlestatus{
 	color:#444;
 	font-size:16px;
-	
-}
+  }
+  .products-details .titlestatus p{
+    margin-bottom: 5px;
+  }
 .products-details .titlestatus span{
 	font-size:16px;
 	color:#999;
