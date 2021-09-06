@@ -170,7 +170,7 @@ const InventoryCars = () => {
         })
     }
 
-    useEffect(() => {
+	useEffect(() => {
 
 		let intervalId;
 		intervalId = setInterval(() => {
@@ -179,6 +179,12 @@ const InventoryCars = () => {
 		return () => clearInterval(intervalId);
         
        
+    },[]);
+
+    useEffect(() => {
+
+			getInventoryCarList();
+             
     },[inventoryCarFlag,highBid]);	  
 
 	  useEffect(()=>{

@@ -114,6 +114,7 @@ const redirectpage=(pathid,seller_dealer_id)=>{
     state: {id:pathid,sellerDealerId:seller_dealer_id},
   });
 }
+
 useEffect(() => {
   
   let intervalId;
@@ -122,6 +123,14 @@ useEffect(() => {
 	}, 60000)
 	return () => clearInterval(intervalId);
     
+   
+},[]);
+
+useEffect(() => {
+  
+
+    getMoreSimilarCars();
+
    
 },[highBid]);
     

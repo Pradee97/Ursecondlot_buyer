@@ -115,6 +115,12 @@ useEffect(() => {
 	return () => clearInterval(intervalId);
    
    
+},[]);
+
+useEffect(() => {
+
+    getMoreCarFromSeller();
+   
 },[highBid]);
 
 // const OnSearch = (e) => {

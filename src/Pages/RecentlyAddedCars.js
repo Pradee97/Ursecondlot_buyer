@@ -151,17 +151,24 @@ const [highBid,setHighBid] = useState(null);
         })
     }
 
+	useEffect(() => {
+
+		let intervalId;
+		intervalId = setInterval(() => {
+			getrecentCarList();
+			dispatch(FilterSearchAction.apiname(apiName))
+		}, 60000)
+		return () => clearInterval(intervalId);
+			
+			
+		},[]);
+
     useEffect(() => {
 
-	let intervalId;
-	intervalId = setInterval(() => {
 		getrecentCarList();
-		dispatch(FilterSearchAction.apiname(apiName))
-	}, 60000)
-	return () => clearInterval(intervalId);
-        
+		dispatch(FilterSearchAction.apiname(apiName))     
 		
-    },[recentCarFlag,highBid]);
+    },[]);
 		
   
 

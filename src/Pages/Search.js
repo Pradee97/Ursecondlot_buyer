@@ -260,6 +260,13 @@ const Search = () => {
 		}, 60000)
 		return () => clearInterval(intervalId);
 		
+	},[])
+
+	useEffect(()=>{
+
+			getSavedSearchEnter();
+
+		
 	},[saveSearchEnter])
 
 	useEffect(()=>{

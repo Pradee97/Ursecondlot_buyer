@@ -182,6 +182,12 @@ useEffect(() => {
 		}, 60000)
 		return () => clearInterval(intervalId);
   
+},[]);
+
+useEffect(() => {
+
+	getFavCarList();
+  
 },[favCarFlag,highBid]);
 
 

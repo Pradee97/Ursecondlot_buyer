@@ -262,6 +262,10 @@ function CarDetailList(){
 	function BuyerInventoryCarDetailList(){
 	
 	}
+
+	useEffect (()=>{
+		CarDetailList();
+		},[id,highBid])
 	
 	useEffect (()=>{
 
@@ -271,7 +275,7 @@ function CarDetailList(){
 	}, 60000)
 	return () => clearInterval(intervalId);
 
-	},[id,highBid])
+	},[])
 
 const addRemoveFavourite=(carid,state,flag)=>{
 	console.log("inside addremove");
