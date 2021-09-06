@@ -145,7 +145,13 @@ const SuggestedCars = () => {
     }
 
     useEffect(() => {
+
+	let intervalId;
+	intervalId = setInterval(() => {
         getrecentCarList();
+	}, 60000)
+	return () => clearInterval(intervalId);
+        
     },[recentCarFlag,highBid]);
 
 	useEffect(()=>{

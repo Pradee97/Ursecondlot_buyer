@@ -115,7 +115,13 @@ const redirectpage=(pathid,seller_dealer_id)=>{
   });
 }
 useEffect(() => {
+  
+  let intervalId;
+	intervalId = setInterval(() => {
     getMoreSimilarCars();
+	}, 60000)
+	return () => clearInterval(intervalId);
+    
    
 },[highBid]);
     

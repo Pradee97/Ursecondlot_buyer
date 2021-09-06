@@ -407,7 +407,7 @@ console.log("check props",props)
                             <div class="form-group col-lg-6 col-md-6">
                             
                             
-                            {carBuyItNow && <p className="details buyitnow"><span>Buy It Now $ {carBuyItNow}</span></p>}
+                            {carBuyItNow && carBuyItNow!="0" && <p className="details buyitnow"><span>Buy It Now $ {carBuyItNow}</span></p>}
 
                         {/* <div class="mbSliderBlock">
                            <Slider 

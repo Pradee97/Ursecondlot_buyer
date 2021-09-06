@@ -253,7 +253,13 @@ const Search = () => {
 	},[recentCarFlag,highBid]);
 	
 	useEffect(()=>{
-		getSavedSearchEnter();
+
+		let intervalId;
+		intervalId = setInterval(() => {
+			getSavedSearchEnter();
+		}, 60000)
+		return () => clearInterval(intervalId);
+		
 	},[saveSearchEnter])
 
 	useEffect(()=>{

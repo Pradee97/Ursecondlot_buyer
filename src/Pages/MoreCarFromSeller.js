@@ -107,7 +107,13 @@ const MoreCarFromSeller = () =>{
 // }
 
 useEffect(() => {
+
+  let intervalId;
+	intervalId = setInterval(() => {
     getMoreCarFromSeller();
+	}, 60000)
+	return () => clearInterval(intervalId);
+   
    
 },[highBid]);
 
@@ -174,6 +180,7 @@ const addRemoveFavourite=(carid,state,flag)=>{
 }
 
 useEffect(() => {
+
   getMoreCarFromSeller();
  
 },[moreCarFlag]);

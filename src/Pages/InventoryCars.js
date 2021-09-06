@@ -171,7 +171,13 @@ const InventoryCars = () => {
     }
 
     useEffect(() => {
-        getInventoryCarList();
+
+		let intervalId;
+		intervalId = setInterval(() => {
+			getInventoryCarList();
+		}, 60000)
+		return () => clearInterval(intervalId);
+        
        
     },[inventoryCarFlag,highBid]);	  
 

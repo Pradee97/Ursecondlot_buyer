@@ -265,8 +265,12 @@ function CarDetailList(){
 	
 	useEffect (()=>{
 
+	let intervalId;
+	intervalId = setInterval(() => {
 	CarDetailList();
-	
+	}, 60000)
+	return () => clearInterval(intervalId);
+
 	},[id,highBid])
 
 const addRemoveFavourite=(carid,state,flag)=>{
