@@ -339,8 +339,8 @@ const [highBid,setHighBid] = useState(null);
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>  
 												<p className="details buyitnow">
-                                                {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
-                                                    <span>Buy It Now $ {item.buy_it_now}</span>
+                                                {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined || item.buy_it_now== 0?"":
+                                                    <a className="cta-btns" href="#">Buy It Now $ {item.buy_it_now}</a>
                                                 }
                                                 </p>  
                                             </div>
@@ -349,7 +349,7 @@ const [highBid,setHighBid] = useState(null);
                                                 <span className="dlrname">{item.dealer_type} </span>
                                                 <span className="dlraddress"><i class="icofont-google-map"></i> {item.location}</span>
                                                 </p>
-                                                <p className="details"><img src={item.image}/></p>
+                                                <p className="details"><img src={item.logo}/></p>
                                             </div>
 
                                             <div className="cars-prices">
