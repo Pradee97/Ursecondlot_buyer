@@ -175,7 +175,13 @@ const addRemoveFavourite=(carid,state,flag)=>{
 // }
 
 useEffect(() => {
-  getFavCarList();
+
+	let intervalId;
+		intervalId = setInterval(() => {
+			getFavCarList();
+		}, 60000)
+		return () => clearInterval(intervalId);
+  
 },[favCarFlag,highBid]);
 
 

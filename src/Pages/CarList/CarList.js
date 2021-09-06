@@ -210,15 +210,21 @@ const CarList = () => {
     }
 
     useEffect(() => {
+
+    let intervalId;
+	intervalId = setInterval(() => {
         getSuggestedCarList();
         getrecentCarList();
         getInventoryCarList();
         getFavCarList();
-
+	}, 60000)
+	return () => clearInterval(intervalId);
+      
     },[highBid]);
     
 
     useEffect(() => {
+        
         getSuggestedCarList();
         getrecentCarList();
         getInventoryCarList();
