@@ -232,9 +232,10 @@ console.log("check props",props)
             createdBy:JSON.parse(localStorage.getItem("userDetails")).buyer_id,
             updatedBy:JSON.parse(localStorage.getItem("userDetails")).buyer_id,
             transportation_charge:"300",
-            save_purchase: !carSavePurchase ? "no" : carSavePurchase,
+            save_purchase: !carTransportation ? "no" : carTransportation,//!carSavePurchase ? "no" : carSavePurchase,
             save_policy: !terms? "no":terms
         }
+
 
         if( terms!=="no" ){
         API.post('makeBid/add',request).then(res=>{
