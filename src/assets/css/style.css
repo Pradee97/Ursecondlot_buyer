@@ -3153,7 +3153,7 @@ Car Detail Page
 	color:#999;
 }
 .products-details .titlestatus img{
-	margin-right:10px;
+	margin-right:5px;
 }
  .products-details .cars-detail-views .car-btns{
 	 border: 1px solid #bd062c;
@@ -7233,6 +7233,8 @@ img.carImg{
 
 .carBrand img{
   border-radius: 5px;
+  width: 80px;
+  height: 70px;
 }
 
 
@@ -7542,8 +7544,10 @@ margin-top: -3px;
   text-decoration: none;
 }
 
-.carpoints label{
-  width: 100%;
+.carpoints .label{
+  float: left;
+  margin-right: 15px;
+  color: #999;
 }
 
 .carspecifation .container{
@@ -7689,12 +7693,15 @@ margin-top: -3px;
 }
 
 .buyitnow span{
-  color: #008d0e !important;
+  color: #fff;
+  background: #008d0e;
   border: #008d0e solid 1px;
   border-radius: 3px;
-  padding: 2px 5px;
+  padding: 5px;
+  font-weight: 500;
   margin-right: 0 !important;
   font-size: 14px;
+  cursor: pointer;
 }
 
 
@@ -7936,4 +7943,37 @@ input[type="checkbox"]:disabled + label{
 
 .carpoint.lockedcar{
   margin-left: 15px;
+}
+
+.products-details .countownBlock{
+  background-color: #002768;
+  color: white;
+  border-color: #002768;
+  font-size: 16px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    margin: 0;
+    min-width: 80px;
+    text-align: center;
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.greytext{
+  color: #999;
+}
+
+.copyImg{
+  cursor: pointer;
+}
+
+.copyImg i{
+  color: #444;  
+  margin-left: 20px;
+  margin-right: 5px;
+
+}
+
+.copyImg:hover i{
+  color: #bd062c;
 }

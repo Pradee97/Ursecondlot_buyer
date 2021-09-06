@@ -360,7 +360,7 @@ return(
 	        		<div class="product-dtl">
         				<div class="product-info">
 		        			<div class="product-name">{carDetail[0].make} {carDetail[0].vehicle_type}({carDetail[0].model})</div>
-							<p  class="productdes">Inventory Number - {carDetail[0].inventory_no}</p>
+							<p  class="productdes"><span className="greytext">Inventory Number</span> - {carDetail[0].inventory_no}</p>
 							<p class="productdes">{carDetail[0].car_description}</p>
 		        			<div class="d-flex align-items-center">
 									<p class="details"><img src={speedometer}  alt=""/><span>{carDetail[0].miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -393,13 +393,13 @@ return(
 	        			<div class="row">
 						
 	        				<div class="col-md-12 carpoints">
-							<label   className= "input-has-value">VIN Number</label>		  
+								<div className="label">VIN Number</div>		  
 								<div class="carpoint">
 								
 									<img src={car}  alt=""/>
 									<span>{carDetail[0].engine}</span>
 									<CopyToClipboard text={carDetail[0].engine} onCopy={() => setCopied(true)}>
-									<img src={book} onClick={copytoclipboard} alt=""/>
+									<span onClick={copytoclipboard} className="copyImg"><i class="icofont-copy"></i></span>
 									</CopyToClipboard>
 									
 									{/* <img src={book} onClick={copytoclipboard} alt=""/>  */}
@@ -425,13 +425,14 @@ return(
 									{/* {carDetail[0].high_bid=="" || carDetail[0].high_bid==null || carDetail[0].high_bid==undefined?"":
 									<a class="car-btns-primary" href=""><img src={tag} alt=""/>High Bid :<span> $ {carDetail[0].high_bid}</span></a>
 									} */}
-									&nbsp;&nbsp;&nbsp;&nbsp;
+									
 									{carDetail[0].buy_it_now=="" || carDetail[0].buy_it_now== null || carDetail[0].buy_it_now== undefined ?"":
-									<a class="car-btns-primary" href=""><img src={tag} alt=""/>Buy it Now :<span> $ {carDetail[0].buy_it_now}</span></a>
+									<a class="car-btns-primary ml-2" href=""><img src={tag} alt=""/>Buy it Now :<span> $ {carDetail[0].buy_it_now}</span></a>
 									}
 
+								<div class= {(carDetail[0].time!==null && carDetail[0].time > 0)?"countownBlock":""} >
 									{carDetail[0].buyer_high_bid==carDetail[0].high_bid && <Countdown date={Date.now() + (carDetail[0].time!==null && carDetail[0].time < 20 ? carDetail[0].time*60*1000 :0)  } renderer={renderer} />}
-
+									</div>
 								</div>
 
 								
