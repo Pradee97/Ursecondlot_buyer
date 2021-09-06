@@ -935,7 +935,7 @@ useEffect(() => {
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>  
 												<p className="details buyitnow">
                                                 {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined  || item.buy_it_now== 0?"":
-                                                    <span>Buy It Now $ {item.buy_it_now}</span>
+                                                    <a className="cta-btns" href="#">Buy It Now $ {item.buy_it_now}</a>
                                                 }
                                                 </p>  
                                             </div>
@@ -944,7 +944,7 @@ useEffect(() => {
                                                 <span className="dlrname">{item.dealer_type} </span>
                                                 <span className="dlraddress"><i class="icofont-google-map"></i> {item.location}</span>
                                                 </p>
-                                                <p className="details"><img src={item.image}/></p>
+                                                <p className="details"><img src={item.logo}/></p>
                                             </div>
 
                                             <div className="cars-prices">

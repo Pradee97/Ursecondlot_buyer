@@ -226,8 +226,8 @@ return(
 									<p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{moreCar.fuel_type}</span></p>    
 									
 									<p className="details buyitnow">
-                                                {moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined?"":
-                                                    <span>Buy It Now $ {moreCar.buy_it_now}</span>
+                                                {moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined || moreCar.buy_it_now== 0?"":
+                                                    <a className="cta-btns" href="#">Buy It Now $ {moreCar.buy_it_now}</a>
                                                 }
                                                 </p> 
 
@@ -237,7 +237,7 @@ return(
 									<span className="dlrname">{moreCar.dealer_type} </span>
 									<span className="dlraddress"><i class="icofont-google-map"></i> {moreCar.location}</span>
 									</p>
-									<p className="details"><img src={moreCar.image}/></p>
+									<p className="details"><img src={moreCar.logo}/></p>
 								</div>
 				
 				<div class="cars-prices">
