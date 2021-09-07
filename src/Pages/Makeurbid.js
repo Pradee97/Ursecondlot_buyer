@@ -575,7 +575,7 @@ console.log("check props",props)
                        
                    
                    <div class="col-md-12 btns">
-                    <button className="cta-btns" onClick={redirect}>ok</button>      
+                    <button className="cta-btns" onClick={redirect}>OK</button>      
                    </div> 
                </div>
              </div>

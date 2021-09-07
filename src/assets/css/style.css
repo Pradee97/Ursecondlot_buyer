@@ -7984,3 +7984,11 @@ input[type="checkbox"]:disabled + label{
   max-width: 500px;
   margin: auto;
 }
+
+
+h2.title {
+  font-size: 30px;
+  font-weight: 500;
+  color: #002768;
+  margin-bottom: 10px;
+}
