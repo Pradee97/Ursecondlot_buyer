@@ -31,6 +31,7 @@ import Popup from '../Component/Popup/Popup';
 import Makeurbid from './Makeurbid';
 import CarDetailsAction from './CarDetails/CarDetailsAction';
 import Countdown from "react-countdown";
+import BuyItNow from '../Pages/BuyItNow/BuyItNow';
 
 
 const Cardetail = (props) =>{
@@ -62,6 +63,7 @@ const [open,setOpen] = useState(false);
 
 
 const [highBid,setHighBid] = useState(null);
+const [carId, setCarId] = useState(null);
 const [makeBitData, setMakeBitData] = useState({})
 
 const Completionist = () => <span>{""}</span>;
@@ -134,7 +136,7 @@ const setMakeBitValue = (high_bid,min_price,save_purchase,car_id,time,counterbuy
 	
 }
 
-const toggleBuyNow = () => {
+const toggleBuyItNow = () => {
 	setOpen(!open);
 }
 
@@ -193,6 +195,9 @@ function img4Click(img){
 function loadLrgImg(img){
 	setLrgImg(img);
 }
+
+
+
 function CarDetailList(){
 
 	const request = {
@@ -216,7 +221,8 @@ function CarDetailList(){
 	setDistance(res.data.distance);
 	setLrgImg(res.data.data[0].image);
 	
-
+	setHighBid(res.data.data[0].high_bid);
+	setCarId(res.data.data[0].car_id)
 
 
 	let rq={
@@ -308,6 +314,7 @@ useEffect (()=>{
 	
 	},[moreCarFlag,similarCarFromSellerFlag])
 
+	
 	
 return(
     <div>
@@ -474,7 +481,7 @@ return(
 							<div class="col-md-12">
 	        					<div class="cars-buy">
 								{carDetail[0].buy_it_now=="" || carDetail[0].buy_it_now== null || carDetail[0].buy_it_now== undefined || carDetail[0].buy_it_now== 0?"":
-									<a class="cars-buy-btns" href="#">Buy now</a>
+									<a class="cars-buy-btns" onClick={toggleBuyItNow}>Buy now</a>
 								}
 									
 									<a class="cars-buy-btns-primary" onClick={()=>setMakeBitValue(carDetail[0].high_bid,carDetail[0].min_price,carDetail[0].save_purchase,carDetail[0].car_id,carDetail[0].time,carDetail[0].counter_buyer_dealer_id,carDetail[0].max_price,carDetail[0].buy_it_now,carDetail[0].comments,carDetail[0].transportation,carDetail[0].display,carDetail[0].proxy_bid,carDetail[0].transportation_charge,carDetail[0].save_policy)}>Make Bid</a>
@@ -748,9 +755,9 @@ return(
 	{open && <Popup
 		isClose={false}
 		content={<>
-			{/* <BuyNow toggle={toggleBuyNow} /> */}
+			<BuyItNow toggle={toggleBuyItNow} highBid={highBid} carId={carId} />
 		</>}
-		handleClose={toggleBuyNow}
+		handleClose={toggleBuyItNow}
 	/>}
 
   </main>
