@@ -7992,3 +7992,12 @@ h2.title {
   color: #002768;
   margin-bottom: 10px;
 }
+
+.buynowPopup .btns .cta-btns{
+  margin: 10px;
+}
+
+.buynowPopup .icofont-car{
+  font-size: 50px;
+  color: #002768;
+}

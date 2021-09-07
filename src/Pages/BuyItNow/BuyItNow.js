@@ -139,13 +139,14 @@ if(!confirmationFlag){
                             </div>
                             </div>:
                             <div>
-                                <div class="col-md-12">
-                                <p className=""> Are you sure want to buy this car <b>  </b> </p>
+                                <div class="col-md-12 text-center">
+                                <i class="icofont-car"></i>
+                                <p className="text-center"> Are you sure want to buy this car <b>  </b> </p>
                                 </div>
                                 
                                 <div class="col-md-12 btns">
                                   <button className="cta-btns" onClick={()=>{setConfirmationFlag(false); props.toggle()}}>Cancel</button>    
-                                  <button  className="cta-btns" onClick={handleBuyItNow} >confirm</button>    
+                                  <button  className="cta-btns" onClick={handleBuyItNow} >Confirm</button>    
                                 </div>
                               </div>
                               }
@@ -160,12 +161,12 @@ if(!confirmationFlag){
                         <div className="modalbody">
                           <h2 className="title"> {alerttitle} </h2>
                           <div class="input-group col-md-12">
-                              <div>
-                                  <p>{alertmessage}</p>
-                                  </div>
+                             
+                                  <p className="text-center">{alertmessage}</p>
+                                
                               
                               <div class="col-md-12 btns">
-                               <button className="cta-btns" onClick={props.toggle}>ok</button>      
+                               <button className="cta-btns" onClick={props.toggle}>OK</button>      
                               </div> 
                           </div>
                         </div>
