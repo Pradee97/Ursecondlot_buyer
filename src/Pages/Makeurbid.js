@@ -517,7 +517,7 @@ console.log("check props",props)
                                 </div>
                     
 
-                                <div className="col-sm-12 form-group agreetab">
+                                <div className="col-sm-12 form-group agreetab customCheckbox mt-3">
                                 <input type="checkbox" className="form-check d-inline " id="chb" 
                                 checked = { terms == "no" ? false : true } value={terms == "no" ? "yes" : "no" } onChange={(e) => {setTerms(e.target.value); e.target.value === "0" && setCarSavePolicy('no')}}/>
                                 <label htmlFor="chb" className="form-check-label">   I Agree for the 

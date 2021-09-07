@@ -400,7 +400,7 @@ return(
 									<img src={car}  alt=""/>
 									<span>{carDetail[0].engine}</span>
 									<CopyToClipboard text={carDetail[0].engine} onCopy={() => setCopied(true)}>
-									<span onClick={copytoclipboard} className="copyImg"><i class="icofont-copy"></i></span>
+									<span  title="Copy" onClick={copytoclipboard} className="copyImg"><i class="icofont-copy"></i></span>
 									</CopyToClipboard>
 									
 									{/* <img src={book} onClick={copytoclipboard} alt=""/>  */}
