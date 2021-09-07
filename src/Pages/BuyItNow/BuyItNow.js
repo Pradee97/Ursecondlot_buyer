@@ -107,7 +107,7 @@ if(!confirmationFlag){
   return (
  
 <div>
-    <div id="" className="saveSearchBlock acceptConfirmation">
+    <div id="" className="saveSearchBlock acceptConfirmation buynowPopup">
       
             <div className="termspageblock">
                 <div className="row content">
@@ -118,21 +118,21 @@ if(!confirmationFlag){
                               <h2 className="title"> Buy Now </h2>
                               <div>
                               <div class="input-group col-md-12">
-                                  <div>
-                                      <p>Are you sure wants to buy the car then please confirm the user name and  password</p>
-                                      </div>
-                                  
+                                
+                                      <p className="text-center">Are you sure wants to buy the car then please confirm the user name and  password</p>
+                                   
                               </div>
                               <div class=" col-md-12">
                               <input className="textbox " type="text" placeholder="Username" onChange={(e)=>setUserName(e.target.value)} />
+                              <p className="form-input-error">{userNameError}</p>
                               </div>
-								              	<p className="form-input-error">{userNameError}</p>
+								              
  
                               <div class=" col-md-12">
                               <input className="textbox " type="text" placeholder="Password" onChange={(e)=>setPassword(e.target.value)} />
+                              <p className="form-input-error">{passwordError}</p>
                               </div>
-								                	<p className="form-input-error">{passwordError}</p>
-
+								                	
                               <div class="col-md-12 btns">
                               <button className="cta-btns" onClick={props.toggle}>Cancel</button>    <button  className="cta-btns" onClick={handleBuyItNow}>Buy Now</button>    
                               </div>  

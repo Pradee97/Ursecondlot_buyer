@@ -6701,7 +6701,7 @@ table td .ant-btn:hover span, table td .ant-btn:hover i{
   color: #002768;
 }
 .form-input-error{
-  color: red;
+  color: red !important; 
   text-align: left;
   margin-bottom: 5px;
 }
@@ -7980,3 +7980,7 @@ input[type="checkbox"]:disabled + label{
   color: #bd062c;
 }
 
+.buynowPopup{
+  max-width: 500px;
+  margin: auto;
+}
