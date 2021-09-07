@@ -93,6 +93,7 @@ const SuggestedCars = () => {
 			display:data.display,
 			carProxyBid:data.proxy_bid,
 			transportationCharge:data.transportation_charge,
+			savePolicy:data.save_policy
 		})
 		setIsOpen(!isOpen);
 	}
@@ -144,8 +145,22 @@ const SuggestedCars = () => {
         })
     }
 
+	useEffect(() => {
+
+		let intervalId;
+		intervalId = setInterval(() => {
+			getrecentCarList();
+		}, 60000)
+		return () => clearInterval(intervalId);
+			
+		},[]);
+
     useEffect(() => {
+
+
         getrecentCarList();
+
+        
     },[recentCarFlag,highBid]);
 
 	useEffect(()=>{

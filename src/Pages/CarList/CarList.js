@@ -63,7 +63,7 @@ const CarList = () => {
 	const toggleMakeBid = () => {
 		setIsOpen(!isOpen);
 	}
-	const setMakeBitValue = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,comments,transportation,display,proxy_bid,transportation_charge) => {
+	const setMakeBitValue = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,comments,transportation,display,proxy_bid,transportation_charge,save_policy) => {
 		console.log("check the toggle make bid value")
 		setMakeBitData({
 			carHighBid: high_bid,
@@ -80,6 +80,7 @@ const CarList = () => {
 			display:display,
             carProxyBid:proxy_bid,
             transportationCharge:transportation_charge,
+            savePolicy:save_policy,
 		})
 	
 		toggleMakeBid()
@@ -210,15 +211,32 @@ const CarList = () => {
     }
 
     useEffect(() => {
+
+        let intervalId;
+        intervalId = setInterval(() => {
+            getSuggestedCarList();
+            getrecentCarList();
+            getInventoryCarList();
+            getFavCarList();
+        }, 60000)
+        return () => clearInterval(intervalId);
+          
+        },[]);
+
+    useEffect(() => {
+
+  
         getSuggestedCarList();
         getrecentCarList();
         getInventoryCarList();
         getFavCarList();
-
+	
+      
     },[highBid]);
     
 
     useEffect(() => {
+        
         getSuggestedCarList();
         getrecentCarList();
         getInventoryCarList();
@@ -308,7 +326,7 @@ const CarList = () => {
                                                 {/* {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
                                                 <a className="cta-btns" href="#">Counter Bid $ {item.buy_it_now}</a>
                                                 } */}
-                                                <a className="cta-btns-primary" href="JavaScript:void(0)" onClick={()=>setMakeBitValue(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid,item.transportation_charge)} >Make Bid</a>
+                                                <a className="cta-btns-primary" href="JavaScript:void(0)" onClick={()=>setMakeBitValue(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid,item.transportation_charge,item.save_policy)} >Make Bid</a>
                                             </div>
                                         </div>
                                     </div>

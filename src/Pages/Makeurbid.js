@@ -232,9 +232,10 @@ console.log("check props",props)
             createdBy:JSON.parse(localStorage.getItem("userDetails")).buyer_id,
             updatedBy:JSON.parse(localStorage.getItem("userDetails")).buyer_id,
             transportation_charge:"300",
-            save_purchase: !carSavePurchase ? "no" : carSavePurchase,
+            save_purchase: !carTransportation ? "no" : carTransportation,//!carSavePurchase ? "no" : carSavePurchase,
             save_policy: !terms? "no":terms
         }
+
 
         if( terms!=="no" ){
         API.post('makeBid/add',request).then(res=>{
@@ -407,7 +408,7 @@ console.log("check props",props)
                             <div class="form-group col-lg-6 col-md-6">
                             
                             
-                            {carBuyItNow && <p className="details buyitnow"><span>Buy It Now $ {carBuyItNow}</span></p>}
+                            {carBuyItNow && carBuyItNow!="0" && <p className="details buyitnow"><span>Buy It Now $ {carBuyItNow}</span></p>}
 
                         {/* <div class="mbSliderBlock">
                            <Slider 
