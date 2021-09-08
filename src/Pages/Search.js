@@ -238,7 +238,7 @@ const Search = () => {
 	  const getSavedSearchEnter = () =>{
 	
 		console.log("save search enter response ========", saveSearchEnter)
-	    if(!saveSearchEnter && saveSearchEnter!="0"){
+	    if(saveSearchEnter){
 		API.post("BuyerInventoryCarSearch/condition", saveSearchEnter).then(res => {
 			console.log("set save search enter _________", res.data.data)
 			setCarDetail(res.data.data || []);
