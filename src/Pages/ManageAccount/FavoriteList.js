@@ -18,7 +18,7 @@ import arrowmark from '../../assets/img/arrowmark.jpg';
 import Popup from '../../Component/Popup/Popup';
 import Makeurbid from '../Makeurbid';
 import CarDetailsAction from '../CarDetails/CarDetailsAction';
-
+import BuyItNow from '../../Pages/BuyItNow/BuyItNow';
 
 const Favoritelist = () => {
 
@@ -67,10 +67,12 @@ const [viewMoreMake,setViewMoreMake]=useState(false);
 const [viewMoreBodyStyle,setViewMoreBodyStyle]=useState(false);
 
 const [isOpen, setIsOpen] = useState(false);
+const [openBuyItNow, setOpenBuyItNow] = useState(false);
 // const highBid= useSelector(state => state.CarDetailsReducer.payload.high_bid);
 
-const [highBid,setHighBid] = useState(null);
-	const [makeBitData, setMakeBitData] = useState({})
+	const [highBid,setHighBid] = useState(null);
+	const [makeBitData, setMakeBitData] = useState({});
+	const [buyItNowData, setBuyItNowData] = useState({})
 	
 	const getMakeBitValue = (data) => {
 		const highBid = data
@@ -103,6 +105,28 @@ const [highBid,setHighBid] = useState(null);
 	
 		toggleMakeBid()
 		
+		
+		
+	}
+
+	const toggleBuyItNow = () => {
+		setOpenBuyItNow(!openBuyItNow);
+	}
+
+    const getBuyItNowValue = (data) => {
+		const highBid = data
+		setHighBid(highBid)
+	}
+
+	const setBuyItNowValue = (buy_it_now,car_id,) => {
+
+		setBuyItNowData({
+			buyItNow: buy_it_now,
+			carId : car_id,
+	
+		})
+	
+		toggleBuyItNow()
 		
 		
 	}
@@ -948,7 +972,7 @@ useEffect(() => {
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>  
 												<p className="details buyitnow">
                                                 {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined || item.buy_it_now== 0?"":
-                                                    <a className="cta-btns" href="#">Buy It Now $ {item.buy_it_now}</a>
+                                                    <a className="cta-btns" onClick={()=>setBuyItNowValue(item.buy_it_now,item.car_id)}>Buy It Now $ {item.buy_it_now}</a>
                                                 }
                                                 </p>  
                                             </div>
@@ -1003,6 +1027,15 @@ useEffect(() => {
 			</>}
 			handleClose={toggleMakeBid}
 		/>}
+
+		{openBuyItNow && <Popup
+			isClose={false}
+			content={<>
+				<BuyItNow toggle={toggleBuyItNow} setBuyItNowValue={buyItNowData} getBuyItNowValue={getBuyItNowValue}  />
+			</>}
+			handleClose={toggleBuyItNow}
+		/>}			
+
         </main>
 }
       </div>  

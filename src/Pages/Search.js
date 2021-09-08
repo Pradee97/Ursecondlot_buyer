@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import SearchAction from '../Pages/SearchAction';
 import Makeurbid from './Makeurbid';
 import CarDetailsAction from './CarDetails/CarDetailsAction';
+import BuyItNow from '../Pages/BuyItNow/BuyItNow';
 
 const Search = () => {
 
@@ -69,10 +70,12 @@ const Search = () => {
 	const [saveSearchRequestPopup,setSaveSearchRequestPopup] = useState("");
 
 	const [open, setOpen] = useState(false);
+	const [openBuyItNow, setOpenBuyItNow] = useState(false);
 	// const highBid= useSelector(state => state.CarDetailsReducer.payload.high_bid);
 
 	const [highBid,setHighBid] = useState(null);
-	const [makeBitData, setMakeBitData] = useState({})
+	const [makeBitData, setMakeBitData] = useState({});
+	const [buyItNowData, setBuyItNowData] = useState({})
 	
 	const getMakeBitValue = (data) => {
 		const highBid = data
@@ -105,6 +108,28 @@ const Search = () => {
 	
 		toggleMakeBid()
 		
+		
+		
+	}
+
+	const toggleBuyItNow = () => {
+		setOpenBuyItNow(!openBuyItNow);
+	}
+
+    const getBuyItNowValue = (data) => {
+		const highBid = data
+		setHighBid(highBid)
+	}
+
+	const setBuyItNowValue = (buy_it_now,car_id,) => {
+
+		setBuyItNowData({
+			buyItNow: buy_it_now,
+			carId : car_id,
+	
+		})
+	
+		toggleBuyItNow()
 		
 		
 	}
@@ -622,7 +647,7 @@ useEffect(() => {
                    
                     <div id="suggested-cars" className="suggested-cars vehiclesearch suggestedCarsPage">
                         
-                        <div className="container-fluid aos-init aos-animate" data-aos="fade-up">
+                        <div className="container-fluid aos-init aos-animate" >
                        
                     
                             <div className="section-title">
@@ -1053,7 +1078,7 @@ useEffect(() => {
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>
 												<p className="details buyitnow">
                                                 {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined || item.buy_it_now== 0?"":
-                                                    <a className="cta-btns" href="#">Buy It Now $ {item.buy_it_now}</a>
+                                                    <a className="cta-btns" onClick={()=>setBuyItNowValue(item.buy_it_now,item.car_id)}>Buy It Now $ {item.buy_it_now}</a>
                                                 }
                                                 </p>  
                                             </div>
@@ -1100,7 +1125,15 @@ useEffect(() => {
 										  />
                                     </>}
                                     handleClose={togglePopup}
-                                />}					
+                                />}	
+
+								{openBuyItNow && <Popup
+									isClose={false}
+									content={<>
+										<BuyItNow toggle={toggleBuyItNow} setBuyItNowValue={buyItNowData} getBuyItNowValue={getBuyItNowValue}  />
+									</>}
+									handleClose={toggleBuyItNow}
+								/>}					
 
         </div>
     )

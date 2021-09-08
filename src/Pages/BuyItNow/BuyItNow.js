@@ -14,7 +14,9 @@ const BuyNow=(props)=>{
     const history = useHistory();
     const [userName,setUserName] = useState("");
     const [password,setPassword] = useState("");
-    const { id } = useParams();
+    const [id,setId] = useState(props.setBuyItNowValue.carId);
+    const [carBuyItNow,setCarBuyItNow] = useState(props.setBuyItNowValue.buyItNow);
+    // const { id } = useParams();
     const userDetails=ls.get('userDetails');
     const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
     console.log("check high bid in the buy it now page",props.highBid)
@@ -72,8 +74,8 @@ if(!confirmationFlag){
             buyer_dealer_id:userDetails.buyer_dealer_id, 
             email:userName,
             password:password,
-            car_id: props.carId,
-            price: props.highBid,
+            car_id: id,
+            price: carBuyItNow,
             status: "sold",
             active: 1,
             buying_proccess:"buyer",

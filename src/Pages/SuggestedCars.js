@@ -13,6 +13,7 @@ import arrowmark from '../../src/assets/img/arrowmark.jpg';
 import Popup from '../Component/Popup/Popup';
 import Makeurbid from './Makeurbid';
 import CarDetailsAction from './CarDetails/CarDetailsAction';
+import BuyItNow from '../Pages/BuyItNow/BuyItNow';
 
 const SuggestedCars = () => {
 
@@ -61,21 +62,25 @@ const SuggestedCars = () => {
 	const [viewMoreMake,setViewMoreMake]=useState(false);
 	const [viewMoreBodyStyle,setViewMoreBodyStyle]=useState(false);
 	const [isOpen, setIsOpen] = useState(false);
+	const [open, setOpen] = useState(false);
 
 	// const highBid= useSelector(state => state.CarDetailsReducer.payload.high_bid);
 
 	const [highBid,setHighBid] = useState(null);
-	const [makeBitData, setMakeBitData] = useState({})
+	const [makeBitData, setMakeBitData] = useState({});
+	const [buyItNowData, setBuyItNowData] = useState({})
 	
 	const getMakeBitValue = (data) => {
 		const highBid = data
 		setHighBid(highBid)
 	}
 
-
 	const toggleMakeBid = () => {
 		setIsOpen(!isOpen);
 	}
+
+	
+
 	const assignMakeBitValue = (data) => {
 		console.log("check the toggle make bid value")
 		setMakeBitData({
@@ -98,6 +103,28 @@ const SuggestedCars = () => {
 		setIsOpen(!isOpen);
 	}
 
+	const toggleBuyItNow = () => {
+		setOpen(!open);
+	}
+
+    const getBuyItNowValue = (data) => {
+		const highBid = data
+		setHighBid(highBid)
+	}
+
+	const setBuyItNowValue = (buy_it_now,car_id,) => {
+
+		setBuyItNowData({
+			buyItNow:buy_it_now,
+			carId : car_id,
+	
+		})
+	
+		toggleBuyItNow()
+		
+		
+	}
+
 	//const [checked, setChecked] = useState(false)
     const getrecentCarList=()=>{
 
@@ -110,8 +137,8 @@ const SuggestedCars = () => {
            // const {results} = res.data.data;
             console.log("Response data",res.data.data);
             //if(results.length>0){
-            setCarDetail(res.data.data);
-            console.log("car Detail",res.data.data);
+			setCarDetail(res.data.data);
+
             setLoading(false);
             //}
         }).catch(err => { console.log(err); });
@@ -940,7 +967,7 @@ useEffect(() => {
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>  
 												<p className="details buyitnow">
                                                 {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined || item.buy_it_now== 0?"":
-                                                    <a className="cta-btns" href="#">Buy It Now $ {item.buy_it_now}</a>
+                                                    <a className="cta-btns" onClick={()=>setBuyItNowValue(item.buy_it_now,item.car_id)} >Buy It Now $ {item.buy_it_now}</a>
                                                 }
                                                 </p>  
                                             </div>
@@ -973,6 +1000,15 @@ useEffect(() => {
 						</>}
 						handleClose={toggleMakeBid}
 					/>}
+
+					{open && <Popup
+						isClose={false}
+						content={<>
+							<BuyItNow toggle={toggleBuyItNow} setBuyItNowValue={buyItNowData} getBuyItNowValue={getBuyItNowValue}  />
+						</>}
+						handleClose={toggleBuyItNow}
+					/>}
+
                </main>
 }
         </div>
