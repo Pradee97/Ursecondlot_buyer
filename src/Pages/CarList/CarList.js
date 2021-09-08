@@ -18,9 +18,7 @@ import CarListAction from './CarListAction';
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
-import CarDetailsAction from '../CarDetails/CarDetailsAction';
-
-import { Paper, Button } from '@material-ui/core'
+import BuyItNow from '../../Pages/BuyItNow/BuyItNow';
 
 
 
@@ -47,22 +45,34 @@ const CarList = () => {
     // const highBid= useSelector(state => state.CarDetailsReducer.payload.high_bid);
 
     const [isOpen, setIsOpen] = useState(false);
+    const [open,setOpen] = useState(false);
     const options = {
         items: 4,
     };
 
     const [highBid,setHighBid] = useState(null);
-	const [makeBitData, setMakeBitData] = useState({})
+    const [carId, setCarId] = useState(null);
+    const [makeBitData, setMakeBitData] = useState({});
+    const [buyItNowData, setBuyItNowData] = useState({})
 	
 	const getMakeBitValue = (data) => {
 		const highBid = data
 		setHighBid(highBid)
 	}
 
+    const getBuyItNowValue = (data) => {
+		const highBid = data
+		setHighBid(highBid)
+	}
 
 	const toggleMakeBid = () => {
 		setIsOpen(!isOpen);
-	}
+    }
+    
+    const toggleBuyItNow = () => {
+        setOpen(!open);
+    }
+
 	const setMakeBitValue = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,comments,transportation,display,proxy_bid,transportation_charge,save_policy) => {
 		console.log("check the toggle make bid value")
 		setMakeBitData({
@@ -83,8 +93,20 @@ const CarList = () => {
             savePolicy:save_policy,
 		})
 	
-		toggleMakeBid()
+		toggleMakeBid();
 		
+		
+    }
+    
+    const setBuyItNowValue = (buy_it_now,car_id,) => {
+
+		setBuyItNowData({
+			buyItNow: buy_it_now,
+			carId : car_id,
+	
+		})
+	
+		toggleBuyItNow()
 		
 		
 	}
@@ -121,7 +143,8 @@ const CarList = () => {
             
             //if(results.length>0){
             setSuggestedCarDetail(res.data.data);
-            
+            setHighBid(res.data.data.high_bid);
+	        setCarId(res.data.data.car_id);
             setLoading(false);
             //}
             //setrecentCarFlag(!recentCarFlag)
@@ -139,7 +162,8 @@ const CarList = () => {
             
             //if(results.length>0){
             setCarDetail(res.data.data);
-            
+            setHighBid(res.data.data.high_bid);
+	        setCarId(res.data.data.car_id);
             setLoading(false);
             //}
             //setrecentCarFlag(!recentCarFlag)
@@ -155,7 +179,8 @@ const CarList = () => {
            
             //if(results.length>0){
                 setCarInventoryDetail(res.data.data);
-           
+                setHighBid(res.data.data.high_bid);
+                setCarId(res.data.data.car_id);
             setLoading(false);
             //}
             //setInventoryCarFlag(!inventoryCarFlag)
@@ -179,7 +204,8 @@ const CarList = () => {
         
         API.post('BuyerFavoriteCarList/condition',request).then(res=>{
             setFavCarInventoryDetail(res.data.data);
-            
+            setHighBid(res.data.data.high_bid);
+	        setCarId(res.data.data.car_id);
             setLoading(false);
             //setFavCarFlag(!favCarFlag)
         }).catch(err=>{console.log(err);});
@@ -306,7 +332,7 @@ const CarList = () => {
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>   
                                                 <p className="details buyitnow">
                                                 {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined || item.buy_it_now== 0?"":
-                                                    <a className="cta-btns" href="#">Buy It Now $ {item.buy_it_now}</a>
+                                                    <a className="cta-btns" onClick={()=>setBuyItNowValue(item.buy_it_now,item.car_id)}>Buy It Now $ {item.buy_it_now}</a>
                                                 }
                                                 </p>
                                             </div>
@@ -321,7 +347,7 @@ const CarList = () => {
                                             <div className="cars-prices">
 
                                                 {item.high_bid=="" || item.high_bid== null || item.high_bid== undefined?"":
-                                                <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
+                                                <a className="cta-btns">High Bid $ {item.high_bid}</a>
                                                 }   
                                                 {/* {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
                                                 <a className="cta-btns" href="#">Counter Bid $ {item.buy_it_now}</a>
@@ -374,7 +400,7 @@ const CarList = () => {
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>    
                                                 <p className="details buyitnow">
                                                 {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined || item.buy_it_now== 0?"":
-                                                    <a className="cta-btns" href="#">Buy It Now $ {item.buy_it_now}</a>
+                                                    <a className="cta-btns" onClick={()=>setBuyItNowValue(item.buy_it_now,item.car_id)}>Buy It Now $ {item.buy_it_now}</a>
                                                 }
                                                 </p>
                                             </div>
@@ -446,7 +472,7 @@ const CarList = () => {
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>  
                                                 <p className="details buyitnow">
                                                 {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined || item.buy_it_now== 0?"":
-                                                    <a className="cta-btns" href="#">Buy It Now $ {item.buy_it_now}</a>
+                                                    <a className="cta-btns" onClick={()=>setBuyItNowValue(item.buy_it_now,item.car_id)}>Buy It Now $ {item.buy_it_now}</a>
                                                 }
                                                 </p>  
                                             </div>
@@ -518,7 +544,7 @@ const CarList = () => {
                                         <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>
                                         <p className="details buyitnow">
                                         {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined || item.buy_it_now== 0?"":
-                                                    <a className="cta-btns" href="#">Buy It Now $ {item.buy_it_now}</a>
+                                                    <a className="cta-btns" onClick={()=>setBuyItNowValue(item.buy_it_now,item.car_id)}>Buy It Now $ {item.buy_it_now}</a>
                                                 }
                                         </p>
                                     </div>
@@ -565,7 +591,13 @@ const CarList = () => {
                         />}
 
          
-           
+{open && <Popup
+		isClose={false}
+		content={<>
+			<BuyItNow toggle={toggleBuyItNow} setBuyItNowValue={buyItNowData} getBuyItNowValue={getBuyItNowValue} />
+		</>}
+		handleClose={toggleBuyItNow}
+	/>}
         
     </main>
 }

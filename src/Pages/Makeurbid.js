@@ -185,7 +185,7 @@ console.log("check props",props)
             setHighBidError("High Bid price should not be empty" )
             return;
         }
-        else if (highBid < (!carHighBid || carHighBid===0 ? carMinBid : carHighBid ) ){
+        else if (highBid < (!Number(carHighBid+50) || Number(carHighBid+50)===0 ?  Number(carMinBid+50) : Number(carHighBid+50) ) ){
 
             setHighBidError("High Bid price should not lower than " +Number(carHighBid+50))
             return;
@@ -520,7 +520,7 @@ console.log("check props",props)
 
                                 <div className="col-sm-12 form-group agreetab customCheckbox mt-3">
                                 <input type="checkbox" className="form-check d-inline " id="chb" 
-                                checked = { terms == "no" ? false : true } value={terms == "no" ? "yes" : "no" } onChange={(e) => {setTerms(e.target.value); e.target.value === "0" && setCarSavePolicy('no')}}/>
+                                checked = { terms == "no" ? false : true } value={terms == "no" ? "yes" : "no" } onChange={(e) => {setTerms(e.target.value); e.target.value === "no" && setCarSavePolicy('no')}}/>
                                 <label htmlFor="chb" className="form-check-label">   I Agree for the 
                                 <a href="JavaScript:void(0)" onClick={toggleTerms}> Policy document</a>
                                 </label>

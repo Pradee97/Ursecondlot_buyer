@@ -14,6 +14,7 @@ import FilterSearchCars from '../Component/FilterSearchCars/FilterSearchCars';
 import Popup from '../Component/Popup/Popup';
 import Makeurbid from './Makeurbid';
 import CarDetailsAction from './CarDetails/CarDetailsAction';
+import BuyItNow from '../Pages/BuyItNow/BuyItNow';
 
 const RecentlyAddedCars = () => {
 
@@ -40,13 +41,15 @@ const [groupSearch,setGroupSearch]=useState([]);
 const [salesTypeSearch,setSalesTypeSearch]=useState("");
 
 
-const [isOpen, setIsOpen] = useState(false);
+const [isOpenMakeBit, setIsOpenMakeBit] = useState(false);
+const [openBuyItNow, setOpenBuyItNow] = useState(false);
 // const highBid= useSelector(state => state.CarDetailsReducer.payload.high_bid);
 const [apiName,setApiName]=useState("")
 
 
-const [highBid,setHighBid] = useState(null);
-	const [makeBitData, setMakeBitData] = useState({})
+	const [highBid,setHighBid] = useState(null);
+	const [makeBitData, setMakeBitData] = useState({});
+	const [buyItNowData, setBuyItNowData] = useState({})
 	
 	const getMakeBitValue = (data) => {
 		const highBid = data
@@ -55,7 +58,7 @@ const [highBid,setHighBid] = useState(null);
 
 
 	const toggleMakeBid = () => {
-		setIsOpen(!isOpen);
+		setIsOpenMakeBit(!isOpenMakeBit);
 	}
 	const setMakeBitValue = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,comments,transportation,display,proxy_bid,transportation_charge,save_policy) => {
 		console.log("check the toggle make bid value")
@@ -79,6 +82,28 @@ const [highBid,setHighBid] = useState(null);
 	
 		toggleMakeBid()
 		
+		
+		
+	}
+
+	const toggleBuyItNow = () => {
+		setOpenBuyItNow(!openBuyItNow);
+	}
+
+    const getBuyItNowValue = (data) => {
+		const highBid = data
+		setHighBid(highBid)
+	}
+
+	const setBuyItNowValue = (buy_it_now,car_id,) => {
+
+		setBuyItNowData({
+			buyItNow: buy_it_now,
+			carId : car_id,
+	
+		})
+	
+		toggleBuyItNow()
 		
 		
 	}
@@ -355,7 +380,7 @@ const [highBid,setHighBid] = useState(null);
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>  
 												<p className="details buyitnow">
                                                 {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined || item.buy_it_now== 0?"":
-                                                    <a className="cta-btns" href="#">Buy It Now $ {item.buy_it_now}</a>
+                                                    <a className="cta-btns" onClick={()=>setBuyItNowValue(item.buy_it_now,item.car_id)}>Buy It Now $ {item.buy_it_now}</a>
                                                 }
                                                 </p>  
                                             </div>
@@ -386,13 +411,22 @@ const [highBid,setHighBid] = useState(null);
 						</div>
 						</div>
                     </div>
-					{isOpen && <Popup
+					{isOpenMakeBit && <Popup
 						isClose={false}
 						content={<>
 							<Makeurbid toggle={toggleMakeBid} setMakeBitValue={makeBitData} getMakeBitValue={getMakeBitValue} />
 						</>}
 						handleClose={toggleMakeBid}
 					/>}
+
+					{openBuyItNow && <Popup
+						isClose={false}
+						content={<>
+							<BuyItNow toggle={toggleBuyItNow} setBuyItNowValue={buyItNowData} getBuyItNowValue={getBuyItNowValue}  />
+						</>}
+						handleClose={toggleBuyItNow}
+					/>}
+
                </main>
 }
         </div>

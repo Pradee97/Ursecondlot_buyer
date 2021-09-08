@@ -63,8 +63,8 @@ const [open,setOpen] = useState(false);
 
 
 const [highBid,setHighBid] = useState(null);
-const [carId, setCarId] = useState(null);
-const [makeBitData, setMakeBitData] = useState({})
+const [makeBitData, setMakeBitData] = useState({});
+const [buyItNowData, setBuyItNowData] = useState({})
 
 const Completionist = () => <span>{""}</span>;
 
@@ -112,27 +112,7 @@ const setMakeBitValue = (high_bid,min_price,save_purchase,car_id,time,counterbuy
 		savePolicy:save_policy,
 	})
 
-	toggleMakeBid()
-	// return {
-	// 	carHighBid: high_bid,
-	// 	carMaxBid: min_price,
-	// 	carId : car_id,
-	// 	carSavePurchase: save_purchase,
-	// 	redirectPage: "cardetail",
-	// 	time:time,
-	// 	counter_buyerid:counterbuyerid,
-	// 	carMaxBid :max_price,
-	// 	buyItNow: buy_it_now,
-	// 	comments:comments,
-	// 	transportation:transportation,
-	// 	display:display,
-	// 	carProxyBid:proxy_bid,
-	// }
-
-	//dispatch(CarDetailsAction.highBid(high_bid))
-	// console.log("checking max bid in the car details page", max_price)
-	// dispatch(CarDetailsAction.minBid(makebiddispatch))
-	
+	toggleMakeBid()	
 	
 }
 
@@ -140,6 +120,23 @@ const toggleBuyItNow = () => {
 	setOpen(!open);
 }
 
+const getBuyItNowValue = (data) => {
+	const highBid = data
+	setHighBid(highBid)
+}
+
+const setBuyItNowValue = ( buy_it_now,car_id,) => {
+
+	setBuyItNowData({
+		buyItNow: buy_it_now,
+		carId : car_id,
+
+	})
+
+	toggleBuyItNow()
+	
+	
+}
 
 const redirectpage=(pathid,seller_dealer_id)=>{
 	//e.preventDefault();
@@ -221,8 +218,7 @@ function CarDetailList(){
 	setDistance(res.data.distance);
 	setLrgImg(res.data.data[0].image);
 	
-	setHighBid(res.data.data[0].high_bid);
-	setCarId(res.data.data[0].car_id)
+
 
 
 	let rq={
@@ -445,43 +441,28 @@ return(
 									{carDetail[0].buy_it_now=="" || carDetail[0].buy_it_now== null || carDetail[0].buy_it_now== undefined || carDetail[0].buy_it_now== 0 ?"":
 									<a class="car-btns-primary ml-2" href=""><img src={tag} alt=""/>Buy it Now :<span> $ {carDetail[0].buy_it_now}</span></a>
 									}
-
+							
 									{(carDetail[0].buyer_high_bid==carDetail[0].high_bid || carDetail[0].buyer_high_bid!==carDetail[0].high_bid) &&
 									 
-									 <div class= {(carDetail[0].time!==null && carDetail[0].time > 0)?"countownBlock":""} >
+									 <div class= {(carDetail[0].time!==null && carDetail[0].time < 20)?"countownBlock":""} >
 									 	<Countdown date={Date.now() + (carDetail[0].time!==null && carDetail[0].time < 20 ? carDetail[0].time*60*1000 :0)  } renderer={renderer} />
-									</div>}
+									
+								</div>}
 									
 								</div>
 
 								
 	        				</div>
-	        			</div>
-						
-						
-						<div class="row">
-	        				<div class="col-md-6">
-								{/* <div class="product-count">
-									<h3>{carDetail[0].dealer_type}</h3>
-									<div class=" d-flex align-items-center mb-3">
-										<p class="details"><img src={Path}  alt=""/><span>Illinois</span></p>
-										
-										<p class="details"><img src="assets/img/road-with-broken-line.svg" alt=""/><span>{distance} M</span></p>
-									</div>	        										
-								</div> */}
-							</div>
-								        				
-	        			</div>
+	        			</div>	
 						</div>
 						<div class="row">
-						{/* {(carDetail[0].isbuyercounterbid === 'yes'  && (carDetail[0].time !==0 || carDetail[0].time!==null) ) || carDetail[0].isbuyercounterbid !== 'yes' ? */}
-						{/* {(carDetail[0].buyer_high_bid == carDetail[0].high_bid && carDetail[0].isbuyercounterbid=='me'&& (carDetail[0].time !==0 || carDetail[0].time!==null))|| carDetail[0].buyer_high_bid!== null || carDetail[0].high_bid ||  carDetail[0].buyer_high_bid == carDetail[0].high_bid && carDetail[0].isbuyercounterbid!=='me'? */}
+						
 						{(carDetail[0].isbuyercounterbid=="me" && carDetail[0].iscounterbid!==null && (carDetail[0].time !==0 || carDetail[0].time!==null)) || ((carDetail[0].iscounterbid==null || carDetail[0].iscounterbid=="no" ) && (carDetail[0].isbuyercounterbid==null || carDetail[0].isbuyercounterbid=="not")&&(carDetail[0].time ==0 || carDetail[0].time==null))?
 						
 							<div class="col-md-12">
 	        					<div class="cars-buy">
 								{carDetail[0].buy_it_now=="" || carDetail[0].buy_it_now== null || carDetail[0].buy_it_now== undefined || carDetail[0].buy_it_now== 0?"":
-									<a class="cars-buy-btns" onClick={toggleBuyItNow}>Buy now</a>
+									<a class="cars-buy-btns" onClick={()=>setBuyItNowValue(carDetail[0]. buy_it_now,carDetail[0].car_id)}>Buy now</a>
 								}
 									
 									<a class="cars-buy-btns-primary" onClick={()=>setMakeBitValue(carDetail[0].high_bid,carDetail[0].min_price,carDetail[0].save_purchase,carDetail[0].car_id,carDetail[0].time,carDetail[0].counter_buyer_dealer_id,carDetail[0].max_price,carDetail[0].buy_it_now,carDetail[0].comments,carDetail[0].transportation,carDetail[0].display,carDetail[0].proxy_bid,carDetail[0].transportation_charge,carDetail[0].save_policy)}>Make Bid</a>
@@ -627,7 +608,7 @@ return(
 
 				<p className="details buyitnow">
 					{moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined || moreCar.buy_it_now== 0?"":
-						<a className="cta-btns" href="#">Buy It Now $ {moreCar.buy_it_now}</a>
+						<a className="cta-btns"onClick={()=>setBuyItNowValue(moreCar.buy_it_now,moreCar.car_id)} >Buy It Now $ {moreCar.buy_it_now}</a>
 					}
 				</p> 
 
@@ -691,7 +672,7 @@ return(
 									
 									<p className="details buyitnow">
                                                 {moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined || moreCar.buy_it_now== 0?"":
-                                                    <a className="cta-btns" href="#">Buy It Now $ {moreCar.buy_it_now}</a>
+                                                    <a className="cta-btns" onClick={()=>setBuyItNowValue(moreCar.buy_it_now,moreCar.car_id)}>Buy It Now $ {moreCar.buy_it_now}</a>
                                                 }
                                                 </p> 
 
@@ -755,7 +736,7 @@ return(
 	{open && <Popup
 		isClose={false}
 		content={<>
-			<BuyItNow toggle={toggleBuyItNow} highBid={highBid} carId={carId} />
+			<BuyItNow toggle={toggleBuyItNow} setBuyItNowValue={buyItNowData} getBuyItNowValue={getBuyItNowValue} />
 		</>}
 		handleClose={toggleBuyItNow}
 	/>}
