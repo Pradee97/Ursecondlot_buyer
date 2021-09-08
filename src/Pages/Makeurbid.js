@@ -397,7 +397,7 @@ console.log("check props",props)
 
                                 <div class="tbox">
 
-                        <i>$</i><input type="number" step="50" id="highBid" class="textbox" defaultValue = {isSliderChnaged && highBid} placeholder="Your New Bid"  onChange={(e)=>highBidValidation(e.target.value)}></input>                             
+                        <i>$</i><input type="number" step="50" id="highBid" class="textbox"  placeholder="Your New Bid"  onChange={(e)=>highBidValidation(e.target.value)}></input>                             
                                     <label htmlFor="highBid" className={highBid != "" ? "input-has-value" : ""}>High Bid</label>
 
                                 </div> 
