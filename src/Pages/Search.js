@@ -176,7 +176,7 @@ const Search = () => {
         API.post('BuyerInventoryCarList/condition',request).then(res=>{
 
             console.log("response",res.data.data);
-            setCarDetail(res.data.data); 
+            setCarDetail(res.data.data || []); 
             setLoading(false);
             
         }).catch(err => { console.log(err); });
@@ -238,10 +238,10 @@ const Search = () => {
 	  const getSavedSearchEnter = () =>{
 	
 		console.log("save search enter response ========", saveSearchEnter)
-	    if(saveSearchEnter!="0"){
+	    if(!saveSearchEnter && saveSearchEnter!="0"){
 		API.post("BuyerInventoryCarSearch/condition", saveSearchEnter).then(res => {
 			console.log("set save search enter _________", res.data.data)
-			setCarDetail(res.data.data);
+			setCarDetail(res.data.data || []);
 			//setSaveSearchEnter(res.data.data);
 			console.log("Saved Search enter from service");
 			console.log("save search enter response +++++++++++++", saveSearchEnter)
@@ -445,7 +445,7 @@ const Search = () => {
         API.post("BuyerInventoryCarSearch/condition",request)
         .then((res)=>{
 		   
-            setCarDetail(res.data.data);
+            setCarDetail(res.data.data || []);
 			
          
         },
