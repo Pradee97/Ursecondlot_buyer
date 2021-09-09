@@ -51,7 +51,7 @@ import MyBids from './Pages/MyBids';
 import Inspection from './Pages/Inspection';
 import MakeurBid from './Pages/Makeurbid';
 import Cardetail from './Pages/Cardetail';
-import Cart from './Pages/Cart';
+import Cart from './Pages/Cart/Cart';
 import Chat from './Pages/Chat';
 import History from './Pages/ManageAccount/History';
 import SuggestedCars from './Pages/SuggestedCars';
