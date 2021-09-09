@@ -71,7 +71,7 @@ if(!confirmationFlag){
   } 
 		let request ={
         
-            buyer_dealer_id:userDetails.buyer_dealer_id, 
+            buyer_dealer_id:JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id, 
             email:userName,
             password:password,
             car_id: id,
@@ -79,8 +79,8 @@ if(!confirmationFlag){
             status: "sold",
             active: 1,
             buying_proccess:"buyer",
-            updatedBy:JSON.parse(loggedInBuyerId).buyer_id,
-            createdBy:JSON.parse(loggedInBuyerId).buyer_id,
+            updatedBy:JSON.parse(localStorage.getItem("userDetails")).buyer_id,
+            createdBy:JSON.parse(localStorage.getItem("userDetails")).buyer_id,
            
 		}
 	console.log("Save Search Request : ",request);
