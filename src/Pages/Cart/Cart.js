@@ -102,12 +102,12 @@ const Cart = () => {
                         // mytotal[index]=(Number(cartDetail.max_price) || 0) +  Number(cartDetail.transportation === 'yes' ? cartDetail.transportation_charge : 0) + Number(getFeeDetails(cartDetail.max_price))
                         // setTotal((Number(cartDetail.max_price) || 0) +  Number(cartDetail.transportation === 'yes' ? cartDetail.transportation_charge : 0) + Number(getFeeDetails(cartDetail.max_price)))
                         // setTotal(mytotal)
-                        paySeparately={[index] : false}
+                        paySeparately={[index] : 'no'}
                         return( <div class="vehiclesheadspaydetails mt-4">
                             <div class="row">					
                                 <div class="vehiclepaycheckbox col-lg-12">
                                     <div class="form-group input-group">
-                                        <input className={"paySeparately"+index}  value={paySeparately[index]} type="checkbox" id={"vehiclepayseparat"+index} defaultChecked={paySeparately[index]} checked = {paySeparately[index]} onChange={(e)=>{paySeparately[index]=false}}/><label for={"vehiclepayseparat"+index}>You Want To Pay Separately</label>
+                                        <input className={"paySeparately"+index}  value={paySeparately[index]=='no'? "yes":"no"} type="checkbox" id={"vehiclepayseparat"+index} checked = {paySeparately[index] =='yes'?true:false} onChange={(e)=>{paySeparately[index]='yes'}}/><label for={"vehiclepayseparat"+index}>You Want To Pay Separately{paySeparately[index]}</label>
                                     </div>
                                 </div>					
                             
