@@ -71,7 +71,7 @@ console.log("check props",props)
     const [isSliderChnaged, setIsSliderChnaged] = useState(false);
 
     const [terms,setTerms]=useState("no");
-    const [eterms,setETerms]=useState("no");
+    const [termsError,setTermsError]=useState("");
     const [maximumProxy,setMaximumProxy] = useState("");
 
     // if(!carHighBid){
@@ -179,7 +179,7 @@ console.log("check props",props)
         
         setHighBidError("")
         setProxyBidError("")
-
+        setTermsError("")
         if(!highBid || !carHighBid){
 
             setHighBidError("High Bid price should not be empty" )
@@ -218,7 +218,10 @@ console.log("check props",props)
             return;
         
         }
- 
+        if( terms=="no" ){
+            setTermsError("Agree the Policy document")
+            return
+        }
    
         let request={
             buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
@@ -231,13 +234,11 @@ console.log("check props",props)
             active:1,
             createdBy:JSON.parse(localStorage.getItem("userDetails")).buyer_id,
             updatedBy:JSON.parse(localStorage.getItem("userDetails")).buyer_id,
-            transportation_charge:"300",
-            save_purchase: !carTransportation ? "no" : carTransportation,//!carSavePurchase ? "no" : carSavePurchase,
-            save_policy: !terms? "no":terms
+            transportation_charge: carTransportation == 'yes' ?  transportationFee : 0,
+            save_purchase:!carSavePurchase ? "no" : carSavePurchase,// !carTransportation ? "no" : carTransportation,//
+            save_policy: !carSavePolicy? "no": carSavePolicy
         }
-
-
-        if( terms!=="no" ){
+        console.log("request===",request)
         API.post('makeBid/add',request).then(res=>{
          
             console.log("",res.data.data);
@@ -256,12 +257,7 @@ console.log("check props",props)
             }
 
         });
-    }else{
-
-        if(terms==="no"){
-            setETerms("yes");
-        }
-    }
+    
 }
 
 //  const assigntransportFlag=()=>{
@@ -468,7 +464,7 @@ console.log("check props",props)
 
                                     <div className="col-lg-6 form-group customCheckbox">
                                     {/* {carSavePurchase == 'yes' && onLoadFlag ?  */}
-                                        <input type="checkbox" className="form-check d-inline " id="chb2" value={carTransportation == 'yes' ? 'no' : 'yes'} checked={carTransportation==="yes" ?true:false} onChange={(e)=>{setCarTransportation(e.target.value); e.target.value === "no" && setCarSavePurchase('no')}}/> 
+                                        <input type="checkbox" className="form-check d-inline " id="chb2" value={carTransportation == 'yes' ? 'no' : 'yes'} checked={carTransportation==="yes" ?true:false} onChange={(e)=>{setCarTransportation(e.target.value);}}/> 
                                         {/* :
                                         <input type="checkbox" className="form-check d-inline " id="chb2" value={carTransportation == 'yes' ? 'no' : 'yes'} onChange={(e)=>setCarTransportation(e.target.value)}/>
                                     } */}
@@ -480,7 +476,8 @@ console.log("check props",props)
                                     </div>
 
                                     <div className="col-lg-12 form-group customCheckbox">
-                                        <input type="checkbox" className="form-check d-inline " id="chb1" readOnly = {carTransportation =='no' ? true: false} disabled = {carTransportation =='no' ? true: false} value={carSavePurchase == 'yes' ? 'no' : 'yes'} checked={carTransportation==="yes" ?true:false} onChange={(e)=>{setCarSavePurchase(e.target.value)}}/>
+                                    <input type="checkbox" className="form-check d-inline " id="chb1" value={carSavePurchase == 'yes' ? 'no' : 'yes'} checked={carSavePurchase==="yes" ?true:false} onChange={(e)=>{setCarSavePurchase(e.target.value)}}/>
+                                        {/* <input type="checkbox" className="form-check d-inline " id="chb1" readOnly = {carTransportation =='no' ? true: false} disabled = {carTransportation =='no' ? true: false} value={carSavePurchase == 'yes' ? 'no' : 'yes'} checked={carTransportation==="yes" ?true:false} onChange={(e)=>{setCarSavePurchase(e.target.value)}}/> */}
                                          {/* <input type="checkbox" className="form-check d-inline " id="chb1" onClick={toggleViewSave}/> */}
                                     
                                         <label htmlFor="chb1" className="form-check-label"> Save this option for next purchase  </label>                               
@@ -524,12 +521,13 @@ console.log("check props",props)
                                 <label htmlFor="chb" className="form-check-label">   I Agree for the 
                                 <a href="JavaScript:void(0)" onClick={toggleTerms}> Policy document</a>
                                 </label>
-                                {eterms==="yes" && terms==="no" ?
-                                <p className="form-input-error"> Agree the Policy document</p>:""}
+                               
+                                <p className="form-input-error"> {termsError}</p>
                                 </div>
 
                                  <div className="col-lg-12 form-group customCheckbox">
-                                        <input type="checkbox" className="form-check d-inline " id="chb4" readOnly = {terms =='no' ? true: false} disabled = {terms =='no' ? true: false} value={carSavePolicy == 'yes' ? 'no' : 'yes'} checked={ terms == "no" ? false : true } onChange={(e)=>{setCarSavePolicy(e.target.value)}}/>
+                                         <input type="checkbox" className="form-check d-inline" id="chb4" value={carSavePolicy == "no" ? "yes" : "no" } checked={ carSavePolicy == "no" ? false : true } onChange={(e)=>{setCarSavePolicy(e.target.value)}}/>
+                                        {/* <input type="checkbox" className="form-check d-inline " id="chb4" readOnly = {terms =='no' ? true: false} disabled = {terms =='no' ? true: false} value={carSavePolicy == 'yes' ? 'no' : 'yes'} checked={ terms == "no" ? false : true } onChange={(e)=>{setCarSavePolicy(e.target.value)}}/> */}
                                          {/* <input type="checkbox" className="form-check d-inline " id="chb1" onClick={toggleViewSave}/> */}
                                     
                                         <label htmlFor="chb4" className="form-check-label"> Save this option for next   </label>                               
