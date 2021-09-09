@@ -166,9 +166,9 @@ const getFeeDetails = (maxPrice) =>{
                     <form id="msform">
                     
                       <ul id="progressbar">
-                      <li class="active">03/21/2021</li>
-                      <li></li>
-                      <li>ETA-03/29/2021</li>
+                      <li className={historyDetail.title_status ==1 ? "active" : ""}>03/21/2021</li>
+                      <li className={historyDetail.title_status ==2 ? "active" : ""}></li>
+                      <li className={historyDetail.title_status ==3 ? "active" : ""}>ETA-03/29/2021</li>
                       </ul>
                       
                       
@@ -179,9 +179,9 @@ const getFeeDetails = (maxPrice) =>{
                     <form id="msform">
                     
                       <ul id="progressbar">
-                      <li class="active">03/21/2021</li>
-                      <li></li>
-                      <li>ETA-03/29/2021</li>
+                      <li className={historyDetail.transportation_status ==1 ? "active" : ""}>03/21/2021</li>
+                      <li className={historyDetail.transportation_status ==2 ? "active" : ""}></li>
+                      <li className={historyDetail.transportation_status ==3 ? "active" : ""}>ETA-03/29/2021</li>
                       </ul>
                       
                       
