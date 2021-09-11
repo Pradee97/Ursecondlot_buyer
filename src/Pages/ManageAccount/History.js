@@ -8,12 +8,19 @@ import gasolinePump from '../../assets/img/gasolinePump.svg';
 import appstore from '../../assets/img/appstore.png';
 import googleplay from '../../assets/img/googleplay.png';
 
-const History = () => {
+ const History = () => {
 
   const history = useHistory();
   const userDetails=ls.get('userDetails');
   const [historyDetail,setHistoryDetail] = useState();
   const [feeDetails, setFeeDetails] = useState("");
+  const [historySearchs,setHistorySearch] = useState("");
+  const [year, setYear] = useState("");
+  const [make, setMake] = useState("");
+	const [model, setModel] = useState("");
+	const [vinError,setVinError] = useState("");
+  const [VINNumber, setVINNumber] = useState("");
+  const [order,setOrder] = useState("");
 
   const redirecttoInspection=(pathid)=>{
     //   history.push("/Inspection/"+pathid);
@@ -40,6 +47,57 @@ const History = () => {
 useEffect (() =>{
   historyDetails()
 }, []);
+
+const searchCarDetail = () => {
+  setVinError("")
+ if(VINNumber.length>0 && VINNumber.length < 6){
+   setVinError("VIN number must have last 6 digit")
+   return;
+ }
+ else if(VINNumber.length > 6){
+  setVinError("VIN number accept only last 6 digit")
+  return;
+}
+}
+
+const historySearch = () => {
+
+ let request={
+  buyer_dealer_id: userDetails.buyer_dealer_id,
+  make: make,
+  model: model,
+  year: year,
+  vin_no: VINNumber,
+ 
+}
+API.post("historySearch/condition", request).then(response=>{
+
+  console.log("history Search", response.data.data)
+  setHistorySearch(response.data.data)
+});
+}
+
+useEffect (() =>{
+  historySearch()
+}, []);
+
+const historyOrder =() =>{
+  let request={
+    buyer_dealer_id: userDetails.buyer_dealer_id,
+      order:order,
+
+  }
+  API.post("historyOrder/condition", request).then(response=>{
+
+    console.log("history Order", response.data.data)
+    setHistorySearch(response.data.data)
+  });
+  }
+   
+useEffect (() =>{
+  historyOrder()
+}, []);
+
 
 async function fetchBuyerFees() {
   let request = {
@@ -89,14 +147,51 @@ const getFeeDetails = (maxPrice) =>{
           <div class="section-title">
             <h2>history</h2>
           </div>
-          <div class="row content">
+          <div class="row">
             
-            <div class="col-lg-12 col-md-12 col-sm-12 historyblock">
-            
-                  <div class="hissearch">
+          <div class="searchlistform col-lg-12">
+          <div class="searchblock">
+                       <div class="form-group">
+                           <label class="control-label" for="location">Year</label> 
+                           <input class="form-control border-end-0" type="text"  id="location" placeholder="Enter Car Year"
+                           onChange={(e) => setYear(e.target.value)}/>
+                       </div>
+
+                       <div class="form-group">
+                           <label class="control-label" for="dealername">Make</label> 
+                           <input class="form-control border-end-0" type="text"  id="dealername" placeholder="Enter Car Make"
+                           onChange={(e) => setMake(e.target.value)}/>
+                       </div>
+
+                       <div class="form-group">
+                           <label class="control-label" for="dealername">Model</label> 
+                           <input class="form-control border-end-0" type="text"  id="dealername" placeholder="Enter Car Model"
+                           onChange={(e) => setModel(e.target.value)}/>
+                       </div>
+
+                       <div class="form-group ">
+                           <label class="control-label" for="date">VIN No</label> 
+                           <input class="form-control border-end-0 " type="text"  id="date" placeholder="Enter Last 6 Digit"
+                           onChange={(e) => setVINNumber(e.target.value)}/>
+                        
+                        </div>
+
+                        <div class=" form-group searchbtn">
+                           {/*<img src={searchicon} onClick={searchCarDetail}/>*/}
+                          <button  onClick={searchCarDetail}><i class="bx bx-search"></i></button> 
+                        </div>
+
+                        </div>
+
+                       <div class="errorMsgBox col-lg-12">
+                       <p className="form-input-error" >{vinError}</p>
+
+               </div>
+
+                  {/* <div class="hissearch">
                     <input type="text" class="form-control" placeholder="Search"/>
                     <i class="icofont-search"></i>
-                  </div>
+                  </div> */}
                   
                   
                   <div class="hisHead">
@@ -105,15 +200,15 @@ const getFeeDetails = (maxPrice) =>{
                     <div class="sortBy">
                         <div class="col-sm-12 form-group mr-0 pr-0">  
                           <div class="tbox">			
-                          <select id="" class="form-control box">
+                          <select id="" class="form-control box"  onChange={(e) => setOrder(e.target.value)}>
                             <option value="USA">Sort By</option>
                             <option value="USA">Sold Date</option>
                             <option value="USA">ACH Date</option>
                             <option value="USA">Title Status</option>
                             <option value="USA">Gate Pass Code</option>
-                            <option value="USA">By Year</option>
+                            {/* <option value="USA">By Year</option>
                             <option value="USA">Make</option>
-                            <option value="USA">Model</option>
+                            <option value="USA">Model</option> */}
                           </select>				
                           </div> 
                         </div>
@@ -451,4 +546,5 @@ const getFeeDetails = (maxPrice) =>{
     </div>
     )
 }
+
 export default History;
