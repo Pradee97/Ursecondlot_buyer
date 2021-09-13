@@ -72,19 +72,19 @@ const billofsales =(request) => {
 }
     
     const getFeeDetails = (maxPrice) =>{
-       
-        return feeDetails.length > 0 ? feeDetails
+       console.log("feeDetails===",feeDetails)
+        return feeDetails && feeDetails.length > 0 ? feeDetails
             .filter((data)=> 
            
             {
-                const range = data.fee_price.replaceAll('$',"").split("-")
+                const range = data?.fee_price?.replaceAll('$',"").split("-")
                
-                if(range[1]!=="up"){
+                if(range && range[1]!=="up"){
                    
                     return Number(range[0]) <= Number(maxPrice) && Number(maxPrice)  <= Number(range[1]) 
                 }
                 else{
-                    return Number(range[0]) <= Number(maxPrice) 
+                    return range ? Number(range[0]) <= Number(maxPrice) : 0
                 }
 
                 } 
@@ -135,8 +135,8 @@ const billofsales =(request) => {
             console.log("mySelectedCarId~~~~~",mySelectedCarId)
             if(cartDetail?.length>0 && cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id)) ).length>0){
                 // console.log("mySelectedCarId.length====",cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id)) ).length)
-                setMySelectedCarDetails(cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id))).map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id}}))
-                billofsales(cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id))).map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id}}))
+                setMySelectedCarDetails(cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id))).map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id}}))
+                billofsales(cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id))).map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id}}))
             }
             else {
                 setMySelectedCarDetails([])
@@ -144,8 +144,8 @@ const billofsales =(request) => {
             }
         }
         else {
-            setMySelectedCarDetails(cartDetail?.length>0 ? cartDetail.map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id}}):[])
-            billofsales(cartDetail?.length>0 ? cartDetail.map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id}}):[])
+            setMySelectedCarDetails(cartDetail?.length>0 ? cartDetail.map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id}}):[])
+            billofsales(cartDetail?.length>0 ? cartDetail.map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id}}):[])
         // return cartDetail?.length>0 && cartDetail
         // .reduce((acc, curr) => acc+((Number(curr.max_price) || 0) +  Number(curr.transportation === 'yes' ? curr.transportation_charge : 0) + Number(getFeeDetails(curr.max_price))),0)
         }
