@@ -4,7 +4,7 @@ import gasolinePump from '../../assets/img/gasoline-pump.svg'
 import appstore from '../../assets/img/appstore.png';
 import googleplay from '../../assets/img/googleplay.png';
 import Logo_final from '../../assets/img/Logo_final.png';
-//import { useinvoice, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import API from "../../Services/BaseService";
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -12,7 +12,7 @@ import Loading from "../../Component/Loading/Loading";
 
     
 const InVoice = (props) => {
-    //const invoice = useinvoice();
+    const history = useHistory();
     const [loading, setloading] = useState(true);
     const [accountDetails,setaccountDetails] = useState("");
     const [dealerInfo,setDealerInfo] = useState("");
@@ -65,7 +65,7 @@ const InVoice = (props) => {
    <div id="invoice" class="fees">
      <div class="container" >
      <div class="back-btn">
-				{/* <a class="back-btn-primary" onClick={() => invoice.push("/invoice")}><i class="bx bx-chevron-left"></i> Back</a> */}
+				 <a class="back-btn-primary" onClick={() => history.push("/History")}><i class="bx bx-chevron-left"></i> Back</a> 
 			</div>
      <div class="feesblock col-lg-12">
        
@@ -157,7 +157,7 @@ const InVoice = (props) => {
                <td>Vehicle Price +Lot Fee 
                <p>Honda Amaze (2014 Model)</p>
                </td>
-               <td><span>$120</span></td>
+               <td><span>{vechileprice}</span></td>
              </tr>
               <tr>
 
@@ -180,7 +180,7 @@ const InVoice = (props) => {
              <tfoot>
              <tr>
                <td>Amount due from the buyer</td>
-               <td><span>{1100+150+200+200+250}</span></td>
+               <td><span>{vechileprice+150+200+200+250}</span></td>
              </tr>
              </tfoot>
             

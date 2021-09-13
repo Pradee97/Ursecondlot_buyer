@@ -31,11 +31,11 @@ import googleplay from '../../assets/img/googleplay.png';
       });
     }
 
-    const redirecttoInvoice=(pathid,seller_dealer_id,car_id,price)=>{
+    const redirecttoInvoice=(car_id,seller_dealer_id,price,pathid)=>{
       //   history.push("/Inspection/"+pathid);
       history.push({
         pathname: "/Invoice",
-        state: {id:pathid,sellerDealerID:seller_dealer_id,car_id,vechileprice:price},
+        state: {car_id,sellerDealerID:seller_dealer_id,vechileprice:price}
 
         });
         console.log ("hi",price);
