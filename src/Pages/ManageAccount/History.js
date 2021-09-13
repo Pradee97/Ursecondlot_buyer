@@ -147,7 +147,7 @@ const getFeeDetails = (maxPrice) =>{
           <div class="row">
             
           <div class="searchlistform col-lg-12">
-          <div class="searchblock">
+                <div class="searchblock">
                        <div class="form-group">
                            <label class="control-label" for="location">Year</label> 
                            <input class="form-control border-end-0" type="text"  id="location" placeholder="Enter Car Year"
@@ -174,21 +174,17 @@ const getFeeDetails = (maxPrice) =>{
                         </div>
 
                         <div class=" form-group searchbtn">
-                           {/*<img src={searchicon} onClick={searchCarDetail}/>*/}
                           <button  onClick={searchCarDetail}><i class="bx bx-search"></i></button> 
                         </div>
 
-                        </div>
-
                        <div class="errorMsgBox col-lg-12">
-                       <p className="form-input-error" >{vinError}</p>
+                         <p className="form-input-error" >{vinError}</p>                      
+                      </div>
+                    </div>
+                   
+                    </div>
 
-               </div>
-
-                  {/* <div class="hissearch">
-                    <input type="text" class="form-control" placeholder="Search"/>
-                    <i class="icofont-search"></i>
-                  </div> */}
+                    </div>
                   
                   
                   <div class="hisHead">
@@ -217,14 +213,14 @@ const getFeeDetails = (maxPrice) =>{
             .map((historyDetail) =>   
               <div class="lotfee-inner col-lg-12">
                 <div class="row">							
-                  <div class="col-lg-4">
+                  <div class="col-lg-3">
                     
                     <div class="car-item">
                     <div class="pickupdetailcontent">
                       <p class="billsalesno">Bill Of sale# 45876</p>
                     </div>
                       <div className="historyImg">
-                        <img src={historyDetail.image} class="img-fluid" alt="..."/>
+                        <img src={historyDetail.image} class="carImg" alt="..."/>
                         </div>
                         <div class="cars-tag">
                         <h4>Best deal</h4>
@@ -239,11 +235,11 @@ const getFeeDetails = (maxPrice) =>{
                         
                         
                         
-                        <div class="cars-prices invoice_link">
+                        <div class="cars-prices invoice_link p-0">
                           <a class="cta-btns" href="JavaScript:void(0)" onClick={()=>redirecttoInspection(historyDetail.car_id)}>Inspection</a>
                           <a class="cta-btns invoice" href="#">Invoice</a>
                         </div>
-                        <div class="cars-prices gatepass">
+                        <div class="cars-prices gatepass pt-1">
                           <a class="cta-btns-primary" href="#">Gate Pass Code B1256</a>
                         </div>
                         </div>
@@ -251,7 +247,7 @@ const getFeeDetails = (maxPrice) =>{
                     
                     
                   </div>
-                  <div class="col-lg-4 sliderBlock">
+                  <div class="col-lg-5 sliderBlock">
                     <p>Purchased from <span>Used Car Dealer</span></p>
                     <h3>Vehicle Title</h3>
                     
@@ -294,7 +290,7 @@ const getFeeDetails = (maxPrice) =>{
                     <p class="date">Purchased on 03/28/2021</p>
                     
                     <div class="vehicleimgright col-lg-12">
-                      <p class="editbtn"><a class="" href="#">Edit</a></p>
+                      <p class="editbtn m-0"><a class="" href="#">Edit</a></p>
                       <h3>Vehicle Price + Lot Fee <span>$ {historyDetail.price}</span></h3>
                       <h4>Inspection <span>$100</span></h4>
                       <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
@@ -507,9 +503,9 @@ const getFeeDetails = (maxPrice) =>{
               
             
               
-            </div>
             
-          </div>
+            
+          
           <div><a class="load-more-btn" href="#">Load More</a></div>
         </div>
       </div>
