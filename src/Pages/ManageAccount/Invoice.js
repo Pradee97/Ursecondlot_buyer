@@ -1,0 +1,220 @@
+import React from 'react';
+import speedometer from '../../assets/img/speedometer.svg';
+import gasolinePump from '../../assets/img/gasoline-pump.svg'
+import appstore from '../../assets/img/appstore.png';
+import googleplay from '../../assets/img/googleplay.png';
+import Logo_final from '../../assets/img/Logo_final.png';
+//import { useinvoice, useParams } from "react-router-dom";
+import API from "../../Services/BaseService";
+import { useState } from 'react';
+import { useEffect } from 'react';
+import Loading from "../../Component/Loading/Loading";
+
+    
+const InVoice = (props) => {
+    //const invoice = useinvoice();
+    const [loading, setloading] = useState(true);
+    const [accountDetails,setaccountDetails] = useState("");
+    const [dealerInfo,setDealerInfo] = useState("");
+    const [sellerInfo,setSellerInfo] = useState("");
+    const { sellerDealerID,vechileprice } = props.location.state;
+ console.log("hello",sellerDealerID,vechileprice);
+    
+     function fetchBuyerDetails() {
+        setloading(true);
+        let request = {
+          buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
+        };
+        const state = API.post('user_profile/condition', request);
+        state.then(res => {
+          console.log("res", res)
+          //setaccountDetails(res.data.data);
+          setDealerInfo(res.data.data);
+          
+        })
+          .catch(err => { console.log(err); });
+      }
+      useEffect (() =>{
+        fetchBuyerDetails();
+        fetchSellerDetails();
+      }, []);
+      
+
+      function fetchSellerDetails() {
+        setloading(true);
+        
+        let request = {
+         seller_dealer_id : sellerDealerID,
+        
+        };
+        const state = API.post('seller_dealer_profile/condition', request);
+        state.then(res => {
+          console.log("res==data====>", res.data)
+          if( res.data.success){
+            //setaccountDetails(res.data.data);
+            setSellerInfo(res.data.data);
+          }
+        })
+          .catch(err => { console.log(err); });
+      }
+    return(
+        <div> 
+           {/*  {loading ? <loading/> : */}
+        <main id="main" class="inner-page">
+   
+   <div id="invoice" class="fees">
+     <div class="container" >
+     <div class="back-btn">
+				{/* <a class="back-btn-primary" onClick={() => invoice.push("/invoice")}><i class="bx bx-chevron-left"></i> Back</a> */}
+			</div>
+     <div class="feesblock col-lg-12">
+       
+        <div class="col-lg-12 invoiceBlock">
+        <div class="row header">
+                <div class="col-lg-6 header_left"><img src={Logo_final}/></div>
+                <div class="col-lg-6 header_right">
+                   <p>
+                       Fairview Ave, El Monte,US, 91732 <br></br>
+                       ursecondLot.com<br></br>
+                       142-564-9147
+                   </p>
+                </div> </div>
+       
+       
+       <div class="section-title">
+           <h2>Invoice</h2>
+       </div>
+        
+       <div class="headtable">
+           <table>			 
+             <tr>
+               <td><span>Bill of sale#</span>B 45876</td>
+               <td class="alignRight"><span>Date </span>03/03/2021</td>
+             </tr>
+             <tr>
+               <td><span>Gate Pass Code </span>B45876</td>
+               <td ></td>
+             </tr>			  
+           </table>
+           
+            </div>
+            
+           <div class="contenttable">
+           {dealerInfo?.length>0?dealerInfo
+            .map((dealerInfo) =>
+           <div>
+           <table class="infotable">
+             <thead>
+               <tr>
+                   <th>Buyer Info</th>
+               </tr>
+             </thead>
+             
+           
+            
+               <tr><td><span>Name</span>{dealerInfo.dealer_name}</td></tr>	
+               <tr><td><span>Address </span>{dealerInfo.address}</td></tr>	
+               <tr><td><span>Contact </span>746-561-6784</td></tr>	
+               <tr><td><span>Email id </span>Someone@example.com</td></tr>		  		  
+            
+              
+                       
+           </table>
+           </div>
+            ) :""} 
+           <table class="infotable">
+             <thead>
+               <tr>
+                   <th>Seller Info</th>
+               </tr>
+             </thead>			  
+           
+             
+             {sellerInfo?.length>0?sellerInfo
+            .map((sellerInfo) =>
+            <>
+               <tr><td><span>Name </span>{sellerInfo.dealer_name}</td></tr>
+               <tr><td><span>pickup adresss </span>{sellerInfo.address}</td></tr>
+               <tr><td><span>Contact </span>746-561-6784</td></tr>
+               <tr><td><span>Email id </span>Someone@example.com</td></tr>
+                  </>    
+                  ) :""}      
+           </table>
+           
+       </div>
+
+       
+         <div class="col-lg-12 pt-4 pt-lg-0 feestableBlock">
+         <div class="feestable">
+            <table>
+             <thead>
+               <tr>
+                   <th>Vehicle Information</th>
+                   <th class="priceCol">Price</th>
+               </tr>
+             </thead>
+             <tr>
+               <td>Vehicle Price +Lot Fee 
+               <p>Honda Amaze (2014 Model)</p>
+               </td>
+               <td><span>$120</span></td>
+             </tr>
+              <tr>
+
+               <td>Buy Fee</td>
+               <td><span>$150</span></td>
+             </tr>
+             <tr>
+               <td>Transportation</td>
+               <td><span>$200</span></td>
+             </tr>
+             <tr>
+               <td>Other Charges</td>
+               <td><span>$200</span></td>
+             </tr>
+             <tr>
+               <td>Miscellaneous Charges</td>
+               <td><span>$250</span></td>
+             </tr>
+             
+             <tfoot>
+             <tr>
+               <td>Amount due from the buyer</td>
+               <td><span>{1100+150+200+200+250}</span></td>
+             </tr>
+             </tfoot>
+            
+            </table>            
+         </div>
+         </div>
+        
+      
+        </div>
+</div>
+     </div>
+   </div>
+   
+
+
+   <section id="playstoreBlock" class="playstoreBlock">
+     <div class="container">
+
+
+       <div class="row content">
+         <div class="col-lg-12">
+         <img src={appstore.png}/>
+          <img src={googleplay} />
+          
+         </div>
+        
+       </div>
+
+     </div>
+   </section>
+
+        </main>
+{/* } */}
+        </div>
+    )
+}
+export default InVoice;

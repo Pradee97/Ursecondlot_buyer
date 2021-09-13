@@ -8,6 +8,7 @@ import gasolinePump from '../../assets/img/gasolinePump.svg';
 import appstore from '../../assets/img/appstore.png';
 import googleplay from '../../assets/img/googleplay.png';
 
+
  const History = () => {
 
   const history = useHistory();
@@ -29,6 +30,17 @@ import googleplay from '../../assets/img/googleplay.png';
       state: {id:pathid},
       });
     }
+
+    const redirecttoInvoice=(pathid,seller_dealer_id,car_id,price)=>{
+      //   history.push("/Inspection/"+pathid);
+      history.push({
+        pathname: "/Invoice",
+        state: {id:pathid,sellerDealerID:seller_dealer_id,car_id,vechileprice:price},
+
+        });
+        console.log ("hi",price);
+      }
+  
 
   const historyDetails = () =>{
 
@@ -241,11 +253,11 @@ const getFeeDetails = (maxPrice) =>{
                         
                         <div class="cars-prices invoice_link">
                           <a class="cta-btns" href="JavaScript:void(0)" onClick={()=>redirecttoInspection(historyDetail.car_id)}>Inspection</a>
-                          <a class="cta-btns invoice" href="#">Invoice</a>
+                          <a class="cta-btns invoice" href="JavaScript:void(0)" onClick={()=>redirecttoInvoice(historyDetail.car_id,historyDetail.seller_dealer_id,historyDetail.price)}>Invoice</a>
                         </div>
                         <div class="cars-prices gatepass">
                           <a class="cta-btns-primary" href="#">Gate Pass Code B1256</a>
-                        </div>
+                        </div>9
                         </div>
                       </div>
                     
