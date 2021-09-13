@@ -36,13 +36,23 @@ const Transport = () => {
 	const [pickUp,setPickUp] = useState("");
 	const [transit,setTransit] = useState("");
 	const [delivered,setDelivered] = useState("");
+	const [year, setYear] = useState("");
+  	const [make, setMake] = useState("");
+	const [model, setModel] = useState("");
+	const [vinError,setVinError] = useState("");
+	const [VINNumber, setVINNumber] = useState("");
+	const [transportFlag,setTransportFlag]=useState("");
+	  
+  	const [order,setOrder] = useState("");
 	
 	const Pickup = () =>{
 		
         let request = {
 			buyer_dealer_id :userDetails.buyer_dealer_id,
 			status: "Pickup"
-        }
+		}
+		//console.log("check the value in transport", value)
+		setTransportFlag("Pickup");
 
         API.post("transportDetails/condition", request).then(response=>{
 
@@ -57,12 +67,13 @@ const Transport = () => {
         let request = {
 			buyer_dealer_id :userDetails.buyer_dealer_id,
 			status: "In Transit"
-        }
+		}
+		setTransportFlag("In Transit");
 
         API.post("transportDetails/condition", request).then(response=>{
 
 			console.log("pickup check the value", response.data.data)
-			setTransit(response.data.data)
+			setPickUp(response.data.data)
            
         });
 	}
@@ -73,34 +84,46 @@ const Transport = () => {
 			buyer_dealer_id :userDetails.buyer_dealer_id,
 			status: "Delivered"
         }
+		setTransportFlag("Delivered");
 
         API.post("transportDetails/condition", request).then(response=>{
 
 			console.log("pickup check the value", response.data.data)
-			setDelivered(response.data.data)
+			setPickUp(response.data.data)
            
         });
 	}
 	
-	// const TransportSearch = () =>{
+	const TransportSearch = () =>{
 		
-    //     let request = {
-	// 		buyer_dealer_id: userDetails.buyer_dealer_id,
-	// 		make: make,
-	// 		model: model,
-	// 		year: year,
-	// 		vin_no: VINNumber,
-    //     }
+		setVinError("")
+		if(VINNumber.length>0 && VINNumber.length < 6){
+		  setVinError("VIN number must have last 6 digit")
+		  return;
+		}
+		else if(VINNumber.length > 6){
+		 setVinError("VIN number accept only last 6 digit")
+		 return;
+	   }
 
-    //     API.post("transportSearch/condition", request).then(response=>{
+        let request = {
+			buyer_dealer_id: userDetails.buyer_dealer_id,
+			make: make,
+			model: model,
+			year: year,
+			vin_no: VINNumber,
+			status:transportFlag
+        }
 
-	// 		console.log("pickup check the value", response.data.data)
-	// 		setPickUp(response.data.data)
-	// 		setTransit(response.data.data)
-	// 		setDelivered(response.data.data)
+        API.post("transportSearch/condition", request).then(response=>{
+
+			console.log("pickup check the value", response.data.data)
+			setPickUp(response.data.data);
+			setTransit(response.data.data);
+			setDelivered(response.data.data);
            
-    //     });
-	// }
+        });
+	}
 
 	useEffect (() =>{
         Pickup()
@@ -116,25 +139,67 @@ return (
 			  <h2>Transport</h2>
 			</div>
 		
+			<div class="row">
+            
+			<div class="searchlistform col-lg-12">
+				  <div class="searchblock">
+						 <div class="form-group">
+							 <label class="control-label" for="location">Year</label> 
+							 <input class="form-control border-end-0" type="text"  id="location" placeholder="Enter Car Year"
+							 onChange={(e) => setYear(e.target.value)}/>
+						 </div>
+  
+						 <div class="form-group">
+							 <label class="control-label" for="dealername">Make</label> 
+							 <input class="form-control border-end-0" type="text"  id="dealername" placeholder="Enter Car Make"
+							 onChange={(e) => setMake(e.target.value)}/>
+						 </div>
+  
+						 <div class="form-group">
+							 <label class="control-label" for="dealername">Model</label> 
+							 <input class="form-control border-end-0" type="text"  id="dealername" placeholder="Enter Car Model"
+							 onChange={(e) => setModel(e.target.value)}/>
+						 </div>
+  
+						 <div class="form-group ">
+							 <label class="control-label" for="date">VIN No</label> 
+							 <input class="form-control border-end-0 " type="text"  id="date" placeholder="Enter Last 6 Digit"
+							 onChange={(e) => setVINNumber(e.target.value)}/>
+						  
+						  </div>
+  
+						  <div class=" form-group searchbtn">
+							<button  onClick={TransportSearch}><i class="bx bx-search"></i></button> 
+						  </div>
+  
+						 <div class="errorMsgBox col-lg-12">
+						   <p className="form-input-error" >{vinError}</p>                      
+						</div>
+					  </div>
+					 
+					  </div>
+  
+					  </div>
+
 			<div class="tabsoptionblock col-lg-12">
 				<ul class="tabs">
-					<li class={`${tab1}`} onClick={()=>{tab("tab1"); Pickup()}} >Pickup</li>
-					<li class={`${tab2}`} onClick={()=>{tab("tab2"); Transit()}} >In Transit</li>
+					<li class={`${tab1}`} onClick={()=>{tab("tab1");Pickup()}} >Pickup</li>
+					<li class={`${tab2}`} onClick={()=>{tab("tab2");Transit()}} >In Transit</li>
 					<li class={`${tab3}`} onClick={()=>{tab("tab3");Delivered()}} >Delivered</li>
 				</ul>
 			</div>
-			<div class="searchblock col-lg-12">
+			{/* <div class="searchblock col-lg-12">
 				<div class="input-group searchbox">
 					<input class="form-control border-end-0 border" type="text" value="search" id="search-input"/>
 					<span class="input-group-append">
 						<button class="searchBtn" type="button"><i class="fa fa-search"></i></button>
 					</span>
 				</div>
-			</div>
+			</div> */}
 			<div class="tab_container">
 			
 				<div id="tab1" style={{display:`${tab1 === ""? "none": "block"}`}} class="tab_content">
-				{pickUp?.length>0? pickUp
+				{pickUp?.length>0 && transportFlag==="Pickup"? pickUp
             	.map((pickUp) =>   
 					<div class="tab_container-block">
 						<div class="row content col-lg-12">							
@@ -172,23 +237,23 @@ return (
 				</div>
 				
 				<div id="tab2" style={{display:`${tab2 === ""? "none": "block"}`}} class="tab_content">
-				{transit?.length>0? transit
-            	.map((transit) => 
+				{pickUp?.length>0 && transportFlag==="In Transit"? pickUp
+            	.map((pickUp) => 
 						<div class="tab_container-block">
 							<div class="row content col-lg-12">
 								<div class="col-lg-5 col-md-5">
 									<div class="modeldetails">
 										<span>order#G86512</span>
-										<span>Bill Of Sale # {transit.bill_of_sales_id}</span>
+										<span>Bill Of Sale # {pickUp.bill_of_sales_id}</span>
 									</div>						
 								</div>
 								<div class="col-lg-4 col-md-4">
 									<div class="modeldetail">
-										<h3>{transit.make}({transit.model} model)</h3>
-										<h4>{transit.vin_no}</h4>
+										<h3>{pickUp.make}({pickUp.model} model)</h3>
+										<h4>{pickUp.vin_no}</h4>
 									</div>						
 								</div>
-								{transit.transportation_charge !==null?
+								{pickUp.transportation_charge !==null?
 								<div class="col-lg-3 col-md-3">
 									<div class="modeldetailprice">
 										<h3>Transport Price<span>$120</span></h3>
@@ -201,37 +266,37 @@ return (
 								<div class="col-lg-2 col-md-2 bordercontent">
 									<div class="modeldetailcontent">
 										<p>Transport Name</p>
-										<p class="subhead">{transit.transport_name}</p>
+										<p class="subhead">{pickUp.transport_name}</p>
 									</div>						
 								</div>
 								<div class="col-lg-2 col-md-2 bordercontent">
 									<div class="modeldetailcontent ">
 										<p>Transport phone</p>
-										<p class="subhead">{transit.transport_phone_no}</p>
+										<p class="subhead">{pickUp.transport_phone_no}</p>
 									</div>						
 								</div>
 								<div class="col-lg-2 col-md-2 bordercontent">
 									<div class="modeldetailcontent">
 										<p>Est.delivary</p>
-										<p class="subhead">{transit.estimate_transpor_date?.substring(0,10)}</p>
+										<p class="subhead">{pickUp.estimate_transpor_date?.substring(0,10)}</p>
 									</div>						
 								</div>
 								<div class="col-lg-2 col-md-2 bordercontent">
 									<div class="modeldetailcontent">
 										<p>Pickup Point</p>
-										<p class="subhead">{transit.pickup_address}</p>
+										<p class="subhead">{pickUp.pickup_address}</p>
 									</div>						
 								</div>
 								<div class="col-lg-2 col-md-2 bordercontent">
 									<div class="modeldetailcontent">
 										<p>Drop Point</p>
-										<p class="subhead">{transit.dropPonit_address}</p>
+										<p class="subhead">{pickUp.dropPonit_address}</p>
 									</div>						
 								</div>
 								<div class="col-lg-2 col-md-2 bordercontent">
 									<div class="modeldetailcontent">
 										<p>Status</p>
-										<p class="subheadstatus">{transit.status}</p>
+										<p class="subheadstatus">{pickUp.status}</p>
 									</div>						
 								</div>
 							</div>
@@ -243,20 +308,20 @@ return (
 				</div>
 							
 				<div id="tab3" style={{display:`${tab3 === ""? "none": "block"}`}} class="tab_content">
-				{delivered?.length>0? delivered
-            	.map((delivered) => 
+				{pickUp?.length>0 && transportFlag==="Delivered"? pickUp
+            	.map((pickUp) => 
 						<div class="tab_container-block">
 							<div class="row content col-lg-12">
 								<div class="col-lg-5 col-md-5">
 									<div class="modeldetails">
 										<span>order#G86512</span>
-										<span>Bill Of Sale # {delivered.bill_of_sales_id}</span>
+										<span>Bill Of Sale # {pickUp.bill_of_sales_id}</span>
 									</div>						
 								</div>
 								<div class="col-lg-4 col-md-4">
 									<div class="modeldetail">
-										<h3>{delivered.make}({delivered.model} model)</h3>
-										<h4>{delivered.vin_no}</h4>
+										<h3>{pickUp.make}({pickUp.model} model)</h3>
+										<h4>{pickUp.vin_no}</h4>
 									</div>						
 								</div>
 								<div class="col-lg-3 col-md-3">
@@ -271,37 +336,37 @@ return (
 								<div class="col-lg-2 col-md-2 bordercontent">
 									<div class="modeldetailcontent">
 										<p>Transport Name</p>
-										<p class="subhead">{delivered.transport_name}</p>
+										<p class="subhead">{pickUp.transport_name}</p>
 									</div>						
 								</div>
 								<div class="col-lg-2 col-md-2 bordercontent">
 									<div class="modeldetailcontent ">
 										<p>Transport phone</p>
-										<p class="subhead">{delivered.transport_phone_no}</p>
+										<p class="subhead">{pickUp.transport_phone_no}</p>
 									</div>						
 								</div>
 								<div class="col-lg-2 col-md-2 bordercontent">
 									<div class="modeldetailcontent">
 										<p>Est.delivary</p>
-										<p class="subhead">{delivered.estimate_transpor_date?.substring(0,10)}</p>
+										<p class="subhead">{pickUp.estimate_transpor_date?.substring(0,10)}</p>
 									</div>						
 								</div>
 								<div class="col-lg-2 col-md-2 bordercontent">
 									<div class="modeldetailcontent">
 										<p>Pickup Point</p>
-										<p class="subhead">{delivered.pickup_address}</p>
+										<p class="subhead">{pickUp.pickup_address}</p>
 									</div>						
 								</div>
 								<div class="col-lg-2 col-md-2 bordercontent">
 									<div class="modeldetailcontent">
 										<p>Drop Point</p>
-										<p class="subhead">{delivered.dropPonit_address}</p>
+										<p class="subhead">{pickUp.dropPonit_address}</p>
 									</div>						
 								</div>
 								<div class="col-lg-2 col-md-2 bordercontent">
 									<div class="modeldetailcontent">
 										<p>Status</p>
-										<p class="subheadstatus">{delivered.status}</p>
+										<p class="subheadstatus">{pickUp.status}</p>
 									</div>						
 								</div>
 							</div>
