@@ -221,7 +221,7 @@ const getFeeDetails = (maxPrice) =>{
                     
                     <div class="car-item">
                     <div class="pickupdetailcontent">
-                      <p class="billsalesno">Bill Of sale# 45876</p>
+                      <p class="billsalesno">Bill Of sale # {historyDetail.bill_of_sales_id}</p>
                     </div>
                       <div className="historyImg">
                         <img src={historyDetail.image} class="img-fluid" alt="..."/>
@@ -258,9 +258,11 @@ const getFeeDetails = (maxPrice) =>{
                     <form id="msform">
                     
                       <ul id="progressbar">
-                      <li className={historyDetail.title_status ==1 ? "active" : ""}>03/21/2021</li>
-                      <li className={historyDetail.title_status ==2 ? "active" : ""}></li>
-                      <li className={historyDetail.title_status ==3 ? "active" : ""}>ETA-03/29/2021</li>
+                      <li className={historyDetail.title_status ==1 ? "active" : ""}>{historyDetail.title_date1?.substring(0,10)}</li>
+                      <li className={historyDetail.title_status ==2 ? "active" : ""}>{historyDetail.title_date2?.substring(0,10)}</li>
+                      {historyDetail.title_status !==3?
+                      <li className={historyDetail.title_status ==3 ? "active" : ""}>{historyDetail.estimate_title_date?.substring(0,10)}</li>:
+                      <li className={historyDetail.title_status ==3 ? "active" : ""}>{historyDetail.title_date3?.substring(0,10)}</li>}
                       </ul>
                       
                       
@@ -271,15 +273,17 @@ const getFeeDetails = (maxPrice) =>{
                     <form id="msform">
                     
                       <ul id="progressbar">
-                      <li className={historyDetail.transportation_status ==1 ? "active" : ""}>03/21/2021</li>
-                      <li className={historyDetail.transportation_status ==2 ? "active" : ""}></li>
-                      <li className={historyDetail.transportation_status ==3 ? "active" : ""}>ETA-03/29/2021</li>
+                      <li className={historyDetail.transportation_status ==1 ? "active" : ""}>{historyDetail.transport_date1?.substring(0,10)}</li>
+                      <li className={historyDetail.transportation_status ==2 ? "active" : ""}>{historyDetail.transpor_date2?.substring(0,10)}</li>
+                      {historyDetail.transportation_status !==3?
+                      <li className={historyDetail.transportation_status ==3 ? "active" : ""}><p>{historyDetail.estimate_transpor_date?.substring(0,10)}</p> <p>{historyDetail.transportation_status_name}</p></li>:
+                      <li className={historyDetail.transportation_status ==3 ? "active" : ""}>{historyDetail.transpor_date3?.substring(0,10)},{historyDetail.transportation_status_name}</li>}
                       </ul>
                       
                       
                     </form>
                     
-                      <h3>Title status - <span> {historyDetail.vehicle_type}</span></h3>
+                      <h3>Title status - <span> {historyDetail.title_status_name}</span></h3>
                     
                     <div class="cars-prices ">
                       <a class="cta-btns" href="#">Price - $ {historyDetail.price}</a>

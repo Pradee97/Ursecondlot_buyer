@@ -8,7 +8,9 @@ import Loading from "../../Component/Loading/Loading";
 import {
   Button
 } from 'antd';
+
 const ManageAccount = () => {
+  
   const history = useHistory();
   const [accountDetails, setaccountDetails] = useState("");
   const [dealerInfo, setDealerInfo] = useState("");
@@ -72,6 +74,7 @@ const ManageAccount = () => {
     fetchLegalDetails();
     fetchAddressDetails();
   }, []);
+  
   return (
     <div>
       {loading?<Loading/>:
