@@ -14,7 +14,7 @@ import googleplay from '../../assets/img/googleplay.png';
   const userDetails=ls.get('userDetails');
   const [historyDetail,setHistoryDetail] = useState();
   const [feeDetails, setFeeDetails] = useState("");
-  const [historySearchs,setHistorySearch] = useState("");
+  // const [historySearch,setHistorySearch] = useState("");
   const [year, setYear] = useState("");
   const [make, setMake] = useState("");
 	const [model, setModel] = useState("");
@@ -58,45 +58,42 @@ const searchCarDetail = () => {
   setVinError("VIN number accept only last 6 digit")
   return;
 }
+
+      let request={
+      buyer_dealer_id: userDetails.buyer_dealer_id,
+      make: make,
+      model: model,
+      year: year,
+      vin_no: VINNumber,
+
+      }
+        API.post("historySearch/condition", request).then(response=>{
+
+          console.log("history Search", response.data.data)
+          setHistoryDetail(response.data.data)
+          // setHistorySearch(response.data.data)
+        }); 
+  
 }
 
-const historySearch = () => {
+  const historyOrder =() =>{
+      let request={
+        buyer_dealer_id: userDetails.buyer_dealer_id,
+          order:order,
 
- let request={
-  buyer_dealer_id: userDetails.buyer_dealer_id,
-  make: make,
-  model: model,
-  year: year,
-  vin_no: VINNumber,
- 
-}
-API.post("historySearch/condition", request).then(response=>{
+      }
+        API.post("historyOrder/condition", request).then(response=>{
 
-  console.log("history Search", response.data.data)
-  setHistorySearch(response.data.data)
-});
-}
-
-useEffect (() =>{
-  historySearch()
-}, []);
-
-const historyOrder =() =>{
-  let request={
-    buyer_dealer_id: userDetails.buyer_dealer_id,
-      order:order,
-
+        console.log("history Order", response.data.data)
+        setHistoryDetail(response.data.data)
+        // setHistorySearch(response.data.data)
+        });
   }
-  API.post("historyOrder/condition", request).then(response=>{
 
-    console.log("history Order", response.data.data)
-    setHistorySearch(response.data.data)
-  });
-  }
-   
+
 useEffect (() =>{
   historyOrder()
-}, []);
+}, [order]);
 
 
 async function fetchBuyerFees() {
