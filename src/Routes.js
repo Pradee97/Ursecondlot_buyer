@@ -62,6 +62,7 @@ import InventoryCars from './Pages/InventoryCars';
 import MoreCarFromBuyer from './Pages/MoreCarFromSeller';
 import Checkout from './Pages/Checkout';
 import ScrollToTop from "./Component/scrollToTop";
+import InVoice from './Pages/ManageAccount/Invoice';
 
 
 function AppRouter() {
@@ -156,6 +157,7 @@ function AppRouter() {
               <Route path="/MoreCarFromBuyer/:id" component={MoreCarFromBuyer}/>
               <Route path="/SimilarCarFromBuyer/:id" component={SimilarCars}/>
               <Route path="/checkout" component={Checkout}/>
+              <Route path="/Invoice" component={InVoice}/>
 
 
             </PrivateRoute>       
