@@ -8096,3 +8096,8 @@ h2.title {
   max-width: 100%;
   object-fit: cover;
 }
+
+ul#progressbar li p{
+  margin: 0;
+  font-size: 12px;
+}
