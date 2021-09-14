@@ -169,7 +169,8 @@ const billofsales =(request) => {
                 <div class="col-lg-8 col-md-8">
                     <div class="vehiclesheads">
                     {/* <h2>Number of Vehicles- 2<span>Total amount- <b>$ {cartDetail.length>0 ? cartDetail.reduce((acc,{max_price,transportation,transportation_charge})=>acc + (Number(max_price) + Number(transportation === 'yes' ? transportation_charge : 0) + Number(getFeeDetails(max_price||0))) ,0) : 0}</b></span></h2> */}
-                    <h2>Number of Vehicles- 2<span>Total amount- <b>$ {mySelectedCarTotal()}</b></span></h2>   
+                    <h2>Number of Vehicles- 2<span>Total amount- <b>$ {cartDetail?.length>0 && cartDetail
+                    .reduce((acc, curr) => acc+((Number(curr.price) || 0) +  Number(curr.transportation === 'yes' ? curr.transportation_charge : 0) + Number(getFeeDetails(curr.price))),0)}</b></span></h2>   
                 </div>
                 {cartDetail?.length>0 && cartDetail
                     .map((cartDetail,index) =>{
@@ -188,13 +189,13 @@ const billofsales =(request) => {
                                     <img src={cartDetail.image}/>
                                 </div>
                                 <div class="vehicleimgright col-lg-8">
-                                    <h3>{cartDetail.make} ({cartDetail.model}) <span>$ {cartDetail.max_price}</span></h3>
-                                    <h4>Buy Fee <span>$ {getFeeDetails(cartDetail.max_price)}</span></h4>
+                                    <h3>{cartDetail.make} ({cartDetail.model}) <span>$ {cartDetail.price}</span></h3>
+                                    <h4>Buy Fee <span>$ {getFeeDetails(cartDetail.price)}</span></h4>
                                     <div class="form-group input-group ">
                                         <input type="checkbox" id="" value={cartDetail.transportation == 'yes' ? 'no' : 'yes'}   checked={cartDetail.transportation== 'yes' ? true : false}/><label for="paytransportation">Transportation</label><span>$ {cartDetail.transportation === 'yes' ? cartDetail.transportation_charge : 0}</span>
                                     </div>
                                     <div class="vehiclerighttotal">
-                                        <h3>Total amount <span>$ {(Number(cartDetail.max_price) || 0) +  Number(cartDetail.transportation === 'yes' ? cartDetail.transportation_charge : 0) + Number(getFeeDetails(cartDetail.max_price))}</span></h3>
+                                        <h3>Total amount <span>$ {(Number(cartDetail.price) || 0) +  Number(cartDetail.transportation === 'yes' ? cartDetail.transportation_charge : 0) + Number(getFeeDetails(cartDetail.price))}</span></h3>
                                     </div>
                                 </div>
                             </div>
@@ -229,16 +230,17 @@ const billofsales =(request) => {
                 <div class="col-lg-4 col-md-8">
                     <div class="vehicletotal">
                         <h2>Total</h2>
-                        <h3>Total Amount <span>${mySelectedCarTotal()}</span></h3>
-                        {/* <h4>Select Payment Method</h4> */}
-                        {/* <div class="input-group">
-                            <select id="vehicleselect"  class="form-control custom-select browser-default" onChange={(e)=>selectPayment(e.target.value)}>
-                                <option value={null}>select</option>
-                                <option value="ACH">ACH</option>
-                                <option value="Floor">Floor</option>
-                                <option value="Credit Card">Credit Card</option>
+                        <h3>Total Amount <span>${cartDetail?.length>0 && cartDetail
+                    .reduce((acc, curr) => acc+((Number(curr.price) || 0) +  Number(curr.transportation === 'yes' ? curr.transportation_charge : 0) + Number(getFeeDetails(curr.price))),0)}</span></h3>
+                        <h4>Select Payment Method</h4>
+                        <div class="input-group">
+                            <select id="vehicleselect"  class="form-control custom-select browser-default">
+                                <option value="Select">select</option>
+                                <option value="Select">ACH</option>
+                                <option value="Select">Floor</option>
+                                <option value="Select">Credit Card</option>
                             </select>
-                        </div> */}
+                        </div> 
                         <div className="form-group selectTbox">
             <div className="tbox">                
                 <div className="selcetclass"> 
