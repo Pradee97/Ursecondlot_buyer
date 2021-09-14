@@ -22,6 +22,7 @@ import googleplay from '../../assets/img/googleplay.png';
 	const [vinError,setVinError] = useState("");
   const [VINNumber, setVINNumber] = useState("");
   const [order,setOrder] = useState("");
+  const [noCars,setNoCars] = useState("");
 
   const redirecttoInspection=(pathid)=>{
     //   history.push("/Inspection/"+pathid);
@@ -52,6 +53,7 @@ import googleplay from '../../assets/img/googleplay.png';
 
         console.log("history check the value", response.data.data)
         setHistoryDetail(response.data.data)
+        setNoCars(response.data.data.length)
     });
 
 }
@@ -83,6 +85,7 @@ const searchCarDetail = () => {
 
           console.log("history Search", response.data.data)
           setHistoryDetail(response.data.data)
+          setNoCars(response.data.data.length)
           // setHistorySearch(response.data.data)
         }); 
   
@@ -98,6 +101,7 @@ const searchCarDetail = () => {
 
         console.log("history Order", response.data.data)
         setHistoryDetail(response.data.data)
+        setNoCars(response.data.data.length)
         // setHistorySearch(response.data.data)
         });
   }
@@ -204,7 +208,7 @@ const getFeeDetails = (maxPrice) =>{
                   
                   
                   <div class="hisHead">
-                    <p>250 Vehicles Purchased</p>
+                    <p>{noCars} Vehicles Purchased</p>
                     
                     <div class="sortBy">
                         <div class="col-sm-12 form-group mr-0 pr-0">  
@@ -233,7 +237,7 @@ const getFeeDetails = (maxPrice) =>{
                     
                     <div class="car-item">
                     <div class="pickupdetailcontent">
-                      <p class="billsalesno">Bill Of sale# 45876</p>
+                      <p class="billsalesno">Bill Of sale# {historyDetail.bill_of_sales_id===null?"":historyDetail.bill_of_sales_id}</p>
                     </div>
                       <div className="historyImg">
                         <img src={historyDetail.image} class="img-fluid" alt="..."/>
@@ -256,7 +260,7 @@ const getFeeDetails = (maxPrice) =>{
                           <a class="cta-btns invoice" href="JavaScript:void(0)" onClick={()=>redirecttoInvoice(historyDetail.car_id,historyDetail.seller_dealer_id,historyDetail.price)}>Invoice</a>
                         </div>
                         <div class="cars-prices gatepass">
-                          <a class="cta-btns-primary" href="#">Gate Pass Code B1256</a>
+                          <a class="cta-btns-primary" href="#">Gate Pass Code {historyDetail.gatepass_id===""?"":historyDetail.gatepass_id}</a>
                         </div>9
                         </div>
                       </div>
@@ -291,7 +295,7 @@ const getFeeDetails = (maxPrice) =>{
                       
                     </form>
                     
-                      <h3>Title status - <span> {historyDetail.vehicle_type}</span></h3>
+                      <h3>Title status - <span> {historyDetail.title_status_name}</span></h3>
                     
                     <div class="cars-prices ">
                       <a class="cta-btns" href="#">Price - $ {historyDetail.price}</a>

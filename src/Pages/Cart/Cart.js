@@ -93,7 +93,7 @@ const Cart = () => {
                     <div class="vehiclesheads">
                     {/* <h2>Number of Vehicles- 2<span>Total amount- <b>$ {cartDetail.length>0 ? cartDetail.reduce((acc,{max_price,transportation,transportation_charge})=>acc + (Number(max_price) + Number(transportation === 'yes' ? transportation_charge : 0) + Number(getFeeDetails(max_price||0))) ,0) : 0}</b></span></h2> */}
                     <h2>Number of Vehicles- 2<span>Total amount- <b>$ {cartDetail?.length>0 && cartDetail
-                    .reduce((acc, curr) => acc+((Number(curr.max_price) || 0) +  Number(curr.transportation === 'yes' ? curr.transportation_charge : 0) + Number(getFeeDetails(curr.max_price))),0)}</b></span></h2>   
+                    .reduce((acc, curr) => acc+((Number(curr.price) || 0) +  Number(curr.transportation === 'yes' ? curr.transportation_charge : 0) + Number(getFeeDetails(curr.price))),0)}</b></span></h2>   
                 </div>
                 {cartDetail?.length>0 && cartDetail
                     .map((cartDetail,index) =>{
@@ -115,13 +115,13 @@ const Cart = () => {
                                     <img src={cartDetail.image}/>
                                 </div>
                                 <div class="vehicleimgright col-lg-8">
-                                    <h3>{cartDetail.make} ({cartDetail.model}) <span>$ {cartDetail.max_price}</span></h3>
-                                    <h4>Buy Fee <span>$ {getFeeDetails(cartDetail.max_price)}</span></h4>
+                                    <h3>{cartDetail.make} ({cartDetail.model}) <span>$ {cartDetail.price}</span></h3>
+                                    <h4>Buy Fee <span>$ {getFeeDetails(cartDetail.price)}</span></h4>
                                     <div class="form-group input-group ">
                                         <input type="checkbox" id="paytransportation" value={cartDetail.transportation == 'yes' ? 'no' : 'yes'}   checked={cartDetail.transportation== 'yes' ? true : false}/><label for="paytransportation">Transportation</label><span>$ {cartDetail.transportation === 'yes' ? cartDetail.transportation_charge : 0}</span>
                                     </div>
                                     <div class="vehiclerighttotal">
-                                        <h3>Total amount <span>$ {(Number(cartDetail.max_price) || 0) +  Number(cartDetail.transportation === 'yes' ? cartDetail.transportation_charge : 0) + Number(getFeeDetails(cartDetail.max_price))}</span></h3>
+                                        <h3>Total amount <span>$ {(Number(cartDetail.price) || 0) +  Number(cartDetail.transportation === 'yes' ? cartDetail.transportation_charge : 0) + Number(getFeeDetails(cartDetail.price))}</span></h3>
                                     </div>
                                 </div>
                             </div>
@@ -157,7 +157,7 @@ const Cart = () => {
                     <div class="vehicletotal">
                         <h2>Total</h2>
                         <h3>Total Amount <span>${cartDetail?.length>0 && cartDetail
-                    .reduce((acc, curr) => acc+((Number(curr.max_price) || 0) +  Number(curr.transportation === 'yes' ? curr.transportation_charge : 0) + Number(getFeeDetails(curr.max_price))),0)}</span></h3>
+                    .reduce((acc, curr) => acc+((Number(curr.price) || 0) +  Number(curr.transportation === 'yes' ? curr.transportation_charge : 0) + Number(getFeeDetails(curr.price))),0)}</span></h3>
                         <h4>Select Payment Method</h4>
                         <div class="input-group">
                             <select id="vehicleselect"  class="form-control custom-select browser-default">
