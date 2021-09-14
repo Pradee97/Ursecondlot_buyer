@@ -18,6 +18,7 @@ import BuyItNow from '../Pages/BuyItNow/BuyItNow';
 import {  useHistory } from "react-router-dom";
 
 const MyBids = () => {
+
     const history = useHistory();
     const [open,setOpen] = useState(false);
     const [myBids, setMyBids] = useState("");
@@ -26,6 +27,7 @@ const MyBids = () => {
     const [makeBitData, setMakeBitData] = useState({});
     const [highBid,setHighBid] = useState(null);
     const [buyItNowData, setBuyItNowData] = useState({});
+
     async function fetchMyBids() {
         let request = {
             buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
@@ -38,26 +40,31 @@ const MyBids = () => {
         })
             .catch(err => { console.log(err); });
     }
+
     useEffect(() => {
         fetchMyBids();
     }, []);
+
     const toggleMakeBid = () => {
         setIsOpen(!isOpen);
     }
+
     const getBuyItNowValue = (data) => {
         const highBid = data
         setHighBid(highBid)
     }
+
     const toggleBuyItNow = () => {
         setOpen(!open);
     }
+
     const cancelBid=(car_id)=>{
         let request = {
             buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
             car_id:car_id
         };
         console.log("========>",request)
-        const state = API.post('cancelbid/condition', request);
+        const state = API.post('cancelbid/update', request);
         state.then(res => {
             history.push("/mybids")   
         })
