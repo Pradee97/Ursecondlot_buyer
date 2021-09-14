@@ -257,7 +257,7 @@ const getFeeDetails = (maxPrice) =>{
                         </div>
                         <div class="cars-prices gatepass pt-1">
                           <a class="cta-btns-primary" href="#">Gate Pass Code {historyDetail.gatepass_id===""?"":historyDetail.gatepass_id}</a>
-                        </div>9
+                        </div>
                         </div>
                       </div>
                     
