@@ -233,7 +233,7 @@ const getFeeDetails = (maxPrice) =>{
                     
                     <div class="car-item">
                     <div class="pickupdetailcontent">
-                      <p class="billsalesno">Bill Of sale # {historyDetail.bill_of_sales_id}</p>
+                      <p class="billsalesno">Bill Of sale #{historyDetail.bill_of_sales_id}</p>
                     </div>
                       <div className="historyImg">
                         <img src={historyDetail.image} class="carImg" alt="..."/>
@@ -524,7 +524,7 @@ const getFeeDetails = (maxPrice) =>{
             
               
             
-            
+
           
           <div><a class="load-more-btn" href="#">Load More</a></div>
         </div>
