@@ -163,7 +163,7 @@ const getFeeDetails = (maxPrice) =>{
           <div class="row">
             
           <div class="searchlistform col-lg-12">
-          <div class="searchblock">
+                <div class="searchblock">
                        <div class="form-group">
                            <label class="control-label" for="location">Year</label> 
                            <input class="form-control border-end-0" type="text"  id="location" placeholder="Enter Car Year"
@@ -190,21 +190,17 @@ const getFeeDetails = (maxPrice) =>{
                         </div>
 
                         <div class=" form-group searchbtn">
-                           {/*<img src={searchicon} onClick={searchCarDetail}/>*/}
                           <button  onClick={searchCarDetail}><i class="bx bx-search"></i></button> 
                         </div>
 
-                        </div>
-
                        <div class="errorMsgBox col-lg-12">
-                       <p className="form-input-error" >{vinError}</p>
+                         <p className="form-input-error" >{vinError}</p>                      
+                      </div>
+                    </div>
+                   
+                    </div>
 
-               </div>
-
-                  {/* <div class="hissearch">
-                    <input type="text" class="form-control" placeholder="Search"/>
-                    <i class="icofont-search"></i>
-                  </div> */}
+                    </div>
                   
                   
                   <div class="hisHead">
@@ -233,14 +229,14 @@ const getFeeDetails = (maxPrice) =>{
             .map((historyDetail) =>   
               <div class="lotfee-inner col-lg-12">
                 <div class="row">							
-                  <div class="col-lg-4">
+                  <div class="col-lg-3">
                     
                     <div class="car-item">
                     <div class="pickupdetailcontent">
-                      <p class="billsalesno">Bill Of sale# {historyDetail.bill_of_sales_id===null?"":historyDetail.bill_of_sales_id}</p>
+                      <p class="billsalesno">Bill Of sale # {historyDetail.bill_of_sales_id}</p>
                     </div>
                       <div className="historyImg">
-                        <img src={historyDetail.image} class="img-fluid" alt="..."/>
+                        <img src={historyDetail.image} class="carImg" alt="..."/>
                         </div>
                         <div class="cars-tag">
                         <h4>Best deal</h4>
@@ -255,11 +251,11 @@ const getFeeDetails = (maxPrice) =>{
                         
                         
                         
-                        <div class="cars-prices invoice_link">
+                        <div class="cars-prices invoice_link p-0">
                           <a class="cta-btns" href="JavaScript:void(0)" onClick={()=>redirecttoInspection(historyDetail.car_id)}>Inspection</a>
                           <a class="cta-btns invoice" href="JavaScript:void(0)" onClick={()=>redirecttoInvoice(historyDetail.car_id,historyDetail.seller_dealer_id,historyDetail.price)}>Invoice</a>
                         </div>
-                        <div class="cars-prices gatepass">
+                        <div class="cars-prices gatepass pt-1">
                           <a class="cta-btns-primary" href="#">Gate Pass Code {historyDetail.gatepass_id===""?"":historyDetail.gatepass_id}</a>
                         </div>9
                         </div>
@@ -267,16 +263,18 @@ const getFeeDetails = (maxPrice) =>{
                     
                     
                   </div>
-                  <div class="col-lg-4 sliderBlock">
+                  <div class="col-lg-5 sliderBlock">
                     <p>Purchased from <span>Used Car Dealer</span></p>
                     <h3>Vehicle Title</h3>
                     
                     <form id="msform">
                     
                       <ul id="progressbar">
-                      <li className={historyDetail.title_status ==1 ? "active" : ""}>03/21/2021</li>
-                      <li className={historyDetail.title_status ==2 ? "active" : ""}></li>
-                      <li className={historyDetail.title_status ==3 ? "active" : ""}>ETA-03/29/2021</li>
+                      <li className={historyDetail.title_status ==1 ? "active" : ""}>{historyDetail.title_date1?.substring(0,10)}</li>
+                      <li className={historyDetail.title_status ==2 ? "active" : ""}>{historyDetail.title_date2?.substring(0,10)}</li>
+                      {historyDetail.title_status !==3?
+                      <li className={historyDetail.title_status ==3 ? "active" : ""}>{historyDetail.estimate_title_date?.substring(0,10)}</li>:
+                      <li className={historyDetail.title_status ==3 ? "active" : ""}>{historyDetail.title_date3?.substring(0,10)}</li>}
                       </ul>
                       
                       
@@ -287,9 +285,11 @@ const getFeeDetails = (maxPrice) =>{
                     <form id="msform">
                     
                       <ul id="progressbar">
-                      <li className={historyDetail.transportation_status ==1 ? "active" : ""}>03/21/2021</li>
-                      <li className={historyDetail.transportation_status ==2 ? "active" : ""}></li>
-                      <li className={historyDetail.transportation_status ==3 ? "active" : ""}>ETA-03/29/2021</li>
+                      <li className={historyDetail.transportation_status ==1 ? "active" : ""}>{historyDetail.transport_date1?.substring(0,10)}</li>
+                      <li className={historyDetail.transportation_status ==2 ? "active" : ""}>{historyDetail.transpor_date2?.substring(0,10)}</li>
+                      {historyDetail.transportation_status !==3?
+                      <li className={historyDetail.transportation_status ==3 ? "active" : ""}><p>{historyDetail.estimate_transpor_date?.substring(0,10)}</p> <p>{historyDetail.transportation_status_name}</p></li>:
+                      <li className={historyDetail.transportation_status ==3 ? "active" : ""}>{historyDetail.transpor_date3?.substring(0,10)},{historyDetail.transportation_status_name}</li>}
                       </ul>
                       
                       
@@ -310,7 +310,7 @@ const getFeeDetails = (maxPrice) =>{
                     <p class="date">Purchased on 03/28/2021</p>
                     
                     <div class="vehicleimgright col-lg-12">
-                      <p class="editbtn"><a class="" href="#">Edit</a></p>
+                      <p class="editbtn m-0"><a class="" href="#">Edit</a></p>
                       <h3>Vehicle Price + Lot Fee <span>$ {historyDetail.price}</span></h3>
                       <h4>Inspection <span>$100</span></h4>
                       <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
@@ -523,9 +523,9 @@ const getFeeDetails = (maxPrice) =>{
               
             
               
-            </div>
             
-          </div>
+            
+          
           <div><a class="load-more-btn" href="#">Load More</a></div>
         </div>
       </div>

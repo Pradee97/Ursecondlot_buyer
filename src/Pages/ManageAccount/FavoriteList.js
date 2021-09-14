@@ -605,10 +605,10 @@ useEffect(() => {
 								<h4>Year<span><img onClick={toggleYearSearch} src={arrowmark}/></span></h4>
 								{yearSearchToggle?(<div class="inner">
 									<div class="row">
-										<div class="input-group col-lg-6">
+										<div class="input-group col-lg-6 pt-0 pb-0 mb-0">
 											<input class="form-control border-end-0 border" type="text"  id="from-input" value={fromYear} maxLength="4" placeholder="From" onChange={(e)=>setFromYear(e.target.value)}/>
 										</div>
-										<div class="input-group col-lg-6">
+										<div class="input-group col-lg-6 pt-0 pb-0 mb-0">
 											<input class="form-control border-end-0 border" type="text" value={toYear} id="to-input" placeholder="To" maxLength="4" onChange={(e)=>setToYear(e.target.value)}/>
 										</div>
 									</div>
@@ -620,10 +620,10 @@ useEffect(() => {
 								<h4>Mileage<span><img onClick={toggleMileageSearch} src={arrowmark}/></span></h4>
 								{mileageSearchToggle?(<div class="inner">
 									<div class="row">
-										<div class="input-group col-lg-6">
+										<div class="input-group col-lg-6  pt-0 pb-0 mb-0">
 											<input class="form-control border-end-0 border" type="text"  id="from-mileage" placeholder="From" value={fromMileage} onChange={(e)=>setFromMIleage(e.target.value)} />
 										</div>
-										<div class="input-group col-lg-6">
+										<div class="input-group col-lg-6  pt-0 pb-0 mb-0">
 											<input class="form-control border-end-0 border" type="text"  id="to-mileage" placeholder="To" value={toMileage} onChange={(e)=>setToMileage(e.target.value)} />
 										</div>
 									</div>
@@ -650,13 +650,13 @@ useEffect(() => {
 								
 										(make.length>0?make.slice(0,6).map((make) =>
 										
-										<div>
+										
 											<div class="form-group input-group ">
 												<input type="checkbox" id={make.car_name} value={make.car_name} onClick={concatMakeSearch}/>
 												<label for={make.car_name} >{make.car_name}</label>
 											</div>
 										
-										</div>
+										
 										):""	)}
 										{viewMoreMake?
 										<div class="viewblock"><a href="JavaScript:void(0)" onClick={()=>setViewMoreMake(false)}>View Less</a></div>:
@@ -730,13 +730,13 @@ useEffect(() => {
 											
 								
 										(bodyStyle.length>0?bodyStyle.slice(0,6).map((bodyStyle) =>
-										<div>
+										
 											<div class="form-group input-group ">
 												<input type="checkbox" id={bodyStyle.style_name} value={bodyStyle.style_name} onClick={concatBodyTypeSearch}/>
 												<label for={bodyStyle.style_name} >{bodyStyle.style_name}</label>
 											</div>
 											
-										</div>
+										
 										):""	)}
 											{viewMoreBodyStyle?
 											<div class="viewblock"><a href="JavaScript:void(0)" onClick={()=>setViewMoreBodyStyle(false)}>View Less</a></div>:
@@ -764,12 +764,12 @@ useEffect(() => {
 											
 								
 										(stateNameList.length>0?stateNameList.slice(0,6).map((stateName) =>
-										<div>
+									
 											<div class="form-group input-group ">
 												<input type="checkbox" id={stateName.state_name} value={stateName.state_name} onClick={concatStateSearch}/>
 												<label for={stateName.state_name}>{stateName.state_name}</label>
 											</div>
-										</div>
+										
 										):""	)}
 
 									{viewMoreState?

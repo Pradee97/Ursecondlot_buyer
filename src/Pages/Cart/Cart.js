@@ -15,8 +15,10 @@ const Cart = () => {
 
     const [highBid,setHighBid] = useState();
     const [feeDetails, setFeeDetails] = useState("");
-    const [total, setTotal] = useState(0);
-    var mytotal = [];
+    const [mySelectedCarId, setMySelectedCarId] = useState([]);
+    const [mySelectedCarDetails, setMySelectedCarDetails] = useState([]);
+    const [paymentMode, setPaymentMode] = useState("")
+    console.log(userDetails==="userDetails======",userDetails)
     let paySeparately={};
     const togglePopup = () => {
         setIsOpen(!isOpen);
@@ -56,20 +58,33 @@ const Cart = () => {
         fetchBuyerFees();
     }, []);
 
+const billofsales =(request) => {
+    // const request = mySelectedCarDetails
+    console.log("req===",request);
+    // return;
+    const state = API.post('billofsales/add', request);
+    state.then(res => {
+        console.log("res", res)
+        setFeeDetails(res.data.data);
+      
+    })
+        .catch(err => { console.log(err); });
+}
+    
     const getFeeDetails = (maxPrice) =>{
-       
-        return feeDetails.length > 0 ? feeDetails
+       console.log("feeDetails===",feeDetails)
+        return feeDetails && feeDetails.length > 0 ? feeDetails
             .filter((data)=> 
            
             {
-                const range = data.fee_price.replaceAll('$',"").split("-")
+                const range = data?.fee_price?.replaceAll('$',"").split("-")
                
-                if(range[1]!=="up"){
+                if(range && range[1]!=="up"){
                    
                     return Number(range[0]) <= Number(maxPrice) && Number(maxPrice)  <= Number(range[1]) 
                 }
                 else{
-                    return Number(range[0]) <= Number(maxPrice) 
+                    return range ? Number(range[0]) <= Number(maxPrice) : 0
                 }
 
                 } 
@@ -77,8 +92,70 @@ const Cart = () => {
             : 0
     }
 
-    return (
+    const selectedCarIdList = (data) => {
+        let newdata=mySelectedCarId || []
+        // newdata.includes(data) ? newdata = newdata.filter(item => item !== data) :newdata.push(data)
+        // setMySelectedCarId(newdata)
+        if(newdata.includes(data)){
+            newdata = newdata.filter(item => item !== data)
+            setMySelectedCarId(newdata)
+        }
+        else{
+            // newdata.push(data) 
+            newdata=[...newdata,data]
+            setMySelectedCarId(newdata)
+        }
+        // console.log("newdata====",newdata)
+        // console.log("mySelectedCarId====",mySelectedCarId)
+    }
 
+    const mySelectedCarTotal = () =>{
+        console.log("mySelectedCarTotal=====")
+        // console.log("console.log(cartDetail?.length>0)====",cartDetail?.length)
+        if(mySelectedCarId.length>0) {
+            console.log("mySelectedCarId~~~~~",mySelectedCarId)
+            if(cartDetail?.length>0 && cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id)) ).length>0){
+                // console.log("mySelectedCarId.length====",cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id)) ).length)
+                return cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id))).reduce((acc, curr) => acc+((Number(curr.max_price) || 0) +  Number(curr.transportation === 'yes' ? curr.transportation_charge : 0) + Number(getFeeDetails(curr.max_price))),0)
+            }
+            else {
+                return 0
+            }
+        }
+        else {
+        return cartDetail?.length>0 && cartDetail
+        .reduce((acc, curr) => acc+((Number(curr.max_price) || 0) +  Number(curr.transportation === 'yes' ? curr.transportation_charge : 0) + Number(getFeeDetails(curr.max_price))),0)
+        }
+    }
+
+    const reviewAndCheckout = () => {
+        togglePopup()
+        console.log("reviewAndCheckout=====")
+        if(mySelectedCarId.length>0) {
+            console.log("mySelectedCarId~~~~~",mySelectedCarId)
+            if(cartDetail?.length>0 && cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id)) ).length>0){
+                // console.log("mySelectedCarId.length====",cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id)) ).length)
+                setMySelectedCarDetails(cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id))).map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id}}))
+                billofsales(cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id))).map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id}}))
+            }
+            else {
+                setMySelectedCarDetails([])
+                billofsales([])
+            }
+        }
+        else {
+            setMySelectedCarDetails(cartDetail?.length>0 ? cartDetail.map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id}}):[])
+            billofsales(cartDetail?.length>0 ? cartDetail.map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id}}):[])
+        // return cartDetail?.length>0 && cartDetail
+        // .reduce((acc, curr) => acc+((Number(curr.max_price) || 0) +  Number(curr.transportation === 'yes' ? curr.transportation_charge : 0) + Number(getFeeDetails(curr.max_price))),0)
+        }
+    }
+    const selectPayment=(data)=> {
+        console.log("selectPayment----",data)
+        setPaymentMode(data)
+    }
+
+    return (
         <main id="main" class="inner-page">
         <div id="checkoutpage" class="checkoutpage">
           <div class="container">
@@ -97,17 +174,14 @@ const Cart = () => {
                 </div>
                 {cartDetail?.length>0 && cartDetail
                     .map((cartDetail,index) =>{
-                        // mytotal.push((Number(cartDetail.max_price) || 0) +  Number(cartDetail.transportation === 'yes' ? cartDetail.transportation_charge : 0) + Number(getFeeDetails(cartDetail.max_price)))
-                        // mytotal=mytotal+((Number(cartDetail.max_price) || 0) +  Number(cartDetail.transportation === 'yes' ? cartDetail.transportation_charge : 0) + Number(getFeeDetails(cartDetail.max_price)))
-                        // mytotal[index]=(Number(cartDetail.max_price) || 0) +  Number(cartDetail.transportation === 'yes' ? cartDetail.transportation_charge : 0) + Number(getFeeDetails(cartDetail.max_price))
-                        // setTotal((Number(cartDetail.max_price) || 0) +  Number(cartDetail.transportation === 'yes' ? cartDetail.transportation_charge : 0) + Number(getFeeDetails(cartDetail.max_price)))
-                        // setTotal(mytotal)
                         paySeparately={[index] : 'no'}
                         return( <div class="vehiclesheadspaydetails mt-4">
                             <div class="row">					
                                 <div class="vehiclepaycheckbox col-lg-12">
                                     <div class="form-group input-group">
-                                        <input className={"paySeparately"+index}  value={paySeparately[index]=='no'? "yes":"no"} type="checkbox" id={"vehiclepayseparat"+index} checked = {paySeparately[index] =='yes'?true:false} onChange={(e)=>{paySeparately[index]='yes'}}/><label for={"vehiclepayseparat"+index}>You Want To Pay Separately{paySeparately[index]}</label>
+                                        {/* <input className={"paySeparately"+index}  value={paySeparately[index]=='no'? "yes":"no"} type="checkbox" id={"vehiclepayseparat"+index} checked = {paySeparately[index] =='yes'?true:false} onChange={(e)=>{paySeparately[index]='yes'}}/><label for={"vehiclepayseparat"+index}>You Want To Pay Separately{paySeparately[index]}</label> */}
+                                        <input className={"paySeparately"+index}  value={index} type="checkbox" id={"vehiclepayseparat"+index} onChange={(e)=>{selectedCarIdList(cartDetail.car_id)}}/><label for={"vehiclepayseparat"+index}>You Want To Pay Separately</label>
+
                                     </div>
                                 </div>					
                             
@@ -118,7 +192,7 @@ const Cart = () => {
                                     <h3>{cartDetail.make} ({cartDetail.model}) <span>$ {cartDetail.price}</span></h3>
                                     <h4>Buy Fee <span>$ {getFeeDetails(cartDetail.price)}</span></h4>
                                     <div class="form-group input-group ">
-                                        <input type="checkbox" id="paytransportation" value={cartDetail.transportation == 'yes' ? 'no' : 'yes'}   checked={cartDetail.transportation== 'yes' ? true : false}/><label for="paytransportation">Transportation</label><span>$ {cartDetail.transportation === 'yes' ? cartDetail.transportation_charge : 0}</span>
+                                        <input type="checkbox" id="" value={cartDetail.transportation == 'yes' ? 'no' : 'yes'}   checked={cartDetail.transportation== 'yes' ? true : false}/><label for="paytransportation">Transportation</label><span>$ {cartDetail.transportation === 'yes' ? cartDetail.transportation_charge : 0}</span>
                                     </div>
                                     <div class="vehiclerighttotal">
                                         <h3>Total amount <span>$ {(Number(cartDetail.price) || 0) +  Number(cartDetail.transportation === 'yes' ? cartDetail.transportation_charge : 0) + Number(getFeeDetails(cartDetail.price))}</span></h3>
@@ -166,16 +240,29 @@ const Cart = () => {
                                 <option value="Select">Floor</option>
                                 <option value="Select">Credit Card</option>
                             </select>
-                        </div>
+                        </div> 
+                        <div className="form-group selectTbox">
+            <div className="tbox">                
+                <div className="selcetclass"> 
+                    <select id="vehicleselect"  class="form-control custom-select browser-default" onChange={(e)=>selectPayment(e.target.value)}>
+                        <option value={null} style={{"display":"none"}}></option>
+                        <option value="ACH">ACH</option>
+                        <option value="Floor">Floor</option>
+                        <option value="Credit Card">Credit Card</option>
+                    </select>
+                    <label  htmlFor="state_id" className={"input-has-value"}>Select Payment Method</label>
+                    </div>
+            </div>
+        </div>
                         <div class="vehicletotalbtns"> 
-                            <a class="vehicletotal-btns" href="JavaScript:void(0)" onClick={togglePopup}>Review & Checkout</a>
+                            <a class="vehicletotal-btns" href="JavaScript:void(0)" disabled={!paymentMode} onClick={()=>{paymentMode && reviewAndCheckout()}}>Review & Checkout</a>
                         </div>
                         
                         
                     </div>
                 </div>
             </div>
-    </div>
+        </div>
           </div>
           {isOpen && <Popup
             isClose={false}
@@ -187,15 +274,6 @@ const Cart = () => {
         </div>
 
 
-
-        
-        
-
-
-    
-       
-    
-     
         <section id="playstoreBlock" class="playstoreBlock">
           <div class="container">
     
