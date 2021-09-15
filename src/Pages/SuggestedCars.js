@@ -177,7 +177,7 @@ const SuggestedCars = () => {
 		let intervalId;
 		intervalId = setInterval(() => {
 			getrecentCarList();
-		}, 60000)
+		}, 30000)
 		return () => clearInterval(intervalId);
 			
 		},[]);
@@ -961,7 +961,7 @@ useEffect(() => {
                                             <h4>{item.deal_name}</h4>
                                         </div>:""}
                                         <div className="cars-content">
-                                            <h3><a href="JavaScript:void(0)" >{item.make} ({item.model} model)</a></h3>
+                                            <h3><a href="JavaScript:void(0)" >{item.make} ({item.model}- {item.year} model)</a></h3>
                                             <div className="d-flex align-items-center mb-3">
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>  
