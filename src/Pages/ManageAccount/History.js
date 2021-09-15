@@ -255,10 +255,10 @@ useEffect(() => {
                       <p class="billsalesno">Bill Of sale #{historyDetail.bill_of_sales_id}</p>
                     </div>
                       <div className="historyImg">
-                        <img src={historyDetail.image} class="carImg" alt="..."/>
+                        <img src={historyDetail.logo} class="carImg" alt="..."/>
                         </div>
                         <div class="cars-tag">
-                        <h4>Best deal</h4>
+                        <h4>{historyDetail.deal_name}</h4>
                         </div>
                         <div class="cars-content">		
                         <h3><a href="#">{historyDetail.make} ({historyDetail.model} - {historyDetail.year}- {historyDetail.year} model)</a></h3>

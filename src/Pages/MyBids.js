@@ -16,6 +16,7 @@ import Popup from '../Component/Popup/Popup';
 import Makeurbid from './Makeurbid';
 import BuyItNow from '../Pages/BuyItNow/BuyItNow';
 import {  useHistory } from "react-router-dom";
+import Countdown from "react-countdown";
 
 const MyBids = () => {
 
@@ -67,7 +68,10 @@ const MyBids = () => {
         console.log("========>",request)
         const state = API.post('cancelbid/update', request);
         state.then(res => {
-            history.push("/mybids")   
+            
+            if(res.data.data.success){
+                window.location.reload(); 
+            }
         })
     }
     const setMakeBitValue = (high_bid, min_price, save_purchase, car_id, time, counterbuyerid, max_price, buy_it_now, comments, transportation, display, proxy_bid, transportation_charge, save_policy) => {
@@ -184,7 +188,11 @@ const MyBids = () => {
                                     <div class="col-lg-2 mybidsbiddetails">
                                         <div class="mybidsbid">
                                             <h4>${bidsObj.high_bid}</h4>
-                                            <p>Car seller</p>
+                                            {/* <p>Car seller</p> */}
+                                            {bidsObj.buyer_high_bid==bidsObj.high_bid?
+                                                <p>by <span>Me</span></p>:
+                                                <p>by <span>{bidsObj.high_bid_buyer_name}</span></p>
+                                                }
                                         </div>
                                     </div>
                                     <div class="col-lg-2 mybidsbuynowdetails">
@@ -200,6 +208,12 @@ const MyBids = () => {
                                             <a class="control-btns-cancel" onClick={()=>setBuyItNowValue(bidsObj.buy_it_now,bidsObj.car_id)} >Accept Bid</a>:""}
                                             <a class="control-btns-cancel" onClick={() =>cancelBid(bidsObj.car_id)}>Cancel Bid</a>
                                         </div>
+                                        {/* {(carDetail[0].buyer_high_bid==carDetail[0].high_bid || carDetail[0].buyer_high_bid!==carDetail[0].high_bid) &&
+									 
+                                            <div class= {(carDetail[0].time!==null && carDetail[0].time < 20)?"countownBlock":""} >
+                                                <Countdown date={Date.now() + (carDetail[0].time!==null && carDetail[0].time < 20 ? carDetail[0].time*60*1000 :0)  } renderer={renderer} />
+                                            
+                                            </div>} */}
                                     </div>
                                 </div>)}
                         </div>}
