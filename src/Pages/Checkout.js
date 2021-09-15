@@ -3,14 +3,19 @@ import { useHistory } from "react-router-dom";
 import API from "../Services/BaseService";
 import vehicles from '../assets/img/vehicles.jpg';
 import CommonPopup from '../Component/CommonPopup/CommonPopup';
+import checkImg from '../../src/assets/img/check.svg';
+import errorImg from '../../src/assets/img/erroricon.png';
 
 const History = (props) => {
 
 	const history = useHistory();
 	const [paymentCar,setPaymentCar] = useState(props.paymentCarList);
+	const [feeDetails, setFeeDetails] = useState("");
 
 	const [isOpen, setIsOpen] = useState(false);
-
+	const [alertmessage,setAlertMessage] = useState("");
+    const [alertimg,setAlertImg] = useState("");
+	const [toggleCheckoutPopupOpen,setToggleCheckoutPopupOpen]= useState(true);
 	const [popupTitle, setPopupTitle] = useState ("");
     const [popupMsg, setPopupMsg] = useState ("");
     const [popupType, setPopupType] = useState ("");
@@ -30,37 +35,77 @@ const History = (props) => {
 
 		console.log("hi checke the redirect",res.data.data)
 
-		if (res.data.success) {
-			const { data } = res;
-			togglePopup()
-			setPopupTitle("");
-			setPopupMsg("Thank you for your business with Ur Second Lot");
-			setPopupType("success");
-			setPopupActionType("redirect");
-			setPopupActionValue("ok");
-			setPopupActionPath("/cart")
+		// if (res.data.success) {
+		// 	setToggleCheckoutPopupOpen(false);
+		// 	setAlertImg(checkImg);
+		// 	setAlertMessage("Thank you for your Business with Ur Second lot")
+		// 	// props.getMakeBitValue(carHighBid)
+			
+		// } else {
+		// 	const { data } = res;
+		// 	setToggleCheckoutPopupOpen(false);
+		// 	setAlertImg(errorImg);
+		// 	setAlertMessage( data.error.err )
 
-		} else {
-			togglePopup()
-			setPopupTitle("");
-			// setPopupMsg("Address is not Created, Please try Again");
-			setPopupMsg( res.data.error.err );
-			setPopupType("error");
-			setPopupActionType("close");
-			setPopupActionValue("close");
-		}
+		// }
+
 		// props.toggle()
 	});
 		
 	}
 
+	const redirect = () => {
+
+        history.push("/cart");  
+        // props.toggle()
+	}
+	
+	async function fetchBuyerFees() {
+		let request = {
+			type: "Buyer"
+		};
+		const state = API.post('fees/condition', request);
+		
+		state.then(res => {
+			console.log("check the fee in the checkout page", res)
+			console.log("res", res)
+			setFeeDetails(res.data.data);
+		  
+		})
+			.catch(err => { console.log(err); });
+	  }
+	  useEffect(() => {
+		fetchBuyerFees();
+	  }, []);
+	  
+	  const getFeeDetails = (maxPrice) =>{
+	   
+		return feeDetails.length > 0 ? feeDetails
+			.filter((data)=> 
+		   
+			{
+				const range = data.fee_price.replaceAll('$',"").split("-")
+			   
+				if(range[1]!=="up"){
+				   
+					return Number(range[0]) <= Number(maxPrice) && Number(maxPrice)  <= Number(range[1]) 
+				}
+				else{
+					return Number(range[0]) <= Number(maxPrice) 
+				}
+	  
+				} 
+				)[0]?.fee || 0
+			: 0
+	  }
+
     return (
 
         <main id="main" class="inner-page">
-   
+   {toggleCheckoutPopupOpen?
 
-    <div id="checkoutpage" class="checkoutpage checkoutReview">
-     
+   (<div id="checkoutpage" class="checkoutpage checkoutReview">
+	
 	  <div class="checkoutblock col-lg-12">
 
         <div class="section-title">
@@ -79,7 +124,7 @@ const History = (props) => {
 						</div>
 						<div class="vehicleimgright col-lg-8">
 							<h3>{paymentCar.make} ({paymentCar.model} model)+Lot Fee <span>$ {paymentCar.price}</span></h3>
-							<h4>Lorem Ipsum Is Simply Dummy Text Of The And Typesetting Industry. <span>$100</span></h4>
+							<h4>Buy Fee <span>$ {Number(getFeeDetails(paymentCar.price))}</span></h4>
 							<h4>Transportation <span>${paymentCar.transportation_charge}</span></h4>
 						</div>
 					</div>
@@ -92,7 +137,7 @@ const History = (props) => {
 						</div>
 						<div class="vehicleimgright col-lg-8">
 							<div class="vehiclerighttotal">
-								<h3>Total amount <span>$ {Number(paymentCar.price)+100+Number(paymentCar.transportation_charge)}</span></h3>
+								<h3>Total amount <span>$ {Number(paymentCar.price)+ Number(getFeeDetails(paymentCar.price)) + Number(paymentCar.transportation_charge)}</span></h3>
 							</div>
 						</div>
 					</div>
@@ -103,8 +148,37 @@ const History = (props) => {
 			</div>
         </div>
 	
-      </div>
-    </div>
+	  </div>
+				
+    </div>):
+				(
+					<div className="popup-box">
+						<div id="" className="CommonModels-box">
+						<div className="Commonfullformblock col-lg-9">
+						<div className="CommonContainer">
+						<div className="CommonModalcontent">
+				{/* <img src={checkImg}></img>  */}
+			<div className="Commonfull-icon">
+			<img alt="" className={alertimg === checkImg ?  "successImg"  : "errorImg" } src={alertimg}></img>
+
+				</div>
+			<div className="modalbody">
+			<h2 className="title"> Thank You </h2>
+			<div class="col-md-12">
+				
+					<p className="text-center">{alertmessage}</p>
+					
+				
+				<div class="col-md-12 btns">
+					<button className="cta-btns" onClick={()=>history.push("/cart")} >OK</button>      
+				</div> 
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>)}
 
 	{/* {isOpen &&
 		<CommonPopup 
