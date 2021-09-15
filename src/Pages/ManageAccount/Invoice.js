@@ -219,7 +219,11 @@ const InVoice = (props) => {
              
              <tfoot>
              <tr>
-               <td>Amount due from the buyer</td>
+             {billOfSales !== null?
+                <td>Already paid </td>
+               :<td> Amount due from the buyer</td>}
+               
+               
                <td><span>{Number(vechileprice+lotFee)+Number(getFeeDetails())+Number(transportationCharge)+0+0}</span></td>
              </tr>
              </tfoot>
