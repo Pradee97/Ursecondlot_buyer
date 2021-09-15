@@ -244,7 +244,7 @@ const CarList = () => {
             getrecentCarList();
             getInventoryCarList();
             getFavCarList();
-        }, 60000)
+        }, 30000)
         return () => clearInterval(intervalId);
           
         },[]);

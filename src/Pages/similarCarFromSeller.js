@@ -146,7 +146,7 @@ useEffect(() => {
   let intervalId;
 	intervalId = setInterval(() => {
     getMoreSimilarCars();
-	}, 60000)
+	}, 30000)
 	return () => clearInterval(intervalId);
     
    

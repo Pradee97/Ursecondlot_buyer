@@ -283,7 +283,7 @@ const Search = () => {
 		let intervalId;
 		intervalId = setInterval(() => {
 			getSavedSearchEnter();
-		}, 60000)
+		}, 30000)
 		return () => clearInterval(intervalId);
 		
 	},[])

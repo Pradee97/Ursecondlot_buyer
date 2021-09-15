@@ -274,7 +274,7 @@ function CarDetailList(){
 	let intervalId;
 	intervalId = setInterval(() => {
 	CarDetailList();
-	}, 60000)
+	}, 30000)
 	return () => clearInterval(intervalId);
 
 	},[])

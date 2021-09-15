@@ -204,7 +204,7 @@ const InventoryCars = () => {
 		let intervalId;
 		intervalId = setInterval(() => {
 			getInventoryCarList();
-		}, 60000)
+		}, 30000)
 		return () => clearInterval(intervalId);
         
        

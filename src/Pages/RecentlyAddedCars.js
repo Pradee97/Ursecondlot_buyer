@@ -183,7 +183,7 @@ const [apiName,setApiName]=useState("")
 		intervalId = setInterval(() => {
 			getrecentCarList();
 			dispatch(FilterSearchAction.apiname(apiName))
-		}, 60000)
+		}, 30000)
 		return () => clearInterval(intervalId);
 			
 			

@@ -245,7 +245,7 @@ const getFeeDetails = (maxPrice) =>{
                         <h3><a href="#">{historyDetail.make} ({historyDetail.model} model)</a></h3>
                         <div class="d-flex align-items-center mb-3">
                           <p class="details"><img src={speedometer}  alt=""/><span>{historyDetail.miles} m</span></p>
-                          {/* &nbsp;&nbsp;&nbsp;&nbsp; */}
+                          &nbsp;&nbsp;&nbsp;&nbsp;
                           <p class="details"><img src={gasolinePump} alt=""/><span>{historyDetail.fuel_type}</span></p>
                         </div>
                         
@@ -256,7 +256,9 @@ const getFeeDetails = (maxPrice) =>{
                           <a class="cta-btns invoice" href="JavaScript:void(0)" onClick={()=>redirecttoInvoice(historyDetail.car_id,historyDetail.seller_dealer_id,historyDetail.price)}>Invoice</a>
                         </div>
                         <div class="cars-prices gatepass pt-1">
-                          <a class="cta-btns-primary" href="#">Gate Pass Code {historyDetail.gatepass_id===""?"":historyDetail.gatepass_id}</a>
+                        {historyDetail.gatepass_id===""?
+                          <a class="cta-btns-primary" href="#">Gate Pass Code </a>:
+                          <a class="cta-btns-primary" href="#">Gate Pass Code : {historyDetail.gatepass_id} </a>}
                         </div>
                         </div>
                       </div>
@@ -264,17 +266,17 @@ const getFeeDetails = (maxPrice) =>{
                     
                   </div>
                   <div class="col-lg-5 sliderBlock">
-                    <p>Purchased from <span>Used Car Dealer</span></p>
+                    <p>Purchased from <span>{historyDetail.dealer_type}</span></p>
                     <h3>Vehicle Title</h3>
                     
                     <form id="msform">
                     
                       <ul id="progressbar">
-                      <li className={historyDetail.title_status ==1 ? "active" : ""}>{historyDetail.title_date1?.substring(0,10)}</li>
-                      <li className={historyDetail.title_status ==2 ? "active" : ""}>{historyDetail.title_date2?.substring(0,10)}</li>
+                      <li className={historyDetail.title_status ==1 ? "active" : ""}><p>{historyDetail.title_date1?.substring(0,10)}</p> <p>Title with Seller</p></li>
+                      <li className={historyDetail.title_status ==2 ? "active" : ""}><p>{historyDetail.title_date2?.substring(0,10)}</p> <p>Title with UrSecond Lot</p></li>
                       {historyDetail.title_status !==3?
-                      <li className={historyDetail.title_status ==3 ? "active" : ""}>{historyDetail.estimate_title_date?.substring(0,10)}</li>:
-                      <li className={historyDetail.title_status ==3 ? "active" : ""}>{historyDetail.title_date3?.substring(0,10)}</li>}
+                      <li className={historyDetail.title_status ==3 ? "active" : ""}><p>{historyDetail.estimate_title_date?.substring(0,10)}</p> <p>Title with Buyer</p></li>:
+                      <li className={historyDetail.title_status ==3 ? "active" : ""}><p>{historyDetail.title_date3?.substring(0,10)}</p> <p>Title with Buyer</p></li>}
                       </ul>
                       
                       
@@ -285,11 +287,11 @@ const getFeeDetails = (maxPrice) =>{
                     <form id="msform">
                     
                       <ul id="progressbar">
-                      <li className={historyDetail.transportation_status ==1 ? "active" : ""}>{historyDetail.transport_date1?.substring(0,10)}</li>
-                      <li className={historyDetail.transportation_status ==2 ? "active" : ""}>{historyDetail.transpor_date2?.substring(0,10)}</li>
+                      <li className={historyDetail.transportation_status ==1 ? "active" : ""}><p>{historyDetail.transport_date1?.substring(0,10)}</p> <p>Car with seller</p></li>
+                      <li className={historyDetail.transportation_status ==2 ? "active" : ""}><p>{historyDetail.transpor_date2?.substring(0,10)}</p> <p>In Transit</p></li>
                       {historyDetail.transportation_status !==3?
-                      <li className={historyDetail.transportation_status ==3 ? "active" : ""}><p>{historyDetail.estimate_transpor_date?.substring(0,10)}</p> <p>{historyDetail.transportation_status_name}</p></li>:
-                      <li className={historyDetail.transportation_status ==3 ? "active" : ""}>{historyDetail.transpor_date3?.substring(0,10)},{historyDetail.transportation_status_name}</li>}
+                      <li className={historyDetail.transportation_status ==3 ? "active" : ""}><p>{historyDetail.estimate_transpor_date?.substring(0,10)}</p> <p>Delivered</p></li>:
+                      <li className={historyDetail.transportation_status ==3 ? "active" : ""}><p>{historyDetail.transpor_date3?.substring(0,10)}</p> <p>Delivered</p></li>}
                       </ul>
                       
                       
@@ -311,220 +313,22 @@ const getFeeDetails = (maxPrice) =>{
                     
                     <div class="vehicleimgright col-lg-12">
                       <p class="editbtn m-0"><a class="" href="#">Edit</a></p>
-                      <h3>Vehicle Price + Lot Fee <span>$ {historyDetail.price}</span></h3>
-                      <h4>Inspection <span>$100</span></h4>
-                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+                      <h3>Vehicle Price + Lot Fee <span>$ {Number(historyDetail.price) + Number(getFeeDetails(historyDetail.price))}</span></h3>
+                      <h4>Inspection <span>$ 0</span></h4>
+                      {/* <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p> */}
                       
-                      <h4>Transportation <span>$100</span></h4>
-                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+                      <h4>Transportation <span>$ {historyDetail.transportation_charge || 0}</span></h4>
+                      {/* <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p> */}
                       
                       <div class="vehiclerighttotal">
-                        <h3>Total amount <span>$ {(Number(historyDetail.price) || 0) +  100 + 100}</span></h3>
+                        <h3>Total amount <span>$ {((Number(historyDetail.price) + Number(getFeeDetails(historyDetail.price))) || 0) +  100 + (Number(historyDetail.transportation_charge || 0))}</span></h3>
                       </div>
                     </div>
   
                   </div>
                 </div>
               </div>)
-                    :""}
-              
-              
-              {/* <div class="lotfee-inner col-lg-12">
-                <div class="row">							
-                  <div class="col-lg-4">
-                    
-                    <div class="car-item">
-                    <div class="pickupdetailcontent">
-                      <p class="billsalesno">Bill Of sale# 45876</p>
-                    </div>
-                    <div className="historyImg">
-                        <img src={cars01} class="img-fluid" alt="..."/>
-                        </div>
-                        <div class="cars-tag">
-                        <h4>Best deal</h4>
-                        </div>
-                        <div class="cars-content">		
-                        <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                        <div class="d-flex align-items-center mb-3">
-                          <p class="details"><img src={speedometer}  alt=""/><span>31,1241 m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-                          <p class="details"><img src={gasolinePump} alt=""/><span>Diesel</span></p>
-                        </div>
-                        
-                        
-                        
-                        <div class="cars-prices invoice_link">
-                          <a class="cta-btns" href="#">Inspection</a>
-                          <a class="cta-btns invoice" href="#">Invoice</a>
-                        </div>
-                        <div class="cars-prices gatepass">
-                          <a class="cta-btns-primary" href="#">Gate Pass Code B1256</a>
-                        </div>
-                        </div>
-                      </div>
-                    
-                    
-                  </div>
-                  <div class="col-lg-4 sliderBlock">
-                    <p>Purchased from <span>Used Car Dealer</span></p>
-                    <h3>Vehicle Title</h3>
-                    
-                    <form id="msform">
-                   
-                      <ul id="progressbar">
-                      <li class="active">03/21/2021</li>
-                      <li></li>
-                      <li>ETA-03/29/2021</li>
-                      </ul>
-                      
-                      
-                    </form>
-                    
-                    <h3>Transportation</h3>
-                    
-                    <form id="msform">
-                    
-                      <ul id="progressbar">
-                      <li class="active">03/21/2021</li>
-                      <li></li>
-                      <li>ETA-03/29/2021</li>
-                      </ul>
-                      
-                      
-                    </form>
-                    
-                    <h3>Title status - <span> Awaiting Title</span></h3>
-                    
-                    <div class="cars-prices">
-                      <a class="cta-btns" href="#">Price - $1900</a>
-                    </div>
-                    
-                    
-                  </div>		
-  
-  
-                  
-                  <div class="col-lg-4 priceBlock">
-                    <p class="date">Purchased on 03/28/2021</p>
-                    
-                    <div class="vehicleimgright col-lg-12">
-                      <p class="editbtn"><a class="" href="#">Edit</a></p>
-                      <h3>Vehicle Price + Lot Fee <span>$1900</span></h3>
-                      <h4>Inspection <span>$100</span></h4>
-                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
-                      
-                      <h4>Transportation <span>$100</span></h4>
-                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
-                      
-                      <div class="vehiclerighttotal">
-                        <h3>Total amount <span>$2,300</span></h3>
-                      </div>
-                    </div>
-  
-                  </div>
-                </div>
-              </div> */}
-              
-              
-              {/* <div class="lotfee-inner col-lg-12">
-                <div class="row">							
-                  <div class="col-lg-4">
-                    
-                    <div class="car-item">
-                    <div class="pickupdetailcontent">
-                      <p class="billsalesno">Bill Of sale# 45876</p>
-                    </div>
-                    <div className="historyImg">
-                        <img src={cars01} class="img-fluid" alt="..."/>
-                        </div>
-                        <div class="cars-tag">
-                        <h4>Best deal</h4>
-                        </div>
-                        <div class="cars-content">		
-                        <h3><a href="#">Honda amaze (2014 model)</a></h3>
-                        <div class="d-flex align-items-center mb-3">
-                          <p class="details"><img src={speedometer}  alt=""/><span>31,1241 m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
-                          <p class="details"><img src={gasolinePump} alt=""/><span>Diesel</span></p>
-                        </div>
-                        
-                        
-                        
-                        <div class="cars-prices invoice_link">
-                          <a class="cta-btns" href="#">Inspection</a>
-                          <a class="cta-btns invoice" href="#">Invoice</a>
-                        </div>
-                        <div class="cars-prices gatepass">
-                          <a class="cta-btns-primary" href="#">Gate Pass Code B1256</a>
-                        </div>
-                        </div>
-                      </div>
-                    
-                    
-                  </div>
-                  <div class="col-lg-4 sliderBlock">
-                    <p>Purchased from <span>Used Car Dealer</span></p>
-                    <h3>Vehicle Title</h3>
-                    
-                    <form id="msform">
-                    
-                      <ul id="progressbar">
-                      <li class="active">03/21/2021</li>
-                      <li></li>
-                      <li>ETA-03/29/2021</li>
-                      </ul>
-                      
-                      
-                    </form>
-                    
-                    <h3>Transportation</h3>
-                    
-                    <form id="msform">
-                   
-                      <ul id="progressbar">
-                      <li class="active">03/21/2021</li>
-                      <li></li>
-                      <li>ETA-03/29/2021</li>
-                      </ul>
-                      
-                      
-                    </form>
-                    
-                    <h3>Title status - <span> Awaiting Title</span></h3>
-                    
-                    <div class="cars-prices">
-                      <a class="cta-btns" href="#">Price - $1900</a>
-                    </div>
-                    
-                    
-                  </div>		
-  
-  
-                  
-                  <div class="col-lg-4 priceBlock">
-                    <p class="date">Purchased on 03/28/2021</p>
-                    
-                    <div class="vehicleimgright col-lg-12">
-                      <p class="editbtn"><a class="" href="#">Edit</a></p>
-                      <h3>Vehicle Price + Lot Fee <span>$1900</span></h3>
-                      <h4>Inspection <span>$100</span></h4>
-                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
-                      
-                      <h4>Transportation <span>$100</span></h4>
-                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
-                      
-                      <div class="vehiclerighttotal">
-                        <h3>Total amount <span>$2,300</span></h3>
-                      </div>
-                    </div>
-  
-                  </div>
-                </div>
-              </div> */}
-              
-              
-            
-              
-            
-
+                    :""}          
           
           <div><a class="load-more-btn" href="#">Load More</a></div>
         </div>

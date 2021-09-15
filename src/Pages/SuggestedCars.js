@@ -177,7 +177,7 @@ const SuggestedCars = () => {
 		let intervalId;
 		intervalId = setInterval(() => {
 			getrecentCarList();
-		}, 60000)
+		}, 30000)
 		return () => clearInterval(intervalId);
 			
 		},[]);
