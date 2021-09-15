@@ -255,7 +255,7 @@ const getFeeDetails = (maxPrice) =>{
                         
                         
                         <div class="cars-prices invoice_link p-0">
-                          <a class="cta-btns" href="JavaScript:void(0)" >Vin no - <span>{historyDetail.vin_no}</span></a>
+                          <div className="vinnoBlock"><p class="vinno" href="JavaScript:void(0)" >Vin no - <span>{historyDetail.vin_no}</span></p></div>
                           <a class="cta-btns" href="JavaScript:void(0)" onClick={()=>redirecttoInspection(historyDetail.car_id)}>Inspection</a>
                           <a class="cta-btns invoice" href="JavaScript:void(0)" onClick={()=>redirecttoInvoice(historyDetail.car_id,historyDetail.seller_dealer_id,historyDetail.price,historyDetail.lot_fee,historyDetail.bill_of_sales_id,historyDetail.gatepass_id,historyDetail.sold_date,historyDetail.make,historyDetail.model,historyDetail.year,historyDetail.transportation_charge)}>Invoice</a>
                         </div>
@@ -271,7 +271,7 @@ const getFeeDetails = (maxPrice) =>{
                   </div>
                   <div class="col-lg-5 sliderBlock">
                     <p>Inventory Number - <span>{historyDetail.inventory_no}</span></p>
-                    <p>Purchased from <span>{historyDetail.dealer_type}</span></p>
+                    <p className="pdate">Purchased from <span>{historyDetail.dealer_type}</span></p>
                     <h3>Vehicle Title</h3>
                     
                     <form id="msform">

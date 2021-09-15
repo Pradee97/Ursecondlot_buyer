@@ -184,7 +184,7 @@ const billofsales =(request) => {
                         return( <div class="vehiclesheadspaydetails mt-4">
                             <div class="row">					
                                 <div class="vehiclepaycheckbox col-lg-12">
-                                    <div class="form-group input-group">
+                                    <div class="form-group input-group pb-0 mb-0">
                                         {/* <input className={"paySeparately"+index}  value={paySeparately[index]=='no'? "yes":"no"} type="checkbox" id={"vehiclepayseparat"+index} checked = {paySeparately[index] =='yes'?true:false} onChange={(e)=>{paySeparately[index]='yes'}}/><label for={"vehiclepayseparat"+index}>You Want To Pay Separately{paySeparately[index]}</label> */}
                                         <input className={"paySeparately"+index}  value={index} type="checkbox" id={"vehiclepayseparat"+index} onChange={(e)=>{selectedCarIdList(cartDetail.car_id)}}/><label for={"vehiclepayseparat"+index}>You Want To Pay Separately</label>
 
@@ -192,7 +192,7 @@ const billofsales =(request) => {
                                 </div>					
                             
                                 <div class="vehicleimgleft col-lg-4">
-                                    <img src={cartDetail.image}/>
+                                    <img src={cartDetail.image} className="carImg"/>
                                 </div>
                                 <div class="vehicleimgright col-lg-8">
                                     <h3>{cartDetail.make} ({cartDetail.model}) <span>$ {cartDetail.price}</span></h3>
