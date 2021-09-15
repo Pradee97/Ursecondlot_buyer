@@ -57,11 +57,10 @@ const MyBids = () => {
             car_id:car_id
         };
         console.log("========>",request)
-        // const state = API.post('cancelbid/condition', request);
-        // state.then(res => {
-        //     history.push("/mybids")
-        //     // setLoading(false);
-        // })
+        const state = API.post('cancelbid/condition', request);
+        state.then(res => {
+            history.push("/mybids")   
+        })
     }
     const setMakeBitValue = (high_bid, min_price, save_purchase, car_id, time, counterbuyerid, max_price, buy_it_now, comments, transportation, display, proxy_bid, transportation_charge, save_policy) => {
         // console.log("check the toggle make bid value")
