@@ -68,7 +68,6 @@ const [buyItNowData, setBuyItNowData] = useState({})
 
 const Completionist = () => <span>{""}</span>;
 
-
 const renderer = ({minutes, seconds, completed }) => {
   if (completed) {
     

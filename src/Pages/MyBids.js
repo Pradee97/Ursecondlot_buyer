@@ -29,6 +29,23 @@ const MyBids = () => {
     const [highBid,setHighBid] = useState(null);
     const [buyItNowData, setBuyItNowData] = useState({});
 
+    const Completionist = () => <span>{""}</span>;
+
+
+    const renderer = ({minutes, seconds, completed }) => {
+    if (completed) {
+        
+        return <Completionist />;
+    } else {
+    
+        return (
+        <span>
+            {minutes}:{seconds}
+        </span>
+        );
+    }
+    };
+
     async function fetchMyBids() {
         let request = {
             buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
@@ -202,18 +219,19 @@ const MyBids = () => {
                                         </div>
                                     </div>
                                     <div class="col-lg-2 mybidscontroldetails">
+                                    {(bidsObj.isbuyercounterbid=="me" && bidsObj.iscounterbid!==null && (bidsObj.time !==0 || bidsObj.time!==null)) || ((bidsObj.iscounterbid==null || bidsObj.iscounterbid=="no" ) && (bidsObj.isbuyercounterbid==null || bidsObj.isbuyercounterbid=="not")&&(bidsObj.time ==0 || bidsObj.time==null))?
                                         <div class="mybidscontrol">
                                             <a class="cta-btns-primary redBtn" onClick={() => setMakeBitValue(bidsObj.high_bid, bidsObj.min_price, bidsObj.save_purchase, bidsObj.car_id, bidsObj.time, bidsObj.counter_buyer_dealer_id, bidsObj.max_price, bidsObj.buy_it_now, bidsObj.comments, bidsObj.transportation, bidsObj.display, bidsObj.proxy_bid, bidsObj.transportation_charge, bidsObj.save_policy)}>Raise Bid</a>
                                             {bidsObj.buy_it_now !==""?
                                             <a class="control-btns-cancel" onClick={()=>setBuyItNowValue(bidsObj.buy_it_now,bidsObj.car_id)} >Accept Bid</a>:""}
                                             <a class="control-btns-cancel" onClick={() =>cancelBid(bidsObj.car_id)}>Cancel Bid</a>
-                                        </div>
-                                        {/* {(carDetail[0].buyer_high_bid==carDetail[0].high_bid || carDetail[0].buyer_high_bid!==carDetail[0].high_bid) &&
+                                        </div>:<a class="control-btns-cancel" >Locked up for Higher Bid</a>}
+                                        {(bidsObj.buyer_high_bid==bidsObj.high_bid || bidsObj.buyer_high_bid!==bidsObj.high_bid) &&
 									 
-                                            <div class= {(carDetail[0].time!==null && carDetail[0].time < 20)?"countownBlock":""} >
-                                                <Countdown date={Date.now() + (carDetail[0].time!==null && carDetail[0].time < 20 ? carDetail[0].time*60*1000 :0)  } renderer={renderer} />
+                                            <div class= {(bidsObj.time!==null && bidsObj.time < 20)?"countownBlock":""} >
+                                                <Countdown date={Date.now() + (bidsObj.time!==null && bidsObj.time < 20 ? bidsObj.time*60*1000 :0)  } renderer={renderer} />
                                             
-                                            </div>} */}
+                                            </div>}
                                     </div>
                                 </div>)}
                         </div>}
