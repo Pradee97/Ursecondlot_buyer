@@ -219,7 +219,7 @@ return (
 							<div class="col-lg-4 col-md-4 bordercontent">
 								<div class="pickupdetailcontent">
 									<p>Pickup Point</p>
-									<p class="subhead">{pickUp.address}</p>
+									<p class="subhead">{pickUp.pickup_address}</p>
 								</div>						
 							</div>
 							<div class="col-lg-4 col-md-4 bordercontent">

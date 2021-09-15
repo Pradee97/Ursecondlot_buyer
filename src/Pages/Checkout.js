@@ -38,11 +38,10 @@ const History = (props) => {
 		if (res.data.success) {
 			setToggleCheckoutPopupOpen(false);
 			setAlertImg(checkImg);
-			setAlertMessage("Your payment is completed , Thank you for your business with Ur Second Lot")
+			setAlertMessage("Thank you for your Business with Ur Second lot")
 			// props.getMakeBitValue(carHighBid)
 			
-		} 
-		else {
+		} else {
 			const { data } = res;
 			setToggleCheckoutPopupOpen(false);
 			setAlertImg(errorImg);
@@ -108,8 +107,7 @@ const History = (props) => {
    <div id="checkoutpage" class="checkoutpage checkoutReview">
 	     {toggleCheckoutPopupOpen?
 	
-	 ( 
-	 <div class="checkoutblock col-lg-12">
+	 ( <div class="checkoutblock col-lg-12">
 
         <div class="section-title mt-3 mb-0">
           <h2>Checkout</h2>
@@ -126,9 +124,9 @@ const History = (props) => {
 							<img src={paymentCar.image} className="carImg" />
 						</div>
 						<div class="vehicleimgright col-lg-8">
-							<h3>{paymentCar.make} ({paymentCar.model} model)+Lot Fee <span>$ {paymentCar.price}</span></h3>
+							<h3>{paymentCar.make}  ({paymentCar.model} - {paymentCar.year}  model)+Lot Fee <span>$ {paymentCar.price}</span></h3>
 							<h4>Buy Fee <span>$ {Number(getFeeDetails(paymentCar.price))}</span></h4>
-							<h4>Transportation <span>$ {paymentCar.transportation_charge}</span></h4>
+							<h4>Transportation <span>${paymentCar.transportation_charge}</span></h4>
 
 							<div class="vehiclerighttotal">
 								<h3>Total amount <span>$ {Number(paymentCar.price)+ Number(getFeeDetails(paymentCar.price)) + Number(paymentCar.transportation_charge)}</span></h3>
@@ -138,7 +136,7 @@ const History = (props) => {
 				</div>				
 				
 				</div>):""}
-				<div class="text-center ckreview"><a  class="cta-btn cancel-btn" onClick={props.toggle}>Cancel</a> <button type="submit" class="cta-btn"  onClick = {()=> billofsales()}>Checkout</button> </div>
+				<div class="text-center ckreview"><a  class="cta-btn cancel-btn" href="/cart">Cancel</a> <button type="submit" class="cta-btn"  onClick = {()=> billofsales()}>Checkout</button> </div>
 				
 			</div>
         </div>
@@ -151,7 +149,7 @@ const History = (props) => {
 			  <div className="Commonfullformblock col-lg-9">
 			  <div className="CommonContainer">
 			  <div className="CommonModalcontent">
-	 
+	  {/* <img src={checkImg}></img>  */}
   <div className="Commonfull-icon">
   <img alt="" className={alertimg === checkImg ?  "successImg"  : "errorImg" } src={alertimg}></img>
 
@@ -164,7 +162,7 @@ const History = (props) => {
 		  
 	  
 	  <div class="col-md-12 btns">
-		  <a className="cta-btns" href="/cart" >OK</a>      
+		  <button className="cta-btns" onClick={redirect} >OK</button>      
 	  </div> 
   </div>
   </div>
@@ -172,25 +170,22 @@ const History = (props) => {
   </div>
   </div>
   </div>
-  
   </div>)}
 				
-				{/* {isOpen &&
-		<CommonPopup 
-			handleClose= {togglePopup}
-			popupTitle= {popupTitle}
-			popupMsg= {popupMsg}
-			popupType= {popupType}
-			popupActionType= {popupActionType}
-			popupActionValue= {popupActionValue}
-			popupActionPath={popupActionPath}
-	/>}  */}
-
     </div>
 
-	 
+	// {/* {isOpen &&
+	// 	<CommonPopup 
+	// 		handleClose= {togglePopup}
+	// 		popupTitle= {popupTitle}
+	// 		popupMsg= {popupMsg}
+	// 		popupType= {popupType}
+	// 		popupActionType= {popupActionType}
+	// 		popupActionValue= {popupActionValue}
+	// 		popupActionPath={popupActionPath}
+	// />} */}
 
-        
+        // 
     )
 }
 export default History;
