@@ -17,8 +17,10 @@ const InVoice = (props) => {
     const [accountDetails,setaccountDetails] = useState("");
     const [dealerInfo,setDealerInfo] = useState("");
     const [sellerInfo,setSellerInfo] = useState("");
-    const { sellerDealerID,vechileprice } = props.location.state;
- console.log("hello",sellerDealerID,vechileprice);
+    const [feeDetails, setFeeDetails] = useState("");
+    
+    const { sellerDealerID,vechileprice,lotFee,billOfSales,gatePassId,Date,Make,Model,Year,transportationCharge} = props.location.state;
+ console.log("hello",sellerDealerID,vechileprice,lotFee,billOfSales,gatePassId,Date);
     
      function fetchBuyerDetails() {
         setloading(true);
@@ -57,6 +59,44 @@ const InVoice = (props) => {
         })
           .catch(err => { console.log(err); });
       }
+
+      async function fetchBuyerFees() {
+        let request = {
+            type: "Buyer"
+        };
+        const state = API.post('fees/condition', request);
+        state.then(res => {
+            console.log("res", res)
+            setFeeDetails(res.data.data);
+          
+        })
+            .catch(err => { console.log(err); });
+      }
+      useEffect(() => {
+        fetchBuyerFees();
+      }, []);
+      
+      const getFeeDetails = () =>{
+       
+        return feeDetails.length > 0 ? feeDetails
+            .filter((data)=> 
+           
+            {
+                const range = data.fee_price.replaceAll('$',"").split("-")
+               
+                if(range[1]!=="up"){
+                   
+                    return Number(range[0]) <= Number(vechileprice) && Number(vechileprice)  <= Number(range[1]) 
+                }
+                else{
+                    return Number(range[0]) <= Number(vechileprice) 
+                }
+      
+                } 
+                )[0]?.fee || 0
+            : 0
+      }
+      
     return(
         <div> 
            {/*  {loading ? <loading/> : */}
@@ -88,11 +128,11 @@ const InVoice = (props) => {
        <div class="headtable">
            <table>			 
              <tr>
-               <td><span>Bill of sale#</span>B 45876</td>
-               <td class="alignRight"><span>Date </span>03/03/2021</td>
+               <td><span>Bill of sale # </span>{billOfSales}</td>
+               <td class="alignRight"><span>Date </span>{Date?.substring(0,10)}</td>
              </tr>
              <tr>
-               <td><span>Gate Pass Code </span>B45876</td>
+               <td><span>Gate Pass Code : </span>{gatePassId}</td>
                <td ></td>
              </tr>			  
            </table>
@@ -114,8 +154,8 @@ const InVoice = (props) => {
             
                <tr><td><span>Name</span>{dealerInfo.dealer_name}</td></tr>	
                <tr><td><span>Address </span>{dealerInfo.address}</td></tr>	
-               <tr><td><span>Contact </span>746-561-6784</td></tr>	
-               <tr><td><span>Email id </span>Someone@example.com</td></tr>		  		  
+               <tr><td><span>Contact </span>{sellerInfo.phone_no }</td></tr>	
+               <tr><td><span>Email id </span>{sellerInfo.email}</td></tr>		  		  
             
               
                        
@@ -135,8 +175,8 @@ const InVoice = (props) => {
             <>
                <tr><td><span>Name </span>{sellerInfo.dealer_name}</td></tr>
                <tr><td><span>pickup adresss </span>{sellerInfo.address}</td></tr>
-               <tr><td><span>Contact </span>746-561-6784</td></tr>
-               <tr><td><span>Email id </span>Someone@example.com</td></tr>
+               <tr><td><span>Contact </span>{sellerInfo.phone_no}</td></tr>
+               <tr><td><span>Email id </span>{sellerInfo.email}</td></tr>
                   </>    
                   ) :""}      
            </table>
@@ -155,32 +195,32 @@ const InVoice = (props) => {
              </thead>
              <tr>
                <td>Vehicle Price +Lot Fee 
-               <p>Honda Amaze (2014 Model)</p>
+               <p>{Make}({Model}-{Year} model)</p>
                </td>
-               <td><span>{vechileprice}</span></td>
+               <td><span>$ {(vechileprice)+lotFee}</span></td>
              </tr>
               <tr>
 
                <td>Buy Fee</td>
-               <td><span>$150</span></td>
+               <td><span>$ {getFeeDetails()}</span></td>
              </tr>
              <tr>
                <td>Transportation</td>
-               <td><span>$200</span></td>
+               <td><span>$ {transportationCharge}</span></td>
              </tr>
              <tr>
                <td>Other Charges</td>
-               <td><span>$200</span></td>
+               <td><span>$ 0</span></td>
              </tr>
              <tr>
                <td>Miscellaneous Charges</td>
-               <td><span>$250</span></td>
+               <td><span>$ 0</span></td>
              </tr>
              
              <tfoot>
              <tr>
                <td>Amount due from the buyer</td>
-               <td><span>{vechileprice+150+200+200+250}</span></td>
+               <td><span>{Number(vechileprice+lotFee)+Number(getFeeDetails())+Number(transportationCharge)+0+0}</span></td>
              </tr>
              </tfoot>
             

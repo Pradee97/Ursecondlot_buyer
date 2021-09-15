@@ -261,7 +261,7 @@ const billofsales =(request) => {
             </div>
         </div>
                         <div class="vehicletotalbtns"> 
-                            <a class="vehicletotal-btns" href="JavaScript:void(0)" disabled={!paymentMode} onClick={()=>reviewAndCheckout() && paymentMode }>Review & Checkout</a>
+                            <a class="vehicletotal-btns" href="JavaScript:void(0)" disabled={!paymentMode} onClick={()=> paymentMode && reviewAndCheckout()  }>Review & Checkout</a>
                         </div>
                         
                         
