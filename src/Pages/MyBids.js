@@ -148,7 +148,7 @@ const MyBids = () => {
    
 
     return (
-        <main id="main" class="inner-page">
+        <main id="main" class="inner-page myBidsPage">
             <div id="mybids" class="mybids">
                 <div class="container">
                     {loading ? <Loading /> :
@@ -223,7 +223,7 @@ const MyBids = () => {
                                         <div class="mybidscontrol">
                                             <a class="cta-btns-primary redBtn" onClick={() => setMakeBitValue(bidsObj.high_bid, bidsObj.min_price, bidsObj.save_purchase, bidsObj.car_id, bidsObj.time, bidsObj.counter_buyer_dealer_id, bidsObj.max_price, bidsObj.buy_it_now, bidsObj.comments, bidsObj.transportation, bidsObj.display, bidsObj.proxy_bid, bidsObj.transportation_charge, bidsObj.save_policy)}>Raise Bid</a>
                                             {bidsObj.buy_it_now !==""?
-                                            <a class="control-btns-cancel" onClick={()=>setBuyItNowValue(bidsObj.buy_it_now,bidsObj.car_id)} >Accept Bid</a>:""}
+                                            <a class="cta-btns greenBtn" onClick={()=>setBuyItNowValue(bidsObj.buy_it_now,bidsObj.car_id)} >Accept Bid</a>:""}
                                             <a class="control-btns-cancel" onClick={() =>cancelBid(bidsObj.car_id)}>Cancel Bid</a>
                                         </div>:<a class="control-btns-cancel" >Locked up for Higher Bid</a>}
                                         {(bidsObj.buyer_high_bid==bidsObj.high_bid || bidsObj.buyer_high_bid!==bidsObj.high_bid) &&
