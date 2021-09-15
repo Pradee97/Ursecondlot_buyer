@@ -213,7 +213,7 @@ return (
 						<div class="row content col-lg-12">
 							<div class="col-lg-4 col-md-4 bordercontent">
 								<div class="pickupdetailcontent">
-									<p class="billsalesno">Bill Of sale # <br></br>{pickUp.bill_of_sales_id}</p>
+									<p class="billsalesno">Bill Of sale # {pickUp.bill_of_sales_id}</p>
 								</div>						
 							</div>
 							<div class="col-lg-4 col-md-4 bordercontent">
@@ -241,7 +241,7 @@ return (
             	.map((pickUp) => 
 						<div class="tab_container-block">
 							<div class="row content col-lg-12">
-								<div class="col-lg-5 col-md-5">
+								<div class="col-lg-4 col-md-4">
 									<div class="modeldetails">
 										<span>order#G86512</span>
 										<span>Bill Of Sale # {pickUp.bill_of_sales_id}</span>
@@ -254,7 +254,7 @@ return (
 									</div>						
 								</div>
 								
-								<div class="col-lg-3 col-md-3">
+								<div class="col-lg-4 col-md-4">
 									<div class="modeldetailprice">
 										<h3>Transport Price<span>$ {pickUp.transportation_charge !==null? (pickUp.transportation_charge) :0}</span></h3>
 									</div>						

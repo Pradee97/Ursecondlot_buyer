@@ -4489,7 +4489,7 @@ ul.tabs li.active {
 }
 
 .pickupdetailcontent p.billsalesno{
-	border: 2px solid #BD062C;
+	border: 1px solid #BD062C;
 	font-size:16px;
 	padding:5px 10px;
 	color:#BD062C;
@@ -4561,7 +4561,7 @@ MyBids
 .mybidsleftvehicle{
 	float:left;
 	width:30%;
-	
+  padding-right: 15px;	
 }
 .mybidsleftvehicle img{
   border-radius: 5px;
@@ -4641,7 +4641,7 @@ MyBids
 .mybidsbid h4{
 	text-align:center;
 	color: #27AE60;
-	font-size:14px;
+	font-size:20px;
 }
 .mybidsbid p{
 	text-align:center;
@@ -4664,7 +4664,7 @@ MyBids
 .mybidsuynow h4{
 	text-align:center;
 	color: #FF0000;
-	font-size:14px;
+	font-size:20px;
 }
 
 .mybidscontroldetails{
@@ -4712,6 +4712,14 @@ MyBids
   width: 100%;
     margin-bottom: 20px;
 }
+
+.mybidscontrol a{
+  display: block;
+  max-width: 150px;
+  margin: auto;
+}
+
+
 
 /*-------------------------------------------------
 notoficationtab
@@ -4860,6 +4868,7 @@ vehicles Summary
 	color: #4E4E4E;	
 	padding:10px 0;
   text-align: left;
+  margin-bottom: 0;
 }
 .vehicleimgright h3 span{
 	font-size:16px;
@@ -4873,6 +4882,7 @@ vehicles Summary
 	color: #4E4E4E;	
 	padding:10px 0;
   text-align: left;
+  margin-bottom: 0;
 }
 .vehicleimgright h4 span{
 	font-size:16px;
@@ -4893,6 +4903,10 @@ vehicles Summary
 .vehiclerighttotal{
 	border-top:1px solid #ddd;
 }
+.vehiclerighttotal h3 span{
+	font-weight: 500;
+}
+
 .vehicletotal{
 	margin: 0 auto;
     margin-top: 0px;
@@ -6940,18 +6954,25 @@ table td .ant-btn:hover span, table td .ant-btn:hover i{
 	width: 33.33%;
 	float: left;
 	position: relative;
+  padding-left: 0;
 }
 #progressbar li:before {
-	content: counter(step);
-	counter-increment: step;
-	width: 20px;
-	line-height: 20px;
+	content: "\f00e";
+	width: 30px;
+  height: 30px;
+	line-height: 30px;
 	display: block;
-	font-size: 10px;
+	font-size: 16px;
 	color: #444;
-	background: #ddd;
-	border-radius: 3px;
+	background: #fff;
+	border-radius: 50%;
 	margin: 0 auto 5px auto;
+  border: #4444 solid 1px;
+  margin-left: 0;
+  padding-left: 0;
+  font-family: IcoFont!important;
+  z-index: 99;
+  position: relative;
 }
 /*progressbar connectors*/
 #progressbar li:after {
@@ -6960,20 +6981,38 @@ table td .ant-btn:hover span, table td .ant-btn:hover i{
 	height: 2px;
 	background: #ddd;
 	position: absolute;
-	left: -40%;
-	top: 20px;
+	left: 0%;
+	top: 25px;
 	z-index: 1; /*put it behind the numbers*/
 }
-#progressbar li:first-child:after {
-	/*connector not needed before the first step*/
-	content: none; 
-}
+
 /*marking active/completed steps green*/
 /*The number of the step and the connector before it = green*/
 #progressbar li.active:before,  #progressbar li.active:after{
-	background: #BD062C;
-	color: white;
+	border: #BD062C solid 1px;
+	color: #BD062C;
+  background: #fff;
 }
+
+#progressbar li:nth-child(2):before{
+  margin: auto;
+}
+
+#progressbar li:nth-child(3):before{
+  margin-left: auto;
+  margin-right: 0;
+}
+
+#progressbar li:nth-child(2) p{
+  text-align: center;
+}
+
+#progressbar li:nth-child(3) p{
+  text-align: right;
+}
+
+
+
 .sliderBlock .cars-prices{
 	text-align:center;
 		margin-top:30px;
@@ -8088,7 +8127,6 @@ h2.title {
 }
 
 .historyPage .lotfee-inner p{
-  margin: 0px;
   text-align: left;
 }
 
@@ -8101,11 +8139,81 @@ h2.title {
 ul#progressbar li p{
   margin: 0;
   font-size: 12px;
+  width: 100%;
+    display: block;
 }
 
 .vehicleimgleft img.carImg {
-  height: 200px;
+  height: 180px;
   max-width: 100%;
   object-fit: cover;
 }
 
+.models-box .vehicleimgleft img.carImg {
+  height: 150px;
+  max-width: 100%;
+  object-fit: cover;
+}
+
+.models-box .checkoutReview .vehiclesheadspaydetails{
+  border-bottom: #eee solid 1px;
+}
+
+.models-box .checkoutReview h2{
+  text-align: center;
+}
+
+.historyPage .car-item:hover {
+  transform: scale(1);
+}
+
+.vinnoBlock{
+  margin-bottom: 5px;
+}
+
+.vinno span{
+  color: #bd062c;
+}
+
+.sliderBlock p{
+  margin: 10px 0;
+  width: 50%;
+  display: inline-block;
+}
+
+.sliderBlock p.pdate{
+  text-align: right;
+}
+
+
+.historyPage .vinnoBlock p.vinno{
+  margin: 0;
+}
+.historyPage  .priceBlock .vehicleimgright h4, .historyPage  .priceBlock .vehicleimgright h3{
+  margin-bottom: 10px;
+}
+
+
+
+.redBtn {
+  background-color: #bd062c;
+  color: white !important;
+  padding: 10px 30px;
+  margin: 20px 0;
+  margin-bottom: 0;
+  border-radius: 3px;
+  border: none;
+  font-size: 16px;
+  border:solid 1px #bd062c;
+}
+
+.redBtn:hover {
+  background-color: #002768;
+  color: white; 
+  border:solid 1px #002768;
+}
+
+.mybidscontrol .control-btns-cancel{
+  margin: auto;
+  margin-top: 10px;
+}
