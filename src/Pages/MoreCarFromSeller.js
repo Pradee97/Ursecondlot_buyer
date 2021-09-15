@@ -137,7 +137,7 @@ useEffect(() => {
   let intervalId;
 	intervalId = setInterval(() => {
     getMoreCarFromSeller();
-	}, 60000)
+	}, 30000)
 	return () => clearInterval(intervalId);
    
    
