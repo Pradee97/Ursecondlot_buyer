@@ -242,7 +242,7 @@ const getFeeDetails = (maxPrice) =>{
                         <h4>Best deal</h4>
                         </div>
                         <div class="cars-content">		
-                        <h3><a href="#">{historyDetail.make} ({historyDetail.model} - {historyDetail.year} model)</a></h3>
+                        <h3><a href="#">{historyDetail.make} ({historyDetail.model} - {historyDetail.year}- {historyDetail.year} model)</a></h3>
                         <div class="d-flex align-items-center mb-3">
                           <p class="details"><img src={speedometer}  alt=""/><span>{historyDetail.miles} m</span></p>
                           &nbsp;&nbsp;&nbsp;&nbsp;

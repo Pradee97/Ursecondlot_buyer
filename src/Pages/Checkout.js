@@ -78,7 +78,7 @@ const History = (props) => {
 							<img src={paymentCar.image} />
 						</div>
 						<div class="vehicleimgright col-lg-8">
-							<h3>{paymentCar.make} ({paymentCar.model} model)+Lot Fee <span>$ {paymentCar.price}</span></h3>
+							<h3>{paymentCar.make} ({paymentCar.model}- {paymentCar.year} model)+Lot Fee <span>$ {paymentCar.price}</span></h3>
 							<h4>Lorem Ipsum Is Simply Dummy Text Of The And Typesetting Industry. <span>$100</span></h4>
 							<h4>Transportation <span>${paymentCar.transportation_charge}</span></h4>
 						</div>

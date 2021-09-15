@@ -161,7 +161,7 @@ const TestDriveMedia = () =>{
                     <h2>Inspection Summary</h2>
                 </div>
                 <div class="inspectionsummeryhead ">
-                    <h2>{inspection[0].make} ({inspection[0].model} Model)</h2>
+                    <h2>{inspection[0].make} ({inspection[0].model}- {inspection[0].year} Model)</h2>
                     <div class="row content">
                         <div class="col-lg-6 pt-4 pt-lg-0">
                             <p>Inspection Date & TIME:<span>06 jan 11.45pM </span></p>
