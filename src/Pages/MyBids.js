@@ -181,7 +181,7 @@ const MyBids = () => {
                                             <img src={bidsObj.image} class="img-fluid" alt="..." />
                                         </div>
                                         <div class="mybidsrightvehicle">
-                                            <h3>{bidsObj.make} ({bidsObj.model})</h3>
+                                            <h3>{bidsObj.make} ({bidsObj.model} - {bidsObj.year} model)</h3>
                                             <div class="d-flex align-items-center">
                                                 <p class="details"><img src={speedometer} alt="" /><span>{bidsObj.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <p class="details"><img src={gasolinePump} alt="" /><span>{bidsObj.fuel_type}</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -225,7 +225,12 @@ const MyBids = () => {
                                             {bidsObj.buy_it_now !==""?
                                             <a class="cta-btns greenBtn" onClick={()=>setBuyItNowValue(bidsObj.buy_it_now,bidsObj.car_id)} >Accept Bid</a>:""}
                                             <a class="control-btns-cancel" onClick={() =>cancelBid(bidsObj.car_id)}>Cancel Bid</a>
-                                        </div>:<a class="control-btns-cancel" >Locked up for Higher Bid</a>}
+                                        </div>:
+                                         <div class="mybidscontrol">
+                                         <a class="control-btns-cancel" >Locked up for Higher Bid</a>
+                                         <a class="control-btns-cancel" onClick={() =>cancelBid(bidsObj.car_id)}>Cancel Bid</a>
+                                     </div>}
+                                     
                                         {(bidsObj.buyer_high_bid==bidsObj.high_bid || bidsObj.buyer_high_bid!==bidsObj.high_bid) &&
 									 
                                             <div class= {(bidsObj.time!==null && bidsObj.time < 20)?"countownBlock":""} >
