@@ -251,12 +251,12 @@ const billofsales =(request) => {
             <div className="tbox">                
                 <div className="selcetclass"> 
                     <select id="vehicleselect"  class="form-control custom-select browser-default" onChange={(e)=>selectPayment(e.target.value)}>
-                        <option value={null} style={{"display":"none"}}></option>
+                        <option value={null} style={{"display":"none"}}>Select</option>
                         <option value="ACH">ACH</option>
                         <option value="Floor">Floor</option>
                         <option value="Credit Card">Credit Card</option>
                     </select>
-                    <label  htmlFor="state_id" className={"input-has-value"}>Select Payment Method</label>
+                    {/* <label  htmlFor="state_id" className={"input-has-value"}>Select Payment Method</label> */}
                     </div>
             </div>
         </div>
