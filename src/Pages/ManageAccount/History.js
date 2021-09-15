@@ -23,6 +23,8 @@ import googleplay from '../../assets/img/googleplay.png';
   const [VINNumber, setVINNumber] = useState("");
   const [order,setOrder] = useState("");
   const [noCars,setNoCars] = useState("");
+  const [lotFee, setLotFee] = useState("")
+  const [lotValue, setLotValue] = useState("");
 
   const redirecttoInspection=(pathid)=>{
     //   history.push("/Inspection/"+pathid);
@@ -149,6 +151,23 @@ const getFeeDetails = (maxPrice) =>{
       : 0
 }
 
+async function getLotfee() {
+  let request = {
+      buyer_dealer_id: userDetails.buyer_dealer_id,
+  };
+  const state = API.post('lot_fee/condition', request);
+  state.then(res => {
+      console.log("res", res.data.data)
+      setLotValue(res.data.data.lot_fee);
+      setLotFee(res.data.data);
+      // setLoading(false);
+  })
+      .catch(err => { console.log(err); });
+}
+useEffect(() => {
+  getLotfee();
+}, []);
+
     return (
 
       <div>
@@ -252,6 +271,7 @@ const getFeeDetails = (maxPrice) =>{
                         
                         
                         <div class="cars-prices invoice_link p-0">
+                          <a class="cta-btns" href="JavaScript:void(0)" >Vin no - <span>{historyDetail.vin_no}</span></a>
                           <a class="cta-btns" href="JavaScript:void(0)" onClick={()=>redirecttoInspection(historyDetail.car_id)}>Inspection</a>
                           <a class="cta-btns invoice" href="JavaScript:void(0)" onClick={()=>redirecttoInvoice(historyDetail.car_id,historyDetail.seller_dealer_id,historyDetail.price)}>Invoice</a>
                         </div>
@@ -266,6 +286,7 @@ const getFeeDetails = (maxPrice) =>{
                     
                   </div>
                   <div class="col-lg-5 sliderBlock">
+                    <p>Inventory Number - <span>{historyDetail.inventory_no}</span></p>
                     <p>Purchased from <span>{historyDetail.dealer_type}</span></p>
                     <h3>Vehicle Title</h3>
                     
@@ -313,8 +334,8 @@ const getFeeDetails = (maxPrice) =>{
                     
                     <div class="vehicleimgright col-lg-12">
                       <p class="editbtn m-0"><a class="" href="#">Edit</a></p>
-                      <h3>Vehicle Price + Lot Fee <span>$ {Number(historyDetail.price)}</span></h3>
-                      <h4> Buy Now <span> $ {Number(getFeeDetails(historyDetail.price))}</span></h4>
+                      <h3>Vehicle Price + Lot Fee <span>$ {Number(historyDetail.price)+ lotValue}</span></h3>
+                      <h4> Buy Fee <span> $ {Number(getFeeDetails(historyDetail.price))}</span></h4>
                       <h4>Inspection <span>$ 0</span></h4>
                       {/* <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p> */}
                       
@@ -322,7 +343,7 @@ const getFeeDetails = (maxPrice) =>{
                       {/* <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p> */}
                       
                       <div class="vehiclerighttotal">
-                        <h3>Total amount <span>$ {((Number(historyDetail.price)) || 0) + (Number(getFeeDetails(historyDetail.price))) + 0 + (Number(historyDetail.transportation_charge || 0))}</span></h3>
+                        <h3>Total amount <span>$ {(Number(historyDetail.price)+ lotValue || 0) + (Number(getFeeDetails(historyDetail.price))) + 0 + (Number(historyDetail.transportation_charge || 0))}</span></h3>
                       </div>
                     </div>
   
