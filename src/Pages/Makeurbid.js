@@ -166,6 +166,9 @@ console.log("check props",props)
         else if(redirectPage=="search") {
         history.push("/search")
         }
+        else if(redirectPage=="mybids") {
+        history.push("/mybids")
+        }
         else{
             history.push("/carlist")
         }

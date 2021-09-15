@@ -43,7 +43,7 @@ const MyBids = () => {
 
     useEffect(() => {
         fetchMyBids();
-    }, []);
+    }, [highBid]);
 
     const toggleMakeBid = () => {
         setIsOpen(!isOpen);
@@ -76,7 +76,7 @@ const MyBids = () => {
             carMinBid: min_price,
             carId: car_id,
             carSavePurchase: save_purchase,
-            redirectPage: "cardetail",
+            redirectPage: "mybids",
             time: time,
             counter_buyerid: counterbuyerid,
             carMaxBid: max_price,
@@ -100,6 +100,16 @@ const MyBids = () => {
             state: {id:pathid,sellerDealerId:seller_dealer_id},
           });
     }
+
+    useEffect (()=>{
+
+        let intervalId;
+        intervalId = setInterval(() => {
+            fetchMyBids();
+        }, 30000)
+        return () => clearInterval(intervalId);
+    
+        },[])
 
     return (
         <main id="main" class="inner-page">
@@ -164,13 +174,15 @@ const MyBids = () => {
                                     </div>
                                     <div class="col-lg-2 mybidsbuynowdetails">
                                         <div class="mybidsuynow">
-                                            <h4>$ {bidsObj.buy_it_now}</h4>
+                                            {bidsObj.buy_it_now !==""?
+                                            <h4>$ {bidsObj.buy_it_now}</h4>:""}
                                         </div>
                                     </div>
                                     <div class="col-lg-2 mybidscontroldetails">
                                         <div class="mybidscontrol">
                                             <a class="cta-btns-primary" onClick={() => setMakeBitValue(bidsObj.high_bid, bidsObj.min_price, bidsObj.save_purchase, bidsObj.car_id, bidsObj.time, bidsObj.counter_buyer_dealer_id, bidsObj.max_price, bidsObj.buy_it_now, bidsObj.comments, bidsObj.transportation, bidsObj.display, bidsObj.proxy_bid, bidsObj.transportation_charge, bidsObj.save_policy)}>Raise Bid</a>
-                                            <a class="control-btns-cancel" >Accept Bid</a>
+                                            {bidsObj.buy_it_now !==""?
+                                            <a class="control-btns-cancel" >Accept Bid</a>:""}
                                             <a class="control-btns-cancel" onClick={() =>cancelBid(bidsObj.car_id)}>Cancel Bid</a>
                                         </div>
                                     </div>

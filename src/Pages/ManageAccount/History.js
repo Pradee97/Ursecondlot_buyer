@@ -242,7 +242,7 @@ const getFeeDetails = (maxPrice) =>{
                         <h4>Best deal</h4>
                         </div>
                         <div class="cars-content">		
-                        <h3><a href="#">{historyDetail.make} ({historyDetail.model} model)</a></h3>
+                        <h3><a href="#">{historyDetail.make} ({historyDetail.model} - {historyDetail.year} model)</a></h3>
                         <div class="d-flex align-items-center mb-3">
                           <p class="details"><img src={speedometer}  alt=""/><span>{historyDetail.miles} m</span></p>
                           &nbsp;&nbsp;&nbsp;&nbsp;
@@ -313,7 +313,8 @@ const getFeeDetails = (maxPrice) =>{
                     
                     <div class="vehicleimgright col-lg-12">
                       <p class="editbtn m-0"><a class="" href="#">Edit</a></p>
-                      <h3>Vehicle Price + Lot Fee <span>$ {Number(historyDetail.price) + Number(getFeeDetails(historyDetail.price))}</span></h3>
+                      <h3>Vehicle Price + Lot Fee <span>$ {Number(historyDetail.price)}</span></h3>
+                      <h4> Buy Now <span> $ {Number(getFeeDetails(historyDetail.price))}</span></h4>
                       <h4>Inspection <span>$ 0</span></h4>
                       {/* <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p> */}
                       
@@ -321,7 +322,7 @@ const getFeeDetails = (maxPrice) =>{
                       {/* <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p> */}
                       
                       <div class="vehiclerighttotal">
-                        <h3>Total amount <span>$ {((Number(historyDetail.price) + Number(getFeeDetails(historyDetail.price))) || 0) +  100 + (Number(historyDetail.transportation_charge || 0))}</span></h3>
+                        <h3>Total amount <span>$ {((Number(historyDetail.price)) || 0) + (Number(getFeeDetails(historyDetail.price))) + 0 + (Number(historyDetail.transportation_charge || 0))}</span></h3>
                       </div>
                     </div>
   
