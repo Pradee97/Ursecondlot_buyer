@@ -206,7 +206,6 @@ useEffect(() => {
 			getFavCarList();
 		}, 30000)
 		return () => clearInterval(intervalId);
-  
 },[]);
 
 useEffect(() => {
