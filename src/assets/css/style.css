@@ -4560,7 +4560,7 @@ MyBids
 }
 .mybidsleftvehicle{
 	float:left;
-	width:30%;
+	width:40%;
   padding-right: 15px;	
 }
 .mybidsleftvehicle img{
@@ -4569,7 +4569,7 @@ MyBids
 
 .mybidsrightvehicle{
 	float:right;
-	width:70%;
+	width:60%;
   text-align: left;
 }
 
@@ -4584,7 +4584,7 @@ MyBids
 	margin-left:5px;
 }
 .mybidsrightvehicle .details{
-	margin-bottom:10px;
+	margin-bottom:2px;
 }
 
 .mybidssellerdetails{
@@ -4623,7 +4623,7 @@ MyBids
 	margin-left:5px;
 }
 .mybidsleftseller .details{
-	margin-bottom:10px;
+	margin-bottom:2px;
 }
 .mybidsbiddetails{
 	float:left;
@@ -4717,6 +4717,7 @@ MyBids
   display: block;
   max-width: 150px;
   margin: auto;
+  margin-bottom: 10px;
 }
 
 
@@ -7655,7 +7656,7 @@ margin-top: -3px;
 
 .carDetailsPage .models-box{
   max-width: 800px;
-  max-height: 660px;
+  max-height: 600px;
 }
 
 
@@ -8216,4 +8217,23 @@ ul#progressbar li p{
 .mybidscontrol .control-btns-cancel{
   margin: auto;
   margin-top: 10px;
+}
+
+.greenBtn{
+  color: #fff !important;
+  background: #008d0e;
+  border: #008d0e solid 1px;
+}
+
+.greenBtn:hover{
+  background: #002768;
+  border: #002768 solid 1px;
+}
+
+.myBidsPage .models-box {
+  max-width: 800px;
+  max-height: 600px;
+}
+.mybidsleftseller .details img{
+  width: 15px;
 }
