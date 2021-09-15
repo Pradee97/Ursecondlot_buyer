@@ -109,40 +109,32 @@ const History = (props) => {
 	
 	 ( <div class="checkoutblock col-lg-12">
 
-        <div class="section-title">
+        <div class="section-title mt-3 mb-0">
           <h2>Checkout</h2>
         </div>
 
         <div class="row content">
 			<div class="col-lg-12 col-md-12 marAuto achBlock">
-				<h2>ACH Payment</h2>
+				<h2 className="pl-4">ACH Payment</h2>
 				{paymentCar.length>0?paymentCar.map((paymentCar) =>
 				<div>
 				<div class="vehiclesheadspaydetails">
 					<div class="row">
 						<div class="vehicleimgleft col-lg-4">
-							<img src={paymentCar.image}  />
+							<img src={paymentCar.image} className="carImg" />
 						</div>
 						<div class="vehicleimgright col-lg-8">
 							<h3>{paymentCar.make} ({paymentCar.model} model)+Lot Fee <span>$ {paymentCar.price}</span></h3>
 							<h4>Buy Fee <span>$ {Number(getFeeDetails(paymentCar.price))}</span></h4>
 							<h4>Transportation <span>${paymentCar.transportation_charge}</span></h4>
-						</div>
-					</div>
-				</div>				
-				
-				<div class="vehiclesheadspaydetails">
-					<div class="row">
-						<div class="vehicleimgleft col-lg-4">
-							
-						</div>
-						<div class="vehicleimgright col-lg-8">
+
 							<div class="vehiclerighttotal">
 								<h3>Total amount <span>$ {Number(paymentCar.price)+ Number(getFeeDetails(paymentCar.price)) + Number(paymentCar.transportation_charge)}</span></h3>
 							</div>
 						</div>
 					</div>
-				</div>
+				</div>				
+				
 				</div>):""}
 				<div class="text-center ckreview"><a  class="cta-btn cancel-btn" href="/cart">Cancel</a> <button type="submit" class="cta-btn"  onClick = {()=> billofsales()}>Checkout</button> </div>
 				
