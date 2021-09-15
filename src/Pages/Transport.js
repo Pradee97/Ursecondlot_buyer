@@ -225,7 +225,7 @@ return (
 							<div class="col-lg-4 col-md-4 bordercontent">
 								<div class="pickupdetailcontent">
 									<p>Status</p>
-									<p class="subheadstatus">{pickUp.status}</p>
+									<p class="subheadstatus">Pending</p>
 								</div>						
 							</div>							
 						</div>
@@ -253,12 +253,12 @@ return (
 										<h4>{pickUp.vin_no}</h4>
 									</div>						
 								</div>
-								{pickUp.transportation_charge !==null?
+								
 								<div class="col-lg-3 col-md-3">
 									<div class="modeldetailprice">
-										<h3>Transport Price<span>$120</span></h3>
+										<h3>Transport Price<span>$ {pickUp.transportation_charge !==null? (pickUp.transportation_charge) :0}</span></h3>
 									</div>						
-								</div>:""}
+								</div>
 							</div>
 							
 							
@@ -296,7 +296,7 @@ return (
 								<div class="col-lg-2 col-md-2 bordercontent">
 									<div class="modeldetailcontent">
 										<p>Status</p>
-										<p class="subheadstatus">{pickUp.status}</p>
+										<p class="subheadstatus">Carrier Assigned</p>
 									</div>						
 								</div>
 							</div>
@@ -326,7 +326,7 @@ return (
 								</div>
 								<div class="col-lg-3 col-md-3">
 									<div class="modeldetailprice">
-										<h3>Transport Price<span>$120</span></h3>
+										<h3>Transport Price<span>$ {pickUp.transportation_charge !==null? (pickUp.transportation_charge) :0}</span></h3>
 									</div>						
 								</div>
 							</div>
@@ -366,7 +366,7 @@ return (
 								<div class="col-lg-2 col-md-2 bordercontent">
 									<div class="modeldetailcontent">
 										<p>Status</p>
-										<p class="subheadstatus">{pickUp.status}</p>
+										<p class="subheadstatus">Delivered</p>
 									</div>						
 								</div>
 							</div>

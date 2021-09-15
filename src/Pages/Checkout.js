@@ -1,19 +1,56 @@
 import React , {  useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import API from "../Services/BaseService";
-import vehicles from '../assets/img/vehicles.jpg'
+import vehicles from '../assets/img/vehicles.jpg';
+import CommonPopup from '../Component/CommonPopup/CommonPopup';
 
 const History = (props) => {
 
 	const history = useHistory();
-	const [paymentCar,setPaymentCar] = useState(props.paymentCarList)
+	const [paymentCar,setPaymentCar] = useState(props.paymentCarList);
+
+	const [isOpen, setIsOpen] = useState(false);
+
+	const [popupTitle, setPopupTitle] = useState ("");
+    const [popupMsg, setPopupMsg] = useState ("");
+    const [popupType, setPopupType] = useState ("");
+    const [popupActionType, setPopupActionType] = useState ("");
+    const [popupActionValue, setPopupActionValue] = useState ("");
+    const [popupActionPath, setPopupActionPath] = useState ("")
+
 	console.log("check the props value",paymentCar)
+
+	const togglePopup = () => {
+        setIsOpen(!isOpen);
+    }
 
 	const billofsales =() => {
 		
-		API.post('billofsales/add', props.paymentCarList)
-		props.toggle()
+		API.post('billofsales/add', props.paymentCarList).then(res=>{
 
+		console.log("hi checke the redirect",res.data.data)
+
+		if (res.data.success) {
+			const { data } = res;
+			togglePopup()
+			setPopupTitle("");
+			setPopupMsg("Thank you for your business with Ur Second Lot");
+			setPopupType("success");
+			setPopupActionType("redirect");
+			setPopupActionValue("ok");
+			setPopupActionPath("/cart")
+
+		} else {
+			togglePopup()
+			setPopupTitle("");
+			// setPopupMsg("Address is not Created, Please try Again");
+			setPopupMsg( res.data.error.err );
+			setPopupType("error");
+			setPopupActionType("close");
+			setPopupActionValue("close");
+		}
+		// props.toggle()
+	});
 		
 	}
 
@@ -68,6 +105,17 @@ const History = (props) => {
 	
       </div>
     </div>
+
+	{/* {isOpen &&
+		<CommonPopup 
+			handleClose= {togglePopup}
+			popupTitle= {popupTitle}
+			popupMsg= {popupMsg}
+			popupType= {popupType}
+			popupActionType= {popupActionType}
+			popupActionValue= {popupActionValue}
+			popupActionPath={popupActionPath}
+	/>} */}
 	
   </main>
         
