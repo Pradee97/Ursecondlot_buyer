@@ -19,6 +19,7 @@ const Cart = () => {
     const [mySelectedCarDetails, setMySelectedCarDetails] = useState([]);
     const [paymentMode, setPaymentMode] = useState("");
     const [paymentCarList,setPaymentCarList] = useState("");
+    const [numberCars,setNumberCars] = useState("");
 
     console.log(userDetails==="userDetails======",userDetails)
     let paySeparately={};
@@ -36,6 +37,7 @@ const Cart = () => {
 
             console.log("cart check the value", response.data.data)
             setCartDetail(response.data.data)
+            setNumberCars(response.data.data.length)
         });
     }
 
@@ -173,7 +175,7 @@ const billofsales =(request) => {
                 <div class="col-lg-8 col-md-8">
                     <div class="vehiclesheads">
                     {/* <h2>Number of Vehicles- 2<span>Total amount- <b>$ {cartDetail.length>0 ? cartDetail.reduce((acc,{max_price,transportation,transportation_charge})=>acc + (Number(max_price) + Number(transportation === 'yes' ? transportation_charge : 0) + Number(getFeeDetails(max_price||0))) ,0) : 0}</b></span></h2> */}
-                    <h2>Number of Vehicles- 2<span>Total amount- <b>$ {cartDetail?.length>0 && cartDetail
+                    <h2>Number of Vehicles- {numberCars}<span>Total amount- <b>$ {cartDetail?.length>0 && cartDetail
                     .reduce((acc, curr) => acc+((Number(curr.price) || 0) +  Number(curr.transportation === 'yes' ? curr.transportation_charge : 0) + Number(getFeeDetails(curr.price))),0)}</b></span></h2>   
                 </div>
                 {cartDetail?.length>0 && cartDetail
@@ -237,24 +239,24 @@ const billofsales =(request) => {
                         <h3>Total Amount <span>${cartDetail?.length>0 && cartDetail
                     .reduce((acc, curr) => acc+((Number(curr.price) || 0) +  Number(curr.transportation === 'yes' ? curr.transportation_charge : 0) + Number(getFeeDetails(curr.price))),0)}</span></h3>
                         <h4>Select Payment Method</h4>
-                        <div class="input-group">
+                        {/* <div class="input-group">
                             <select id="vehicleselect"  class="form-control custom-select browser-default">
                                 <option value="Select">select</option>
                                 <option value="Select">ACH</option>
                                 <option value="Select">Floor</option>
                                 <option value="Select">Credit Card</option>
                             </select>
-                        </div> 
+                        </div>  */}
                         <div className="form-group selectTbox">
             <div className="tbox">                
                 <div className="selcetclass"> 
                     <select id="vehicleselect"  class="form-control custom-select browser-default" onChange={(e)=>selectPayment(e.target.value)}>
-                        <option value={null} style={{"display":"none"}}></option>
+                        <option value={null} style={{"display":"none"}}>Select</option>
                         <option value="ACH">ACH</option>
                         <option value="Floor">Floor</option>
                         <option value="Credit Card">Credit Card</option>
                     </select>
-                    <label  htmlFor="state_id" className={"input-has-value"}>Select Payment Method</label>
+                    {/* <label  htmlFor="state_id" className={"input-has-value"}>Select Payment Method</label> */}
                     </div>
             </div>
         </div>
