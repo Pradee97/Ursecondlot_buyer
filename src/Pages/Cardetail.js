@@ -371,7 +371,7 @@ return(
 					<div className={(carDetail[0].buyer_high_bid=="" || carDetail[0].buyer_high_bid==null || carDetail[0].buyer_high_bid==undefined) && (carDetail[0].high_bid=="" || carDetail[0].high_bid==null || carDetail[0].high_bid==undefined)?"col-md-6":"col-md-4"}>
 	        		<div class="product-dtl">
         				<div class="product-info">
-		        			<div class="product-name">{carDetail[0].make} {carDetail[0].vehicle_type}({carDetail[0].model})</div>
+		        			<div class="product-name">{carDetail[0].make} {carDetail[0].vehicle_type}({carDetail[0].model} - {carDetail[0].year} model)</div>
 							<p  class="productdes"><span className="greytext">Inventory Number</span> - {carDetail[0].inventory_no}</p>
 							<p class="productdes">{carDetail[0].car_description}</p>
 		        			<div class="d-flex align-items-center">
