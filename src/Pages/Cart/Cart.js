@@ -17,7 +17,9 @@ const Cart = () => {
     const [feeDetails, setFeeDetails] = useState("");
     const [mySelectedCarId, setMySelectedCarId] = useState([]);
     const [mySelectedCarDetails, setMySelectedCarDetails] = useState([]);
-    const [paymentMode, setPaymentMode] = useState("")
+    const [paymentMode, setPaymentMode] = useState("");
+    const [paymentCarList,setPaymentCarList] = useState("");
+
     console.log(userDetails==="userDetails======",userDetails)
     let paySeparately={};
     const togglePopup = () => {
@@ -60,15 +62,17 @@ const Cart = () => {
 
 const billofsales =(request) => {
     // const request = mySelectedCarDetails
-    console.log("req===",request);
+    setPaymentCarList(request)
+    console.log("set payment request check",  request)
+    togglePopup();
     // return;
-    const state = API.post('billofsales/add', request);
-    state.then(res => {
-        console.log("res", res)
-        setFeeDetails(res.data.data);
+    // const state = API.post('billofsales/add', request);
+    // state.then(res => {
+    //     console.log("res", res)
+    //     setFeeDetails(res.data.data);
       
-    })
-        .catch(err => { console.log(err); });
+    // })
+    //     .catch(err => { console.log(err); });
 }
     
     const getFeeDetails = (maxPrice) =>{
@@ -129,14 +133,14 @@ const billofsales =(request) => {
     }
 
     const reviewAndCheckout = () => {
-        togglePopup()
+        //togglePopup()
         console.log("reviewAndCheckout=====")
         if(mySelectedCarId.length>0) {
             console.log("mySelectedCarId~~~~~",mySelectedCarId)
             if(cartDetail?.length>0 && cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id)) ).length>0){
                 // console.log("mySelectedCarId.length====",cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id)) ).length)
                 setMySelectedCarDetails(cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id))).map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id}}))
-                billofsales(cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id))).map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id}}))
+                billofsales(cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id))).map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id,"make": data.make, "model": data.model, "image": data.image, "price": data.price,"transportation_charge":data.transportation_charge}}))
             }
             else {
                 setMySelectedCarDetails([])
@@ -145,7 +149,7 @@ const billofsales =(request) => {
         }
         else {
             setMySelectedCarDetails(cartDetail?.length>0 ? cartDetail.map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id}}):[])
-            billofsales(cartDetail?.length>0 ? cartDetail.map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id}}):[])
+            billofsales(cartDetail?.length>0 ? cartDetail.map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id,"make": data.make, "model": data.model, "image": data.image, "price": data.price,"transportation_charge":data.transportation_charge}}):[])
         // return cartDetail?.length>0 && cartDetail
         // .reduce((acc, curr) => acc+((Number(curr.max_price) || 0) +  Number(curr.transportation === 'yes' ? curr.transportation_charge : 0) + Number(getFeeDetails(curr.max_price))),0)
         }
@@ -255,7 +259,7 @@ const billofsales =(request) => {
             </div>
         </div>
                         <div class="vehicletotalbtns"> 
-                            <a class="vehicletotal-btns" href="JavaScript:void(0)" disabled={!paymentMode} onClick={()=>{paymentMode && reviewAndCheckout()}}>Review & Checkout</a>
+                            <a class="vehicletotal-btns" href="JavaScript:void(0)" disabled={!paymentMode} onClick={()=>reviewAndCheckout() && paymentMode }>Review & Checkout</a>
                         </div>
                         
                         
@@ -267,7 +271,7 @@ const billofsales =(request) => {
           {isOpen && <Popup
             isClose={false}
             content={<>
-                <Checkout toggle={togglePopup} />
+                <Checkout toggle={togglePopup} paymentCarList={paymentCarList}/>
             </>}
             handleClose={togglePopup}
         />}
