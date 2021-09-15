@@ -4864,7 +4864,7 @@ vehicles Summary
     transform: rotate(45deg);
 }
 .vehicleimgright h3{
-	font-size:16px;
+	font-size:14px;
 	font-weight:500;
 	color: #4E4E4E;	
 	padding:10px 0;
@@ -4872,13 +4872,13 @@ vehicles Summary
   margin-bottom: 0;
 }
 .vehicleimgright h3 span{
-	font-size:16px;
+	font-size:14px;
 	font-weight:normal;
 	color: #4E4E4E;
 	float:right;
 }
 .vehicleimgright h4{
-	font-size:16px;
+	font-size:14px;
 	font-weight:normal;
 	color: #4E4E4E;	
 	padding:10px 0;
@@ -4886,7 +4886,7 @@ vehicles Summary
   margin-bottom: 0;
 }
 .vehicleimgright h4 span{
-	font-size:16px;
+	font-size:14px;
 	font-weight:normal;
 	color: #4E4E4E;
 	float:right;
@@ -8129,6 +8129,7 @@ h2.title {
 
 .historyPage .lotfee-inner p{
   text-align: left;
+  font-size: 14px;
 }
 
 .historyPage .car-item img.carImg {
@@ -8237,3 +8238,22 @@ ul#progressbar li p{
 .mybidsleftseller .details img{
   width: 15px;
 }
+
+.mybidsdetailsblock .countownBlock{
+  background-color: #002768;
+  color: white;
+  border-color: #002768;
+  font-size: 16px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    margin: 0;
+    min-width: 80px;
+    text-align: center;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.historyPage .priceBlock p.date{
+  padding-left: 0;
+}
+

@@ -314,7 +314,7 @@ const getFeeDetails = (maxPrice) =>{
   
                   
                   <div class="col-lg-4 priceBlock">
-                    <p class="date">Purchased on {historyDetail.sold_date?.substring(0,10)}</p>
+                    <p class="date ml-0">Purchased on {historyDetail.sold_date?.substring(0,10)}</p>
                     
                     <div class="vehicleimgright col-lg-12">
                       <p class="editbtn m-0"><a class="" href="#">Edit</a></p>
