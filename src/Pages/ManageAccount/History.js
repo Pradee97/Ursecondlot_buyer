@@ -34,14 +34,14 @@ import googleplay from '../../assets/img/googleplay.png';
       });
     }
 
-    const redirecttoInvoice=(car_id,seller_dealer_id,price,pathid)=>{
+    const redirecttoInvoice=(car_id,seller_dealer_id,price,lot_fee,bill_of_sales_id,gatepass_id,sold_date,make,model,year,transportation_charge)=>{
       //   history.push("/Inspection/"+pathid);
       history.push({
         pathname: "/Invoice",
-        state: {car_id,sellerDealerID:seller_dealer_id,vechileprice:price}
+        state: {car_id,sellerDealerID:seller_dealer_id,vechileprice:price,lotFee:lot_fee,billOfSales:bill_of_sales_id,gatePassId:gatepass_id,Date:sold_date,Make:make,Model:model,Year:year,transportationCharge:transportation_charge}
 
         });
-        console.log ("hi",price);
+        console.log ("hi",price,lot_fee,bill_of_sales_id,gatepass_id,sold_date);
       }
   
 
@@ -151,22 +151,6 @@ const getFeeDetails = (maxPrice) =>{
       : 0
 }
 
-async function getLotfee() {
-  let request = {
-      buyer_dealer_id: userDetails.buyer_dealer_id,
-  };
-  const state = API.post('lot_fee/condition', request);
-  state.then(res => {
-      console.log("res", res.data.data)
-      setLotValue(res.data.data.lot_fee);
-      setLotFee(res.data.data);
-      // setLoading(false);
-  })
-      .catch(err => { console.log(err); });
-}
-useEffect(() => {
-  getLotfee();
-}, []);
 
     return (
 
@@ -261,8 +245,8 @@ useEffect(() => {
                         <h4>Best deal</h4>
                         </div>
                         <div class="cars-content">		
-                        <h3><a href="#">{historyDetail.make} ({historyDetail.model} - {historyDetail.year}- {historyDetail.year} model)</a></h3>
-                        <div class="d-flex align-items-center mb-2">
+                        <h3><a href="#">{historyDetail.make} ({historyDetail.model} - {historyDetail.year} model)</a></h3>
+                        <div class="d-flex align-items-center mb-3">
                           <p class="details"><img src={speedometer}  alt=""/><span>{historyDetail.miles} m</span></p>
                           &nbsp;&nbsp;&nbsp;&nbsp;
                           <p class="details"><img src={gasolinePump} alt=""/><span>{historyDetail.fuel_type}</span></p>
@@ -273,7 +257,7 @@ useEffect(() => {
                         <div class="cars-prices invoice_link p-0">
                           <div className="vinnoBlock"><p class="vinno" href="JavaScript:void(0)" >Vin no - <span>{historyDetail.vin_no}</span></p></div>
                           <a class="cta-btns" href="JavaScript:void(0)" onClick={()=>redirecttoInspection(historyDetail.car_id)}>Inspection</a>
-                          <a class="cta-btns invoice" href="JavaScript:void(0)" onClick={()=>redirecttoInvoice(historyDetail.car_id,historyDetail.seller_dealer_id,historyDetail.price)}>Invoice</a>
+                          <a class="cta-btns invoice" href="JavaScript:void(0)" onClick={()=>redirecttoInvoice(historyDetail.car_id,historyDetail.seller_dealer_id,historyDetail.price,historyDetail.lot_fee,historyDetail.bill_of_sales_id,historyDetail.gatepass_id,historyDetail.sold_date,historyDetail.make,historyDetail.model,historyDetail.year,historyDetail.transportation_charge)}>Invoice</a>
                         </div>
                         <div class="cars-prices gatepass pt-1">
                         {historyDetail.gatepass_id===""?
@@ -330,11 +314,11 @@ useEffect(() => {
   
                   
                   <div class="col-lg-4 priceBlock">
-                    <p class="date">Purchased on 03/28/2021</p>
+                    <p class="date">Purchased on {historyDetail.sold_date?.substring(0,10)}</p>
                     
                     <div class="vehicleimgright col-lg-12">
                       <p class="editbtn m-0"><a class="" href="#">Edit</a></p>
-                      <h3>Vehicle Price + Lot Fee <span>$ {Number(historyDetail.price)+ lotValue}</span></h3>
+                      <h3>Vehicle Price + Lot Fee <span>$ {Number(historyDetail.price)+ Number(historyDetail.lot_fee)}</span></h3>
                       <h4> Buy Fee <span> $ {Number(getFeeDetails(historyDetail.price))}</span></h4>
                       <h4>Inspection <span>$ 0</span></h4>
                       {/* <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p> */}
@@ -343,7 +327,7 @@ useEffect(() => {
                       {/* <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p> */}
                       
                       <div class="vehiclerighttotal">
-                        <h3>Total amount <span>$ {(Number(historyDetail.price)+ lotValue || 0) + (Number(getFeeDetails(historyDetail.price))) + 0 + (Number(historyDetail.transportation_charge || 0))}</span></h3>
+                        <h3>Total amount <span>$ {(Number(historyDetail.price)+  Number(historyDetail.lot_fee) || 0) + (Number(getFeeDetails(historyDetail.price))) + 0 + (Number(historyDetail.transportation_charge || 0))}</span></h3>
                       </div>
                     </div>
   
