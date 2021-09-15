@@ -43,7 +43,7 @@ const MyBids = () => {
 
     useEffect(() => {
         fetchMyBids();
-    }, []);
+    }, [highBid]);
 
     const toggleMakeBid = () => {
         setIsOpen(!isOpen);
@@ -76,7 +76,7 @@ const MyBids = () => {
             carMinBid: min_price,
             carId: car_id,
             carSavePurchase: save_purchase,
-            redirectPage: "cardetail",
+            redirectPage: "mybids",
             time: time,
             counter_buyerid: counterbuyerid,
             carMaxBid: max_price,
@@ -100,6 +100,16 @@ const MyBids = () => {
             state: {id:pathid,sellerDealerId:seller_dealer_id},
           });
     }
+
+    useEffect (()=>{
+
+        let intervalId;
+        intervalId = setInterval(() => {
+            fetchMyBids();
+        }, 30000)
+        return () => clearInterval(intervalId);
+    
+        },[])
 
     return (
         <main id="main" class="inner-page">
