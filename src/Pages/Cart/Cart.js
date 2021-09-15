@@ -192,7 +192,7 @@ const billofsales =(request) => {
                                 </div>					
                             
                                 <div class="vehicleimgleft col-lg-4">
-                                    <img src={cartDetail.image}/>
+                                    <img src={cartDetail.image} className="carImg"/>
                                 </div>
                                 <div class="vehicleimgright col-lg-8">
                                     <h3>{cartDetail.make} ({cartDetail.model}) <span>$ {cartDetail.price}</span></h3>

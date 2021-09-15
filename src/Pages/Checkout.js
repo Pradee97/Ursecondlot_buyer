@@ -120,7 +120,7 @@ const History = (props) => {
 				<div class="vehiclesheadspaydetails">
 					<div class="row">
 						<div class="vehicleimgleft col-lg-4">
-							<img src={paymentCar.image} />
+							<img src={paymentCar.image} className="carImg" />
 						</div>
 						<div class="vehicleimgright col-lg-8">
 							<h3>{paymentCar.make} ({paymentCar.model} model)+Lot Fee <span>$ {paymentCar.price}</span></h3>

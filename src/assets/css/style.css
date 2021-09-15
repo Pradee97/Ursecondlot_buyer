@@ -4847,10 +4847,10 @@ vehicles Summary
     width: 6px;
     height: 14px;
     border: solid #bd062c;
-        border-top-width: medium;
-        border-right-width: medium;
-        border-bottom-width: medium;
-        border-left-width: medium;
+    border-top-width: medium;
+    border-right-width: medium;
+    border-bottom-width: medium;
+    border-left-width: medium;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
 }
@@ -7546,6 +7546,7 @@ margin-top: -3px;
   background: #002768;
   color: #fff;
   text-decoration: none;
+  border: #002768 2px solid;
 }
 
 .carpoints .label{
@@ -8101,3 +8102,10 @@ ul#progressbar li p{
   margin: 0;
   font-size: 12px;
 }
+
+.vehicleimgleft img.carImg {
+  height: 200px;
+  max-width: 100%;
+  object-fit: cover;
+}
+
