@@ -20,6 +20,8 @@ const Cart = () => {
     const [paymentMode, setPaymentMode] = useState("");
     const [paymentCarList,setPaymentCarList] = useState("");
     const [numberCars,setNumberCars] = useState("");
+    const [paymentModeError,setPaymentModeError] = useState("");
+    const [alertError,setAlertError] = useState("");
 
     console.log(userDetails==="userDetails======",userDetails)
     let paySeparately={};
@@ -66,7 +68,18 @@ const billofsales =(request) => {
     // const request = mySelectedCarDetails
     setPaymentCarList(request)
     console.log("set payment request check",  request)
-    togglePopup();
+    
+    setAlertError("")
+
+    if(paymentMode==null){
+        setPaymentModeError("You need to select the Payment Mode")
+    }
+    if(request.length>0){
+        togglePopup();
+    }
+    else{
+       setAlertError("Without selecting any car you can't go for the Review")
+    }
     // return;
     // const state = API.post('billofsales/add', request);
     // state.then(res => {
@@ -256,14 +269,16 @@ const billofsales =(request) => {
                         <option value="Floor">Floor</option>
                         <option value="Credit Card">Credit Card</option>
                     </select>
+                    <p>{paymentModeError}</p>
                     {/* <label  htmlFor="state_id" className={"input-has-value"}>Select Payment Method</label> */}
                     </div>
             </div>
         </div>
+                   
                         <div class="vehicletotalbtns"> 
                             <a class="vehicletotal-btns" href="JavaScript:void(0)" disabled={!paymentMode} onClick={()=> paymentMode && reviewAndCheckout()  }>Review & Checkout</a>
                         </div>
-                        
+                        <p className="form-input-error">{alertError}</p>
                         
                     </div>
                 </div>
