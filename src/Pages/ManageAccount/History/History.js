@@ -353,8 +353,8 @@ console.log("request======",request)
                             
                       </div>
                       <div className="col-lg-6 form-group customCheckbox hideContent" id={`transporationDiv${historyDetail.car_id}`} >
-                            {historyDetail.transportation !=null && <><input type="checkbox" className="form-check d-inline"id="transporation" value={historyDetail?.transportation == 'yes' ? 'no' : 'yes'} onChange={(e)=>{setCarTransportation(e.target.value)}}/>
-                            <label htmlFor='transporation' className="form-check-label" >Transportation</label>  </>}
+                            <input type="checkbox" className="form-check d-inline"id="transporation" value={historyDetail?.transportation == 'yes' ? 'no' : 'yes'} onChange={(e)=>{setCarTransportation(e.target.value)}}/>
+                            <label htmlFor='transporation' className="form-check-label" >Transportation</label>
                             {/* <input type="checkbox" className="form-check d-inline" id="transporation" value={historyDetail.transportation == 'yes' ? 'no' : 'yes'} checked={historyDetail.transportation==="yes" ?true:false} onChange={(e)=>{setCarTransportation(e.target.value)}}/> 
                             <label htmlFor='transporation' className="form-check-label" >Transportation  </label>    */}
                             <div>
