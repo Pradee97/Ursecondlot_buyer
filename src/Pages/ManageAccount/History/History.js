@@ -8,7 +8,7 @@ import gasolinePump from '../../../assets/img/gasolinePump.svg';
 import appstore from '../../../assets/img/appstore.png';
 import googleplay from '../../../assets/img/googleplay.png';
 import $ from 'jquery';
-
+import './history.css'
 
  const History = () => {
 
@@ -27,7 +27,7 @@ import $ from 'jquery';
   const [lotFee, setLotFee] = useState("")
   const [lotValue, setLotValue] = useState("");
   const [historyEdit,setHistoryEdit] = useState(false);
-  const [carTransportation,setCarTransportation] = useState("")
+  const [carTransportation,setCarTransportation] = useState("no")
   const [transportationCharge,setTransportationCharge] = useState("")
 
   const redirecttoInspection=(pathid)=>{
@@ -155,35 +155,31 @@ const getFeeDetails = (maxPrice) =>{
       : 0
 }
 
-const HistoryUpdate = (carId,transportationCharge) =>{
+const HistoryUpdate = (carId,transportationCharge,transportation,divContent,HeaderContent) =>{
 
   let request = {
       buyer_dealer_id :userDetails.buyer_dealer_id,
       car_id:carId,
-      transportation:!carTransportation ? "no" : carTransportation,
+      transportation:!transportation ? "no" : transportation,
       transportation_charge: carTransportation == 'yes' ?  transportationCharge : 0,
   }
-
+  console.log("carTransportation====",carTransportation)
+console.log("request======",request)
+  // return
   API.post("editTransportation/update", request).then(response=>{
     setHistoryEdit(false)
-
+    document.getElementById(divContent).setAttribute("class", "col-lg-6 form-group customCheckbox hideContent");
+    document.getElementById(HeaderContent).setAttribute("class", "showContent");
   });
 
 }
 
-const HistoryEdit = (carId) =>{
-
-  console.log("check the car id coming or not in the edit on click",carId)
-
-      $(`#${carId}`).show();
- 
-
-
-}
-
-
+    const HistoryEdit = (divContent,HeaderContent) =>{
+      console.log("check the car id coming or not in the edit on click",divContent)
+      document.getElementById(divContent).setAttribute("class", "col-lg-6 form-group customCheckbox showContent");
+      document.getElementById(HeaderContent).setAttribute("class", "hideContent");
+    }
     return (
-
       <div>
       <main id="main" class="inner-page">
    
@@ -259,8 +255,9 @@ const HistoryEdit = (carId) =>{
                   
                   
             {historyDetail?.length>0? historyDetail
-            .map((historyDetail) =>   
-              <div class="lotfee-inner col-lg-12">
+            .map((historyDetail) =>   {
+              // setCarTransportation(historyDetail.transportation)
+              return <div class="lotfee-inner col-lg-12">
                 <div class="row">							
                   <div class="col-lg-3">
                     
@@ -347,28 +344,30 @@ const HistoryEdit = (carId) =>{
                     <p class="date ml-0">Purchased on {historyDetail.sold_date?.substring(0,10)}</p>
                     
                     <div class="vehicleimgright col-lg-12">
-                      <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>HistoryEdit(`transporation${historyDetail.car_id}`)}>Edit</a></p>
+                      <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>HistoryEdit(`transporationDiv${historyDetail.car_id}`,`transporationHeader${historyDetail.car_id}`)}>Edit</a></p>
                       <h3>Vehicle Price + Lot Fee <span>$ {Number(historyDetail.price)+ Number(historyDetail.lot_fee)}</span></h3>
                       <h4> Buy Fee <span> $ {Number(getFeeDetails(historyDetail.price))}</span></h4>
                       <h4>Inspection <span>$ 0</span></h4>
                       {/* <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p> */}
-                      {historyEdit?
-                      <div className="col-lg-6 form-group customCheckbox">
-                            <input type="checkbox" className="form-check d-inline " id={`transporation${historyDetail.car_id}`} value={historyDetail.transportation == 'yes' ? 'no' : 'yes'} checked={historyDetail.transportation==="yes" ? true:false} onChange={(e)=>{setCarTransportation(e.target.value)}}
-                            />                      
-                            <label htmlFor={historyDetail.car_id} className="form-check-label" >Transportation  </label>   
+                      <div className="">
+                            
+                      </div>
+                      <div className="col-lg-6 form-group customCheckbox hideContent" id={`transporationDiv${historyDetail.car_id}`} >
+                            {historyDetail.transportation !=null && <><input type="checkbox" className="form-check d-inline"id="transporation" value={historyDetail?.transportation == 'yes' ? 'no' : 'yes'} onChange={(e)=>{setCarTransportation(e.target.value)}}/>
+                            <label htmlFor='transporation' className="form-check-label" >Transportation</label>  </>}
+                            {/* <input type="checkbox" className="form-check d-inline" id="transporation" value={historyDetail.transportation == 'yes' ? 'no' : 'yes'} checked={historyDetail.transportation==="yes" ?true:false} onChange={(e)=>{setCarTransportation(e.target.value)}}/> 
+                            <label htmlFor='transporation' className="form-check-label" >Transportation  </label>    */}
                             <div>
                             <div className="col-lg-6 form-group">
                                 <span>${historyDetail.transportation_charge || 0} </span>                              
                             </div>
                               <div>
-                              <a onClick={()=>HistoryUpdate(historyDetail.car_id,historyDetail.transportation_charge)}>update</a>   
+                              <button onClick={()=>HistoryUpdate(historyDetail.car_id,historyDetail.transportation_charge,historyDetail.transportation,`transporationDiv${historyDetail.car_id}`,`transporationHeader${historyDetail.car_id}`)}>update</button>   
                               </div>
                             </div>                        
                       </div>
-
-                        
-                        :<h4>Transportation <span>$ {historyDetail.transportation_charge || 0}</span></h4>}
+                      <h4 className='showContent' id={`transporationHeader${historyDetail.car_id}`}>Transportation <span>$ {historyDetail.transportation_charge || 0}</span></h4>
+             
 
                       
 
@@ -381,7 +380,7 @@ const HistoryEdit = (carId) =>{
   
                   </div>
                 </div>
-              </div>)
+              </div>})
                     :""}          
           
           <div><a class="load-more-btn" href="#">Load More</a></div>
