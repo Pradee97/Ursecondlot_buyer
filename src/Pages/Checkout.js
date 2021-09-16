@@ -162,7 +162,7 @@ const History = (props) => {
 		  
 	  
 	  <div class="col-md-12 btns">
-		  <button className="cta-btns" onClick={redirect} >OK</button>      
+		  <a className="cta-btns" href="/cart" >OK</a>      
 	  </div> 
   </div>
   </div>
