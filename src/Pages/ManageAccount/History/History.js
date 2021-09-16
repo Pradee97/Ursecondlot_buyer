@@ -1,12 +1,13 @@
 import React , {  useState, useEffect } from 'react';
 import { useHistory} from "react-router-dom";
 import ls from 'local-storage';
-import API from "../../Services/BaseService";
-import cars01 from '../../assets/img/cars01.png';
-import speedometer from '../../assets/img/speedometer.svg';
-import gasolinePump from '../../assets/img/gasolinePump.svg';
-import appstore from '../../assets/img/appstore.png';
-import googleplay from '../../assets/img/googleplay.png';
+import API from "../../../Services/BaseService";
+import cars01 from '../../../assets/img/cars01.png';
+import speedometer from '../../../assets/img/speedometer.svg';
+import gasolinePump from '../../../assets/img/gasolinePump.svg';
+import appstore from '../../../assets/img/appstore.png';
+import googleplay from '../../../assets/img/googleplay.png';
+import $ from 'jquery';
 
 
  const History = () => {
@@ -25,6 +26,9 @@ import googleplay from '../../assets/img/googleplay.png';
   const [noCars,setNoCars] = useState("");
   const [lotFee, setLotFee] = useState("")
   const [lotValue, setLotValue] = useState("");
+  const [historyEdit,setHistoryEdit] = useState(false);
+  const [carTransportation,setCarTransportation] = useState("")
+  const [transportationCharge,setTransportationCharge] = useState("")
 
   const redirecttoInspection=(pathid)=>{
     //   history.push("/Inspection/"+pathid);
@@ -149,6 +153,32 @@ const getFeeDetails = (maxPrice) =>{
           } 
           )[0]?.fee || 0
       : 0
+}
+
+const HistoryUpdate = (carId,transportationCharge) =>{
+
+  let request = {
+      buyer_dealer_id :userDetails.buyer_dealer_id,
+      car_id:carId,
+      transportation:!carTransportation ? "no" : carTransportation,
+      transportation_charge: carTransportation == 'yes' ?  transportationCharge : 0,
+  }
+
+  API.post("editTransportation/update", request).then(response=>{
+    setHistoryEdit(false)
+
+  });
+
+}
+
+const HistoryEdit = (carId) =>{
+
+  console.log("check the car id coming or not in the edit on click",carId)
+
+      $(`#${carId}`).show();
+ 
+
+
 }
 
 
@@ -317,13 +347,31 @@ const getFeeDetails = (maxPrice) =>{
                     <p class="date ml-0">Purchased on {historyDetail.sold_date?.substring(0,10)}</p>
                     
                     <div class="vehicleimgright col-lg-12">
-                      <p class="editbtn m-0"><a class="" href="#">Edit</a></p>
+                      <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>HistoryEdit(`transporation${historyDetail.car_id}`)}>Edit</a></p>
                       <h3>Vehicle Price + Lot Fee <span>$ {Number(historyDetail.price)+ Number(historyDetail.lot_fee)}</span></h3>
                       <h4> Buy Fee <span> $ {Number(getFeeDetails(historyDetail.price))}</span></h4>
                       <h4>Inspection <span>$ 0</span></h4>
                       {/* <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p> */}
+                      {historyEdit?
+                      <div className="col-lg-6 form-group customCheckbox">
+                            <input type="checkbox" className="form-check d-inline " id={`transporation${historyDetail.car_id}`} value={historyDetail.transportation == 'yes' ? 'no' : 'yes'} checked={historyDetail.transportation==="yes" ? true:false} onChange={(e)=>{setCarTransportation(e.target.value)}}
+                            />                      
+                            <label htmlFor={historyDetail.car_id} className="form-check-label" >Transportation  </label>   
+                            <div>
+                            <div className="col-lg-6 form-group">
+                                <span>${historyDetail.transportation_charge || 0} </span>                              
+                            </div>
+                              <div>
+                              <a onClick={()=>HistoryUpdate(historyDetail.car_id,historyDetail.transportation_charge)}>update</a>   
+                              </div>
+                            </div>                        
+                      </div>
+
+                        
+                        :<h4>Transportation <span>$ {historyDetail.transportation_charge || 0}</span></h4>}
+
                       
-                      <h4>Transportation <span>$ {historyDetail.transportation_charge || 0}</span></h4>
+
                       {/* <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p> */}
                       
                       <div class="vehiclerighttotal">
