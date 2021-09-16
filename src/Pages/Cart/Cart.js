@@ -188,8 +188,7 @@ const billofsales =(request) => {
                 <div class="col-lg-8 col-md-8">
                     <div class="vehiclesheads">
                     {/* <h2>Number of Vehicles- 2<span>Total amount- <b>$ {cartDetail.length>0 ? cartDetail.reduce((acc,{max_price,transportation,transportation_charge})=>acc + (Number(max_price) + Number(transportation === 'yes' ? transportation_charge : 0) + Number(getFeeDetails(max_price||0))) ,0) : 0}</b></span></h2> */}
-                    <h2>Number of Vehicles- {numberCars}<span>Total amount- <b>$ {cartDetail?.length>0 && cartDetail
-                    .reduce((acc, curr) => acc+((Number(curr.price) || 0) +  Number(curr.transportation === 'yes' ? curr.transportation_charge : 0) + Number(getFeeDetails(curr.price))),0)}</b></span></h2>   
+                    <h2>Number of Vehicles- {numberCars}<span>Total amount- <b>$ {mySelectedCarTotal()}</b></span></h2>   
                 </div>
                 {cartDetail?.length>0 && cartDetail
                     .map((cartDetail,index) =>{
@@ -249,8 +248,7 @@ const billofsales =(request) => {
                 <div class="col-lg-4 col-md-8">
                     <div class="vehicletotal">
                         <h2>Total</h2>
-                        <h3>Total Amount <span>${cartDetail?.length>0 && cartDetail
-                    .reduce((acc, curr) => acc+((Number(curr.price) || 0) +  Number(curr.transportation === 'yes' ? curr.transportation_charge : 0) + Number(getFeeDetails(curr.price))),0)}</span></h3>
+                        <h3>Total Amount <span>$ {mySelectedCarTotal()}</span></h3>
                         <h4>Select Payment Method</h4>
                         {/* <div class="input-group">
                             <select id="vehicleselect"  class="form-control custom-select browser-default">
