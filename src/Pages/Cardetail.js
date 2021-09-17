@@ -438,7 +438,8 @@ return(
 							<div class="row">	
 							<div class="col-md-12 cars-detail-ins">
 	        					<div class="cars-detail-views">
-									<a class="car-btns carcheck" onClick={()=>redirecttoInspection(carDetail[0].car_id)}><img src={carcheck} alt=""/>View Inspection</a>
+									<a class="car-btns carcheck" onClick={()=>redirecttoInspection(carDetail[0].car_id)}>View Inspection</a>
+									<img src={carcheck} alt=""/>
 									{/* {carDetail[0].high_bid=="" || carDetail[0].high_bid==null || carDetail[0].high_bid==undefined?"":
 									<a class="car-btns-primary" href=""><img src={tag} alt=""/>High Bid :<span> $ {carDetail[0].high_bid}</span></a>
 									} */}
@@ -488,11 +489,22 @@ return(
 						
 							<div className="offerDetail">
 							{carDetail[0].buyer_high_bid=="" || carDetail[0].buyer_high_bid==null || carDetail[0].buyer_high_bid==undefined?"":
+
 							<div>
 								<h3>Last Bid</h3>
 									<div className="offerPrice">$ {carDetail[0].buyer_high_bid}</div>						
 									<p>by <span>Me</span></p>
+
+								{carDetail[0].proxy_status=="yes"?
+									<div className="oops">
+									
+										<img src={oops}  alt=""/>
+									<p>Oops! Somebody offered that first. Its Tide Bid, you must bid more</p>
+									</div>
+								:""} 
+
 							</div>
+
 							}
 							</div>
 							<hr></hr>
@@ -502,18 +514,15 @@ return(
 								<h3>High Bid</h3>
 								<div className="offerPrice">$ {carDetail[0].high_bid}</div>
 								{carDetail[0].buyer_high_bid==carDetail[0].high_bid?
-								<p>by <span>Me</span></p>:
-								<p>by <span>{carDetail[0].high_bid_buyer_name}</span></p>
-								}
+								<p>by <span>Me</span></p>
+								:<p>by <span>{carDetail[0].high_bid_buyer_name}</span></p>								
+								}										
 								</div>
 								}
 								<div class="carBrand">	        				
 									<img src={carDetail[0].high_bid_buyer_logo}  alt=""/>
 								</div>
-							<div className="oops">
-							<img src={oops}  alt=""/>
-								<p>Ooopss! Somebody offered that first. Its Tide Bid, you must bid more</p>
-							</div>
+							
 								
 							</div>
 							
@@ -616,7 +625,7 @@ return(
 
 				<p className="details buyitnow">
 					{moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined || moreCar.buy_it_now== 0?"":
-						<a className="cta-btns"onClick={()=>setBuyItNowValue(moreCar.buy_it_now,moreCar.car_id)} >Buy It Now $ {moreCar.buy_it_now}</a>
+						<a className="cta-btns"onClick={()=>setBuyItNowValue(moreCar.buy_it_now,moreCar.car_id,moreCar.image,moreCar.model,moreCar.make,moreCar.year,moreCar.image,moreCar.model,moreCar.make,moreCar.year)} >Buy It Now $ {moreCar.buy_it_now}</a>
 					}
 				</p> 
 
@@ -680,7 +689,7 @@ return(
 									
 									<p className="details buyitnow">
                                                 {moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined || moreCar.buy_it_now== 0?"":
-                                                    <a className="cta-btns" onClick={()=>setBuyItNowValue(moreCar.buy_it_now,moreCar.car_id)}>Buy It Now $ {moreCar.buy_it_now}</a>
+                                                    <a className="cta-btns" onClick={()=>setBuyItNowValue(moreCar.buy_it_now,moreCar.car_id,moreCar.image,moreCar.model,moreCar.make,moreCar.year,moreCar.image,moreCar.model,moreCar.make,moreCar.year)}>Buy It Now $ {moreCar.buy_it_now}</a>
                                                 }
                                                 </p> 
 

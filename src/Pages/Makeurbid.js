@@ -148,7 +148,7 @@ console.log("check props",props)
           });
         }
         else if(redirectPage=="suggestedcars") {
-        <a href="/suggestedcars"></a>
+            history.push("/suggestedcars")
         }
         else if(redirectPage=="inventorycars") {
         history.push("/inventorycars")
@@ -176,6 +176,7 @@ console.log("check props",props)
         }
         
         props.toggle()
+        window.location.reload()
     }
 
  
@@ -186,19 +187,19 @@ console.log("check props",props)
         setProxyBidError("")
         setTermsError("")
 
-        if(!highBid || !proxyBid){
+        if(!highBid){
 
-            setProxyBidError("You must give High Bid or Maximum proxy Bid" )
+            setHighBidError("High Bid price should not be empty" )
             return;
         }
-        if(carHighBid !== highBid){
+        // if((carHighBid || carMinBid)!== highBid){
 
-            if((highBid ) < (Number(carHighBid+50)===null || 0 ?  Number(carMinBid+50) : Number(carHighBid+50) ) ){
+           if(highBid < (!Number(carHighBid+50) || Number(carHighBid+50)===null ?  Number(carMinBid+50) : Number(carHighBid+50) ) ){
 
             setHighBidError("High Bid price should not be lower than " +Number(carHighBid+50))
             return;
             } 
-        }
+        // }
         
         if((Number(carBuyItNow)!==0) && (Number(carBuyItNow) < Number(highBid))){
 
@@ -398,7 +399,7 @@ console.log("check props",props)
 
 
                             <div class="form-group col-lg-6 col-md-6 highbidtbox">
-
+                           
                                 <div class="tbox">
 
                         <i>$</i><input type="text" step="50" id="highBid" class="textbox"  placeholder="Your New Bid"  onChange={(e)=>highBidValidation(e.target.value)}></input>                             
