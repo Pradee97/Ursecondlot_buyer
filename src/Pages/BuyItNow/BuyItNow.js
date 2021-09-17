@@ -150,12 +150,11 @@ if(!confirmationFlag){
                                 {/* <i class="icofont-car"></i> */}
                                 <p className="text-center"> Are you sure want to buy this Unit <b>  </b> </p>
                                 </div>
-                                <div class="slider-banner-image">
-                                  <img  src={carImage} alt="no image" /> 
+                                <div class="popImage">
+                                  <img  src={carImage} alt="no image" /> <br></br>
+                                  <a href="#">{carMake}  ({carModel} - {carYear} model)</a>
                                 </div> 
-                                <div class="cars-content">		
-			                            <h3><a href="#">{carMake}  ({carModel} - {carYear} model)</a></h3>
-                                </div>
+                                
                                 <div class="col-md-12 btns">
                                   <button className="cta-btns" onClick={()=>{setConfirmationFlag(false); props.toggle()}}>Cancel</button>    
                                   <button  className="cta-btns" onClick={handleBuyItNow} >Confirm</button>    

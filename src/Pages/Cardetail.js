@@ -12,7 +12,9 @@ import gasolinePump from '../assets/img/gasolinePump.svg';
 import car from '../assets/img/car.svg';
 import book from '../assets/img/book.svg';
 import barcode from '../assets/img/barcode.svg';
+import carcheck from '../assets/img/carcheck.png';
 import tag from '../assets/img/tag.svg';
+import oops from '../assets/img/oops.jpg';
 import Path from '../assets/img/Path.svg';
 import transmission from '../assets/img/manual-transmission.svg';
 import drivetrain from '../assets/img/drivetrain.svg';
@@ -436,7 +438,7 @@ return(
 							<div class="row">	
 							<div class="col-md-12 cars-detail-ins">
 	        					<div class="cars-detail-views">
-									<a class="car-btns" onClick={()=>redirecttoInspection(carDetail[0].car_id)}>View Inspection</a>
+									<a class="car-btns carcheck" onClick={()=>redirecttoInspection(carDetail[0].car_id)}><img src={carcheck} alt=""/>View Inspection</a>
 									{/* {carDetail[0].high_bid=="" || carDetail[0].high_bid==null || carDetail[0].high_bid==undefined?"":
 									<a class="car-btns-primary" href=""><img src={tag} alt=""/>High Bid :<span> $ {carDetail[0].high_bid}</span></a>
 									} */}
@@ -508,8 +510,9 @@ return(
 								<div class="carBrand">	        				
 									<img src={carDetail[0].high_bid_buyer_logo}  alt=""/>
 								</div>
-							<div>
-								<p>Ooopss! <img src={carDetail[0].high_bid_buyer_logo}  alt=""/> Somebody offered that first. Its Tide Bid, you must bid more</p>
+							<div className="oops">
+							<img src={oops}  alt=""/>
+								<p>Ooopss! Somebody offered that first. Its Tide Bid, you must bid more</p>
 							</div>
 								
 							</div>

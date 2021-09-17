@@ -7848,7 +7848,7 @@ input[type="checkbox"]:disabled + label{
 .offerDetailsBlock{
   text-align: left;
   font-size: 16px;
-  background: #FAFAFA;
+  background: #fff;
   padding: 20px;
   border-radius: 5px;
 }
@@ -8256,4 +8256,22 @@ ul#progressbar li p{
 .historyPage .priceBlock p.date{
   padding-left: 0;
 }
+.oops{
+  text-align: center;
+}
 
+.oops img{
+  margin: 5px;
+  width: 100px;
+}
+
+.buynowPopup .popImage img{
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.carcheck img{
+  width: 40px;
+  margin-right: 10px;
+}
