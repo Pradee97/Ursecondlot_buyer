@@ -29,7 +29,9 @@ console.log("check props",props)
     const [carProxyBid,setCarProxyBid] = useState(props.setMakeBitValue.carProxyBid);
     const [make,setMake] = useState(props.setMakeBitValue.make);
     const [redirectPage,setRedirectPage] = useState(props.setMakeBitValue.redirectPage);
-    const [carHighBid,setCarHighBid] = useState(!props.setMakeBitValue.carHighBid ? props.setMakeBitValue.carMinBid : props.setMakeBitValue.carHighBid);  
+    // const [carHighBid,setCarHighBid] = useState(!props.setMakeBitValue.carHighBid ? props.setMakeBitValue.carMinBid : props.setMakeBitValue.carHighBid); 
+    const [carHighBid,setCarHighBid] = useState(props.setMakeBitValue.carHighBid);  
+
     const [carMinBid,setCarMinBid] = useState(props.setMakeBitValue.carMinBid);
     const [time,setTime] = useState(props.setMakeBitValue.time);
     const [counterBuyerId,setCounterBuyerId] = useState(props.setMakeBitValue.counter_buyerid);
@@ -146,7 +148,7 @@ console.log("check props",props)
           });
         }
         else if(redirectPage=="suggestedcars") {
-        history.push("/suggestedcars")
+        <a href="/suggestedcars"></a>
         }
         else if(redirectPage=="inventorycars") {
         history.push("/inventorycars")
@@ -183,16 +185,19 @@ console.log("check props",props)
         setHighBidError("")
         setProxyBidError("")
         setTermsError("")
-        if(!highBid || !carHighBid){
 
-            setHighBidError("High Bid price should not be empty" )
+        if(!highBid || !proxyBid){
+
+            setProxyBidError("You must give High Bid or Maximum proxy Bid" )
             return;
         }
-        else if (highBid < (!Number(carHighBid+50) || Number(carHighBid+50)===0 ?  Number(carMinBid+50) : Number(carHighBid+50) ) ){
+        if(carHighBid !== highBid){
 
-            setHighBidError("High Bid price should not lower than " +Number(carHighBid+50))
+            if((highBid ) < (Number(carHighBid+50)===null || 0 ?  Number(carMinBid+50) : Number(carHighBid+50) ) ){
+
+            setHighBidError("High Bid price should not be lower than " +Number(carHighBid+50))
             return;
-            
+            } 
         }
         
         if((Number(carBuyItNow)!==0) && (Number(carBuyItNow) < Number(highBid))){
