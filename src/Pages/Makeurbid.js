@@ -192,13 +192,23 @@ console.log("check props",props)
             setHighBidError("High Bid price should not be empty" )
             return;
         }
-        // if((carHighBid || carMinBid)!== highBid){
+        // if((carHighBid )!== highBid){
 
-           if(highBid < (!Number(carHighBid+50) || Number(carHighBid+50)===null ?  Number(carMinBid+50) : Number(carHighBid+50) ) ){
+        //    if(highBid < (!Number(carHighBid+50) || Number(carHighBid+50)===null ?  Number(carMinBid+50) : Number(carHighBid+50) ) ){
+            // if(!carHighBid ){alert("hi logs")}
+         
+//first time
+            if(!carHighBid && highBid < Number(carMinBid+50) ){
 
-            setHighBidError("High Bid price should not be lower than " +Number(carHighBid+50))
-            return;
-            } 
+                setHighBidError("High Bid price should not be lower than " +Number(carMinBid+50))
+                return;
+                } 
+
+//second time
+                if(carHighBid &&  Number(highBid ) < Number(carHighBid) ){
+                    setHighBidError("High Bid price should not be lower than " +Number(carHighBid+50))
+                    return;
+                } 
         // }
         
         if((Number(carBuyItNow)!==0) && (Number(carBuyItNow) < Number(highBid))){
