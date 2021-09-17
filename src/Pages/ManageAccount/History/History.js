@@ -266,7 +266,7 @@ console.log("request======",request)
                       <p class="billsalesno">Bill Of sale #{historyDetail.bill_of_sales_id}</p>
                     </div>
                       <div className="historyImg">
-                        <img src={historyDetail.logo} class="carImg" alt="..."/>
+                        <img src={historyDetail.car_image} class="carImg" alt="..."/>
                         </div>
                         <div class="cars-tag">
                         <h4>{historyDetail.deal_name}</h4>

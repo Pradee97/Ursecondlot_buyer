@@ -16,6 +16,11 @@ const BuyNow=(props)=>{
     const [password,setPassword] = useState("");
     const [id,setId] = useState(props.setBuyItNowValue.carId);
     const [carBuyItNow,setCarBuyItNow] = useState(props.setBuyItNowValue.buyItNow);
+    const [carMake,setCarMake] = useState(props.setBuyItNowValue.make);
+    const [carModel,setCarModel] = useState(props.setBuyItNowValue.model);
+    const [carImage,setCarImage] = useState(props.setBuyItNowValue.image);
+    const [carYear,setCarYear] = useState(props.setBuyItNowValue.year);
+    console.log("check the carMake in the buy it now page",carModel)
     // const { id } = useParams();
     const userDetails=ls.get('userDetails');
     const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
@@ -142,10 +147,15 @@ if(!confirmationFlag){
                             </div>:
                             <div>
                                 <div class="col-md-12 text-center">
-                                <i class="icofont-car"></i>
-                                <p className="text-center"> Are you sure want to buy this car <b>  </b> </p>
+                                {/* <i class="icofont-car"></i> */}
+                                <p className="text-center"> Are you sure want to buy this Unit <b>  </b> </p>
                                 </div>
-                                
+                                <div class="slider-banner-image">
+                                  <img  src={carImage} alt="no image" /> 
+                                </div> 
+                                <div class="cars-content">		
+			                            <h3><a href="#">{carMake}  ({carModel} - {carYear} model)</a></h3>
+                                </div>
                                 <div class="col-md-12 btns">
                                   <button className="cta-btns" onClick={()=>{setConfirmationFlag(false); props.toggle()}}>Cancel</button>    
                                   <button  className="cta-btns" onClick={handleBuyItNow} >Confirm</button>    
