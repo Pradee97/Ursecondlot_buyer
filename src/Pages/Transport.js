@@ -219,7 +219,7 @@ return (
 							<div class="col-lg-4 col-md-4 bordercontent">
 								<div class="pickupdetailcontent">
 									<p>Pickup Point</p>
-									<p class="subhead">{pickUp.pickup_address}</p>
+									<p class="subhead">{pickUp.pickup_address},{pickUp.seller_state_name},{pickUp.seller_zipcode}</p>
 								</div>						
 							</div>
 							<div class="col-lg-4 col-md-4 bordercontent">
@@ -284,13 +284,13 @@ return (
 								<div class="col-lg-2 col-md-2 bordercontent">
 									<div class="modeldetailcontent">
 										<p>Pickup Point</p>
-										<p class="subhead">{pickUp.pickup_address}</p>
+										<p class="subhead">{pickUp.pickup_address},{pickUp.seller_state_name},{pickUp.seller_zipcode}</p>
 									</div>						
 								</div>
 								<div class="col-lg-2 col-md-2 bordercontent">
 									<div class="modeldetailcontent">
 										<p>Drop Point</p>
-										<p class="subhead">{pickUp.dropPonit_address}</p>
+										<p class="subhead">{pickUp.dropPonit_address},{pickUp.buyer_city_name},{pickUp.buyer_zipcode}</p>
 									</div>						
 								</div>
 								<div class="col-lg-2 col-md-2 bordercontent">
@@ -354,13 +354,13 @@ return (
 								<div class="col-lg-2 col-md-2 bordercontent">
 									<div class="modeldetailcontent">
 										<p>Pickup Point</p>
-										<p class="subhead">{pickUp.pickup_address}</p>
+										<p class="subhead">{pickUp.pickup_address},{pickUp.seller_state_name},{pickUp.seller_zipcode}</p>
 									</div>						
 								</div>
 								<div class="col-lg-2 col-md-2 bordercontent">
 									<div class="modeldetailcontent">
 										<p>Drop Point</p>
-										<p class="subhead">{pickUp.dropPonit_address}</p>
+										<p class="subhead">{pickUp.dropPonit_address},{pickUp.buyer_city_name},{pickUp.buyer_zipcode}</p>
 									</div>						
 								</div>
 								<div class="col-lg-2 col-md-2 bordercontent">

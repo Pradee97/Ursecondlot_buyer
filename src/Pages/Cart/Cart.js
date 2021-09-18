@@ -210,10 +210,13 @@ const billofsales =(request) => {
                                     <h3>{cartDetail.make} ({cartDetail.model} - {cartDetail.year} model) <span>$ {cartDetail.price}</span></h3>
                                     <h4>Buy Fee <span>$ {getFeeDetails(cartDetail.price)}</span></h4>
                                     <div class="form-group input-group ">
-                                        <input type="checkbox" id="" value={cartDetail.transportation == 'yes' ? 'no' : 'yes'}   checked={cartDetail.transportation== 'yes' ? true : false}/><label for="paytransportation">Transportation</label><span>$ {cartDetail.transportation === 'yes' ? cartDetail.transportation_charge : 0}</span>
+                                    {/* <input type="checkbox" id="" value={cartDetail.transportation == 'yes' ? 'no' : 'yes'}   checked={cartDetail.transportation== 'yes' ? true : false}/><label for="paytransportation">Transportation</label><span>$ {cartDetail.transportation === 'yes' ? cartDetail.transportation_charge : 0}</span> */}
+
+                                        <input type="checkbox" id="" value={cartDetail.transportation == 'yes' ? 'no' : 'yes'}   checked={cartDetail.transportation== 'yes' ? true : false}/><label for="paytransportation">Transportation</label><span>$ {cartDetail.transportation === 'yes' ? 300 : 0}</span>
                                     </div>
                                     <div class="vehiclerighttotal">
-                                        <h3>Total amount <span>$ {(Number(cartDetail.price) || 0) +  Number(cartDetail.transportation === 'yes' ? cartDetail.transportation_charge : 0) + Number(getFeeDetails(cartDetail.price))}</span></h3>
+                                    {/* <h3>Total amount <span>$ {(Number(cartDetail.price) || 0) +  Number(cartDetail.transportation === 'yes' ? cartDetail.transportation_charge : 0) + Number(getFeeDetails(cartDetail.price))}</span></h3> */}
+                                        <h3>Total amount <span>$ {(Number(cartDetail.price) || 0) +  Number(cartDetail.transportation === 'yes' ? 300 : 0) + Number(getFeeDetails(cartDetail.price))}</span></h3>
                                     </div>
                                 </div>
                             </div>
