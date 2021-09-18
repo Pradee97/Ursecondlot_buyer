@@ -19,7 +19,7 @@ const InVoice = (props) => {
     const [sellerInfo,setSellerInfo] = useState("");
     const [feeDetails, setFeeDetails] = useState("");
     
-    const { sellerDealerID,vechileprice,lotFee,billOfSales,gatePassId,Date,Make,Model,Year,transportationCharge} = props.location.state;
+    const {sellerDealerID,vechileprice,lotFee,billOfSales,gatePassId,Date,Make,Model,Year,transportationCharge} = props.location.state;
  console.log("hello",sellerDealerID,vechileprice,lotFee,billOfSales,gatePassId,Date);
     
      function fetchBuyerDetails() {
@@ -225,6 +225,7 @@ const InVoice = (props) => {
                
                
                <td><span>{Number(vechileprice+lotFee)+Number(getFeeDetails())+Number(transportationCharge)+0+0}</span></td>
+               
              </tr>
              </tfoot>
             
