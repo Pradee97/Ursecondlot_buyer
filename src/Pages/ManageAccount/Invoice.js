@@ -19,7 +19,7 @@ const InVoice = (props) => {
     const [sellerInfo,setSellerInfo] = useState("");
     const [feeDetails, setFeeDetails] = useState("");
     
-    const {sellerDealerID,vechileprice,lotFee,billOfSales,gatePassId,Date,Make,Model,Year,transportationCharge} = props.location.state;
+    const {sellerDealerID,vechileprice,lotFee,billOfSales,gatePassId,Date,Make,Model,Year,transportationCharge,Transportation} = props.location.state;
  console.log("hello",sellerDealerID,vechileprice,lotFee,billOfSales,gatePassId,Date);
     
      function fetchBuyerDetails() {
@@ -206,7 +206,9 @@ const InVoice = (props) => {
              </tr>
              <tr>
                <td>Transportation</td>
-               <td><span>$ {transportationCharge}</span></td>
+               {/* <td><span>$ {transportationCharge}</span></td> */}
+                {/* <td><span>$ {Transportation == 'yes' ? 300 : 0}</span></td> */}
+                 <td><span>$ { 300 || 0}</span></td>
              </tr>
              <tr>
                <td>Other Charges</td>
@@ -224,7 +226,9 @@ const InVoice = (props) => {
                :<td> Amount due from the buyer</td>}
                
                
-               <td><span>{Number(vechileprice+lotFee)+Number(getFeeDetails())+Number(transportationCharge)+0+0}</span></td>
+               {/* <td><span>{Number(vechileprice+lotFee)+Number(getFeeDetails())+Number(transportationCharge)+0+0}</span></td> */}
+               {/* <td><span>{Number(vechileprice+lotFee)+Number(getFeeDetails())+Number(Transportation == 'yes' ? 300 : 0)+0+0}</span></td> */}
+               <td><span>{Number(vechileprice+lotFee)+Number(getFeeDetails())+Number( 300 || 0)+0+0}</span></td>
                
              </tr>
              </tfoot>
