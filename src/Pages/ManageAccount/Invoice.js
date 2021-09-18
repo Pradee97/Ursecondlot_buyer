@@ -153,9 +153,9 @@ const InVoice = (props) => {
            
             
                <tr><td><span>Name</span>{dealerInfo.dealer_name}</td></tr>	
-               <tr><td><span>Address </span>{dealerInfo.address}</td></tr>	
-               <tr><td><span>Contact </span>{sellerInfo.phone_no }</td></tr>	
-               <tr><td><span>Email id </span>{sellerInfo.email}</td></tr>		  		  
+               <tr><td><span>Address </span>{dealerInfo.address},{dealerInfo.state_name},{dealerInfo.city_name},{dealerInfo.zipcode}</td></tr>	
+               <tr><td><span>Contact </span>{dealerInfo.phone_no }</td></tr>	
+               <tr><td><span>Email id </span>{dealerInfo.email}</td></tr>		  		  
             
               
                        
@@ -174,7 +174,7 @@ const InVoice = (props) => {
             .map((sellerInfo) =>
             <>
                <tr><td><span>Name </span>{sellerInfo.dealer_name}</td></tr>
-               <tr><td><span>pickup adresss </span>{sellerInfo.address}</td></tr>
+               <tr><td><span>pickup adresss </span>{sellerInfo.address},{sellerInfo.state_name},{sellerInfo.city_name},{sellerInfo.zipcode}</td></tr>
                <tr><td><span>Contact </span>{sellerInfo.phone_no}</td></tr>
                <tr><td><span>Email id </span>{sellerInfo.email}</td></tr>
                   </>    
