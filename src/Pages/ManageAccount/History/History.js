@@ -161,7 +161,8 @@ const HistoryUpdate = (carId,transportationCharge,transportation,divContent,Head
       buyer_dealer_id :userDetails.buyer_dealer_id,
       car_id:carId,
       transportation:!transportation ? "no" : transportation,
-      transportation_charge: carTransportation == 'yes' ?  transportationCharge : 0,
+      // transportation_charge: carTransportation == 'yes' ?  transportationCharge : 0,
+      transportation_charge: carTransportation == 'yes' ?  300 : 0,
   }
   console.log("carTransportation====",carTransportation)
 console.log("request======",request)
@@ -359,7 +360,8 @@ console.log("request======",request)
                             <label htmlFor='transporation' className="form-check-label" >Transportation  </label>    */}
                             <div>
                             <div className="col-lg-6 form-group">
-                                <span>${historyDetail.transportation_charge || 0} </span>                              
+                                {/* <span>${historyDetail.transportation_charge || 0} </span>   */}
+                                <span>${300 || 0} </span>                            
                             </div>
                               <div>
                               <button onClick={()=>HistoryUpdate(historyDetail.car_id,historyDetail.transportation_charge,historyDetail.transportation,`transporationDiv${historyDetail.car_id}`,`transporationHeader${historyDetail.car_id}`)}>update</button>   

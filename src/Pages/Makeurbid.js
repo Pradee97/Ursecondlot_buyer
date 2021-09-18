@@ -253,7 +253,8 @@ console.log("check props",props)
             active:1,
             createdBy:JSON.parse(localStorage.getItem("userDetails")).buyer_id,
             updatedBy:JSON.parse(localStorage.getItem("userDetails")).buyer_id,
-            transportation_charge: carTransportation == 'yes' ?  transportationFee : 0,
+            // transportation_charge: carTransportation == 'yes' ?  transportationFee : 0,
+            transportation_charge: carTransportation == 'yes' ?  300 : 0,
             save_purchase:!carSavePurchase ? "no" : carSavePurchase,// !carTransportation ? "no" : carTransportation,//
             save_policy: !carSavePolicy? "no": carSavePolicy
         }
@@ -491,7 +492,8 @@ console.log("check props",props)
                                     </div>
 
                                     <div className="col-lg-6 form-group">
-                                        <span>${transportationFee || 0} </span>                              
+                                        {/* <span>${transportationFee || 0} </span> */}
+                                        <span>$ {300 || 0} </span>                              
                                     </div>
 
                                     <div className="col-lg-12 form-group customCheckbox">
@@ -524,11 +526,13 @@ console.log("check props",props)
                                             </div>
                                             <div class="divRow">
                                                 <div class="divCell">Transportation</div>
-                                                <div class="divCell">$ {carTransportation === 'yes' ? transportationFee : 0}</div>
+                                                {/* <div class="divCell">$ {carTransportation === 'yes' ? transportationFee : 0}</div> */}
+                                                <div class="divCell">$ {carTransportation === 'yes' ? 300 : 0}</div>
                                             </div>
                                             <div class="footRow divRow">
                                                 <div class="divCell">Total</div>
-                                                <div  class="divCell">$ {(Number(highBid) || 0) + Number(carTransportation === 'yes' ? transportationFee : 0) + Number(getFeeDetails())}</div>
+                                                {/* <div  class="divCell">$ {(Number(highBid) || 0) + Number(carTransportation === 'yes' ? transportationFee : 0) + Number(getFeeDetails())}</div> */}
+                                                <div  class="divCell">$ {(Number(highBid) || 0) + Number(carTransportation === 'yes' ? 300 : 0) + Number(getFeeDetails())}</div>
                                             </div>
                                     </div>
                                 </div>
