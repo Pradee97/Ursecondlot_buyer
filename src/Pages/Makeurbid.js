@@ -492,6 +492,7 @@ console.log("check props",props)
                                     </div>
 
                                     <div className="col-lg-6 form-group">
+                                        {/* <span>${transportationFee || 0} </span> */}
                                         <span>$ {300 || 0} </span>                              
                                     </div>
 
