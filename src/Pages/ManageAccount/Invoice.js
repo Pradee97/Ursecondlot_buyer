@@ -207,8 +207,8 @@ const InVoice = (props) => {
              <tr>
                <td>Transportation</td>
                {/* <td><span>$ {transportationCharge}</span></td> */}
-                {/* <td><span>$ {Transportation == 'yes' ? 300 : 0}</span></td> */}
-                 <td><span>$ { 300 || 0}</span></td>
+                <td><span>$ {Transportation == 'yes' ? 300 : 0}</span></td>
+                 {/* <td><span>$ { 300 || 0}</span></td> */}
              </tr>
              <tr>
                <td>Other Charges</td>
@@ -228,7 +228,8 @@ const InVoice = (props) => {
                
                {/* <td><span>{Number(vechileprice+lotFee)+Number(getFeeDetails())+Number(transportationCharge)+0+0}</span></td> */}
                {/* <td><span>{Number(vechileprice+lotFee)+Number(getFeeDetails())+Number(Transportation == 'yes' ? 300 : 0)+0+0}</span></td> */}
-               <td><span>{Number(vechileprice+lotFee)+Number(getFeeDetails())+Number( 300 || 0)+0+0}</span></td>
+               <td><span>{Number(vechileprice+lotFee)+Number(getFeeDetails())+Number(Transportation == 'yes' ? transportationCharge : 0)+0+0}</span></td>
+               {/* <td><span>{Number(vechileprice+lotFee)+Number(getFeeDetails())+Number( 300 || 0)+0+0}</span></td> */}
                
              </tr>
              </tfoot>

@@ -349,6 +349,8 @@ console.log("request======",request)
                       <h3>Vehicle Price + Lot Fee <span>$ {Number(historyDetail.price)+ Number(historyDetail.lot_fee)}</span></h3>
                       <h4> Buy Fee <span> $ {Number(getFeeDetails(historyDetail.price))}</span></h4>
                       <h4>Inspection <span>$ 0</span></h4>
+                      <h4>Other Charges <span>$ 0</span></h4>
+                      <h4>Miscellaneous Charges <span>$ 0</span></h4>
                       {/* <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p> */}
                       <div className="">
                             
@@ -360,24 +362,26 @@ console.log("request======",request)
                             <label htmlFor='transporation' className="form-check-label" >Transportation  </label>    */}
                             <div>
                             <div className="col-lg-6 form-group">
-                                {/* <span>${historyDetail.transportation_charge || 0} </span>   */}
-                                <span>${300 || 0} </span>                            
+                                <span>${historyDetail.transportation_charge || 0} </span>  
+                                {/* <span>${300 || 0} </span>                             */}
                             </div>
                               <div>
-                              <button onClick={()=>HistoryUpdate(historyDetail.car_id,historyDetail.transportation_charge,historyDetail.transportation,`transporationDiv${historyDetail.car_id}`,`transporationHeader${historyDetail.car_id}`)}>update</button>   
+                              <button onClick={()=>HistoryUpdate(historyDetail.car_id,historyDetail.transportation_charge,historyDetail.transportation,`transporationDiv${historyDetail.car_id}`,`transporationHeader${historyDetail.car_id}`)}>update</button>  
+                              <button >Cancel</button>    
                               </div>
                             </div>                        
-                      </div><h4 className='showContent' id={`transporationHeader${historyDetail.car_id}`}>Transportation <span>$ {300 || 0}</span></h4>
-                      {/* <h4 className='showContent' id={`transporationHeader${historyDetail.car_id}`}>Transportation <span>$ {historyDetail.transportation_charge || 0}</span></h4>
-              */}
+                      </div>
+                      {/* <h4 className='showContent' id={`transporationHeader${historyDetail.car_id}`}>Transportation <span>$ {300 || 0}</span></h4> */}
+                      <h4 className='showContent' id={`transporationHeader${historyDetail.car_id}`}>Transportation <span>$ {historyDetail.transportation_charge || 0}</span></h4>
+             
 
                       
 
                       {/* <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p> */}
                       
                       <div class="vehiclerighttotal">
-                      {/* <h3>Total amount <span>$ {(Number(historyDetail.price)+  Number(historyDetail.lot_fee) || 0) + (Number(getFeeDetails(historyDetail.price))) + 0 + (Number(historyDetail.transportation_charge || 0))}</span></h3> */}
-                        <h3>Total amount <span>$ {(Number(historyDetail.price)+  Number(historyDetail.lot_fee) || 0) + (Number(getFeeDetails(historyDetail.price))) + 0 + (Number(300|| 0))}</span></h3>
+                      <h3>Total amount <span>$ {(Number(historyDetail.price)+  Number(historyDetail.lot_fee) || 0) + (Number(getFeeDetails(historyDetail.price))) + 0 +0+0+ (Number(historyDetail.transportation_charge || 0))}</span></h3>
+                        {/* <h3>Total amount <span>$ {(Number(historyDetail.price)+  Number(historyDetail.lot_fee) || 0) + (Number(getFeeDetails(historyDetail.price))) + 0 + (Number(300|| 0))}</span></h3> */}
                       </div>
                     </div>
   
