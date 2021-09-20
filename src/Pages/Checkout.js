@@ -127,7 +127,7 @@ const History = (props) => {
 							<h3>{paymentCar.make}  ({paymentCar.model} - {paymentCar.year}  model)+Lot Fee <span>$ {Number(paymentCar.price)+Number(paymentCar.lot_fee)}</span></h3>
 							<h4>Buy Fee <span>$ {Number(getFeeDetails(paymentCar.price))}</span></h4>
 							{/* <h4>Transportation <span>${paymentCar.transportation_charge}</span></h4> */}
-							<h4>Transportation <span>${300 || 0}</span></h4>
+							<h4>Transportation <span>${paymentCar.transportation=="yes"?300 : 0}</span></h4>
 
 
 							<div class="vehiclerighttotal">

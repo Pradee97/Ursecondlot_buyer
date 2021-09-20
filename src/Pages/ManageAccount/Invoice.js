@@ -174,7 +174,7 @@ const InVoice = (props) => {
             .map((sellerInfo) =>
             <>
                <tr><td><span>Name </span>{sellerInfo.dealer_name}</td></tr>
-               <tr><td><span>pickup adresss </span>{sellerInfo.address},{sellerInfo.state_name},{sellerInfo.city_name},{sellerInfo.zipcode}</td></tr>
+               <tr><td><span>Adresss </span>{sellerInfo.address},{sellerInfo.state_name},{sellerInfo.city_name},{sellerInfo.zipcode}</td></tr>
                <tr><td><span>Contact </span>{sellerInfo.phone_no}</td></tr>
                <tr><td><span>Email id </span>{sellerInfo.email}</td></tr>
                   </>    
