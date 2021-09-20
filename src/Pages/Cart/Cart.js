@@ -6,6 +6,7 @@ import appstore from '../../assets/img/appstore.png';
 import googleplay from '../../assets/img/googleplay.png';
 import Checkout from '../Checkout';
 import Popup from '../../Component/Popup/Popup';
+import Loading from"../../Component/Loading/Loading";
 
 const Cart = () => {
 
@@ -22,6 +23,7 @@ const Cart = () => {
     const [numberCars,setNumberCars] = useState("");
     const [paymentModeError,setPaymentModeError] = useState("");
     const [alertError,setAlertError] = useState("");
+    const [loading,setLoading] = useState(true);
 
     console.log(userDetails==="userDetails======",userDetails)
     let paySeparately={};
@@ -40,6 +42,7 @@ const Cart = () => {
             console.log("cart check the value", response.data.data)
             setCartDetail(response.data.data)
             setNumberCars(response.data.data.length)
+            setLoading(false);
         });
     }
 
@@ -135,7 +138,7 @@ const billofsales =(request) => {
             console.log("mySelectedCarId~~~~~",mySelectedCarId)
             if(cartDetail?.length>0 && cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id)) ).length>0){
                 // console.log("mySelectedCarId.length====",cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id)) ).length)
-                return cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id))).reduce((acc, curr) => acc+((Number(curr.max_price) || 0) +  Number(curr.transportation === 'yes' ? curr.transportation_charge : 0) + Number(getFeeDetails(curr.max_price))),0)
+                return cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id))).reduce((acc, curr) => acc+((Number(curr.max_price) || 0)+Number(curr.lot_fee) +  Number(curr.transportation === 'yes' ? curr.transportation_charge : 0) + Number(getFeeDetails(curr.max_price))),0)
             }
             else {
                 return 0
@@ -143,7 +146,7 @@ const billofsales =(request) => {
         }
         else {
         return cartDetail?.length>0 && cartDetail
-        .reduce((acc, curr) => acc+((Number(curr.max_price) || 0) +  Number(curr.transportation === 'yes' ? curr.transportation_charge : 0) + Number(getFeeDetails(curr.max_price))),0)
+        .reduce((acc, curr) => acc+((Number(curr.max_price) || 0)+Number(curr.lot_fee) +  Number(curr.transportation === 'yes' ? curr.transportation_charge : 0) + Number(getFeeDetails(curr.max_price))),0)
         }
     }
 
@@ -175,6 +178,8 @@ const billofsales =(request) => {
     }
 
     return (
+        <div>
+        {loading?<Loading/>:
         <main id="main" class="inner-page">
         <div id="checkoutpage" class="checkoutpage">
           <div class="container">
@@ -207,8 +212,10 @@ const billofsales =(request) => {
                                     <img src={cartDetail.image} className="carImg"/>
                                 </div>
                                 <div class="vehicleimgright col-lg-8">
-                                    <h3>{cartDetail.make} ({cartDetail.model} - {cartDetail.year} model) <span>$ {cartDetail.price}</span></h3>
+                                    <h3>{cartDetail.make} ({cartDetail.model} - {cartDetail.year} model) <span>$ {(Number(cartDetail.price)+(Number(cartDetail.lot_fee)))}</span></h3>
                                     <h4>Buy Fee <span>$ {getFeeDetails(cartDetail.price)}</span></h4>
+                                    <h4>Other Charges <span>$ 0</span></h4>
+                                    <h4>Miscellaneous Charges <span>$ 0</span></h4>
                                     <div class="form-group input-group ">
                                     {/* <input type="checkbox" id="" value={cartDetail.transportation == 'yes' ? 'no' : 'yes'}   checked={cartDetail.transportation== 'yes' ? true : false}/><label for="paytransportation">Transportation</label><span>$ {cartDetail.transportation === 'yes' ? cartDetail.transportation_charge : 0}</span> */}
 
@@ -216,51 +223,21 @@ const billofsales =(request) => {
                                     </div>
                                     <div class="vehiclerighttotal">
                                     {/* <h3>Total amount <span>$ {(Number(cartDetail.price) || 0) +  Number(cartDetail.transportation === 'yes' ? cartDetail.transportation_charge : 0) + Number(getFeeDetails(cartDetail.price))}</span></h3> */}
-                                        <h3>Total amount <span>$ {(Number(cartDetail.price) || 0) +  Number(cartDetail.transportation === 'yes' ? 300 : 0) + Number(getFeeDetails(cartDetail.price))}</span></h3>
+                                        <h3>Total amount <span>$ {(Number(cartDetail.price) || 0)+(Number(cartDetail.lot_fee)) +  Number(cartDetail.transportation === 'yes' ? 300 : 0) + Number(getFeeDetails(cartDetail.price)) + 0 + 0}</span></h3>
                                     </div>
                                 </div>
                             </div>
                         </div>)
                     })
                 }
-                    
-                    {/* <div class="vehiclesheadspaydetails mt-4">
-                        <div class="row">					
-                            <div class="vehiclepaycheckbox col-lg-12">
-                                <div class="form-group input-group">
-                                    <input type="checkbox" id="vehiclepayseparat"/><label for="vehiclepayseparat">You Want To Pay Separately</label>
-                                </div>
-                            </div>					
-                        
-                            <div class="vehicleimgleft col-lg-4">
-                                <img src={vehicles}/>
-                            </div>
-                            <div class="vehicleimgright col-lg-8">
-                                <h3>Honda Amaze (2014 model) <span>$1900</span></h3>
-                                <h4>Buy Fee <span>$ {getFeeDetails()}</span></h4>
-                                <div class="form-group input-group ">
-                                    <input type="checkbox" id="paytransportation"/><label for="paytransportation">Transportation</label><span>$300</span>
-                                </div>
-                                <div class="vehiclerighttotal">
-                                    <h3>Total amount <span>$2,300</span></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div> */}
+                  
                 </div>
                 <div class="col-lg-4 col-md-8">
                     <div class="vehicletotal">
                         <h2>Total</h2>
                         <h3>Total Amount <span>$ {mySelectedCarTotal()}</span></h3>
                         <h4>Select Payment Method</h4>
-                        {/* <div class="input-group">
-                            <select id="vehicleselect"  class="form-control custom-select browser-default">
-                                <option value="Select">select</option>
-                                <option value="Select">ACH</option>
-                                <option value="Select">Floor</option>
-                                <option value="Select">Credit Card</option>
-                            </select>
-                        </div>  */}
+
                         <div className="form-group selectTbox">
             <div className="tbox">                
                 <div className="selcetclass"> 
@@ -317,6 +294,8 @@ const billofsales =(request) => {
      
     
       </main>
+}
+      </div>
         
     )
 }

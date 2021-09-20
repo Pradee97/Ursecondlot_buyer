@@ -126,13 +126,15 @@ const History = (props) => {
 						<div class="vehicleimgright col-lg-8">
 							<h3>{paymentCar.make}  ({paymentCar.model} - {paymentCar.year}  model)+Lot Fee <span>$ {Number(paymentCar.price)+Number(paymentCar.lot_fee)}</span></h3>
 							<h4>Buy Fee <span>$ {Number(getFeeDetails(paymentCar.price))}</span></h4>
+							<h4>Other Charges <span>$ 0</span></h4>
+                            <h4>Miscellaneous Charges <span>$ 0</span></h4>
 							{/* <h4>Transportation <span>${paymentCar.transportation_charge}</span></h4> */}
-							<h4>Transportation <span>${paymentCar.transportation=="yes"?300 : 0}</span></h4>
+							<h4>Transportation <span>${paymentCar.transportation=="yes"?paymentCar.transportation_charge : 0}</span></h4>
 
 
 							<div class="vehiclerighttotal">
-								<h3>Total amount <span>$ {Number(paymentCar.price)+ Number(getFeeDetails(paymentCar.price)) + Number(300 || 0)}</span></h3>
-								{/* <h3>Total amount <span>$ {Number(paymentCar.price)+ Number(getFeeDetails(paymentCar.price)) + Number(paymentCar.transportation_charge)}</span></h3> */}
+								{/* <h3>Total amount <span>$ {Number(paymentCar.price)+ Number(getFeeDetails(paymentCar.price)) + Number(300 || 0)}</span></h3> */}
+								<h3>Total amount <span>$ {Number(paymentCar.price)+ Number(paymentCar.lot_fee)+Number(getFeeDetails(paymentCar.price)) + Number(paymentCar.transportation_charge)+0+0}</span></h3>
 							</div>
 						</div>
 					</div>

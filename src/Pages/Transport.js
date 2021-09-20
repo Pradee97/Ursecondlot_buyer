@@ -3,6 +3,7 @@ import ls from 'local-storage';
 import API from "../Services/BaseService";
 import appstore from '../assets/img/appstore.png';
 import googleplay from '../assets/img/googleplay.png';
+import Loading from"../Component/Loading/Loading";
 
 const Transport = () => {
 
@@ -42,6 +43,7 @@ const Transport = () => {
 	const [vinError,setVinError] = useState("");
 	const [VINNumber, setVINNumber] = useState("");
 	const [transportFlag,setTransportFlag]=useState("");
+	const [loading,setLoading] = useState(true);
 	  
   	const [order,setOrder] = useState("");
 	
@@ -58,6 +60,7 @@ const Transport = () => {
 
 			console.log("pickup check the value", response.data.data)
 			setPickUp(response.data.data)
+			setLoading(false);
            
         });
 	}
@@ -74,6 +77,7 @@ const Transport = () => {
 
 			console.log("pickup check the value", response.data.data)
 			setPickUp(response.data.data)
+			setLoading(false);
            
         });
 	}
@@ -90,6 +94,7 @@ const Transport = () => {
 
 			console.log("pickup check the value", response.data.data)
 			setPickUp(response.data.data)
+			setLoading(false);
            
         });
 	}
@@ -130,7 +135,8 @@ const Transport = () => {
     }, []);
 
 return (
-
+	<div>
+ {loading?<Loading/>:
     <main id="main" class="inner-page">
 
     <div id="transport" class="transport">
@@ -404,6 +410,8 @@ return (
  
 
   </main>
+  }
+  </div>
 
 )
 }
