@@ -187,25 +187,30 @@ console.log("check props",props)
         setProxyBidError("")
         setTermsError("")
 
-        if(!highBid){
+        // if(!highBid){
 
-            setHighBidError("High Bid price should not be empty" )
-            return;
-        }
+        //     setHighBidError("High Bid price should not be empty" )
+        //     return;
+        // }
+
         // if((carHighBid )!== highBid){
 
         //    if(highBid < (!Number(carHighBid+50) || Number(carHighBid+50)===null ?  Number(carMinBid+50) : Number(carHighBid+50) ) ){
             // if(!carHighBid ){alert("hi logs")}
-         
-//first time
-            if(!carHighBid && highBid < Number(carMinBid+50) ){
+         if( !highBid && !proxyBid ){
+            setProxyBidError("You must give High Bid price or Maximum Proxy Bid" )
+            return;
+        }
 
+//first time
+            if(!carHighBid && highBid && highBid < Number(carMinBid+50) ){
                 setHighBidError("High Bid price should not be lower than " +Number(carMinBid+50))
                 return;
                 } 
 
 //second time
                 if(carHighBid &&  Number(highBid ) < Number(carHighBid) ){
+                    console.log("carHighBid=====")
                     setHighBidError("High Bid price should not be lower than " +Number(carHighBid+50))
                     return;
                 } 
