@@ -122,22 +122,29 @@ const History = (props) => {
 	
 	 ( <div class="checkoutblock col-lg-12">
 
-        <div class="section-title mt-3 mb-0">
+        <div class="section-title mt-3 mb-0 revCheHeadBlock">
           <h2>Checkout</h2>
+		  <div className="revCheHead">
+				<h2 className="pl-4">{paymentMode} Payment</h2>
+			
+				<h2 className="text-right">Total <span> $ {overAllTotal()}</span></h2>
+
+				</div>
         </div>
 
-        <div class="row content">
+        <div class="row content contentBlock">
 			<div class="col-lg-12 col-md-12 marAuto achBlock">
-				<h2 className="pl-4">{paymentMode} Payment</h2>
-				<h2>Total <span> $ {overAllTotal()}</span></h2>
+
+			
 				{paymentCar.length>0?paymentCar.map((paymentCar) =>
+
 				<div>
 				<div class="vehiclesheadspaydetails">
 					<div class="row">
 						<div class="vehicleimgleft col-lg-4">
 							<img src={paymentCar.image} className="carImg" />
 						</div>
-						<div class="vehicleimgright col-lg-8">
+						<div class="vehicleimgright col-lg-8 pr-0">
 							<h3>{paymentCar.make}  ({paymentCar.model} - {paymentCar.year}  model)+Lot Fee <span>$ {Number(paymentCar.price)+Number(paymentCar.lot_fee)}</span></h3>
 							<h4>Buy Fee <span>$ {Number(getFeeDetails(paymentCar.price))}</span></h4>
 							<h4>Other Charges <span>$ 0</span></h4>
