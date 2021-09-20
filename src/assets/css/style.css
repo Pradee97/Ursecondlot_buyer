@@ -8179,12 +8179,14 @@ ul#progressbar li p{
 
 .sliderBlock p{
   margin: 10px 0;
-  width: 50%;
+  width: 42%;
   display: inline-block;
 }
 
+
 .sliderBlock p.pdate{
   text-align: right;
+  width: 58%;
 }
 
 
@@ -8255,6 +8257,9 @@ ul#progressbar li p{
 
 .historyPage .priceBlock p.date{
   padding-left: 0;
+  padding-right: 0;
+  text-align: right;
+  margin-right: 0;
 }
 .oops{
   text-align: center;
@@ -8275,3 +8280,4 @@ ul#progressbar li p{
   width: 40px;
   margin-right: 10px;
 }
+

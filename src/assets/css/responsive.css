@@ -101,6 +101,15 @@ img.carImg {
     max-width: 100%;
 }
 
+.historyPage .lotfee-inner .cars-prices .cta-btns{
+    padding: 8px 10px;
+    font-size: 14px;
+}
+.historyPage .lotfee-inner .cars-prices .cta-btns-primary{
+    font-size: 14px;
+    padding: 8px;
+}
+
 }
 
 @media (max-width: 1335px) {
@@ -120,8 +129,11 @@ img.carImg {
 #hero {  
     height: 450px;
 }
-	
-	
+
+.sliderBlock p {
+    width: 100% !important;
+    text-align: left !important;
+}
 	
 	
 }
