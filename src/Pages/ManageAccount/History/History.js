@@ -9,6 +9,7 @@ import appstore from '../../../assets/img/appstore.png';
 import googleplay from '../../../assets/img/googleplay.png';
 import $ from 'jquery';
 import './history.css'
+import Loading from"../../../Component/Loading/Loading";
 
  const History = () => {
 
@@ -28,7 +29,8 @@ import './history.css'
   const [lotValue, setLotValue] = useState("");
   const [historyEdit,setHistoryEdit] = useState(false);
   const [carTransportation,setCarTransportation] = useState("no")
-  const [transportationCharge,setTransportationCharge] = useState("")
+  const [transportationCharge,setTransportationCharge] = useState("");
+  const [loading,setLoading] = useState(true);
 
   const redirecttoInspection=(pathid)=>{
     //   history.push("/Inspection/"+pathid);
@@ -60,6 +62,7 @@ import './history.css'
         console.log("history check the value", response.data.data)
         setHistoryDetail(response.data.data)
         setNoCars(response.data.data.length)
+        setLoading(false);
     });
 
 }
@@ -182,6 +185,7 @@ console.log("request======",request)
     }
     return (
       <div>
+        {loading?<Loading/>:
       <main id="main" class="inner-page">
    
       <div id="historyPage" class="historyPage">
@@ -420,6 +424,7 @@ console.log("request======",request)
    
   
     </main>
+ }
     </div>
     )
 }
