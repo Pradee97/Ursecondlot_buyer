@@ -172,7 +172,7 @@ console.log("request======",request)
   // return
   API.post("editTransportation/update", request).then(response=>{
     setHistoryEdit(false)
-    document.getElementById(divContent).setAttribute("class", "col-lg-6 form-group customCheckbox hideContent");
+    document.getElementById(divContent).setAttribute("class", "col-lg-12 p-0 form-group transCbox customCheckbox hideContent");
     document.getElementById(HeaderContent).setAttribute("class", "showContent");
   });
 
@@ -180,7 +180,7 @@ console.log("request======",request)
 
     const HistoryEdit = (divContent,HeaderContent) =>{
       console.log("check the car id coming or not in the edit on click",divContent)
-      document.getElementById(divContent).setAttribute("class", "col-lg-6 form-group customCheckbox showContent");
+      document.getElementById(divContent).setAttribute("class", "col-lg-12 p-0 form-group transCbox customCheckbox showContent");
       document.getElementById(HeaderContent).setAttribute("class", "hideContent");
     }
     return (
@@ -303,7 +303,7 @@ console.log("request======",request)
                   </div>
                   <div class="col-lg-5 sliderBlock">
                     <p>Inventory Number - <span>{historyDetail.inventory_no}</span></p>
-                    <p className="pdate">Purchased from <span>{historyDetail.dealer_type}</span></p>
+                    
                     <h3>Vehicle Title</h3>
                     
                     <form id="msform">
@@ -346,6 +346,7 @@ console.log("request======",request)
   
                   
                   <div class="col-lg-4 priceBlock">
+                    <p className="pdate">Purchased from <span>{historyDetail.dealer_type}</span></p>
                     <p class="date ml-0">Purchased on {historyDetail.sold_date?.substring(0,10)}</p>
                     
                     <div class="vehicleimgright col-lg-12">
@@ -356,24 +357,22 @@ console.log("request======",request)
                       <h4>Other Charges <span>$ 0</span></h4>
                       <h4>Miscellaneous Charges <span>$ 0</span></h4>
                       {/* <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p> */}
-                      <div className="">
-                            
-                      </div>
-                      <div className="col-lg-6 form-group customCheckbox hideContent" id={`transporationDiv${historyDetail.car_id}`} >
+                      
+                      <div className="col-lg-12 form-group transCbox customCheckbox hideContent p-0" id={`transporationDiv${historyDetail.car_id}`} >
                             <input type="checkbox" className="form-check d-inline"id="transporation" value={historyDetail?.transportation == 'yes' ? 'no' : 'yes'} onChange={(e)=>{setCarTransportation(e.target.value)}}/>
                             <label htmlFor='transporation' className="form-check-label" >Transportation</label>
                             {/* <input type="checkbox" className="form-check d-inline" id="transporation" value={historyDetail.transportation == 'yes' ? 'no' : 'yes'} checked={historyDetail.transportation==="yes" ?true:false} onChange={(e)=>{setCarTransportation(e.target.value)}}/> 
                             <label htmlFor='transporation' className="form-check-label" >Transportation  </label>    */}
-                            <div>
-                            <div className="col-lg-6 form-group">
+                           
+                            <div className="rprice">
                                 <span>${historyDetail.transportation_charge || 0} </span>  
                                 {/* <span>${300 || 0} </span>                             */}
                             </div>
-                              <div>
+                              <div className="totalActions">
                               <button onClick={()=>HistoryUpdate(historyDetail.car_id,historyDetail.transportation_charge,historyDetail.transportation,`transporationDiv${historyDetail.car_id}`,`transporationHeader${historyDetail.car_id}`)}>update</button>  
                               <button >Cancel</button>    
                               </div>
-                            </div>                        
+                                                  
                       </div>
                       {/* <h4 className='showContent' id={`transporationHeader${historyDetail.car_id}`}>Transportation <span>$ {300 || 0}</span></h4> */}
                       <h4 className='showContent' id={`transporationHeader${historyDetail.car_id}`}>Transportation <span>$ {historyDetail.transportation_charge || 0}</span></h4>

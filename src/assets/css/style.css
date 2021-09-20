@@ -4903,6 +4903,7 @@ vehicles Summary
 }
 .vehiclerighttotal{
 	border-top:1px solid #ddd;
+  clear: both;
 }
 .vehiclerighttotal h3 span{
 	font-weight: 500;
@@ -8179,16 +8180,28 @@ ul#progressbar li p{
 
 .sliderBlock p{
   margin: 10px 0;
-  width: 42%;
+  width: 100%;
   display: inline-block;
 }
-
-
-.sliderBlock p.pdate{
+.priceBlock p.pdate{
+  text-align: left;
+  width: 50%;
+}
+.priceBlock p{
   text-align: right;
-  width: 58%;
+  width: 50%;
+  display: inline-block;
+    float: left;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 10px;
 }
 
+.priceBlock .vehicleimgright p.editbtn{
+  width: 100%;
+  text-align: right;
+  max-width: 100%;
+}
 
 .historyPage .vinnoBlock p.vinno{
   margin: 0;
@@ -8281,3 +8294,46 @@ ul#progressbar li p{
   margin-right: 10px;
 }
 
+.historyPage .lotfee-inner .car-item .cars-prices .cta-btns{
+  background-color: #002768;
+  color: white;
+}
+
+.historyPage .lotfee-inner .car-item .cars-prices .cta-btns:hover{
+  background-color: #bd062c;
+  border: #bd062c 1px solid;
+}
+
+.historyPage .lotfee-inner .car-item .cars-prices.gatepass .cta-btns-primary{
+  background-color: #fff;
+  color: #444;
+  border: 1px solid #444;
+}
+
+.transCbox label{
+  font-size: 14px !important;
+}
+
+.rprice {
+  float: right;
+  text-align: right;
+}
+
+.rprice span{
+  font-size: 14px !important;
+}
+.totalActions{
+  clear: both;
+  margin-top: 10px;
+}
+
+.totalActions button{
+  padding:5px 10px;
+  margin-right: 10px;
+  border-radius: 3px;
+  font-size: 14px;
+}
+
+.customCheckbox.transCbox input:checked + label::after{
+top: 2px;
+}
