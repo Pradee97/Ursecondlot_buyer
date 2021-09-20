@@ -22,6 +22,7 @@ const History = (props) => {
     const [popupActionType, setPopupActionType] = useState ("");
     const [popupActionValue, setPopupActionValue] = useState ("");
     const [popupActionPath, setPopupActionPath] = useState ("")
+	const [paymentMode,setPaymentMode] = useState(props.paymentMode);
 
 	console.log("check the props value",paymentCar)
 
@@ -79,7 +80,8 @@ const History = (props) => {
 	  }, []);
 	  
 	  const getFeeDetails = (maxPrice) =>{
-	   
+	   console.log("----fee---",maxPrice)
+	
 		return feeDetails.length > 0 ? feeDetails
 			.filter((data)=> 
 		   
@@ -97,7 +99,18 @@ const History = (props) => {
 				} 
 				)[0]?.fee || 0
 			: 0
+
+
 	  }
+
+	  
+
+	  const overAllTotal = () => {
+		  console.log("paymentCar----",paymentCar)
+        return paymentCar?.length>0 && paymentCar
+        .reduce((acc, curr) => acc+((Number(curr.price) || 0)+Number(curr.lot_fee) +  Number( curr.transportation_charge || 0) + Number(getFeeDetails(curr.price))),0)
+		
+	}
 
     return (
 
@@ -115,7 +128,8 @@ const History = (props) => {
 
         <div class="row content">
 			<div class="col-lg-12 col-md-12 marAuto achBlock">
-				<h2 className="pl-4">ACH Payment</h2>
+				<h2 className="pl-4">{paymentMode} Payment</h2>
+				<h2>Total <span> $ {overAllTotal()}</span></h2>
 				{paymentCar.length>0?paymentCar.map((paymentCar) =>
 				<div>
 				<div class="vehiclesheadspaydetails">
@@ -129,19 +143,19 @@ const History = (props) => {
 							<h4>Other Charges <span>$ 0</span></h4>
                             <h4>Miscellaneous Charges <span>$ 0</span></h4>
 							{/* <h4>Transportation <span>${paymentCar.transportation_charge}</span></h4> */}
-							<h4>Transportation <span>${paymentCar.transportation=="yes"?paymentCar.transportation_charge : 0}</span></h4>
+							<h4>Transportation <span>$ { paymentCar.transportation_charge || 0}</span></h4>
 
 
 							<div class="vehiclerighttotal">
 								{/* <h3>Total amount <span>$ {Number(paymentCar.price)+ Number(getFeeDetails(paymentCar.price)) + Number(300 || 0)}</span></h3> */}
-								<h3>Total amount <span>$ {Number(paymentCar.price)+ Number(paymentCar.lot_fee)+Number(getFeeDetails(paymentCar.price)) + Number(paymentCar.transportation_charge)+0+0}</span></h3>
+								<h3>Total amount <span>$ {Number(paymentCar.price)+ Number(paymentCar.lot_fee)+Number(getFeeDetails(paymentCar.price)) + Number(paymentCar.transportation_charge|| 0)+0+0}</span></h3>
 							</div>
 						</div>
 					</div>
 				</div>				
 				
 				</div>):""}
-				<div class="text-center ckreview"><a  class="cta-btn cancel-btn" href="/cart">Cancel</a> <button type="submit" class="cta-btn"  onClick = {()=> billofsales()}>Checkout</button> </div>
+				<div class="text-center ckreview"><a  class="cta-btn cancel-btn" href="/cart">Cancel</a> <button type="submit" class="cta-btn"  onClick = {()=> billofsales()}>Make Payment</button> </div>
 				
 			</div>
         </div>

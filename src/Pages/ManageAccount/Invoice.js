@@ -13,7 +13,7 @@ import Loading from "../../Component/Loading/Loading";
     
 const InVoice = (props) => {
     const history = useHistory();
-    const [loading, setloading] = useState(true);
+    const [loading,setLoading] = useState(true);
     const [accountDetails,setaccountDetails] = useState("");
     const [dealerInfo,setDealerInfo] = useState("");
     const [sellerInfo,setSellerInfo] = useState("");
@@ -23,7 +23,7 @@ const InVoice = (props) => {
  console.log("hello",sellerDealerID,vechileprice,lotFee,billOfSales,gatePassId,Date);
     
      function fetchBuyerDetails() {
-        setloading(true);
+        
         let request = {
           buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
         };
@@ -32,6 +32,7 @@ const InVoice = (props) => {
           console.log("res", res)
           //setaccountDetails(res.data.data);
           setDealerInfo(res.data.data);
+          setLoading(false);
           
         })
           .catch(err => { console.log(err); });
@@ -43,7 +44,7 @@ const InVoice = (props) => {
       
 
       function fetchSellerDetails() {
-        setloading(true);
+        
         
         let request = {
          seller_dealer_id : sellerDealerID,
@@ -55,6 +56,7 @@ const InVoice = (props) => {
           if( res.data.success){
             //setaccountDetails(res.data.data);
             setSellerInfo(res.data.data);
+            setLoading(false);
           }
         })
           .catch(err => { console.log(err); });
@@ -68,6 +70,7 @@ const InVoice = (props) => {
         state.then(res => {
             console.log("res", res)
             setFeeDetails(res.data.data);
+            setLoading(false);
           
         })
             .catch(err => { console.log(err); });
@@ -99,7 +102,7 @@ const InVoice = (props) => {
       
     return(
         <div> 
-           {/*  {loading ? <loading/> : */}
+            {loading ? <Loading/> :
         <main id="main" class="inner-page">
    
    <div id="invoice" class="fees">
@@ -263,7 +266,7 @@ const InVoice = (props) => {
    </section>
 
         </main>
-{/* } */}
+}
         </div>
     )
 }
