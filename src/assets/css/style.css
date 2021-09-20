@@ -8353,3 +8353,18 @@ top: 2px;
   width: 10%;
     text-align: center; 
 }
+
+.models-box .checkoutReview .revCheHead h2{
+  width: 50%;
+  float: left;
+  text-align: left;
+  font-size: 16px;
+  text-transform: capitalize;
+}
+
+.revCheHead{
+  display: block;
+    float: left;
+    width: 100%;
+}
+
