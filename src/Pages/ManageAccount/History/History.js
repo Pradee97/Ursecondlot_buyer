@@ -10,6 +10,8 @@ import googleplay from '../../../assets/img/googleplay.png';
 import $ from 'jquery';
 import './history.css'
 import Loading from"../../../Component/Loading/Loading";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
  const History = () => {
 
@@ -31,6 +33,9 @@ import Loading from"../../../Component/Loading/Loading";
   const [carTransportation,setCarTransportation] = useState("no")
   const [transportationCharge,setTransportationCharge] = useState("");
   const [loading,setLoading] = useState(true);
+  const[scheduletodate,setScheduleToDate]=useState(null);
+  const[scheduleDate,setScheduleDate]=useState(null);
+  const [fromDateError,setFromDateError] = useState("");
 
   const redirecttoInspection=(pathid)=>{
     //   history.push("/Inspection/"+pathid);
@@ -49,8 +54,8 @@ import Loading from"../../../Component/Loading/Loading";
         });
         console.log ("hi",price,lot_fee,bill_of_sales_id,gatepass_id,sold_date);
       }
-  
 
+ 
   const historyDetails = () =>{
 
     let request = {
@@ -69,10 +74,11 @@ import Loading from"../../../Component/Loading/Loading";
 
 useEffect (() =>{
   historyDetails()
-}, []);
+}, [scheduletodate,scheduleDate]);
 
 const searchCarDetail = () => {
   setVinError("")
+  setFromDateError("")
  if(VINNumber.length>0 && VINNumber.length < 6){
    setVinError("VIN number must have last 6 digit")
    return;
@@ -81,6 +87,18 @@ const searchCarDetail = () => {
   setVinError("VIN number accept only last 6 digit")
   return;
 }
+if(scheduletodate){
+  if(!scheduleDate){
+  setFromDateError("From Date is required")
+  return;
+  }
+}
+if(scheduleDate){
+  if(!scheduletodate){
+  setFromDateError("To Date is required")
+  return;
+  }
+}
 
       let request={
       buyer_dealer_id: userDetails.buyer_dealer_id,
@@ -88,8 +106,11 @@ const searchCarDetail = () => {
       model: model,
       year: year,
       vin_no: VINNumber,
+      fromdate: scheduleDate==null ? "" : convert(scheduleDate),
+      todate:scheduleDate==null? "" : scheduletodate==null?convert(new Date()):convert(scheduletodate),
 
       }
+  
         API.post("historySearch/condition", request).then(response=>{
 
           console.log("history Search", response.data.data)
@@ -99,6 +120,26 @@ const searchCarDetail = () => {
         }); 
   
 }
+
+function convert(str) {
+  var date = new Date(str),
+    mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+    day = ("0" + date.getDate()).slice(-2);
+  return [date.getFullYear(), mnth, day].join("-");
+}
+
+const handleDateChangeRaw = (e) => {
+  e.preventDefault();
+  }  
+  
+useEffect (()=>{
+    // console.log("id value",id)
+    let intervalId;
+    intervalId = setInterval(() => {
+      historyDetails();
+        }, 30000)
+    return () => clearInterval(intervalId);
+    },[])
 
   const historyOrder =() =>{
       let request={
@@ -223,12 +264,54 @@ console.log("request======",request)
                         
                         </div>
 
+                        <div className="form-group dateBlock">
+                                        <label className="control-label" for="date">From Date</label> 
+                                        {/* <input className="form-control border-end-0 " type="date" value={scheduleDate}  id="date" onKeyDown={onKeydowninSearch} placeholder="DD-MM-YYYY" onChange={(e) => setScheduleDate(e.target.value)}></input> */}
+                                        <DatePicker
+                                                        className="form-control textbox" name="date" id="date"
+                                                        autoComplete="off"
+                                                        selected={scheduleDate}
+                                                        onChange={(date) => setScheduleDate(date)}
+                                                        isClearable
+                                                        placeholderText="Date"
+                                                        required
+                                                        onChangeRaw={handleDateChangeRaw}
+                                                    />
+                                   
+                                    </div>
+
+                                    <div className="form-group dateBlock">
+                                        <label title=" Select From date first to proceed !" className="control-label" for="todate">To Date</label> 
+                                        {scheduleDate!=""?
+                                        // <input className="form-control border-end-0 " type="date"  id="todate" onKeyDown={onKeydowninSearch} placeholder="DD-MM-YYYY" value={scheduletodate} onChange={(e) => setScheduleToDate(e.target.value)}></input>
+                                        <DatePicker
+                                                        className="form-control textbox" name="todate" id="todate"
+                                                        selected={scheduletodate}
+                                                        onChange={(date) => setScheduleToDate(date)}
+                                                        isClearable
+                                                        placeholderText="Date"
+                                                        required
+                                                        onChangeRaw={handleDateChangeRaw}
+                                                    />:
+                                                    <DatePicker
+                                                    className="form-control textbox" disabled name="todate" id="todate"
+                                                    selected={scheduletodate}
+                                                    onChange={(date) => setScheduleToDate(date)}
+                                                    isClearable
+                                                    placeholderText="Date"
+                                                    disabled="true"
+                                                    required
+                                                    onChangeRaw={handleDateChangeRaw}
+                                                />}
+                                    </div>
+
                         <div class=" form-group searchbtn">
                           <button  onClick={searchCarDetail}><i class="bx bx-search"></i></button> 
                         </div>
 
                        <div class="errorMsgBox col-lg-12">
-                         <p className="form-input-error" >{vinError}</p>                      
+                         <p className="form-input-error" >{vinError}</p> 
+                         <p className="form-input-error" >{fromDateError}</p>                     
                       </div>
                     </div>
                    
@@ -346,10 +429,10 @@ console.log("request======",request)
   
                   
                   <div class="col-lg-4 priceBlock">
-                    <p class="date ml-0">Purchased on {historyDetail.sold_date?.substring(0,10)}</p>
+                    <p class="date ml-0">Purchased on {historyDetail.sold_date?.substring(0,10)} time:{historyDetail.sold_date?.substring(11,19)}</p>
                     
                     <div class="vehicleimgright col-lg-12">
-                      <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>HistoryEdit(`transporationDiv${historyDetail.car_id}`,`transporationHeader${historyDetail.car_id}`)}>Edit</a></p>
+                      <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>HistoryEdit(`transporationDiv${historyDetail.car_id}`,`transporationHeader${historyDetail.car_id}`)}>Edit Transportation</a></p>
                       <h3>Vehicle Price + Lot Fee <span>$ {Number(historyDetail.price)+ Number(historyDetail.lot_fee)}</span></h3>
                       <h4> Buy Fee <span> $ {Number(getFeeDetails(historyDetail.price))}</span></h4>
                       <h4>Inspection <span>$ 0</span></h4>
@@ -393,8 +476,9 @@ console.log("request======",request)
                 </div>
               </div>})
                     :""}          
-          
-          <div><a class="load-more-btn" href="#">Load More</a></div>
+           {historyDetail.length >10 ? historyDetail.slice(0,1)
+              .map(() =>
+          <div><a class="load-more-btn" href="#">Load More</a></div>):""}
         </div>
       </div>
      
