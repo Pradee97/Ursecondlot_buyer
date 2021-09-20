@@ -205,11 +205,11 @@ const HistoryUpdate = (carId,transportationCharge,transportation,divContent,Head
       buyer_dealer_id :userDetails.buyer_dealer_id,
       car_id:carId,
       transportation:!transportation ? "no" : transportation,
-      // transportation_charge: carTransportation == 'yes' ?  transportationCharge : 0,
-      transportation_charge: carTransportation == 'yes' ?  300 : 0,
+      transportation_charge: transportationCharge,
+      // transportation_charge: carTransportation == 'yes' ?  300 : 0,
   }
-  console.log("carTransportation====",carTransportation)
-console.log("request======",request)
+  // console.log("transportationCharge====",transportationCharge)
+  console.log("request======",request)
   // return
   API.post("editTransportation/update", request).then(response=>{
     setHistoryEdit(false)
@@ -219,11 +219,48 @@ console.log("request======",request)
 
 }
 
+  const cancelEdit = (divContent, HeaderContent) => {
+    setHistoryEdit(false)
+    document.getElementById(divContent).setAttribute("class", "col-lg-12 p-0 form-group transCbox customCheckbox hideContent");
+    document.getElementById(HeaderContent).setAttribute("class", "showContent");
+  }
+
     const HistoryEdit = (divContent,HeaderContent) =>{
       console.log("check the car id coming or not in the edit on click",divContent)
       document.getElementById(divContent).setAttribute("class", "col-lg-12 p-0 form-group transCbox customCheckbox showContent");
       document.getElementById(HeaderContent).setAttribute("class", "hideContent");
     }
+
+    const carTransportationupdate = (value, carid) => {
+      console.log("carid===", carid)
+      console.log("value===", value)
+      setHistoryDetail( historyDetail.map(data => {
+        if(data.car_id === carid){
+          data.transportation = value
+          data.transportation_charge= value == 'yes' ? 300 : 0
+       }
+       return data
+     }))
+
+     
+
+      // const mydata = historyDetail.map(data => {
+      //   if(data.car_id === carid){
+      //      data.transportation = value
+      //   }
+      //   return data
+      // });
+
+      // console.log("mydata===",mydata)
+
+      // historyDetail.filter(data => {
+      //   if(data.car_id === carid){
+      //     data.transportation = value
+      //   }
+      // })
+      // setCarTransportation()
+    }
+
     return (
       <div>
         {loading?<Loading/>:
@@ -442,8 +479,14 @@ console.log("request======",request)
                       {/* <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p> */}
                       
                       <div className="col-lg-12 form-group transCbox customCheckbox hideContent p-0" id={`transporationDiv${historyDetail.car_id}`} >
-                            <input type="checkbox" className="form-check d-inline"id="transporation" value={historyDetail?.transportation == 'yes' ? 'no' : 'yes'} onChange={(e)=>{setCarTransportation(e.target.value)}}/>
-                            <label htmlFor='transporation' className="form-check-label" >Transportation</label>
+                            <input type="checkbox" className="form-check d-inline" 
+                              id = {`transporation${historyDetail.car_id}`} 
+                              // id = 'transporation' 
+                              value = {historyDetail?.transportation == 'yes' ? 'no' : 'yes'} 
+                              checked = { historyDetail.transportation==="yes" ? true : false } 
+                              onChange = {(e)=>{carTransportationupdate(e.target.value, historyDetail.car_id)}} 
+                            />
+                            <label htmlFor={`transporation${historyDetail.car_id}`}  className="form-check-label" >Transportation</label>
                             {/* <input type="checkbox" className="form-check d-inline" id="transporation" value={historyDetail.transportation == 'yes' ? 'no' : 'yes'} checked={historyDetail.transportation==="yes" ?true:false} onChange={(e)=>{setCarTransportation(e.target.value)}}/> 
                             <label htmlFor='transporation' className="form-check-label" >Transportation  </label>    */}
                            
@@ -452,8 +495,8 @@ console.log("request======",request)
                                 {/* <span>${300 || 0} </span>                             */}
                             </div>
                               <div className="totalActions">
-                              <button onClick={()=>HistoryUpdate(historyDetail.car_id,historyDetail.transportation_charge,historyDetail.transportation,`transporationDiv${historyDetail.car_id}`,`transporationHeader${historyDetail.car_id}`)}>update</button>  
-                              <button >Cancel</button>    
+                              <button onClick={()=>HistoryUpdate(historyDetail.car_id, historyDetail.transportation_charge, historyDetail.transportation, `transporationDiv${historyDetail.car_id}`, `transporationHeader${historyDetail.car_id}`)}>update</button>  
+                              <button onClick={()=>cancelEdit(`transporationDiv${historyDetail.car_id}`,`transporationHeader${historyDetail.car_id}`)}>Cancel</button>    
                               </div>
                                                   
                       </div>
