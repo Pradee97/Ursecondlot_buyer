@@ -42,7 +42,7 @@ const BuyNow=(props)=>{
 
     const [toggleAcceptPopupOpen,setToggleAcceptPopupOpen]= useState(true);
     const [confirmationFlag, setConfirmationFlag] = useState(false);
-
+    const email = JSON.parse(localStorage.getItem("userDetails")).email;
     const toggleCommonPopup = () => {
       setIsCommonPopupOpen(!isCommonPopupOpen);
     }
@@ -131,7 +131,7 @@ if(!confirmationFlag){
                                    
                               </div>
                               <div class=" col-md-12">
-                              <input className="textbox " type="text" placeholder="Username" onChange={(e)=>setUserName(e.target.value)} />
+                              <input className="textbox " type="text" placeholder="Email" defaultValue = {email} disabled />
                               <p className="form-input-error">{userNameError}</p>
                               </div>
 								              

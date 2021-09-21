@@ -19,15 +19,12 @@ const BuyNow=(props)=>{
   const [popupType, setPopupType] = useState("");
   const [popupActionType, setPopupActionType] = useState("");
   const [popupActionValue, setPopupActionValue] = useState("");
-  const [popupActionPath, setPopupActionPath] = useState("")
-  const email = JSON.parse(localStorage.getItem("userDetails")).email;
+  const [popupActionPath, setPopupActionPath] = useState("");
   const toggleCommonPopup = () => {
     setIsCommonPopupOpen(!isCommonPopupOpen);
 }
 const handleAccepts=()=>{
     
-
-
 		let request ={
 
             buyer_dealer_id:JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id, 
@@ -63,8 +60,6 @@ const handleAccepts=()=>{
         }
     })
 }
-
-
   return (
  
 <div>
@@ -81,7 +76,7 @@ const handleAccepts=()=>{
                                   
                               </div>
                               <div class="input-group col-md-12">
-                              <input className="textbox " type="text" placeholder="Email" value = {email} disabled />
+                              <input className="textbox " type="text" placeholder="Email" onChange={(e)=>setUserName(e.target.value)} />
                               </div>
                               <div class="input-group col-md-12">
                               <input className="textbox " type="text" placeholder="Password" onChange={(e)=>setPassword(e.target.value)} />
