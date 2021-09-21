@@ -376,7 +376,7 @@ return(
 					<div className={(carDetail[0].buyer_high_bid=="" || carDetail[0].buyer_high_bid==null || carDetail[0].buyer_high_bid==undefined) && (carDetail[0].high_bid=="" || carDetail[0].high_bid==null || carDetail[0].high_bid==undefined)?"col-md-6":"col-md-4"}>
 	        		<div class="product-dtl">
         				<div class="product-info">
-		        			<div class="product-name">{carDetail[0].make} {carDetail[0].vehicle_type}({carDetail[0].model} - {carDetail[0].year} model)</div>
+		        			<div class="product-name">{carDetail[0].year} {carDetail[0].make} {carDetail[0].model}  </div>
 							<p  class="productdes"><span className="greytext">Inventory Number</span> - {carDetail[0].inventory_no}</p>
 							<p class="productdes">{carDetail[0].car_description}</p>
 		        			<div class="d-flex align-items-center">
@@ -617,7 +617,7 @@ return(
 				
 				</div>:""}
               <div class="cars-content">		
-			  <h3><a href="#">{moreCar.make} {moreCar._type} ({moreCar.model} model)</a></h3>
+			  <h3><a href="#">{moreCar.year} {moreCar.make} {moreCar.model} </a></h3>
 			<div className="d-flex align-items-center mb-3">
 				<p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{moreCar.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
 				<p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{moreCar.fuel_type}</span></p>    
@@ -682,7 +682,7 @@ return(
 								  <img src={moreCar.image} onClick={()=>{redirectpage(moreCar.car_id,moreCar.seller_dealer_id)}} class="carImg" alt="..."/>
 								  
 							  <div class="cars-content">		
-							  <h3><a href="#">{moreCar.make} {moreCar._type} ({moreCar.model} model)</a></h3>
+							  <h3><a href="#">{moreCar.year} {moreCar.make} {moreCar.model}</a></h3>
 							    <div className="d-flex align-items-center mb-3">
 									<p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{moreCar.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
 									<p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{moreCar.fuel_type}</span></p>    

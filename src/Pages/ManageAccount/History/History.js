@@ -45,11 +45,11 @@ import "react-datepicker/dist/react-datepicker.css";
       });
     }
 
-    const redirecttoInvoice=(car_id,seller_dealer_id,price,lot_fee,bill_of_sales_id,gatepass_id,sold_date,make,model,year,transportation_charge,transportation)=>{
+    const redirecttoInvoice=(car_id,seller_dealer_id,price,lot_fee,bill_of_sales_id,gatepass_id,sold_date,make,model,year,transportation_charge,transportation,inventory_no,vin_no)=>{
       //   history.push("/Inspection/"+pathid);
       history.push({
         pathname: "/Invoice",
-        state: {car_id,sellerDealerID:seller_dealer_id,vechileprice:price,lotFee:lot_fee,billOfSales:bill_of_sales_id,gatePassId:gatepass_id,Date:sold_date,Make:make,Model:model,Year:year,transportationCharge:transportation_charge,Transportation:transportation}
+        state: {car_id,sellerDealerID:seller_dealer_id,vechileprice:price,lotFee:lot_fee,billOfSales:bill_of_sales_id,gatePassId:gatepass_id,Date:sold_date,Make:make,Model:model,Year:year,transportationCharge:transportation_charge,Transportation:transportation,invNo:inventory_no,vinNo:vin_no}
 
         });
         console.log ("hi",price,lot_fee,bill_of_sales_id,gatepass_id,sold_date);
@@ -397,7 +397,7 @@ const HistoryUpdate = (carId,transportationCharge,transportation,divContent,Head
                         <h4>{historyDetail.deal_name}</h4>
                         </div>
                         <div class="cars-content">		
-                        <h3><a href="#">{historyDetail.make} ({historyDetail.model} - {historyDetail.year} model)</a></h3>
+                        <h3><a href="#"> {historyDetail.year} {historyDetail.make} {historyDetail.model}</a></h3>
                         <div class="d-flex align-items-center mb-3">
                           <p class="details"><img src={speedometer}  alt=""/><span>{historyDetail.miles} m</span></p>
                           &nbsp;&nbsp;&nbsp;&nbsp;
@@ -409,7 +409,7 @@ const HistoryUpdate = (carId,transportationCharge,transportation,divContent,Head
                         <div class="cars-prices invoice_link p-0">
                           <div className="vinnoBlock"><p class="vinno" href="JavaScript:void(0)" >Vin no - <span>{historyDetail.vin_no}</span></p></div>
                           <a class="cta-btns" href="JavaScript:void(0)" onClick={()=>redirecttoInspection(historyDetail.car_id)}>Inspection</a>
-                          <a class="cta-btns invoice" href="JavaScript:void(0)" onClick={()=>redirecttoInvoice(historyDetail.car_id,historyDetail.seller_dealer_id,historyDetail.price,historyDetail.lot_fee,historyDetail.bill_of_sales_id,historyDetail.gatepass_id,historyDetail.sold_date,historyDetail.make,historyDetail.model,historyDetail.year,historyDetail.transportation_charge,historyDetail.transportation)}>Invoice</a>
+                          <a class="cta-btns invoice" href="JavaScript:void(0)" onClick={()=>redirecttoInvoice(historyDetail.car_id,historyDetail.seller_dealer_id,historyDetail.price,historyDetail.lot_fee,historyDetail.bill_of_sales_id,historyDetail.gatepass_id,historyDetail.sold_date,historyDetail.make,historyDetail.model,historyDetail.year,historyDetail.transportation_charge,historyDetail.transportation,historyDetail.inventory_no,historyDetail.vin_no)}>Invoice</a>
                         </div>
                         <div class="cars-prices gatepass pt-1">
                         {historyDetail.gatepass_id===""?
@@ -467,7 +467,7 @@ const HistoryUpdate = (carId,transportationCharge,transportation,divContent,Head
                   
                   <div class="col-lg-4 priceBlock">
                     <p className="pdate">Purchased from <span>{historyDetail.dealer_type}</span></p>
-                    <p class="date ml-0">Purchased on {historyDetail.sold_date?.substring(0,10)}</p>
+                    <p class="date ml-0">Purchased on {historyDetail.sold_date?.substring(0,10)} {historyDetail.sold_date?.substring(11,19)}</p>
                     
                     <div class="vehicleimgright col-lg-12">
                       <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>HistoryEdit(`transporationDiv${historyDetail.car_id}`,`transporationHeader${historyDetail.car_id}`)}>Edit Transportation</a></p>
