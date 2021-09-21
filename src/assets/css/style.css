@@ -7704,7 +7704,15 @@ margin-top: -3px;
   margin: 0;
     margin-right: 10px;
     display: inline-block;
+    margin-bottom: 10px;
 }
+
+.owl-carousel .cars-prices .cta-btns:hover{
+  background-color: #fff;
+    color: #444;
+    border: 1px solid #444;
+}
+
 
 .owl-carousel .cars-prices .cta-btns-primary {
   margin: 0;
@@ -8209,8 +8217,6 @@ ul#progressbar li p{
 .historyPage  .priceBlock .vehicleimgright h4, .historyPage  .priceBlock .vehicleimgright h3{
   margin-bottom: 10px;
 }
-
-
 
 .redBtn {
   background-color: #bd062c;
