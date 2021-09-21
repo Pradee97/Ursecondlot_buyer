@@ -79,6 +79,11 @@ const InVoice = (props) => {
         fetchBuyerFees();
       }, []);
       
+      const redirecttoCart=() =>{
+        history.push({
+          pathname: "/Cart",
+        })
+      }
       const getFeeDetails = () =>{
        
         return feeDetails.length > 0 ? feeDetails
@@ -248,6 +253,7 @@ const InVoice = (props) => {
 </div>
      </div>
    </div>
+   <a class={`cta-btns-primary ${(billOfSales !== null && billOfSales !== ""  ) && "redBtn"}`} onClick={()=>{(billOfSales == null ||billOfSales == ""  )&& redirecttoCart()}} > {billOfSales !== null && billOfSales !== "" ? "paid": "pay" } </a> :  
    
 
 

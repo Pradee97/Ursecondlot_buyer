@@ -54,7 +54,12 @@ import "react-datepicker/dist/react-datepicker.css";
         });
         console.log ("hi",price,lot_fee,bill_of_sales_id,gatepass_id,sold_date);
       }
-
+    
+      const redirecttoCart=() =>{
+        history.push({
+          pathname: "/Cart",
+        })
+      }
  
   const historyDetails = () =>{
 
@@ -513,11 +518,12 @@ const HistoryUpdate = (carId,transportationCharge,transportation,divContent,Head
                         {/* <h3>Total amount <span>$ {(Number(historyDetail.price)+  Number(historyDetail.lot_fee) || 0) + (Number(getFeeDetails(historyDetail.price))) + 0 + (Number(300|| 0))}</span></h3> */}
                       </div>
                     </div>
-  
+                    <a class={`cta-btns-primary ${(historyDetail.bill_of_sales_id !== null && historyDetail.bill_of_sales_id !== ""  ) && "redBtn"}`} onClick={()=>{(historyDetail.bill_of_sales_id == null || historyDetail.bill_of_sales_id == ""  )&& redirecttoCart()}}  >{historyDetail.bill_of_sales_id !== null && historyDetail.bill_of_sales_id !== "" ? "paid": "pay" }  </a>   
                   </div>
                 </div>
               </div>})
-                    :""}          
+                    :""}       
+                     
            {historyDetail.length >10 ? historyDetail.slice(0,1)
               .map(() =>
           <div><a class="load-more-btn" href="#">Load More</a></div>):""}
