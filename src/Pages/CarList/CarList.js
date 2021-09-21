@@ -330,7 +330,7 @@ const CarList = () => {
                                         </div>:""}
                                         
                                         <div className="cars-content">
-                                            <h3><a href="JavaScript:void(0)" title = {`${item.make} (${item.model}) model`}>{item.make} ({item.model}- {item.year} model)</a></h3>
+                                            <h3><a href="JavaScript:void(0)" title = {`${item.make} (${item.model}) model`}>{item.year} {item.make} {item.model}  </a></h3>
                                             <div className="d-flex align-items-center mb-3">
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>   
@@ -356,8 +356,10 @@ const CarList = () => {
                                                 {/* {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
                                                 <a className="cta-btns" href="#">Counter Bid $ {item.buy_it_now}</a>
                                                 } */}
+                                                {(item.isbuyercounterbid=="me" && item.iscounterbid!==null && (item.time !==0 || item.time!==null)) || ((item.iscounterbid==null || item.iscounterbid=="no" ) && (item.isbuyercounterbid==null || item.isbuyercounterbid=="not")&&(item.time ==0 || item.time==null))?
                                                 <a className="cta-btns-primary" href="JavaScript:void(0)" onClick={()=>setMakeBitValue(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid,item.transportation_charge,item.save_policy)} >Make Bid</a>
-                                            </div>
+                                                :<div class="carpoint lockedcar"> <a class="cars-buy-btns-primary">Locked up for Higher Bid </a></div>}
+                                                </div>
                                         </div>
                                     </div>
                                 </div>): ""}
@@ -398,7 +400,7 @@ const CarList = () => {
                                             <h4>{item.deal_name}</h4>
                                         </div>:""}
                                         <div className="cars-content">
-                                            <h3><a href="JavaScript:void(0)" title = {`${item.make} (${item.model}) model`}>{item.make} ({item.model}- {item.year} model)</a></h3>
+                                            <h3><a href="JavaScript:void(0)" title = {`${item.make} (${item.model}) model`}>{item.year} {item.make} {item.model}</a></h3>
                                             <div className="d-flex align-items-center mb-3">
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>    
@@ -470,7 +472,7 @@ const CarList = () => {
                                             <h4>{item.deal_name}</h4>
                                         </div>:""}
                                         <div className="cars-content">
-                                            <h3><a href="JavaScript:void(0)" title = {`${item.make} (${item.model}) model`}>{item.make} ({item.model}- {item.year} model)</a></h3>
+                                            <h3><a href="JavaScript:void(0)" title = {`${item.make} (${item.model}) model`}>{item.year} {item.make} {item.model}</a></h3>
                                             <div className="d-flex align-items-center mb-3">
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>  
@@ -542,7 +544,7 @@ const CarList = () => {
                                     <h4>{item.deal_name}</h4>
                                 </div>:""}
                                 <div className="cars-content">
-                                    <h3><a href="JavaScript:void(0)" title = {`${item.make} (${item.model}) model`}>{item.make} ({item.model}- {item.year} model)</a></h3>
+                                    <h3><a href="JavaScript:void(0)" title = {`${item.make} (${item.model}) model`}>{item.year} {item.make} {item.model}</a></h3>
                                     <div className="d-flex align-items-center mb-3">
                                         <p className="details"><img src={process.env.PUBLIC_URL +"/images/speedometer.svg"} alt="" /><span>{item.miles} m</span></p>
                                         <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>

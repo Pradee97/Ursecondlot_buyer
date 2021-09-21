@@ -181,7 +181,7 @@ const MyBids = () => {
                                             <img src={bidsObj.image} class="img-fluid" alt="..." />
                                         </div>
                                         <div class="mybidsrightvehicle">
-                                            <h3>{bidsObj.make} ({bidsObj.model} - {bidsObj.year} model)</h3>
+                                            <h3>{bidsObj.year} {bidsObj.make} {bidsObj.model}  </h3>
                                             <div class="d-flex align-items-center">
                                                 <p class="details"><img src={speedometer} alt="" /><span>{bidsObj.miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <p class="details"><img src={gasolinePump} alt="" /><span>{bidsObj.fuel_type}</span></p>&nbsp;&nbsp;&nbsp;&nbsp;

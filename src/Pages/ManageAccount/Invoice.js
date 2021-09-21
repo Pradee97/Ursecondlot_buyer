@@ -19,7 +19,7 @@ const InVoice = (props) => {
     const [sellerInfo,setSellerInfo] = useState("");
     const [feeDetails, setFeeDetails] = useState("");
     
-    const {sellerDealerID,vechileprice,lotFee,billOfSales,gatePassId,Date,Make,Model,Year,transportationCharge,Transportation} = props.location.state;
+    const {sellerDealerID,vechileprice,lotFee,billOfSales,gatePassId,Date,Make,Model,Year,transportationCharge,Transportation,invNo,vinNo} = props.location.state;
  console.log("hello",sellerDealerID,vechileprice,lotFee,billOfSales,gatePassId,Date);
     
      function fetchBuyerDetails() {
@@ -136,7 +136,10 @@ const InVoice = (props) => {
              </tr>
              <tr>
                <td><span>Gate Pass Code : </span>{gatePassId}</td>
-               <td ></td>
+               <td >
+                 <span>Inventory Number: {invNo} </span> <span> VIN Number: {vinNo}</span>
+
+               </td>
              </tr>			  
            </table>
            
@@ -198,7 +201,7 @@ const InVoice = (props) => {
              </thead>
              <tr>
                <td>Vehicle Price +Lot Fee 
-               <p>{Make}({Model}-{Year} model)</p>
+               <p>{Year} {Make} {Model} </p>
                </td>
                <td><span>$ {(vechileprice)+lotFee}</span></td>
              </tr>
@@ -224,9 +227,8 @@ const InVoice = (props) => {
              
              <tfoot>
              <tr>
-             {billOfSales !== null?
-                <td>Already paid </td>
-               :<td> Amount due from the buyer</td>}
+             
+               <td> Total </td>
                
                
                {/* <td><span>{Number(vechileprice+lotFee)+Number(getFeeDetails())+Number(transportationCharge)+0+0}</span></td> */}

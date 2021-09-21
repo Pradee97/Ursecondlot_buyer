@@ -209,7 +209,7 @@ const billofsales =(request) => {
                                 <div class="vehiclepaycheckbox col-lg-12">
                                     <div class="form-group input-group pb-0 mb-0">
                                         {/* <input className={"paySeparately"+index}  value={paySeparately[index]=='no'? "yes":"no"} type="checkbox" id={"vehiclepayseparat"+index} checked = {paySeparately[index] =='yes'?true:false} onChange={(e)=>{paySeparately[index]='yes'}}/><label for={"vehiclepayseparat"+index}>You Want To Pay Separately{paySeparately[index]}</label> */}
-                                        <input className={"paySeparately"+index}  value={index} type="checkbox" id={"vehiclepayseparat"+index} onChange={(e)=>{selectedCarIdList(cartDetail.car_id)}}/><label for={"vehiclepayseparat"+index}>You Want To Pay Separately</label>
+                                        <label for={"vehiclepayseparat"+index}>Select to make payment for this car</label><input className={"paySeparately"+index}  value={index} type="checkbox" id={"vehiclepayseparat"+index} onChange={(e)=>{selectedCarIdList(cartDetail.car_id)}}/>
 
                                     </div>
                                 </div>					
@@ -219,9 +219,9 @@ const billofsales =(request) => {
                                 </div>
 
                                 <div class="vehicleimgright col-lg-8">
-                                    <h3>{cartDetail.make} ({cartDetail.model} - {cartDetail.year} model)</h3>
+                                    <h3>{cartDetail.year} {cartDetail.make} {cartDetail.model} ({cartDetail.vin_no})  </h3>
                                     <h3>Inventory Number - {cartDetail.inventory_no}</h3>
-                                    <h4>Car Price + Lot Fee <span>$ {(Number(cartDetail.price)+(Number(cartDetail.lot_fee)))}</span></h4>
+                                    <h4>Vechile Price + Lot Fee <span>$ {(Number(cartDetail.price)+(Number(cartDetail.lot_fee)))}</span></h4>
                                     <h4>Buy Fee <span>$ {getFeeDetails(cartDetail.price)}</span></h4>
                                     <h4>Other Charges <span>$ 0</span></h4>
                                     <h4>Miscellaneous Charges <span>$ 0</span></h4>
