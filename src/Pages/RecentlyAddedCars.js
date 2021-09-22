@@ -15,6 +15,7 @@ import Popup from '../Component/Popup/Popup';
 import Makeurbid from './Makeurbid';
 import CarDetailsAction from './CarDetails/CarDetailsAction';
 import BuyItNow from '../Pages/BuyItNow/BuyItNow';
+import Countdown from "react-countdown";
 
 const RecentlyAddedCars = () => {
 
@@ -49,7 +50,23 @@ const [apiName,setApiName]=useState("")
 
 	const [highBid,setHighBid] = useState(null);
 	const [makeBitData, setMakeBitData] = useState({});
-	const [buyItNowData, setBuyItNowData] = useState({})
+	const [buyItNowData, setBuyItNowData] = useState({});
+
+	const Completionist = () => <span>{""}</span>;
+
+    const renderer = ({minutes, seconds, completed }) => {
+    if (completed) {
+        
+        return <Completionist />;
+    } else {
+    
+        return (
+        <span>
+            {minutes}:{seconds}
+        </span>
+        );
+    }
+    };
 	
 	const getMakeBitValue = (data) => {
 		const highBid = data
@@ -405,7 +422,17 @@ const [apiName,setApiName]=useState("")
 												{/* {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined?"":
 												<a className="cta-btns" href="#">Counter Bid $ {item.buy_it_now}</a>
 												}  */}
-                                                <a className="cta-btns-primary" onClick={()=>setMakeBitValue(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid,item.transportation_charge,item.save_policy)} >Make Bid</a>
+
+												{(item.isbuyercounterbid=="me" && item.iscounterbid!==null && (item.time !==0 || item.time!==null)) || ((item.iscounterbid==null || item.iscounterbid=="no" ) && (item.isbuyercounterbid==null || item.isbuyercounterbid=="not")&&(item.time ==0 || item.time==null))?
+                                                <a className="cta-btns-primary" href="JavaScript:void(0)" onClick={()=>setMakeBitValue(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid,item.transportation_charge,item.save_policy)} >Make Bid</a>
+                                                :<a class="cta-btns">Locked up for Higher Bid </a>}
+
+                                                {(item.buyer_high_bid==item.high_bid || item.buyer_high_bid!==item.high_bid) &&       
+                                                <div class= {(item.time!==null && item.time < 20)?"countownBlock":""} >
+                                                    <Countdown date={Date.now() + (item.time!==null && item.time < 20 ? item.time*60*1000 :0)  } renderer={renderer} />                                               
+                                                </div>}
+
+                                                {/* <a className="cta-btns-primary" onClick={()=>setMakeBitValue(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid,item.transportation_charge,item.save_policy)} >Make Bid</a> */}
                                             </div>
                                         </div>
                                     </div>

@@ -647,7 +647,17 @@ return(
 					{/* {moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined?"":
 					<a className="cta-btns" href="#">Counter Bid $ {moreCar.buy_it_now}</a>
 					} */}
-					<a class="cta-btns-primary" onClick={()=>setMakeBitValue(moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now,moreCar.comments,moreCar.transportation,moreCar.display,moreCar.proxy_bid,moreCar.transportation_charge,moreCar.save_policy)}>Make Bid</a>
+
+					{(moreCar.isbuyercounterbid=="me" && moreCar.iscounterbid!==null && (moreCar.time !==0 || moreCar.time!==null)) || ((moreCar.iscounterbid==null || moreCar.iscounterbid=="no" ) && (moreCar.isbuyercounterbid==null || moreCar.isbuyercounterbid=="not")&&(moreCar.time ==0 || moreCar.time==null))?
+					<a className="cta-btns-primary" href="JavaScript:void(0)" onClick={()=>setMakeBitValue(moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now,moreCar.comments,moreCar.transportation,moreCar.display,moreCar.proxy_bid,moreCar.transportation_charge,moreCar.save_policy)} >Make Bid</a>
+					:<a class="cta-btns">Locked up for Higher Bid </a>}
+
+					{(moreCar.buyer_high_bid==moreCar.high_bid || moreCar.buyer_high_bid!==moreCar.high_bid) &&       
+					<div class= {(moreCar.time!==null && moreCar.time < 20)?"countownBlock":""} >
+						<Countdown date={Date.now() + (moreCar.time!==null && moreCar.time < 20 ? moreCar.time*60*1000 :0)  } renderer={renderer} />                                               
+					</div>}
+
+					{/* <a class="cta-btns-primary" onClick={()=>setMakeBitValue(moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now,moreCar.comments,moreCar.transportation,moreCar.display,moreCar.proxy_bid,moreCar.transportation_charge,moreCar.save_policy)}>Make Bid</a> */}
 				</div>
               </div>
             </div>
@@ -710,7 +720,17 @@ return(
 									{/* {moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined?"":
 									<a className="cta-btns" href="#">Counter Bid $ {moreCar.buy_it_now}</a>
 									} */}
-									<a class="cta-btns-primary" onClick={()=>setMakeBitValue( moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now,moreCar.comments,moreCar.transportation,moreCar.display,moreCar.proxy_bid,moreCar.transportation_charge,moreCar.save_policy)}>Make Bid</a>
+
+									{(moreCar.isbuyercounterbid=="me" && moreCar.iscounterbid!==null && (moreCar.time !==0 || moreCar.time!==null)) || ((moreCar.iscounterbid==null || moreCar.iscounterbid=="no" ) && (moreCar.isbuyercounterbid==null || moreCar.isbuyercounterbid=="not")&&(moreCar.time ==0 || moreCar.time==null))?
+									<a className="cta-btns-primary" href="JavaScript:void(0)" onClick={()=>setMakeBitValue(moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now,moreCar.comments,moreCar.transportation,moreCar.display,moreCar.proxy_bid,moreCar.transportation_charge,moreCar.save_policy)} >Make Bid</a>
+									:<a class="cta-btns">Locked up for Higher Bid </a>}
+
+									{(moreCar.buyer_high_bid==moreCar.high_bid || moreCar.buyer_high_bid!==moreCar.high_bid) &&       
+									<div class= {(moreCar.time!==null && moreCar.time < 20)?"countownBlock":""} >
+										<Countdown date={Date.now() + (moreCar.time!==null && moreCar.time < 20 ? moreCar.time*60*1000 :0)  } renderer={renderer} />                                               
+									</div>}
+
+									{/* <a class="cta-btns-primary" onClick={()=>setMakeBitValue( moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now,moreCar.comments,moreCar.transportation,moreCar.display,moreCar.proxy_bid,moreCar.transportation_charge,moreCar.save_policy)}>Make Bid</a> */}
 								</div>
 							  </div>
 							</div>

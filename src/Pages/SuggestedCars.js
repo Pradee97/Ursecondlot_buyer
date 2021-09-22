@@ -14,6 +14,7 @@ import Popup from '../Component/Popup/Popup';
 import Makeurbid from './Makeurbid';
 import CarDetailsAction from './CarDetails/CarDetailsAction';
 import BuyItNow from '../Pages/BuyItNow/BuyItNow';
+import Countdown from "react-countdown";
 
 const SuggestedCars = () => {
 
@@ -68,7 +69,23 @@ const SuggestedCars = () => {
 
 	const [highBid,setHighBid] = useState(null);
 	const [makeBitData, setMakeBitData] = useState({});
-	const [buyItNowData, setBuyItNowData] = useState({})
+	const [buyItNowData, setBuyItNowData] = useState({});
+
+	const Completionist = () => <span>{""}</span>;
+
+    const renderer = ({minutes, seconds, completed }) => {
+    if (completed) {
+        
+        return <Completionist />;
+    } else {
+    
+        return (
+        <span>
+            {minutes}:{seconds}
+        </span>
+        );
+    }
+    };
 	
 	const getMakeBitValue = (data) => {
 		const highBid = data
@@ -988,7 +1005,16 @@ useEffect(() => {
                                                 <a className="cta-btns" href="#">High Bid $ {item.high_bid}</a>
                                                 }
 
-                                                <a href="JavaScript:void(0)" className="cta-btns-primary" onClick={()=>assignMakeBitValue(item)} >Make Bid</a>
+												{(item.isbuyercounterbid=="me" && item.iscounterbid!==null && (item.time !==0 || item.time!==null)) || ((item.iscounterbid==null || item.iscounterbid=="no" ) && (item.isbuyercounterbid==null || item.isbuyercounterbid=="not")&&(item.time ==0 || item.time==null))?
+                                                <a className="cta-btns-primary" href="JavaScript:void(0)" onClick={()=>assignMakeBitValue(item)} >Make Bid</a>
+                                                :<a class="cta-btns">Locked up for Higher Bid </a>}
+
+                                                {(item.buyer_high_bid==item.high_bid || item.buyer_high_bid!==item.high_bid) &&       
+                                                <div class= {(item.time!==null && item.time < 20)?"countownBlock":""} >
+                                                    <Countdown date={Date.now() + (item.time!==null && item.time < 20 ? item.time*60*1000 :0)  } renderer={renderer} />                                               
+                                                </div>}
+
+                                                {/* <a href="JavaScript:void(0)" className="cta-btns-primary" onClick={()=>assignMakeBitValue(item)} >Make Bid</a> */}
                                             </div>
                                         </div>
                                     </div>
