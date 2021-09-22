@@ -384,7 +384,7 @@ const HistoryUpdate = (carId,transportationCharge,transportation,divContent,Head
                   </div>
                   
                   
-            {historyDetail?.length>0? historyDetail
+            {historyDetail?.length>0? historyDetail.sort((b,a)=>b.historyDetail?.sold_date-a.historyDetail?.sold_date)
             .map((historyDetail) =>   {
               // setCarTransportation(historyDetail.transportation)
               return <div class="lotfee-inner col-lg-12">

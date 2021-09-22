@@ -120,10 +120,10 @@ const billofsales =(request) => {
         // setMySelectedCarId(newdata)
         if(newdata.includes(data)){
             newdata = newdata.filter(item => item !== data)
-            setMySelectedCarId(newdata)
+            setMySelectedCarId(newdata|| [])
         }
         else{
-            // newdata.push(data) 
+            // newdata.push(data)             
             newdata=[...newdata,data]
             setMySelectedCarId(newdata)
         }
@@ -134,19 +134,21 @@ const billofsales =(request) => {
     const mySelectedCarTotal = () =>{
         console.log("mySelectedCarTotal=====")
         console.log("cartDetail.====",cartDetail)
+        console.log("mySelectedCarId.====",mySelectedCarId)
         if(mySelectedCarId.length>0) {
             console.log("mySelectedCarId~~~~~",mySelectedCarId)
-            if(cartDetail?.length>0 && cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id)) ).length>0){
+            if(cartDetail?.length>0 && cartDetail.filter(item => (mySelectedCarId.includes(item.car_id)) ).length>0){
                 // console.log("mySelectedCarId.length====",cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id)) ).length)
-                return cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id))).reduce((acc, curr) => acc+((Number(curr.price) || 0)+Number(curr.lot_fee) +  Number(curr.transportation === 'yes' ? curr.transportation_charge : 0) + Number(getFeeDetails(curr.price))),0)
+                return cartDetail.filter(item => (mySelectedCarId.includes(item.car_id))).reduce((acc, curr) => acc+((Number(curr.price) || 0)+Number(curr.lot_fee) +  Number(curr.transportation === 'yes' ? curr.transportation_charge : 0) + Number(getFeeDetails(curr.price))),0)
             }
             else {
                 return 0
             }
         }
         else {
-        return cartDetail?.length>0 && cartDetail
-        .reduce((acc, curr) => acc+((Number(curr.price) || 0)+Number(curr.lot_fee) +  Number(curr.transportation === 'yes' ? curr.transportation_charge : 0) + Number(getFeeDetails(curr.price))),0)
+            return 0
+        // return cartDetail?.length>0 && cartDetail
+        // .reduce((acc, curr) => acc+((Number(curr.price) || 0)+Number(curr.lot_fee) +  Number(curr.transportation === 'yes' ? curr.transportation_charge : 0) + Number(getFeeDetails(curr.price))),0)
         }
     }
 
@@ -155,10 +157,10 @@ const billofsales =(request) => {
         console.log("reviewAndCheckout=====")
         if(mySelectedCarId.length>0) {
             console.log("mySelectedCarId~~~~~",mySelectedCarId)
-            if(cartDetail?.length>0 && cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id)) ).length>0){
+            if(cartDetail?.length>0 && cartDetail.filter(item => (mySelectedCarId.includes(item.car_id)) ).length>0){
                 // console.log("mySelectedCarId.length====",cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id)) ).length)
-                setMySelectedCarDetails(cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id))).map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id}}))
-                billofsales(cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id))).map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id,"make": data.make, "model": data.model, "image": data.image, "price": data.price,"transportation_charge":data.transportation_charge,"year":data.year,"lot_fee":data.lot_fee,"buyFee":getFeeDetails()}}))
+                setMySelectedCarDetails(cartDetail.filter(item => (mySelectedCarId.includes(item.car_id))).map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id}}))
+                billofsales(cartDetail.filter(item => (mySelectedCarId.includes(item.car_id))).map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id,"make": data.make, "model": data.model, "image": data.image, "price": data.price,"transportation_charge":data.transportation_charge,"year":data.year,"lot_fee":data.lot_fee,"buyFee":getFeeDetails()}}))
             }
             else {
                 setMySelectedCarDetails([])
@@ -166,8 +168,10 @@ const billofsales =(request) => {
             }
         }
         else {
-            setMySelectedCarDetails(cartDetail?.length>0 ? cartDetail.map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id}}):[])
-            billofsales(cartDetail?.length>0 ? cartDetail.map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id,"make": data.make, "model": data.model, "image": data.image, "price": data.price,"transportation_charge":data.transportation_charge,"year":data.year,"lot_fee":data.lot_fee,"buyFee":getFeeDetails()}}):[])
+            setMySelectedCarDetails([])
+            billofsales([])
+            // setMySelectedCarDetails(cartDetail?.length>0 ? cartDetail.map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id}}):[])
+            // billofsales(cartDetail?.length>0 ? cartDetail.map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id,"make": data.make, "model": data.model, "image": data.image, "price": data.price,"transportation_charge":data.transportation_charge,"year":data.year,"lot_fee":data.lot_fee,"buyFee":getFeeDetails()}}):[])
         // return cartDetail?.length>0 && cartDetail
         // .reduce((acc, curr) => acc+((Number(curr.max_price) || 0) +  Number(curr.transportation === 'yes' ? curr.transportation_charge : 0) + Number(getFeeDetails(curr.max_price))),0)
         }
@@ -209,7 +213,7 @@ const billofsales =(request) => {
                                 <div class="vehiclepaycheckbox col-lg-12">
                                     <div class="form-group input-group pb-0 mb-0">
                                         {/* <input className={"paySeparately"+index}  value={paySeparately[index]=='no'? "yes":"no"} type="checkbox" id={"vehiclepayseparat"+index} checked = {paySeparately[index] =='yes'?true:false} onChange={(e)=>{paySeparately[index]='yes'}}/><label for={"vehiclepayseparat"+index}>You Want To Pay Separately{paySeparately[index]}</label> */}
-                                        <label for={"vehiclepayseparat"+index}>Select to make payment for this car</label><input className={"paySeparately"+index}  value={index} type="checkbox" id={"vehiclepayseparat"+index} onChange={(e)=>{selectedCarIdList(cartDetail.car_id)}}/>
+                                        <input className={"paySeparately"+index}  value={index} type="checkbox" id={"vehiclepayseparat"+index} onChange={(e)=>{selectedCarIdList(cartDetail.car_id)}}/><label for={"vehiclepayseparat"+index}>Select to make payment for this car</label>
 
                                     </div>
                                 </div>					
@@ -265,7 +269,7 @@ const billofsales =(request) => {
         </div>
                    
                         <div class="vehicletotalbtns"> 
-                            <a class="vehicletotal-btns" href="JavaScript:void(0)" disabled={!paymentMode} onClick={()=> paymentMode && reviewAndCheckout()  }>Review & Checkout</a>
+                            <a class="vehicletotal-btns" href="JavaScript:void(0)" disabled={!paymentMode || !mySelectedCarId.length} onClick={()=> paymentMode && mySelectedCarId.length>0&& reviewAndCheckout()  }>Review & Checkout</a>
                         </div>
                         <p className="form-input-error">{alertError}</p>
                         
