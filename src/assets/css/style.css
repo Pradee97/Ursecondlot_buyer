@@ -4230,6 +4230,7 @@ Search Box"
     border: 1px solid rgba(0,0,0,.125);
     border-radius: .25rem;
 	padding:30px 40px;
+  min-height: 600px;
 	
 }
 .floorplans .section-title p {
@@ -8373,4 +8374,43 @@ top: 2px;
     float: left;
     width: 100%;
 }
+
+.products-details .cars-detail-views .car-btns-primary.buyitBtn{
+  color: #fff;
+  background: #008d0e;
+  border: #008d0e solid 1px;
+  border-radius: 3px;
+  padding: 5px;
+  font-weight: 500;
+  margin-right: 0 !important;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.products-details .cars-detail-views .car-btns-primary.buyitBtn span{
+  color: #fff;
+  padding: 5px 10px;
+  padding-left: 0;
+}
+
+
+.paybtns{
+  width: 100%;
+  float: left;
+  text-align: center;
+}
+
+.paybtns .cta-btns-primary{
+  clear: both;
+  display: inline-block;
+  color: #fff;
+  text-transform: uppercase;
+  background-color: #bd062c;
+}
+
+.paybtns .cta-btns-primary.greenBtn{
+  background: #008d0e;
+}
+
+
 

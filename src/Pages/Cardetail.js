@@ -445,7 +445,7 @@ return(
 									} */}
 									
 									{carDetail[0].buy_it_now=="" || carDetail[0].buy_it_now== null || carDetail[0].buy_it_now== undefined || carDetail[0].buy_it_now== 0 ?"":
-									<a class="car-btns-primary ml-2" onClick={()=>setBuyItNowValue(carDetail[0]. buy_it_now,carDetail[0].car_id,carDetail[0].image,carDetail[0].model,carDetail[0].make,carDetail[0].year)}><img src={tag} alt=""/>Buy it Now :<span> $ {carDetail[0].buy_it_now}</span></a>
+									<a class="car-btns-primary ml-2 buyitBtn" onClick={()=>setBuyItNowValue(carDetail[0]. buy_it_now,carDetail[0].car_id,carDetail[0].image,carDetail[0].model,carDetail[0].make,carDetail[0].year)}><i class="icofont-tag"></i> Buy it Now :<span> $ {carDetail[0].buy_it_now}</span></a>
 									}
 							
 									{(carDetail[0].buyer_high_bid==carDetail[0].high_bid || carDetail[0].buyer_high_bid!==carDetail[0].high_bid) &&

@@ -246,17 +246,21 @@ const InVoice = (props) => {
             
             </table>            
          </div>
+        
          </div>
         
       
         </div>
 </div>
+
+
      </div>
    </div>
-   <a class={`cta-btns-primary ${(billOfSales !== null && billOfSales !== ""  ) && "redBtn"}`} onClick={()=>{(billOfSales == null ||billOfSales == ""  )&& redirecttoCart()}} > {billOfSales !== null && billOfSales !== "" ? "paid": "pay" } </a> :  
+  
+   <div class="col-md-12 text-center paybtns">
+   <a class={`cta-btns-primary ${(billOfSales !== null && billOfSales !== ""  ) && "greenBtn"}`} onClick={()=>{(billOfSales == null ||billOfSales == ""  )&& redirecttoCart()}} > {billOfSales !== null && billOfSales !== "" ? "paid": "pay" } </a> 
    
-
-
+   </div>
    <section id="playstoreBlock" class="playstoreBlock">
      <div class="container">
 

@@ -518,7 +518,9 @@ const HistoryUpdate = (carId,transportationCharge,transportation,divContent,Head
                         {/* <h3>Total amount <span>$ {(Number(historyDetail.price)+  Number(historyDetail.lot_fee) || 0) + (Number(getFeeDetails(historyDetail.price))) + 0 + (Number(300|| 0))}</span></h3> */}
                       </div>
                     </div>
-                    <a class={`cta-btns-primary ${(historyDetail.bill_of_sales_id !== null && historyDetail.bill_of_sales_id !== ""  ) && "redBtn"}`} onClick={()=>{(historyDetail.bill_of_sales_id == null || historyDetail.bill_of_sales_id == ""  )&& redirecttoCart()}}  >{historyDetail.bill_of_sales_id !== null && historyDetail.bill_of_sales_id !== "" ? "paid": "pay" }  </a>   
+                    <div class="col-md-12 text-center paybtns">
+                    <a class={`cta-btns-primary ${(historyDetail.bill_of_sales_id !== null && historyDetail.bill_of_sales_id !== ""  ) && "greenBtn"}`} onClick={()=>{(historyDetail.bill_of_sales_id == null || historyDetail.bill_of_sales_id == ""  )&& redirecttoCart()}}  >{historyDetail.bill_of_sales_id !== null && historyDetail.bill_of_sales_id !== "" ? "paid": "pay" }  </a>   
+                    </div>
                   </div>
                 </div>
               </div>})
