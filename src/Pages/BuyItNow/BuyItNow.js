@@ -128,7 +128,7 @@ if(!confirmationFlag){
                               <div>
                               <div class="input-group col-md-12">
                                 
-                                      <p className="text-center">Are you sure wants to buy the car then please confirm the user name and  password</p>
+                                      <p className="text-center">Are you sure wants to buy the car then please confirm the password</p>
                                    
                               </div>
                               <div class=" col-md-12">
