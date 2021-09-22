@@ -52,7 +52,7 @@ const handleBuyItNow=()=>{
   setUsernameError("")
   setPasswordError("")
 
-  if(!userName){
+  if(userName ){
     setUsernameError("Email is required")
     return;
   }
@@ -78,7 +78,7 @@ if(!confirmationFlag){
         
             buyer_dealer_id:JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
             buyer_id:JSON.parse(localStorage.getItem("userDetails")).buyer_id, 
-            email:userName,
+            email:JSON.parse(localStorage.getItem("userDetails")).email,
             password:password,
             car_id: id,
             price: carBuyItNow,
@@ -89,6 +89,7 @@ if(!confirmationFlag){
             createdBy:JSON.parse(localStorage.getItem("userDetails")).buyer_id,
            
 		}
+    // return
 	console.log("Save Search Request : ",request);
 		API.post("carbuy/add", request).then(response=>{
 	
