@@ -445,7 +445,7 @@ return(
 									} */}
 									
 									{carDetail[0].buy_it_now=="" || carDetail[0].buy_it_now== null || carDetail[0].buy_it_now== undefined || carDetail[0].buy_it_now== 0 ?"":
-									<a class="car-btns-primary ml-2" href=""><img src={tag} alt=""/>Buy it Now :<span> $ {carDetail[0].buy_it_now}</span></a>
+									<a class="car-btns-primary ml-2" onClick={()=>setBuyItNowValue(carDetail[0]. buy_it_now,carDetail[0].car_id,carDetail[0].image,carDetail[0].model,carDetail[0].make,carDetail[0].year)}><img src={tag} alt=""/>Buy it Now :<span> $ {carDetail[0].buy_it_now}</span></a>
 									}
 							
 									{(carDetail[0].buyer_high_bid==carDetail[0].high_bid || carDetail[0].buyer_high_bid!==carDetail[0].high_bid) &&
@@ -467,9 +467,9 @@ return(
 						
 							<div class="col-md-12">
 	        					<div class="cars-buy">
-								{carDetail[0].buy_it_now=="" || carDetail[0].buy_it_now== null || carDetail[0].buy_it_now== undefined || carDetail[0].buy_it_now== 0?"":
+								{/* {carDetail[0].buy_it_now=="" || carDetail[0].buy_it_now== null || carDetail[0].buy_it_now== undefined || carDetail[0].buy_it_now== 0?"":
 									<a class="cars-buy-btns" onClick={()=>setBuyItNowValue(carDetail[0]. buy_it_now,carDetail[0].car_id,carDetail[0].image,carDetail[0].model,carDetail[0].make,carDetail[0].year)}>Buy now</a>
-								}
+								} */}
 									
 									<a class="cars-buy-btns-primary" onClick={()=>setMakeBitValue(carDetail[0].high_bid,carDetail[0].min_price,carDetail[0].save_purchase,carDetail[0].car_id,carDetail[0].time,carDetail[0].counter_buyer_dealer_id,carDetail[0].max_price,carDetail[0].buy_it_now,carDetail[0].comments,carDetail[0].transportation,carDetail[0].display,carDetail[0].proxy_bid,carDetail[0].transportation_charge,carDetail[0].save_policy)}>Make Bid</a>
 								</div>
