@@ -198,7 +198,7 @@ const MyBids = () => {
                                             <h3>Used Car Dealer</h3>
                                             <p class="details"><img src={Path} alt="" /><span>{bidsObj.address}</span></p>
                                             <div class="d-flex align-items-center">
-                                                <p class="details"><img src={persent} alt="" /><span>15%</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                {/* <p class="details"><img src={persent} alt="" /><span>15%</span></p>&nbsp;&nbsp;&nbsp;&nbsp; */}
                                                 <p class="details"><img src={roadwithBrokenLine} alt="" /><span>{bidsObj.mileage}M</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
                                             </div>
                                         </div>

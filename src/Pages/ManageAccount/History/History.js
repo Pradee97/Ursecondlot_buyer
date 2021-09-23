@@ -475,7 +475,7 @@ const HistoryUpdate = (carId,transportationCharge,transportation,divContent,Head
                     <p class="date ml-0">Purchased on {historyDetail.sold_date?.substring(0,10)} {historyDetail.sold_date?.substring(11,19)}</p>
                     
                     <div class="vehicleimgright col-lg-12">
-                      <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>HistoryEdit(`transporationDiv${historyDetail.car_id}`,`transporationHeader${historyDetail.car_id}`)}>Edit Transportation</a></p>
+                      <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>HistoryEdit(`transporationDiv${historyDetail.car_id}`,`transporationHeader${historyDetail.car_id}`)}>{historyDetail.bill_of_sales_id !== null && historyDetail.bill_of_sales_id !== "" ? "": "Edit Transportation" }</a></p>
                       <h3>Vehicle Price + Lot Fee <span>$ {Number(historyDetail.price)+ Number(historyDetail.lot_fee)}</span></h3>
                       <h4> Buy Fee <span> $ {Number(getFeeDetails(historyDetail.price))}</span></h4>
                       <h4>Inspection <span>$ 0</span></h4>
