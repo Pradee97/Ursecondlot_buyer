@@ -12,6 +12,7 @@ import './history.css'
 import Loading from"../../../Component/Loading/Loading";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { NoEncryptionOutlined } from '@material-ui/icons';
 
  const History = () => {
 
@@ -36,6 +37,9 @@ import "react-datepicker/dist/react-datepicker.css";
   const[scheduletodate,setScheduleToDate]=useState(null);
   const[scheduleDate,setScheduleDate]=useState(null);
   const [fromDateError,setFromDateError] = useState("");
+  let [loadValue,setLoadValue] = useState(0);
+  let [loadValueSearch,setLoadValueSearch] = useState(0);
+  let [loadValueOrder,setLoadValueOrder] = useState(0);
 
   const redirecttoInspection=(pathid)=>{
     //   history.push("/Inspection/"+pathid);
@@ -63,8 +67,15 @@ import "react-datepicker/dist/react-datepicker.css";
  
   const historyDetails = () =>{
 
+    if(loadValue==0){
+      loadValue=10;
+    }
+    else{
+      loadValue=loadValue+10;
+    }
     let request = {
         buyer_dealer_id :userDetails.buyer_dealer_id,
+        key:loadValue
     }
 
     API.post("historyDetails/condition", request).then(response=>{
@@ -72,6 +83,7 @@ import "react-datepicker/dist/react-datepicker.css";
         console.log("history check the value", response.data.data)
         setHistoryDetail(response.data.data)
         setNoCars(response.data.data.length)
+        setLoadValue(response.data.data.length);
         setLoading(false);
     });
 
@@ -82,8 +94,17 @@ useEffect (() =>{
 }, [scheduletodate,scheduleDate]);
 
 const searchCarDetail = () => {
+
+  if(loadValueSearch==0){
+    loadValueSearch=10;
+  }
+  else{
+    loadValueSearch=loadValueSearch+10;
+  }
+
   setVinError("")
   setFromDateError("")
+
  if(VINNumber.length>0 && VINNumber.length < 6){
    setVinError("VIN number must have last 6 digit")
    return;
@@ -113,6 +134,7 @@ if(scheduleDate){
       vin_no: VINNumber,
       fromdate: scheduleDate==null ? "" : convert(scheduleDate),
       todate:scheduleDate==null? "" : scheduletodate==null?convert(new Date()):convert(scheduletodate),
+      key: loadValueSearch
 
       }
   
@@ -121,6 +143,7 @@ if(scheduleDate){
           console.log("history Search", response.data.data)
           setHistoryDetail(response.data.data)
           setNoCars(response.data.data.length)
+          setLoadValueSearch(response.data.data.length);
           // setHistorySearch(response.data.data)
         }); 
   
@@ -147,9 +170,18 @@ useEffect (()=>{
     },[])
 
   const historyOrder =() =>{
+
+    if(loadValueOrder==0){
+      loadValueOrder=10;
+    }
+    else{
+      loadValueOrder=loadValueOrder+10;
+    }
+
       let request={
         buyer_dealer_id: userDetails.buyer_dealer_id,
           order:order,
+          key: loadValueOrder
 
       }
         API.post("historyOrder/condition", request).then(response=>{
@@ -157,13 +189,14 @@ useEffect (()=>{
         console.log("history Order", response.data.data)
         setHistoryDetail(response.data.data)
         setNoCars(response.data.data.length)
+        setLoadValueOrder(response.data.data.length)
         // setHistorySearch(response.data.data)
         });
   }
 
 
 useEffect (() =>{
-  historyOrder()
+  order!=="" && historyOrder()
 }, [order]);
 
 
@@ -369,6 +402,7 @@ const HistoryUpdate = (carId,transportationCharge,transportation,divContent,Head
                         <div class="col-sm-12 form-group mr-0 pr-0">  
                           <div class="tbox">			
                           <select id="" class="form-control box"  onChange={(e) => setOrder(e.target.value)}>
+                          <option style={{display:NoEncryptionOutlined}} value="">select</option>
                             <option value="USA">Sort By</option>
                             <option value="USA">Sold Date</option>
                             <option value="USA">ACH Date</option>

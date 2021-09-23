@@ -46,12 +46,17 @@ const Transport = () => {
 	const [loading,setLoading] = useState(true);
 	  
   	const [order,setOrder] = useState("");
-	
+	  const [loadValue,setLoadValue] = useState(10);
+	const [loadValuePickup,setLoadValuePickup] = useState(10);
+	const [loadValueTransit,setLoadValueTransit] = useState(10);
+	const [loadValueDelivered,setLoadValueDelivered] = useState(10);
+
 	const Pickup = () =>{
 		
         let request = {
 			buyer_dealer_id :userDetails.buyer_dealer_id,
-			status: "Pickup"
+			status: "Pickup",
+			key: loadValuePickup
 		}
 		//console.log("check the value in transport", value)
 		setTransportFlag("Pickup");
@@ -60,6 +65,7 @@ const Transport = () => {
 
 			console.log("pickup check the value", response.data.data)
 			setPickUp(response.data.data)
+			setLoadValuePickup(response.data.data.length>0 ? response.data.data : 10)
 			setLoading(false);
            
         });
@@ -69,7 +75,8 @@ const Transport = () => {
 		
         let request = {
 			buyer_dealer_id :userDetails.buyer_dealer_id,
-			status: "In Transit"
+			status: "In Transit",
+			key: loadValueTransit
 		}
 		setTransportFlag("In Transit");
 
@@ -77,6 +84,7 @@ const Transport = () => {
 
 			console.log("pickup check the value", response.data.data)
 			setPickUp(response.data.data)
+			setLoadValueTransit(response.data.data.length>0 ? response.data.data : 10)
 			setLoading(false);
            
         });
@@ -86,7 +94,8 @@ const Transport = () => {
 		
         let request = {
 			buyer_dealer_id :userDetails.buyer_dealer_id,
-			status: "Delivered"
+			status: "Delivered",
+			key: loadValueDelivered
         }
 		setTransportFlag("Delivered");
 
@@ -94,6 +103,7 @@ const Transport = () => {
 
 			console.log("pickup check the value", response.data.data)
 			setPickUp(response.data.data)
+			setLoadValueDelivered(response.data.data.length>0 ? response.data.data : 10)
 			setLoading(false);
            
         });
