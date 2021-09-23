@@ -132,11 +132,15 @@ const MyBids = () => {
         setHighBid(highBid)
     }
     
-    const setBuyItNowValue = ( buy_it_now,car_id,) => {
+    const setBuyItNowValue = ( buy_it_now,car_id,image,model,make,year) => {
     
         setBuyItNowData({
             buyItNow: buy_it_now,
             carId : car_id,
+            image : image,
+		    model : model,
+			make : make, 
+			year : year 
     
         })
     
@@ -223,7 +227,7 @@ const MyBids = () => {
                                         <div class="mybidscontrol">
                                             <a class="cta-btns-primary redBtn" onClick={() => setMakeBitValue(bidsObj.high_bid, bidsObj.min_price, bidsObj.save_purchase, bidsObj.car_id, bidsObj.time, bidsObj.counter_buyer_dealer_id, bidsObj.max_price, bidsObj.buy_it_now, bidsObj.comments, bidsObj.transportation, bidsObj.display, bidsObj.proxy_bid, bidsObj.transportation_charge, bidsObj.save_policy)}>Raise Bid</a>
                                             {bidsObj.buy_it_now !==""?
-                                            <a class="cta-btns greenBtn" onClick={()=>setBuyItNowValue(bidsObj.buy_it_now,bidsObj.car_id)} >Accept Bid</a>:""}
+                                            <a class="cta-btns greenBtn" onClick={()=>setBuyItNowValue(bidsObj.buy_it_now,bidsObj.car_id,bidsObj.image,bidsObj.model,bidsObj.make,bidsObj.year)} >Accept Bid</a>:""}
                                             <a class="control-btns-cancel" onClick={() =>cancelBid(bidsObj.car_id)}>Cancel Bid</a>
                                         </div>:
                                          <div class="mybidscontrol">
