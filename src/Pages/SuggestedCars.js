@@ -1007,7 +1007,7 @@ useEffect(() => {
 
 												{(item.isbuyercounterbid=="me" && item.iscounterbid!==null && (item.time !==0 || item.time!==null)) || ((item.iscounterbid==null || item.iscounterbid=="no" ) && (item.isbuyercounterbid==null || item.isbuyercounterbid=="not")&&(item.time ==0 || item.time==null))?
                                                 <a className="cta-btns-primary" href="JavaScript:void(0)" onClick={()=>assignMakeBitValue(item)} >Make Bid</a>
-                                                :<a class="cta-btns">Locked up for Higher Bid </a>}
+                                                :<a class="cta-btns lockedcarBtn">Locked up for Higher Bid </a>}
 
                                                 {(item.buyer_high_bid==item.high_bid || item.buyer_high_bid!==item.high_bid) &&       
                                                 <div class= {(item.time!==null && item.time < 20)?"countownBlock":""} >

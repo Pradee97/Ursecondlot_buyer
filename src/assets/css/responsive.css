@@ -138,6 +138,9 @@ img.carImg {
 .owl-carousel .cars-prices .cta-btns{
        margin-bottom: 10px;
   }	
+  a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
+   margin-top: 10px !important;
+  }
 	
 }
 @media (max-width: 1300px) {

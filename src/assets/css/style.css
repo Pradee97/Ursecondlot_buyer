@@ -1073,7 +1073,7 @@ Cars list
  .cars-prices .cta-btns {
     background-color: #fff;
     color: #444;
-    padding: 8px 15px;   
+    padding: 8px 10px;   
 	margin-right:20px;
     border-radius: 3px;
     border: 1px solid #444;
@@ -7998,6 +7998,7 @@ input[type="checkbox"]:disabled + label{
 
 .carpoint.lockedcar{
   margin-left: 15px;
+  cursor: default;
 }
 
 .products-details .countownBlock{
@@ -8433,7 +8434,7 @@ top: 2px;
   min-width: auto !important;
 }
 
-.cars-prices  .countownBlock{
+.cars-prices .countownBlock{
   background-color: #002768;
   color: white;
   border-color: #002768;
@@ -8444,15 +8445,16 @@ top: 2px;
     min-width: 80px;
     text-align: center;
     display: inline-block;
-    margin-left: 20px;
+    margin-top: 10px;
 }
 
 a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
-  display: inline;
+  display: inline-block;
   border: 1px solid #444 !important;
   background: #E1E1E1 !important;
   padding: 8px 10px !important;
   border-radius: 5px;
+  cursor: default;
 }
 
 
@@ -8473,3 +8475,6 @@ a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
   padding-bottom: 0;
 }
 
+.carList.carouselPage .more-btn{
+  margin-top: 0;
+}
