@@ -137,12 +137,15 @@ const InVoice = (props) => {
            <table>			 
              <tr>
                <td><span>Bill of sale # </span>{billOfSales}</td>
-               <td class="alignRight"><span>Date </span>{Date?.substring(0,10)}</td>
+               <td colSpan="2" class="alignRight"><span className="autoWidth pr-1">Date: </span>{Date?.substring(0,10)}</td>
              </tr>
              <tr>
                <td><span>Gate Pass Code : </span>{gatePassId}</td>
                <td >
-                 <span>Inventory Number: {invNo} </span> <span> VIN Number: {vinNo}</span>
+                 <span>Inventory Number: {invNo} </span> 
+               </td>
+                <td >
+                  <span> VIN Number: {vinNo}</span>
 
                </td>
              </tr>			  

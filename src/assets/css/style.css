@@ -7024,15 +7024,16 @@ table td .ant-btn:hover span, table td .ant-btn:hover i{
 
 
 .sliderBlock .cars-prices .cta-btns{
-	background-color: #fff;
-    color: #444;
+	background-color: #bd062c;
+    color: #fff;
     padding: 10px 20px;   
 	margin-right:0px;
     border-radius: 3px;
-    border: 1px solid #444;
+    border: 1px solid #bd062c;
 	font-size:18px;
 	text-align:center;
   float: none;
+  cursor: default;
 }
 
 .sliderBlock .cars-prices .cta-btns:hover{
@@ -8312,9 +8313,10 @@ ul#progressbar li p{
 }
 
 .historyPage .lotfee-inner .car-item .cars-prices.gatepass .cta-btns-primary{
-  background-color: #fff;
-  color: #444;
-  border: 1px solid #444;
+  background-color: #bd062c;
+  color: #fff;
+  border: 1px solid #bd062c;
+  cursor: default;
 }
 
 .transCbox label{
@@ -8412,5 +8414,46 @@ top: 2px;
   background: #008d0e;
 }
 
+.vehiclepaycheckbox .productName{
+  font-size: 16px;
+}
+
+
+.vehiclepaycheckbox .cbox{
+  width: auto;
+  padding: 0;
+}
+
+.historyPage, .historyPage .container{
+  width: 100%;
+  float: left;
+}
+
+.autoWidth{
+  width: auto !important;
+  min-width: auto !important;
+}
+
+.cars-prices  .countownBlock{
+  background-color: #002768;
+  color: white;
+  border-color: #002768;
+  font-size: 16px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    margin: 0;
+    min-width: 80px;
+    text-align: center;
+    display: inline-block;
+    margin-left: 20px;
+}
+
+a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
+  display: inline;
+  border: 1px solid #444 !important;
+  background: #E1E1E1 !important;
+  padding: 8px 10px !important;
+  border-radius: 5px;
+}
 
 
