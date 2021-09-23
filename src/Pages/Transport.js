@@ -46,11 +46,11 @@ const Transport = () => {
 	const [loading,setLoading] = useState(true);
 	  
   	const [order,setOrder] = useState("");
-	  const [loadValue,setLoadValue] = useState(10);
 	const [loadValuePickup,setLoadValuePickup] = useState(10);
 	const [loadValueTransit,setLoadValueTransit] = useState(10);
 	const [loadValueDelivered,setLoadValueDelivered] = useState(10);
 
+	const pickupCall = ()=>{Pickup()}
 	const Pickup = () =>{
 		
         let request = {
@@ -65,12 +65,13 @@ const Transport = () => {
 
 			console.log("pickup check the value", response.data.data)
 			setPickUp(response.data.data)
-			setLoadValuePickup(response.data.data.length>0 ? response.data.data : 10)
+			setLoadValuePickup(response.data.data.length>0 ? response.data.data.length+10 : 10)
 			setLoading(false);
            
         });
 	}
-	
+
+	const transitCall = ()=>{Transit()}
 	const Transit = () =>{
 		
         let request = {
@@ -84,12 +85,13 @@ const Transport = () => {
 
 			console.log("pickup check the value", response.data.data)
 			setPickUp(response.data.data)
-			setLoadValueTransit(response.data.data.length>0 ? response.data.data : 10)
+			setLoadValueTransit(response.data.data.length>0 ? response.data.data.length+10 : 10)
 			setLoading(false);
            
         });
 	}
 	
+	const deliverCall = ()=>{Delivered()}
 	const Delivered = () =>{
 		
         let request = {
@@ -103,7 +105,7 @@ const Transport = () => {
 
 			console.log("pickup check the value", response.data.data)
 			setPickUp(response.data.data)
-			setLoadValueDelivered(response.data.data.length>0 ? response.data.data : 10)
+			setLoadValueDelivered(response.data.data.length>0 ? response.data.data.length+10 : 10)
 			setLoading(false);
            
         });
@@ -248,7 +250,7 @@ return (
 					</div>):"No data found"}
 					
 					<div class="text-center">
-						<a href="#" class="load-more-btn">Load More</a>
+						<a href="JavaScript:void(0)" onClick={pickupCall} class="load-more-btn">Load More</a>
 					</div>
 				</div>
 				
@@ -319,7 +321,7 @@ return (
 						</div>):"No data found"}				
 					
 					<div class="text-center">
-						<a href="#" class="load-more-btn">Load More</a>
+						<a href="JavaScript:void(0)" onClick={transitCall} class="load-more-btn">Load More</a>
 					</div>
 				</div>
 							
@@ -389,7 +391,7 @@ return (
 						</div>):"No data found"}
 
 					<div class="text-center">
-						<a href="#" class="load-more-btn">Load More</a>
+						<a href="JavaScript:void(0)" onClick={deliverCall} class="load-more-btn">Load More</a>
 					</div>
 				</div>
 			</div>
