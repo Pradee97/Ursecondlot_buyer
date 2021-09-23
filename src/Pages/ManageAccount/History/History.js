@@ -402,7 +402,7 @@ const HistoryUpdate = (carId,transportationCharge,transportation,divContent,Head
                         <div class="col-sm-12 form-group mr-0 pr-0">  
                           <div class="tbox">			
                           <select id="" class="form-control box"  onChange={(e) => setOrder(e.target.value)}>
-                          <option style={{display:NoEncryptionOutlined}} value="">select</option>
+                          <option disabled  value="">select</option>
                             <option value="USA">Sort By</option>
                             <option value="USA">Sold Date</option>
                             <option value="USA">ACH Date</option>
