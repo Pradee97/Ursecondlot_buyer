@@ -319,7 +319,7 @@ const CarList = () => {
        
             <div>
                 {loading?<Loading/>:
-                <main id="main" className="inner-page carList">
+                <main id="main" className="inner-page carList carouselPage">
                      
                     <div id="suggested-cars" className="suggested-cars">
                         <div className="container-fluid aos-init aos-animate" data-aos="fade-up">

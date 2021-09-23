@@ -134,7 +134,10 @@ img.carImg {
     width: 100% !important;
     text-align: left !important;
 }
-	
+
+.owl-carousel .cars-prices .cta-btns{
+       margin-bottom: 10px;
+  }	
 	
 }
 @media (max-width: 1300px) {
