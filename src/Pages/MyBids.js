@@ -191,6 +191,7 @@ const MyBids = () => {
                                                 <p class="details"><img src={gasolinePump} alt="" /><span>{bidsObj.fuel_type}</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
                                             </div>
                                             <p class="details"><img src={car} alt="" /><span>{bidsObj.vin_no}</span></p>
+                                            <p class="details"><span>Inventory Number- {bidsObj.inventory_no}</span></p>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 mybidssellerdetails">

@@ -211,8 +211,8 @@ return (
 						<div class="row content col-lg-12">							
 							<div class="col-lg-12 col-md-12">
 								<div class="pickupdetailcontent">
-									<h3>{pickUp.year} {pickUp.make} {pickUp.model}  </h3>
-									<h4>{pickUp.vin_no}</h4>
+									<h3>{pickUp.year} {pickUp.make} {pickUp.model}({pickUp.vin_no})  </h3>
+									<h4>Inventory Number- {pickUp.inventory_no}</h4>
 								</div>						
 							</div>							
 						</div>
@@ -255,8 +255,8 @@ return (
 								</div>
 								<div class="col-lg-4 col-md-4">
 									<div class="modeldetail">
-										<h3>{pickUp.year} {pickUp.make} {pickUp.model}  </h3>
-										<h4>{pickUp.vin_no}</h4>
+										<h3>{pickUp.year} {pickUp.make} {pickUp.model} ({pickUp.vin_no})</h3>
+										<h4>Inventory Number- {pickUp.inventory_no}</h4>
 									</div>						
 								</div>
 								
@@ -326,8 +326,8 @@ return (
 								</div>
 								<div class="col-lg-4 col-md-4">
 									<div class="modeldetail">
-										<h3> {pickUp.year} {pickUp.make} {pickUp.model} </h3>
-										<h4>{pickUp.vin_no}</h4>
+										<h3> {pickUp.year} {pickUp.make} {pickUp.model} ({pickUp.vin_no})</h3>
+										<h4>Inventory Number- {pickUp.inventory_no}</h4>
 									</div>						
 								</div>
 								<div class="col-lg-3 col-md-3">
