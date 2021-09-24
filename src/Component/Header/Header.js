@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {  useState, useEffect } from 'react';
+import ls from 'local-storage';
+import API from "../../Services/BaseService";
 import { useHistory, useLocation } from "react-router-dom";
 import LogoImg from '../../../src/assets/img/Logo_final.png';
 import cartImg from '../../../src/assets/img/cart.svg';
@@ -8,8 +10,58 @@ import adduser from '../../../src/assets/img/adduser.jpg'
 import './header.css';
 
 const Header = () => {
+
+  const userDetails=ls.get('userDetails');
   const history = useHistory();
   const location = useLocation();
+  const [myBids, setMyBids] = useState("");
+  const [numberCars,setNumberCars] = useState("");
+
+  const cartDetails = () =>{
+
+    let request = {
+        buyer_dealer_id :userDetails.buyer_dealer_id,
+    }
+
+    API.post("cartDetails/condition", request).then(response=>{
+
+        console.log("cart check the value", response.data.data)
+        // setCartDetail(response.data.data)
+        setNumberCars(response.data.data.length)
+        // setLoading(false);
+    });
+}
+
+useEffect (() =>{
+  let intervalId;
+    intervalId = setInterval(() => {
+      cartDetails();
+        }, 10000)
+    return () => clearInterval(intervalId);
+    
+}, []);
+  
+  async function fetchMyBids() {
+    let request = {
+        buyer_dealer_id: userDetails?.buyer_dealer_id,
+    };
+    const state = API.post('mybids/condition', request);
+    state.then(res => {
+        setMyBids(res.data.data.length);
+        // setLoading(false);
+        // setLoading(false);
+    })
+        .catch(err => { console.log(err); });
+}
+
+useEffect(() => {
+  let intervalId;
+  intervalId = setInterval(() => {
+    fetchMyBids();
+      }, 10000)
+  return () => clearInterval(intervalId);
+   
+}, []);
 
 const Submenu = () => {
     return (
@@ -83,7 +135,7 @@ const Submenu = () => {
               <ul className="nav__menu">
               <li className={location.pathname ==="/carList"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/carList')} >Home</a></li>
               <li className={location.pathname ==="/search"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/search')} >Search</a></li>
-              <li className={location.pathname ==="/mybids"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/mybids')} >My Bids <span className="countbox">5</span></a></li>
+              <li className={location.pathname ==="/mybids"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/mybids')} >My Bids <span className="countbox">{myBids}</span></a></li>
               <li className={location.pathname ==="/fees"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/fees')} >Fees</a></li>
               <li className={location.pathname ==="/floor"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/floor')} >Floor</a></li>
               <li className={location.pathname ==="/transport"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/transport')} >Transport</a></li>
@@ -93,7 +145,7 @@ const Submenu = () => {
               </li>
               <li className={location.pathname ==="/cart"? "active nav__menu-item" : "nav__menu-item"} >
                 <img alt="Menu" src={cartImg} onClick={()=>history.push('/cart')}/>
-                <span className="countbox">5</span>
+                <span className="countbox">{numberCars}</span>
               </li>
               <li className="topRightUser">
                 <b className="user_name">Welcome 
