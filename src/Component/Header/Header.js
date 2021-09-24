@@ -20,7 +20,7 @@ const Header = () => {
   const cartDetails = () =>{
 
     let request = {
-        buyer_dealer_id :userDetails.buyer_dealer_id,
+        buyer_dealer_id :userDetails?.buyer_dealer_id,
     }
 
     API.post("cartDetails/condition", request).then(response=>{
@@ -33,12 +33,16 @@ const Header = () => {
 }
 
 useEffect (() =>{
-  let intervalId;
+  if(userDetails?.buyer_dealer_id){
+    let intervalId;
     intervalId = setInterval(() => {
       cartDetails();
+      fetchMyBids();
         }, 10000)
     return () => clearInterval(intervalId);
     
+  }
+  
 }, []);
   
   async function fetchMyBids() {
@@ -53,15 +57,6 @@ useEffect (() =>{
     })
         .catch(err => { console.log(err); });
 }
-
-useEffect(() => {
-  let intervalId;
-  intervalId = setInterval(() => {
-    fetchMyBids();
-      }, 10000)
-  return () => clearInterval(intervalId);
-   
-}, []);
 
 const Submenu = () => {
     return (
