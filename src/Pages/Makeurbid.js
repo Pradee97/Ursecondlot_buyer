@@ -223,7 +223,10 @@ console.log("check props",props)
         
         }
     
-
+        if(!carProxyBid && proxyBid && proxyBid < Number(carMinBid+50) ){
+            setProxyBidError("Maximum Proxy Bid price should not be lower than " +Number(carMinBid+50))
+            return;
+            } 
        
         if(carProxyBid!==proxyBid){
 

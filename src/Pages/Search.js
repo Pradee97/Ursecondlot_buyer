@@ -78,6 +78,8 @@ const Search = () => {
 	const [makeBitData, setMakeBitData] = useState({});
 	const [buyItNowData, setBuyItNowData] = useState({});
 
+	const [loadValue,setLoadValue] = useState(9);
+
 	const Completionist = () => <span>{""}</span>;
 
     const renderer = ({minutes, seconds, completed }) => {
@@ -187,16 +189,19 @@ const Search = () => {
         setIsOpen(!isOpen);
     }
 
+	const SearchViewMore = ()=>{VehicleSearch()}
     const VehicleSearch=()=>{
 
         let request={
 			buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
+			key: loadValue
 			
         }
         API.post('BuyerInventoryCarList/condition',request).then(res=>{
 
             console.log("response",res.data.data);
             setCarDetail(res.data.data || []); 
+			setLoadValue(res.data.data.length>0 ? res.data.data.length+9 : 9)
             setLoading(false);
             
         }).catch(err => { console.log(err); });
@@ -1133,6 +1138,9 @@ useEffect(() => {
                                         </div>
                                     </div>
                                 </div>):<div className="floor_notfiled_block"><p>No Data Found</p></div>}
+								<div class="col-md-12 text-center">
+									<a href="JavaScript:void(0)" onClick={SearchViewMore} class="load-more-btn">Load More</a>
+								</div>
                             </div>
 							</div></div>
                         </div>
