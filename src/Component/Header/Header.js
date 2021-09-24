@@ -89,9 +89,11 @@ const Submenu = () => {
               <li className={location.pathname ==="/transport"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/transport')} >Transport</a></li>
               <li className={location.pathname ==="/chat"? "active nav__menu-item" : "nav__menu-item"} >
                 <img alt="Menu" src={chatImg} onClick={()=>history.push('/chat')}/>
+                <span className="countbox">5</span>
               </li>
               <li className={location.pathname ==="/cart"? "active nav__menu-item" : "nav__menu-item"} >
                 <img alt="Menu" src={cartImg} onClick={()=>history.push('/cart')}/>
+                <span className="countbox">5</span>
               </li>
               <li className="topRightUser">
                 <b className="user_name">Welcome 

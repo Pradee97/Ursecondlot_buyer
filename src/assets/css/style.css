@@ -8478,3 +8478,21 @@ a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
 .carList.carouselPage .more-btn{
   margin-top: 0;
 }
+
+.countbox {
+  background: #bd062c;
+  color: #fff !important;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 12px !important;
+  line-height: 20px;
+  position: absolute;
+  text-align: center;
+  top: -10px;
+}
+
+.nav__menu-item .countbox{
+  top: 10px;
+  right: -10px;
+}
