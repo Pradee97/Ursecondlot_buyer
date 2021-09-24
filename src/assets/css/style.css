@@ -8489,7 +8489,8 @@ a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
   line-height: 20px;
   position: absolute;
   text-align: center;
-  top: -10px;
+  top: 0;
+  right: -22px;
 }
 
 .nav__menu-item .countbox{
