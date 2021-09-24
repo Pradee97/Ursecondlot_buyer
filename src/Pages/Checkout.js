@@ -122,7 +122,7 @@ const History = (props) => {
 	
 	 ( <div class="checkoutblock col-lg-12">
 
-        <div class="section-title mt-3 mb-0 revCheHeadBlock">
+        <div class="section-title mt-0 pt-3 mb-0 revCheHeadBlock">
           <h2>Checkout</h2>
 		  <div className="revCheHead">
 				<h2 className="pl-4">{paymentMode} Payment</h2>
