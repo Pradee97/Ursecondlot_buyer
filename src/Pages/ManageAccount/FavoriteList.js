@@ -75,6 +75,8 @@ const [openBuyItNow, setOpenBuyItNow] = useState(false);
 	const [makeBitData, setMakeBitData] = useState({});
 	const [buyItNowData, setBuyItNowData] = useState({});
 
+	const [loadValue,setLoadValue] = useState(9);
+
 	const Completionist = () => <span>{""}</span>;
 
     const renderer = ({minutes, seconds, completed }) => {
@@ -152,16 +154,18 @@ const [openBuyItNow, setOpenBuyItNow] = useState(false);
 		
 	}
 
-
+	const FavoriteListViewMore = ()=>{getFavCarList()}
   const getFavCarList=()=>{
 
     let request={
-      buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+      buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
+	  key: loadValue
     }
 
     console.log("request",request);
     API.post('BuyerFavoriteCarList/condition',request).then(res=>{
-        setFavCarInventoryDetail(res.data.data);      
+        setFavCarInventoryDetail(res.data.data);     
+		setLoadValue(res.data.data.length>0 ? res.data.data.length+9 : 9) 
         console.log("Car Fav Inventory Detail",res.data.data);
         setLoading(false);
     }).catch(err=>{console.log(err);});
@@ -822,34 +826,11 @@ useEffect(() => {
 								):""}
 							</div>
 
-							{/* <div class="sellertypeblock">
-								<h4>Seller Type<span><img onClick={toggleSellerTypeSearch} src={arrowmark}/></span></h4>
-								{sellerTypeSearchToggle?(<div class="inner">
-									<div class="radio input-group">
-										<input id="radio-any5" name="sellerTypeRadio" type="radio" />
-										<label for="radio-any5" class="radio-label">Any</label>
-									</div>
-
-									<div class="radio input-group">
-										<input id="radio-franchise" name="sellerTypeRadio" type="radio"/>
-										<label  for="radio-franchise" class="radio-label">Franchise</label>
-									</div>
-									<div class="radio input-group">
-										<input id="radio-independent" name="sellerTypeRadio" type="radio"/>
-										<label  for="radio-independent" class="radio-label">Independent</label>
-									</div>
-								</div>
-							):""}
-
-								</div> */}
 
 							<div class="groupblock">
 								<h4>Seller<span><img onClick={toggleGroupSearch} src={arrowmark}/></span></h4>
 								{groupSearchToggle?(<div class="inner">
-											{/* <div class="form-group input-group ">
-												<input type="checkbox" id="deals" value="Deals Almost Close" onClick={onGroupClick}/>
-												<label for="deals">Deals Almost Close</label>
-											</div> */}
+						
 											<div class="form-group input-group ">
 												<input type="checkbox" id="sellersflo" value="Sellers I Follow" onClick={onGroupClick}/>
 												<label for="sellersflo">Sellers I Follow</label>
@@ -939,35 +920,8 @@ useEffect(() => {
 								</div>):""}
 							</div>
 
-							{/* <div class="groupblock">
-								<h4>Group<span><img onClick={toggleGroupSearch} src={arrowmark}/></span></h4>
-								{groupSearchToggle?(<div class="inner">
-											<div class="form-group input-group ">
-												<input type="checkbox" id="deals" value="Deals Almost Close" onClick={onGroupClick}/>
-												<label for="deals">Deals Almost Close</label>
-											</div>
-											<div class="form-group input-group ">
-												<input type="checkbox" id="sellersflo" value="Sellers I Follow" onClick={onGroupClick}/>
-												<label for="sellersflo">Sellers I Follow</label>
-											</div>
-											<div class="form-group input-group ">
-												<input type="checkbox" id="sellerstit" value="Seller Has Title" onClick={onGroupClick}/>
-												<label for="sellerstit">Seller Has Title</label>
-											</div>
-										</div>
-								):""}
-							</div> */}
 						</div>
-					</div>
-
-              {/* <div className="filtersblock  col-lg-6 SalesRepsSearch  row" >
-                <div className="input-group searchbox ">
-                    <input type="text"  className="form-control border"  placeholder="model/make/year" onKeyDown={onKeydowninSearch} onChange={OnSearch}></input>
-                    <span className="input-group-append" >
-                    <button className="btn ms-n5" type="button" id="btntest" name="btntest" onClick={searchFav} ><i className='bx bx-search'></i></button>
-                    </span>                                
-                </div>
-            </div> */}
+					</div>  
 
 		<div className="col-lg-9">
 
@@ -1027,7 +981,10 @@ useEffect(() => {
                         </div>
                     </div>
                   </div>
-                </div>  ):<div className="floor_notfiled_block"><p>No Data Found</p></div>}                                           
+                </div>  ):<div className="floor_notfiled_block"><p>No Data Found</p></div>}     
+				<div class="col-md-12 text-center">
+					<a href="JavaScript:void(0)" onClick={FavoriteListViewMore} class="load-more-btn">Load More</a>
+				</div>                                      
                   </div>
 				  </div>
 				  </div>
