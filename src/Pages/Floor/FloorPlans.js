@@ -49,7 +49,7 @@ const FloorPlans = () => {
                 <div className="col-lg-12 floorplanstableblock">
                   <div className="add-floor">
                     {/* <a className="add-floor-btns" href="/flooradd"><i class="icofont-plus"></i>  Add Floor</a> */}
-                    <Button autofocus className="add-user-btns" onClick={() => history.push("/flooradd")}><i class="icofont-plus"></i><span>Add Floor</span></Button>
+                    <Button autofocus className="add-user-btns" onClick={() => history.push("/FloorAdd")}><i class="icofont-plus"></i><span>Add Floor</span></Button>
                   </div>
 
                  
