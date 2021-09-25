@@ -145,7 +145,7 @@ const History = (props) => {
 							<img src={paymentCar.image} className="carImg" />
 						</div>
 						<div class="vehicleimgright col-lg-8 pr-0">
-							<h3>{paymentCar.year} {paymentCar.make}  {paymentCar.model}  + Lot Fee <span>$ {Number(paymentCar.price)+Number(paymentCar.lot_fee)}</span></h3>
+							<h3>{paymentCar.year} {paymentCar.make}  {paymentCar.model}  <span>$ {Number(paymentCar.price)+Number(paymentCar.lot_fee)}</span></h3>
 							<h4>Buy Fee <span>$ {Number(getFeeDetails(paymentCar.price))}</span></h4>
 							<h4>Other Charges <span>$ 0</span></h4>
                             <h4>Miscellaneous Charges <span>$ 0</span></h4>
