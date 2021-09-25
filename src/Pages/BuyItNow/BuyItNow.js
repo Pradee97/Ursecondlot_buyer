@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState,useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ls from 'local-storage';
 import API from "../../Services/BaseService";
@@ -40,6 +40,10 @@ const BuyNow=(props)=>{
     const [alerttitle,setAlertTitle] = useState("");
     const [alertimg,setAlertImg] = useState("");
 
+    const [carTransportationCharge,setCarTransportationCharge] = useState(props.setBuyItNowValue.transportationCharge);
+    const [feeDetails, setFeeDetails] = useState("");
+
+
     const [toggleAcceptPopupOpen,setToggleAcceptPopupOpen]= useState(true);
     const [confirmationFlag, setConfirmationFlag] = useState(false);
     const email = JSON.parse(localStorage.getItem("userDetails")).email;
@@ -49,25 +53,25 @@ const BuyNow=(props)=>{
 
 const handleBuyItNow=()=>{
 
-  setUsernameError("")
-  setPasswordError("")
+//   setUsernameError("")
+//   setPasswordError("")
 
-  if(userName ){
-    setUsernameError("Email is required")
-    return;
-  }
-  else if(userName && !new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i).test(userName)){
-    setUsernameError("Must match the email format")
-return;
-  }
-  if(!password){
-    setPasswordError("Password is required")
-    return;
-  }
-  else if(password && !new RegExp(/(^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,}))/).test(password)){
-    setPasswordError("Password must have minimum of 8 characters with the combination of upper ,lower case letters , number and a special character")
-    return;
-}
+//   if(userName ){
+//     setUsernameError("Email is required")
+//     return;
+//   }
+//   else if(userName && !new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i).test(userName)){
+//     setUsernameError("Must match the email format")
+// return;
+//   }
+//   if(!password){
+//     setPasswordError("Password is required")
+//     return;
+//   }
+//   else if(password && !new RegExp(/(^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,}))/).test(password)){
+//     setPasswordError("Password must have minimum of 8 characters with the combination of upper ,lower case letters , number and a special character")
+//     return;
+// }
 
 if(!confirmationFlag){
 
@@ -78,8 +82,8 @@ if(!confirmationFlag){
         
             buyer_dealer_id:JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
             buyer_id:JSON.parse(localStorage.getItem("userDetails")).buyer_id, 
-            email:JSON.parse(localStorage.getItem("userDetails")).email,
-            password:password,
+            // email:JSON.parse(localStorage.getItem("userDetails")).email,
+            // password:password,
             car_id: id,
             price: carBuyItNow,
             status: "sold",
@@ -113,6 +117,58 @@ if(!confirmationFlag){
 	
     })
 }
+
+
+async function fetchBuyerFees() {
+  let request = {
+    type: "Buyer"
+  };
+  const state = API.post('fees/condition', request);
+  
+  state.then(res => {
+    console.log("check the fee in the checkout page", res)
+    console.log("res", res)
+    setFeeDetails(res.data.data);
+    
+  })
+    .catch(err => { console.log(err); });
+  }
+  useEffect(() => {
+  fetchBuyerFees();
+  }, []);
+  
+  const getFeeDetails = (maxPrice) =>{
+   console.log("----fee---",maxPrice)
+
+  return feeDetails.length > 0 ? feeDetails
+    .filter((data)=> 
+     
+    {
+      const range = data.fee_price.replaceAll('$',"").split("-")
+       
+      if(range[1]!=="up"){
+         
+        return Number(range[0]) <= Number(maxPrice) && Number(maxPrice)  <= Number(range[1]) 
+      }
+      else{
+        return Number(range[0]) <= Number(maxPrice) 
+      }
+  
+      } 
+      )[0]?.fee || 0
+    : 0
+
+
+  }
+
+  
+
+//   const overAllTotal = () => {
+//     console.log("paymentCar----",paymentCar)
+//       return paymentCar?.length>0 && paymentCar
+//       .reduce((acc, curr) => acc+((Number(curr.price) || 0)+Number(curr.lot_fee) +  Number( curr.transportation_charge || 0) + Number(getFeeDetails(curr.price))),0)
+  
+// }
   return (
  
 <div>
@@ -121,49 +177,101 @@ if(!confirmationFlag){
             <div className="termspageblock">
                 <div className="row content">
                   {toggleAcceptPopupOpen?
-                        (<div className="modalcontent">
-                         {!confirmationFlag ? 
-                            <div className="modalbody">
-                              <h2 className="title"> Buy Now </h2>
-                              <div>
-                              <div class="input-group col-md-12">
+                      //   (<div className="modalcontent">
+                      //    {!confirmationFlag ? 
+                      //       <div className="modalbody">
+                      //         <h2 className="title"> Buy Now </h2>
+                      //         <div>
+                      //         <div class="input-group col-md-12">
                                 
-                                      <p className="text-center">Are you sure wants to buy the car then please confirm the password</p>
+                      //                 <p className="text-center">Are you sure wants to buy the car then please confirm the password</p>
                                    
-                              </div>
-                              <div class=" col-md-12">
-                              <input className="textbox " type="text" placeholder="Email" defaultValue = {email} disabled />
-                              <p className="form-input-error">{userNameError}</p>
-                              </div>
+                      //         </div>
+                      //         <div class=" col-md-12">
+                      //         <input className="textbox " type="text" placeholder="Email" defaultValue = {email} disabled />
+                      //         <p className="form-input-error">{userNameError}</p>
+                      //         </div>
 								              
  
-                              <div class=" col-md-12">
-                              <input className="textbox " type="text" placeholder="Password" onChange={(e)=>setPassword(e.target.value)} />
-                              <p className="form-input-error">{passwordError}</p>
-                              </div>
+                      //         <div class=" col-md-12">
+                      //         <input className="textbox " type="text" placeholder="Password" onChange={(e)=>setPassword(e.target.value)} />
+                      //         <p className="form-input-error">{passwordError}</p>
+                      //         </div>
 								                	
-                              <div class="col-md-12 btns">
-                              <button className="cta-btns" onClick={props.toggle}>Cancel</button>    <button  className="cta-btns" onClick={handleBuyItNow}>Buy Now</button>    
-                              </div>  
-                            </div>
-                            </div>:
-                            <div>
-                                <div class="col-md-12 text-center">
-                                {/* <i class="icofont-car"></i> */}
-                                <p className="text-center"> Are you sure want to buy this Unit <b>  </b> </p>
-                                </div>
-                                <div class="popImage">
-                                  <img  src={carImage} alt="no image" /> <br></br>
-                                  <a href="#">{carMake}  ({carModel} - {carYear} model)</a>
-                                </div> 
+                      //         <div class="col-md-12 btns">
+                      //         <button className="cta-btns" onClick={props.toggle}>Cancel</button>    <button  className="cta-btns" onClick={handleBuyItNow}>Buy Now</button>    
+                      //         </div>  
+                      //       </div>
+                      //       </div>:
+                      //       <div>
+                      //           <div class="col-md-12 text-center">
+                      //           {/* <i class="icofont-car"></i> */}
+                      //           <p className="text-center"> Are you sure want to buy this Unit <b>  </b> </p>
+                      //           </div>
+                      //           <div class="popImage">
+                      //             <img  src={carImage} alt="no image" /> <br></br>
+                      //             <a href="#">{carMake}  ({carModel} - {carYear} model)</a>
+                      //           </div> 
                                 
-                                <div class="col-md-12 btns">
-                                  <button className="cta-btns" onClick={()=>{setConfirmationFlag(false); props.toggle()}}>Cancel</button>    
-                                  <button  className="cta-btns" onClick={handleBuyItNow} >Confirm</button>    
-                                </div>
-                              </div>
-                              }
-                       </div>):
+                      //           <div class="col-md-12 btns">
+                      //             <button className="cta-btns" onClick={()=>{setConfirmationFlag(false); props.toggle()}}>Cancel</button>    
+                      //             <button  className="cta-btns" onClick={handleBuyItNow} >Confirm</button>    
+                      //           </div>
+                      //         </div>
+                      //         }
+                      //  </div>):
+
+
+      ( <div class="checkoutblock col-lg-12">
+
+        <div class="section-title mt-0 pt-3 mb-0 revCheHeadBlock">
+          <h2>Buy Now</h2>
+		  <div className="revCheHead">
+				<h2 className="pl-4"> Are You Want to Buy this Unit</h2>
+			
+				{/* <h2 className="text-right">Total <span> $ {overAllTotal()}</span></h2> */}
+
+				</div>
+        </div>
+
+        <div class="row content contentBlock">
+			<div class="col-lg-12 col-md-12 marAuto achBlock">
+
+			
+				
+				<div>
+				<div class="vehiclesheadspaydetails">
+					<div class="row">
+						<div class="vehicleimgleft col-lg-4">
+							<img src={carImage} className="carImg" />
+						</div>
+						<div class="vehicleimgright col-lg-8 pr-0">
+							<h3>{carYear} {carMake}  {carModel} <span>$ {Number(carBuyItNow)}</span></h3>
+							<h4>Buy Fee <span>$ {Number(getFeeDetails(carBuyItNow))}</span></h4>
+							<h4>Other Charges <span>$ 0</span></h4>
+                            <h4>Miscellaneous Charges <span>$ 0</span></h4>
+							{/* <h4>Transportation <span>${Cartransportation_charge}</span></h4> */}
+							<h4>Transportation Charges <span>$ { carTransportationCharge || 0}</span></h4>
+
+
+							<div class="vehiclerighttotal">
+								{/* <h3>Total amount <span>$ {Number(paymentCar.price)+ Number(getFeeDetails(paymentCar.price)) + Number(300 || 0)}</span></h3> */}
+								<h3>Total amount <span>$ {Number(carBuyItNow)+Number(getFeeDetails(carBuyItNow)) + Number(carTransportationCharge|| 0)+0+0}</span></h3>
+							</div>
+						</div>
+					</div>
+				</div>				
+				
+				</div>
+				<div class="text-center ckreview"><a  class="cta-btn cancel-btn" onClick={()=>{setConfirmationFlag(false); props.toggle()}}>Cancel</a> <button type="submit" class="cta-btn"   onClick={handleBuyItNow}>Confirm </button> </div>
+				
+			</div>
+        </div>
+	
+	  </div>
+	  ):
+
+
                        (
                        <div className="modalcontent">
                         <div className="Commonfull-icon">
@@ -179,7 +287,7 @@ if(!confirmationFlag){
                                 
                               
                               <div class="col-md-12 btns">
-                               <button className="cta-btns" onClick={props.toggle}>OK</button>      
+                               <a className="cta-btns" href="/carlist">OK</a>      
                               </div> 
                           </div>
                         </div>
