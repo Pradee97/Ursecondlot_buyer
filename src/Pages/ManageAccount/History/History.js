@@ -10,9 +10,11 @@ import googleplay from '../../../assets/img/googleplay.png';
 import $ from 'jquery';
 import './history.css'
 import Loading from"../../../Component/Loading/Loading";
+import carcheck from '../../../assets/img/carcheck.png';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { NoEncryptionOutlined } from '@material-ui/icons';
+
 
  const History = () => {
 
@@ -448,6 +450,7 @@ const HistoryUpdate = (carId,transportationCharge,transportation,divContent,Head
                         <div class="cars-prices invoice_link p-0">
                           <div className="vinnoBlock"><p class="vinno" href="JavaScript:void(0)" >Vin no - <span>{historyDetail.vin_no}</span></p></div>
                           <a class="cta-btns" href="JavaScript:void(0)" onClick={()=>redirecttoInspection(historyDetail.car_id)}>Inspection</a>
+                          <span className="autoCheck"><img src={carcheck} alt=""/></span>
                           <a class="cta-btns invoice" href="JavaScript:void(0)" onClick={()=>redirecttoInvoice(historyDetail.car_id,historyDetail.seller_dealer_id,historyDetail.price,historyDetail.lot_fee,historyDetail.bill_of_sales_id,historyDetail.gatepass_id,historyDetail.sold_date,historyDetail.make,historyDetail.model,historyDetail.year,historyDetail.transportation_charge,historyDetail.transportation,historyDetail.inventory_no,historyDetail.vin_no)}>Invoice</a>
                         </div>
                         <div class="cars-prices gatepass pt-1">
@@ -494,7 +497,7 @@ const HistoryUpdate = (carId,transportationCharge,transportation,divContent,Head
                     </form>
                     
                       <h3>Title status - <span> {historyDetail.title_status_name}</span></h3>
-                      <h6>Message from Dealer - <span> {historyDetail.dealer_message}</span></h6>
+                      <h6 className="mfdealer">Message from Dealer - <span> {historyDetail.dealer_message}</span></h6>
                     
                     <div class="cars-prices ">
                       <a class="cta-btns" href="#">Price - $ {historyDetail.price}</a>

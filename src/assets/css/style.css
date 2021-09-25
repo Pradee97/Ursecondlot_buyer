@@ -3227,7 +3227,8 @@ Car Detail Page
     margin: 20px 0;
     border-radius: 3px;
     border: none;
-	font-size:20px;
+	font-size:18px;
+  font-weight: 500;
 }
 .cars-buy .cars-buy-btns:hover, .cars-buy .cars-buy-btns-primary:hover{
 	background-color: #bd062c;
@@ -7033,7 +7034,7 @@ table td .ant-btn:hover span, table td .ant-btn:hover i{
 	font-size:18px;
 	text-align:center;
   float: none;
-  cursor: default;
+  cursor: inherit;
 }
 
 .sliderBlock .cars-prices .cta-btns:hover{
@@ -8410,6 +8411,10 @@ top: 2px;
   text-transform: uppercase;
   background-color: #bd062c;
 }
+.paybtns .cta-btns-primary:hover{
+  background: #002768;
+  color: #fff;
+}
 
 .paybtns .cta-btns-primary.greenBtn{
   background: #008d0e;
@@ -8528,3 +8533,44 @@ a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
 .checkoutpage .models-box .contentBlock{
   padding-top: 90px;
 }
+
+
+
+.buyNowBlock .car-btns-primary.buyitBtn{
+  color: #fff;
+  background: #008d0e;
+  border: #008d0e solid 1px;
+  border-radius: 3px;
+  padding: 10px 30px;;
+  font-weight: 500;
+  margin-right: 0 !important;
+  font-size: 16px;
+  cursor: pointer;
+  float: left;
+}
+
+.buyNowBlock .car-btns-primary.buyitBtn span{
+  color: #fff;
+  padding: 5px 10px;
+  padding-left: 0;
+}
+
+.buyNowBlock{
+  float: left;
+    clear: both;
+    width: 100%;
+    margin-top: 20px;
+}
+.buyNowBlock .makeBidBtn{
+  float: right;
+  margin-top: 10px;
+}
+
+.autoCheck img{
+  width: auto;
+}
+
+.mfdealer span{
+  color: #008d0e;
+}
+

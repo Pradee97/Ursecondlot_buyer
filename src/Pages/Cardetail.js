@@ -440,43 +440,15 @@ return(
 	        					<div class="cars-detail-views">
 									<a class="car-btns carcheck" onClick={()=>redirecttoInspection(carDetail[0].car_id)}>View Inspection</a>
 									<img src={carcheck} alt=""/>
-									{/* {carDetail[0].high_bid=="" || carDetail[0].high_bid==null || carDetail[0].high_bid==undefined?"":
-									<a class="car-btns-primary" href=""><img src={tag} alt=""/>High Bid :<span> $ {carDetail[0].high_bid}</span></a>
-									} */}
-									
-									{carDetail[0].buy_it_now=="" || carDetail[0].buy_it_now== null || carDetail[0].buy_it_now== undefined || carDetail[0].buy_it_now== 0 ?"":
-									<a class="car-btns-primary ml-2 buyitBtn" onClick={()=>setBuyItNowValue(carDetail[0]. buy_it_now,carDetail[0].car_id,carDetail[0].image,carDetail[0].model,carDetail[0].make,carDetail[0].year)}><i class="icofont-tag"></i> Buy it Now :<span> $ {carDetail[0].buy_it_now}</span></a>
-									}
-							
-									{(carDetail[0].buyer_high_bid==carDetail[0].high_bid || carDetail[0].buyer_high_bid!==carDetail[0].high_bid) &&
-									 
-									 <div class= {(carDetail[0].time!==null && carDetail[0].time < 20)?"countownBlock":""} >
-									 	<Countdown date={Date.now() + (carDetail[0].time!==null && carDetail[0].time < 20 ? carDetail[0].time*60*1000 :0)  } renderer={renderer} />
-									
-								</div>}
-									
 								</div>
 
 								
 	        				</div>
 	        			</div>	
 						</div>
-						<div class="row">
 						
-						{(carDetail[0].isbuyercounterbid=="me" && carDetail[0].iscounterbid!==null && (carDetail[0].time !==0 || carDetail[0].time!==null)) || ((carDetail[0].iscounterbid==null || carDetail[0].iscounterbid=="no" ) && (carDetail[0].isbuyercounterbid==null || carDetail[0].isbuyercounterbid=="not")&&(carDetail[0].time ==0 || carDetail[0].time==null))?
-						
-							<div class="col-md-12">
-	        					<div class="cars-buy">
-								{/* {carDetail[0].buy_it_now=="" || carDetail[0].buy_it_now== null || carDetail[0].buy_it_now== undefined || carDetail[0].buy_it_now== 0?"":
-									<a class="cars-buy-btns" onClick={()=>setBuyItNowValue(carDetail[0]. buy_it_now,carDetail[0].car_id,carDetail[0].image,carDetail[0].model,carDetail[0].make,carDetail[0].year)}>Buy now</a>
-								} */}
-									
-									<a class="cars-buy-btns-primary" onClick={()=>setMakeBitValue(carDetail[0].high_bid,carDetail[0].min_price,carDetail[0].save_purchase,carDetail[0].car_id,carDetail[0].time,carDetail[0].counter_buyer_dealer_id,carDetail[0].max_price,carDetail[0].buy_it_now,carDetail[0].comments,carDetail[0].transportation,carDetail[0].display,carDetail[0].proxy_bid,carDetail[0].transportation_charge,carDetail[0].save_policy)}>Make Bid</a>
-								</div>
-	        				</div>
-						
-							:<div class="carpoint lockedcar"> <a class="cars-buy-btns-primary">Locked up for Higher Bid </a></div>} 
-	        		</div> </div> }
+					
+					</div> }
 					
 					<div class="col-md-3">
 					{carDetail[0].noofBuyer=="" || carDetail[0].noofBuyer==null || carDetail[0].noofBuyer==undefined?"":
@@ -522,13 +494,34 @@ return(
 								<div class="carBrand">	        				
 									<img src={carDetail[0].high_bid_buyer_logo}  alt=""/>
 								</div>
-							
-								
 							</div>
-							
-
-						</div>
+						</div>						
 }
+
+							<div className="buyNowBlock">
+								{carDetail[0].buy_it_now=="" || carDetail[0].buy_it_now== null || carDetail[0].buy_it_now== undefined || carDetail[0].buy_it_now== 0 ?"":
+									<a class="car-btns-primary buyitBtn" onClick={()=>setBuyItNowValue(carDetail[0]. buy_it_now,carDetail[0].car_id,carDetail[0].image,carDetail[0].model,carDetail[0].make,carDetail[0].year)}><i class="icofont-tag"></i> Buy it Now :<span> $ {carDetail[0].buy_it_now}</span></a>
+								}
+						
+								{(carDetail[0].buyer_high_bid==carDetail[0].high_bid || carDetail[0].buyer_high_bid!==carDetail[0].high_bid) &&
+									<div class= {(carDetail[0].time!==null && carDetail[0].time < 20)?"countownBlock":""} >
+									<Countdown date={Date.now() + (carDetail[0].time!==null && carDetail[0].time < 20 ? carDetail[0].time*60*1000 :0)  } renderer={renderer} />
+								</div>
+								}
+
+								<div class="makeBidBtn">
+									
+									{(carDetail[0].isbuyercounterbid=="me" && carDetail[0].iscounterbid!==null && (carDetail[0].time !==0 || carDetail[0].time!==null)) || ((carDetail[0].iscounterbid==null || carDetail[0].iscounterbid=="no" ) && (carDetail[0].isbuyercounterbid==null || carDetail[0].isbuyercounterbid=="not")&&(carDetail[0].time ==0 || carDetail[0].time==null))?
+										<div class="cars-buy">
+											<a class="cars-buy-btns-primary" onClick={()=>setMakeBitValue(carDetail[0].high_bid,carDetail[0].min_price,carDetail[0].save_purchase,carDetail[0].car_id,carDetail[0].time,carDetail[0].counter_buyer_dealer_id,carDetail[0].max_price,carDetail[0].buy_it_now,carDetail[0].comments,carDetail[0].transportation,carDetail[0].display,carDetail[0].proxy_bid,carDetail[0].transportation_charge,carDetail[0].save_policy)}>Make Bid</a>
+										</div>										
+										:<div class="carpoint lockedcar"> <a class="cars-buy-btns-primary">Locked up for Higher Bid </a></div>} 
+								</div> 
+
+
+							</div>
+
+
 					</div>
 							
 	        	</div>
