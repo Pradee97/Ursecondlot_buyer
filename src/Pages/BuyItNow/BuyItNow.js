@@ -171,7 +171,7 @@ async function fetchBuyerFees() {
 // }
   return (
  
-<div>
+
     <div id="" className="saveSearchBlock acceptConfirmation buynowPopup">
       
             <div className="termspageblock">
@@ -295,9 +295,7 @@ async function fetchBuyerFees() {
                        
                    </div>
               </div>
-      </div>
-
-      {/* {isCommonPopupOpen && <CommonPopup
+              {/* {isCommonPopupOpen && <CommonPopup
 				handleClose={isCommonPopupOpen}
 				popupTitle={popupTitle}
 				popupMsg={popupMsg}
@@ -306,7 +304,10 @@ async function fetchBuyerFees() {
 				popupActionValue={popupActionValue}
 				popupActionPath={popupActionPath}
 			/>} */}
+     
       </div>
+
+      
     )
     }
 
