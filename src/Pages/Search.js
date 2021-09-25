@@ -140,7 +140,7 @@ const Search = () => {
 		setHighBid(highBid)
 	}
 
-	const setBuyItNowValue = (buy_it_now,car_id,image,model,make,year) => {
+	const setBuyItNowValue = (buy_it_now,car_id,image,model,make,year,transportation_charge) => {
 
 		setBuyItNowData({
 			buyItNow: buy_it_now,
@@ -148,7 +148,9 @@ const Search = () => {
 			image : image,
 			model : model,
 			make : make, 
-			year : year
+			year : year,
+			transportationCharge : transportation_charge
+
 		})
 	
 		toggleBuyItNow()
@@ -1103,7 +1105,7 @@ useEffect(() => {
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>
 												<p className="details buyitnow">
                                                 {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined || item.buy_it_now== 0?"":
-                                                    <a className="cta-btns" onClick={()=>setBuyItNowValue(item.buy_it_now,item.car_id,item.image,item.model,item.make,item.year,item.image,item.model,item.make,item.year)}>Buy It Now $ {item.buy_it_now}</a>
+                                                    <a className="cta-btns" onClick={()=>setBuyItNowValue(item.buy_it_now,item.car_id,item.image,item.model,item.make,item.year,item.image,item.model,item.make,item.year,item.transportation_charge)}>Buy It Now $ {item.buy_it_now}</a>
                                                 }
                                                 </p>  
                                             </div>
