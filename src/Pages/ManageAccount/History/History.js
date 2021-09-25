@@ -494,6 +494,7 @@ const HistoryUpdate = (carId,transportationCharge,transportation,divContent,Head
                     </form>
                     
                       <h3>Title status - <span> {historyDetail.title_status_name}</span></h3>
+                      <h6>Message from Dealer - <span> {historyDetail.dealer_message}</span></h6>
                     
                     <div class="cars-prices ">
                       <a class="cta-btns" href="#">Price - $ {historyDetail.price}</a>
@@ -510,7 +511,7 @@ const HistoryUpdate = (carId,transportationCharge,transportation,divContent,Head
                     
                     <div class="vehicleimgright col-lg-12">
                       <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>HistoryEdit(`transporationDiv${historyDetail.car_id}`,`transporationHeader${historyDetail.car_id}`)}>{historyDetail.bill_of_sales_id !== null && historyDetail.bill_of_sales_id !== "" ? "": "Edit Transportation" }</a></p>
-                      <h3>Vehicle Price + Lot Fee <span>$ {Number(historyDetail.price)+ Number(historyDetail.lot_fee)}</span></h3>
+                      <h3>Vehicle Price  <span>$ {Number(historyDetail.price)+ Number(historyDetail.lot_fee)}</span></h3>
                       <h4> Buy Fee <span> $ {Number(getFeeDetails(historyDetail.price))}</span></h4>
                       <h4>Inspection <span>$ 0</span></h4>
                       <h4>Other Charges <span>$ 0</span></h4>

@@ -208,7 +208,7 @@ const InVoice = (props) => {
                </tr>
              </thead>
              <tr>
-               <td>Vehicle Price +Lot Fee 
+               <td>Vehicle Price 
                <p>{Year} {Make} {Model} </p>
                </td>
                <td><span>$ {(vechileprice)+lotFee}</span></td>
