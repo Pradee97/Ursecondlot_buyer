@@ -134,7 +134,7 @@ function clear (){
 
          <div className="col-lg-6 d-flex align-items-stretch">
            <div className="info">
-           <p className="contacttag">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been </p>
+           <p className="contacttag">Here is our address for more details please reach out. Also you can share your questions or concerns by submitting the Enquiry form. </p>
              <div className="address">
                <i className="icofont-google-map"></i>
                <h4>Address</h4>

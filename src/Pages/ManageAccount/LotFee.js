@@ -71,8 +71,8 @@ const LotFee = () => {
                 console.log("res", response.data.success)
                 if (response.data.success) {
                     togglePopup()
-                    setPopupTitle("Create LotFee");
-                    setPopupMsg("LotFee Successfully Created");
+                    setPopupTitle("LotFee Update");
+                    setPopupMsg("LotFee Successfully Updated");
                     setPopupType("success");
                     setPopupActionType("close");
                     setPopupActionValue("close");
