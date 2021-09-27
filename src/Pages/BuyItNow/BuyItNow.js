@@ -227,7 +227,7 @@ async function fetchBuyerFees() {
         <div class="section-title mt-0 pt-3 mb-0 revCheHeadBlock">
           <h2>Buy Now</h2>
 		  <div className="revCheHead">
-				<h2 className="pl-4"> Are You Want to Buy this Unit</h2>
+				<h3 className="pl-4"> Are You Want to Buy this Unit</h3>
 			
 				{/* <h2 className="text-right">Total <span> $ {overAllTotal()}</span></h2> */}
 

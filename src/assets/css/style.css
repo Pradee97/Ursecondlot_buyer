@@ -7584,6 +7584,7 @@ margin-top: -3px;
 .ckreview .cancel-btn{
   padding: 11px 20px;
   margin-right: 20px;
+  color: #bd062c;
 }
 
 .ckreview .cancel-btn:hover{
@@ -8036,7 +8037,6 @@ input[type="checkbox"]:disabled + label{
 }
 
 .buynowPopup{
-  max-width: 500px;
   margin: auto;
 }
 
@@ -8574,3 +8574,15 @@ a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
   color: #008d0e;
 }
 
+
+.buynowPopup .revCheHead h3{
+  font-size: 20px;
+}
+.buynowPopup .vehiclesheadspaydetails{
+  border: #ddd solid 1px;
+  box-shadow: none;
+}
+
+.buynowPopup .termspageblock .modalbody p{
+  width: 100%;
+}
