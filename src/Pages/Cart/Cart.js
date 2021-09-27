@@ -12,7 +12,7 @@ const Cart = () => {
 
     const userDetails=ls.get('userDetails');
     const [isOpen, setIsOpen] = useState(false);
-    const [cartDetail,setCartDetail] = useState();
+    const [cartDetail,setCartDetail] = useState([]);
 
     const [highBid,setHighBid] = useState();
     const [feeDetails, setFeeDetails] = useState("");
@@ -24,6 +24,7 @@ const Cart = () => {
     const [paymentModeError,setPaymentModeError] = useState("");
     const [alertError,setAlertError] = useState("");
     const [loading,setLoading] = useState(true);
+    const [selectAllCar, setSelectAllCar] = useState(true)
 
     console.log(userDetails==="userDetails======",userDetails)
     let paySeparately={};
@@ -40,7 +41,11 @@ const Cart = () => {
         API.post("cartDetails/condition", request).then(response=>{
 
             console.log("cart check the value", response.data.data)
-            setCartDetail(response.data.data)
+            if(response.data.data.length){
+                setCartDetail(response.data.data.map(data=> {return {...data, isChecked:true}}))
+                 setMySelectedCarId(response.data.data.map(data=>data.car_id))
+            }
+           
             setNumberCars(response.data.data.length)
             setLoading(false);
         });
@@ -115,6 +120,7 @@ const billofsales =(request) => {
     }
 
     const selectedCarIdList = (data) => {
+        
         let newdata=mySelectedCarId || []
         // newdata.includes(data) ? newdata = newdata.filter(item => item !== data) :newdata.push(data)
         // setMySelectedCarId(newdata)
@@ -129,6 +135,16 @@ const billofsales =(request) => {
         }
         // console.log("newdata====",newdata)
         // console.log("mySelectedCarId====",mySelectedCarId)
+        setCartDetail(cartDetail.map(value=>{
+            if(value.car_id == data)
+            {
+                console.log("====value.isChecked====",value.isChecked)
+                value.isChecked = ! value.isChecked
+            }
+            return value
+        } 
+
+        ))
     }
 
     const mySelectedCarTotal = () =>{
@@ -185,6 +201,19 @@ const billofsales =(request) => {
         return cartDetail?.length>0 && cartDetail
         .reduce((acc, curr) => acc+((Number(curr.price) || 0)+Number(curr.lot_fee) +  Number(curr.transportation === 'yes' ? curr.transportation_charge : 0) + Number(getFeeDetails(curr.price))),0) + 0 + 0
     }
+
+    const isSelectedAllCar = () => {
+        if(selectAllCar) //while chnage funtion is triggering state is not updated so using reverse logic 
+        {
+            setMySelectedCarId([])
+            setCartDetail(cartDetail.map(data=> {return {...data, isChecked: false}}))
+        }else{
+            setMySelectedCarId(cartDetail.map(data=>data.car_id))
+            setCartDetail(cartDetail.map(data=> {return {...data, isChecked: true}}))
+        }
+
+        setSelectAllCar(!selectAllCar)
+    }
     
 
     return (
@@ -202,10 +231,23 @@ const billofsales =(request) => {
             <div class="row content">
                 <div class="col-lg-8 col-md-8">
                     <div class="vehiclesheads">
-                    {/* <h2>Number of Vehicles- 2<span>Total amount- <b>$ {cartDetail.length>0 ? cartDetail.reduce((acc,{max_price,transportation,transportation_charge})=>acc + (Number(max_price) + Number(transportation === 'yes' ? transportation_charge : 0) + Number(getFeeDetails(max_price||0))) ,0) : 0}</b></span></h2> */}
-                    <h2>Number of Vehicles- {numberCars}<span>Total amount- <b>$ {overAllTotal()}</b></span></h2>   
-                </div>
-                {cartDetail?.length>0 && cartDetail
+                        {/* <h2>Number of Vehicles- 2<span>Total amount- <b>$ {cartDetail.length>0 ? cartDetail.reduce((acc,{max_price,transportation,transportation_charge})=>acc + (Number(max_price) + Number(transportation === 'yes' ? transportation_charge : 0) + Number(getFeeDetails(max_price||0))) ,0) : 0}</b></span></h2> */}
+                        <h2>Number of Vehicles- {numberCars}<span>Total amount- <b>$ {overAllTotal()}</b></span></h2>   
+                    </div>
+                    {/* <div class="vehiclesheadspaydetails mt-4"> */}
+                        <div class="row">				
+                            <div class="vehiclepaycheckbox col-lg-12">
+                                <div class="form-group input-group pb-0 mb-0 pull-right cbox">
+                                    <input 
+                                        type="checkbox" 
+                                        id="selectAll" 
+                                        checked= {selectAllCar}
+                                        onChange={(e)=>{isSelectedAllCar()}}/><label for="selectAll">Select All / Unselect All to make payment for all cars</label>
+                                </div>
+                            </div>
+                        </div>
+                    {/* </div> */}
+                    {cartDetail?.length>0 && cartDetail
                     .map((cartDetail,index) =>{
                         paySeparately={[index] : 'no'}
                         return( <div class="vehiclesheadspaydetails mt-4">
@@ -216,7 +258,13 @@ const billofsales =(request) => {
 
                                     <div class="form-group input-group pb-0 mb-0 pull-right cbox">
                                         {/* <input className={"paySeparately"+index}  value={paySeparately[index]=='no'? "yes":"no"} type="checkbox" id={"vehiclepayseparat"+index} checked = {paySeparately[index] =='yes'?true:false} onChange={(e)=>{paySeparately[index]='yes'}}/><label for={"vehiclepayseparat"+index}>You Want To Pay Separately{paySeparately[index]}</label> */}
-                                        <input className={"paySeparately"+index}  value={index} type="checkbox" id={"vehiclepayseparat"+index} onChange={(e)=>{selectedCarIdList(cartDetail.car_id)}}/><label for={"vehiclepayseparat"+index}>Select to make payment for this car</label>
+                                        <input 
+                                        className={"paySeparately"+index}  
+                                        value={index} 
+                                        type="checkbox" 
+                                        id={"vehiclepayseparat"+index} 
+                                        checked= {cartDetail.isChecked}
+                                        onChange={(e)=>{selectedCarIdList(cartDetail.car_id)}}/><label for={"vehiclepayseparat"+index}>Select to make payment for this car</label>
 
                                     </div>
                                 </div>					
@@ -248,7 +296,7 @@ const billofsales =(request) => {
                             </div>
                         </div>)
                     })
-                }
+                    }
                   
                 </div>
                 <div class="col-lg-4 col-md-8">
@@ -307,11 +355,7 @@ const billofsales =(request) => {
     
           </div>
         </section>
-    
-       
-    
-     
-    
+
       </main>
 }
       </div>
