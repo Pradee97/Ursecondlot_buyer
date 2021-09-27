@@ -84,7 +84,7 @@ const ForgotPasswordEmail = () => {
                                     <div className="col-sm-12 form-group">
                                         <div className="tbox">
                                             <input type="text" id="email" className="textbox" placeholder="" name="email"  onChange={(e) => setEmail(e.target.value)} />
-                                            <label htmlFor="email" className={email != "" ? "input-has-value" : ""}>User Name</label>
+                                            <label htmlFor="email" className={email != "" ? "input-has-value" : ""}>Enter Your Email Id</label>
                                             <p className="form-input-error" >{emailError}</p>
                                         </div>
                                     </div>
