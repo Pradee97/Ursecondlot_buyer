@@ -60,7 +60,7 @@ const MoreCarFromSeller = () =>{
 	const toggleMakeBid = () => {
 		setIsOpen(!isOpen);
 	}
-	const setMakeBitValue = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,comments,transportation,display,proxy_bid,transportation_charge,save_policy) => {
+	const setMakeBitValue = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,comments,transportation,display,proxy_bid,transportation_charge,save_policy,credit_limit) => {
 		console.log("check the toggle make bid value")
 		setMakeBitData({
 			carHighBid: high_bid,
@@ -77,7 +77,8 @@ const MoreCarFromSeller = () =>{
 			display:display,
 			carProxyBid:proxy_bid,
       transportationCharge:transportation_charge,
-      savePolicy:save_policy
+      savePolicy:save_policy,
+      creditLimit:credit_limit
 		})
 	
 		toggleMakeBid()
@@ -307,7 +308,7 @@ return(
 					} */}
 
           {(moreCar.isbuyercounterbid=="me" && moreCar.iscounterbid!==null && (moreCar.time !==0 || moreCar.time!==null)) || ((moreCar.iscounterbid==null || moreCar.iscounterbid=="no" ) && (moreCar.isbuyercounterbid==null || moreCar.isbuyercounterbid=="not")&&(moreCar.time ==0 || moreCar.time==null))?
-          <a className="cta-btns-primary" href="JavaScript:void(0)" onClick={()=>setMakeBitValue(moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now,moreCar.comments,moreCar.transportation,moreCar.display,moreCar.proxy_bid,moreCar.transportation_charge,moreCar.save_policy)} >Make Bid</a>
+          <a className="cta-btns-primary" href="JavaScript:void(0)" onClick={()=>setMakeBitValue(moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now,moreCar.comments,moreCar.transportation,moreCar.display,moreCar.proxy_bid,moreCar.transportation_charge,moreCar.save_policy,moreCar.credit_limit)} >Make Bid</a>
           :<a class="cta-btns lockedcarBtn">Locked up for Higher Bid </a>}
 
           {(moreCar.buyer_high_bid==moreCar.high_bid || moreCar.buyer_high_bid!==moreCar.high_bid) &&       

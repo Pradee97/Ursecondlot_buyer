@@ -7,7 +7,9 @@ import { useHistory, useLocation, useParams } from "react-router-dom";
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import checkImg from '../../assets/img/check.svg';
 import errorImg from '../../assets/img/erroricon.png';
-import "../../Component/CommonPopup/commonPopup.css"
+import "../../Component/CommonPopup/commonPopup.css";
+import Popup from '../../Component/Popup/Popup';
+import Terms from '../../Component/TermsAndCondition/TermsAndCondition';
 
 const BuyNow=(props)=>{
 
@@ -28,7 +30,7 @@ const BuyNow=(props)=>{
     console.log("check the car id in the buy it now page",props.carId)
 
     const [isCommonPopupOpen, setIsCommonPopupOpen] = useState(false);
-	const [popupTitle, setPopupTitle] = useState("");
+	  const [popupTitle, setPopupTitle] = useState("");
     const [popupMsg, setPopupMsg] = useState("");
     const [popupType, setPopupType] = useState("");
     const [popupActionType, setPopupActionType] = useState("");
@@ -42,13 +44,19 @@ const BuyNow=(props)=>{
 
     const [carTransportationCharge,setCarTransportationCharge] = useState(props.setBuyItNowValue.transportationCharge);
     const [feeDetails, setFeeDetails] = useState("");
-
+    const [isOpen, setIsOpen] = useState(false);
+    const [terms,setTerms]=useState("0");
+    const [eterms,setETerms]=useState("0");
 
     const [toggleAcceptPopupOpen,setToggleAcceptPopupOpen]= useState(true);
     const [confirmationFlag, setConfirmationFlag] = useState(false);
     const email = JSON.parse(localStorage.getItem("userDetails")).email;
     const toggleCommonPopup = () => {
       setIsCommonPopupOpen(!isCommonPopupOpen);
+    }
+
+    const togglePopup = () => {
+      setIsOpen(!isOpen);
     }
 
 const handleBuyItNow=()=>{
@@ -93,8 +101,11 @@ if(!confirmationFlag){
             createdBy:JSON.parse(localStorage.getItem("userDetails")).buyer_id,
            
 		}
-    // return
+
 	console.log("Save Search Request : ",request);
+
+  if( terms!=="0" ){
+   
 		API.post("carbuy/add", request).then(response=>{
 	
 		console.log("saveeeeee",response)
@@ -113,9 +124,15 @@ if(!confirmationFlag){
       setAlertMessage(data.error.err)
       
   }
-		
-	
-    })
+}, (error) => {
+ 
+});
+}else{
+
+  if(terms==="0"){
+      setETerms("1");
+  }
+}
 }
 
 
@@ -258,11 +275,21 @@ async function fetchBuyerFees() {
 								{/* <h3>Total amount <span>$ {Number(paymentCar.price)+ Number(getFeeDetails(paymentCar.price)) + Number(300 || 0)}</span></h3> */}
 								<h3>Total amount <span>$ {Number(carBuyItNow)+Number(getFeeDetails(carBuyItNow)) + Number(carTransportationCharge|| 0)+0+0}</span></h3>
 							</div>
+              
 						</div>
 					</div>
 				</div>				
 				
 				</div>
+        <div className="col-sm-12 form-group agreetab">
+            <input type="checkbox" className="form-check d-inline " id="chb" 
+            checked = { terms == 0 ? false : true } value={terms == 0 ? 1 : 0 } onChange={(e) => setTerms(e.target.value)}/>
+            <label htmlFor="chb" className="form-check-label"> I Agree for the 
+            <a href="JavaScript:void(0)" onClick={togglePopup}>Terms And Conditions</a>
+            </label>
+            {eterms==="1" && terms==="0" ?
+            <p className="form-input-error"> Agree the Terms And Conditions</p>:""}
+        </div>
 				<div class="text-center ckreview"><a  class="cta-btn cancel-btn" onClick={()=>{setConfirmationFlag(false); props.toggle()}}>Cancel</a> <button type="submit" class="cta-btn"   onClick={handleBuyItNow}>Confirm </button> </div>
 				
 			</div>
@@ -295,15 +322,22 @@ async function fetchBuyerFees() {
                        
                    </div>
               </div>
-              {/* {isCommonPopupOpen && <CommonPopup
-				handleClose={isCommonPopupOpen}
-				popupTitle={popupTitle}
-				popupMsg={popupMsg}
-				popupType={popupType}
-				popupActionType={popupActionType}
-				popupActionValue={popupActionValue}
-				popupActionPath={popupActionPath}
-			/>} */}
+              {isOpen && <Popup
+                  isClose={false}
+                  content={<>
+                      <Terms toggle={togglePopup} />
+                  </>}
+                  handleClose={togglePopup}
+              />}
+              {isCommonPopupOpen && <CommonPopup
+                  handleClose={isCommonPopupOpen}
+                  popupTitle={popupTitle}
+                  popupMsg={popupMsg}
+                  popupType={popupType}
+                  popupActionType={popupActionType}
+                  popupActionValue={popupActionValue}
+                  popupActionPath={popupActionPath}
+              />}
      
       </div>
 
