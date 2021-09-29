@@ -140,6 +140,18 @@ const InVoice = (props) => {
                <td colSpan="2" class="alignRight"><span className="autoWidth pr-1">Date: </span>{Date?.substring(0,10)}</td>
              </tr>
              <tr>
+               <td>
+                 <span>Year: {Year} </span>
+                 </td>
+               <td >
+                 <span>Make: {Make} </span> 
+               </td>
+                <td >
+                  <span> Model: {Model}</span>
+
+               </td>
+             </tr>			  
+             <tr>
                <td><span>Gate Pass Code : </span>{gatePassId}</td>
                <td >
                  <span>Inventory Number: {invNo} </span> 
@@ -167,9 +179,10 @@ const InVoice = (props) => {
            
             
                <tr><td><span>Name</span>{dealerInfo.dealer_name}</td></tr>	
-               <tr><td><span>Address </span>{dealerInfo.address},{dealerInfo.state_name},{dealerInfo.city_name},{dealerInfo.zipcode}</td></tr>	
-               <tr><td><span>Contact </span>{dealerInfo.phone_no }</td></tr>	
-               <tr><td><span>Email id </span>{dealerInfo.email}</td></tr>		  		  
+               <tr><td><span>Address </span>{dealerInfo.address}</td></tr>	
+               <tr><td><span>City </span>{dealerInfo.city_name}</td></tr>	
+               <tr><td><span>State </span>{dealerInfo.state_name}</td></tr>	
+               <tr><td><span>Zipcode </span>{dealerInfo.zipcode}</td></tr>		  		  
             
               
                        
@@ -187,10 +200,11 @@ const InVoice = (props) => {
              {sellerInfo?.length>0?sellerInfo
             .map((sellerInfo) =>
             <>
-               <tr><td><span>Name </span>{sellerInfo.dealer_name}</td></tr>
-               <tr><td><span>Adresss </span>{sellerInfo.address},{sellerInfo.state_name},{sellerInfo.city_name},{sellerInfo.zipcode}</td></tr>
-               <tr><td><span>Contact </span>{sellerInfo.phone_no}</td></tr>
-               <tr><td><span>Email id </span>{sellerInfo.email}</td></tr>
+               <tr><td><span>Name  </span>{sellerInfo.dealer_name}</td></tr>
+               <tr><td><span>Address  </span>{sellerInfo.address}</td></tr>
+               <tr><td><span>City  </span>{sellerInfo.city_name}</td></tr>
+               <tr><td><span>State  </span>{sellerInfo.state_name}</td></tr>
+               <tr><td><span>Zipcode  </span>{sellerInfo.zipcode}</td></tr>
                   </>    
                   ) :""}      
            </table>
@@ -262,7 +276,8 @@ const InVoice = (props) => {
   
    <div class="col-md-12 text-center paybtns">
    <a class={`cta-btns-primary ${(billOfSales !== null && billOfSales !== ""  ) && "greenBtn"}`} onClick={()=>{(billOfSales == null ||billOfSales == ""  )&& redirecttoCart()}} > {billOfSales !== null && billOfSales !== "" ? "paid": "pay" } </a> 
-   
+   {/* <a class={`cta-btns-primary ${(billOfSales !== null && billOfSales !== ""  ) && "redBtn"}`} onClick={()=>{(billOfSales == null ||billOfSales == ""  )&& redirecttoCart()}} > {billOfSales !== null && billOfSales !== "" ? "print": "" } </a>  */} 
+  
    </div>
    <section id="playstoreBlock" class="playstoreBlock">
      <div class="container">
