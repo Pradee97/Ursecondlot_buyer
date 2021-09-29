@@ -1,22 +1,27 @@
 import React from 'react';
-import speedometer from '../assets/img/speedometer.svg';
-import gasolinePump from '../assets/img/gasolinePump.svg';
-import car from '../assets/img/car.svg';
-import persent from '../assets/img/persent.svg';
-import roadwithBrokenLine from '../assets/img/roadwithBrokenLine.svg';
-import carbrid from '../assets/img/carbrid.jpg';
-import Path from '../assets/img/Path.svg';
-import carshonda from '../assets/img/carshonda.jpg';
-import appstore from '../assets/img/appstore.png';
-import googleplay from '../assets/img/googleplay.png';
-import API from "../Services/BaseService";
+import speedometer from '../../assets/img/speedometer.svg';
+import gasolinePump from '../../assets/img/gasolinePump.svg';
+import car from '../../assets/img/car.svg';
+import persent from '../../assets/img/persent.svg';
+import roadwithBrokenLine from '../../assets/img/roadwithBrokenLine.svg';
+import carbrid from '../../assets/img/carbrid.jpg';
+import Path from '../../assets/img/Path.svg';
+import carshonda from '../../assets/img/carshonda.jpg';
+import appstore from '../../assets/img/appstore.png';
+import googleplay from '../../assets/img/googleplay.png';
+import API from "../../Services/BaseService";
 import { useState, useEffect } from 'react';
-import Loading from '../Component/Loading/Loading';
-import Popup from '../Component/Popup/Popup';
-import Makeurbid from './Makeurbid';
-import BuyItNow from '../Pages/BuyItNow/BuyItNow';
+import Loading from '../../Component/Loading/Loading';
+import Popup from '../../Component/Popup/Popup';
+import Makeurbid from '../Makeurbid';
+import BuyItNow from '../../Pages/BuyItNow/BuyItNow';
 import {  useHistory } from "react-router-dom";
 import Countdown from "react-countdown";
+import CommonPopup from '../../Component/CommonPopup/CommonPopup';
+import checkImg from '../../assets/img/check.svg';
+import errorImg from '../../assets/img/erroricon.png';
+import CancelBid from './CancelBid';
+
 
 const MyBids = () => {
 
@@ -27,7 +32,19 @@ const MyBids = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [makeBitData, setMakeBitData] = useState({});
     const [highBid,setHighBid] = useState(null);
-    const [buyItNowData, setBuyItNowData] = useState({});
+    const [buyItNowData, setBuyItNowData] = useState({});   
+
+    const [cancelBidData, setCancelBidData] = useState({});   
+    const [alertmessage,setAlertMessage] = useState("");
+    const [alerttitle,setAlertTitle] = useState("");
+    const [alertimg,setAlertImg] = useState("");
+    const [toggleAcceptPopupOpen,setToggleAcceptPopupOpen]= useState(true);
+
+    const [cancelBidOpen,setCancelBidOpen] = useState(false);
+
+    const togglePopup = () => {
+		setIsOpen(!isOpen);
+	}
 
     const Completionist = () => <span>{""}</span>;
 
@@ -41,6 +58,23 @@ const MyBids = () => {
         return (
         <span>
             {minutes}:{seconds}
+        </span>
+        );
+    }
+    };
+
+    const Completion = () => <span>{""}</span>;
+
+
+    const render = ({hours,minutes, seconds, completed }) => {
+    if (completed) {
+        
+        return <Completion />;
+    } else {
+    
+        return (
+        <span>
+            {hours}:{minutes}:{seconds}
         </span>
         );
     }
@@ -77,21 +111,34 @@ const MyBids = () => {
         setIsOpen(!isOpen);
     }
 
-    const cancelBid=(car_id)=>{
-        let request = {
-            buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
-            car_id:car_id
-        };
-        console.log("========>",request)
-        const state = API.post('cancelbid/update', request);
-        state.then(res => {
+    // const cancelBid=(car_id)=>{
+    //     let request = {
+    //         buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
+    //         car_id:car_id
+    //     };
+    //     console.log("========>",request)
+    //     const state = API.post('cancelbid/update', request);
+    //     state.then(res => {
             
-            if(res.data.data.success){
-                window.location.reload(); 
-            }
-        })
-    }
-    const setMakeBitValue = (high_bid, min_price, save_purchase, car_id, time, counterbuyerid, max_price, buy_it_now, comments, transportation, display, proxy_bid, transportation_charge, save_policy) => {
+    //         if(res.data.data.success){
+    //             const { data } = res;
+    //             console.log("response", res)
+    //             setToggleAcceptPopupOpen(false);
+    //             setAlertImg(checkImg);
+    //             setAlertTitle("Thank you")
+    //             setAlertMessage("You have successfully done this deal thank you for your business with Urs second lot")
+    
+
+    //         } else {
+    //             const { data } = res;
+    //             setToggleAcceptPopupOpen(false);
+    //             setAlertImg(errorImg);
+    //             setAlertMessage(data.error.err)
+    //         }
+    //     })
+    // }
+
+    const setMakeBitValue = (high_bid, min_price, save_purchase, car_id, time, counterbuyerid, max_price, buy_it_now, comments, transportation, display, proxy_bid, transportation_charge, save_policy,credit_limit) => {
         // console.log("check the toggle make bid value")
         setMakeBitData({
             carHighBid: high_bid,
@@ -109,6 +156,7 @@ const MyBids = () => {
             carProxyBid: proxy_bid,
             transportationCharge: transportation_charge,
             savePolicy: save_policy,
+            creditLimit:credit_limit
         })
         toggleMakeBid()
     }
@@ -148,7 +196,32 @@ const MyBids = () => {
         
         
     }
-
+    
+    const toggleCancelBid = () => {
+        setCancelBidOpen(!cancelBidOpen);
+    }
+    
+    const getCancelBidValue = (data) => {
+        const highBid = data
+        setHighBid(highBid)
+    }
+    
+    const setCancelBidValue = ( car_id,image,model,make,year) => {
+    
+        setCancelBidData({
+           
+            carId : car_id,
+            image : image,
+		    model : model,
+			make : make, 
+			year : year 
+    
+        })
+    
+        toggleCancelBid()
+        
+        
+    }
    
 
     return (
@@ -227,14 +300,42 @@ const MyBids = () => {
                                     <div class="col-lg-2 mybidscontroldetails">
                                     {(bidsObj.isbuyercounterbid=="me" && bidsObj.iscounterbid!==null && (bidsObj.time !==0 || bidsObj.time!==null)) || ((bidsObj.iscounterbid==null || bidsObj.iscounterbid=="no" ) && (bidsObj.isbuyercounterbid==null || bidsObj.isbuyercounterbid=="not")&&(bidsObj.time ==0 || bidsObj.time==null))?
                                         <div class="mybidscontrol">
-                                            <a class="cta-btns-primary redBtn" onClick={() => setMakeBitValue(bidsObj.high_bid, bidsObj.min_price, bidsObj.save_purchase, bidsObj.car_id, bidsObj.time, bidsObj.counter_buyer_dealer_id, bidsObj.max_price, bidsObj.buy_it_now, bidsObj.comments, bidsObj.transportation, bidsObj.display, bidsObj.proxy_bid, bidsObj.transportation_charge, bidsObj.save_policy)}>Raise Bid</a>
+                                            <a class="cta-btns-primary redBtn" onClick={() => setMakeBitValue(bidsObj.high_bid, bidsObj.min_price, bidsObj.save_purchase, bidsObj.car_id, bidsObj.time, bidsObj.counter_buyer_dealer_id, bidsObj.max_price, bidsObj.buy_it_now, bidsObj.comments, bidsObj.transportation, bidsObj.display, bidsObj.proxy_bid, bidsObj.transportation_charge, bidsObj.save_policy,bidsObj.credit_limit)}>Raise Bid</a>
                                             {bidsObj.buy_it_now !==""?
                                             <a class="cta-btns greenBtn" onClick={()=>setBuyItNowValue(bidsObj.buy_it_now,bidsObj.car_id,bidsObj.image,bidsObj.model,bidsObj.make,bidsObj.year)} >Accept Bid</a>:""}
-                                            <a class="control-btns-cancel" onClick={() =>cancelBid(bidsObj.car_id)}>Cancel Bid</a>
+                                            {(bidsObj.cancel_bid_time!==null && bidsObj.cancel_bid_time!==0 && bidsObj.cancel_bid_time < 300) ?
+									 
+                                     (<div>
+                                          <a class="control-btns-cancel" disabled >Cancel Bid Activate After Some Times</a>
+                                         <div class= {(bidsObj.cancel_bid_time!==null && bidsObj.cancel_bid_time!==0 && bidsObj.cancel_bid_time < 300)?"countownBlock":""} >
+                                         <Countdown date={Date.now() + (bidsObj.cancel_bid_time!==null && bidsObj.cancel_bid_time < 300 ? bidsObj.cancel_bid_time*60*1000 :0)  } renderer={render} />
+                                        
+                                         </div>
+                                    
+                                     </div>
+                                     ):
+                                     (<div>
+                                     <a class="control-btns-cancel" onClick={()=>setCancelBidValue(bidsObj.car_id,bidsObj.image,bidsObj.model,bidsObj.make,bidsObj.year)}>Cancel Bid</a></div>)
+
+                                     } 
                                         </div>:
                                          <div class="mybidscontrol">
                                          <a class="control-btns-cancel" >Locked up for Higher Bid</a>
-                                         <a class="control-btns-cancel" onClick={() =>cancelBid(bidsObj.car_id)}>Cancel Bid</a>
+                                         {(bidsObj.cancel_bid_time!==null && bidsObj.cancel_bid_time!==0 && bidsObj.cancel_bid_time < 300) ?
+									 
+                                     (<div>
+                                          <a class="control-btns-cancel" diabled >Cancel Bid Activate After Some Times</a>
+                                         <div class= {(bidsObj.cancel_bid_time!==null && bidsObj.cancel_bid_time!==0 && bidsObj.cancel_bid_time < 300)?"countownBlock":""} >
+                                         <Countdown date={Date.now() + (bidsObj.cancel_bid_time!==null && bidsObj.cancel_bid_time < 300 ? bidsObj.cancel_bid_time*60*1000 :0)  } renderer={render} />
+                                        
+                                         </div>
+                                    
+                                     </div>
+                                     ):
+                                     (<div>
+                                     <a class="control-btns-cancel" onClick={()=>setCancelBidValue(bidsObj.car_id,bidsObj.image,bidsObj.model,bidsObj.make,bidsObj.year)}>Cancel Bid</a></div>)
+
+                                     } 
                                      </div>}
                                      
                                         {(bidsObj.buyer_high_bid==bidsObj.high_bid || bidsObj.buyer_high_bid!==bidsObj.high_bid) &&
@@ -243,6 +344,9 @@ const MyBids = () => {
                                                 <Countdown date={Date.now() + (bidsObj.time!==null && bidsObj.time < 20 ? bidsObj.time*60*1000 :0)  } renderer={renderer} />
                                             
                                             </div>}
+
+                                            
+
                                     </div>
                                 </div>)}
                         </div>}
@@ -272,6 +376,17 @@ const MyBids = () => {
                 </>}
                 handleClose={toggleBuyItNow}
             />}
+
+            {cancelBidOpen && <Popup
+                isClose={false}
+                content={<>
+                    <CancelBid toggle={toggleCancelBid} setCancelBidValue={cancelBidData}  getCancelBidValue={getCancelBidValue}/>
+                </>}
+                handleClose={toggleCancelBid}
+            />}
+
+
+
         </main>
     )
 }

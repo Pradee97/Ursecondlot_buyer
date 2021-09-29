@@ -115,7 +115,8 @@ const SuggestedCars = () => {
 			display:data.display,
 			carProxyBid:data.proxy_bid,
 			transportationCharge:data.transportation_charge,
-			savePolicy:data.save_policy
+			savePolicy:data.save_policy,
+			creditLimit:data.credit_limit
 		})
 		setIsOpen(!isOpen);
 	}

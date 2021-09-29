@@ -10,6 +10,7 @@ import checkImg from '../../src/assets/img/check.svg';
 import errorImg from '../../src/assets/img/erroricon.png';
 import '../Component/CommonPopup/commonPopup.css';
 import { Slider } from 'antd';
+import ls from 'local-storage';
 
 const MakeurBid=(props)=>{
 
@@ -43,15 +44,8 @@ console.log("check props",props)
     const [comments,setComments] = useState(carComments);
     const [highBid,setHighBid] = useState(carHighBid);
     const [proxyBid,setProxyBid] = useState(carProxyBid);
-    // const [transportation,setTransportation] = useState("no");
-    // const [display,setDisplay]=useState("no");
-    // const [save,setSave] = useState("no");
-    // const [transportFlag,setTransportFlag] = useState("");
-    // const [displayFlag,setDisplayFlag]=useState("");
-    // const [saveFlag,setSaveFlag] = useState("");
-    // const [reset,setReset]=useState("");
-    
 
+    const [creditLimit,setCreditLimit] = useState(props.setMakeBitValue.creditLimit);
 
     const [popupTitle, setPopupTitle] = useState ("");
     const [popupMsg, setPopupMsg] = useState ("");
@@ -76,6 +70,15 @@ console.log("check props",props)
     const [termsError,setTermsError]=useState("");
     const [maximumProxy,setMaximumProxy] = useState("");
 
+    const [totalAmount,setTotalAmount] = useState("");
+    const [creditLimitError,setCreditLimitError] = useState("");
+
+    const userDetails=ls.get('userDetails');
+    const [mySelectedCarId, setMySelectedCarId] = useState([]);
+    const [cartDetail,setCartDetail] = useState([]);
+
+  
+
     // if(!carHighBid){
     //     setCarHighBid(carMinBid)
     // }
@@ -89,6 +92,30 @@ console.log("check props",props)
         setOpen(!open);
     }
  
+
+    const getTotalAmount = () => {
+
+        let request = {
+
+            buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
+
+        };
+
+        API.post('getTotalAmount/condition', request).then(response => {
+            console.log("get total amount response", response.data.data)
+            setTotalAmount(response.data.data)
+            
+        })
+            .catch(err => { console.log(err); });
+    }
+
+    useEffect(() => {
+
+        getTotalAmount();
+
+    }, []);
+
+   
 
     async function fetchBuyerFees() {
         let request = {
@@ -186,6 +213,7 @@ console.log("check props",props)
         setHighBidError("")
         setProxyBidError("")
         setTermsError("")
+        setCreditLimitError("")
 
         // if(!highBid){
 
@@ -245,11 +273,22 @@ console.log("check props",props)
             return;
         
         }
+
+        if((Number(totalAmount)+Number(highBid))>creditLimit){
+
+            console.log("check the total amount in if condition",totalAmount)
+            setCreditLimitError("you have reached your credit Limit")
+            return;
+
+        }
+
         if( terms=="no" ){
             setTermsError("Agree the Policy document")
-            return
+            return;
         }
    
+        
+
         let request={
             buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
             car_id:id,
@@ -396,6 +435,9 @@ console.log("check props",props)
         console.log("my=====highBid====",highBid)
         setHighBid(highBid)
     }
+
+   
+
     return(
         <div>
           
@@ -554,6 +596,7 @@ console.log("check props",props)
                                 </label>
                                
                                 <p className="form-input-error"> {termsError}</p>
+                                
                                 </div>
 
                                  <div className="col-lg-12 form-group customCheckbox">
@@ -563,6 +606,8 @@ console.log("check props",props)
                                     
                                         <label htmlFor="chb4" className="form-check-label"> Save this option for next   </label>                               
                                     </div>
+
+                                    <p className="form-input-error"> {creditLimitError} </p>
 
                             {/* <div class=" col-lg-12 policylink">
                                 <a href="JavaScript:void(0)" onClick={toggleTerms} >Policy document</a>

@@ -47,7 +47,7 @@ import ForgotEmail from './Pages/ForgotPassword/ForgotEmail';
 import Favoritelist from './Pages/ManageAccount/FavoriteList';
 import Search from './Pages/Search';
 import Transport from './Pages/Transport';
-import MyBids from './Pages/MyBids';
+import MyBids from './Pages/MyBids/MyBids';
 import Inspection from './Pages/Inspection';
 import MakeurBid from './Pages/Makeurbid';
 import Cardetail from './Pages/Cardetail';
