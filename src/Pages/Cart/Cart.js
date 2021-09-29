@@ -236,7 +236,7 @@ const billofsales =(request) => {
                     </div>
                     {/* <div class="vehiclesheadspaydetails mt-4"> */}
                         <div class="row">				
-                            <div class="vehiclepaycheckbox col-lg-12">
+                            <div class="vehiclepaycheckbox col-lg-12 mt-4">
                                 <div class="form-group input-group pb-0 mb-0 pull-right cbox">
                                     <input 
                                         type="checkbox" 
