@@ -277,7 +277,7 @@ const billofsales =(request) => {
                                 <div class="vehicleimgright col-lg-8">
                                 <h3>{cartDetail.date?.substring(0,10)} {cartDetail.date?.substring(11,19)}</h3>
                                     <h3>Inventory Number - {cartDetail.inventory_no}</h3>
-                                    <h4>Vechile Price + Lot Fee <span>$ {(Number(cartDetail.price)+(Number(cartDetail.lot_fee)))}</span></h4>
+                                    <h4>Vechile Price <span>$ {(Number(cartDetail.price)+(Number(cartDetail.lot_fee)))}</span></h4>
                                     <h4>Buy Fee <span>$ {getFeeDetails(cartDetail.price)}</span></h4>
                                     <h4>Other Charges <span>$ 0</span></h4>
                                     <h4>Miscellaneous Charges <span>$ 0</span></h4>

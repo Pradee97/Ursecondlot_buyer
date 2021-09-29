@@ -499,9 +499,9 @@ const HistoryUpdate = (carId,transportationCharge,transportation,divContent,Head
                       <h3>Title status - <span> {historyDetail.title_status_name}</span></h3>
                       <h6 className="mfdealer">Message from Dealer - <span> {historyDetail.dealer_message}</span></h6>
                     
-                    <div class="cars-prices ">
+                    {/* <div class="cars-prices ">
                       <a class="cta-btns" href="#">Price - $ {historyDetail.price}</a>
-                    </div>
+                    </div> */}
                     
                     
                   </div>		
