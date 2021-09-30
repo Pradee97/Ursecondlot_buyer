@@ -675,7 +675,7 @@ useEffect(() => {
     return(
         <div>
             {loading?<Loading/>:
-             <main id="main" className="inner-page carList">
+             <main id="main" className="inner-page carList searchPage">
                    
                     <div id="suggested-cars" className="suggested-cars vehiclesearch suggestedCarsPage">
                         
@@ -1159,10 +1159,8 @@ useEffect(() => {
 						</>}
 						handleClose={toggleMakeBid}
 					/>}
-               </main>
-}
-
-								{isOpen && <Popup
+					
+					{isOpen && <Popup
                                     isClose={false}
                                     content={<>
                                         <SaveSearchPopup toggle={togglePopup}
@@ -1178,7 +1176,11 @@ useEffect(() => {
 										<BuyItNow toggle={toggleBuyItNow} setBuyItNowValue={buyItNowData} getBuyItNowValue={getBuyItNowValue}  />
 									</>}
 									handleClose={toggleBuyItNow}
-								/>}					
+								/>}	
+               </main>
+}
+
+												
 
         </div>
     )

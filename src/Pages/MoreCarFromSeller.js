@@ -248,7 +248,7 @@ useEffect(() => {
 return(
     <div>
         {loading?<Loading/>:
-        <main id="main" class="inner-page-cars">
+        <main id="main" class="inner-page-cars moreCarListPage">
     
 				
 	

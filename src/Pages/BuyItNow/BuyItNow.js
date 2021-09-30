@@ -244,7 +244,7 @@ async function fetchBuyerFees() {
 
     <div id="" className="saveSearchBlock acceptConfirmation buynowPopup">
       
-            <div className="termspageblock">
+            <div className="termspageblock pt-1">
                 <div className="row content">
                   {toggleAcceptPopupOpen?
                       //   (<div className="modalcontent">
@@ -376,7 +376,7 @@ async function fetchBuyerFees() {
 				</div>				
 				
 				</div>
-        <div className="col-sm-12 form-group agreetab">
+        <div className="col-sm-12 form-group agreetab customCheckbox pl-0 mt-3">
             <input type="checkbox" className="form-check d-inline " id="chb" 
             checked = { terms == 0 ? false : true } value={terms == 0 ? 1 : 0 } onChange={(e) => setTerms(e.target.value)}/>
             <label htmlFor="chb" className="form-check-label"> I Agree for the 

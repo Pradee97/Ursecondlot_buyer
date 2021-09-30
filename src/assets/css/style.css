@@ -7237,6 +7237,8 @@ img.carImg{
   max-width: 800px;
 }
 
+
+
 .makeyourbid .container{
   padding: 0;
 }
@@ -8504,26 +8506,6 @@ a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
   right: -10px;
 }
 
-.checkoutpage .models-box .section-title{
-  position: -webkit-sticky;
-  position: sticky;
-  position: fixed;
-  max-width: 950px;
-  width: 100%;
-  background: #fff;
-  z-index: 9999;
-
-}
-
-.checkoutpage .models-box .ckreview{
-  position: fixed;
-  z-index: 9999;
-  width: 100%;
-  background: #fff;
-  bottom:0%;
-  position: -webkit-sticky;
-  position: sticky;
-}
 
 .checkoutpage .models-box .vehicleimgright h4, .checkoutpage .models-box .vehicleimgright h3{
   padding-right: 20px;
@@ -8586,3 +8568,28 @@ a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
 .buynowPopup .termspageblock .modalbody p{
   width: 100%;
 }
+
+.moreCarListPage .models-box{
+  max-width: 800px;
+}
+
+.checkoutpage .models-box .section-title{
+  position: -webkit-sticky;
+  position: sticky;
+  position: fixed;
+  max-width: 950px;
+  width: 100%;
+  background: #fff;
+  z-index: 9999;
+}
+
+.checkoutpage .models-box .ckreview{
+  position: fixed;
+  z-index: 9999;
+  width: 100%;
+  background: #fff;
+  bottom:0%;
+  position: -webkit-sticky;
+  position: sticky;
+}
+
