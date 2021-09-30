@@ -24,7 +24,9 @@ const Cart = () => {
     const [paymentModeError,setPaymentModeError] = useState("");
     const [alertError,setAlertError] = useState("");
     const [loading,setLoading] = useState(true);
-    const [selectAllCar, setSelectAllCar] = useState(true)
+    const [selectAllCar, setSelectAllCar] = useState(true);
+
+    const [cartEdit,setCartEdit] = useState(false);
 
     console.log(userDetails==="userDetails======",userDetails)
     let paySeparately={};
@@ -215,7 +217,48 @@ const billofsales =(request) => {
         setSelectAllCar(!selectAllCar)
     }
     
+    const HistoryUpdate = (carId,transportationCharge,transportation,divContent,HeaderContent) =>{
 
+        let request = {
+            buyer_dealer_id :userDetails.buyer_dealer_id,
+            car_id:carId,
+            transportation:!transportation ? "no" : transportation,
+            transportation_charge: transportationCharge,
+            // transportation_charge: carTransportation == 'yes' ?  300 : 0,
+        }
+        // console.log("transportationCharge====",transportationCharge)
+        console.log("request======",request)
+        // return
+        API.post("editTransportation/update", request).then(response=>{
+          setCartEdit(false)
+          document.getElementById(divContent).setAttribute("class", "col-lg-12 p-0 form-group transCbox customCheckbox hideContent");
+          document.getElementById(HeaderContent).setAttribute("class", "showContent");
+        });
+      
+      }
+      const cancelEdit = (divContent, HeaderContent) => {
+        setCartEdit(false)
+        document.getElementById(divContent).setAttribute("class", "col-lg-12 p-0 form-group transCbox customCheckbox hideContent");
+        document.getElementById(HeaderContent).setAttribute("class", "showContent");
+      }
+    
+        const HistoryEdit = (divContent,HeaderContent) =>{
+          console.log("check the car id coming or not in the edit on click",divContent)
+          document.getElementById(divContent).setAttribute("class", "col-lg-12 p-0 form-group transCbox customCheckbox showContent");
+          document.getElementById(HeaderContent).setAttribute("class", "hideContent");
+        }
+    
+    const carTransportationupdate = (value, carid) => {
+        console.log("carid===", carid)
+        console.log("value===", value)
+        setCartDetail( cartDetail.map(data => {
+          if(data.car_id === carid){
+            data.transportation = value
+            data.transportation_charge= value == 'yes' ? 300 : 0
+         }
+         return data
+       }))
+    }
     return (
         <div>
         {loading?<Loading/>:
@@ -276,18 +319,49 @@ const billofsales =(request) => {
 
                                 <div class="vehicleimgright col-lg-8">
                                 <h3>{cartDetail.date?.substring(0,10)} {cartDetail.date?.substring(11,19)}</h3>
+                                 {/* <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>HistoryEdit(`transporationDiv${cartDetail.car_id}`,`transporationHeader${cartDetail.car_id}`)}>{cartDetail.bill_of_sales_id !== null && cartDetail.bill_of_sales_id !== "" ? "": "Edit Transportation" }</a></p> */}
+                                 <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>HistoryEdit(`transporationDiv${cartDetail.car_id}`,`transporationHeader${cartDetail.car_id}`)}> Edit Transportation</a></p>
+
+
                                     <h3>Inventory Number - {cartDetail.inventory_no}</h3>
                                     <h4>Vechile Price <span>$ {(Number(cartDetail.price)+(Number(cartDetail.lot_fee)))}</span></h4>
                                     <h4>Buy Fee <span>$ {getFeeDetails(cartDetail.price)}</span></h4>
                                     <h4>Other Charges <span>$ 0</span></h4>
                                     <h4>Miscellaneous Charges <span>$ 0</span></h4>
-                                    <h4>Transportation Charges <span>$ {cartDetail.transportation === 'yes' ? cartDetail.transportation_charge : 0}</span></h4>
+                                    {/* <h4>Transportation Charges <span>$ {cartDetail.transportation === 'yes' ? cartDetail.transportation_charge : 0}</span></h4> */}
                                     {/* <div class="form-group input-group ">
                                     <input type="checkbox" id="" value={cartDetail.transportation == 'yes' ? 'no' : 'yes'}   checked={cartDetail.transportation== 'yes' ? true : false}/><label for="paytransportation">Transportation</label><span>$ {cartDetail.transportation === 'yes' ? cartDetail.transportation_charge : 0}</span>
                                     <input  id="" /><label for="paytransportation">Transportation</label><span>$ {cartDetail.transportation === 'yes' ? cartDetail.transportation_charge : 0}</span>
 
                                         <input type="checkbox" id="" value={cartDetail.transportation == 'yes' ? 'no' : 'yes'}   checked={cartDetail.transportation== 'yes' ? true : false}/><label for="paytransportation">Transportation</label><span>$ {cartDetail.transportation === 'yes' ? 300 : 0}</span>
                                     </div> */}
+
+                            <div className="col-lg-12 form-group transCbox customCheckbox hideContent p-0" id={`transporationDiv${cartDetail.car_id}`} >
+                            <input type="checkbox" className="form-check d-inline" 
+                              id = {`transporation${cartDetail.car_id}`} 
+                              // id = 'transporation' 
+                              value = {cartDetail?.transportation == 'yes' ? 'no' : 'yes'} 
+                              checked = { cartDetail.transportation==="yes" ? true : false } 
+                              onChange = {(e)=>{carTransportationupdate(e.target.value, cartDetail.car_id)}} 
+                            />
+                            <label htmlFor={`transporation${cartDetail.car_id}`}  className="form-check-label" >Transportation</label>
+                            {/* <input type="checkbox" className="form-check d-inline" id="transporation" value={historyDetail.transportation == 'yes' ? 'no' : 'yes'} checked={historyDetail.transportation==="yes" ?true:false} onChange={(e)=>{setCarTransportation(e.target.value)}}/> 
+                            <label htmlFor='transporation' className="form-check-label" >Transportation  </label>    */}
+                           
+                            <div className="rprice">
+                                <span>${cartDetail.transportation_charge || 0} </span>  
+                                {/* <span>${300 || 0} </span>                             */}
+                            </div>
+                              <div className="totalActions">
+                              <button onClick={()=>HistoryUpdate(cartDetail.car_id,cartDetail.transportation_charge, cartDetail.transportation, `transporationDiv${cartDetail.car_id}`, `transporationHeader${cartDetail.car_id}`)}>update</button>  
+                              <button onClick={()=>cancelEdit(`transporationDiv${cartDetail.car_id}`,`transporationHeader${cartDetail.car_id}`)}>Cancel</button>    
+                              </div>
+                                                  
+                      </div>
+                      <h4 className='showContent' id={`transporationHeader${cartDetail.car_id}`}>Transportation <span>$ {cartDetail.transportation_charge || 0}</span></h4>
+
+
+
                                     <div class="vehiclerighttotal">
                                     <h3>Total amount <span>$ {(Number(cartDetail.price) || 0) + (Number(cartDetail.lot_fee)) +  Number(cartDetail.transportation === 'yes' ? cartDetail.transportation_charge : 0) + Number(getFeeDetails(cartDetail.price)) + 0 + 0}</span></h3>
                                         {/* <h3>Total amount <span>$ {(Number(cartDetail.price) || 0)+(Number(cartDetail.lot_fee)) +  Number(cartDetail.transportation === 'yes' ? 300 : 0) + Number(getFeeDetails(cartDetail.price)) + 0 + 0}</span></h3> */}
