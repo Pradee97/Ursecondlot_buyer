@@ -26,8 +26,6 @@ const BuyNow=(props)=>{
     // const { id } = useParams();
     const userDetails=ls.get('userDetails');
     const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
-    console.log("check high bid in the buy it now page",props.highBid)
-    console.log("check the car id in the buy it now page",props.carId)
 
     const [isCommonPopupOpen, setIsCommonPopupOpen] = useState(false);
 	  const [popupTitle, setPopupTitle] = useState("");
@@ -55,7 +53,7 @@ const BuyNow=(props)=>{
     const [confirmationFlag, setConfirmationFlag] = useState(false);
     const email = JSON.parse(localStorage.getItem("userDetails")).email;
 
-    // const [transportationEdit,setTransportationEdit] = useState(false);
+    const [transportationEdit,setTransportationEdit] = useState(false);
 
     const toggleCommonPopup = () => {
       setIsCommonPopupOpen(!isCommonPopupOpen);
@@ -195,49 +193,51 @@ async function fetchBuyerFees() {
   
 // }
 
-// const TransportationUpdate = (carId,transportationCharge,transportation,divContent,HeaderContent) =>{
+const TransportationUpdate = (carId,transportationCharge,transportation,divContent,HeaderContent) =>{
 
-//   let request = {
-//       buyer_dealer_id :userDetails.buyer_dealer_id,
-//       car_id:id,
-//       transportation:!transportation ? "no" : transportation,
-//       transportation_charge: transportationCharge,
+  let request = {
+      buyer_dealer_id :userDetails.buyer_dealer_id,
+      car_id:id,
+      transportation:!transportation ? "no" : transportation,
+      transportation_charge: transportationCharge,
       
-//   }
+  }
   
-//   console.log("request======",request)
+  console.log("request======",request)
 
-//   API.post("editTransportation/update", request).then(response=>{
-//     setTransportationEdit(false)
-//     document.getElementById(divContent).setAttribute("class", "col-lg-12 p-0 form-group transCbox customCheckbox hideContent");
-//     document.getElementById(HeaderContent).setAttribute("class", "showContent");
-//   });
+  API.post("editTransportation/update", request).then(response=>{
+    setTransportationEdit(false)
+    document.getElementById(divContent).setAttribute("class", "col-lg-12 p-0 form-group transCbox customCheckbox hideContent");
+    document.getElementById(HeaderContent).setAttribute("class", "showContent");
+  });
 
-// }
+}
 
-//   const cancelTransportationEdit = (divContent, HeaderContent) => {
-//     setTransportationEdit(false)
-//     document.getElementById(divContent).setAttribute("class", "col-lg-12 p-0 form-group transCbox customCheckbox hideContent");
-//     document.getElementById(HeaderContent).setAttribute("class", "showContent");
-//   }
+  const cancelTransportationEdit = (divContent, HeaderContent) => {
+    setTransportationEdit(false)
+    document.getElementById(divContent).setAttribute("class", "col-lg-12 p-0 form-group transCbox customCheckbox hideContent");
+    document.getElementById(HeaderContent).setAttribute("class", "showContent");
+  }
 
-//     const TransportationEdit = (divContent,HeaderContent) =>{
-//       console.log("check the car id coming or not in the edit on click",divContent)
-//       document.getElementById(divContent).setAttribute("class", "col-lg-12 p-0 form-group transCbox customCheckbox showContent");
-//       document.getElementById(HeaderContent).setAttribute("class", "hideContent");
-//     }
+    const TransportationEdit = (divContent,HeaderContent) =>{
+      console.log("check the car id coming or not in the edit on click",divContent)
+      document.getElementById(divContent).setAttribute("class", "col-lg-12 p-0 form-group transCbox customCheckbox showContent");
+      document.getElementById(HeaderContent).setAttribute("class", "hideContent");
+    }
 
-//     const carTransportationupdate = (value, id) => {
-//       console.log("carid===", id)
-//       console.log("value===", value)
+    const carTransportationupdate = (value, id) => {
+      console.log("carid===", id)
+      console.log("value===", value)
     
-//         if(id === id){
-//           carTransportation = value
-//           carTransportationCharge= value == 'yes' ? 300 : 0
-//        }
+        if(id === id){
+          console.log("check the history car transportation update",  )
+          
+          setCarTransportation(value)
+          setCarTransportationCharge(value == 'yes' ? 300 : 0)
+       }
       
  
-//     } 
+    } 
 
   return (
  
@@ -321,11 +321,11 @@ async function fetchBuyerFees() {
 							<h4>Other Charges <span>$ 0</span></h4>
                             <h4>Miscellaneous Charges <span>$ 0</span></h4>
 							{/* <h4>Transportation <span>${Cartransportation_charge}</span></h4> */}
-							<h4>Transportation Charges <span>$ { carTransportationCharge || 0}</span></h4>
+							{/* <h4>Transportation Charges <span>$ { carTransportationCharge || 0}</span></h4> */}
 
               
 
-              {/* <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>TransportationEdit (`transporationDiv${id}`,`transporationHeader${id}`)}> Edit Transportation</a></p>
+               <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>TransportationEdit (`transporationDiv${id}`,`transporationHeader${id}`)}> Edit Transportation</a></p>
 
 
               <div className="col-lg-12 form-group transCbox customCheckbox hideContent p-0" id={`transporationDiv${id}`} >
@@ -350,7 +350,7 @@ async function fetchBuyerFees() {
                                                   
                       </div>
                      
-                      <h4 className='showContent' id={`transporationHeader${id}`}>Transportation <span>$ {carTransportationCharge || 0}</span></h4> */}
+                      <h4 className='showContent' id={`transporationHeader${id}`}>Transportation <span>$ {carTransportationCharge || 0}</span></h4>
 
 
 
