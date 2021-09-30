@@ -93,7 +93,7 @@ const getMakeBitValue = (data) => {
 const toggleMakeBid = () => {
 	setIsOpen(!isOpen);
 }
-const setMakeBitValue = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,comments,transportation,display,proxy_bid,transportation_charge,save_policy,credit_limit) => {
+const setMakeBitValue = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,comments,transportation,display,proxy_bid,transportation_charge,save_policy,credit_limit,lot_fee) => {
 	// console.log("check the toggle make bid value")
 	setMakeBitData({
 		carHighBid: high_bid,
@@ -111,7 +111,8 @@ const setMakeBitValue = (high_bid,min_price,save_purchase,car_id,time,counterbuy
 		carProxyBid:proxy_bid,
 		transportationCharge:transportation_charge,
 		savePolicy:save_policy,
-		creditLimit:credit_limit
+		creditLimit:credit_limit,
+		lotFee:lot_fee
 	})
 
 	toggleMakeBid()	
@@ -520,7 +521,7 @@ return(
 									
 									{(carDetail[0].isbuyercounterbid=="me" && carDetail[0].iscounterbid!==null && (carDetail[0].time !==0 || carDetail[0].time!==null)) || ((carDetail[0].iscounterbid==null || carDetail[0].iscounterbid=="no" ) && (carDetail[0].isbuyercounterbid==null || carDetail[0].isbuyercounterbid=="not")&&(carDetail[0].time ==0 || carDetail[0].time==null))?
 										<div class="cars-buy">
-											<a class="cars-buy-btns-primary" onClick={()=>setMakeBitValue(carDetail[0].high_bid,carDetail[0].min_price,carDetail[0].save_purchase,carDetail[0].car_id,carDetail[0].time,carDetail[0].counter_buyer_dealer_id,carDetail[0].max_price,carDetail[0].buy_it_now,carDetail[0].comments,carDetail[0].transportation,carDetail[0].display,carDetail[0].proxy_bid,carDetail[0].transportation_charge,carDetail[0].save_policy,carDetail[0].credit_limit)}>Make Bid</a>
+											<a class="cars-buy-btns-primary" onClick={()=>setMakeBitValue(carDetail[0].high_bid,carDetail[0].min_price,carDetail[0].save_purchase,carDetail[0].car_id,carDetail[0].time,carDetail[0].counter_buyer_dealer_id,carDetail[0].max_price,carDetail[0].buy_it_now,carDetail[0].comments,carDetail[0].transportation,carDetail[0].display,carDetail[0].proxy_bid,carDetail[0].transportation_charge,carDetail[0].save_policy,carDetail[0].credit_limit,carDetail[0].lot_fee)}>Make Bid</a>
 										</div>										
 										:<div class="carpoint lockedcar"> <a class="cars-buy-btns-primary">Locked up for Higher Bid </a></div>} 
 								</div> 
@@ -649,7 +650,7 @@ return(
 					} */}
 
 					{(moreCar.isbuyercounterbid=="me" && moreCar.iscounterbid!==null && (moreCar.time !==0 || moreCar.time!==null)) || ((moreCar.iscounterbid==null || moreCar.iscounterbid=="no" ) && (moreCar.isbuyercounterbid==null || moreCar.isbuyercounterbid=="not")&&(moreCar.time ==0 || moreCar.time==null))?
-					<a className="cta-btns-primary" href="JavaScript:void(0)" onClick={()=>setMakeBitValue(moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now,moreCar.comments,moreCar.transportation,moreCar.display,moreCar.proxy_bid,moreCar.transportation_charge,moreCar.save_policy,moreCar.credit_limit)} >Make Bid</a>
+					<a className="cta-btns-primary" href="JavaScript:void(0)" onClick={()=>setMakeBitValue(moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now,moreCar.comments,moreCar.transportation,moreCar.display,moreCar.proxy_bid,moreCar.transportation_charge,moreCar.save_policy,moreCar.credit_limit,moreCar.lot_fee)} >Make Bid</a>
 					:<a class="cta-btns">Locked up for Higher Bid </a>}
 
 					{(moreCar.buyer_high_bid==moreCar.high_bid || moreCar.buyer_high_bid!==moreCar.high_bid) &&       
@@ -722,7 +723,7 @@ return(
 									} */}
 
 									{(moreCar.isbuyercounterbid=="me" && moreCar.iscounterbid!==null && (moreCar.time !==0 || moreCar.time!==null)) || ((moreCar.iscounterbid==null || moreCar.iscounterbid=="no" ) && (moreCar.isbuyercounterbid==null || moreCar.isbuyercounterbid=="not")&&(moreCar.time ==0 || moreCar.time==null))?
-									<a className="cta-btns-primary" href="JavaScript:void(0)" onClick={()=>setMakeBitValue(moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now,moreCar.comments,moreCar.transportation,moreCar.display,moreCar.proxy_bid,moreCar.transportation_charge,moreCar.save_policy,moreCar.credit_limit)} >Make Bid</a>
+									<a className="cta-btns-primary" href="JavaScript:void(0)" onClick={()=>setMakeBitValue(moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now,moreCar.comments,moreCar.transportation,moreCar.display,moreCar.proxy_bid,moreCar.transportation_charge,moreCar.save_policy,moreCar.credit_limit,moreCar.lot_fee)} >Make Bid</a>
 									:<a class="cta-btns">Locked up for Higher Bid </a>}
 
 									{(moreCar.buyer_high_bid==moreCar.high_bid || moreCar.buyer_high_bid!==moreCar.high_bid) &&       

@@ -90,7 +90,7 @@ const handleBuyItNow=()=>{
 if(!confirmationFlag){
 
     setConfirmationFlag(true)
-    return
+    // return
   } 
 		let request ={
         
