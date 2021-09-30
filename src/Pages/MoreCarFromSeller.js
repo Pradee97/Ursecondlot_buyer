@@ -96,11 +96,19 @@ const MoreCarFromSeller = () =>{
 		setHighBid(highBid)
 	}
 
-	const setBuyItNowValue = (buy_it_now,car_id,) => {
+	const setBuyItNowValue = (buy_it_now,car_id,image,model,make,year,price,transportation,transportation_charge,lot_fee) => {
 
 		setBuyItNowData({
 			buyItNow: buy_it_now,
 			carId : car_id,
+      image : image,
+      model : model,
+      make : make, 
+      year : year,
+      price : price,
+      transportation : transportation,
+      transportationCharge : transportation_charge,
+      lotFee:lot_fee
 	
 		})
 	
@@ -284,7 +292,7 @@ return(
 									
 									<p className="details buyitnow">
                                                 {moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined || moreCar.buy_it_now== 0?"":
-                                                    <a className="cta-btns" onClick={()=>setBuyItNowValue(moreCar.buy_it_now,moreCar.car_id)}>Buy It Now $ {moreCar.buy_it_now}</a>
+                                                    <a className="cta-btns" onClick={()=>setBuyItNowValue(moreCar.buy_it_now,moreCar.car_id,moreCar.image,moreCar.model,moreCar.make,moreCar.year,moreCar.price,moreCar.transportation,moreCar.transportation_charge,moreCar.lot_fee)}>Buy It Now $ {moreCar.buy_it_now}</a>
                                                 }
                                                 </p> 
 
