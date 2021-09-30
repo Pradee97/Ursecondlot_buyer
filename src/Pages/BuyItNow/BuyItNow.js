@@ -42,6 +42,9 @@ const BuyNow=(props)=>{
     const [alerttitle,setAlertTitle] = useState("");
     const [alertimg,setAlertImg] = useState("");
 
+    const [carTransportation,setCarTransportation] = useState(props.setBuyItNowValue.transportation);
+    const [carLotFee,setCarLotFee] = useState(props.setBuyItNowValue.lotFee);
+    console.log("check the lot fee coming",carLotFee)
     const [carTransportationCharge,setCarTransportationCharge] = useState(props.setBuyItNowValue.transportationCharge);
     const [feeDetails, setFeeDetails] = useState("");
     const [isOpen, setIsOpen] = useState(false);
@@ -51,6 +54,9 @@ const BuyNow=(props)=>{
     const [toggleAcceptPopupOpen,setToggleAcceptPopupOpen]= useState(true);
     const [confirmationFlag, setConfirmationFlag] = useState(false);
     const email = JSON.parse(localStorage.getItem("userDetails")).email;
+
+    // const [transportationEdit,setTransportationEdit] = useState(false);
+
     const toggleCommonPopup = () => {
       setIsCommonPopupOpen(!isCommonPopupOpen);
     }
@@ -84,7 +90,7 @@ const handleBuyItNow=()=>{
 if(!confirmationFlag){
 
     setConfirmationFlag(true)
-    return
+    // return
   } 
 		let request ={
         
@@ -97,12 +103,14 @@ if(!confirmationFlag){
             status: "sold",
             active: 1,
             buying_proccess:"buyer",
+            lot_fee:carLotFee,
             updatedBy:JSON.parse(localStorage.getItem("userDetails")).buyer_id,
             createdBy:JSON.parse(localStorage.getItem("userDetails")).buyer_id,
            
 		}
 
 	console.log("Save Search Request : ",request);
+  // return
 
   if( terms!=="0" ){
    
@@ -186,6 +194,51 @@ async function fetchBuyerFees() {
 //       .reduce((acc, curr) => acc+((Number(curr.price) || 0)+Number(curr.lot_fee) +  Number( curr.transportation_charge || 0) + Number(getFeeDetails(curr.price))),0)
   
 // }
+
+// const TransportationUpdate = (carId,transportationCharge,transportation,divContent,HeaderContent) =>{
+
+//   let request = {
+//       buyer_dealer_id :userDetails.buyer_dealer_id,
+//       car_id:id,
+//       transportation:!transportation ? "no" : transportation,
+//       transportation_charge: transportationCharge,
+      
+//   }
+  
+//   console.log("request======",request)
+
+//   API.post("editTransportation/update", request).then(response=>{
+//     setTransportationEdit(false)
+//     document.getElementById(divContent).setAttribute("class", "col-lg-12 p-0 form-group transCbox customCheckbox hideContent");
+//     document.getElementById(HeaderContent).setAttribute("class", "showContent");
+//   });
+
+// }
+
+//   const cancelTransportationEdit = (divContent, HeaderContent) => {
+//     setTransportationEdit(false)
+//     document.getElementById(divContent).setAttribute("class", "col-lg-12 p-0 form-group transCbox customCheckbox hideContent");
+//     document.getElementById(HeaderContent).setAttribute("class", "showContent");
+//   }
+
+//     const TransportationEdit = (divContent,HeaderContent) =>{
+//       console.log("check the car id coming or not in the edit on click",divContent)
+//       document.getElementById(divContent).setAttribute("class", "col-lg-12 p-0 form-group transCbox customCheckbox showContent");
+//       document.getElementById(HeaderContent).setAttribute("class", "hideContent");
+//     }
+
+//     const carTransportationupdate = (value, id) => {
+//       console.log("carid===", id)
+//       console.log("value===", value)
+    
+//         if(id === id){
+//           carTransportation = value
+//           carTransportationCharge= value == 'yes' ? 300 : 0
+//        }
+      
+ 
+//     } 
+
   return (
  
 
@@ -270,6 +323,48 @@ async function fetchBuyerFees() {
 							{/* <h4>Transportation <span>${Cartransportation_charge}</span></h4> */}
 							<h4>Transportation Charges <span>$ { carTransportationCharge || 0}</span></h4>
 
+              
+
+              {/* <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>TransportationEdit (`transporationDiv${id}`,`transporationHeader${id}`)}> Edit Transportation</a></p>
+
+
+              <div className="col-lg-12 form-group transCbox customCheckbox hideContent p-0" id={`transporationDiv${id}`} >
+                            <input type="checkbox" className="form-check d-inline" 
+                              id = {`transporation${id}`} 
+                             
+                              value = {carTransportation == 'yes' ? 'no' : 'yes'} 
+                              checked = { carTransportation==="yes" ? true : false } 
+                              onChange = {(e)=>{carTransportationupdate(e.target.value, id)}} 
+                            />
+                            <label htmlFor={`transporation${id}`}  className="form-check-label" >Transportation</label>
+                            
+                           
+                            <div className="rprice">
+                                <span>${carTransportationCharge || 0} </span>  
+                                                       
+                            </div>
+                              <div className="totalActions">
+                              <button onClick={()=>TransportationUpdate(id, carTransportationCharge, carTransportation, `transporationDiv${id}`, `transporationHeader${id}`)}>update</button>  
+                              <button onClick={()=>cancelTransportationEdit(`transporationDiv${id}`,`transporationHeader${id}`)}>Cancel</button>    
+                              </div>
+                                                  
+                      </div>
+                     
+                      <h4 className='showContent' id={`transporationHeader${id}`}>Transportation <span>$ {carTransportationCharge || 0}</span></h4> */}
+
+
+
+              {/* <div className="col-lg-6 form-group customCheckbox">
+                                    
+                  <input type="checkbox" className="form-check d-inline " id="chb2" value={carTransportation == 'yes' ? 'no' : 'yes'} checked={carTransportation==="yes" ?true:false} onChange={(e)=>{setCarTransportation(e.target.value);}}/> 
+                  
+                  <label htmlFor="chb2" className="form-check-label">Transportation  </label>                               
+              </div> */}
+
+              {/* <div className="col-lg-6 form-group">
+                  <span>${carTransportationCharge || 0} </span>
+                  <span>$ {300 || 0} </span>                              
+              </div> */}
 
 							<div class="vehiclerighttotal">
 								{/* <h3>Total amount <span>$ {Number(paymentCar.price)+ Number(getFeeDetails(paymentCar.price)) + Number(300 || 0)}</span></h3> */}

@@ -138,7 +138,7 @@ const MyBids = () => {
     //     })
     // }
 
-    const setMakeBitValue = (high_bid, min_price, save_purchase, car_id, time, counterbuyerid, max_price, buy_it_now, comments, transportation, display, proxy_bid, transportation_charge, save_policy,credit_limit) => {
+    const setMakeBitValue = (high_bid, min_price, save_purchase, car_id, time, counterbuyerid, max_price, buy_it_now, comments, transportation, display, proxy_bid, transportation_charge, save_policy,credit_limit,lot_fee) => {
         // console.log("check the toggle make bid value")
         setMakeBitData({
             carHighBid: high_bid,
@@ -156,7 +156,8 @@ const MyBids = () => {
             carProxyBid: proxy_bid,
             transportationCharge: transportation_charge,
             savePolicy: save_policy,
-            creditLimit:credit_limit
+            creditLimit:credit_limit,
+            lotFee:lot_fee
         })
         toggleMakeBid()
     }
@@ -180,7 +181,7 @@ const MyBids = () => {
         setHighBid(highBid)
     }
     
-    const setBuyItNowValue = ( buy_it_now,car_id,image,model,make,year) => {
+    const setBuyItNowValue = ( buy_it_now,car_id,image,model,make,year,price,transportation,transportation_charge,lot_fee) => {
     
         setBuyItNowData({
             buyItNow: buy_it_now,
@@ -188,7 +189,11 @@ const MyBids = () => {
             image : image,
 		    model : model,
 			make : make, 
-			year : year 
+			year : year,
+            price : price,
+            transportation : transportation,
+            transportationCharge : transportation_charge,
+            lotFee:lot_fee 
     
         })
     
@@ -300,9 +305,9 @@ const MyBids = () => {
                                     <div class="col-lg-2 mybidscontroldetails">
                                     {(bidsObj.isbuyercounterbid=="me" && bidsObj.iscounterbid!==null && (bidsObj.time !==0 || bidsObj.time!==null)) || ((bidsObj.iscounterbid==null || bidsObj.iscounterbid=="no" ) && (bidsObj.isbuyercounterbid==null || bidsObj.isbuyercounterbid=="not")&&(bidsObj.time ==0 || bidsObj.time==null))?
                                         <div class="mybidscontrol">
-                                            <a class="cta-btns-primary redBtn" onClick={() => setMakeBitValue(bidsObj.high_bid, bidsObj.min_price, bidsObj.save_purchase, bidsObj.car_id, bidsObj.time, bidsObj.counter_buyer_dealer_id, bidsObj.max_price, bidsObj.buy_it_now, bidsObj.comments, bidsObj.transportation, bidsObj.display, bidsObj.proxy_bid, bidsObj.transportation_charge, bidsObj.save_policy,bidsObj.credit_limit)}>Raise Bid</a>
+                                            <a class="cta-btns-primary redBtn" onClick={() => setMakeBitValue(bidsObj.high_bid, bidsObj.min_price, bidsObj.save_purchase, bidsObj.car_id, bidsObj.time, bidsObj.counter_buyer_dealer_id, bidsObj.max_price, bidsObj.buy_it_now, bidsObj.comments, bidsObj.transportation, bidsObj.display, bidsObj.proxy_bid, bidsObj.transportation_charge, bidsObj.save_policy,bidsObj.credit_limit,bidsObj.lot_fee)}>Raise Bid</a>
                                             {bidsObj.buy_it_now !==""?
-                                            <a class="cta-btns greenBtn" onClick={()=>setBuyItNowValue(bidsObj.buy_it_now,bidsObj.car_id,bidsObj.image,bidsObj.model,bidsObj.make,bidsObj.year)} >Accept Bid</a>:""}
+                                            <a class="cta-btns greenBtn" onClick={()=>setBuyItNowValue(bidsObj.buy_it_now,bidsObj.car_id,bidsObj.image,bidsObj.model,bidsObj.make,bidsObj.year,bidsObj.price,bidsObj.transportation,bidsObj.transportation_charge,bidsObj.lot_fee)} >Accept Bid</a>:""}
                                             {(bidsObj.cancel_bid_time!==null && bidsObj.cancel_bid_time!==0 && bidsObj.cancel_bid_time < 300) ?
 									 
                                      (<div>

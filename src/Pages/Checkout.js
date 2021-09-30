@@ -39,7 +39,7 @@ const History = (props) => {
 		if (res.data.success) {
 			setToggleCheckoutPopupOpen(false);
 			setAlertImg(checkImg);
-			setAlertMessage("Thank you for your Business with Ur Second lot")
+			setAlertMessage("Thank you so much for doing business with Ur 2nd Lot")
 			// props.getMakeBitValue(carHighBid)
 			
 		} else {
@@ -181,7 +181,7 @@ const History = (props) => {
 
 	  </div>
   <div className="modalbody">
-  <h2 className="title"> Congratulations! Thank you for your business </h2>
+  <h2 className="title"> Congratulations </h2>
   <div class="col-md-12">
 	  
 		  <p className="text-center">{alertmessage}</p>

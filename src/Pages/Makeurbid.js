@@ -46,6 +46,8 @@ console.log("check props",props)
     const [proxyBid,setProxyBid] = useState(carProxyBid);
 
     const [creditLimit,setCreditLimit] = useState(props.setMakeBitValue.creditLimit);
+    const [lotFee,setLotFee] = useState(props.setMakeBitValue.lotFee);
+    console.log("check the lot fee in make ur bid from car details",lotFee)
 
     const [popupTitle, setPopupTitle] = useState ("");
     const [popupMsg, setPopupMsg] = useState ("");
@@ -303,7 +305,8 @@ console.log("check props",props)
             // transportation_charge: carTransportation == 'yes' ?  transportationFee : 0,
             transportation_charge: carTransportation == 'yes' ?  300 : 0,
             save_purchase:!carSavePurchase ? "no" : carSavePurchase,// !carTransportation ? "no" : carTransportation,//
-            save_policy: !carSavePolicy? "no": carSavePolicy
+            save_policy: !carSavePolicy? "no": carSavePolicy,
+            lot_fee:lotFee
         }
         console.log("request===",request)
         API.post('makeBid/add',request).then(res=>{

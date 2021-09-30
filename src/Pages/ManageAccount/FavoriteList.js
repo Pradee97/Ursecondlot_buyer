@@ -102,7 +102,7 @@ const [openBuyItNow, setOpenBuyItNow] = useState(false);
 	const toggleMakeBid = () => {
 		setIsOpen(!isOpen);
 	}
-	const setMakeBitValue = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,comments,transportation,display,proxy_bid,transportation_charge,save_policy,credit_limit) => {
+	const setMakeBitValue = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,comments,transportation,display,proxy_bid,transportation_charge,save_policy,credit_limit,lot_fee) => {
 		console.log("check the toggle make bid value")
 		setMakeBitData({
 			carHighBid: high_bid,
@@ -120,7 +120,9 @@ const [openBuyItNow, setOpenBuyItNow] = useState(false);
 			carProxyBid:proxy_bid,
 			transportationCharge:transportation_charge,
 			savePolicy:save_policy,
-			creditLimit:credit_limit
+			creditLimit:credit_limit,
+			lotFee:lot_fee
+			
 		})
 	
 		toggleMakeBid()
@@ -138,7 +140,7 @@ const [openBuyItNow, setOpenBuyItNow] = useState(false);
 		setHighBid(highBid)
 	}
 
-	const setBuyItNowValue = (buy_it_now,car_id,image,model,make,year,transportation_charge) => {
+	const setBuyItNowValue = (buy_it_now,car_id,image,model,make,year,price,transportation,transportation_charge,lot_fee) => {
 
 		setBuyItNowData({
 			buyItNow: buy_it_now,
@@ -147,7 +149,10 @@ const [openBuyItNow, setOpenBuyItNow] = useState(false);
 			model : model,
 			make : make, 
 			year : year,
-			transportationCharge : transportation_charge
+			price : price,
+            transportation : transportation,
+            transportationCharge : transportation_charge,
+            lotFee:lot_fee 
 
 	
 		})
@@ -949,7 +954,7 @@ useEffect(() => {
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>  
 												<p className="details buyitnow">
                                                 {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined || item.buy_it_now== 0?"":
-                                                    <a className="cta-btns" onClick={()=>setBuyItNowValue(item.buy_it_now,item.car_id,item.image,item.model,item.make,item.year)}>Buy It Now $ {item.buy_it_now}</a>
+                                                    <a className="cta-btns" onClick={()=>setBuyItNowValue(item.buy_it_now,item.car_id,item.image,item.model,item.make,item.year,item.price,item.transportation,item.transportation_charge,item.lot_fee)}>Buy It Now $ {item.buy_it_now}</a>
                                                 }
                                                 </p>  
                                             </div>
@@ -972,7 +977,7 @@ useEffect(() => {
 							}  */}
 
 							{(item.isbuyercounterbid=="me" && item.iscounterbid!==null && (item.time !==0 || item.time!==null)) || ((item.iscounterbid==null || item.iscounterbid=="no" ) && (item.isbuyercounterbid==null || item.isbuyercounterbid=="not")&&(item.time ==0 || item.time==null))?
-							<a className="cta-btns-primary" href="JavaScript:void(0)" onClick={()=>setMakeBitValue(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid,item.transportation_charge,item.save_policy,item.transportation_charge,item.credit_limit)} >Make Bid</a>
+							<a className="cta-btns-primary" href="JavaScript:void(0)" onClick={()=>setMakeBitValue(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid,item.transportation_charge,item.save_policy,item.transportation_charge,item.credit_limit,item.lot_fee)} >Make Bid</a>
 							:<a class="cta-btns lockedcarBtn">Locked up for Higher Bid </a>}
 
 							{(item.buyer_high_bid==item.high_bid || item.buyer_high_bid!==item.high_bid) &&       
