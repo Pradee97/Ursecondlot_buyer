@@ -76,7 +76,7 @@ const Buyers = () => {
         }
     }
     function onHandleEdit(e) {
-        history.push("/buyeredit/"+e);
+        history.push("/buyerview/"+e);
       }
     useEffect(() => {
         getuserDetails();
@@ -113,7 +113,7 @@ const Buyers = () => {
 
                                 <div className="col-lg-12 userlisttableblock">
                                     <div className="add-user">
-                                    <Button className="add-user-btns" onClick={() => history.push("/adduser")}><i className="icofont-plus"></i> Add User</Button>
+                                    {/* <Button className="add-user-btns" onClick={() => history.push("/adduser")}><i className="icofont-plus"></i> Add User</Button> */}
                                         {/*<a className="add-user-btns" href="/adduser"><i className="icofont-plus"></i> Add User</a>*/}
                                     </div>
 				
@@ -126,7 +126,6 @@ const Buyers = () => {
                                                 <th className="th_name">Name</th>
                                                 <th className="th_img">Image</th>
                                                 <th className="th_phone">Phone</th>
-                                                {/* <th>Email</th> */}
                                                 <th className="th_privileges">Privileges</th>
                                                 <th className="th_status">Status</th>
                                                 <th className="th_action">Action</th>
@@ -145,7 +144,7 @@ const Buyers = () => {
                                             <td>{item.buy_now===1?"Buy Now,":"No privileges"}{item.cancel_bid===1?"Cancel the bid after 4 hours,":""}{item.bid===1?"Bid,":""}
                                             {item.proxy_bid===1?"Proxy Bid,":""}{item.counter_bid===1?"Counter Bid,":""}{item.lot_fee===1?"Lot Fee.":""}</td>
                                             <td>{item.status===1?"Active":"InActive"}</td>
-                                            <td><Button className="ant-btn" onClick={() => onHandleEdit(item.buyer_id)}><i className="icofont-ui-edit"></i> Edit</Button></td>
+                                            <td><Button className="ant-btn" onClick={() => onHandleEdit(item.buyer_id)}><i className="icofont-ui-edit"></i> View</Button></td>
                                         </tr>
                                          ):
                                         <tr><td colspan="6" ng-show="0">
