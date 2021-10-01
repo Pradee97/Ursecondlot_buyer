@@ -41,6 +41,7 @@ import AddLegalAccount  from './Pages/ManageAccount/LegalAccount/AddLegalAccount
 import AddAddress  from './Pages/ManageAccount/Address/AddAddress';
 import EditLegalAccount from './Pages/ManageAccount/LegalAccount/EditLegalAccount';
 import EditBuyer from './Pages/ManageAccount/Buyer/EditBuyer';
+import ViewBuyer from './Pages/ManageAccount/Buyer/ViewBuyer';
 import ForgotPasswordEmail from './Pages/ForgotPassword/ForgotPasswordEmail';
 import ForgotPassword from './Pages/ForgotPassword/ForgotPassword';
 import ForgotEmail from './Pages/ForgotPassword/ForgotEmail';
@@ -151,6 +152,7 @@ function AppRouter() {
               <Route  path="/legaladd" component={AddLegalAccount}/>
               <Route  path="/addressadd" component={AddAddress}/>
               <Route  path="/buyeredit/:id" component={EditBuyer}/>
+              <Route  path="/buyerview/:id" component={ViewBuyer}/>
               <Route path="/Makeurbid" component={MakeurBid}/>
               <Route path="/Inspection" component={Inspection}/>
               <Route path="/CarDetail" component={Cardetail}/>

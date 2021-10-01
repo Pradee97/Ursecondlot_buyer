@@ -16,6 +16,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import { NoEncryptionOutlined } from '@material-ui/icons';
 
 
+// import jsPdf from 'jspdf';
+// import 'jspdf-autotable';
+// 
+
+
  const History = () => {
 
   const history = useHistory();
@@ -301,6 +306,55 @@ const HistoryUpdate = (carId,transportationCharge,transportation,divContent,Head
       // setCarTransportation()
     }
 
+//    const pdfGenerator = () => {
+//       var doc = new jsPdf('P', 'pt');
+//       const columns2= [
+     
+//     {
+//       title: 'Year',
+//       dataKey: 'year',
+//     },
+//     {
+//       title: 'Make',
+//       dataKey: 'make',
+//     },
+//     {
+//       title: 'Model',
+//       dataKey: 'model',
+//     },
+//     {
+//       title: 'Vin Number',
+//       dataKey: 'vin_no',
+//     },
+//     {
+//       title: 'Inventory Number',
+//       dataKey: 'inv_no',
+//     },
+    
+
+//   ];
+//   const rows = historyDetail.map((historyDetail) => {
+//     var obj = {
+//       Make: historyDetail.make,
+//       Model: historyDetail.model,
+//       Year: historyDetail.year,
+//       VinNumber: historyDetail.vin_no,
+//       inventory_no: historyDetail.inv_no
+
+
+//   }
+//   return obj;
+  
+//   })
+//   doc.autoTable(columns2,rows, {
+//     theme: 'grid',
+//     styles: {
+//       fontSize: 12
+//     },
+//     startY: 250,
+//   });
+// }
+
     return (
       <div>
         {loading?<Loading/>:
@@ -395,7 +449,7 @@ const HistoryUpdate = (carId,transportationCharge,transportation,divContent,Head
                     </div>
 
                     </div>
-                  
+                  <button >Download</button>
                   
                   <div class="hisHead">
                     <p>{noCars} Vehicles Purchased</p>
