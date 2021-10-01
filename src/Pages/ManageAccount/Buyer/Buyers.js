@@ -126,7 +126,6 @@ const Buyers = () => {
                                                 <th className="th_name">Name</th>
                                                 <th className="th_img">Image</th>
                                                 <th className="th_phone">Phone</th>
-                                                {/* <th>Email</th> */}
                                                 <th className="th_privileges">Privileges</th>
                                                 <th className="th_status">Status</th>
                                                 <th className="th_action">Action</th>
