@@ -14,49 +14,62 @@ const Header = () => {
   const userDetails=ls.get('userDetails');
   const history = useHistory();
   const location = useLocation();
-  const [myBids, setMyBids] = useState("");
   const [numberCars,setNumberCars] = useState("");
+  const [myBids,setMyBids] = useState("");
+  const [cart, setCart] = useState("");
 
-  const cartDetails = () =>{
+//   const cartDetails = () =>{
 
-    let request = {
-        buyer_dealer_id :userDetails?.buyer_dealer_id,
-    }
+//     let request = {
+//         buyer_dealer_id :userDetails?.buyer_dealer_id,
+//     }
 
-    API.post("cartDetails/condition", request).then(response=>{
+//     API.post("cartDetails/condition", request).then(response=>{
 
-        console.log("cart check the value", response.data.data)
-        // setCartDetail(response.data.data)
-        setNumberCars(response.data.data.length)
-        // setLoading(false);
-    });
+//         console.log("cart check the value", response.data.data)
+//         // setCartDetail(response.data.data)
+//         setNumberCars(response.data.data.length)
+//         // setLoading(false);
+//     });
+// }
+
+
+const countDetails = () =>{
+
+  let request = {
+      buyer_dealer_id :userDetails?.buyer_dealer_id,
+  }
+
+  API.post("countDetails/condition", request).then(response=>{
+
+      console.log("count details check the value", response.data.data)
+      
+      setMyBids(response.data.data.mybids_count)
+      setCart(response.data.data.cart_count)
+      
+  });
 }
 
 useEffect (() =>{
-  if(userDetails?.buyer_dealer_id){
-    let intervalId;
-    intervalId = setInterval(() => {
-      cartDetails();
-      fetchMyBids();
-        }, 10000)
-    return () => clearInterval(intervalId);
-    
-  }
+  
+      countDetails();
+      
+
   
 }, []);
   
-  async function fetchMyBids() {
-    let request = {
-        buyer_dealer_id: userDetails?.buyer_dealer_id,
-    };
-    const state = API.post('mybids/condition', request);
-    state.then(res => {
-        setMyBids(res.data.data.length);
-        // setLoading(false);
-        // setLoading(false);
-    })
-        .catch(err => { console.log(err); });
-}
+//   async function fetchMyBids() {
+//     let request = {
+//         buyer_dealer_id: userDetails?.buyer_dealer_id,
+//     };
+//     const state = API.post('mybids/condition', request);
+//     state.then(res => {
+//         setMyBids(res.data.data.length);
+//         // setLoading(false);
+//         // setLoading(false);
+//     })
+//         .catch(err => { console.log(err); });
+// }
 
 const Submenu = () => {
     return (
@@ -140,7 +153,7 @@ const Submenu = () => {
               </li>
               <li className={location.pathname ==="/cart"? "active nav__menu-item" : "nav__menu-item"} >
                 <img alt="Menu" src={cartImg} onClick={()=>history.push('/cart')}/>
-                <span className="countbox">{numberCars}</span>
+                <span className="countbox">{cart}</span>
               </li>
               <li className="topRightUser">
                 <b className="user_name">Welcome 
