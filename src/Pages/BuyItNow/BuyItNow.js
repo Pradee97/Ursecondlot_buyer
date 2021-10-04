@@ -315,7 +315,9 @@ const TransportationUpdate = (carId,transportationCharge,transportation,divConte
 						<div class="vehicleimgleft col-lg-4">
 							<img src={carImage} className="carImg" />
 						</div>
+            
 						<div class="vehicleimgright col-lg-8 pr-0">
+            <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>TransportationEdit (`transporationDiv${id}`,`transporationHeader${id}`)}> Edit Transportation</a></p>&nbsp;&nbsp;&nbsp;&nbsp;
 							<h3>{carYear} {carMake}  {carModel} <span>$ {Number(carBuyItNow)}</span></h3>
 							<h4>Buy Fee <span>$ {Number(getFeeDetails(carBuyItNow))}</span></h4>
 							<h4>Other Charges <span>$ 0</span></h4>
@@ -325,7 +327,7 @@ const TransportationUpdate = (carId,transportationCharge,transportation,divConte
 
               
 
-               <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>TransportationEdit (`transporationDiv${id}`,`transporationHeader${id}`)}> Edit Transportation</a></p>
+               
 
 
               <div className="col-lg-12 form-group transCbox customCheckbox hideContent p-0" id={`transporationDiv${id}`} >
