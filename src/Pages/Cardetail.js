@@ -34,6 +34,8 @@ import Makeurbid from './Makeurbid';
 import CarDetailsAction from './CarDetails/CarDetailsAction';
 import Countdown from "react-countdown";
 import BuyItNow from '../Pages/BuyItNow/BuyItNow';
+import Barcode from "react-hooks-barcode";
+
 
 
 const Cardetail = (props) =>{
@@ -66,7 +68,10 @@ const [open,setOpen] = useState(false);
 
 const [highBid,setHighBid] = useState(null);
 const [makeBitData, setMakeBitData] = useState({});
-const [buyItNowData, setBuyItNowData] = useState({})
+const [buyItNowData, setBuyItNowData] = useState({});
+
+const [make,setMake] = useState("");
+const [model,setModel] = useState("");
 
 const Completionist = () => <span>{""}</span>;
 
@@ -226,11 +231,12 @@ function CarDetailList(){
 	let make=res.data.data[0].make;
 	let sellerDealerId=res.data.data[0].seller_dealer_id;
 	
-	setLoading(false);
+	
 
+	
 	setDistance(res.data.distance);
 	setLrgImg(res.data.data[0].image);
-	
+	setLoading(false);
 
 
 
@@ -323,7 +329,17 @@ useEffect (()=>{
 	
 	},[moreCarFlag,similarCarFromSellerFlag])
 
-	
+	const config = {
+		background: "#f5f5f5",
+		displayValue: false,
+		marginTop: "20px",
+		marginBottom: "20px",
+		fontOptions: "italic",
+		width: 2,
+		heigth:5
+	  };
+
+	  
 	
 return(
     <div>
@@ -427,9 +443,14 @@ return(
 									<span  title="Copy" onClick={copytoclipboard} className="copyImg"><i class="icofont-copy"></i></span>
 									</CopyToClipboard>
 									
-									{/* <img src={book} onClick={copytoclipboard} alt=""/>  */}
-									<img src={barcode}  alt=""/>
+									<img src={book} onClick={copytoclipboard} alt=""/> 
+									{/* <img src={barcode} value={App()}  alt=""/> */}
+									<div>
+									<Barcode value={"Vin: "+carDetail[0].engine +"\n Year: " +carDetail[0].year + "\n Make: " + carDetail[0].make + "\n model: " + carDetail[0].model} {...config} />
+
+									</div>
 									
+									{/* <img ref={inputRef}  alt=""/> */}
 								</div>
 								{/* {copied ? <p>Copied !</p> : ""} */}
 							</div>
