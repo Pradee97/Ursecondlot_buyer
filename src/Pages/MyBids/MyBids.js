@@ -308,12 +308,12 @@ const MyBids = () => {
                                             <a class="cta-btns-primary redBtn" onClick={() => setMakeBitValue(bidsObj.high_bid, bidsObj.min_price, bidsObj.save_purchase, bidsObj.car_id, bidsObj.time, bidsObj.counter_buyer_dealer_id, bidsObj.max_price, bidsObj.buy_it_now, bidsObj.comments, bidsObj.transportation, bidsObj.display, bidsObj.proxy_bid, bidsObj.transportation_charge, bidsObj.save_policy,bidsObj.credit_limit,bidsObj.lot_fee)}>Raise Bid</a>
                                             {bidsObj.buy_it_now !==""?
                                             <a class="cta-btns greenBtn" onClick={()=>setBuyItNowValue(bidsObj.buy_it_now,bidsObj.car_id,bidsObj.image,bidsObj.model,bidsObj.make,bidsObj.year,bidsObj.price,bidsObj.transportation,bidsObj.transportation_charge,bidsObj.lot_fee)} >Accept Bid</a>:""}
-                                            {(bidsObj.cancel_bid_time!==null && bidsObj.cancel_bid_time!==0 && bidsObj.cancel_bid_time < 300) ?
+                                            {(bidsObj.cancel_bid_time!==null && bidsObj.cancel_bid_time!==0 && bidsObj.cancel_bid_time < 400) ?
 									 
                                      (<div>
                                           <a class="control-btns-cancel" disabled >Cancel Bid Activate After Some Times</a>
-                                         <div class= {(bidsObj.cancel_bid_time!==null && bidsObj.cancel_bid_time!==0 && bidsObj.cancel_bid_time < 300)?"countownBlock":""} >
-                                         <Countdown date={Date.now() + (bidsObj.cancel_bid_time!==null && bidsObj.cancel_bid_time < 300 ? bidsObj.cancel_bid_time*60*1000 :0)  } renderer={render} />
+                                         <div class= {(bidsObj.cancel_bid_time!==null && bidsObj.cancel_bid_time!==0 && bidsObj.cancel_bid_time < 400)?"countownBlock":""} >
+                                         <Countdown date={Date.now() + (bidsObj.cancel_bid_time!==null && bidsObj.cancel_bid_time < 400 ? bidsObj.cancel_bid_time*60*1000 :0)  } renderer={render} />
                                         
                                          </div>
                                     

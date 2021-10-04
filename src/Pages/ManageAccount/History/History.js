@@ -56,11 +56,11 @@ import { NoEncryptionOutlined } from '@material-ui/icons';
       });
     }
 
-    const redirecttoInvoice=(car_id,seller_dealer_id,price,lot_fee,bill_of_sales_id,gatepass_id,sold_date,make,model,year,transportation_charge,transportation,inventory_no,vin_no)=>{
+    const redirecttoInvoice=(car_id,seller_dealer_id,price,lot_fee,bill_of_sales_id,gatepass_id,sold_date,make,model,year,transportation_charge,transportation,inventory_no,vin_no,late_fee)=>{
       //   history.push("/Inspection/"+pathid);
       history.push({
         pathname: "/Invoice",
-        state: {car_id,sellerDealerID:seller_dealer_id,vechileprice:price,lotFee:lot_fee,billOfSales:bill_of_sales_id,gatePassId:gatepass_id,Date:sold_date,Make:make,Model:model,Year:year,transportationCharge:transportation_charge,Transportation:transportation,invNo:inventory_no,vinNo:vin_no}
+        state: {car_id,sellerDealerID:seller_dealer_id,vechileprice:price,lotFee:lot_fee,billOfSales:bill_of_sales_id,gatePassId:gatepass_id,Date:sold_date,Make:make,Model:model,Year:year,transportationCharge:transportation_charge,Transportation:transportation,invNo:inventory_no,vinNo:vin_no,LateFee:late_fee}
 
         });
         console.log ("hi",price,lot_fee,bill_of_sales_id,gatepass_id,sold_date);
@@ -505,7 +505,7 @@ const HistoryUpdate = (carId,transportationCharge,transportation,divContent,Head
                           <div className="vinnoBlock"><p class="vinno" href="JavaScript:void(0)" >Vin no - <span>{historyDetail.vin_no}</span></p></div>
                           <a class="cta-btns" href="JavaScript:void(0)" onClick={()=>redirecttoInspection(historyDetail.car_id)}>Inspection</a>
                           <span className="autoCheck"><img src={carcheck} alt=""/></span>
-                          <a class="cta-btns invoice" href="JavaScript:void(0)" onClick={()=>redirecttoInvoice(historyDetail.car_id,historyDetail.seller_dealer_id,historyDetail.price,historyDetail.lot_fee,historyDetail.bill_of_sales_id,historyDetail.gatepass_id,historyDetail.sold_date,historyDetail.make,historyDetail.model,historyDetail.year,historyDetail.transportation_charge,historyDetail.transportation,historyDetail.inventory_no,historyDetail.vin_no)}>Invoice</a>
+                          <a class="cta-btns invoice" href="JavaScript:void(0)" onClick={()=>redirecttoInvoice(historyDetail.car_id,historyDetail.seller_dealer_id,historyDetail.price,historyDetail.lot_fee,historyDetail.bill_of_sales_id,historyDetail.gatepass_id,historyDetail.sold_date,historyDetail.make,historyDetail.model,historyDetail.year,historyDetail.transportation_charge,historyDetail.transportation,historyDetail.inventory_no,historyDetail.vin_no,historyDetail.late_fee)}>Invoice</a>
                         </div>
                         <div class="cars-prices gatepass pt-1">
                         {historyDetail.gatepass_id===""?
@@ -573,6 +573,8 @@ const HistoryUpdate = (carId,transportationCharge,transportation,divContent,Head
                       <h4>Inspection <span>$ 0</span></h4>
                       <h4>Other Charges <span>$ 0</span></h4>
                       <h4>Miscellaneous Charges <span>$ 0</span></h4>
+                      {historyDetail.late_fee =="" || historyDetail.late_fee ==null ||  historyDetail.late_fee ==0 ? "":
+                      <h4>Late Fee <span>$ {Number(historyDetail.late_fee)}</span></h4>}
                       {/* <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p> */}
                       
                       <div className="col-lg-12 form-group transCbox customCheckbox hideContent p-0" id={`transporationDiv${historyDetail.car_id}`} >
@@ -606,7 +608,7 @@ const HistoryUpdate = (carId,transportationCharge,transportation,divContent,Head
                       {/* <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p> */}
                       
                       <div class="vehiclerighttotal">
-                      <h3>Total amount <span>$ {(Number(historyDetail.price)+  Number(historyDetail.lot_fee) || 0) + (Number(getFeeDetails(historyDetail.price))) + 0 +0+0+ (Number(historyDetail.transportation_charge || 0))}</span></h3>
+                      <h3>Total amount <span>$ {(Number(historyDetail.price)+  Number(historyDetail.lot_fee) || 0) + (Number(getFeeDetails(historyDetail.price))) + 0 +0+0+ (Number(historyDetail.transportation_charge || 0)) +  Number(historyDetail.late_fee)}</span></h3>
                         {/* <h3>Total amount <span>$ {(Number(historyDetail.price)+  Number(historyDetail.lot_fee) || 0) + (Number(getFeeDetails(historyDetail.price))) + 0 + (Number(300|| 0))}</span></h3> */}
                       </div>
                     </div>

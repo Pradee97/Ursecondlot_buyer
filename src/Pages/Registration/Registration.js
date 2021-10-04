@@ -62,7 +62,8 @@ const Registration = () => {
     const [stateAndCityError, setStateAndCityError] = useState("");
     const [myTimezone, SetMyTimezone] = useState([])
     const [timezoneActiveFlag, SetTimezoneActiveFlag] = useState(true)
-    const [myTimezoneValue, SetMyTimezoneValue] =  useState(36)
+    const [myTimezoneValue, SetMyTimezoneValue] =  useState(36);
+    const [optionPhone,setOptionPhone] = useState("");
 
     useEffect(()=>{
         API.post("timezone/condition")
@@ -251,7 +252,7 @@ const Registration = () => {
             meeting_date: UTC_updateDate, //date,
             meeting_time: UTC_updateTime, //time,
             active: 1,
-            country_id: "1",
+            country_id: optionPhone,
             state_id: stateName,
             city_id: cityName,
             zipcode_id: zipCodeId,
@@ -367,8 +368,9 @@ const Registration = () => {
                             </div>
                             <div className="col-sm-4 form-group countrycode">
                             <div className="tbox">
-                                <select className="form-control custom-select browser-default textbox"  id="drop" placeholder="" defaultValue="+1">
+                                <select className="form-control custom-select browser-default textbox"  id="drop" placeholder=""  onChange={(e) => setOptionPhone(e.target.value)}>
                                     <option value="+1">+1</option>
+                                    <option value="+91">+91</option>
                                 </select>
                                 <label  for="drop" className={"input-has-value"}>Country code</label>
                             </div>

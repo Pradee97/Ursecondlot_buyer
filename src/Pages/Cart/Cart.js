@@ -157,7 +157,7 @@ const billofsales =(request) => {
             console.log("mySelectedCarId~~~~~",mySelectedCarId)
             if(cartDetail?.length>0 && cartDetail.filter(item => (mySelectedCarId.includes(item.car_id)) ).length>0){
                 // console.log("mySelectedCarId.length====",cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id)) ).length)
-                return cartDetail.filter(item => (mySelectedCarId.includes(item.car_id))).reduce((acc, curr) => acc+((Number(curr.price) || 0)+Number(curr.lot_fee) +  Number(curr.transportation === 'yes' ? curr.transportation_charge : 0) + Number(getFeeDetails(curr.price))),0)
+                return cartDetail.filter(item => (mySelectedCarId.includes(item.car_id))).reduce((acc, curr) => acc+((Number(curr.price) || 0)+Number(curr.lot_fee) +  Number(curr.transportation === 'yes' ? curr.transportation_charge : 0) + Number(getFeeDetails(curr.price))+Number(curr.late_fee)),0)
             }
             else {
                 return 0
@@ -178,7 +178,7 @@ const billofsales =(request) => {
             if(cartDetail?.length>0 && cartDetail.filter(item => (mySelectedCarId.includes(item.car_id)) ).length>0){
                 // console.log("mySelectedCarId.length====",cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id)) ).length)
                 setMySelectedCarDetails(cartDetail.filter(item => (mySelectedCarId.includes(item.car_id))).map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id}}))
-                billofsales(cartDetail.filter(item => (mySelectedCarId.includes(item.car_id))).map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id,"make": data.make, "model": data.model, "image": data.image, "price": data.price,"transportation_charge":data.transportation_charge,"year":data.year,"lot_fee":data.lot_fee,"buyFee":getFeeDetails()}}))
+                billofsales(cartDetail.filter(item => (mySelectedCarId.includes(item.car_id))).map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id,"make": data.make, "model": data.model, "image": data.image, "price": data.price,"transportation_charge":data.transportation_charge,"year":data.year,"lot_fee":data.lot_fee,"late_fee":data.late_fee,"buyFee":getFeeDetails()}}))
             }
             else {
                 setMySelectedCarDetails([])
@@ -201,7 +201,7 @@ const billofsales =(request) => {
 
     const overAllTotal = () => {
         return cartDetail?.length>0 && cartDetail
-        .reduce((acc, curr) => acc+((Number(curr.price) || 0)+Number(curr.lot_fee) +  Number(curr.transportation === 'yes' ? curr.transportation_charge : 0) + Number(getFeeDetails(curr.price))),0) + 0 + 0
+        .reduce((acc, curr) => acc+((Number(curr.price) || 0)+Number(curr.lot_fee) +  Number(curr.transportation === 'yes' ? curr.transportation_charge : 0) + Number(getFeeDetails(curr.price))+ 0 + 0 + Number(curr.late_fee)),0) 
     }
 
     const isSelectedAllCar = () => {
@@ -318,7 +318,7 @@ const billofsales =(request) => {
                                 </div>
 
                                 <div class="vehicleimgright col-lg-8">
-                                <h3>{cartDetail.date?.substring(0,10)} {cartDetail.date?.substring(11,19)}</h3>
+                                <h3>{cartDetail.sold_date?.substring(0,10)} {cartDetail.sold_date?.substring(11,19)}</h3>
                                  {/* <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>HistoryEdit(`transporationDiv${cartDetail.car_id}`,`transporationHeader${cartDetail.car_id}`)}>{cartDetail.bill_of_sales_id !== null && cartDetail.bill_of_sales_id !== "" ? "": "Edit Transportation" }</a></p> */}
                                  <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>HistoryEdit(`transporationDiv${cartDetail.car_id}`,`transporationHeader${cartDetail.car_id}`)}> Edit Transportation</a></p>
 
@@ -328,6 +328,8 @@ const billofsales =(request) => {
                                     <h4>Buy Fee <span>$ {getFeeDetails(cartDetail.price)}</span></h4>
                                     <h4>Other Charges <span>$ 0</span></h4>
                                     <h4>Miscellaneous Charges <span>$ 0</span></h4>
+                                    {cartDetail.late_fee =="" || cartDetail.late_fee ==null ||  cartDetail.late_fee ==0 ? "":
+                                    <h4>Late Fee <span>$ {Number(cartDetail.late_fee)}</span></h4>}
                                     {/* <h4>Transportation Charges <span>$ {cartDetail.transportation === 'yes' ? cartDetail.transportation_charge : 0}</span></h4> */}
                                     {/* <div class="form-group input-group ">
                                     <input type="checkbox" id="" value={cartDetail.transportation == 'yes' ? 'no' : 'yes'}   checked={cartDetail.transportation== 'yes' ? true : false}/><label for="paytransportation">Transportation</label><span>$ {cartDetail.transportation === 'yes' ? cartDetail.transportation_charge : 0}</span>
@@ -363,7 +365,7 @@ const billofsales =(request) => {
 
 
                                     <div class="vehiclerighttotal">
-                                    <h3>Total amount <span>$ {(Number(cartDetail.price) || 0) + (Number(cartDetail.lot_fee)) +  Number(cartDetail.transportation === 'yes' ? cartDetail.transportation_charge : 0) + Number(getFeeDetails(cartDetail.price)) + 0 + 0}</span></h3>
+                                    <h3>Total amount <span>$ {(Number(cartDetail.price) || 0) + (Number(cartDetail.lot_fee)) +  Number(cartDetail.transportation === 'yes' ? cartDetail.transportation_charge : 0) + Number(getFeeDetails(cartDetail.price)) + 0 + 0 + Number(cartDetail.late_fee)}</span></h3>
                                         {/* <h3>Total amount <span>$ {(Number(cartDetail.price) || 0)+(Number(cartDetail.lot_fee)) +  Number(cartDetail.transportation === 'yes' ? 300 : 0) + Number(getFeeDetails(cartDetail.price)) + 0 + 0}</span></h3> */}
                                     </div>
                                 </div>
