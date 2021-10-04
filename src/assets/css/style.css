@@ -8584,12 +8584,11 @@ a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
 }
 
 .checkoutpage .models-box .ckreview{
-  position: fixed;
   z-index: 9999;
   width: 100%;
   background: #fff;
   bottom:0%;
   position: -webkit-sticky;
-  position: sticky;
+  position: sticky !important;
 }
 
