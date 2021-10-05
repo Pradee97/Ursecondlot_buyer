@@ -578,7 +578,7 @@ const HistoryUpdate = (carId,transportationCharge,transportation,divContent,Head
                       <h4 className="lateFee">Late Fee  <span> $ {Number(historyDetail.late_fee)}</span> <div class="tool_tip"><i class='bx bxs-info-circle '></i> <span class="tooltiptext tooltip-top"><div className="oops">
 									
                       <img src={oops}  alt=""/>
-                    <p>Ooops! Sorry, We have to add late fee becuase the payment is not made with in 4 days</p>
+                    Ooops! Sorry, We have to add late fee becuase the payment is not made with in 4 days
                     </div></span></div></h4>}
                       {/* <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p> */}
                       

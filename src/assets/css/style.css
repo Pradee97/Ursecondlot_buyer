@@ -8611,8 +8611,8 @@ a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
 
 .tool_tip .tooltiptext {
   visibility: hidden;
-  width: 120px;
-  background-color: black;
+  width: 320px;
+  background-color: #222;
   color: #fff;
   text-align: center;
   border-radius: 6px;
@@ -8621,9 +8621,22 @@ a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
   /* Position the tooltip */
   position: absolute;
   z-index: 1;
-  bottom: 25px;
-  left: 50%;
-  margin-left: -60px;
+  top: -30px;
+    right: 105%;
+    padding: 10px;
+}
+
+.tool_tip .tooltiptext p{
+  margin-bottom: 0;
+}
+.tool_tip .tooltiptext .oops img{
+  width: 60px;
+  float: right;
+  margin: 0;
+}
+
+.tool_tip .tooltiptext .oops{
+  text-align: left;
 }
 
 .tool_tip:hover .tooltiptext {
@@ -8631,13 +8644,13 @@ a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
 }
 .tooltip-top::after {
   content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #555 transparent transparent transparent;
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent #555;
 }
 
 .redText {
