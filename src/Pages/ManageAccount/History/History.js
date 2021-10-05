@@ -563,8 +563,8 @@ const HistoryUpdate = (carId,transportationCharge,transportation,divContent,Head
   
                   
                   <div class="col-lg-4 priceBlock">
-                    <p className="pdate">Purchased from <span>{historyDetail.dealer_type}</span></p>
-                    <p class="date ml-0">Purchased on {historyDetail.sold_date?.substring(0,10)} {historyDetail.sold_date?.substring(11,19)}</p>
+                    <p className="pdate">Purchased from <span className="redText">{historyDetail.dealer_type}</span></p>
+                    <p class="date ml-0">Purchased on <span className="redText">{historyDetail.sold_date?.substring(0,10)} {historyDetail.sold_date?.substring(11,19)}</span></p>
                     
                     <div class="vehicleimgright col-lg-12">
                       <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>HistoryEdit(`transporationDiv${historyDetail.car_id}`,`transporationHeader${historyDetail.car_id}`)}>{historyDetail.bill_of_sales_id !== null && historyDetail.bill_of_sales_id !== "" ? "": "Edit Transportation" }</a></p>
@@ -574,7 +574,7 @@ const HistoryUpdate = (carId,transportationCharge,transportation,divContent,Head
                       <h4>Other Charges <span>$ 0</span></h4>
                       <h4>Miscellaneous Charges <span>$ 0</span></h4>
                       {historyDetail.late_fee =="" || historyDetail.late_fee ==null ||  historyDetail.late_fee ==0 ? "":
-                      <h4>Late Fee <span>$ {Number(historyDetail.late_fee)}</span></h4>}
+                      <h4 className="lateFee">Late Fee  <span> $ {Number(historyDetail.late_fee)}</span> <div class="tool_tip"><i class='bx bxs-info-circle '></i> <span class="tooltiptext tooltip-top">Tooltip text</span></div></h4>}
                       {/* <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p> */}
                       
                       <div className="col-lg-12 form-group transCbox customCheckbox hideContent p-0" id={`transporationDiv${historyDetail.car_id}`} >
