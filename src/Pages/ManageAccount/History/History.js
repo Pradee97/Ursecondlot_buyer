@@ -14,6 +14,7 @@ import carcheck from '../../../assets/img/carcheck.png';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { NoEncryptionOutlined } from '@material-ui/icons';
+import oops from '../../../assets/img/oops.jpg';
 
 
 // import jsPdf from 'jspdf';
@@ -574,7 +575,11 @@ const HistoryUpdate = (carId,transportationCharge,transportation,divContent,Head
                       <h4>Other Charges <span>$ 0</span></h4>
                       <h4>Miscellaneous Charges <span>$ 0</span></h4>
                       {historyDetail.late_fee =="" || historyDetail.late_fee ==null ||  historyDetail.late_fee ==0 ? "":
-                      <h4 className="lateFee">Late Fee  <span> $ {Number(historyDetail.late_fee)}</span> <div class="tool_tip"><i class='bx bxs-info-circle '></i> <span class="tooltiptext tooltip-top">Tooltip text</span></div></h4>}
+                      <h4 className="lateFee">Late Fee  <span> $ {Number(historyDetail.late_fee)}</span> <div class="tool_tip"><i class='bx bxs-info-circle '></i> <span class="tooltiptext tooltip-top"><div className="oops">
+									
+                      <img src={oops}  alt=""/>
+                    <p>Ooops! Sorry, We have to add late fee becuase the payment is not made with in 4 days</p>
+                    </div></span></div></h4>}
                       {/* <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p> */}
                       
                       <div className="col-lg-12 form-group transCbox customCheckbox hideContent p-0" id={`transporationDiv${historyDetail.car_id}`} >
