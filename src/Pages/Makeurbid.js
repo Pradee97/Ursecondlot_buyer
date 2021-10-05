@@ -279,7 +279,7 @@ console.log("check props",props)
         if((Number(totalAmount)+Number(highBid))>creditLimit){
 
             console.log("check the total amount in if condition",totalAmount)
-            setCreditLimitError("you have reached your credit Limit")
+            setCreditLimitError("Your credit limit balance is" + " " + ((Number(creditLimit))-Number(totalAmount)) + " " + ". Please pay your car in the cart to release your credit or contact us")
             return;
 
         }

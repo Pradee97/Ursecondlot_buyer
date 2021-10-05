@@ -335,8 +335,8 @@ useEffect (()=>{
 		marginTop: "20px",
 		marginBottom: "20px",
 		fontOptions: "italic",
-		width: 2,
-		heigth:5
+		width: 1,
+		heigth: 4
 	  };
 
 	  
@@ -443,15 +443,16 @@ return(
 									<span  title="Copy" onClick={copytoclipboard} className="copyImg"><i class="icofont-copy"></i></span>
 									</CopyToClipboard>
 									
-									<img src={book} onClick={copytoclipboard} alt=""/> 
-									{/* <img src={barcode} value={App()}  alt=""/> */}
-									<div>
-									<Barcode value={"Vin: "+carDetail[0].engine +"\n Year: " +carDetail[0].year + "\n Make: " + carDetail[0].make + "\n model: " + carDetail[0].model} {...config} />
-
-									</div>
+									{/* <img src={book} onClick={copytoclipboard} alt=""/>  */}
+									<img src={barcode} alt=""/>
+									
 									
 									{/* <img ref={inputRef}  alt=""/> */}
 								</div>
+								<div>
+									<Barcode value={carDetail[0].engine} {...config} />
+
+									</div>
 								{/* {copied ? <p>Copied !</p> : ""} */}
 							</div>
 

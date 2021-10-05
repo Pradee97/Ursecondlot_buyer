@@ -143,7 +143,7 @@ function clear (){
              <div className="phone">
                <i className="icofont-phone"></i>
                <h4>Contact</h4>
-               <p>142-564-9147</p>
+               <p>+1(223)333-6666</p>
              </div>
 
              <div className="email">
