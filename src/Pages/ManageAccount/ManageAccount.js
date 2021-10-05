@@ -17,6 +17,7 @@ const ManageAccount = () => {
   const [addressDetails, setaddressDetails] = useState("");
   const [legaldetails, setLegalDetails] = useState("");
   const [loading,setloading]=useState("");
+  const [totalAmount,setTotalAmount] = useState("");
 
   async function fetchAccountDetails() {
     setloading(true);
@@ -69,10 +70,28 @@ const ManageAccount = () => {
     history.push("/addressedit/" + e);
   }
 
+  const getTotalAmount = () => {
+
+    let request = {
+
+        buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
+
+    };
+
+    API.post('getTotalAmount/condition', request).then(response => {
+        console.log("get total amount response", response.data.data)
+        setTotalAmount(response.data.data)
+        
+    })
+        .catch(err => { console.log(err); });
+}
+
+
   useEffect(() => {
     fetchAccountDetails();
     fetchLegalDetails();
     fetchAddressDetails();
+    getTotalAmount();
   }, []);
   
   return (
@@ -113,8 +132,17 @@ const ManageAccount = () => {
                             <td><span className="tdcol1">State</span><span>{item.state_name}</span></td>
                             <td><span className="tdcol1">Zip code</span><span>{item.zipcode}</span></td>
                           </tr>
-                         
+
+                          <tr>
+                            
+                            <td><span className="tdcol1">Credit Limit</span><span>{item.credit_limit}</span></td>
+                            <td><span className="tdcol1">Available Credit Limit</span><span>{Number(item.credit_limit) - Number(totalAmount)}</span></td>
+                          </tr>
+
                         </table>
+
+                        <p>( Please email us for increasing credit limit or Call us on - +1(223)333-6666 )</p>
+
                       </div>
                     </div>
                   ) : ""}
