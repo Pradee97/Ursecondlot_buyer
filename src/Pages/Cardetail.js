@@ -135,7 +135,7 @@ const getBuyItNowValue = (data) => {
 	setHighBid(highBid)
 }
 
-const setBuyItNowValue = ( buy_it_now,car_id,image,model,make,year,price,transportation,transportation_charge,lot_fee) => {
+const setBuyItNowValue = ( buy_it_now,car_id,image,model,make,year,price,transportation,transportation_charge,lot_fee,credit_limit) => {
 
 	setBuyItNowData({
 
@@ -148,7 +148,8 @@ const setBuyItNowValue = ( buy_it_now,car_id,image,model,make,year,price,transpo
 		price : price,
 		transportation : transportation,
 		transportationCharge : transportation_charge,
-		lotFee:lot_fee
+		lotFee:lot_fee,
+		creditLimit : credit_limit
 
 
 	})
@@ -540,7 +541,7 @@ return(
 
 							<div className="buyNowBlock">
 								{carDetail[0].buy_it_now=="" || carDetail[0].buy_it_now== null || carDetail[0].buy_it_now== undefined || carDetail[0].buy_it_now== 0 ?"":
-									<a class="car-btns-primary buyitBtn" onClick={()=>setBuyItNowValue(carDetail[0]. buy_it_now,carDetail[0].car_id,carDetail[0].image,carDetail[0].model,carDetail[0].make,carDetail[0].year,carDetail[0].price,carDetail[0].transportation,carDetail[0].transportation_charge,carDetail[0].lot_fee)}><i class="icofont-tag"></i> Buy it Now :<span> $ {carDetail[0].buy_it_now}</span></a>
+									<a class="car-btns-primary buyitBtn" onClick={()=>setBuyItNowValue(carDetail[0]. buy_it_now,carDetail[0].car_id,carDetail[0].image,carDetail[0].model,carDetail[0].make,carDetail[0].year,carDetail[0].price,carDetail[0].transportation,carDetail[0].transportation_charge,carDetail[0].lot_fee, carDetail[0].credit_limit)}><i class="icofont-tag"></i> Buy it Now :<span> $ {carDetail[0].buy_it_now}</span></a>
 								}
 						
 								{(carDetail[0].buyer_high_bid==carDetail[0].high_bid || carDetail[0].buyer_high_bid!==carDetail[0].high_bid) &&
@@ -658,7 +659,7 @@ return(
 
 				<p className="details buyitnow">
 					{moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined || moreCar.buy_it_now== 0?"":
-						<a className="cta-btns"onClick={()=>setBuyItNowValue(moreCar.buy_it_now,moreCar.car_id,moreCar.image,moreCar.model,moreCar.make,moreCar.year,moreCar.price,moreCar.transportation,moreCar.transportation_charge,moreCar.lot_fee)} >Buy It Now $ {moreCar.buy_it_now}</a>
+						<a className="cta-btns"onClick={()=>setBuyItNowValue(moreCar.buy_it_now,moreCar.car_id,moreCar.image,moreCar.model,moreCar.make,moreCar.year,moreCar.price,moreCar.transportation,moreCar.transportation_charge,moreCar.lot_fee,moreCar.credit_limit)} >Buy It Now $ {moreCar.buy_it_now}</a>
 					}
 				</p> 
 
@@ -732,7 +733,7 @@ return(
 									
 									<p className="details buyitnow">
                                                 {moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined || moreCar.buy_it_now== 0?"":
-                                                    <a className="cta-btns" onClick={()=>setBuyItNowValue(moreCar.buy_it_now,moreCar.car_id,moreCar.image,moreCar.model,moreCar.make,moreCar.year,moreCar.price,moreCar.transportation,moreCar.transportation_charge,moreCar.lot_fee)}>Buy It Now $ {moreCar.buy_it_now}</a>
+                                                    <a className="cta-btns" onClick={()=>setBuyItNowValue(moreCar.buy_it_now,moreCar.car_id,moreCar.image,moreCar.model,moreCar.make,moreCar.year,moreCar.price,moreCar.transportation,moreCar.transportation_charge,moreCar.lot_fee,moreCar.credit_limit)}>Buy It Now $ {moreCar.buy_it_now}</a>
                                                 }
                                                 </p> 
 
