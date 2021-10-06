@@ -426,6 +426,11 @@ return(
 								</div>
 								</div>
 								</div>
+
+							{carDetail[0].announcement=="" || carDetail[0].announcement==null || carDetail[0].announcement== undefined?
+							<p><span class="dealertaglines">Announcement -</span> No Message</p>:
+							<p><span class="dealertaglines">Announcement -</span> {carDetail[0].announcement}</p>
+							}
 							
 							{carDetail[0].dealer_message=="" || carDetail[0].dealer_message==null || carDetail[0].dealer_message== undefined?
 							<p><span class="dealertaglines">Message From The Dealer-</span> No Message</p>:
