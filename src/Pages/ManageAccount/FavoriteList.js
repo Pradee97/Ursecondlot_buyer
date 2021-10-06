@@ -989,10 +989,14 @@ useEffect(() => {
                         </div>
                     </div>
                   </div>
-                </div>  ):<div className="floor_notfiled_block"><p>No Data Found</p></div>}     
+                </div>  ):<div className="floor_notfiled_block"><p>No Data Found</p></div>}    
+
+				{carFavInventoryDetail.length >4 ? carFavInventoryDetail.slice(0,1)
+                                .map(() =>
 				<div class="col-md-12 text-center">
 					<a href="JavaScript:void(0)" onClick={FavoriteListViewMore} class="load-more-btn">Load More</a>
-				</div>                                      
+				</div> ):""}       
+
                   </div>
 				  </div>
 				  </div>

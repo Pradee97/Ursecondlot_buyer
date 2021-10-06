@@ -1145,9 +1145,12 @@ useEffect(() => {
                                         </div>
                                     </div>
                                 </div>):<div className="floor_notfiled_block"><p>No Data Found</p></div>}
+								{carDetail.length >4 ? carDetail.slice(0,1)
+                                .map(() =>
 								<div class="col-md-12 text-center">
 									<a href="JavaScript:void(0)" onClick={SearchViewMore} class="load-more-btn">Load More</a>
-								</div>
+								</div>):""}
+
                             </div>
 							</div></div>
                         </div>
