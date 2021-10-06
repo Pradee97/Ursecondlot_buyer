@@ -22,7 +22,8 @@ const BuyNow=(props)=>{
     const [carModel,setCarModel] = useState(props.setBuyItNowValue.model);
     const [carImage,setCarImage] = useState(props.setBuyItNowValue.image);
     const [carYear,setCarYear] = useState(props.setBuyItNowValue.year);
-    console.log("check the carMake in the buy it now page",carModel)
+    const [carCreditLimit,setCreditLimit] = useState(props.setBuyItNowValue.creditLimit);
+    console.log("check the CreditLimit in the buy it now page",carCreditLimit)
     // const { id } = useParams();
     const userDetails=ls.get('userDetails');
     const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
@@ -52,8 +53,11 @@ const BuyNow=(props)=>{
     const [toggleAcceptPopupOpen,setToggleAcceptPopupOpen]= useState(true);
     const [confirmationFlag, setConfirmationFlag] = useState(false);
     const email = JSON.parse(localStorage.getItem("userDetails")).email;
-
+    
+    const [totalAmount,setTotalAmount] = useState("");
     const [transportationEdit,setTransportationEdit] = useState(false);
+
+    const [creditLimitError,setCreditLimitError] = useState("");
 
     const toggleCommonPopup = () => {
       setIsCommonPopupOpen(!isCommonPopupOpen);
@@ -62,6 +66,29 @@ const BuyNow=(props)=>{
     const togglePopup = () => {
       setIsOpen(!isOpen);
     }
+
+
+    const getTotalAmount = () => {
+
+      let request = {
+
+          buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
+
+      };
+
+      API.post('getTotalAmount/condition', request).then(response => {
+          console.log("get total amount response", response.data.data)
+          setTotalAmount(response.data.data)
+          
+      })
+          .catch(err => { console.log(err); });
+  }
+
+  useEffect(() => {
+
+      getTotalAmount();
+
+  }, []);
 
 const handleBuyItNow=()=>{
 
@@ -84,6 +111,15 @@ const handleBuyItNow=()=>{
 //     setPasswordError("Password must have minimum of 8 characters with the combination of upper ,lower case letters , number and a special character")
 //     return;
 // }
+
+// if((Number(totalAmount)+Number(carBuyItNow))<(Number(carCreditLimit))){
+
+//   setCreditLimitError("Your credit limit balance is" + " " + ((Number(carCreditLimit))-Number(totalAmount)) + " " + ". Please pay your car in the cart to release your credit or contact us")
+//   return;
+
+// }
+
+setCreditLimitError("")
 
 if(!confirmationFlag){
 
@@ -110,7 +146,11 @@ if(!confirmationFlag){
 	console.log("Save Search Request : ",request);
   // return
 
+  if((Number(totalAmount)+Number(carBuyItNow))<(Number(carCreditLimit))){
+
   if( terms!=="0" ){
+
+    
    
 		API.post("carbuy/add", request).then(response=>{
 	
@@ -133,11 +173,18 @@ if(!confirmationFlag){
 }, (error) => {
  
 });
-}else{
-
-  if(terms==="0"){
-      setETerms("1");
   }
+  else{
+
+    if(terms==="0"){
+        setETerms("1");
+    }
+}
+}
+else{
+  console.log("check the total amount in if condition",totalAmount)
+  setCreditLimitError("Your credit limit balance is" + " " + ((Number(carCreditLimit))-Number(totalAmount)) + " " + ". Please pay your car in the cart to release your credit or contact us")
+  return;
 }
 }
 
@@ -386,6 +433,9 @@ const TransportationUpdate = (carId,transportationCharge,transportation,divConte
             </label>
             {eterms==="1" && terms==="0" ?
             <p className="form-input-error"> Agree the Terms And Conditions</p>:""}
+
+            <p className="form-input-error"> {creditLimitError}</p>
+
         </div>
 				<div class="text-center ckreview"><a  class="cta-btn cancel-btn" onClick={()=>{setConfirmationFlag(false); props.toggle()}}>Cancel</a> <button type="submit" class="cta-btn"   onClick={handleBuyItNow}>Confirm </button> </div>
 				
