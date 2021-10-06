@@ -338,8 +338,8 @@ useEffect (()=>{
 		marginTop: "20px",
 		marginBottom: "20px",
 		fontOptions: "italic",
-		width: 1,
-		heigth: 4
+		width: 2,
+		heigth: 5
 	  };
 
 	  
