@@ -73,6 +73,8 @@ const [buyItNowData, setBuyItNowData] = useState({});
 const [make,setMake] = useState("");
 const [model,setModel] = useState("");
 
+const [isShown, setIsShown] = useState(false);
+
 const Completionist = () => <span>{""}</span>;
 
 const renderer = ({minutes, seconds, completed }) => {
@@ -438,21 +440,24 @@ return(
 								<div class="carpoint">
 								
 									<img src={car}  alt=""/>
-									<span>{carDetail[0].engine}</span>
-									<CopyToClipboard text={carDetail[0].engine} onCopy={() => setCopied(true)}>
+									<span>{carDetail[0].vin_no}</span>
+									<CopyToClipboard text={carDetail[0].vin_no} onCopy={() => setCopied(true)}>
 									<span  title="Copy" onClick={copytoclipboard} className="copyImg"><i class="icofont-copy"></i></span>
 									</CopyToClipboard>
 									
 									{/* <img src={book} onClick={copytoclipboard} alt=""/>  */}
-									<img src={barcode} alt=""/>
+									<img src={barcode} alt=""  onMouseEnter={() => setIsShown(true)}  onMouseLeave={() => setIsShown(false)}/>
 									
 									
 									{/* <img ref={inputRef}  alt=""/> */}
 								</div>
-								<div>
-									<Barcode value={carDetail[0].engine} {...config} />
 
-									</div>
+								{isShown && (
+										<div>
+										<Barcode value={carDetail[0].vin_no} {...config} />
+										</div>
+									)}
+								
 								{/* {copied ? <p>Copied !</p> : ""} */}
 							</div>
 
