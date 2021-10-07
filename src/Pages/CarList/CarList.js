@@ -57,6 +57,38 @@ const CarList = () => {
 
     const Completionist = () => <span>{""}</span>;
 
+    useEffect(() => {
+
+        let intervalId;
+        intervalId = setInterval(() => {
+            getSuggestedCarList();
+            getrecentCarList();
+            getInventoryCarList();
+            getFavCarList();
+        }, 30000)
+        return () => clearInterval(intervalId);
+          
+        },[]);
+
+
+    useEffect(() => {
+        
+        getSuggestedCarList();
+        // getrecentCarList();
+        // getInventoryCarList();
+        // getFavCarList();
+
+    },[]);
+
+    
+    useEffect(() => {
+        getrecentCarList();
+        getFavCarList();
+        getInventoryCarList();
+        getSuggestedCarList();
+        
+    },[recentCarFlag, inventoryCarFlag, favCarFlag, highBid ]);
+
     const renderer = ({minutes, seconds, completed }) => {
     if (completed) {
         
@@ -109,12 +141,8 @@ const CarList = () => {
             savePolicy:save_policy,
             creditLimit:credit_limit,
             lotFee:lot_fee
-
 		})
-	
 		toggleMakeBid();
-		
-		
     }
     
     const setBuyItNowValue = (buy_it_now,car_id,image,model,make,year,price,transportation,transportation_charge,lot_fee,credit_limit) => {
@@ -131,12 +159,8 @@ const CarList = () => {
             transportationCharge:transportation_charge,
             lotFee:lot_fee,
             creditLimit : credit_limit
-
 		})
-	
 		toggleBuyItNow()
-		
-		
 	}
 
     // const togglePopup = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,comments,transportation,display,proxy_bid) => {
@@ -160,6 +184,7 @@ const CarList = () => {
     //     dispatch(CarDetailsAction.minBid(makebiddispatch))
     //     setIsOpen(!isOpen);
     // }
+
     const getSuggestedCarList=()=>{
         let request={
             buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
@@ -171,7 +196,7 @@ const CarList = () => {
             
             //if(results.length>0){
             setSuggestedCarDetail(res.data.data);
-            setHighBid(res.data.data.high_bid);
+            // setHighBid(res.data.data.high_bid);
 	        setCarId(res.data.data.car_id);
             setLoading(false);
             //}
@@ -190,7 +215,7 @@ const CarList = () => {
             
             //if(results.length>0){
             setCarDetail(res.data.data);
-            setHighBid(res.data.data.high_bid);
+            // setHighBid(res.data.data.high_bid);
 	        setCarId(res.data.data.car_id);
             setLoading(false);
             //}
@@ -207,7 +232,7 @@ const CarList = () => {
            
             //if(results.length>0){
                 setCarInventoryDetail(res.data.data);
-                setHighBid(res.data.data.high_bid);
+                // setHighBid(res.data.data.high_bid);
                 setCarId(res.data.data.car_id);
             setLoading(false);
             //}
@@ -232,7 +257,7 @@ const CarList = () => {
         
         API.post('BuyerFavoriteCarList/condition',request).then(res=>{
             setFavCarInventoryDetail(res.data.data);
-            setHighBid(res.data.data.high_bid);
+            // setHighBid(res.data.data.high_bid);
 	        setCarId(res.data.data.car_id);
             setLoading(false);
             //setFavCarFlag(!favCarFlag)
@@ -264,64 +289,19 @@ const CarList = () => {
         })
     }
 
-    useEffect(() => {
+    const filterLateFee =()=>{
 
-        let intervalId;
-        intervalId = setInterval(() => {
-            getSuggestedCarList();
-            getrecentCarList();
-            getInventoryCarList();
-            getFavCarList();
-        }, 30000)
-        return () => clearInterval(intervalId);
-          
-        },[]);
-
-    useEffect(() => {
-
-  
-        getSuggestedCarList();
-        getrecentCarList();
-        getInventoryCarList();
-        getFavCarList();
-	
-      
-    },[highBid]);
+        return suggestedCarDetail?.length>0 
+        ? suggestedCarDetail.filter((lateFee)=> 
+            {
     
-
-    useEffect(() => {
-        
-        getSuggestedCarList();
-        getrecentCarList();
-        getInventoryCarList();
-        getFavCarList();
-
-    },[]);
-
-    
-    useEffect(() => {
-        getrecentCarList();
-        getFavCarList();
-        getInventoryCarList();
-        getSuggestedCarList();
-        
-    },[recentCarFlag]);
-
-    
-    useEffect(() => {
-        getrecentCarList();
-        getInventoryCarList();
-        getFavCarList();
-        getSuggestedCarList();
-
-    },[inventoryCarFlag]);
-    useEffect(() => {
-        getrecentCarList();
-        getInventoryCarList();
-        getFavCarList();
-        getSuggestedCarList();
-
-    },[favCarFlag]);
+                if(suggestedCarDetail.late_fee>0){
+                    return true
+                }
+            }
+        )[0] || false
+        : false
+    }
 
     return (
        
@@ -347,7 +327,7 @@ const CarList = () => {
                                             {/* <img src={(item.isFavourite===0)? locked : lock} onClick={()=>(item.isFavourite===0)?addFavourite(item.car_id):removeFav(item.car_id)} /> */}
                                             <img src={(item.isFavourite===0)? lock : locked} onClick={()=>addRemoveFavourite(item.car_id,item.isFavourite,'recent')} />
                                         </div>
-                                        <img className="carImg" src={item.image}  onClick={()=>{redirectpage(item.car_id,item.seller_dealer_id)}}/>
+                                        <img className="carImg" src={item.image}  onClick={()=>{ redirectpage(item.car_id,item.seller_dealer_id)}}/>
                                         {item.isbestSale?
                                         <div className="cars-tag">
                                             <h4>{item.deal_name}</h4>
@@ -360,7 +340,7 @@ const CarList = () => {
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>   
                                                 <p className="details buyitnow">
                                                 {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined || item.buy_it_now== 0?"":
-                                                    <a className="cta-btns" onClick={()=>setBuyItNowValue(item.buy_it_now,item.car_id,item.image,item.model,item.make,item.year,item.price,item.transportation,item.transportation_charge,item.lot_fee,item.credit_limit)}>Buy It Now $ {item.buy_it_now}</a>
+                                                    <a className="cta-btns"  onClick={()=>!filterLateFee() && setBuyItNowValue(item.buy_it_now,item.car_id,item.image,item.model,item.make,item.year,item.price,item.transportation,item.transportation_charge,item.lot_fee,item.credit_limit)}>Buy It Now $ {item.buy_it_now}</a>
                                                 }
                                                 </p>
                                             </div>

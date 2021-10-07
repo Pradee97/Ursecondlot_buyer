@@ -42,10 +42,13 @@ const countDetails = () =>{
 
   API.post("countDetails/condition", request).then(response=>{
 
+    if(response.success ) {
       console.log("count details check the value", response.data.data)
       
       setMyBids(response.data.data.mybids_count)
       setCart(response.data.data.cart_count)
+    }
+    
       
   });
 }
