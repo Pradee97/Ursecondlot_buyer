@@ -9,7 +9,7 @@ import API from "../../Services/BaseService";
 import { useState } from 'react';
 import { useEffect } from 'react';
 import Loading from "../../Component/Loading/Loading";
-
+import printJS from 'print-js'
     
 const InVoice = (props) => {
     const history = useHistory();
@@ -104,7 +104,15 @@ const InVoice = (props) => {
                 )[0]?.fee || 0
             : 0
       }
-      
+      const printPage = () => {
+        console.log("print")
+        printJS({
+          printable:'invoice',
+          type: 'html',
+          targetStyles: ['*'],
+          header: 'InVoice'
+        })
+      }
     return(
         <div> 
             {loading ? <Loading/> :
@@ -282,7 +290,9 @@ const InVoice = (props) => {
    <div class="col-md-12 text-center paybtns">
    <a class={`cta-btns-primary ${(billOfSales !== null && billOfSales !== ""  ) && "greenBtn"}`} onClick={()=>{(billOfSales == null ||billOfSales == ""  )&& redirecttoCart()}} > {billOfSales !== null && billOfSales !== "" ? "paid": "pay" } </a> 
    {/* <a class={`cta-btns-primary ${(billOfSales !== null && billOfSales !== ""  ) && "redBtn"}`} onClick={()=>{(billOfSales == null ||billOfSales == ""  )&& redirecttoCart()}} > {billOfSales !== null && billOfSales !== "" ? "print": "" } </a>  */} 
-  
+   <div class="col-lg-12 invoiceBlock">
+   <button type ="button" onClick= {printPage}>Print</button>
+   </div>
    </div>
    <section id="playstoreBlock" class="playstoreBlock">
      <div class="container">

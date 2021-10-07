@@ -8160,13 +8160,13 @@ ul#progressbar li p{
 }
 
 .vehicleimgleft img.carImg {
-  height: 180px;
+  height: 250px;
   max-width: 100%;
   object-fit: cover;
 }
 
 .models-box .vehicleimgleft img.carImg {
-  height: 150px;
+  height: 200px;
   max-width: 100%;
   object-fit: cover;
 }
@@ -8523,12 +8523,16 @@ a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
   background: #008d0e;
   border: #008d0e solid 1px;
   border-radius: 3px;
-  padding: 10px 30px;;
+  padding: 30px;
   font-weight: 500;
   margin-right: 0 !important;
   font-size: 16px;
   cursor: pointer;
   float: left;
+}
+
+.buyNowBlock .cars-buy-btns-primary{
+  padding: 30px;
 }
 
 .buyNowBlock .car-btns-primary.buyitBtn span{
@@ -8545,7 +8549,7 @@ a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
 }
 .buyNowBlock .makeBidBtn{
   float: right;
-  margin-top: 10px;
+  padding: 30px 0;
 }
 
 .autoCheck img{
@@ -8656,4 +8660,19 @@ a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
 .redText {
   color: #bd062c !important;
 }
+.barCodeIcon:hover{
+  cursor: pointer;
+}
 
+
+.barCodeDiv{
+    float: left;
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: -30px;
+}
+
+.favoritePage .models-box {
+  max-width: 800px;
+}

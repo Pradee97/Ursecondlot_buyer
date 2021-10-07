@@ -579,7 +579,7 @@ useEffect(() => {
   return (
       <div>
         {loading?<Loading/>:
-        <main id="main" class="inner-page">
+        <main id="main" class="inner-page favoritePage">
         {/* <div class="back-btn">
                         <a class="back-btn-primary" href="/carlist"><i class="bx bx-chevron-left"></i> Back</a>
             </div> */}

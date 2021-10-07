@@ -356,7 +356,7 @@ return(
 
 	        <div class="row">
 			{carDetail.length>0 && 
-					<div className={(carDetail[0].buyer_high_bid=="" || carDetail[0].buyer_high_bid==null || carDetail[0].buyer_high_bid==undefined) && (carDetail[0].high_bid=="" || carDetail[0].high_bid==null || carDetail[0].high_bid==undefined)?"col-md-6":"col-md-5"}> 
+					<div className={(carDetail[0].buyer_high_bid=="" || carDetail[0].buyer_high_bid==null || carDetail[0].buyer_high_bid==undefined) && (carDetail[0].high_bid=="" || carDetail[0].high_bid==null || carDetail[0].high_bid==undefined)?"col-md-5":"col-md-5"}> 
 
 					<div class="vehicle-detail-banner banner-content clearfix">
 						<div class="banner-slider">
@@ -400,7 +400,7 @@ return(
 				</div>}
 				{ carDetail.length >0 && 
 			
-					<div className={(carDetail[0].buyer_high_bid=="" || carDetail[0].buyer_high_bid==null || carDetail[0].buyer_high_bid==undefined) && (carDetail[0].high_bid=="" || carDetail[0].high_bid==null || carDetail[0].high_bid==undefined)?"col-md-6":"col-md-4"}>
+					<div className={(carDetail[0].buyer_high_bid=="" || carDetail[0].buyer_high_bid==null || carDetail[0].buyer_high_bid==undefined) && (carDetail[0].high_bid=="" || carDetail[0].high_bid==null || carDetail[0].high_bid==undefined)?"col-md-4":"col-md-4"}>
 	        		<div class="product-dtl">
         				<div class="product-info">
 		        			<div class="product-name">{carDetail[0].year} {carDetail[0].make} {carDetail[0].model}  </div>
@@ -452,14 +452,14 @@ return(
 									</CopyToClipboard>
 									
 									{/* <img src={book} onClick={copytoclipboard} alt=""/>  */}
-									<img src={barcode} alt=""  onMouseEnter={() => setIsShown(true)}  onMouseLeave={() => setIsShown(false)}/>
+									<span className="barCodeIcon"><img src={barcode} alt=""  onMouseEnter={() => setIsShown(true)}  onMouseLeave={() => setIsShown(false)}/> </span>
 									
 									
 									{/* <img ref={inputRef}  alt=""/> */}
 								</div>
 
 								{isShown && (
-										<div>
+										<div class="barCodeDiv">
 										<Barcode value={carDetail[0].vin_no} {...config} />
 										</div>
 									)}

@@ -14,6 +14,19 @@
         padding:5px 10px !important;
         margin-right: 10px !important;
     }
+    .buyNowBlock .car-btns-primary.buyitBtn{
+        width: 100%;
+    }
+    .buyNowBlock .makeBidBtn{
+        width: 100%;
+        display: block;
+        padding: 0;
+    }
+    .buyNowBlock .cars-buy-btns-primary {
+        width: 100%;
+        display: block;
+        text-align: center;
+    }
 }
 
 @media (max-width: 1600px) {
