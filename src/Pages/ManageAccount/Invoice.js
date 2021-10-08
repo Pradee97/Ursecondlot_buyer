@@ -290,9 +290,9 @@ const InVoice = (props) => {
    <div class="col-md-12 text-center paybtns">
    <a class={`cta-btns-primary ${(billOfSales !== null && billOfSales !== ""  ) && "greenBtn"}`} onClick={()=>{(billOfSales == null ||billOfSales == ""  )&& redirecttoCart()}} > {billOfSales !== null && billOfSales !== "" ? "paid": "pay" } </a> 
    {/* <a class={`cta-btns-primary ${(billOfSales !== null && billOfSales !== ""  ) && "redBtn"}`} onClick={()=>{(billOfSales == null ||billOfSales == ""  )&& redirecttoCart()}} > {billOfSales !== null && billOfSales !== "" ? "print": "" } </a>  */} 
-   <div class="col-lg-12 invoiceBlock">
-   <button type ="button" onClick= {printPage}>Print</button>
-   </div>
+  
+   <button  className="printBtn"  type ="button" onClick= {printPage}>Print</button>
+  
    </div>
    <section id="playstoreBlock" class="playstoreBlock">
      <div class="container">

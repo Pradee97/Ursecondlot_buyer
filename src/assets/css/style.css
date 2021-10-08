@@ -8676,3 +8676,14 @@ a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
 .favoritePage .models-box {
   max-width: 800px;
 }
+
+.dateFormat{
+  background:url("../img/dateFormat.jpg") no-repeat left -3px;
+  background-size: 100%;
+}
+
+.printBtn{
+  padding: 10px 20px;
+  border-radius: 3px;
+  margin-left: 10px;
+}
