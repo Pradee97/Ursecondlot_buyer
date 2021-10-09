@@ -800,7 +800,7 @@ const togglePrint = () => {
                                         </tr>
                                         </thead>
 
-                                        
+                                
                                         <tr>
                                         <td>{historyDetail.bill_of_sales_id}</td>
                                         <td>{historyDetail.year}</td>
@@ -816,17 +816,12 @@ const togglePrint = () => {
                                   </div>
                                     </div>
 
-                    </div> 
+                                    </div> 
 
-                            <div>
-                            {/* <button  onClick={()=>{ PrintData(historyDetail)}}>Generate pdf</button> */}
-                            
-                             
-                          </div>
-
-                            
-                                                </div>
-                  </div>
+                                            <div>
+                                    </div>
+                                    </div>
+                                                      </div>
                 </div>
               </div>})
                     :""}       
