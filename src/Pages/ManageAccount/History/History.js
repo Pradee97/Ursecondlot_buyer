@@ -22,7 +22,7 @@ import {CopyToClipboard} from 'react-copy-to-clipboard';
 import printJS from 'print-js'
 
 
-import ComponentToPrint from '../../../Pages/ManageAccount/History/Print';
+
 import Popup from '../../../Component/Popup/Popup';
 
 
@@ -835,14 +835,14 @@ const togglePrint = () => {
       </div>
   
      
-      {isOpen && <Popup
+      {/* {isOpen && <Popup
                             isClose={false}
                             content={<>
                                 <ComponentToPrint toggle={togglePrint} CarId= {carId} BillOfSale= {billOfSales} Year= {year} Make= {make} Model ={model} vinNo= {VINNumber} InvNo= {inventoryNo} GatePass= {gatePass} TitleStatus= {titleStatus}  />
                                 
                             </>}
                             handleClose={togglePrint}
-                        />}
+                        />} */}
 
      
       <section id="playstoreBlock" class="playstoreBlock">
