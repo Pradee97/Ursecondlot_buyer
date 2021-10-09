@@ -1,4 +1,4 @@
-import React , {  useState, useEffect } from 'react';
+import React , {  useState, useEffect, useref } from 'react';
 import { useHistory} from "react-router-dom";
 import ls from 'local-storage';
 import API from "../../../Services/BaseService";
@@ -15,11 +15,19 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { NoEncryptionOutlined } from '@material-ui/icons';
 import oops from '../../../assets/img/oops.jpg';
+import Barcode from "react-hooks-barcode";
+import barcode from '../../../assets/img/barcode.svg';
+import car from '../../../assets/img/car.svg';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import printJS from 'print-js'
 
 
-// import jsPdf from 'jspdf';
-// import 'jspdf-autotable';
-// 
+
+import Popup from '../../../Component/Popup/Popup';
+
+
+
+
 
 
  const History = () => {
@@ -48,6 +56,25 @@ import oops from '../../../assets/img/oops.jpg';
   let [loadValue,setLoadValue] = useState(0);
   let [loadValueSearch,setLoadValueSearch] = useState(0);
   let [loadValueOrder,setLoadValueOrder] = useState(0);
+  const [copied, setCopied] = useState(false);
+  const [isShown, setIsShown] = useState(false);
+  const [copySuccess, setCopySuccess] = useState('');
+  const [carId, setCarId] = useState({});
+  const [inventoryNo, setInventoryNo] = useState({});
+  const [gatePass, setGatePass] = useState({});
+  const [titleStatus, setTitleStatus] = useState({});
+  const [billOfSales, setbillOfSales] = useState({});
+ 
+
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [mySelectedCarId, setMySelectedCarId] = useState([]);
+  const [selectAllCar, setSelectAllCar] = useState(false);
+  const [mySelectedCarDetails, setMySelectedCarDetails] = useState([]);
+
+ 
+  let paySeparately={};
+
 
   const redirecttoInspection=(pathid)=>{
     //   history.push("/Inspection/"+pathid);
@@ -244,6 +271,42 @@ const getFeeDetails = (maxPrice) =>{
           )[0]?.fee || 0
       : 0
 }
+const selectedCarIdList = (data) => {
+        
+  let newdata=mySelectedCarId || []
+  // newdata.includes(data) ? newdata = newdata.filter(item => item !== data) :newdata.push(data)
+  // setMySelectedCarId(newdata)
+  if(newdata.includes(data)){
+      newdata = newdata.filter(item => item !== data)
+      setMySelectedCarId(newdata|| [])
+  }
+  else{
+      // newdata.push(data)             
+      newdata=[...newdata,data]
+      setMySelectedCarId(newdata)
+  }
+  // console.log("newdata====",newdata)
+  // console.log("mySelectedCarId====",mySelectedCarId)
+  setHistoryDetail(historyDetail.map(value=>{
+      if(value.car_id == data)
+      {
+          console.log("====value.isChecked====",value.isChecked)
+          value.isChecked = ! value.isChecked
+      }
+      return value
+  } 
+
+  ))
+}
+
+
+function copytoclipboard(e) {
+
+  document.execCommand('copy');
+ 
+  e.target.focus();
+  setCopySuccess('Copied!');
+};
 
 const HistoryUpdate = (carId,transportationCharge,transportation,divContent,HeaderContent) =>{
 
@@ -307,54 +370,97 @@ const HistoryUpdate = (carId,transportationCharge,transportation,divContent,Head
       // setCarTransportation()
     }
 
-//    const pdfGenerator = () => {
-//       var doc = new jsPdf('P', 'pt');
-//       const columns2= [
-     
-//     {
-//       title: 'Year',
-//       dataKey: 'year',
-//     },
-//     {
-//       title: 'Make',
-//       dataKey: 'make',
-//     },
-//     {
-//       title: 'Model',
-//       dataKey: 'model',
-//     },
-//     {
-//       title: 'Vin Number',
-//       dataKey: 'vin_no',
-//     },
-//     {
-//       title: 'Inventory Number',
-//       dataKey: 'inv_no',
-//     },
-    
 
-//   ];
-//   const rows = historyDetail.map((historyDetail) => {
-//     var obj = {
-//       Make: historyDetail.make,
-//       Model: historyDetail.model,
-//       Year: historyDetail.year,
-//       VinNumber: historyDetail.vin_no,
-//       inventory_no: historyDetail.inv_no
-
-
-//   }
-//   return obj;
   
-//   })
-//   doc.autoTable(columns2,rows, {
-//     theme: 'grid',
-//     styles: {
-//       fontSize: 12
-//     },
-//     startY: 250,
-//   });
-// }
+
+const togglePrint = () => {
+  setIsOpen(!isOpen);
+  }
+  
+  const PrintData = (historyDetail) =>{
+  
+   
+      setCarId(historyDetail.car_id);
+      setbillOfSales(historyDetail.bill_of_sales_id);
+      setYear(historyDetail.year);
+      setMake(historyDetail.make);
+      setModel(historyDetail.model);
+      setVINNumber(historyDetail.vin_no);
+      setTitleStatus(historyDetail.title_status_name);
+      setInventoryNo(historyDetail.inventory_no);
+      setGatePass(historyDetail.gatepass_id);
+
+
+       
+    
+    togglePrint();
+  }
+      const config = {
+        background: "#f5f5f5",
+        displayValue: false,
+        marginTop: "20px",
+        marginBottom: "20px",
+        fontOptions: "italic",
+        width: 2,
+        heigth: 5
+        };
+
+        const printPage = () => {
+          console.log("print")
+          printJS({
+            printable: 'Printpage',
+            type: 'html',
+            targetStyles: ['*'],
+            header: 'Car Details'
+          })
+          console.log("reviewAndCheckout=====")
+          if(mySelectedCarId.length>0) {
+              console.log("mySelectedCarId~~~~~",mySelectedCarId)
+              if(historyDetail?.length>0 && historyDetail.filter(item => (mySelectedCarId.includes(item.car_id)) ).length>0){
+                  // console.log("mySelectedCarId.length====",historyDetail.filter(item => !(mySelectedCarId.includes(item.car_id)) ).length)
+                  setMySelectedCarDetails(historyDetail.filter(item => (mySelectedCarId.includes(item.car_id))).map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id}}))
+                  // billofsales(historyDetail.filter(item => (mySelectedCarId.includes(item.car_id))).map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id,"make": data.make, "model": data.model, "image": data.image, "price": data.price,"transportation_charge":data.transportation_charge,"year":data.year,"lot_fee":data.lot_fee,"late_fee":data.late_fee,"buyFee":getFeeDetails()}}))
+              }
+              else {
+                  setMySelectedCarDetails([])
+                  // billofsales([])
+              }
+          }
+          else {
+              setMySelectedCarDetails([])
+              // billofsales([])
+
+              // setMySelectedCarDetails(historyDetail?.length>0 ? historyDetail.map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id}}):[])
+              // billofsales(historyDetail?.length>0 ? historyDetail.map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id,"make": data.make, "model": data.model, "image": data.image, "price": data.price,"transportation_charge":data.transportation_charge,"year":data.year,"lot_fee":data.lot_fee,"buyFee":getFeeDetails()}}):[])
+          // return historyDetail?.length>0 && historyDetail
+          // .reduce((acc, curr) => acc+((Number(curr.max_price) || 0) +  Number(curr.transportation === 'yes' ? curr.transportation_charge : 0) + Number(getFeeDetails(curr.max_price))),0)
+          }
+      }
+      // const selectPayment=(data)=> {
+      //     console.log("selectPayment----",data)
+      //     setPaymentMode(data)
+      // }
+  
+      // const overAllTotal = () => {
+      //     return historyDetail?.length>0 && historyDetail
+      //     .reduce((acc, curr) => acc+((Number(curr.price) || 0)+Number(curr.lot_fee) +  Number(curr.transportation === 'yes' ? curr.transportation_charge : 0) + Number(getFeeDetails(curr.price))+ 0 + 0 + Number(curr.late_fee)),0) 
+      // }
+  
+      const isSelectedAllCar = () => {
+          if(selectAllCar) //while chnage funtion is triggering state is not updated so using reverse logic 
+          {
+              setMySelectedCarId([])
+              setHistoryDetail(historyDetail.map(data=> {return {...data, isChecked: false}}))
+          }else{
+              setMySelectedCarId(historyDetail.map(data=>data.car_id))
+              setHistoryDetail(historyDetail.map(data=> {return {...data, isChecked: true}}))
+          }
+  
+          setSelectAllCar(!selectAllCar)
+      
+        }
+
+        
 
     return (
       <div>
@@ -450,11 +556,22 @@ const HistoryUpdate = (carId,transportationCharge,transportation,divContent,Head
                     </div>
 
                     </div>
-                  <button >Download</button>
+                    {/* <button  className="printBtn"  type ="button" onClick= {printPage}>Download</button> */}
                   
                   <div class="hisHead">
                     <p>{noCars} Vehicles Purchased</p>
-                    
+                    <div class="row">				
+                            <div class="vehiclepaycheckbox col-lg-12 mt-4">
+                                <div class="form-group input-group pb-0 mb-0 pull-right cbox">
+                                    <input 
+                                        type="checkbox" 
+                                        id="selectAll" 
+                                        checked= {selectAllCar}
+                                        onChange={(e)=>{isSelectedAllCar()}}/><label for="selectAll">Select All / Unselect All to download for all cars</label>
+                                </div>
+                            </div>
+                        </div>
+
                     <div class="sortBy">
                         <div class="col-sm-12 form-group mr-0 pr-0">  
                           <div class="tbox">			
@@ -476,7 +593,8 @@ const HistoryUpdate = (carId,transportationCharge,transportation,divContent,Head
                   
                   
             {historyDetail?.length>0? historyDetail.sort((b,a)=>b.historyDetail?.sold_date-a.historyDetail?.sold_date)
-            .map((historyDetail) =>   {
+            .map((historyDetail,index) =>{
+                        paySeparately={[index] : 'no'} 
               // setCarTransportation(historyDetail.transportation)
               return <div class="lotfee-inner col-lg-12">
                 <div class="row">							
@@ -492,8 +610,10 @@ const HistoryUpdate = (carId,transportationCharge,transportation,divContent,Head
                         <div class="cars-tag">
                         <h4>{historyDetail.deal_name}</h4>
                         </div>
+                        
                         <div class="cars-content">		
                         <h3><a href="#"> {historyDetail.year} {historyDetail.make} {historyDetail.model}</a></h3>
+                      
                         <div class="d-flex align-items-center mb-3">
                           <p class="details"><img src={speedometer}  alt=""/><span>{historyDetail.miles} m</span></p>
                           &nbsp;&nbsp;&nbsp;&nbsp;
@@ -503,7 +623,35 @@ const HistoryUpdate = (carId,transportationCharge,transportation,divContent,Head
                         
                         
                         <div class="cars-prices invoice_link p-0">
-                          <div className="vinnoBlock"><p class="vinno" href="JavaScript:void(0)" >Vin no - <span>{historyDetail.vin_no}</span></p></div>
+                          {/* <div className="vinnoBlock"><p class="vinno" href="JavaScript:void(0)" >Vin no - <span>{historyDetail.vin_no}</span></p></div> */}
+                          <div class="row" id = "Vin">
+						
+	        				<div class="col-md-12 carpoints">
+								<div className="label">VIN Number</div>		  
+								<div class="carpoint">
+								
+									<img src={car}  alt=""/>
+									<span>{historyDetail.vin_no}</span>
+									<CopyToClipboard text={historyDetail.vin_no} onCopy={() => setCopied(true)} >
+									<span  title="Copy" onClick={copytoclipboard} className="copyImg"><i class="icofont-copy"></i></span>
+									</CopyToClipboard>
+									
+									{/* <img src={book} onClick={copytoclipboard} alt=""/>  */}
+									<span className="barCodeIcon"><img src={barcode} alt=""  onMouseEnter={() => setIsShown(true)}  onMouseLeave={() => setIsShown(false)}/> </span>
+									
+									
+									{/* <img ComponentToPrint={inputRef}  alt=""/> */}
+								</div>
+
+								{isShown && (
+										<div class="barCodeDiv">
+										<Barcode value={historyDetail.vin_no} {...config} />
+										</div>
+									)}
+								
+								{/* {copied ? <p>Copied !</p> : ""} */}
+							</div>
+              </div>
                           <a class="cta-btns" href="JavaScript:void(0)" onClick={()=>redirecttoInspection(historyDetail.car_id)}>Inspection</a>
                           <span className="autoCheck"><img src={carcheck} alt=""/></span>
                           <a class="cta-btns invoice" href="JavaScript:void(0)" onClick={()=>redirecttoInvoice(historyDetail.car_id,historyDetail.seller_dealer_id,historyDetail.price,historyDetail.lot_fee,historyDetail.bill_of_sales_id,historyDetail.gatepass_id,historyDetail.sold_date,historyDetail.make,historyDetail.model,historyDetail.year,historyDetail.transportation_charge,historyDetail.transportation,historyDetail.inventory_no,historyDetail.vin_no,historyDetail.late_fee)}>Invoice</a>
@@ -521,6 +669,19 @@ const HistoryUpdate = (carId,transportationCharge,transportation,divContent,Head
                   <div class="col-lg-5 sliderBlock">
                     <p>Inventory Number - <span>{historyDetail.inventory_no}</span></p>
                     
+                    <div class="form-group input-group pb-0 mb-0 pull-right cbox">
+                                        {/* <input className={"paySeparately"+index}  value={paySeparately[index]=='no'? "yes":"no"} type="checkbox" id={"vehiclepayseparat"+index} checked = {paySeparately[index] =='yes'?true:false} onChange={(e)=>{paySeparately[index]='yes'}}/><label for={"vehiclepayseparat"+index}>You Want To Pay Separately{paySeparately[index]}</label> */}
+                                        <input 
+                                        className={"paySeparately"+index}  
+                                        value={index} 
+                                        type="checkbox" 
+                                        id={"vehiclepayseparat"+index} 
+                                        checked= {historyDetail.isChecked}
+                                        onChange={(e)=>{selectedCarIdList(historyDetail.car_id)}}/><label for={"vehiclepayseparat"+index}>Select to download</label>
+
+                                    </div>
+
+
                     <h3>Vehicle Title</h3>
                     
                     <form id="msform">
@@ -619,8 +780,48 @@ const HistoryUpdate = (carId,transportationCharge,transportation,divContent,Head
                     </div>
                     <div class="col-md-12 text-center paybtns">
                     <a class={`cta-btns-primary ${(historyDetail.bill_of_sales_id !== null && historyDetail.bill_of_sales_id !== ""  ) && "greenBtn"}`} onClick={()=>{(historyDetail.bill_of_sales_id == null || historyDetail.bill_of_sales_id == ""  )&& redirecttoCart()}}  >{historyDetail.bill_of_sales_id !== null && historyDetail.bill_of_sales_id !== "" ? "paid": "pay" }  </a>   
-                    </div>
-                  </div>
+                     <div> 
+                    <button  className="printBtn"  type ="button" onClick= {printPage}>Print</button>
+                    <div class = " hideContent" >
+                    <div id = "Printpage" style ={{"border-collapse": "collapse"}}>
+                      
+
+                            <table   >
+                                    <thead>
+                                      <tr>
+                                        <th>Bill of sale </th>
+                                        <th>Year</th>
+                                        <th>Make</th>
+                                        <th>Model</th>
+                                        <th>Vin No</th>
+                                        <th>Gate Pass code</th>
+                                        <th>Inventory NO</th>
+                                        <th>Title status</th>
+                                        </tr>
+                                        </thead>
+
+                                
+                                        <tr>
+                                        <td>{historyDetail.bill_of_sales_id}</td>
+                                        <td>{historyDetail.year}</td>
+                                        <td>{historyDetail.make}</td>
+                                        <td>{historyDetail.model}</td>
+                                        <td>{historyDetail.vin_no}</td>
+                                        <td>{historyDetail.gatepass_id}</td>
+                                        <td>{historyDetail.inventory_no}</td>
+                                        <td>{historyDetail.title_status_name}</td>
+                                      </tr>
+                                    
+                                  </table>
+                                  </div>
+                                    </div>
+
+                                    </div> 
+
+                                            <div>
+                                    </div>
+                                    </div>
+                                                      </div>
                 </div>
               </div>})
                     :""}       
@@ -634,7 +835,15 @@ const HistoryUpdate = (carId,transportationCharge,transportation,divContent,Head
       </div>
   
      
-  
+      {/* {isOpen && <Popup
+                            isClose={false}
+                            content={<>
+                                <ComponentToPrint toggle={togglePrint} CarId= {carId} BillOfSale= {billOfSales} Year= {year} Make= {make} Model ={model} vinNo= {VINNumber} InvNo= {inventoryNo} GatePass= {gatePass} TitleStatus= {titleStatus}  />
+                                
+                            </>}
+                            handleClose={togglePrint}
+                        />} */}
+
      
       <section id="playstoreBlock" class="playstoreBlock">
         <div class="container">
