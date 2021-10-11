@@ -781,7 +781,7 @@ const togglePrint = () => {
                     <div class="col-md-12 text-center paybtns">
                     <a class={`cta-btns-primary ${(historyDetail.bill_of_sales_id !== null && historyDetail.bill_of_sales_id !== ""  ) && "greenBtn"}`} onClick={()=>{(historyDetail.bill_of_sales_id == null || historyDetail.bill_of_sales_id == ""  )&& redirecttoCart()}}  >{historyDetail.bill_of_sales_id !== null && historyDetail.bill_of_sales_id !== "" ? "paid": "pay" }  </a>   
                      <div> 
-                    <button  className="printBtn"  type ="button" onClick= {printPage}>Print</button>
+                    <button  className="printBtn"  type ="button" onClick= {() => printPage()}>Print</button>
                     <div class = " hideContent" >
                     <div id = "Printpage" style ={{"border-collapse": "collapse"}}>
                       
