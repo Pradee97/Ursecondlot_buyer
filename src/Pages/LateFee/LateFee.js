@@ -48,8 +48,12 @@ const LateFee = (props) => {
 
     return (
 
+        <div id="makeyourbid" class="makeyourbid"><div class="container"><div class="makeyourbidblock col-lg-12">
         <div class="section-title">
+           
           <h2>Alert</h2> 
+          <i class="icofont-warning"></i>
+          </div>
           <div>
           {lateFee.length>0?lateFee.slice(0,1).map((lateFee)=>
             <div>
@@ -75,6 +79,9 @@ const LateFee = (props) => {
             
             </div> 
             </div>        
+      
+        </div>
+        </div>
         </div>
 
         

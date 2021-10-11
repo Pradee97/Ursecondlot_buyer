@@ -8744,3 +8744,13 @@ a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
 .datel{
   color: #000;
 }
+
+.buy-it-disable-btn{
+  cursor: inherit;
+  pointer-events: none;
+  opacity: 0.5;
+}
+.icofont-warning{
+  font-size: 50px;
+  color: #FFCC00;
+}
