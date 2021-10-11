@@ -727,7 +727,7 @@ const togglePrint = () => {
                   
                   <div class="col-lg-4 priceBlock">
                     <p className="pdate">Purchased from <span className="redText">{historyDetail.dealer_type}</span></p>
-                    <p class="date ml-0">Purchased on <span className="redText dateFormat">{historyDetail.sold_date?.substring(0,10)} {historyDetail.sold_date?.substring(11,19)}</span></p>
+                    <p class="date ml-0"><span className="datelabel">Purchased on <i className="dateFormat">(MM/DD/YYYY)</i></span>  <span className="redText">{historyDetail.sold_date?.substring(0,10)} {historyDetail.sold_date?.substring(11,19)}</span></p>
                     
                     <div class="vehicleimgright col-lg-12">
                       <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>HistoryEdit(`transporationDiv${historyDetail.car_id}`,`transporationHeader${historyDetail.car_id}`)}>{historyDetail.bill_of_sales_id !== null && historyDetail.bill_of_sales_id !== "" ? "": "Edit Transportation" }</a></p>

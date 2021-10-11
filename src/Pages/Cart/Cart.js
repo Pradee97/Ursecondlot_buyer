@@ -318,7 +318,7 @@ const billofsales =(request) => {
                                 </div>
 
                                 <div class="vehicleimgright col-lg-8">
-                                <h3>{cartDetail.sold_date?.substring(0,10)} {cartDetail.sold_date?.substring(11,19)}</h3>
+                                <h3><i className="dateFormat">(MM/DD/YYYY)</i>{cartDetail.sold_date?.substring(0,10)} {cartDetail.sold_date?.substring(11,19)}</h3>
                                  {/* <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>HistoryEdit(`transporationDiv${cartDetail.car_id}`,`transporationHeader${cartDetail.car_id}`)}>{cartDetail.bill_of_sales_id !== null && cartDetail.bill_of_sales_id !== "" ? "": "Edit Transportation" }</a></p> */}
                                  <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>HistoryEdit(`transporationDiv${cartDetail.car_id}`,`transporationHeader${cartDetail.car_id}`)}> Edit Transportation</a></p>
 

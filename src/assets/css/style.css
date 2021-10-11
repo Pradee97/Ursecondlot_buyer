@@ -8680,10 +8680,6 @@ a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
   max-width: 800px;
 }
 
-.dateFormat{
-  background:url("../img/dateFormat.jpg") no-repeat left -3px;
-  background-size: 100%;
-}
 
 .printBtn{
   padding: 10px 20px;
@@ -8726,4 +8722,25 @@ a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
 }
 .tophead .customCheckbox label{
  font-size: 14px;
+}
+.dateFormat{
+  font-size: 10px;
+    margin-top: 0px;
+    display: block;
+    color: #999;
+}
+
+.datelabel{
+  width: 50%;
+  float: left;
+  color: #000;
+}
+
+.datelabel_1{
+  font-size: 10px;
+    margin-top: 0px;
+    color: #999;
+}
+.datel{
+  color: #000;
 }
