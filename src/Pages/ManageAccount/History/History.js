@@ -781,7 +781,7 @@ const togglePrint = () => {
                     <div class="col-md-12 text-center paybtns">
                     <a class={`cta-btns-primary ${(historyDetail.bill_of_sales_id !== null && historyDetail.bill_of_sales_id !== ""  ) && "greenBtn"}`} onClick={()=>{(historyDetail.bill_of_sales_id == null || historyDetail.bill_of_sales_id == ""  )&& redirecttoCart()}}  >{historyDetail.bill_of_sales_id !== null && historyDetail.bill_of_sales_id !== "" ? "paid": "pay" }  </a>   
                      <div> 
-                    <button  className="printBtn"  type ="button" onClick= {printPage}>Print</button>
+                    <button  className="printBtn"  type ="button" onClick= {() => printPage()}>Print</button>
                     <div class = " hideContent" >
                     <div id = "Printpage" style ={{"border-collapse": "collapse"}}>
                       
@@ -789,27 +789,31 @@ const togglePrint = () => {
                             <table   >
                                     <thead>
                                       <tr>
-                                        <th>Bill of sale </th>
                                         <th>Year</th>
                                         <th>Make</th>
                                         <th>Model</th>
                                         <th>Vin No</th>
-                                        <th>Gate Pass code</th>
                                         <th>Inventory NO</th>
+                                        <th>Bill of sale </th>
+                                        <th>Gate Pass code</th>
                                         <th>Title status</th>
+                                        <th>Total Amount</th>
                                         </tr>
                                         </thead>
 
                                 
                                         <tr>
-                                        <td>{historyDetail.bill_of_sales_id}</td>
                                         <td>{historyDetail.year}</td>
                                         <td>{historyDetail.make}</td>
                                         <td>{historyDetail.model}</td>
                                         <td>{historyDetail.vin_no}</td>
-                                        <td>{historyDetail.gatepass_id}</td>
                                         <td>{historyDetail.inventory_no}</td>
+                                        <td>{historyDetail.bill_of_sales_id}</td>
+                                        <td>{historyDetail.gatepass_id}</td>
                                         <td>{historyDetail.title_status_name}</td>
+                                        <td>{(Number(historyDetail.price)+  Number(historyDetail.lot_fee) || 0) + (Number(getFeeDetails(historyDetail.price))) + 0 +0+0+ (Number(historyDetail.transportation_charge || 0)) +  Number(historyDetail.late_fee)}</td>
+
+
                                       </tr>
                                     
                                   </table>
