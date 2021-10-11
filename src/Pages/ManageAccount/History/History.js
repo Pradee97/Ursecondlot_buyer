@@ -396,13 +396,13 @@ const togglePrint = () => {
     togglePrint();
   }
       const config = {
-        background: "#f5f5f5",
+        background: "#fff",
         displayValue: false,
-        marginTop: "20px",
-        marginBottom: "20px",
+        marginTop: "10px",
+        marginBottom: "10px",
         fontOptions: "italic",
-        width: 2,
-        heigth: 5
+        width: 1,
+        heigth: 3
         };
 
         const printPage = () => {
@@ -667,9 +667,10 @@ const togglePrint = () => {
                     
                   </div>
                   <div class="col-lg-5 sliderBlock">
+                    <div className="tophead">
                     <p>Inventory Number - <span>{historyDetail.inventory_no}</span></p>
                     
-                    <div class="form-group input-group pb-0 mb-0 pull-right cbox">
+                    <div class="customCheckbox cbox">
                                         {/* <input className={"paySeparately"+index}  value={paySeparately[index]=='no'? "yes":"no"} type="checkbox" id={"vehiclepayseparat"+index} checked = {paySeparately[index] =='yes'?true:false} onChange={(e)=>{paySeparately[index]='yes'}}/><label for={"vehiclepayseparat"+index}>You Want To Pay Separately{paySeparately[index]}</label> */}
                                         <input 
                                         className={"paySeparately"+index}  
@@ -680,7 +681,7 @@ const togglePrint = () => {
                                         onChange={(e)=>{selectedCarIdList(historyDetail.car_id)}}/><label for={"vehiclepayseparat"+index}>Select to download</label>
 
                                     </div>
-
+                                    </div>
 
                     <h3>Vehicle Title</h3>
                     
@@ -780,8 +781,10 @@ const togglePrint = () => {
                     </div>
                     <div class="col-md-12 text-center paybtns">
                     <a class={`cta-btns-primary ${(historyDetail.bill_of_sales_id !== null && historyDetail.bill_of_sales_id !== ""  ) && "greenBtn"}`} onClick={()=>{(historyDetail.bill_of_sales_id == null || historyDetail.bill_of_sales_id == ""  )&& redirecttoCart()}}  >{historyDetail.bill_of_sales_id !== null && historyDetail.bill_of_sales_id !== "" ? "paid": "pay" }  </a>   
-                     <div> 
+                    
                     <button  className="printBtn"  type ="button" onClick= {() => printPage()}>Print</button>
+                     <div> 
+                   
                     <div class = " hideContent" >
                     <div id = "Printpage" style ={{"border-collapse": "collapse"}}>
                       
@@ -789,15 +792,15 @@ const togglePrint = () => {
                             <table   >
                                     <thead>
                                       <tr>
-                                        <th>Year</th>
-                                        <th>Make</th>
-                                        <th>Model</th>
-                                        <th>Vin No</th>
-                                        <th>Inventory NO</th>
-                                        <th>Gate Pass code</th>
-                                        <th>Bill of sale </th>
-                                        <th>Title status</th>
-                                        <th>Total Amount</th>
+                                        <td><b>Year</b> </td>
+                                        <td><b>Make </b></td>
+                                        <td><b>Model </b></td>
+                                        <td><b>Vin No </b></td>
+                                        <td><b>Inventory NO</b> </td>
+                                        <td><b>Gate Pass code </b></td>
+                                        <td><b>Bill of sale  </b></td>
+                                        <td><b>Title status</b> </td>
+                                        <td><b>Total Amount</b> </td>
 
                                         </tr>
                                         </thead>
