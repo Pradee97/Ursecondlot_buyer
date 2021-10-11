@@ -144,8 +144,8 @@ const InVoice = (props) => {
        <div class="headtable">
            <table>			 
              <tr>
-               <td><span>Bill of sale # </span>{billOfSales}</td>
-               <td colSpan="2" class="alignRight"><span className="autoWidth pr-1">Date: </span>{Date?.substring(0,10)}</td>
+               <td colSpan="2"><span>Bill of sale # </span>{billOfSales}</td>
+               <td  class=""><span className="autoWidth pr-1 datel">Date<i className="datelabel_1">(MM/DD/YYYY):</i></span><span class="redText">{Date?.substring(0,10)}</span></td>
              </tr>
              <tr>
                <td>

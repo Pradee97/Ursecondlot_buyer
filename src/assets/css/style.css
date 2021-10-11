@@ -8316,10 +8316,10 @@ ul#progressbar li p{
 }
 
 .historyPage .lotfee-inner .car-item .cars-prices.gatepass .cta-btns-primary{
-  background-color: #bd062c;
-  color: #fff;
+  background-color: #fff;
+  color: #bd062c;
   border: 1px solid #bd062c;
-  cursor: default;
+  cursor: inherit;
 }
 
 .transCbox label{
@@ -8419,7 +8419,10 @@ top: 2px;
 }
 
 .paybtns .cta-btns-primary.greenBtn{
-  background: #008d0e;
+  background: #fff;
+  color: #008d0e !important;
+  border: #008d0e solid 1px;
+  cursor: inherit;
 }
 
 .vehiclepaycheckbox .productName{
@@ -8677,13 +8680,67 @@ a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
   max-width: 800px;
 }
 
-.dateFormat{
-  background:url("../img/dateFormat.jpg") no-repeat left -3px;
-  background-size: 100%;
-}
 
 .printBtn{
   padding: 10px 20px;
   border-radius: 3px;
   margin-left: 10px;
+}
+
+
+#Vin .carpoint{
+	display:inline;
+	border: 1px solid #444;
+	background: #E1E1E1;
+	padding:10px;
+	border-radius:5px;
+  clear: both;
+    float: left;
+    text-align: left;
+    font-size: 14px;
+	
+}
+#Vin .carpoint span{
+	color:#bd062c;
+}
+#Vin .carpoint img{
+	margin:0 5px;
+  width: 18px;
+}
+
+.barCodeDiv svg{
+  width: 100%;
+}
+
+.tophead p{
+  float: left;
+  width: auto;
+}
+
+.tophead .customCheckbox {
+  float: right;
+}
+.tophead .customCheckbox label{
+ font-size: 14px;
+}
+.dateFormat{
+  font-size: 10px;
+    margin-top: 0px;
+    display: block;
+    color: #999;
+}
+
+.datelabel{
+  width: 50%;
+  float: left;
+  color: #000;
+}
+
+.datelabel_1{
+  font-size: 10px;
+    margin-top: 0px;
+    color: #999;
+}
+.datel{
+  color: #000;
 }
