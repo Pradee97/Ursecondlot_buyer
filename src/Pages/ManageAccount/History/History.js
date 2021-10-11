@@ -794,10 +794,11 @@ const togglePrint = () => {
                                         <th>Model</th>
                                         <th>Vin No</th>
                                         <th>Inventory NO</th>
-                                        <th>Bill of sale </th>
                                         <th>Gate Pass code</th>
+                                        <th>Bill of sale </th>
                                         <th>Title status</th>
                                         <th>Total Amount</th>
+
                                         </tr>
                                         </thead>
 
@@ -812,8 +813,6 @@ const togglePrint = () => {
                                         <td>{historyDetail.gatepass_id}</td>
                                         <td>{historyDetail.title_status_name}</td>
                                         <td>{(Number(historyDetail.price)+  Number(historyDetail.lot_fee) || 0) + (Number(getFeeDetails(historyDetail.price))) + 0 +0+0+ (Number(historyDetail.transportation_charge || 0)) +  Number(historyDetail.late_fee)}</td>
-
-
                                       </tr>
                                     
                                   </table>
