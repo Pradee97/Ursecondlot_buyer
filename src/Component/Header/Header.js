@@ -34,29 +34,29 @@ const Header = () => {
 // }
 
 
-// const countDetails = () =>{
+const countDetails = () =>{
 
-//   let request = {
-//       buyer_dealer_id :userDetails?.buyer_dealer_id,
-//   }
+  let request = {
+      buyer_dealer_id :userDetails?.buyer_dealer_id,
+  }
 
-//   API.post("countDetails/condition", request).then(response=>{
+  API.post("countDetails/condition", request).then(response=>{
 
-//       console.log("count details check the value", response.data.data)
+      console.log("count details check the value", response.data.data)
       
-//       setMyBids(response.data.data.mybids_count)
-//       setCart(response.data.data.cart_count)
+      setMyBids(response.data.data.mybids_count)
+      setCart(response.data.data.cart_count)
       
-//   });
-// }
+  });
+}
 
-// useEffect (() =>{
+useEffect (() =>{
   
-//       countDetails();
+      countDetails();
       
 
   
-// }, []);
+}, []);
   
 //   async function fetchMyBids() {
 //     let request = {
