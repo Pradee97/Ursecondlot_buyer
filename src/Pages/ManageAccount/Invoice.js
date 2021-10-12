@@ -107,7 +107,7 @@ const InVoice = (props) => {
       const printPage = () => {
         console.log("print")
         printJS({
-          printable:'invoice',
+          printable:'Print',
           type: 'html',
           targetStyles: ['*'],
           header: 'InVoice'
