@@ -12,8 +12,11 @@ import PhoneInput from 'react-phone-number-input/input';
 import FileBase64 from 'react-file-base64';
 import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../../../Component/Loading/Loading';
+import Popup from '../../../Component/Popup/Popup';
+import LateFee from '../../../Pages/LateFee/LateFee';
 
 const EditMyProfile = () => {
+
     const history = useHistory();
     let { register, updateMyProfile, formState: { errors },reset  } = useForm();
     const { id } = useParams();
@@ -48,6 +51,13 @@ const EditMyProfile = () => {
     const buyer_id=JSON.parse(loggedInBuyerId).buyer_id;
     const buyer_dealer_id=JSON.parse(loggedInBuyerId).buyer_dealer_id;
     const [loading,setLoading] = useState(true);
+
+    const [isLateFee, setIsLateFee] = useState(false);
+    const [lateFeeValue, setLateFeeValue] = useState(0);
+
+	const toggleLateFee = () => {
+		setIsLateFee(!isLateFee);
+  	}
 
     const togglePopup = () => {
         setIsOpen(!isOpen);
@@ -225,12 +235,39 @@ const EditMyProfile = () => {
         })
             .catch(err => { console.log(err); });
     }, [reset,buyer_id,buyer_dealer_id]);
+
     function handleOnChange(value) {
         setPrimaryPhone(value);
      }
+
      function handleOnChanges(value) {
         setMobilephone(value);
      }
+
+     const getlateFee=()=>{
+        let request={
+            buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+        }
+        
+        API.post('getlatefee/condition',request).then(res=>{
+           if(res.data.data.length){
+            
+       console.log("check +++++ ", res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" )
+            const lateFeeValueStatus=res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" 
+            setIsLateFee(lateFeeValueStatus==="yes")
+            setLateFeeValue(res.data.data.filter(value=>value.late_fee>0)[0]?.late_fee || 0)
+           }
+          
+    
+        }).catch(err=>{console.log(err);});
+    }
+
+    useEffect(() => {
+
+        getlateFee();
+
+    }, []);
+
     return (
         <div>
         {loading?<Loading/>:
@@ -390,6 +427,15 @@ const EditMyProfile = () => {
                     popupActionValue= {popupActionValue}
                     popupActionPath={popupActionPath}
                 />}
+
+{isLateFee && <Popup
+          isClose={false}
+          content={<>
+            <LateFee toggle={toggleLateFee} />
+          </>}
+          handleClose={toggleLateFee}
+        />} 
+
             </main>
 }
         </div>
