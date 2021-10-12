@@ -226,7 +226,6 @@ const ChangePassword = () => {
                         </div>
                     </div>
                 </section>
-                
                 {isOpen && 
                 <CommonPopup 
                     handleClose= {togglePopup}
