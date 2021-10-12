@@ -21,7 +21,7 @@ import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import checkImg from '../../assets/img/check.svg';
 import errorImg from '../../assets/img/erroricon.png';
 import CancelBid from './CancelBid';
-
+import LateFee from '../../Pages/LateFee/LateFee';
 
 const MyBids = () => {
 
@@ -41,6 +41,13 @@ const MyBids = () => {
     const [toggleAcceptPopupOpen,setToggleAcceptPopupOpen]= useState(true);
 
     const [cancelBidOpen,setCancelBidOpen] = useState(false);
+
+    const [isLateFee, setIsLateFee] = useState(false);
+    const [lateFeeValue, setLateFeeValue] = useState(0);
+
+	const toggleLateFee = () => {
+		setIsLateFee(!isLateFee);
+    }
 
     const togglePopup = () => {
 		setIsOpen(!isOpen);
@@ -229,6 +236,29 @@ const MyBids = () => {
         
     }
    
+    const getlateFee=()=>{
+        let request={
+            buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+        }
+        
+        API.post('getlatefee/condition',request).then(res=>{
+           if(res.data.data.length){
+            
+       console.log("check +++++ ", res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" )
+            const lateFeeValueStatus=res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" 
+            setIsLateFee(lateFeeValueStatus==="yes")
+            setLateFeeValue(res.data.data.filter(value=>value.late_fee>0)[0]?.late_fee || 0)
+           }
+          
+    
+        }).catch(err=>{console.log(err);});
+    }
+    
+    useEffect(() => {
+    
+        getlateFee()
+    
+    },[]);
 
     return (
         <main id="main" class="inner-page myBidsPage">
@@ -306,9 +336,9 @@ const MyBids = () => {
                                     <div class="col-lg-2 mybidscontroldetails">
                                     {(bidsObj.isbuyercounterbid=="me" && bidsObj.iscounterbid!==null && (bidsObj.time !==0 || bidsObj.time!==null)) || ((bidsObj.iscounterbid==null || bidsObj.iscounterbid=="no" ) && (bidsObj.isbuyercounterbid==null || bidsObj.isbuyercounterbid=="not")&&(bidsObj.time ==0 || bidsObj.time==null))?
                                         <div class="mybidscontrol">
-                                            <a class="cta-btns-primary redBtn" onClick={() => setMakeBitValue(bidsObj.high_bid, bidsObj.min_price, bidsObj.save_purchase, bidsObj.car_id, bidsObj.time, bidsObj.counter_buyer_dealer_id, bidsObj.max_price, bidsObj.buy_it_now, bidsObj.comments, bidsObj.transportation, bidsObj.display, bidsObj.proxy_bid, bidsObj.transportation_charge, bidsObj.save_policy,bidsObj.credit_limit,bidsObj.lot_fee)}>Raise Bid</a>
+                                            <a className={`${lateFeeValue > 0 && 'buy-it-disable-btn'} cta-btns-primary redBtn`}  href="JavaScript:void(0)" onClick={() => setMakeBitValue(bidsObj.high_bid, bidsObj.min_price, bidsObj.save_purchase, bidsObj.car_id, bidsObj.time, bidsObj.counter_buyer_dealer_id, bidsObj.max_price, bidsObj.buy_it_now, bidsObj.comments, bidsObj.transportation, bidsObj.display, bidsObj.proxy_bid, bidsObj.transportation_charge, bidsObj.save_policy,bidsObj.credit_limit,bidsObj.lot_fee)}>Raise Bid</a>
                                             {bidsObj.buy_it_now !==""?
-                                            <a class="cta-btns greenBtn" onClick={()=>setBuyItNowValue(bidsObj.buy_it_now,bidsObj.car_id,bidsObj.image,bidsObj.model,bidsObj.make,bidsObj.year,bidsObj.price,bidsObj.transportation,bidsObj.transportation_charge,bidsObj.lot_fee,bidsObj.credit_limit)} >Accept Bid</a>:""}
+                                            <a className={`${lateFeeValue > 0 && 'buy-it-disable-btn'} cta-btns greenBtn`} href="JavaScript:void(0)" onClick={()=>setBuyItNowValue(bidsObj.buy_it_now,bidsObj.car_id,bidsObj.image,bidsObj.model,bidsObj.make,bidsObj.year,bidsObj.price,bidsObj.transportation,bidsObj.transportation_charge,bidsObj.lot_fee,bidsObj.credit_limit)} >Accept Bid</a>:""}
                                             {(bidsObj.cancel_bid_time!==null && bidsObj.cancel_bid_time!==0 && bidsObj.cancel_bid_time < 400) ?
 									 
                                      (<div>
@@ -391,7 +421,13 @@ const MyBids = () => {
                 handleClose={toggleCancelBid}
             />}
 
-
+            {isLateFee && <Popup
+                isClose={false}
+                content={<>
+                    <LateFee toggle={toggleLateFee} />
+                </>}
+                handleClose={toggleLateFee}
+            />}  
 
         </main>
     )

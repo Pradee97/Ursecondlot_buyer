@@ -15,6 +15,7 @@ import Makeurbid from './Makeurbid';
 import CarDetailsAction from './CarDetails/CarDetailsAction';
 import BuyItNow from '../Pages/BuyItNow/BuyItNow';
 import Countdown from "react-countdown";
+import LateFee from '../Pages/LateFee/LateFee';
 
 const MoreCarFromSeller = () =>{
 
@@ -34,6 +35,13 @@ const MoreCarFromSeller = () =>{
   const [highBid,setHighBid] = useState(null);
   const [makeBitData, setMakeBitData] = useState({});
   const [buyItNowData, setBuyItNowData] = useState({});
+
+  const [isLateFee, setIsLateFee] = useState(false);
+  const [lateFeeValue, setLateFeeValue] = useState(0);
+
+  const toggleLateFee = () => {
+    setIsLateFee(!isLateFee);
+  }
 
   const Completionist = () => <span>{""}</span>;
 
@@ -245,6 +253,30 @@ useEffect(() => {
   getMoreCarFromSeller();
  
 },[moreCarFlag]);
+
+const getlateFee=()=>{
+	let request={
+		buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+	}
+	
+	API.post('getlatefee/condition',request).then(res=>{
+	   if(res.data.data.length){
+		
+   console.log("check +++++ ", res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" )
+		const lateFeeValueStatus=res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" 
+		setIsLateFee(lateFeeValueStatus==="yes")
+		setLateFeeValue(res.data.data.filter(value=>value.late_fee>0)[0]?.late_fee || 0)
+	   }
+	  
+
+	}).catch(err=>{console.log(err);});
+}
+
+useEffect(() => {
+
+	getlateFee()
+
+},[]);
     
 return(
     <div>
@@ -295,7 +327,7 @@ return(
 									
 									<p className="details buyitnow">
                                                 {moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined || moreCar.buy_it_now== 0?"":
-                                                    <a className="cta-btns" onClick={()=>setBuyItNowValue(moreCar.buy_it_now,moreCar.car_id,moreCar.image,moreCar.model,moreCar.make,moreCar.year,moreCar.price,moreCar.transportation,moreCar.transportation_charge,moreCar.lot_fee,moreCar.credit_limit)}>Buy It Now $ {moreCar.buy_it_now}</a>
+                                                    <a className={`${lateFeeValue > 0 && 'buy-it-disable-btn'} cta-btns`} href="JavaScript:void(0)" onClick={()=>lateFeeValue === 0 && setBuyItNowValue(moreCar.buy_it_now,moreCar.car_id,moreCar.image,moreCar.model,moreCar.make,moreCar.year,moreCar.price,moreCar.transportation,moreCar.transportation_charge,moreCar.lot_fee,moreCar.credit_limit)}>Buy It Now $ {moreCar.buy_it_now}</a>
                                                 }
                                                 </p> 
 
@@ -319,7 +351,7 @@ return(
 					} */}
 
           {(moreCar.isbuyercounterbid=="me" && moreCar.iscounterbid!==null && (moreCar.time !==0 || moreCar.time!==null)) || ((moreCar.iscounterbid==null || moreCar.iscounterbid=="no" ) && (moreCar.isbuyercounterbid==null || moreCar.isbuyercounterbid=="not")&&(moreCar.time ==0 || moreCar.time==null))?
-          <a className="cta-btns-primary" href="JavaScript:void(0)" onClick={()=>setMakeBitValue(moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now,moreCar.comments,moreCar.transportation,moreCar.display,moreCar.proxy_bid,moreCar.transportation_charge,moreCar.save_policy,moreCar.credit_limit,moreCar.lot_fee)} >Make Bid</a>
+          <a className={`${lateFeeValue > 0 && 'buy-it-disable-btn'} cta-btns-primary`}  href="JavaScript:void(0)" onClick={()=>lateFeeValue === 0 && setMakeBitValue(moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now,moreCar.comments,moreCar.transportation,moreCar.display,moreCar.proxy_bid,moreCar.transportation_charge,moreCar.save_policy,moreCar.credit_limit,moreCar.lot_fee)} >Make Bid</a>
           :<a class="cta-btns lockedcarBtn">Locked up for Higher Bid </a>}
 
           {(moreCar.buyer_high_bid==moreCar.high_bid || moreCar.buyer_high_bid!==moreCar.high_bid) &&       
@@ -369,6 +401,14 @@ return(
 						</>}
 						handleClose={toggleBuyItNow}
 					/>}
+
+      {isLateFee && <Popup
+          isClose={false}
+          content={<>
+            <LateFee toggle={toggleLateFee} />
+          </>}
+          handleClose={toggleLateFee}
+      />} 
 
   </main>
 }

@@ -4,6 +4,8 @@ import API from "../Services/BaseService";
 import appstore from '../assets/img/appstore.png';
 import googleplay from '../assets/img/googleplay.png';
 import Loading from"../Component/Loading/Loading";
+import Popup from '../Component/Popup/Popup';
+import LateFee from '../Pages/LateFee/LateFee';
 
 const Transport = () => {
 
@@ -49,6 +51,13 @@ const Transport = () => {
 	const [loadValuePickup,setLoadValuePickup] = useState(10);
 	const [loadValueTransit,setLoadValueTransit] = useState(10);
 	const [loadValueDelivered,setLoadValueDelivered] = useState(10);
+
+	const [isLateFee, setIsLateFee] = useState(false);
+  	const [lateFeeValue, setLateFeeValue] = useState(0);
+
+	const toggleLateFee = () => {
+		setIsLateFee(!isLateFee);
+    }
 
 	const pickupCall = ()=>{Pickup()}
 	const Pickup = () =>{
@@ -142,8 +151,29 @@ const Transport = () => {
         });
 	}
 
+	const getlateFee=()=>{
+		let request={
+			buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+		}
+		
+		API.post('getlatefee/condition',request).then(res=>{
+		   if(res.data.data.length){
+			
+	   console.log("check +++++ ", res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" )
+			const lateFeeValueStatus=res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" 
+			setIsLateFee(lateFeeValueStatus==="yes")
+			setLateFeeValue(res.data.data.filter(value=>value.late_fee>0)[0]?.late_fee || 0)
+		   }
+		  
+	
+		}).catch(err=>{console.log(err);});
+	}
+
 	useEffect (() =>{
-        Pickup()
+
+		getlateFee();
+        Pickup();
+		
     }, []);
 
 return (
@@ -418,6 +448,13 @@ return (
     </section>
 
    
+	{isLateFee && <Popup
+                isClose={false}
+                content={<>
+                    <LateFee toggle={toggleLateFee} />
+                </>}
+                handleClose={toggleLateFee}
+            />}
 
  
 
