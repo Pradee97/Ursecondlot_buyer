@@ -10,10 +10,12 @@ import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import FileBase64 from 'react-file-base64';
 import { Button, Upload } from 'antd';
 import Loading from "../../Component/Loading/Loading";
+import LateFee from '../../Pages/LateFee/LateFee';
 
 const { Dragger } = Upload;
 
 const Document = () => {
+
     const history = useHistory();
     const [isOpen, setIsOpen] = useState(false);
     let userDetails = ls.get('userDetails');
@@ -34,7 +36,16 @@ const Document = () => {
     const [popupType, setPopupType] = useState("");
     const [popupActionType, setPopupActionType] = useState("");
     const [popupActionValue, setPopupActionValue] = useState("");
-    const [popupActionPath, setPopupActionPath] = useState("")
+    const [popupActionPath, setPopupActionPath] = useState("");
+
+    const [isLateFee, setIsLateFee] = useState(false);
+    const [lateFeeValue, setLateFeeValue] = useState(0);
+
+	const toggleLateFee = () => {
+		setIsLateFee(!isLateFee);
+  	}
+
+
     const togglePopup = () => {
         setIsOpen(!isOpen);
     }
@@ -84,7 +95,10 @@ const Document = () => {
     }
 
     useEffect(() => {
+
         getDocuments();
+        getlateFee();
+
     }, []);
 
 
@@ -261,6 +275,24 @@ const Document = () => {
             }
         })
     }
+
+    const getlateFee=()=>{
+		let request={
+		  buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+		}
+		
+		API.post('getlatefee/condition',request).then(res=>{
+		   if(res.data.data.length){
+		  
+		 console.log("check +++++ ", res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" )
+		  const lateFeeValueStatus=res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" 
+		  setIsLateFee(lateFeeValueStatus==="yes")
+		  setLateFeeValue(res.data.data.filter(value=>value.late_fee>0)[0]?.late_fee || 0)
+		   }
+		  
+	  
+		}).catch(err=>{console.log(err);});
+	  }
 
     return (
         <div>
@@ -591,6 +623,16 @@ const Document = () => {
                         popupActionPath={popupActionPath}
                         Confirmation={deleteingFile}
                     />}
+
+
+{isLateFee && <Popup
+          isClose={false}
+          content={<>
+            <LateFee toggle={toggleLateFee} />
+          </>}
+          handleClose={toggleLateFee}
+        />} 
+
             </main>
             }
         </div>
