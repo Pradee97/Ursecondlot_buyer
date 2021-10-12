@@ -58,20 +58,31 @@ const LateFee = (props) => {
           {lateFee.length>0?lateFee.slice(0,1).map((lateFee)=>
             <div>
 
+                {lateFee.late_fee>0?"":
                 <div>
-                    {lateFee.days>1?
-                        <a>  Days: {lateFee.days} </a>:
-                        <a>  Day: {lateFee.days}</a>
-                    }
-                </div>
+                    <div>
+                        {lateFee.days>1?
+                            <a>  Days: {lateFee.days} </a>:
+                            <a>  Day: {lateFee.days}</a>
+                        }
+                    </div>
 
-                <div class= {(lateFee.time!==null && lateFee.time < 5000)?"countownBlock":""} >
-                <Countdown date={Date.now() + (lateFee.time!==null && lateFee.time < 5000 ? lateFee.time*60*1000 :0)  } renderer={renderer} />
+                    <div class= {(lateFee.time!==null && lateFee.time < 5000)?"countownBlock":""} >
+                    <Countdown date={Date.now() + (lateFee.time!==null && lateFee.time < 5000 ? lateFee.time*60*1000 :0)  } renderer={renderer} />
+                    </div>
                 </div>
+                }
+
+            {lateFee.late_fee>0?
+            <p>Now your charged late fee of $ <span> {lateFee.late_fee} </span></p>:
+            <p>If you dont make a payment, you will be charged late fee $ 75</p>
+            }
 
             </div>):""}
-            <p>If you dont make a payment, you will be charged late fee 75$</p>
+
             
+
+
             <div class="col-lg-12 makeyourbid-btn">
 
                 <a class="makeyourbid-send-btns" href="/cart" >Make Payment</a>
