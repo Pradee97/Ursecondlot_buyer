@@ -433,10 +433,7 @@ const InVoice = (props) => {
                <td> Total </td>
                
                
-               {/* <td><span>{Number(vechileprice+lotFee)+Number(getFeeDetails())+Number(transportationCharge)+0+0}</span></td> */}
-               {/* <td><span>{Number(vechileprice+lotFee)+Number(getFeeDetails())+Number(Transportation == 'yes' ? 300 : 0)+0+0}</span></td> */}
                <td><span>{Number(vechileprice+lotFee)+Number(getFeeDetails())+Number(Transportation == 'yes' ? transportationCharge : 0)+0+0 + Number(LateFee)}</span></td>
-               {/* <td><span>{Number(vechileprice+lotFee)+Number(getFeeDetails())+Number( 300 || 0)+0+0}</span></td> */}
                
              </tr>
              </tfoot>
@@ -450,12 +447,9 @@ const InVoice = (props) => {
         </div>
 
    <button  className="printBtn"  type ="button" onClick= {printPage}>Print</button>
-  
    </div>
    <section id="playstoreBlock" class="playstoreBlock">
      <div class="container">
-
-
        <div class="row content">
          <div class="col-lg-12">
          <img src={appstore.png}/>
