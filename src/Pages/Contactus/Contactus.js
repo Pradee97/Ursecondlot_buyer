@@ -2,10 +2,13 @@ import React from 'react';
 import API from "../../Services/BaseService";
 import Popup from '../../Component/Popup/Popup';
 import { useForm } from "react-hook-form";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import checkImg from '../../../src/assets/img/check.svg';
+import LateFee from '../../Pages/LateFee/LateFee';
+
 const Contactus = () => { 
+  
   const [isOpen, setIsOpen] = useState(false);
  
   const togglePopup = () => {
@@ -26,6 +29,13 @@ const Contactus = () => {
     const [fullNameError, setFullNameError] = useState("");
     const [emailError, setEmailError] = useState("");
     const [commentsError,setCommentsError]=useState ("");
+
+    const [isLateFee, setIsLateFee] = useState(false);
+    const [lateFeeValue, setLateFeeValue] = useState(0);
+  
+    const toggleLateFee = () => {
+      setIsLateFee(!isLateFee);
+    }
 
     const history = useHistory();   
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -119,6 +129,32 @@ function clear (){
       // }
       // } 
 }
+
+const getlateFee=()=>{
+	let request={
+		buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+	}
+	
+	API.post('getlatefee/condition',request).then(res=>{
+	   if(res.data.data.length){
+		
+   console.log("check +++++ ", res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" )
+		const lateFeeValueStatus=res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" 
+		setIsLateFee(lateFeeValueStatus==="yes")
+		setLateFeeValue(res.data.data.filter(value=>value.late_fee>0)[0]?.late_fee || 0)
+	   }
+	  
+
+	}).catch(err=>{console.log(err);});
+}
+
+
+useEffect(() => {
+
+  getlateFee();
+  
+}, []);
+
     return (
         <div>
   <main id="main" className="inner-page">
@@ -256,7 +292,13 @@ function clear (){
                     popupActionPath={popupActionPath}
                 />} */}
 
-  
+  {isLateFee && <Popup
+          isClose={false}
+          content={<>
+            <LateFee toggle={toggleLateFee} />
+          </>}
+          handleClose={toggleLateFee}
+        />}  
 
 
 

@@ -11,8 +11,11 @@ import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAcco
 import { useDispatch, useSelector } from 'react-redux';
 import PhoneInput from 'react-phone-number-input/input';
 import Loading from '../../../Component/Loading/Loading';
+import Popup from '../../../Component/Popup/Popup';
+import LateFee from '../../../Pages/LateFee/LateFee';
 
 const EditBuyer = () => {
+
     const history = useHistory();
     const { id } = useParams();
     const userDetails = ls.get('userDetails');
@@ -55,6 +58,13 @@ const EditBuyer = () => {
     const [type,setType]=useState("");
     const loggedInBuyerId = useSelector(state => state.LoginReducer.payload); 
     const [loading,setLoading] = useState(true);
+
+    const [isLateFee, setIsLateFee] = useState(false);
+    const [lateFeeValue, setLateFeeValue] = useState(0);
+
+	const toggleLateFee = () => {
+		setIsLateFee(!isLateFee);
+  	}
 
     const togglePopup = () => {
         setIsOpen(!isOpen);
@@ -313,12 +323,39 @@ const EditBuyer = () => {
     })
         .catch(err => { console.log(err); });
     },[] );
+
     function handleOnChange(value) {
         setPrimaryPhone(value);
      }
+
      function handleOnChanges(value) {
         setMobilephone(value);
      }
+
+     const getlateFee=()=>{
+        let request={
+            buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+        }
+        
+        API.post('getlatefee/condition',request).then(res=>{
+           if(res.data.data.length){
+            
+       console.log("check +++++ ", res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" )
+            const lateFeeValueStatus=res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" 
+            setIsLateFee(lateFeeValueStatus==="yes")
+            setLateFeeValue(res.data.data.filter(value=>value.late_fee>0)[0]?.late_fee || 0)
+           }
+          
+    
+        }).catch(err=>{console.log(err);});
+    }
+
+    useEffect(() => {
+
+        getlateFee();
+
+    }, []);
+
     return (
         <div>
            {loading?<Loading/>:
@@ -498,6 +535,15 @@ const EditBuyer = () => {
                         popupActionValue={popupActionValue}
                         popupActionPath={popupActionPath}
                     />}
+
+{isLateFee && <Popup
+          isClose={false}
+          content={<>
+            <LateFee toggle={toggleLateFee} />
+          </>}
+          handleClose={toggleLateFee}
+        />} 
+
             </main>
 }
         </div>

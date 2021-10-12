@@ -5,11 +5,21 @@ import { useEffect } from 'react';
 import API from "../../../Services/BaseService";
 import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks";
 import Loading from '../../../Component/Loading/Loading';
+import Popup from '../../../Component/Popup/Popup';
+import LateFee from '../../../Pages/LateFee/LateFee';
 
 const MyProfile = () => {
+
     const history = useHistory();
     const [accountDetails, setaccountDetails] = useState("");
     const [loading,setLoading] = useState(true);
+
+    const [isLateFee, setIsLateFee] = useState(false);
+    const [lateFeeValue, setLateFeeValue] = useState(0);
+
+	const toggleLateFee = () => {
+		setIsLateFee(!isLateFee);
+  }
 
     async function fetchAccountDetails() {
       let request = {
@@ -26,8 +36,30 @@ const MyProfile = () => {
     function onHandleEdit(e){
       history.push("/editmyprofile/"+e);
     }
+
+    const getlateFee=()=>{
+      let request={
+        buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+      }
+      
+      API.post('getlatefee/condition',request).then(res=>{
+         if(res.data.data.length){
+        
+       console.log("check +++++ ", res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" )
+        const lateFeeValueStatus=res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" 
+        setIsLateFee(lateFeeValueStatus==="yes")
+        setLateFeeValue(res.data.data.filter(value=>value.late_fee>0)[0]?.late_fee || 0)
+         }
+        
+    
+      }).catch(err=>{console.log(err);});
+    }
+
   useEffect(() => {
+
+    getlateFee();
     fetchAccountDetails();
+
   }, []);
 
     return (
@@ -111,6 +143,15 @@ const MyProfile = () => {
 
      </div>
    </section>
+
+   {isLateFee && <Popup
+          isClose={false}
+          content={<>
+            <LateFee toggle={toggleLateFee} />
+          </>}
+          handleClose={toggleLateFee}
+        />} 
+
  </main>
 }
     </div>

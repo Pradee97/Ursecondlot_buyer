@@ -7,8 +7,11 @@ import API from "../../Services/BaseService";
 import '../../Component/Popup/popup.css';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import Loading from '../../Component/Loading/Loading';
+import Popup from '../../Component/Popup/Popup';
+import LateFee from '../../Pages/LateFee/LateFee';
 
 const LotFee = () => {
+
     const [isOpen, setIsOpen] = useState(false);
     const [popupTitle, setPopupTitle] = useState("");
     const [popupMsg, setPopupMsg] = useState("");
@@ -21,6 +24,13 @@ const LotFee = () => {
     const [lotFeeError, setLotFeeError] = useState("")
     let userDetails = ls.get('userDetails');
     const [loading,setLoading] = useState(true);
+
+    const [isLateFee, setIsLateFee] = useState(false);
+    const [lateFeeValue, setLateFeeValue] = useState(0);
+
+	const toggleLateFee = () => {
+		setIsLateFee(!isLateFee);
+  	}
 
     const togglePopup = () => {
         setIsOpen(!isOpen);
@@ -39,8 +49,12 @@ const LotFee = () => {
             .catch(err => { console.log(err); });
     }
     useEffect(() => {
+
         getLotfee();
+        getlateFee();
+
     }, []);
+
     // useEffect(() => {},[lotValue]);
     const updateLotValue = (data) => {
         console.log("---------------", data)
@@ -97,6 +111,24 @@ const LotFee = () => {
                 });
     }
 
+    const getlateFee=()=>{
+		let request={
+		  buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+		}
+		
+		API.post('getlatefee/condition',request).then(res=>{
+		   if(res.data.data.length){
+		  
+		 console.log("check +++++ ", res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" )
+		  const lateFeeValueStatus=res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" 
+		  setIsLateFee(lateFeeValueStatus==="yes")
+		  setLateFeeValue(res.data.data.filter(value=>value.late_fee>0)[0]?.late_fee || 0)
+		   }
+		  
+	  
+		}).catch(err=>{console.log(err);});
+	  }
+
     return (
         <div>
             {loading?<Loading/>:
@@ -151,6 +183,16 @@ const LotFee = () => {
                         popupActionValue={popupActionValue}
                         popupActionPath={popupActionPath}
                     />}
+
+
+{isLateFee && <Popup
+          isClose={false}
+          content={<>
+            <LateFee toggle={toggleLateFee} />
+          </>}
+          handleClose={toggleLateFee}
+        />} 
+
             </main>
             }
         </div>
