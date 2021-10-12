@@ -107,10 +107,10 @@ const InVoice = (props) => {
       const printPage = () => {
         console.log("print")
         printJS({
-          printable:'invoice',
+          printable:'Print',
           type: 'html',
           targetStyles: ['*'],
-          header: 'InVoice'
+          header: ''
         })
       }
     return(
@@ -291,6 +291,164 @@ const InVoice = (props) => {
    <a class={`cta-btns-primary ${(billOfSales !== null && billOfSales !== ""  ) && "greenBtn"}`} onClick={()=>{(billOfSales == null ||billOfSales == ""  )&& redirecttoCart()}} > {billOfSales !== null && billOfSales !== "" ? "paid": "pay" } </a> 
    {/* <a class={`cta-btns-primary ${(billOfSales !== null && billOfSales !== ""  ) && "redBtn"}`} onClick={()=>{(billOfSales == null ||billOfSales == ""  )&& redirecttoCart()}} > {billOfSales !== null && billOfSales !== "" ? "print": "" } </a>  */} 
   
+<div class = " hideContent">
+   <div class="col-lg-12 invoiceBlock" id = "Print">
+        <div class="row header">
+                <div class="col-lg-6 header_left"><img src={Logo_final}/></div>
+                <div class="col-lg-6 header_right">
+                   <p>
+                       Fairview Ave, El Monte,US, 91732 <br></br>
+                       ursecondLot.com<br></br>
+                       142-564-9147
+                   </p>
+                </div> </div>
+       
+       
+       <div class="section-title">
+           <h2>Invoice</h2>
+       </div>
+        
+       <div class="headtable">
+           <table>			 
+             <tr>
+               <td colSpan="2"><span>Bill of sale # </span>{billOfSales}</td>
+               <td  class=""><span className="autoWidth pr-1 datel">Date<i className="datelabel_1">(MM/DD/YYYY):</i></span><span class="redText">{Date?.substring(0,10)}</span></td>
+             </tr>
+             <tr>
+               <td>
+                 <span>Year: {Year} </span>
+                 </td>
+               <td >
+                 <span>Make: {Make} </span> 
+               </td>
+                <td >
+                  <span> Model: {Model}</span>
+
+               </td>
+             </tr>			  
+             <tr>
+               <td><span>Gate Pass Code : </span>{gatePassId}</td>
+               <td >
+                 <span>Inventory Number: {invNo} </span> 
+               </td>
+                <td >
+                  <span> VIN Number: {vinNo}</span>
+
+               </td>
+             </tr>			  
+           </table>
+           
+            </div>
+            
+           <div class="contenttable">
+           {dealerInfo?.length>0?dealerInfo
+            .map((dealerInfo) =>
+           <div>
+           <table class="infotable">
+             <thead>
+               <tr>
+                   <th>Buyer Info</th>
+               </tr>
+             </thead>
+             
+           
+            
+               <tr><td><span>Name</span>{dealerInfo.dealer_name}</td></tr>	
+               <tr><td><span>Address </span>{dealerInfo.address}</td></tr>	
+               <tr><td><span>City </span>{dealerInfo.city_name}</td></tr>	
+               <tr><td><span>State </span>{dealerInfo.state_name}</td></tr>	
+               <tr><td><span>Zipcode </span>{dealerInfo.zipcode}</td></tr>		  		  
+            
+              
+                       
+           </table>
+           </div>
+            ) :""} 
+           <table class="infotable">
+             <thead>
+               <tr>
+                   <th>Seller Info</th>
+               </tr>
+             </thead>			  
+           
+             
+             {sellerInfo?.length>0?sellerInfo
+            .map((sellerInfo) =>
+            <>
+               <tr><td><span>Name  </span>{sellerInfo.dealer_name}</td></tr>
+               <tr><td><span>Address  </span>{sellerInfo.address}</td></tr>
+               <tr><td><span>City  </span>{sellerInfo.city_name}</td></tr>
+               <tr><td><span>State  </span>{sellerInfo.state_name}</td></tr>
+               <tr><td><span>Zipcode  </span>{sellerInfo.zipcode}</td></tr>
+                  </>    
+                  ) :""}      
+           </table>
+           
+       </div>
+
+       
+         <div class="col-lg-12 pt-4 pt-lg-0 feestableBlock">
+         <div class="feestable">
+            <table>
+             <thead>
+               <tr>
+                   <th>Vehicle Information</th>
+                   <th class="priceCol">Price</th>
+               </tr>
+             </thead>
+             <tr>
+               <td>Vehicle Price 
+               <p>{Year} {Make} {Model} </p>
+               </td>
+               <td><span>$ {(vechileprice)+lotFee}</span></td>
+             </tr>
+              <tr>
+
+               <td>Buy Fee</td>
+               <td><span>$ {getFeeDetails()}</span></td>
+             </tr>
+             <tr>
+               <td>Transportation</td>
+               {/* <td><span>$ {transportationCharge}</span></td> */}
+                <td><span>$ {Transportation == 'yes' ? 300 : 0}</span></td>
+                 {/* <td><span>$ { 300 || 0}</span></td> */}
+             </tr>
+             <tr>
+               <td>Other Charges</td>
+               <td><span>$ 0</span></td>
+             </tr>
+             <tr>
+               <td>Miscellaneous Charges</td>
+               <td><span>$ 0</span></td>
+             </tr>
+             {LateFee == "" || LateFee == null || LateFee == 0?"":
+             <tr>
+               <td>Late Fee</td>
+               <td><span>$ {LateFee}</span></td>
+             </tr>
+              }
+             <tfoot>
+             <tr>
+             
+               <td> Total </td>
+               
+               
+               {/* <td><span>{Number(vechileprice+lotFee)+Number(getFeeDetails())+Number(transportationCharge)+0+0}</span></td> */}
+               {/* <td><span>{Number(vechileprice+lotFee)+Number(getFeeDetails())+Number(Transportation == 'yes' ? 300 : 0)+0+0}</span></td> */}
+               <td><span>{Number(vechileprice+lotFee)+Number(getFeeDetails())+Number(Transportation == 'yes' ? transportationCharge : 0)+0+0 + Number(LateFee)}</span></td>
+               {/* <td><span>{Number(vechileprice+lotFee)+Number(getFeeDetails())+Number( 300 || 0)+0+0}</span></td> */}
+               
+             </tr>
+             </tfoot>
+            
+            </table>            
+         </div>
+        
+         </div>
+        
+      </div>
+        </div>
+
    <button  className="printBtn"  type ="button" onClick= {printPage}>Print</button>
   
    </div>
