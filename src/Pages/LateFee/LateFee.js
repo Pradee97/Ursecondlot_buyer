@@ -85,8 +85,8 @@ const LateFee = (props) => {
 
             <div class="col-lg-12 makeyourbid-btn">
 
-                <a class="makeyourbid-send-btns" href="/cart" >Make Payment</a>
-                <a class="makeyourbid-cancle-btns" onClick={props.toggle}>Cancel</a>
+                <a class="cta-btns mr-2" href="/cart" >Make Payment</a>
+                <a class="cta-btns-primary" onClick={props.toggle}>Cancel</a>
             
             </div> 
             </div>        

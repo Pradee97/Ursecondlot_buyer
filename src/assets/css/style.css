@@ -8753,4 +8753,22 @@ a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
 .icofont-warning{
   font-size: 50px;
   color: #FFCC00;
+  margin: 20px 0;
+    display: inline-block;
+}
+
+
+
+.makeyourbid-btn a{
+  color: #fff;
+}
+
+.makeyourbid-btn .cta-btns-primary:hover{
+  background-color: #bd062c;
+    color: white;
+}
+
+
+.historyPage .barCodeDiv{
+  margin-bottom: -10px;
 }

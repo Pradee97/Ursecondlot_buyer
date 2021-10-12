@@ -73,7 +73,7 @@ const Fees = () => {
 
     return (
         <div>
-            <main id="main" className="inner-page">
+            <main id="main" className="inner-page feesPage">
 
 
                 <div id="fees" className="fees">
