@@ -387,7 +387,7 @@ const TransportationUpdate = (carId,transportationCharge,transportation,divConte
                             
                            
                             <div className="rprice">
-                                <span>${carTransportationCharge || 0} </span>  
+                                <span>$ {carTransportationCharge == null  ? 300: carTransportationCharge} </span>  
                                                        
                             </div>
                               <div className="totalActions">
@@ -397,7 +397,7 @@ const TransportationUpdate = (carId,transportationCharge,transportation,divConte
                                                   
                       </div>
                      
-                      <h4 className='showContent' id={`transporationHeader${id}`}>Transportation <span>$ {carTransportationCharge || 0}</span></h4>
+                      <h4 className='showContent' id={`transporationHeader${id}`}>Transportation <span>$ {carTransportationCharge == null  ? 300: carTransportationCharge}</span></h4>
 
 
 
@@ -415,7 +415,7 @@ const TransportationUpdate = (carId,transportationCharge,transportation,divConte
 
 							<div class="vehiclerighttotal">
 								{/* <h3>Total amount <span>$ {Number(paymentCar.price)+ Number(getFeeDetails(paymentCar.price)) + Number(300 || 0)}</span></h3> */}
-								<h3>Total amount <span>$ {Number(carBuyItNow)+Number(getFeeDetails(carBuyItNow)) + Number(carTransportationCharge|| 0)+0+0}</span></h3>
+								<h3>Total amount <span>$ {Number(carBuyItNow)+Number(getFeeDetails(carBuyItNow)) + Number(carTransportationCharge == null  ? 300: carTransportationCharge)+0+0}</span></h3>
 							</div>
               
 						</div>
