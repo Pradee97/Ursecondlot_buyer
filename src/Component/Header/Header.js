@@ -42,21 +42,20 @@ const countDetails = () =>{
 
   API.post("countDetails/condition", request).then(response=>{
 
-    if(response.success ) {
-      console.log("count details check the value", response.data.data)
+    // if(response.success ) {
+      console.log("header count details check the value", response.data.data.mybids_count)
       
       setMyBids(response.data.data.mybids_count)
       setCart(response.data.data.cart_count)
-    }
+    // }
     
       
   });
 }
 
 useEffect (() =>{
-  
-      countDetails();
-      
+ 
+			countDetails();
 
   
 }, []);

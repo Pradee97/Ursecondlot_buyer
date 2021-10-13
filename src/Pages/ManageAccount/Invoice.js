@@ -110,7 +110,7 @@ const InVoice = (props) => {
           printable:'Print',
           type: 'html',
           targetStyles: ['*'],
-          header: 'InVoice'
+          header: ""
         })
       }
     return(
