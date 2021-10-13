@@ -70,8 +70,8 @@ const LateFee = (props) => {
                 <div>
                     <div>
                         {lateFee.days>1?
-                            <a>  Days: {lateFee.days} </a>:
-                            <a>  Day: {lateFee.days}</a>
+                            <a > <span> {lateFee.days== null || lateFee.days== "" ? "" : "Days: "  (lateFee.days)}</span> </a>:
+                            <a> <span> {lateFee.days== null || lateFee.days== "" ? "" : "Day: "  (lateFee.days)}</span></a>
                         }
                     </div>
 
