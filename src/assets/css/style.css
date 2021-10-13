@@ -8533,6 +8533,9 @@ a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
   cursor: pointer;
   float: left;
 }
+.buyNowBlock .car-btns-primary.buyitBtn:hover{
+  text-decoration: none;
+}
 
 .buyNowBlock .cars-buy-btns-primary{
   padding: 30px;
@@ -8771,4 +8774,21 @@ a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
 
 .historyPage .barCodeDiv{
   margin-bottom: -10px;
+}
+
+.buyNowBlock .car-btns-primary.buyitBtn{
+  width: 100%;
+}
+
+.buyNowBlock .cars-buy-btns-primary {
+  width: 100%;
+  display: block;
+  text-align: center;
+}
+
+.buyNowBlock .makeBidBtn {
+  float: right;
+  padding:  0;
+  display: block;
+  width: 100%;
 }
