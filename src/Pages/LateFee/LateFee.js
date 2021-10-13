@@ -78,7 +78,7 @@ const LateFee = (props) => {
                 }
 
             {lateFee.late_fee>0?
-            <p>Now your charged late fee of $ <span> {lateFee.late_fee} </span></p>:
+            <p>Please make the pending payments</p>:
             <p>If you dont make a payment, you will be charged late fee $ 75</p>
             }
 
