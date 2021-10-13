@@ -342,13 +342,11 @@ const TransportationUpdate = (carId,transportationCharge,transportation,divConte
       ( <div class="checkoutblock col-lg-12">
 
         <div class="section-title mt-0 pt-3 mb-0 revCheHeadBlock">
-          <h2>Buy Now</h2>
-		  <div className="revCheHead">
+          <h4>Are You Want to Buy this Unit</h4>
+		  {/* <div className="revCheHead">
 				<h3 className="pl-4"> Are You Want to Buy this Unit</h3>
-			
-				{/* <h2 className="text-right">Total <span> $ {overAllTotal()}</span></h2> */}
 
-				</div>
+				</div> */}
         </div>
 
         <div class="row content contentBlock">

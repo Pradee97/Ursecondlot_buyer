@@ -465,13 +465,13 @@ const billofsales =(request) => {
           </div>
         </section>
 
-        {isLateFee && <Popup
+        {/* {isLateFee && <Popup
                 isClose={false}
                 content={<>
                     <LateFee toggle={toggleLateFee} />
                 </>}
                 handleClose={toggleLateFee}
-            />}
+            />} */}
 
       </main>
 }

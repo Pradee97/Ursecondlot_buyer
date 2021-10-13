@@ -49,13 +49,17 @@ const LateFee = (props) => {
     return (
 
         <div id="makeyourbid" class="makeyourbid"><div class="container"><div class="makeyourbidblock col-lg-12">
-        <div class="section-title">
-           
-          <h2>Alert</h2> 
-          <i class="icofont-warning"></i>
-          </div>
+        
           <div>
           {lateFee.length>0?lateFee.slice(0,1).map((lateFee)=>
+            <div>
+                {lateFee.late_fee>0?"":
+                <div class="section-title">
+                    
+                <h2>Alert</h2> 
+                <i class="icofont-warning"></i>
+                </div>}
+
             <div>
 
                 {lateFee.late_fee>0?"":
@@ -78,6 +82,7 @@ const LateFee = (props) => {
             <p>If you dont make a payment, you will be charged late fee $ 75</p>
             }
 
+            </div>
             </div>):""}
 
             

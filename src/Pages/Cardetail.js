@@ -62,6 +62,7 @@ const [carBuyerDealerId,setCarBuyerDealerId]=useState("");
 const [loading,setLoading] = useState(true);
 console.log("selescted seller id_______",sellerDealerId)
 
+const [carSellerDealerId,setCarSellerDealerId] = useState("");
 const [isOpen, setIsOpen] = useState(false);
 const [open,setOpen] = useState(false);
 
@@ -237,6 +238,7 @@ function CarDetailList(){
 
 
 	setCarDetail(res.data.data);
+	
 
 	let make=res.data.data[0].make;
 	let sellerDealerId=res.data.data[0].seller_dealer_id;
@@ -262,7 +264,8 @@ function CarDetailList(){
 		console.log("car Inventory Detail",res.data.data);
 		const req={
 		seller_dealer_id:sellerDealerId,
-		buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+		buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
+		car_id:id
 		};
 		API.post('SellerCarList/condition',req).then(resp=>{
 		console.log("response",resp.data.data);
@@ -275,7 +278,8 @@ function CarDetailList(){
 		})
 		const req_samecar={
 		"make":make,
-		buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+		buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
+		seller_dealer_id:sellerDealerId
 		}
 		console.log("other dealer car req",req_samecar);
 		API.post('OtherDealerCarList/condition',req_samecar).then(response=>{
