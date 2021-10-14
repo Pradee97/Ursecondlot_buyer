@@ -11,6 +11,7 @@ import errorImg from '../../src/assets/img/erroricon.png';
 import '../Component/CommonPopup/commonPopup.css';
 import { Slider } from 'antd';
 import ls from 'local-storage';
+import BuyItNow from '../Pages/BuyItNow/BuyItNow';
 
 const MakeurBid=(props)=>{
 
@@ -28,7 +29,13 @@ console.log("check props",props)
     const [carSavePurchase,setCarSavePurchase] = useState(props.setMakeBitValue.carSavePurchase);
     const [carSavePolicy,setCarSavePolicy] = useState(props.setMakeBitValue.savePolicy||'no');
     const [carProxyBid,setCarProxyBid] = useState(props.setMakeBitValue.carProxyBid);
+    
     const [make,setMake] = useState(props.setMakeBitValue.make);
+    const [model,setModel] = useState(props.setMakeBitValue.model);
+    const [year,setYear] = useState(props.setMakeBitValue.year);
+    
+    const [image,setImage] = useState(props.setMakeBitValue.image);
+    console.log("check the make is coming0",image)
     const [redirectPage,setRedirectPage] = useState(props.setMakeBitValue.redirectPage);
     // const [carHighBid,setCarHighBid] = useState(!props.setMakeBitValue.carHighBid ? props.setMakeBitValue.carMinBid : props.setMakeBitValue.carHighBid); 
     const [carHighBid,setCarHighBid] = useState(props.setMakeBitValue.carHighBid);  
@@ -78,8 +85,9 @@ console.log("check props",props)
     const userDetails=ls.get('userDetails');
     const [mySelectedCarId, setMySelectedCarId] = useState([]);
     const [cartDetail,setCartDetail] = useState([]);
-
-  
+    const [openBuyItNow, setOpenBuyItNow] = useState(false);
+    const [makeBitData, setMakeBitData] = useState({});
+    const [buyItNowData, setBuyItNowData] = useState({});
 
     // if(!carHighBid){
     //     setCarHighBid(carMinBid)
@@ -94,6 +102,36 @@ console.log("check props",props)
         setOpen(!open);
     }
  
+    const toggleBuyItNow = () => {
+		setOpenBuyItNow(!openBuyItNow);
+	}
+
+    const getBuyItNowValue = (data) => {
+		const highBid = data
+		setHighBid(highBid)
+	}
+
+	const setBuyItNowValue = () => {
+
+		setBuyItNowData({
+			buyItNow: carBuyItNow,
+			carId : id,
+			image : image,
+			model : model,
+			make : make, 
+			year : year,
+			// price : price,
+			transportation : carTransportation,
+			transportationCharge : transportationFee,
+			// lotFee:lot_fee,
+			creditLimit : creditLimit
+
+		})
+	
+		toggleBuyItNow()
+		
+		
+	}
 
     const getTotalAmount = () => {
 
@@ -477,7 +515,7 @@ console.log("check props",props)
                             <div class="form-group col-lg-6 col-md-6">
                             
                             
-                            {carBuyItNow && carBuyItNow!="0" && <p className="details buyitnow"><span><a class="cta-btns" href="#">Buy It Now $ {carBuyItNow}</a></span></p>}
+                            {carBuyItNow && carBuyItNow!="0" && <p className="details buyitnow"><span><a class="cta-btns" onClick={()=>setBuyItNowValue()}>Buy It Now $ {carBuyItNow}</a></span></p>}
 
                         {/* <div class="mbSliderBlock">
                            <Slider 
@@ -671,6 +709,15 @@ console.log("check props",props)
                 </>}
                 handleClose={toggleTerms}
             />}
+
+                {openBuyItNow && <Popup
+                    isClose={false}
+                    content={<>
+                        <BuyItNow toggle={toggleBuyItNow} setBuyItNowValue={buyItNowData} getBuyItNowValue={getBuyItNowValue}  />
+                    </>}
+                    handleClose={toggleBuyItNow}
+                />}	
+
               {isOpen &&
                     <CommonPopup 
                         handleClose= {togglePopup}
