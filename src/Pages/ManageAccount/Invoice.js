@@ -19,7 +19,7 @@ const InVoice = (props) => {
     const [sellerInfo,setSellerInfo] = useState("");
     const [feeDetails, setFeeDetails] = useState("");
     
-    const {sellerDealerID,vechileprice,lotFee,billOfSales,gatePassId,Date,Make,Model,Year,transportationCharge,Transportation,invNo,vinNo,LateFee} = props.location.state;
+    const {sellerDealerID,vechileprice,lotFee,billOfSales,gatePassId,Date,Make,Model,Year,transportationCharge,Transportation,invNo,vinNo,LateFee,BillOfSaleDate} = props.location.state;
  console.log("hello",sellerDealerID,vechileprice,lotFee,billOfSales,gatePassId,Date);
     
      function fetchBuyerDetails() {
@@ -145,7 +145,7 @@ const InVoice = (props) => {
            <table>			 
              <tr>
                <td colSpan="2"><span>Bill of sale # </span>{billOfSales}</td>
-               <td  class=""><span className="autoWidth pr-1 datel">Date<i className="datelabel_1">(MM/DD/YYYY):</i></span><span class="redText">{Date?.substring(0,10)}</span></td>
+               <td  class=""><span className="autoWidth pr-1 datel">Date<i className="datelabel_1">(MM/DD/YYYY):</i></span><span class="redText">{Date}</span></td>
              </tr>
              <tr>
                <td>
@@ -273,7 +273,13 @@ const InVoice = (props) => {
                
              </tr>
              </tfoot>
-            
+             
+               <tr>
+               <td> Paid by Date and time</td>
+
+                 <td><span>{billOfSales !== null && billOfSales !== "" ?  BillOfSaleDate : " " } </span></td>
+               </tr> 
+             
             </table>            
          </div>
         
@@ -291,6 +297,8 @@ const InVoice = (props) => {
    <a class={`cta-btns-primary ${(billOfSales !== null && billOfSales !== ""  ) && "greenBtn"}`} onClick={()=>{(billOfSales == null ||billOfSales == ""  )&& redirecttoCart()}} > {billOfSales !== null && billOfSales !== "" ? "paid": "pay" } </a> 
    {/* <a class={`cta-btns-primary ${(billOfSales !== null && billOfSales !== ""  ) && "redBtn"}`} onClick={()=>{(billOfSales == null ||billOfSales == ""  )&& redirecttoCart()}} > {billOfSales !== null && billOfSales !== "" ? "print": "" } </a>  */} 
   
+
+
 <div class = " hideContent">
    <div class="col-lg-12 invoiceBlock" id = "Print">
         <div class="row header">
@@ -437,6 +445,13 @@ const InVoice = (props) => {
                
              </tr>
              </tfoot>
+
+            
+               <tr>
+                 <td><span>{billOfSales !== null && billOfSales !== "" ?  "Paid by Date and time" : " " } </span></td>
+                 <td><span>{billOfSales !== null && billOfSales !== "" ?  BillOfSaleDate : " " } </span></td>
+               </tr>
+            
             
             </table>            
          </div>
@@ -444,6 +459,7 @@ const InVoice = (props) => {
          </div>
         
       </div>
+
         </div>
 
    <button  className="printBtn"  type ="button" onClick= {printPage}>Print</button>
