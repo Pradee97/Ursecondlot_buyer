@@ -24,6 +24,7 @@ const BuyNow=(props)=>{
     const [carYear,setCarYear] = useState(props.setBuyItNowValue.year);
     const [carCreditLimit,setCreditLimit] = useState(props.setBuyItNowValue.creditLimit);
     console.log("check the CreditLimit in the buy it now page",carCreditLimit)
+    console.log("check the car id is coming from make bid",carMake)
     // const { id } = useParams();
     const userDetails=ls.get('userDetails');
     const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
