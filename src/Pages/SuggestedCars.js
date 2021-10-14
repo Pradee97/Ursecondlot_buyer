@@ -125,7 +125,11 @@ const SuggestedCars = () => {
 			transportationCharge:data.transportation_charge,
 			savePolicy:data.save_policy,
 			creditLimit:data.credit_limit,
-			lotFee:data.lot_fee
+			lotFee:data.lot_fee,
+			image:data.image,
+			model:data.model,
+			make:data.make,	
+			year:data.year,
 			
 		})
 		setIsOpen(!isOpen);
