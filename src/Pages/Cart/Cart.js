@@ -9,6 +9,7 @@ import Popup from '../../Component/Popup/Popup';
 import Loading from"../../Component/Loading/Loading";
 import LateFee from '../../Pages/LateFee/LateFee';
 
+
 const Cart = () => {
 
     const userDetails=ls.get('userDetails');
@@ -31,6 +32,10 @@ const Cart = () => {
 
     const [isLateFee, setIsLateFee] = useState(false);
   	const [lateFeeValue, setLateFeeValue] = useState(0);
+    const [floorSelector,setFloorSelector] = useState(false);
+    const [floorMode,setFloorMode] = useState("");
+    const [contactFloor,setContactFloor] = useState("");
+    const [selectedTotalFloor,setSelectedTotalFloor]= useState("");
 
 	const toggleLateFee = () => {
 		setIsLateFee(!isLateFee);
@@ -73,6 +78,8 @@ const Cart = () => {
         state.then(res => {
             console.log("res", res)
             setFeeDetails(res.data.data);
+            selectedTotalFloor=mySelectedCarTotal();
+
           
         })
             .catch(err => { console.log(err); });
@@ -80,6 +87,8 @@ const Cart = () => {
 
     useEffect(() => {
         fetchBuyerFees();
+        
+
     }, []);
 
 const billofsales =(request) => {
@@ -161,11 +170,14 @@ const billofsales =(request) => {
         console.log("mySelectedCarTotal=====")
         console.log("cartDetail.====",cartDetail)
         console.log("mySelectedCarId.====",mySelectedCarId)
+        let floorvalue='';
         if(mySelectedCarId.length>0) {
             console.log("mySelectedCarId~~~~~",mySelectedCarId)
             if(cartDetail?.length>0 && cartDetail.filter(item => (mySelectedCarId.includes(item.car_id)) ).length>0){
                 // console.log("mySelectedCarId.length====",cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id)) ).length)
-                return cartDetail.filter(item => (mySelectedCarId.includes(item.car_id))).reduce((acc, curr) => acc+((Number(curr.price) || 0)+Number(curr.lot_fee) +  Number(curr.transportation === 'yes' ? curr.transportation_charge : 0) + Number(getFeeDetails(curr.price))+Number(curr.late_fee)),0)
+              
+              return cartDetail.filter(item => (mySelectedCarId.includes(item.car_id))).reduce((acc, curr) => acc+((Number(curr.price) || 0)+Number(curr.lot_fee) +  Number(curr.transportation === 'yes' ? curr.transportation_charge : 0) + Number(getFeeDetails(curr.price))+Number(curr.late_fee)),0)
+               
             }
             else {
                 return 0
@@ -186,7 +198,7 @@ const billofsales =(request) => {
             if(cartDetail?.length>0 && cartDetail.filter(item => (mySelectedCarId.includes(item.car_id)) ).length>0){
                 // console.log("mySelectedCarId.length====",cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id)) ).length)
                 setMySelectedCarDetails(cartDetail.filter(item => (mySelectedCarId.includes(item.car_id))).map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id}}))
-                billofsales(cartDetail.filter(item => (mySelectedCarId.includes(item.car_id))).map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id,"make": data.make, "model": data.model, "image": data.image, "price": data.price,"transportation_charge":data.transportation_charge,"year":data.year,"lot_fee":data.lot_fee,"late_fee":data.late_fee,"buyFee":getFeeDetails()}}))
+                billofsales(cartDetail.filter(item => (mySelectedCarId.includes(item.car_id))).map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id,"make": data.make, "model": data.model, "image": data.image, "price": data.price,"transportation_charge":data.transportation_charge,"year":data.year,"lot_fee":data.lot_fee,"late_fee":data.late_fee,"buyFee":getFeeDetails(),"credit_limit":data.credit_limit,"total_price":mySelectedCarTotal(),"floor_plan_id":floorMode,}}))
             }
             else {
                 setMySelectedCarDetails([])
@@ -204,8 +216,18 @@ const billofsales =(request) => {
     }
     const selectPayment=(data)=> {
         console.log("selectPayment----",data)
+        if(data=="Floor"){
+            setFloorSelector(true)
+                FloorDetails()
+             
+        }
+        else{
+            setFloorSelector(false)
+        }
         setPaymentMode(data)
     }
+
+    
 
     const overAllTotal = () => {
         return cartDetail?.length>0 && cartDetail
@@ -268,6 +290,8 @@ const billofsales =(request) => {
        }))
     }
 
+   
+
     const getlateFee=()=>{
 		let request={
 			buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
@@ -286,9 +310,37 @@ const billofsales =(request) => {
 		}).catch(err=>{console.log(err);});
 	}
 
+    const selectFloorPayment=(data)=>{
+
+        console.log("check the floor payment selected",data)
+        setFloorMode(data)
+        
+
+    }
+
+    const FloorDetails=()=>{
+
+		let request={
+			buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
+            amount: mySelectedCarTotal()
+		}
+		
+		API.post('floorDetails/condition',request).then(response=>{
+		  
+			
+	   console.log("check floor ",response.data.data)
+       setContactFloor(response.data.data)
+			
+		  
+	
+		}).catch(err=>{console.log(err);});
+	}
+
+
     useEffect (() =>{
 
-		getlateFee();      
+		getlateFee();  
+      
 		
     }, []);
 
@@ -428,9 +480,29 @@ const billofsales =(request) => {
                     </div>
             </div>
         </div>
-                   
+        {floorSelector && 
+                 
+                
+                 <div>
+                <h4>Floor Method</h4>
+
+                <div className="form-group selectTbox">
+                    <div className="tbox">   
+                                
+                        <div className="selcetclass"> 
+                            <select id="floormethod"  class="form-control custom-select browser-default" onChange={(e)=>selectFloorPayment(e.target.value)}>
+                            <option value="Select">Select</option>
+                            {contactFloor.length>0?contactFloor.map((item)=>
+                             
+                                <option id ={item.contact_name} value={item.floor_plan_id} >{item.contact_name}</option>
+                            ):""} 
+                            </select>        
+                        </div>
+                    </div>
+                </div></div>}
+
                         <div class="vehicletotalbtns"> 
-                            <a class="vehicletotal-btns" href="JavaScript:void(0)" disabled={!paymentMode || !mySelectedCarId.length} onClick={()=> paymentMode && mySelectedCarId.length>0&& reviewAndCheckout()  }>Review & Checkout</a>
+                            <a class="vehicletotal-btns" href="JavaScript:void(0)" disabled={!paymentMode || !floorMode || !mySelectedCarId.length } onClick={()=> paymentMode && floorMode && mySelectedCarId.length>0&& reviewAndCheckout()  }>Review & Checkout</a>
                         </div>
                         <p className="form-input-error">{alertError}</p>
                         
