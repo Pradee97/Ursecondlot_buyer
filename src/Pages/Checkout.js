@@ -6,10 +6,11 @@ import CommonPopup from '../Component/CommonPopup/CommonPopup';
 import checkImg from '../../src/assets/img/check.svg';
 import errorImg from '../../src/assets/img/erroricon.png';
 
-const History = (props) => {
+const CheckOut = (props) => {
 
 	const history = useHistory();
 	const [paymentCar,setPaymentCar] = useState(props.paymentCarList);
+	console.log("check the bill of sale request",props.paymentCarList)
 	const [feeDetails, setFeeDetails] = useState("");
 
 	const [isOpen, setIsOpen] = useState(false);
@@ -31,6 +32,7 @@ const History = (props) => {
     }
 
 	const billofsales =() => {
+		
 		
 		API.post('billofsales/add', props.paymentCarList).then(res=>{
 
@@ -216,4 +218,4 @@ const History = (props) => {
         // 
     )
 }
-export default History;
+export default CheckOut;
