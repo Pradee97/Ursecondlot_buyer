@@ -470,7 +470,7 @@ const billofsales =(request) => {
             <div className="tbox">                
                 <div className="selcetclass"> 
                     <select id="vehicleselect"  class="form-control custom-select browser-default" onChange={(e)=>selectPayment(e.target.value)}>
-                        <option value={null} style={{"display":"none"}}>Select</option>
+                        <option value={null} style={{"display":"none"}}>-- Select --</option>
                         <option value="ACH">ACH</option>
                         <option value="Floor">Floor</option>
                         <option value="Credit Card">Credit Card</option>
@@ -491,10 +491,10 @@ const billofsales =(request) => {
                                 
                         <div className="selcetclass"> 
                             <select id="floormethod"  class="form-control custom-select browser-default" onChange={(e)=>selectFloorPayment(e.target.value)}>
-                            <option value="Select">Select</option>
+                            <option value="Select">--  Select  --</option>
                             {contactFloor.length>0?contactFloor.map((item)=>
                              
-                                <option id ={item.contact_name} value={item.floor_plan_id} >{item.contact_name}</option>
+                                <option id ={item.contact_name} value={item.floor_plan_id} >{item.company_name} ({item.account_no})</option>
                             ):""} 
                             </select>        
                         </div>
