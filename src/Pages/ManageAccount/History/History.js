@@ -594,6 +594,10 @@ const togglePrint = () => {
                             </div>
                         </div>
 
+                        <div>
+                          <button  className="printBtn"  type ="button" >Download</button>
+                        </div>
+
                     <div class="sortBy">
                         <div class="col-sm-12 form-group mr-0 pr-0">  
                           <div class="tbox">			
@@ -659,17 +663,26 @@ const togglePrint = () => {
 									</CopyToClipboard>
 									
 									{/* <img src={book} onClick={copytoclipboard} alt=""/>  */}
-									<span className="barCodeIcon"><img src={barcode} alt=""  onMouseEnter={() => setIsShown(true)}  onMouseLeave={() => setIsShown(false)}/> </span>
+									{/* <span className="barCodeIcon"><img src={barcode} alt=""  onMouseEnter={() => setIsShown(true)}  onMouseLeave={() => setIsShown(false)}/> </span> */}
+										<div id = {`imgBarCode${index}`} className= "showContent" >
+                  
+                  <img  src={barcode} alt=""  onMouseEnter={() =>document.getElementById(  `showBarCodeDetails${index}` ).setAttribute("class", "showContent")} onMouseLeave={() => document.getElementById(  `showBarCodeDetails${index}` ).setAttribute("class", "hideContent")}/> 
 									
-									
+									</div>
+
 									{/* <img ComponentToPrint={inputRef}  alt=""/> */}
 								</div>
 
-								{isShown && (
+								{/* {isShown && (
 										<div class="barCodeDiv">
 										<Barcode value={historyDetail.vin_no} {...config} />
 										</div>
-									)}
+									)} */}
+                  {/* {isShown && ( */}
+						<div id = {`showBarCodeDetails${index}`} className= "hideContent" >
+							<Barcode value={historyDetail.vin_no} {...config} />
+						</div>
+					{/* )} */}
 								
 								{/* {copied ? <p>Copied !</p> : ""} */}
 							</div>
@@ -749,7 +762,7 @@ const togglePrint = () => {
                   
                   <div class="col-lg-4 priceBlock">
                     <p className="pdate">Purchased from <span className="redText">{historyDetail.dealer_type}</span></p>
-                    <p class="date ml-0"><span className="datelabel">Date Of Purchased <i className="dateFormat">(MM/DD/YYYY)</i></span>  <span className="redText">{historyDetail.sold_date?.substring(0,10)} {historyDetail.sold_date?.substring(11,19)}</span></p>
+                    <p class="date ml-0"><span className="datelabel">Date Of Purchased <i className="dateFormat">(MM/DD/YYYY)</i></span>  <span className="redText">{historyDetail.sold_date}</span></p>
                     
                     <div class="vehicleimgright col-lg-12">
                       <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>HistoryEdit(`transporationDiv${historyDetail.car_id}`,`transporationHeader${historyDetail.car_id}`)}>{historyDetail.bill_of_sales_id !== null && historyDetail.bill_of_sales_id !== "" ? "": "Edit Transportation" }</a></p>
@@ -804,7 +817,7 @@ const togglePrint = () => {
                     <div class="col-md-12 text-center paybtns">
                     <a class={`cta-btns-primary ${(historyDetail.bill_of_sales_id !== null && historyDetail.bill_of_sales_id !== ""  ) && "greenBtn"}`} onClick={()=>{(historyDetail.bill_of_sales_id == null || historyDetail.bill_of_sales_id == ""  )&& redirecttoCart()}}  >{historyDetail.bill_of_sales_id !== null && historyDetail.bill_of_sales_id !== "" ? "paid": "pay" }  </a>   
                     
-                    <button  className="printBtn"  type ="button" onClick= {() => printPage(`Printpage${index}`)}>Print</button>
+                    <button  className="printBtn"  type ="button" onClick= {() => printPage(`Printpage${index}`)}>Download</button>
                      <div> 
                    
                     <div class = " hideContent" >
