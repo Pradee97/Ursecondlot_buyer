@@ -395,13 +395,13 @@ const ViewBuyer = () => {
                                 </div>
                                 <div className="col-sm-12 form-group">
                                     <div className="tbox">
-                                        <input type="text" defaultValue={myProfileObjc.first_name} className="form-control textbox" placeholder="" disabled onChange={(e) => setFirstName(e.target.value)} />
+                                        <input type="text" defaultValue={myProfileObjc.first_name} className="form-control textbox" placeholder="" disabled />
                                         <label htmlFor="first_name" className={firstName != "" ? "input-has-value" : ""}>First Name</label>
                                     </div>
                                 </div>
                                 <div className="col-sm-12 form-group">
                                     <div className="tbox">
-                                        <input type="text" defaultValue={myProfileObjc.last_name} className="form-control textbox" placeholder="" disabled onChange={(e) => setLastName(e.target.value)} />
+                                        <input type="text" defaultValue={myProfileObjc.last_name} className="form-control textbox" placeholder="" disabled  />
                                         <label htmlFor="last_name" className={lastName != "" ? "input-has-value" : ""}>Last Name</label>
                                     </div>
                                 </div>
@@ -445,13 +445,13 @@ const ViewBuyer = () => {
                                 </div>
                                 <div className="col-sm-12 form-group">
                                     <div className="tbox">
-                                        <input type="email" defaultValue={myProfileObjc.email} className="form-control textbox" placeholder="" disabled required onChange={(e) => setEmailId(e.target.value)} />
+                                        <input type="email" defaultValue={myProfileObjc.email} className="form-control textbox" placeholder="" disabled />
                                         <label htmlFor="email" className={emailId != "" ? "input-has-value" : ""}>Email Id</label>
                                     </div>
                                 </div>
                                 <div className="col-sm-12 form-group">
                                     <div className="tbox">
-                                        <input type="text" defaultValue={myProfileObjc.address} className="form-control textbox" placeholder=""  disabled onChange={(e) => setAddress(e.target.value)} />
+                                        <input type="text" defaultValue={myProfileObjc.address} className="form-control textbox" placeholder=""  disabled  />
                                         <label htmlFor="address" className={address != "" ? "input-has-value" : ""}>Address</label>
                                     </div>
                                     <p className="form-input-error" >{addressError}</p>
@@ -468,7 +468,7 @@ const ViewBuyer = () => {
                                  <p className="form-input-error"> {stateAndCityError} </p>
                                 <div className="col-sm-12 form-group">
                                     <div className="tbox">
-                                        <input type="text" defaultValue={myProfileObjc.address} className="form-control textbox" placeholder="" disabled onChange={(e) => setLocationName(e.target.value)} />
+                                        <input type="text" defaultValue={myProfileObjc.address} className="form-control textbox" placeholder="" disabled />
                                         <label htmlFor="address" className={locationName != "" ? "input-has-value" : ""}>Location Name</label>
                                     </div>
                                     <p className="form-input-error" >{locationNameError}</p>
@@ -479,39 +479,39 @@ const ViewBuyer = () => {
                                     </div>
                                     <div className="col-sm-12">
                                         <div className="radio input-group privileges">
-                                            <input id="radio-privileges" name="radio" type="radio" value="1" checked={selectPrivilege} disabled onChange={(e) => setUserPrivileges(e.target.value)} />
+                                            <input id="radio-privileges" name="radio" type="radio" value="1" checked={selectPrivilege} disabled  />
                                             <label htmlFor="radio-privileges" className="radio-label">Select Buyer Privileges</label>
                                         </div>
                                         <div className=" row adduserpageforminner">
                                             <div className="col-sm-6 form-group input-group">
-                                                <input type="checkbox" id="buynow" value={buy_now == 0 ? 1 : 0} checked={buy_now == 1 ? true : false} disabled onChange={(e) => setBuyNow(e.target.value)} />
+                                                <input type="checkbox" id="buynow" value={buy_now == 0 ? 1 : 0} checked={buy_now == 1 ? true : false}  />
                                                 <label htmlFor="buynow">Buy now</label>
                                             </div>
                                             <div className="col-sm-6 form-group input-group ">
-                                                <input type="checkbox" id="cancelbid" value={cancel_bid == 0 ? 1 : 0} checked={cancel_bid == 1 ? true : false} disabled onChange={(e) => setCancelBid(e.target.value)} />
+                                                <input type="checkbox" id="cancelbid" value={cancel_bid == 0 ? 1 : 0} checked={cancel_bid == 1 ? true : false}  />
                                                 <label htmlFor="cancelbid">Cancel the bid after 4 hours</label>
                                             </div>
                                             <div className="col-sm-6 form-group input-group ">
-                                                <input type="checkbox" id="bid" value={bid == 0 ? 1 : 0} checked={bid == 1 ? true : false} disabled  onChange={(e) => setBid(e.target.value)} />
+                                                <input type="checkbox" id="bid" value={bid == 0 ? 1 : 0} checked={bid == 1 ? true : false}   />
                                                 <label htmlFor="bid">Bid</label>
                                             </div>
                                             <div className="col-sm-6 form-group input-group ">
-                                                <input type="checkbox" id="proxybid" value={proxy_bid == 0 ? 1 : 0} checked={proxy_bid == 1 ? true : false} disabled onChange={(e) => setProxy_bid(e.target.value)} />
+                                                <input type="checkbox" id="proxybid" value={proxy_bid == 0 ? 1 : 0} checked={proxy_bid == 1 ? true : false} />
                                                 <label htmlFor="proxybid">Proxy Bid</label>
                                             </div>
                                             <div className="col-sm-6 form-group input-group ">
-                                                <input type="checkbox" id="counterbid" value={counter_bid == 0 ? 1 : 0} checked={counter_bid == 1 ? true : false} disabled onChange={(e) => setCounter_bid(e.target.value)} />
+                                                <input type="checkbox" id="counterbid" value={counter_bid == 0 ? 1 : 0} checked={counter_bid == 1 ? true : false}   />
                                                 <label htmlFor="counterbid">Counter Bid</label>
                                             </div>
                                             <div className="col-sm-6 form-group input-group ">
-                                                <input type="checkbox" id="lotfee" value={lot_fee == 0 ? 1 : 0} checked={lot_fee == 1 ? true : false} disabled onChange={(e) => setLot_fee(e.target.value)} />
+                                                <input type="checkbox" id="lotfee" value={lot_fee == 0 ? 1 : 0} checked={lot_fee == 1 ? true : false}   />
                                                 <label htmlFor="lotfee">Lot Fee</label>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="col-sm-12">
                                     <div className="radio input-group noprivileges">
-                                        <input id="radio-noprivileges" name="radio" type="radio" value="0" checked = {deselectPrivilege} disabled onChange={(e) => setUserPrivileges(e.target.value)} />
+                                        <input id="radio-noprivileges" name="radio" type="radio" value="0" checked = {deselectPrivilege}   />
                                         <label htmlFor="radio-noprivileges" className="radio-label">No privileges (Only View)</label>
                                     </div>
                                 </div>

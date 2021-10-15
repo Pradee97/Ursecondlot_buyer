@@ -145,7 +145,7 @@ const InVoice = (props) => {
            <table>			 
              <tr>
                <td colSpan="2"><span>Bill of sale # </span>{billOfSales}</td>
-               <td  class=""><span className="autoWidth pr-1 datel">Date<i className="datelabel_1">(MM/DD/YYYY):</i></span><span class="redText">{Date}</span></td>
+               <td  class=""><span className="autoWidth pr-1 datel">Date Of Purchased<i className="datelabel_1">(MM/DD/YYYY):</i></span><span class="redText">{Date}</span></td>
              </tr>
              <tr>
                <td>
@@ -320,7 +320,7 @@ const InVoice = (props) => {
            <table>			 
              <tr>
                <td colSpan="2"><span>Bill of sale # </span>{billOfSales}</td>
-               <td  class=""><span className="autoWidth pr-1 datel">Date<i className="datelabel_1">(MM/DD/YYYY):</i></span><span class="redText">{Date?.substring(0,10)}</span></td>
+               <td  class=""><span className="autoWidth pr-1 datel">Date Of Purchased<i className="datelabel_1">(MM/DD/YYYY):</i></span><span class="redText">{Date}</span></td>
              </tr>
              <tr>
                <td>
@@ -448,7 +448,7 @@ const InVoice = (props) => {
 
             
                <tr>
-                 <td><span>{billOfSales !== null && billOfSales !== "" ?  "Paid by Date and time" : " " } </span></td>
+                 <td> Paid by Date and time </td>
                  <td><span>{billOfSales !== null && billOfSales !== "" ?  BillOfSaleDate : " " } </span></td>
                </tr>
             

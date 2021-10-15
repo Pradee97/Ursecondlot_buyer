@@ -305,7 +305,7 @@ const MyBids = () => {
                                             </div>
                                             <p class="details"><img src={car} alt="" /><span>{bidsObj.vin_no}</span></p>
                                             <p class="details"><span>Inventory Number- {bidsObj.inventory_no}</span></p>
-                                            <p class="details"><span> {bidsObj.date?.substring(0,10)} {bidsObj.date?.substring(11,19)}</span></p>
+                                            <p class="details"><span> {bidsObj.date}</span></p>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 mybidssellerdetails">
