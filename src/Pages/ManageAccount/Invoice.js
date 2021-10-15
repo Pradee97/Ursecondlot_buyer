@@ -282,8 +282,9 @@ const InVoice = (props) => {
          </div>
       
       <div>
-      <a><p>Paid by Date and time : <span><b>{billOfSales !== null && billOfSales !== "" ?  BillOfSaleDate : " " } </b></span></p></a>
-
+      {billOfSales !== null && billOfSales !== "" ?
+      <a><p>Paid by Date and time : <b>{  BillOfSaleDate  } </b></p></a>
+:""}
         </div>
         </div>
 </div>
@@ -453,7 +454,9 @@ const InVoice = (props) => {
         
          </div>
          <div>
-        <a><p>Paid by Date and time : <span><b>{billOfSales !== null && billOfSales !== "" ?  BillOfSaleDate : " " } </b></span></p></a>
+      {billOfSales !== null && billOfSales !== "" ?
+      <a><p>Paid by Date and time : <b>{  BillOfSaleDate  } </b></p></a>
+:""}
         </div>
 
       </div>
