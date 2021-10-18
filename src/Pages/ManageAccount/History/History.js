@@ -493,7 +493,11 @@ const togglePrint = () => {
       <div class="container" >
         <div class="lotfeeblock col-lg-12">
           <div class="section-title">
-            <h2>history</h2>
+            <h2>history
+            <div>
+                <button  className="printBtn"  type ="button" >Download</button>
+            </div>
+            </h2>
           </div>
           <div class="row">
             
@@ -594,9 +598,7 @@ const togglePrint = () => {
                             </div>
                         </div>
 
-                        <div>
-                          <button  className="printBtn"  type ="button" >Download</button>
-                        </div>
+                        
 
                     <div class="sortBy">
                         <div class="col-sm-12 form-group mr-0 pr-0">  
@@ -830,12 +832,12 @@ const togglePrint = () => {
                                         <td><b>Year</b> </td>
                                         <td><b>Make </b></td>
                                         <td><b>Model </b></td>
-                                        <td><b>Vin No </b></td>
-                                        <td><b>Inventory NO</b> </td>
-                                        <td><b>Gate Pass code </b></td>
-                                        <td><b>Bill of sale  </b></td>
+                                        <td><b>Vin # </b></td>
+                                        <td><b>Inventory #</b> </td>
+                                        <td><b>GPS # </b></td>
+                                        <td><b>BOS # </b></td>
                                         <td><b>Title status</b> </td>
-                                        <td><b>Total Amount</b> </td>
+                                        <td><b>Amount</b> </td>
 
                                         </tr>
                                         </thead>
