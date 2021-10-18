@@ -1,5 +1,5 @@
 import React, {  useState, useEffect } from 'react';
-import ls from 'local-storage';
+import ls, { set } from 'local-storage';
 import API from "../../Services/BaseService";
 import vehicles from '../../assets/img/vehicles.jpg'
 import appstore from '../../assets/img/appstore.png';
@@ -36,6 +36,8 @@ const Cart = () => {
     const [floorMode,setFloorMode] = useState("");
     const [contactFloor,setContactFloor] = useState("");
     const [selectedTotalFloor,setSelectedTotalFloor]= useState("");
+    const [floorContact,setFloorContact] = useState("");
+    const [floorAccount,setFloorAccount] = useState("");
 
 	const toggleLateFee = () => {
 		setIsLateFee(!isLateFee);
@@ -198,7 +200,7 @@ const billofsales =(request) => {
             if(cartDetail?.length>0 && cartDetail.filter(item => (mySelectedCarId.includes(item.car_id)) ).length>0){
                 // console.log("mySelectedCarId.length====",cartDetail.filter(item => !(mySelectedCarId.includes(item.car_id)) ).length)
                 setMySelectedCarDetails(cartDetail.filter(item => (mySelectedCarId.includes(item.car_id))).map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id}}))
-                billofsales(cartDetail.filter(item => (mySelectedCarId.includes(item.car_id))).map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id,"make": data.make, "model": data.model, "image": data.image, "price": data.price,"transportation_charge":data.transportation_charge,"year":data.year,"lot_fee":data.lot_fee,"late_fee":data.late_fee,"buyFee":getFeeDetails(),"credit_limit":data.credit_limit,"total_price":mySelectedCarTotal(),"floor_plan_id":floorMode,}}))
+                billofsales(cartDetail.filter(item => (mySelectedCarId.includes(item.car_id))).map((data)=>{return{"buyer_dealer_id":userDetails.buyer_dealer_id,"car_id":data.car_id,'total_price':data.price,"payment_mode":paymentMode,"active":userDetails.active,"createdBy":userDetails.buyer_id,"updatedBy":userDetails.buyer_id,"make": data.make, "model": data.model, "image": data.image, "price": data.price,"transportation_charge":data.transportation_charge,"year":data.year,"lot_fee":data.lot_fee,"late_fee":data.late_fee,"buyFee":getFeeDetails(),"credit_limit":data.credit_limit,"total_price":mySelectedCarTotal(),"floor_plan_id":floorMode}}))
             }
             else {
                 setMySelectedCarDetails([])
@@ -313,7 +315,12 @@ const billofsales =(request) => {
     const selectFloorPayment=(data)=>{
 
         console.log("check the floor payment selected",data)
-        setFloorMode(data)
+
+        const floor=data.split(",")
+
+        setFloorMode(floor[0])
+        setFloorContact(floor[1])
+        setFloorAccount(floor[2])
         
 
     }
@@ -494,7 +501,7 @@ const billofsales =(request) => {
                             <option value="Select">--  Select  --</option>
                             {contactFloor.length>0?contactFloor.map((item)=>
                              
-                                <option id ={item.contact_name} value={item.floor_plan_id} >{item.company_name} ({item.account_no})</option>
+                                <option id ={item.contact_name} value={` ${item.floor_plan_id},  ${item.company_name},  ${item.account_no}`} >{item.company_name} ({item.account_no})</option>
                             ):""} 
                             </select>        
                         </div>
@@ -502,7 +509,7 @@ const billofsales =(request) => {
                 </div></div>}
 
                         <div class="vehicletotalbtns"> 
-                            <a class="vehicletotal-btns" href="JavaScript:void(0)" disabled={!paymentMode || !floorMode || !mySelectedCarId.length } onClick={()=> paymentMode && floorMode && mySelectedCarId.length>0&& reviewAndCheckout()  }>Review & Checkout</a>
+                            <a class="vehicletotal-btns" href="JavaScript:void(0)" disabled={!paymentMode || !floorMode || !mySelectedCarId.length } onClick={()=> floorContact && floorAccount && paymentMode && floorMode && mySelectedCarId.length>0&& reviewAndCheckout()  }>Review & Checkout</a>
                         </div>
                         <p className="form-input-error">{alertError}</p>
                         
@@ -514,7 +521,7 @@ const billofsales =(request) => {
           {isOpen && <Popup
             isClose={false}
             content={<>
-                <Checkout toggle={togglePopup} paymentCarList={paymentCarList} paymentMode={paymentMode}/>
+                <Checkout toggle={togglePopup} paymentCarList={paymentCarList} paymentMode={paymentMode} floorContact={floorContact} floorAccount={floorAccount}/>
             </>}
             handleClose={togglePopup}
         />}

@@ -24,6 +24,9 @@ const CheckOut = (props) => {
     const [popupActionValue, setPopupActionValue] = useState ("");
     const [popupActionPath, setPopupActionPath] = useState ("")
 	const [paymentMode,setPaymentMode] = useState(props.paymentMode);
+	const [floorContact,setFloorContact] = useState(props.floorContact);
+	const [floorAccount,setFloorAccount] = useState(props.floorAccount);
+	console.log("check the floor contact in the checkout page",props.floorContact)
 
 	console.log("check the props value",paymentCar.late_fee)
 
@@ -33,7 +36,8 @@ const CheckOut = (props) => {
 
 	const billofsales =() => {
 		
-		
+		// console.log("check the request in checkout page",request)
+		// return
 		API.post('billofsales/add', props.paymentCarList).then(res=>{
 
 		console.log("hi checke the redirect",res.data.data)
@@ -127,7 +131,7 @@ const CheckOut = (props) => {
         <div class="section-title mt-0 pt-3 mb-0 revCheHeadBlock">
           <h2>Checkout</h2>
 		  <div className="revCheHead">
-				<h2 className="pl-4">{paymentMode} Payment</h2>
+				<h2 className="pl-4">{paymentMode} Payment , Floor Contact - {floorContact} ({floorAccount})</h2>
 			
 				<h2 className="text-right">Total <span> $ {overAllTotal()}</span></h2>
 
