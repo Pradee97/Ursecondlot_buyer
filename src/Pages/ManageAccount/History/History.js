@@ -494,7 +494,7 @@ const togglePrint = () => {
         <div class="lotfeeblock col-lg-12">
           <div class="section-title">
             <h2>history
-            <div>
+            <div className="downBtn">
                 <button  className="printBtn"  type ="button" >Download</button>
             </div>
             </h2>

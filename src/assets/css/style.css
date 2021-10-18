@@ -8800,3 +8800,9 @@ a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
 .copyImg i{
   margin-left: 5px;
 }
+
+
+.downBtn{
+  font-size: 14px;
+  float: right;
+}
