@@ -8792,3 +8792,11 @@ a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
   display: block;
   width: 100%;
 }
+
+.carcodeIcon.showContent{
+  display: inline-block;
+}
+
+.copyImg i{
+  margin-left: 5px;
+}

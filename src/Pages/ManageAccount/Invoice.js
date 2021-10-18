@@ -127,7 +127,7 @@ const InVoice = (props) => {
        
         <div class="col-lg-12 invoiceBlock">
         <div class="row header">
-                <div class="col-lg-6 header_left"><img src={Logo_final}/></div>
+                <div class="col-lg-6 header_left text-left"><img src={Logo_final}/></div>
                 <div class="col-lg-6 header_right">
                    <p>
                        Fairview Ave, El Monte,US, 91732 <br></br>
@@ -300,9 +300,9 @@ const InVoice = (props) => {
 
 
 <div class = " hideContent">
-   <div class="col-lg-12 invoiceBlock" id = "Print">
+   <div class="col-lg-12 invoiceBlock printInvoice" id = "Print">
         <div class="row header">
-                <div class="col-lg-6 header_left"><img src={Logo_final}/></div>
+                <div class="col-lg-6 header_left text-left"><img src={Logo_final}/></div>
                 <div class="col-lg-6 header_right">
                    <p>
                        Fairview Ave, El Monte,US, 91732 <br></br>

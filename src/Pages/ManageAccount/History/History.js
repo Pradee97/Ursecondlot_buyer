@@ -664,7 +664,7 @@ const togglePrint = () => {
 									
 									{/* <img src={book} onClick={copytoclipboard} alt=""/>  */}
 									{/* <span className="barCodeIcon"><img src={barcode} alt=""  onMouseEnter={() => setIsShown(true)}  onMouseLeave={() => setIsShown(false)}/> </span> */}
-										<div id = {`imgBarCode${index}`} className= "showContent" >
+										<div id = {`imgBarCode${index}`} className= "carcodeIcon showContent" >
                   
                   <img  src={barcode} alt=""  onMouseEnter={() =>document.getElementById(  `showBarCodeDetails${index}` ).setAttribute("class", "showContent")} onMouseLeave={() => document.getElementById(  `showBarCodeDetails${index}` ).setAttribute("class", "hideContent")}/> 
 									
@@ -796,7 +796,7 @@ const togglePrint = () => {
                                 {/* <span>${300 || 0} </span>                             */}
                             </div>
                               <div className="totalActions">
-                              <button onClick={()=>HistoryUpdate(historyDetail.car_id, historyDetail.transportation_charge, historyDetail.transportation, `transporationDiv${historyDetail.car_id}`, `transporationHeader${historyDetail.car_id}`)}>update</button>  
+                              <button onClick={()=>HistoryUpdate(historyDetail.car_id, historyDetail.transportation_charge, historyDetail.transportation, `transporationDiv${historyDetail.car_id}`, `transporationHeader${historyDetail.car_id}`)}>Update</button>  
                               <button onClick={()=>cancelEdit(`transporationDiv${historyDetail.car_id}`,`transporationHeader${historyDetail.car_id}`)}>Cancel</button>    
                               </div>
                                                   
