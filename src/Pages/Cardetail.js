@@ -442,7 +442,7 @@ return(
 	        		<div class="product-dtl">
         				<div class="product-info">
 		        			<div class="product-name">{carDetail[0].year} {carDetail[0].make} {carDetail[0].model}  </div>
-							<p  class="productdes"><span className="greytext">Inventory Number</span> - {carDetail[0].inventory_no}</p>
+							<p  class="productdes"><span className="greytext">Inventory #</span> - {carDetail[0].inventory_no}</p>
 							<p class="productdes">{carDetail[0].car_description}</p>
 		        			<div class="d-flex align-items-center">
 									<p class="details"><img src={speedometer}  alt=""/><span>{carDetail[0].miles} m</span></p>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -480,7 +480,7 @@ return(
 	        			<div class="row">
 						
 	        				<div class="col-md-12 carpoints">
-								<div className="label">VIN Number</div>		  
+								<div className="label">VIN # -</div>		  
 								<div class="carpoint">
 								
 									<img src={car}  alt=""/>

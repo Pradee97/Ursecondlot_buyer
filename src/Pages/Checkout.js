@@ -26,6 +26,8 @@ const CheckOut = (props) => {
 	const [paymentMode,setPaymentMode] = useState(props.paymentMode);
 	const [floorContact,setFloorContact] = useState(props.floorContact);
 	const [floorAccount,setFloorAccount] = useState(props.floorAccount);
+    const [creditLimit,setCreditLimit] = useState(props.creditLimit);
+
 	console.log("check the floor contact in the checkout page",props.floorContact)
 
 	console.log("check the props value",paymentCar.late_fee)
@@ -131,7 +133,7 @@ const CheckOut = (props) => {
         <div class="section-title mt-0 pt-3 mb-0 revCheHeadBlock">
           <h2>Checkout</h2>
 		  <div className="revCheHead">
-				<h2 className="pl-4">{paymentMode} Payment , Floor Contact - {floorContact} ({floorAccount})</h2>
+				<h2 className="pl-4">{paymentMode} Payment , Floor Contact - {floorContact} ({floorAccount}) Credit Limit - {creditLimit}</h2>
 			
 				<h2 className="text-right">Total <span> $ {overAllTotal()}</span></h2>
 

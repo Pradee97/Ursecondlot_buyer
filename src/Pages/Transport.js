@@ -210,7 +210,7 @@ return (
 						 </div>
   
 						 <div class="form-group ">
-							 <label class="control-label" for="date">VIN No</label> 
+							 <label class="control-label" for="date">VIN #</label> 
 							 <input class="form-control border-end-0 " type="text"  id="date" placeholder="Enter Last 6 Digit"
 							 onChange={(e) => setVINNumber(e.target.value)}/>
 						  
@@ -254,7 +254,7 @@ return (
 							<div class="col-lg-12 col-md-12">
 								<div class="pickupdetailcontent">
 									<h3>{pickUp.year} {pickUp.make} {pickUp.model}({pickUp.vin_no})  </h3>
-									<h4>Inventory Number- {pickUp.inventory_no}</h4>
+									<h4>Inventory # - {pickUp.inventory_no}</h4>
 								</div>						
 							</div>							
 						</div>
@@ -298,7 +298,7 @@ return (
 								<div class="col-lg-4 col-md-4">
 									<div class="modeldetail">
 										<h3>{pickUp.year} {pickUp.make} {pickUp.model} ({pickUp.vin_no})</h3>
-										<h4>Inventory Number- {pickUp.inventory_no}</h4>
+										<h4>Inventory # - {pickUp.inventory_no}</h4>
 									</div>						
 								</div>
 								
@@ -369,7 +369,7 @@ return (
 								<div class="col-lg-4 col-md-4">
 									<div class="modeldetail">
 										<h3> {pickUp.year} {pickUp.make} {pickUp.model} ({pickUp.vin_no})</h3>
-										<h4>Inventory Number- {pickUp.inventory_no}</h4>
+										<h4>Inventory # - {pickUp.inventory_no}</h4>
 									</div>						
 								</div>
 								<div class="col-lg-3 col-md-3">

@@ -522,7 +522,7 @@ const togglePrint = () => {
                        </div>
 
                        <div class="form-group ">
-                           <label class="control-label" for="date">VIN No</label> 
+                           <label class="control-label" for="date">VIN #</label> 
                            <input class="form-control border-end-0 " type="text"  id="date" placeholder="Enter Last 6 Digit"
                            onChange={(e) => setVINNumber(e.target.value)}/>
                         
@@ -655,7 +655,7 @@ const togglePrint = () => {
                           <div class="row" id = "Vin">
 						
 	        				<div class="col-md-12 carpoints">
-								<div className="label">VIN Number</div>		  
+								<div className="label">VIN #</div>		  
 								<div class="carpoint">
 								
 									<img src={car}  alt=""/>
@@ -705,7 +705,7 @@ const togglePrint = () => {
                   </div>
                   <div class="col-lg-5 sliderBlock">
                     <div className="tophead">
-                    <p>Inventory Number - <span>{historyDetail.inventory_no}</span></p>
+                    <p>Inventory # - <span>{historyDetail.inventory_no}</span></p>
                     
                     <div class="customCheckbox cbox">
                                         {/* <input className={"paySeparately"+index}  value={paySeparately[index]=='no'? "yes":"no"} type="checkbox" id={"vehiclepayseparat"+index} checked = {paySeparately[index] =='yes'?true:false} onChange={(e)=>{paySeparately[index]='yes'}}/><label for={"vehiclepayseparat"+index}>You Want To Pay Separately{paySeparately[index]}</label> */}
