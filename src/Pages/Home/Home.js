@@ -23,7 +23,8 @@ const Home = () => {
 		  </div>
 
           <div className="d-lg-flex">
-          <button className="btn-get-started scrollto" type="button" onClick={togglePopup}>Become a Dealer</button>
+          {localStorage.getItem("islogedIn") === "true" ?"":
+          <button className="btn-get-started scrollto" type="button" onClick={togglePopup}>Become a Dealer</button>}
    
           {isOpen && <Popup
             isClose={true}
