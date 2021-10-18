@@ -145,7 +145,7 @@ const InVoice = (props) => {
            <table>			 
              <tr>
                <td colSpan="2"><span>Bill of sale # </span>{billOfSales}</td>
-               <td  class=""><span className="autoWidth pr-1 datel">Date Of Purchased<i className="datelabel_1">(MM/DD/YYYY):</i></span><span class="redText">{Date}</span></td>
+               <td  class=""><span className="autoWidth pr-1 datel">Date Of Purchased<i className="datelabel_1">(MM/DD/YYYY): </i></span><span class="redText">{Date}</span></td>
              </tr>
              <tr>
                <td>
@@ -162,10 +162,10 @@ const InVoice = (props) => {
              <tr>
                <td><span>Gate Pass Code : </span>{gatePassId}</td>
                <td >
-                 <span>Inventory Number: {invNo} </span> 
+                 <span>Inventory # : {invNo} </span> 
                </td>
                 <td >
-                  <span> VIN Number: {vinNo}</span>
+                  <span> VIN # : {vinNo}</span>
 
                </td>
              </tr>			  

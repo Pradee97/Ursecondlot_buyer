@@ -38,6 +38,8 @@ const Cart = () => {
     const [selectedTotalFloor,setSelectedTotalFloor]= useState("");
     const [floorContact,setFloorContact] = useState("");
     const [floorAccount,setFloorAccount] = useState("");
+    const [creditLimit,setCreditLimit] = useState("");
+
 
 	const toggleLateFee = () => {
 		setIsLateFee(!isLateFee);
@@ -321,6 +323,7 @@ const billofsales =(request) => {
         setFloorMode(floor[0])
         setFloorContact(floor[1])
         setFloorAccount(floor[2])
+        setCreditLimit(floor[3])
         
 
     }
@@ -415,7 +418,7 @@ const billofsales =(request) => {
                                  <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>HistoryEdit(`transporationDiv${cartDetail.car_id}`,`transporationHeader${cartDetail.car_id}`)}> Edit Transportation</a></p>
 
 
-                                    <h3>Inventory Number - {cartDetail.inventory_no}</h3>
+                                    <h3>Inventory # - {cartDetail.inventory_no}</h3>
                                     <h4>Vechile Price <span>$ {(Number(cartDetail.price)+(Number(cartDetail.lot_fee)))}</span></h4>
                                     <h4>Buy Fee <span>$ {getFeeDetails(cartDetail.price)}</span></h4>
                                     <h4>Other Charges <span>$ 0</span></h4>
@@ -501,7 +504,7 @@ const billofsales =(request) => {
                             <option value="Select">--  Select  --</option>
                             {contactFloor.length>0?contactFloor.map((item)=>
                              
-                                <option id ={item.contact_name} value={` ${item.floor_plan_id},  ${item.company_name},  ${item.account_no}`} >{item.company_name} ({item.account_no})</option>
+                                <option id ={item.contact_name} value={` ${item.floor_plan_id},  ${item.company_name},  ${item.account_no},  ${item.credit_limit}`} >{item.company_name} ({item.account_no})</option>
                             ):""} 
                             </select>        
                         </div>
@@ -509,7 +512,7 @@ const billofsales =(request) => {
                 </div></div>}
 
                         <div class="vehicletotalbtns"> 
-                            <a class="vehicletotal-btns" href="JavaScript:void(0)" disabled={!paymentMode || !floorMode || !mySelectedCarId.length } onClick={()=> floorContact && floorAccount && paymentMode && floorMode && mySelectedCarId.length>0&& reviewAndCheckout()  }>Review & Checkout</a>
+                            <a class="vehicletotal-btns" href="JavaScript:void(0)" disabled={!paymentMode || !floorMode || !mySelectedCarId.length } onClick={()=> floorContact && floorAccount && creditLimit && paymentMode && floorMode  && mySelectedCarId.length>0&& reviewAndCheckout()  }>Review & Checkout</a>
                         </div>
                         <p className="form-input-error">{alertError}</p>
                         
@@ -521,7 +524,7 @@ const billofsales =(request) => {
           {isOpen && <Popup
             isClose={false}
             content={<>
-                <Checkout toggle={togglePopup} paymentCarList={paymentCarList} paymentMode={paymentMode} floorContact={floorContact} floorAccount={floorAccount}/>
+                <Checkout toggle={togglePopup} paymentCarList={paymentCarList} paymentMode={paymentMode} floorContact={floorContact} floorAccount={floorAccount} creditLimit= {creditLimit}/>
             </>}
             handleClose={togglePopup}
         />}
