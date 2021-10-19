@@ -63,14 +63,14 @@ const LateFee = (props) => {
                             <h2>Alert</h2>
                             <i class="icofont-warning"></i>
                         </div>
-
-                        <p>If you dont make a payment, you will be charged late fee $ 75</p>
+                        <p>Please make the pending payments</p>
+                        
 
                     </div>
 
                     :
                     <div class="section-title">
-                        <p>Please make the pending payments</p>
+                        <p>If you dont make a payment, you will be charged late fee $ 75</p>
                         <div class="section-title">
 
                             <h2>Alert</h2>
