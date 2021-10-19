@@ -195,14 +195,14 @@ const handleDateChangeRaw = (e) => {
   e.preventDefault();
   }  
   
-useEffect (()=>{
-    // console.log("id value",id)
-    let intervalId;
-    intervalId = setInterval(() => {
-      historyDetails();
-        }, 30000)
-    return () => clearInterval(intervalId);
-    },[])
+// useEffect (()=>{
+//     // console.log("id value",id)
+//     let intervalId;
+//     intervalId = setInterval(() => {
+//       historyDetails();
+//         }, 30000)
+//     return () => clearInterval(intervalId);
+//     },[])
 
   const historyOrder =() =>{
 
@@ -764,7 +764,7 @@ const togglePrint = () => {
                   
                   <div class="col-lg-4 priceBlock">
                     <p className="pdate">Purchased from <span className="redText">{historyDetail.dealer_type}</span></p>
-                    <p class="date ml-0"><span className="datelabel">Date Of Purchased <i className="dateFormat">(MM/DD/YYYY)</i></span>  <span className="redText">{historyDetail.sold_date}</span></p>
+                    <p class="date ml-0"><span className="datelabel">Date Of Purchased </span>  <span className="redText">{historyDetail.sold_date}</span></p>
                     
                     <div class="vehicleimgright col-lg-12">
                       <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>HistoryEdit(`transporationDiv${historyDetail.car_id}`,`transporationHeader${historyDetail.car_id}`)}>{historyDetail.bill_of_sales_id !== null && historyDetail.bill_of_sales_id !== "" ? "": "Edit Transportation" }</a></p>
@@ -869,9 +869,9 @@ const togglePrint = () => {
               </div>})
                     :""}       
                      
-           {historyDetail.length >10 ? historyDetail.slice(0,1)
+           {historyDetail.length >1 ? historyDetail.slice(0,1)
               .map(() =>
-          <div><a class="load-more-btn" href="#">Load More</a></div>):""}
+          <div><a class="load-more-btn" onClick= {historyDetails}>Load More</a></div>):""}
         </div>
       </div>
      

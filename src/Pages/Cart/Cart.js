@@ -413,12 +413,13 @@ const billofsales =(request) => {
                                 </div>
 
                                 <div class="vehicleimgright col-lg-8">
-                                <h3><i className="dateFormat">(MM/DD/YYYY)</i>{cartDetail.sold_date} </h3>
+                                <h4>Inventory #  {cartDetail.inventory_no}</h4>
+                                
                                  {/* <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>HistoryEdit(`transporationDiv${cartDetail.car_id}`,`transporationHeader${cartDetail.car_id}`)}>{cartDetail.bill_of_sales_id !== null && cartDetail.bill_of_sales_id !== "" ? "": "Edit Transportation" }</a></p> */}
                                  <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>HistoryEdit(`transporationDiv${cartDetail.car_id}`,`transporationHeader${cartDetail.car_id}`)}> Edit Transportation</a></p>
 
 
-                                    <h3>Inventory # - {cartDetail.inventory_no}</h3>
+                                    <h4 className="dateFormat">Date Of Purchased : {cartDetail.sold_date} </h4>
                                     <h4>Vechile Price <span>$ {(Number(cartDetail.price)+(Number(cartDetail.lot_fee)))}</span></h4>
                                     <h4>Buy Fee <span>$ {getFeeDetails(cartDetail.price)}</span></h4>
                                     <h4>Other Charges <span>$ 0</span></h4>
