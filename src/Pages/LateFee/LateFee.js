@@ -191,10 +191,10 @@ const LateFee = (props) => {
                         <i class="icofont-warning"></i>
                         
                         <div>
-                           {/* {console.log("===days===>",lateFee)}
+                           {console.log("===days===>",lateFee)}
                            {Number(lateFee.days)>1?
                            <a > <span> Days: {lateFee.days}</span> </a> 
-                           :""} */}
+                           :""}
                                 
                             
                         </div>
