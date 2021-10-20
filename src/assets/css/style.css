@@ -8169,6 +8169,7 @@ ul#progressbar li p{
   height: 200px;
   max-width: 100%;
   object-fit: cover;
+  border: #f1f1f1 solid 1px;
 }
 
 .models-box .checkoutReview .vehiclesheadspaydetails{
@@ -8516,7 +8517,7 @@ a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
 
 
 .checkoutpage .models-box .contentBlock{
-  padding-top: 90px;
+  padding-top: 100px;
 }
 
 
@@ -8806,3 +8807,22 @@ a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
   font-size: 14px;
   float: right;
 }
+.floorDetails{
+  text-align: left;
+  padding-left: 35px;
+  color: #002768;
+}
+
+.floorDetails .label{
+  color: #999;
+}
+
+.cartTotal {
+  font-size: 16px;
+    font-weight: 600;
+    padding-right: 30px;
+    color: #002768;
+}
+
+
+
