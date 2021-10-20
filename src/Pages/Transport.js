@@ -55,6 +55,12 @@ const Transport = () => {
 	const [isLateFee, setIsLateFee] = useState(false);
   	const [lateFeeValue, setLateFeeValue] = useState(0);
 
+	const [pickUpCount,setPickUpCount] = useState("");
+	const [inTransitCount,setInTransitCount] = useState("");
+	const [deliveredCount,setDeliveredCount] = useState("");
+	const [transitLength,setTransitLength] =  useState("");
+	const [deliveredLength,setDeliveredLength] = useState("");
+
 	const toggleLateFee = () => {
 		setIsLateFee(!isLateFee);
     }
@@ -72,7 +78,7 @@ const Transport = () => {
 
         API.post("transportDetails/condition", request).then(response=>{
 
-			console.log("pickup check the value", response.data.data)
+			console.log("pickup check the value", response.data.data.length)
 			setPickUp(response.data.data)
 			setLoadValuePickup(response.data.data.length>0 ? response.data.data.length+10 : 10)
 			setLoading(false);
@@ -92,8 +98,9 @@ const Transport = () => {
 
         API.post("transportDetails/condition", request).then(response=>{
 
-			console.log("pickup check the value", response.data.data)
+			console.log("pickup check the value", response.data.data.length)
 			setPickUp(response.data.data)
+			setTransitLength(response.data.data.length)
 			setLoadValueTransit(response.data.data.length>0 ? response.data.data.length+10 : 10)
 			setLoading(false);
            
@@ -114,6 +121,7 @@ const Transport = () => {
 
 			console.log("pickup check the value", response.data.data)
 			setPickUp(response.data.data)
+			setDeliveredLength(response.data.data.length)
 			setLoadValueDelivered(response.data.data.length>0 ? response.data.data.length+10 : 10)
 			setLoading(false);
            
@@ -169,10 +177,29 @@ const Transport = () => {
 		}).catch(err=>{console.log(err);});
 	}
 
+	const countDetails = () =>{
+
+		let request = {
+			buyer_dealer_id : JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
+		}
+	  
+		API.post("countDetails/condition", request).then(response=>{
+
+			console.log(" count details check the value", response.data.data.pickedup_count)
+			
+			setPickUpCount(response.data.data.pickedup_count)
+			setInTransitCount(response.data.data.intransit_count)
+			setDeliveredCount(response.data.data.delivered_count)
+		  
+			
+		});
+	  }
+
 	useEffect (() =>{
 
 		getlateFee();
         Pickup();
+		countDetails();
 		
     }, []);
 
@@ -279,9 +306,11 @@ return (
 						</div>
 					</div>):"No data found"}
 					
+					{pickUp?.length>0 && transportFlag==="Pickup"? pickUp.slice(0,1)
+            	.map(() =>   
 					<div class="text-center">
-						<a href="JavaScript:void(0)" onClick={pickupCall} class="load-more-btn">Load More</a>
-					</div>
+						<a href="JavaScript:void(0)" onClick={pickupCall} class={pickUp.length !== pickUpCount ?"load-more-btn":""}>{pickUp.length !== pickUpCount ?"Load More":""}</a>
+					</div>):""}
 				</div>
 				
 				<div id="tab2" style={{display:`${tab2 === ""? "none": "block"}`}} class="tab_content">
@@ -350,9 +379,12 @@ return (
 							</div>
 						</div>):"No data found"}				
 					
+
+						{pickUp?.length>0 && transportFlag==="In Transit"? pickUp.slice(0,1)
+            	.map((pickUp) => 
 					<div class="text-center">
-						<a href="JavaScript:void(0)" onClick={transitCall} class="load-more-btn">Load More</a>
-					</div>
+						<a href="JavaScript:void(0)" onClick={transitCall} class={transitLength !== inTransitCount ?"load-more-btn":""}>{transitLength !== inTransitCount ?"Load More":""}</a>
+					</div>):""}
 				</div>
 							
 				<div id="tab3" style={{display:`${tab3 === ""? "none": "block"}`}} class="tab_content">
@@ -420,9 +452,11 @@ return (
 							</div>
 						</div>):"No data found"}
 
+						{pickUp?.length>0 && transportFlag==="Delivered"? pickUp.slice(0,1)
+            	.map((pickUp) =>   
 					<div class="text-center">
-						<a href="JavaScript:void(0)" onClick={deliverCall} class="load-more-btn">Load More</a>
-					</div>
+						<a href="JavaScript:void(0)" onClick={deliverCall} class={deliveredLength !== deliveredCount ?"load-more-btn":""}>{deliveredLength !== deliveredCount ?"Load More":""}</a>
+					</div>):""}
 				</div>
 			</div>
 		</div>
