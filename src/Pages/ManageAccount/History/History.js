@@ -67,6 +67,8 @@ import LateFee from '../../../Pages/LateFee/LateFee';
 
   const [isLateFee, setIsLateFee] = useState(false);
   	const [lateFeeValue, setLateFeeValue] = useState(0);
+    const [noCarsSearch,setNoCarsSearch] = useState(0);
+    const [totalHistoryCount,setTotalHistoryCount] = useState(0)
 
 	const toggleLateFee = () => {
 		setIsLateFee(!isLateFee);
@@ -177,7 +179,7 @@ if(scheduleDate){
 
           console.log("history Search", response.data.data)
           setHistoryDetail(response.data.data)
-          setNoCars(response.data.data.length)
+          setNoCarsSearch(response.data.data.length)
           setLoadValueSearch(response.data.data.length);
           // setHistorySearch(response.data.data)
         }); 
@@ -477,9 +479,27 @@ const togglePrint = () => {
         
           }).catch(err=>{console.log(err);});
         }
+
+        const countDetails = () =>{
+
+          let request = {
+              buyer_dealer_id : JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
+          }
+        
+          API.post("countDetails/condition", request).then(response=>{
+
+              console.log(" count details check the value", response.data.data.history_count)
+              
+              setTotalHistoryCount(response.data.data.history_count)
+
+            
+              
+          });
+        }
       
           useEffect (() =>{
       
+          countDetails();
           getlateFee();      
           
           }, []);      
@@ -497,8 +517,12 @@ const togglePrint = () => {
             <div className="downBtn">
                 <button  className="printBtn"  type ="button" >Download</button>
             </div>
+            <div class="hisHead"> <p>{noCars} Vehicles Purchased</p></div>
             </h2>
+            
+                 
           </div>
+         
           <div class="row">
             
           <div class="searchlistform col-lg-12">
@@ -585,7 +609,9 @@ const togglePrint = () => {
                     {/* <button  className="printBtn"  type ="button" onClick= {printPage}>Download</button> */}
                   
                   <div class="hisHead">
-                    <p>{noCars} Vehicles Purchased</p>
+                  {noCarsSearch >0?
+                  <p>{noCarsSearch} Vehicles Found</p>: 
+                   ""}
                     <div class="row">				
                             <div class="vehiclepaycheckbox col-lg-12 mt-4">
                                 <div class="form-group input-group pb-0 mb-0 pull-right cbox">
@@ -869,9 +895,8 @@ const togglePrint = () => {
               </div>})
                     :""}       
                      
-           {historyDetail.length >1 ? historyDetail.slice(0,1)
-              .map(() =>
-          <div><a class="load-more-btn" onClick= {historyDetails}>Load More</a></div>):""}
+          {historyDetail.length>9?historyDetail.slice(0,1).map(()=>
+          <div><a class="load-more-btn" onClick= {historyDetails}>{historyDetail.length !== totalHistoryCount?"Load More":""}</a></div>):""}
         </div>
       </div>
      
