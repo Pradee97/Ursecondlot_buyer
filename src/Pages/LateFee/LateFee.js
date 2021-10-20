@@ -68,15 +68,16 @@ const LateFee = (props) => {
                 </div>
                 
                 <div>
-                    <div>
+                    {/* <div>
                         {lateFee.days>1?
                             <a > {lateFee.days== null || lateFee.days== "" ? "" : "Days: "  (lateFee.days)} </a>:
                             <a>  {lateFee.days== null || lateFee.days== "" ? "" : "Day: "  (lateFee.days)}</a>
                         }
-                    </div>
+                    </div> */}
+                    
 
                     <div class= {(lateFee.time!==null && lateFee.time < 5000)?"countownBlock":""} >
-                        <label>Hours:Minutes:Seconds - </label>
+                    <label>Days:Hours:Minutes:Seconds - {lateFee.days} </label>:
                     <Countdown date={Date.now() + (lateFee.time!==null && lateFee.time < 5000 ? lateFee.time*60*1000 :0)  } renderer={renderer} />
                     </div>
                 </div>
