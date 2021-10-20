@@ -47,7 +47,7 @@ const CheckOut = (props) => {
 		if (res.data.success) {
 			setToggleCheckoutPopupOpen(false);
 			setAlertImg(checkImg);
-			setAlertMessage("Thank you so much for doing business with Ur 2nd Lot")
+			setAlertMessage("Good Luck with your product. We will contact your financial institutions to get approve between the working hours 9 to 5 central time.We will notify you by email and text about gate pass")
 			// props.getMakeBitValue(carHighBid)
 			
 		} else {
@@ -133,8 +133,9 @@ const CheckOut = (props) => {
         <div class="section-title mt-0 pt-3 mb-0 revCheHeadBlock">
           <h2>Checkout</h2>
 		  <div className="revCheHead">
-				<h2 className="pl-4">{paymentMode} Payment </h2>
-					<h2> Bank Name - {floorContact}, Account Number - {floorAccount}, Credit Limit - {creditLimit}</h2>
+				<h2 className="pl-4">{paymentMode} Payment , Credit Limit - {creditLimit} </h2>
+				{floorContact!=null ||floorContact!=""?
+					<h2> Bank Name - {floorContact}, Account Number - {floorAccount}</h2>:""}
 			
 				<h2 className="text-right">Total <span> $ {overAllTotal()}</span></h2>
 
