@@ -227,6 +227,10 @@ const billofsales =(request) => {
         }
         else{
             setFloorSelector(false)
+            setFloorMode("")
+            setFloorContact("")
+            setFloorAccount("")
+            setCreditLimit("")
         }
         setPaymentMode(data)
     }
@@ -353,6 +357,15 @@ const billofsales =(request) => {
       
 		
     }, []);
+
+    const checkAndRevCall = () => {
+        if(floorSelector){
+            floorContact && floorAccount && creditLimit &&  floorMode &&  paymentMode && mySelectedCarId.length>0&& reviewAndCheckout() 
+        }
+        else {
+            paymentMode && mySelectedCarId.length>0&& reviewAndCheckout() 
+        }
+    }
 
     return (
         <div>
@@ -513,7 +526,7 @@ const billofsales =(request) => {
                 </div></div>}
 
                         <div class="vehicletotalbtns"> 
-                            <a class="vehicletotal-btns" href="JavaScript:void(0)" disabled={!paymentMode || !floorMode || !mySelectedCarId.length } onClick={()=> floorContact && floorAccount && creditLimit && paymentMode && floorMode  && mySelectedCarId.length>0&& reviewAndCheckout()  }>Review & Checkout</a>
+                            <a class="vehicletotal-btns" href="JavaScript:void(0)" disabled={!paymentMode || (floorSelector && !floorMode ) || !mySelectedCarId.length } onClick={checkAndRevCall }>Review & Checkout</a>
                         </div>
                         <p className="form-input-error">{alertError}</p>
                         
