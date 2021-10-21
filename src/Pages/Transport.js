@@ -306,7 +306,7 @@ return (
 						</div>
 					</div>):"No data found"}
 					
-					{pickUp?.length>0 && transportFlag==="Pickup"? pickUp.slice(0,1)
+					{pickUp?.length>=10 && transportFlag==="Pickup"? pickUp.slice(0,1)
             	.map(() =>   
 					<div class="text-center">
 						<a href="JavaScript:void(0)" onClick={pickupCall} class={pickUp.length !== pickUpCount ?"load-more-btn":""}>{pickUp.length !== pickUpCount ?"Load More":""}</a>
@@ -380,7 +380,7 @@ return (
 						</div>):"No data found"}				
 					
 
-						{pickUp?.length>0 && transportFlag==="In Transit"? pickUp.slice(0,1)
+						{pickUp?.length>=10 && transportFlag==="In Transit"? pickUp.slice(0,1)
             	.map((pickUp) => 
 					<div class="text-center">
 						<a href="JavaScript:void(0)" onClick={transitCall} class={transitLength !== inTransitCount ?"load-more-btn":""}>{transitLength !== inTransitCount ?"Load More":""}</a>
@@ -452,7 +452,7 @@ return (
 							</div>
 						</div>):"No data found"}
 
-						{pickUp?.length>0 && transportFlag==="Delivered"? pickUp.slice(0,1)
+						{pickUp?.length>=10 && transportFlag==="Delivered"? pickUp.slice(0,1)
             	.map((pickUp) =>   
 					<div class="text-center">
 						<a href="JavaScript:void(0)" onClick={deliverCall} class={deliveredLength !== deliveredCount ?"load-more-btn":""}>{deliveredLength !== deliveredCount ?"Load More":""}</a>

@@ -68,7 +68,10 @@ import LateFee from '../../../Pages/LateFee/LateFee';
   const [isLateFee, setIsLateFee] = useState(false);
   	const [lateFeeValue, setLateFeeValue] = useState(0);
     const [noCarsSearch,setNoCarsSearch] = useState(0);
-    const [totalHistoryCount,setTotalHistoryCount] = useState(0)
+    const [totalHistoryCount,setTotalHistoryCount] = useState(0);
+
+    const [historySearchCount,setHistorySearchCount] = useState(false);
+    const [searchLoadMore,setSearchLoadMore]=useState(false);
 
 	const toggleLateFee = () => {
 		setIsLateFee(!isLateFee);
@@ -181,6 +184,7 @@ if(scheduleDate){
           setHistoryDetail(response.data.data)
           setNoCarsSearch(response.data.data.length)
           setLoadValueSearch(response.data.data.length);
+          setHistorySearchCount(response.data.history_count)
           // setHistorySearch(response.data.data)
         }); 
   
@@ -502,7 +506,20 @@ const togglePrint = () => {
           countDetails();
           getlateFee();      
           
-          }, []);      
+          }, []); 
+          
+          const loadMoreDetails = () =>{
+
+            if(historySearchCount==false){
+              historyDetails()
+      
+            }
+            else{
+              searchCarDetail()
+      
+            }
+      
+            }
 
     return (
       <div>
@@ -517,7 +534,7 @@ const togglePrint = () => {
             <div className="downBtn">
                 <button  className="printBtn"  type ="button" >Download</button>
             </div>
-            <div class="hisHead"> <p>{noCars} Vehicles Purchased</p></div>
+            <div class="hisHead"> <p>{noCars}/{totalHistoryCount} Vehicles Purchased</p></div>
             </h2>
             
                  
@@ -610,7 +627,7 @@ const togglePrint = () => {
                   
                   <div class="hisHead">
                   {noCarsSearch >0?
-                  <p>{noCarsSearch} Vehicles Found</p>: 
+                  <p>{noCarsSearch}/{historySearchCount} Vehicles Found</p>: 
                    ""}
                     <div class="row">				
                             <div class="vehiclepaycheckbox col-lg-12 mt-4">
@@ -895,8 +912,9 @@ const togglePrint = () => {
               </div>})
                     :""}       
                      
-          {historyDetail.length>9?historyDetail.slice(0,1).map(()=>
-          <div><a class="load-more-btn" onClick= {historyDetails}>{historyDetail.length !== totalHistoryCount?"Load More":""}</a></div>):""}
+          {historyDetail.length>=10?historyDetail.slice(0,1).map(()=>
+          <div><a class={historyDetail.length !== totalHistoryCount && noCarsSearch !== historySearchCount ?"load-more-btn":""} onClick= {loadMoreDetails}>{historyDetail.length !== totalHistoryCount && noCarsSearch !== historySearchCount ?"Load More":""}</a></div>
+          ):""} 
         </div>
       </div>
      
