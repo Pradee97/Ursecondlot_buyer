@@ -27,6 +27,7 @@ const CheckOut = (props) => {
 	const [floorContact,setFloorContact] = useState(props.floorContact);
 	const [floorAccount,setFloorAccount] = useState(props.floorAccount);
     const [creditLimit,setCreditLimit] = useState(props.creditLimit);
+	const [buyerCreditLimit,setBuyerCreditLimit] = useState(props.buyerCreditLimit);
 
 	console.log("check the floor contact in the checkout page",props.floorContact)
 
@@ -135,9 +136,11 @@ const CheckOut = (props) => {
 			<div className="revCheHead floorDetailsBlock">
 				<div class="row">
 					<div className="col-lg-6 floorDetails">
-						{floorContact!=null ||floorContact!=""?
-						<p> <span class="label"> Bank Name - </span> {floorContact},  <span class="label">Account Number -</span> {floorAccount}</p>:""}
-						<p className="text-left"><span class="label">Credit Limit - </span>{creditLimit},  <span class="label">Payment Mode - </span> {paymentMode} Payment   </p>
+						
+						<p className="text-left"> <span class="label">Payment Mode - </span> {paymentMode}  </p>
+
+						{floorContact && floorAccount!=null || floorContact && floorAccount!=""?
+						<p> <span class="label"> Bank Name - </span> {floorContact},  <span class="label">Account Number -</span> {floorAccount}, <span class="label">Credit Limit - </span>{creditLimit} </p>:""}
 						
 					</div>
 					<div className="col-lg-6 cartTotal">

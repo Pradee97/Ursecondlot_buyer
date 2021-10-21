@@ -39,7 +39,7 @@ const Cart = () => {
     const [floorContact,setFloorContact] = useState("");
     const [floorAccount,setFloorAccount] = useState("");
     const [creditLimit,setCreditLimit] = useState("");
-
+    const [buyerCreditLimit,setBuyerCreditLimit] = useState("");
 
 	const toggleLateFee = () => {
 		setIsLateFee(!isLateFee);
@@ -64,7 +64,8 @@ const Cart = () => {
                 setCartDetail(response.data.data.map(data=> {return {...data, isChecked:true}}))
                  setMySelectedCarId(response.data.data.map(data=>data.car_id))
             }
-           
+            setBuyerCreditLimit(response.data.data[0].credit_limit)
+            console.log("check the credit limit in the cart page",response.data.data[0].credit_limit)
             setNumberCars(response.data.data.length)
             setLoading(false);
         });
@@ -363,7 +364,7 @@ const billofsales =(request) => {
             floorContact && floorAccount && creditLimit &&  floorMode &&  paymentMode && mySelectedCarId.length>0&& reviewAndCheckout() 
         }
         else {
-            paymentMode && mySelectedCarId.length>0&& reviewAndCheckout() 
+            paymentMode && buyerCreditLimit && mySelectedCarId.length>0&& reviewAndCheckout() 
         }
     }
 
