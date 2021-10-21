@@ -137,10 +137,10 @@ const CheckOut = (props) => {
 				<div class="row">
 					<div className="col-lg-6 floorDetails">
 						
-						<p className="text-left"> <span class="label">Payment Mode - </span> {paymentMode} Payment  , <span class="label">Credit Limit - </span>{buyerCreditLimit} </p>
+						<p className="text-left"> <span class="label">Payment Mode - </span> {paymentMode}  </p>
 
 						{floorContact && floorAccount!=null || floorContact && floorAccount!=""?
-						<p> <span class="label"> Bank Name - </span> {floorContact},  <span class="label">Account Number -</span> {floorAccount}</p>:""}
+						<p> <span class="label"> Bank Name - </span> {floorContact},  <span class="label">Account Number -</span> {floorAccount}, <span class="label">Credit Limit - </span>{creditLimit} </p>:""}
 						
 					</div>
 					<div className="col-lg-6 cartTotal">

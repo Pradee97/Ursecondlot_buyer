@@ -539,7 +539,7 @@ const billofsales =(request) => {
           {isOpen && <Popup
             isClose={false}
             content={<>
-                <Checkout toggle={togglePopup} paymentCarList={paymentCarList} paymentMode={paymentMode} floorContact={floorContact} floorAccount={floorAccount} creditLimit= {creditLimit} buyerCreditLimit={buyerCreditLimit}/>
+                <Checkout toggle={togglePopup} paymentCarList={paymentCarList} paymentMode={paymentMode} floorContact={floorContact} floorAccount={floorAccount} creditLimit= {creditLimit}/>
             </>}
             handleClose={togglePopup}
         />}
