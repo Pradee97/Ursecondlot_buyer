@@ -8824,5 +8824,8 @@ a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
     color: #002768;
 }
 
+.paymentMode{
+  font-weight: 700;
+}
 
 
