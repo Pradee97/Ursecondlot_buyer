@@ -534,7 +534,7 @@ const togglePrint = () => {
             <div className="downBtn">
                 <button  className="printBtn"  type ="button" >Download</button>
             </div>
-            <div class="hisHead"> <p>{noCars}/{totalHistoryCount} Vehicles Purchased</p></div>
+            <div class="hisHead"> <p>{noCars} of {totalHistoryCount} Vehicles Purchased</p></div>
             </h2>
             
                  
@@ -627,7 +627,7 @@ const togglePrint = () => {
                   
                   <div class="hisHead">
                   {noCarsSearch >0?
-                  <p>{noCarsSearch}/{historySearchCount} Vehicles Found</p>: 
+                  <p>{noCarsSearch} of {historySearchCount} Vehicles Found</p>: 
                    ""}
                     <div class="row">				
                             <div class="vehiclepaycheckbox col-lg-12 mt-4">
