@@ -135,15 +135,15 @@ const CheckOut = (props) => {
 			<h2>Checkout</h2>
 			<div className="revCheHead floorDetailsBlock">
 				<div class="row">
-					<div className="col-lg-6 floorDetails">
+					<div className="col-lg-9 floorDetails">
 						
-						<p className="text-left"> <span class="label">Payment Mode - </span> {paymentMode}  </p>
+						<p className="text-left paymentMode"> <span class="label">Payment Mode - </span> {paymentMode}  </p>
 
 						{floorContact && floorAccount!=null || floorContact && floorAccount!=""?
-						<p> <span class="label"> Bank Name - </span> {floorContact},  <span class="label">Account Number -</span> {floorAccount}, <span class="label">Credit Limit - </span>{creditLimit} </p>:""}
+						<p className="ml-3"> <span class="label"> Bank Name - </span> {floorContact},  <span class="label">Account Number -</span> {floorAccount}, <span class="label">Credit Limit - </span>{creditLimit} </p>:""}
 						
 					</div>
-					<div className="col-lg-6 cartTotal">
+					<div className="col-lg-3 cartTotal">
 						<p className="text-right">Total <span> $ {overAllTotal()}</span></p>
 					</div>
 				</div>
