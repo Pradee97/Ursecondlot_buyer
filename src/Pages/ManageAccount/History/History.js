@@ -89,11 +89,11 @@ import LateFee from '../../../Pages/LateFee/LateFee';
       });
     }
 
-    const redirecttoInvoice=(car_id,seller_dealer_id,price,lot_fee,bill_of_sales_id,gatepass_id,sold_date,make,model,year,transportation_charge,transportation,inventory_no,vin_no,late_fee, bill_of_sales_date,payment_mode)=>{
+    const redirecttoInvoice=(car_id,seller_dealer_id,price,lot_fee,bill_of_sales_id,gatepass_id,sold_date,make,model,year,transportation_charge,transportation,inventory_no,vin_no,late_fee, bill_of_sales_date,payment_mode,company_name)=>{
       //   history.push("/Inspection/"+pathid);
       history.push({
         pathname: "/Invoice",
-        state: {car_id,sellerDealerID:seller_dealer_id,vechileprice:price,lotFee:lot_fee,billOfSales:bill_of_sales_id,gatePassId:gatepass_id,Date:sold_date,Make:make,Model:model,Year:year,transportationCharge:transportation_charge,Transportation:transportation,invNo:inventory_no,vinNo:vin_no,LateFee:late_fee, BillOfSaleDate:bill_of_sales_date, PaymentMode:payment_mode}
+        state: {car_id,sellerDealerID:seller_dealer_id,vechileprice:price,lotFee:lot_fee,billOfSales:bill_of_sales_id,gatePassId:gatepass_id,Date:sold_date,Make:make,Model:model,Year:year,transportationCharge:transportation_charge,Transportation:transportation,invNo:inventory_no,vinNo:vin_no,LateFee:late_fee, BillOfSaleDate:bill_of_sales_date, PaymentMode:payment_mode,CompanyName:company_name}
 
         });
         console.log ("hi",price,lot_fee,bill_of_sales_id,gatepass_id,sold_date);
@@ -734,7 +734,7 @@ const togglePrint = () => {
               </div>
                           <a class="cta-btns" href="JavaScript:void(0)" onClick={()=>redirecttoInspection(historyDetail.car_id)}>Inspection</a>
                           <span className="autoCheck"><img src={carcheck} alt=""/></span>
-                          <a class="cta-btns invoice" href="JavaScript:void(0)" onClick={()=>redirecttoInvoice(historyDetail.car_id,historyDetail.seller_dealer_id,historyDetail.price,historyDetail.lot_fee,historyDetail.bill_of_sales_id,historyDetail.gatepass_id,historyDetail.sold_date,historyDetail.make,historyDetail.model,historyDetail.year,historyDetail.transportation_charge,historyDetail.transportation,historyDetail.inventory_no,historyDetail.vin_no,historyDetail.late_fee,historyDetail. bill_of_sales_date,historyDetail.payment_mode)}>Invoice</a>
+                          <a class="cta-btns invoice" href="JavaScript:void(0)" onClick={()=>redirecttoInvoice(historyDetail.car_id,historyDetail.seller_dealer_id,historyDetail.price,historyDetail.lot_fee,historyDetail.bill_of_sales_id,historyDetail.gatepass_id,historyDetail.sold_date,historyDetail.make,historyDetail.model,historyDetail.year,historyDetail.transportation_charge,historyDetail.transportation,historyDetail.inventory_no,historyDetail.vin_no,historyDetail.late_fee,historyDetail. bill_of_sales_date,historyDetail.payment_mode,historyDetail.company_name)}>Invoice</a>
                         </div>
                         <div class="cars-prices gatepass pt-1">
                         {historyDetail.gatepass_id===""?
