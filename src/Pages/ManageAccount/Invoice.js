@@ -305,8 +305,8 @@ const InVoice = (props) => {
 
 
 <div class = " hideContent">
-   <div class="col-lg-12 invoiceBlock printInvoice" id = "Print">
-        <div class="row header">
+   <div class="col-lg-12 invoiceBlock printInvoice pb-1" id = "Print">
+        <div class="row header mb-0 pb-1">
                 <div class="col-lg-6 header_left text-left"><img src={Logo_final}/></div>
                 <div class="col-lg-6 header_right">
                    <p>
@@ -317,8 +317,8 @@ const InVoice = (props) => {
                 </div> </div>
        
        
-       <div class="section-title">
-           <h2>Invoice</h2>
+       <div class="section-title pb-0">
+           <h2 className="pb-0"><b>Invoice</b></h2>
        </div>
         
        <div class="headtable">
