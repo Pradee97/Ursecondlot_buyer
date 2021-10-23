@@ -8828,4 +8828,6 @@ a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
   font-weight: 700;
 }
 
-
+.printInvoice.section-title h2 {
+font-weight: 700;
+}
