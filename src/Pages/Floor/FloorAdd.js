@@ -12,6 +12,7 @@ import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import { useForm } from "react-hook-form";
 import PhoneInput from 'react-phone-number-input/input';
 import { useDispatch, useSelector } from 'react-redux';
+import NumberFormat from 'react-number-format';
 
 const FloorAdd = () => {
 
@@ -318,9 +319,10 @@ const FloorAdd = () => {
                             </div>
                             <div className="col-sm-9 form-group">
                             <div className="tbox">
-                                <input type="number" id="creditLimit" className="textbox"  placeholder="" name="creditLimit"
-                                onChange={(e) => setCreditLimit(e.target.value)} />
+                                {/* <input type="number" id="creditLimit" className="textbox"  placeholder="" name="creditLimit"
+                                onChange={(e) => setCreditLimit(e.target.value)} /> */}
                                 <label htmlFor="creditLimit" className={creditLimit !="" ? "input-has-value" : ""}>Credit Limit</label>
+                                <NumberFormat thousandSeparator={true} onChange={(e) => setCreditLimit(e.target.value)} />
                                 
                                 <p className="form-input-error" >{creditLimitError}</p>
                             </div>
