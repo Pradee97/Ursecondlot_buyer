@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import Countdown from "react-countdown";
+import Countdown, { zeroPad } from "react-countdown";
 import API from "../../Services/BaseService";
 
 
@@ -11,16 +11,30 @@ const LateFee = (props) => {
     const Completionist = () => <span>{""}</span>;
 
 
-    const renderer = ({hours,minutes, seconds, completed }) => {
+    const renderer = ({days,hours,minutes, seconds, completed }) => {
     if (completed) {
         
         return <Completionist />;
     } else {
     
         return (
-        <span>
-            {hours}:{minutes}:{seconds}
-        </span>
+            <div className="timerCountown">
+                <div className="dbox">
+                <span>{zeroPad(days)}</span>Days
+                </div>
+                
+                <div className="dbox">
+                <span>{zeroPad(hours)}</span>Hours
+                </div>
+                
+                <div className="dbox">
+                <span>{zeroPad(minutes)}</span>Minutes
+                </div>
+                
+                <div className="dbox">
+                <span>{zeroPad(seconds)}</span>Seconds
+                </div>
+            </div>
         );
     }
     };
@@ -74,10 +88,11 @@ const LateFee = (props) => {
                             <a>  {lateFee.days== null || lateFee.days== "" ? "" : "Day: "  (lateFee.days)}</a>
                         }
                     </div> */}
-                    
+
+                    {/* <a>days</a> */}
 
                     <div class= {(lateFee.time!==null && lateFee.time < 5000)?"countownBlock":""} >
-                    <label>Days:Hours:Minutes:Seconds - {lateFee.days} </label>:
+                    
                     <Countdown date={Date.now() + (lateFee.time!==null && lateFee.time < 5000 ? lateFee.time*60*1000 :0)  } renderer={renderer} />
                     </div>
                 </div>
