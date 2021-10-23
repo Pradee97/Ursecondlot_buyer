@@ -8831,3 +8831,25 @@ a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
 .printInvoice.section-title h2 {
 font-weight: 700;
 }
+
+.timerCountown{
+  margin-bottom: 20px;
+}
+
+.timerCountown .dbox{
+  display: inline-block;
+    background: #002768;
+    color: #fff;
+    padding: 5px 15px;
+    margin-right: 5px;
+    border-radius: 4px;
+    font-size: 14px;
+    
+}
+
+
+.timerCountown .dbox span{
+  font-size: 30px;
+  display: block;
+  font-weight: 600;
+}
