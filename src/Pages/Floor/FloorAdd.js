@@ -321,9 +321,9 @@ const FloorAdd = () => {
                             <div className="tbox">
                                 {/* <input type="number" id="creditLimit" className="textbox"  placeholder="" name="creditLimit"
                                 onChange={(e) => setCreditLimit(e.target.value)} /> */}
-                                <label htmlFor="creditLimit" className={creditLimit !="" ? "input-has-value" : ""}>Credit Limit</label>
-                                <NumberFormat thousandSeparator={true} onChange={(e) => setCreditLimit(e.target.value)} />
                                 
+                                <NumberFormat className="textbox" thousandSeparator={true} onChange={(e) => setCreditLimit(e.target.value)} />
+                                <label htmlFor="creditLimit" className={creditLimit !="" ? "input-has-value" : ""}>Credit Limit</label>
                                 <p className="form-input-error" >{creditLimitError}</p>
                             </div>
                             </div>
