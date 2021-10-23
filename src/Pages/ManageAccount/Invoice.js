@@ -19,8 +19,8 @@ const InVoice = (props) => {
     const [sellerInfo,setSellerInfo] = useState("");
     const [feeDetails, setFeeDetails] = useState("");
     
-    const {sellerDealerID,vechileprice,lotFee,billOfSales,gatePassId,Date,Make,Model,Year,transportationCharge,Transportation,invNo,vinNo,LateFee,BillOfSaleDate,PaymentMode} = props.location.state;
- console.log("hello",sellerDealerID,vechileprice,lotFee,billOfSales,gatePassId,Date);
+    const {sellerDealerID,vechileprice,lotFee,billOfSales,gatePassId,Date,Make,Model,Year,transportationCharge,Transportation,invNo,vinNo,LateFee,BillOfSaleDate,PaymentMode,CompanyName} = props.location.state;
+ console.log("hello",sellerDealerID,vechileprice,lotFee,billOfSales,gatePassId,Date,CompanyName);
     
      function fetchBuyerDetails() {
         
@@ -289,7 +289,7 @@ const InVoice = (props) => {
         {PaymentMode == null || PaymentMode=="" || PaymentMode
         ==undefined?"":
         <div>
-        <a><p>Payment Mode : <b>{  PaymentMode  } </b></p></a>
+        <a><p>Payment Mode : <b>{  PaymentMode  } </b>({CompanyName})</p></a>
         </div>}
         </div>
 </div>
@@ -460,9 +460,14 @@ const InVoice = (props) => {
          </div>
          <div>
       {billOfSales !== null && billOfSales !== "" ?
-      <a><p>Paid by Date and time : <b>{  BillOfSaleDate  } </b></p></a>
+      <a><p>Paid by Date and time : <b>{  BillOfSaleDate  }</b></p></a>
 :""}
         </div>
+        {PaymentMode == null || PaymentMode=="" || PaymentMode
+        ==undefined?"":
+        <div>
+        <a><p>Payment Mode : <b>{  PaymentMode  } </b>({CompanyName})</p></a>
+        </div>}
 
       </div>
 

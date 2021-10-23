@@ -89,11 +89,11 @@ import LateFee from '../../../Pages/LateFee/LateFee';
       });
     }
 
-    const redirecttoInvoice=(car_id,seller_dealer_id,price,lot_fee,bill_of_sales_id,gatepass_id,sold_date,make,model,year,transportation_charge,transportation,inventory_no,vin_no,late_fee, bill_of_sales_date,payment_mode)=>{
+    const redirecttoInvoice=(car_id,seller_dealer_id,price,lot_fee,bill_of_sales_id,gatepass_id,sold_date,make,model,year,transportation_charge,transportation,inventory_no,vin_no,late_fee, bill_of_sales_date,payment_mode,company_name)=>{
       //   history.push("/Inspection/"+pathid);
       history.push({
         pathname: "/Invoice",
-        state: {car_id,sellerDealerID:seller_dealer_id,vechileprice:price,lotFee:lot_fee,billOfSales:bill_of_sales_id,gatePassId:gatepass_id,Date:sold_date,Make:make,Model:model,Year:year,transportationCharge:transportation_charge,Transportation:transportation,invNo:inventory_no,vinNo:vin_no,LateFee:late_fee, BillOfSaleDate:bill_of_sales_date, PaymentMode:payment_mode}
+        state: {car_id,sellerDealerID:seller_dealer_id,vechileprice:price,lotFee:lot_fee,billOfSales:bill_of_sales_id,gatePassId:gatepass_id,Date:sold_date,Make:make,Model:model,Year:year,transportationCharge:transportation_charge,Transportation:transportation,invNo:inventory_no,vinNo:vin_no,LateFee:late_fee, BillOfSaleDate:bill_of_sales_date, PaymentMode:payment_mode,CompanyName:company_name}
 
         });
         console.log ("hi",price,lot_fee,bill_of_sales_id,gatepass_id,sold_date);
@@ -411,10 +411,10 @@ const togglePrint = () => {
         heigth: 3
         };
 
-        const printPage = (data) => {
+        const printPage = () => {
           console.log("print")
           printJS({
-            printable: data,
+            printable: "pdfPrint",
             type: 'html',
             targetStyles: ['*'],
             header: 'Car Details'
@@ -532,7 +532,7 @@ const togglePrint = () => {
           <div class="section-title">
             <h2>history
             <div className="downBtn">
-                <button  className="printBtn"  type ="button" >Download</button>
+                <button  className="printBtn"  type ="button" onClick= {() => printPage()}>Download</button>
             </div>
             <div class="hisHead"> <p>{noCars} of {totalHistoryCount} Vehicles Purchased</p></div>
             </h2>
@@ -629,7 +629,7 @@ const togglePrint = () => {
                   {noCarsSearch >0?
                   <p>{noCarsSearch} of {historySearchCount} Vehicles Found</p>: 
                    ""}
-                    <div class="row">				
+                    {/* <div class="row">				
                             <div class="vehiclepaycheckbox col-lg-12 mt-4">
                                 <div class="form-group input-group pb-0 mb-0 pull-right cbox">
                                     <input 
@@ -639,7 +639,7 @@ const togglePrint = () => {
                                         onChange={(e)=>{isSelectedAllCar()}}/><label for="selectAll">Select All / Unselect All to download for all cars</label>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
 
                         
 
@@ -734,7 +734,7 @@ const togglePrint = () => {
               </div>
                           <a class="cta-btns" href="JavaScript:void(0)" onClick={()=>redirecttoInspection(historyDetail.car_id)}>Inspection</a>
                           <span className="autoCheck"><img src={carcheck} alt=""/></span>
-                          <a class="cta-btns invoice" href="JavaScript:void(0)" onClick={()=>redirecttoInvoice(historyDetail.car_id,historyDetail.seller_dealer_id,historyDetail.price,historyDetail.lot_fee,historyDetail.bill_of_sales_id,historyDetail.gatepass_id,historyDetail.sold_date,historyDetail.make,historyDetail.model,historyDetail.year,historyDetail.transportation_charge,historyDetail.transportation,historyDetail.inventory_no,historyDetail.vin_no,historyDetail.late_fee,historyDetail. bill_of_sales_date,historyDetail.payment_mode)}>Invoice</a>
+                          <a class="cta-btns invoice" href="JavaScript:void(0)" onClick={()=>redirecttoInvoice(historyDetail.car_id,historyDetail.seller_dealer_id,historyDetail.price,historyDetail.lot_fee,historyDetail.bill_of_sales_id,historyDetail.gatepass_id,historyDetail.sold_date,historyDetail.make,historyDetail.model,historyDetail.year,historyDetail.transportation_charge,historyDetail.transportation,historyDetail.inventory_no,historyDetail.vin_no,historyDetail.late_fee,historyDetail. bill_of_sales_date,historyDetail.payment_mode,historyDetail.company_name)}>Invoice</a>
                         </div>
                         <div class="cars-prices gatepass pt-1">
                         {historyDetail.gatepass_id===""?
@@ -750,8 +750,8 @@ const togglePrint = () => {
                     <div className="tophead">
                     <p>Inventory # - <span>{historyDetail.inventory_no}</span></p>
                     
-                    <div class="customCheckbox cbox">
-                                        {/* <input className={"paySeparately"+index}  value={paySeparately[index]=='no'? "yes":"no"} type="checkbox" id={"vehiclepayseparat"+index} checked = {paySeparately[index] =='yes'?true:false} onChange={(e)=>{paySeparately[index]='yes'}}/><label for={"vehiclepayseparat"+index}>You Want To Pay Separately{paySeparately[index]}</label> */}
+                    {/* <div class="customCheckbox cbox">
+                                        <input className={"paySeparately"+index}  value={paySeparately[index]=='no'? "yes":"no"} type="checkbox" id={"vehiclepayseparat"+index} checked = {paySeparately[index] =='yes'?true:false} onChange={(e)=>{paySeparately[index]='yes'}}/><label for={"vehiclepayseparat"+index}>You Want To Pay Separately{paySeparately[index]}</label>
                                         <input 
                                         className={"paySeparately"+index}  
                                         value={index} 
@@ -760,7 +760,7 @@ const togglePrint = () => {
                                         checked= {historyDetail.isChecked}
                                         onChange={(e)=>{selectedCarIdList(historyDetail.car_id)}}/><label for={"vehiclepayseparat"+index}>Select to download</label>
 
-                                    </div>
+                                    </div> */}
                                     </div>
 
                     <h3>Vehicle Title</h3>
@@ -862,8 +862,8 @@ const togglePrint = () => {
                     <div class="col-md-12 text-center paybtns">
                     <a class={`cta-btns-primary ${(historyDetail.bill_of_sales_id !== null && historyDetail.bill_of_sales_id !== ""  ) && "greenBtn"}`} onClick={()=>{(historyDetail.bill_of_sales_id == null || historyDetail.bill_of_sales_id == ""  )&& redirecttoCart()}}  >{historyDetail.bill_of_sales_id !== null && historyDetail.bill_of_sales_id !== "" ? "paid": "pay" }  </a>   
                     
-                    <button  className="printBtn"  type ="button" onClick= {() => printPage(`Printpage${index}`)}>Download</button>
-                     <div> 
+                    {/* <button  className="printBtn"  type ="button" onClick= {() => printPage(`Printpage${index}`)}>Download</button> */}
+                     {/* <div> 
                    
                     <div class = " hideContent" >
                     <div id = {`Printpage${index}`} style ={{"border-collapse": "collapse"}}>
@@ -902,7 +902,7 @@ const togglePrint = () => {
                                   </div>
                                     </div>
 
-                                    </div> 
+                                    </div>  */}
 
                                             <div>
                                     </div>
@@ -959,6 +959,50 @@ const togglePrint = () => {
   
     </main>
  }
+ 
+ <div> 
+                   
+                   <div class = "hideContent" >
+                   <div id = "pdfPrint" style ={{"border-collapse": "collapse"}}>
+                     
+                   
+                           <table   >
+                             
+                                   <thead>
+                                     <tr>
+                                       <td><b>Year</b> </td>
+                                       <td><b>Make </b></td>
+                                       <td><b>Model </b></td>
+                                       <td><b>Vin # </b></td>
+                                       <td><b>Inventory #</b> </td>
+                                       <td><b>GPS # </b></td>
+                                       <td><b>BOS # </b></td>
+                                       <td><b>Title status</b> </td>
+                                       <td><b>Amount</b> </td>
+
+                                       </tr>
+                                       </thead>
+                                      
+                                       {historyDetail?.length>0?historyDetail.map((historyDetail)=>
+                                       <tr>
+                                       
+                                        <td>{historyDetail.year}</td>
+                                        <td>{historyDetail.make}</td>
+                                        <td>{historyDetail.model}</td>
+                                        <td>{historyDetail.vin_no}</td>
+                                        <td>{historyDetail.inventory_no}</td>
+                                        <td>{historyDetail.bill_of_sales_id}</td>
+                                        <td>{historyDetail.gatepass_id}</td>
+                                        <td>{historyDetail.title_status_name}</td>
+                                        <td>{(Number(historyDetail.price||0)+  Number(historyDetail.lot_fee) || 0) + (Number(getFeeDetails(historyDetail.price))||0) + 0 +0+0+ (Number(historyDetail.transportation_charge || 0)) +  Number(historyDetail.late_fee)||0}</td> 
+                                      </tr>):""}
+                                   
+                                 </table>
+                                
+                                 </div>
+                                   </div>
+
+                                   </div> 
     </div>
     )
 }
