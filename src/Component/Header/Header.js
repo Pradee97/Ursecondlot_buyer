@@ -144,6 +144,7 @@ const Submenu = () => {
   const Chat = () => {
         
     return (
+      <div>
 
       <div  className="nav__submenu" aria-labelledby="navbarDropdown">
         
@@ -177,6 +178,7 @@ const Submenu = () => {
           </div>     
           ):"No data found"}
          
+        </div>
         </div>
     )}
 
