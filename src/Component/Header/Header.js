@@ -145,37 +145,24 @@ const Submenu = () => {
         
     return (
 
-      <div  className="nav__submenu" aria-labelledby="navbarDropdown">
+      <div  className="nav__submenu notiBlock" aria-labelledby="navbarDropdown">
         
         
           {notification.length>0?notification.map((getNotification)=>
-            <div>
-
-              < div>
-                <h2>{getNotification.title}</h2>
-              </div>
-             
-                <div class="row content">
-
-                    <div class="notoficationcontent">
-                        <div class="notofication-icon col-lg-2  col-md-2">        
-                            <img alt="" src={getNotification.image}  />
-                        </div>
-                        <div class="notoficationbody col-lg-8  col-md-8">
-                            
-                            <div>
-                                <p>{getNotification.message}</p>
-                            </div>
-                            {/* <h5>3 Hours Ago</h5> */}
-                        </div>
-                        <div class="notofication-close-icon col-lg-2  col-md-2">        
-                            <img alt="" src={closebtn} onClick={()=>deleteNotification(getNotification)} />
-                        </div>
-                    </div>                                                 
-
-                </div>
-          </div>     
-          ):"No data found"}
+             <div class="notoficationcontent">                        
+             <div class="media">
+                   <img alt="" src={getNotification.image}  />
+                   <div class="media-body">
+                        <h3>{getNotification.title}</h3>
+                         <p>{getNotification.message}</p>
+                         <h5>3 Hours Ago</h5>
+                   </div>
+                   <span class="notofication-close-icon"onClick={()=>deleteNotification(getNotification)}>        
+                   <i class='bx bxs-x-circle'></i>
+                   </span>
+             </div>
+         </div>        
+          ):<div>No Data Found</div>}
          
         </div>
     )}
