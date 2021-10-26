@@ -6,7 +6,8 @@ import LogoImg from '../../../src/assets/img/Logo_final.png';
 import cartImg from '../../../src/assets/img/cart.svg';
 import chatImg from '../../../src/assets/img/chat.svg';
 import hamburgermenuImg from '../../../src/assets/img/hamburger-menu.svg';
-import adduser from '../../../src/assets/img/adduser.jpg'
+import adduser from '../../../src/assets/img/adduser.jpg';
+import closebtn from '../../../src/assets/img/closebtn.png';
 import './header.css';
 
 const Header = () => {
@@ -17,22 +18,7 @@ const Header = () => {
   const [numberCars,setNumberCars] = useState("");
   const [myBids,setMyBids] = useState("");
   const [cart, setCart] = useState("");
-
-//   const cartDetails = () =>{
-
-//     let request = {
-//         buyer_dealer_id :userDetails?.buyer_dealer_id,
-//     }
-
-//     API.post("cartDetails/condition", request).then(response=>{
-
-//         console.log("cart check the value", response.data.data)
-//         // setCartDetail(response.data.data)
-//         setNumberCars(response.data.data.length)
-//         // setLoading(false);
-//     });
-// }
-
+  const [notification,setNotification] = useState("");
 
 const countDetails = () =>{
 
@@ -53,13 +39,66 @@ const countDetails = () =>{
   });
 }
 
+    const getNotification= () =>{
+
+        let request = {
+            buyer_dealer_id : JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
+        }
+      
+        
+        API.post("notificationDetails/condition", request).then(response=>{
+      
+            console.log("notification data", response.data.data)
+       
+            setNotification(response.data.data);
+           
+            
+        });
+    }
+
+    const deleteNotification= (data) =>{
+
+        let request = {
+            notification_id : data.notification_id,
+        }
+
+        console.log("notification data", request)
+        // return
+        API.post("delete_notification/update", request).then(response=>{
+
+            getNotification();
+      
+            console.log("notification id", response.data.data)
+       
+           
+            
+        });
+    }
+
 useEffect (() =>{
  
-			countDetails();
+  getNotification();
+  // deleteNotification();
+	countDetails();
 
   
 }, []);
   
+//   const cartDetails = () =>{
+
+//     let request = {
+//         buyer_dealer_id :userDetails?.buyer_dealer_id,
+//     }
+
+//     API.post("cartDetails/condition", request).then(response=>{
+
+//         console.log("cart check the value", response.data.data)
+//         // setCartDetail(response.data.data)
+//         setNumberCars(response.data.data.length)
+//         // setLoading(false);
+//     });
+// }
+
 //   async function fetchMyBids() {
 //     let request = {
 //         buyer_dealer_id: userDetails?.buyer_dealer_id,
@@ -74,6 +113,7 @@ useEffect (() =>{
 // }
 
 const Submenu = () => {
+
     return (
       <ul className="nav__submenu">
         <li className="nav__submenu-item ">
@@ -100,6 +140,45 @@ const Submenu = () => {
       </ul>
     )
   }
+
+  const Chat = () => {
+        
+    return (
+
+      <div  className="nav__submenu" aria-labelledby="navbarDropdown">
+        
+        
+          {notification.length>0?notification.map((getNotification)=>
+            <div>
+
+              < div>
+                <h2>{getNotification.title}</h2>
+              </div>
+             
+                <div class="row content">
+
+                    <div class="notoficationcontent">
+                        <div class="notofication-icon col-lg-2  col-md-2">        
+                            <img alt="" src={getNotification.image}  />
+                        </div>
+                        <div class="notoficationbody col-lg-8  col-md-8">
+                            
+                            <div>
+                                <p>{getNotification.message}</p>
+                            </div>
+                            {/* <h5>3 Hours Ago</h5> */}
+                        </div>
+                        <div class="notofication-close-icon col-lg-2  col-md-2">        
+                            <img alt="" src={closebtn} onClick={()=>deleteNotification(getNotification)} />
+                        </div>
+                    </div>                                                 
+
+                </div>
+          </div>     
+          ):"No data found"}
+         
+        </div>
+    )}
 
   const logoNavigation = () => {
     if (localStorage.getItem("islogedIn") ==="false" || localStorage.getItem("islogedIn") ===null) {
@@ -150,7 +229,7 @@ const Submenu = () => {
               <li className={location.pathname ==="/floor"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/floor')} >Floor</a></li>
               <li className={location.pathname ==="/transport"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/transport')} >Transport</a></li>
               <li className={location.pathname ==="/chat"? "active nav__menu-item" : "nav__menu-item"} >
-                <img alt="Menu" src={chatImg} onClick={()=>history.push('/chat')}/>
+                <img alt="Menu" src={chatImg} /><Chat/>
                 <span className="countbox">5</span>
               </li>
               <li className={location.pathname ==="/cart"? "active nav__menu-item" : "nav__menu-item"} >
