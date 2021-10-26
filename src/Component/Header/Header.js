@@ -42,7 +42,7 @@ const countDetails = () =>{
     const getNotification= () =>{
 
         let request = {
-            buyer_dealer_id : JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
+            buyer_dealer_id : userDetails?.buyer_dealer_id,
         }
       
         
