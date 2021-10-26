@@ -8853,3 +8853,56 @@ font-weight: 700;
   display: block;
   font-weight: 600;
 }
+
+
+
+
+.nav__submenu.notiBlock{
+  width: 300px;
+  border: #ddd solid 1px;
+  padding: 5px;
+}
+
+.notiBlock .notoficationcontent{
+display:block;
+margin-bottom: 5px;
+    padding-bottom: 5px;
+}
+
+.notoficationcontent .media img{
+width: 80px;
+height: 80px;
+}
+.notoficationcontent {
+ margin: 0;
+}
+
+.notoficationcontent .media-body{
+  margin-left: 10px;
+}
+
+.notoficationcontent h3{
+font-size: 16px;
+margin-bottom: 0;
+}
+.notoficationcontent h5{
+font-size: 12px;
+font-weight: 400;
+color: #BD062C;
+}
+
+.notoficationcontent p{
+margin: 5px 0;
+line-height: 18px;
+white-space: break-spaces;
+font-size: 12px;
+}
+.notofication-close-icon i{
+color: #666;
+cursor: pointer;
+}
+
+.notofication-close-icon:hover i{
+color: #BD062C;
+}
+
