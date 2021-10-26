@@ -146,7 +146,7 @@ const Submenu = () => {
     return (
       <div>
 
-      <div  className="nav__submenu notiBlock" aria-labelledby="navbarDropdown">
+      <div  className="nav__submenu notiBlock">
         
         
           {notification.length>0?notification.map((getNotification)=>
