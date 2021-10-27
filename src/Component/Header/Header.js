@@ -144,8 +144,9 @@ const Submenu = () => {
   const Chat = () => {
         
     return (
+      <div>
 
-      <div  className="nav__submenu notiBlock" aria-labelledby="navbarDropdown">
+      <div  className="nav__submenu notiBlock">
         
         
           {notification.length>0?notification.map((getNotification)=>
@@ -164,6 +165,7 @@ const Submenu = () => {
          </div>        
           ):<div>No Data Found</div>}
          
+        </div>
         </div>
     )}
 
