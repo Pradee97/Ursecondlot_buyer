@@ -8861,7 +8861,12 @@ font-weight: 700;
   width: 300px;
   border: #ddd solid 1px;
   padding: 5px;
+  max-height: 400px;
+  overflow-y: auto;
+  position:absolute;
+      right:5px;
 }
+
 
 .notiBlock .notoficationcontent{
 display:block;
@@ -8879,6 +8884,7 @@ height: 80px;
 
 .notoficationcontent .media-body{
   margin-left: 10px;
+  white-space: break-spaces;
 }
 
 .notoficationcontent h3{
@@ -8886,7 +8892,7 @@ font-size: 16px;
 margin-bottom: 0;
 }
 .notoficationcontent h5{
-font-size: 12px;
+font-size: 14px;
 font-weight: 400;
 color: #BD062C;
 }
@@ -8895,11 +8901,12 @@ color: #BD062C;
 margin: 5px 0;
 line-height: 18px;
 white-space: break-spaces;
-font-size: 12px;
+font-size: 14px;
 }
 .notofication-close-icon i{
 color: #666;
 cursor: pointer;
+font-size: 20px;
 }
 
 .notofication-close-icon:hover i{
