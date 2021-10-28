@@ -19,6 +19,9 @@ const Header = () => {
   const [myBids,setMyBids] = useState("");
   const [cart, setCart] = useState("");
   const [notification,setNotification] = useState("");
+  const [notificationCount,setNotificationCount] = useState("");
+
+  
 
 const countDetails = () =>{
 
@@ -51,6 +54,11 @@ const countDetails = () =>{
             console.log("notification data", response.data.data)
        
             setNotification(response.data.data);
+            setNotificationCount(response.data.data ? response.data.data[0].count : 0 );
+            // setNotificationTime(response.data.data.time);
+
+            console.log("check count in notification+++",response.data.data.count)
+
            
             
         });
@@ -83,6 +91,17 @@ useEffect (() =>{
 
   
 }, []);
+
+useEffect(() => {
+
+  let intervalId;
+  intervalId = setInterval(() => {
+  getNotification();
+      
+  }, 30000)
+  return () => clearInterval(intervalId);
+    
+  },[]);
   
 //   const cartDetails = () =>{
 
@@ -145,7 +164,7 @@ const Submenu = () => {
         
     return (
       <div>
-
+      
       <div  className="nav__submenu notiBlock">
         
         
@@ -156,7 +175,9 @@ const Submenu = () => {
                    <div class="media-body">
                         <h3>{getNotification.title}</h3>
                          <p>{getNotification.message}</p>
-                         <h5>3 Hours Ago</h5>
+                         {getNotification.time < 60 ? <h5>{ getNotification.time} Minutes ago</h5> :
+                         <h5>{ Math.floor(getNotification.time/60)} Hours ago</h5>}
+                         {/* <h5>{Hours} Hours Ago</h5> */}
                    </div>
                    <span class="notofication-close-icon"onClick={()=>deleteNotification(getNotification)}>        
                    <i class='bx bxs-x-circle'></i>
@@ -219,7 +240,9 @@ const Submenu = () => {
               <li className={location.pathname ==="/transport"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/transport')} >Transport</a></li>
               <li className={location.pathname ==="/chat"? "active nav__menu-item" : "nav__menu-item"} >
                 <img alt="Menu" src={chatImg} /><Chat/>
-                <span className="countbox">5</span>
+                {/* <span className="countbox">{notification.length}</span> */}
+                <span className="countbox">{notificationCount}</span>
+
               </li>
               <li className={location.pathname ==="/cart"? "active nav__menu-item" : "nav__menu-item"} >
                 <img alt="Menu" src={cartImg} onClick={()=>history.push('/cart')}/>
