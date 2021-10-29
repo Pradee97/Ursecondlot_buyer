@@ -18,8 +18,9 @@ const Header = () => {
   const [numberCars,setNumberCars] = useState("");
   const [myBids,setMyBids] = useState("");
   const [cart, setCart] = useState("");
-  const [notification,setNotification] = useState("");
   const [notificationCount,setNotificationCount] = useState("");
+  
+
 
   
 
@@ -36,72 +37,57 @@ const countDetails = () =>{
       
       setMyBids(response.data.data?.mybids_count || 0)
       setCart(response.data.data?.cart_count || 0)
+      
+
     // }
     
       
   });
 }
-
-    const getNotification= () =>{
-
-        let request = {
-            buyer_dealer_id : userDetails?.buyer_dealer_id,
-        }
-      
-        
-        API.post("notificationDetails/condition", request).then(response=>{
-      
-            console.log("notification data", response.data.data)
-       
-            setNotification(response.data.data);
-            setNotificationCount(response.data.data ? response.data.data[0].count : 0 );
-            // setNotificationTime(response.data.data.time);
-
-            console.log("check count in notification+++",response.data.data.count)
-
-           
-            
-        });
-    }
-
-    const deleteNotification= (data) =>{
-
-        let request = {
-            notification_id : data.notification_id,
-        }
-
-        console.log("notification data", request)
-        // return
-        API.post("delete_notification/update", request).then(response=>{
-
-            getNotification();
-      
-            console.log("notification id", response.data.data)
-       
-           
-            
-        });
-    }
-
 useEffect (() =>{
- 
-  getNotification();
-  // deleteNotification();
-	countDetails();
 
+
+  countDetails();
   
-}, []);
+  
+  }, []);
 
-useEffect(() => {
+  const getNotificationDetails= () =>{
 
+    let request = {
+        buyer_dealer_id : userDetails?.buyer_dealer_id,
+    }
+  
+    
+    API.post("notificationDetails/condition", request).then(response=>{
+  
+        console.log("notification data", response.data.data)
+   
+        // setNotification(response.data.data);
+        setNotificationCount(response.data.data[0]?.count||0);
+        // setNotificationTime(response.data.data.time);
+
+        console.log("check count in notification+++",response.data.data.count)
+
+       
+        
+    });
+}
+useEffect (() =>{
+
+  getNotificationDetails();
+  // deleteNotification();
+  }, []);
+  
+  
+  useEffect(() => {
   let intervalId;
   intervalId = setInterval(() => {
-  getNotification();
-      
+  getNotificationDetails(); 
   }, 30000)
   return () => clearInterval(intervalId);
-    
   },[]);
+    
   
 //   const cartDetails = () =>{
 
@@ -161,6 +147,66 @@ const Submenu = () => {
   }
 
   const Chat = () => {
+
+  const [notification,setNotification] = useState("");
+
+    const getNotification= () =>{
+
+      let request = {
+          buyer_dealer_id : userDetails?.buyer_dealer_id,
+      }
+    
+      
+      API.post("notificationDetails/condition", request).then(response=>{
+    
+          console.log("notification data", response.data.data)
+     
+          setNotification(response.data.data);
+         setNotificationCount(response.data.data[0]?.count||0);
+                  
+
+          // setNotificationTime(response.data.data.time);
+
+          console.log("check count in notification+++",response.data.data.count)
+
+         
+          
+      });
+  }
+
+  const deleteNotification= (data) =>{
+
+      let request = {
+          notification_id : data.notification_id,
+      }
+
+      console.log("notification data", request)
+      // return
+      API.post("delete_notification/update", request).then(response=>{
+
+          getNotification();
+    
+          console.log("notification id", response.data.data)
+     
+         
+          
+      });
+  }
+
+useEffect (() =>{
+
+getNotification();
+// deleteNotification();
+}, []);
+
+
+useEffect(() => {
+let intervalId;
+intervalId = setInterval(() => {
+getNotification(); 
+}, 30000)
+return () => clearInterval(intervalId);
+},[]);
         
     return (
       <div>
@@ -234,19 +280,19 @@ const Submenu = () => {
               <ul className="nav__menu">
               <li className={location.pathname ==="/carList"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/carList')} >Home</a></li>
               <li className={location.pathname ==="/search"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/search')} >Search</a></li>
-              <li className={location.pathname ==="/mybids"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/mybids')} >My Bids <span className="countbox">{myBids}</span></a></li>
+              <li className={location.pathname ==="/mybids"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/mybids')} >My Bids {myBids == null || myBids == undefined || myBids == "0" ? "":<span className="countbox">{myBids}</span>}</a></li>
               <li className={location.pathname ==="/fees"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/fees')} >Fees</a></li>
               <li className={location.pathname ==="/floor"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/floor')} >Floor</a></li>
               <li className={location.pathname ==="/transport"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/transport')} >Transport</a></li>
               <li className={location.pathname ==="/chat"? "active nav__menu-item" : "nav__menu-item"} >
                 <img alt="Menu" src={chatImg} /><Chat/>
                 {/* <span className="countbox">{notification.length}</span> */}
-                <span className="countbox">{notificationCount}</span>
+               {notificationCount == undefined || notificationCount == null || notificationCount == "0"? "" : <span className="countbox">{notificationCount}</span>}
 
               </li>
               <li className={location.pathname ==="/cart"? "active nav__menu-item" : "nav__menu-item"} >
                 <img alt="Menu" src={cartImg} onClick={()=>history.push('/cart')}/>
-                <span className="countbox">{cart}</span>
+               {cart == "0" || cart == undefined || cart == null ? "" : <span className="countbox">{cart}</span> }
               </li>
               <li className="topRightUser">
                 <b className="user_name">Welcome 
