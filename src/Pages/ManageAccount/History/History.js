@@ -22,6 +22,7 @@ import {CopyToClipboard} from 'react-copy-to-clipboard';
 import printJS from 'print-js'
 import Popup from '../../../Component/Popup/Popup';
 import LateFee from '../../../Pages/LateFee/LateFee';
+import ReactExport from "react-data-export";
 
  const History = () => {
 
@@ -72,6 +73,11 @@ import LateFee from '../../../Pages/LateFee/LateFee';
 
     const [historySearchCount,setHistorySearchCount] = useState(false);
     const [searchLoadMore,setSearchLoadMore]=useState(false);
+
+  const [carDetailForExcel,setCarDetailForExcel]=useState([]);
+  const ExcelFile = ReactExport.ExcelFile;
+  const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
+  const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 
 	const toggleLateFee = () => {
 		setIsLateFee(!isLateFee);
@@ -125,6 +131,25 @@ import LateFee from '../../../Pages/LateFee/LateFee';
         setNoCars(response.data.data.length)
         setLoadValue(response.data.data.length);
         setLoading(false);
+
+        if(response.data.data.length >0){
+          // 
+          setCarDetailForExcel(response.data.data.map(value=> {
+            return {
+              vin_no: value.vin_no,
+              model:  value.model,
+              make:   value.make,
+              year:   value.year,
+              inventory_no:  value.inventory_no,
+                bill_of_sales_id:    value.bill_of_sales_id,
+                gatepass_id:    value.gatepass_id,
+                title_status_name:     value.title_status_name,
+                amount:             (Number(value.price||0)+  Number(value.lot_fee) || 0) + (Number(getFeeDetails(value.price))||0) + 0 +0+0+ (Number(value.transportation_charge || 0)) +  Number(value.late_fee)||0
+
+                                        
+            }
+          }))
+          }
     });
 
 }
@@ -186,6 +211,25 @@ if(scheduleDate){
           setLoadValueSearch(response.data.data.length);
           setHistorySearchCount(response.data.history_count)
           // setHistorySearch(response.data.data)
+
+          if(response.data.data.length >0){
+            // 
+            setCarDetailForExcel(response.data.data.map(value=> {
+              return {
+                vin_no: value.vin_no,
+                model:  value.model,
+                make:   value.make,
+                year:   value.year,
+                inventory_no:  value.inventory_no,
+                bill_of_sales_id:    value.bill_of_sales_id,
+                gatepass_id:    value.gatepass_id,
+                title_status_name:     value.title_status_name,
+                amount:             (Number(value.price||0)+  Number(value.lot_fee) || 0) + (Number(getFeeDetails(value.price))||0) + 0 +0+0+ (Number(value.transportation_charge || 0)) +  (Number(value.late_fee)||0)
+                  
+                                        
+              }
+            }))
+            }
         }); 
   
 }
@@ -534,10 +578,29 @@ const togglePrint = () => {
             <div className="downBtn">
                 <button  className="printBtn"  type ="button" onClick= {() => printPage()}>Download</button>
             </div>
+            <div class="downloadBtn" className="printBtn">
+              <div class="downBtn">
+            <i class=""></i>
+             <ExcelFile>
+                <ExcelSheet data={carDetailForExcel} name="URCar">
+                    <ExcelColumn label="Year" value="year"/>
+                    <ExcelColumn label="Model" value="model"/>
+                    <ExcelColumn label="Make" value="make"/>
+                    <ExcelColumn label="VIN #" value="vin_no"/>
+                    <ExcelColumn label="INV #" value="inventory_no"/>
+                    <ExcelColumn label="BOS #" value="bill_of_sales_id"/>     
+                    <ExcelColumn label="GP #" value="gatepass_id"/>
+                    <ExcelColumn label="TS #" value="title_status_name"/>
+                    <ExcelColumn label="Amount $" value="amount"/>
+                </ExcelSheet>
+            </ExcelFile>
+            </div>
+            </div> 
             <div class="hisHead"> <p>{noCars} of {totalHistoryCount} Vehicles Purchased</p></div>
             </h2>
-            
+           
                  
+           
           </div>
          
           <div class="row">
@@ -969,18 +1032,21 @@ const togglePrint = () => {
                            <table   >
                              
                                    <thead>
+                                   {historyDetail?.length>0?historyDetail.slice(0,1).map((historyDetail)=>
                                      <tr>
                                        <td><b>Year</b> </td>
                                        <td><b>Make </b></td>
                                        <td><b>Model </b></td>
                                        <td><b>Vin # </b></td>
                                        <td><b>Inventory #</b> </td>
-                                       <td><b>GPS # </b></td>
-                                       <td><b>BOS # </b></td>
-                                       <td><b>Title status</b> </td>
+                                       <td><b>Bos # </b></td>
+                                       <td><b>Gps# </b></td>
+                                       {historyDetail.title_status_name == "Title with Buyer" ?  <td><b>T</b> </td>:
+                                       <td><b>TA</b> </td>}
                                        <td><b>Amount</b> </td>
 
-                                       </tr>
+                                       </tr>)
+                                       :""}
                                        </thead>
                                       
                                        {historyDetail?.length>0?historyDetail.map((historyDetail)=>
@@ -996,9 +1062,13 @@ const togglePrint = () => {
                                         <td>{historyDetail.title_status_name}</td>
                                         <td>{(Number(historyDetail.price||0)+  Number(historyDetail.lot_fee) || 0) + (Number(getFeeDetails(historyDetail.price))||0) + 0 +0+0+ (Number(historyDetail.transportation_charge || 0)) +  Number(historyDetail.late_fee)||0}</td> 
                                       </tr>):""}
+
+                                    
                                    
                                  </table>
-                                
+                                 <div>
+                                 <h3>  * T- Title Delivered, TA- Title Absent, GP- Gate Pass, BOS- Bill Of Sale </h3>
+                                 </div>
                                  </div>
                                    </div>
 
