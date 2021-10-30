@@ -151,10 +151,35 @@ const Submenu = () => {
   const Chat = () => {
 
   const [notification,setNotification] = useState("");
-  
   const [allCarAcceptAllEnable, setAllCarAcceptAllEnable]=useState(false)
   const [allCarMultiAcceptEnable, setAllCarMultiAcceptEnable]=useState(false)
+  const [checkedCars,setCheckedCars]=useState([]);
+  const [carId, setCarId] = useState([]);
 
+  const carSelectBox=(id, carData)=>{
+    const newvalue= document.getElementById(id).checked ? [...checkedCars,carData] :  checkedCars.filter(data=>data.car_id !== carData.car_id)
+    setCheckedCars( document.getElementById(id).checked ? [...checkedCars,carData] : checkedCars.filter(data=>data.car_id !== carData.car_id))
+    // setCheckedCars(carData)
+    console.log("---setCheckedCars----", newvalue)
+
+    setCarId(newvalue.map(data => data.notification_id))
+    
+    console.log("====setCarId====", newvalue.map(data => data.notification_id))
+   }
+
+   const allCarSelectBox=(AllcarsData)=>{
+    console.log("==AllscarData==", AllcarsData)
+    const Allnewsvalue =  AllcarsData
+    console.log("---setAllsCarInfo----", Allnewsvalue)
+    setAllCarMultiAcceptEnable(false);
+    setAllCarAcceptAllEnable(true)
+   
+    setCarId(Allnewsvalue.map(data => data.notification_id))
+
+    console.log("====setRecentlyAdded--All-- CarId====", Allnewsvalue.map(data => data.car_id))
+
+  }
+  
   const MultiAcceptDisable =() =>{
     setAllCarMultiAcceptEnable(false)
   }
@@ -186,17 +211,30 @@ const Submenu = () => {
       });
   }
 
-  const deleteNotification= (data) =>{
+  const getDeleteNotification=(data)=>{
+    let request={
+        notification_id: [data.notification_id] 
+    }
+    console.log("request Delete", request);
+    API.post('delete_notification/update',request).then(res=>{
+        // setNotificationCount(res.data.data);
+        getNotificationDetails()
+    }) .catch(err => { console.log(err); });
+  }
+
+  const deleteNotification= () =>{
 
       let request = {
-          notification_id : data.notification_id,
+          notification_id : carId,
       }
 
       console.log("notification data", request)
       // return
       API.post("delete_notification/update", request).then(response=>{
 
-          getNotification();
+          getNotification()
+           setAllCarMultiAcceptEnable(false)
+              setAllCarAcceptAllEnable(false)
     
           console.log("notification id", response.data.data)
      
@@ -239,31 +277,34 @@ return () => clearInterval(intervalId);
                    </div>
                    {allCarMultiAcceptEnable == true || allCarAcceptAllEnable ==true ? 
                                 <div>
-                              {allCarMultiAcceptEnable && 
-                              <div className="customCheckbox cbox">
-                                <input type="checkbox" id={`allCarSelect${index}`} /> 
-                                <label for={`allCarSelect${index}`}></label>                 
-                              </div>
-                              }
-                              { allCarAcceptAllEnable && 
-                              <div className="customCheckbox cbox">
+                            
+                                {allCarMultiAcceptEnable && 
+                                <div className="custom_checkbox">
+                                  <input type="checkbox" id={`allCarSelect${index}`} onClick={(e)=>carSelectBox(`allCarSelect${index}`,getNotification)}/> 
+                                  <label for={`allCarSelect${index}`}></label>                 
+                                </div>
+                                }
+                          
+                              {allCarAcceptAllEnable && 
+                              <div className="custom_checkbox">
                                 <input type="checkbox" checked="true" id={`allCarSelected${index}`} /> 
                                 <label for={`allCarSelected${index}`}></label>                 
-                              </div>}
+                              </div>
+                            }
                               </div>:
-                   <span class="notofication-close-icon"onClick={()=>deleteNotification(getNotification)}>        
+                   <span class="notofication-close-icon"onClick={()=>getDeleteNotification(getNotification)}>        
                    <i class='bx bxs-x-circle'></i>
                    </span>}
              </div>
          </div>        
           ):<div>No Data Found</div>}
           <div>
-         {notification.length > 0 &&
+          {notification.length > 0 &&
                   <div class="multiAccept">
-                    {allCarAcceptAllEnable == true ? <span className="acceptAllGrp notifidelete"><button onClick={() => AllAcceptDisable()}> Cancel </button>  </span>:
-                    <button className="acceptAll notifidelete" onClick={()=>{setAllCarMultiAcceptEnable(false);setAllCarAcceptAllEnable(true)}}>Select All</button> }
-                    {allCarMultiAcceptEnable == true ? <span className="multiAcceptGrp"><button onClick={() => MultiAcceptDisable()}> Cancel </button>  </span>:
-                    <button className="multiAcceptbtn notifidelete" onClick={()=>{setAllCarMultiAcceptEnable(true);setAllCarAcceptAllEnable(false)}}>Delete</button> }
+                    {allCarMultiAcceptEnable == true ? <span className="multiAcceptGrp"><button onClick={() => MultiAcceptDisable()}> Cancel </button> <button onClick={()=> deleteNotification()}> Ok </button> </span>:
+                    <button className="multiAcceptbtn" onClick={()=>{setAllCarMultiAcceptEnable(true);setAllCarAcceptAllEnable(false)}}>Delete</button> }
+                    {allCarAcceptAllEnable == true ? <span className="acceptAllGrp"><button onClick={() => AllAcceptDisable()}> Cancel </button> <button onClick={()=> deleteNotification()}> Ok </button> </span>:
+                    <button className="acceptAll"  onClick={(e)=>allCarSelectBox(notification)}>SelectAll</button> }
                   </div>		  
                 } </div>
         </div>
