@@ -60,7 +60,7 @@ useEffect (() =>{
   
     
     API.post("notificationDetails/condition", request).then(response=>{
-  
+  try{
         console.log("notification data", response.data.data)
    
         // setNotification(response.data.data);
@@ -68,8 +68,10 @@ useEffect (() =>{
         // setNotificationTime(response.data.data.time);
 
         console.log("check count in notification+++",response.data.data.count)
-
-       
+  }
+        catch(err){
+          console.log(err)
+        }
         
     });
 }
