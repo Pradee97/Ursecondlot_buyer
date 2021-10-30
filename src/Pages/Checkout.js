@@ -48,7 +48,7 @@ const CheckOut = (props) => {
 		if (res.data.success) {
 			setToggleCheckoutPopupOpen(false);
 			setAlertImg(checkImg);
-			setAlertMessage("Good Luck with your product. We will contact your financial institutions to get approve between the business hours 9 to 5 central time.We will notify you by email and text about gate pass.")
+			setAlertMessage("Good Luck with your product. We will contact your financial institutions to get approve between the business hours 9 AM to 5 PM Central time.We will notify you by email and text about gate pass.")
 			// props.getMakeBitValue(carHighBid)
 			
 		} else {
