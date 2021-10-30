@@ -151,6 +151,16 @@ const Submenu = () => {
   const Chat = () => {
 
   const [notification,setNotification] = useState("");
+  
+  const [allCarAcceptAllEnable, setAllCarAcceptAllEnable]=useState(false)
+  const [allCarMultiAcceptEnable, setAllCarMultiAcceptEnable]=useState(false)
+
+  const MultiAcceptDisable =() =>{
+    setAllCarMultiAcceptEnable(false)
+  }
+  const AllAcceptDisable =() =>{
+    setAllCarAcceptAllEnable(false)
+  }
 
     const getNotification= () =>{
 
@@ -211,12 +221,12 @@ return () => clearInterval(intervalId);
 },[]);
         
     return (
-      <div>
+   
       
       <div  className="nav__submenu notiBlock">
         
         
-          {notification.length>0?notification.map((getNotification)=>
+          {notification.length>0?notification.map((getNotification,index)=>
              <div class="notoficationcontent">                        
              <div class="media">
                    <img alt="" src={getNotification.image}  />
@@ -227,15 +237,38 @@ return () => clearInterval(intervalId);
                          <h5>{ Math.floor(getNotification.time/60)} Hours ago</h5>}
                          {/* <h5>{Hours} Hours Ago</h5> */}
                    </div>
+                   {allCarMultiAcceptEnable == true || allCarAcceptAllEnable ==true ? 
+                                <div>
+                              {allCarMultiAcceptEnable && 
+                              <div className="customCheckbox cbox">
+                                <input type="checkbox" id={`allCarSelect${index}`} /> 
+                                <label for={`allCarSelect${index}`}></label>                 
+                              </div>
+                              }
+                              { allCarAcceptAllEnable && 
+                              <div className="customCheckbox cbox">
+                                <input type="checkbox" checked="true" id={`allCarSelected${index}`} /> 
+                                <label for={`allCarSelected${index}`}></label>                 
+                              </div>}
+                              </div>:
                    <span class="notofication-close-icon"onClick={()=>deleteNotification(getNotification)}>        
                    <i class='bx bxs-x-circle'></i>
-                   </span>
+                   </span>}
              </div>
          </div>        
           ):<div>No Data Found</div>}
-         
+          <div>
+         {notification.length > 0 &&
+                  <div class="multiAccept">
+                    {allCarAcceptAllEnable == true ? <span className="acceptAllGrp notifidelete"><button onClick={() => AllAcceptDisable()}> Cancel </button>  </span>:
+                    <button className="acceptAll notifidelete" onClick={()=>{setAllCarMultiAcceptEnable(false);setAllCarAcceptAllEnable(true)}}>Select All</button> }
+                    {allCarMultiAcceptEnable == true ? <span className="multiAcceptGrp"><button onClick={() => MultiAcceptDisable()}> Cancel </button>  </span>:
+                    <button className="multiAcceptbtn notifidelete" onClick={()=>{setAllCarMultiAcceptEnable(true);setAllCarAcceptAllEnable(false)}}>Delete</button> }
+                  </div>		  
+                } </div>
         </div>
-        </div>
+        
+        
     )}
 
   const logoNavigation = () => {

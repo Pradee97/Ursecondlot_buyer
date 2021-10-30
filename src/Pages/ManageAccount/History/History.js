@@ -576,11 +576,13 @@ const togglePrint = () => {
           <div class="section-title">
             <h2>history
             <div className="downBtn">
+            <i class="icofont-file-pdf"></i>
                 <button  className="printBtn"  type ="button" onClick= {() => printPage()}>Download</button>
             </div>
-            <div class="downloadBtn" className="printBtn">
+            
+            <div class="downloadBtn">
               <div class="downBtn">
-            <i class=""></i>
+              <i class="icofont-file-excel"></i>
              <ExcelFile>
                 <ExcelSheet data={carDetailForExcel} name="URCar">
                     <ExcelColumn label="Year" value="year"/>
