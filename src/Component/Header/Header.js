@@ -75,11 +75,11 @@ useEffect (() =>{
         
     });
 }
-useEffect (() =>{
+// useEffect (() =>{
 
-  getNotificationDetails();
-  // deleteNotification();
-  }, []);
+//   getNotificationDetails();
+//   // deleteNotification();
+//   }, []);
   
   
   useEffect(() => {
@@ -219,6 +219,7 @@ const Submenu = () => {
     API.post('delete_notification/update',request).then(res=>{
         // setNotificationCount(res.data.data);
         getNotificationDetails()
+        
     }) .catch(err => { console.log(err); });
   }
 
@@ -233,6 +234,7 @@ const Submenu = () => {
       API.post("delete_notification/update", request).then(response=>{
 
           getNotification()
+          getNotificationDetails()
            setAllCarMultiAcceptEnable(false)
               setAllCarAcceptAllEnable(false)
     
