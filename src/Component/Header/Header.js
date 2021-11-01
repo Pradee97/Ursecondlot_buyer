@@ -301,8 +301,8 @@ return () => clearInterval(intervalId);
          </div>        
           ):<div>No Data Found</div>}
           <div>
-          {notification.length > 0 &&
-                  <div class="multiAccept">
+              {notification.length > 0 &&
+                  <div class="multiAccept notiMultiAccept">
                     {allCarMultiAcceptEnable == true ? <span className="multiAcceptGrp"><button onClick={() => MultiAcceptDisable()}> Cancel </button> <button onClick={()=> deleteNotification()}> Ok </button> </span>:
                     <button className="multiAcceptbtn" onClick={()=>{setAllCarMultiAcceptEnable(true);setAllCarAcceptAllEnable(false)}}>Delete</button> }
                     {allCarAcceptAllEnable == true ? <span className="acceptAllGrp"><button onClick={() => AllAcceptDisable()}> Cancel </button> <button onClick={()=> deleteNotification()}> Ok </button> </span>:
