@@ -62,7 +62,7 @@ const AddUser = () => {
 	const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);	
 
 	console.log("loggedIN",typeof loggedInBuyerId)
-	console.log("buyer Id +++++++++++++",JSON.parse(loggedInBuyerId).buyer_id);
+	// console.log("buyer Id +++++++++++++",JSON.parse(loggedInBuyerId).buyer_id);
 
 	console.log("=====userDetails====>", userDetails)
 	console.log("======>", userDetails.dealer_id)
