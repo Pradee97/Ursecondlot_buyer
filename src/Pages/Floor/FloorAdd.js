@@ -79,7 +79,7 @@ const FloorAdd = () => {
     const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);	
    
     console.log("loggedIN",typeof loggedInBuyerId)
-	console.log("buyer Id +++++++++++++",JSON.parse(loggedInBuyerId).buyer_id);
+	//console.log("buyer Id +++++++++++++",JSON.parse(loggedInBuyerId).buyer_id);
    
     const inputProps = {
         placeholder: 'DD/MM/YYYY',

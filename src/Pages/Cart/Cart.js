@@ -60,13 +60,13 @@ const Cart = () => {
         API.post("cartDetails/condition", request).then(response=>{
 
             console.log("cart check the value", response.data.data)
-            if(response.data.data.length){
+            if(Array.isArray(response.data.data) && response.data.data.length){
                 setCartDetail(response.data.data.map(data=> {return {...data, isChecked:true}}))
                  setMySelectedCarId(response.data.data.map(data=>data.car_id))
-            }
-            setBuyerCreditLimit(response.data.data[0].credit_limit)
-            console.log("check the credit limit in the cart page",response.data.data[0].credit_limit)
-            setNumberCars(response.data.data.length)
+                 setBuyerCreditLimit(response.data.data[0].credit_limit)
+                  console.log("check the credit limit in the cart page",response.data.data[0].credit_limit)
+                 setNumberCars(response.data.data.length)
+            }            
             setLoading(false);
         });
     }
@@ -83,7 +83,7 @@ const Cart = () => {
         state.then(res => {
             console.log("res", res)
             setFeeDetails(res.data.data);
-            selectedTotalFloor=mySelectedCarTotal();
+            setSelectedTotalFloor(mySelectedCarTotal());
 
           
         })
