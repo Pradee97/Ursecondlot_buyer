@@ -148,7 +148,7 @@ const EditLegalAccount = () => {
             tax_id_exp: taxidexp,
             bussiness_name:legalBusinessname,
             active:1,
-            updatedBy:JSON.parse(loggedInBuyerId).buyer_id 
+            updatedBy:JSON.parse(JSON.stringify(loggedInBuyerId)).buyer_id 
            
         };
 
@@ -216,10 +216,24 @@ const EditLegalAccount = () => {
             setTaxidexpError("Tax Id exp is required")
             return;
         }
-        if(!(typeof city==='string'?accountObjc.city_id:city) || !(typeof state==='string'?accountObjc.state_id:state) || !(zipcode===accountObjc.zipcode?accountObjc.zipcode_id:zipcode)){
-            setStateAndCityError("State, City and Zipcode is required")
+        // if(!(typeof city==='string'?accountObjc.city_id:city) || !(typeof state==='string'?accountObjc.state_id:state) || !(zipcode===accountObjc.zipcode?accountObjc.zipcode_id:zipcode)){
+        //     setStateAndCityError("State, City and Zipcode is required")
+        //     return
+        // }
+
+        if(!(typeof state==='string'?accountObjc.state_id:state)){
+            setStateAndCityError("state is required")
             return
         }
+        if(!(typeof city==='string'?accountObjc.city_id:city)){
+            setStateAndCityError("city is required")
+             return
+        }
+        if(!(zipcode===accountObjc.zipcode?accountObjc.zipcode_id:zipcode)){
+            setStateAndCityError("zipcode is required")
+             return
+        }
+
 
         API
             .post('legal_manage/update', request)

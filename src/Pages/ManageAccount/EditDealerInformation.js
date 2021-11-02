@@ -56,8 +56,8 @@ const EditDealerInformation = () => {
     const [addressError, setAddressError] = useState("")
     const [stateAndCityError, setStateAndCityError] = useState("");
     const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
-    const buyer_id=JSON.parse(loggedInBuyerId).buyer_id;
-    const buyer_dealer_id=JSON.parse(loggedInBuyerId).buyer_dealer_id;
+    const buyer_id=JSON.parse(JSON.stringify(loggedInBuyerId)).buyer_id;
+    const buyer_dealer_id=JSON.parse(JSON.stringify(loggedInBuyerId)).buyer_dealer_id;
     
 
     const getStateName=(stateData)=>{
@@ -157,10 +157,34 @@ const EditDealerInformation = () => {
             setAddressError("Address must not exceed 150 characters")
             return;
         }
-        if(!(typeof city==='string'?accountObjc.city_id:city) || !(typeof state==='string'?accountObjc.state_id:state) || !(zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode)){
-            setStateAndCityError("State, City and Zipcode is required")
+        // if(!(typeof city==='string'?accountObjc.city_id:city) || !(typeof state==='string'?accountObjc.state_id:state) || !(zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode)){
+        //     setStateAndCityError("State, City and Zipcode is required")
+        //     return
+        // }
+        if(!(typeof state==='string'?accountObjc.state_id:state)){
+            setStateAndCityError("state is required")
             return
         }
+        if(!(typeof city==='string'?accountObjc.city_id:city)){
+            setStateAndCityError("city is required")
+             return
+        }
+        if(!(zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode)){
+            setStateAndCityError("zipcode is required")
+             return
+        }
+        // if(!state){
+        //     setStateAndCityError("state is required")
+        //     return
+        // }
+        // if(!city){
+        //     setStateAndCityError("city is required")
+        //      return
+        // }
+        // if(!zipCode){
+        //     setStateAndCityError("zipcode is required")
+        //      return
+        // }
 
         let request = {
             buyer_dealer_id:id,

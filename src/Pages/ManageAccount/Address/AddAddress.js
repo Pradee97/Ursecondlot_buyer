@@ -155,8 +155,8 @@ const AddAddress = () => {
                 location:location,
                 instructions:instruction,
                 active:1,
-                createdBy:JSON.parse(loggedInBuyerId).buyer_id,
-                updatedBy:JSON.parse(loggedInBuyerId).buyer_id
+                createdBy:JSON.parse(JSON.stringify(loggedInBuyerId)).buyer_id,
+                updatedBy:JSON.parse(JSON.stringify(loggedInBuyerId)).buyer_id
                 
             };
             console.log("===",request)  

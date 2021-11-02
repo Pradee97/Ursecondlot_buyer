@@ -48,8 +48,8 @@ const EditMyProfile = () => {
     const [image,setImage] = useState("");
     const [doc, setDoc] = useState("");
     const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
-    const buyer_id=JSON.parse(loggedInBuyerId).buyer_id;
-    const buyer_dealer_id=JSON.parse(loggedInBuyerId).buyer_dealer_id;
+    const buyer_id=JSON.parse(JSON.stringify(loggedInBuyerId)).buyer_id;
+    const buyer_dealer_id=JSON.parse(JSON.stringify(loggedInBuyerId)).buyer_dealer_id;
     const [loading,setLoading] = useState(true);
 
     const [isLateFee, setIsLateFee] = useState(false);
