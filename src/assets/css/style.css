@@ -5029,6 +5029,7 @@ __________________________________________________________*/
     font-size: 14px;
     color: #4E4E4E;
     margin-left: 5px;
+    text-transform: capitalize;
 }
 .mgaccountuserlinks{
 	float:left;
@@ -6723,6 +6724,7 @@ table td .ant-btn:hover span, table td .ant-btn:hover i{
   color: red !important; 
   text-align: left;
   margin-bottom: 5px;
+  text-transform: capitalize;
 }
 .topRightUser img{
   width:35px;
@@ -9144,3 +9146,40 @@ margin-right: 20px !important;
   border: none;
   box-shadow: none;
 }
+
+.popup-box a.cta-btns{
+  color: #fff !important;
+  text-transform: uppercase;
+}
+
+.popup-box .cta-btns{
+  color: #fff !important;
+  text-transform: uppercase;
+}
+
+
+.buyNowBlock .countownBlock{
+  margin: 10px 0;
+}
+
+.buyNowBlock .carpoint.lockedcar{
+  float: left;
+    width: 100%;
+    margin-left: 0;
+    padding: 0;
+}
+
+.buyNowBlock .carpoint.lockedcar a.cars-buy-btns-primary{
+  padding: 10px;
+}
+.lockedcarBtn{
+  margin-top: 10px !important;
+}
+.selectboxError{
+  margin-top: 0;
+}
+.selectTbox{
+  margin-bottom: 0;
+}
+
+

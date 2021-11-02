@@ -372,7 +372,7 @@ const EditMyProfile = () => {
                                 defaultCityValue = {city}
                                 defaultZipcodeValue = {zipcode}
                             />
-                            <p className="form-input-error"> {stateAndCityError} </p>
+                            <p className="form-input-error ml-3"> {stateAndCityError} </p>
                             {/* <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={city} className="form-control textbox" placeholder="" required onChange={(e) => setCity(e.target.value)} />

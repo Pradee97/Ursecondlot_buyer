@@ -401,7 +401,9 @@ const EditLegalAccount = () => {
                                 defaultCityValue = {city}
                                 defaultZipcodeValue = {zipcode}
                             />
+                             <div className="col-sm-12 form-group selectboxError">
                             <p className="form-input-error"> {stateAndCityError} </p>
+                            </div>
                             <div className="col-sm-12 form-group datePickerBlock">
                             <div className="tbox">  
                                  {/* <input type="date" defaultValue={accountObjc.dealer_license_exp===undefined?"":accountObjc.dealer_license_exp.substring(0,10)} 

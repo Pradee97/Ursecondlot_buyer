@@ -306,7 +306,7 @@ const getZipCodeId = (zipData) => {
                                 setCityValue={getCityName}
                                 setZipcodeValue={getZipCodeId}
                             />
-                            <div className="col-sm-12 form-group">
+                            <div className="col-sm-12 form-group selectboxError">
                             <p className="form-input-error"> {stateAndCityError}</p>
                             </div>
 

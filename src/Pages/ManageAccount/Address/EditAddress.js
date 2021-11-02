@@ -397,7 +397,7 @@ const EditAddress = () => {
                                 
                             />
                             {console.log("below component",zipCode)}
-                            <p className="form-input-error"> {stateAndCityError} </p>
+                            <p className="form-input-error ml-3"> {stateAndCityError} </p>
                              <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={accountObjc.location} className="textbox" placeholder="" onChange={(e) => setLocation(e.target.value)} />

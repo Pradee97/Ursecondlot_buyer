@@ -352,8 +352,8 @@ const AddLegalAccount = () => {
                                 setCityValue={getCityName}
                                 setZipcodeValue={getZipCodeId}
                             />
-                            <div className="col-sm-12 form-group">
-                            <p className="form-input-error"> {stateAndCityError}</p>
+                            <div className="col-sm-12 form-group selectboxError">
+                            <p className="form-input-error ml-3"> {stateAndCityError}</p>
                             </div>
                            
                             {/* <div className="col-sm-12 form-group">
