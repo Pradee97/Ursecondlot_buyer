@@ -50,6 +50,10 @@ const EditMyProfile = () => {
     const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
     const buyer_id=JSON.parse(JSON.stringify(loggedInBuyerId)).buyer_id;
     const buyer_dealer_id=JSON.parse(JSON.stringify(loggedInBuyerId)).buyer_dealer_id;
+
+    // const buyer_id=JSON.parse((loggedInBuyerId)).buyer_id;
+    // const buyer_dealer_id=JSON.parse((loggedInBuyerId)).buyer_dealer_id;
+
     const [loading,setLoading] = useState(true);
 
     const [isLateFee, setIsLateFee] = useState(false);
@@ -142,9 +146,21 @@ const EditMyProfile = () => {
             setAddressError("Address must not exceed 150 characters")
             return;
         }
-        if(!(typeof city==='string'?myProfileObjc.city_id:city) || !(typeof state==='string'?myProfileObjc.state_id:state) || !(zipcode===myProfileObjc.zipcode?myProfileObjc.zipcode_id:zipcode)){
-            setStateAndCityError("State, City and Zipcode is required")
+        // if(!(typeof city==='string'?myProfileObjc.city_id:city) || !(typeof state==='string'?myProfileObjc.state_id:state) || !(zipcode===myProfileObjc.zipcode?myProfileObjc.zipcode_id:zipcode)){
+        //     setStateAndCityError("State, City and Zipcode is required")
+        //     return
+        // }
+        if(!(typeof state==='string'?myProfileObjc.state_id:state)){
+            setStateAndCityError("state is required")
             return
+        }
+        if(!(typeof city==='string'?myProfileObjc.city_id:city)){
+            setStateAndCityError("city is required")
+             return
+        }
+        if(!(zipcode===myProfileObjc.zipcode?myProfileObjc.zipcode_id:zipcode)){
+            setStateAndCityError("zipcode is required")
+             return
         }
 
         let request = {
