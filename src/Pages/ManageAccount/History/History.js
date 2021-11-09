@@ -1098,7 +1098,7 @@ const togglePrint = () => {
                                        <td><b>Gps# </b></td>
                                        {historyDetail.title_status_name == "Title with Buyer" ?  <td><b>T</b> </td>:
                                        <td><b>TA</b> </td>}
-                                       <td><b>Amount</b> </td>
+                                       <td><b>Amount $</b> </td>
 
                                        </tr>)
                                        :""}

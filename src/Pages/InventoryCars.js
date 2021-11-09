@@ -74,6 +74,13 @@ const InventoryCars = () => {
 
 	const [isLateFee, setIsLateFee] = useState(false);
     const [lateFeeValue, setLateFeeValue] = useState(0);
+	const [carCountDetail,setCarCountDetail] = useState("");
+	const [loadMore, setLoadMore] = useState(4);
+	const [searchLoadMore,setSearchLoadMore] = useState(4);
+	const [ inventoryDetailsCount,setInventoryDetailsCount] = useState(false);
+	const [InventorySearchCount,setInventorySearchCount]=useState("");
+
+
 
     const toggleLateFee = () => {
     	setIsLateFee(!isLateFee);
@@ -172,7 +179,9 @@ const InventoryCars = () => {
     const getInventoryCarList=()=>{
 
         let request={
-            buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+            buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
+			key:loadMore
+
         }
 
         API.post('BuyerInventoryCarList/condition',request).then(res=>{
@@ -181,6 +190,11 @@ const InventoryCars = () => {
             //console.log("Response data",res.data.data);
             //if(results.length>0){
                 setCarInventoryDetail(res.data.data);
+				setLoadMore( res.data.data.length >= 4 ? res.data.data.length + 4 : loadMore)
+                setCarCountDetail(res.data.count);
+
+				console.log("car count detail ===== ",res.data.count);
+
             console.log("car Inventory Detail",res.data.data);
             setLoading(false);
             //}
@@ -386,7 +400,8 @@ const InventoryCars = () => {
 			engine_noise:engineNoiseSearch,
 			transmission_issue:transmissionIssueSearch,
 			history:historySearch,
-			sales_type:salesTypeSearch
+			sales_type:salesTypeSearch,
+			key:searchLoadMore
 			
 			}
 			console.log("state=======",stateSearch)
@@ -396,7 +411,10 @@ const InventoryCars = () => {
         .then((res)=>{
 		   		
             	setCarInventoryDetail(res.data.data);
- 
+			   setInventoryDetailsCount(res.data.data.length)
+			setInventorySearchCount(res.data.data.count);	
+			console.log ("SEARCH COUNT ===========",res.data.data.count)	
+			setSearchLoadMore( res.data.data.length >= 4 ? res.data.data.length + 4 : searchLoadMore )
         },
         (error) => {
             console.log(error);
@@ -610,6 +628,20 @@ useEffect(() => {
 	getlateFee()
 
 },[]);
+
+
+const loadMoreDetails = () =>{
+
+	if(inventoryDetailsCount==false){
+		getInventoryCarList()
+
+	}
+	else{
+		searchCarDetail()
+
+	}
+
+	}
 
     return(
         <div>
@@ -1079,6 +1111,15 @@ useEffect(() => {
                                 </div>):<div className="floor_notfiled_block"><p>No Data Found</p></div>}
                                 </div>
 								</div>
+								            
+								 {/* {carInventoryDetail.length>= 4 ?carInventoryDetail.slice(0,1).map(()=>
+          <div><a class={carInventoryDetail.length !== carCountDetail ?"load-more-btn":""} onClick= {loadMoreDetails}>{carInventoryDetail.length !== carCountDetail ?"load-more-btn":""}</a></div>
+          ):""}   */}
+
+<div class="text-center clearB col-lg-12">
+		{carInventoryDetail.length>=4?carInventoryDetail.slice(0,1).map(()=>
+			<a onClick={ loadMoreDetails }class={carInventoryDetail.length !== carCountDetail && inventoryDetailsCount !== InventorySearchCount ?"load-more-btn":""}>{carInventoryDetail.length !== carCountDetail && inventoryDetailsCount !== InventorySearchCount  ? "Load More" : ""}</a>
+		):""}</div>
                            
                         </div>
                     </div>
