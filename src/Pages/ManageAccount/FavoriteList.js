@@ -76,10 +76,17 @@ const [openBuyItNow, setOpenBuyItNow] = useState(false);
 	const [makeBitData, setMakeBitData] = useState({});
 	const [buyItNowData, setBuyItNowData] = useState({});
 
-	const [loadValue,setLoadValue] = useState(9);
+	const [loadValue,setLoadValue] = useState(4);
 
 	const [isLateFee, setIsLateFee] = useState(false);
     const [lateFeeValue, setLateFeeValue] = useState(0);
+
+	const [carCountDetail,setCarCountDetail] = useState("");
+
+	const [searchLoadMore,setSearchLoadMore] = useState(4);
+	const [ favDetailsCount,setFavDetailsCount] = useState(false);
+	const [favSearchCount,setFavSearchCount]=useState("");
+
 
     const toggleLateFee = () => {
     	setIsLateFee(!isLateFee);
@@ -175,7 +182,7 @@ const [openBuyItNow, setOpenBuyItNow] = useState(false);
 		
 	}
 
-	const FavoriteListViewMore = ()=>{getFavCarList()}
+	// const FavoriteListViewMore = ()=>{getFavCarList()}
   const getFavCarList=()=>{
 
     let request={
@@ -186,7 +193,8 @@ const [openBuyItNow, setOpenBuyItNow] = useState(false);
     console.log("request",request);
     API.post('BuyerFavoriteCarList/condition',request).then(res=>{
         setFavCarInventoryDetail(res.data.data);     
-		setLoadValue(res.data.data.length>0 ? res.data.data.length+9 : 9) 
+		setLoadValue(res.data.data.length>0 ? res.data.data.length+4 : 4) 
+		setCarCountDetail(res.data.count);
         console.log("Car Fav Inventory Detail",res.data.data);
         setLoading(false);
     }).catch(err=>{console.log(err);});
@@ -390,7 +398,8 @@ const OnSearch = (e) => {
 		engine_noise:engineNoiseSearch,
 		transmission_issue:transmissionIssueSearch,
 		history:historySearch,
-		sales_type:salesTypeSearch
+		sales_type:salesTypeSearch,
+		key:searchLoadMore
 		
 		}
 		console.log("state=======",stateSearch)
@@ -401,6 +410,9 @@ const OnSearch = (e) => {
 	   
 		
 		setFavCarInventoryDetail(res.data.data);
+		setFavDetailsCount(res.data.data.length)
+		setFavSearchCount(res.data.count);		
+		setSearchLoadMore( res.data.data.length >= 4 ? res.data.data.length + 4 : searchLoadMore )
 	 
 	},
 	(error) => {
@@ -612,6 +624,19 @@ useEffect(() => {
 	getlateFee()
 
 },[]);
+
+const loadMoreDetails = () =>{
+
+	if(favDetailsCount==false){
+		getFavCarList()
+
+	}
+	else{
+		searchCarDetail()
+
+	}
+
+	}
 
   return (
       <div>
@@ -1029,18 +1054,21 @@ useEffect(() => {
                   </div>
                 </div>  ):<div className="floor_notfiled_block"><p>No Data Found</p></div>}    
 
-				{carFavInventoryDetail.length >4 ? carFavInventoryDetail.slice(0,1)
+				{/* {carFavInventoryDetail.length >=2 ? carFavInventoryDetail.slice(0,1)
                                 .map(() =>
 				<div class="col-md-12 text-center">
 					<a href="JavaScript:void(0)" onClick={FavoriteListViewMore} class="load-more-btn">Load More</a>
-				</div> ):""}       
+				</div> ):""}        */}
 
                   </div>
 				  </div>
 				  </div>
                 </div>
             </div>
-          
+			 <div class="text-center clearB col-lg-12"> 
+		{carFavInventoryDetail.length>=4?carFavInventoryDetail.slice(0,1).map(()=>
+			<a onClick={ loadMoreDetails }class={carFavInventoryDetail.length !== carCountDetail && favDetailsCount !== favSearchCount ?"load-more-btn":""}>{carFavInventoryDetail.length !== carCountDetail && favDetailsCount !== favSearchCount  ? "Load More" : ""}</a>
+		):""}</div> 
 
           <section id="playstoreBlock" class="playstoreBlock">
             <div class="container">
