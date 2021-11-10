@@ -64,7 +64,7 @@ import MoreCarFromBuyer from './Pages/MoreCarFromSeller';
 import Checkout from './Pages/Checkout';
 import ScrollToTop from "./Component/scrollToTop";
 import InVoice from './Pages/ManageAccount/Invoice';
-
+import Invalidlink from './Pages/ForgotPassword/Invalidlink';
 
 function AppRouter() {
 
@@ -119,6 +119,11 @@ function AppRouter() {
             <Route path="/forgotpasswordemail" component={ForgotPasswordEmail}/>
             <Route path="/forgotpassword" component={ForgotPassword}/>
             <Route path="/forgotEmail" component={ForgotEmail}/>
+            {/* <Route path="/InvalidLink" component={InvalidLink}/> */}
+          <Route path="/Invalidlink" component={Invalidlink}/>
+
+
+            
 
             <PrivateRoute>
               <Route  path="/floor" component={FloorPlans}/>

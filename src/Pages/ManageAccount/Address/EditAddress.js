@@ -40,8 +40,8 @@ const EditAddress = () => {
     const [instructionError, setInstructionError] = useState("")
     const [stateAndCityError, setStateAndCityError] = useState("");
     const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
-    const buyer_id=JSON.parse(loggedInBuyerId).buyer_id;
-    const buyer_dealer_id=JSON.parse(loggedInBuyerId).buyer_dealer_id;
+    const buyer_id=JSON.parse(JSON.stringify(loggedInBuyerId)).buyer_id;
+    const buyer_dealer_id=JSON.parse(JSON.stringify(loggedInBuyerId)).buyer_dealer_id;
     const [loading,setLoading] = useState(true);
 
     const [isLateFee, setIsLateFee] = useState(false);
@@ -177,9 +177,21 @@ const EditAddress = () => {
             setInstructionError("Instruction must not exceed 150 characters")
             return;
         }
-        if(!(typeof city==='string'?accountObjc.city_id:city) || !(typeof state==='string'?accountObjc.state_id:state) || !(zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode)){
-            setStateAndCityError("State, City and Zipcode is required")
+        // if(!(typeof city==='string'?accountObjc.city_id:city) || !(typeof state==='string'?accountObjc.state_id:state) || !(zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode)){
+        //     setStateAndCityError("State, City and Zipcode is required")
+        //     return
+        // }
+        if(!(typeof state==='string'?accountObjc.state_id:state)){
+            setStateAndCityError("state is required")
             return
+        }
+        if(!(typeof city==='string'?accountObjc.city_id:city)){
+            setStateAndCityError("city is required")
+             return
+        }
+        if(!(zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode)){
+            setStateAndCityError("zipcode is required")
+             return
         }
 
         let request = {
@@ -385,7 +397,7 @@ const EditAddress = () => {
                                 
                             />
                             {console.log("below component",zipCode)}
-                            <p className="form-input-error"> {stateAndCityError} </p>
+                            <p className="form-input-error ml-3"> {stateAndCityError} </p>
                              <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={accountObjc.location} className="textbox" placeholder="" onChange={(e) => setLocation(e.target.value)} />

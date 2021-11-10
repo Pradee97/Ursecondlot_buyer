@@ -5029,6 +5029,7 @@ __________________________________________________________*/
     font-size: 14px;
     color: #4E4E4E;
     margin-left: 5px;
+    text-transform: capitalize;
 }
 .mgaccountuserlinks{
 	float:left;
@@ -6723,6 +6724,7 @@ table td .ant-btn:hover span, table td .ant-btn:hover i{
   color: red !important; 
   text-align: left;
   margin-bottom: 5px;
+  text-transform: capitalize;
 }
 .topRightUser img{
   width:35px;
@@ -7278,7 +7280,7 @@ img.carImg{
 
 .historyImg{
   width: 100%;
-  background: #f5f5f5;
+  background: #fff;
 }
 
 .carBrand img{
@@ -7286,8 +7288,14 @@ img.carImg{
   width: 80px;
   height: 70px;
 }
-
-
+.toggleExpand .priceBlock p.pdate{
+  width: 100%;
+  margin-top: 10px;
+}
+.toggleExpand .priceBlock p.date{
+  width: 100%;
+  text-align: left;
+}
 
 .checkoutReview{
 	margin:auto;
@@ -8283,7 +8291,7 @@ ul#progressbar li p{
 .historyPage .priceBlock p.date{
   padding-left: 0;
   padding-right: 0;
-  text-align: right;
+  text-align: left;
   margin-right: 0;
 }
 .oops{
@@ -8890,6 +8898,7 @@ height: 80px;
 .notoficationcontent h3{
 font-size: 16px;
 margin-bottom: 0;
+text-transform: capitalize;
 }
 .notoficationcontent h5{
 font-size: 14px;
@@ -8912,4 +8921,265 @@ font-size: 20px;
 .notofication-close-icon:hover i{
 color: #BD062C;
 }
+
+.multiAccept{
+	float: right;
+    font-size: 16px;
+    text-transform: capitalize;
+	margin-top:-30px;
+	position:relative;
+	z-index:99999;
+}
+
+.multiAccept button{
+  background: none;
+	margin-left:10px;
+  color: #BD062C;
+}
+
+.multiAccept button:hover{
+  color: #008d0e;
+  text-decoration: underline;
+}
+.multiAccept.notiMultiAccept{
+  margin-top: 0;
+    position: sticky;
+    bottom: -5px;
+    background: #fff;
+    width: 100%;
+    padding: 0px;
+    border-top: #ddd solid 1px;
+}
+
+.notoficationcontent .custom_checkbox{
+  margin-top: 10px;
+}
+.downBtn {
+  background: #bd062c;
+  color: #fff;
+  float: right;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.downBtn button:hover{
+  background: #bd062c;
+}
+.downBtns .downloadBtn {
+  float: right;
+  width: auto;
+  margin-right: 10px;
+}
+.downBtns i {
+  font-size: 20px;
+}
+.notoficationcontent .custom_checkbox{
+  margin-top: 10px;
+}
+
+
+.custom_checkbox input {
+  padding: 0;
+  height: initial;
+  width: initial;
+  margin-bottom: 0;
+  display: none;
+  cursor: pointer;
+}
+
+.custom_checkbox  label {
+  position: relative;
+  cursor: pointer;
+}
+
+.custom_checkbox  label:before {
+  content:'';
+  -webkit-appearance: none;
+  background-color: transparent;
+  border: 1px solid #ddd;
+  padding: 10px;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  cursor: pointer;
+  margin-right: 5px;
+  background:#fff;
+  margin-top: -3px;
+}
+
+.custom_checkbox  input:checked + label:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 12px;
+  left: 9px;
+  width: 6px;
+  height: 14px;
+  border: solid #bd062c;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.toggleList  .lotfee-inner{
+  padding: 20px;
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+}
+
+
+.toggleList  .pickupdetailcontent p.billsalesno{
+  margin-right: 10px;
+}
+.toggleIcon i{
+  font-size: 30px;
+  margin-top: 0px;
+  cursor: pointer;
+  padding-top: 18px;
+  padding-bottom: 16px;
+  padding-right: 10px;
+}
+.toggleIcon i:hover{
+    color: #BD062C;
+}
+
+.borderBottom{
+  border-bottom: #DDDDDD solid 1px;
+}
+
+.toggleExpand .borderBottom{
+  margin-bottom: 20px;
+}
+
+
+.toggleList .toggleIcon {
+  position: absolute;
+  right: 0px;
+  z-index: 999;
+  left: 0;
+  bottom: 0;
+  top: 0;
+}
+
+.toggleList .toggleExpand{
+border-top: #ddd solid 1px;
+box-shadow: none;
+padding: 0 10px;
+}
+
+.toggleList  .pickupdetailcontent p.billsalesno .label{
+color: #999;
+display: block;
+font-weight: 400;
+}
+
+
+.toggleList  .pickupdetailcontent p.billsalesno{
+  color: #444;
+  padding: 10px;
+  margin: 0;
+  float: left;
+  border-radius: 0;
+  width: 12%;
+  font-size: 13px;
+  border: none;
+}
+.toggleList  .pickupdetailcontent p.billsalesno.model{
+  width: 20%;
+}
+.toggleList  .pickupdetailcontent p.billsalesno.soldDate{
+  width: 20%;
+  padding-right: 40px;
+}
+
+.toggleList  .lotfee-inner{
+padding: 0;
+}
+
+.toggleList .toggleIcon {
+  position: absolute;
+  right: 0px;
+  z-index: 999;
+  left: 0;
+  bottom: 0;
+  top: 0;
+}
+
+.toggleList .toggleExpand{
+border-top: #ddd solid 1px;
+box-shadow: none;
+padding: 0 10px;
+}
+
+
+.label{
+color: #999 !important;
+}
+
+.toggleList .toggleExpand .pickupdetailcontent p.billsalesno{
+border: 2px solid #BD062C;
+  font-size: 16px;
+  padding: 5px 10px;
+  color: #BD062C;
+  margin-top: 10px;
+  margin-right: 10px;
+  width: auto;
+  margin-left: 10px;
+  border-radius: 3px;	
+  margin-bottom: 10px;
+}
+
+
+.toggleList .toggleExpand .historyMiddle p.solddate{
+margin-top: 10px !important;
+margin-right: 20px !important;
+}
+
+.toggleList .toggleExpand .datelabel{
+  width: auto;
+  margin-right: 5px;
+}
+
+.toggleExpand .car-item {
+  padding: 0;
+  margin: 0;
+  border: none;
+  box-shadow: none;
+}
+
+.popup-box a.cta-btns{
+  color: #fff !important;
+  text-transform: uppercase;
+}
+
+.popup-box .cta-btns{
+  color: #fff !important;
+  text-transform: uppercase;
+}
+
+
+.buyNowBlock .countownBlock{
+  margin: 10px 0;
+}
+
+.buyNowBlock .carpoint.lockedcar{
+  float: left;
+    width: 100%;
+    margin-left: 0;
+    padding: 0;
+}
+
+.buyNowBlock .carpoint.lockedcar a.cars-buy-btns-primary{
+  padding: 10px;
+}
+.lockedcarBtn{
+  margin-top: 10px !important;
+}
+.selectboxError{
+  margin-top: 0;
+}
+.selectTbox{
+  margin-bottom: 0;
+}
+
 

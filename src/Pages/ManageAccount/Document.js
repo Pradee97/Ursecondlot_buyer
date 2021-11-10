@@ -41,6 +41,9 @@ const Document = () => {
     const [isLateFee, setIsLateFee] = useState(false);
     const [lateFeeValue, setLateFeeValue] = useState(0);
 
+    const [Type,setType]=useState("");
+    const [UpdateType,setUpdateType]=useState("");
+
 	const toggleLateFee = () => {
 		setIsLateFee(!isLateFee);
   	}
@@ -167,7 +170,80 @@ const Document = () => {
             }
         })
     }
-    const updateFiles = (file, document_id) => {
+    const updateFiles = (file, document_id,  value) => {
+
+        console.log("====value====>",value)
+        console.log("====document file====>",file)
+        console.log("====document_id====>",document_id)
+        if (value == "Dealer license" && !isValidFile(file))
+        { 
+            setUpdateType("1");
+            console.log("====setType1====>")
+            
+         }
+        else if (value =="liability insurance" && !isValidFile(file))
+        {
+            setUpdateType("2");
+            
+
+        }
+        else if (value == "company check" && !isValidFile(file))
+        {
+            setUpdateType("3");
+            
+
+        }
+        else if (value === "state sales tax" && !isValidFile(file))
+        {
+            setUpdateType("4");
+            
+
+        }
+        else if (value === "surety bond" && !isValidFile(file))
+        {
+            setUpdateType("5");
+            
+
+        }
+        else if (value === "DMV vehicle" && !isValidFile(file))
+        {
+            setUpdateType("6");
+            
+
+        }
+        else if (value === "individual guaranty" && !isValidFile(file))
+        {
+            setUpdateType("7");
+            
+
+        }
+        else if (value === "owners and representatives" && !isValidFile(file))
+        {
+            setUpdateType("8");
+            
+
+        }
+        else if (value === "bank Authorization" && !isValidFile(file))
+        {
+            setUpdateType("9");
+            
+
+        }
+        else if (value === "representatives" && !isValidFile(file))
+        {
+            setUpdateType("10");
+            
+
+        }
+        else if (value === "Articles of incorporation" && !isValidFile(file))
+        {
+            setUpdateType("11");
+            
+
+        }
+        else{
+           
+            console.log("====else calli=ng===>")
         let request = {
             document_id: document_id,
             doc_name: file.length > 0 ? file : [file]
@@ -220,7 +296,100 @@ const Document = () => {
             }
         })
     }
+    }
+
+    const isValidFile = (file) => {
+        let filesArray = Object.values(file);  
+        // console.log("====filesArray====>",filesArray[0])
+        let fileExtension = filesArray[0].split('.').pop(); 
+        // console.log("====fileExtension====>",fileExtension)
+
+        let isValid = (fileExtension == 'txt' || 
+        fileExtension == 'doc' ||
+        fileExtension == 'pdf' ||
+        fileExtension == 'png' || 
+        fileExtension == 'jpeg' || 
+        fileExtension == 'jpg' );
+        return isValid;
+    }
+
     const getFiles = (file, value) => {
+
+        console.log("====file====>",file)
+        console.log("====value====>",value)
+        console.log("==== txt ==== ", isValidFile(file))
+        setType("")
+        console.log("==== condition ==== ", (value == "Dealer license" && !isValidFile(file)))
+        
+        if (value == "Dealer license" && !isValidFile(file))
+        { 
+            setType("1");
+            console.log("====setType1====>")
+            
+         }
+        else if (value =="liability insurance" && !isValidFile(file))
+        {
+            setType("2");
+            
+
+        }
+        else if (value == "company check" && !isValidFile(file))
+        {
+            setType("3");
+            
+
+        }
+        else if (value === "state sales tax" && !isValidFile(file))
+        {
+            setType("4");
+            
+
+        }
+        else if (value === "surety bond" && !isValidFile(file))
+        {
+            setType("5");
+            
+
+        }
+        else if (value === "DMV vehicle" && !isValidFile(file))
+        {
+            setType("6");
+            
+
+        }
+        else if (value === "individual guaranty" && !isValidFile(file))
+        {
+            setType("7");
+            
+
+        }
+        else if (value === "owners and representatives" && !isValidFile(file))
+        {
+            setType("8");
+            
+
+        }
+        else if (value === "bank Authorization" && !isValidFile(file))
+        {
+            setType("9");
+            
+
+        }
+        else if (value === "representatives" && !isValidFile(file))
+        {
+            setType("10");
+            
+
+        }
+        else if (value === "Articles of incorporation" && !isValidFile(file))
+        {
+            setType("11");
+            
+
+        }
+        else{
+           
+            console.log("====else calli=ng===>")
         let request = {
             buyer_dealer_id: userDetails.buyer_dealer_id,
             buyer_doc_type: value,
@@ -275,6 +444,7 @@ const Document = () => {
             }
         })
     }
+    }
 
     const getlateFee=()=>{
 		let request={
@@ -322,6 +492,7 @@ const Document = () => {
                                                                 <FileBase64 onDone={(e) => getFiles(e, "Dealer license")} />
                                                             </div>
                                                             </p>   
+                                                            {Type==="1"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
                                                     </div> :
                                                         <div className="docdetails">
                                                             <h5>Copy of Dealer license</h5>
@@ -330,9 +501,11 @@ const Document = () => {
                                                             <p>
                                                                 <div className="upload-btn-wrapper updateFile">
                                                                     <a className="btn"> Update File</a>
-                                                                    <FileBase64 onDone={(e) => updateFiles(e, doc1.document_id)} />
+                                                                    <FileBase64 onDone={(e) => updateFiles(e, doc1.document_id),"Dealer license" } />
                                                                 </div>
                                                                 <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc1.document_id)}> Delete File</a>
+                                                                {UpdateType==="1"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
+
                                                             </p>
                                                         </div>}
                                                 </div>
@@ -346,6 +519,7 @@ const Document = () => {
                                                                 <FileBase64 onDone={(e) => getFiles(e, "liability insurance")} />
                                                             </div>
                                                         </p>
+                                                        {Type==="2"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
                                                     </div> :
                                                         <div className="docdetails">
                                                             <h5>Certificate of liability insurance.</h5>
@@ -354,10 +528,11 @@ const Document = () => {
                                                             <p>
                                                                 <div className="upload-btn-wrapper updateFile">
                                                                     <a className="btn"> Update File</a>
-                                                                    <FileBase64 onDone={(e) => updateFiles(e, doc2.document_id)} />
+                                                                    <FileBase64 onDone={(e) => updateFiles(e, doc2.document_id,"liability insurance")} />
                                                                 </div>
 
                                                                 <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc2.document_id)}> Delete File</a>
+                                                                {UpdateType==="2"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
                                                             </p>
                                                         </div>
                                                     }
@@ -373,6 +548,7 @@ const Document = () => {
                                                                 <FileBase64 onDone={(e) => getFiles(e, "company check")} />
                                                             </div>
                                                         </p>
+                                                        {Type==="3"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
                                                     </div> : <div className="docdetails">
                                                         <h5>Copy of Company check.</h5>
                                                         <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc3.doc_name} className="img-fluid" alt="" />
@@ -380,10 +556,12 @@ const Document = () => {
                                                         <p>
                                                             <div className="upload-btn-wrapper updateFile">
                                                                 <a className="btn"> Update File</a>
-                                                                <FileBase64 onDone={(e) => updateFiles(e, doc3.document_id)} />
+                                                                <FileBase64 onDone={(e) => updateFiles(e, doc3.document_id, "company check")} />
                                                             </div>
 
                                                             <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc3.document_id)}> Delete File</a>
+                                                            {UpdateType==="3"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
+
                                                         </p>
                                                     </div>
                                                     }
@@ -403,6 +581,7 @@ const Document = () => {
                                                                 <FileBase64 onDone={(e) => getFiles(e, "state sales tax")} />
                                                             </div>
                                                         </p>
+                                                        {Type==="4"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
                                                     </div> :
                                                         <div className="docdetails">
                                                             <h5>Copy of state sales tax certificate.</h5>
@@ -411,9 +590,10 @@ const Document = () => {
                                                             <p>
                                                                 <div className="upload-btn-wrapper updateFile">
                                                                     <a className="btn"> Update File</a>
-                                                                    <FileBase64 onDone={(e) => updateFiles(e, doc4.document_id)} />
+                                                                    <FileBase64 onDone={(e) => updateFiles(e, doc4.document_id, "state sales tax")} />
                                                                 </div>
                                                                 <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc4.document_id)}> Delete File</a>
+                                                                {UpdateType==="4"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
                                                             </p>
                                                         </div>}
                                                 </div>
@@ -427,6 +607,7 @@ const Document = () => {
                                                                 <FileBase64 onDone={(e) => getFiles(e, "surety bond")} />
                                                             </div>
                                                         </p>
+                                                        {Type==="5"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
                                                     </div> :
                                                         <div className="docdetails">
                                                             <h5>Copy of surety bond (if required by you state).</h5>
@@ -435,9 +616,10 @@ const Document = () => {
                                                             <p>
                                                                 <div className="upload-btn-wrapper updateFile">
                                                                     <a className="btn"> Update File</a>
-                                                                    <FileBase64 onDone={(e) => updateFiles(e, doc5.document_id)} />
+                                                                    <FileBase64 onDone={(e) => updateFiles(e, doc5.document_id, "surety bond")} />
                                                                 </div>
                                                                 <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc5.document_id)}> Delete File</a>
+                                                                {UpdateType==="5"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
                                                             </p>
                                                         </div>}
                                                 </div>
@@ -451,6 +633,7 @@ const Document = () => {
                                                                 <FileBase64 onDone={(e) => getFiles(e, "DMV vehicle")} />
                                                             </div>
                                                         </p>
+                                                        {Type==="6"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
                                                     </div>:
                                                      <div className="docdetails">
                                                      <h5>Copy of DMV vehicle dealer bond (in required states).</h5>
@@ -459,9 +642,10 @@ const Document = () => {
                                                      <p>
                                                          <div className="upload-btn-wrapper updateFile">
                                                              <a className="btn"> Update File</a>
-                                                             <FileBase64 onDone={(e) => updateFiles(e, doc6.document_id)} />
+                                                             <FileBase64 onDone={(e) => updateFiles(e, doc6.document_id, "DMV vehicle")} />
                                                          </div>
                                                          <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc6.document_id)}> Delete File</a>
+                                                         {UpdateType==="6"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
                                                      </p>
                                                  </div>}
                                                 </div>                                                
@@ -479,6 +663,8 @@ const Document = () => {
                                                                 <FileBase64 onDone={(e) => getFiles(e, "individual guaranty")} />
                                                             </div>
                                                         </p>
+                                                        {Type==="7"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
+
                                                     </div>:
                                                     <div className="docdetails">
                                                     <h5>Signed individual guaranty for each owner.</h5>
@@ -487,9 +673,10 @@ const Document = () => {
                                                     <p>
                                                         <div className="upload-btn-wrapper updateFile">
                                                             <a className="btn"> Update File</a>
-                                                            <FileBase64 onDone={(e) => updateFiles(e, doc7.document_id)} />
+                                                            <FileBase64 onDone={(e) => updateFiles(e, doc7.document_id, "individual guaranty")} />
                                                         </div>
                                                         <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc7.document_id)}> Delete File</a>
+                                                        {UpdateType==="7"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
                                                     </p>
                                                 </div>}
                                                 </div>
@@ -503,6 +690,7 @@ const Document = () => {
                                                                 <FileBase64 onDone={(e) => getFiles(e, "owners and representatives")} />
                                                             </div>
                                                         </p>
+                                                        {Type==="8"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
                                                     </div>:
                                                     <div className="docdetails">
                                                     <h5>Legible copy of driver’s license for owners and representatives</h5>
@@ -511,9 +699,11 @@ const Document = () => {
                                                     <p>
                                                         <div className="upload-btn-wrapper updateFile">
                                                             <a className="btn"> Update File</a>
-                                                            <FileBase64 onDone={(e) => updateFiles(e, doc8.document_id)} />
+                                                            <FileBase64 onDone={(e) => updateFiles(e, doc8.document_id,"owners and representatives")} />
                                                         </div>
                                                         <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc8.document_id)}> Delete File</a>
+                                                        {UpdateType==="8"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
+
                                                     </p>
                                                 </div>}
                                                 </div>
@@ -527,6 +717,7 @@ const Document = () => {
                                                                 <FileBase64 onDone={(e) => getFiles(e, "bank Authorization")} />
                                                             </div>
                                                         </p>
+                                                        {Type==="9"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
                                                     </div>:
                                                     <div className="docdetails">
                                                     <h5>Signed bank Authorization letter for bank to release information.</h5>
@@ -535,9 +726,11 @@ const Document = () => {
                                                     <p>
                                                         <div className="upload-btn-wrapper updateFile">
                                                             <a className="btn"> Update File</a>
-                                                            <FileBase64 onDone={(e) => updateFiles(e, doc9.document_id)} />
+                                                            <FileBase64 onDone={(e) => updateFiles(e, doc9.document_id, "bank Authorization")} />
                                                         </div>
                                                         <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc9.document_id)}> Delete File</a>
+                                                        {UpdateType==="9"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
+
                                                     </p>
                                                 </div>}
                                                 </div>
@@ -555,6 +748,7 @@ const Document = () => {
                                                                 <FileBase64 onDone={(e) => getFiles(e, "representatives")} />
                                                             </div>
                                                         </p>
+                                                        {Type==="10"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
                                                     </div>:
                                                     <div className="docdetails">
                                                     <h5>Legible copy of driver’s license for owners and representatives</h5>
@@ -563,9 +757,11 @@ const Document = () => {
                                                     <p>
                                                         <div className="upload-btn-wrapper updateFile">
                                                             <a className="btn"> Update File</a>
-                                                            <FileBase64 onDone={(e) => updateFiles(e, doc10.document_id)} />
+                                                            <FileBase64 onDone={(e) => updateFiles(e, doc10.document_id, "representatives")} />
                                                         </div>
                                                         <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc10.document_id)}> Delete File</a>
+                                                        {UpdateType==="10"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
+
                                                     </p>
                                                 </div>}
                                                 </div>
@@ -580,6 +776,7 @@ const Document = () => {
                                                                 <FileBase64 onDone={(e) => getFiles(e, "Articles of incorporation")} />
                                                             </div>
                                                         </p>
+                                                        {Type==="11"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
                                                     </div>:
                                                     <div className="docdetails">
                                                     <h5>Articles of incorporation.</h5>
@@ -588,9 +785,10 @@ const Document = () => {
                                                     <p>
                                                         <div className="upload-btn-wrapper updateFile">
                                                             <a className="btn"> Update File</a>
-                                                            <FileBase64 onDone={(e) => updateFiles(e, doc11.document_id)} />
+                                                            <FileBase64 onDone={(e) => updateFiles(e, doc11.document_id, "Articles of incorporation")} />
                                                         </div>
                                                         <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc11.document_id)}> Delete File</a>
+                                                        {UpdateType==="11"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
                                                     </p>
                                                 </div>}
                                                 </div>

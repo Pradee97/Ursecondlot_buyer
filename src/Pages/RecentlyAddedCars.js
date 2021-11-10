@@ -56,6 +56,12 @@ const [apiName,setApiName]=useState("")
 	const [isLateFee, setIsLateFee] = useState(false);
     const [lateFeeValue, setLateFeeValue] = useState(0);
 
+	const [carCountDetail,setCarCountDetail] = useState("");
+	const [loadMore, setLoadMore] = useState(4);
+	const [searchLoadMore,setSearchLoadMore] = useState(4);
+	const [ RecentDetailsCount,setRecentDetailsCount] = useState(false);
+	const [recentSearchCount,setRecentSearchCount]=useState("");
+
     const toggleLateFee = () => {
     	setIsLateFee(!isLateFee);
     }
@@ -152,7 +158,9 @@ const [apiName,setApiName]=useState("")
     const getrecentCarList=()=>{
 
         let request={
-            buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+            buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
+			key:loadMore
+
         }
 
         API.post('BuyerNewCarList/condition',request).then(res=>{
@@ -161,6 +169,9 @@ const [apiName,setApiName]=useState("")
             console.log("Response data",res.data.data);
             //if(results.length>0){
             setCarDetail(res.data.data);
+			setLoadMore( res.data.data.length >= 4 ? res.data.data.length + 4 : loadMore)
+			setCarCountDetail(res.data.count);
+
             console.log("car Detail",res.data.data);
             setLoading(false);
             //}
@@ -357,7 +368,8 @@ const [apiName,setApiName]=useState("")
 			engine_noise:engineNoiseSearch,
 			transmission_issue:transmissionIssueSearch,
 			history:historySearch,
-			sales_type:salesTypeSearch
+			sales_type:salesTypeSearch,
+			key:searchLoadMore
 			
 			}
 			console.log("state=======",stateSearch)
@@ -368,6 +380,9 @@ const [apiName,setApiName]=useState("")
 		   
 			
             setCarDetail(res.data.data);
+			setRecentDetailsCount(res.data.data.length)
+			setRecentSearchCount(res.data.count);		
+			setSearchLoadMore( res.data.data.length >= 4 ? res.data.data.length + 4 : searchLoadMore )
          
         },
         (error) => {
@@ -403,6 +418,18 @@ const [apiName,setApiName]=useState("")
 	},[]);
 
 
+	const loadMoreDetails = () =>{
+
+		if(RecentDetailsCount==false){
+			getrecentCarList()
+	
+		}
+		else{
+			searchCarDetail()
+	
+		}
+	
+		}
     return(
         <div>
             {loading?<Loading/>:
@@ -484,6 +511,10 @@ const [apiName,setApiName]=useState("")
 						</div>
 						</div>
                     </div>
+					<div class="text-center clearB col-lg-12">
+		{carDetail.length>=4?carDetail.slice(0,1).map(()=>
+			<a onClick={ loadMoreDetails }class={carDetail.length !== carCountDetail && RecentDetailsCount !== recentSearchCount ?"load-more-btn":""}>{carDetail.length !== carCountDetail && RecentDetailsCount !== recentSearchCount  ? "Load More" : ""}</a>
+		):""}</div>
 					{isOpenMakeBit && <Popup
 						isClose={false}
 						content={<>

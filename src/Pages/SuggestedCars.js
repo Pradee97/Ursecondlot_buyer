@@ -75,6 +75,13 @@ const SuggestedCars = () => {
 	const [isLateFee, setIsLateFee] = useState(false);
     const [lateFeeValue, setLateFeeValue] = useState(0);
 
+	const [carCountDetail,setCarCountDetail] = useState("");
+	const [loadMore, setLoadMore] = useState(4);
+	const [searchLoadMore,setSearchLoadMore] = useState(4);
+	const [ suggestedDetailsCount,setSuggestedDetailsCount] = useState(false);
+	const [suggestedSearchCount,setSuggestedSearchCount]=useState("");
+
+
 	const toggleLateFee = () => {
 		setIsLateFee(!isLateFee);
     }
@@ -172,7 +179,7 @@ const SuggestedCars = () => {
 
         let request={
 			buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id,
-			
+			key:loadMore
         }
         API.post('SuggestedCarList/condition',request).then(res=>{
             console.log("response",res.data.data);
@@ -180,6 +187,8 @@ const SuggestedCars = () => {
             console.log("Response data",res.data.data);
             //if(results.length>0){
 			setCarDetail(res.data.data);
+			setLoadMore( res.data.data.length >= 4 ? res.data.data.length + 4 : loadMore)
+			setCarCountDetail(res.data.count);
 
             setLoading(false);
             //}
@@ -376,11 +385,9 @@ const clear = () => {
 			engine_noise:engineNoiseSearch,
 			transmission_issue:transmissionIssueSearch,
 			history:historySearch,
-			sales_type:salesTypeSearch
-
-
-			
-			}
+			sales_type:salesTypeSearch,
+			key:searchLoadMore			
+		}
 			console.log("state=======",stateSearch)
 			console.log(" filter search request",request);
 
@@ -389,6 +396,9 @@ const clear = () => {
 		   
 			//if(res.data.data.length>0)
             	setCarDetail(res.data.data);
+				setSuggestedDetailsCount(res.data.data.length)
+				setSuggestedSearchCount(res.data.count);		
+				setSearchLoadMore( res.data.data.length >= 4 ? res.data.data.length + 4 : searchLoadMore )
 			// else
 			// 	getrecentCarList();
          
@@ -600,6 +610,18 @@ useEffect(() => {
 
 },[]);
 
+const loadMoreDetails = () =>{
+
+	if(suggestedDetailsCount==false){
+		getrecentCarList()
+
+	}
+	else{
+		searchCarDetail()
+
+	}
+
+	}
     return(
         <div>
             {loading?<Loading/>:
@@ -1067,8 +1089,15 @@ useEffect(() => {
                                 </div>):<div className="floor_notfiled_block"><p>No Data Found</p></div>}
                             </div>
 							</div></div>
+
+
+
                         </div>
                     </div>
+					<div class="text-center clearB col-lg-12">
+		{carDetail.length>=4?carDetail.slice(0,1).map(()=>
+			<a onClick={ loadMoreDetails }class={carDetail.length !== carCountDetail && suggestedDetailsCount !== suggestedSearchCount ?"load-more-btn":""}>{carDetail.length !== carCountDetail && suggestedDetailsCount !== suggestedSearchCount  ? "Load More" : ""}</a>
+		):""}</div>
 					{isOpen && <Popup
 						isClose={false}
 						content={<>

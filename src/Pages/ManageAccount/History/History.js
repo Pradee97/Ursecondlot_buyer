@@ -565,6 +565,31 @@ const togglePrint = () => {
       
             }
 
+            const showDetails = (data, minusBtn, plusButton) =>{
+              console.log("showDetails", data)
+              document.getElementById(data).setAttribute("class", "showContent");
+              document.getElementById(data).removeAttribute("hideContent"); 
+              
+              document.getElementById(minusBtn).removeAttribute("hideContent"); 
+              document.getElementById(minusBtn).setAttribute("class", "bx bx-minus showContent");
+              
+              document.getElementById(plusButton).removeAttribute("showContent"); 
+              document.getElementById(plusButton).setAttribute("class", "bx bx-plus hideContent");
+        
+              }
+              const hideDetails = (data, minusBtn, plusButton) =>{
+              console.log("hideDetails", data)
+              document.getElementById(data).setAttribute("class", "hideContent");
+              document.getElementById(data).removeAttribute("showContent"); 
+              
+              document.getElementById(minusBtn).removeAttribute("showContent"); 
+              document.getElementById( minusBtn).setAttribute("class", "bx bx-minus hideContent");
+              
+              document.getElementById(plusButton).removeAttribute("hideContent"); 
+              document.getElementById( plusButton).setAttribute("class", "bx bx-plus showContent");
+              
+              }
+
     return (
       <div>
         {loading?<Loading/>:
@@ -573,11 +598,11 @@ const togglePrint = () => {
       <div id="historyPage" class="historyPage">
       <div class="container" >
         <div class="lotfeeblock col-lg-12">
-          <div class="section-title">
+          <div class="section-title downBtns">
             <h2>history
             <div className="downBtn">
             <i class="icofont-file-pdf"></i>
-                <button  className="printBtn"  type ="button" onClick= {() => printPage()}>Download</button>
+                <button  className=""  type ="button" onClick= {() => printPage()}>Download</button>
             </div>
             
             <div class="downloadBtn">
@@ -732,9 +757,37 @@ const togglePrint = () => {
             .map((historyDetail,index) =>{
                         paySeparately={[index] : 'no'} 
               // setCarTransportation(historyDetail.transportation)
-              return <div class="lotfee-inner col-lg-12">
+              return   <div class="toggleList"> <div class="lotfee-inner col-lg-12">
+
+              <div class="row">							
+                               <div class="col-lg-12">	
+                              			
+                                   <div class="car-item">
+                                       
+									   <div class="pickupdetailcontent"  >
+									   <p class="billsalesno invNo"><span className="label">Inventory # :</span> {historyDetail.inventory_no}</p>
+                                        <p class="billsalesno model"><span className="label">Year Make Model :</span>{historyDetail.year} {historyDetail.make} {historyDetail.model}</p>
+                                        <p class="billsalesno vinNo"><span className="label">Vin # :</span>  {historyDetail.vin_no}</p>
+                                          <p class="billsalesno billOf"><span className="label">Bill Of sale # : </span> {historyDetail.bill_of_sales_id}</p>
+										                      <p class="billsalesno  netAmt"><span className="label">Gate Pass Code : </span>{historyDetail.gatepass_id}</p>
+                                          <p class="billsalesno netAmt"><span className="label">Total Amount : $</span> {(Number(historyDetail.price)+  Number(historyDetail.lot_fee) || 0) + (Number(getFeeDetails(historyDetail.price))) + 0 +0+0+ (Number(historyDetail.transportation_charge || 0)) +  Number(historyDetail.late_fee)}</p>
+                                          <p class="billsalesno soldDate"><span className="label">Date of Purchase :</span>  {historyDetail.sold_date}</p>                                      
+                                       </div>			
+                                     </div>
+                               </div>
+                               <div class="text-right toggleIcon plus">	
+                               <i id = {`plusButton${index}`}  className='bx bx-plus showContent' onClick={()=>showDetails(`showDetails${index}`, `minusButton${index}`, `plusButton${index}`)}></i>
+                          
+                               <i id = {`minusButton${index}`}  className="bx bx-minus hideContent " onClick={()=>hideDetails(`showDetails${index}`, `minusButton${index}`, `plusButton${index}`)}></i>
+                               </div>
+                                   
+                           </div> 
+
+					<div id = {`showDetails${index}`} className = "hideContent" > 
+
+          <div class="lotfee-inner col-lg-12 toggleExpand">
                 <div class="row">							
-                  <div class="col-lg-3">
+                  <div class="col-lg-4">
                     
                     <div class="car-item">
                     <div class="pickupdetailcontent">
@@ -811,7 +864,7 @@ const togglePrint = () => {
                     
                     
                   </div>
-                  <div class="col-lg-5 sliderBlock">
+                  <div class="col-lg-4 sliderBlock">
                     <div className="tophead">
                     <p>Inventory # - <span>{historyDetail.inventory_no}</span></p>
                     
@@ -871,8 +924,8 @@ const togglePrint = () => {
   
                   
                   <div class="col-lg-4 priceBlock">
-                    <p className="pdate">Purchased from <span className="redText">{historyDetail.dealer_type}</span></p>
-                    <p class="date ml-0"><span className="datelabel">Date Of Purchased </span>  <span className="redText">{historyDetail.sold_date}</span></p>
+                    <p className="pdate">Purchased from: <span className="redText">{historyDetail.dealer_type}</span></p>
+                    <p class="date ml-0"><span className="datelabel">Date Of Purchase: </span>  <span className="redText">{historyDetail.sold_date}</span></p>
                     
                     <div class="vehicleimgright col-lg-12">
                       <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>HistoryEdit(`transporationDiv${historyDetail.car_id}`,`transporationHeader${historyDetail.car_id}`)}>{historyDetail.bill_of_sales_id !== null && historyDetail.bill_of_sales_id !== "" ? "": "Edit Transportation" }</a></p>
@@ -972,9 +1025,9 @@ const togglePrint = () => {
                                             <div>
                                     </div>
                                     </div>
-                                                      </div>
+                              </div>                        </div></div>
                 </div>
-              </div>})
+              </div></div>})
                     :""}       
                      
           {historyDetail.length>=10?historyDetail.slice(0,1).map(()=>
@@ -1045,7 +1098,7 @@ const togglePrint = () => {
                                        <td><b>Gps# </b></td>
                                        {historyDetail.title_status_name == "Title with Buyer" ?  <td><b>T</b> </td>:
                                        <td><b>TA</b> </td>}
-                                       <td><b>Amount</b> </td>
+                                       <td><b>Amount $</b> </td>
 
                                        </tr>)
                                        :""}

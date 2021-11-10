@@ -84,6 +84,12 @@ const Search = () => {
 	const [isLateFee, setIsLateFee] = useState(false);
     const [lateFeeValue, setLateFeeValue] = useState(0);
 
+    const [carCountDetail,setCarCountDetail] = useState("");
+	const [loadMore, setLoadMore] = useState(4);
+    const [searchLoadMore,setSearchLoadMore] = useState(4);
+	const [ inventoryDetailsCount,setInventoryDetailsCount] = useState(false);
+	const [InventorySearchCount,setInventorySearchCount]=useState("");
+
     const toggleLateFee = () => {
       setIsLateFee(!isLateFee);
       }
@@ -221,8 +227,10 @@ const Search = () => {
 
             console.log("response",res.data.data);
             setCarDetail(res.data.data || []); 
-			setLoadValue(res.data.data.length>0 ? res.data.data.length+9 : 9)
+			setLoadValue(res.data.data.length>0 ? res.data.data.length+4 : 4)
             setLoading(false);
+			setCarCountDetail(res.data.count);
+
             
         }).catch(err => { console.log(err); });
 	}
@@ -479,7 +487,8 @@ const Search = () => {
 			engine_noise:engineNoiseSearch,
 			transmission_issue:transmissionIssueSearch,
 			history:historySearch,
-			sales_type:salesTypeSearch
+			sales_type:salesTypeSearch,
+			key:searchLoadMore
 
 
 			
@@ -491,6 +500,10 @@ const Search = () => {
         .then((res)=>{
 		   
             setCarDetail(res.data.data || []);
+			setInventoryDetailsCount(res.data.data.length)
+			setInventorySearchCount(res.data.data.count);	
+			console.log ("SEARCH COUNT ===========",res.data.data.count)	
+			setSearchLoadMore( res.data.data.length >= 4 ? res.data.data.length + 4 : searchLoadMore )
 			
          
         },
@@ -708,6 +721,19 @@ useEffect(() => {
 	getlateFee()
 
 },[]);
+
+const loadMoreDetails = () =>{
+
+	if(inventoryDetailsCount==false){
+		VehicleSearch()
+
+	}
+	else{
+		searchCarDetail()
+
+	}
+
+	}
 
     return(
         <div>
@@ -1182,11 +1208,16 @@ useEffect(() => {
                                         </div>
                                     </div>
                                 </div>):<div className="floor_notfiled_block"><p>No Data Found</p></div>}
-								{carDetail.length >4 ? carDetail.slice(0,1)
+								{/* {carDetail.length >4 ? carDetail.slice(0,1)
                                 .map(() =>
 								<div class="col-md-12 text-center">
 									<a href="JavaScript:void(0)" onClick={SearchViewMore} class="load-more-btn">Load More</a>
-								</div>):""}
+								</div>):""} */}
+
+<div class="text-center clearB col-lg-12">
+		{carDetail.length>=4?carDetail.slice(0,1).map(()=>
+			<a onClick={ loadMoreDetails }class={carDetail.length !== carCountDetail && inventoryDetailsCount !== InventorySearchCount ?"load-more-btn":""}>{carDetail.length !== carCountDetail && inventoryDetailsCount !== InventorySearchCount  ? "Load More" : ""}</a>
+		):""}</div>
 
                             </div>
 							</div></div>

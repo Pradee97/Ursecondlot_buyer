@@ -75,11 +75,11 @@ useEffect (() =>{
         
     });
 }
-useEffect (() =>{
+// useEffect (() =>{
 
-  getNotificationDetails();
-  // deleteNotification();
-  }, []);
+//   getNotificationDetails();
+//   // deleteNotification();
+//   }, []);
   
   
   useEffect(() => {
@@ -219,6 +219,7 @@ const Submenu = () => {
     API.post('delete_notification/update',request).then(res=>{
         // setNotificationCount(res.data.data);
         getNotificationDetails()
+        
     }) .catch(err => { console.log(err); });
   }
 
@@ -233,6 +234,7 @@ const Submenu = () => {
       API.post("delete_notification/update", request).then(response=>{
 
           getNotification()
+          getNotificationDetails()
            setAllCarMultiAcceptEnable(false)
               setAllCarAcceptAllEnable(false)
     
@@ -299,8 +301,8 @@ return () => clearInterval(intervalId);
          </div>        
           ):<div>No Data Found</div>}
           <div>
-          {notification.length > 0 &&
-                  <div class="multiAccept">
+              {notification.length > 0 &&
+                  <div class="multiAccept notiMultiAccept">
                     {allCarMultiAcceptEnable == true ? <span className="multiAcceptGrp"><button onClick={() => MultiAcceptDisable()}> Cancel </button> <button onClick={()=> deleteNotification()}> Ok </button> </span>:
                     <button className="multiAcceptbtn" onClick={()=>{setAllCarMultiAcceptEnable(true);setAllCarAcceptAllEnable(false)}}>Delete</button> }
                     {allCarAcceptAllEnable == true ? <span className="acceptAllGrp"><button onClick={() => AllAcceptDisable()}> Cancel </button> <button onClick={()=> deleteNotification()}> Ok </button> </span>:
