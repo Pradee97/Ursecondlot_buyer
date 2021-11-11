@@ -388,11 +388,8 @@ const FloorAdd = () => {
                                             justifyContent: "center",
                                             }}
                                         >
-                                        {/* <button onClick={decreaseMonth} disabled={prevMonthButtonDisabled}> */}
-                                        <button onClick={decreaseMonth}  disabledDate={(current) => {
-     return moment().add(-1, 'days')  >= current ||
-          moment().add(1, 'month')  <= current;
-     }} >
+                                        <button onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
+                                       
 
                                        
                                         {"<"}
