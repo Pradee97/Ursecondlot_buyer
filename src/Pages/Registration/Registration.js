@@ -242,6 +242,7 @@ const Registration = () => {
           setTimeError("Seleted Meeting Time should be betwen on 10:00 AM to 04:00 PM of CDT (America/Chicago)")
           return;
         }
+        
         let request = {
             dealer_name: dealerName,
             first_name:firstName,
@@ -262,7 +263,7 @@ const Registration = () => {
             timezone_id: myTimezoneValue
         };
 
-        if( terms!=="0" ){
+        if( terms!=="0"  && type == "" ){
         API.post("registration/add", request)
             .then((response) => {
                 if (response.data.success) {

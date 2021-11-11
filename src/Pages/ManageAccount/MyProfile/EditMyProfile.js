@@ -50,6 +50,8 @@ const EditMyProfile = () => {
     const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
     const buyer_id=JSON.parse(JSON.stringify(loggedInBuyerId)).buyer_id;
     const buyer_dealer_id=JSON.parse(JSON.stringify(loggedInBuyerId)).buyer_dealer_id;
+    const [type,setType]=useState("");
+
 
     // const buyer_id=JSON.parse((loggedInBuyerId)).buyer_id;
     // const buyer_dealer_id=JSON.parse((loggedInBuyerId)).buyer_dealer_id;
@@ -182,6 +184,7 @@ const EditMyProfile = () => {
             updatedBy:buyer_id
            
         };
+        if( type == "" ){
         API
             .post("myProfile/update" ,request)
             .then((response) => {
@@ -217,12 +220,21 @@ const EditMyProfile = () => {
                 setPopupActionType("close");
                 setPopupActionValue("close");
             });
+        }else{
+            setType("0");
+        }
 
     }
     const getFiles = (file) => {
         console.log("======>",file)
-        setDoc(file);
-    }
+        setType("")
+        console.log("================>",file.type)
+        if(file.type.includes("jpg") || file.type.includes("jpeg") || file.type.includes("png")){
+            setDoc(file);
+        }else{
+            setType("0");
+        }
+      }
 
     useEffect(() => {
         //fetchMyProfileDetails();
@@ -312,7 +324,8 @@ const EditMyProfile = () => {
                                     {image==="" && doc===""?<img alt="" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} />:                                    
                                     doc===""?<img alt=""  src={image} />:
                                     <img alt=""  src={doc.base64} />}  
-                                    <span className="proCamera"></span>                                  
+                                    <span className="proCamera"></span>        
+                                    {type==="0"?<p className="form-input-error">Upload only Image Format </p>:""}                          
                                     <FileBase64 onDone={getFiles} type="hidden" />
                                     
                                 </div>
