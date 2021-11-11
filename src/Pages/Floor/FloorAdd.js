@@ -217,8 +217,9 @@ const FloorAdd = () => {
             
         }];
         console.log("===",request)
-        
+       
         API.post("floor_plan/add", request)
+       
             .then((response) => {
                 if (response.data.success) {
                     const { data } = response;
@@ -388,6 +389,9 @@ const FloorAdd = () => {
                                             }}
                                         >
                                         <button onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
+                                       
+
+                                       
                                         {"<"}
                                         </button>
                                         <select
@@ -422,6 +426,7 @@ const FloorAdd = () => {
                                             autoComplete="off"
                                             selected={dateOpened}
                                             onChange={(date) => setDateOpened(date)}
+                                            minDate={moment(). toDate()}
                                             isClearable
                                             placeholderText="Date Opened"
                                             // onChangeRaw={handleDateChangeRaw}
