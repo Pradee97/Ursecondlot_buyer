@@ -9183,3 +9183,19 @@ margin-right: 20px !important;
 }
 
 
+.privacyPolicyPage h4{
+  font-size: 18px;
+  margin-bottom: 10px;
+  margin-top: 30px;
+  color: #002768;
+}
+
+.privacyPolicyPage ul{
+margin-left: 20px;
+}
+
+.privacyPolicyPage ul li{
+  white-space: normal;
+  list-style: decimal;
+  padding-left: 10px !important;
+}
