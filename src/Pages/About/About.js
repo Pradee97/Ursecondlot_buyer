@@ -5,7 +5,7 @@ import Popup from '../../Component/Popup/Popup';
 import AboutusImg from '../../../src/assets/img/aboutusimg.png';
 import AppStoreImg from '../../../src/assets/img/appstore.png';
 import GooglePlayImg from '../../../src/assets/img/googleplay.png';
-import LateFee from '../../Pages/LateFee/LateFee';
+// import LateFee from '../../Pages/LateFee/LateFee';
 
 const About = () => {
 
