@@ -108,8 +108,7 @@ function AppRouter() {
             <Route exact path="/" component={Home}/>
             <Route  path="/login" component={Login}/>
             <Route  path="/registration" component={Registration}/>
-            <Route  path="/contactus" component={Contactus}/>
-            <Route  path="/about" component={About}/>
+            
             <Route  path="/success" component={Success}/>
             <Route  path="/error" component={Error}/>
             <Route  path="/emailerror" component={EmailError}/>
@@ -123,6 +122,8 @@ function AppRouter() {
             {/* <Route path="/InvalidLink" component={InvalidLink}/> */}
           <Route path="/Invalidlink" component={Invalidlink}/>
           <Route  path="/privacypolicy" component={PrivacyPolicyFiles}/>
+          <Route  path="/contactus" component={Contactus}/>
+            <Route  path="/about" component={About}/>
 
 
             

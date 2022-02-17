@@ -35,9 +35,9 @@ const Inspection=(props)=>{
         
     }
     API.post('inspection/condition',request).then(res=>{
-        console.log("response",res.data.data);
+        // console.log("response",res.data.data);
        
-        setInspection(res.data.data);
+        setInspection(res.data?.data);
         
     }).catch(err => { console.log(err); });
 }
@@ -47,9 +47,9 @@ const ExteriorMedia=()=>{
         car_id:id
     }
     API.post('exterior_media/condition',request).then(res=>{
-        console.log("exterior_media/condition",res.data.data);
+        // console.log("exterior_media/condition",res.data.data);
        
-        setExteriorMedia(res.data.data);
+        setExteriorMedia(res.data?.data);
         
     }).catch(err => { console.log(err); });
 
@@ -61,9 +61,9 @@ const InteriorMedia = () =>{
         
     }
     API.post('interior_media/condition',request).then(res=>{
-        console.log("interior_media/condition",res.data.data);
+        // console.log("interior_media/condition",res.data.data);
        
-        setInteriorMedia(res.data.data);
+        setInteriorMedia(res.data?.data);
         
     }).catch(err => { console.log(err); });
 }
@@ -74,9 +74,9 @@ const MechanicalMedia = () =>{
         
     }
     API.post('mechanical_media/condition',request).then(res=>{
-        console.log("mechanical_media/condition",res.data.data);
+        // console.log("mechanical_media/condition",res.data.data);
        
-        setMechanicalMedia(res.data.data);
+        setMechanicalMedia(res.data?.data);
         
     }).catch(err => { console.log(err); });
 }
@@ -87,9 +87,9 @@ const TiresWheelsMedia = () =>{
         
     }
     API.post('tireswheels_media/condition',request).then(res=>{
-        console.log("tireswheels_media",res.data.data);
+        // console.log("tireswheels_media",res.data.data);
        
-        setTiresWheelsMedia(res.data.data);
+        setTiresWheelsMedia(res.data?.data);
         
     }).catch(err => { console.log(err); });
 }
@@ -100,9 +100,9 @@ const PowerTrainMedia = () =>{
         
     }
     API.post('power_train_media/condition',request).then(res=>{
-        console.log("power_train_media/condition",res.data.data);
+        // console.log("power_train_media/condition",res.data.data);
        
-        setPowerTrainMedia(res.data.data);
+        setPowerTrainMedia(res.data?.data);
         
     }).catch(err => { console.log(err); });
 }
@@ -113,9 +113,9 @@ const TestDriveMedia = () =>{
         
     }
     API.post('testdrive_media/condition',request).then(res=>{
-        console.log("testdrive_media/condition",res.data.data);
+        // console.log("testdrive_media/condition",res.data.data);
        
-        setTestDriveMedia(res.data.data);
+        setTestDriveMedia(res.data?.data);
         setLoading(false);
     }).catch(err => { console.log(err); });
 }
@@ -253,14 +253,14 @@ const TestDriveMedia = () =>{
                                     {powerTrainMedia.length>0?powerTrainMedia.map((item)=>
                                     
                                     <div className="">
-                                        {item?.media.indexOf('mp4')>0?(
+                                        {item?.format != "image" ?
                                   
                                     <video autobuffer controls autoplay  width='100%'
                                     height='100%'>
-                                        <source id="mp4" src={item?.media} type="video/mp4"></source>
+                                        <source id="mp4" src={item?.image} type="video/mp4"></source>
                                     </video>
                                 
-                                    ):<img class="img-fluid" src={item?.media}></img>}
+                                    :<img class="img-fluid" src={item?.image}></img>}
                                     </div>
                                     ):""}
                                     
@@ -273,7 +273,7 @@ const TestDriveMedia = () =>{
                     
                     
                     <div class="commentstextblock">
-                    <p>{inspection[0].comments}</p>
+                    <p>{inspection[0].carpowertraincomments}</p>
                     </div>
                     
                     <div class="inspectiontable">          
@@ -378,14 +378,14 @@ const TestDriveMedia = () =>{
                             <div class="photo-gallery">
                                 <OwlCarousel className='owl-theme row photos' 
                                     loop={false} margin={10} items={4} dots ={false} nav autoplay={false} navText ={['<i class="icofont-block-left"></i>','<i class="icofont-block-right"></i>']}>
-                                    {tiresWheelsMedia.length>0?tiresWheelsMedia.map((item)=>
+                                    {mechanicalMedia.length>0?mechanicalMedia.map((item)=>
                                     <div class="">
-                                        {item?.media.indexOf('mp4')>0?(
+                                        {item?.format != "image" ?
                                          <video autobuffer controls autoplay  width='100%'
                                          height='100%'>
-                                             <source id="mp4" src={item?.media} type="video/mp4"></source>
+                                             <source id="mp4" src={item?.image} type="video/mp4"></source>
                                          </video>
-                                         ):<img class="img-fluid" src={item?.media}></img>}
+                                         :<img class="img-fluid" src={item?.image}></img>}
                                     </div>
                                     ):""}
                                     
@@ -398,7 +398,7 @@ const TestDriveMedia = () =>{
                     
                     
                     <div class="commentstextblock">
-                    <p>{inspection[0].comments}</p>
+                    <p>{inspection[0].mechanicalcomments}</p>
                     </div>
                     
                     <div class="inspectiontable">          
@@ -454,12 +454,12 @@ const TestDriveMedia = () =>{
                                     loop={false} margin={10} items={4} dots ={false} nav autoplay={false} navText ={['<i class="icofont-block-left"></i>','<i class="icofont-block-right"></i>']}>
                                     {tiresWheelsMedia.length>0?tiresWheelsMedia.map((item)=>
                                     <div class="">
-                                        {item?.media.indexOf('mp4')>0?(
+                                        {item?.format != "image" ?
                                         <video autobuffer controls autoplay  width='100%'
                                         height='100%'>
-                                            <source id="mp4" src={item?.media} type="video/mp4"></source>
+                                            <source id="mp4" src={item?.image} type="video/mp4"></source>
                                         </video>
-                                        ):<img class="img-fluid" src={item?.media}></img>}
+                                        :<img class="img-fluid" src={item?.image}></img>}
                                     </div>
                                     ):""}
                                     
@@ -472,7 +472,7 @@ const TestDriveMedia = () =>{
                     
                     
                     <div class="commentstextblock">
-                    <p>{inspection[0].comments}</p>
+                    <p>{inspection[0].tireswheelscomments}</p>
                     </div>
                     <div class="inspectiontable">          
                         <table>
@@ -544,12 +544,12 @@ const TestDriveMedia = () =>{
                                     loop={false} margin={10} items={4} dots ={false} nav autoplay={false} navText ={['<i class="icofont-block-left"></i>','<i class="icofont-block-right"></i>']}>
                                     {exteriorMedia.length>0?exteriorMedia.map((item)=>
                                     <div class="">
-                                        {item?.media.indexOf('mp4')>0?(
+                                        {item?.format != "image" ?
                                         <video autobuffer controls autoplay  width='100%'
                                         height='100%'>
-                                            <source id="mp4" src={item?.media} type="video/mp4"></source>
+                                            <source id="mp4" src={item?.image} type="video/mp4"></source>
                                         </video>
-                                        ):<img class="img-fluid" src={item?.media}></img>}
+                                        :<img class="img-fluid" src={item?.image}></img>}
                                     </div>
                                     ):""}
                                     
@@ -562,7 +562,7 @@ const TestDriveMedia = () =>{
                     
                     
                     <div class="commentstextblock">
-                    <p>{inspection[0].comments}</p>
+                    <p>{inspection[0].exteriorcomments}</p>
                     </div>
                     
                     
@@ -626,12 +626,12 @@ const TestDriveMedia = () =>{
                                     loop={false} margin={10} items={4} dots ={false} nav autoplay={false} navText ={['<i class="icofont-block-left"></i>','<i class="icofont-block-right"></i>']}>
                                     {interiorMedia.length>0?interiorMedia.map((item)=>
                                     <div class="">
-                                        {item?.media.indexOf('mp4')>0?(
+                                        {item?.format != "image" ?
                                          <video autobuffer controls autoplay  width='100%'
                                          height='100%'>
-                                             <source id="mp4" src={item?.media} type="video/mp4"></source>
+                                             <source id="mp4" src={item?.image} type="video/mp4"></source>
                                          </video>
-                                         ):<img class="img-fluid" src={item?.media}></img>}
+                                         :<img class="img-fluid" src={item?.image}></img>}
                                     </div>
                                     ):""}
                                     
@@ -645,7 +645,7 @@ const TestDriveMedia = () =>{
                     
                     
                     <div class="commentstextblock">
-                    <p>{inspection[0].comments}</p>
+                    <p>{inspection[0].interiorcomments}</p>
                     </div>
                     
                     <div class="inspectiontable">          
@@ -725,13 +725,37 @@ const TestDriveMedia = () =>{
                         
                         </table>            
                     </div>
+
+                    <div class="commentsblock">
+                        <h3>Test Drive</h3>
+                        </div>
+                        
+                        <div class="interiorgallery images-container">
+                            <div class="photo-gallery">
+                                <OwlCarousel className='owl-theme row photos' 
+                                    loop={false} margin={10} items={4} dots ={false} nav autoplay={false} navText ={['<i class="icofont-block-left"></i>','<i class="icofont-block-right"></i>']}>
+                                    {testDriveMedia.length>0?testDriveMedia.map((item)=>
+                                    <div class="">
+                                        {item?.format != "image" ?
+                                         <video autobuffer controls autoplay  width='100%'
+                                         height='100%'>
+                                             <source id="mp4" src={item?.image} type="video/mp4"></source>
+                                         </video>
+                                         :<img class="img-fluid" src={item?.image}></img>}
+                                    </div>
+                                    ):""}
+                                    
+                                </OwlCarousel>
+                            </div>
+                        </div>
+
                     <div class="commentsblock">
                     <h3>Comments</h3>
                     </div>
                     
                     
                     <div class="commentstextblock">
-                    <p>{inspection[0].comments}</p>
+                    <p>{inspection[0].testdrivecomments}</p>
                     </div>
                     
                     
