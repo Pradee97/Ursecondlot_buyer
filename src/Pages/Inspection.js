@@ -149,11 +149,11 @@ const TestDriveMedia = () =>{
    
    
             <div id="inspectionsummery" class="inspectionsummery">
-            {inspection.length>0?
+            {/* {inspection.length>0? */}
                 <div class="container">
                 
                 <div class="back-btn">
-                        <a class="backBtn" href="JavaScript:void(0)" onClick={()=>{redirectpage(inspection[0].car_id,inspection[0].seller_dealer_id)}} ><i class="bx bx-chevron-left"></i> Back</a>
+                        <a class="backBtn" href="JavaScript:void(0)" onClick={()=>{redirectpage(inspection[0]?.car_id,inspection[0]?.seller_dealer_id)}} ><i class="bx bx-chevron-left"></i> Back</a>
                 </div>
                 <div class="inspectionsummeryblock col-lg-12">
 
@@ -161,15 +161,15 @@ const TestDriveMedia = () =>{
                     <h2>Inspection Summary</h2>
                 </div>
                 <div class="inspectionsummeryhead ">
-                    <h2>{inspection[0].make} ({inspection[0].model}- {inspection[0].year} Model)</h2>
+                    <h2>{inspection[0]?.make} ({inspection[0]?.model}- {inspection[0]?.year} Model)</h2>
                     <div class="row content">
                         <div class="col-lg-6 pt-4 pt-lg-0">
                             <p>Inspection Date & TIME:<span>06 jan 11.45pM </span></p>
-                            <p>Inspection name:<span>{inspection[0].name}</span></p>
+                            <p>Inspection name:<span>{inspection[0]?.name}</span></p>
                         </div>
                         <div class="col-lg-6 pt-4 pt-lg-0">
                             <p>Colour:<span>Metallic Blue</span></p>
-                            <p>Vim:<span>{inspection[0].vin_no}</span></p>
+                            <p>Vim:<span>{inspection[0]?.vin_no}</span></p>
                         </div>
                     </div>
                 </div>
@@ -196,7 +196,7 @@ const TestDriveMedia = () =>{
                     
                     
                     <div class="commentstextblock">
-                    <p>{inspection[0].comments}</p>
+                    <p>{inspection[0]?.comments}</p>
                     </div>
                     
                     <div class="inspectiontable">          
@@ -216,14 +216,14 @@ const TestDriveMedia = () =>{
                         
                         <tr class="">
                         <td>Engine Bottom End Noise</td>
-                        {inspection[0].noise == "Covered"?
+                        {inspection[0]?.noise == "Covered"?
                         <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
                         <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
                         </tr>
                         <tr class="">
                         <td>Automatic Transmission Operation</td>
-                        <td></td>{inspection[0].auto_transmission == "Covered"?
+                        <td></td>{inspection[0]?.auto_transmission == "Covered"?
                         <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>:<td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}       
                         </tr>
                         <tr class="">
@@ -262,7 +262,7 @@ const TestDriveMedia = () =>{
                                 
                                     :<img class="img-fluid" src={item?.image}></img>}
                                     </div>
-                                    ):""}
+                                    ):"No Data Found"}
                                     
                                 </OwlCarousel>
                             </div>
@@ -273,7 +273,7 @@ const TestDriveMedia = () =>{
                     
                     
                     <div class="commentstextblock">
-                    <p>{inspection[0].carpowertraincomments}</p>
+                    <p>{inspection[0]?.carpowertraincomments}</p>
                     </div>
                     
                     <div class="inspectiontable">          
@@ -293,7 +293,7 @@ const TestDriveMedia = () =>{
                         
                         <tr class="">
                         <td>Engine Upper End</td>
-                        {inspection[0].upper_end == "Good"?
+                        {inspection[0]?.upper_end == "Good"?
                         <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
                         <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
@@ -302,7 +302,7 @@ const TestDriveMedia = () =>{
                         <tr class="">
                         <td>Engine Bottom End</td>
                         <td></td>
-                        {inspection[0].bottam_end == "Good"?
+                        {inspection[0]?.bottam_end == "Good"?
                         <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
                         <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
@@ -310,7 +310,7 @@ const TestDriveMedia = () =>{
                         <tr class="">
                         <td>Catalytic Converter Present</td>
                         <td></td>
-                        {inspection[0].catalytic_converter == "Good"?
+                        {inspection[0]?.catalytic_converter == "Good"?
                         <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
                         <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
@@ -318,7 +318,7 @@ const TestDriveMedia = () =>{
                         
                         <tr class="">
                         <td>Heater Runs Hot</td>
-                        {inspection[0].heater_runs == "Good"?
+                        {inspection[0]?.heater_runs == "Good"?
                         <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
                         <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
@@ -326,7 +326,7 @@ const TestDriveMedia = () =>{
                         </tr>
                         <tr class="">
                         <td>A/c Runs Hot</td>
-                        {inspection[0].ac_runs == "Good"?
+                        {inspection[0]?.ac_runs == "Good"?
                         <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
                         <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
@@ -334,7 +334,7 @@ const TestDriveMedia = () =>{
                         </tr>
                         <tr class="">
                         <td>No Check Engine Light At Startup</td>
-                        {inspection[0].engine_light == "Good"?
+                        {inspection[0]?.engine_light == "Good"?
                         <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
                         <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
@@ -343,14 +343,14 @@ const TestDriveMedia = () =>{
                         <tr class="">
                         <td>No Abs</td>
                         <td></td>
-                        {inspection[0].no_ads == "Good"?
+                        {inspection[0]?.no_ads == "Good"?
                         <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
                         <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
                         </tr>
                         <tr class="">
                         <td>No SRS/Airbag Light</td>
-                        {inspection[0].no_srs == "Good"?
+                        {inspection[0]?.no_srs == "Good"?
                         <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
                         <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
@@ -358,7 +358,7 @@ const TestDriveMedia = () =>{
                         </tr>
                         <tr class="">
                         <td>Differential Operation</td>
-                        {inspection[0].differential_operation == "Good"?
+                        {inspection[0]?.differential_operation == "Good"?
                         <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
                         <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
@@ -387,7 +387,7 @@ const TestDriveMedia = () =>{
                                          </video>
                                          :<img class="img-fluid" src={item?.image}></img>}
                                     </div>
-                                    ):""}
+                                    ):"No Data Found"}
                                     
                                 </OwlCarousel>
                             </div>
@@ -398,7 +398,7 @@ const TestDriveMedia = () =>{
                     
                     
                     <div class="commentstextblock">
-                    <p>{inspection[0].mechanicalcomments}</p>
+                    <p>{inspection[0]?.mechanicalcomments}</p>
                     </div>
                     
                     <div class="inspectiontable">          
@@ -418,7 +418,7 @@ const TestDriveMedia = () =>{
                         
                         <tr class="">
                         <td>5/32 Tread Depth</td>
-                        {inspection[0].tread_depth == "Good"?
+                        {inspection[0]?.tread_depth == "Good"?
                         <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
                         <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
@@ -428,7 +428,7 @@ const TestDriveMedia = () =>{
                         <tr class="">
                         <td>Four Tires Condition</td>
                         <td></td>
-                        {inspection[0].four_tires_condition == "Good"?
+                        {inspection[0]?.four_tires_condition == "Good"?
                         <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
                         <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
@@ -436,7 +436,7 @@ const TestDriveMedia = () =>{
                         
                         <tr class="">
                         <td>Any Scratches On The Wheels</td>
-                        {/* {inspection[0].breaking_senses == "Good"?
+                        {/* {inspection[0]?.breaking_senses == "Good"?
                         <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
                         <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>} */}
                         <td></td>
@@ -461,7 +461,7 @@ const TestDriveMedia = () =>{
                                         </video>
                                         :<img class="img-fluid" src={item?.image}></img>}
                                     </div>
-                                    ):""}
+                                    ):"No Data Found"}
                                     
                                 </OwlCarousel>
                             </div>
@@ -472,7 +472,7 @@ const TestDriveMedia = () =>{
                     
                     
                     <div class="commentstextblock">
-                    <p>{inspection[0].tireswheelscomments}</p>
+                    <p>{inspection[0]?.tireswheelscomments}</p>
                     </div>
                     <div class="inspectiontable">          
                         <table>
@@ -491,7 +491,7 @@ const TestDriveMedia = () =>{
                         
                         <tr class="">
                         <td>No Visible Rust</td>
-                        {inspection[0].visible_rust == "Good"?
+                        {inspection[0]?.visible_rust == "Good"?
                         <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
                         <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
@@ -501,7 +501,7 @@ const TestDriveMedia = () =>{
                         <tr class="">
                         <td>No Colour Fade</td>
                         <td></td>
-                        {inspection[0].color_fade == "Good"?
+                        {inspection[0]?.color_fade == "Good"?
                         <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
                         <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
@@ -509,7 +509,7 @@ const TestDriveMedia = () =>{
                         <tr class="">
                         <td>No Glass Damaged</td>
                         <td></td>
-                        {inspection[0].glass_damage == "Good"?
+                        {inspection[0]?.glass_damage == "Good"?
                         <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
                         <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
@@ -517,7 +517,7 @@ const TestDriveMedia = () =>{
                         
                         <tr class="">
                         <td>No Exterior Scratches</td>
-                        {inspection[0].scratches == "Good"?
+                        {inspection[0]?.scratches == "Good"?
                         <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
                         <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
@@ -526,7 +526,7 @@ const TestDriveMedia = () =>{
                         
                         <tr class="">
                         <td>No Side Mirror Damage</td>
-                        {inspection[0].side_mirror == "Good"?
+                        {inspection[0]?.side_mirror == "Good"?
                         <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
                         <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
@@ -551,7 +551,7 @@ const TestDriveMedia = () =>{
                                         </video>
                                         :<img class="img-fluid" src={item?.image}></img>}
                                     </div>
-                                    ):""}
+                                    ):"No Data Found"}
                                     
                                 </OwlCarousel>
                             </div>
@@ -562,7 +562,7 @@ const TestDriveMedia = () =>{
                     
                     
                     <div class="commentstextblock">
-                    <p>{inspection[0].exteriorcomments}</p>
+                    <p>{inspection[0]?.exteriorcomments}</p>
                     </div>
                     
                     
@@ -583,7 +583,7 @@ const TestDriveMedia = () =>{
                         
                         <tr class="">
                         <td>No Visible Damage</td>
-                        {inspection[0].visible_damage == "Good"?
+                        {inspection[0]?.visible_damage == "Good"?
                         <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
                         <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
@@ -593,7 +593,7 @@ const TestDriveMedia = () =>{
                         <tr class="">
                         <td>Frond Seat Conditions</td>
                         <td></td>
-                        {inspection[0].front_seat == "Good"?
+                        {inspection[0]?.front_seat == "Good"?
                         <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
                         <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
@@ -601,7 +601,7 @@ const TestDriveMedia = () =>{
                         <tr class="">
                         <td>Back Seat Condition</td>
                         <td></td>
-                        {/* {inspection[0].automatic_transmission == "Good"?
+                        {/* {inspection[0]?.automatic_transmission == "Good"?
                         <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
                         <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>} */}
                         <td></td>
@@ -609,7 +609,7 @@ const TestDriveMedia = () =>{
                         
                         <tr class="">
                         <td>No Major Visible Damage</td>
-                        {inspection[0].major_damage == "Good"?
+                        {inspection[0]?.major_damage == "Good"?
                         <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
                         <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
@@ -633,7 +633,7 @@ const TestDriveMedia = () =>{
                                          </video>
                                          :<img class="img-fluid" src={item?.image}></img>}
                                     </div>
-                                    ):""}
+                                    ):"No Data Found"}
                                     
                                 </OwlCarousel>
                             </div>
@@ -645,7 +645,7 @@ const TestDriveMedia = () =>{
                     
                     
                     <div class="commentstextblock">
-                    <p>{inspection[0].interiorcomments}</p>
+                    <p>{inspection[0]?.interiorcomments}</p>
                     </div>
                     
                     <div class="inspectiontable">          
@@ -665,7 +665,7 @@ const TestDriveMedia = () =>{
                         <tr class="">
                         <td>Automatic Transmission</td>
                         <td></td>
-                        {inspection[0].automatic_transmission == "Good"?
+                        {inspection[0]?.automatic_transmission == "Good"?
                         <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
                         <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
@@ -673,7 +673,7 @@ const TestDriveMedia = () =>{
                         
                         <tr class="">
                         <td>Manual Transmission</td>
-                        {inspection[0].manual_transmission == "Good"?
+                        {inspection[0]?.manual_transmission == "Good"?
                         <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
                         <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
@@ -683,7 +683,7 @@ const TestDriveMedia = () =>{
                         <tr class="">
                         <td>Exilator Level</td>
                         <td></td>
-                        {inspection[0].exilator_level == "Good"?
+                        {inspection[0]?.exilator_level == "Good"?
                         <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
                         <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
@@ -691,7 +691,7 @@ const TestDriveMedia = () =>{
                         
                         <tr class="">
                         <td>Breaking Senses</td>
-                        {inspection[0].breaking_senses == "Good"?
+                        {inspection[0]?.breaking_senses == "Good"?
                         <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
                         <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
@@ -700,7 +700,7 @@ const TestDriveMedia = () =>{
                         <tr class="">
                         <td>Steering Controls</td>
                         <td></td>
-                        {/* {inspection[0].side_mirror == "Good"?
+                        {/* {inspection[0]?.side_mirror == "Good"?
                         <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
                         <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>} */}
                         <td></td>
@@ -708,7 +708,7 @@ const TestDriveMedia = () =>{
                         <tr class="">
                         <td>Transfer Case</td>
                         <td></td>
-                        {inspection[0].transfer_case == "Good"?
+                        {inspection[0]?.transfer_case == "Good"?
                         <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
                         <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
@@ -716,7 +716,7 @@ const TestDriveMedia = () =>{
                         <tr class="">
                         <td>Differential</td>
                         <td></td>
-                        {inspection[0].differential == "Good"?
+                        {inspection[0]?.differential == "Good"?
                         <td><span class="tablecheck"><img src={checkmark}></img></span></td> :
                         <td><span class="tablecheckred"><img src={checkmarkred}></img></span></td>}
                         <td></td>
@@ -743,7 +743,7 @@ const TestDriveMedia = () =>{
                                          </video>
                                          :<img class="img-fluid" src={item?.image}></img>}
                                     </div>
-                                    ):""}
+                                    ):"No Data Found"}
                                     
                                 </OwlCarousel>
                             </div>
@@ -755,7 +755,7 @@ const TestDriveMedia = () =>{
                     
                     
                     <div class="commentstextblock">
-                    <p>{inspection[0].testdrivecomments}</p>
+                    <p>{inspection[0]?.testdrivecomments}</p>
                     </div>
                     
                     
@@ -769,7 +769,7 @@ const TestDriveMedia = () =>{
             
             
                 </div>
-:"No data found"}
+ {/* :"No data found"} */}
             </div>
          
             
