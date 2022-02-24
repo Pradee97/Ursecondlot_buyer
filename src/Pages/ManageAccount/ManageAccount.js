@@ -238,11 +238,11 @@ const getlateFee=()=>{
                           </tr>
                           <tr>
                             <td><span className="tdcol1">Dealership license</span><span>{item.dealer_license}</span></td>
-                            <td><span className="tdcol1">Dealership license exp</span><span>{item.dealer_license_exp.substring(0,10)}</span></td>
+                            <td><span className="tdcol1">Dealership license exp</span><span>{item.dealer_license_exp}</span></td>
                           </tr>
                           <tr>
                             <td><span className="tdcol1">Tax id</span><span>{item.tax_id}</span></td>
-                            <td><span className="tdcol1">Tax id exp</span><span>{item.tax_id_exp.substring(0,10)}</span></td>
+                            <td><span className="tdcol1">Tax id exp</span><span>{item.tax_id_exp}</span></td>
                           </tr>
                         </table>
                         {/* <h4>Location name</h4>
