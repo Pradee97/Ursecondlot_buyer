@@ -40,6 +40,7 @@ const Document = () => {
 
     const [isLateFee, setIsLateFee] = useState(false);
     const [lateFeeValue, setLateFeeValue] = useState(0);
+    const [docLists,setDocLists]=useState("");
 
     const [Type,setType]=useState("");
     const [UpdateType,setUpdateType]=useState("");
@@ -53,6 +54,22 @@ const Document = () => {
         setIsOpen(!isOpen);
     }
   const [loading,setloading]=useState("");
+
+  const viewDoc= () =>{
+
+    let request = {
+        buyer_dealer_id: userDetails.buyer_dealer_id
+    };
+   
+    API.post("buyerdoclist/condition",request).then(response=>{
+        console.log("view Identify", response.data.data)
+        setDocLists(response.data.data);
+    });
+}
+useEffect(()=>{
+    viewDoc();
+     
+}, [])
 
     async function getDocuments() {
     console.log("inside get document");
@@ -157,7 +174,7 @@ const Document = () => {
                 setPopupType("success");
                 setPopupActionType("close");
                 setPopupActionValue("ok");
-                //getDocuments();
+                viewDoc();
                 //setPopupActionPath("/document");
             } else {
                 setIsOpen(true);
@@ -283,7 +300,7 @@ const Document = () => {
                 setPopupType("success");
                 setPopupActionType("close");
                 setPopupActionValue("ok");
-               // getDocuments();
+                viewDoc();
                 //setPopupActionPath("/document")
             } else {
                 togglePopup()
@@ -327,66 +344,66 @@ const Document = () => {
             console.log("====setType1====>")
             
          }
-        else if (value =="liability insurance" && !isValidFile(file))
-        {
-            setType("2");
+        // else if (value =="liability insurance" && !isValidFile(file))
+        // {
+        //     setType("2");
             
 
-        }
-        else if (value == "company check" && !isValidFile(file))
-        {
-            setType("3");
+        // }
+        // else if (value == "company check" && !isValidFile(file))
+        // {
+        //     setType("3");
             
 
-        }
-        else if (value === "state sales tax" && !isValidFile(file))
-        {
-            setType("4");
+        // }
+        // else if (value === "state sales tax" && !isValidFile(file))
+        // {
+        //     setType("4");
             
 
-        }
-        else if (value === "surety bond" && !isValidFile(file))
-        {
-            setType("5");
+        // }
+        // else if (value === "surety bond" && !isValidFile(file))
+        // {
+        //     setType("5");
             
 
-        }
-        else if (value === "DMV vehicle" && !isValidFile(file))
-        {
-            setType("6");
+        // }
+        // else if (value === "DMV vehicle" && !isValidFile(file))
+        // {
+        //     setType("6");
             
 
-        }
-        else if (value === "individual guaranty" && !isValidFile(file))
-        {
-            setType("7");
+        // }
+        // else if (value === "individual guaranty" && !isValidFile(file))
+        // {
+        //     setType("7");
             
 
-        }
-        else if (value === "owners and representatives" && !isValidFile(file))
-        {
-            setType("8");
+        // }
+        // else if (value === "owners and representatives" && !isValidFile(file))
+        // {
+        //     setType("8");
             
 
-        }
-        else if (value === "bank Authorization" && !isValidFile(file))
-        {
-            setType("9");
+        // }
+        // else if (value === "bank Authorization" && !isValidFile(file))
+        // {
+        //     setType("9");
             
 
-        }
-        else if (value === "representatives" && !isValidFile(file))
-        {
-            setType("10");
+        // }
+        // else if (value === "representatives" && !isValidFile(file))
+        // {
+        //     setType("10");
             
 
-        }
-        else if (value === "Articles of incorporation" && !isValidFile(file))
-        {
-            setType("11");
+        // }
+        // else if (value === "Articles of incorporation" && !isValidFile(file))
+        // {
+        //     setType("11");
             
 
-        }
+        // }
         else{
            
             console.log("====else calli=ng===>")
@@ -431,7 +448,7 @@ const Document = () => {
                 setPopupType("success");
                 setPopupActionType("close");
                 setPopupActionValue("close");
-                //getDocuments();
+                viewDoc();
                 //setPopupActionPath("/document")
             } else {
                 togglePopup()
@@ -483,317 +500,63 @@ const Document = () => {
                                     <div className="documentspage-inner">
                                         <div className="col-lg-12">
                                             <div className="row">
-                                                <div className="col-lg-4 col-md-4">
-                                                    {doc1 === "" ? <div className="docdetails">
-                                                    <h5>Copy of Dealer license</h5>
-                                                        <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} className="img-fluid" alt="" />
-                                                        <p><div className="upload-btn-wrapper">
-                                                                <a className="btn"> Upload File</a>
-                                                                <FileBase64 onDone={(e) => getFiles(e, "Dealer license")} />
-                                                            </div>
-                                                            </p>   
-                                                            {Type==="1"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
-                                                    </div> :
-                                                        <div className="docdetails">
-                                                            <h5>Copy of Dealer license</h5>
-                                                            <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc1.doc_name} className="img-fluid" alt="" />
-                                                            <div><a href={doc1.doc_name} target="_blank">{doc1.doc_name.split("_")[1]}</a></div>
-                                                            <p>
-                                                                <div className="upload-btn-wrapper updateFile">
-                                                                    <a className="btn"> Update File</a>
-                                                                    <FileBase64 onDone={(e) => updateFiles(e, doc1.document_id),"Dealer license" } />
-                                                                </div>
-                                                                <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc1.document_id)}> Delete File</a>
-                                                                {UpdateType==="1"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
+                                                 {docLists.length > 0 ? docLists.map((docLists)=>
 
-                                                            </p>
-                                                        </div>}
-                                                </div>
-                                                <div className="col-lg-4 col-md-4">
-                                                    {doc2 === "" ? <div className="docdetails">
-                                                        <h5>Certificate of liability insurance.</h5>
+                                     
+                                                  <div className="col-lg-4 col-md-4 mb-3 ">
+                                                  {docLists.doc_name == ""  || docLists.doc_name == null || docLists.doc_name === undefined || docLists.doc_name === "0" ?
+                                                   <div className="docdetails">
+                                                        <h5>{docLists.buyer_doc_type}</h5>
                                                         <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} className="img-fluid" alt="" />
                                                         <p>  
                                                         <div className="upload-btn-wrapper">
                                                                 <a className="btn"> Upload File</a>
-                                                                <FileBase64 onDone={(e) => getFiles(e, "liability insurance")} />
+                                                                <FileBase64 onDone={(e) => getFiles(e, docLists.buyer_doc_type)} />
                                                             </div>
                                                         </p>
-                                                        {Type==="2"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
+                                                        {Type=== docLists.buyer_doc_type_id ?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
                                                     </div> :
-                                                        <div className="docdetails">
-                                                            <h5>Certificate of liability insurance.</h5>
-                                                            <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc2.doc_name} className="img-fluid" alt="" />
-                                                            <div><a href={doc2.doc_name} target="_blank">{doc2.doc_name.split("_")[1]}</a></div>
-                                                            <p>
-                                                                <div className="upload-btn-wrapper updateFile">
-                                                                    <a className="btn"> Update File</a>
-                                                                    <FileBase64 onDone={(e) => updateFiles(e, doc2.document_id,"liability insurance")} />
-                                                                </div>
+                                                      (<>  
+                                                       {/* {docLists.buyer_doc_type == doc.buyer_doc_type && doc.buyer_doc_type_id  ? */}
+                                                        
+                                                      <div className="docdetails">
+                                                            <h5>{docLists.buyer_doc_type}</h5>
+                                                         
 
-                                                                <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc2.document_id)}> Delete File</a>
-                                                                {UpdateType==="2"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
-                                                            </p>
-                                                        </div>
-                                                    }
-                                                </div>
-                                                <div className="col-lg-4 col-md-4">
-                                                    {doc3 === "" ? <div className="docdetails">
-                                                        <h5>Copy of Company check.</h5>
-                                                        <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} className="img-fluid" alt="" />
+                                                            <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={docLists.doc_name} className="img-fluid" alt="" />
 
-                                                        <p>  
-                                                        <div className="upload-btn-wrapper">
-                                                                <a className="btn"> Upload File</a>
-                                                                <FileBase64 onDone={(e) => getFiles(e, "company check")} />
-                                                            </div>
-                                                        </p>
-                                                        {Type==="3"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
-                                                    </div> : <div className="docdetails">
-                                                        <h5>Copy of Company check.</h5>
-                                                        <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc3.doc_name} className="img-fluid" alt="" />
-                                                        <div><a href={doc3.doc_name} target="_blank">{doc3.doc_name.split("_")[1]}</a></div>
+                                                            <div><a href={docLists.doc_name} target="_blank">{docLists.doc_name.split('_')[1]}</a></div>
                                                         <p>
-                                                            <div className="upload-btn-wrapper updateFile">
-                                                                <a className="btn"> Update File</a>
-                                                                <FileBase64 onDone={(e) => updateFiles(e, doc3.document_id, "company check")} />
-                                                            </div>
-
-                                                            <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc3.document_id)}> Delete File</a>
-                                                            {UpdateType==="3"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
-
-                                                        </p>
-                                                    </div>
-                                                    }
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-12 pt-2 mt-2">
-                                            <div className="row">
-                                                <div className="col-lg-4 col-md-4">
-                                                    {doc4 === "" ? <div className="docdetails">
-                                                        <h5>Copy of state sales tax certificate.</h5>
-                                                        <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} className="img-fluid" alt="" />
-
-                                                        <p>  
-                                                        <div className="upload-btn-wrapper">
-                                                                <a className="btn"> Upload File</a>
-                                                                <FileBase64 onDone={(e) => getFiles(e, "state sales tax")} />
-                                                            </div>
-                                                        </p>
-                                                        {Type==="4"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
-                                                    </div> :
-                                                        <div className="docdetails">
-                                                            <h5>Copy of state sales tax certificate.</h5>
-                                                            <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc4.doc_name} className="img-fluid" alt="" />
-                                                            <div><a href={doc4.doc_name} target="_blank">{doc4.doc_name.split("_")[1]}</a></div>
-                                                            <p>
                                                                 <div className="upload-btn-wrapper updateFile">
                                                                     <a className="btn"> Update File</a>
-                                                                    <FileBase64 onDone={(e) => updateFiles(e, doc4.document_id, "state sales tax")} />
+                                                                    <FileBase64 onDone={(e) => updateFiles(e, docLists.document_id,docLists.buyer_doc_type)} />
                                                                 </div>
-                                                                <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc4.document_id)}> Delete File</a>
-                                                                {UpdateType==="4"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
+                                                                <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(docLists.document_id)}> Delete File</a>
+                                                                {UpdateType=== docLists.buyer_doc_type_id ?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
                                                             </p>
-                                                        </div>}
-                                                </div>
-                                                <div className="col-lg-4 col-md-4">
-                                                    {doc5 === "" ? <div className="docdetails">
-                                                        <h5>Copy of surety bond (if required by you state).</h5>
-                                                        <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} className="img-fluid" alt="" />
-                                                        <p>  
-                                                        <div className="upload-btn-wrapper">
-                                                                <a className="btn"> Upload File</a>
-                                                                <FileBase64 onDone={(e) => getFiles(e, "surety bond")} />
-                                                            </div>
-                                                        </p>
-                                                        {Type==="5"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
-                                                    </div> :
-                                                        <div className="docdetails">
-                                                            <h5>Copy of surety bond (if required by you state).</h5>
-                                                            <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc5.doc_name} className="img-fluid" alt="" />
-                                                            <div><a href={doc5.doc_name} target="_blank">{doc5.doc_name.split("_")[1]}</a></div>
-                                                            <p>
-                                                                <div className="upload-btn-wrapper updateFile">
-                                                                    <a className="btn"> Update File</a>
-                                                                    <FileBase64 onDone={(e) => updateFiles(e, doc5.document_id, "surety bond")} />
-                                                                </div>
-                                                                <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc5.document_id)}> Delete File</a>
-                                                                {UpdateType==="5"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
-                                                            </p>
-                                                        </div>}
-                                                </div>
-                                                <div className="col-lg-4 col-md-4">
-                                                {doc6 === "" ?<div className="docdetails">
-                                                        <h5>Copy of DMV vehicle dealer bond (in required states).</h5>
-                                                        <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} className="img-fluid" alt="" />
-                                                        <p>  
-                                                        <div className="upload-btn-wrapper">
-                                                                <a className="btn"> Upload File</a>
-                                                                <FileBase64 onDone={(e) => getFiles(e, "DMV vehicle")} />
-                                                            </div>
-                                                        </p>
-                                                        {Type==="6"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
-                                                    </div>:
-                                                     <div className="docdetails">
-                                                     <h5>Copy of DMV vehicle dealer bond (in required states).</h5>
-                                                     <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc6.doc_name} className="img-fluid" alt="" />
-                                                     <div><a href={doc6.doc_name} target="_blank">{doc6.doc_name.split("_")[1]}</a></div>
-                                                     <p>
-                                                         <div className="upload-btn-wrapper updateFile">
-                                                             <a className="btn"> Update File</a>
-                                                             <FileBase64 onDone={(e) => updateFiles(e, doc6.document_id, "DMV vehicle")} />
-                                                         </div>
-                                                         <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc6.document_id)}> Delete File</a>
-                                                         {UpdateType==="6"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
-                                                     </p>
-                                                 </div>}
-                                                </div>                                                
+                                                        </div>
+                                                       {/* <div className="docdetails">
+                                                       <h5>{docLists.buyer_doc_type}</h5>
+                                                       <img src={uploadblack} className="img-fluid" alt="" />
+                                                       <p>  
+                                                      
+                                                       <div className="upload-btn-wrapper">
+                                                               <a className="btn"> Upload File</a>
+                                                               <FileBase64 onDone={(e) => getFiles(e, docLists.buyer_doc_type)} />
+                                                           </div>
+                                                       </p>
+                                                       {Type=== docLists.buyer_doc_type_id ?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
+                                                   </div> */}
+                                                         
+                                                        </>)}
+                                                  </div> ): ""}
+                                               
+                                               
                                             </div>
                                         </div>
-                                        <div className="col-lg-12 pt-2 mt-2">
-                                            <div className="row">
-                                                <div className="col-lg-4 col-md-4">
-                                                {doc7 === "" ?<div className="docdetails">
-                                                        <h5>Signed individual guaranty for each owner.</h5>
-                                                        <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} className="img-fluid" alt="" />
-                                                        <p>  
-                                                        <div className="upload-btn-wrapper">
-                                                                <a className="btn"> Upload File</a>
-                                                                <FileBase64 onDone={(e) => getFiles(e, "individual guaranty")} />
-                                                            </div>
-                                                        </p>
-                                                        {Type==="7"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
-
-                                                    </div>:
-                                                    <div className="docdetails">
-                                                    <h5>Signed individual guaranty for each owner.</h5>
-                                                    <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc7.doc_name} className="img-fluid" alt="" />
-                                                    <div><a href={doc7.doc_name} target="_blank">{doc7.doc_name.split("_")[1]}</a></div>
-                                                    <p>
-                                                        <div className="upload-btn-wrapper updateFile">
-                                                            <a className="btn"> Update File</a>
-                                                            <FileBase64 onDone={(e) => updateFiles(e, doc7.document_id, "individual guaranty")} />
-                                                        </div>
-                                                        <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc7.document_id)}> Delete File</a>
-                                                        {UpdateType==="7"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
-                                                    </p>
-                                                </div>}
-                                                </div>
-                                                <div className="col-lg-4 col-md-4">
-                                                {doc8 === "" ?<div className="docdetails">
-                                                        <h5>Legible copy of driver’s license for owners and representatives</h5>
-                                                        <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} className="img-fluid" alt="" />
-                                                        <p>  
-                                                        <div className="upload-btn-wrapper">
-                                                                <a className="btn"> Upload File</a>
-                                                                <FileBase64 onDone={(e) => getFiles(e, "owners and representatives")} />
-                                                            </div>
-                                                        </p>
-                                                        {Type==="8"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
-                                                    </div>:
-                                                    <div className="docdetails">
-                                                    <h5>Legible copy of driver’s license for owners and representatives</h5>
-                                                    <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc8.doc_name} className="img-fluid" alt="" />
-                                                    <div><a href={doc8.doc_name} target="_blank">{doc8.doc_name.split("_")[1]}</a></div>
-                                                    <p>
-                                                        <div className="upload-btn-wrapper updateFile">
-                                                            <a className="btn"> Update File</a>
-                                                            <FileBase64 onDone={(e) => updateFiles(e, doc8.document_id,"owners and representatives")} />
-                                                        </div>
-                                                        <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc8.document_id)}> Delete File</a>
-                                                        {UpdateType==="8"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
-
-                                                    </p>
-                                                </div>}
-                                                </div>
-                                                <div className="col-lg-4 col-md-4">
-                                                {doc9 === "" ?<div className="docdetails">
-                                                        <h5>Signed bank Authorization letter for bank to release information.</h5>
-                                                        <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} className="img-fluid" alt="" />
-                                                        <p>  
-                                                        <div className="upload-btn-wrapper">
-                                                                <a className="btn"> Upload File</a>
-                                                                <FileBase64 onDone={(e) => getFiles(e, "bank Authorization")} />
-                                                            </div>
-                                                        </p>
-                                                        {Type==="9"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
-                                                    </div>:
-                                                    <div className="docdetails">
-                                                    <h5>Signed bank Authorization letter for bank to release information.</h5>
-                                                    <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc9.doc_name} className="img-fluid" alt="" />
-                                                    <div><a href={doc9.doc_name} target="_blank">{doc9.doc_name.split("_")[1]}</a></div>
-                                                    <p>
-                                                        <div className="upload-btn-wrapper updateFile">
-                                                            <a className="btn"> Update File</a>
-                                                            <FileBase64 onDone={(e) => updateFiles(e, doc9.document_id, "bank Authorization")} />
-                                                        </div>
-                                                        <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc9.document_id)}> Delete File</a>
-                                                        {UpdateType==="9"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
-
-                                                    </p>
-                                                </div>}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-12 pt-2 mt-2">
-                                            <div className="row">
-                                                <div className="col-lg-4 col-md-4">
-                                                {doc10 === "" ?<div className="docdetails">
-                                                        <h5>Legible copy of driver’s license for owners and representatives</h5>
-                                                        <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} className="img-fluid" alt="" />
-                                                        <p>  
-                                                        <div className="upload-btn-wrapper">
-                                                                <a className="btn"> Upload File</a>
-                                                                <FileBase64 onDone={(e) => getFiles(e, "representatives")} />
-                                                            </div>
-                                                        </p>
-                                                        {Type==="10"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
-                                                    </div>:
-                                                    <div className="docdetails">
-                                                    <h5>Legible copy of driver’s license for owners and representatives</h5>
-                                                    <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc10.doc_name} className="img-fluid" alt="" />
-                                                    <div><a href={doc10.doc_name} target="_blank">{doc10.doc_name.split("_")[1]}</a></div>
-                                                    <p>
-                                                        <div className="upload-btn-wrapper updateFile">
-                                                            <a className="btn"> Update File</a>
-                                                            <FileBase64 onDone={(e) => updateFiles(e, doc10.document_id, "representatives")} />
-                                                        </div>
-                                                        <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc10.document_id)}> Delete File</a>
-                                                        {UpdateType==="10"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
-
-                                                    </p>
-                                                </div>}
-                                                </div>
-                                                <div className="col-lg-4 col-md-4">
-                                                {doc11 === "" ?<div className="docdetails">
-                                                        <h5>Articles of incorporation.</h5>
-                                                        <img src={process.env.PUBLIC_URL + "/images/uploadblack.png"} className="img-fluid" alt="" />
-
-                                                        <p>  
-                                                        <div className="upload-btn-wrapper">
-                                                                <a className="btn"> Upload File</a>
-                                                                <FileBase64 onDone={(e) => getFiles(e, "Articles of incorporation")} />
-                                                            </div>
-                                                        </p>
-                                                        {Type==="11"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
-                                                    </div>:
-                                                    <div className="docdetails">
-                                                    <h5>Articles of incorporation.</h5>
-                                                    <img src={process.env.PUBLIC_URL + "/images/fileDocIcon.png"} href={doc11.doc_name} className="img-fluid" alt="" />
-                                                    <div><a href={doc11.doc_name} target="_blank">{doc11.doc_name.split("_")[1]}</a></div>
-                                                    <p>
-                                                        <div className="upload-btn-wrapper updateFile">
-                                                            <a className="btn"> Update File</a>
-                                                            <FileBase64 onDone={(e) => updateFiles(e, doc11.document_id, "Articles of incorporation")} />
-                                                        </div>
-                                                        <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(doc11.document_id)}> Delete File</a>
-                                                        {UpdateType==="11"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
-                                                    </p>
-                                                </div>}
-                                                </div>
-                                            </div>
-                                        </div>
+                                   
+                                      
+                                      
                                     </div>
                                 </div>
                             </div>
