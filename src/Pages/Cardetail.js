@@ -624,7 +624,7 @@ return(
 				  </div>
 				  <div class="col-lg-2">
 					<div class="specifati2">
-					 <p>{carDetail[0].transmission}</p>
+					 <p>{carDetail[0].transmission_types}</p>
 					 <p>{carDetail[0].drivetrain}</p>
 					 <p>{carDetail[0].fuel_type}</p>
 					 
@@ -639,7 +639,7 @@ return(
 				  </div>
 				  <div class="col-lg-2">
 					<div class="specifati2">
-					<p>{carDetail[0].radio}</p>
+					<p>{carDetail[0].radio_types}</p>
 					 <p>{carDetail[0].color}</p>
 					
 					 
@@ -656,7 +656,7 @@ return(
 					<div class="specifati2">
 					 
 					 <p>{carDetail[0].engine}</p>
-					 <p>{carDetail[0].vehicle_type}</p>
+					 <p>{carDetail[0].vehicle_types}</p>
 					 
 					</div>
 				  </div>
