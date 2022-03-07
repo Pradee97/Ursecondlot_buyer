@@ -46,9 +46,9 @@ const AddAddress = () => {
     const [stateAndCityError, setStateAndCityError] = useState("");
     const [locationError, setLocationError] = useState("");
     const [instructionError, setInstructionError] = useState("");
-    const [state,setState]=useState("1");
-    const [city,setCity]=useState("1");
-    const [zipcode,setZipcode]=useState("1");
+    // const [state,setState]=useState("1");
+    // const [city,setCity]=useState("1");
+    // const [zipcode,setZipcode]=useState("1");
     const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
 
     function formatMobileNO(value){
@@ -148,8 +148,8 @@ const AddAddress = () => {
                 address: address,
                 phone_no: formatMobileNO(primaryPhone),
                 mobile_no: formatMobileNO(mobilePhone),
-                city_id: city,
-                state_id: state,
+                city_id: cityName,
+                state_id: stateName,
                 zipcode_id: zipCodeId,
                 buyer_dealer_id:userDetails.buyer_dealer_id,
                 location:location,

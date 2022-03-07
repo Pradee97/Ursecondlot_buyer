@@ -13,6 +13,8 @@ import Loading from '../../Component/Loading/Loading';
 import StateAndCity from '../../Component/StateAndCity/StateAndCity'
 import Popup from '../../Component/Popup/Popup';
 import LateFee from '../../Pages/LateFee/LateFee';
+import FileBase64 from 'react-file-base64';
+import adduser from '../../assets/img/adduser.jpg';
 
 const EditDealerInformation = () => {
 
@@ -31,7 +33,8 @@ const EditDealerInformation = () => {
     const [zipCode, setZipcode] = useState("");
     const [loading,setLoading] = useState(true);
     const [isOpen, setIsOpen] = useState(false);
- 
+    const [doc, setDoc] = useState("");
+    const [type,setType]=useState("");
     const [isLateFee, setIsLateFee] = useState(false);
     const [lateFeeValue, setLateFeeValue] = useState(0);
 
@@ -117,14 +120,14 @@ const EditDealerInformation = () => {
         setAddressError("")
         setStateAndCityError("")
 
-        if(!firstName){
-            setFirstNameError("Dealer Name is required")
-            return;
-        }
-        else if(firstName.length>50){
-            setFirstNameError("Dealer Name must not exceed 50 characters")
-            return;
-        }
+        // if(!firstName){
+        //     setFirstNameError("Dealer Name is required")
+        //     return;
+        // }
+        // else if(firstName.length>50){
+        //     setFirstNameError("Dealer Name must not exceed 50 characters")
+        //     return;
+        // }
         // if(!lastName){
         //     setLastNameError("Last Name is required")
         //     return;
@@ -188,7 +191,7 @@ const EditDealerInformation = () => {
 
         let request = {
             buyer_dealer_id:id,
-            dealer_name: firstName,
+            // dealer_name: firstName,
             // last_name: lastName,
             // phone_no: formatMobileNO(primaryPhone),
             // mobile_no: formatMobileNO(mobilePhone),
@@ -200,6 +203,7 @@ const EditDealerInformation = () => {
             state_id: typeof state==='string'?accountObjc.state_id:state,
             zipcode_id: zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode,
             active:1,
+            image:doc===""?doc:doc.length>0?doc:[doc],           
             updatedBy:buyer_id
 
         };
@@ -211,6 +215,7 @@ const EditDealerInformation = () => {
                     const { data } = response;
                     console.log("response", response)
                     ls.set('userDetails', response.data.data[0]);
+                    console.log("local str======", ls.set('userDetails', response.data.data[0]))
                     // history.push("/success");
                     togglePopup()
                     setPopupTitle("Edit Dealer Information");
@@ -243,7 +248,7 @@ const EditDealerInformation = () => {
     useEffect(() => {
       //fetchAccountDetails();
       let request = {
-        buyer_dealer_id: buyer_dealer_id,
+        buyer_dealer_id: id,
     };
     const state = API.post('user_profile/condition', request);
     state.then(res => {
@@ -291,7 +296,15 @@ const EditDealerInformation = () => {
     
         }).catch(err=>{console.log(err);});
     }
-
+    const getFiles=(file)=>{
+        console.log("================>",file.type)
+        setType("")
+        if(file.type.includes("jpg") || file.type.includes("jpeg") || file.type.includes("png")){
+            setDoc(file);
+        }else{
+            setType("0");
+        }
+      }
     useEffect(() => {
 
         getlateFee();
@@ -323,13 +336,23 @@ const EditDealerInformation = () => {
                         <div className="section-title">
                         <button className="back-btn-paymentform backBtn" onClick={() => history.push("/manageaccount")}><i className="icofont-arrow-left"></i> Back</button>   
 							<h2> Edit Dealer Information</h2>
-						</div>
-
+						
+                        <div className="col-sm-12 form-group">
+                                <div className="user-upload-btn-wrapper">
+                                {doc===""?<img alt=""  src={accountObjc.image || adduser} ></img>:
+                                <img alt="" src={doc.base64} ></img>														
+                                }
+                                <span className="proCamera"></span>
+                                {type==="0"?<div className="form-input-error">Upload only Image Format </div>:""}      
+                                <FileBase64 onDone={ getFiles }  type="hidden"/>				
+                                </div>
+                                </div>
+                                </div>
                         <div className="col-sm-12 form-group">
                             <div className="tbox">
-                                <input type="text"  defaultValue={accountObjc.dealer_name} className="textbox" placeholder="Dealer Name"  onChange={(e) => setFirstname(e.target.value)} />
+                                <input type="text"  className="textbox" placeholder={accountObjc.dealer_name} disabled />
                                 <label htmlFor="first_name" className={firstName != "" ? "input-has-value" : ""}>Dealer Name</label>
-                                <p className="form-input-error" >{firstNameError}</p>
+                                {/* <p className="form-input-error" >{firstNameError}</p> */}
 
                             </div>
                             </div>

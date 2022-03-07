@@ -253,7 +253,7 @@ const Registration = () => {
             meeting_date: UTC_updateDate, //date,
             meeting_time: UTC_updateTime, //time,
             active: 1,
-            country_id: optionPhone,
+            country_id: parseInt(optionPhone),
             state_id: stateName,
             city_id: cityName,
             zipcode_id: zipCodeId,
@@ -331,8 +331,8 @@ const Registration = () => {
                         <div className="row">
                         <div className="col-sm-12 form-group">
                         <div className="user-upload-btn-wrapper">
-                        {doc===""?<img alt="" src="adduser.jpg" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} ></img>:
-														<img alt="" src="adduser.jpg" src={doc.base64} ></img>														
+                        {doc===""?<img alt=""  src={process.env.PUBLIC_URL + "/images/adduser.jpg"} ></img>:
+														<img alt=""  src={doc.base64} ></img>														
 														}
                         <span className="proCamera"></span>
                         {type==="0"?<p className="form-input-error">Upload only Image Format </p>:""}      
@@ -370,8 +370,8 @@ const Registration = () => {
                             <div className="col-sm-4 form-group countrycode">
                             <div className="tbox">
                                 <select className="form-control custom-select browser-default textbox"  id="drop" placeholder=""  onChange={(e) => setOptionPhone(e.target.value)}>
-                                    <option value="+1">+1</option>
-                                    <option value="+91">+91</option>
+                                    <option value="1">+1</option>
+                                    {/* <option value="+91">+91</option> */}
                                 </select>
                                 <label  for="drop" className={"input-has-value"}>Country code</label>
                             </div>
