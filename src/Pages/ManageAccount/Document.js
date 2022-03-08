@@ -409,7 +409,7 @@ useEffect(()=>{
             console.log("====else calli=ng===>")
         let request = {
             buyer_dealer_id: userDetails.buyer_dealer_id,
-            buyer_doc_type: value,
+            buyer_doc_type_id: value,
             doc_name: file.length > 0 ? file : [file],
         };
         const upload = API.post('buyer_document/add', request);
@@ -511,7 +511,7 @@ useEffect(()=>{
                                                         <p>  
                                                         <div className="upload-btn-wrapper">
                                                                 <a className="btn"> Upload File</a>
-                                                                <FileBase64 onDone={(e) => getFiles(e, docLists.buyer_doc_type)} />
+                                                                <FileBase64 onDone={(e) => getFiles(e, docLists.buyer_doc_type_id)} />
                                                             </div>
                                                         </p>
                                                         {Type=== docLists.buyer_doc_type_id ?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
@@ -529,7 +529,7 @@ useEffect(()=>{
                                                         <p>
                                                                 <div className="upload-btn-wrapper updateFile">
                                                                     <a className="btn"> Update File</a>
-                                                                    <FileBase64 onDone={(e) => updateFiles(e, docLists.document_id,docLists.buyer_doc_type)} />
+                                                                    <FileBase64 onDone={(e) => updateFiles(e, docLists.document_id,docLists.buyer_doc_type_id)} />
                                                                 </div>
                                                                 <a className="btn deleteFile" onClick={(e)=>deleteFileConfirmation(docLists.document_id)}> Delete File</a>
                                                                 {UpdateType=== docLists.buyer_doc_type_id ?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
