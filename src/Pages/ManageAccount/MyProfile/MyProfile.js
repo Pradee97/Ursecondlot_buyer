@@ -33,8 +33,11 @@ const MyProfile = () => {
       })
           .catch(err => { console.log(err); });
     }
-    function onHandleEdit(e){
-      history.push("/editmyprofile/"+e);
+    function onHandleEdit(item){
+      // history.push("/editmyprofile/"+e);
+      history.push({pathname: "/editmyprofile",
+      state: {id:item?.buyer_id}
+    })
     }
 
     const getlateFee=()=>{
@@ -80,11 +83,11 @@ const MyProfile = () => {
                    </div>
                    <div className="col-lg-9 col-md-8 col-sm-12 pt-4 pt-lg-0 myprofilerightblock">
                        <div className="myprofilerighttableblock"> 
-                       {accountDetails.length>0?accountDetails.map((item,index) =>	
+                       {accountDetails?.length>0?accountDetails.map((item,index) =>	
                        
                            
                            <div className="myprofilerighttable">
-                             <h3>My Details<span><button className="ant-btn" onClick={() => onHandleEdit(item.buyer_id)}><i className="icofont-ui-edit"></i> Edit</button></span></h3>	
+                             <h3>My Details<span><button className="ant-btn" onClick={() => onHandleEdit(item)}><i className="icofont-ui-edit"></i> Edit</button></span></h3>	
                            <p>Location where transport carriers will drop of a vehicle that you have purchased</p>
                            					
                                <table>

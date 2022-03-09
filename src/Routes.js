@@ -153,10 +153,10 @@ function AppRouter() {
               <Route  path="/buyers" component={Buyers}/>
               <Route  path="/adduser" component={AddUser}/>
               <Route  path="/myprofile" component={MyProfile}/>  
-              <Route  path="/editmyprofile/:id" component={EditMyProfile}/>
-              <Route  path="/dealerinfoedit/:id" component={EditDealerInformation}/>
-              <Route  path="/addressedit/:id" component={EditAddress}/>
-              <Route  path="/legaledit/:id" component={EditLegalAccount}/>
+              <Route  path="/editmyprofile" component={EditMyProfile}/>
+              <Route  path="/dealerinfoedit" component={EditDealerInformation}/>
+              <Route  path="/addressedit" component={EditAddress}/>
+              <Route  path="/legaledit" component={EditLegalAccount}/>
               <Route  path="/legaladd" component={AddLegalAccount}/>
               <Route  path="/addressadd" component={AddAddress}/>
               <Route  path="/buyeredit/:id" component={EditBuyer}/>
