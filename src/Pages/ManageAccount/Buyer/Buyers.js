@@ -146,7 +146,7 @@ const Buyers = () => {
 
                                 <div className="col-lg-12 userlisttableblock">
                                     <div className="add-user">
-                                    {/* <Button className="add-user-btns" onClick={() => history.push("/adduser")}><i className="icofont-plus"></i> Add User</Button> */}
+                                    <Button className="add-user-btns" onClick={() => history.push("/adduser")}><i className="icofont-plus"></i> Add User</Button>
                                         {/*<a className="add-user-btns" href="/adduser"><i className="icofont-plus"></i> Add User</a>*/}
                                     </div>
 				
@@ -169,7 +169,7 @@ const Buyers = () => {
                                             <td>{item.buyer_id}</td>															
                                             <td><span className="cartitlename">{item.first_name} {item.last_name} </span></td>
                                             <td className="userImage">{item.image===""?
-                                            <img alt="" src="adduser.jpg" src={process.env.PUBLIC_URL + "/images/adduser.jpg"}/>:
+                                            <img alt=""  src={process.env.PUBLIC_URL + "/images/adduser.jpg"}/>:
                                             <img alt="" src={item.image} />
                                             }</td>
                                             <td className="phonenotab">{item.phone_no}</td>

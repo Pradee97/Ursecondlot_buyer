@@ -16,11 +16,12 @@ import LateFee from '../../Pages/LateFee/LateFee';
 import FileBase64 from 'react-file-base64';
 import adduser from '../../assets/img/adduser.jpg';
 
-const EditDealerInformation = () => {
+const EditDealerInformation = (props) => {
 
     let { register, updateDealerInfo, formState: { errors },reset  } = useForm();
     const history = useHistory();
-    const { id } = useParams();
+    // const { id } = useParams();
+    const {id} = props.location.state;
     const userDetails = ls.get('userDetails');
     const [accountObjc, setAccountObj] = useState("");
     const [firstName, setFirstname] = useState("");

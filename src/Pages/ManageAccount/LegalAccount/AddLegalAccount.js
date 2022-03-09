@@ -13,6 +13,7 @@ import StateAndCity from '../../../Component/StateAndCity/StateAndCity';
 import { useForm } from "react-hook-form";
 import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks";
 import { useDispatch, useSelector } from 'react-redux';
+import Datetime from 'react-datetime';
 
 const AddLegalAccount = () => {
 
@@ -62,7 +63,7 @@ const AddLegalAccount = () => {
     const [dealershiplicense, setDealershiplicense] = useState(""); 
     const [taxid, setTaxid] = useState("");
     const [address, setAddress] = useState("");
-    const [dealershipLicenseexp, setDealershiplicenseexp] = useState(null);
+    const [dealershipLicenseexp, setDealershipLicenseexp] = useState(null);
     const [taxidexp, setTaxidexp] = useState(null);
     const [legalBusinessname, setLegalBusinessname] = useState("");
     const [stateName, setStateName] = useState("");
@@ -82,7 +83,10 @@ const AddLegalAccount = () => {
     const [state,setState]=useState("1");
     const [city,setCity]=useState("1");
     const [zipcode,setZipcode]=useState("1");
-
+    const yesterday = moment().subtract(1, 'day');
+    const disablePastDt = current => {
+      return current.isAfter(yesterday);
+    };
     
     const onhandleSubmit = (data) => {
         // setOpenLoader(true);
@@ -107,8 +111,8 @@ const AddLegalAccount = () => {
             ein_no: EINnumber,
             dealer_license: dealershiplicense,
             tax_id: taxid,
-            tax_id_exp: moment(taxidexp).format("YYYY-MM-DD"),
-            dealer_license_exp: moment(dealershipLicenseexp).format("YYYY-MM-DD"),
+            tax_id_exp: taxidexp,
+            dealer_license_exp: dealershipLicenseexp,
             state_id: stateName,
             city_id: cityName,
             zipcode_id: zipCodeId,
@@ -249,7 +253,20 @@ const AddLegalAccount = () => {
     const getZipCodeId = (zipData) => {
         setZipcodeId(zipData)
     }
-
+    const inputProps1 = {
+        placeholder: "YYYY/MM/DD",
+        // value : expiration
+        };
+    const Date1 = (event) => {
+        setTaxidexp(event.format("YYYY/MM/DD"))
+        }
+    const inputProps = {
+    placeholder: "YYYY/MM/DD",
+    // value : expiration
+    };
+    const Date = (event) => {
+        setDealershipLicenseexp(event.format("YYYY/MM/DD"))
+        }
     return (
         <div>
             <main id="main" className="inner-page">
@@ -375,8 +392,11 @@ const AddLegalAccount = () => {
                             </div> 
                             </div>  */}
                             <div className="col-sm-12 form-group datePickerBlock">
-                             <div className="tbox">  
-                             <DatePicker 
+                             <div className="tbox"> 
+                             <Datetime inputProps={ inputProps } timeFormat={false} dateFormat="YYYY/MM/DD" 
+                                    nclass="form-control textbox" name="Date" id="Date" isValidDate={disablePastDt} onChange={Date} 
+                                     /> 
+                             {/* <DatePicker 
                                     class="form-control textbox" name="Date" id="Date"
                                     renderCustomHeader={({
                                         date,
@@ -433,14 +453,17 @@ const AddLegalAccount = () => {
                                             placeholderText="Dealership license exp"
                                             // onChangeRaw={handleDateChangeRaw}
                                                         
-                                    />                          
+                                    />                           */}
                                
                             </div>
                             <p className="form-input-error" >{dealershipLicenseexpError}</p>
                             </div>  
                             <div className="col-sm-12 form-group datePickerBlock">
-                             <div className="tbox">     
-                             <DatePicker 
+                             <div className="tbox">  
+                             <Datetime inputProps={ inputProps1 } timeFormat={false} dateFormat="YYYY/MM/DD" 
+                                   class="form-control textbox" name="Date" id="Date" isValidDate={disablePastDt} onChange={Date1} 
+                                     />   
+                             {/* <DatePicker 
                                     class="form-control textbox" name="Date" id="Date"
                                     renderCustomHeader={({
                                         date,
@@ -497,7 +520,7 @@ const AddLegalAccount = () => {
                                             placeholderText="Tax id exp"
                                             // onChangeRaw={handleDateChangeRaw}
                                                         
-                                    />                       
+                                    />                        */}
 
                             </div>
                             <p className="form-input-error" >{taxidexpError}</p>

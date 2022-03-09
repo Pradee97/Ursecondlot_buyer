@@ -15,12 +15,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../../../Component/Loading/Loading';
 import Popup from '../../../Component/Popup/Popup';
 import LateFee from '../../../Pages/LateFee/LateFee';
+import Datetime from 'react-datetime';
 
-const EditLegalAccount = () => {
+const EditLegalAccount = (props) => {
 
     const history = useHistory();
     let { register, updateLegalAccount, formState: { errors },reset  } = useForm();
-    const { id } = useParams();
+    // const { id } = useParams();
+    const {id} = props.location.state;
     const [accountObjc, setAccountObj] = useState("");
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
@@ -34,7 +36,6 @@ const EditLegalAccount = () => {
     const [zipcode, setZipcode] = useState("");
     const [dealershipLicenseexp, setDealershipLicenseexp] = useState(null);
     const [taxidexp, setTaxidexp] = useState(null);
-   
 
     const [firstnameError, setFirstnameError] = useState("");
     const [lastnameError, setLastnameError] = useState("");
@@ -51,7 +52,10 @@ const EditLegalAccount = () => {
 
     const [isLateFee, setIsLateFee] = useState(false);
     const [lateFeeValue, setLateFeeValue] = useState(0);
-
+    const yesterday = moment().subtract(1, 'day');
+    const disablePastDt = current => {
+      return current.isAfter(yesterday);
+    };
 	const toggleLateFee = () => {
 		setIsLateFee(!isLateFee);
   	}
@@ -104,8 +108,8 @@ const EditLegalAccount = () => {
             setCity(res.data.data[0].city_name);
             setState(res.data.data[0].state_name);
             setZipcode(res.data.data[0].zipcode);
-            setDealershipLicenseexp(new Date(res.data.data[0].dealer_license_exp));
-            setTaxidexp(new Date(res.data.data[0].tax_id_exp));
+            setDealershipLicenseexp(res.data.data[0].dealer_license_exp);
+            setTaxidexp(res.data.data[0].tax_id_exp);
 
             setAccountObj(res.data.data[0])
             console.log("-====res.data.data[0].dealer_license_exp=====>",res.data.data[0].dealer_license_exp)
@@ -289,8 +293,8 @@ const EditLegalAccount = () => {
         setCity(res.data.data[0].city_name);
         setState(res.data.data[0].state_name);
         setZipcode(res.data.data[0].zipcode);
-        setDealershipLicenseexp(new Date(res.data.data[0].dealer_license_exp));
-        setTaxidexp(new Date(res.data.data[0].tax_id_exp));
+        setDealershipLicenseexp(res.data.data[0].dealer_license_exp);
+        setTaxidexp(res.data.data[0].tax_id_exp);
         setAccountObj(res.data.data[0]);
         reset(res.data.data[0]);
         setLoading(false);
@@ -322,7 +326,20 @@ const EditLegalAccount = () => {
         getlateFee();
 
     }, []);
-    
+    const inputProps1 = {
+        placeholder: taxidexp,
+        // value : expiration
+        };
+    const Date1 = (event) => {
+        setTaxidexp(event.format("YYYY/MM/DD"))
+        }
+    const inputProps = {
+    placeholder: dealershipLicenseexp,
+    // value : expiration
+    };
+    const Date = (event) => {
+        setDealershipLicenseexp(event.format("YYYY/MM/DD"))
+        }
     return (
         <div>
           {loading?<Loading/>:
@@ -406,32 +423,33 @@ const EditLegalAccount = () => {
                             </div>
                             <div className="col-sm-12 form-group datePickerBlock">
                             <div className="tbox">  
-                                 {/* <input type="date" defaultValue={accountObjc.dealer_license_exp===undefined?"":accountObjc.dealer_license_exp.substring(0,10)} 
-                                 className="form-control textbox" placeholder=""  onChange={(e) => setDealershipLicenseexp(e.target.value)} /> */}
-                                 <DatePicker
+                            <Datetime inputProps={ inputProps } timeFormat={false} dateFormat="YYYY/MM/DD" 
+                                    name="Date" isValidDate={disablePastDt} onChange={Date} 
+                                     id="meeting_date"/>
+                                 {/* <DatePicker
                                     className="form-control textbox" name="dealershipLicenseexp" id="dealershipLicenseexp"                                                        
                                     autoComplete="off"
                                     selected={ dealershipLicenseexp == null ? null : dealershipLicenseexp }
                                     onChange={(date) => setDealershipLicenseexp(date)}
                                     placeholderText="DOJ"
                                     onChangeRaw={handleDateChangeRaw}
-                                />
+                                /> */}
                                 <label htmlFor="first_name" className={dealershipLicenseexp !="" ? "input-has-value" : ""}>Dealership license exp</label>
                             </div> <p className="form-input-error" >{dealershipLicenseexpError}</p>
                             </div>
                             <div className="col-sm-12 form-group datePickerBlock">
                             <div className="tbox">
-                                {/* <input type="date" 
-                                defaultValue={accountObjc.tax_id_exp===undefined?"":accountObjc.tax_id_exp.substring(0,10)} 
-                                className="form-control textbox" placeholder="" onChange={(e) => setTaxidexp(e.target.value)} /> */}
-                                <DatePicker
+                            <Datetime inputProps={ inputProps1 } timeFormat={false} dateFormat="YYYY/MM/DD" 
+                                    name="Date" isValidDate={disablePastDt} onChange={Date1} 
+                                     id="meeting_date"/>
+                                {/* <DatePicker
                                     className="form-control textbox" name="taxidexp" id="taxidexp"                                                        
                                     autoComplete="off"
                                     selected={ taxidexp == null ? null : taxidexp }
                                     onChange={(date) => setTaxidexp(date)}
                                     placeholderText="DOJ"
                                     onChangeRaw={handleDateChangeRaw}
-                                />
+                                /> */}
                                 <label htmlFor="first_name" className={taxidexp!="" ? "input-has-value" : ""}>Tax id exp</label>
                             </div><p className="form-input-error" >{taxidexpError}</p>
                             </div>

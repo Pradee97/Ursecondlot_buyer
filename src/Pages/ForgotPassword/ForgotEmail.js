@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 import API from "../../Services/BaseService";
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
+import { useForm } from "react-hook-form";
+
 const ForgotEmail = () => {
     const history = useHistory();
     const [popupTitle, setPopupTitle] = useState("");
@@ -14,6 +16,9 @@ const ForgotEmail = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [phoneNo, setPhoneNo]=useState('');
     let value=window.location.href.split("id=");
+
+    const { register, handleSubmit, formState: { errors } } = useForm();
+
     const handleForgotEmail = (event) => {
         let request = {
             phone_no:phoneNo
@@ -62,7 +67,7 @@ const ForgotEmail = () => {
                         <button className="back-btn-paymentform backBtn" onClick={() => history.push("/login")}><i className="icofont-arrow-left"></i> Back</button>
                         <div className="col-lg-12 card">
                         <div className="logo"><img alt="" src={process.env.PUBLIC_URL +"/images/Logo_final.png"} /></div>
-                            <form className="registrationform" onSubmit={handleForgotEmail} >
+                            <form className="registrationform" onSubmit={handleSubmit(handleForgotEmail)} >
                                 <h2 className="title">Forgot Username</h2>
                                 <p className="error-message">{errorMessage}</p>
                                 <div className="row changePassblock">

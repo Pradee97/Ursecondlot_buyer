@@ -15,11 +15,12 @@ import Loading from '../../../Component/Loading/Loading';
 import Popup from '../../../Component/Popup/Popup';
 import LateFee from '../../../Pages/LateFee/LateFee';
 
-const EditMyProfile = () => {
+const EditMyProfile = (props) => {
 
     const history = useHistory();
     let { register, updateMyProfile, formState: { errors },reset  } = useForm();
-    const { id } = useParams();
+    // const { id } = useParams();
+    const {id} = props.location.state;
     const userDetails=ls.get('userDetails');
     const [myProfileObjc, setMyProfileObj] = useState("");
     const [firstName, setFirstName] = useState("");
@@ -48,13 +49,18 @@ const EditMyProfile = () => {
     const [image,setImage] = useState("");
     const [doc, setDoc] = useState("");
     const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
-    const buyer_id=JSON.parse(JSON.stringify(loggedInBuyerId)).buyer_id;
-    const buyer_dealer_id=JSON.parse(JSON.stringify(loggedInBuyerId)).buyer_dealer_id;
+    // const buyer_id=JSON.parse(JSON.stringify(loggedInBuyerId)).buyer_id;
+    // const buyer_dealer_id=JSON.parse(JSON.stringify(loggedInBuyerId)).buyer_dealer_id;
     const [type,setType]=useState("");
 
+    const buyer_id=JSON.parse((loggedInBuyerId)).buyer_id;
+    const buyer_dealer_id=JSON.parse((loggedInBuyerId)).buyer_dealer_id;
 
-    // const buyer_id=JSON.parse((loggedInBuyerId)).buyer_id;
-    // const buyer_dealer_id=JSON.parse((loggedInBuyerId)).buyer_dealer_id;
+console.log("buyer_id",buyer_id)
+console.log("loggedInBuyerId",loggedInBuyerId)
+console.log("useSelector(state => state.LoginReducer.payload)",useSelector(state => state.LoginReducer.payload))
+
+   
 
     const [loading,setLoading] = useState(true);
 

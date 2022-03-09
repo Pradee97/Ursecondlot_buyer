@@ -14,10 +14,11 @@ import Loading from '../../../Component/Loading/Loading';
 import Popup from '../../../Component/Popup/Popup';
 import LateFee from '../../../Pages/LateFee/LateFee';
 
-const EditAddress = () => {
+const EditAddress = (props) => {
 
     const history = useHistory();
-    const { id } = useParams();
+    // const { id } = useParams();
+    const {id} = props.location.state;
     // let { register, updateAddress, formState: { errors },reset  } = useForm();
     const [accountObjc, setAccountObj] = useState("");
     const [FirstName, setFirstName] = useState("");
