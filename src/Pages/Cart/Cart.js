@@ -22,6 +22,7 @@ const Cart = () => {
     const [mySelectedCarDetails, setMySelectedCarDetails] = useState([]);
     const [paymentMode, setPaymentMode] = useState("");
     const [paymentCarList,setPaymentCarList] = useState("");
+    const [sellerDealerId,setSellerDealerId] = useState("");
     const [numberCars,setNumberCars] = useState("");
     const [paymentModeError,setPaymentModeError] = useState("");
     const [alertError,setAlertError] = useState("");
@@ -67,6 +68,7 @@ const Cart = () => {
                   console.log("check the credit limit in the cart page",response.data.data[0].credit_limit)
                  setNumberCars(response.data.data.length)
             }            
+    
             setLoading(false);
         });
     }
@@ -99,6 +101,8 @@ const Cart = () => {
 const billofsales =(request) => {
     // const request = mySelectedCarDetails
     setPaymentCarList(request)
+    // setSellerDealerId(request)
+
     console.log("set payment request check",  request)
     
     setAlertError("")
@@ -299,6 +303,7 @@ const billofsales =(request) => {
        }))
     }
 
+   
    
 
     const getlateFee=()=>{
@@ -527,7 +532,7 @@ const billofsales =(request) => {
                 </div></div>}
 
                         <div class="vehicletotalbtns"> 
-                            <a class="vehicletotal-btns" href="JavaScript:void(0)" disabled={!paymentMode || (floorSelector && !floorMode ) || !mySelectedCarId.length } onClick={checkAndRevCall }>Review & Checkout</a>
+                            <a class="vehicletotal-btns" href="JavaScript:void(0)" disabled={!paymentMode || (floorSelector && !floorMode ) || !mySelectedCarId.length } onClick={checkAndRevCall}>Review & Checkout</a>
                         </div>
                         <p className="form-input-error">{alertError}</p>
                         
