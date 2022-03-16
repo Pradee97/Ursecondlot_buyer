@@ -95,14 +95,22 @@ import ReactExport from "react-data-export";
       });
     }
 
-    const redirecttoInvoice=(car_id,seller_dealer_id,price,lot_fee,bill_of_sales_id,gatepass_id,sold_date,make,model,year,transportation_charge,transportation,inventory_no,vin_no,late_fee, car_payment_date,payment_mode,company_name)=>{
+    const redirecttoBOS=(bill_of_sale_id)=>{
+      //   history.push("/Inspection/"+pathid);
+      history.push({
+        pathname: "/billofsale",
+        state: {BillofSale : bill_of_sale_id },
+        });
+      }
+
+    const redirecttoInvoice=(car_id,seller_dealer_id,price,lot_fee,bill_of_sale_id,gatepass_id,sold_date,make,model,year,transportation_charge,transportation,inventory_no,vin_no,late_fee, car_payment_date,payment_mode,company_name)=>{
       //   history.push("/Inspection/"+pathid);
       history.push({
         pathname: "/Invoice",
-        state: {car_id,sellerDealerID:seller_dealer_id,vechileprice:price,lotFee:lot_fee,billOfSales:bill_of_sales_id,gatePassId:gatepass_id,Date:sold_date,Make:make,Model:model,Year:year,transportationCharge:transportation_charge,Transportation:transportation,invNo:inventory_no,vinNo:vin_no,LateFee:late_fee, BillOfSaleDate:car_payment_date, PaymentMode:payment_mode,CompanyName:company_name}
+        state: {car_id,sellerDealerID:seller_dealer_id,vechileprice:price,lotFee:lot_fee,billOfSales:bill_of_sale_id,gatePassId:gatepass_id,Date:sold_date,Make:make,Model:model,Year:year,transportationCharge:transportation_charge,Transportation:transportation,invNo:inventory_no,vinNo:vin_no,LateFee:late_fee, BillOfSaleDate:car_payment_date, PaymentMode:payment_mode,CompanyName:company_name}
 
         });
-        console.log ("hi",price,lot_fee,bill_of_sales_id,gatepass_id,sold_date);
+        console.log ("hi",price,lot_fee,bill_of_sale_id,gatepass_id,sold_date);
       }
     
       const redirecttoCart=() =>{
@@ -141,7 +149,7 @@ import ReactExport from "react-data-export";
               make:   value.make,
               year:   value.year,
               inventory_no:  value.inventory_no,
-                bill_of_sales_id:    value.bill_of_sales_id,
+                bill_of_sale_id:    value.bill_of_sale_id,
                 gatepass_id:    value.gatepass_id,
                 title_status_name:     value.title_status_name,
                 amount:             (Number(value.price||0)+  Number(value.lot_fee) || 0) + (Number(getFeeDetails(value.price))||0) + 0 +0+0+ (Number(value.transportation_charge || 0)) +  Number(value.late_fee)||0
@@ -221,7 +229,7 @@ if(scheduleDate){
                 make:   value.make,
                 year:   value.year,
                 inventory_no:  value.inventory_no,
-                bill_of_sales_id:    value.bill_of_sales_id,
+                bill_of_sale_id:    value.bill_of_sale_id,
                 gatepass_id:    value.gatepass_id,
                 title_status_name:     value.title_status_name,
                 amount:             (Number(value.price||0)+  Number(value.lot_fee) || 0) + (Number(getFeeDetails(value.price))||0) + 0 +0+0+ (Number(value.transportation_charge || 0)) +  (Number(value.late_fee)||0)
@@ -431,7 +439,7 @@ const togglePrint = () => {
   
    
       setCarId(historyDetail.car_id);
-      setbillOfSales(historyDetail.bill_of_sales_id);
+      setbillOfSales(historyDetail.bill_of_sale_id);
       setYear(historyDetail.year);
       setMake(historyDetail.make);
       setModel(historyDetail.model);
@@ -615,7 +623,7 @@ const togglePrint = () => {
                     <ExcelColumn label="Make" value="make"/>
                     <ExcelColumn label="VIN #" value="vin_no"/>
                     <ExcelColumn label="INV #" value="inventory_no"/>
-                    <ExcelColumn label="BOS #" value="bill_of_sales_id"/>     
+                    <ExcelColumn label="BOS #" value="bill_of_sale_id"/>     
                     <ExcelColumn label="GP #" value="gatepass_id"/>
                     <ExcelColumn label="TS #" value="title_status_name"/>
                     <ExcelColumn label="Amount $" value="amount"/>
@@ -768,7 +776,7 @@ const togglePrint = () => {
 									   <p class="billsalesno invNo"><span className="label">Inventory # :</span> {historyDetail.inventory_no}</p>
                                         <p class="billsalesno model"><span className="label">Year Make Model :</span>{historyDetail.year} {historyDetail.make} {historyDetail.model}</p>
                                         <p class="billsalesno vinNo"><span className="label">Vin # :</span>  {historyDetail.vin_no}</p>
-                                          <p class="billsalesno billOf"><span className="label">Bill Of sale # : </span> {historyDetail.bill_of_sales_id}</p>
+                                          <p class="billsalesno billOf"><span className="label">Bill Of sale # : </span> {historyDetail.bill_of_sale_id}</p>
 										                      <p class="billsalesno  netAmt"><span className="label">Gate Pass Code : </span>{historyDetail.gatepass_id}</p>
                                           <p class="billsalesno netAmt"><span className="label">Total Amount : $</span> {(Number(historyDetail.price)+  Number(historyDetail.lot_fee) || 0) + (Number(getFeeDetails(historyDetail.price))) + 0 +0+0+ (Number(historyDetail.transportation_charge || 0)) +  Number(historyDetail.late_fee)}</p>
                                           <p class="billsalesno soldDate"><span className="label">Date of Purchase :</span>  {historyDetail.sold_date}</p>                                      
@@ -788,10 +796,12 @@ const togglePrint = () => {
           <div class="lotfee-inner col-lg-12 toggleExpand">
                 <div class="row">							
                   <div class="col-lg-4">
-                    
                     <div class="car-item">
-                    <div class="pickupdetailcontent">
-                      <p class="billsalesno">Bill Of sale #{historyDetail.bill_of_sales_id}</p>
+                    <div class="pickupdetailcontent" >
+                      <a class="billsalesno" onClick={ () => {
+                                history.push({pathname: "/billofsale", state: {BillofSale: historyDetail.bill_of_sale_id}});
+                                
+                            }}>Bill Of sale #{historyDetail.bill_of_sale_id}</a>
                     </div>
                       <div className="historyImg">
                         <img src={historyDetail.car_image} class="carImg" alt="..."/>
@@ -850,9 +860,9 @@ const togglePrint = () => {
 								{/* {copied ? <p>Copied !</p> : ""} */}
 							</div>
               </div>
-                          <a class="cta-btns" href="JavaScript:void(0)" onClick={()=>redirecttoInspection(historyDetail.car_id)}>Inspection</a>
+                          <button class="cta-btns" href="JavaScript:void(0)" onClick={()=>redirecttoInspection(historyDetail.car_id)}>Inspection</button>
                           <span className="autoCheck"><img src={carcheck} alt=""/></span>
-                          <a class="cta-btns invoice" href="JavaScript:void(0)" onClick={()=>redirecttoInvoice(historyDetail.car_id,historyDetail.seller_dealer_id,historyDetail.price,historyDetail.lot_fee,historyDetail.bill_of_sales_id,historyDetail.gatepass_id,historyDetail.sold_date,historyDetail.make,historyDetail.model,historyDetail.year,historyDetail.transportation_charge,historyDetail.transportation,historyDetail.inventory_no,historyDetail.vin_no,historyDetail.late_fee,historyDetail. car_payment_date,historyDetail.payment_mode,historyDetail.company_name)}>Invoice</a>
+                          <a class="cta-btns invoice" href="JavaScript:void(0)" onClick={()=>redirecttoInvoice(historyDetail.car_id,historyDetail.seller_dealer_id,historyDetail.price,historyDetail.lot_fee,historyDetail.bill_of_sale_id,historyDetail.gatepass_id,historyDetail.sold_date,historyDetail.make,historyDetail.model,historyDetail.year,historyDetail.transportation_charge,historyDetail.transportation,historyDetail.inventory_no,historyDetail.vin_no,historyDetail.late_fee,historyDetail. car_payment_date,historyDetail.payment_mode,historyDetail.company_name)}>Invoice</a>
                         </div>
                         <div class="cars-prices gatepass pt-1">
                         {historyDetail.gatepass_id===""?
@@ -928,7 +938,7 @@ const togglePrint = () => {
                     <p class="date ml-0"><span className="datelabel">Date Of Purchase: </span>  <span className="redText">{historyDetail.sold_date}</span></p>
                     
                     <div class="vehicleimgright col-lg-12">
-                      <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>HistoryEdit(`transporationDiv${historyDetail.car_id}`,`transporationHeader${historyDetail.car_id}`)}>{historyDetail.bill_of_sales_id !== null && historyDetail.bill_of_sales_id !== "" ? "": "Edit Transportation" }</a></p>
+                      <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>HistoryEdit(`transporationDiv${historyDetail.car_id}`,`transporationHeader${historyDetail.car_id}`)}>{historyDetail.bill_of_sale_id !== null && historyDetail.bill_of_sale_id !== "" ? "": "Edit Transportation" }</a></p>
                       <h3>Vehicle Price  <span>$ {Number(historyDetail.price)+ Number(historyDetail.lot_fee)}</span></h3>
                       <h4> Buy Fee <span> $ {Number(getFeeDetails(historyDetail.price))}</span></h4>
                       <h4>Inspection <span>$ 0</span></h4>
@@ -978,7 +988,7 @@ const togglePrint = () => {
                       </div>
                     </div>
                     <div class="col-md-12 text-center paybtns">
-                    <a class={`cta-btns-primary ${(historyDetail.bill_of_sales_id !== null && historyDetail.bill_of_sales_id !== ""  ) && "greenBtn"}`} onClick={()=>{(historyDetail.bill_of_sales_id == null || historyDetail.bill_of_sales_id == ""  )&& redirecttoCart()}}  >{historyDetail.bill_of_sales_id !== null && historyDetail.bill_of_sales_id !== "" ? "paid": "pay" }  </a>   
+                    <a class={`cta-btns-primary ${(historyDetail.bill_of_sale_id !== null && historyDetail.bill_of_sale_id !== ""  ) && "greenBtn"}`} onClick={()=>{(historyDetail.bill_of_sale_id == null || historyDetail.bill_of_sale_id == ""  )&& redirecttoCart()}}  >{historyDetail.bill_of_sale_id !== null && historyDetail.bill_of_sale_id !== "" ? "paid": "pay" }  </a>   
                     
                     {/* <button  className="printBtn"  type ="button" onClick= {() => printPage(`Printpage${index}`)}>Download</button> */}
                      {/* <div> 
@@ -1010,7 +1020,7 @@ const togglePrint = () => {
                                         <td>{historyDetail.model}</td>
                                         <td>{historyDetail.vin_no}</td>
                                         <td>{historyDetail.inventory_no}</td>
-                                        <td>{historyDetail.bill_of_sales_id}</td>
+                                        <td>{historyDetail.bill_of_sale_id}</td>
                                         <td>{historyDetail.gatepass_id}</td>
                                         <td>{historyDetail.title_status_name}</td>
                                         <td>{(Number(historyDetail.price)+  Number(historyDetail.lot_fee) || 0) + (Number(getFeeDetails(historyDetail.price))) + 0 +0+0+ (Number(historyDetail.transportation_charge || 0)) +  Number(historyDetail.late_fee)}</td>
@@ -1112,7 +1122,7 @@ const togglePrint = () => {
                                         <td>{historyDetail.model}</td>
                                         <td>{historyDetail.vin_no}</td>
                                         <td>{historyDetail.inventory_no}</td>
-                                        <td>{historyDetail.bill_of_sales_id}</td>
+                                        <td>{historyDetail.bill_of_sale_id}</td>
                                         <td>{historyDetail.gatepass_id}</td>
                                         <td>{historyDetail.title_status_name}</td>
                                         <td>{(Number(historyDetail.price||0)+  Number(historyDetail.lot_fee) || 0) + (Number(getFeeDetails(historyDetail.price))||0) + 0 +0+0+ (Number(historyDetail.transportation_charge || 0)) +  Number(historyDetail.late_fee)||0}</td> 

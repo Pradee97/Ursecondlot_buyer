@@ -55,6 +55,7 @@ import Cardetail from './Pages/Cardetail';
 import Cart from './Pages/Cart/Cart';
 import Chat from './Pages/Chat';
 import History from './Pages/ManageAccount/History/History';
+import BillofSale from './Pages/ManageAccount/History/BillofSale';
 import SuggestedCars from './Pages/SuggestedCars';
 import recentcars from './Pages/RecentlyAddedCars';
 import SimilarCars from './Pages/similarCarFromSeller';
@@ -148,6 +149,7 @@ function AppRouter() {
               <Route  path="/document" component={Document}/> 
               <Route  path="/favorite" component={Favoritelist}/>
               <Route  path="/history" component={History}/>
+              <Route  path="/billofsale" component={BillofSale}/>
               <Route  path="/cart" component={Cart}/>
               <Route  path="/chat" component={Chat}/>
               <Route  path="/buyers" component={Buyers}/>
