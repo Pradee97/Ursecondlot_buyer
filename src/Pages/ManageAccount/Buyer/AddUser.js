@@ -195,7 +195,7 @@ const AddUser = () => {
 				first_name: firstName,
 				last_name: lastName,
 				email: email,
-				phone_no: formatMobileNO(phoneNumber),
+				phone_no: phoneNumber.substring(2, 12),
 				address: address,
 				active: "0",
 				country_id: "1",
@@ -315,8 +315,8 @@ const getZipCodeId = (zipData) => {
 													<div className="col-sm-12 form-group">
 
 													<div className="user-upload-btn-wrapper">
-														{doc===""?<img alt="" src="adduser.jpg" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} ></img>:
-														<img alt="" src="adduser.jpg" src={doc.base64} ></img>														
+														{doc===""?<img alt=""src={process.env.PUBLIC_URL + "/images/adduser.jpg"} ></img>:
+														<img alt="" src={doc.base64} ></img>														
 														}
 														<span class="proCamera"></span>
 														{type==="0"?<p className="form-input-error">Upload only Image Format </p>:""}
@@ -355,7 +355,7 @@ const getZipCodeId = (zipData) => {
 														<div className="tbox ">
 														<PhoneInput id="phone_no" name="phoneNumber" country="US" className="textbox" maxLength="14" minLength="14" value={phoneNumber}
 															onChange={handleOnChange} ></PhoneInput>
-															<label for="phone_no" className={"input-has-value"}>Phone</label>
+															<label for="phone_no" className={"input-has-value"}>Phone #</label>
 												    	</div>
 														<p className="form-input-error" >{phoneNumberError}</p>
 													</div>

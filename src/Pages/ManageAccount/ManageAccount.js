@@ -127,7 +127,13 @@ const getlateFee=()=>{
     fetchAddressDetails();
     getTotalAmount();
   }, []);
-  
+  function formatMobileNO(value){
+    var x = value.replace(/\D/g, '').match(/(\d{3})(\d{3})(\d{4})/);
+    console.log("value of x",x);
+    value = '+1 '+ '('+ x[1] +') ' + x[2] + '-' + x[3];
+    console.log("mobileno",value);
+    return value;
+ }
   return (
     <div>
       {loading?<Loading/>:
@@ -198,11 +204,11 @@ const getlateFee=()=>{
                             <td><span className="tdcol1">City</span><span>{item.city_name}</span></td>
                           </tr>
                           <tr>
-                            <td><span className="tdcol1">Primary phone</span><span>{item.phone_no}</span></td>
+                            <td><span className="tdcol1">Primary phone #</span><span>{formatMobileNO(item.phone_no)}</span></td>
                             <td><span className="tdcol1">State</span><span>{item.state_name}</span></td>
                           </tr>
                           <tr>
-                            <td><span className="tdcol1">Mobile phone</span><span>{item.mobile_no}</span></td>
+                            <td><span className="tdcol1">Mobile phone #</span><span>{item.mobile_no != "" || item.mobile_no != null ? formatMobileNO(item.mobile_no):""}</span></td>
                             <td><span className="tdcol1">Zip code</span><span>{item.zipcode}</span></td>
                           </tr>
                         </table>

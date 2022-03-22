@@ -44,7 +44,8 @@ const EditAddress = (props) => {
     const buyer_id=JSON.parse(JSON.stringify(loggedInBuyerId)).buyer_id;
     const buyer_dealer_id=JSON.parse(JSON.stringify(loggedInBuyerId)).buyer_dealer_id;
     const [loading,setLoading] = useState(true);
-
+    const [cellFlag,setCellFlag] = useState(false);
+    const [alterPhoneFlag,setAlterPhoneFlag] = useState(false);
     const [isLateFee, setIsLateFee] = useState(false);
     const [lateFeeValue, setLateFeeValue] = useState(0);
 
@@ -201,8 +202,8 @@ const EditAddress = (props) => {
             first_name: FirstName,
             last_name: lastName,
             address: address,
-            phone_no: formatMobileNO(primaryPhone),
-            mobile_no: formatMobileNO(mobilePhone),
+            phone_no: cellFlag === true ? primaryPhone.substring(2, 12) : accountObjc?.phone_no,
+            mobile_no: alterPhoneFlag === true ? mobilePhone.substring(2, 12) : accountObjc?.mobile_no,
             city_id: typeof city==='string'?accountObjc.city_id:city,
             state_id: typeof state==='string'?accountObjc.state_id:state,
             zipcode_id: zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode,
@@ -259,8 +260,8 @@ const EditAddress = (props) => {
         setFirstName(res.data.data[0].first_name);
         setLastName(res.data.data[0].last_name);
         setAddress(res.data.data[0].address);
-        setPrimaryPhone(res.data.data[0].phone_no);
-        setMobilePhone(res.data.data[0].mobile_no);
+        // setPrimaryPhone(res.data.data[0].phone_no);
+        // setMobilePhone(res.data.data[0].mobile_no);
         setCity(res.data.data[0].city_name);
         setState(res.data.data[0].state_name);
         setZIpCode(res.data.data[0].zipcode_id);
@@ -268,19 +269,15 @@ const EditAddress = (props) => {
         setInstruction(res.data.data[0].instructions);
         setZIpCode(res.data.data[0].zipcode);
         setAccountObj(res.data.data[0]);
+        formatPhone(res.data.data[0].phone_no)
+        if(res.data.data[0].mobile_no != ""){
+        formatMobile(res.data.data[0].mobile_no);
+        }
         setLoading(false);
         // reset(res.data.data);
     })
         .catch(err => { console.log(err); });
     }, [buyer_id,buyer_dealer_id]);
-
-    function handleOnChange(value) {
-        setPrimaryPhone(value);
-     }
-
-     function handleOnChanges(value) {
-        setMobilePhone(value);
-     }
 
      const getlateFee=()=>{
         let request={
@@ -305,7 +302,35 @@ const EditAddress = (props) => {
         getlateFee();
 
     }, []);
-
+    function formatPhone(value){
+        var x = value.replace(/\D/g, '').match(/(\d{3})(\d{3})(\d{4})/);
+        console.log("formatPhoneNumber x",x);
+        value = '+1'+ '('+ x[1] +')' + x[2] + '-' + x[3];
+        console.log("formatPhoneNumber",value);
+        return setPrimaryPhone(value);
+      }
+      function formatMobile(value){
+        var x = value.replace(/\D/g, '').match(/(\d{3})(\d{3})(\d{4})/);
+        console.log("formatPhoneNumber x",x);
+        value = '+1'+ '('+ x[1] +')' + x[2] + '-' + x[3];
+        console.log("formatPhoneNumber",value);
+        return setMobilePhone(value);
+      }
+    const handleOnChangePhone = (value) => {
+        setPrimaryPhone(value);
+        setCellFlag(true) 
+          console.log("inside handle")
+    
+          console.log("phn no", value)
+       }
+    
+       const handleOnChangeMobile = (value) => {
+        setMobilePhone(value);
+        setAlterPhoneFlag(true) 
+          console.log("inside handle")
+    
+          console.log("phn no", value)
+       }
     return (
         <div>
             {loading?<Loading/>:
@@ -360,8 +385,8 @@ const EditAddress = (props) => {
                             </div>
                             <div class="col-sm-8 form-group ">
                             <div className="tbox ">
-                            <PhoneInput value={accountObjc.phone_no} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChange} ></PhoneInput>
-                            <label for="primary_phone"  className={"input-has-value"}>Primary Phone</label>
+                            <PhoneInput value={primaryPhone} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChangePhone} ></PhoneInput>
+                            <label for="primary_phone"  className={"input-has-value"}>Primary Phone #</label>
                             </div>
                             <p className="form-input-error" >{primaryPhoneError}</p>
                             </div>
@@ -375,8 +400,8 @@ const EditAddress = (props) => {
                             </div>
                             <div class="col-sm-8 form-group ">
                             <div className="tbox ">
-                            <PhoneInput value={accountObjc.mobile_no} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChanges} ></PhoneInput>
-                            <label for="mobile_phone"  className={"input-has-value"}>Mobile Phone</label>
+                            <PhoneInput value={mobilePhone} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChangeMobile} ></PhoneInput>
+                            <label for="mobile_phone"  className={"input-has-value"}>Mobile Phone  #</label>
                             </div> 
                             <p className="form-input-error" >{mobilePhoneError}</p>
                             </div>

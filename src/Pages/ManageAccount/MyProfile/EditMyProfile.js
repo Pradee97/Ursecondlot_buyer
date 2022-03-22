@@ -26,7 +26,7 @@ const EditMyProfile = (props) => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [primaryPhone, setPrimaryPhone] = useState("");
-    const [mobilePhone, setMobilephone] = useState("");
+    const [mobilePhone, setMobilePhone] = useState("");
     const [emailId, setEmailId] = useState("");
     const [address, setAddress] = useState("");
     const [city, setCity] = useState("");
@@ -52,7 +52,8 @@ const EditMyProfile = (props) => {
     // const buyer_id=JSON.parse(JSON.stringify(loggedInBuyerId)).buyer_id;
     // const buyer_dealer_id=JSON.parse(JSON.stringify(loggedInBuyerId)).buyer_dealer_id;
     const [type,setType]=useState("");
-
+    const [cellFlag,setCellFlag] = useState(false);
+    const [alterPhoneFlag,setAlterPhoneFlag] = useState(false);
     const buyer_id=JSON.parse((loggedInBuyerId)).buyer_id;
     const buyer_dealer_id=JSON.parse((loggedInBuyerId)).buyer_dealer_id;
 
@@ -98,8 +99,8 @@ console.log("useSelector(state => state.LoginReducer.payload)",useSelector(state
             console.log("res", res.data.data)
             setFirstName(res.data.data[0].first_name);
             setLastName(res.data.data[0].last_name);
-            setPrimaryPhone(res.data.data[0].phone_no);
-            setMobilephone(res.data.data[0].mobile_no);           
+            // setPrimaryPhone(res.data.data[0].phone_no);
+            // setMobilephone(res.data.data[0].mobile_no);           
             setEmailId(res.data.data[0].email);
             setAddress(res.data.data[0].address);
             setCity(res.data.data[0].city_name);
@@ -109,6 +110,7 @@ console.log("useSelector(state => state.LoginReducer.payload)",useSelector(state
             
             // setLocationName(res.data.data[0].address);
             setMyProfileObj(res.data.data[0]);
+            
         })
             .catch(err => { console.log(err); });
     }
@@ -175,8 +177,8 @@ console.log("useSelector(state => state.LoginReducer.payload)",useSelector(state
             buyer_id:id,
             first_name: firstName,
             last_name: lastName,
-            phone_no: formatMobileNO(primaryPhone),
-            mobile_no: formatMobileNO(mobilePhone),           
+            phone_no: cellFlag === true ? primaryPhone.substring(2, 12) : myProfileObjc?.phone_no,
+            mobile_no: alterPhoneFlag === true ? mobilePhone.substring(2, 12) : myProfileObjc?.mobile_no,           
             email: emailId,
             // city_id: city,
             // state_id: state,
@@ -253,8 +255,8 @@ console.log("useSelector(state => state.LoginReducer.payload)",useSelector(state
             console.log("res", res.data.data)
             setFirstName(res.data.data[0].first_name);
             setLastName(res.data.data[0].last_name);
-            setPrimaryPhone(res.data.data[0].phone_no);
-            setMobilephone(res.data.data[0].mobile_no);           
+            // setPrimaryPhone(res.data.data[0].phone_no);
+            // setMobilephone(res.data.data[0].mobile_no);           
             setEmailId(res.data.data[0].email);
             setAddress(res.data.data[0].address);
             setCity(res.data.data[0].city_name);
@@ -264,19 +266,15 @@ console.log("useSelector(state => state.LoginReducer.payload)",useSelector(state
             setMyProfileObj(res.data.data[0]);
             reset(res.data.data[0]);
             setImage(res.data.data[0].image);
+            formatPhone(res.data.data[0].phone_no)
+            if(res.data.data[0].mobile_no != ""){
+            formatMobile(res.data.data[0].mobile_no);
+            }
             setLoading(false);
            
         })
             .catch(err => { console.log(err); });
     }, [reset,buyer_id,buyer_dealer_id]);
-
-    function handleOnChange(value) {
-        setPrimaryPhone(value);
-     }
-
-     function handleOnChanges(value) {
-        setMobilephone(value);
-     }
 
      const getlateFee=()=>{
         let request={
@@ -301,7 +299,35 @@ console.log("useSelector(state => state.LoginReducer.payload)",useSelector(state
         getlateFee();
 
     }, []);
-
+    function formatPhone(value){
+        var x = value.replace(/\D/g, '').match(/(\d{3})(\d{3})(\d{4})/);
+        console.log("formatPhoneNumber x",x);
+        value = '+1'+ '('+ x[1] +')' + x[2] + '-' + x[3];
+        console.log("formatPhoneNumber",value);
+        return setPrimaryPhone(value);
+      }
+      function formatMobile(value){
+        var x = value.replace(/\D/g, '').match(/(\d{3})(\d{3})(\d{4})/);
+        console.log("formatPhoneNumber x",x);
+        value = '+1'+ '('+ x[1] +')' + x[2] + '-' + x[3];
+        console.log("formatPhoneNumber",value);
+        return setMobilePhone(value);
+      }
+    const handleOnChangePhone = (value) => {
+        setPrimaryPhone(value);
+        setCellFlag(true) 
+          console.log("inside handle")
+    
+          console.log("phn no", value)
+       }
+    
+       const handleOnChangeMobile = (value) => {
+        setMobilePhone(value);
+        setAlterPhoneFlag(true) 
+          console.log("inside handle")
+    
+          console.log("phn no", value)
+       }
     return (
         <div>
         {loading?<Loading/>:
@@ -360,10 +386,10 @@ console.log("useSelector(state => state.LoginReducer.payload)",useSelector(state
                             </div>
                             <div className="col-sm-8 form-group ">
                             <div className="tbox ">
-                            <PhoneInput value={myProfileObjc.phone_no} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChange} ></PhoneInput>
+                            <PhoneInput value={primaryPhone} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChangePhone} ></PhoneInput>
                             {/* <MuiPhoneNumber value={myProfileObjc.phone_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={handleOnChange} ></MuiPhoneNumber> */}
                                 {/* <input type="text" defaultValue={myProfileObjc.phone_no} className="form-control textbox" placeholder=""  onChange={(e) => setPrimaryPhone(e.target.value)} /> */}
-                                <label for="phone_no" className={primaryPhone !="" ? "input-has-value" : ""}>Primary Phone</label>
+                                <label for="phone_no" className={primaryPhone !="" ? "input-has-value" : ""}>Primary Phone #</label>
                             </div>
                                 <p className="form-input-error" >{primaryPhoneError}</p>
                             </div>
@@ -377,10 +403,10 @@ console.log("useSelector(state => state.LoginReducer.payload)",useSelector(state
                             </div>
                             <div className="col-sm-8 form-group ">
                             <div className="tbox ">
-                            <PhoneInput value={myProfileObjc.mobile_no} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChanges} ></PhoneInput>
+                            <PhoneInput value={mobilePhone} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChangeMobile} ></PhoneInput>
                             {/* <MuiPhoneNumber value={myProfileObjc.mobile_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={handleOnChanges} ></MuiPhoneNumber> */}
                                 {/* <input type="text" defaultValue={myProfileObjc.mobile_no} className="form-control textbox" placeholder=""  onChange={(e) => setMobilephone(e.target.value)} /> */}
-                                <label for="mobile_no" className={mobilePhone !="" ? "input-has-value" : ""}>Mobile Phone</label>
+                                <label for="mobile_no" className={mobilePhone !="" ? "input-has-value" : ""}>Mobile Phone #</label>
                             </div>
                                 <p className="form-input-error" >{mobilePhoneError}</p>
                             </div>                      
