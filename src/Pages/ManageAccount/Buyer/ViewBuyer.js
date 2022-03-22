@@ -285,8 +285,8 @@ const ViewBuyer = () => {
         console.log("res=>", res.data.data)
         setFirstName(res.data.data[0].first_name);
         setLastName(res.data.data[0].last_name);
-        setPrimaryPhone(res.data.data[0].phone_no);
-        setMobilephone(res.data.data[0].mobile_no);
+        // setPrimaryPhone(res.data.data[0].phone_no);
+        // setMobilephone(res.data.data[0].mobile_no);
         setEmailId(res.data.data[0].email);
         setAddress(res.data.data[0].address);
         setCity(res.data.data[0].city_name);
@@ -302,6 +302,8 @@ const ViewBuyer = () => {
         setLot_fee(res.data.data[0].lot_fee)
         setPriviegesId(res.data.data[0].buyer_privileges_id)
         setImage(res.data.data[0].image);
+        formatPhone(res.data.data[0].phone_no)
+
         setPrivilegesObj({
             buyNow : res.data.data[0].buy_now,
             cancelBid: res.data.data[0].cancel_bid,
@@ -324,14 +326,13 @@ const ViewBuyer = () => {
         .catch(err => { console.log(err); });
     },[] );
 
-    function handleOnChange(value) {
-        setPrimaryPhone(value);
-     }
-
-     function handleOnChanges(value) {
-        setMobilephone(value);
-     }
-
+    function formatPhone(value){
+        var x = value.replace(/\D/g, '').match(/(\d{3})(\d{3})(\d{4})/);
+        console.log("formatPhoneNumber x",x);
+        value = '+1'+ '('+ x[1] +')' + x[2] + '-' + x[3];
+        console.log("formatPhoneNumber",value);
+        return setPrimaryPhone(value);
+      }
      const getlateFee=()=>{
         let request={
             buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
@@ -416,33 +417,33 @@ const ViewBuyer = () => {
                                 <div className="col-sm-8 form-group ">
                                     <div className="tbox ">
                                     {/* <PhoneInput value={myProfileObjc.phone_no} country="US" className="textbox" maxLength="14" minLength="14"  disabled onChange={handleOnChange} ></PhoneInput> */}
-                                    <PhoneInput value={myProfileObjc.phone_no} country="US" className="textbox" maxLength="14" minLength="14"  disabled ></PhoneInput>
+                                    <PhoneInput value={primaryPhone} country="US" className="textbox" maxLength="14" minLength="14"  disabled ></PhoneInput>
 
                                         {/* <MuiPhoneNumber value={myProfileObjc.phone_no} defaultCountry={'us'} onlyCountries={['us']}  className=" textbox" onChange={handleOnChange} ></MuiPhoneNumber> */}
                                         {/* <input type="text" defaultValue={myProfileObjc.phone_no} className="form-control textbox" placeholder="" onChange={(e) => setPrimaryPhone(e.target.value)} /> */}
-                                        <label for="phone_no" className={primaryPhone != "" ? "input-has-value" : ""}>Primary Phone</label>
+                                        <label for="phone_no" className={primaryPhone != "" ? "input-has-value" : ""}>Phone #</label>
                                     </div>
                                     <p className="form-input-error" >{primaryPhoneError}</p>
                                 </div>
-                                <div className="col-sm-4 form-group countrycode">
+                                {/* <div className="col-sm-4 form-group countrycode">
                             <div className="tbox">
                                 <select className="form-control custom-select browser-default textbox"  id="drop" placeholder="" defaultValue="+1">
                                     <option value="+1">+1</option>
                                 </select>
                                 <label  for="drop" className={"input-has-value"}>Country code</label>
                             </div>
-                            </div>
-                                <div className="col-sm-8 form-group ">
-                                    <div className="tbox ">
+                            </div> */}
+                                {/* <div className="col-sm-8 form-group ">
+                                    <div className="tbox "> */}
                                     {/* <PhoneInput value={myProfileObjc.mobile_no} country="US" className="textbox" maxLength="14" minLength="14" disabled onChange={handleOnChanges} ></PhoneInput> */}
-                                    <PhoneInput value={myProfileObjc.mobile_no} country="US" className="textbox" maxLength="14" minLength="14" disabled  ></PhoneInput>
+                                    {/* <PhoneInput value={myProfileObjc.mobile_no} country="US" className="textbox" maxLength="14" minLength="14" disabled  ></PhoneInput> */}
 
                                     {/* <MuiPhoneNumber value={myProfileObjc.mobile_no} defaultCountry={'us'} onlyCountries={['us']}  className=" textbox" onChange={handleOnChanges} ></MuiPhoneNumber> */}
                                         {/* <input type="text" defaultValue={myProfileObjc.mobile_no} className="form-control textbox" placeholder="" onChange={(e) => setMobilephone(e.target.value)} /> */}
-                                        <label for="mobile_no" className={mobilePhone != "" ? "input-has-value" : ""}>Mobile Phone</label>
+                                        {/* <label for="mobile_no" className={mobilePhone != "" ? "input-has-value" : ""}>Mobile Phone</label>
                                     </div>
                                     <p className="form-input-error" >{mobilePhoneError}</p>
-                                </div>
+                                </div> */}
                                 <div className="col-sm-12 form-group">
                                     <div className="tbox">
                                         <input type="email" defaultValue={myProfileObjc.email} className="form-control textbox" placeholder="" disabled />

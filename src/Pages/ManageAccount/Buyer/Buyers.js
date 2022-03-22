@@ -113,7 +113,13 @@ const Buyers = () => {
         getuserDetails();
 
     }, []);
-    
+    function formatMobileNO(value){
+        var x = value.replace(/\D/g, '').match(/(\d{3})(\d{3})(\d{4})/);
+        console.log("value of x",x);
+        value = '+1 '+ '('+ x[1] +') ' + x[2] + '-' + x[3];
+        console.log("mobileno",value);
+        return value;
+     }
     return (
         <div>
              {loading?<Loading/>:
@@ -158,7 +164,7 @@ const Buyers = () => {
                                                 <th className="th_id">ID</th>
                                                 <th className="th_name">Name</th>
                                                 <th className="th_img">Image</th>
-                                                <th className="th_phone">Phone</th>
+                                                <th className="th_phone">Phone #</th>
                                                 <th className="th_privileges">Privileges</th>
                                                 <th className="th_status">Status</th>
                                                 <th className="th_action">Action</th>
@@ -172,7 +178,7 @@ const Buyers = () => {
                                             <img alt=""  src={process.env.PUBLIC_URL + "/images/adduser.jpg"}/>:
                                             <img alt="" src={item.image} />
                                             }</td>
-                                            <td className="phonenotab">{item.phone_no}</td>
+                                            <td className="phonenotab">{formatMobileNO(item.phone_no)}</td>
                                             {/* <td>{item.email}</td> */}
                                             <td>{item.buy_now===1?"Buy Now,":"No privileges"}{item.cancel_bid===1?"Cancel the bid after 4 hours,":""}{item.bid===1?"Bid,":""}
                                             {item.proxy_bid===1?"Proxy Bid,":""}{item.counter_bid===1?"Counter Bid,":""}{item.lot_fee===1?"Lot Fee.":""}</td>

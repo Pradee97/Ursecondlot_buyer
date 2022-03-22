@@ -146,8 +146,8 @@ const AddAddress = () => {
                 first_name: firstName,
                 last_name: lastName,
                 address: address,
-                phone_no: formatMobileNO(primaryPhone),
-                mobile_no: formatMobileNO(mobilePhone),
+                phone_no: primaryPhone.substring(2, 12),
+                mobile_no: mobilePhone.substring(2, 12),
                 city_id: cityName,
                 state_id: stateName,
                 zipcode_id: zipCodeId,
@@ -271,7 +271,7 @@ const getZipCodeId = (zipData) => {
                             <div className="tbox ">
                                 <PhoneInput  id="primaryPhone" name="primaryPhone" country="US" class="textbox" maxLength="14" minLength="14" value={primaryPhone}
                                 onChange={handleOnChange} ></PhoneInput>
-                                <label htmlFor="companyName" className={"input-has-value"}>Primary phone</label>
+                                <label htmlFor="companyName" className={"input-has-value"}>Primary phone #</label>
                                 <p className="form-input-error" >{primaryPhoneError}</p>
                             </div>
                             </div>
@@ -289,7 +289,7 @@ const getZipCodeId = (zipData) => {
                            
                                 <PhoneInput  id="mobilePhone" name="mobilePhone"  country="US" class="textbox" maxLength="14" minLength="14" value={mobilePhone}
                                 onChange={handleOnChanges} ></PhoneInput>
-                                <label htmlFor="branchName" className={"input-has-value"}>Mobile phone</label>
+                                <label htmlFor="branchName" className={"input-has-value"}>Mobile phone #</label>
                                 <p className="form-input-error" >{mobilePhoneError}</p>
                             </div>
                             </div>

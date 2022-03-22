@@ -248,7 +248,7 @@ const Registration = () => {
             first_name:firstName,
             last_name: lastName,
             email: email,
-            phone_no: formatMobileNO(phoneNumber),
+            phone_no: phoneNumber.substring(2, 12),
             address: address,
             meeting_date: UTC_updateDate, //date,
             meeting_time: UTC_updateTime, //time,
@@ -380,7 +380,7 @@ const Registration = () => {
                                 <div className="tbox ">
                                 <PhoneInput  id="phone_no" name="phoneNumber" country="US" className="textbox" maxLength="14" minLength="14" value={phoneNumber}
                                     onChange={handleOnChange} ></PhoneInput>
-                                    <label htmlFor="phone_no" className={"input-has-value"}>Phone</label>
+                                    <label htmlFor="phone_no" className={"input-has-value"}>Phone #</label>
                                 </div>
                                 <p className="form-input-error" >{phoneNumberError}</p>
 

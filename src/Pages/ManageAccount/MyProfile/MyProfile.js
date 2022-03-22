@@ -64,7 +64,13 @@ const MyProfile = () => {
     fetchAccountDetails();
 
   }, []);
-
+  function formatMobileNO(value){
+    var x = value.replace(/\D/g, '').match(/(\d{3})(\d{3})(\d{4})/);
+    console.log("value of x",x);
+    value = '+1 '+ '('+ x[1] +') ' + x[2] + '-' + x[3];
+    console.log("mobileno",value);
+    return value;
+ }
     return (
         <div>
           {loading?<Loading/>:
@@ -101,11 +107,11 @@ const MyProfile = () => {
                                    <td>City<span>{item.city_name}</span></td>
                                  </tr>
                                 <tr>
-                                   <td>Primary phone<span>{item.phone_no}</span></td>
+                                   <td>Primary phone #<span>{formatMobileNO(item.phone_no)}</span></td>
                                    <td>State<span>{item.state_name}</span></td>
                                  </tr>	
                                    <tr>
-                                   <td>Mobile phone<span>{item.mobile_no}</span></td>
+                                   <td>Mobile phone #<span>{item.mobile_no != "" || item.mobile_no != null ? formatMobileNO(item.mobile_no):""}</span></td>
                                    <td>Zip code<span>{item.zipcode}</span></td>
                                  </tr>
 
