@@ -215,14 +215,16 @@ async function fetchBuyerFees() {
     .filter((data)=> 
      
     {
-      const range = data.fee_price.replaceAll('$',"").split("-")
+      const range = data.from_price
+      const rangeOne = data.to_price
+
        
-      if(range[1]!=="up"){
+      if(rangeOne!=="up"){
          
-        return Number(range[0]) <= Number(maxPrice) && Number(maxPrice)  <= Number(range[1]) 
+        return Number(range) <= Number(maxPrice) && Number(maxPrice)  <= Number(rangeOne) 
       }
       else{
-        return Number(range[0]) <= Number(maxPrice) 
+        return Number(range) <= Number(maxPrice) 
       }
   
       } 

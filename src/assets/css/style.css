@@ -9199,3 +9199,33 @@ margin-left: 20px;
   list-style: decimal;
   padding-left: 10px !important;
 }
+.billof-sec .card-body {
+  background: #ffffff;
+}
+.billof-sec h4{
+text-align: left;
+margin-bottom: 35px;
+font-size: 20px;
+}
+.btn-dark{
+  margin-right: 10px;
+  background-color: #949494;
+    color: #ffffff;
+    padding: 6px 18px;
+    border: none;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+
+.billof-sec .form-check {
+  text-align: left;
+}
+.billof-sec h5 {
+  margin-top: 10px;
+  margin-bottom: 25px;
+ 
+ }
+
+.billof-sec label.radio-label {
+  margin-bottom: 19px;
+}

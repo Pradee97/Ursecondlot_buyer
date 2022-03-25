@@ -420,28 +420,31 @@ console.log("check props",props)
         }
         
     }
-    const getFeeDetails = () =>{
-        // return feeDetails.length > 0 ? feeDetails[0].fee : 0
-        return feeDetails.length > 0 ? feeDetails
-            .filter((data)=> 
-            // data.fee_price.replaceAll('$',"").split("-")[1]!=="up" ? Number(data.fee_price.replaceAll('$',"").split("-")[0]) >= Number(highBid) && Number(highBid)  <= Number(data.fee_price.replaceAll('$',"").split("-")[1])  : Number(data.fee_price.replaceAll('$',"").split("-")[0]) <= Number(highBid) 
-            {
-                const range = data.fee_price.replaceAll('$',"").split("-")
-                // console.log("range===",range)
-                //return range[1]!=="up" ? Number(range[0]) >= Number(highBid) && Number(highBid)  <= Number(range[1])  : Number(range[0]) <= Number(highBid) 
-                if(range[1]!=="up"){
-                    // console.log("data.fee---",Number(highBid),"====",data.fee )
-                    // console.log("data.fee---",Number(range[0]) >= Number(highBid) && Number(highBid)  <= Number(range[1]) )
-                    return Number(range[0]) <= Number(highBid) && Number(highBid)  <= Number(range[1]) 
-                }
-                else{
-                    return Number(range[0]) <= Number(highBid) 
-                }
-
-                } 
-                )[0]?.fee || 0
-            : 0
-    }
+    const getFeeDetails = (maxPrice) =>{
+        console.log("----fee---",maxPrice)
+     
+       return feeDetails.length > 0 ? feeDetails
+         .filter((data)=> 
+          
+         {
+           const range = data.from_price
+           const rangeOne = data.to_price
+     
+            
+           if(rangeOne!=="up"){
+              
+             return Number(range) <= Number(maxPrice) && Number(maxPrice)  <= Number(rangeOne) 
+           }
+           else{
+             return Number(range) <= Number(maxPrice) 
+           }
+       
+           } 
+           )[0]?.fee || 0
+         : 0
+     
+     
+       }
     const highProxyBidValidation= (data)=> {
         
         console.log("carHighBid====",carHighBid)
