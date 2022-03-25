@@ -84,26 +84,31 @@ const InVoice = (props) => {
           pathname: "/Cart",
         })
       }
-      const getFeeDetails = () =>{
+      const getFeeDetails = (maxPrice) =>{
+        console.log("----fee---",maxPrice)
+     
+       return feeDetails.length > 0 ? feeDetails
+         .filter((data)=> 
+          
+         {
+           const range = data.from_price
+           const rangeOne = data.to_price
+     
+            
+           if(rangeOne!=="up"){
+              
+             return Number(range) <= Number(maxPrice) && Number(maxPrice)  <= Number(rangeOne) 
+           }
+           else{
+             return Number(range) <= Number(maxPrice) 
+           }
        
-        return feeDetails.length > 0 ? feeDetails
-            .filter((data)=> 
-           
-            {
-                const range = data.fee_price.replaceAll('$',"").split("-")
-               
-                if(range[1]!=="up"){
-                   
-                    return Number(range[0]) <= Number(vechileprice) && Number(vechileprice)  <= Number(range[1]) 
-                }
-                else{
-                    return Number(range[0]) <= Number(vechileprice) 
-                }
-      
-                } 
-                )[0]?.fee || 0
-            : 0
-      }
+           } 
+           )[0]?.fee || 0
+         : 0
+     
+     
+       }
       const printPage = () => {
         console.log("print")
         printJS({
