@@ -228,7 +228,7 @@ const Registration = () => {
         const selecteDateAndTime = moment(`${date} ${time}`).tz(myTimezone.filter((data)=> data.timezone_id == myTimezoneValue)[0].timezone_name, true);
         // const UTC_updateDateAndTime = moment.utc(selecteDateAndTime).format('MM/DD/YYYY HH:mm')
         const UTCFullData= moment.utc(selecteDateAndTime).format()
-        const UTC_updateDate = moment.utc(selecteDateAndTime).format('MM/DD/YYYY')
+        const UTC_updateDate = moment.utc(selecteDateAndTime).format('YYYY-MM-DD')
         const UTC_updateTime = moment.utc(selecteDateAndTime).format('HH:mm')
         const checkWithChicagoTime = moment(UTCFullData).tz('America/Chicago').format('HH:mm') >= "10:00" && moment(UTCFullData).tz('America/Chicago').format('HH:mm') <= "16:00";
         console.log("selecteDateAndTime:",selecteDateAndTime)
@@ -252,8 +252,8 @@ const Registration = () => {
             address: address,
             meeting_date: UTC_updateDate, //date,
             meeting_time: UTC_updateTime, //time,
-            active: 1,
-            country_id: parseInt(optionPhone),
+            active: 0,
+            country_id:  parseInt(optionPhone) ? parseInt(optionPhone) : 1,
             state_id: stateName,
             city_id: cityName,
             zipcode_id: zipCodeId,
