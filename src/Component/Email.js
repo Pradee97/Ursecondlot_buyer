@@ -56,7 +56,7 @@ const Email = () => {
                                     </div>
                                     <div className="modalbody">                                       
                                         <p>Email successfull activated</p>
-                                        <p>Username and Password sent to email</p>
+                                        <p>Ursecondlot Admin Will Contact You.</p>
                                 
                                         {/* <a href="/login" className="get-started-btn">Dealer Login</a> */}
                                         <Button className="get-started-btn" onClick={() => history.push("/login")}>Dealer Login</Button>

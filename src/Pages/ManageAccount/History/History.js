@@ -802,8 +802,8 @@ const togglePrint = () => {
                 <div class="row">							
                   <div class="col-lg-4">
                     <div class="car-item">
-                    <div class="pickupdetailcontent" >
-                      <a class="billsalesno" onClick={ () => {
+                    <div class="cars-prices pickupdetailcontent" >
+                      <a class="cta-btns-primary" onClick={ () => {
                                 history.push({pathname: "/billofsale", state: {BillofSale: historyDetail.bill_of_sale_id}});
                                 
                             }}>Bill Of sale #{historyDetail.bill_of_sale_id}</a>
