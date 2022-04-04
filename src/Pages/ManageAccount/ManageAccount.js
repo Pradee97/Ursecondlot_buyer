@@ -21,6 +21,8 @@ const ManageAccount = () => {
 
   const [isLateFee, setIsLateFee] = useState(false);
   const [lateFeeValue, setLateFeeValue] = useState(0);
+  const [cell,setCell] =useState("");
+  const [phoneNo,setPhoneNo] =useState("");
 
 	const toggleLateFee = () => {
 		setIsLateFee(!isLateFee);
@@ -48,6 +50,12 @@ const ManageAccount = () => {
     state.then(res => {
       console.log("res", res)
       setaddressDetails(res.data.data);
+      if (res.data?.data[0]?.phone_no != "" && res.data?.data[0]?.phone_no != null){
+        formatCellMobile(res.data.data[0]?.phone_no)
+        }
+      if (res.data?.data[0]?.mobile_no != "" && res.data?.data[0]?.mobile_no != null){
+          formatMobile(res.data.data[0]?.mobile_no)
+          }
     })
       .catch(err => { console.log(err); });
   }
@@ -127,13 +135,20 @@ const getlateFee=()=>{
     fetchAddressDetails();
     getTotalAmount();
   }, []);
-  function formatMobileNO(value){
+  function formatCellMobile(value){
     var x = value.replace(/\D/g, '').match(/(\d{3})(\d{3})(\d{4})/);
-    console.log("value of x",x);
-    value = '+1 '+ '('+ x[1] +') ' + x[2] + '-' + x[3];
-    console.log("mobileno",value);
-    return value;
- }
+    console.log("formatPhoneNumber x",x);
+    value = '+1'+ '('+ x[1] +')' + x[2] + '-' + x[3];
+    console.log("formatPhoneNumber",value);
+    return setCell(value);
+  }
+  function formatMobile(value){
+    var x = value.replace(/\D/g, '').match(/(\d{3})(\d{3})(\d{4})/);
+    console.log("formatPhoneNumber x",x);
+    value = '+1'+ '('+ x[1] +')' + x[2] + '-' + x[3];
+    console.log("formatPhoneNumber",value);
+    return setPhoneNo(value);
+  }
   return (
     <div>
       {loading?<Loading/>:
@@ -204,11 +219,11 @@ const getlateFee=()=>{
                             <td><span className="tdcol1">City</span><span>{item.city_name}</span></td>
                           </tr>
                           <tr>
-                            <td><span className="tdcol1">Primary phone #</span><span>{formatMobileNO(item.phone_no)}</span></td>
+                            <td><span className="tdcol1">Primary phone #</span><span>{cell}</span></td>
                             <td><span className="tdcol1">State</span><span>{item.state_name}</span></td>
                           </tr>
                           <tr>
-                            <td><span className="tdcol1">Mobile phone #</span><span>{item.mobile_no != "" || item.mobile_no != null ? formatMobileNO(item.mobile_no):""}</span></td>
+                            <td><span className="tdcol1">Mobile phone #</span><span>{phoneNo}</span></td>
                             <td><span className="tdcol1">Zip code</span><span>{item.zipcode}</span></td>
                           </tr>
                         </table>
