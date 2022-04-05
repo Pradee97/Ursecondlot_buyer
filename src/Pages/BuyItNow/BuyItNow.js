@@ -23,6 +23,7 @@ const BuyNow=(props)=>{
     const [carImage,setCarImage] = useState(props.setBuyItNowValue.image);
     const [carYear,setCarYear] = useState(props.setBuyItNowValue.year);
     const [carCreditLimit,setCreditLimit] = useState(props.setBuyItNowValue.creditLimit);
+
     console.log("check the CreditLimit in the buy it now page",carCreditLimit)
     console.log("check the car id is coming from make bid",carMake)
     // const { id } = useParams();
@@ -133,6 +134,7 @@ if(!confirmationFlag){
             buyer_id:JSON.parse(localStorage.getItem("userDetails")).buyer_id, 
             // email:JSON.parse(localStorage.getItem("userDetails")).email,
             // password:password,
+            seller_dealer_id: props.setBuyItNowValue.sellerDealerId,
             car_id: id,
             price: carBuyItNow,
             status: "sold",
