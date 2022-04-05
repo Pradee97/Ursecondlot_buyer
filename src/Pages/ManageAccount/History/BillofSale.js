@@ -7,7 +7,7 @@ const BillofSale = (props) => {
     const history = useHistory();
     const [BOSList,setBOSList] = useState("");
     const [loading,setLoading] = useState(true);
-    const {BillofSale} = props.location.state;
+    const {backURL, BillofSale} = props.location.state;
 
     console.log("BillofSale",BillofSale)
 
@@ -46,7 +46,7 @@ const BillofSale = (props) => {
   return (
  
         <div class="container billof-sec">
-        <a class="back-btn-paymentform backBtn" onClick={()=>history.push('/history')}><i class="icofont-arrow-left"></i> Back</a>
+        <a class="back-btn-paymentform backBtn" onClick={()=>history.push(backURL)}><i class="icofont-arrow-left"></i> Back</a>
 
             <h5>
               View Bill of Sale
