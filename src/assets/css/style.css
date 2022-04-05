@@ -9229,3 +9229,11 @@ font-size: 20px;
 .billof-sec label.radio-label {
   margin-bottom: 19px;
 }
+
+.cartBillofSale{
+  color: #fff !important;
+  float: right;
+}
+.cartBillofSale .cta-btns-primary{
+  color: #fff !important;
+}

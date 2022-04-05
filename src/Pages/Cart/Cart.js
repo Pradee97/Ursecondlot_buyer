@@ -8,10 +8,11 @@ import Checkout from '../Checkout';
 import Popup from '../../Component/Popup/Popup';
 import Loading from"../../Component/Loading/Loading";
 import LateFee from '../../Pages/LateFee/LateFee';
+import { useHistory} from "react-router-dom";
 
 
 const Cart = () => {
-
+    const history = useHistory();
     const userDetails=ls.get('userDetails');
     const [isOpen, setIsOpen] = useState(false);
     const [cartDetail,setCartDetail] = useState([]);
@@ -391,7 +392,7 @@ const getFeeDetails = (maxPrice) =>{
             </div>
     
             <div class="row content">
-                <div class="col-lg-8 col-md-8">
+                <div class="col-lg-12 col-md-12">
                     <div class="vehiclesheads">
                         {/* <h2>Number of Vehicles- 2<span>Total amount- <b>$ {cartDetail.length>0 ? cartDetail.reduce((acc,{max_price,transportation,transportation_charge})=>acc + (Number(max_price) + Number(transportation === 'yes' ? transportation_charge : 0) + Number(getFeeDetails(max_price||0))) ,0) : 0}</b></span></h2> */}
                         <h2>Number of Vehicles- {numberCars}<span>Total amount- <b>$ {overAllTotal()}</b></span></h2>   
@@ -437,7 +438,13 @@ const getFeeDetails = (maxPrice) =>{
                                 </div>
 
                                 <div class="vehicleimgright col-lg-8">
-                                <h4>Inventory #  {cartDetail.inventory_no}</h4>
+                                <h4 className='mb-2'>Inventory #  {cartDetail.inventory_no}
+                                <div class="cartBillofSale" >
+                                    <a class="cta-btns-primary" onClick={ () => {
+                                    history.push({pathname: "/billofsale", state: {backURL: "/cart", BillofSale: cartDetail.bill_of_sale_id}});
+                                }}>Bill Of sale #{cartDetail.bill_of_sale_id}</a>
+                                </div>
+                                </h4>
                                 
                                  {/* <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>HistoryEdit(`transporationDiv${cartDetail.car_id}`,`transporationHeader${cartDetail.car_id}`)}>{cartDetail.bill_of_sales_id !== null && cartDetail.bill_of_sales_id !== "" ? "": "Edit Transportation" }</a></p> */}
                                  <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>HistoryEdit(`transporationDiv${cartDetail.car_id}`,`transporationHeader${cartDetail.car_id}`)}> Edit Transportation</a></p>
@@ -495,7 +502,7 @@ const getFeeDetails = (maxPrice) =>{
                     }
                   
                 </div>
-                <div class="col-lg-4 col-md-8">
+                {/* <div class="col-lg-4 col-md-8">
                     <div class="vehicletotal">
                         <h2>Checkout</h2>
                         <h3>Total Amount <span>$ {mySelectedCarTotal()}</span></h3>
@@ -511,7 +518,7 @@ const getFeeDetails = (maxPrice) =>{
                         <option value="Credit Card">Credit Card</option>
                     </select>
                     <p>{paymentModeError}</p>
-                    {/* <label  htmlFor="state_id" className={"input-has-value"}>Select Payment Method</label> */}
+                    <label  htmlFor="state_id" className={"input-has-value"}>Select Payment Method</label>
                     </div>
             </div>
         </div>
@@ -542,7 +549,7 @@ const getFeeDetails = (maxPrice) =>{
                         <p className="form-input-error">{alertError}</p>
                         
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
           </div>
