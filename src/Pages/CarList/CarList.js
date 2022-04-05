@@ -157,7 +157,7 @@ const CarList = () => {
 		toggleMakeBid();
     }
     
-    const setBuyItNowValue = (buy_it_now,car_id,image,model,make,year,price,transportation,transportation_charge,lot_fee,credit_limit) => {
+    const setBuyItNowValue = (buy_it_now,car_id,image,model,make,year,price,transportation,transportation_charge,lot_fee,credit_limit,seller_dealer_id) => {
 
 		setBuyItNowData({
 			buyItNow: buy_it_now,
@@ -170,7 +170,8 @@ const CarList = () => {
             transportation:transportation,
             transportationCharge:transportation_charge,
             lotFee:lot_fee,
-            creditLimit : credit_limit
+            creditLimit : credit_limit,
+            sellerDealerId : seller_dealer_id
 		})
 		toggleBuyItNow()
 	}
@@ -372,7 +373,7 @@ const CarList = () => {
                                                 <p className="details buyitnow">
                                                 {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined || item.buy_it_now== 0?"":
                                                     // <a className="cta-btns"  onClick={()=>lateFeeDayCount === 0 ? setBuyItNowValue(item.buy_it_now,item.car_id,item.image,item.model,item.make,item.year,item.price,item.transportation,item.transportation_charge,item.lot_fee,item.credit_limit): lateFeeDayCount > 2 && toggleLateFee()}>Buy It Now $ {item.buy_it_now}</a>
-                                                    <a className={`${lateFeeValue > 0 && 'buy-it-disable-btn'} cta-btns`} href="JavaScript:void(0)"  onClick={()=>lateFeeValue === 0 && setBuyItNowValue(item.buy_it_now,item.car_id,item.image,item.model,item.make,item.year,item.price,item.transportation,item.transportation_charge,item.lot_fee,item.credit_limit)}>Buy It Now $ {item.buy_it_now}</a>
+                                                    <a className={`${lateFeeValue > 0 && 'buy-it-disable-btn'} cta-btns`} href="JavaScript:void(0)"  onClick={()=>lateFeeValue === 0 && setBuyItNowValue(item.buy_it_now,item.car_id,item.image,item.model,item.make,item.year,item.price,item.transportation,item.transportation_charge,item.lot_fee,item.credit_limit,item.seller_dealer_id)}>Buy It Now $ {item.buy_it_now}</a>
                                                 }
                                                 </p>
                                             </div>
