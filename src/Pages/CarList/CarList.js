@@ -450,7 +450,7 @@ const CarList = () => {
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>    
                                                 <p className="details buyitnow">
                                                 {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined || item.buy_it_now== 0?"":
-                                                    <a className={`${lateFeeValue > 0 && 'buy-it-disable-btn'} cta-btns`} href="JavaScript:void(0)" onClick={()=>lateFeeValue === 0 && setBuyItNowValue(item.buy_it_now,item.car_id,item.image,item.model,item.make,item.year,item.price,item.transportation,item.transportation_charge,item.lot_fee,item.credit_limit)}>Buy It Now $ {item.buy_it_now}</a>
+                                                    <a className={`${lateFeeValue > 0 && 'buy-it-disable-btn'} cta-btns`} href="JavaScript:void(0)" onClick={()=>lateFeeValue === 0 && setBuyItNowValue(item.buy_it_now,item.car_id,item.image,item.model,item.make,item.year,item.price,item.transportation,item.transportation_charge,item.lot_fee,item.credit_limit,item.seller_dealer_id)}>Buy It Now $ {item.buy_it_now}</a>
                                                 }
                                                 </p>
                                             </div>
@@ -532,7 +532,7 @@ const CarList = () => {
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>  
                                                 <p className="details buyitnow">
                                                 {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined || item.buy_it_now== 0?"":
-                                                    <a className={`${lateFeeValue > 0 && 'buy-it-disable-btn'} cta-btns`} href="JavaScript:void(0)" onClick={()=>lateFeeValue === 0 && setBuyItNowValue(item.buy_it_now,item.car_id,item.image,item.model,item.make,item.year,item.price,item.transportation,item.transportation_charge,item.lot_fee,item.credit_limit)}>Buy It Now $ {item.buy_it_now}</a>
+                                                    <a className={`${lateFeeValue > 0 && 'buy-it-disable-btn'} cta-btns`} href="JavaScript:void(0)" onClick={()=>lateFeeValue === 0 && setBuyItNowValue(item.buy_it_now,item.car_id,item.image,item.model,item.make,item.year,item.price,item.transportation,item.transportation_charge,item.lot_fee,item.credit_limit,item.seller_dealer_id)}>Buy It Now $ {item.buy_it_now}</a>
                                                 }
                                                 </p>  
                                             </div>
@@ -614,7 +614,7 @@ const CarList = () => {
                                         <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>
                                         <p className="details buyitnow">
                                         {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined || item.buy_it_now== 0?"":
-                                                    <a className={`${lateFeeValue > 0 && 'buy-it-disable-btn'} cta-btns`} href="JavaScript:void(0)" onClick={()=>lateFeeValue === 0 && setBuyItNowValue(item.buy_it_now,item.car_id,item.image,item.model,item.make,item.year,item.price,item.transportation,item.transportation_charge,item.lot_fee,item.credit_limit)}>Buy It Now $ {item.buy_it_now}</a>
+                                                    <a className={`${lateFeeValue > 0 && 'buy-it-disable-btn'} cta-btns`} href="JavaScript:void(0)" onClick={()=>lateFeeValue === 0 && setBuyItNowValue(item.buy_it_now,item.car_id,item.image,item.model,item.make,item.year,item.price,item.transportation,item.transportation_charge,item.lot_fee,item.credit_limit,item.seller_dealer_id)}>Buy It Now $ {item.buy_it_now}</a>
                                                 }
                                         </p>
                                     </div>
