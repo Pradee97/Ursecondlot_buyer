@@ -192,7 +192,7 @@ const MyBids = () => {
         setHighBid(highBid)
     }
     
-    const setBuyItNowValue = ( buy_it_now,car_id,image,model,make,year,price,transportation,transportation_charge,lot_fee,credit_limit) => {
+    const setBuyItNowValue = ( buy_it_now,car_id,image,model,make,year,price,transportation,transportation_charge,lot_fee,credit_limit,seller_dealer_id) => {
     
         setBuyItNowData({
             buyItNow: buy_it_now,
@@ -205,7 +205,8 @@ const MyBids = () => {
             transportation : transportation,
             transportationCharge : transportation_charge,
             lotFee:lot_fee ,
-            creditLimit : credit_limit
+            creditLimit : credit_limit,
+            sellerDealerId : seller_dealer_id
     
         })
     
@@ -342,7 +343,7 @@ const MyBids = () => {
                                         <div class="mybidscontrol">
                                             <a className={`${lateFeeValue > 0 && 'buy-it-disable-btn'} cta-btns-primary redBtn`}  href="JavaScript:void(0)" onClick={() => setMakeBitValue(bidsObj.high_bid, bidsObj.min_price, bidsObj.save_purchase, bidsObj.car_id, bidsObj.time, bidsObj.counter_buyer_dealer_id, bidsObj.max_price, bidsObj.buy_it_now, bidsObj.comments, bidsObj.transportation, bidsObj.display, bidsObj.proxy_bid, bidsObj.transportation_charge, bidsObj.save_policy,bidsObj.credit_limit,bidsObj.lot_fee,bidsObj.image,bidsObj.model,bidsObj.make,bidsObj.year)}>Raise Bid</a>
                                             {bidsObj?.buy_it_now !==""?
-                                            <a className={`${lateFeeValue > 0 && 'buy-it-disable-btn'} cta-btns greenBtn`} href="JavaScript:void(0)" onClick={()=>setBuyItNowValue(bidsObj.buy_it_now,bidsObj.car_id,bidsObj.image,bidsObj.model,bidsObj.make,bidsObj.year,bidsObj.price,bidsObj.transportation,bidsObj.transportation_charge,bidsObj.lot_fee,bidsObj.credit_limit)} >Accept Bid</a>:""}
+                                            <a className={`${lateFeeValue > 0 && 'buy-it-disable-btn'} cta-btns greenBtn`} href="JavaScript:void(0)" onClick={()=>setBuyItNowValue(bidsObj.buy_it_now,bidsObj.car_id,bidsObj.image,bidsObj.model,bidsObj.make,bidsObj.year,bidsObj.price,bidsObj.transportation,bidsObj.transportation_charge,bidsObj.lot_fee,bidsObj.credit_limit,bidsObj.seller_dealer_id)} >Accept Bid</a>:""}
                                             {(bidsObj?.cancel_bid_time!==null && bidsObj?.cancel_bid_time!==0 && bidsObj?.cancel_bid_time < 400) ?
 									 
                                      (<div>
