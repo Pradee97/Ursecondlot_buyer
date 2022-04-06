@@ -55,7 +55,7 @@ import Cardetail from './Pages/Cardetail';
 import Cart from './Pages/Cart/Cart';
 import Chat from './Pages/Chat';
 import History from './Pages/ManageAccount/History/History';
-import BillofSale from './Pages/ManageAccount/History/BillofSale';
+import BillofSale from './Pages/ManageAccount/History/BillOfSales/BillofSale';
 import SuggestedCars from './Pages/SuggestedCars';
 import recentcars from './Pages/RecentlyAddedCars';
 import SimilarCars from './Pages/similarCarFromSeller';
