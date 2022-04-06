@@ -518,7 +518,7 @@ const getFeeDetails = (maxPrice) =>{
                         <option value="Credit Card">Credit Card</option>
                     </select>
                     <p>{paymentModeError}</p>
-                    <label  htmlFor="state_id" className={"input-has-value"}>Select Payment Method</label>
+----------------  if u uncommand this functionality means plzz command this label tag ------------ <label  htmlFor="state_id" className={"input-has-value"}>Select Payment Method</label>
                     </div>
             </div>
         </div>
