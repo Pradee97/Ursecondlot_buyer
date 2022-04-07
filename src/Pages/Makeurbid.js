@@ -29,6 +29,7 @@ console.log("check props",props)
     const [carSavePurchase,setCarSavePurchase] = useState(props.setMakeBitValue.carSavePurchase);
     const [carSavePolicy,setCarSavePolicy] = useState(props.setMakeBitValue.savePolicy||'no');
     const [carProxyBid,setCarProxyBid] = useState(props.setMakeBitValue.carProxyBid);
+    const [SellerDealerId,setSellerDealerId] = useState(props.setMakeBitValue.sellerDealerId);
     
     const [make,setMake] = useState(props.setMakeBitValue.make);
     const [model,setModel] = useState(props.setMakeBitValue.model);
@@ -124,7 +125,8 @@ console.log("check props",props)
 			transportation : carTransportation,
 			transportationCharge : transportationFee,
 			// lotFee:lot_fee,
-			creditLimit : creditLimit
+			creditLimit : creditLimit,
+            sellerDealerId : SellerDealerId
 
 		})
 	

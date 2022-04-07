@@ -288,7 +288,7 @@ return (
 						<div class="row content col-lg-12">
 							<div class="col-lg-4 col-md-4 bordercontent">
 								<div class="pickupdetailcontent">
-									<p class="billsalesno">Bill Of sale # {pickUp.bill_of_sales_id}</p>
+									<p class="billsalesno">Bill Of sale # {pickUp.bill_of_sale_id}</p>
 								</div>						
 							</div>
 							<div class="col-lg-4 col-md-4 bordercontent">
@@ -321,7 +321,7 @@ return (
 								<div class="col-lg-4 col-md-4">
 									<div class="modeldetails">
 										<span>order#G86512</span>
-										<span>Bill Of Sale # {pickUp.bill_of_sales_id}</span>
+										<span>Bill Of Sale # {pickUp.bill_of_sale_id}</span>
 									</div>						
 								</div>
 								<div class="col-lg-4 col-md-4">
@@ -395,7 +395,7 @@ return (
 								<div class="col-lg-5 col-md-5">
 									<div class="modeldetails">
 										<span>order#G86512</span>
-										<span>Bill Of Sale # {pickUp.bill_of_sales_id}</span>
+										<span>Bill Of Sale # {pickUp.bill_of_sale_id}</span>
 									</div>						
 								</div>
 								<div class="col-lg-4 col-md-4">

@@ -67,7 +67,7 @@ const SimilarCarFromSeller = () =>{
     const toggleMakeBid = () => {
       setIsOpen(!isOpen);
     }
-    const setMakeBitValue = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,comments,transportation,display,proxy_bid,transportation_charge,save_policy,credit_limit,lot_fee,image,model,make,year) => {
+    const setMakeBitValue = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,comments,transportation,display,proxy_bid,transportation_charge,save_policy,credit_limit,lot_fee,image,model,make,year,seller_dealer_id) => {
       console.log("check the toggle make bid value")
       setMakeBitData({
         carHighBid: high_bid,
@@ -91,6 +91,7 @@ const SimilarCarFromSeller = () =>{
         model:model,
         make:make,	
         year:year,
+        sellerDealerId : seller_dealer_id
         
       })
     
@@ -109,7 +110,7 @@ const SimilarCarFromSeller = () =>{
       setHighBid(highBid)
     }
   
-    const setBuyItNowValue = (buy_it_now,car_id,image,model,make,year,price,transportation,transportation_charge,lot_fee,credit_limit) => {
+    const setBuyItNowValue = (buy_it_now,car_id,image,model,make,year,price,transportation,transportation_charge,lot_fee,credit_limit,seller_dealer_id) => {
   
       setBuyItNowData({
         buyItNow: buy_it_now,
@@ -122,7 +123,8 @@ const SimilarCarFromSeller = () =>{
         transportation : transportation,
         transportationCharge : transportation_charge,
         lotFee:lot_fee,
-        creditLimit : credit_limit
+        creditLimit : credit_limit,
+        sellerDealerId : seller_dealer_id
 
     
       })
@@ -291,7 +293,7 @@ return(
 									
 									<p className="details buyitnow">
                                                 {moreCar.buy_it_now=="" || moreCar.buy_it_now== null || moreCar.buy_it_now== undefined || moreCar.buy_it_now== 0 ?"":
-                                                    <a className={`${lateFeeValue > 0 && 'buy-it-disable-btn'} cta-btns`} href="JavaScript:void(0)" onClick={()=>lateFeeValue === 0 && setBuyItNowValue(moreCar.buy_it_now,moreCar.car_id,moreCar.image,moreCar.model,moreCar.make,moreCar.year,moreCar.price,moreCar.transportation,moreCar.transportation_charge,moreCar.lot_fee,moreCar.credit_limit)}>Buy It Now $ {moreCar.buy_it_now}</a>
+                                                    <a className={`${lateFeeValue > 0 && 'buy-it-disable-btn'} cta-btns`} href="JavaScript:void(0)" onClick={()=>lateFeeValue === 0 && setBuyItNowValue(moreCar.buy_it_now,moreCar.car_id,moreCar.image,moreCar.model,moreCar.make,moreCar.year,moreCar.price,moreCar.transportation,moreCar.transportation_charge,moreCar.lot_fee,moreCar.credit_limit,moreCar.seller_dealer_id)}>Buy It Now $ {moreCar.buy_it_now}</a>
                                                 }
                                                 </p> 
 
@@ -317,7 +319,7 @@ return(
 					} */}
 
           {(moreCar.isbuyercounterbid=="me" && moreCar.iscounterbid!==null && (moreCar.time !==0 || moreCar.time!==null)) || ((moreCar.iscounterbid==null || moreCar.iscounterbid=="no" ) && (moreCar.isbuyercounterbid==null || moreCar.isbuyercounterbid=="not")&&(moreCar.time ==0 || moreCar.time==null))?
-          <a className={`${lateFeeValue > 0 && 'buy-it-disable-btn'} cta-btns-primary`}  href="JavaScript:void(0)" onClick={()=>lateFeeValue === 0 && setMakeBitValue(moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now,moreCar.comments,moreCar.transportation,moreCar.display,moreCar.proxy_bid,moreCar.transportation_charge,moreCar.save_policy,moreCar.credit_limit,moreCar.lot_fee,moreCar.image,moreCar.model,moreCar.make,moreCar.year)} >Make Bid</a>
+          <a className={`${lateFeeValue > 0 && 'buy-it-disable-btn'} cta-btns-primary`}  href="JavaScript:void(0)" onClick={()=>lateFeeValue === 0 && setMakeBitValue(moreCar.high_bid, moreCar.min_price, moreCar.save_purchase, moreCar.car_id, moreCar.time, moreCar.counter_buyer_dealer_id, moreCar.max_price, moreCar.buy_it_now,moreCar.comments,moreCar.transportation,moreCar.display,moreCar.proxy_bid,moreCar.transportation_charge,moreCar.save_policy,moreCar.credit_limit,moreCar.lot_fee,moreCar.image,moreCar.model,moreCar.make,moreCar.year,moreCar.seller_dealer_id)} >Make Bid</a>
           :<a class="cta-btns lockedcarBtn">Locked up for Higher Bid </a>}
 
           {(moreCar.buyer_high_bid==moreCar.high_bid || moreCar.buyer_high_bid!==moreCar.high_bid) &&       
