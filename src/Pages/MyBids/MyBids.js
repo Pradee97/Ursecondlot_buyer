@@ -145,7 +145,7 @@ const MyBids = () => {
     //     })
     // }
 
-    const setMakeBitValue = (high_bid, min_price, save_purchase, car_id, time, counterbuyerid, max_price, buy_it_now, comments, transportation, display, proxy_bid, transportation_charge, save_policy,credit_limit,lot_fee,image,model,make,year) => {
+    const setMakeBitValue = (high_bid, min_price, save_purchase, car_id, time, counterbuyerid, max_price, buy_it_now, comments, transportation, display, proxy_bid, transportation_charge, save_policy,credit_limit,lot_fee,image,model,make,year,seller_dealer_id) => {
         // console.log("check the toggle make bid value")
         setMakeBitData({
             carHighBid: high_bid,
@@ -169,6 +169,8 @@ const MyBids = () => {
 			model:model,
 			make:make,	
 			year:year,
+            sellerDealerId : seller_dealer_id
+
         })
         toggleMakeBid()
     }
@@ -341,7 +343,7 @@ const MyBids = () => {
                                     <div class="col-lg-2 mybidscontroldetails">
                                     {(bidsObj?.isbuyercounterbid=="me" && bidsObj?.iscounterbid!==null && (bidsObj?.time !==0 || bidsObj?.time!==null)) || ((bidsObj?.iscounterbid==null || bidsObj.iscounterbid=="no" ) && (bidsObj.isbuyercounterbid==null || bidsObj.isbuyercounterbid=="not")&&(bidsObj.time ==0 || bidsObj.time==null))?
                                         <div class="mybidscontrol">
-                                            <a className={`${lateFeeValue > 0 && 'buy-it-disable-btn'} cta-btns-primary redBtn`}  href="JavaScript:void(0)" onClick={() => setMakeBitValue(bidsObj.high_bid, bidsObj.min_price, bidsObj.save_purchase, bidsObj.car_id, bidsObj.time, bidsObj.counter_buyer_dealer_id, bidsObj.max_price, bidsObj.buy_it_now, bidsObj.comments, bidsObj.transportation, bidsObj.display, bidsObj.proxy_bid, bidsObj.transportation_charge, bidsObj.save_policy,bidsObj.credit_limit,bidsObj.lot_fee,bidsObj.image,bidsObj.model,bidsObj.make,bidsObj.year)}>Raise Bid</a>
+                                            <a className={`${lateFeeValue > 0 && 'buy-it-disable-btn'} cta-btns-primary redBtn`}  href="JavaScript:void(0)" onClick={() => setMakeBitValue(bidsObj.high_bid, bidsObj.min_price, bidsObj.save_purchase, bidsObj.car_id, bidsObj.time, bidsObj.counter_buyer_dealer_id, bidsObj.max_price, bidsObj.buy_it_now, bidsObj.comments, bidsObj.transportation, bidsObj.display, bidsObj.proxy_bid, bidsObj.transportation_charge, bidsObj.save_policy,bidsObj.credit_limit,bidsObj.lot_fee,bidsObj.image,bidsObj.model,bidsObj.make,bidsObj.year,bidsObj.seller_dealer_id)}>Raise Bid</a>
                                             {bidsObj?.buy_it_now !==""?
                                             <a className={`${lateFeeValue > 0 && 'buy-it-disable-btn'} cta-btns greenBtn`} href="JavaScript:void(0)" onClick={()=>setBuyItNowValue(bidsObj.buy_it_now,bidsObj.car_id,bidsObj.image,bidsObj.model,bidsObj.make,bidsObj.year,bidsObj.price,bidsObj.transportation,bidsObj.transportation_charge,bidsObj.lot_fee,bidsObj.credit_limit,bidsObj.seller_dealer_id)} >Accept Bid</a>:""}
                                             {(bidsObj?.cancel_bid_time!==null && bidsObj?.cancel_bid_time!==0 && bidsObj?.cancel_bid_time < 400) ?

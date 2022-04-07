@@ -446,7 +446,7 @@ const getFeeDetails = (maxPrice) =>{
                                 </div>
                                 </h4>
                                 
-                                 {/* <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>HistoryEdit(`transporationDiv${cartDetail.car_id}`,`transporationHeader${cartDetail.car_id}`)}>{cartDetail.bill_of_sales_id !== null && cartDetail.bill_of_sales_id !== "" ? "": "Edit Transportation" }</a></p> */}
+                                 {/* <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>HistoryEdit(`transporationDiv${cartDetail.car_id}`,`transporationHeader${cartDetail.car_id}`)}>{cartDetail.bill_of_sale_id !== null && cartDetail.bill_of_sale_id !== "" ? "": "Edit Transportation" }</a></p> */}
                                  <p class="editbtn m-0"><a class="" href="JavaScript:void(0)" onClick={()=>HistoryEdit(`transporationDiv${cartDetail.car_id}`,`transporationHeader${cartDetail.car_id}`)}> Edit Transportation</a></p>
 
 

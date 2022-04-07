@@ -113,7 +113,7 @@ const InventoryCars = () => {
 	const toggleMakeBid = () => {
 		setIsOpenMakeBit(!isOpenMakeBit);
 	}
-	const setMakeBitValue = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,comments,transportation,display,proxy_bid,transportation_charge,save_policy,credit_limit,lot_fee,image,model,make,year) => {
+	const setMakeBitValue = (high_bid,min_price,save_purchase,car_id,time,counterbuyerid,max_price,buy_it_now,comments,transportation,display,proxy_bid,transportation_charge,save_policy,credit_limit,lot_fee,image,model,make,year,seller_dealer_id) => {
 		console.log("check the toggle make bid value")
 		setMakeBitData({
 			carHighBid: high_bid,
@@ -137,6 +137,7 @@ const InventoryCars = () => {
 			model:model,
 			make:make,	
 			year:year,
+			sellerDealerId : seller_dealer_id
 		})
 	
 		toggleMakeBid()
@@ -154,7 +155,7 @@ const InventoryCars = () => {
 		setHighBid(highBid)
 	}
 
-	const setBuyItNowValue = (buy_it_now,car_id,image,model,make,year,price,transportation,transportation_charge,lot_fee,credit_limit) => {
+	const setBuyItNowValue = (buy_it_now,car_id,image,model,make,year,price,transportation,transportation_charge,lot_fee,credit_limit,seller_dealer_id) => {
 
 		setBuyItNowData({
 			buyItNow: buy_it_now,
@@ -167,8 +168,8 @@ const InventoryCars = () => {
 			transportation : transportation,
 			transportationCharge : transportation_charge,
 			lotFee:lot_fee,
-			creditLimit : credit_limit
-	
+			creditLimit : credit_limit,
+			sellerDealerId : seller_dealer_id
 		})
 	
 		toggleBuyItNow()
@@ -1073,7 +1074,7 @@ const loadMoreDetails = () =>{
                                                 <p className="details"><img src={process.env.PUBLIC_URL +"/images/gasoline-pump.svg"} alt="" /><span>{item.fuel_type}</span></p>  
 												<p className="details buyitnow">
                                                 {item.buy_it_now=="" || item.buy_it_now== null || item.buy_it_now== undefined  || item.buy_it_now== 0?"":
-                                                    <a className={`${lateFeeValue > 0 && 'buy-it-disable-btn'} cta-btns`} href="JavaScript:void(0)" onClick={()=>lateFeeValue === 0 && setBuyItNowValue(item.buy_it_now,item.car_id,item.image,item.model,item.make,item.year,item.price,item.transportation,item.transportation_charge,item.lot_fee,item.credit_limit)}>Buy It Now $ {item.buy_it_now}</a>
+                                                    <a className={`${lateFeeValue > 0 && 'buy-it-disable-btn'} cta-btns`} href="JavaScript:void(0)" onClick={()=>lateFeeValue === 0 && setBuyItNowValue(item.buy_it_now,item.car_id,item.image,item.model,item.make,item.year,item.price,item.transportation,item.transportation_charge,item.lot_fee,item.credit_limit,item.seller_dealer_id)}>Buy It Now $ {item.buy_it_now}</a>
                                                 }
                                                 </p>  
                                             </div>
@@ -1096,7 +1097,7 @@ const loadMoreDetails = () =>{
 												}  */}
 
 												{(item.isbuyercounterbid=="me" && item.iscounterbid!==null && (item.time !==0 || item.time!==null)) || ((item.iscounterbid==null || item.iscounterbid=="no" ) && (item.isbuyercounterbid==null || item.isbuyercounterbid=="not")&&(item.time ==0 || item.time==null))?
-                                                <a className={`${lateFeeValue > 0 && 'buy-it-disable-btn'} cta-btns-primary`}  href="JavaScript:void(0)" onClick={()=>lateFeeValue === 0 && setMakeBitValue(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid,item.transportation_charge,item.save_policy,item.credit_limit,item.lot_fee,item.image,item.model,item.make,item.year)} >Make Bid</a>
+                                                <a className={`${lateFeeValue > 0 && 'buy-it-disable-btn'} cta-btns-primary`}  href="JavaScript:void(0)" onClick={()=>lateFeeValue === 0 && setMakeBitValue(item.high_bid, item.min_price, item.save_purchase, item.car_id, item.time, item.counter_buyer_dealer_id, item.max_price, item.buy_it_now,item.comments,item.transportation,item.display,item.proxy_bid,item.transportation_charge,item.save_policy,item.credit_limit,item.lot_fee,item.image,item.model,item.make,item.seller,item.seller_dealer_id)} >Make Bid</a>
                                                 :<a class="cta-btns lockedcarBtn">Locked up for Higher Bid </a>}
 
                                                 {(item.buyer_high_bid==item.high_bid || item.buyer_high_bid!==item.high_bid) &&       
