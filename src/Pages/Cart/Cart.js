@@ -392,7 +392,7 @@ const getFeeDetails = (maxPrice) =>{
             </div>
     
             <div class="row content">
-                <div class="col-lg-12 col-md-12">
+                <div class="col-lg-8 col-md-8">
                     <div class="vehiclesheads">
                         {/* <h2>Number of Vehicles- 2<span>Total amount- <b>$ {cartDetail.length>0 ? cartDetail.reduce((acc,{max_price,transportation,transportation_charge})=>acc + (Number(max_price) + Number(transportation === 'yes' ? transportation_charge : 0) + Number(getFeeDetails(max_price||0))) ,0) : 0}</b></span></h2> */}
                         <h2>Number of Vehicles- {numberCars}<span>Total amount- <b>$ {overAllTotal()}</b></span></h2>   
@@ -502,7 +502,7 @@ const getFeeDetails = (maxPrice) =>{
                     }
                   
                 </div>
-                {/* <div class="col-lg-4 col-md-8">
+                <div class="col-lg-4 col-md-8">
                     <div class="vehicletotal">
                         <h2>Checkout</h2>
                         <h3>Total Amount <span>$ {mySelectedCarTotal()}</span></h3>
@@ -515,10 +515,10 @@ const getFeeDetails = (maxPrice) =>{
                         <option value={null} style={{"display":"none"}}>-- Select --</option>
                         <option value="ACH">ACH</option>
                         <option value="Floor">Floor</option>
-                        <option value="Credit Card">Credit Card</option>
+                        {/* <option value="Credit Card">Credit Card</option> */}
                     </select>
                     <p>{paymentModeError}</p>
-----------------  if u uncommand this functionality means plzz command this label tag ------------ <label  htmlFor="state_id" className={"input-has-value"}>Select Payment Method</label>
+{/* ----------------  if u uncommand this functionality means plzz command this label tag ------------ <label  htmlFor="state_id" className={"input-has-value"}>Select Payment Method</label> */}
                     </div>
             </div>
         </div>
@@ -533,7 +533,7 @@ const getFeeDetails = (maxPrice) =>{
                                 
                         <div className="selcetclass"> 
                             <select id="floormethod"  class="form-control custom-select browser-default" onChange={(e)=>selectFloorPayment(e.target.value)}>
-                            <option value="Select">--  Select  --</option>
+                            <option value="Select">-- Select --</option>
                             {contactFloor.length>0?contactFloor.map((item)=>
                              
                                 <option id ={item.contact_name} value={` ${item.floor_plan_id},  ${item.company_name},  ${item.account_no},  ${item.credit_limit}`} >{item.company_name} ({item.account_no})</option>
@@ -549,7 +549,7 @@ const getFeeDetails = (maxPrice) =>{
                         <p className="form-input-error">{alertError}</p>
                         
                     </div>
-                </div> */}
+                </div> 
             </div>
         </div>
           </div>
