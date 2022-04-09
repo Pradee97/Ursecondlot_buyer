@@ -339,9 +339,9 @@ return () => clearInterval(intervalId);
 
             <div className="col-lg-4 topRight">
               <div className="rightMenu">
-                <a href="JavaScript:void(0)"><i className="icofont-globe"></i> English <i className="icofont-thin-down"></i></a>
+                {/* <a href="JavaScript:void(0)"><i className="icofont-globe"></i> English <i className="icofont-thin-down"></i></a> */}
                 <i className="bx bxl-envelope"></i> CALL US: +1(223)333-6666
-			          <i className="bx bxl-phone"></i> <a href="JavaScript:void(0)">GET FREE DEMO <i className="icofont-long-arrow-right"></i></a>
+			          {/* <i className="bx bxl-phone"></i> <a href="JavaScript:void(0)">GET FREE DEMO <i className="icofont-long-arrow-right"></i></a> */}
               </div>
             </div>
           </div>
