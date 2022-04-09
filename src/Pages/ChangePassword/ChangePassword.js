@@ -4,16 +4,18 @@ import ls from 'local-storage';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 // import '../../assets/css/styles.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import API from "../../Services/BaseService";
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import './ChangePassword.css';
 import '../../assets/css/responsive.css';
 import { useForm } from "react-hook-form";
-
+import Popup from '../../Component/Popup/Popup';
+import LateFee from '../../Pages/LateFee/LateFee';
 
 
 const ChangePassword = () => {
+
     const history = useHistory();
     const eye = <FontAwesomeIcon icon={faEye} />;
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -39,7 +41,14 @@ const ChangePassword = () => {
     const [popupType, setPopupType] = useState ("");
     const [popupActionType, setPopupActionType] = useState ("");
     const [popupActionValue, setPopupActionValue] = useState ("");
-    const [popupActionPath, setPopupActionPath] = useState ("")
+    const [popupActionPath, setPopupActionPath] = useState ("");
+
+    const [isLateFee, setIsLateFee] = useState(false);
+    const [lateFeeValue, setLateFeeValue] = useState(0);
+
+	const toggleLateFee = () => {
+		setIsLateFee(!isLateFee);
+  	}
 
     // const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -62,6 +71,7 @@ const ChangePassword = () => {
         setOldPasswordError("")
         setNewPasswordError("")
         setConfirmPasswordError("")
+        setErrorMessage("")
 
         if(!oldPassword){
           setOldPasswordError("Old Password is required")
@@ -96,7 +106,7 @@ const ChangePassword = () => {
         let request = {
           old_password: oldPassword,
           new_password: newPassword,
-         user_id: userDetails.user_id,
+          buyer_id: userDetails.buyer_id,
          active:1
 
         };
@@ -132,6 +142,30 @@ const ChangePassword = () => {
                 setPopupActionValue("close");
             });
         }
+
+        const getlateFee=()=>{
+            let request={
+                buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+            }
+            
+            API.post('getlatefee/condition',request).then(res=>{
+               if(res.data.data.length){
+                
+           console.log("check +++++ ", res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" )
+                const lateFeeValueStatus=res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" 
+                setIsLateFee(lateFeeValueStatus==="yes")
+                setLateFeeValue(res.data.data.filter(value=>value.late_fee>0)[0]?.late_fee || 0)
+               }
+              
+        
+            }).catch(err=>{console.log(err);});
+        }
+    
+        useEffect(() => {
+    
+            getlateFee();
+    
+        }, []);
       
     return (
         <div>
@@ -202,6 +236,15 @@ const ChangePassword = () => {
                     popupActionValue= {popupActionValue}
                     popupActionPath={popupActionPath}
                 />}
+
+{isLateFee && <Popup
+          isClose={false}
+          content={<>
+            <LateFee toggle={toggleLateFee} />
+          </>}
+          handleClose={toggleLateFee}
+        />} 
+
             </main>
 
         </div>

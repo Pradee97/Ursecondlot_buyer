@@ -27,7 +27,7 @@ const Payment = () => {
     const [popupActionValue, setPopupActionValue] = useState ("");
     const [popupActionPath, setPopupActionPath] = useState ("")
    
-
+    const[type,setType]=useState("");
     const [buyerId, setBuyerId] = useState("");
     const [dealershipName, setDealershipName] = useState("");
     const [accountHolderName, setAccountHolderName] = useState("");
@@ -124,10 +124,28 @@ const Payment = () => {
         setDoc(event.target.files[0]);        
       };
 
+      const isValidFile = (file) => {
+        let filesobject = Object.assign({}, ...file);
+
+        let filesArray = Object.values(filesobject);  
+
+        // console.log("====filesobject====>",filesobject)
+        let fileExtension = filesArray[0].split('.').pop(); 
+        console.log("====fileExtension====>",fileExtension)
+
+        let isValid = (fileExtension == 'txt' || 
+        fileExtension == 'doc' ||
+        fileExtension == 'pdf' ||
+        fileExtension == 'png' || 
+        fileExtension == 'jpeg' || 
+        fileExtension == 'jpg' );
+        return isValid;
+    }
+    
     const paymenthandleSubmit= (data) => {
         // setOpenLoader(true);
         // event.preventDefault();    
-        
+       
         setDealershipNameError("")
         setAccountHolderNameError("") 
         setBankNameError("") 
@@ -142,7 +160,7 @@ const Payment = () => {
 
         console.log("=====docdoc====>",doc)
         let request = {
-            buyer_id: userDetails.user_id,
+            buyer_dealer_id: userDetails.buyer_dealer_id,
             dealership_name: dealershipName,
             acc_name: accountHolderName,      
             bank_name: bankName,
@@ -250,11 +268,54 @@ const Payment = () => {
             setAccStateAndCityError("zipcode is required")
              return
         }
-        if(!doc){
-            setDocError("Upload Document is required")
-            return;
-        }
+        // if(!doc){
+        //     setDocError("Upload Document is required")
+        //     return;
+        // }
+        // if(!doc)
+        // {
+        // setType("1");
+        // return;
+        // }
+        // else
+        // {
+        //     setType("");
+        // }
+        // if( type!=="1" ){
+        //     console.log("tyoe",type);
+
+            
+        // if(!doc)
+        // {
+        // setType("1");
+        // return;
+        // }
+        // else if(!doc[0].type.includes('.txt') || !doc[0].type.includes('.doc') || !doc[0].type.includes('.pdf') || !doc[0].type.includes('.png') || !doc[0].type.includes('.jpeg') || !doc[0].type.includes('.jpg'))
+        // {
+        //     setType("2");
+        // return;
+        // }
+        // else
+        // {
+        //     setType("");
+        // }
         
+        // if( type!=="1" ){
+        //     console.log("type",type);
+
+        if(!doc)
+        {
+        setType("1");
+        return;
+        }
+        else if(!isValidFile(doc))
+        {
+            setType("2");
+        return;
+        }
+        else
+        {
+           
         API
             .post("payment_info/add", request)
             .then((response) => {
@@ -286,11 +347,20 @@ const Payment = () => {
                     setPopupActionType("close");
                     setPopupActionValue("close");
         });
-   
-    
+    }
+        
 }
     const getFiles=(file)=>{
-        setDoc(file);
+        //setDoc(file);
+       
+        console.log("file",file)
+        console.log("================>",file[0].type)
+        //if(file[0].type.includes("jpg") || file.type.includes("jpeg") || file.type.includes("png")){
+            setDoc(file);
+        // }else{
+            setType("");
+        // }
+        //setType("")
       }
       const getStateName = (stateData) => {
         setStateName(stateData)
@@ -446,7 +516,9 @@ const Payment = () => {
                                                         <FileBase64 multiple={ true } onDone={ getFiles } hidden type="hidden"/>
                                                     </div>
                                                     <span className="uploadedFile">{doc.length>0?doc[0].name:doc.name}</span>
-                                                    <p className="form-input-error" >{docError}</p>
+                                                    {/* <p className="form-input-error" >{docError}</p> */}
+                                                    {/* {type==="0"?<p className="form-input-error">Upload only Image Format </p>:""}  */}
+                                                    {type==="1"?<p className="form-input-error">File Upload Mandatory </p>:type==="2"?<p className="form-input-error">Only TXT,DOC,PDF,JPG,PNG,JPEG file formats can be uploaded</p>:""} 
                                                     </div>
                                                    
                                                     <div className="col-lg-12 loginBtn">

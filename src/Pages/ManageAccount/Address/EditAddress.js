@@ -9,11 +9,16 @@ import StateAndCity from '../../../Component/StateAndCity/StateAndCity';
 import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks";
 import { useForm } from "react-hook-form";
 import PhoneInput from 'react-phone-number-input/input';
+import { useDispatch, useSelector } from 'react-redux';
+import Loading from '../../../Component/Loading/Loading';
+import Popup from '../../../Component/Popup/Popup';
+import LateFee from '../../../Pages/LateFee/LateFee';
 
+const EditAddress = (props) => {
 
-const EditAddress = () => {
     const history = useHistory();
-    const { id } = useParams();
+    // const { id } = useParams();
+    const {id} = props.location.state;
     // let { register, updateAddress, formState: { errors },reset  } = useForm();
     const [accountObjc, setAccountObj] = useState("");
     const [FirstName, setFirstName] = useState("");
@@ -34,7 +39,19 @@ const EditAddress = () => {
     const [mobilePhoneError, setMobilePhoneError] = useState("")
     const [locationError, setLocationError] = useState("")
     const [instructionError, setInstructionError] = useState("")
-    const [stateAndCityError, setStateAndCityError] = useState("")
+    const [stateAndCityError, setStateAndCityError] = useState("");
+    const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
+    const buyer_id=JSON.parse(JSON.stringify(loggedInBuyerId)).buyer_id;
+    const buyer_dealer_id=JSON.parse(JSON.stringify(loggedInBuyerId)).buyer_dealer_id;
+    const [loading,setLoading] = useState(true);
+    const [cellFlag,setCellFlag] = useState(false);
+    const [alterPhoneFlag,setAlterPhoneFlag] = useState(false);
+    const [isLateFee, setIsLateFee] = useState(false);
+    const [lateFeeValue, setLateFeeValue] = useState(0);
+
+	const toggleLateFee = () => {
+		setIsLateFee(!isLateFee);
+  	}
 
     const togglePopup = () => {
       setIsOpen(!isOpen);
@@ -73,11 +90,12 @@ const EditAddress = () => {
             setMobilePhone(res.data.data[0].mobile_no);
             setCity(res.data.data[0].city_name);
             setState(res.data.data[0].state_name);
-            setZIpCode(res.data.data[0].zipcode_id);
+            //setZIpCode(res.data.data[0].zipcode_id);
             setLocation(res.data.data[0].location);
             setInstruction(res.data.data[0].instructions);
             setZIpCode(res.data.data[0].zipcode);
             setAccountObj(res.data.data[0])
+            console.log("zipcode value from res",res.data.data[0].zipcode);
         })
             .catch(err => { console.log(err); });
     }
@@ -161,26 +179,39 @@ const EditAddress = () => {
             setInstructionError("Instruction must not exceed 150 characters")
             return;
         }
-        if(!(typeof city==='string'?accountObjc.city_id:city) || !(typeof state==='string'?accountObjc.state_id:state) || !(zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode)){
-            setStateAndCityError("State, City and Zipcode is required")
+        // if(!(typeof city==='string'?accountObjc.city_id:city) || !(typeof state==='string'?accountObjc.state_id:state) || !(zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode)){
+        //     setStateAndCityError("State, City and Zipcode is required")
+        //     return
+        // }
+        if(!(typeof state==='string'?accountObjc.state_id:state)){
+            setStateAndCityError("state is required")
             return
+        }
+        if(!(typeof city==='string'?accountObjc.city_id:city)){
+            setStateAndCityError("city is required")
+             return
+        }
+        if(!(zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode)){
+            setStateAndCityError("zipcode is required")
+             return
         }
 
         let request = {
             buyer_address_id:id,
-            buyer_id:JSON.parse(localStorage.getItem("userDetails")).user_id,
+            buyer_dealer_id:buyer_dealer_id,
             first_name: FirstName,
             last_name: lastName,
             address: address,
-            phone_no: formatMobileNO(primaryPhone),
-            mobile_no: formatMobileNO(mobilePhone),
+            phone_no: cellFlag === true ? primaryPhone.substring(2, 12) : accountObjc?.phone_no,
+            mobile_no: alterPhoneFlag === true ? mobilePhone.substring(2, 12) : accountObjc?.mobile_no,
             city_id: typeof city==='string'?accountObjc.city_id:city,
             state_id: typeof state==='string'?accountObjc.state_id:state,
             zipcode_id: zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode,
             location: location,
             instructions: instruction,
             // buyer_address_id:buyeraddress,
-            active:1
+            active:1,
+            updatedBy: buyer_id            
            
         };
          API
@@ -229,27 +260,81 @@ const EditAddress = () => {
         setFirstName(res.data.data[0].first_name);
         setLastName(res.data.data[0].last_name);
         setAddress(res.data.data[0].address);
-        setPrimaryPhone(res.data.data[0].phone_no);
-        setMobilePhone(res.data.data[0].mobile_no);
+        // setPrimaryPhone(res.data.data[0].phone_no);
+        // setMobilePhone(res.data.data[0].mobile_no);
         setCity(res.data.data[0].city_name);
         setState(res.data.data[0].state_name);
         setZIpCode(res.data.data[0].zipcode_id);
         setLocation(res.data.data[0].location);
         setInstruction(res.data.data[0].instructions);
         setZIpCode(res.data.data[0].zipcode);
-        setAccountObj(res.data.data[0])
+        setAccountObj(res.data.data[0]);
+        formatPhone(res.data.data[0].phone_no)
+        if(res.data.data[0].mobile_no != ""){
+        formatMobile(res.data.data[0].mobile_no);
+        }
+        setLoading(false);
         // reset(res.data.data);
     })
         .catch(err => { console.log(err); });
+    }, [buyer_id,buyer_dealer_id]);
+
+     const getlateFee=()=>{
+        let request={
+            buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+        }
+        
+        API.post('getlatefee/condition',request).then(res=>{
+           if(res.data.data.length){
+            
+       console.log("check +++++ ", res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" )
+            const lateFeeValueStatus=res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" 
+            setIsLateFee(lateFeeValueStatus==="yes")
+            setLateFeeValue(res.data.data.filter(value=>value.late_fee>0)[0]?.late_fee || 0)
+           }
+          
+    
+        }).catch(err=>{console.log(err);});
+    }
+
+    useEffect(() => {
+
+        getlateFee();
+
     }, []);
-    function handleOnChange(value) {
+    function formatPhone(value){
+        var x = value.replace(/\D/g, '').match(/(\d{3})(\d{3})(\d{4})/);
+        console.log("formatPhoneNumber x",x);
+        value = '+1'+ '('+ x[1] +')' + x[2] + '-' + x[3];
+        console.log("formatPhoneNumber",value);
+        return setPrimaryPhone(value);
+      }
+      function formatMobile(value){
+        var x = value.replace(/\D/g, '').match(/(\d{3})(\d{3})(\d{4})/);
+        console.log("formatPhoneNumber x",x);
+        value = '+1'+ '('+ x[1] +')' + x[2] + '-' + x[3];
+        console.log("formatPhoneNumber",value);
+        return setMobilePhone(value);
+      }
+    const handleOnChangePhone = (value) => {
         setPrimaryPhone(value);
-     }
-     function handleOnChanges(value) {
+        setCellFlag(true) 
+          console.log("inside handle")
+    
+          console.log("phn no", value)
+       }
+    
+       const handleOnChangeMobile = (value) => {
         setMobilePhone(value);
-     }
+        setAlterPhoneFlag(true) 
+          console.log("inside handle")
+    
+          console.log("phn no", value)
+       }
     return (
         <div>
+            {loading?<Loading/>:
+           
             <main id="main" className="inner-page">
             <div id="addaddress" className="addaddress_block">
             <div className="container" >
@@ -300,8 +385,8 @@ const EditAddress = () => {
                             </div>
                             <div class="col-sm-8 form-group ">
                             <div className="tbox ">
-                            <PhoneInput value={accountObjc.phone_no} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChange} ></PhoneInput>
-                            <label for="primary_phone"  className={"input-has-value"}>Primary Phone</label>
+                            <PhoneInput value={primaryPhone} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChangePhone} ></PhoneInput>
+                            <label for="primary_phone"  className={"input-has-value"}>Primary Phone #</label>
                             </div>
                             <p className="form-input-error" >{primaryPhoneError}</p>
                             </div>
@@ -315,8 +400,8 @@ const EditAddress = () => {
                             </div>
                             <div class="col-sm-8 form-group ">
                             <div className="tbox ">
-                            <PhoneInput value={accountObjc.mobile_no} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChanges} ></PhoneInput>
-                            <label for="mobile_phone"  className={"input-has-value"}>Mobile Phone</label>
+                            <PhoneInput value={mobilePhone} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChangeMobile} ></PhoneInput>
+                            <label for="mobile_phone"  className={"input-has-value"}>Mobile Phone  #</label>
                             </div> 
                             <p className="form-input-error" >{mobilePhoneError}</p>
                             </div>
@@ -335,8 +420,10 @@ const EditAddress = () => {
                                 defaultStateValue = {state}
                                 defaultCityValue = {city}
                                 defaultZipcodeValue = {zipCode}
+                                
                             />
-                            <p className="form-input-error"> {stateAndCityError} </p>
+                            {console.log("below component",zipCode)}
+                            <p className="form-input-error ml-3"> {stateAndCityError} </p>
                              <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={accountObjc.location} className="textbox" placeholder="" onChange={(e) => setLocation(e.target.value)} />
@@ -388,8 +475,17 @@ const EditAddress = () => {
                     popupActionValue= {popupActionValue}
                     popupActionPath={popupActionPath}
                 />}
+
+{isLateFee && <Popup
+          isClose={false}
+          content={<>
+            <LateFee toggle={toggleLateFee} />
+          </>}
+          handleClose={toggleLateFee}
+        />} 
+
             </main>
-          
+}
         </div>
 
 

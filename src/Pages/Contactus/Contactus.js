@@ -2,10 +2,13 @@ import React from 'react';
 import API from "../../Services/BaseService";
 import Popup from '../../Component/Popup/Popup';
 import { useForm } from "react-hook-form";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import checkImg from '../../../src/assets/img/check.svg';
+// import LateFee from '../../Pages/LateFee/LateFee';
+
 const Contactus = () => { 
+  
   const [isOpen, setIsOpen] = useState(false);
  
   const togglePopup = () => {
@@ -26,6 +29,13 @@ const Contactus = () => {
     const [fullNameError, setFullNameError] = useState("");
     const [emailError, setEmailError] = useState("");
     const [commentsError,setCommentsError]=useState ("");
+
+    // const [isLateFee, setIsLateFee] = useState(false);
+    // const [lateFeeValue, setLateFeeValue] = useState(0);
+  
+    // const toggleLateFee = () => {
+    //   setIsLateFee(!isLateFee);
+    // }
 
     const history = useHistory();   
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -119,6 +129,32 @@ function clear (){
       // }
       // } 
 }
+
+// const getlateFee=()=>{
+// 	let request={
+// 		buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+// 	}
+	
+// 	API.post('getlatefee/condition',request).then(res=>{
+// 	   if(res.data.data.length){
+		
+//    console.log("check +++++ ", res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" )
+// 		const lateFeeValueStatus=res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" 
+// 		setIsLateFee(lateFeeValueStatus==="yes")
+// 		setLateFeeValue(res.data.data.filter(value=>value.late_fee>0)[0]?.late_fee || 0)
+// 	   }
+	  
+
+// 	}).catch(err=>{console.log(err);});
+// }
+
+
+// useEffect(() => {
+
+//   getlateFee();
+  
+// }, []);
+
     return (
         <div>
   <main id="main" className="inner-page">
@@ -134,7 +170,7 @@ function clear (){
 
          <div className="col-lg-6 d-flex align-items-stretch">
            <div className="info">
-           <p className="contacttag">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been </p>
+           <p className="contacttag">Here is our address for more details please reach out. Also you can share your questions or concerns by submitting the Enquiry form. </p>
              <div className="address">
                <i className="icofont-google-map"></i>
                <h4>Address</h4>
@@ -143,7 +179,7 @@ function clear (){
              <div className="phone">
                <i className="icofont-phone"></i>
                <h4>Contact</h4>
-               <p>142-564-9147</p>
+               <p>+1(223)333-6666</p>
              </div>
 
              <div className="email">
@@ -256,7 +292,13 @@ function clear (){
                     popupActionPath={popupActionPath}
                 />} */}
 
-  
+  {/* {isLateFee && <Popup
+          isClose={false}
+          content={<>
+            <LateFee toggle={toggleLateFee} />
+          </>}
+          handleClose={toggleLateFee}
+        />}   */}
 
 
 

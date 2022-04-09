@@ -8,15 +8,20 @@ import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccountLinks";
 import { useForm } from "react-hook-form";
 import PhoneInput from 'react-phone-number-input/input';
-
-
+import { useDispatch, useSelector } from 'react-redux';
+import Loading from '../../Component/Loading/Loading';
 import StateAndCity from '../../Component/StateAndCity/StateAndCity'
+import Popup from '../../Component/Popup/Popup';
+import LateFee from '../../Pages/LateFee/LateFee';
+import FileBase64 from 'react-file-base64';
+import adduser from '../../assets/img/adduser.jpg';
 
+const EditDealerInformation = (props) => {
 
-const EditDealerInformation = () => {
     let { register, updateDealerInfo, formState: { errors },reset  } = useForm();
     const history = useHistory();
-    const { id } = useParams();
+    // const { id } = useParams();
+    const {id} = props.location.state;
     const userDetails = ls.get('userDetails');
     const [accountObjc, setAccountObj] = useState("");
     const [firstName, setFirstname] = useState("");
@@ -27,9 +32,17 @@ const EditDealerInformation = () => {
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
     const [zipCode, setZipcode] = useState("");
-
+    const [loading,setLoading] = useState(true);
     const [isOpen, setIsOpen] = useState(false);
- 
+    const [doc, setDoc] = useState("");
+    const [type,setType]=useState("");
+    const [isLateFee, setIsLateFee] = useState(false);
+    const [lateFeeValue, setLateFeeValue] = useState(0);
+
+	const toggleLateFee = () => {
+		setIsLateFee(!isLateFee);
+  	}
+
     const togglePopup = () => {
       setIsOpen(!isOpen);
     }
@@ -45,7 +58,11 @@ const EditDealerInformation = () => {
     const [primaryPhoneError, setPrimaryPhoneError] = useState("")
     const [mobilePhoneError, setMobilePhoneError] = useState("")
     const [addressError, setAddressError] = useState("")
-    const [stateAndCityError, setStateAndCityError] = useState("")
+    const [stateAndCityError, setStateAndCityError] = useState("");
+    const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
+    const buyer_id=JSON.parse(JSON.stringify(loggedInBuyerId)).buyer_id;
+    const buyer_dealer_id=JSON.parse(JSON.stringify(loggedInBuyerId)).buyer_dealer_id;
+    
 
     const getStateName=(stateData)=>{
         setState(stateData)
@@ -63,12 +80,13 @@ const EditDealerInformation = () => {
         console.log(id)
         
         let request = {
-            buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+            buyer_dealer_id: buyer_dealer_id,
         };
         const state = API.post('user_profile/condition', request);
         state.then(res => {
             console.log( "userDetails=>",userDetails)
             console.log("res=======>", res.data.data)
+          
             setFirstname(res.data.data[0].first_name);
             setLastname(res.data.data[0].last_name);
             setPrimaryphone(res.data.data[0].phone_no);
@@ -77,9 +95,12 @@ const EditDealerInformation = () => {
             setCity(res.data.data[0].city_name);
             setState(res.data.data[0].state_name);
             setZipcode(res.data.data[0].zipcode);
-            setAccountObj(res.data.data[0])
+            setAccountObj(res.data.data[0]);
+            
         })
             .catch(err => { console.log(err); });
+          
+      
     }
     function formatMobileNO(value){
         var x = value.replace(/\D/g, '').match(/(\d{1})(\d{3})(\d{3})(\d{4})/);
@@ -93,45 +114,45 @@ const EditDealerInformation = () => {
         // setOpenLoader(true);
         event.preventDefault();    
         
-        setFirstNameError("")
-        setLastNameError("")
-        setPrimaryPhoneError("")
-        setMobilePhoneError("")
+         setFirstNameError("")
+        // setLastNameError("")
+        // setPrimaryPhoneError("")
+        // setMobilePhoneError("")
         setAddressError("")
         setStateAndCityError("")
 
-        if(!firstName){
-            setFirstNameError("First Name is required")
-            return;
-        }
-        else if(firstName.length>50){
-            setFirstNameError("First Name must not exceed 50 characters")
-            return;
-        }
-        if(!lastName){
-            setLastNameError("Last Name is required")
-            return;
-        }
-        else if(lastName.length>50){
-            setLastNameError("Last Name must not exceed 50 characters")
-            return;
-        }
-        if(!primaryPhone){
-            setPrimaryPhoneError("Primary Phone is required")
-            return;
-        }
-        else if(primaryPhone.length<12 ){
-            setPrimaryPhoneError("Primary Phone must have 10 digits")
-            return;
-        }
-        if(!mobilePhone){
-            setMobilePhoneError("Mobile Phone is required")
-            return;
-        }
-        else if(mobilePhone.length<12){
-            setMobilePhoneError("Mobile Phone must have 10 digits")
-            return;
-        }
+        // if(!firstName){
+        //     setFirstNameError("Dealer Name is required")
+        //     return;
+        // }
+        // else if(firstName.length>50){
+        //     setFirstNameError("Dealer Name must not exceed 50 characters")
+        //     return;
+        // }
+        // if(!lastName){
+        //     setLastNameError("Last Name is required")
+        //     return;
+        // }
+        // else if(lastName.length>50){
+        //     setLastNameError("Last Name must not exceed 50 characters")
+        //     return;
+        // }
+        // if(!primaryPhone){
+        //     setPrimaryPhoneError("Primary Phone is required")
+        //     return;
+        // }
+        // else if(primaryPhone.length<12 ){
+        //     setPrimaryPhoneError("Primary Phone must have 10 digits")
+        //     return;
+        // }
+        // if(!mobilePhone){
+        //     setMobilePhoneError("Mobile Phone is required")
+        //     return;
+        // }
+        // else if(mobilePhone.length<12){
+        //     setMobilePhoneError("Mobile Phone must have 10 digits")
+        //     return;
+        // }
         if(!address){
             setAddressError("Address is required")
             return;
@@ -140,17 +161,41 @@ const EditDealerInformation = () => {
             setAddressError("Address must not exceed 150 characters")
             return;
         }
-        if(!(typeof city==='string'?accountObjc.city_id:city) || !(typeof state==='string'?accountObjc.state_id:state) || !(zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode)){
-            setStateAndCityError("State, City and Zipcode is required")
+        // if(!(typeof city==='string'?accountObjc.city_id:city) || !(typeof state==='string'?accountObjc.state_id:state) || !(zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode)){
+        //     setStateAndCityError("State, City and Zipcode is required")
+        //     return
+        // }
+        if(!(typeof state==='string'?accountObjc.state_id:state)){
+            setStateAndCityError("state is required")
             return
         }
+        if(!(typeof city==='string'?accountObjc.city_id:city)){
+            setStateAndCityError("city is required")
+             return
+        }
+        if(!(zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode)){
+            setStateAndCityError("zipcode is required")
+             return
+        }
+        // if(!state){
+        //     setStateAndCityError("state is required")
+        //     return
+        // }
+        // if(!city){
+        //     setStateAndCityError("city is required")
+        //      return
+        // }
+        // if(!zipCode){
+        //     setStateAndCityError("zipcode is required")
+        //      return
+        // }
 
         let request = {
-            user_id:id,
-            first_name: firstName,
-            last_name: lastName,
-            phone_no: formatMobileNO(primaryPhone),
-            mobile_no: formatMobileNO(mobilePhone),
+            buyer_dealer_id:id,
+            // dealer_name: firstName,
+            // last_name: lastName,
+            // phone_no: formatMobileNO(primaryPhone),
+            // mobile_no: formatMobileNO(mobilePhone),
             address: address,
             // city_id: city,
             // state_id: state,
@@ -158,7 +203,10 @@ const EditDealerInformation = () => {
             city_id: typeof city==='string'?accountObjc.city_id:city,
             state_id: typeof state==='string'?accountObjc.state_id:state,
             zipcode_id: zipCode===accountObjc.zipcode?accountObjc.zipcode_id:zipCode,
-            active:1
+            active:1,
+            image:doc===""?doc:doc.length>0?doc:[doc],           
+            updatedBy:buyer_id
+
         };
         console.log("request==----==",request)
         API
@@ -168,6 +216,7 @@ const EditDealerInformation = () => {
                     const { data } = response;
                     console.log("response", response)
                     ls.set('userDetails', response.data.data[0]);
+                    console.log("local str======", ls.set('userDetails', response.data.data[0]))
                     // history.push("/success");
                     togglePopup()
                     setPopupTitle("Edit Dealer Information");
@@ -200,32 +249,73 @@ const EditDealerInformation = () => {
     useEffect(() => {
       //fetchAccountDetails();
       let request = {
-        buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+        buyer_dealer_id: id,
     };
     const state = API.post('user_profile/condition', request);
     state.then(res => {
         console.log("res=======>", res.data.data)
-        setFirstname(res.data.data[0].first_name);
-        setLastname(res.data.data[0].last_name);
-        setPrimaryphone(res.data.data[0].phone_no);
-        setMobilephone(res.data.data[0].mobile_no);
+        setFirstname(res.data.data[0].dealer_name);
+        // setLastname(res.data.data[0].last_name);
+        // setPrimaryphone(res.data.data[0].phone_no);
+        // setMobilephone(res.data.data[0].mobile_no);
         setAddress(res.data.data[0].address);
         setCity(res.data.data[0].city_name);
         setState(res.data.data[0].state_name);
         setZipcode(res.data.data[0].zipcode);
         setAccountObj(res.data.data[0])
         reset(res.data.data[0]);
+        setLoading(false);
+
     })
+    
         .catch(err => { console.log(err); });
-    }, [reset]);
+        
+    }, [reset,buyer_id,buyer_dealer_id]);
+
     function handleOnChange(value) {
         setPrimaryphone(value);
      }
+
      function handleOnChanges(value) {
         setMobilephone(value);
      }
+
+     const getlateFee=()=>{
+        let request={
+            buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+        }
+        
+        API.post('getlatefee/condition',request).then(res=>{
+           if(res.data.data.length){
+            
+       console.log("check +++++ ", res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" )
+            const lateFeeValueStatus=res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" 
+            setIsLateFee(lateFeeValueStatus==="yes")
+            setLateFeeValue(res.data.data.filter(value=>value.late_fee>0)[0]?.late_fee || 0)
+           }
+          
+    
+        }).catch(err=>{console.log(err);});
+    }
+    const getFiles=(file)=>{
+        console.log("================>",file.type)
+        setType("")
+        if(file.type.includes("jpg") || file.type.includes("jpeg") || file.type.includes("png")){
+            setDoc(file);
+        }else{
+            setType("0");
+        }
+      }
+    useEffect(() => {
+
+        getlateFee();
+
+    }, []);
+
     return (
+
         <div>
+        {loading?<Loading/>:
             <main id="main" className="inner-page">
             <div id="addaddress" className="addaddress_block">
             <div className="container" >
@@ -247,9 +337,28 @@ const EditDealerInformation = () => {
                         <div className="section-title">
                         <button className="back-btn-paymentform backBtn" onClick={() => history.push("/manageaccount")}><i className="icofont-arrow-left"></i> Back</button>   
 							<h2> Edit Dealer Information</h2>
-						</div>
+						
+                        <div className="col-sm-12 form-group">
+                                <div className="user-upload-btn-wrapper">
+                                {doc===""?<img alt=""  src={accountObjc.image || adduser} ></img>:
+                                <img alt="" src={doc.base64} ></img>														
+                                }
+                                <span className="proCamera"></span>
+                                {type==="0"?<div className="form-input-error">Upload only Image Format </div>:""}      
+                                <FileBase64 onDone={ getFiles }  type="hidden"/>				
+                                </div>
+                                </div>
+                                </div>
+                        <div className="col-sm-12 form-group">
+                            <div className="tbox">
+                                <input type="text"  className="textbox" placeholder={accountObjc.dealer_name} disabled />
+                                <label htmlFor="first_name" className={firstName != "" ? "input-has-value" : ""}>Dealer Name</label>
+                                {/* <p className="form-input-error" >{firstNameError}</p> */}
 
-                            <div className="col-sm-12 form-group">
+                            </div>
+                            </div>
+        
+                            {/* <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text"  defaultValue={accountObjc.first_name} className="textbox" placeholder="First name"  onChange={(e) => setFirstname(e.target.value)} />
                                 <label htmlFor="first_name" className={firstName != "" ? "input-has-value" : ""}>First Name</label>
@@ -264,8 +373,8 @@ const EditDealerInformation = () => {
                                 <p className="form-input-error" >{lastNameError}</p>
 
                             </div>
-                            </div>
-                            <div className="col-sm-4 form-group countrycode">
+                            </div> */}
+                            {/* <div className="col-sm-4 form-group countrycode">
                             <div className="tbox">
                                 <select className="form-control custom-select browser-default textbox"  id="drop" placeholder="" defaultValue="+1">
                                     <option value="+1">+1</option>
@@ -278,7 +387,7 @@ const EditDealerInformation = () => {
                             <PhoneInput value={accountObjc.phone_no} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChange} ></PhoneInput>
                             {/* <MuiPhoneNumber value={accountObjc.phone_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={handleOnChange} ></MuiPhoneNumber> */}
                                  {/* <input type="text" defaultValue={accountObjc.phone_no} class="textbox" placeholder="Primary phone"  onChange={(e) => setPrimaryphone(e.target.value)} /> */}
-                                <label for="phone_no" className={primaryPhone != "" ? "input-has-value" : ""}>Primary Phone</label>
+                                {/* <label for="phone_no" className={primaryPhone != "" ? "input-has-value" : ""}>Primary Phone</label>
                             </div>
                                 <p className="form-input-error" >{primaryPhoneError}</p>
                             </div>
@@ -289,15 +398,15 @@ const EditDealerInformation = () => {
                                 </select>
                                 <label  for="drop" className={"input-has-value"}>Country code</label>
                             </div>
-                            </div>
+                            </div> */} 
                             <div class="col-sm-8 form-group ">
-                            <div className="tbox ">
+                            {/* <div className="tbox ">
                             <PhoneInput value={accountObjc.mobile_no} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChanges} ></PhoneInput>
                             {/* <MuiPhoneNumber value={accountObjc.mobile_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={handleOnChanges} ></MuiPhoneNumber> */}
                                {/* <input type="text" defaultValue={accountObjc.mobile_no} class="textbox" placeholder="Mobile phone"  onChange={(e) => setMobilephone(e.target.value)} /> */}
-                                <label for="mobile_no" className={mobilePhone != "" ? "input-has-value" : ""}>Mobile Phone</label>
+                                {/* <label for="mobile_no" className={mobilePhone != "" ? "input-has-value" : ""}>Mobile Phone</label>
                             </div>
-                            <p className="form-input-error" >{mobilePhoneError}</p>
+                            <p className="form-input-error" >{mobilePhoneError}</p> */} 
                             </div>
                             <div className="col-sm-12 form-group">
                             <div className="tbox">
@@ -360,8 +469,18 @@ const EditDealerInformation = () => {
                     popupActionValue= {popupActionValue}
                     popupActionPath={popupActionPath}
                 />}
+
+
+{isLateFee && <Popup
+          isClose={false}
+          content={<>
+            <LateFee toggle={toggleLateFee} />
+          </>}
+          handleClose={toggleLateFee}
+        />} 
+
             </main>
-          
+}
         </div>
 
 

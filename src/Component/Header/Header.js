@@ -1,17 +1,126 @@
-import React from 'react';
+import React, {  useState, useEffect } from 'react';
+import ls from 'local-storage';
+import API from "../../Services/BaseService";
 import { useHistory, useLocation } from "react-router-dom";
 import LogoImg from '../../../src/assets/img/Logo_final.png';
 import cartImg from '../../../src/assets/img/cart.svg';
 import chatImg from '../../../src/assets/img/chat.svg';
 import hamburgermenuImg from '../../../src/assets/img/hamburger-menu.svg';
-import adduser from '../../../src/assets/img/adduser.jpg'
+import adduser from '../../../src/assets/img/adduser.jpg';
+import closebtn from '../../../src/assets/img/closebtn.png';
 import './header.css';
 
 const Header = () => {
+
+  const userDetails=ls.get('userDetails');
   const history = useHistory();
   const location = useLocation();
+  const [numberCars,setNumberCars] = useState("");
+  const [myBids,setMyBids] = useState("");
+  const [cart, setCart] = useState("");
+  const [notificationCount,setNotificationCount] = useState("");
+  
+
+
+  
+
+const countDetails = () =>{
+
+  let request = {
+      buyer_dealer_id :userDetails?.buyer_dealer_id,
+  }
+
+  API.post("countDetails/condition", request).then(response=>{
+
+    // if(response.success ) {
+      console.log("header count details check the value", response.data.data)
+      
+      setMyBids(response.data.data?.mybids_count || 0)
+      setCart(response.data.data?.cart_count || 0)
+      
+
+    // }
+    
+      
+  });
+}
+useEffect (() =>{
+
+
+  countDetails();
+  
+  
+  }, []);
+
+  const getNotificationDetails= () =>{
+
+    let request = {
+        buyer_dealer_id : userDetails?.buyer_dealer_id,
+    }
+  
+    
+    API.post("notificationDetails/condition", request).then(response=>{
+  try{
+        console.log("notification data", response.data.data)
+   
+        // setNotification(response.data.data);
+        setNotificationCount(response.data.data[0]?.count||0);
+        // setNotificationTime(response.data.data.time);
+
+        console.log("check count in notification+++",response.data.data.count)
+  }
+        catch(err){
+          console.log(err)
+        }
+        
+    });
+}
+// useEffect (() =>{
+
+//   getNotificationDetails();
+//   // deleteNotification();
+//   }, []);
+  
+  
+  useEffect(() => {
+  let intervalId;
+  intervalId = setInterval(() => {
+  getNotificationDetails(); 
+  }, 30000)
+  return () => clearInterval(intervalId);
+  },[]);
+    
+  
+//   const cartDetails = () =>{
+
+//     let request = {
+//         buyer_dealer_id :userDetails?.buyer_dealer_id,
+//     }
+
+//     API.post("cartDetails/condition", request).then(response=>{
+
+//         console.log("cart check the value", response.data.data)
+//         // setCartDetail(response.data.data)
+//         setNumberCars(response.data.data.length)
+//         // setLoading(false);
+//     });
+// }
+
+//   async function fetchMyBids() {
+//     let request = {
+//         buyer_dealer_id: userDetails?.buyer_dealer_id,
+//     };
+//     const state = API.post('mybids/condition', request);
+//     state.then(res => {
+//         setMyBids(res.data.data.length);
+//         // setLoading(false);
+//         // setLoading(false);
+//     })
+//         .catch(err => { console.log(err); });
+// }
 
 const Submenu = () => {
+
     return (
       <ul className="nav__submenu">
         <li className="nav__submenu-item ">
@@ -23,12 +132,14 @@ const Submenu = () => {
         <li className="nav__submenu-item ">
           <a href="JavaScript:void(0)" onClick={()=>history.push('/manageaccount')}>Manage Account</a>
         </li>
+        <hr></hr>
         <li className="nav__submenu-item ">
           <a href="JavaScript:void(0)" onClick={()=>history.push('/contactus')}>Contact Us</a>
         </li>
         <li className="nav__submenu-item ">
           <a href="JavaScript:void(0)" onClick={()=>history.push('/about')}>About Us</a>
         </li>
+        <hr></hr>
         <li className="nav__submenu-item ">
         <a href="JavaScript:void(0)" onClick={()=>{history.push('/');localStorage.clear()}}>Logout</a>
         </li>
@@ -36,6 +147,172 @@ const Submenu = () => {
       </ul>
     )
   }
+
+  const Chat = () => {
+
+  const [notification,setNotification] = useState("");
+  const [allCarAcceptAllEnable, setAllCarAcceptAllEnable]=useState(false)
+  const [allCarMultiAcceptEnable, setAllCarMultiAcceptEnable]=useState(false)
+  const [checkedCars,setCheckedCars]=useState([]);
+  const [carId, setCarId] = useState([]);
+
+  const carSelectBox=(id, carData)=>{
+    const newvalue= document.getElementById(id).checked ? [...checkedCars,carData] :  checkedCars.filter(data=>data.car_id !== carData.car_id)
+    setCheckedCars( document.getElementById(id).checked ? [...checkedCars,carData] : checkedCars.filter(data=>data.car_id !== carData.car_id))
+    // setCheckedCars(carData)
+    console.log("---setCheckedCars----", newvalue)
+
+    setCarId(newvalue.map(data => data.notification_id))
+    
+    console.log("====setCarId====", newvalue.map(data => data.notification_id))
+   }
+
+   const allCarSelectBox=(AllcarsData)=>{
+    console.log("==AllscarData==", AllcarsData)
+    const Allnewsvalue =  AllcarsData
+    console.log("---setAllsCarInfo----", Allnewsvalue)
+    setAllCarMultiAcceptEnable(false);
+    setAllCarAcceptAllEnable(true)
+   
+    setCarId(Allnewsvalue.map(data => data.notification_id))
+
+    console.log("====setRecentlyAdded--All-- CarId====", Allnewsvalue.map(data => data.car_id))
+
+  }
+  
+  const MultiAcceptDisable =() =>{
+    setAllCarMultiAcceptEnable(false)
+  }
+  const AllAcceptDisable =() =>{
+    setAllCarAcceptAllEnable(false)
+  }
+
+    const getNotification= () =>{
+
+      let request = {
+          buyer_dealer_id : userDetails?.buyer_dealer_id,
+      }
+    
+      
+      API.post("notificationDetails/condition", request).then(response=>{
+    
+          console.log("notification data", response.data.data)
+     
+          setNotification(response.data.data);
+         setNotificationCount(response.data.data[0]?.count||0);
+                  
+
+          // setNotificationTime(response.data.data.time);
+
+          console.log("check count in notification+++",response.data.data.count)
+
+         
+          
+      });
+  }
+
+  const getDeleteNotification=(data)=>{
+    let request={
+        notification_id: [data.notification_id] 
+    }
+    console.log("request Delete", request);
+    API.post('delete_notification/update',request).then(res=>{
+        // setNotificationCount(res.data.data);
+        getNotificationDetails()
+        
+    }) .catch(err => { console.log(err); });
+  }
+
+  const deleteNotification= () =>{
+
+      let request = {
+          notification_id : carId,
+      }
+
+      console.log("notification data", request)
+      // return
+      API.post("delete_notification/update", request).then(response=>{
+
+          getNotification()
+          getNotificationDetails()
+           setAllCarMultiAcceptEnable(false)
+              setAllCarAcceptAllEnable(false)
+    
+          console.log("notification id", response.data.data)
+     
+         
+          
+      });
+  }
+
+useEffect (() =>{
+
+getNotification();
+// deleteNotification();
+}, []);
+
+
+useEffect(() => {
+let intervalId;
+intervalId = setInterval(() => {
+getNotification(); 
+}, 30000)
+return () => clearInterval(intervalId);
+},[]);
+        
+    return (
+   
+      
+      <div  className="nav__submenu notiBlock">
+        
+        
+          {notification.length>0?notification.map((getNotification,index)=>
+             <div class="notoficationcontent">                        
+             <div class="media">
+                   <img alt="" src={getNotification.image}  />
+                   <div class="media-body">
+                        <h3>{getNotification.title}</h3>
+                         <p>{getNotification.message}</p>
+                         {getNotification.time < 60 ? <h5>{ getNotification.time} Minutes ago</h5> :
+                         <h5>{ Math.floor(getNotification.time/60)} Hours ago</h5>}
+                         {/* <h5>{Hours} Hours Ago</h5> */}
+                   </div>
+                   {allCarMultiAcceptEnable == true || allCarAcceptAllEnable ==true ? 
+                                <div>
+                            
+                                {allCarMultiAcceptEnable && 
+                                <div className="custom_checkbox">
+                                  <input type="checkbox" id={`allCarSelect${index}`} onClick={(e)=>carSelectBox(`allCarSelect${index}`,getNotification)}/> 
+                                  <label for={`allCarSelect${index}`}></label>                 
+                                </div>
+                                }
+                          
+                              {allCarAcceptAllEnable && 
+                              <div className="custom_checkbox">
+                                <input type="checkbox" checked="true" id={`allCarSelected${index}`} /> 
+                                <label for={`allCarSelected${index}`}></label>                 
+                              </div>
+                            }
+                              </div>:
+                   <span class="notofication-close-icon"onClick={()=>getDeleteNotification(getNotification)}>        
+                   <i class='bx bxs-x-circle'></i>
+                   </span>}
+             </div>
+         </div>        
+          ):<div>No Data Found</div>}
+          <div>
+              {notification.length > 0 &&
+                  <div class="multiAccept notiMultiAccept">
+                    {allCarMultiAcceptEnable == true ? <span className="multiAcceptGrp"><button onClick={() => MultiAcceptDisable()}> Cancel </button> <button onClick={()=> deleteNotification()}> Ok </button> </span>:
+                    <button className="multiAcceptbtn" onClick={()=>{setAllCarMultiAcceptEnable(true);setAllCarAcceptAllEnable(false)}}>Delete</button> }
+                    {allCarAcceptAllEnable == true ? <span className="acceptAllGrp"><button onClick={() => AllAcceptDisable()}> Cancel </button> <button onClick={()=> deleteNotification()}> Ok </button> </span>:
+                    <button className="acceptAll"  onClick={(e)=>allCarSelectBox(notification)}>SelectAll</button> }
+                  </div>		  
+                } </div>
+        </div>
+        
+        
+    )}
 
   const logoNavigation = () => {
     if (localStorage.getItem("islogedIn") ==="false" || localStorage.getItem("islogedIn") ===null) {
@@ -63,7 +340,7 @@ const Submenu = () => {
             <div className="col-lg-4 topRight">
               <div className="rightMenu">
                 <a href="JavaScript:void(0)"><i className="icofont-globe"></i> English <i className="icofont-thin-down"></i></a>
-                <i className="bx bxl-envelope"></i> CALL US: 123 456 789
+                <i className="bx bxl-envelope"></i> CALL US: +1(223)333-6666
 			          <i className="bx bxl-phone"></i> <a href="JavaScript:void(0)">GET FREE DEMO <i className="icofont-long-arrow-right"></i></a>
               </div>
             </div>
@@ -81,15 +358,19 @@ const Submenu = () => {
               <ul className="nav__menu">
               <li className={location.pathname ==="/carList"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/carList')} >Home</a></li>
               <li className={location.pathname ==="/search"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/search')} >Search</a></li>
-              <li className={location.pathname ==="/mybids"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/mybids')} >My Bids</a></li>
+              <li className={location.pathname ==="/mybids"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/mybids')} >My Bids {myBids == null || myBids == undefined || myBids == "0" ? "":<span className="countbox">{myBids}</span>}</a></li>
               <li className={location.pathname ==="/fees"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/fees')} >Fees</a></li>
               <li className={location.pathname ==="/floor"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/floor')} >Floor</a></li>
               <li className={location.pathname ==="/transport"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/transport')} >Transport</a></li>
               <li className={location.pathname ==="/chat"? "active nav__menu-item" : "nav__menu-item"} >
-                <img alt="Menu" src={chatImg} onClick={()=>history.push('/chat')}/>
+                <img alt="Menu" src={chatImg} /><Chat/>
+                {/* <span className="countbox">{notification.length}</span> */}
+               {notificationCount == undefined || notificationCount == null || notificationCount == "0"? "" : <span className="countbox">{notificationCount}</span>}
+
               </li>
               <li className={location.pathname ==="/cart"? "active nav__menu-item" : "nav__menu-item"} >
                 <img alt="Menu" src={cartImg} onClick={()=>history.push('/cart')}/>
+               {cart == "0" || cart == undefined || cart == null ? "" : <span className="countbox">{cart}</span> }
               </li>
               <li className="topRightUser">
                 <b className="user_name">Welcome 
@@ -110,7 +391,7 @@ const Submenu = () => {
             :
             <ul>
               <li className={location.pathname ==="/"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/')} >Home</a></li>
-              <li className={location.pathname ==="/about"? "active" : ""} ><a href="JavaScript:void(0)"  onClick={()=>history.push('/about')} >About</a></li>
+              <li className={location.pathname ==="/about"? "active" : ""} ><a href="JavaScript:void(0)"  onClick={()=>history.push('/about')} >About Us</a></li>
               <li className={location.pathname ==="/fees"? "active" : ""}  ><a href="JavaScript:void(0)" onClick={()=>history.push('/fees')} >Fees</a></li>
               <li className={location.pathname ==="/contactus"? "active" : ""} ><a href="JavaScript:void(0)" onClick={()=>history.push('/contactus')}>Contactus</a></li>
              

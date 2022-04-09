@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom
 import { useIdleTimer } from 'react-idle-timer'
 import './App.css';
 import SessionConfirmationPopup from "./Component/CommonPopup/SessionConfirmationPopup"
-
+import Suggested from './Pages/SuggestedCars';
 // import Loading from './Component/Loading/Loading';
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
@@ -41,19 +41,33 @@ import AddLegalAccount  from './Pages/ManageAccount/LegalAccount/AddLegalAccount
 import AddAddress  from './Pages/ManageAccount/Address/AddAddress';
 import EditLegalAccount from './Pages/ManageAccount/LegalAccount/EditLegalAccount';
 import EditBuyer from './Pages/ManageAccount/Buyer/EditBuyer';
+import ViewBuyer from './Pages/ManageAccount/Buyer/ViewBuyer';
 import ForgotPasswordEmail from './Pages/ForgotPassword/ForgotPasswordEmail';
 import ForgotPassword from './Pages/ForgotPassword/ForgotPassword';
 import ForgotEmail from './Pages/ForgotPassword/ForgotEmail';
 import Favoritelist from './Pages/ManageAccount/FavoriteList';
 import Search from './Pages/Search';
 import Transport from './Pages/Transport';
-import MyBids from './Pages/MyBids';
+import MyBids from './Pages/MyBids/MyBids';
 import Inspection from './Pages/Inspection';
 import MakeurBid from './Pages/Makeurbid';
 import Cardetail from './Pages/Cardetail';
-import Cart from './Pages/Cart';
+import Cart from './Pages/Cart/Cart';
 import Chat from './Pages/Chat';
-import History from './Pages/ManageAccount/History';
+import History from './Pages/ManageAccount/History/History';
+import BillofSale from './Pages/ManageAccount/History/BillOfSales/BillofSale';
+import SuggestedCars from './Pages/SuggestedCars';
+import recentcars from './Pages/RecentlyAddedCars';
+import SimilarCars from './Pages/similarCarFromSeller';
+import inventoryCars from './Pages/InventoryCars';
+import InventoryCars from './Pages/InventoryCars';
+import MoreCarFromBuyer from './Pages/MoreCarFromSeller';
+import Checkout from './Pages/Checkout';
+import ScrollToTop from "./Component/scrollToTop";
+import InVoice from './Pages/ManageAccount/Invoice';
+import Invalidlink from './Pages/ForgotPassword/Invalidlink';
+import PrivacyPolicyFiles from './Pages/PrivacyPolicyFiles'
+
 function AppRouter() {
 
   const timeout = 900000;
@@ -90,12 +104,12 @@ function AppRouter() {
       {isSession && <SessionConfirmationPopup  isToggle={setIsSession}/>}
         {/* <Suspense fallback={<Loading />}> */}
           <Header /> 
+          <ScrollToTop />
           <Switch>
             <Route exact path="/" component={Home}/>
             <Route  path="/login" component={Login}/>
             <Route  path="/registration" component={Registration}/>
-            <Route  path="/contactus" component={Contactus}/>
-            <Route  path="/about" component={About}/>
+            
             <Route  path="/success" component={Success}/>
             <Route  path="/error" component={Error}/>
             <Route  path="/emailerror" component={EmailError}/>
@@ -106,6 +120,14 @@ function AppRouter() {
             <Route path="/forgotpasswordemail" component={ForgotPasswordEmail}/>
             <Route path="/forgotpassword" component={ForgotPassword}/>
             <Route path="/forgotEmail" component={ForgotEmail}/>
+            {/* <Route path="/InvalidLink" component={InvalidLink}/> */}
+          <Route path="/Invalidlink" component={Invalidlink}/>
+          <Route  path="/privacypolicy" component={PrivacyPolicyFiles}/>
+          <Route  path="/contactus" component={Contactus}/>
+            <Route  path="/about" component={About}/>
+
+
+            
 
             <PrivateRoute>
               <Route  path="/floor" component={FloorPlans}/>
@@ -117,6 +139,9 @@ function AppRouter() {
               <Route  path="/transport" component={Transport}/>
               <Route  path="/manageaccount" component={ManageAccount}/>
               <Route  path="/lotfee" component={LotFee}/>
+              <Route  path="/suggestedcars" component={SuggestedCars}/>
+              <Route  path="/Recentlyaddedcars" component={recentcars}/>
+              <Route  path="/InventoryCars" component={InventoryCars}/>
               <Route  path="/notification" component={Notification}/>
               <Route  path="/payment" component={Payment}/>
               <Route  path="/paymentinfo" component={PaymentInfo}/>
@@ -124,21 +149,29 @@ function AppRouter() {
               <Route  path="/document" component={Document}/> 
               <Route  path="/favorite" component={Favoritelist}/>
               <Route  path="/history" component={History}/>
+              <Route  path="/billofsale" component={BillofSale}/>
               <Route  path="/cart" component={Cart}/>
               <Route  path="/chat" component={Chat}/>
               <Route  path="/buyers" component={Buyers}/>
               <Route  path="/adduser" component={AddUser}/>
               <Route  path="/myprofile" component={MyProfile}/>  
-              <Route  path="/editmyprofile/:id" component={EditMyProfile}/>
-              <Route  path="/dealerinfoedit/:id" component={EditDealerInformation}/>
-              <Route  path="/addressedit/:id" component={EditAddress}/>
-              <Route  path="/legaledit/:id" component={EditLegalAccount}/>
+              <Route  path="/editmyprofile" component={EditMyProfile}/>
+              <Route  path="/dealerinfoedit" component={EditDealerInformation}/>
+              <Route  path="/addressedit" component={EditAddress}/>
+              <Route  path="/legaledit" component={EditLegalAccount}/>
               <Route  path="/legaladd" component={AddLegalAccount}/>
               <Route  path="/addressadd" component={AddAddress}/>
               <Route  path="/buyeredit/:id" component={EditBuyer}/>
+              <Route  path="/buyerview/:id" component={ViewBuyer}/>
               <Route path="/Makeurbid" component={MakeurBid}/>
               <Route path="/Inspection" component={Inspection}/>
               <Route path="/CarDetail" component={Cardetail}/>
+              <Route path="/MoreCarFromBuyer/:id" component={MoreCarFromBuyer}/>
+              <Route path="/SimilarCarFromBuyer/:id" component={SimilarCars}/>
+              <Route path="/checkout" component={Checkout}/>
+              <Route path="/Invoice" component={InVoice}/>
+
+
             </PrivateRoute>       
           </Switch>
           <Footer />

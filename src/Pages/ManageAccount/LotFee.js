@@ -6,7 +6,12 @@ import ManageAccountLinks from "../../Component/ManageAccountLinks/ManageAccount
 import API from "../../Services/BaseService";
 import '../../Component/Popup/popup.css';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
+import Loading from '../../Component/Loading/Loading';
+import Popup from '../../Component/Popup/Popup';
+import LateFee from '../../Pages/LateFee/LateFee';
+
 const LotFee = () => {
+
     const [isOpen, setIsOpen] = useState(false);
     const [popupTitle, setPopupTitle] = useState("");
     const [popupMsg, setPopupMsg] = useState("");
@@ -18,24 +23,38 @@ const LotFee = () => {
     const [lotValue, setLotValue] = useState("");
     const [lotFeeError, setLotFeeError] = useState("")
     let userDetails = ls.get('userDetails');
+    const [loading,setLoading] = useState(true);
+
+    const [isLateFee, setIsLateFee] = useState(false);
+    const [lateFeeValue, setLateFeeValue] = useState(0);
+
+	const toggleLateFee = () => {
+		setIsLateFee(!isLateFee);
+  	}
+
     const togglePopup = () => {
         setIsOpen(!isOpen);
     }
     async function getLotfee() {
         let request = {
-            buyer_id: userDetails.user_id,
+            buyer_dealer_id: userDetails.buyer_dealer_id,
         };
         const state = API.post('lot_fee/condition', request);
         state.then(res => {
             console.log("res", res.data.data)
             setLotValue(res.data.data.lot_fee);
-            setLotFee(res.data.data)
+            setLotFee(res.data.data);
+            setLoading(false);
         })
             .catch(err => { console.log(err); });
     }
     useEffect(() => {
+
         getLotfee();
+        getlateFee();
+
     }, []);
+
     // useEffect(() => {},[lotValue]);
     const updateLotValue = (data) => {
         console.log("---------------", data)
@@ -53,21 +72,21 @@ const LotFee = () => {
         //console.log("check",buyer_id)
         setLotFeeError("")
         let request = {
-            buyer_id: userDetails.user_id,
+            buyer_dealer_id: userDetails.buyer_dealer_id,
             lot_fee: lotValue,
             active: 1
         };
-        if (lotValue === 0) {
-            setLotFeeError("LotFee must be greater then zero")
-            return;
-        }
+        // if (lotValue === 0) {
+        //     setLotFeeError("LotFee must be greater then zero")
+        //     return;
+        // }
         API.post("lot_fee/add", request)
             .then((response) => {
                 console.log("res", response.data.success)
                 if (response.data.success) {
                     togglePopup()
-                    setPopupTitle("Create LotFee");
-                    setPopupMsg("LotFee Successfully Created");
+                    setPopupTitle("LotFee Update");
+                    setPopupMsg("LotFee Successfully Updated");
                     setPopupType("success");
                     setPopupActionType("close");
                     setPopupActionValue("close");
@@ -92,8 +111,27 @@ const LotFee = () => {
                 });
     }
 
+    const getlateFee=()=>{
+		let request={
+		  buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+		}
+		
+		API.post('getlatefee/condition',request).then(res=>{
+		   if(res.data.data.length){
+		  
+		 console.log("check +++++ ", res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" )
+		  const lateFeeValueStatus=res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" 
+		  setIsLateFee(lateFeeValueStatus==="yes")
+		  setLateFeeValue(res.data.data.filter(value=>value.late_fee>0)[0]?.late_fee || 0)
+		   }
+		  
+	  
+		}).catch(err=>{console.log(err);});
+	  }
+
     return (
         <div>
+            {loading?<Loading/>:
             <main id="main" className="inner-page">
                 <div id="lotfee" className="lotfee">
                     <div className="container">
@@ -145,7 +183,18 @@ const LotFee = () => {
                         popupActionValue={popupActionValue}
                         popupActionPath={popupActionPath}
                     />}
+
+
+{isLateFee && <Popup
+          isClose={false}
+          content={<>
+            <LateFee toggle={toggleLateFee} />
+          </>}
+          handleClose={toggleLateFee}
+        />} 
+
             </main>
+            }
         </div>
     )
 }

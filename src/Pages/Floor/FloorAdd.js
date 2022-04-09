@@ -11,6 +11,8 @@ import { useEffect } from 'react';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import { useForm } from "react-hook-form";
 import PhoneInput from 'react-phone-number-input/input';
+import { useDispatch, useSelector } from 'react-redux';
+import NumberFormat from 'react-number-format';
 
 const FloorAdd = () => {
 
@@ -74,7 +76,10 @@ const FloorAdd = () => {
     const [phoneNumberError, setPhoneNumberError] = useState("");
     const [dateOpenedError, setDateOpenedError] = useState("");
     const [accountOpenedError, setAccountOpenedError] = useState("");
+    const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);	
    
+    console.log("loggedIN",typeof loggedInBuyerId)
+	//console.log("buyer Id +++++++++++++",JSON.parse(loggedInBuyerId).buyer_id);
    
     const inputProps = {
         placeholder: 'DD/MM/YYYY',
@@ -205,13 +210,16 @@ const FloorAdd = () => {
             phone_no:formatMobileNO(phoneNumber),
             opened_date: moment(dateOpened).format("YYYY-MM-DD"),
             account_opened: accountOpened,
-            buyer_id:userDetails.user_id,
-            active:1
+            buyer_dealer_id:userDetails.buyer_dealer_id,
+            active:1,
+            createdBy:JSON.parse(loggedInBuyerId).buyer_id,
+			updatedBy:JSON.parse(loggedInBuyerId).buyer_id
             
         }];
         console.log("===",request)
-        
+       
         API.post("floor_plan/add", request)
+       
             .then((response) => {
                 if (response.data.success) {
                     const { data } = response;
@@ -312,10 +320,11 @@ const FloorAdd = () => {
                             </div>
                             <div className="col-sm-9 form-group">
                             <div className="tbox">
-                                <input type="number" id="creditLimit" className="textbox"  placeholder="" name="creditLimit"
-                                onChange={(e) => setCreditLimit(e.target.value)} />
-                                <label htmlFor="creditLimit" className={creditLimit !="" ? "input-has-value" : ""}>Credit Limit</label>
+                                {/* <input type="number" id="creditLimit" className="textbox"  placeholder="" name="creditLimit"
+                                onChange={(e) => setCreditLimit(e.target.value)} /> */}
                                 
+                                <NumberFormat className="textbox" thousandSeparator={true} onChange={(e) => setCreditLimit(e.target.value)} />
+                                <label htmlFor="creditLimit" className={creditLimit !="" ? "input-has-value" : ""}>Credit Limit</label>
                                 <p className="form-input-error" >{creditLimitError}</p>
                             </div>
                             </div>
@@ -380,6 +389,9 @@ const FloorAdd = () => {
                                             }}
                                         >
                                         <button onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
+                                       
+
+                                       
                                         {"<"}
                                         </button>
                                         <select
@@ -414,6 +426,7 @@ const FloorAdd = () => {
                                             autoComplete="off"
                                             selected={dateOpened}
                                             onChange={(date) => setDateOpened(date)}
+                                            minDate={moment(). toDate()}
                                             isClearable
                                             placeholderText="Date Opened"
                                             // onChangeRaw={handleDateChangeRaw}

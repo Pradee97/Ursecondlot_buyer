@@ -145,7 +145,7 @@ Popup Modal
   background: #fff;
   border-radius: 4px;
   overflow: auto;
-  top: 100px;
+  top: 50px;
   max-width: 500px;
 }
 .userlinks{

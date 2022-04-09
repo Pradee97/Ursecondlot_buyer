@@ -9,6 +9,7 @@ import StateAndCity from '../../../Component/StateAndCity/StateAndCity';
 import { useForm } from "react-hook-form";
 import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks";
 import PhoneInput from 'react-phone-number-input/input';
+import { useDispatch, useSelector } from 'react-redux';
 
 const AddAddress = () => {
     const history = useHistory();   
@@ -45,10 +46,10 @@ const AddAddress = () => {
     const [stateAndCityError, setStateAndCityError] = useState("");
     const [locationError, setLocationError] = useState("");
     const [instructionError, setInstructionError] = useState("");
-    const [state,setState]=useState("1");
-    const [city,setCity]=useState("1");
-    const [zipcode,setZipcode]=useState("1");
-
+    // const [state,setState]=useState("1");
+    // const [city,setCity]=useState("1");
+    // const [zipcode,setZipcode]=useState("1");
+    const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
 
     function formatMobileNO(value){
         var x = value.replace(/\D/g, '').match(/(\d{1})(\d{3})(\d{3})(\d{4})/);
@@ -145,15 +146,18 @@ const AddAddress = () => {
                 first_name: firstName,
                 last_name: lastName,
                 address: address,
-                phone_no: formatMobileNO(primaryPhone),
-                mobile_no: formatMobileNO(mobilePhone),
-                city_id: city,
-                state_id: state,
+                phone_no: primaryPhone.substring(2, 12),
+                mobile_no: mobilePhone.substring(2, 12),
+                city_id: cityName,
+                state_id: stateName,
                 zipcode_id: zipCodeId,
-                buyer_id:userDetails.user_id,
+                buyer_dealer_id:userDetails.buyer_dealer_id,
                 location:location,
                 instructions:instruction,
-                active:1           
+                active:1,
+                createdBy:JSON.parse(JSON.stringify(loggedInBuyerId)).buyer_id,
+                updatedBy:JSON.parse(JSON.stringify(loggedInBuyerId)).buyer_id
+                
             };
             console.log("===",request)  
         API.post("buyer_address/add", request)
@@ -267,7 +271,7 @@ const getZipCodeId = (zipData) => {
                             <div className="tbox ">
                                 <PhoneInput  id="primaryPhone" name="primaryPhone" country="US" class="textbox" maxLength="14" minLength="14" value={primaryPhone}
                                 onChange={handleOnChange} ></PhoneInput>
-                                <label htmlFor="companyName" className={"input-has-value"}>Primary phone</label>
+                                <label htmlFor="companyName" className={"input-has-value"}>Primary phone #</label>
                                 <p className="form-input-error" >{primaryPhoneError}</p>
                             </div>
                             </div>
@@ -285,7 +289,7 @@ const getZipCodeId = (zipData) => {
                            
                                 <PhoneInput  id="mobilePhone" name="mobilePhone"  country="US" class="textbox" maxLength="14" minLength="14" value={mobilePhone}
                                 onChange={handleOnChanges} ></PhoneInput>
-                                <label htmlFor="branchName" className={"input-has-value"}>Mobile phone</label>
+                                <label htmlFor="branchName" className={"input-has-value"}>Mobile phone #</label>
                                 <p className="form-input-error" >{mobilePhoneError}</p>
                             </div>
                             </div>
@@ -302,7 +306,7 @@ const getZipCodeId = (zipData) => {
                                 setCityValue={getCityName}
                                 setZipcodeValue={getZipCodeId}
                             />
-                            <div className="col-sm-12 form-group">
+                            <div className="col-sm-12 form-group selectboxError">
                             <p className="form-input-error"> {stateAndCityError}</p>
                             </div>
 

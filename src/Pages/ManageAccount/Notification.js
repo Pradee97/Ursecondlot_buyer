@@ -10,11 +10,14 @@ import Popup from '../../Component/Popup/Popup';
 import '../../Component/Popup/popup.css';
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import 'antd/dist/antd.css';
-
+import Loading from '../../Component/Loading/Loading';
+import LateFee from '../../Pages/LateFee/LateFee';
 
 const Notification = () => {
+
 	const history = useHistory();
 	const [isOpen, setIsOpen] = useState(false);
+	const [loading,setLoading] = useState(true);
 
 	const togglePopup = () => {
 		setIsOpen(!isOpen);
@@ -34,6 +37,15 @@ const Notification = () => {
 	const [fsms, setFavSms] = useState("no");
 	const [popupcontent, setPopupcontent] = useState("");
 	let userDetails = ls.get('userDetails');
+
+
+    const [isLateFee, setIsLateFee] = useState(false);
+    const [lateFeeValue, setLateFeeValue] = useState(0);
+
+	const toggleLateFee = () => {
+		setIsLateFee(!isLateFee);
+  	}
+
 	const content = (
 		<div>
 			<Popover>
@@ -48,20 +60,21 @@ const Notification = () => {
 
 	async function getNotification() {
 		let request = {
-			buyer_id: userDetails.user_id,
+			buyer_dealer_id: userDetails.buyer_dealer_id,
 
 		};
 		const state = API.post('notification/condition', request);
-		state.then(res => {
+		state.then(res => {setLoading(false)
 			console.log("res", res.data.data)
 			setNotification(res.data.data);
 			setEmail(res.data.data.email)
 			setSms(res.data.data.sms)
 			setPush_notification(res.data.data.push_notification)
 			setFavEmail(res.data.data.favorite_email)
-			setFavSms(res.data.data.favorite_sms)
+			setFavSms(res.data.data.favorite_sms) 
+			setLoading(false)
 		})
-			.catch(err => { console.log(err); });
+		    .catch(err => { console.log(err); });
 	}
 	useEffect(() => {
 		getNotification();
@@ -71,7 +84,7 @@ const Notification = () => {
 	const savehandleclick = () => {
 
 		let request = {
-			buyer_id: userDetails.user_id,
+			buyer_dealer_id: userDetails.buyer_dealer_id,
 			email: email,
 			sms: sms,
 			push_notification: push_notification,
@@ -116,9 +129,34 @@ const Notification = () => {
 
 	}
 
+	const getlateFee=()=>{
+		let request={
+		  buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+		}
+		
+		API.post('getlatefee/condition',request).then(res=>{
+		   if(res.data.data.length){
+		  
+		 console.log("check +++++ ", res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" )
+		  const lateFeeValueStatus=res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" 
+		  setIsLateFee(lateFeeValueStatus==="yes")
+		  setLateFeeValue(res.data.data.filter(value=>value.late_fee>0)[0]?.late_fee || 0)
+		   }
+		  
+	  
+		}).catch(err=>{console.log(err);});
+	  }
+  
+	useEffect(() => {
+  
+	  getlateFee();
+
+  
+	}, []);
+
 	return (
 		<div>
-
+    {loading?<Loading/>: 
 			<main id="main" className="inner-page">
 
 
@@ -339,7 +377,17 @@ const Notification = () => {
 						popupActionValue={popupActionValue}
 						popupActionPath={popupActionPath}
 					/>}
+
+{isLateFee && <Popup
+          isClose={false}
+          content={<>
+            <LateFee toggle={toggleLateFee} />
+          </>}
+          handleClose={toggleLateFee}
+        />} 
+
 			</main>
+} 
 		</div>
 	);
 };

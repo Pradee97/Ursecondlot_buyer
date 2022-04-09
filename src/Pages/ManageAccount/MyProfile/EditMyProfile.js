@@ -10,19 +10,23 @@ import { useForm } from "react-hook-form";
 import ls from 'local-storage';
 import PhoneInput from 'react-phone-number-input/input';
 import FileBase64 from 'react-file-base64';
+import { useDispatch, useSelector } from 'react-redux';
+import Loading from '../../../Component/Loading/Loading';
+import Popup from '../../../Component/Popup/Popup';
+import LateFee from '../../../Pages/LateFee/LateFee';
 
-const EditMyProfile = () => {
+const EditMyProfile = (props) => {
+
     const history = useHistory();
     let { register, updateMyProfile, formState: { errors },reset  } = useForm();
-    const { id } = useParams();
-    const { user_id } = useParams();
-    const { buyer_id } = useParams();
+    // const { id } = useParams();
+    const {id} = props.location.state;
     const userDetails=ls.get('userDetails');
     const [myProfileObjc, setMyProfileObj] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [primaryPhone, setPrimaryPhone] = useState("");
-    const [mobilePhone, setMobilephone] = useState("");
+    const [mobilePhone, setMobilePhone] = useState("");
     const [emailId, setEmailId] = useState("");
     const [address, setAddress] = useState("");
     const [city, setCity] = useState("");
@@ -30,6 +34,7 @@ const EditMyProfile = () => {
     const [zipcode, setZipcode] = useState("");
     // const [locationName, setLocationName] = useState("");
     const [isOpen, setIsOpen] = useState(false);
+   
     
     const [popupTitle, setPopupTitle] = useState ("");
     const [popupMsg, setPopupMsg] = useState ("");
@@ -43,6 +48,29 @@ const EditMyProfile = () => {
     const [stateAndCityError, setStateAndCityError] = useState("")
     const [image,setImage] = useState("");
     const [doc, setDoc] = useState("");
+    const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
+    // const buyer_id=JSON.parse(JSON.stringify(loggedInBuyerId)).buyer_id;
+    // const buyer_dealer_id=JSON.parse(JSON.stringify(loggedInBuyerId)).buyer_dealer_id;
+    const [type,setType]=useState("");
+    const [cellFlag,setCellFlag] = useState(false);
+    const [alterPhoneFlag,setAlterPhoneFlag] = useState(false);
+    const buyer_id=JSON.parse((loggedInBuyerId)).buyer_id;
+    const buyer_dealer_id=JSON.parse((loggedInBuyerId)).buyer_dealer_id;
+
+console.log("buyer_id",buyer_id)
+console.log("loggedInBuyerId",loggedInBuyerId)
+console.log("useSelector(state => state.LoginReducer.payload)",useSelector(state => state.LoginReducer.payload))
+
+   
+
+    const [loading,setLoading] = useState(true);
+
+    const [isLateFee, setIsLateFee] = useState(false);
+    const [lateFeeValue, setLateFeeValue] = useState(0);
+
+	const toggleLateFee = () => {
+		setIsLateFee(!isLateFee);
+  	}
 
     const togglePopup = () => {
         setIsOpen(!isOpen);
@@ -63,16 +91,16 @@ const EditMyProfile = () => {
 
     async function fetchMyProfileDetails() {
         let request = {
-            buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+            buyer_id: buyer_dealer_id,
         };
         
-        const state = API.post('user_profile/condition',request);
+        const state = API.post('buyer_profile/condition',request);
         state.then(res => {
             console.log("res", res.data.data)
             setFirstName(res.data.data[0].first_name);
             setLastName(res.data.data[0].last_name);
-            setPrimaryPhone(res.data.data[0].phone_no);
-            setMobilephone(res.data.data[0].mobile_no);           
+            // setPrimaryPhone(res.data.data[0].phone_no);
+            // setMobilephone(res.data.data[0].mobile_no);           
             setEmailId(res.data.data[0].email);
             setAddress(res.data.data[0].address);
             setCity(res.data.data[0].city_name);
@@ -82,6 +110,7 @@ const EditMyProfile = () => {
             
             // setLocationName(res.data.data[0].address);
             setMyProfileObj(res.data.data[0]);
+            
         })
             .catch(err => { console.log(err); });
     }
@@ -127,17 +156,29 @@ const EditMyProfile = () => {
             setAddressError("Address must not exceed 150 characters")
             return;
         }
-        if(!(typeof city==='string'?myProfileObjc.city_id:city) || !(typeof state==='string'?myProfileObjc.state_id:state) || !(zipcode===myProfileObjc.zipcode?myProfileObjc.zipcode_id:zipcode)){
-            setStateAndCityError("State, City and Zipcode is required")
+        // if(!(typeof city==='string'?myProfileObjc.city_id:city) || !(typeof state==='string'?myProfileObjc.state_id:state) || !(zipcode===myProfileObjc.zipcode?myProfileObjc.zipcode_id:zipcode)){
+        //     setStateAndCityError("State, City and Zipcode is required")
+        //     return
+        // }
+        if(!(typeof state==='string'?myProfileObjc.state_id:state)){
+            setStateAndCityError("state is required")
             return
+        }
+        if(!(typeof city==='string'?myProfileObjc.city_id:city)){
+            setStateAndCityError("city is required")
+             return
+        }
+        if(!(zipcode===myProfileObjc.zipcode?myProfileObjc.zipcode_id:zipcode)){
+            setStateAndCityError("zipcode is required")
+             return
         }
 
         let request = {
-            user_id:id,
+            buyer_id:id,
             first_name: firstName,
             last_name: lastName,
-            phone_no: formatMobileNO(primaryPhone),
-            mobile_no: formatMobileNO(mobilePhone),           
+            phone_no: cellFlag === true ? primaryPhone.substring(2, 12) : myProfileObjc?.phone_no,
+            mobile_no: alterPhoneFlag === true ? mobilePhone.substring(2, 12) : myProfileObjc?.mobile_no,           
             email: emailId,
             // city_id: city,
             // state_id: state,
@@ -147,10 +188,11 @@ const EditMyProfile = () => {
             zipcode_id: zipcode===myProfileObjc.zipcode?myProfileObjc.zipcode_id:zipcode,
             address: address,
             active:1,
-            image:doc===""?doc:doc.length>0?doc:[doc]
-            // buyer_id: userDetails.user_id
+            image:doc===""?doc:doc.length>0?doc:[doc],
+            updatedBy:buyer_id
            
         };
+        if( type == "" ){
         API
             .post("myProfile/update" ,request)
             .then((response) => {
@@ -186,26 +228,35 @@ const EditMyProfile = () => {
                 setPopupActionType("close");
                 setPopupActionValue("close");
             });
+        }else{
+            setType("0");
+        }
 
     }
     const getFiles = (file) => {
         console.log("======>",file)
-        setDoc(file);
-    }
+        setType("")
+        console.log("================>",file.type)
+        if(file.type.includes("jpg") || file.type.includes("jpeg") || file.type.includes("png")){
+            setDoc(file);
+        }else{
+            setType("0");
+        }
+      }
 
     useEffect(() => {
         //fetchMyProfileDetails();
         let request = {
-            buyer_id: JSON.parse(localStorage.getItem("userDetails")).user_id,
+            buyer_id: buyer_id,
         };
         
-        const state = API.post('user_profile/condition',request);
+        const state = API.post('buyer_profile/condition',request);
         state.then(res => {
             console.log("res", res.data.data)
             setFirstName(res.data.data[0].first_name);
             setLastName(res.data.data[0].last_name);
-            setPrimaryPhone(res.data.data[0].phone_no);
-            setMobilephone(res.data.data[0].mobile_no);           
+            // setPrimaryPhone(res.data.data[0].phone_no);
+            // setMobilephone(res.data.data[0].mobile_no);           
             setEmailId(res.data.data[0].email);
             setAddress(res.data.data[0].address);
             setCity(res.data.data[0].city_name);
@@ -214,18 +265,72 @@ const EditMyProfile = () => {
             // setLocationName(res.data.data[0].address);
             setMyProfileObj(res.data.data[0]);
             reset(res.data.data[0]);
-            setImage(res.data.data[0].image)
+            setImage(res.data.data[0].image);
+            formatPhone(res.data.data[0].phone_no)
+            if(res.data.data[0].mobile_no != ""){
+            formatMobile(res.data.data[0].mobile_no);
+            }
+            setLoading(false);
+           
         })
             .catch(err => { console.log(err); });
-    }, [reset]);
-    function handleOnChange(value) {
+    }, [reset,buyer_id,buyer_dealer_id]);
+
+     const getlateFee=()=>{
+        let request={
+            buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+        }
+        
+        API.post('getlatefee/condition',request).then(res=>{
+           if(res.data.data.length){
+            
+       console.log("check +++++ ", res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" )
+            const lateFeeValueStatus=res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" 
+            setIsLateFee(lateFeeValueStatus==="yes")
+            setLateFeeValue(res.data.data.filter(value=>value.late_fee>0)[0]?.late_fee || 0)
+           }
+          
+    
+        }).catch(err=>{console.log(err);});
+    }
+
+    useEffect(() => {
+
+        getlateFee();
+
+    }, []);
+    function formatPhone(value){
+        var x = value.replace(/\D/g, '').match(/(\d{3})(\d{3})(\d{4})/);
+        console.log("formatPhoneNumber x",x);
+        value = '+1'+ '('+ x[1] +')' + x[2] + '-' + x[3];
+        console.log("formatPhoneNumber",value);
+        return setPrimaryPhone(value);
+      }
+      function formatMobile(value){
+        var x = value.replace(/\D/g, '').match(/(\d{3})(\d{3})(\d{4})/);
+        console.log("formatPhoneNumber x",x);
+        value = '+1'+ '('+ x[1] +')' + x[2] + '-' + x[3];
+        console.log("formatPhoneNumber",value);
+        return setMobilePhone(value);
+      }
+    const handleOnChangePhone = (value) => {
         setPrimaryPhone(value);
-     }
-     function handleOnChanges(value) {
-        setMobilephone(value);
-     }
+        setCellFlag(true) 
+          console.log("inside handle")
+    
+          console.log("phn no", value)
+       }
+    
+       const handleOnChangeMobile = (value) => {
+        setMobilePhone(value);
+        setAlterPhoneFlag(true) 
+          console.log("inside handle")
+    
+          console.log("phn no", value)
+       }
     return (
         <div>
+        {loading?<Loading/>:
             <main id="main" className="inner-page">
             <div id="addaddress" className="addaddress_block">
             <div className="container" >
@@ -251,7 +356,8 @@ const EditMyProfile = () => {
                                     {image==="" && doc===""?<img alt="" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} />:                                    
                                     doc===""?<img alt=""  src={image} />:
                                     <img alt=""  src={doc.base64} />}  
-                                    <span className="proCamera"></span>                                  
+                                    <span className="proCamera"></span>        
+                                    {type==="0"?<p className="form-input-error">Upload only Image Format </p>:""}                          
                                     <FileBase64 onDone={getFiles} type="hidden" />
                                     
                                 </div>
@@ -280,10 +386,10 @@ const EditMyProfile = () => {
                             </div>
                             <div className="col-sm-8 form-group ">
                             <div className="tbox ">
-                            <PhoneInput value={myProfileObjc.phone_no} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChange} ></PhoneInput>
+                            <PhoneInput value={primaryPhone} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChangePhone} ></PhoneInput>
                             {/* <MuiPhoneNumber value={myProfileObjc.phone_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={handleOnChange} ></MuiPhoneNumber> */}
                                 {/* <input type="text" defaultValue={myProfileObjc.phone_no} className="form-control textbox" placeholder=""  onChange={(e) => setPrimaryPhone(e.target.value)} /> */}
-                                <label for="phone_no" className={primaryPhone !="" ? "input-has-value" : ""}>Primary Phone</label>
+                                <label for="phone_no" className={primaryPhone !="" ? "input-has-value" : ""}>Primary Phone #</label>
                             </div>
                                 <p className="form-input-error" >{primaryPhoneError}</p>
                             </div>
@@ -297,10 +403,10 @@ const EditMyProfile = () => {
                             </div>
                             <div className="col-sm-8 form-group ">
                             <div className="tbox ">
-                            <PhoneInput value={myProfileObjc.mobile_no} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChanges} ></PhoneInput>
+                            <PhoneInput value={mobilePhone} country="US" className="textbox" maxLength="14" minLength="14" onChange={handleOnChangeMobile} ></PhoneInput>
                             {/* <MuiPhoneNumber value={myProfileObjc.mobile_no} defaultCountry={'us'} onlyCountries={['us']}  className="textbox" onChange={handleOnChanges} ></MuiPhoneNumber> */}
                                 {/* <input type="text" defaultValue={myProfileObjc.mobile_no} className="form-control textbox" placeholder=""  onChange={(e) => setMobilephone(e.target.value)} /> */}
-                                <label for="mobile_no" className={mobilePhone !="" ? "input-has-value" : ""}>Mobile Phone</label>
+                                <label for="mobile_no" className={mobilePhone !="" ? "input-has-value" : ""}>Mobile Phone #</label>
                             </div>
                                 <p className="form-input-error" >{mobilePhoneError}</p>
                             </div>                      
@@ -327,7 +433,7 @@ const EditMyProfile = () => {
                                 defaultCityValue = {city}
                                 defaultZipcodeValue = {zipcode}
                             />
-                            <p className="form-input-error"> {stateAndCityError} </p>
+                            <p className="form-input-error ml-3"> {stateAndCityError} </p>
                             {/* <div className="col-sm-12 form-group">
                             <div className="tbox">
                                 <input type="text" defaultValue={city} className="form-control textbox" placeholder="" required onChange={(e) => setCity(e.target.value)} />
@@ -382,7 +488,17 @@ const EditMyProfile = () => {
                     popupActionValue= {popupActionValue}
                     popupActionPath={popupActionPath}
                 />}
+
+{isLateFee && <Popup
+          isClose={false}
+          content={<>
+            <LateFee toggle={toggleLateFee} />
+          </>}
+          handleClose={toggleLateFee}
+        />} 
+
             </main>
+}
         </div>
 
 

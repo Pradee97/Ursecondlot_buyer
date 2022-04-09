@@ -11,12 +11,18 @@ import CommonPopup from '../../../Component/CommonPopup/CommonPopup';
 import StateAndCity from '../../../Component/StateAndCity/StateAndCity'
 import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from 'react-redux';
+import Loading from '../../../Component/Loading/Loading';
+import Popup from '../../../Component/Popup/Popup';
+import LateFee from '../../../Pages/LateFee/LateFee';
+import Datetime from 'react-datetime';
 
+const EditLegalAccount = (props) => {
 
-const EditLegalAccount = () => {
     const history = useHistory();
     let { register, updateLegalAccount, formState: { errors },reset  } = useForm();
-    const { id } = useParams();
+    // const { id } = useParams();
+    const {id} = props.location.state;
     const [accountObjc, setAccountObj] = useState("");
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
@@ -41,8 +47,18 @@ const EditLegalAccount = () => {
     const [dealershipLicenseexpError, setDealershipLicenseexpError] = useState("");
     const [taxidexpError, setTaxidexpError] = useState("");
     const [stateAndCityError, setStateAndCityError] = useState("")
-
+    const [loading,setLoading] = useState(true);
     const [isOpen, setIsOpen] = useState(false);
+
+    const [isLateFee, setIsLateFee] = useState(false);
+    const [lateFeeValue, setLateFeeValue] = useState(0);
+    const yesterday = moment().subtract(1, 'day');
+    const disablePastDt = current => {
+      return current.isAfter(yesterday);
+    };
+	const toggleLateFee = () => {
+		setIsLateFee(!isLateFee);
+  	}
  
     const togglePopup = () => {
       setIsOpen(!isOpen);
@@ -58,6 +74,7 @@ const EditLegalAccount = () => {
     const [popupActionType, setPopupActionType] = useState ("");
     const [popupActionValue, setPopupActionValue] = useState ("");
     const [popupActionPath, setPopupActionPath] = useState ("")
+    const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);
   
     const getStateName=(stateData)=>{
         setState(stateData)
@@ -91,12 +108,13 @@ const EditLegalAccount = () => {
             setCity(res.data.data[0].city_name);
             setState(res.data.data[0].state_name);
             setZipcode(res.data.data[0].zipcode);
-            setDealershipLicenseexp(new Date(res.data.data[0].dealer_license_exp));
-            setTaxidexp(new Date(res.data.data[0].tax_id_exp));
+            setDealershipLicenseexp(res.data.data[0].dealer_license_exp);
+            setTaxidexp(res.data.data[0].tax_id_exp);
 
             setAccountObj(res.data.data[0])
             console.log("-====res.data.data[0].dealer_license_exp=====>",res.data.data[0].dealer_license_exp)
             console.log("================>",moment(accountObjc.dealer_license_exp).format('YYYY-MM-DD'))
+            
         })
             .catch(err => { console.log(err); });
     }
@@ -133,7 +151,8 @@ const EditLegalAccount = () => {
             dealer_license_exp: dealershipLicenseexp,
             tax_id_exp: taxidexp,
             bussiness_name:legalBusinessname,
-            active:1
+            active:1,
+            updatedBy:JSON.parse(JSON.stringify(loggedInBuyerId)).buyer_id 
            
         };
 
@@ -201,10 +220,24 @@ const EditLegalAccount = () => {
             setTaxidexpError("Tax Id exp is required")
             return;
         }
-        if(!(typeof city==='string'?accountObjc.city_id:city) || !(typeof state==='string'?accountObjc.state_id:state) || !(zipcode===accountObjc.zipcode?accountObjc.zipcode_id:zipcode)){
-            setStateAndCityError("State, City and Zipcode is required")
+        // if(!(typeof city==='string'?accountObjc.city_id:city) || !(typeof state==='string'?accountObjc.state_id:state) || !(zipcode===accountObjc.zipcode?accountObjc.zipcode_id:zipcode)){
+        //     setStateAndCityError("State, City and Zipcode is required")
+        //     return
+        // }
+
+        if(!(typeof state==='string'?accountObjc.state_id:state)){
+            setStateAndCityError("state is required")
             return
         }
+        if(!(typeof city==='string'?accountObjc.city_id:city)){
+            setStateAndCityError("city is required")
+             return
+        }
+        if(!(zipcode===accountObjc.zipcode?accountObjc.zipcode_id:zipcode)){
+            setStateAndCityError("zipcode is required")
+             return
+        }
+
 
         API
             .post('legal_manage/update', request)
@@ -260,15 +293,56 @@ const EditLegalAccount = () => {
         setCity(res.data.data[0].city_name);
         setState(res.data.data[0].state_name);
         setZipcode(res.data.data[0].zipcode);
-        setDealershipLicenseexp(new Date(res.data.data[0].dealer_license_exp));
-        setTaxidexp(new Date(res.data.data[0].tax_id_exp));
+        setDealershipLicenseexp(res.data.data[0].dealer_license_exp);
+        setTaxidexp(res.data.data[0].tax_id_exp);
         setAccountObj(res.data.data[0]);
         reset(res.data.data[0]);
+        setLoading(false);
+        
     })
         .catch(err => { console.log(err); });
     }, [reset]);
+
+    const getlateFee=()=>{
+        let request={
+            buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+        }
+        
+        API.post('getlatefee/condition',request).then(res=>{
+           if(res.data.data.length){
+            
+       console.log("check +++++ ", res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" )
+            const lateFeeValueStatus=res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" 
+            setIsLateFee(lateFeeValueStatus==="yes")
+            setLateFeeValue(res.data.data.filter(value=>value.late_fee>0)[0]?.late_fee || 0)
+           }
+          
+    
+        }).catch(err=>{console.log(err);});
+    }
+
+    useEffect(() => {
+
+        getlateFee();
+
+    }, []);
+    const inputProps1 = {
+        placeholder: taxidexp,
+        // value : expiration
+        };
+    const Date1 = (event) => {
+        setTaxidexp(event.format("YYYY/MM/DD"))
+        }
+    const inputProps = {
+    placeholder: dealershipLicenseexp,
+    // value : expiration
+    };
+    const Date = (event) => {
+        setDealershipLicenseexp(event.format("YYYY/MM/DD"))
+        }
     return (
         <div>
+          {loading?<Loading/>:
             <main id="main" className="inner-page">
             <div id="addaddress" className="addaddress_block">
             <div className="container" >
@@ -344,35 +418,38 @@ const EditLegalAccount = () => {
                                 defaultCityValue = {city}
                                 defaultZipcodeValue = {zipcode}
                             />
+                             <div className="col-sm-12 form-group selectboxError">
                             <p className="form-input-error"> {stateAndCityError} </p>
+                            </div>
                             <div className="col-sm-12 form-group datePickerBlock">
                             <div className="tbox">  
-                                 {/* <input type="date" defaultValue={accountObjc.dealer_license_exp===undefined?"":accountObjc.dealer_license_exp.substring(0,10)} 
-                                 className="form-control textbox" placeholder=""  onChange={(e) => setDealershipLicenseexp(e.target.value)} /> */}
-                                 <DatePicker
+                            <Datetime inputProps={ inputProps } timeFormat={false} dateFormat="YYYY/MM/DD" 
+                                    name="Date" isValidDate={disablePastDt} onChange={Date} 
+                                     id="meeting_date"/>
+                                 {/* <DatePicker
                                     className="form-control textbox" name="dealershipLicenseexp" id="dealershipLicenseexp"                                                        
                                     autoComplete="off"
                                     selected={ dealershipLicenseexp == null ? null : dealershipLicenseexp }
                                     onChange={(date) => setDealershipLicenseexp(date)}
                                     placeholderText="DOJ"
                                     onChangeRaw={handleDateChangeRaw}
-                                />
+                                /> */}
                                 <label htmlFor="first_name" className={dealershipLicenseexp !="" ? "input-has-value" : ""}>Dealership license exp</label>
                             </div> <p className="form-input-error" >{dealershipLicenseexpError}</p>
                             </div>
                             <div className="col-sm-12 form-group datePickerBlock">
                             <div className="tbox">
-                                {/* <input type="date" 
-                                defaultValue={accountObjc.tax_id_exp===undefined?"":accountObjc.tax_id_exp.substring(0,10)} 
-                                className="form-control textbox" placeholder="" onChange={(e) => setTaxidexp(e.target.value)} /> */}
-                                <DatePicker
+                            <Datetime inputProps={ inputProps1 } timeFormat={false} dateFormat="YYYY/MM/DD" 
+                                    name="Date" isValidDate={disablePastDt} onChange={Date1} 
+                                     id="meeting_date"/>
+                                {/* <DatePicker
                                     className="form-control textbox" name="taxidexp" id="taxidexp"                                                        
                                     autoComplete="off"
                                     selected={ taxidexp == null ? null : taxidexp }
                                     onChange={(date) => setTaxidexp(date)}
                                     placeholderText="DOJ"
                                     onChangeRaw={handleDateChangeRaw}
-                                />
+                                /> */}
                                 <label htmlFor="first_name" className={taxidexp!="" ? "input-has-value" : ""}>Tax id exp</label>
                             </div><p className="form-input-error" >{taxidexpError}</p>
                             </div>
@@ -403,8 +480,17 @@ const EditLegalAccount = () => {
                     popupActionValue= {popupActionValue}
                     popupActionPath={popupActionPath}
                 />}
+
+{isLateFee && <Popup
+          isClose={false}
+          content={<>
+            <LateFee toggle={toggleLateFee} />
+          </>}
+          handleClose={toggleLateFee}
+        />} 
+
             </main>
-          
+}
         </div>
 
 

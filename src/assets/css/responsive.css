@@ -1,4 +1,4 @@
-@media (max-width: 1700px) {
+@media only screen and (max-width: 1700px) {
 	
     #topbar .col-lg-8 {
         -ms-flex: 0 0 60%;
@@ -9,6 +9,23 @@
         -ms-flex: 0 0 40%;
         flex: 0 0 40%;
         max-width: 40%;
+    }
+    .dealer-cars .cars-prices .cta-btns, .dealer-cars .cars-prices .cta-btns-primary, .other-dealer-cars .cars-prices .cta-btns-primary, .other-dealer-cars .cars-prices .cta-btns{
+        padding:5px 10px !important;
+        margin-right: 10px !important;
+    }
+    .buyNowBlock .car-btns-primary.buyitBtn{
+        width: 100%;
+    }
+    .buyNowBlock .makeBidBtn{
+        width: 100%;
+        display: block;
+        padding: 0;
+    }
+    .buyNowBlock .cars-buy-btns-primary {
+        width: 100%;
+        display: block;
+        text-align: center;
     }
 }
 
@@ -44,6 +61,18 @@ padding-right: 20px;
     padding: 0 20px;
 }
 
+.dealer-cars .cars-prices .cta-btns-primary{
+    padding: 10px
+}
+
+.cars-prices a{
+   
+    margin-bottom: 0;
+}
+img.carImg {
+    height: 220px !important;
+    max-width: 100%;
+}
 	
 }
 
@@ -58,6 +87,20 @@ padding-right: 20px;
     .search-cars .cars-prices a, .search-cars .cars-prices .cta-btns, .search-cars .cars-prices .cta-btns-primary{
         margin: 3px;
     }
+    .dealer-cars .col-md-3, .other-dealer-cars  .col-md-3 {
+        flex: 25% 1 !important;
+        max-width: 25% !important;
+    }
+    img.carImg {
+        height: 200px;
+    }
+    .dealer-cars .cars-prices .cta-btns, .other-dealer-cars .cars-prices .cta-btns{
+        font-size: 16px;
+    }
+    .dealer-cars .cars-content h3 a, .other-dealer-cars .cars-content h3 a{
+        font-size: 16px;
+    }
+   
         
 }
 
@@ -67,8 +110,19 @@ padding-right: 20px;
     height: 485px;
 }
 
-	
-	
+.carspecifation .container{
+    max-width: 100%;
+}
+
+.historyPage .lotfee-inner .cars-prices .cta-btns{
+    padding: 8px 10px;
+    font-size: 14px;
+}
+.historyPage .lotfee-inner .cars-prices .cta-btns-primary{
+    font-size: 14px;
+    padding: 8px;
+}
+
 }
 
 @media (max-width: 1335px) {
@@ -88,9 +142,18 @@ padding-right: 20px;
 #hero {  
     height: 450px;
 }
-	
-	
-	
+
+.sliderBlock p {
+    width: 100% !important;
+    text-align: left !important;
+}
+
+.owl-carousel .cars-prices .cta-btns{
+       margin-bottom: 10px;
+  }	
+  a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
+   margin-top: 10px !important;
+  }
 	
 }
 @media (max-width: 1300px) {
@@ -136,6 +199,11 @@ padding-right: 20px;
 }
 .adduserpageforminner .form-group label {    
     font-size: 14px!important;
+}
+
+.dealer-cars .col-md-3, .other-dealer-cars .col-md-3 {
+    flex: 33.33% 1 !important;
+    max-width: 33.33% !important;
 }
 
 	
@@ -304,6 +372,12 @@ padding-right: 20px;
 		display: inline-block;
 		float: none;
 	}
+
+    .carspecifationblock .col-lg-2{
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    
 	
 	
 }
@@ -364,9 +438,8 @@ padding-right: 20px;
 	
 	
 	
-	
-	
 }
+
 @media (max-width: 480px) {
 	
 	.slider-banner-image {

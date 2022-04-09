@@ -7,8 +7,12 @@ import API from "../../../Services/BaseService";
 import ManageAccountLinks from "../../../Component/ManageAccountLinks/ManageAccountLinks";
 import CommonPopup from '../../../Component/CommonPopup/CommonPopup';
 import { Button } from 'antd';
+import Loading from '../../../Component/Loading/Loading';
+import Popup from '../../../Component/Popup/Popup';
+import LateFee from '../../../Pages/LateFee/LateFee';
 
 const Buyers = () => {
+
     const history = useHistory();
     let userDetails = ls.get('userDetails');
     const [userList,setUserList] = useState("");
@@ -21,18 +25,28 @@ const Buyers = () => {
     const [popupActionValue, setPopupActionValue] = useState ("");
     const [popupActionPath, setPopupActionPath] = useState ("");
     const [oldUserList,setOldUserList]=useState ("");
+    const [loading,setLoading] = useState(true);
+
+    const [isLateFee, setIsLateFee] = useState(false);
+    const [lateFeeValue, setLateFeeValue] = useState(0);
+
+	const toggleLateFee = () => {
+		setIsLateFee(!isLateFee);
+  	}
+
     const togglePopup = () => {
         setIsOpen(!isOpen);
       }
     async function getuserDetails() {
         let request = {
-            dealer_id: userDetails.dealer_id
+            buyer_dealer_id: userDetails.buyer_dealer_id
         };
         const state = API.post('user_list/condition', request);
         state.then(res => {
             console.log("res", res.data.data)
             setOldUserList(res.data.data);
             setUserList(res.data.data);
+            setLoading(false);
         })
             .catch(err => { console.log(err); });
     }
@@ -40,7 +54,7 @@ const Buyers = () => {
         console.log("=====data=======>",data)        
         let request={
             data: data,
-            dealer_id:userDetails.dealer_id
+            buyer_dealer_id:userDetails.buyer_dealer_id
         }
         if(data!==""){
         API.post("userSearch/condition",request)
@@ -72,13 +86,43 @@ const Buyers = () => {
         }
     }
     function onHandleEdit(e) {
-        history.push("/buyeredit/"+e);
+        history.push("/buyerview/"+e);
       }
+
+      const getlateFee=()=>{
+        let request={
+            buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+        }
+        
+        API.post('getlatefee/condition',request).then(res=>{
+           if(res.data.data.length){
+            
+       console.log("check +++++ ", res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" )
+            const lateFeeValueStatus=res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" 
+            setIsLateFee(lateFeeValueStatus==="yes")
+            setLateFeeValue(res.data.data.filter(value=>value.late_fee>0)[0]?.late_fee || 0)
+           }
+          
+    
+        }).catch(err=>{console.log(err);});
+    }
+
     useEffect(() => {
+
+        getlateFee();
         getuserDetails();
+
     }, []);
+    function formatMobileNO(value){
+        var x = value.replace(/\D/g, '').match(/(\d{3})(\d{3})(\d{4})/);
+        console.log("value of x",x);
+        value = '+1 '+ '('+ x[1] +') ' + x[2] + '-' + x[3];
+        console.log("mobileno",value);
+        return value;
+     }
     return (
         <div>
+             {loading?<Loading/>:
             <main id="main" className="inner-page">
    
             <div id="adduserpage" className="adduserpage">
@@ -120,8 +164,7 @@ const Buyers = () => {
                                                 <th className="th_id">ID</th>
                                                 <th className="th_name">Name</th>
                                                 <th className="th_img">Image</th>
-                                                <th className="th_phone">Phone</th>
-                                                {/* <th>Email</th> */}
+                                                <th className="th_phone">Phone #</th>
                                                 <th className="th_privileges">Privileges</th>
                                                 <th className="th_status">Status</th>
                                                 <th className="th_action">Action</th>
@@ -129,18 +172,18 @@ const Buyers = () => {
                                         </thead>
                                         {userList.length>0?userList.map((item,index) =>
                                         <tr>
-                                            <td>{item.user_id}</td>															
+                                            <td>{item.buyer_id}</td>															
                                             <td><span className="cartitlename">{item.first_name} {item.last_name} </span></td>
                                             <td className="userImage">{item.image===""?
-                                            <img alt="" src="adduser.jpg" src={process.env.PUBLIC_URL + "/images/adduser.jpg"}/>:
+                                            <img alt=""  src={process.env.PUBLIC_URL + "/images/adduser.jpg"}/>:
                                             <img alt="" src={item.image} />
                                             }</td>
-                                            <td className="phonenotab">{item.phone_no}</td>
+                                            <td className="phonenotab">{formatMobileNO(item.phone_no)}</td>
                                             {/* <td>{item.email}</td> */}
-                                            <td>{item.buy_now===1?"Buy Now,":""}{item.cancel_bid===1?"Cancel the bid after 4 hours,":""}{item.bid===1?"Bid,":""}
+                                            <td>{item.buy_now===1?"Buy Now,":"No privileges"}{item.cancel_bid===1?"Cancel the bid after 4 hours,":""}{item.bid===1?"Bid,":""}
                                             {item.proxy_bid===1?"Proxy Bid,":""}{item.counter_bid===1?"Counter Bid,":""}{item.lot_fee===1?"Lot Fee.":""}</td>
                                             <td>{item.status===1?"Active":"InActive"}</td>
-                                            <td><Button className="ant-btn" onClick={() => onHandleEdit(item.user_id)}><i className="icofont-ui-edit"></i> Edit</Button></td>
+                                            <td><Button className="ant-btn" onClick={() => onHandleEdit(item.buyer_id)}><i className="icofont-ui-edit"></i> View</Button></td>
                                         </tr>
                                          ):
                                         <tr><td colspan="6" ng-show="0">
@@ -186,7 +229,17 @@ const Buyers = () => {
             popupActionValue= {popupActionValue}
             popupActionPath={popupActionPath}
         />}
+
+{isLateFee && <Popup
+          isClose={false}
+          content={<>
+            <LateFee toggle={toggleLateFee} />
+          </>}
+          handleClose={toggleLateFee}
+        />} 
+
  </main>
+}
     </div>
 
 

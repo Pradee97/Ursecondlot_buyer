@@ -5,7 +5,7 @@
 body {
   font-family: 'Poppins', sans-serif;
   color: #444444;
-  font-size: 14px;
+  font-size: 16px;
   background: #F5F5F5;
 }
 
@@ -23,6 +23,9 @@ a:focus {
   outline: none;
 }
 
+a:not([href]){
+  color: #444;
+}
 
 ul {
     margin: 0;
@@ -952,9 +955,9 @@ table td span{
 Cars list
 ------------------------------------------------------------------*/
 .suggested-cars .col-md-3 , .inventory-cars .col-md-3, .recently-cars .col-md-3, .favorite-cars .col-md-3{ 
--ms-flex: 20%;
-    flex:  20%;
-    max-width:  20%;
+-ms-flex: 25%;
+    flex:  25%;
+    max-width:  25%;
 
 }
 .suggested-cars{
@@ -985,20 +988,29 @@ Cars list
 	position: absolute;
     background: #fff;
     border-radius: 50px;
-    padding: 8px 12px;
     right: 10px;
     top: 10px;
-	
+   cursor: pointer;
+   width: 40px;
+   height: 40px;
+   line-height: 40px;
+}
+
+.cars-lock:hover{	
+  background: #ddd;
 }
 
 .car-item img{
 	width:100%;
 }
  .cars-lock img{
-	width:15px;	
+	width:20px;	
 }
 .cars-content {
     padding: 15px;
+    padding-bottom: 0;
+    display: inline-block;
+    width: 100%;
 }
  .cars-tag {
 	position: absolute;
@@ -1011,84 +1023,98 @@ Cars list
     color: #fff;
 	display:inline;
 	font-weight:normal;
+  text-transform: capitalize;
 }
  .cars-content .details {
     margin: 0;
     font-weight: 300;
     font-size: 16px;
-    color: #9f9f9f;
+    color: #999;
+    display: inline-block;
+    margin-right: 10px;
+    text-transform: capitalize;
 }
  .cars-content .details img {
-   width:20px;
+   width:16px;
    margin-right:10px;
+   float: left;
 }
 .cars-content h3 {
     font-weight: 700;
     font-size: 20px;
     text-align: left;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
  .cars-content h3 a {
-    color: #37423b;
+    color: #444;
     transition: 0.3s;
 	font-size:18px;
 	font-weight:500;
 }
+
+.cars-content h3 a:hover{
+  color: #bd062c;
+  text-decoration: none;
+}
+
  .cars-content p {
     font-size: 14px;
-    color: #777777;
+    color: #999;
 }
  .cars-prices{
-	display: -ms-flexbox;    
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -ms-flex-align: center;
-    align-items: center;
-    -ms-flex-pack: end;
-    justify-content: flex-end;
+	  align-items: center;
     padding:20px 0;
-    margin-top:20px;;
-    border-top: none;
-    padding-top: 2px;
+    clear: both;
+    float: left;
+    width: 100%;
 }
  .cars-prices .cta-btns {
     background-color: #fff;
-    color: #343434;
-    padding: 8px 15px;   
+    color: #444;
+    padding: 8px 10px;   
 	margin-right:20px;
     border-radius: 3px;
-    border: 1px solid #707070;
+    border: 1px solid #444;
 	font-size:16px;
+  display: inline-block;
+  margin: 5px;
 }
  .cars-prices .cta-btns-primary {
 	font-size:16px;
-    background-color: #b8b8b8;
+    background-color: #002768;
     color: white;
     padding: 8px 15px;   
     border-radius: 3px;
     border: none;
+    border: #002768 1px solid;
+    display: inline-block;
+  margin: 5px;
+
 }
 
 .cars-prices .cta-btns-primary:hover{
   background: #bd062c;
   text-decoration: none;
+  border: #bd062c 1px solid;
+  color: #fff;
 }
 .more-btn {
     display: inline-block;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 6px 30px 8px 30px;
+    background:#F5F5F5;
+    padding: 5px;
     color: #bd062c;
     border-radius: 50px;
     transition: all ease-in-out 0.4s;
 	font-size:18px;
-	padding-top:25px;
-	margin-top:25px;
+  margin-bottom: 25px;
+  margin-top: 20px;
 }
 
 
-.inventory-cars , .recently-cars{
-	background: #fff 0% 0% no-repeat padding-box;
+.inventory-cars, .recently-cars{
 	opacity: 1;
-	padding:30px 0;
 }
 .favorite-cars {
 	background: #fff 0% 0% no-repeat padding-box;
@@ -1139,7 +1165,7 @@ Cars list
     margin: 0;
     font-weight: 300;
     font-size: 16px;
-    color: #9f9f9f;
+    color: #999;
 }
 .favorite-cars .car-item img{
 	width:100%;
@@ -1151,6 +1177,7 @@ Cars list
 .favorite-cars .cars-content h3 {
     font-weight: 700;
     font-size: 20px;
+    text-align: center;
 }
 .favorite-cars .cars-content h3 a {
     color: #BD062C;
@@ -1160,7 +1187,7 @@ Cars list
 }
 .favorite-cars .cars-content p {
     font-size: 14px;
-    color: #777777;
+    color: #999;
 }
 .favorite-cars .cars-prices{
 	display: -ms-flexbox;    
@@ -1177,16 +1204,16 @@ Cars list
 }
 .favorite-cars .cars-prices .cta-btns {
     background-color: #fff;
-    color: #343434;
+    color: #444;
     padding: 10px 20px;   
 	margin-right:20px;
     border-radius: 3px;
-    border: 1px solid #707070;
+    border: 1px solid #444;
 	font-size:18px;
 }
 .favorite-cars .cars-prices .cta-btns-primary {
 	font-size:18px;
-    background-color: #b8b8b8;
+    background-color: #999;
     color: white;
     padding: 10px 20px;   
     border-radius: 3px;
@@ -1892,7 +1919,7 @@ Cars list
   padding-bottom:10px;
   margin-bottom: 20px;
   font-size: 16px;
-  color: #707070;
+  color: #444;
   font-weight:300;
   text-align: center;
 }
@@ -1901,7 +1928,7 @@ Cars list
   padding-bottom:20px;
   margin-bottom: 20px;
   font-size: 18px;
-  color: #707070;
+  color: #444;
   font-weight:300;
    padding-top: 5px;
 }
@@ -2312,7 +2339,7 @@ Cars list
 }
 
 #footer .footer-top .footer-links ul a {
-  color: #777777;
+  color: #999;
   transition: 0.3s;
   display: inline-block;
   line-height: 1;
@@ -2538,7 +2565,7 @@ input[type="password"] {
   padding: 10px 20px;
   margin-top: 20px;
   margin-bottom: 20px;
-  width: 100%;
+  width:auto;
   border-radius: 3px;
   border: none;
 }
@@ -2638,7 +2665,7 @@ input[type="text"], input[type="password"]{
 }
 .scheduleMeeting p{
 	font-size:14px;
-	color: #9F9F9F;
+	color: #999;
 }
 
 
@@ -2659,7 +2686,7 @@ input[type="text"], input[type="password"]{
 	padding: 10px;
 	padding-right:15px;
 	transition: all 0.1s ease-out;
-	color: #9F9F9F;
+	color: #999;
       }
 
 
@@ -2684,7 +2711,7 @@ input[type="text"], input[type="password"]{
 	padding: 10px;
 	padding-right:15px;
 	transition: all 0.1s ease-out;
-	color: #707070;
+	color: #444;
       }
 
 
@@ -2695,7 +2722,7 @@ input[type="text"], input[type="password"]{
   transition: all 0.4s ease;
   height: 0;
   overflow: hidden;
-  color: #9F9F9F;
+  color: #999;
 }
 .time-picker .set-time {
   display: flex;
@@ -2729,7 +2756,7 @@ input[type="text"], input[type="password"]{
   height: 40px;
   font-size: 14px;
   border: transparent;
-  color: #9F9F9F;
+  color: #999;
 }
 .time-picker #submitTime {
   text-align: center;
@@ -2750,7 +2777,7 @@ input[type="text"], input[type="password"]{
   background-color: #fff;
 }
 .timer  input[type="text"] {
-color: #9F9F9F;
+color: #999;
 background:#fff;
 }
 .agreetab label{
@@ -2765,7 +2792,7 @@ background:#fff;
   content: '';
 -webkit-appearance: none;
 background-color: transparent;
-border: 1px solid #707070;
+border: 1px solid #444;
 padding: 10px;
 display: inline-block;
 position: relative;
@@ -2773,7 +2800,7 @@ vertical-align: middle;
 cursor: pointer;
 margin-right: 5px;
 background: #fff;
-border: 1px solid #707070;
+border: 1px solid #444;
 margin-top: -3px;
 }
 .registrationform .form-group.agreetab input:checked + label::after {
@@ -2817,7 +2844,7 @@ margin-top: -3px;
   border-radius: 3px 0 0 3px;
   padding: 0 5px;
   background: #fff;
-  color: #9F9F9F;
+  color: #999;
   transform: translateZ(0) translateX(0);
   transition: all 0.3s ease-in;
   transition-delay: 0.2s;
@@ -2836,7 +2863,7 @@ margin-top: -3px;
   border-radius: 3px 0 0 3px;
   padding: 0 5px;
   background: #fff;
-  color: #9F9F9F;
+  color: #999;
   transform: translateZ(0) translateX(0);
   transition: all 0.3s ease-in;
   transition-delay: 0.2s;
@@ -2854,7 +2881,7 @@ margin-top: -3px;
   border-radius: 3px 0 0 3px;
   padding: 0 5px;
   background: #fff;
-  color: #9F9F9F;
+  color: #999;
   transform: translateZ(0) translateX(0);
   transition: all 0.3s ease-in;
   transition-delay: 0.2s;
@@ -2891,7 +2918,7 @@ popup Dialogbox
 }
 .modal-body p{
 	font-size:22px;
-	color: #707070;
+	color: #444;
 	
 }
 .modal-body{
@@ -2939,9 +2966,9 @@ popup Dialogbox
 
 
 .suggested-cars .col-md-3{ 
--ms-flex: 20%;
-    flex:  20%;
-    max-width:  20%;
+-ms-flex: 25%;
+    flex:  25%;
+    max-width:  25%;
 
 }
 
@@ -2949,16 +2976,17 @@ popup Dialogbox
 Car Detail Page
 ---------------------------------------------------------*/
 .inner-page-cars{
-	 background: #fff;
-    padding-top: 50px;
+	 background: #F5F5F5;
+    padding-top: 40px;
 }
 .back-btn{
 	display:block;
 	margin-bottom:20px;
+  text-align: left;
 	
 }
 .back-btn-primary{
-	color:#BD062C;
+	color:#BD062C !important;
 	font-size:18px;
 	border: 2px solid #BD062C;
 	padding:6px 15px;
@@ -2979,6 +3007,7 @@ Car Detail Page
 	font-size: 30px;
 	font-weight: 500;
 	margin-bottom: 10px;
+  text-transform: capitalize;
 }
 
 
@@ -3055,28 +3084,32 @@ Car Detail Page
 }
 
 .thumbnail-image {
-  width: 100px;
-  height: 100px;
-  margin: 20px auto;
+  margin: 0;
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  border: 4px solid transparent;
+  margin-bottom: 20px;
+}
+
+.thumbnail-image img{
+  width: 100%;
+  height: 140px;
 }
 
 .product-info .details span{
-	color:#4e4e4e;
+	color:#999;
 	margin-left:10px;
 }
 .product-dtl p {
 	font-size: 16px;
 	font-weight:normal;
-	color: #707070;
+	color: #444;
 }
 
 .product-info .details{
-    border-right: #707070 solid 1px;
-	color:#4e4e4e
+    border-right: #444 solid 1px;
+	color:#444;
+  text-transform: capitalize;
 }
 
 
@@ -3089,16 +3122,16 @@ Car Detail Page
 }
 
 .dealertaglines{
-	color:#b8b8b8;
+	color:#999;
 	font-size:16px;
 }
 .productdes{
-	color:#9f9f9f;
+	color:#999;
 	font-size:16px;
 }
 .products-details .carpoint{
 	display:inline;
-	border: 1px solid #707070;
+	border: 1px solid #444;
 	background: #E1E1E1;
 	padding:10px;
 	border-radius:5px;
@@ -3111,34 +3144,38 @@ Car Detail Page
 	margin:0 10px;
 }
 .products-details .titlestatus{
-	color:#343434;
+	color:#444;
 	font-size:16px;
-	
-}
+  }
+  .products-details .titlestatus p{
+    margin-bottom: 5px;
+  }
 .products-details .titlestatus span{
 	font-size:16px;
-	color:#9f9f9f;
+	color:#999;
 }
 .products-details .titlestatus img{
-	margin-right:10px;
+	margin-right:5px;
 }
  .products-details .cars-detail-views .car-btns{
 	 border: 1px solid #bd062c;
 	 color:#bd062c;
 	 font-size:16px;
-	 padding:10px 15px;
+	 padding:7px 10px;
 	 border-radius:5px;
 	 margin-right:10px;
-	 
+	 display: inline-block;
+   margin-bottom: 10px;
  }
  
   .products-details .cars-detail-views .car-btns-primary{
-	 border: 1px solid #9f9f9f;
-	 color:#343434;
+	 border: 1px solid #999;
+	 color:#444;
 	 font-size:16px;
-	 padding:10px 15px;
+	 padding:7px 10px;
 	 border-radius:5px;
-	 
+   display: inline-block;
+	 margin-bottom: 10px;
  }
   .products-details .cars-detail-views .car-btns-primary span{	 
 	 color:#008d0e;
@@ -3155,7 +3192,7 @@ Car Detail Page
 	  
   }
   .product-count .details {
-    border-right: #707070 solid 1px;
+    border-right: #444 solid 1px;
     color: #4e4e4e;
 	margin-left:5px;
 }
@@ -3184,14 +3221,21 @@ Car Detail Page
   margin-right: 20px;
 }
 .cars-buy .cars-buy-btns-primary{
-	background-color: #b8b8b8;
+	background-color: #002768;
     color: white;
     padding: 10px 30px;
     margin: 20px 0;
     border-radius: 3px;
     border: none;
-	font-size:20px;
+	font-size:18px;
+  font-weight: 500;
 }
+.cars-buy .cars-buy-btns:hover, .cars-buy .cars-buy-btns-primary:hover{
+	background-color: #bd062c;
+    color: white;
+    text-decoration: none;
+}
+
 
 .carspecifation .carspecifationblock {
     margin: 0 auto;
@@ -3204,8 +3248,10 @@ Car Detail Page
 	box-shadow: 0px 3px 6px #ddd;
 }
 .carspecifation p{
-	color:#343434;
+	color:#444;
   text-align: left;
+  display: flex;
+  text-transform: capitalize;
 }
 .carspecifation span{
 	color:#808080;
@@ -3213,14 +3259,15 @@ Car Detail Page
 }
 
 .dealer-cars .col-md-3{ 
--ms-flex: 20%;
-    flex:  20%;
-    max-width:  20%;
+  -ms-flex: 25%;
+    flex:  25%;
+    max-width:25%;
+    margin-bottom: 20px;
 }
 .dealer-cars   {
-	background: #fff 0% 0% no-repeat padding-box;
+	background: #f5f5f5;
 	opacity: 1;
-	padding:30px 90px;
+	padding:10px 90px;
 }
 .dealer-cars   .car-item {
     border-radius: 5px;
@@ -3233,20 +3280,23 @@ Car Detail Page
 	padding-bottom: 5px;
 }
 
-.dealer-cars   .cars-lock{	
+.dealer-cars .cars-lock{	
 	position: absolute;
     background: #fff;
-    border-radius: 50px;
-    padding: 8px 12px;
+    border-radius: 50%;
     right: 10px;
     top: 10px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
 	
 }
 .dealer-cars   .cars-lock img{
-	width:15px;	
+	width:20px !important;	
 }
 .dealer-cars   .cars-content {
     padding: 15px;
+    padding-bottom: 0;
 }
 .dealer-cars   .cars-tag {
 	position: absolute;
@@ -3260,63 +3310,20 @@ Car Detail Page
 	display:inline;
 	font-weight:normal;
 }
-.dealer-cars   .cars-content .details {
-    margin: 0;
-    font-weight: 300;
-    font-size: 16px;
-    color: #9f9f9f;
-}
+
 .dealer-cars   .car-item img{
 	width:100%;
 }
 .dealer-cars   .cars-content .details img {
-   width:20px;
-   margin-right:10px;
+   width:16px;
 }
 .dealer-cars   .cars-content h3 {
     font-weight: 700;
     font-size: 20px;
 }
-.dealer-cars   .cars-content h3 a {
-    color: #37423b;
-    transition: 0.3s;
-	font-size:18px;
-	font-weight:500;
-}
-.dealer-cars   .cars-content p {
-    font-size: 14px;
-    color: #777777;
-}
-.dealer-cars   .cars-prices{
-	display: -ms-flexbox;    
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -ms-flex-align: center;
-    align-items: center;
-    -ms-flex-pack: end;
-    justify-content: flex-end;
-    padding:20px 0;
-    margin-top:20px;;
-    border-top: none;
-    padding-top: 2px;
-}
-.dealer-cars   .cars-prices .cta-btns {
-    background-color: #fff;
-    color: #343434;
-    padding: 10px 20px;   
-	margin-right:20px;
-    border-radius: 3px;
-    border: 1px solid #707070;
-	font-size:18px;
-}
-.dealer-cars   .cars-prices .cta-btns-primary {
-	font-size:18px;
-    background-color: #b8b8b8;
-    color: white;
-    padding: 10px 20px;   
-    border-radius: 3px;
-    border: none;
-}
+
+
+
 .dealer-cars   .more-btn {
     display: inline-block;
     background: rgba(255, 255, 255, 0.2);
@@ -3330,9 +3337,9 @@ Car Detail Page
 }
 
 .other-dealer-cars  .col-md-3{ 
--ms-flex: 20%;
-    flex:  20%;
-    max-width:  20%;
+-ms-flex: 25%;
+    flex:  25%;
+    max-width:25%;
 }
 .other-dealer-cars    {
 	background: #fff 0% 0% no-repeat padding-box;
@@ -3353,14 +3360,15 @@ Car Detail Page
 .other-dealer-cars    .cars-lock{	
 	position: absolute;
     background: #fff;
-    border-radius: 50px;
-    padding: 8px 12px;
+    border-radius: 50%;
     right: 10px;
     top: 10px;
-	
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
 }
 .other-dealer-cars    .cars-lock img{
-	width:15px;	
+	width:20px !important;	
 }
 .other-dealer-cars    .cars-content {
     padding: 15px;
@@ -3381,28 +3389,27 @@ Car Detail Page
     margin: 0;
     font-weight: 300;
     font-size: 16px;
-    color: #9f9f9f;
+    color: #999;
 }
 .other-dealer-cars    .car-item img{
 	width:100%;
 }
 .other-dealer-cars    .cars-content .details img {
-   width:20px;
-   margin-right:10px;
+   width:16px;
 }
 .other-dealer-cars    .cars-content h3 {
     font-weight: 700;
     font-size: 20px;
 }
 .other-dealer-cars    .cars-content h3 a {
-    color: #37423b;
+    color: #444;
     transition: 0.3s;
 	font-size:18px;
 	font-weight:500;
 }
 .other-dealer-cars    .cars-content p {
     font-size: 14px;
-    color: #777777;
+    color: #999;
 }
 .other-dealer-cars    .cars-prices{
 	display: -ms-flexbox;    
@@ -3417,23 +3424,7 @@ Car Detail Page
     border-top: none;
     padding-top: 2px;
 }
-.other-dealer-cars    .cars-prices .cta-btns {
-    background-color: #fff;
-    color: #343434;
-    padding: 10px 20px;   
-	margin-right:20px;
-    border-radius: 3px;
-    border: 1px solid #707070;
-	font-size:18px;
-}
-.other-dealer-cars    .cars-prices .cta-btns-primary {
-	font-size:18px;
-    background-color: #b8b8b8;
-    color: white;
-    padding: 10px 20px;   
-    border-radius: 3px;
-    border: none;
-}
+
 .other-dealer-cars    .more-btn {
     display: inline-block;
     background: rgba(255, 255, 255, 0.2);
@@ -3665,7 +3656,7 @@ ErrorModalCenter
 }
 
 .inspectiontable table td span {
-   color: #9F9F9F;
+   color: #999;
    font-size: 16px;
     font-weight: normal;
 }
@@ -3675,19 +3666,19 @@ ErrorModalCenter
 }
 
 .inspectionsummeryhead h2{
-	color:#343434;
+	color:#444;
 	font-size:25px;
 	font-weight:500;
 	margin-bottom:20px;
 }
 
 .inspectionsummeryhead p{
-	color:#9f9f9f;
+	color:#999;
 	font-size:18px;
 	font-weight:500;
 }
 .inspectionsummeryhead span{
-	color:#343434;
+	color:#444;
 	font-size:18px;
 	margin-left:5px;
 }
@@ -3696,17 +3687,17 @@ ErrorModalCenter
 	margin:15px 0;
 }
 .inspectiontableBlock .commentsblock h3{
-	color:#343434;
+	color:#444;
 	padding:15px 0;
 	font-size:18px;
 	font-weight:normal;
 }
 .inspectiontableBlock .commentstextblock{
-	border:1px  #707070 solid;
+	border:1px  #444 solid;
 	margin:15px 0;
 }
 .inspectiontableBlock .commentstextblock p{
-	color:#707070;
+	color:#444;
 	padding:20px 15px;
 	font-size:16px;
 	font-weight:normal;
@@ -3714,7 +3705,7 @@ ErrorModalCenter
 }
 .inspectionbg{
 	background:#D0DBEC;
-	color:#343434;
+	color:#444;
 }
 .inspectionbg td{
 	border: 1px solid #ddd;
@@ -3742,7 +3733,7 @@ Make your Bid
 ---------------------------------------------*/
 
 .makeyourbid .makeyourbidblock{
-	
+	font-size: 16px;
 	    margin: 0 auto;
     word-wrap: break-word;
     background-color: #fff;
@@ -3750,6 +3741,7 @@ Make your Bid
     border: 1px solid rgba(0,0,0,.125);
     border-radius: .25rem;
     padding: 30px 40px;
+    padding-top: 15px;
 }
 
 .makeyourbid .makeyourbidblock .section-title h2{
@@ -3762,10 +3754,10 @@ Make your Bid
 	border: 1px solid #ddd;
 }
 .border-bottomtext{
-	margin:10px;
-  text-align: left;
+  text-align:left;
   font-weight: 600;
-    font-size: 16px;
+  font-size: 16px;
+  margin: 20px 0;
 }
 .input-icon {
   position: relative;
@@ -3781,7 +3773,7 @@ Make your Bid
 	font-style: normal;
 	font-size:25px;
 	left:20px;
-	color:#707070;  
+	color:#444;  
 }
 
 .input-icon > input {
@@ -3808,12 +3800,14 @@ Make your Bid
 	border: 1px solid #ccc;
 	margin:20px 0;
   text-align: left;
+  margin-top: 0;
 }
 .optional-services h4{
 	color:#4e4e4e;
 	font-size:16px;
 	text-align:center;
 	margin-top:15px;
+  margin-bottom: 20px;
 }
 .optional-services .transportation{
     margin-right: 10px;
@@ -3827,14 +3821,14 @@ Make your Bid
 }
 .makeyourbidblock  .policylink{
 	text-align:center;
-	margin:20px auto;
+	margin:10px auto;
 }
 .makeyourbid-btn{
 	text-align:center;
 	margin:20px auto;
 }
 .makeyourbid-cancle-btns{
-	color: #bd062c;
+	color: #bd062c !important;
     padding: 10px 30px;
     margin-right: 20px;
     border-radius: 3px;
@@ -3854,6 +3848,21 @@ Make your Bid
 	font-weight:500;
 }
 
+.makeyourbid-send-btns:hover{
+  background:#002768;
+  border:2px solid  #002768;
+  color: #fff;
+  text-decoration: none;
+}
+
+.makeyourbid-cancle-btns:hover, .makeyourbid-cancle-btns:focus{
+  background:#bd062c;
+   border:2px solid  #bd062c;
+   color: #fff !important;
+   text-decoration: none;
+}
+
+
 /*----------------------------------------------------
 Search Box"
 --------------------------------------------------------*/
@@ -3863,6 +3872,8 @@ Search Box"
 	background:#fff;
   text-align: left;
   padding: 15px;
+  width: 100%;
+  margin-bottom: 50px;
 	
 }
 .leftonsidebox h3{
@@ -3899,7 +3910,7 @@ Search Box"
 }
 
 .vehicleblock h4 , .sortbyblock h4{
-	color: #343434;
+	color: #444;
 	font-size:20px;
 	font-weight:500;
 	
@@ -3926,7 +3937,7 @@ Search Box"
   content:'';
   -webkit-appearance: none;
   background-color: transparent;
-  border: 1px solid #707070;
+  border: 1px solid #444;
   padding: 10px;
   display: inline-block;
   position: relative;
@@ -3934,7 +3945,7 @@ Search Box"
   cursor: pointer;
   margin-right: 5px;
   background:#fff;
-  border: 1px solid #707070;
+  border: 1px solid #444;
   margin-top: -3px;
 }
 
@@ -4018,11 +4029,16 @@ Search Box"
 }
 
 .leftonsidebox h4{
-	color: #343434;
-	font-size:20px;
+	color: #444;
+	font-size:18px;
 	font-weight:500;
-	margin:10px 0;
-	
+	margin:20px 0;
+  border-bottom: #eee solid 1px;
+  padding-bottom: 10px;
+}
+
+.leftonsidebox h4 span{
+  cursor: pointer;
 }
 
 .search-cars{
@@ -4071,7 +4087,7 @@ Search Box"
     margin: 0;
     font-weight: 300;
     font-size: 16px;
-    color: #9f9f9f;
+    color: #999;
 }
 .search-cars .cars-content .details img {
    width:20px;
@@ -4082,14 +4098,14 @@ Search Box"
     font-size: 20px;
 }
 .search-cars .cars-content h3 a {
-    color: #37423b;
+    color: #444;
     transition: 0.3s;
 	font-size:18px;
 	font-weight:500;
 }
 .search-cars .cars-content p {
     font-size: 14px;
-    color: #777777;
+    color: #999;
 }
 .search-cars .cars-prices{
 	display: -ms-flexbox;    
@@ -4106,11 +4122,11 @@ Search Box"
 }
 .search-cars .cars-prices .cta-btns {
     background-color: #fff;
-    color: #343434;
+    color: #444;
     padding: 10px 20px;   
 	margin-right:0px;
     border-radius: 3px;
-    border: 1px solid #707070;
+    border: 1px solid #444;
 	font-size:18px;
 }
 
@@ -4122,7 +4138,7 @@ Search Box"
 
 .search-cars .cars-prices .cta-btns-primary {
 	font-size:18px;
-    background-color: #b8b8b8;
+    background-color: #999;
     color: white;
     padding: 10px 20px;   
     border-radius: 3px;
@@ -4215,6 +4231,7 @@ Search Box"
     border: 1px solid rgba(0,0,0,.125);
     border-radius: .25rem;
 	padding:30px 40px;
+  min-height: 600px;
 	
 }
 .floorplans .section-title p {
@@ -4320,8 +4337,8 @@ Transport
 	height: auto;
 }
 .tabsoptionblock ul.tabs li {
-	padding: 20px 21px;	
-	border-right: 1px solid #707070;
+	padding: 10px;	
+	border-right: 1px solid #ccc;
 	background-color: #fff;
 	position: relative;
 	width: 33.33%;
@@ -4360,6 +4377,7 @@ Transport
     border-radius: .25rem;
     padding: 30px 0px;
 	margin-bottom:20px;
+  padding-bottom: 0;
 	
 }
 .searchblock{
@@ -4374,16 +4392,17 @@ Transport
 }
 .modeldetails span{
 	color: #bd062c;
-    padding: 10px 20px;
+    padding: 7px 20px;
     margin-top: 20px;
     margin-bottom: 20px;
     border-radius: 3px;
     border: 1px solid #bd062c;
 	font-size:16px;
+  margin-right: 20px;
 }
 .modeldetail h3{
 	font-size:20px;
-	color: #343434;
+	color: #444;
 	font-weight:500;
 	text-align:center;
 }
@@ -4396,12 +4415,13 @@ Transport
 }
 
 .modeldetailprice h3{
-	font-size:20px;
-	color: #343434;
+	font-size:16px;
+	color: #444;
 	font-weight:500;
 	text-align:center;
-	border: 1px solid #707070;
+	border: 1px solid #444;
 	padding:10px;
+  display: inline-block;
 }
 
 .modeldetailprice span {
@@ -4417,12 +4437,13 @@ Transport
 	color: #4E4E4E;
 	font-size:14px;
 	font-weight:500;
+  margin-bottom: 5px;
 }
 .modeldetailcontent{
-	margin:20px 0;
+	margin:10px 0;
 }
 .modeldetailcontent .subhead{
-	color: #B8B8B8;
+	color: #999;
 	font-size:14px;
 }
 .modeldetailcontent .subheadstatus{
@@ -4444,7 +4465,7 @@ ul.tabs li.active {
 
 .pickupdetailcontent h3{
 	font-size:20px;
-	color: #343434;
+	color: #444;
 	font-weight:500;
 	text-align:center;
 }
@@ -4457,7 +4478,7 @@ ul.tabs li.active {
 }
 
 .bordercontent{
-	border-right: 1px solid #B8B8B8;
+	border-right: 1px solid #999;
 	margin:20px 0;
 	
 }
@@ -4470,18 +4491,18 @@ ul.tabs li.active {
 }
 
 .pickupdetailcontent p.billsalesno{
-	border: 2px solid #BD062C;
-	font-size:20px;
-	padding:10px 20px;
+	border: 1px solid #BD062C;
+	font-size:16px;
+	padding:5px 10px;
 	color:#BD062C;
-	margin-top:20px;
-	margin-right:10px;
-	
+	display: inline-block;  
+  border-radius: 5px;
+  margin: 10px;
 }
 
 .pickupdetailcontent p.subhead{
 	color: #4e4e4e;
-	font-size:20px;
+	font-size:16px;
 	font-weight:300;
 }
 .pickupdetailcontent p.subheadstatus{
@@ -4529,7 +4550,7 @@ MyBids
 	text-align:center;
 }
 .mybidsdetailsblock{
-	border-bottom: 1px solid #B8B8B8;
+	border-bottom: 1px solid #999;
 	padding-bottom:15px;
 }
 .mybidsvehicledetails{
@@ -4537,12 +4558,12 @@ MyBids
 	width:100%;
 	margin:20px 0;
 	padding:10px 0;
-	border-right: 1px solid #B8B8B8;
+	border-right: 1px solid #999;
 }
 .mybidsleftvehicle{
 	float:left;
-	width:30%;
-	
+	width:40%;
+  padding-right: 15px;	
 }
 .mybidsleftvehicle img{
   border-radius: 5px;
@@ -4550,22 +4571,22 @@ MyBids
 
 .mybidsrightvehicle{
 	float:right;
-	width:70%;
+	width:60%;
   text-align: left;
 }
 
 .mybidsrightvehicle h3{
 	font-size:16px;
 	font-weight:500;
-	color:#343434;
+	color:#444;
 }
 .mybidsrightvehicle .details span{
 	font-size:12px;
-	color:#9f9f9f;
+	color:#999;
 	margin-left:5px;
 }
 .mybidsrightvehicle .details{
-	margin-bottom:10px;
+	margin-bottom:2px;
 }
 
 .mybidssellerdetails{
@@ -4574,7 +4595,7 @@ MyBids
 	margin:20px 0;
 	padding:10px 0;
 	padding-left:10px;
-	border-right: 1px solid #B8B8B8;
+	border-right: 1px solid #999;
 }
 
 .mybidsleftseller h3{
@@ -4600,11 +4621,11 @@ MyBids
 
 .mybidsleftseller .details span{
 	font-size:14px;
-	color:#9f9f9f;
+	color:#999;
 	margin-left:5px;
 }
 .mybidsleftseller .details{
-	margin-bottom:10px;
+	margin-bottom:2px;
 }
 .mybidsbiddetails{
 	float:left;
@@ -4612,7 +4633,7 @@ MyBids
 	margin:20px 0;
 	padding:10px 0;
 	padding-left:10px;
-	border-right: 1px solid #B8B8B8;
+	border-right: 1px solid #999;
 }
 .mybidsbid{
 	text-align:center;
@@ -4622,11 +4643,11 @@ MyBids
 .mybidsbid h4{
 	text-align:center;
 	color: #27AE60;
-	font-size:14px;
+	font-size:20px;
 }
 .mybidsbid p{
 	text-align:center;
-	color: #9f9f9f;
+	color: #999;
 	font-size:14px;
 }
 .mybidsbuynowdetails{
@@ -4635,7 +4656,7 @@ MyBids
 	margin:20px 0;
 	padding:10px 0;
 	padding-left:10px;
-	border-right: 1px solid #B8B8B8;
+	border-right: 1px solid #999;
 }
 
 .mybidsuynow{
@@ -4645,7 +4666,7 @@ MyBids
 .mybidsuynow h4{
 	text-align:center;
 	color: #FF0000;
-	font-size:14px;
+	font-size:20px;
 }
 
 .mybidscontroldetails{
@@ -4694,6 +4715,15 @@ MyBids
     margin-bottom: 20px;
 }
 
+.mybidscontrol a{
+  display: block;
+  max-width: 150px;
+  margin: auto;
+  margin-bottom: 10px;
+}
+
+
+
 /*-------------------------------------------------
 notoficationtab
 ---------------------------------------------------*/
@@ -4716,7 +4746,7 @@ notoficationtab
 .notoficationbody {
 	float:left;
 	text-align:justify;
-	color: #707070;
+	color: #444;
 	font-size:14px;
 	font-weight:normal;
 }
@@ -4765,7 +4795,7 @@ vehicles Summary
 }
 
 .vehiclesheads h2 span b{
-	color: #343434;
+	color: #444;
 	font-weight:500;
 	
 }
@@ -4808,7 +4838,7 @@ vehicles Summary
     content: '';
     -webkit-appearance: none;
     background-color: transparent;
-    border: 1px solid #707070;
+    border: 1px solid #444;
     padding: 10px;
     display: inline-block;
     position: relative;
@@ -4816,7 +4846,7 @@ vehicles Summary
     cursor: pointer;
     margin-right: 5px;
     background: #fff;
-    border: 1px solid #707070;
+    border: 1px solid #444;
 	
 }
 .vehiclepaycheckbox .form-group input:checked + label::after , .vehicleimgright .form-group input:checked + label::after {
@@ -4828,35 +4858,37 @@ vehicles Summary
     width: 6px;
     height: 14px;
     border: solid #bd062c;
-        border-top-width: medium;
-        border-right-width: medium;
-        border-bottom-width: medium;
-        border-left-width: medium;
+    border-top-width: medium;
+    border-right-width: medium;
+    border-bottom-width: medium;
+    border-left-width: medium;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
 }
 .vehicleimgright h3{
-	font-size:16px;
+	font-size:14px;
 	font-weight:500;
 	color: #4E4E4E;	
 	padding:10px 0;
   text-align: left;
+  margin-bottom: 0;
 }
 .vehicleimgright h3 span{
-	font-size:16px;
+	font-size:14px;
 	font-weight:normal;
 	color: #4E4E4E;
 	float:right;
 }
 .vehicleimgright h4{
-	font-size:16px;
+	font-size:14px;
 	font-weight:normal;
 	color: #4E4E4E;	
 	padding:10px 0;
   text-align: left;
+  margin-bottom: 0;
 }
 .vehicleimgright h4 span{
-	font-size:16px;
+	font-size:14px;
 	font-weight:normal;
 	color: #4E4E4E;
 	float:right;
@@ -4873,7 +4905,12 @@ vehicles Summary
 }
 .vehiclerighttotal{
 	border-top:1px solid #ddd;
+  clear: both;
 }
+.vehiclerighttotal h3 span{
+	font-weight: 500;
+}
+
 .vehicletotal{
 	margin: 0 auto;
     margin-top: 0px;
@@ -4899,6 +4936,7 @@ vehicles Summary
 	font-weight:500;
 	color: #4E4E4E;	
 	padding:10px 0;
+  text-align: left;
 }
 .vehicletotal h3 span{
 	font-size:16px;
@@ -4910,6 +4948,7 @@ vehicles Summary
 	font-size:14px;
 	font-weight:500;
 	color: #4E4E4E;	
+  text-align: left;
 	padding:10px 0;
 }
 .vehicletotal-btns{
@@ -4925,6 +4964,8 @@ vehicles Summary
 
 .vehicletotal-btns:hover{
   color: #fff;
+  text-decoration: none;
+  background-color: #002768;
 }
 
 .vehicletotalbtns{
@@ -4940,7 +4981,7 @@ __________________________________________________________*/
 }
 
 .notificationtabblock h3 {
-  color: #343434;
+  color: #444;
   font-size: 20px;
   font-weight: 500;
   display: block;
@@ -4980,7 +5021,7 @@ __________________________________________________________*/
 .mgaccountuserright h3 {
     font-size: 18px;
     font-weight: 500;
-    color: #343434;	
+    color: #444;	
     text-align: left;
     padding-top: 10px;
 }
@@ -4988,6 +5029,7 @@ __________________________________________________________*/
     font-size: 14px;
     color: #4E4E4E;
     margin-left: 5px;
+    text-transform: capitalize;
 }
 .mgaccountuserlinks{
 	float:left;
@@ -5020,7 +5062,7 @@ margin-top: 20px;
 }
 .mgaccountrighttable table td {
     width: 50%;
-    color: #343434;
+    color: #444;
     text-align: left;
     padding-left: 20px;
     font-weight: 500;
@@ -5030,17 +5072,16 @@ margin-top: 20px;
 	font-weight: 500;
 }
 .mgaccountrighttable table td span {
-    color: #707070;
+    color: #444;
     font-size: 16px;
     font-weight: 500;
-    width: 65%;
-    float: right;
+    float: left;
 }
 .mgaccountrighttableblock h3{
 	text-align:center;
 	display:block;
 	font-size:20px;
-	color: #343434;
+	color: #444;
   font-weight: 500;
   margin-bottom: 15px;
   border-bottom: #eee solid 1px;
@@ -5077,7 +5118,7 @@ margin-top: 20px;
 .mgaccountrighttableblock p{
 	text-align:center;
 	display:block;
-	color: #343434;	
+	color: #444;	
 	font-size:16px;
   margin-bottom: 20px;
 }
@@ -5091,7 +5132,7 @@ margin-top: 20px;
 	padding: 30px;
 }
 .mgaccountrighttableblock h4{
-	color: #343434;
+	color: #444;
 	font-size:18px;
 	margin-top:20px;
 	padding-left: 20px;
@@ -5107,7 +5148,7 @@ margin-top: 20px;
   font-weight: 500;
 }
 .mgaccountrighttableblock h6{
-	color: #707070;
+	color: #444;
 	font-size:16px;
 	margin-top:10px;
 	padding-left: 20px;
@@ -5143,7 +5184,7 @@ Form text overlop
     border-radius: 3px 0 0 3px;
     padding: 0 5px;
     background: #fff;
-    color: #9F9F9F;
+    color: #999;
     transform: translateZ(0) translateX(0);
     transition: all 0.3s ease-in;
     transition-delay: 0.2s;
@@ -5187,7 +5228,7 @@ Form text overlop
     content: '';
     -webkit-appearance: none;
     background-color: transparent;
-    border: 1px solid #707070;
+    border: 1px solid #444;
     padding: 10px;
     display: inline-block;
     position: relative;
@@ -5195,7 +5236,7 @@ Form text overlop
     cursor: pointer;
     margin-right: 15px;
     background: #fff;
-    border: 1px solid #707070;
+    border: 1px solid #444;
 }
 
 /*-------------------------------------------------------
@@ -5226,7 +5267,7 @@ userfavorite-cars
 
 .car-item {
   transition: 0.2s;
-  margin-top: 3%;
+  margin-bottom: 20px;
 }
 
 .car-item:hover {
@@ -5267,7 +5308,7 @@ userfavorite-cars
     margin: 0;
     font-weight: 300;
     font-size: 16px;
-    color: #9f9f9f;
+    color: #999;
 }
 .userfavorite-cars .cars-content .details img {
    width:20px;
@@ -5278,14 +5319,14 @@ userfavorite-cars
     font-size: 20px;
 }
 .userfavorite-cars .cars-content h3 a {
-    color: #37423b;
+    color: #444;
     transition: 0.3s;
 	font-size:18px;
 	font-weight:500;
 }
 .userfavorite-cars .cars-content p {
     font-size: 14px;
-    color: #777777;
+    color: #999;
 }
 .userfavorite-cars .cars-prices{
 	display: -ms-flexbox;    
@@ -5302,16 +5343,16 @@ userfavorite-cars
 }
 .userfavorite-cars .cars-prices .cta-btns {
     background-color: #fff;
-    color: #343434;
+    color: #444;
     padding: 10px 20px;   
 	margin-right:20px;
     border-radius: 3px;
-    border: 1px solid #707070;
+    border: 1px solid #444;
 	font-size:18px;
 }
 .userfavorite-cars .cars-prices .cta-btns-primary {
 	font-size:18px;
-    background-color: #b8b8b8;
+    background-color: #999;
     color: white;
     padding: 10px 20px;   
     border-radius: 3px;
@@ -5343,14 +5384,14 @@ History
     padding: 0 auto;
     text-align: center;
     display: block;
-    color: #B8B8B8;
+    color: #999;
 }
 .filtersblock .searchbox {
     margin-bottom: 20px;
     padding-bottom: 20px;
 }
 .filtersblock .searchbox .fa {
-    color: #B8B8B8;
+    color: #999;
     font-size: 25px;
 }
 .vehicespurchased{
@@ -5412,7 +5453,7 @@ History
     font-weight: normal;
 }
 .purchasedcars  .cars-content h3 a {
-    color: #343434;
+    color: #444;
     font-size: 14px;
     font-weight: normal;
 }
@@ -5420,7 +5461,7 @@ History
     margin: 0;
     font-weight: 300;
     font-size: 16px;
-    color: #9f9f9f;
+    color: #999;
 }
 .purchasedcars  .cars-content .details img {
     width: 20px;
@@ -5451,7 +5492,7 @@ History
 	color: #BD062C;
 }
 .cta-links-insection{
-    background: #B8B8B8;
+    background: #999;
     color: white;
     padding: 20px;
     margin-top: 20px;
@@ -5523,8 +5564,8 @@ History
 }
 .multi-steps > li.is-active:before {
   background-color: #fff;
-  border-color: #B8B8B8;
-  color:#B8B8B8;
+  border-color: #999;
+  color:#999;
 }
 .multi-steps > li.is-active ~ li {
   color: #808080;
@@ -5538,7 +5579,7 @@ History
 	float:left;
 }
 .purchasedcarss h4{
-	color:#9f9f9f;
+	color:#999;
 	font-size:14px;
 }
 .purchasedcarss h4 span{
@@ -5578,7 +5619,7 @@ History
 .purchasedon h4{
 	float:right;
 	font-size:14px;
-	color: #9F9F9F;
+	color: #999;
 	display:block;
 }
 .purchasedontable{
@@ -5609,7 +5650,7 @@ History
 	padding:20px 10px;
 }
 .purchasedontable table td p{ 
-	color: #9F9F9F;
+	color: #999;
 	font-size:14px;
 }
 
@@ -5641,7 +5682,7 @@ height: 100%;
 }
 
 .notificationrighttableblock label{
-  color: #343434;
+  color: #444;
   font-size: 16px;
   font-weight: 500;
   font-family: 'Poppins', sans-serif;
@@ -5655,7 +5696,7 @@ height: 100%;
 }
 
 .notificationrighttableblock h2{
-	color: #343434;
+	color: #444;
 	font-size:30px;
 	text-align:center;
 	display:block;
@@ -5666,14 +5707,14 @@ height: 100%;
 }
 
 .notificationtabblock  h3{
-	color: #343434;
+	color: #444;
 	font-size:20px;
 	font-weight:500;
 	display:block;
 	text-align:left;
 }
 .notificationtabblock p{
-	color: #343434;
+	color: #444;
 	font-size:14px;
 	font-weight:normal;
   text-align: left;
@@ -5733,7 +5774,7 @@ paymentform
 
 .paymentdetailblock p{
 	text-align:center;
-	color: #343434;
+	color: #444;
 	font-size:16px;
 	margin:20px 30px;
 }
@@ -5775,7 +5816,7 @@ paymentform
 
 .uploadbutton label{
 	 display: inline-block;
-  background: #9F9F9F ;
+  background: #999 ;
   color: white;
   padding: 8px 10px;
   font-family: sans-serif;
@@ -5803,8 +5844,8 @@ paymentform
 }
 
 .uploadbtn .btn {
-  border: 2px solid #9F9F9F;
-  background: #9F9F9F;
+  border: 2px solid #999;
+  background: #999;
   color: #fff;
   padding: 8px 20px;
   border-radius: 3px;
@@ -5893,7 +5934,7 @@ paymentform
 }
 
 .bankinfo table td  span{
-    color: #343434;
+    color: #444;
     font-size: 14px;
     text-align: left;
     border: none;
@@ -5901,7 +5942,7 @@ paymentform
 	float:left;
 }
 .bankinfo table td {
-   color: #707070;
+   color: #444;
     font-size: 14px;
     text-align: left;
     border: none;
@@ -5919,7 +5960,7 @@ paymentform
 
 .releaseinfo p{
 	    text-align: center;
-    color: #343434;
+    color: #444;
     font-size: 16px;
     margin: 20px 30px;
 	display:inline-block;
@@ -5970,7 +6011,7 @@ paymentform
     bottom: 0;    
     padding: 0 5px;
     background: #fff;
-    color: #9F9F9F;    
+    color: #999;    
     display: inline-block;
     height: 22px;
     margin: 0;
@@ -5998,7 +6039,7 @@ paymentform
   border-radius: 3px 0 0 3px;
   padding: 0 5px;
   background: #fff;
-  color: #9F9F9F;
+  color: #999;
   transform: translateZ(0) translateX(0);
   transition: all 0.3s ease-in;
   transition-delay: 0.2s;
@@ -6017,7 +6058,7 @@ paymentform
   border-radius: 3px 0 0 3px;
   padding: 0 5px;
   background: #fff;
-  color: #9F9F9F;
+  color: #999;
   transform: translateZ(0) translateX(0);
   transition: all 0.3s ease-in;
   transition-delay: 0.2s;
@@ -6118,14 +6159,14 @@ Documents page
 }
 	
 .docdetails h5{
-	color: #343434;
+	color: #444;
 	font-size:14px;
 	font-weight:500;
 	margin-bottom:20px;
-  min-height: 66px;
+  min-height: 40px;
 }
 .docdetails p{
-	color: #343434;
+	color: #444;
 	font-size:14px;
 	font-weight:400;
 	margin-top:20px;
@@ -6150,7 +6191,7 @@ Add Users
 .adduserpageforminner .form-group label {
     position: relative;
     cursor: pointer;
-	color: #707070;
+	color: #444;
 	font-size:16px;
 }
 .adduserpageforminner .form-group input {
@@ -6165,7 +6206,7 @@ Add Users
     content: '';
     -webkit-appearance: none;
     background-color: transparent;
-    border: 1px solid #707070;
+    border: 1px solid #444;
     padding: 10px;
     display: inline-block;
     position: relative;
@@ -6173,7 +6214,7 @@ Add Users
     cursor: pointer;
     margin-right: 5px;
     background: #fff;
-    border: 1px solid #707070;
+    border: 1px solid #444;
 }
 .adduserpageforminner .form-group input:checked + label::after {
   content: '';
@@ -6210,7 +6251,7 @@ Add Users
   margin: auto;
 }
 .privileges label, .noprivileges label {
-	color: #343434;
+	color: #444;
 	font-size:16px;
 	font-weight:500;
 }
@@ -6263,9 +6304,9 @@ button:focus{
   width: 100%;
 }
 *::placeholder {
-  color: #9F9F9F;
+  color: #999;
   font-size: 16px;
-    font-weight: 600;
+    font-weight: 400;
 }
 
 .datePickerBlock .react-datepicker-wrapper:focus-visible {
@@ -6296,7 +6337,7 @@ ul.ant-pagination li{
   border-radius: 3px 0 0 3px;
   padding: 0 5px;
   background: #fff;
-  color: #9F9F9F;
+  color: #999;
   transform: translateZ(0) translateX(0);
   transition: all 0.3s ease-in;
   transition-delay: 0.2s;
@@ -6372,7 +6413,7 @@ width: 100%;
 }
 .myprofilerighttable table td {
   width: 40%;
-  color: #343434;
+  color: #444;
   text-align: left;
   padding-left: 20px;
   font-weight: 500;
@@ -6382,7 +6423,7 @@ border-right: none;
 font-weight: 500;
 }
 .myprofilerighttable table td span {
-  color: #707070;
+  color: #444;
   font-size: 16px;
   font-weight: 500;
   width: 60%;
@@ -6392,7 +6433,7 @@ font-weight: 500;
 text-align:center;
 display:block;
 font-size:20px;
-color: #343434;
+color: #444;
 border-bottom: #eee solid 1px;
 padding-bottom: 15px;
 }
@@ -6420,7 +6461,7 @@ padding-bottom: 15px;
 .myprofilerighttableblock p{
 text-align:center;
 display:block;
-color: #343434;	
+color: #444;	
 font-size:16px;
 }
 .myprofilerighttableblock{
@@ -6433,13 +6474,13 @@ border-radius: .25rem;
 padding: 30px;
 }
 .myprofilerighttableblock h4{
-color: #343434;
+color: #444;
 font-size:16px;
 margin-top:10px;
 padding-left: 20px;
 }
 .myprofilerighttableblock h5{
-color: #707070;
+color: #444;
 font-size:16px;
 margin-top:10px;
 padding-left: 20px;
@@ -6453,7 +6494,7 @@ Users
   padding: 0 auto;
   text-align: center;
   display: block;
-  color: #B8B8B8;
+  color: #999;
 }
 .filtersblock .searchbox {
   margin-bottom: 20px;
@@ -6680,8 +6721,10 @@ table td .ant-btn:hover span, table td .ant-btn:hover i{
   color: #002768;
 }
 .form-input-error{
-  color: red;
+  color: red !important; 
   text-align: left;
+  margin-bottom: 5px;
+  text-transform: capitalize;
 }
 .topRightUser img{
   width:35px;
@@ -6747,17 +6790,20 @@ table td .ant-btn:hover span, table td .ant-btn:hover i{
   text-align: center;
   position: relative;
   top: 50px;
-  left: 7%;
-  font-size: 19px;
+  left: 0;
+  font-size: 20px;
   font-weight: 500;
-  padding-bottom: 30px;
+  text-align: center;
+  width: 100%;
+  background: #fff;
+  padding: 50px;
 }
 .phonecode small {
     font-size: 80%;
     font-weight: 400;
     float: left;
     margin-top: 5px;
-    color: #9f9f9f;
+    color: #999;
     margin-right: 5px;
 }
 .phoneNumberfield .MuiInput-root{
@@ -6914,18 +6960,25 @@ table td .ant-btn:hover span, table td .ant-btn:hover i{
 	width: 33.33%;
 	float: left;
 	position: relative;
+  padding-left: 0;
 }
 #progressbar li:before {
-	content: counter(step);
-	counter-increment: step;
-	width: 20px;
-	line-height: 20px;
+	content: "\f00e";
+	width: 30px;
+  height: 30px;
+	line-height: 30px;
 	display: block;
-	font-size: 10px;
+	font-size: 16px;
 	color: #444;
-	background: #ddd;
-	border-radius: 3px;
+	background: #fff;
+	border-radius: 50%;
 	margin: 0 auto 5px auto;
+  border: #4444 solid 1px;
+  margin-left: 0;
+  padding-left: 0;
+  font-family: IcoFont!important;
+  z-index: 99;
+  position: relative;
 }
 /*progressbar connectors*/
 #progressbar li:after {
@@ -6934,20 +6987,38 @@ table td .ant-btn:hover span, table td .ant-btn:hover i{
 	height: 2px;
 	background: #ddd;
 	position: absolute;
-	left: -40%;
-	top: 20px;
+	left: 0%;
+	top: 25px;
 	z-index: 1; /*put it behind the numbers*/
 }
-#progressbar li:first-child:after {
-	/*connector not needed before the first step*/
-	content: none; 
-}
+
 /*marking active/completed steps green*/
 /*The number of the step and the connector before it = green*/
 #progressbar li.active:before,  #progressbar li.active:after{
-	background: #BD062C;
-	color: white;
+	border: #BD062C solid 1px;
+	color: #BD062C;
+  background: #fff;
 }
+
+#progressbar li:nth-child(2):before{
+  margin: auto;
+}
+
+#progressbar li:nth-child(3):before{
+  margin-left: auto;
+  margin-right: 0;
+}
+
+#progressbar li:nth-child(2) p{
+  text-align: center;
+}
+
+#progressbar li:nth-child(3) p{
+  text-align: right;
+}
+
+
+
 .sliderBlock .cars-prices{
 	text-align:center;
 		margin-top:30px;
@@ -6956,15 +7027,22 @@ table td .ant-btn:hover span, table td .ant-btn:hover i{
 
 
 .sliderBlock .cars-prices .cta-btns{
-	background-color: #fff;
-    color: #343434;
+	background-color: #bd062c;
+    color: #fff;
     padding: 10px 20px;   
 	margin-right:0px;
     border-radius: 3px;
-    border: 1px solid #707070;
+    border: 1px solid #bd062c;
 	font-size:18px;
 	text-align:center;
   float: none;
+  cursor: inherit;
+}
+
+.sliderBlock .cars-prices .cta-btns:hover{
+  background: #bd062c;
+  border: #bd062c 1px solid;
+  color: #fff;
 }
 
 .sliderBlock p span{
@@ -7055,7 +7133,7 @@ table td .ant-btn:hover span, table td .ant-btn:hover i{
 }
 .banner-slider .slider.slider-for {
   max-width: 84%;
-  padding-right: 35px;
+  padding-right: 20px;
 }
 .banner-slider .slider.slider-nav {
   max-width: 16%;
@@ -7144,4 +7222,2018 @@ height: 30px;
 
 .slick-slide img{
 width:100%;
+}
+
+img.carImg{
+  height: 280px;
+  max-width: 100%;
+  object-fit: cover;
+}
+
+
+.carList .models-box .inner-page{
+ padding: 0;
+}
+
+.carList .models-box{
+  max-width: 800px;
+}
+
+
+
+.makeyourbid .container{
+  padding: 0;
+}
+
+.contactblock  .cta-btn{
+  width: auto;
+}
+.saveSearch{
+  text-align: left;
+}
+
+.saveSearch .cta-btn{
+  width: auto;
+  margin: 0;
+    margin-bottom: 5px;
+}
+.distanceBlock{
+  margin-bottom: 30px;
+}
+
+.load-more-btn {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 6px 30px 8px 30px;
+  color: #bd062c;
+  border-radius: 5px;
+  transition: all ease-in-out 0.4s;
+  font-size: 18px;
+  margin-top: 25px;
+  border: 2px solid #bd062c;
+}
+
+.load-more-btn:focus, .load-more-btn:hover {
+  border: 2px solid #bd062c;
+  color: #bd062c;
+}
+
+.historyImg{
+  width: 100%;
+  background: #fff;
+}
+
+.carBrand img{
+  border-radius: 5px;
+  width: 80px;
+  height: 70px;
+}
+.toggleExpand .priceBlock p.pdate{
+  width: 100%;
+  margin-top: 10px;
+}
+.toggleExpand .priceBlock p.date{
+  width: 100%;
+  text-align: left;
+}
+
+.checkoutReview{
+	margin:auto;
+}
+
+.checkoutReview h2{
+	font-size:20px;
+}
+
+.checkoutReview .vehiclesheadspaydetails{
+	box-shadow: none;
+    border-radius: 0;
+}
+
+.checkoutReview .cta-btn{
+	border:#bd062c 2px solid;
+	font-size:18px;
+	margin:10px;
+}
+
+.cancel-btn{
+	background:transparent;
+	color:#bd062c;
+	border:#bd062c 2px solid;
+}
+
+.checkoutReview .cta-btn:hover{
+	border:#002768 2px solid;
+	color:#fff;	
+}
+
+
+.checkoutReview .cancel-btn:hover{
+	border:#bd062c 2px solid;
+	color:#bd062c;	
+}
+
+.mgaccountrighttable table td span.tdcol1{
+  width: 200px;
+  float: left;
+  color: #000;
+}
+hr{
+  margin: 0;
+}
+form.timePicker{
+  padding: 0;
+}
+.marAuto{
+  margin: auto;
+}
+.achBlock h2{
+  text-align: left;
+}
+
+.makeyourbid .makeyourbidblock .input-icon > i{
+  border-right: #ccc solid 1px;
+    padding-right: 8px;
+    padding: 8px;
+    left: 10px;
+    padding-right: 10px;
+    font-size: 20px;
+}
+
+
+.customCheckbox  label {
+  position: relative;
+  cursor: pointer;
+}
+.customCheckbox  label::before {
+  content: '';
+-webkit-appearance: none;
+background-color: transparent;
+border: 1px solid #444;
+padding: 10px;
+display: inline-block;
+position: relative;
+vertical-align: middle;
+cursor: pointer;
+margin-right: 5px;
+background: #fff;
+border: 1px solid #444;
+margin-top: -3px;
+}
+.customCheckbox  input:checked + label::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 2px;
+  left: 9px;
+  width: 6px;
+  height: 14px;
+  border: solid #bd062c;
+      border-top-width: medium;
+      border-right-width: medium;
+      border-bottom-width: medium;
+      border-left-width: medium;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.customCheckbox  label{
+  cursor: pointer;
+}
+.customCheckbox  input {
+  padding: 0;
+  height: initial;
+  width: initial;
+  margin-bottom: 0;
+  display: none!important;
+  cursor: pointer;
+}
+.customCheckbox {
+	float:left;
+	text-align:left;
+}
+
+.transport .searchbox{
+  max-width: 800px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.transport .searchbox .input-group-append i{
+  color: #666;
+}
+
+.transport .searchbox .searchBtn{
+  background: #fff;
+  border: 1px solid #dee2e6;
+  border-left: none;
+  padding-right: 15px;
+}
+
+
+
+/* Dropdown CSS */
+
+#topbar ul.dropdown-menu{
+	padding:0;
+	margin:0;
+	max-width:150px;
+	transform: translate3d(60px, 30px, 0px) !important;
+}
+
+#topbar ul.dropdown-menu li{
+	padding:0;
+	margin:0;
+}
+
+#topbar ul.dropdown-menu li a{
+	color:#000;
+	padding: 7px 15px;
+    margin: 0;
+	font-size:14px;
+}
+#topbar ul.dropdown-menu li .dropdown-item:hover, #topbar ul.dropdown-menu li .dropdown-item:focus, #topbar ul.dropdown-menu li .dropdown-item a.active{
+	background:#fff;
+	color:#BD062C;
+}
+
+/* Invoice */
+
+.invoiceBlock{
+	max-width: 1000px;
+    margin: auto;
+    border: #ddd solid 1px;
+    padding: 30px;
+}
+
+.invoiceBlock .header{
+	border-bottom:#ddd solid 1px;
+	padding-bottom:20px;
+	margin-bottom:30px;
+}
+
+.invoiceBlock .header_right{
+	text-align:right;
+}
+
+.invoiceBlock .feestableBlock{
+	max-width:100%;
+	clear:both;
+	margin-top:20px;
+}
+.invoiceBlock .headtable table{
+	width:100%;
+	text-align:left;
+}
+
+.invoiceBlock  table{
+	width:100%;
+	text-align:left;
+}
+
+.invoiceBlock table td{	
+	text-align:left;
+	font-size:14px;
+}
+.invoiceBlock  table td span{	
+	font-weight: 500;
+    min-width: 150px;
+    display: inline-block;
+	text-align:left;
+	font-size:14px;
+}
+.infotable{
+	margin-top:20px;
+}
+
+.alignRight{
+	text-align:right !important;
+}
+
+.invoiceBlock .infotable{
+	width:50%;
+	float:left;
+}
+.invoiceBlock .infotable th{
+	padding:10px;
+	font-size:16px;
+	font-weight:600;
+}
+
+.invoiceBlock .infotable td span{
+	color:#000;
+}
+
+.invoiceBlock  table th.priceCol{
+	width:20%;
+	text-align:center;
+}
+
+.invoiceBlock .feestable th{
+	text-align:center;
+	padding:10px 0;
+}
+
+.invoiceBlock .feestable p{
+	color:#999;
+	font-size:14px;
+}
+.invoiceBlock .feestable td span{	
+	
+	min-width: auto;
+	color:#000;
+}
+.invoiceBlock .feestableBlock .feestable table td:last-child{
+	text-align:center;
+}
+
+
+.invoiceBlock .contenttable{
+	float: left;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.invoiceBlock .feestable tfoot td{	
+	background:#F0F0F0;
+	font-size:16px;
+}
+.invoiceBlock .feestable tfoot td span{	
+	font-size:16px;
+}
+
+
+.transport .searchbox .input-group-append i {
+  font-size: 20px;
+  padding: 10px;
+}
+
+.transport .searchblock .searchbox{
+  max-width: 800px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.checkoutpage .models-box{
+  max-width: 1000px;
+}
+
+.checkoutReview .section-title{
+  margin-bottom: 10px;
+  padding-bottom: 0;
+}
+
+.checkoutReview .section-title h2{
+  text-align: center;
+  font-size: 30px;
+}
+
+.checkoutReview h2{
+  font-size: 20px;
+    text-align: left;
+}
+
+.ckreview .cancel-btn{
+  padding: 11px 20px;
+  margin-right: 20px;
+  color: #bd062c;
+}
+
+.ckreview .cancel-btn:hover{
+  background: #002768;
+  color: #fff;
+  text-decoration: none;
+  border: #002768 2px solid;
+}
+
+.carpoints .label{
+  float: left;
+  margin-right: 15px;
+  color: #999;
+}
+
+.carspecifation .container{
+  max-width: 80%;
+  margin-bottom: 20px;
+}
+
+.vehiclesearch .back-btn{
+  float: left;
+  position: relative;
+  z-index: 9999;
+  margin-bottom: 0;
+}
+
+.suggestedCarsPage.suggested-cars .col-md-3 {
+  flex: 33.333% 1;
+  max-width: 33.333%;
+}
+
+.product-count.carBrand{
+  text-align: left;
+}
+ 
+.specifati p img{
+  width:20px;
+}
+.dealer-cars .back-btn{
+  float: left;
+  position: relative;
+  z-index: 9999;
+  margin-bottom: 0;
+}
+
+
+.section-title .back-btn-primary{
+  float: left;
+  position: relative;
+  z-index: 9999;
+}
+
+
+.saveSearchBlock .modalcontent{
+  text-align: center;
+  width: 100%;
+}
+
+.saveSearchBlock .modalcontent input{
+   width: 100%;
+   height: 40px;
+}
+
+.saveSearchBlock .modalcontent .btns{
+  text-align: center;
+    display: block;
+    margin-top: 10px;
+}
+
+.saveSearchBlock .termspageblock{
+  padding-bottom: 20px;
+}
+
+.carDetailsPage .models-box{
+  max-width: 800px;
+  max-height: 600px;
+}
+
+
+
+
+.owl-carousel  .car-item:hover {
+  transform: scale(1);
+  z-index: 999;
+}
+
+.owl-carousel .cars-lock img{
+  width: 20px;
+  margin: auto;
+  margin-top: 11px;
+}
+
+
+
+
+.owl-theme .owl-nav [class*='owl-']:hover{
+  background: transparent;
+}
+.owl-prev, .owl-next {
+  position: absolute;
+  top: 25%;
+  transform: translateY(-50%);
+  display: block !important;
+  border:0px solid black;
+}
+.owl-prev { left: 0px; }
+.owl-next { right: 0px; }
+.owl-prev i, .owl-next i {transform : scale(2,5); color: #002768; font-size: 40px;}
+
+.owl-prev i:hover, .owl-next i:hover { color: #dd0000; }
+
+
+.owl-carousel .car-item{
+  float: left;
+    position: relative;
+    width: 100%;
+}
+
+.owl-carousel .cars-prices .cta-btns{
+  margin: 0;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.owl-carousel .cars-prices .cta-btns:hover{
+  background-color: #fff;
+    color: #444;
+    border: 1px solid #444;
+}
+
+
+.owl-carousel .cars-prices .cta-btns-primary {
+  margin: 0;
+  margin-bottom: 0px;
+  display: inline-block;
+}
+
+.models-box .section-title{
+  padding-bottom: 10px;
+}
+
+.makeyourbidblock .form-group p{
+  margin-bottom: 0;
+}
+.dealerType{
+  float: left;
+  width: 100%;
+  margin-bottom: 0 !important;
+}
+
+.dealerType .details img{
+  width: 60px !important;
+  height: 40px;
+  border-radius: 3px;
+  float: right;
+  margin: 0;
+}
+
+.buyitnow{
+  float: right;
+  margin-right: 0 !important;
+}
+
+.buyitnow a{
+  color: #fff;
+  background: #008d0e;
+  border: #008d0e solid 1px;
+  border-radius: 3px;
+  padding: 5px;
+  font-weight: 500;
+  margin-right: 0 !important;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+
+.cars-content .d-flex{
+  display: block !important;
+}
+
+.cars-content .d-flex.align-items-center{
+  text-align: left !important;
+}
+
+.cars-content .details:first-child img{
+  width: 20px;
+  margin-top: 5px;
+}
+
+
+.dealerType .details:first-child{
+  width: 70%;
+  float: left;
+}
+
+.dealerType .details:first-child span{
+  width: 100%;
+  float: left;
+}
+
+.dealerType .details:last-child{
+    float: right;
+    text-align: right;
+    margin-right: 0;
+}
+
+.dlrname{
+  color: #444;
+  font-weight: 400;
+}
+
+
+.makeyourbid .tbox i{
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-right: 1px solid lightgray;
+  font-size: 22px;
+  font-style: normal;
+  padding-top: 10px;
+}
+
+.makeyourbid .tbox input.textbox + label{
+  left: 60px;
+}
+
+.makeyourbid .tbox input.textbox{
+  padding-left: 63px;
+}
+
+.greentext{
+  color: #008d0e !important;
+  border: #008d0e solid 1px !important;
+}
+
+.makeyourbid .addComment  .tbox input.textbox{
+  padding-left:15px;
+}
+
+.makeyourbid .addComment .tbox input.textbox + label{
+  left: 15px;
+}
+.dlraddress i.icofont-google-map{
+  margin-left: -3px;
+}
+
+.makeyourbid .buyitnow{
+  float: left;
+}
+
+.makeyourbid .tbox{
+  margin-bottom: 0;
+}
+
+
+.makeyourbid .highbidtbox .tbox input.textbox + label {
+  padding-right: 50px;
+}
+
+.makeyourbid .highbidtbox .tbox input.textbox:focus + label, .makeyourbid .highbidtbox .tbox input.textbox + label.input-has-value{
+  padding-right: 10px;
+}
+
+.ant-btn {
+  font-size: 16px;
+}
+
+input[type="checkbox"]:disabled + label{
+  opacity: 0.5;
+}
+
+.offerDetailsBlock{
+  text-align: left;
+  font-size: 16px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.offerDetailsBlock hr{
+  margin-bottom: 20px;
+  margin-top: 20px;
+} 
+
+
+.offerDetailsBlock .car-btns{
+  border: 1px solid #bd062c;
+  color:#bd062c;
+  font-size:16px;
+  padding:10px 15px;
+  border-radius:5px;
+  margin-right:10px;
+  
+}
+
+.offerDetailsBlock p span{
+  color: #bd062c;
+}   
+
+.offerDetailsBlock h3{
+  font-size: 16px;
+  font-weight: 300;
+}   
+
+.offerMade{
+  color: green;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.divTable
+    {
+        display:  table;
+        width:auto;
+        background-color:#fff;
+        border:1px solid  #ddd;
+        border-spacing:0px;
+        width: 100%;
+        text-align: left;
+    }
+
+    .divRow
+    {
+       display:table-row;
+       width:auto;
+    }
+
+    .divCell
+    {
+        float:left;
+        display:table-column;
+        background-color:#fff;
+        padding: 10px;
+    }
+
+    .headRow{
+      border-bottom: #ddd solid 1px;
+      float: left;
+      width: 100%;
+      font-weight: 600;
+    }
+
+    .divRow .divCell:first-child{
+      width: 80%;
+    }
+
+    .divRow .divCell:last-child{
+      width: 20%;
+      text-align: right;
+    }
+
+    .footRow{
+      font-weight: 600;
+      float: left;
+      width: 100%;
+      border-top: #ddd solid 1px;
+    }
+
+.offerDetail .left{
+  display: inline-block;
+}
+
+.offerDetail .carBrand{
+ float: right;
+}
+
+.offerDetail p{
+  margin: 0;
+}
+.mbSliderBlock{
+  clear: both;
+    float: left;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.ant-slider-rail{
+  height: 8px;
+  border-radius: 5px;
+  background-color: #B8B8B8;
+}
+
+.ant-slider-step{
+  height: 8px;
+  border-radius: 5px;
+}
+.ant-slider-handle{
+  background-color: #fff;
+    border: solid 5px #bd062c;
+    width: 20px;
+    height: 20px;
+    margin-top: -7px;
+}
+
+.ant-slider:hover .ant-slider-handle:not(.ant-tooltip-open) {
+  border-color: #bd062c;
+}
+
+.ant-slider:hover .ant-slider-track {
+  background-color: #bd062c;
+}
+
+.ant-slider-track{
+  background-color: #bd062c;
+  height: 8px;
+  border-radius: 5px;
+}
+
+.ant-slider-handle.ant-tooltip-open {
+  border-color: #bd062c;
+}
+
+.carpoint.lockedcar{
+  margin-left: 15px;
+  cursor: default;
+}
+
+.products-details .countownBlock{
+  background-color: #002768;
+  color: white;
+  border-color: #002768;
+  font-size: 16px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    margin: 0;
+    min-width: 80px;
+    text-align: center;
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.greytext{
+  color: #999;
+}
+
+.copyImg{
+  cursor: pointer;
+}
+
+.copyImg i{
+  color: #444;  
+  margin-left: 20px;
+  margin-right: 5px;
+
+}
+
+.copyImg:hover i{
+  color: #bd062c;
+}
+
+.buynowPopup{
+  margin: auto;
+}
+
+
+h2.title {
+  font-size: 30px;
+  font-weight: 500;
+  color: #002768;
+  margin-bottom: 10px;
+}
+
+.buynowPopup .btns .cta-btns{
+  margin: 10px;
+}
+
+.buynowPopup .icofont-car{
+  font-size: 50px;
+  color: #002768;
+}
+
+
+.searchlistform{
+	width:100%;
+	background:#fff;
+	box-shadow: 0px 3px 6px #ddd;
+	border-radius:60px;
+	margin:0 auto;
+	margin-bottom:20px;
+	text-align:right;
+	float:right;
+	max-width:1000px;
+	margin-top:5px;
+}
+.searchlistform .form-group.searchbtn {
+	width:auto;
+	display:inline-block;
+	border-right:none;
+	cursor:pointer;
+  float:right;
+  margin-top: 8px;
+  margin-right: 0;
+}
+
+.searchlistform .form-group.searchbtn button{
+  font-size: 30px;
+  color: #fff;
+  width: 60px;
+  height: 60px;
+  line-height: 65px;
+  border-radius: 50%;
+}
+
+
+.searchlistform .form-group {
+	width:20%;
+	display:inline-block;
+	border-right:1px solid #ddd;
+	margin:10px;
+}
+.searchlistform label{
+	text-align:left;
+	margin:0 auto;
+	display:block;
+	color: #343434;
+	font-size:16px;
+	font-weight:500;
+}
+
+.searchlistform  input[type="text"] {   
+    border: none;
+	text-align:left;
+	color: #333;
+	font-size:16px;
+	padding: 5px;
+	padding-left:0;
+	height: 30px;
+	margin: 0;
+	background: #fff;
+}
+
+.searchlistform .searchblock{
+	width: 100%;
+}
+
+.historyPage .pickupdetailcontent{
+  text-align: left;
+}
+.sliderBlock{
+  text-align: left;
+}
+
+.historyPage .sliderBlock h3 {
+  font-size: 18px;
+  margin-top: 30px;
+  clear: both;
+}
+
+.historyPage .lotfee-inner{
+  margin-bottom: 20px;
+  padding-bottom: 0;
+}
+
+.historyPage .lotfee-inner p{
+  text-align: left;
+  font-size: 14px;
+}
+
+.historyPage .car-item img.carImg {
+  height: 230px;
+  max-width: 100%;
+  object-fit: cover;
+}
+
+ul#progressbar li p{
+  margin: 0;
+  font-size: 12px;
+  width: 100%;
+    display: block;
+}
+
+.vehicleimgleft img.carImg {
+  height: 250px;
+  max-width: 100%;
+  object-fit: cover;
+}
+
+.models-box .vehicleimgleft img.carImg {
+  height: 200px;
+  max-width: 100%;
+  object-fit: cover;
+  border: #f1f1f1 solid 1px;
+}
+
+.models-box .checkoutReview .vehiclesheadspaydetails{
+  border-bottom: #eee solid 1px;
+}
+
+.models-box .checkoutReview h2{
+  text-align: center;
+}
+
+.historyPage .car-item:hover {
+  transform: scale(1);
+}
+
+.vinnoBlock{
+  margin-bottom: 5px;
+}
+
+.vinno span{
+  color: #bd062c;
+}
+
+.sliderBlock p{
+  margin: 10px 0;
+  width: 100%;
+  display: inline-block;
+}
+.priceBlock p.pdate{
+  text-align: left;
+  width: 50%;
+}
+.priceBlock p{
+  text-align: right;
+  width: 50%;
+  display: inline-block;
+    float: left;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.priceBlock .vehicleimgright p.editbtn{
+  width: 100%;
+  text-align: right;
+  max-width: 100%;
+}
+
+.historyPage .vinnoBlock p.vinno{
+  margin: 0;
+}
+.historyPage  .priceBlock .vehicleimgright h4, .historyPage  .priceBlock .vehicleimgright h3{
+  margin-bottom: 10px;
+}
+
+.redBtn {
+  background-color: #bd062c;
+  color: white !important;
+  padding: 10px 30px;
+  margin: 20px 0;
+  margin-bottom: 0;
+  border-radius: 3px;
+  border: none;
+  font-size: 16px;
+  border:solid 1px #bd062c;
+}
+
+.redBtn:hover {
+  background-color: #002768;
+  color: white; 
+  border:solid 1px #002768;
+}
+
+.mybidscontrol .control-btns-cancel{
+  margin: auto;
+  margin-top: 10px;
+}
+
+.greenBtn{
+  color: #fff !important;
+  background: #008d0e;
+  border: #008d0e solid 1px;
+}
+
+.greenBtn:hover{
+  background: #002768;
+  border: #002768 solid 1px;
+}
+
+.myBidsPage .models-box {
+  max-width: 800px;
+  max-height: 600px;
+}
+.mybidsleftseller .details img{
+  width: 15px;
+}
+
+.mybidsdetailsblock .countownBlock{
+  background-color: #002768;
+  color: white;
+  border-color: #002768;
+  font-size: 16px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    margin: 0;
+    min-width: 80px;
+    text-align: center;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.historyPage .priceBlock p.date{
+  padding-left: 0;
+  padding-right: 0;
+  text-align: left;
+  margin-right: 0;
+}
+.oops{
+  text-align: center;
+}
+
+.oops img{
+  margin: 5px;
+  width: 100px;
+}
+
+.buynowPopup .popImage img{
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.carcheck img{
+  width: 40px;
+  margin-right: 10px;
+}
+
+.historyPage .lotfee-inner .car-item .cars-prices .cta-btns{
+  background-color: #002768;
+  color: white;
+}
+
+.historyPage .lotfee-inner .car-item .cars-prices .cta-btns:hover{
+  background-color: #bd062c;
+  border: #bd062c 1px solid;
+}
+
+.historyPage .lotfee-inner .car-item .cars-prices.gatepass .cta-btns-primary{
+  background-color: #fff;
+  color: #bd062c;
+  border: 1px solid #bd062c;
+  cursor: inherit;
+}
+
+.transCbox label{
+  font-size: 14px !important;
+}
+
+.rprice {
+  float: right;
+  text-align: right;
+}
+
+.rprice span{
+  font-size: 14px !important;
+}
+.totalActions{
+  clear: both;
+  margin-top: 10px;
+}
+
+.totalActions button{
+  padding:5px 10px;
+  margin-right: 10px;
+  border-radius: 3px;
+  font-size: 14px;
+}
+
+.customCheckbox.transCbox input:checked + label::after{
+top: 2px;
+}
+.historyPage .searchlistform{
+  max-width: 100%;
+}
+
+.historyPage .searchlistform .form-group{
+  width: 15%;
+    margin: 10px 0;
+    padding-left: 10px;
+    text-align: left;
+    float: left;
+    margin-top: 15px;
+}
+.historyPage .searchlistform .form-group.searchbtn{
+  width: 10%;
+    text-align: center; 
+}
+
+.models-box .checkoutReview .revCheHead h2{
+  width: 50%;
+  float: left;
+  text-align: left;
+  font-size: 16px;
+  text-transform: capitalize;
+  padding-right: 20px;
+}
+
+.revCheHead{
+  display: block;
+    float: left;
+    width: 100%;
+}
+
+.products-details .cars-detail-views .car-btns-primary.buyitBtn{
+  color: #fff;
+  background: #008d0e;
+  border: #008d0e solid 1px;
+  border-radius: 3px;
+  padding: 5px;
+  font-weight: 500;
+  margin-right: 0 !important;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.products-details .cars-detail-views .car-btns-primary.buyitBtn span{
+  color: #fff;
+  padding: 5px 10px;
+  padding-left: 0;
+}
+
+
+.paybtns{
+  width: 100%;
+  float: left;
+  text-align: center;
+}
+
+.paybtns .cta-btns-primary{
+  clear: both;
+  display: inline-block;
+  color: #fff;
+  text-transform: uppercase;
+  background-color: #bd062c;
+}
+.paybtns .cta-btns-primary:hover{
+  background: #002768;
+  color: #fff;
+}
+
+.paybtns .cta-btns-primary.greenBtn{
+  background: #fff;
+  color: #008d0e !important;
+  border: #008d0e solid 1px;
+  cursor: inherit;
+}
+
+.vehiclepaycheckbox .productName{
+  font-size: 16px;
+}
+
+
+.vehiclepaycheckbox .cbox{
+  width: auto;
+  padding: 0;
+}
+
+.historyPage, .historyPage .container{
+  width: 100%;
+  float: left;
+}
+
+.autoWidth{
+  width: auto !important;
+  min-width: auto !important;
+}
+
+.cars-prices .countownBlock{
+  background-color: #002768;
+  color: white;
+  border-color: #002768;
+  font-size: 16px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    margin: 0;
+    min-width: 80px;
+    text-align: center;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+a.cta-btns.lockedcarBtn, a.cta-btns.lockedcarBtn:hover {
+  display: inline-block;
+  border: 1px solid #444 !important;
+  background: #E1E1E1 !important;
+  padding: 8px 10px !important;
+  border-radius: 5px;
+  cursor: default;
+}
+
+
+.owl-carousel .owl-stage{
+ padding: 40px 0;
+}
+
+.owl-carousel .owl-item{
+  transition: 0.2s;
+}
+
+.owl-carousel .owl-item:hover {
+  transform: scale(1.1);
+  z-index: 99999;
+}
+
+.carList.carouselPage .section-title{
+  padding-bottom: 0;
+}
+
+.carList.carouselPage .more-btn{
+  margin-top: 0;
+}
+
+.countbox {
+  background: #bd062c;
+  color: #fff !important;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 12px !important;
+  line-height: 20px;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  right: -22px;
+}
+
+.nav__menu-item .countbox{
+  top: 10px;
+  right: -10px;
+}
+
+
+.checkoutpage .models-box .vehicleimgright h4, .checkoutpage .models-box .vehicleimgright h3{
+  padding-right: 20px;
+}
+
+
+.checkoutpage .models-box .contentBlock{
+  padding-top: 100px;
+}
+
+
+
+.buyNowBlock .car-btns-primary.buyitBtn{
+  color: #fff;
+  background: #008d0e;
+  border: #008d0e solid 1px;
+  border-radius: 3px;
+  padding: 30px;
+  font-weight: 500;
+  margin-right: 0 !important;
+  font-size: 16px;
+  cursor: pointer;
+  float: left;
+}
+.buyNowBlock .car-btns-primary.buyitBtn:hover{
+  text-decoration: none;
+}
+
+.buyNowBlock .cars-buy-btns-primary{
+  padding: 30px;
+}
+
+.buyNowBlock .car-btns-primary.buyitBtn span{
+  color: #fff;
+  padding: 5px 10px;
+  padding-left: 0;
+}
+
+.buyNowBlock{
+  float: left;
+    clear: both;
+    width: 100%;
+    margin-top: 20px;
+}
+.buyNowBlock .makeBidBtn{
+  float: right;
+  padding: 30px 0;
+}
+
+.autoCheck img{
+  width: auto;
+}
+
+.mfdealer span{
+  color: #008d0e;
+}
+
+
+.buynowPopup .revCheHead h3{
+  font-size: 20px;
+}
+.buynowPopup .vehiclesheadspaydetails{
+  border: #ddd solid 1px;
+  box-shadow: none;
+}
+
+.buynowPopup .termspageblock .modalbody p{
+  width: 100%;
+}
+
+.moreCarListPage .models-box{
+  max-width: 800px;
+}
+
+.checkoutpage .models-box .section-title{
+  position: -webkit-sticky;
+  position: sticky;
+  position: fixed;
+  max-width: 950px;
+  width: 100%;
+  background: #fff;
+  z-index: 9999;
+}
+
+.checkoutpage .models-box .ckreview{
+  z-index: 9999;
+  width: 100%;
+  background: #fff;
+  bottom:0%;
+  position: -webkit-sticky;
+  position: sticky !important;
+}
+
+.lateFee i{
+  font-size: 20px;
+  float: right;
+  margin-top: -2px;
+}
+.lateFee i:hover{
+  color: #bd062c;
+}
+
+
+.tool_tip {
+  float: right;
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.tool_tip .tooltiptext {
+  visibility: hidden;
+  width: 320px;
+  background-color: #222;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: -30px;
+    right: 105%;
+    padding: 10px;
+}
+
+.tool_tip .tooltiptext p{
+  margin-bottom: 0;
+}
+.tool_tip .tooltiptext .oops img{
+  width: 60px;
+  float: right;
+  margin: 0;
+}
+
+.tool_tip .tooltiptext .oops{
+  text-align: left;
+}
+
+.tool_tip:hover .tooltiptext {
+  visibility: visible;
+}
+.tooltip-top::after {
+  content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent #555;
+}
+
+.redText {
+  color: #bd062c !important;
+}
+.barCodeIcon:hover{
+  cursor: pointer;
+}
+
+
+.barCodeDiv{
+    float: left;
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: -30px;
+}
+
+.favoritePage .models-box {
+  max-width: 800px;
+}
+
+
+.printBtn{
+  padding: 10px 20px;
+  border-radius: 3px;
+  margin-left: 10px;
+}
+
+
+#Vin .carpoint{
+	display:inline;
+	border: 1px solid #444;
+	background: #E1E1E1;
+	padding:10px;
+	border-radius:5px;
+  clear: both;
+    float: left;
+    text-align: left;
+    font-size: 14px;
+	
+}
+#Vin .carpoint span{
+	color:#bd062c;
+}
+#Vin .carpoint img{
+	margin:0 5px;
+  width: 18px;
+}
+
+.barCodeDiv svg{
+  width: 100%;
+}
+
+.tophead p{
+  float: left;
+  width: auto;
+}
+
+.tophead .customCheckbox {
+  float: right;
+}
+.tophead .customCheckbox label{
+ font-size: 14px;
+}
+.dateFormat{
+  font-size: 10px;
+    margin-top: 0px;
+    display: block;
+    color: #999;
+}
+
+.datelabel{
+  width: 50%;
+  float: left;
+  color: #000;
+}
+
+.datelabel_1{
+  font-size: 10px;
+    margin-top: 0px;
+    color: #999;
+}
+.datel{
+  color: #000;
+}
+
+.buy-it-disable-btn{
+  cursor: inherit;
+  pointer-events: none;
+  opacity: 0.5;
+}
+.icofont-warning{
+  font-size: 50px;
+  color: #FFCC00;
+  margin: 20px 0;
+    display: inline-block;
+}
+
+
+
+.makeyourbid-btn a{
+  color: #fff;
+}
+
+.makeyourbid-btn .cta-btns-primary:hover{
+  background-color: #bd062c;
+    color: white;
+}
+
+
+.historyPage .barCodeDiv{
+  margin-bottom: -10px;
+}
+
+.buyNowBlock .car-btns-primary.buyitBtn{
+  width: 100%;
+}
+
+.buyNowBlock .cars-buy-btns-primary {
+  width: 100%;
+  display: block;
+  text-align: center;
+}
+
+.buyNowBlock .makeBidBtn {
+  float: right;
+  padding:  0;
+  display: block;
+  width: 100%;
+}
+
+.carcodeIcon.showContent{
+  display: inline-block;
+}
+
+.copyImg i{
+  margin-left: 5px;
+}
+
+
+.downBtn{
+  font-size: 14px;
+  float: right;
+}
+.floorDetails{
+  text-align: left;
+  padding-left: 35px;
+  color: #002768;
+}
+
+.floorDetails .label{
+  color: #999;
+}
+
+.cartTotal {
+  font-size: 16px;
+    font-weight: 600;
+    padding-right: 30px;
+    color: #002768;
+}
+
+.paymentMode{
+  font-weight: 700;
+}
+
+.printInvoice.section-title h2 {
+font-weight: 700;
+}
+
+.timerCountown{
+  margin-bottom: 20px;
+}
+
+.timerCountown .dbox{
+  display: inline-block;
+    background: #002768;
+    color: #fff;
+    padding: 5px 15px;
+    margin-right: 5px;
+    border-radius: 4px;
+    font-size: 14px;
+    
+}
+
+
+.timerCountown .dbox span{
+  font-size: 30px;
+  display: block;
+  font-weight: 600;
+}
+
+
+
+
+.nav__submenu.notiBlock{
+  width: 300px;
+  border: #ddd solid 1px;
+  padding: 5px;
+  max-height: 400px;
+  overflow-y: auto;
+  position:absolute;
+      right:5px;
+}
+
+
+.notiBlock .notoficationcontent{
+display:block;
+margin-bottom: 5px;
+    padding-bottom: 5px;
+}
+
+.notoficationcontent .media img{
+width: 80px;
+height: 80px;
+}
+.notoficationcontent {
+ margin: 0;
+}
+
+.notoficationcontent .media-body{
+  margin-left: 10px;
+  white-space: break-spaces;
+}
+
+.notoficationcontent h3{
+font-size: 16px;
+margin-bottom: 0;
+text-transform: capitalize;
+}
+.notoficationcontent h5{
+font-size: 14px;
+font-weight: 400;
+color: #BD062C;
+}
+
+.notoficationcontent p{
+margin: 5px 0;
+line-height: 18px;
+white-space: break-spaces;
+font-size: 14px;
+}
+.notofication-close-icon i{
+color: #666;
+cursor: pointer;
+font-size: 20px;
+}
+
+.notofication-close-icon:hover i{
+color: #BD062C;
+}
+
+.multiAccept{
+	float: right;
+    font-size: 16px;
+    text-transform: capitalize;
+	margin-top:-30px;
+	position:relative;
+	z-index:99999;
+}
+
+.multiAccept button{
+  background: none;
+	margin-left:10px;
+  color: #BD062C;
+}
+
+.multiAccept button:hover{
+  color: #008d0e;
+  text-decoration: underline;
+}
+.multiAccept.notiMultiAccept{
+  margin-top: 0;
+    position: sticky;
+    bottom: -5px;
+    background: #fff;
+    width: 100%;
+    padding: 0px;
+    border-top: #ddd solid 1px;
+}
+
+.notoficationcontent .custom_checkbox{
+  margin-top: 10px;
+}
+.downBtn {
+  background: #bd062c;
+  color: #fff;
+  float: right;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.downBtn button:hover{
+  background: #bd062c;
+}
+.downBtns .downloadBtn {
+  float: right;
+  width: auto;
+  margin-right: 10px;
+}
+.downBtns i {
+  font-size: 20px;
+}
+.notoficationcontent .custom_checkbox{
+  margin-top: 10px;
+}
+
+
+.custom_checkbox input {
+  padding: 0;
+  height: initial;
+  width: initial;
+  margin-bottom: 0;
+  display: none;
+  cursor: pointer;
+}
+
+.custom_checkbox  label {
+  position: relative;
+  cursor: pointer;
+}
+
+.custom_checkbox  label:before {
+  content:'';
+  -webkit-appearance: none;
+  background-color: transparent;
+  border: 1px solid #ddd;
+  padding: 10px;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  cursor: pointer;
+  margin-right: 5px;
+  background:#fff;
+  margin-top: -3px;
+}
+
+.custom_checkbox  input:checked + label:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 12px;
+  left: 9px;
+  width: 6px;
+  height: 14px;
+  border: solid #bd062c;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.toggleList  .lotfee-inner{
+  padding: 20px;
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+}
+
+
+.toggleList  .pickupdetailcontent p.billsalesno{
+  margin-right: 10px;
+}
+.toggleIcon i{
+  font-size: 30px;
+  margin-top: 0px;
+  cursor: pointer;
+  padding-top: 18px;
+  padding-bottom: 16px;
+  padding-right: 10px;
+}
+.toggleIcon i:hover{
+    color: #BD062C;
+}
+
+.borderBottom{
+  border-bottom: #DDDDDD solid 1px;
+}
+
+.toggleExpand .borderBottom{
+  margin-bottom: 20px;
+}
+
+
+.toggleList .toggleIcon {
+  position: absolute;
+  right: 0px;
+  z-index: 999;
+  left: 0;
+  /* bottom: 0; */
+  top: 0;
+}
+
+.toggleList .toggleExpand{
+border-top: #ddd solid 1px;
+box-shadow: none;
+padding: 0 10px;
+}
+
+.toggleList  .pickupdetailcontent p.billsalesno .label{
+color: #999;
+display: block;
+font-weight: 400;
+}
+
+
+.toggleList  .pickupdetailcontent p.billsalesno{
+  color: #444;
+  padding: 10px;
+  margin: 0;
+  float: left;
+  border-radius: 0;
+  width: 12%;
+  font-size: 13px;
+  border: none;
+}
+.toggleList  .pickupdetailcontent p.billsalesno.model{
+  width: 20%;
+}
+.toggleList  .pickupdetailcontent p.billsalesno.soldDate{
+  width: 20%;
+  padding-right: 40px;
+}
+
+.toggleList  .lotfee-inner{
+padding: 0;
+}
+
+.toggleList .toggleIcon {
+  position: absolute;
+  right: 0px;
+  z-index: 999;
+  left: 0;
+  /* bottom: 0; */
+  top: 0;
+}
+
+.toggleList .toggleExpand{
+border-top: #ddd solid 1px;
+box-shadow: none;
+padding: 0 10px;
+}
+
+
+.label{
+color: #999 !important;
+}
+
+.toggleList .toggleExpand .pickupdetailcontent p.billsalesno{
+border: 2px solid #BD062C;
+  font-size: 16px;
+  padding: 5px 10px;
+  color: #BD062C;
+  margin-top: 10px;
+  margin-right: 10px;
+  width: auto;
+  margin-left: 10px;
+  border-radius: 3px;	
+  margin-bottom: 10px;
+}
+
+
+.toggleList .toggleExpand .historyMiddle p.solddate{
+margin-top: 10px !important;
+margin-right: 20px !important;
+}
+
+.toggleList .toggleExpand .datelabel{
+  width: auto;
+  margin-right: 5px;
+}
+
+.toggleExpand .car-item {
+  padding: 0;
+  margin: 0;
+  border: none;
+  box-shadow: none;
+}
+
+.popup-box a.cta-btns{
+  color: #fff !important;
+  text-transform: uppercase;
+}
+
+.popup-box .cta-btns{
+  color: #fff !important;
+  text-transform: uppercase;
+}
+
+
+.buyNowBlock .countownBlock{
+  margin: 10px 0;
+}
+
+.buyNowBlock .carpoint.lockedcar{
+  float: left;
+    width: 100%;
+    margin-left: 0;
+    padding: 0;
+}
+
+.buyNowBlock .carpoint.lockedcar a.cars-buy-btns-primary{
+  padding: 10px;
+}
+.lockedcarBtn{
+  margin-top: 10px !important;
+}
+.selectboxError{
+  margin-top: 0;
+}
+.selectTbox{
+  margin-bottom: 0;
+}
+
+
+.privacyPolicyPage h4{
+  font-size: 18px;
+  margin-bottom: 10px;
+  margin-top: 30px;
+  color: #002768;
+}
+
+.privacyPolicyPage ul{
+margin-left: 20px;
+}
+
+.privacyPolicyPage ul li{
+  white-space: normal;
+  list-style: decimal;
+  padding-left: 10px !important;
+}
+.billof-sec .card-body {
+  background: #ffffff;
+}
+.billof-sec h4{
+text-align: left;
+margin-bottom: 35px;
+font-size: 20px;
+}
+.btn-dark{
+  margin-right: 10px;
+  background-color: #949494;
+    color: #ffffff;
+    padding: 6px 18px;
+    border: none;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+
+.billof-sec .form-check {
+  text-align: left;
+}
+.billof-sec h5 {
+  margin-top: 10px;
+  margin-bottom: 25px;
+ 
+ }
+
+.billof-sec label.radio-label {
+  margin-bottom: 19px;
+}
+
+.cartBillofSale{
+  color: #fff !important;
+  float: right;
+}
+.cartBillofSale .cta-btns-primary{
+  color: #fff !important;
 }

@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import ls from 'local-storage';
 import API from "../../Services/BaseService";
 import CommonPopup from '../../Component/CommonPopup/CommonPopup';
-
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const FloorEdit = () => {
@@ -25,6 +25,7 @@ const FloorEdit = () => {
     const [dateOpened, setDateOpened] = useState("");
     const [accountOpened, setAccountOpened] = useState("");
     const [isOpen, setIsOpen] = useState(false);
+    const loggedInBuyerId = useSelector(state => state.LoginReducer.payload);	
     
     const togglePopup = () => {
         setIsOpen(!isOpen);
@@ -73,7 +74,8 @@ const FloorEdit = () => {
             opened_date: dateOpened,
             account_opened: accountOpened,
             active:1,
-            buyer_id: userDetails.user_id
+            buyer_dealer_id: userDetails.buyer_dealer_id,
+            updatedBy:JSON.parse(loggedInBuyerId).buyer_id
            
         };
         API

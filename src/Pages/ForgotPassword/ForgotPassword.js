@@ -5,6 +5,9 @@ import CommonPopup from '../../Component/CommonPopup/CommonPopup';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { useForm } from "react-hook-form";
+import { useEffect } from 'react';
+import Loading from '../../Component/Loading/Loading';
+
 const ForgotPassword = () => {
     const history = useHistory();
     const eye = <FontAwesomeIcon icon={faEye} />;
@@ -23,6 +26,8 @@ const ForgotPassword = () => {
     const[showPwds,setShowPwds]=useState(false);
     const [passwordError, setPasswordError] = useState('');
     const [newPasswordError, setNewPasswordError] = useState('');
+    const [loading,setLoading] = useState(false);
+    const [invalidLinkCheck, setInvalidLinkCheck] = useState (false);
 
     function togglepwd(e){
         e.preventDefault();
@@ -37,6 +42,7 @@ const ForgotPassword = () => {
         //event.preventDefault();
         setPasswordError("")
         setNewPasswordError("")
+        setErrorMessage("")
 
         if(!password){
             setPasswordError("password is required")
@@ -61,7 +67,7 @@ const ForgotPassword = () => {
         
         let request = {
             password:password,
-            user_id:value[1]
+            buyer_id:value[1]
         }
         API.post("forgotpassword/update", request).then((response) => {
             console.log("======111====>",response)
@@ -98,10 +104,32 @@ const ForgotPassword = () => {
     const togglePopup = () => {
         setIsOpen(!isOpen);
     }
+
+    const checkValid = ()=> {
+        let request={
+           buyer_id:value[1]
+        }
+        API.post("urlstatus/condition",request).then((response)=>{
+            if(response.data.data.urlstatus === 0){
+            setLoading(false);
+            setInvalidLinkCheck(false)
+            history.push('/Invalidlink')
+          }
+          else{
+            setInvalidLinkCheck(true)
+            setLoading(false);
+          }
+        })
+      }
+      useEffect(() => {
+        checkValid();   
+      }, []);
     return (
 
         <div>
-            <div>
+            <div>{loading ? <Loading/> :
+                
+                invalidLinkCheck && 
                 <main id="main" className="inner-page">
                     <div className="col-lg-4  loginBlock forgotpage">
                         <button className="back-btn-paymentform backBtn" onClick={() => history.push("/login")}><i className="icofont-arrow-left"></i> Back</button>
@@ -156,7 +184,7 @@ const ForgotPassword = () => {
                             popupActionValue={popupActionValue}
                             popupActionPath={popupActionPath}
                         />}
-                </main>
+                </main>}
 
             </div>
         </div>

@@ -11,8 +11,10 @@ import '../../Component/Popup/popup.css';
 import Terms from '../../Component/TermsAndCondition/TermsAndCondition';
 import StateAndCity from '../../Component/StateAndCity/StateAndCity';
 import FileBase64 from 'react-file-base64';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PhoneInput from 'react-phone-number-input/input';
+import momentTimezone from 'moment-timezone';
+import { CodeSharp } from '@material-ui/icons';
 
 const Registration = () => {
     const history = useHistory();
@@ -58,7 +60,21 @@ const Registration = () => {
     const [timeError, setTimeError] = useState("");
     const [numberOfYearsError, setNumberofYearsError] = useState("");
     const [stateAndCityError, setStateAndCityError] = useState("");
+    const [myTimezone, SetMyTimezone] = useState([])
+    const [timezoneActiveFlag, SetTimezoneActiveFlag] = useState(true)
+    const [myTimezoneValue, SetMyTimezoneValue] =  useState(36);
+    const [optionPhone,setOptionPhone] = useState("");
 
+    useEffect(()=>{
+        API.post("timezone/condition")
+            .then((response) => {
+                console.log("timezone res====", response.data.data)
+                SetMyTimezone(response.data.data)
+            })
+            .catch(()=>{
+                console.log("")
+            })
+    },[])
     const togglePopup = () => {
         setIsOpen(!isOpen);
     }
@@ -100,7 +116,7 @@ const Registration = () => {
     const registrationhandleSubmit = (data) => {
         // setOpenLoader(true);
         // event.preventDefault();
-        
+
         setDealerNameError("")
         setFirstNameError("") 
         setLastNameError("")
@@ -198,28 +214,56 @@ const Registration = () => {
         if(!time){
             setTimeError("Time is required")
             return;
-        }                             
-        console.log("===date===",date)
+        } 
+
+        // console.log("===date==222==",moment(new Date(`${date} ${time}`)).tz(myTimezone.filter((data)=> data.timezone_id == myTimezoneValue)[0].timezone_name).format('MM/DD/YYYY'))
+        // console.log("===time==222==",moment(new Date(`${date} ${time}`)).tz(myTimezone.filter((data)=> data.timezone_id == myTimezoneValue)[0].timezone_name).format('HH:mm'))
+       
+        // const UTC_updateDate = moment(new Date(`${date} ${time}`)).tz(myTimezone.filter((data)=> data.timezone_id == myTimezoneValue)[0].timezone_name).format('MM/DD/YYYY')
+        // const UTC_updateTime = moment(new Date(`${date} ${time}`)).tz(myTimezone.filter((data)=> data.timezone_id == myTimezoneValue)[0].timezone_name).format('HH:mm')
+        // console.log("UTC_updateTime==",UTC_updateTime)
+        // console.log("UTC_updateDate==",UTC_updateDate)
+        
+
+        const selecteDateAndTime = moment(`${date} ${time}`).tz(myTimezone.filter((data)=> data.timezone_id == myTimezoneValue)[0].timezone_name, true);
+        // const UTC_updateDateAndTime = moment.utc(selecteDateAndTime).format('MM/DD/YYYY HH:mm')
+        const UTCFullData= moment.utc(selecteDateAndTime).format()
+        const UTC_updateDate = moment.utc(selecteDateAndTime).format('YYYY-MM-DD')
+        const UTC_updateTime = moment.utc(selecteDateAndTime).format('HH:mm')
+        const checkWithChicagoTime = moment(UTCFullData).tz('America/Chicago').format('HH:mm') >= "10:00" && moment(UTCFullData).tz('America/Chicago').format('HH:mm') <= "16:00";
+        console.log("selecteDateAndTime:",selecteDateAndTime)
+        console.log("UTCFullData:",UTCFullData)
+        console.log("UTC_updateDate:",UTC_updateDate)
+        console.log("UTC_updateTime:",UTC_updateTime)
+        console.log("checkWithChicagoTime:", checkWithChicagoTime)
+        console.log("-------:", moment(UTCFullData).tz('America/Chicago').format('MM/DD/YYYY HH:mm'))
+
+        if(!checkWithChicagoTime){
+          setTimeError("Seleted Meeting Time should be betwen on 10:00 AM to 04:00 PM of CDT (America/Chicago)")
+          return;
+        }
+        
         let request = {
             dealer_name: dealerName,
             first_name:firstName,
             last_name: lastName,
             email: email,
-            phone_no: formatMobileNO(phoneNumber),
+            phone_no: phoneNumber.substring(2, 12),
             address: address,
-            meeting_date: date,
-            meeting_time: time,
-            active: "0",
-            country_id: "1",
+            meeting_date: UTC_updateDate, //date,
+            meeting_time: UTC_updateTime, //time,
+            active: 0,
+            country_id:  parseInt(optionPhone) ? parseInt(optionPhone) : 1,
             state_id: stateName,
             city_id: cityName,
             zipcode_id: zipCodeId,
             no_years: option,
             local_flag: 0,
             image: doc==="" ? "" : doc.length>0 ? doc : [doc],
+            timezone_id: myTimezoneValue
         };
 
-        if( terms!=="0" ){
+        if( terms!=="0"  && type == "" ){
         API.post("registration/add", request)
             .then((response) => {
                 if (response.data.success) {
@@ -287,8 +331,8 @@ const Registration = () => {
                         <div className="row">
                         <div className="col-sm-12 form-group">
                         <div className="user-upload-btn-wrapper">
-                        {doc===""?<img alt="" src="adduser.jpg" src={process.env.PUBLIC_URL + "/images/adduser.jpg"} ></img>:
-														<img alt="" src="adduser.jpg" src={doc.base64} ></img>														
+                        {doc===""?<img alt=""  src={process.env.PUBLIC_URL + "/images/adduser.jpg"} ></img>:
+														<img alt=""  src={doc.base64} ></img>														
 														}
                         <span className="proCamera"></span>
                         {type==="0"?<p className="form-input-error">Upload only Image Format </p>:""}      
@@ -325,8 +369,9 @@ const Registration = () => {
                             </div>
                             <div className="col-sm-4 form-group countrycode">
                             <div className="tbox">
-                                <select className="form-control custom-select browser-default textbox"  id="drop" placeholder="" defaultValue="+1">
-                                    <option value="+1">+1</option>
+                                <select className="form-control custom-select browser-default textbox"  id="drop" placeholder=""  onChange={(e) => setOptionPhone(e.target.value)}>
+                                    <option value="1">+1</option>
+                                    {/* <option value="+91">+91</option> */}
                                 </select>
                                 <label  for="drop" className={"input-has-value"}>Country code</label>
                             </div>
@@ -335,7 +380,7 @@ const Registration = () => {
                                 <div className="tbox ">
                                 <PhoneInput  id="phone_no" name="phoneNumber" country="US" className="textbox" maxLength="14" minLength="14" value={phoneNumber}
                                     onChange={handleOnChange} ></PhoneInput>
-                                    <label htmlFor="phone_no" className={"input-has-value"}>Phone</label>
+                                    <label htmlFor="phone_no" className={"input-has-value"}>Phone #</label>
                                 </div>
                                 <p className="form-input-error" >{phoneNumberError}</p>
 
@@ -403,14 +448,38 @@ const Registration = () => {
                                 </div>
                                 </div>
                             </div>
+                            
                             <div className="col-sm-6 form-group timepicker">
-                                <div className="tbox">
-                                    <input type="time" className="form-control textbox" placeholder="Select Time" name="Time"
+                                <form novalidate className="timePicker">
+                                <div className="tbox"> 
+                                    <input type="time" className="form-control textbox" placeholder="Select Time" name="Time" 
                                     onChange={(e) => setTime(e.target.value)} />
                                     <label htmlFor="meeting_time" className={"input-has-value"}>Select Time</label>
                                     <p className="form-input-error" >{timeError}</p>
                                 </div>
+                                </form>
                             </div>
+                            
+                            <div className="col-sm-12 form-group countrycode">
+                                <div className="tbox">
+                                    <select className="form-control custom-select browser-default textbox"
+                                        id="drop"
+                                        placeholder=""
+                                        value={myTimezoneValue}
+                                        onChange={(e) => SetMyTimezoneValue( e.target.value) }
+                                        >
+                                        <option value={null} style={{"display":"none"}}></option>
+                                        {myTimezone.length > 0 && myTimezone.map((data)=>
+                                            <option key={data.timezone_id} 
+                                                checked={timezoneActiveFlag && data.timezone_id == myTimezoneValue ? true : false}
+                                                value={data.timezone_id}
+                                            >{data.timezone_name}</option> 
+                                        )}
+                                    </select>
+                                    <label  for="drop" className={"input-has-value"}> Time Zone</label>
+                                </div>
+                            </div>
+                            
                             <div className="col-sm-12 form-group agreetab">
                                 <input type="checkbox" className="form-check d-inline " id="chb" 
                                 checked = { terms == 0 ? false : true } value={terms == 0 ? 1 : 0 } onChange={(e) => setTerms(e.target.value)}/>

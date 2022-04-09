@@ -7,15 +7,26 @@ import { useEffect } from 'react';
 import ls from 'local-storage';
 import { Button } from 'antd';
 import Loading from "../../Component/Loading/Loading";
+import Popup from '../../Component/Popup/Popup';
+import LateFee from '../../Pages/LateFee/LateFee';
+
 const FloorPlans = () => {
+
   const [loading, setLoading] = useState(true);
   const history = useHistory();
   const [floorDetails, setFloorDetails] = useState("");
   let userDetails = ls.get('userDetails');
-  console.log("====userDetails.user_id====>", userDetails.user_id)
+
+  const [isLateFee, setIsLateFee] = useState(false);
+  const [lateFeeValue, setLateFeeValue] = useState(0);
+
+	const toggleLateFee = () => {
+		setIsLateFee(!isLateFee);
+    }
+
   async function fetchBuyerFloorPlans() {
     let request = {
-      buyer_id: userDetails.user_id,
+      buyer_dealer_id: userDetails.buyer_dealer_id,
     };
     const state = API.post('floor_plan/condition', request);
     state.then(res => {
@@ -25,11 +36,34 @@ const FloorPlans = () => {
     })
       .catch(err => { console.log(err); });
   }
+
   function onHandleEdit(e) {
     history.push("/flooredit/" + e);
   }
+
+  const getlateFee=()=>{
+    let request={
+        buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
+    }
+    
+    API.post('getlatefee/condition',request).then(res=>{
+       if(res.data.data.length){
+        
+   console.log("check +++++ ", res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" )
+        const lateFeeValueStatus=res.data.data.filter(value=>value.status=="yes")[0]?.status || "no" 
+        setIsLateFee(lateFeeValueStatus==="yes")
+        setLateFeeValue(res.data.data.filter(value=>value.late_fee>0)[0]?.late_fee || 0)
+       }
+      
+
+    }).catch(err=>{console.log(err);});
+}
+
   useEffect(() => {
+
+    getlateFee();
     fetchBuyerFloorPlans();
+
   }, []);
 
   return (
@@ -50,7 +84,7 @@ const FloorPlans = () => {
                 <div className="col-lg-12 floorplanstableblock">
                   <div className="add-floor">
                     {/* <a className="add-floor-btns" href="/flooradd"><i class="icofont-plus"></i>  Add Floor</a> */}
-                    <Button autofocus className="add-user-btns" onClick={() => history.push("/flooradd")}><i class="icofont-plus"></i><span>Add Floor</span></Button>
+                    <Button autofocus className="add-user-btns" onClick={() => history.push("/FloorAdd")}><i class="icofont-plus"></i><span>Add Floor</span></Button>
                   </div>
 
                  
@@ -124,6 +158,14 @@ const FloorPlans = () => {
 
           </div>
         </section>
+
+        {isLateFee && <Popup
+                isClose={false}
+                content={<>
+                    <LateFee toggle={toggleLateFee} />
+                </>}
+                handleClose={toggleLateFee}
+            />}  
 
       </main>
     </div>
