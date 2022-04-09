@@ -781,7 +781,7 @@ const togglePrint = () => {
 									   <p class="billsalesno invNo"><span className="label">Inventory # :</span> {historyDetail.inventory_no}</p>
                                         <p class="billsalesno model"><span className="label">Year Make Model :</span>{historyDetail.year} {historyDetail.make} {historyDetail.model}</p>
                                         <p class="billsalesno vinNo"><span className="label">Vin # :</span>  {historyDetail.vin_no}</p>
-                                          <p class="billsalesno billOf"><span className="label">Bill Of sale # : </span> {historyDetail.bill_of_sale_id}</p>
+                                          <p class="billsalesno billOf"><span className="label">Bill Of sale # : </span> {historyDetail.bill_of_sale_code}</p>
 										                      <p class="billsalesno  netAmt"><span className="label">Gate Pass Code : </span>{historyDetail.gatepass_id}</p>
                                           <p class="billsalesno netAmt"><span className="label">Total Amount : $</span> {(Number(historyDetail.price)+  Number(historyDetail.lot_fee) || 0) + (Number(getFeeDetails(historyDetail.price))) + 0 +0+0+ (Number(historyDetail.transportation_charge || 0)) +  Number(historyDetail.late_fee)}</p>
                                           <p class="billsalesno soldDate"><span className="label">Date of Purchase :</span>  {historyDetail.sold_date}</p>                                      

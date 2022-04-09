@@ -108,7 +108,7 @@ const BillofSale = (props) => {
                             <div className='col-sm-12'>
                                 <h4>Bill of Sale info</h4>
                                 </div>
-                                <div class="col-md-6 col-lg-4  form-group"><div class="tbox"><input type="text" class="textbox" placeholder=""  defaultValue={BOSList?.bill_of_sale_id} disabled/><label for="Gate_Pass#" class="input-has-value">Bill Of Sale #</label></div></div>
+                                <div class="col-md-6 col-lg-4  form-group"><div class="tbox"><input type="text" class="textbox" placeholder=""  defaultValue={BOSList?.bill_of_sale_code} disabled/><label for="Gate_Pass#" class="input-has-value">Bill Of Sale #</label></div></div>
                                 <div class="col-md-6 col-lg-4  form-group"><div class="tbox"><input type="text" class="textbox" placeholder=""  defaultValue={BOSList?.gatepass_id} disabled/><label for="Gate_Pass#" class="input-has-value">Gate Pass #</label></div></div>
                                 <div class="col-md-6 col-lg-4  form-group"><div class="tbox"><input type="text" class="textbox" placeholder=""  defaultValue={BOSList?.title} disabled/><label for="Gate_Pass#" class="input-has-value">Title #</label></div></div>
                                 <div className='col-sm-12'>
