@@ -28,6 +28,9 @@ const LotFee = () => {
     const [isLateFee, setIsLateFee] = useState(false);
     const [lateFeeValue, setLateFeeValue] = useState(0);
 
+    const [priviliges,setPriviliges] = useState("");
+
+
 	const toggleLateFee = () => {
 		setIsLateFee(!isLateFee);
   	}
@@ -129,6 +132,22 @@ const LotFee = () => {
 		}).catch(err=>{console.log(err);});
 	  }
 
+      const getPrivileges = ()=>{
+        let request={
+            buyer_id: userDetails.buyer_id,
+        }
+        
+        API.post('buyerPrivileges/condition',request).then(res=>{
+            setPriviliges(res.data.data);
+        }).catch(err=>{console.log(err);});
+    }
+
+    useEffect(() => {
+      
+        getPrivileges()
+    },[]);
+
+
     return (
         <div>
             {loading?<Loading/>:
@@ -153,10 +172,12 @@ const LotFee = () => {
                                             </div>
                                         </div>
                                         <p className="form-input-error" >{lotFeeError}</p>
+                                        {priviliges.lot_fee === 0 ? "" :
+                                                
                                         <div className="col-lg-12 loginBtn">
                                             <button className="cta-btn" onClick={handlesubimt}>Submit</button>
                                             {/* conclick={handlesubimt} */}
-                                        </div>
+                                        </div>}
                                     </div>
                                 </div>
                             </div>

@@ -218,8 +218,8 @@ const AddUser = () => {
 				lot_fee: lot_fee,
 				local_flag: 0,
 				image:doc===""?doc:doc.length>0?doc:[doc],
-				createdBy:JSON.parse(loggedInBuyerId).buyer_id,
-				updatedBy:JSON.parse(loggedInBuyerId).buyer_id
+				createdBy:JSON.parse(JSON.stringify(loggedInBuyerId)).buyer_id,
+				updatedBy:JSON.parse(JSON.stringify(loggedInBuyerId)).buyer_id
 
 			};
 			console.log("loggedIn buyer id check",loggedInBuyerId.buyer_id)

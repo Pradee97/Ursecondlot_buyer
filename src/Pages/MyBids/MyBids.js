@@ -22,6 +22,8 @@ import checkImg from '../../assets/img/check.svg';
 import errorImg from '../../assets/img/erroricon.png';
 import CancelBid from './CancelBid';
 import LateFee from '../../Pages/LateFee/LateFee';
+import ls from 'local-storage';
+
 
 const MyBids = () => {
 
@@ -33,6 +35,7 @@ const MyBids = () => {
     const [makeBitData, setMakeBitData] = useState({});
     const [highBid,setHighBid] = useState(null);
     const [buyItNowData, setBuyItNowData] = useState({});   
+    let userDetails = ls.get('userDetails');
 
     const [cancelBidData, setCancelBidData] = useState({});   
     const [alertmessage,setAlertMessage] = useState("");
@@ -44,6 +47,9 @@ const MyBids = () => {
 
     const [isLateFee, setIsLateFee] = useState(false);
     const [lateFeeValue, setLateFeeValue] = useState(0);
+
+    const [priviliges,setPriviliges] = useState("");
+
 
 	const toggleLateFee = () => {
 		setIsLateFee(!isLateFee);
@@ -264,8 +270,21 @@ const MyBids = () => {
     useEffect(() => {
     
         getlateFee()
+        getPrivileges()
     
     },[]);
+
+    const getPrivileges = ()=>{
+        let request={
+            buyer_id: userDetails.buyer_id,
+        }
+        
+        API.post('buyerPrivileges/condition',request).then(res=>{
+            setPriviliges(res.data.data);
+        }).catch(err=>{console.log(err);});
+    }
+
+   
 
     return (
         <main id="main" class="inner-page myBidsPage">
@@ -375,10 +394,15 @@ const MyBids = () => {
                                     
                                      </div>
                                      ):
-                                     (<div>
-                                     <a class="control-btns-cancel" onClick={()=>setCancelBidValue(bidsObj?.car_id,bidsObj?.image,bidsObj?.model,bidsObj?.make,bidsObj?.year)}>Cancel Bid</a></div>)
-
-                                     } 
+                                   
+                                     (
+                                       
+                                     <div>
+                                           {priviliges.cancel_bid === 0 ? "" :
+                                     <a class="control-btns-cancel" onClick={()=>setCancelBidValue(bidsObj?.car_id,bidsObj?.image,bidsObj?.model,bidsObj?.make,bidsObj?.year)}>Cancel Bid</a>}
+                                     </div>)
+                                     }
+                                     
                                      </div>}
                                      
                                         {(bidsObj?.buyer_high_bid==bidsObj?.high_bid || bidsObj?.buyer_high_bid!==bidsObj?.high_bid) &&
