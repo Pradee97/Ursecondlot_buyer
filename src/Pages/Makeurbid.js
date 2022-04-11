@@ -90,6 +90,9 @@ console.log("check props",props)
     const [makeBitData, setMakeBitData] = useState({});
     const [buyItNowData, setBuyItNowData] = useState({});
 
+    const [priviliges,setPriviliges] = useState("");
+
+
     // if(!carHighBid){
     //     setCarHighBid(carMinBid)
     // }
@@ -174,6 +177,21 @@ console.log("check props",props)
     useEffect(() => {
         fetchBuyerFees();
     }, []);
+
+    const getPrivileges = ()=>{
+        let request={
+            buyer_id: userDetails.buyer_id,
+        }
+        
+        API.post('buyerPrivileges/condition',request).then(res=>{
+            setPriviliges(res.data.data);
+        }).catch(err=>{console.log(err);});
+    }
+
+    useEffect(() => {
+      
+        getPrivileges()
+    },[]);
 
     // function toggleViewDisplay(data){
         
@@ -533,7 +551,8 @@ console.log("check props",props)
                         </div> */}
                             
                             </div>
-                            
+                            {priviliges.proxy_bid == "" || priviliges.proxy_bid == undefined || priviliges.proxy_bid == null || priviliges.proxy_bid == 0 ? "" :
+                                            
                             <div class="form-group col-lg-6 col-md-6">
                                 {!carProxyBid ?
                                 <div class="tbox">
@@ -550,7 +569,7 @@ console.log("check props",props)
                                 </div>
                                  }
                                  <p className="form-input-error">{proxyBidError}</p>  
-                            </div>
+                            </div>}
                             
                             
                             <div className="col-lg-6 form-group customCheckbox  pt-3">
