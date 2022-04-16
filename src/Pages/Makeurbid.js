@@ -210,7 +210,7 @@ const MakeurBid = (props) => {
 
     API.post("buyerPrivileges/condition", request)
       .then((res) => {
-        setPriviliges(res.data.data[0]);
+        setPriviliges(res.data?.data[0]);
       })
       .catch((err) => {
         console.log(err);
@@ -543,19 +543,24 @@ const MakeurBid = (props) => {
 
                   <p class="form-input-error">{highBidError}</p>
                 </div>
-
-                <div class="form-group col-lg-6 col-md-6">
-                  {carBuyItNow && carBuyItNow != "0" && (
-                    <p className="details buyitnow">
-                      <span>
-                        <a class="cta-btns" onClick={() => setBuyItNowValue()}>
-                          Buy It Now $ {carBuyItNow}
-                        </a>
-                      </span>
-                    </p>
-                  )}
-
-                  {/* <div class="mbSliderBlock">
+                {priviliges.buy_now === 0 ? (
+                  ""
+                ) : (
+                  <>
+                    <div class="form-group col-lg-6 col-md-6">
+                      {carBuyItNow && carBuyItNow != "0" && (
+                        <p className="details buyitnow">
+                          <span>
+                            <a
+                              class="cta-btns"
+                              onClick={() => setBuyItNowValue()}
+                            >
+                              Buy It Now $ {carBuyItNow}
+                            </a>
+                          </span>
+                        </p>
+                      )}{" "}
+                      {/* <div class="mbSliderBlock">
                            <Slider 
                            defaultValue={[Number(carHighBid+50)]}
                            step={50}
@@ -564,7 +569,9 @@ const MakeurBid = (props) => {
                            onChange={getSliderValue}
                            />
                         </div> */}
-                </div>
+                    </div>
+                  </>
+                )}
                 {priviliges.proxy_bid === 0 ? (
                   ""
                 ) : (
