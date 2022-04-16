@@ -513,6 +513,7 @@ const MyBids = () => {
                             )}
                           </>
                         )}
+
                         {bidsObj?.cancel_bid_time !== null &&
                         bidsObj?.cancel_bid_time !== 0 &&
                         bidsObj?.cancel_bid_time < 400 ? (
@@ -543,20 +544,24 @@ const MyBids = () => {
                           </div>
                         ) : (
                           <div>
-                            <a
-                              class="control-btns-cancel"
-                              onClick={() =>
-                                setCancelBidValue(
-                                  bidsObj.car_id,
-                                  bidsObj.image,
-                                  bidsObj.model,
-                                  bidsObj.make,
-                                  bidsObj.year
-                                )
-                              }
-                            >
-                              Cancel Bid
-                            </a>
+                            {priviliges[0]?.bid == 0 ? (
+                              <a
+                                class="control-btns-cancel"
+                                onClick={() =>
+                                  setCancelBidValue(
+                                    bidsObj.car_id,
+                                    bidsObj.image,
+                                    bidsObj.model,
+                                    bidsObj.make,
+                                    bidsObj.year
+                                  )
+                                }
+                              >
+                                Cancel Bid
+                              </a>
+                            ) : (
+                              ""
+                            )}
                           </div>
                         )}
                       </div>
