@@ -543,7 +543,7 @@ const MakeurBid = (props) => {
 
                   <p class="form-input-error">{highBidError}</p>
                 </div>
-                {priviliges.buy_now === 0 ? (
+                {priviliges?.buy_now === 0 ? (
                   ""
                 ) : (
                   <>
@@ -572,7 +572,7 @@ const MakeurBid = (props) => {
                     </div>
                   </>
                 )}
-                {priviliges.proxy_bid === 0 ? (
+                {priviliges?.proxy_bid === 0 ? (
                   ""
                 ) : (
                   <div class="form-group col-lg-6 col-md-6">
