@@ -16,6 +16,7 @@ const About = () => {
   //   setIsLateFee(!isLateFee);
   // }
     
+  
   // const getlateFee=()=>{
   //   let request={
   //     buyer_dealer_id: JSON.parse(localStorage.getItem("userDetails")).buyer_dealer_id
